@@ -4006,10 +4006,6 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
             // remove the current processed item from the queue
             d->m_importUrlsQueue.dequeue();
         }
-
-        QScopedPointer<ImportSummaryDialog> dlg(new ImportSummaryDialog(nullptr));
-        dlg->setModel(MyMoneyStatementReader::importResultsModel());
-        dlg->exec();
     }
 }
 
