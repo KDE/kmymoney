@@ -28,7 +28,7 @@ endif()
 
 set(RELEASE_SERVICE_VERSION_MAJOR "5")
 set(RELEASE_SERVICE_VERSION_MINOR "2")
-set(RELEASE_SERVICE_VERSION_MICRO "0")
+set(RELEASE_SERVICE_VERSION_MICRO "1")
 set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
 
 # Use ccache if available
@@ -41,18 +41,15 @@ endif()
 project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 
 # Minimum versions required for extern packages
-set(KMM_ALKIMIA_MIN_VERSION 8.1.90)
+set(KMM_ALKIMIA_MIN_VERSION 8.2.1)
 set(KMM_KCHART_MIN_VERSION 2.6.0)
 # LibOFX uses two different version numbers. find_package looks for the
 # library's so version whereas pkg_check_modules retrieves the package
 # version. Details can be found in the libofx source code
 set(KMM_LIBOFX_MIN_VERSION 0.10.0)
 set(KMM_LIBOFX_MIN_SOVERSION 7.0.0)
-set(KMM_AQBANKING_MIN_VERSION 6.5.0)
-set(KMM_GWENHYWFAR_MIN_VERSION 5.10.1)
-if(BUILD_WITH_QT6)
-  set(KMM_GWENHYWFAR_MIN_VERSION 5.12.1)
-endif()
+set(KMM_AQBANKING_MIN_VERSION 6.6.1)
+set(KMM_GWENHYWFAR_MIN_VERSION 5.12.1)
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
