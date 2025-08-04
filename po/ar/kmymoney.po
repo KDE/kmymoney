@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-02 01:58+0000\n"
-"PO-Revision-Date: 2025-01-18 13:15+0400\n"
+"POT-Creation-Date: 2025-08-04 02:14+0000\n"
+"PO-Revision-Date: 2025-08-03 13:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3508,7 +3508,7 @@ msgstr "أصلح المعاملات"
 #: kmymoney/dialogs/settings/ksettingshome.ui:14
 #, kde-format
 msgid "Homepage Settings"
-msgstr "إعدادات الصفحة الرئيسية"
+msgstr "إعدادات الصفحة الرئيسة"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:40
@@ -5753,53 +5753,53 @@ msgstr "تعذّر استيراد %1 باستخدام الملحقة %2.  أرج
 msgid "Importing error"
 msgstr "خطأ استيراد"
 
-#: kmymoney/kmymoney.cpp:4019
+#: kmymoney/kmymoney.cpp:4015
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "مُكِّنت جميع الرسائل."
 
-#: kmymoney/kmymoney.cpp:4019
+#: kmymoney/kmymoney.cpp:4015
 #, kde-format
 msgid "All messages"
 msgstr "كل الرسائل"
 
-#: kmymoney/kmymoney.cpp:4055
+#: kmymoney/kmymoney.cpp:4051
 #, kde-format
 msgid "Auto saving..."
 msgstr "يحفظ تلقائيًّا..."
 
-#: kmymoney/kmymoney.cpp:4175
+#: kmymoney/kmymoney.cpp:4171
 #, kde-format
 msgid "Creating new document..."
 msgstr "ينشئ مستند جديد..."
 
-#: kmymoney/kmymoney.cpp:4235
+#: kmymoney/kmymoney.cpp:4231
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "أنشئ لاحة جديدة"
 
-#: kmymoney/kmymoney.cpp:4246
+#: kmymoney/kmymoney.cpp:4242
 #, kde-format
 msgid "Open a file."
 msgstr "افتح ملف."
 
-#: kmymoney/kmymoney.cpp:4260
+#: kmymoney/kmymoney.cpp:4256
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4264
+#: kmymoney/kmymoney.cpp:4260
 #, kde-format
 msgid "All files (*)"
 msgstr "كلّ الملفّات (*)"
 
-#: kmymoney/kmymoney.cpp:4277
+#: kmymoney/kmymoney.cpp:4273
 #, kde-format
 msgid "Loading file..."
 msgstr "يحمّل الملف..."
 
-#: kmymoney/kmymoney.cpp:4285
+#: kmymoney/kmymoney.cpp:4281
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5808,58 +5808,58 @@ msgstr ""
 "<p><b>%1</b> اسم ملف غير صالح أو الملف غير موجود. يمكنك فتح ملف آخر أو إنشاء "
 "واحد جديد.</p>"
 
-#: kmymoney/kmymoney.cpp:4285
+#: kmymoney/kmymoney.cpp:4281
 #, kde-format
 msgid "File not found"
 msgstr "الملف غير موجود"
 
-#: kmymoney/kmymoney.cpp:4317
+#: kmymoney/kmymoney.cpp:4313
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4323
+#: kmymoney/kmymoney.cpp:4319
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested. Error was: %1"
 msgid "Cannot open file as requested."
 msgstr "تعذّر فتح الملفّ كما طُلب. الخطأ هو: %1"
 
-#: kmymoney/kmymoney.cpp:4330
+#: kmymoney/kmymoney.cpp:4326
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4341
+#: kmymoney/kmymoney.cpp:4337
 #, kde-format
 msgid "Saving file..."
 msgstr "يحفظ الملف..."
 
-#: kmymoney/kmymoney.cpp:4353
+#: kmymoney/kmymoney.cpp:4349
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "فشل حفظ: %1"
 
-#: kmymoney/kmymoney.cpp:4359
+#: kmymoney/kmymoney.cpp:4355
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4365
+#: kmymoney/kmymoney.cpp:4361
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "يحفظ الملفّ..."
 
-#: kmymoney/kmymoney.cpp:4381
+#: kmymoney/kmymoney.cpp:4377
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4410
+#: kmymoney/kmymoney.cpp:4406
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -8767,7 +8767,7 @@ msgstr "المركز المالي"
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:238
 #, kde-format
 msgid "Accounts with no institution assigned"
-msgstr "حسابات بدون مؤسسة مخصّصة"
+msgstr "حسابات بلا مؤسسة مخصّصة"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:57
 #, fuzzy, kde-format
@@ -10380,7 +10380,7 @@ msgstr "امسح مدخلات الأعمدة المحدّدة"
 #, kde-format
 msgctxt "Clear all column assignments"
 msgid "Clear all"
-msgstr "امسح الكل"
+msgstr "امحُ الكل"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:221
 #, fuzzy, kde-format
@@ -10903,7 +10903,7 @@ msgstr "امحُ مدخلات الأعمدة المحدّدة."
 #, kde-format
 msgctxt "verb, to clear selected columns"
 msgid "Clear"
-msgstr "امسح"
+msgstr "امحُ"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_priceFraction)
 #. i18n: ectx: property (text), widget (QLabel, lblpriceFraction)
@@ -12240,7 +12240,7 @@ msgstr "نزّل المعاملات من المؤسّسة"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:145
 #, kde-format
 msgid "No date"
-msgstr "بدون تاريخ"
+msgstr "بلا تاريخ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:150
@@ -18551,7 +18551,7 @@ msgstr "استخدام مفتاح Enter يتّنقّل بين الحقول"
 #: kmymoney/settings/kmymoney.kcfg:96
 #, kde-format
 msgid "Start with last selected view or homepage"
-msgstr "ابدأ بآخر عرض أو صفحة رئيسية محدّدة"
+msgstr "ابدأ بآخر عرض أو صفحة رئيسة محدّدة"
 
 #. i18n: ectx: label, entry (LastViewSelected), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:100
@@ -18631,7 +18631,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:148
 #, kde-format
 msgid "Order of items on homepage"
-msgstr "ترتيب العناصر في الصفحة الرئيسية"
+msgstr "ترتيب العناصر في الصفحة الرئيسة"
 
 #. i18n: ectx: label, entry (ZoomFactor), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:152
@@ -18650,7 +18650,7 @@ msgstr "تذكّر (ضبط يدوي) حجم الخط في عرض المنزل ع
 #: kmymoney/settings/kmymoney.kcfg:160
 #, kde-format
 msgid "Show account limit information on the Homepage"
-msgstr "أظهر معلومات حدود الحساب في الصفحة الرئيسية"
+msgstr "أظهر معلومات حدود الحساب في الصفحة الرئيسة"
 
 #. i18n: ectx: label, entry (ShowBalanceStatusOfOnlineAccounts), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:164
@@ -21028,7 +21028,7 @@ msgstr "اختر المعاملات"
 #: kmymoney/views/kwelcomepage.cpp:55
 #, kde-format
 msgid "Home Page"
-msgstr "الصفحة الرئيسية"
+msgstr "الصفحة الرئيسة"
 
 #: kmymoney/views/kwelcomepage.cpp:65
 #, kde-format
