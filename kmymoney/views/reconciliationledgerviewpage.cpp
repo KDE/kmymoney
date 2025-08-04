@@ -503,7 +503,7 @@ bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const Sel
     default:
         break;
     }
-    return true;
+    return LedgerViewPage::executeAction(action, selections);
 }
 
 void ReconciliationLedgerViewPage::updateSummaryInformation(const QHash<QString, AccountBalances>& balances)
