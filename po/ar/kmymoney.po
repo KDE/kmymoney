@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-04 03:55+0000\n"
-"PO-Revision-Date: 2025-08-03 13:43+0400\n"
+"PO-Revision-Date: 2025-08-04 18:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -146,12 +146,12 @@ msgstr "مُتسلِّم/مستلم جديد"
 #: kmymoney/converter/mymoneystatementreader.cpp:1108
 #, kde-format
 msgid "Default Category for Payee"
-msgstr "الفئة الافتراضيّة للمُتسلِّم"
+msgstr "الفئة المبدئيّة للمُتسلِّم"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1115
 #, kde-format
 msgid "Please select a default category for payee '%1'"
-msgstr "رجاء اختر فئة افتراضيّة للمُتسلِّم ’%1‘"
+msgstr "رجاء اختر فئة مبدئيّة للمُتسلِّم ’%1‘"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1138
 #, kde-format
@@ -905,7 +905,7 @@ msgstr "رجاء اختر ما تريد فعله بالتّغييرات أعلا
 #, kde-format
 msgid ""
 "&Discard the changes and enter the original transaction into the register."
-msgstr "أ&همِل التّغييرات وأدخِل المعاملة الأصليّة في السّجلّ."
+msgstr "أ&همِل التّغييرات وأدخِل المعاملة الأصليّة في السجل."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_onceRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:77
@@ -2045,7 +2045,7 @@ msgstr "احذف"
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
-msgstr "(الافتراضيّ)"
+msgstr "(المبدئيّ)"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:182
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:160
@@ -2240,7 +2240,7 @@ msgid ""
 "the following dialog</i>.</p>"
 msgstr ""
 "<p>الفئة <b>%1</b> غير موجودة حاليًّا. هل تريد إنشاءها؟</p><p><i>الحساب الأب "
-"سيكون افتراضيًّا <b>%2</b> لكن يمكن تغييره في مربع الحوار التالي</i>.</p>"
+"سيكون مبدئيًّا <b>%2</b> لكن يمكن تغييره في مربع الحوار التالي</i>.</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1151
 #: kmymoney/dialogs/knewaccountdlg.cpp:1176
@@ -2962,7 +2962,7 @@ msgstr "خيارات الفرز"
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
 #, kde-format
 msgid "Use default"
-msgstr "استخدم الافتراضي"
+msgstr "استخدم المبدئي"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -3126,7 +3126,7 @@ msgstr "عالمي"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:30
 #, kde-format
 msgid "Autosave options"
-msgstr "خيارات الحفظ التلقائي"
+msgstr "خيارات الحفظ الآليّ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoSaveFile)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:41
@@ -3144,7 +3144,7 @@ msgstr "دق"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:92
 #, kde-format
 msgid "Autosave when file is modified upon close"
-msgstr "احفظ تلقائيًّا عند تعديل الملف عند الإغلاق"
+msgstr "احفظ آليًّا عند تعديل الملف عند الإغلاق"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
@@ -3464,7 +3464,7 @@ msgstr "التّسجيل"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:576
 #, kde-format
 msgid "Log path"
-msgstr "مسار السّجلّ"
+msgstr "مسار السجل"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:624
@@ -3473,7 +3473,7 @@ msgid ""
 "On choosing a log file path please keep in mind that log files may contain "
 "sensitive data (e.g. passwords in clear-text etc)."
 msgstr ""
-"عند اختيار مسار لملفّ السّجلّ لا تنسَ أنّ ملفّات السّجلّ فيها بيانات حسّاسة (مثل "
+"عند اختيار مسار لملفّ السجل لا تنسَ أنّ ملفّات السجل فيها بيانات حسّاسة (مثل "
 "كلمات السّرّ دون تعمية في نصّ واضح، وغيرها)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
@@ -4240,7 +4240,7 @@ msgstr "مُسوًّى"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:374
 #, kde-format
 msgid "Autofill"
-msgstr "الملء التلقائي"
+msgstr "الملء الآليّ"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:383
@@ -4253,7 +4253,7 @@ msgstr "اختر المعاملات"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:386
 #, kde-format
 msgid "No Autofill"
-msgstr "لا ملء تلقائي"
+msgstr "لا ملء آليّ"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:395
@@ -5759,7 +5759,7 @@ msgstr "كل الرسائل"
 #: kmymoney/kmymoney.cpp:4051
 #, kde-format
 msgid "Auto saving..."
-msgstr "يحفظ تلقائيًّا..."
+msgstr "يحفظ آليًّا..."
 
 #: kmymoney/kmymoney.cpp:4171
 #, kde-format
@@ -12924,7 +12924,7 @@ msgstr "يرجى اختيار مؤسستك المالية من القائمة أ
 #, kde-format
 msgctxt "@title type of online banking connection"
 msgid "Automatic"
-msgstr "تلقائي"
+msgstr "آليّ"
 
 #. i18n: ectx: attribute (title), widget (QWidget, manualTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:77
@@ -13649,7 +13649,7 @@ msgstr "محدِّد تشكيلة QIF"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:174
 #, kde-format
 msgid "The default QIF profile"
-msgstr "تشكيلة QIF الافتراضية"
+msgstr "تشكيلة QIF المبدئية"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:385
 #, kde-format
@@ -14030,7 +14030,7 @@ msgstr "جديد"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:139
 #, kde-format
 msgid "Reset"
-msgstr "أعد التعيين"
+msgstr "صفّر"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KExportDlgDecl)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:14
@@ -15028,7 +15028,7 @@ msgstr "تعذّر تعديل الموازنة"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:236
 #, kde-format
 msgid "Unable to reset budget"
-msgstr "تعذّر إعادة تعيين الموازنة"
+msgstr "تعذّر تصفير الموازنة"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:251
 #, kde-format
@@ -15717,7 +15717,7 @@ msgstr "حوّالة مصرفيّة"
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:204
 #, kde-format
 msgid "Show log"
-msgstr "اعرض السّجلّ"
+msgstr "اعرض السجل"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:224
 #, fuzzy, kde-format
@@ -16730,7 +16730,7 @@ msgstr "تقرير مولّد"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1429
 #, kde-format
 msgid "Default Report"
-msgstr "تقرير افتراضي"
+msgstr "تقرير مبدئي"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:402
 #: kmymoney/plugins/views/reports/kreportsview.cpp:473
@@ -16766,7 +16766,7 @@ msgstr "تعذّر إضافة التقرير، السبب: \"%1\""
 #: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
-msgstr "<b>%1</b> تقرير افتراضي، لذا لا يمكن حذفه."
+msgstr "<b>%1</b> تقرير مبدئي، لذا لا يمكن حذفه."
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:544
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
@@ -17336,7 +17336,7 @@ msgstr "لوحة الرسوم البيانية"
 #, kde-format
 msgctxt "@item KDChart color palette"
 msgid "Default"
-msgstr "الافتراضي"
+msgstr "المبدئي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ChartsPalette)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:106
@@ -17356,13 +17356,13 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:134
 #, kde-format
 msgid "Default CSS file"
-msgstr "ملف CSS الافتراضي"
+msgstr "ملف CSS المبدئي"
 
 #. i18n: ectx: property (toolTip), widget (KUrlRequester, kcfg_CssFileDefault)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:141
 #, kde-format
 msgid "default style sheet"
-msgstr "نمط الورقة الافتراضي"
+msgstr "نمط الورقة المبدئي"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -17501,7 +17501,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:125
 #, kde-format
 msgid "Show as chart by default"
-msgstr "أظهر كرسم بياني افتراضيًّا"
+msgstr "أظهر كرسم بياني مبدئيًّا"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkCHGridLines)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:139
@@ -18565,7 +18565,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:49
 #, kde-format
 msgid "Autosave file upon close"
-msgstr "احفظ تلقائيًّا الملف عند الإغلاق"
+msgstr "احفظ آليًّا الملف عند الإغلاق"
 
 #. i18n: ectx: label, entry (CheckSchedule), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:53
@@ -18901,7 +18901,7 @@ msgstr "تاريخ البدء"
 #: kmymoney/settings/kmymoney.kcfg:309
 #, kde-format
 msgid "Log file path"
-msgstr "مسار ملفّ السّجلّ"
+msgstr "مسار ملفّ السجل"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:318
@@ -18940,7 +18940,7 @@ msgstr "خطأ داخليّ - لا معاملات متطابقة"
 #: kmymoney/settings/kmymoney.kcfg:363
 #, kde-format
 msgid "During import, ask for a new payee's default category"
-msgstr "أثناء الاستيراد، اسأل عن فئة المستفيد الافتراضية"
+msgstr "أثناء الاستيراد، اسأل عن فئة المستفيد المبدئية"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
 #: kmymoney/settings/kmymoney.kcfg:370
@@ -19007,7 +19007,7 @@ msgstr "اللوحة المستخدمة لتصيير الرسوم البياني
 #: kmymoney/settings/kmymoney.kcfg:426
 #, kde-format
 msgid "Name of default CSS file"
-msgstr "اسم ملف CSS الافتراضي"
+msgstr "اسم ملف CSS المبدئي"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KLoadTemplateDlg)
 #: kmymoney/templates/kloadtemplatedlg.ui:14
@@ -19777,7 +19777,7 @@ msgstr ""
 #: kmymoney/views/keditscheduledlg.cpp:673
 #, kde-format
 msgid "Reset Last Payment Date"
-msgstr "أعد تعيين تاريخ آخر عملية سداد"
+msgstr "صفّر تاريخ آخر عملية سداد"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KEditScheduleDlg)
 #: kmymoney/views/keditscheduledlg.ui:14
@@ -19857,7 +19857,7 @@ msgstr ""
 #: kmymoney/views/keditscheduledlg.ui:255
 #, kde-format
 msgid "Enter this schedule into the register automatically when it is due"
-msgstr "أدخِل هذا الجدول في السّجلّ آليًّا ما إن يُستحقّ"
+msgstr "أدخِل هذا الجدول في السجل آليًّا ما إن يُستحقّ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, endSeriesOption)
 #: kmymoney/views/keditscheduledlg.ui:265
@@ -20629,7 +20629,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview.ui:454
 #, kde-format
 msgid "Default category:"
-msgstr "الفئة الافتراضية:"
+msgstr "الفئة المبدئية:"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSuggestACategory)
 #: kmymoney/views/kpayeesview.ui:467
@@ -21824,7 +21824,7 @@ msgstr "أرجع التغييرات"
 #, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr "التصفير إلى المبدئيات"
+msgstr "صفّر إلى المبدئيات"
 
 #: kmymoney/views/tabordereditor.cpp:443
 #, kde-format

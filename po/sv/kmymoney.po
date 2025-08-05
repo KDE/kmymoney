@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-04 03:55+0000\n"
-"PO-Revision-Date: 2025-08-03 20:51+0200\n"
+"PO-Revision-Date: 2025-08-04 21:07+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -4905,7 +4905,7 @@ msgstr "Slutför"
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
-msgstr "Skjut upp"
+msgstr "Senarelägg"
 
 #: kmymoney/kmymoney.cpp:1416
 #, kde-format
