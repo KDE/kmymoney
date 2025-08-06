@@ -189,7 +189,7 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
                 }
             }
             if (!rc) {
-                // scan the account names of all splits
+                // scan the account names and memos of all splits
                 const auto transactionIndices = file->journalModel()->indexesByTransactionId(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
                 const auto rows = transactionIndices.count();
                 for (int row = 0; !rc && (row < rows); ++row) {
@@ -213,6 +213,10 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
                         if (!rc) {
                             rc = acc.name().contains(d->filterString, Qt::CaseInsensitive);
                         }
+                    }
+                    if (!rc) {
+                        const auto memo = rowIndex.data(eMyMoney::Model::SplitMemoRole).toString();
+                        rc = memo.contains(d->filterString, Qt::CaseInsensitive);
                     }
                 }
             }
