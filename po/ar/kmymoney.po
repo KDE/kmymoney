@@ -3474,7 +3474,7 @@ msgid ""
 "sensitive data (e.g. passwords in clear-text etc)."
 msgstr ""
 "عند اختيار مسار لملفّ السجل لا تنسَ أنّ ملفّات السجل فيها بيانات حسّاسة (مثل "
-"كلمات السّرّ دون تعمية في نصّ واضح، وغيرها)."
+"كلمات السر دون تعمية في نصّ واضح، وغيرها)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
 #. i18n: ectx: label, entry (logImportedStatements), group (List Options)
@@ -12966,7 +12966,7 @@ msgid ""
 "online banking.  Please note that many banks require a separate signup, and "
 "assign a separate PIN or password just for online banking from home."
 msgstr ""
-"رجاءً أدخِل اسم المستخدم وكلمة السّرّ التي تستخدمها للولوج إلى هذا المصرف "
+"رجاءً أدخِل اسم المستخدم وكلمة السر التي تستخدمها للولوج إلى هذا المصرف "
 "للصّيرفة المصرفيّة. اعلم رجاءً بأنّ العديد من المصارف تتطلّب تسجيلًا منفصلًا، "
 "وإسناد رمز أو كلمة سرّ منفصلة لأجل الصّيرفة المصرفيّة من المنزل."
 
@@ -12984,7 +12984,7 @@ msgstr "اسم المستخدم"
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:134
 #, kde-format
 msgid "Password"
-msgstr "كلمة السّرّ"
+msgstr "كلمة السر"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_storePassword)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:228
