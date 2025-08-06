@@ -109,7 +109,7 @@ bool KOfxDirectConnectDlg::init()
     auto codec = QTextCodec::codecForName("Windows-1251");
     const auto encodedRequest = codec->fromUnicode(request);
 #else
-    auto fromUtf16 = QStringEncoder(QLatin1String("Windows-1251"));
+    auto fromUtf16 = QStringEncoder("Windows-1251");
     const auto encodedRequest = fromUtf16(request);
 #endif
     qDebug() << "creating job"; // << encodedRequest;

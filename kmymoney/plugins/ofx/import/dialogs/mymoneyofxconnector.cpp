@@ -376,7 +376,7 @@ QString MyMoneyOfxConnector::statementRequest() const
         auto codec = QTextCodec::codecForName("Windows-1251");
         result = codec->toUnicode(szrequest);
 #else
-        auto toUtf16 = QStringDecoder(QLatin1String("Windows-1251"));
+        auto toUtf16 = QStringDecoder("Windows-1251");
         result = toUtf16(szrequest);
 #endif
         free(szrequest);
