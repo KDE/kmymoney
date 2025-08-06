@@ -245,7 +245,7 @@ static QMap<int, QString> mibToName;
 
 QByteArray KMM_Codec::encodingForLocale()
 {
-    QStringDecoder decoder(QLocale::system().name());
+    QStringDecoder decoder(QLocale::system().name().toUtf8());
     if (decoder.isValid()) {
         const auto name = decoder.name();
         if (name) {
@@ -304,7 +304,7 @@ int KMM_Codec::mibForCodecName(const QString& name)
 
 static bool hasEncodingForName(const QString& codecName)
 {
-    return QStringDecoder(codecName).isValid();
+    return QStringDecoder(codecName.toUtf8()).isValid();
 }
 
 #else

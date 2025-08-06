@@ -1840,7 +1840,7 @@ void CSVFile::readFile(CSVProfile *profile)
     const QString decodedData = inStream.readAll();
 #else
     const auto encodedData = inFile.readAll();
-    QStringDecoder decoder(KMM_Codec::codecNameForMib(profile->m_encodingMIBEnum));
+    QStringDecoder decoder(KMM_Codec::codecNameForMib(profile->m_encodingMIBEnum).toUtf8());
     const QString decodedData = decoder.decode(encodedData);
 #endif
 

@@ -365,7 +365,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         auto codec = QTextCodec::codecForName("Windows-1251");
         auto request = codec->toUnicode(libofx_request_accountinfo(&fi));
 #else
-        auto toUtf16 = QStringDecoder(QLatin1String("Windows-1251"));
+        auto toUtf16 = QStringDecoder("Windows-1251");
         QString request = toUtf16(libofx_request_accountinfo(&fi));
 #endif
 
