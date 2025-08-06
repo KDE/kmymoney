@@ -105,7 +105,7 @@ macro(add_report_tests)
         set_tests_properties(${test_name}-${format}
           PROPERTIES
             SKIP_REGULAR_EXPRESSION "is missing" "SKIP" "Skipped"
-            ENVIRONMENT LANG=C
+            ENVIRONMENT ${KMM_ADD_TESTS_ENVIRONMENT}
           )
       endforeach()
     endwhile()
