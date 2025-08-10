@@ -2,304 +2,246 @@
 <chapter id="credits">
 <chapterinfo>
   <date
->2019-04-05</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.4</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title
 >Tack till</title>
 
 <para
->Program Copyright &copy; 2000-2019 &kmymoney;-utvecklingsgruppen </para>
+>Program Copyright &copy; 2000-2024 &kmymoney;-utvecklingsgruppen </para>
 
 <para
 >&underGPL; </para>
 
 <para
->Dokumentation Copyright &copy; 2000-2019 &kmymoney;-utvecklingsgruppen </para>
+>Dokumentation Copyright &copy; 2000-2024 &kmymoney;-utvecklingsgruppen </para>
 
 <para
 >Översättning Stefan Asserhäll <email
->stefan.asserhall@bredband.net</email
+>stefan.asserhall@gmail.com</email
 ></para
 > 
 <para
 >&underFDL; </para>
 
-<sect1 id="credits.active">
-<title
+<sect1 id="credits.active"
+><title
 >Aktiva utvecklare</title>
-
 <itemizedlist>
   <listitem>
-    <formalpara>
-      <title
->Thomas Baumgart &Thomas.Baumgart.mail;</title>
-      <para
->Utgåveansvar och de facto underhåll. Kärnprogram. Projektadministration. </para>
-    </formalpara>
+    <para
+><emphasis
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</emphasis
+>: Utgivningsansvarig och de facto underhåll. Kärnprogram. Projektadministration. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
->Ralf Habacker &Ralf.Habacker.mail;</title>
-      <para
->Utvecklare.</para>
-    </formalpara>
+    <para
+><emphasis
+>&Ralf.Habacker; &Ralf.Habacker.mail;</emphasis
+>: Utvecklare. </para>
   </listitem>
 </itemizedlist>
 </sect1>
 
-<sect1 id="credits.special">
-<title
+<sect1 id="credits.special"
+><title
 >Särskilt tack till</title>
-
 <itemizedlist>
   <listitem>
-    <formalpara>
-      <title
->Jack Ostroff &Jack.H.Ostroff.mail;</title>
-      <para
->Dokumentation och användarstöd.</para>
-    </formalpara>
+    <para
+><emphasis role="bold"
+>&Allan.Anderson;</emphasis
+>: Programfixar. CSV-import/export. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
->Kevin Tambascio <email
->ktambascio@users.sourceforge.net</email
-></title>
-      <para
->Ursprungligt stöd för investeringar.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Javier Campos Morales <email
->javi_c@users.sourceforge.net</email
-></title>
-      <para
->Utvecklare och grafiker.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Robert Wadley &Robert.Wadley.mail;</title>
-      <para
->Grafiker. ikoner, startskärm, hemvy.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Laurent Montel <email
->montel@kde.org</email
-></title>
-      <para
->Programfixar och konvertering till &kde; 4.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Wolfgang Rohdewald <email
->woro@users.sourceforge.net</email
-></title>
-      <para
->Programfixar.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
+    <para
+><emphasis role="bold"
 >Marko Käning <email
 >mk-lists@email.de</email
-></title>
-      <para
->Programfixar, paketering och KF5-CI för OS X.</para>
-    </formalpara>
+></emphasis
+>: Programfixar, paketering och KF5-CI för OS-X. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
->Allan Anderson ✝&Allan.Anderson.mail;</title>
-      <para
->Programfixar, CSV-import och -export.</para>
-    </formalpara>
+    <para
+><emphasis role="bold"
+>Laurent Montel <email
+>montel@kde.org</email
+></emphasis
+>: Programfixar. </para>
   </listitem>
 
+  <listitem>
+    <para
+><emphasis role="bold"
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></emphasis
+>: Utvecklare och konstnär. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</emphasis
+>: Dokumentation och användarsupport. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Wolfgang Rohdewald <email
+>woro@users.sourceforge.net</email
+></emphasis
+>: Programfixar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Kevin Tambascio <email
+>tambascio@users.sourceforge.net</email
+></emphasis
+>: Ursprungligt investeringsstöd. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Robert.Wadley; &Robert.Wadley.mail;</emphasis
+>: Konstnär. Ikoner, startskärm, Hemvy. </para>
+  </listitem>
 </itemizedlist>
 </sect1>
 
-<sect1 id="credits.past">
-<title
+<sect1 id="credits.past"
+><title
 >Inaktiva utvecklare och bidragsgivare till tidigare versioner</title>
-
 <itemizedlist>
   <listitem>
-    <formalpara>
-      <title
->Cristian Oneţ &Cristian.Onet.mail;</title>
-      <para
->Programfixar och insticksprogram.</para>
-    </formalpara>
+    <para
+><emphasis
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</emphasis
+>: &gnucash; Importverktyg. Databasstöd. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
->Cristian Dávid &Christian.David.mail;</title>
-      <para
->Utvecklare.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
-      <para
->Utvecklare.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Michael Edwardes &Michael.T.Edwardes.mail;</title>
-      <para
->Ursprunglig upphovsman, mycket ursprunglig källkod. Projektadministratör. </para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
-      <para
->Prognos. Rapporter.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Ace Jones &Ace.Jones.mail;</title>
-      <para
->Rapportlogik. OFX-import. Direktkurser. Redaktör för dokumentation.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Tony Bloomfield &Tony.Bloomfield.mail;</title>
-      <para
->Import från &gnucash;. Databasstöd.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
->Felix Rodriguez <email
->frodriguez@users.sourceforge.net</email
-></title>
-      <para
->Projektadministration.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
+    <para
+><emphasis
 >John C <email
 >tacoturtle@users.sourceforge.net</email
-></title>
-      <para
->Utvecklare.</para>
-    </formalpara>
+></emphasis
+>: Utvecklare. </para>
   </listitem>
  
   <listitem>
-    <formalpara>
-      <title
->Fernando Vilas &Fernando.Vilas.mail;</title>
-      <para
->Databasstöd.</para>
-    </formalpara>
-  </listitem>
-
-
-  <listitem>
-    <formalpara>
-      <title
->Roger Lum &Roger.Lum.mail;</title>
-      <para
->Dokumentation.</para>
-    </formalpara>
+    <para
+><emphasis
+>&Christian.David; &Christian.David.mail;</emphasis
+>: Utvecklare. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
->Darin Strait &Darin.Strait.mail;</title>
-      <para
->Dokumentation.</para>
-    </formalpara>
+    <para
+><emphasis
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail;</emphasis
+>: Ursprunglig upphovsman, mycket initial källkod. Projektadministration. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
->Colin Wright &Colin.Wright.mail;</title>
-      <para
->Programfixar och dokumentation.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title
+    <para
+><emphasis
 >Bernd Gonsior <email
 >bernd.gonsior@googlemail.com</email
-></title>
-      <para
->Rapporter. Överföring till &kde;4/&Qt;4.</para>
-    </formalpara>
+></emphasis
+>: Rapporter. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
+    <para
+><emphasis
+>&Ace.Jones; &Ace.Jones.mail;</emphasis
+>: Rapportlogik. OFX-import. Direktkurser. Dokumentation. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Roger.Lum; &Roger.Lum.mail;</emphasis
+>: Dokumentation. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
 >Ian Neal <email
 >iann_bugzilla@blueyonder.co.uk</email
-></title>
-      <para
->Schemalagda överföringar och kalendrar.</para>
-    </formalpara>
+></emphasis
+>: Schemalagda transaktioner och kalendrar. </para>
   </listitem>
 
   <listitem>
-    <formalpara>
-      <title
->Överföring till &kde;4/&Qt;4</title>
-      <para
->Detta har varit en kraftansträngning, och många utvecklare har bidragit. Vi ber om ursäkt om vi glömt att nämna någon explicit.</para>
-    </formalpara>
+    <para
+><emphasis
+>&Cristian.Onet; &Cristian.Onet.mail;</emphasis
+>: Programfixar och insticksprogram. </para>
   </listitem>
 
+  <listitem>
+    <para
+><emphasis
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></emphasis
+>: Projektadministration. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Alvaro.Soliverez; &Alvaro.Soliverez.mail;</emphasis
+>: Prognos. Rapporter. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Darin.Strait; &Darin.Strait.mail;</emphasis
+>: Dokumentation. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Fernando.Vilas; &Fernando.Vilas.mail;</emphasis
+>: Databasstöd. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Lukasz.Wojnilowicz; &Lukasz.Wojnilowicz.mail;</emphasis
+>: Utvecklare. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Colin.Wright; &Colin.Wright.mail;</emphasis
+>: Programfixar och dokumentation. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</emphasis
+>: Programfixar och integrering med Woob. </para>
+  </listitem>
 </itemizedlist>
 
 </sect1>

@@ -3,14 +3,15 @@
 <chapterinfo>
   <authorgroup>
     <author
->&Ace.Jones; &Ace.Jones.mail; </author>
+>&Ace.Jones; &Ace.Jones.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
   </authorgroup>
   <date
->2011-07-03</date>
+>2024-12-01</date>
   <releaseinfo
->4.6</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Importera och exportera</title>
 
@@ -18,17 +19,17 @@
 <sect1info>
   <author
 >&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
-
 <title
 >Import från &gnucash;</title>
 
-<sect2>
-<title
+<sect2
+><title
 >&gnucash;-filer</title>
-
 <para
->&kmymoney;s import från &gnucash; hanterar direkt läsning av standardfiler (&XML;) som skapas av &gnucash; version 1.8 och 2.0. Följande stöds inte: </para>
+>Importverktyget för &gnucash; i &kmymoney; är känt för att hantera direkt läsning av normala filer (&XML;) som produceras av &gnucash; version 1.8 och 2.0. Filer från nyare versioner bör också importeras utan problem. Det finns ingen nyligen genomförd, formell testning som bekräftar det, men utvecklarnas e-postlista &devlist; har en rapport om lyckad import av en fil från &gnucash; 5.3. Specifikt stöds dock inte följande: </para>
 
 <itemizedlist>
   <listitem
@@ -54,25 +55,27 @@
 </itemizedlist>
 
 <para
->Importen fungerar troligen bara riktigt om den ges en giltig fil. Det rekommenderas att &gnucash; funktion <guimenuitem
+>Importen fungerar troligen bara riktigt om den ges en giltig fil. Det rekommenderas menyalternativ <menuchoice
+><guimenu
+>Åtgärder</guimenu
+><guimenuitem
 >Kontrollera och reparera alla</guimenuitem
-> (i menyn <guimenu
->Handlingar</guimenu
->) körs innan ett försök att importera görs. </para>
+></menuchoice
+> i &gnucash; körs innan filen sparas och ett ett försök att importera den i &kmymoney; görs. </para>
 
 <para
 >Filer kan öppnas genom att ange filnamnet på kommandoraden (<command
 >kmymoney &lt;sökväg till fil&gt;</command
->), eller med &kmymoney;s menyalternativ <menuchoice
+>), eller med hjälp av menyalternativen &kmymoney; <menuchoice
 > <shortcut
 > <keycombo
->&Ctrl;<keysym
->O</keysym
-></keycombo
+>&Ctrl;<keycap
+>O</keycap
+> </keycombo
 > </shortcut
 > <guimenu
 >Arkiv</guimenu
-> <guimenuitem
+><guimenuitem
 >Öppna</guimenuitem
 > </menuchoice
 > eller <menuchoice
@@ -80,59 +83,56 @@
 >Arkiv</guimenu
 > <guisubmenu
 >Importera</guisubmenu
-></menuchoice
+> </menuchoice
 >. </para>
 
 <para
->Likheten mellan de två produkterna betyder att mycket daglig data kan importeras på ett rättframt sätt. Dock finns det några områden där skillnader uppstår, och diverse alternativ tillhandahålls för att hantera dem. Följande avsnitt beskriver några av skillnaderna. Att förstå dem bör leda till en smärtfriare import. </para>
+>Likheten mellan de två produkterna innebär att mycket daglig data kan importeras på ett enkelt sätt. Det finns dock vissa områden där det finns skillnader, och olika alternativ finns för att hantera dem. Följande avsnitt beskriver några av skillnaderna. Att förstå dem bör leda till smidigare import, när någon av dem är relevant för dina data. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Likheter, skillnader och terminologi</title>
 
-<sect3>
-<title
+<sect3
+><title
 >Användning för mindre företag</title>
-
 <para
 >Man bör observera att &kmymoney; är en <emphasis
 >hemekonomihanterare</emphasis
 >, och som sådan, inte direkt stöder några av &gnucash; företagsfunktioner, som skattetabeller, avlöningslistor och uppföljning av gods. Alla skuldkonton eller fordringskonton som hittas i en fil kommer att importeras som respektive skuld- och tillgångskonton. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Konton</title>
 
-<sect4>
-<title
+<sect4
+><title
 >Kontotyper</title>
-
 <para
->For both products, the highest level of structure in the file is the account. &kmymoney; supports 5 main types of account: Asset, Liability, Income, Expense and Equity, each of which may have various subtypes, e,g., Checking, Credit Card, etc. &kmymoney; includes a 'standard' account for each of these five types, and all other accounts are held subordinate to one of these. &kmymoney; enforces more consistency (or less flexibility, depending on your point of view) between account types than does &gnucash;, and the importer will correct any inconsistencies it detects. This may result in a slightly different account structure, though this can, within reason, be amended after the import is complete. </para>
+>För båda produkter, är kontot den högsta strukturnivån i filen. &kmymoney; stöder fem huvudtyper av konton: tillgångskonto, skuldkonto, inkomst, utgift och aktiekonto, som var och en kan ha flera deltyper, t.ex. lönekonto, kreditkortskonto, etc. &kmymoney; inkluderar ett 'standardkonto' för var och en av de fem typerna, och alla andra konton är underordnade till något av dessa. &kmymoney; genomdriver större följdriktighet (eller mindre flexibilitet, beroende på ståndpunkt) mellan kontotyper än &gnucash; gör, och eventuella motsägelser som detekteras korrigeras vid import. Det kan orsaka en något annorlunda kontostruktur, även om det kan rättas till efter det att importen är klar, inom rimliga gränser. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Kategorier</title>
-
 <para
->&kmymoney; uses the term Category to denote an account of an Income or Expense type. Unlike &gnucash;, these are not considered as 'ledger' accounts, and entry of transactions folder into categories is not supported; allocations are made during transaction entry into other account types. </para>
+>&kmymoney; använder termen kategori för att beteckna ett konto av typen Inkomst eller Utgift. Till skillnad från &gnucash; betraktas de inte som <quote
+>huvudbokskonton</quote
+>, och direktinmatning av transaktioner i kategorier stöds inte. Tilldelningar till kategorier görs när transaktioner matas in eller redigeras i andra kontotyper. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Struktur och platsmarkörer</title>
-
 <para
->&gnucash; supports the use of Placeholder accounts. In effect, these are just read-only accounts into which no transactions can be entered, but which function in an analogous fashion to folders in a folder structure, as a holder for other accounts. Though &kmymoney; does not support this feature as such, it does provide a parent/child account relationship, so the importer simulates placeholders by creating empty accounts. </para>
+>&gnucash; stöder användning av platsmarkörskonton. Praktiskt taget är de bara skrivskyddade konton där inga transaktioner kan läggas till, men som fungerar på liknande sätt som kataloger i en katalogstruktur, för att innehålla andra konton. Även om &kmymoney; inte stöder funktionen som sådan, tillhandahåller det förhållanden mellan konton, så platsmarkörer simuleras vid import genom att skapa tomma konton. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Avbildning av kontotyper</title>
-
 <informaltable frame='all'>
 <tgroup cols='2' align='left' colsep='1' rowsep='1'>
 <thead>
@@ -310,71 +310,64 @@
 </sect4>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Transaktioner och delningar</title>
 
-<sect4>
-<title
+<sect4
+><title
 >Balanserade transaktioner</title>
-
 <para
->Liksom i &gnucash; skrivs data in i form av transaktioner, där var och en i allmänhet består av två eller flera delade poster. I själva verket innehåller alltid giltiga transaktioner i &gnucash; minst två delningar, och för att rätta sig efter &gnucash; standard för dubbel bokföring, måste de vara i monetär balans (dvs. måste kunna balanseras till noll). &kmymoney; uppmuntrar till att använda standarden, men tvingar inte till det, men alla importerade transaktioner som inte är balanserade kommer att markeras i huvudboksvyn som att de har problem. </para>
+>I båda programmen skrivs data in i form av transaktioner, där var och en i allmänhet består av två eller flera delade poster. I själva verket innehåller alltid giltiga transaktioner i &gnucash; minst två delningar, och för att rätta sig efter &gnucash; standard för dubbel bokföring, måste de vara i monetär balans (dvs. måste kunna balanseras till noll). &kmymoney; uppmuntrar till att använda standarden, men tvingar inte till det, men alla importerade transaktioner som inte är balanserade kommer att markeras i huvudboksvyn som att de har problem. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Betalare</title>
-
 <para
->&kmymoney; prefers that all transactions have a Payee (a generic term that encompasses both payees and payers), and unlike &gnucash;, a list of these payees is maintained. Payee names are generated by the importer from the &gnucash; transaction's Description field. </para>
+>&kmymoney; föredrar att alla transaktioner har en betalare (ett generellt begrepp som omfattar både betalningsmottagare och betalare), och i motsats till &gnucash;, upprätthålls en lista av betalarna. Namn på betalare skapas vid import från beskrivningsfältet i &gnucash; transaktioner. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Överföringar</title>
-
 <para
 >&kmymoney; använder begreppet överföring för att beskriva en transaktion som inte blandar in en kategori, utan bara överför pengar mellan tillgångskonton och/eller skuldkonton. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Avstämmning</title>
-
 <para
 >&kmymoney; tillhandahåller en funktion för avstämning av konton som liknar den i &gnucash;, och motsvarande transaktionsstatus importeras. </para>
 </sect4>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Varor</title>
-
 <para
 >&gnucash; använder termen Varor för att täcka både valutatillgångar och icke-valutatillgångar. De behandlas separat i &kmymoney;. </para>
 
-<sect4>
-<title
+<sect4
+><title
 >Valutor</title>
-
 <para
 >&kmymoney; har inbyggt stöd för alla typer av utländska <link linkend="details.currencies"
 >valutor</link
 >. &kmymoney; kräver också att användaren anger en basvaluta, som är standardvalutan för nya konton. Vid import görs ett försök att bestämma den troligaste basvalutan, även om valet kan förkastas till förmån för något alternativ. </para>
 
-<note
-><para
->&kmymoney; stöder för närvarande inte konton med valörer i ogiltiga valutor (utom de som har ersatts av euro). För närvarande är det nödvändigt att ta bort alla sådana konton från &gnucash;-filen innan import. Vi hoppas förbättra situationen i en framtida utgåva. </para
-></note>
+<note>
+  <para
+>&kmymoney; stöder för närvarande inte konton med valörer i ogiltiga valutor, utom de som har ersatts av euro. För närvarande är det nödvändigt att ta bort alla sådana konton från &gnucash;-filen innan import. Vi hoppas förbättra situationen i en framtida utgåva. </para>
+</note>
 </sect4>
 
-<sect4 id="gncsecurities">
-<title
+<sect4 id="gncsecurities"
+><title
 >Värdepapper och investeringar</title>
-
 <para
->Tillgångar som inte är medel (normalt aktier och obligationer) kallas värdepapper i &kmymoney;, och representerar huvudskillnaden mellan de två typerna, eftersom &kmymoney; kräver att alla konton som anges i värdepapper är underliggande till ett investeringskonto. Det beskrivs mer detaljerat i kapitlet om <link linkend="details.investments"
+>Tillgångar som inte är medel (oftast aktier och obligationer) kallas värdepapper i &kmymoney;, och representerar huvudskillnaden mellan de två typerna, eftersom &kmymoney; kräver att alla konton som anges i värdepapper är underliggande till ett investeringskonto. Det beskrivs mer detaljerat i kapitlet om <link linkend="details.investments"
 >Investeringar</link
 >. Även om användare kan ha implementerat ett sådant förhållande, inför inte &gnucash; någon definierad struktur för det, så importen klarar inte av att detektera det och utföra en automatisk konvertering. Tre alternativ har därför gjorts tillgängliga: </para>
 
@@ -386,7 +379,9 @@
 
   <listitem>
     <para
->Skapa ett enstaka investeringskonto som kommer att fungera som 'överliggande konto' för alla värdepapperskonton.</para>
+>Skapa ett enstaka investeringskonto som kommer att fungera som <quote
+>överliggande konto</quote
+> för alla värdepapperskonton.</para>
   </listitem>
 
   <listitem>
@@ -396,64 +391,65 @@
 </itemizedlist>
 
 <para
->It depends entirely on user requirements which of these options is relevant in each situation, and in some cases, manual restructuring of accounts after importation may be necessary. </para>
+>Det beror helt på användarens krav och preferenser vilket av dessa alternativ som är relevant i varje situation. I vissa fall kan manuell omstrukturering av konton efter import vara nödvändig. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Kurser och valutakurser</title>
-
 <para
 >Värdepapperskurser och valutakurser som visas i &gnucash; prisredigerare kommer att importeras. Dessutom skapas kurs- och valutakursposter för alla transaktioner som omfattar värdepapper och flera valutor. </para>
 </sect4>
 
-<sect4 id="details.impexp.gncquotes">
-<title
+<sect4 id="details.impexp.gncquotes"
+><title
 >Direktkurser</title>
-
 <para
->For obtaining online price and currency rate quotations, &gnucash; uses a package called <literal
+>För att få direktkurser för aktier och valuta använder &gnucash; ett Perl-baserat paket som heter <literal
 >Finance::Quote</literal
->. Recent versions of &kmymoney; contain support for this package for obtaining stock quotes, and this will be used by default when importing data. You may however select to convert to the native method used by &kmymoney; which is covered in more detail in <link linkend="details.investments.onlinequotes"
->online quotes</link
+>. Nyare versioner av &kmymoney; innehåller stöd för paketet för att hämta aktiekurser, och det används normalt när data importeras från &gnucash;. Du kan dock välja att konvertera till den ursprungliga metoden som används av &kmymoney; vilket behandlas mer detaljerat i avsnittet om <link linkend="details.investments.onlinequotes"
+>direktkurser</link
 >. </para>
 
 <para
->If you choose to do so, the following dialog will allow selection of a 'native' &kmymoney; price source, or a user-defined source, for each account for which online quotes are required. However, the stock (ticker) symbol will be imported unchanged. Since this symbol will almost certainly be different in the two packages, it will need to be manually edited after completion of the import process. Future currency rate updates will not use <literal
+>Om du väljer att göra det, tillåter följande dialogruta val av en <quote
+>inbyggd</quote
+> kurskälla i &kmymoney;, eller en användardefinierad källa, för varje konto där direktkurser krävs. Aktiesymbolen (ticker) importeras dock oförändrad. Eftersom symbolen nästan säkert är olika i de två paketen, måste den redigeras manuellt efter att importprocessen är slutförd. Framtida valutakursuppdateringar använder inte <literal
 >Finance::Quote</literal
->, and will always use the native retrieval method. </para>
+>, utan använder alltid den ursprungliga hämtningsmetoden. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="gnucash-select_price_source.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>gnucash import väljare av kurskälla</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="gnucash-select_price_source.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>gnucash import väljare av kurskälla</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect4>
 </sect3>
 
-<sect3 id="gncschedules">
-<title
+<sect3 id="gncschedules"
+><title
 >Schemalagda transaktioner</title>
-
 <para
 >&kmymoney; behåller inte den skillnad som görs i &gnucash; mellan malltransaktioner och hur ofta de förekommer. Transaktionsdata kommer att dupliceras om samma mall används i olika scheman, men det har troligen inte så stor betydelse. </para>
 
-<sect4>
-<title
+<sect4
+><title
 >Schematyper</title>
-
 <para
->&kmymoney; classifies all schedules as one of three types, Bills, Deposits, or Transfers. Since &gnucash; does not make such a distinction, the importer attempts to determine the classification from the accounts and direction of money movements. It may be that in some cases incorrect assumptions are made, and these will need manual correction. </para>
+>&kmymoney; klassificerar alla scheman som en av tre typer: räkningar, insättningar och överföringar. Eftersom &gnucash; inte gör någon sådan åtskillnad, försöker importen avgöra klassificeringen från konton och riktningen pengar flyttas. Det kan inträffa i vissa fall att felaktiga antaganden görs, och de kommer att behöva korrigeras manuellt. </para>
 </sect4>
 
-<sect4>
-<title
+<sect4
+><title
 >Misstänkta scheman</title>
-
 <para
 >Vissa funktioner i &gnucash; schemalagda transaktioner är inte tillgängliga i &kmymoney;, så importen försöker att nå en rimlig kompromiss när data konverteras i varje enskilt fall. Transaktionerna markeras som misstänkta, och användaren ges tillfälle att redigera dem direkt under importprocessen. Exempel på situationer som kan orsaka detta är: </para>
 
@@ -470,7 +466,7 @@
 
   <listitem>
     <para
->komplexa fall som ännu inte har identifierats vid import.</para>
+>komplexa fall som ännu inte har identifierats vid import</para>
   </listitem>
 </itemizedlist>
 
@@ -479,10 +475,9 @@
 </sect4>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Rapporter</title>
-
 <para
 >&kmymoney; tillhandahåller ett omfattande urval av inställningsbara rapporter, som beskrivs mer detaljerat under <link linkend="details.reports"
 >Rapporter</link
@@ -490,84 +485,79 @@
 </sect3>
 </sect2>
 
-<sect2>
-<title
+<sect2 id="details.impexp.gncoptions"
+><title
 >Välja importalternativ</title>
+<screenshot>
+  <screeninfo
+>gnucash importalternativ</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="gnucash-import_options.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>gnucash importalternativ</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-<para id="details.impexp.gncoptions">
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="gnucash-import_options.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<sect3>
-<title
+<sect3
+><title
 >Hantering av investeringar</title>
-
 <para
 >Se <link linkend="gncsecurities"
 >Värdepapper och investeringar</link
 > ovan. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Direktkurser</title>
-
 <para
->Stäng av det om du vill använda den inbyggda metoden för framtida direktkurser. </para>
-
-<para
->Se <link linkend="details.impexp.gncquotes"
+>Stäng av det om du vill använda den ursprungliga metoden för framtida direktkurser från nätet. Se <link linkend="details.impexp.gncquotes"
 >"Direktkurser"</link
-> ovan. </para>
+> ovan för mer information. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Schemalagda transaktioner</title>
-
 <para
 >Se <link linkend="gncschedules"
 >"Schemalagda transaktioner"</link
 > ovan. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Kodningsalternativ</title>
-
 <para
->Om ditt modersmål skrivs med bokstäver eller symboler som skiljer sig från de som används i latinska språk (dvs. i allmänhet västeuropeiska språk), representeras de på ett särskilt sätt ('kodas') i &gnucash;-filen. Om bokstäverna inte visas riktigt på skärmen, måste de avkodas. För närvarande är det ofta inte möjligt att detektera exakt vilken form av avkodning som måste användas, så du kan behöva markera alternativet och välja ett värde i listan. I allmänhet är det första värdet i listan det som anses vara lämpligt med dina landsinställningar (dvs. landet och språket som valdes när operativsystemet installerades), så det bör provas först. Eftersom importprocessen inte skriver över &gnucash;-filen, har du full frihet att experimentera med vilket som helst av alternativen. </para>
+>Om ditt modersmål skrivs med bokstäver eller symboler som skiljer sig från de som används i de "latinska" språken (dvs. vanligtvis västeuropeiska), representeras de på ett speciellt sätt (<quote
+>kodade</quote
+>) i &gnucash;-filen. Om tecknen inte visas korrekt på skärmen måste de avkodas. För närvarande är det ofta inte möjligt att exakt avgöra vilken avkodning som måste användas, så du kan behöva ställa in alternativet manuellt genom att välja en post i listan. I allmänhet är det första alternativet i listan det som anses lämpligt för din region (dvs. det land och språk som valdes som modersmål när operativsystemet installerades), så det bör provas först. Eftersom importprocessen inte skriver över &gnucash;-filen kan du experimentera med vilket som helst av valen. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Alternativ för transaktionsanteckningar</title>
-
 <para
 >För vissa användarfall kan transaktioner i &gnucash;, som inte delats, innehålla kvarvarande, ofta felaktiga, anteckningsdata som normalt inte är synliga för användaren. När de importeras i &kmymoney;, kan denna data bli synlig, på grund av skillnad vid visning. Ofta har transaktionerna ett fält som beskriver transaktionens verkliga syfte. Om alternativet är markerat, används detta fält för att överskrida irrelevant anteckningsdata, om det finns. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Felsökningsalternativ</title>
-
 <para
->Dessa behöver bara användas i händelse av importproblem. Om du har sådana problem, bör du också rapportera dem till &kmymoney;s utvecklingslista &devlist;. Observera att bakåtspårningarna som skapas av alternativen kan innehålla data av konfidentiell natur, och alternativet <guilabel
+>De behöver bara användas vid importproblem. Om du har sådana problem bör du också rapportera dem till utvecklarnas e-postlista &devlist;. Observera att loggarna som produceras av alternativ kan innehålla data av konfidentiell karaktär, och alternativet <guilabel
 >Anonymisera data</guilabel
-> bör användas om den behöver göras öppet tillgängligt. </para>
+> bör användas om de ska göras offentligt tillgängliga. </para>
 </sect3>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Importrapport</title>
-
 <para
 >I slutet av behandlingen, skapar importen en rapport som visar antal olika behandlade objekt, och eventuella fel och anomalier som har inträffat. Rapporten visas på skärmen, och kan spara i en fil för senare granskning. En fullständig rapport kan innehålla följande avsnitt: </para>
 
@@ -588,15 +578,19 @@
   </listitem>
 </itemizedlist>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="gnucash-report.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>gnucash importrapport</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="gnucash-report.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>gnucash importrapport</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect2>
 </sect1>
 
@@ -604,17 +598,17 @@
 <sect1info>
   <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
-
 <title
 >Import av QIF</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Formatet QIF anses skadligt</title>
-
 <para
->I allmänhet ska QIF-formatet undvikas när det är möjligt. Det är ett dåligt val för att förmedla ekonomisk data. Bland annat, lider QIF av följande problem: </para>
+>I allmänhet ska QIF-formatet undvikas när det är möjligt. Av många anledningar är det ett dåligt val för att förmedla ekonomisk data. Bland annat, lider QIF av följande problem: </para>
 
 <itemizedlist>
   <listitem>
@@ -639,43 +633,46 @@
 > 2005. Om du har möjlighet att hämta data på något annat sätt, som OFX, välj alltid det alternativet. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Hur man importerar en QIF-fil</title>
-
 <para
->För att importera en QIF-fil, försäkra dig först om att du har en giltig &kmymoney;-fil öppen. Välj därefter menyalternativet <menuchoice
-><guimenu
+>För att importera en QIF-fil, se först till att du har en giltig &kmymoney;-fil öppen och välj sedan menyalternativet <menuchoice
+> <guimenu
 >Arkiv</guimenu
-><guisubmenu
+> <guisubmenu
 >Importera</guisubmenu
 > <guimenuitem
 >QIF...</guimenuitem
 > </menuchoice
 >. </para>
 	
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qifopen.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>qif-import</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifopen.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>qif-import</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->The resulting dialog prompts for the QIF filename allowing you to locate the file by clicking on the <guibutton
->Browse</guibutton
-> button. </para>
+>Den resulterande dialogrutan frågar efter QIF-filnamnet, vilket gör att du kan skriva in hela sökvägen till filen eller hitta filen genom att klicka på <guibutton
+>Bläddra</guibutton
+>. </para>
 
 <para
->Also, &kmymoney; differentiates between the import of a bank statement file and historic data exported from another application. The default is to import a bank statement file. In case you are importing data from your previous personal finance manager application select the appropriate option. </para>
+>Observera att &kmymoney; skiljer mellan import av ett kontoutdrag och en fil med historisk data som exporterats från ett annat program. Ett kontoutdrag innehåller inte nödvändigtvis all data relaterad till ett enda kontoutdrag, den kan bara innehålla en eller några få transaktioner. Standardinställningen är att importera ett kontoutdrag. Om du importerar data från ett tidigare program för personlig ekonomihantering, välj lämpligt alternativ. </para>
 
 <para
->I allmänhet bör standardprofilen för QIF fungera med din QIF-data. I vissa fall kan det bli nödvändigt att använda en modifierad QIF-profil. Se <link linkend="details.impexp.qifimp.profile"
+>Nästa steg är att välja en QIF-profil för importen. Eftersom det inte finns något universellt standardformat för en QIF-fil har olika leverantörer tagit sig friheter med formatet och introducerat sina egna nyanser. QIF-profilen låter &kmymoney; få reda på filens särdrag. Generellt sett bör den normala QIF-profilen fungera med de flesta QIF-filer. I vissa fall kan det vara nödvändigt att använda en modifierad QIF-profil. Se <link linkend="details.impexp.qif.profile"
 >nästa avsnitt</link
-> för mer detaljinformation om ämnet. </para>
+> för mer information om ämnet. </para>
 
 <para
 >Klicka på <guibutton
@@ -686,205 +683,97 @@
 >&kmymoney; börjar söka igenom filen för att avgöra vilka format som används för att representera datum och tal. Om det inte går att avgöra ett datumformat utan tvetydighet, ber &kmymoney; användaren att välja ett från listan med möjliga datumformat. </para>
 
 <para
->Next, &kmymoney; imports the data and creates all necessary objects, such as payee information, accounts and category records, and stock price information. Wherever possible, existing transactions will be matched against the imported information. A progress bar is shown and updated during the import process. </para>
+>Därefter importerar &kmymoney; informationen och skapar alla nödvändiga objekt, såsom betalningsmottagarens information, konto- och kategoriposter samt information om aktiekurs. Där det är möjligt matchas befintliga transaktioner med den importerade informationen för att undvika dubbletter av transaktioner. En förloppsindikator visas och uppdateras under importprocessen. </para>
 
 <para
->In case &kmymoney; could not detect the name of the account to be imported, the user will be asked to select the account into which the data should be imported. If the account does not already exist in your file, a new account can be created by clicking on <guibutton
->Create</guibutton
+>Om &kmymoney; inte kunde identifiera namnet på kontot som ska importeras, blir användaren ombedd att välja kontot som informationen ska importeras till. Om kontot inte redan finns i filen kan ett nytt konto skapas genom att klicka på <guibutton
+>Skapa</guibutton
 >. </para>
 
 <para
 >Vid slutet av importen visar &kmymoney; ett statistikfönster för utdragsimporten. </para>
 
-<para>
 <screenshot>
-	<screeninfo
->Utdragsstatistik</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qif_report.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Utdragsstatistik</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>qif statistik för importutdrag</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qif_report.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>qif statistik för importutdrag</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
 <para
->After importing, all of the imported transactions will be shown with a yellow background in the ledger view. In case &kmymoney; was able to match an imported transaction with an already existing transaction, the background is shown in light green. </para>
-
-<para
->Nästa steg är att kontrollera importerad data och acceptera den. Det är en allmän process, och gäller också import från andra källor. Den sammanfattas i ett separat avsnitt av dokumentet. </para>
+>Efter import visas alla importerade transaktioner med gul bakgrund i huvudboksvyn. Om &kmymoney; kunde matcha en importerad transaktion med en redan befintlig transaktion visas bakgrunden i ljusgrönt. </para>
 
 <note>
 <para
 >Färgerna som används för att markera importerade och matchade transaktioner är anpassningsbara, och kan vara annorlunda i din miljö. </para>
 </note>
-</sect2>
-
-<!--
-<sect2>
-<title
->Accepting the imported transactions</title>
-<para>
-  
-	When &kmymoney; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
-</para>
-
-<para>
-<screenshot>
-	<screeninfo
->Imported transactions</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qifimportverify.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Imported transactions</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>
-	Some of your transactions may be flashing red in the ledger.  
-	This is because they need to be assigned a category.  
-	The importer was not able to automatically assign a category based on your past transaction history.
-</para>
 
 <para
->	
-	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton
->OK</guibutton
-> to accept the imported transactions or <guibutton
->Cancel</guibutton
-> to remove the imported transactions.
-</para>
-
-</sect2>
-
-<sect2
-><title
->Importing Investments</title>
-
-<para>
-	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
-	The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
-</para>
-</sect2>
--->
-
-<sect2 id="details.impexp.qifimp.profile">
-<title
->Ställa in en QIF-profil</title>
-
-<para
->Because there is no universally standard format for a QIF file, different vendors have taken liberties with the format, and introduced their own nuances. The QIF Profile allows &kmymoney; to know about the peculiarities of your file. To edit an existing QIF Profile, or to create a new one, press the <guibutton
->New</guibutton
-> button on the QIF Import dialog, near the profile selector. </para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->QIF-profileditor</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<note>
-<para
->Previous versions of &kmymoney; used to have a tab for date and amount specifications. &kmymoney; now determines those settings by scanning the file. If it cannot figure out all settings, it will interrogate the user during import. </para>
-</note>
-<!--
-<para>
-	The most commonly changed thing between QIF implementations is the date format.  
-	So if this is the first time you're importing a QIF file, spend a few moments to figure out what format the dates are in, and set the QIF Profile accordingly.  
-	See the discussion below on apostrophe format for more details.
-</para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->QIF Profile Date</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-</sect2>
-
-<sect2
-><title
->Apostrophe format</title>
-
-<para>
-	Many common QIF writers use a 2-digit representation for the year. 
-	This is ambiguous, because the importer cannot know which century the date belongs in.
-	To make things even more complicated, QIF files will often used an apostrophe as a year separator to indicate that the date belongs in the OTHER century from the default.
-</para>
-<para>
-	For example, if the default century is 1900-1999, the date 12/31/95 would mean 1995.  The date 12/31'05 would mean 2005.
-</para>
-<para>
-	Because the QIF format is not standardized, it's impossible to know which century is desired.
-	This is why you have to explicitly state it in the QIF profile.
-	You do this by specifying which century is intended when an apostrophe is found.
-	In the example above, you would set the Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be interpreted as being &gt; year 2000.
-	In this case, dates without an apostrophe will be treated as being in the 1900's.
-</para>
--->
+>Nästa steg är att verifiera importerad data och acceptera alla importerade transaktioner. Det är en generell process och gäller även import från andra källor. Den liknar processen för <link linkend="details.ledgers.match"
+>matchade transaktioner</link
+>. Alla importerade transaktioner markeras i huvudboken med en <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-imported.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> importerad ikon. När du har <quote
+>Accepterat</quote
+> transaktionen är den inte längre markerad som Importerad. </para>
 </sect2>
 
 <sect2
 ><title
 >Transaktionsmatchning</title>
+<para
+>Som tidigare påpekats, är en av de största nackdelarna med QIF-formatet avsaknaden av en unik identifierare för varje transaktion. Om du sålunda importerar en QIF-file och vissa transaktioner redan finns i huvudboken, kan du få dubbletter. &kmymoney; försöker komma runt det genom att leta efter transaktioner som liknar de som du redan har. Om någonting som ser ut som samma transaktion hittas, matchas den möjliga dubbletten. </para>
 
 <para
->As noted previously, one of the major drawbacks of the QIF format is the lack of a unique identifier for each transaction. Thus, if you import a QIF file and some of the transactions are already in your ledger, you may get duplicates. &kmymoney; attempts to get around this by looking for transactions that look similar to those you already have. If it finds something that looks like the same transaction, it will match the apparent duplicate. </para>
-
-<para
->Det kan vara ett problem om du har transaktioner som ser alltför lika ut, men i själva verket är olika. I detta fall, kan du senare försöka att ta bort matchning av transaktionerna i huvudboksvyn. </para>
+>Det kan vara ett problem om du har transaktioner som ser väldigt lika ut men i själva verket är olika. I det här fallet kan du ta bort matchningen av transaktionerna senare i huvudboksvyn. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2 id="details.impexp.qif.filter"
+><title
 >Skriva ett importfilter</title>
+<para
+>Ibland kan du ha data med ett eget format, som kommaseparerade värden (CSV) eller något annat unikt för din situation. Från och med version 4.6 inkluderar &kmymoney; ett insticksprogram för CSV-import, men du kan ändå importera andra typer av filer till &kmymoney; med hjälp av ett QIF-importfilter. Ett filter är ett eget program du skriver som tar den speciella filen som indata och producerar en QIF-fil som utdata. Det kan vara ett skalskript, ett perl-skript, ett kompilerat program skrivet i C/C++ eller vad som helst annat du kan föreställa dig, så länge systemet kan köra det. Filtret körs med indatafilen som standardinmatning och standardutmatningen antas vara en giltig QIF-fil att skicka vidare till det verkliga QIF-importverktyget. </para>
 
 <para
->Ibland kan du ha data i ett eget format, som värden åtskilda med kommatecken (CSV), eller något annat som är speciellt för din situation. Från version 4.6 inkluderar &kmymoney; ett insticksprogram för CSV-import, men du kan ändå importera filen i &kmymoney; med ett QIF-importfilter. Ett filter är ett eget program som du skriver, som tar din speciella fil som indata, och skapar en QIF-fil som utdata. Det kan vara ett skalskript, ett Perl-skript, ett kompilerat program skrivet i C eller C++, eller vad som helst som du kan tänka ut, under förutsättning att systemet kan köra det. </para>
+>För att använda ett filter, redigera QIF-favoritprofilen eller skapa en ny (se nästa avsnitt för mer information om QIF-profiler) och välj fliken Filter. Ange den fullständiga sökvägen till filterprogrammet i fältet <guilabel
+>Plats för indatafilter</guilabel
+>, eller klicka på bläddringsikonen bredvid fältet och navigera till filtret i dialogrutan <guilabel
+>Öppna fil...</guilabel
+>. Sedan, när du gör en QIF-import med profilen, körs filen du väljer för import först genom filtret. Observera att fältet för filterplats innehåller den fullständiga sökvägen till filterprogrammet eller skriptet, men kan också innehålla kommandoradsväljare för programmet. </para>
 
 <para
->För att använda det, redigera din QIF-favoritprofil, och välj filterfliken. Skriv in platsen för filterprogrammet när du blir tillfrågad. Därefter körs filen som du väljer att importera först genom filtret, så fort du gör en QIF-import med användning av den här profilen. </para>
+>Om du sedan vill att dialogrutan <guilabel
+>Öppna fil...</guilabel
+> där du väljer indatafilen ska ha ett filter för den specifika filtypen, ange en kommaseparerad lista med filfilter (t.ex. <quote
+>*.abc,*.xyz</quote
+>) i fältet <guilabel
+>Indatafiltrets filtyp</guilabel
+>. I exemplet ovan, när du öppnar en fil för import med profilen, ser du bara filer som slutar på abc eller xyz. Om du lämnar fältet tomt utförs ingen namnfiltrering, och du ser alla filer. </para>
 
 <para
->Ett vanligt problem är att konvertera en lista med värden åtskilda av kommatecken till en QIF-fil. Det är ett uppenbart fall för verktyget <command
+>Ett vanligt problem är att konvertera en lista med kommaseparerade värden till en QIF-fil. Innan &kmymoney;s insticksprogram för CSV Import tillkom, skulle det ha varit ett typexempel för verktyget <command
 >awk</command
->. Skapa ett skript som heter <filename
+>. Vi använder fortfarande exemplet här, bara för att visa ett prov på hur importfilterprocessen fungerar. Skapa ett skript som heter <filename
 >csv2qif.awk</filename
->, med följande två raders innehåll: </para>
+>, med följande två rader som innehåll: </para>
 
 <programlisting
 >BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
 
-      { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
+    { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
 </programlisting>
 
 <para
->Ändra därefter QIF-nycklarna (D,T,N,P,M) så att de stämmer med ordningen av CSV-data. Ställ in indatafiltret till <userinput
+>Ändra därefter QIF-nycklarna (D,T,N,P,M) så att de stämmer med kolumnordningen i CSV-data. Ställ in indatafiltret till <userinput
 >awk -f csv2qif.awk</userinput
 >. </para>
 
@@ -892,49 +781,180 @@
 >Ett annat problem uppstår ibland med kodningen av QIF-filer. &kmymoney; förväntar sig att filer ska vara kodade med UTF8. Om filen är kodad på något annat sätt, kan det vara användbart att konvertera den till UTF8. För att exempelvis konvertera den från iso-8859-1, skulle du ställa in indatafiltret till <userinput
 >recode iso-8859-1..utf-8</userinput
 >. </para>
-
 </sect2>
-<sect2>
-<title
->Särskilda utökningar av QIF i &kmymoney;</title>
 
+<sect2
+><title
+>Särskilda utökningar av QIF i &kmymoney;</title>
 <para
 >Som redan nämnt, är en av de största nackdelarna med QIF-formatet avsaknaden av en unik identifierare för varje transaktion. Om du skriver en egen QIF-filskapare (eller filter, som beskrivs ovan), kan du komma förbi problemet. &kmymoney; stöder fältet '#'. Importen tolkar det som ett unikt transaktions-id, och bortser från posten om transaktionen redan finns i systemet. </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.impexp.qifexp">
-<title
->Export av QIF</title>
+<sect1 id="details.impexp.qif.profile"
+><title
+>QIF-profiler</title>
 <para
->To export one of your accounts to a QIF file, choose the <menuchoice
-><guimenu
->File</guimenu
-><guisubmenu
->Export</guisubmenu
+>För att redigera en befintlig QIF-profil, eller för att skapa en ny, öppna dialogrutan QIF-import genom att välja <menuchoice
+> <shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>,</keycap
+> </keycombo
+> </shortcut
+> <guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kmymoney;...</guimenuitem
+> </menuchoice
+> i huvudmenyn, klicka på <inlinemediaobject
+> <imageobject
+> <imagedata fileref="preferences-plugin.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> <guilabel
+>Insticksprogram</guilabel
+> längst ner i den vänstra panelen och klicka på &configicon; Anpassa i posten för <quote
+>QIF-import</quote
+>. </para>
+
+<para
+>Observera att eftersom QIF-import och QIF-export är implementerade som separata insticksprogram, finns det separata poster för var och en i inställningsdialogrutan för insticksprogram. Om du ställer in endera av dem visas samma dialogruta för profileditorn. </para>
+
+<screenshot>
+  <screeninfo
+>qif profileditor fliken allmänt</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofileeditor.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>qif profileditor fliken allmänt</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Till vänster visar profilväljaren en lista över alla befintliga QIF-profiler. Välj en för att redigera dess inställning. För att skapa en ny profil, tryck på knappen <guibutton
+>Ny</guibutton
+>. Du kan byta namn på en befintlig profil genom att markera den i profilväljaren och klicka på <guibutton
+>Byt namn</guibutton
+>, och ta bort den med knappen <guibutton
+>Ta bort</guibutton
+>. Om du klickar på <guibutton
+>Återställ</guibutton
+> återställs alla fält i profilen som visas till standardvärden. </para>
+
+<para
+>Dialogrutans högra område har fyra flikar. </para>
+
+<para
+>Fliken <quote
+>Allmänt</quote
+> innehåller ett fält för en beskrivning av filtret, flera fält för att ange hur &kmymoney; ska förvänta sig att vissa fält ska se ut i qif-filen som filtret matar ut, och en kryssruta som anger för &kmymoney; om det ska försöka matcha liknande transaktioner för att undvika dubbletter. </para>
+
+<screenshot>
+  <screeninfo
+>qif profileditor filterflik</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofilefilter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>qif profileditor filterflik</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Fliken <quote
+>Filter</quote
+> låter dig ange platsen för både ett importfilter, som beskrivs i <link linkend="details.impexp.qif.filter"
+>föregående avsnitt</link
+>, samt ett utdatafilter, som fungerar på liknande sätt men används när man skriver ut en datafil. <guilabel
+>Indatafiltrets filtyp</guilabel
+> gäller inte för ett utdatafilter, eftersom fildialogrutan för filen som ska skrivas inte kräver filtrering. </para>
+
+<screenshot>
+  <screeninfo
+>qif profileditor datumflik</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofiledate.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>qif profileditor datumflik</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Fliken <quote
+>Datum</quote
+> är främst användbar för QIF-export, eftersom &kmymoney; vanligtvis kan bestämma datumformatet genom att undersöka faktiska data. Det primära syftet är att ange ordningen på datumdelarna och avgränsaren som separerar dem. </para>
+
+<para
+>Eftersom QIF-formatet inte är standardiserat är det omöjligt att veta vilket århundrade som avses när man använder tvåsiffriga årtal. I QIF-filer med tvåsiffriga årtal finns det ett antaget århundrade, och en apostrof används som årsavgränsare för att ange att posten är i det ANDRA århundradet. Eftersom det århundrade som antas vara normalt inte är standardiserat används fältet <guilabel
+>Apostrofhantering</guilabel
+> för ändamålet, för att indikera det avsedda århundradet när en apostrof används som årsavgränsare. Som exempel skulle du ställa in apostrofformatet till "2000-2099", så datum med en apostrof tolkas som att vara större än år 2000. I det fallet behandlas datum utan apostrof som om de gäller 1900-talet. </para>
+
+<screenshot>
+  <screeninfo
+>qif profileditor beloppsflik</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofileamount.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>qif profileditor beloppsflik</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Fliken <quote
+>Belopp</quote
+> används i QIF-export för att ange decimaltecknet och tusentalsavgränsaren som ska användas. Du måste dock ange dem för varje rad i QIF-filen som kan innehålla ett belopp. För att ändra inställningarna, klicka på en av raderna i den övre delen av skärmen och använd sedan kombinationsmenyerna nedan för att ange vilka tecken som ska användas. </para>
+</sect1>
+
+<sect1 id="details.impexp.qifexp"
+><title
+>QIF-export</title>
+<para
+>För att exportera ett konto till en QIF-fil, välj menyalternativet <menuchoice
+> <guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Exportera</guisubmenu
 > <guimenuitem
 >QIF...</guimenuitem
-></menuchoice
-> menu item. You will be prompted for which single account to export, what file to export it to, and what QIF Profile to use. </para>
+> </menuchoice
+>. Du blir tillfrågad om vilket konto som ska exporteras, vilken fil det ska exporteras till och vilken QIF-profil som ska användas. </para>
 
-<note
-><para
->För närvarande hanterar inte QIF export av investeringar. </para
-></note>
+<note>
+  <para
+>QIF-export hanterar inte export av investeringskonton. Det kan verka fungera och producerar en utdatafil, men filen kommer inte att innehålla några faktiska data.</para>
+</note>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qifimport-export.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->QIF-export</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>qif export</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-export.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>qif export</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>QIF-export använder QIF-profiler på ett liknande sätt som QIF-import, men använder informationen i profilen för att formatera QIF-filen som skrivs, snarare än för att tolka filen som läses. Parallellt med importverktyget kan du använda ett anpassat filterprogram. Det finns ett separat fält under fliken Filter i QIF-profileditorn för ett utdatafilter, så du kan använda samma QIF-profil för både import och export, men använda ett separat filter för de två processerna. </para>
 </sect1>
 
 <sect1 id="details.impexp.ofx">
@@ -943,182 +963,173 @@
 >&Ace.Jones; &Ace.Jones.mail;</author>
   <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title
->OFX-importinsticksprogram</title>
-
-<sect2>
-<title
->Hämta insticksprogrammet</title>
+>OFX-import</title>
 
 <para
->&kmymoney; will import OFX files painlessly. However, this functionality is not built into the core program. You must obtain and install the OFX Importer Plugin. Once that is installed, the command to import OFX files will automatically show up under the <menuchoice
-><guimenu
->File</guimenu
-> <guisubmenu
->Import</guisubmenu
-></menuchoice
-> submenu. </para>
+>OFX-import var en av de första komponenterna i &kmymoney; som skrevs som ett insticksprogram. Vid den tiden fanns det bara ett fåtal insticksprogram inkluderade i källkoden, och de ingick inte alltid i versioner byggda för &Linux;-distributioner, så det var ibland nödvändigt för användare att kunna kompilera insticksprogrammen själva. Det är sällan fallet längre, men se avsnittet om <link linkend="makingmostof.plugins"
+>Insticksprogram</link
+> för mer information. För närvarande implementeras många av de funktioner som anses vara centrala delar av &kmymoney; som insticksprogram, så det faktum nämns inte alltid i handboken där funktionerna diskuteras. Se även avsnittet <link linkend="details.settings.plugins"
+>Insticksprogram</link
+> i kapitlet Inställningar. </para>
 
-<para
->Note that many prepackaged versions of &kmymoney; were built with the OFX importer already included or available as a separate package. If the OFX importer does not seem to be installed in your version, the first place to check is in the same place you got your base &kmymoney; package. </para>
-
-<para
->If you have installed from RPM, the OFX Importer Plugin is contained within the kmymoney-ofx package. It should be available from whatever source you got the base &kmymoney; package. If you have built from sources, all you need to do is have preferably the libOFX 0.9 development headers and libraries installed on your system. The &kmymoney; build process will detect these and compile the plugin. At the time of release of &kmymoney; 4.6, the latest libofx version was 0.9.4, which is also the minimum required version. </para>
-
-<para
->Skulle du stöta på problem när du försöker kompilera &kmymoney;, och du är säker på att du har rätt version av libOFX installerad, kontakta gärna utvecklarnas lista &devlist; för hjälp. Inkludera en kopia av filen <filename
->config.log</filename
->, först komprimerad med <command
->gzip</command
->. </para>
-</sect2>
-
-<sect2>
-<title
+<sect2
+><title
 >Vad är OFX</title>
-
 <para
->OFX stands for <quote
+><acronym
+>OFX</acronym
+> står för <quote
 >Open Financial Exchange</quote
->. According to the <ulink url="https://www.ofx.net/"
->OFX web site</ulink
+>. Enligt <ulink url="https://financialdataexchange.org/ofx/"
+>OFX-arbetsgruppens webbplats</ulink
 > <quote
->Open Financial Exchange (OFX) is a unified specification for the electronic exchange of financial data between financial institutions, businesses and consumers via the Internet. OFX is not a financial institution.</quote
-> The specification defines formats for transfer of financial data both by file and by direct interchange. </para>
+>är Open Financial Exchange en öppen standard för klient-server-system och molnbaserade programmeringsgränssnitt för att utbyta finansiella data och utföra finansiella transaktioner mellan finansiella institutioner och finansiella applikationer.</quote
+> Specifikationen definierar format för överföring av finansiella data både via filer och genom direkt utbyte. Ytterligare historisk information finns på <ulink url="https://en.wikipedia.org/wiki/Open_Financial_Exchange"
+>Wikipedia-sidan</ulink
+> </para>
 
 <para
->Även om standarden är mycket fullständigare och stabilare än QIF, finns det ändå variationer, beroende på den specifika implementeringen som används av ett visst institut. OFX-filer kan ha filändelsen <quote
+>Även om OFX-standarden är mycket mer komplett och robust än QIF, finns det fortfarande variationer, beroende på vilken specifika implementering som används av institutionen. OFX-filer kan ha filändelsen <quote
 >OFX</quote
 > eller <quote
 >QFX</quote
-> (stora eller små bokstäver). Det innebär inte någon särskild skillnad i innehåll. Specifikationen är baserad på &XML;, alltså kan filerna läsas av vilken texteditor som helst, men eftersom blanktecken inte är relevanta för själva innehållet använder vissa implementeringar inte några alls, vilket gör dem mycket svårlästa för en människa. </para>
+> (stora eller små bokstäver). Det innebär ingen särskild skillnad i innehållet. Specifikationen baserades ursprungligen på SGML, och senare versioner är baserade på &XML;, så filerna kan läsas i vilken texteditor som helst, men eftersom blanktecken inte är relevanta för själva innehållet använder vissa implementeringar inga, vilket gör det mycket svårt för en människa att läsa. </para>
 
 <para
->Another site with good information is <ulink url="https:/ofxhome.com/"
+>Dessutom, även om standarden innehåller bestämmelser för ytterligare typer av data, kan &kmymoney; bara importera transaktionsdata, med viss ytterligare data såsom aktuellt behållning på konton. </para>
+
+<para
+>Även om den verkar ha försvunnit, fanns det tidigare en annan webbplats med bra information på <ulink url="https:/ofxhome.com/"
 >OFX Home</ulink
->. They maintain a directory of financial institutions that support OFX. This can be useful if you have problems setting up <link linkend="details.impexp.ofxdirectconnect"
->OFX direct connect.</link
-> They also have a forum for discussions about OFX issues. </para>
+>, som hade en katalog över finansiella institutioner som stöder OFX. Det var ofta användbart om man hade problem med att ställa in <link linkend="details.impexp.ofxdirectconnect"
+>OFX-direktanslutning.</link
+> De hade också ett forum för diskussioner om OFX-frågor. Eftersom domänen fortfarande är registrerad lämnar vi referensen ifall webbplatsen dyker upp igen i framtiden. </para>
 </sect2>
 
-<sect2>
-<title
->Importera en OFX-fil</title>
+<sect2
+><title
+>Importera OFX-data</title>
+<para
+>OFX-standarden definierar organisationen och formateringen av finansiella data, men data kan antingen existera som en vanlig fil eller som en dataström mellan två datorer. Det enklaste sättet att hämta OFX-data är att ladda ner dem från banken eller en annan finansiell institution som en OFX-fil. I de flesta fall, när du är inloggad på bankens webbplats, finns det en knapp eller länk för att ladda ner data på sidan som visar transaktioner. Det kan stå OFX eller QFX, eller så kan du begära data för Quicken eller Web Connect (se nedan för mer information om denna term). Du har också möjlighet att ange datumintervallet för transaktioner som ska laddas ner (även om det ibland är begränsat till perioder som matchar de tillgängliga kontoutdragen), samt filtrera enligt transaktionstyp. </para>
 
 <para
->The most basic way to import an OFX file is to choose the importer from the menu bar. From the <menuchoice
-><guimenu
->File</guimenu
-><guisubmenu
->Import</guisubmenu
+>Om du har laddat ner en OFX-fil är det enklaste sättet att importera den att välja importverktyget i menyraden och välja menyalternativet <menuchoice
+> <guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Importera</guisubmenu
 > <guimenuitem
 >OFX...</guimenuitem
-></menuchoice
-> menu item. If OFX does not show up under Import, you do not have the OFX Importer Plugin installed correctly. Please see the previous section. </para>
+> </menuchoice
+>. Om OFX inte visas under Importera har du inte insticksprogrammet för OFX-import korrekt installerat, eller så är det inte aktiverat. Se föregående avsnitt. </para>
 
 <para
->The first thing the importer will do is ask you into which account to import the transactions. If there are transactions from multiple accounts in your file, you will be asked this question multiple times. </para>
+>Det första importverktyget gör är att fråga dig till vilket konto transaktionerna ska importeras. Om filen innehåller transaktioner från flera konton får du frågan flera gånger. </para>
 
 <para
 >Efter import, kanske vissa transaktioner visas med ett utropstecken på en gul triangel i huvudboken. Det beror på att de behöver tilldelas en kategori. Importen kunde inte automatiskt tilldela en kategori baserat på din tidigare transaktionshistorik. Du kan redigera varje transaktioner i huvudboken för att tilldela den en kategori, så kommer markeringen att tas bort. </para>
 
 <para
->Please note that this section describes the <quote
->native</quote
-> OFX importer. OFX files may also be imported using the AqBanking Importer Plugin if you have installed that. Note that the two importers do behave slightly differently, and they are written and supported by two different developers. </para>
+>Det här avsnittet beskriver det <quote
+>ursprungliga</quote
+> OFX-importverktyget. OFX-filer kan också importeras med hjälp av AqBanking importinsticksprogrammet. De två importverktygen beter sig något olika, och de är skrivna och stöds av två olika utvecklare. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Importera investeringar</title>
-
 <para
 >Observera att om du importerar en fil med investeringstransaktioner, måste investeringarna först finnas i &kmymoney;s fil. Aktiesymbolen används för matchning, så försäkra dig om att symbolen i &kmymoney; är exakt likadan som den i filen du importerar. </para>
 </sect2>
 
-<sect2 id="details.impexp.webconnect">
-<title
+<sect2 id="details.impexp.webconnect"
+><title
 >Webbanslutning</title>
+<para
+>Istället för att explicit ladda ner en OFX-fil, som beskrivs ovan, är ett enklare sätt att importera en OFX-fil att ställa in Web Connect. Besök bankens webbplats och klicka på knappen eller länken för att ladda ner data som en OFX-fil. (Vissa institutioner listar bara QFX, vilket är ekvivalent.) Webbläsaren bör fråga om du vill spara filen, eller vilket program du vill använda för att öppna filen. Peka webbläsare på &kmymoney;. Det importera sedan den nerladdade OFX-filen direkt till &kmymoney;s fil som för närvarande är öppen, eller den fil som senast var öppen. Du kan också ändra filassociationer i skrivbordsmiljön och få systemet att automatiskt öppna &kmymoney; om du klickar på en OFX-fil i filhanteraren. </para>
 
 <para
->The easiest way to import an OFX file is to set up Web Connect. Visit your bank's web site, and click on a link to download an OFX file. Your browser should ask you what program you would like to use to open the file. Point your browser to &kmymoney;. It will then import the downloaded OFX file into the &kmymoney; file you most recently had open. You can also change the file associations of your desktop environment, and have &kmymoney; open the OFX file automatically for you. </para>
-
-<para
->Om du behöver importerar OFX-filen till en annan fil i &kmymoney;, ladda först den filen i &kmymoney;, och besök därefter bankens hemsida. </para>
+>Om du behöver importera OFX-filen till någon annan &kmymoney;s datafil, öppna först den filen i &kmymoney; och besök sedan din banks webbplats. </para>
 </sect2>
 
-<sect2 id="details.impexp.ofxdirectconnect">
-<title
+<sect2 id="details.impexp.ofxdirectconnect"
+><title
 >Direktanslutning</title>
+<para
+>&kmymoney; stöder även OFX Direct Connect. Det ger &kmymoney; möjligheten att kontakta din bank direkt för att ladda ner transaktioner, förutsatt att banken stöder det. </para>
 
 <para
->OFX Direct Connect is now supported in &kmymoney;. This gives you the ability to contact your bank directly to obtain statements. In the future, there will be more help written, and this will be moved to its own section. </para>
-
-<para
->To enable this feature, you must compile &kmymoney; with the <userinput
-><option
->--enable-ofxbanking</option
-></userinput
-> switch (now the default). </para>
-
-<para
->Please be warned: Many banks require a separate signup, will give you a separate password or PIN, and may even charge you a separate fee for this service. No bank directly supports &kmymoney;. You will have to tell them you want to bank directly from <application
+>Observera: inte alla banker stöder OFX Direct Connect, och de som gör det använder ofta programvara som tillhandahålls och stöds av tredje part, och tredje part tillhandahåller ofta endast kundsupport för användare av specifik, kommersiell programvara för ekonomihantering. Ingen bank stöder direkt &kmymoney;, så du kan behöva tala om för dem att du vill använda banktjänster direkt från <application
 >MS Money</application
-> or <application
+> eller <application
 >Quicken</application
->. </para>
+>. Dessutom säger OFX-arbetsgruppens webbplats som nämns ovan också <quote
+>Vidare tillåter programmeringsgränssnittet att utbytet underlättas antingen direkt eller via en mellanhand, såsom leverantörer av aggregeringstjänster.</quote
+> Användare har rapporterat att banker som har övergått till att använda sådana leverantörer av aggregeringstjänster är ännu mindre benägna att tillhandahålla något stöd om du inte använder ett av de kommersiella programmen. </para>
 
 <para
->The first step is to configure each account for which you wish to download statements. Go to the Accounts view, right click on the account you wish to configure, and choose <guimenuitem
->Map to online account...</guimenuitem
->. In case more than one online banking plugin is installed on your system you will be asked which one to use. For the internal OFX method select <guimenuitem
+>Dessutom kan banken kräva en separat registrering än för den vanliga webbplatsen, de kan ge dig ett separat lösenord eller en separat PIN-kod, och de kan till och med ta ut en separat avgift för tjänsten. </para>
+
+<para
+>Om Direct Connect fungerar för dig kan du uppdatera information genom att ladda ner senaste transaktioner med ett enda knapptryck. Om det inte fungerar vid första försöket kan du hitta en enkel lösning på problemet, eller så kan det kräva mycket efterforskningar, och det finns ingen garanti för att det kommer att fungera i någon specifik situation. Ta dock inte det som en anledning att inte försöka. </para>
+
+<para
+>Det första steget är att ställa in varje konto som du vill ladda ner transaktioner för. Gå till vyn Konton, högerklicka på det konto du vill ställa in och välj <guimenuitem
+>Anslut konto...</guimenuitem
+>. Det är också tillgängligt i menyn <guimenu
+>Konton</guimenu
+> om kontot är öppet i huvudboksvyn. Om mer än ett insticksprogram för Internetbank är installerat på systemet blir du tillfrågad om vilket som ska användas. För den interna OFX-metoden väljer du <guimenuitem
 >&kmymoney; OFX</guimenuitem
->. A list of banks will be downloaded from the Internet and a wizard will guide you through choosing a bank, entering your username and password, and selecting an account. Should you find that your bank is not listed, then it may still be possible to use the manual option. Your bank may be able to provide the required parameters, or you may have to do some research to find them. </para>
+>. En lista över banker laddas ner från Internet och en guide vägleder dig att välja bank, ange användarnamn och lösenord och välja konto. Om du upptäcker att banken inte finns med i listan kan det ändå vara möjligt att använda det manuella alternativet. Banken kan eventuellt tillhandahålla de nödvändiga parametrarna, eller så kan du behöva göra lite efterforskningar för att hitta dem. </para>
 
 <note>
   <para
->Setting up OFX Direct Connect can sometimes be a challenge, especially as the implementation at most institutions do not provide sufficient details in error messages. One particular issue to note is that many institutions require you to change your password the first time you access it online using this method. Unfortunately, at this time, the library that &kmymoney; uses (libofx) does not have a way to interactively change a password. In some cases, it is possible to get a technical support person at the institution to change the password for you. Until we are able to expand this section with more detailed troubleshooting information, if you have trouble getting this to work for you, you can ask for help on the &kmymoney; developer list &devlist;. </para>
+>Som antytts ovan kan det ibland vara en utmaning att ställa in OFX Direct Connect, särskilt eftersom implementeringarna på de flesta institutioner inte ger tillräcklig information i felmeddelanden. Ett särskilt problem att notera är att många institutioner kräver att du ändrar lösenord första gången du använder det på nätet med den här metoden. Tyvärr har biblioteket som &kmymoney; använder (libofx) för närvarande inte ett sätt att interaktivt ändra ett lösenord. I vissa fall är det möjligt att få en teknisk supportperson på institutionen att ändra lösenordet åt dig. Tills vi kan utöka avsnittet med mer detaljerad felsökningsinformation kan du, om du har problem med att få det att fungera, be om hjälp på utvecklarnas e-postlista &devlist; eller någon av de andra <link linkend="firsttime.contact"
+> supportkanalerna</link
+>. </para>
 </note>
 
 <para
->Once you have an account set up with online banking, go to the ledger for that account. Then choose <menuchoice
+>När du har skapat ett konto med internetbanken, gå till huvudboken för det kontot och välj <menuchoice
 ><guimenu
->Account</guimenu
+>Konto</guimenu
 ><guimenuitem
->Update account...</guimenuitem
+>Uppdatera konto...</guimenuitem
 ></menuchoice
-> menu item. This will connect to your bank, and download a statement for the last 60 days. </para>
+>. Det ansluter till banken och ladda ner de senaste transaktionerna. Se nästa avsnitt om hur du kan ställa in det faktiska datumintervallet för transaktioner som ska hämtas. </para>
 
 <note>
   <para
->In version of &kmymoney; prior to 4.6, the payee name was always taken from the <literal
+>I äldre versioner av &kmymoney; hämtades betalningsmottagarens namn alltid från fältet <literal
 >PAYEEID</literal
-> field. As of version 4.6, the payee name can be based on either the <literal
+> i OFX-data. Från och med version 4.6 kan betalningsmottagarens namn antingen baseras på fältet <literal
 >PAYEEID</literal
 >, <literal
 >NAME</literal
->, or <literal
+> eller <literal
 >MEMO</literal
-> field in the OFX transaction. You can configure this feature and some other OFX direct connect settings by selecting the appropriate tab in the <link linkend="details.accounts.edit"
->Edit account</link
-> dialog. </para>
+> i OFX-transaktionen. Nästa avsnitt visar hur du kan ställa in funktionen och några andra inställningar för direktanslutning till OFX. </para>
 </note>
 </sect2>
 
-<sect2>
-<title
->Exportera en OFX-fil</title>
-
+<sect2 id="details.impexp.ofxsettings"
+><title
+>Anpassa OFX-importinformation</title>
 <para
->It is not possible to export your data as an OFX file currently. If you are interested to contribute in this area, please contact the libofx development team for details. </para>
+>Det beskrevs tidigare i avsnittet om <link linkend="details.accounts.edit"
+>redigering av kontouppgifter</link
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Exportera en OFX-fil</title>
+<para
+>Det är för närvarande inte möjligt att exportera data som en OFX-fil. Om du är intresserad av att bidra inom området, vänligen kontakta libofx utvecklingsteam för mer information. </para>
 </sect2>
 </sect1
->&details-impexp-csv; &details-impexp-csvexp; &details-impexp-woob; <sect1 id="details.impexp.plugins">
-<title
->Skriva importinsticksprogram</title>
-
-<para
->&kmymoney; contains explicit support for importer plugins. If you have a custom format, and you would like to write an importer plugin, we would value your contribution. To do so, you'll need to compile the program from source. Then use the OFX Importer Plugin as an example. </para>
-</sect1>
-</chapter>
+>&details-impexp-csv; &details-impexp-woob; </chapter>

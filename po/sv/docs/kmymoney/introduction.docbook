@@ -2,20 +2,18 @@
 <chapter id="introduction">
 <chapterinfo>
   <date
->2018-01-13</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Inledning</title>
 
-<sect1 id="what-is-kmymoney">
-<title
+<sect1 id="what-is-kmymoney"
+><title
 >Vad är &kmymoney;?</title>
-
 <para
->Med enkla ord är &kmymoney; en hemekonomihanterare av &kde;. Den låter en användare av operativsystem och program med öppen källkod noggrant följa upp sin personliga ekonomi, genom att tillhandahålla en stor mängd ekonomiska funktioner och verktyg. </para>
+>&kmymoney; är en hemekonomihanterare av &kde;. Den låter användare noggrant följa upp sin personliga ekonomi genom att tillhandahålla en stor mängd ekonomiska funktioner och verktyg. </para>
 
 <para
 >De huvudsakliga målen med projektet är: </para>
@@ -51,12 +49,11 @@
 
 </sect1>
 
-<sect1 id="what-kmymoney-is-not">
-<title
+<sect1 id="what-kmymoney-is-not"
+><title
 >Vad &kmymoney; inte är</title>
-
 <para
->Som hemekonomihanterare, är inte &kmymoney; avsett att att skala upp till behoven hos ett typiskt företag. Ett mindre företag kan finna tillräckligt med funktioner för att använda &kmymoney;, men funktioner som kundfordringar och leverantörsskulder stöds inte direkt. Dock vore det möjligt att skapa funktioner för kunder, leverantörer och dokumentation, eller andra funktioner, via insticksprogram. </para>
+>Som hemekonomihanterare, är inte &kmymoney; avsett att att skala upp till behoven hos ett typiskt företag. Ett mindre företag kan finna tillräckligt med funktioner för att använda &kmymoney;, men funktioner som kundfordringar och leverantörsskulder stöds inte direkt. Ju större företaget är, desto mindre sannolikt är det att &kmymoney; tillgodoser behovet av ekonomisk förvaltning. De flesta om inte all data som behövs för ett litet företag, till exempel för rapporter för revisions- och beskattningsändamål, finns, men kan behöva extraheras med hjälp av olika rapporter och sedan bearbetas och sättas ihop till de format som krävs. Dessutom vore det möjligt att skapa funktioner för kunder, leverantörer och dokumentation, eller andra funktioner, via insticksprogram. </para>
 
 <para
 >&kmymoney; är inte bara en klon av kommersiellt tillgängliga program för hemekonomi. Även om många av funktionerna som finns i &kmymoney; också kan hittas i andra liknande program, strävar &kmymoney; efter att presentera en individuell och unik vy av din ekonomi. </para>

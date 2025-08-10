@@ -1,41 +1,69 @@
 <sect1 id="details.impexp.woob">
-    <sect1info>
-        <author
+<sect1info>
+  <author
 >&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
-    </sect1info>
-
-    <title
+</sect1info>
+<title
 >Woob Import</title>
-    <sect2>
-        <title
+
+<sect2
+><title
 >Vad är Woob?</title>
-        <para
+<para
+><acronym
 ><ulink url="https://woob.tech/"
 >Woob</ulink
-> is <quote
->a collection of applications able to interact with websites, without requiring the user to open them in a browser</quote
->. One of <ulink url="https://woob.tech/applications/"
->such applications</ulink
-> allows specifically to interact with <ulink url="https://woob.tech/applications/bank"
->financial institutions</ulink
->. &kmymoney; provides a plugin that employs it directly, therefore allowing to import transactions from those accounts which otherwise do not offer support for any other financial protocol that &kmymoney; handles. </para>
-
-        <note>
-            <para
->&kmymoney; currently requires that you install Woob independently. Refer to the further sections for details. </para>
-        </note>
-    </sect2>
-    <sect2>
-        <title
+></acronym
+>,eller <quote
+>Web outside of browsers</quote
+>, är <quote
+>en samling program som kan interagera med webbplatser utan att kräva att användaren öppnar dem i en webbläsare</quote
+>. Ett av <ulink url="https://woob.tech/applications/"
+>dessa program</ulink
+> möjliggör specifikt att interagera med <ulink url="https://woob.tech/applications/bank"
+>finansinstitut</ulink
+>. &kmymoney; tillhandahåller ett insticksprogram som direkt utnyttjar det, och därför gör det möjligt att importera transaktioner från de konton som annars inte erbjuder stöd för något annat finansprotokoll som &kmymoney; hanterar. </para>
+</sect2>
+  
+<sect2
+><title
 >Installera Woob</title>
-        <para
->You need to install Python 3 first before continuing. You can download a package for your system from the <ulink url="https://www.python.org/downloads/"
->official website</ulink
+<note>
+  <para
+>&kmymoney; kräver för närvarande att du installerar Woob oberoende. Se nedan för detaljerad information. </para>
+</note>
+
+<para
+>Vissa &Linux;-distributioner paketerar Woob, och det är den föredragna installationsmetoden, om den är tillgänglig. Om inte, måste du först installera en ny version av Python 3 innan du fortsätter. Alla större &Linux;-distributioner paketerar Python, och du bör använda den versionen, om möjligt. Annars kan du ladda ner ett paket för ditt system från den <ulink url="https://www.python.org/downloads/"
+>officiella Python-webbplatsen</ulink
+>. Den exakta minimiversionen av Python som krävs av Woob finns på <ulink url="https://woob.tech/install/"
+>Woobs webbplats</ulink
 >. </para>
 
-        <para
->Med Python 3 installerat, ska du nu enkelt kunna ladda ner och installera nödvändiga Woob-moduler. Se instruktionerna på <ulink url="https://woob.tech/install/"
->Woob webbplatsen</ulink
->. </para>
-    </sect2>
+<para
+>Med Python 3 installerat bör du nu enkelt kunna ladda ner och installera de nödvändiga Woob-modulerna. Se instruktionerna på Woobs webbplats. När &kmymoney; körs, letar det efter närvaron av Woob och laddar insticksprogrammet om Woob hittas. Se avsnittet <link linkend="details.settings.plugins"
+>Insticksprogram</link
+> i kapitlet <link linkend="details.settings"
+>Inställningar</link
+> för mer information om att säkerställa att Woob-insticksprogrammet är laddat. </para>
+</sect2>
+
+<sect2
+><title
+>Använda Woob</title>
+<para
+>Om Woob är installerat och &kmymoney; woob-insticksprogrammet är laddad, bör du kunna ställa in det för användning med ett konto genom att använda menyalternativet <menuchoice
+> <guimenu 
+>Konto</guimenu
+> <guimenuitem 
+>Anslut till direktkonto...</guimenuitem 
+> </menuchoice 
+>. När det är gjort laddar menyalternativet <menuchoice
+> <guimenu
+>Konto</guimenu
+> <guimenuitem
+>Uppdatera konto...</guimenuitem
+> </menuchoice
+> ner transaktioner för det kontot med Woob. </para>
+</sect2>
 </sect1>

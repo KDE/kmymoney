@@ -4,72 +4,68 @@
   <authorgroup>
     <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2014-08-30</date>
+>2024-12-01</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Filformat</title>
 
 <para
 >Om du inte väljer att använda en <link linkend="details.database"
 >relationsdatabas</link
->, lagrar &kmymoney; all ekonomisk information i en fil som har ändelsen <filename class="extension"
+>, lagrar &kmymoney; all ekonomisk information i en fil. Vanligtvis avslutas filnamnet med <filename class="extension"
 >.kmy</filename
 >. Dessutom öppnar &kmymoney; den senaste filen som var öppen när det startas, om du inte använder en <link linkend="firsttime.launch"
 >kommandoradsväljare</link
-> som talar om att det inte ska göras. Det är dock viktigt att veta att det finns mer än en typ av fill som &kmymoney; kan använda för att lagra ekonomisk data. </para>
+> som talar om att det inte ska göras. Det är dock viktigt att veta att det finns mer än en typ av fil som &kmymoney; kan använda för att lagra ekonomisk data. </para>
 
 <para
->Det här kapitlet beskriver formaten som &kmymoney; lagrar data i permanent form på användarens lagringsenhet. I allmänhet lagrar &kmymoney; information i form av ett &XML;-dokument. Beroende på själva formatet, kommer detta &XML;-dokument att skrivas: <itemizedlist>
-  <listitem
-><para
->som en <link linkend="details.formats.plain"
->vanlig textfil</link
-> kodad med UTF-8,</para
-></listitem>
+>Kapitlet beskriver filformaten som &kmymoney; kan använda för att lagra data i permanent form. Det beskriver också säkerhetskopiering av data. </para>
 
-  <listitem
+<sect1
+><title
+>Datafilformat</title>
+<para
+>I allmänhet lagrar &kmymoney; sin information i form av ett &XML;-dokument. Beroende på det faktiska formatet, som är inställt i &kmymoney;s inställningar, skrivs &XML;-dokumentet: <itemizedlist
+> <listitem
 ><para
->som en <link linkend="details.formats.compressed"
->komprimerad fil</link
-> med användning av komprimering med GZIP,</para
-></listitem>
-
-  <listitem
+>som en vanlig textfil, kodad i UTF-8,</para
+></listitem
+> <listitem
 ><para
->som en <link linkend="details.formats.encrypted"
->krypterad fil</link
-> med användning av kryptering med GPG, eller</para
-></listitem>
-
-  <listitem
+>som en komprimerad fil, med GZIP-komprimering,</para
+></listitem
+> <listitem
 ><para
->som en <link linkend="details.formats.anonymous"
->anonym vanlig textfil</link
-> kodad med UTF-8 men med all personlig data förvanskad.</para
-></listitem>
-</itemizedlist>
-</para>
+>som en krypterad fil, med GPG-kryptering, eller</para
+></listitem
+> <listitem
+> <para
+>som en anonym vanlig textfil, kodad i UTF-8 men med all personlig data förvrängd.</para
+> </listitem
+> </itemizedlist
+> Var och en beskrivs mer detaljerat i följande avsnitt. </para>
 
-<sect1 id="details.formats.plain">
-<title
+<sect2 id="details.formats.plain"
+><title
 >Vanlig textfil</title>
 <para
 >Det här är formatet som konsumerar mest utrymme, eftersom ingen komprimering utförs. Det är inte avsett för normal användning, och tillhandahålls i felsökningssyfte och ger möjlighet att ändra filen för hand. Om du slutar ett filnamn med <filename class="extension"
 >.xml</filename
-> kommer filen att lagras med det här formatet. <caution
+> kommer filen att lagras med det här formatet. <note
 > <para
->Att ändra filen för hand rekommenderas inte för den vanliga användaren, och ska bara göras om den interna funktionen hos &kmymoney; är fullständigt förstådd eller instruktioner från utvecklarna talar om för dig vad du ska göra. Skyll inte på utvecklarna av &kmymoney; om du förstör data. Du har fått en varning. </para>
-</caution>
+>Att ändra filen för hand rekommenderas inte för den vanliga användaren, och ska bara göras om den interna funktionen hos &kmymoney; är fullständigt förstådd eller instruktioner från utvecklarna talar om för dig vad du ska göra. Skyll inte på utvecklarna av &kmymoney; om du skadar eller förstör data. Du har fått en varning. </para>
+</note>
 </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.formats.compressed">
-<title
+<sect2 id="details.formats.compressed"
+><title
 >Fil komprimerad med GZIP</title>
 <para
 >Detta är det normala formatet som används av &kmymoney; när du lagrar en fil med filändelsen <filename class="extension"
@@ -80,7 +76,7 @@
   <para
 >Om <link linkend="details.formats.encrypted"
 >kryptering</link
-> har valts, kommer filen att lagras krypterad. </para>
+> har valts i inställningarna, kommer filen att lagras krypterad, som beskrivs i nästa avsnitt. </para>
 </note>
 
 <para
@@ -97,22 +93,22 @@
 >.xml</filename
 ></link
 > för att skriva den med okomprimerat format. </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.formats.encrypted">
-<title
+<sect2 id="details.formats.encrypted"
+><title
 >Fil komprimerad med GPG</title>
 <para
 >Att använda filformatet krypterat av GPG är en mycket säker metod att lagra personlig ekonomidata på en lagringsenhet. När &kmymoney; har blivit instruerad att lagra data krypterat via inställningsdialogrutan, chiffreras data med GPG och nyckeln du tillhandahållit innan det verkligen lagras. När en krypterad fil öppnas, måste du tillhandahålla lösenordsfrasen som är nödvändig för att öppna din nyckelring. Själva den krypterade filen lagras i GPG:s <emphasis
 >&ASCII;-bepansrade</emphasis
 > format. <note
 > <para
->När kryptering med GPG används, komprimerar också GPG filen, så ingen ytterligare komprimering är nödvändig. </para>
+>När kryptering med GPG används, komprimerar också GPG filen med gzip, så ingen ytterligare komprimering är nödvändig. </para>
   </note>
 </para>
 
-<sect2 id="details.formats.encrypted.gpgkeys">
-<title
+<sect3 id="details.formats.encrypted.gpgkeys"
+><title
 >GPG-nycklar</title>
 <para
 >Om du inte redan har gjort det för e-postkryptering, måste du skapa ett nyckelpar för att kunna använda funktionen för kryptering med GPG i &kmymoney;. Dessutom måste <application
@@ -120,37 +116,51 @@
 > vara installerat på systemet. </para>
 
 <para
->Information om hur ett nyckelpar skapas, och hur det hanteras, är utanför det här dokumentets omfattning. En kort handledning om ämnet finns på <ulink url="https://www.gnupg.org/documentation/howtos.en.html"
+>Information om hur ett nyckelpar skapas, och hur man tar hand om det, är utanför det här dokumentets omfattning. En kort handledning om ämnet finns på <ulink url="https://www.gnupg.org/documentation/howtos.en.html"
 >https://www.gnupg.org/documentation/howtos.en.html</ulink
->. </para>
-</sect2>
+>. Webbplatserna för de flesta &Linux;-distributionerna innehåller också instruktioner om hur GPG används i den distributionen. </para>
+</sect3>
 
-<sect2 id="details.formats.encrypted.keysettings">
-<title
+<sect3 id="details.formats.encrypted.keysettings"
+><title
 >Ställa in nycklarna i &kmymoney;</title>
 <para
->På krypteringssidan i inställningsdialogrutan finns en kombinationsruta där du kan välja nyckeln som ska användas vid kryptering och avkodning. Dessutom finns ett fält där du kan skriva in nyckel-id för en nyckel som inte finns i listrutan. Du kan antingen använda nyckel-id, e-postadressen som hör ihop med nyckeln eller någon annan giltig nyckelidentifiering i GPG som värde i fältet. När nyckel-id skrivs in, kommer &kmymoney; kontrollera dess giltighet och tända en grön lysdiod i dialogrutan om en nyckel hittas. <caution
+>På krypteringssidan i inställningsdialogrutan finns en kombinationslista där du kan välja nyckeln som ska användas vid kryptering och avkodning. Dessutom finns ett fält där du kan skriva in nyckel-id för en nyckel som inte finns i listrutan. Du kan antingen använda nyckel-id, e-postadressen som hör ihop med nyckeln eller någon annan giltig nyckelidentifiering i GPG som värde i fältet. När nyckel-id skrivs in, kommer &kmymoney; kontrollera dess giltighet och visa en grön lysdiod i dialogrutan om en nyckel hittas. <caution
 > <para
 >Försäkra dig om att du har både den öppna och privata nyckeln för detta id. Om du inte äger den privata nyckeln för det id som skrivs in, kommer du inte att kunna öppna filen igen. </para>
   </caution>
 </para>
-</sect2>
+</sect3>
 
-<sect2 id="details.formats.encrypted.recoverkey">
-<title
+<sect3 id="details.formats.encrypted.recoverkey"
+><title
 >&kmymoney;s återställningsnyckel</title>
 <para
 >På den här sidan i inställningsdialogrutan har du också möjlighet att välja tilläggskryptering med &kmymoney;s återställningsnyckel. Alternativet är tillgängligt om den nyckeln är lagrad i din nyckelring i <application
 >GPG</application
->. Att välja alternativet gör det möjligt att återställa data även i fallet då du förlorar din egen privata nyckel. Det är möjligt eftersom data inte bara krypteras med din egen nyckel, utan också med &kmymoney;s återställningsnyckel. Nyckeln är bara tillgänglig för utvalda utvecklare av &kmymoney; (när det här skrivs, bara upphovsmannen). Från och med utgivningen av &kmymoney; version 4.7, är utgåvenyckeln inställd att gå ut 3:e januari 2015. </para>
+>. Att välja alternativet gör det möjligt att återställa data även i fallet då du förlorar din egen privata nyckel. Det är möjligt eftersom data inte bara krypteras med din egen nyckel, utan också med &kmymoney;s återställningsnyckel. Nyckeln är bara tillgänglig för utvalda utvecklare av &kmymoney; (när det här skrivs, bara upphovsmannen). Från och med maj 2024 är återställningsnyckeln inställd att löpa ut den 7 januari 2025. </para>
 
 <para
 >Under normala omständigheter, kommer du att öppna, spara och stänga filen som vanligt. I det onormala fallet när din nyckel har gått förlorad, har du möjlighet att kontakta en av utvecklarna som har tillgång till &kmymoney;s återställningsnyckel och be om hjälp att återställa din data. Du kan kontakta utvecklarna via e-post till &kmymoney;s e-postlista för utvecklare på &devlist;. </para>
-</sect2>
-</sect1>
 
-<sect1 id="details.formats.anonymous">
-<title
+<para
+>För att hämta återställningsnyckeln, gå till sidan <ulink url="https://kmymoney.org/recovery.html"
+>The KMyMoney recovery key</ulink
+> på &kmymoney;s webbplats. Kopiera och spara <quote
+>PGP PUBLIC KEY BLOCK</quote
+> (inklusive raderna <quote
+>BEGIN</quote
+> och <quote
+>END</quote
+>) i en textfil och importera den sedan med gpg. </para>
+
+<para
+>Kom ihåg att utvecklaren kan bara hjälpa till att återställa datafilen om du faktiskt krypterar den med återställningsnyckeln, förutom din egen nyckel. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.formats.anonymous"
+><title
 >Anonym fil</title>
 <para
 >Formatet är inte avsett att användas för normal datalagring. Det stöds så att du kan tillhandahålla filen till &kmymoney;s utvecklingsgrupp i händelse av problem, utan att avslöja några av de konfidentiella delarna av din ekonomiska information. Det ändrar till exempel institution, konto, betalare och kategorinamn till strängar som "I000001" och "A000001", det gör liknande ändringar av all information som kontonummer, och ändrar också slumpmässigt transaktionernas värden. </para>
@@ -166,6 +176,103 @@
 
 <para
 >För att kontrollera att problemet fortfarande finns, läs in den anonyma filen igen och försök upprepa problemet. Om problemet fortfarande finns, skicka filen till utvecklarnas e-postlista på &devlist; för ytterligare undersökning. Om problemet inte visar sig, ... nåja, det är ett scenario som jag inte vill föreställa mig just nu. </para>
+</sect2>
+
+<sect2
+><title
+>Datafilplatser</title>
+<para
+>Alla ovanstående filtyper kan lagras på en lokal hårddisk, en flyttbar enhet som ett USB-minne eller en nätverksplats. Beroende på operativsystemet kan en fjärrplats behöva ställas in eller monteras innan användning. </para>
+
+<note
+><title
+>Begränsningar på Windows</title>
+  <para
+>I Windows måste en plats ställas in med en enhetsbeteckning för att kunna använda en nätverks- eller fjärrfilplats. </para>
+</note>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.backup"
+><title
+>Säkerhetskopiera</title>
+<para
+>Vi försöker inte övertyga dig om att det är en extremt bra idé att säkerhetskopiera dina data här. Förhoppningsvis är du redan övertygad om det. Avsnittet beskriver tre sätt att göra det, och du kan använda ett, två eller till och med alla tre. Observera att det handlar om att säkerhetskopiera en datafil. Om du använder ett SQL-gränssnitt för att lagra data, se dokumentationen för det databassystemet för instruktioner om hur du gör säkerhetskopior. </para>
+
+<sect2
+><title
+>Säkerhetskopians plats</title>
+<para
+>Om du behöver en säkerhetskopia av data för att bekräfta någon aspekt av din ekonomi vid en tidigare tidpunkt, eller för att återställa till ett tidigare tillstånd, till exempel för att ångra import av mycket data till fel konto, spelar det ingen roll om säkerhetskopian är lokal eller lagrad någon annanstans, till exempel på en ansluten nätverksenhet. Men om du behöver en säkerhetskopia för att återställa från dataförlust om din hårddisk till exempel går sönder, är det viktigt att säkerhetskopian <emphasis
+>inte</emphasis
+> finns på samma enhet som den primära datafilen. Vid en större katastrof, till exempel en husbrand, behöver du en säkerhetskopia som lagras i ett brandsäkert kassaskåp eller på en fysiskt annan plats. Tänk på det när du bestämmer din säkerhetskopieringsstrategi. </para>
+</sect2>
+
+<sect2
+><title
+>Spara automatiskt</title>
+<para
+>&kmymoney; har möjlighet att automatiskt spara en kopia av datafilen med jämna mellanrum. Det kan också göras när programmet stängs, om informationen har ändrats. Beteende kan ställas in i &kmymoney;s <link linkend="details.settings.general.global"
+>inställningsdialogruta, avsnittet Allmänt, fliken Allmänt</link
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Filkopiering</title>
+<para
+>Om du inte använder lagring med SQL kan data komprimeras och krypteras, men de lagras i en vanlig fil. När du sparar data med menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Spara</guimenuitem
+></menuchoice
+> skrivs all data i en fil och ersätter den tidigare versionen. Det enklaste sättet att säkerhetskopiera data är att göra en kopia av filen. En enda kopia kan till och med ha samma filnamn om den finns i en annan katalog än den ursprungliga filen, men om du ska behålla flera kopior är det klokt att inkludera någon form av aktuellt datum och tid i varje filnamn. Du kan spara dem på en nätverksenhet, en USB-lagringsenhet eller till och med en optisk enhet. Den främsta nackdelen med metoden är att du måste hålla reda på alla säkerhetskopior, men den ger mest flexibilitet. </para>
+</sect2>
+
+<sect2
+><title
+>Säkerhetskopieringskommando</title>
+<para
+>För att göra det lite enklare kan du välja menyalternativet <menuchoice
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Säkerhetskopiering</guimenuitem
+> </menuchoice
+>. </para>
+
+<screenshot>
+  <screeninfo
+>filsäkerhetskopiering</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="file-backup.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>filsäkerhetskopiering</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>När du klickar på <guibutton
+>Ok</guibutton
+> skapar &kmymoney; en kopia av datafilen, med datumet (formaterat som ÅÅÅÅ-MM-DD) tillagt i namnet. Observera att det innebär att endast en säkerhetskopia per dag kan skapas med metoden. Om du redan har skapat en säkerhetskopia samma dag frågar &kmymoney; om du vill ersätta den tidigare säkerhetskopian eller avbryta. </para>
+
+<para
+>&kmymoney; sparar filen i katalogen som anges i fältet <guilabel
+>Monteringsplats</guilabel
+>. Du kan antingen skriva in hela sökvägen till katalogen manuellt eller klicka på <guibutton
+>Välj...</guibutton
+> och navigera till den med hjälp av filhanteraren. Katalogen kan finnas på en lokal lagringsenhet eller så kan den vara en nätverkskatalog. </para>
+
+<para
+>Om den angivna katalogen faktiskt är en monteringsplats för en lagringsenhet som inte alltid är monterad, kan du markera kryssrutan <guilabel
+>Montera katalogen innan säkerhetskopiering</guilabel
+>. Använd inte det för en vanlig nätverksfildelning som alltid är monterad. </para>
+</sect2>
 </sect1>
 </chapter>
-

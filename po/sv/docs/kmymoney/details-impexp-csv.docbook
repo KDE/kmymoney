@@ -1,199 +1,329 @@
 <sect1 id="details.impexp.csv">
 <sect1info>
-   <author
->&Allan.Anderson; &Allan.Anderson.mail; </author>
+  <author
+>&Allan.Anderson;</author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title
 >CSV-importinsticksprogram</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Anledningar för att importera CSV-filer</title>
-
 <para
 >I allmänhet är OFX lämpligast att importera Dock tillhandahåller inte alla institutioner data i det formatet. CSV-filer (kommaseparerat värde) är nästan alltid tillgängliga, ibland kallade Excel-filer eller kalkylblad. De kan också oftast skapas snabbt och enkelt genom att spara data du vill importera, som i en textfil, och redigera den manuellt. </para>
 
 <para
->Insticksprogrammets huvudfokus är att importera data från bankutdrag, men det finns också en möjlighet att importera vissa investeringsutdrag. Insticksprogrammet skapades ursprungligen för att generera QIF-filer från CSV, som kunde importeras, innan det blev ett CSV-importverktyg. Funktionen finns fortfarande, men kommer troligen tas bort, eftersom insticksprogrammet nu fokuserar på att direkt importera CSV-filer. Dessutom har &kmymoney; en inbyggd möjlighet att <link linkend="details.impexp.qifexp"
+>Inledande fokus för CSV-import var att hantera data från bankutdrag, men möjligheten att även importera vissa investeringsutdrag har lagts till. Dessutom har den förbättrats ytterligare för att importera både valuta och aktiekurser. Den ursprungliga koden för det skapades ursprungligen, innan det blev CSV-import, för att producera QIF-filer från CSV-filer, som sedan kunde importeras. Den möjlighet finns fortfarande kvar, men kommer sannolikt att tas bort, eftersom fokus nu ligger på att direkt importera CSV-filer. Dessutom har &kmymoney; den inbyggda möjligheten att <link linkend="details.impexp.qifexp"
 >exportera QIF-filer</link
->, så det finns ingen riktig anledning att skapa en QIF-file från en CSV-fil. </para>
+>, så det finns inte längre någon riktig anledning att producera en QIF-fil från en CSV-fil. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Hämta insticksprogrammet</title>
-
 <para
->&kmymoney; importerar CSV-filer. Funktionen tillhandahålls som ett insticksprogram och är nu inbyggd i huvudprogrammet, både i paket från distributioner och i källkodsfiler. När väl distributionens paket har installerats, eller källfilerna har kompilerats och installerats, visas menyalternativet för att importera CSV-filer automatiskt i undermenyn <menuchoice
-><guimenu
+>CSV-import är en av de nyare funktionerna som har lagts till i &kmymoney; i form av ett insticksprogram. Men precis som med andra insticksprogram ingår CSV-import i &kmymoney;:s kärnkällkod, så den borde vara tillgänglig i alla versioner av &Linux;-distributioner, såväl som i versionerna för andra plattformar som görs tillgängliga via &kmymoney;:s webbplats. Menyalternativet för att importera CSV-filer bör automatiskt synas i undermenyn <menuchoice
+> <guimenu
 >Arkiv</guimenu
-><guisubmenu
+> <guisubmenu
 >Importera</guisubmenu
-></menuchoice
+> </menuchoice
 >. </para>
 
 <para
->Insticksprogrammet för CSV-import är mycket nyare än OFX-insticksprogrammet, men de flesta distributioner byggs nu med CSV-importverktyget redan inkluderat eller tillgängligt som ett separat paket. Försäkra dig om att det är aktiverat i &kmymoney;. Kontrollera med menyalternativet <menuchoice
-><guimenu
+>För att säkerställa att den är aktiverad i &kmymoney;, kontrollera menyalternativet <menuchoice
+> <guimenu
 >Inställningar</guimenu
 > <guimenuitem
 >Anpassa &kmymoney;...</guimenuitem
-><guimenuitem
->Insticksprogram</guimenuitem
-></menuchoice
->. Om CSV-importverktyget inte verkar vara installerat i din version, är det första stället att kontrollera samma plats där du hämtade baspaketet för &kmymoney;. Kontrollera om en senare version är tillgänglig, eller om importverktyget är tillgängligt som ett separat paket. </para>
+> </menuchoice
+>, välj <guilabel
+>Insticksprogram</guilabel
+> i den vänstra rutan och leta efter <guilabel
+>CSV-import</guilabel
+> i den visade listan över insticksprogram. Om CSV-import inte verkar vara installerad i din version är det första stället att kontrollera på samma plats där du hämtade ditt grundläggande &kmymoney;-paket. Se om en senare version är tillgänglig, eller om importverktyget är tillgängligt som ett separat paket. </para>
 
 <para
->Om du installerar från RPM- eller Deb-paket, bör insticksprogrammet för CSV-import finnas i paketet kmymoney. Om du har byggt från källkod ska det inte finnas några ytterligare krav. Byggprocessen för &kmymoney; bör detektera insticksprogrammets källkod och kompilera den. </para>
+>Om du har byggt från källkod ska det inte finnas några ytterligare krav. Byggprocessen i &kmymoney; ska upptäcka insticksprogrammets källkod och kompilera insticksprogrammet. Det finns inställningar som kan användas för att utesluta att det eller andra insticksprogram byggs, men de bör sällan vara nödvändiga. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Importera en CSV-fil</title>
-
 <para
->För att importera en CSV-fil, välj import i menyraden: <menuchoice
-><guimenu
+>För att importera en CSV-fil, välj importverktyget i huvudmenyn: <menuchoice
+> <guimenu
 >Arkiv</guimenu
-><guisubmenu
->Import</guisubmenu
-><guimenuitem
+> <guisubmenu
+>Importera</guisubmenu
+> <guimenuitem
 >CSV...</guimenuitem
-></menuchoice
->. Om CSV inte visas under Import, har du inte installerat insticksprogrammet för CSV-import riktigt. Se föregående avsnitt. </para>
+> </menuchoice
+>. Om CSV inte visas under Importera är CSV-Importinsticksprogrammet inte korrekt installerat eller så är det inte aktiverat. Se föregående avsnitt. </para>
 
 <para
->CSV-importverktyget har formen av en guide, med en separat sida för varje enskilt steg av processen. Det kan finnas några mindre skillnader mellan texten i den här handboken, beteckningarna på skärmbilderna och beteckningarna som du faktiskt ser i guiden. I sådana fall beskriver handboken hur guiden ser ut i nästa utgåva. </para>
+>CSV-import presenteras i form av en guide, med en separat sida för varje enskilt steg i processen. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Guide för CSV-import: Start</title>
-
 <para
->När det startas visar CSV-importverktyget sidan <guilabel
+>När CSV-import startas visar den sidan <guilabel
 >Start</guilabel
->. Det övre området där data kommer att visas, är inledningsvis tomt. Under det till vänster finns en lista över stegen i importprocessen, med det nuvarande markerat. Till höger finns några kortfattade instruktioner och två alternativknappar, som gör det möjligt att antingen välja <guilabel
->Bank</guilabel
 > eller <guilabel
+>Fil</guilabel
+>. Till vänster finns en lista över stegen i importprocessen, med det aktuella markerat. Det övre högra området är där data som ska importeras visas. Innan dess visas några korta instruktioner som är relevanta för guidens aktuella steg. Nedanför finns en uppsättning alternativknappar för att välja vilken typ av data som ska importeras. Listan inkluderar för närvarande <guilabel
+>Bank</guilabel
+>, <guilabel
 >Investering</guilabel
->. Därefter finns en ruta för profilval, som aktiveras när väl en av alternativknapparna har valts. Längst ner i fönstret finns knappar för att gå vidare till nästa steg i guiden, gå <guibutton
->Tillbaka</guibutton
-> till det föregående steget, eller <guibutton
->Avbryt</guibutton
-> importen. I det inledande steget finns också knappen <guilabel
->Välj fil</guilabel
-> för att först välja filen att importera. </para>
-<!-- want to use inlinemediaobject to avoid lines above and below. -->
-  <screenshot>
+>, <guilabel
+>Valutakurser</guilabel
+> och <guilabel
+>Aktiekurser</guilabel
+>. Därefter finns en kombinationsmeny för profilväljare, som aktiveras om alternativknappen har valts för en av filtyperna att importera. </para>
+
+<screenshot>
+  <screeninfo
+>guide för csv-import: start</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_1.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>guide för csv-import: start</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
+</sect3>
+
+<sect3
+><title
+>CSV-importprofiler</title>
+<para
+>Varje typ av CSV-fil som ska importeras kräver specifikation av flera detaljer gällande den förväntade formateringen av data, vilket beskrivs i följande avsnitt. Detaljerna skiljer sig inte bara åt för de olika typerna av importerade datafiler, det är också möjligt att det kan behövas olika inställningar för samma typ av data från olika källor. Så att du inte behöver ange all information varje gång du importerar en fil, låter CSV-import dig ange informationen en gång och spara den i en namngiven profil. </para>
 
 <para
->Observera också kryssrutan <guilabel
+>Namnet på en CSV-importprofil är helt godtyckligt, men blir lättare att komma ihåg om det återspeglar både typen av data som importeras (bank, kreditkort, investering, ...) och datakällan. Det finns inget behov av att referera till det konto som informationen importeras till, och det är möjligt att använda samma profil för import till mer än ett konto, till exempel två lönekonton i samma bank. </para>
+
+<para
+>Profilväljarens kombinationsruta innehåller namnen på alla CSV-importprofiler som tidigare har skapats, och den låter dig också skriva in namnet på en ny profil. Under profilväljarens kombinationsmeny finns tre knappar. När du klickar på <guilabel
+>Lägg till</guilabel
+>, vilket alltid är aktiverat, skapas en ny profil med namnet som anges i kombinationsmenyn. Ingenting händer om fältet är tomt eller om det visar namnet på en befintlig profil. När du fortsätter genom resten av CSV-importguiden sparas de olika inställningarna du anger eller ändrar i den valda profilen. </para>
+
+<para
+>Om du tidigare har skapat en eller flera profiler aktiveras de andra två knapparna. Om du klickar på <guilabel
+>Ta bort</guilabel
+> tas profilen som namnges i kombinationsmenyn bort. Om du klickar på <guilabel
+>Byt namn</guilabel
+>, och sedan ändrar namnet som visas i kombinationsmenyn och klickar på <guilabel
+>Byt namn</guilabel
+> igen, ändras profilens namn i enlighet med det. </para>
+
+<para
+>Intill profilväljaren finns kryssrutan <guilabel
 >Hoppa över inställning</guilabel
-> intill profilväljaren. Från början ska inte kryssrutan markeras. När du väl har ställt in en profil och avslutat guiden, sparas parametrarna i resursfilen. Nästa gång du använder samma profil, läses parametrarna in i användargränssnittet. Guiden skulle därefter sega sig igenom de följande sidorna med parametrar som du inte behöver ändra. Så när du är nöjd med en profil, är det istället användbart att markera rutan. Guiden går då direkt till den sista sidan, och under förutsättning att inga problem hittas, behöver du bara klicka på <guilabel
+>. Inledningsvis bör kryssrutan inte markeras. När du har ställt in en profil och avslutat guiden sparas alla inställningsparametrar du angett i resursfilen under profilnamnet. Nästa gång du använder samma profil laddas parametrarna in i användargränssnittet. Guiden går sedan igenom följande sidor med parametrar som du inte behöver ändra. Så när du är nöjd med en profil kan det vara bra att markera rutan. Guiden går sedan direkt till den sista sidan, och förutsatt att inga problem hittas behöver du bara klicka på <guilabel
 >Importera</guilabel
 >. </para>
 
 <para
->Välj först <guilabel
->Bank</guilabel
-> eller <guilabel
->Investering</guilabel
->, klicka i valrutan som visar "Lägg till ny profil". Om du tidigare har skapat några profiler kan du välja en av dem, skriv annars in ett nytt profilnamn, möjligen namnet på kontot som du vill importera till. Om du skriver in ett nytt profilnamn, tryck på returtangenten för att skapa den. Klicka därefter på <guilabel
+>Längst ner finns knappen <guilabel
 >Välj fil</guilabel
-> så öppnas en vanlig filvalsruta där du ska välja CSV-filen som du vill importera. </para>
+>. Om du klickar på knappen visas en fildialogruta där du kan välja filen som ska importeras. Längst ner på de återstående sidorna i guiden finns knappar för att gå <guibutton
+>&lt; Tillbaka</guibutton
+> till föregående steg i guiden, gå vidare till steget <guilabel
+>Nästa &gt;</guilabel
+> eller <guibutton
+>Avbryt</guibutton
+> importen. </para>
+
+<para
+>För att granska, markera först kryssrutan för den typ av data du importerar på guidens startsida. I profilväljarens kombinationsmeny kan du välja namnet på en tidigare skapad CSV-importprofil, eller ange ett nytt namn, eventuellt namnet på det konto du vill importera till, och klicka på <guilabel
+>Lägg till</guilabel
+>. Klicka slutligen på <guilabel
+>Välj fil</guilabel
+>, så öppnas en fildialogruta där du väljer den CSV-fil du vill importera. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Guide för CSV-import: Avgränsare</title>
 <para
->Guiden har nu gått vidare till sidan <guilabel
+>Efter att du öppnat den valda datafilen går guiden vidare till sidan <guilabel
 >Avgränsare</guilabel
 >, och du bör nu se data. </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo
+>guide för csv-import: avgränsare</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_2.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>guide för csv-import: avgränsare</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
-  <warning>
-    <para
->Det kan verka som om posterna som visas i den övre delen av insticksprogrammets fönster är redigerade, och de kan faktiskt vara det, men eventuella redigeringar behålls inte. Tabellen är bara till för att visas, inte redigeras. Indatafilen ändras aldrig av insticksprogrammet, och data som faktiskt importeras kommer från indatafilen, inte från det som visas. Det enda undantaget till det beskrivs i <link linkend="details.impexp.csv.secsym"
+<warning>
+  <para
+>Det kan verka som att informationen som visas i den övre delen av insticksprogrammets fönster kan redigeras, och det kan den faktiskt, men eventuella ändringar sparas inte. Tabellen är enbart för granskning, inte för redigering. Indatafilen ändras aldrig av CSV-import, och den information som faktiskt importeras kommer från indatafilen, inte från granskningen. Det enda undantaget från det behandlas i <link linkend="details.impexp.csv.secsym"
 >Värdepapper och symboler</link
 > nedan. </para
 > 
-  </warning>
+</warning>
 
 <para
->Insticksprogrammet bör ha detekterat lämplig <guilabel
+>CSV-import bör ha identifierat lämplig <guilabel
+>Kodning</guilabel
+>, <guilabel
 >Fältavgränsare</guilabel
-> att använda, och det är inte vanligtvis möjligt att välja en annan. I själva verket återställs alla eventuella fältval som du redan kan ha gjort, om du försöker göra det. Det finns också en väljare för <guilabel
+> och <guilabel
 >Textavgränsare</guilabel
->, men i allmänhet är citationstecknet (") riktigt. Klicka nu på knappen <guibutton
+>. Du kan ändra kodningen om programmet inte valde korrekt. Om du behöver ändra fältavgränsaren, till exempel om data faktiskt är avgränsade med tabulator och inte kommatecken, var medveten om att det återställer alla fältval du redan har gjort. Generellt sett är citattecknet (&quot;) korrekta textavgränsare, men du kan ändra det efter behov. Klicka på <guibutton
 >Nästa</guibutton
->. Beroende på tidigare val som du har gjort, går du nu antingen till sidan Bank eller Investering. </para>
+> för att fortsätta. </para>
 </sect3>
 
-<sect3>
-<title
->Guide för CSV-import: Bank</title>
+<sect3
+><title
+>Guide för CSV-import: Rader</title>
 <para
->På den här sidan väljer du kolumnnummer som relevanta fält ska importeras från. </para>
+>Nu är du på sidan <guilabel
+>Rader</guilabel
+> eller <guilabel
+>Linjer</guilabel
+>. Här anger du om några rader ska ignoreras i början eller slutet av filen. </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo
+>guide för csv-import: rader</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_3.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>guide för csv-import: rader</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
 <para
->För de flesta fält behöver du bara använda lämplig kombinationsruta för att välja passande kolumn. Det finns dock några speciella överväganden. </para>
+>På den här sidan kan du justera importen för att ignorera sidhuvud och sidfot i början eller slutet av filen, som faktiskt inte innehåller data som ska importeras. </para>
+
+<formalpara
+><title
+>Startrad</title>
+<para
+>Ställ in den så att importverktyget hoppar över alla rubrikrader i filen. Valet sparas i profilen för framtida bruk. Start- och slutraderna samverkar, och startraden får inte vara större än slutraden, och den får inte heller vara större än det faktiska antalet rader i filen. Om valet av <guilabel
+>Startrad</guilabel
+> inte är tillgängligt, kontrollera inställningen för slutraden. </para>
+</formalpara>
+
+<formalpara
+><title
+>Slutrad</title>
+<para
+>Importverktyget ställer automatiskt in denna till filens sista rad, eller till inställningen som senast sparades. Den behöver bara justeras om det finns en sidfot i filen som importverktyget ska ignorera. Annars får du troligen en varning om datafel när insticksprogrammet försöker tolka felaktig data. Återigen, om valet <guilabel
+>Slutrad</guilabel
+> inte är tillgängligt, kontrollera inställningen av <guilabel
+>Startrad</guilabel
+>. </para>
+</formalpara>
+
+<para
+>Ovanför de två fälten finns kryssrutan <guilabel
+>Sidhuvud innehåller kontonamn eller nummer</guilabel
+>. Om den är markerad letar importverktyget i raderna ovanför startraden efter namnet eller numret på det konto som ska användas för importen. Om inte, blir du ombedd att ange den informationen. </para>
+
+<para
+>När du är klar klicka på <guilabel
+>Nästa</guilabel
+> för att gå vidare till nästa steg. </para>
+</sect3>
+
+<sect3
+><title
+>Guide för CSV-import: Kolumner</title>
+<para
+>Du bör nu vara på sidan <guilabel
+>Kolumner</guilabel
+>. Det är här du anger för importverktyget vilka kolumner i filen som innehåller data som avbildas till de specifika fält som behövs för att skapa en meningsfull post eller transaktion, beroende på vilken typ av data som importeras. Det finns en annan version av sidan för varje typ av data, eftersom varje kräver en annan kombination av objekt. </para>
+
+<sect4
+><title
+>Guide för CSV-import: Bank</title>
+<screenshot>
+  <screeninfo
+>guide för csv-import: bank</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>guide för csv-import: bank</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+  
+<para
+>För de flesta fält behöver du bara använda kombinationsmenyn för att välja lämplig kolumn. Observera att många fält har knappen <quote
+>x</quote
+> till höger. Om du klickar på den tas det värde som har angetts eller valts i fältet till vänster bort. Dessutom finns det några speciella saker att tänka på. </para>
 
 <itemizedlist>
 <listitem>
-<para
->I mitten finns två alternativknappar. Om filen har en enda kolumn för alla värden, välj kolumnen <guilabel
+  <para
+>Till höger finns ett område med två flikar. Om din fil har en enda kolumn för alla värden, välj fliken <guilabel
 >Belopp</guilabel
->. Om det istället finns separata kolumner för debet och kredit, välj kolumnen <guilabel
+>. Om det däremot finns separata kolumner för debet och kredit, välj fliken <guilabel
 >Debet och kredit</guilabel
->. Det aktiverar antingen val av kolumnen <guilabel
->Belopp</guilabel
-> eller kolumnerna <guilabel
->Debet</guilabel
-> och <guilabel
->Kredit</guilabel
 >. </para>
+
+  <para
+>Under fliken Belopp börjar med att välja den kolumn som innehåller transaktionsbeloppet. Om det finns en kolumn som innehåller <quote
+>Kredit</quote
+> eller <quote
+>Debet</quote
+> för att ange vilket beloppet är, välj den kolumnen som <guilabel
+>Debet- och kreditindikering</guilabel
+>. Om det finns en sträng i beloppsfältet som anger att beloppet antingen är kredit eller debet, ange den strängen i lämpligt <guilabel
+>Indikator</guilabel
+>-fält. Slutligen, om det importerade beloppet återställs från vad det borde vara trots att alla ovanstående värden är korrekt inställda, markera kryssrutan <guilabel
+>Motsatt tecken</guilabel
+>. </para>
+
+  <para
+>Under fliken Debet och kredit anger du helt enkelt numren på kolumnerna med de värdena i lämpliga fält. </para>
 </listitem>
 
 <listitem>
 <para
->Det är möjligt att välja mer än en kolumn för anteckningsfältet med på varandra följande markeringar. Anteckningskolumner som redan är valda är markerade med en asterisk (*) i kombinationsrutan. Om du väljer flera kolumner på detta sätt, sammanfogas de i anteckningsfältet. </para>
+>Det är möjligt att välja mer än en kolumn för anteckningsfältet genom att göra markeringar i följd. Anteckningskolumner som redan är valda indikeras i fältet <guilabel
+>Anteckningskolumner:</guilabel
+>. Om du väljer flera kolumner på det sättet sammanfogas deras innehåll att i anteckningsfältet. </para>
 </listitem>
 
 <listitem>
 <para
->Om du försöker välja samma kolumnnummer för två fält varnar insticksprogrammet dig och rensar båda valen. Det är dock möjligt, om så önskas, att använda samma kolumn i båda fälten <guilabel
+>Om du försöker välja samma kolumnnummer för två fält, varnar importverktyget dig och tar bort båda valen. Det är dock möjligt, om så önskas, att använda samma kolumn i både fälten <guilabel
 >Betalningsmottagare eller beskrivning</guilabel
 > och <guilabel
 >Anteckning</guilabel
 >. Om du väljer en kolumn för fältet <guilabel
 >Betalningsmottagare eller beskrivning</guilabel
-> och sedan väljer samma fält för <guilabel
+> och sedan väljer samma kolumn för fältet <guilabel
 >Anteckning</guilabel
-> får du en varning om att duplicerade kolumner har valts, men du blir tillfrågad om du vill fortsätta. Om du vill det, klicka på <guibutton
+>, får du en varning om att dubbletter av kolumner har valts, men du får en fråga om du vill fortsätta. Om du gör det klickar du på <guibutton
 >Ja</guibutton
->. </para>
+>, så används kolumnen för båda fälten. </para>
 </listitem>
 
 <listitem>
@@ -203,30 +333,82 @@
 </itemizedlist>
 
 <para
->Om du märker att du har gjort ett felaktigt val, ändra bara valet. Om flera ändringar behöver göras, klicka på knappen <guilabel
->Rensa</guilabel
->. </para>
+>Om du märker att du har gjort ett felaktigt val, ändra bara det valet. Om flera ändringar behöver göras kan du klicka på <guilabel
+>Rensa alla</guilabel
+> och börja om. </para>
 
 <para
 >När kolumner väl har valts för alla nödvändiga fält, aktiveras knappen <guilabel
 >Nästa</guilabel
 > och att klicka på den gör att guiden går vidare. </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title
+<sect4
+><title
+>Guide för CSV-import: Format</title>
+<para
+>Nästa sida i guiden visar fortfarande data som ska importeras längst upp, men den nedre delen innehåller tre kombinationsmenyer. De initiala värdena ställs in av &kmymoney; baserat på undersökning av verklig data. </para>
+
+<screenshot>
+  <screeninfo
+>guide för csv-import: investering</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>guide för csv-import: investering</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+><guilabel
+>Decimalsymbol</guilabel
+> är normalt inställt på <quote
+>automatisk</quote
+>, vilket vanligtvis ger korrekta resultat. Om inte, kan du explicit ange <quote
+>punkt</quote
+> eller <quote
+>kommatecken</quote
+>. </para>
+
+<para
+><guilabel
+>Tusentalsavgränsare</guilabel
+> ställs in automatiskt och fältet kan inaktiveras om det inte påverkar resultaten. </para>
+
+<para
+>Det här måste anges i ordningen år, månad, och dag i datumen i filen. Om insticksprogrammet hittar data som är inkompatibel med inställningen, kommer det klaga när du försöker utföra importen. Om inställningen däremot är fel, men ger ogiltiga resultat som inte detekteras (såsom data där dag-värdet aldrig går över 12, så att månad och dag kan vara bytta), får du helt enkelt felaktig data, eftersom insticksprogrammet inte kan veta att du har begått ett misstag. I detta fall kommer felet att vara uppenbart i huvudboken efter importen. </para>
+
+<para
+><guilabel
+>Datumformatet</guilabel
+> anger ordningen för dag, månad och år, och ställs också in automatiskt. I vissa fall, till exempel data utan dag större än 12, märker du dock problemet efter import. I sådana fall måste du upprepa importen och välja den faktiska ordningen för datumkomponenterna. </para>
+</sect4>
+
+<sect4
+><title
 >Guide för CSV-import: Investering</title>
 <para
 >Sidan liknar sidan <guilabel
 >Bank</guilabel
->, även om den är något mer komplicerad. De flesta val är ganska uppenbara, men det är några alternativ som kan verka förvirrande innan processen har genomförts några gånger. <screenshot
-> <mediaobject
-> <imageobject>
-  <imagedata fileref="csvImporter_4.png" format="PNG"/>
-  </imageobject>
+>, även om den är något mer komplicerad. De flesta val är ganska uppenbara, men det är några alternativ som kan verka förvirrande innan processen har genomförts några gånger. </para>
+
+<screenshot>
+  <screeninfo
+>guide för csv-import: investering</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>guide för csv-import: investering</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
-</para>
+</screenshot>
 
 <para>
 <itemizedlist>
@@ -255,27 +437,41 @@
 
 <listitem>
 <para
->Använd valet <guilabel
+>Det finns två sätt att ange avgifter för transaktioner. Om filen har en separat kolumn för avgifter, använd väljaren <guilabel
 >Avgiftskolumn</guilabel
-> om filen har en särskild kolumn för avgifter. Se dock upp med att avgiften kan ha tagits hänsyn till i kursen. Om det finns en avgift som är en procentsiffra istället för ett värde, klicka på kryssrutan <guilabel
+>. Observera att det är det enda fältet på sidan som uttryckligen inkluderar "kolumn" i beteckningen, för att betona att det är för avgiftskolumnen, inte för någon faktisk avgift. Var dock medveten om att avgiften kan ha beaktats i kursen. </para>
+
+<para
+>Om det finns en avgift, men den är en procentsats snarare än ett angivet värde, klicka i kryssrutan <guilabel
 >Avgiften är i procent</guilabel
->. Observera att på denna sidan är detta det enda fältet som explicit innehåller "kolumn" i beteckningen, för att understryka att det gäller avgiftskolumnen, inte den verkliga avgiften. </para>
+> och ange procentsatsen i fältet <guilabel
+>Avgiftsvärde</guilabel
+>. Om det finns en minimiavgift anger du den i fältet <guilabel
+>Minimiavgift</guilabel
+>, vilket aktiveras när du anger avgiftsvärdet (med en decimalpunkt). Om du nu klickar på <guibutton
+>Beräkna avgift</guibutton
+> läggs en kolumn till höger om tabellen ovan, och den beräknade avgiften för varje transaktion anges. </para>
+
+<para
+>Om du gjorde ett misstag när du angav avgiftsinformationen, kan alla avgiftsrelaterade fält återställas till ursprungliga värden genom att klicka på <guibutton
+>Nollställ avgift</guibutton
+>. </para>
 </listitem>
 
 <listitem>
 <para
 >Under kolumnväljarna finns två områden för värdepappersidentiteten. Beroende på mäklare eller finansinstitut kan filen innehålla poster för endast ett eller för flera olika värdepapper. <itemizedlist>
-  <listitem>
-  <para
->Om filen bara innehåller transaktioner för ett enda värdepapper, där namnet möjligen anges på en rubrikrad, ska det matas in i rutan <guilabel
+    <listitem>
+      <para
+>Om filen innehåller transaktioner för bara ett enda värdepapper, eventuellt med namnet i en rubrikrad, ska namnet anges i rutan <guilabel
 >Värdepappersnamn</guilabel
->. Namnet som du matar in läggs till i kombinationsrutan för framtida användning. Senare kanske du vill ta bort namnet från listan. Om det är fallet, markera det och klicka därefter på knappen <guilabel
+>. Namnet du anger läggs till i kombinationsmenyn för framtida bruk. Du kan senare vilja ta bort namnet från listan. Om så är fallet, markera det och klicka sedan på <guilabel
 >Dölj värdepapper</guilabel
->. Detta tar bara bort det från listan, och har ingen effekt på huvudfilen i &kmymoney;. </para>
-  </listitem>
+>. Det tar bara bort det från listan och har ingen effekt på &kmymoney;s huvudfil. </para>
+    </listitem>
 
-  <listitem>
-  <para
+    <listitem>
+      <para
 >Om filen innehåller transaktioner för flera värdepapper, identifieras var och en av dess telegrafsymbol med ytterligare information i en annan kolumn. Välj kolumner i väljarna <guilabel
 >Symbol</guilabel
 > och <guilabel
@@ -287,7 +483,7 @@
 > och skriv in <quote
 >typ: </quote
 >, inklusive det avslutande blanktecknet. </para>
-  </listitem>
+    </listitem>
   </itemizedlist>
 </para>
 </listitem>
@@ -298,69 +494,20 @@
 >När alla fält som krävs ar markerade, aktiveras knappen <guilabel
 >Nästa</guilabel
 >, och klicka på den går vidare i guiden. </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title
->Guide för CSV-import: Rader</title>
-<para
->På den här sidan anger du om några rader ska ignoreras i början eller slutet av filen. Du anger också formatet på en eventuell datumkolumn. <screenshot
-> <mediaobject
-> <imageobject>
-  <imagedata fileref="csvImporter_5.png" format="PNG"/>
-  </imageobject>
-  </mediaobject>
-  </screenshot>
-</para>
-
-<formalpara
+<sect4 id="details.impexp.csv.secsym"
 ><title
->Startrad</title>
-<para
->Ställ in denna så att importverktyget hoppar över eventuella rubrikrader i filen. Valet sparas i profilen för framtida användning. Start- och slutrader påverkar varandra och startraden kan inte vara större än slutraden. Om valet <guilabel
->Startrad</guilabel
-> inte svarar, kontrollera inställningen av slutrad. </para>
-</formalpara>
-
-<formalpara
-><title
->Slutrad</title>
-<para
->Importverktyget ställer automatiskt in denna till filens sista rad, eller till inställningen som senast sparades. Den behöver bara justeras om det finns sidfotsrader i filen som importverktyget ska ignorera. Annars får du troligen en varning om datafel när insticksprogrammet försöker tolka felaktig data. Återigen, om valet <guilabel
->Slutrad</guilabel
-> inte svarar, kontrollera inställningen av <guilabel
->Startrad</guilabel
->. </para>
-</formalpara>
-
-<formalpara
-><title
->Datumformat</title>
-<para
->Det här måste anges i ordningen år, månad, och dag i datumen i filen. Om insticksprogrammet hittar data som är inkompatibel med inställningen, kommer det klaga när du försöker utföra importen. Om inställningen däremot är fel, men ger ogiltiga resultat som inte detekteras (såsom data där dag-värdet aldrig går över 12, så att månad och dag kan vara bytta), får du helt enkelt felaktig data, eftersom insticksprogrammet inte kan veta att du har begått ett misstag. I detta fall kommer felet att vara uppenbart i huvudboken efter importen. </para>
-</formalpara>
-
-<para
->När du väl är klar, aktiveras knappen <guilabel
->Nästa</guilabel
-> och att klicka på den gör att guiden går vidare. </para>
-</sect3>
-
-<sect3 id="details.impexp.csv.secsym">
-<title
 >Guide för CSV-import: Värdepapper och symboler</title>
-
 <para
->Efter att sidan <guilabel
->Rader</guilabel
-> har accepterats för en investeringsfil, måste du försäkra dig om att varje värdepapper i filen motsvarar rätt värdepapper i &kmymoney;-filen, innan importen kan fortsätta. Vid detta tillfälle öppnas ett annat fönster som visar värdepappren och symbolerna som finns i importfilen. Observera att i motsats till datavisningen i guidens huvudfönster, <emphasis
->importeras</emphasis
-> ändringarna som görs på den här sidan. </para>
+>För en investeringsfil, efter att sidan <guilabel
+>Kolumner</guilabel
+> har accepterats, måste du säkerställa att varje värdepapper i filen matchar rätt värdepapper i &kmymoney;s fil, innan importen kan fortsätta. Vid denna tidpunkt öppnas ett annat fönster som visar värdepappren och symbolerna som finns i importfilen. Observera att till skillnad från datavisningen i huvudfönstren i guiden, importeras de ändringar du gör på den här sidan. </para>
 
 <para
 >Att fylla i sidan är enkelt om du tänker på följande saker: <itemizedlist>
     <listitem>
-    <para
+      <para
 >Varje rad representerar en transaktion, och därför kan det verka som om det finns duplicerade rader. Det är ok. </para>
     </listitem>
 
@@ -384,7 +531,7 @@
 </para>
 
 <para
->Namnet på en symbol eller ett värdepapper kan redigeras genom att dubbelklicka på cellen. Vid behov redigera namnet på varje värdepapper i en av dess rader. Om det riktiga värdepappersnamnet visas i den importerade filen, dubbelklicka på det för att markera det, kopiera och klistra in eller redigera det därefter, med hänsyn till om en variant eller förkortning har används inne i &kmymoney;. Om ett värdepappers namn redigeras, används den redigeringen för alla rader med samma symbol. </para>
+>Du kan redigera en symbol eller ett värdepappersnamn genom att dubbelklicka på cellen. För varje värdepapper, om det behövs, redigera namnet på en av raderna. Om rätt värdepappersnamn visas i den importerade filen, dubbelklicka på det för att markera det, kopiera och klistra in/redigera sedan. Var försiktig om du har använt en variant eller förkortning i &kmymoney;. Om du redigerar ett värdepappersnamn används redigeringen för alla rader med samma symbol. </para>
 
 <para
 >Alla rader utan en symbol behandlas som ett checkobjekt av kontantdepå-typ. Om någon transaktion berör ett annat konto, t.ex. ett lönekonto eller en kontantdepå för en mottagen utdelning eller för att göra en betalning, dyker en meddelanderuta upp för att skriva in kontonamnet för överföringen. Det är i allmänhet kontantdepån du valde eller skapade när investeringskontot skapades. Skriv på liknande sätt in kolumnnumret som innehåller betalningsmottagaren, om det begärs. Om ett misstag görs när kontonamnet skrivs in kommer importen att gå vidare, men &kmymoney; kommer inte att känna igen det, och flaggar att dessa transaktioner saknar en kategoritilldelning. Om kontonamnet som begärs är rätt långt, skriv bara in några få tecken. Importen går vidare men transaktionerna flaggas av &kmymoney; att de saknar kategoritilldelning och du måste välja rätt överföringskonto efter importen. Klicka på <guibutton
@@ -392,31 +539,46 @@
 > när du är klar. Importprocessen överlämnas då till &kmymoney;. </para>
 
 <para
->Om det finns mer än en transaktion som berör samma värdepapper, kan alla redigeras på en gång, med flerval. För att exempelvis lägga till en symbol för flera rader, tryck och håll nere &Ctrl;-tangenten och markera varje transaktion i symbolkolumnen. Medan &Ctrl;-tangenten fortfarande hålls nere ska alla dessa symbolceller fortfarande vara markerade, så klicka på en och skriv in symbolen. Klicka inne i fönstret, men utanför den kolumnen, eller tryck på returtangenten (inte <guibutton
+>Om du har fler än en transaktion som hänvisar till samma värdepapper kan du redigera alla samtidigt med hjälp av flerval. Om du till exempel vill lägga till en symbol för flera rader, tryck och håll ner &Ctrl;-tangenten och markera varje transaktion i symbolkolumnen. Medan du fortfarande håller ner &Ctrl;-tangenten ska alla dessa symbolceller fortfarande vara markerade, så klicka på en och ange symbolen. Klicka inuti fönstret men utanför den kolumnen, eller tryck på returtangenten (inte <guibutton
 >Ok</guibutton
->). Nu när alla transaktionerna har samma symbol, dubbelklicka på informationsinmatningen och redigera värdepapprets namn efter behov. Klicka någon annanstans i fönstret för att acceptera redigeringen (eller tryck på returtangenten), vilket då ändrar alla posterna. Återstående poster visar symbolerna som hämtas från transaktionerna i importfilen. </para>
+>). Nu när alla transaktioner har samma symbol, dubbelklicka på en detaljpost och redigera värdepappersnamnet som du vill. Klicka någon annanstans i fönstret (eller tryck på returtangenten) för att acceptera redigeringen, vilket sedan ändrar alla posterna. De återstående posterna visar symbolerna som hämtats från transaktionerna i importfilen. </para>
 
 <para
 >Klicka nu på <guibutton
 >Ok</guibutton
->, och därefter <guibutton
+> och sedan på <guibutton
 >Importera</guibutton
->. Skriv in namnet på en kontantdepå för tillgångar i rutan <guilabel
->Skriv in kontonamn</guilabel
->. Om du skriver in ett giltigt namn används det kontot. Om du inte orkar skriva in ett riktigt men långt namn, skriv in några få tecken. Importen accepterar det, men transaktionerna i huvudboken behöver få ett riktigt konto tilldelat efter importen. Skriv in numret på kolumnen som innehåller den informationen i rutan <guilabel
->Kontantdepå</guilabel
->. Nu kan ett fåtal poster visas i rutan <guilabel
->Ogiltiga transaktioner</guilabel
-> eftersom aktivitetstypen inte stämmer med kombinationen av antal, kurs, och belopp. Klicka på <guilabel
+>. I rutan <guilabel
+>Ange konto</guilabel
+> anger du namnet på ett mäklarkonto eller lönekonto med tillgångar. Om du anger ett giltigt namn används det kontot. Om du inte orkar ange ett korrekt men långt namn, ange några tecken. Importen accepterar det, men transaktionerna i huvudboken efter importen kräver att ett korrekt konto väljs. I rutan <guilabel
+>Mäklarkonto</guilabel
+> anger du numret på kolumnen som innehåller den informationen. I rutan <guilabel
+>Ogiltig transaktion</guilabel
+> kan du nu få några poster eftersom aktivitetstypen inte matchar kombinationen av antal/kurs/belopp. Klicka på <guilabel
 >Välj transaktionstyp</guilabel
-> för varje meddelande, så visas en kombinationsruta som anger giltiga aktivitetstyper för den kombinationen av värden. </para>
+> i varje meddelande, så visas en kombinationsmeny som anger giltiga aktivitetstyper för den värdekombinationen. </para>
 
 <para
 >Nu har importen skett, och du är i &kmymoney; för att välja investeringskontot att använda, och därefter lönekontot om det fanns några transaktioner med typen kontantdepå. </para>
+</sect4>
+
+<sect4
+><title
+>Guide för CSV-import: Valutakurser</title>
+<para
+>någonting om att importera valutakurser </para>
+</sect4>
+
+<sect4
+><title
+>Guide för CSV-import: Aktiekurser</title>
+<para
+>någonting om att importera valutakurser </para>
+</sect4>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Guide för CSV-import: Slutför</title>
 <para
 >När den sista sidan nås, validerar insticksprogrammet automatiskt värdena. Om kolumnen eller kolumnerna med numeriska värden är markerade med grönt, har valideringen lyckats och allt som behövs är att klicka på <guibutton
@@ -462,15 +624,15 @@
 </formalpara>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Skapa QIF-fil</title>
 <para
 >Knappen ger dig möjlighet att spara data från CSV-filen som en QIF-fil efter att importen är färdig, om du behöver en av någon orsak. Detta var i själva verket den ursprungliga funktionen som ledde till att insticksprogrammet skapades. Dock är möjligheten troligen nu av mindre nytta eftersom &kmymoney; numera själv kan exportera en QIF-fil, och kommer sannolikt att så småningom tas bort. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Slutföra</title>
 <para
 >För en <guilabel
@@ -480,13 +642,13 @@
 > kan dock lite mer krävas. Om insticksprogrammet inte hittar en giltig transaktionstyp vid import av en transaktion, visar det den felande transaktionen, och användaren kan välja en giltig typ som ersättning, beroende på kombinationen av värden för antal, kurs och belopp. För varje transaktion validerar insticksprogrammet kolumnens innehåll för att försäkra att det stämmer med åtgärdstypen. Om exempelvis ett antal finns, men ingen kurs eller belopp antas att transaktionen bara kan vara tillägg eller borttagning av aktier. Eller om det finns ett belopp men inget antal eller kurs, antas en utdelning, etc. </para>
 
 <para
->Om du vill spara inställningarna, kom ihåg att klicka på knappen <guibutton
+>Om du vill spara dina inställningar, kom ihåg att klicka på <guibutton
 >Slutför</guibutton
-> så stängs insticksprogrammet. </para>
+>, så stängs insticksprogrammet. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Lägga till typer av investeringsaktiviteter</title>
 <para
 >Om du ser att dina investeringsutdrag hela tiden inkluderar aktivitetstyper som inte känns igen, lägg bara till dem under sektionen i resursfilen. (Se <link linkend="details.impexp.csv.config"
@@ -520,20 +682,23 @@
 >. Att arrangera om listorna för att passa det fungerar inte som förväntat, eftersom posterna i resursfilen sorteras i alfabetisk ordning. Om den problematiska parametern är en som du inte behöver, ta bara bort den från filen. Om det inte är möjligt kan du behöva redigera din fil innan inläsning. </para>
 </sect3>
 
-<sect3 id="details.impexp.csv.config">
-<title
+<sect3 id="details.impexp.csv.config"
+><title
 >Anpassa CSV-importinsticksprogram</title>
-
 <para
->En välkänd nackdel med QIF-formatet är det att det är ett ganska vagt format. Man har samma problem med CSV-filer, men i större omfattning, eftersom det inte alls finns någon allmänt godtagen standard. I synnerhet för investeringsfiler finns det så mycket mer utrymme för variation i hur aktivitetstyperna som förekommer beskrivs. Insticksprogrammet hanterar det genom att lista aktivitetstyperna i en resursfil, som kallas <filename
+>En välkänd nackdel med QIF-formatet är att det är ett ganska löst format. Med CSV-filer finns samma problem, bara ännu mer, eftersom det inte finns någon överenskommen standard alls. Speciellt med investeringsfiler finns det mycket mer utrymme för variation i att ange de olika typerna av aktiviteter som representeras i data. Insticksprogrammet hanterar det genom att lista aktivitetstyperna i en resursfil, kallad <filename
 >csvimporterrc</filename
->. Platsen filen lagras beror på distributionen. På ett &Linux;-system är det i <filename class="directory"
+>. Platsen för filen beror på operativsystem eller distribution. På ett &Linux;-system är det <filename class="directory"
 >$KDEHOME/share/config</filename
 > där <envar
 >$KDEHOME</envar
-> oftast är <quote
->.config</quote
->. Att använda resursfilen låter användaren lägga till en aktivitetstyp som utvecklaren inte har stött på. Om filen inte finns när importen körs för första gången skapar insticksprogrammet en standardversion som innehåller några av de mer uppenbara beskrivningarna. </para>
+> vanligtvis är <filename class="directory"
+>.config</filename
+> i hemkatalogen. Om du migrerar från en version av &kmymoney; innan 5.0, var den gamla platsen för <envar
+>$KDEHOME</envar
+> <filename class="directory"
+>.kde4</filename
+>, också i hemkatalogen. Genom att använda resursfilen kan användaren lägga till en aktivitetstyp som utvecklarna inte har stött på. Om filen inte finns när importprogrammet körs första gången skapas en standardversion som innehåller några av de mer uppenbara beskrivningarna. </para>
 
 <para
 >Ett antal exempel på CSV-filer tillhandahålls (i katalogen <filename class="directory"
@@ -558,7 +723,91 @@
 
 <para
 >När insticksprogrammet skapades hade man bara sett ett fåtal investeringsformat att bygga på, och det kan mycket väl vara så att du stöter på ett som inte kan hanteras korrekt. Om du hittar en sådan fil, skicka gärna ett exempel (redigerat för att ta bort eller ersätta personlig information) till &kmymoney;s användarlista &userlist; eller utvecklarlista &devlist;, så kommer utvecklaren att göra sitt bästa för att ändra insticksprogrammet så att det hanteras. </para>
+
+<sect4
+><title
+>Inställningsdialogruta för CSV-import</title>
+<para
+>Slutligen finns det några andra saker som kan ställas in i en dialogruta som anropas via <link linkend="details.settings.plugins.csvimporter"
+>inställningsdialogrutan för CSV-import</link
+>, som kan visas från sidan Insticksprogram i KMyMoneys huvudinställningsdialogruta. Det inkluderar vilka objekt som automatiskt detekteras av importverktyget och vilken profil som används om du låter importverktyget exportera en QIF-fil, som nämnts ovan. </para>
+</sect4>
 </sect3>
 </sect2>
-</sect1>
 
+<sect2 id="details.impexp.csvexp">
+<sect2info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect2info>
+<title
+>Export till CSV</title>
+
+<para
+>För att exportera data till en CSV-fil, välj menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Exportera</guisubmenu
+> <guimenuitem
+>CSV...</guimenuitem
+> </menuchoice
+>. Dialogrutan som visas ger dig ett antal val som styr vilka data som ska exporteras. </para>
+
+<screenshot>
+  <screeninfo
+>export till csv</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvexport.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>export till csv</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Observera att en exporterad CSV-fil endast kan innehålla data från ett konto. </para>
+
+<para
+>Ange namnet på den exporterade CSV-filen antingen genom att ange den fullständiga sökvägen i fältet <guilabel
+>Fil att exportera till</guilabel
+>, eller genom att klicka på <guilabel
+>Bläddra</guilabel
+> och navigera till den i dialogrutan Spara fil. Välj vilket konto som ska exporteras med kombinationsmenyn <guilabel
+>Konto att exportera</guilabel
+>. </para>
+
+<para
+>Tidsperioden för exporterad data styrs av datumfälten <guilabel
+>Datumintervall</guilabel
+> <guilabel
+>Börja den</guilabel
+> och <guilabel
+>Sluta den</guilabel
+>. Standardvärdena representerar hela datumintervallet för hela datafilen och de justeras när du väljer ett konto att exportera. </para>
+
+<para
+>Normalt är <guilabel
+>Fältavgränsare</guilabel
+> ett kommatecken, men du kan också välja att använda tabulator eller semikolon. </para>
+
+<para
+>Om du markerar alternativknappen <guilabel
+>Innehåll att exportera</guilabel
+> <guilabel
+>Konto</guilabel
+> är den exporterade informationen transaktionerna från det angivna kontot och datumintervallet. Om du däremot väljer alternativknappen <guilabel
+>Kategorier</guilabel
+> innehåller den exporterade filen en rad för varje kategori som har definierats. För kategorier på toppnivå visas kategorinamnet och ett <quote
+>I</quote
+> eller <quote
+>U</quote
+> visas för att ange om kategorin är inkomst eller utgift. För kategorier som inte är på toppnivå visas även den överordnade kategorin. </para>
+
+<para
+>Exportverktyget matar ut en uppsättning kolumner som är lämpliga för den typ av konto som exporteras. </para>
+</sect2>
+</sect1>

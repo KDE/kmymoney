@@ -93,7 +93,7 @@
 ><surname
 >Ostroff</surname
 > <contrib
->Dokumentation.</contrib
+>Dokumentation och användarsupport.</contrib
 > <email
 >ostroffjh@users.sourceforge.net</email
 > </author>
@@ -135,9 +135,9 @@
 >arniing@users.sourceforge.net</email
 ></author>
 
-    These persons were not previously listed as authors here, but are included
-    in credits.docbook.  They should either be dropped from there or included
-    here.
+    These persons were not previously listed as authors here, but are included in
+    credits.docbook and as authors of some chapter(s).  They should either be dropped
+    from there or included here.
 
     <author
 ><firstname
@@ -145,7 +145,7 @@
 ><surname
 >Jones</surname>
     <contrib
->Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+>Reports.  OFX Import.  Online Quotes.  Documentation.  Previous versions.</contrib>
     <email
 >acejones@users.sourceforge.net</email
 ></author>
@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->2016-06-17</date>
+>2024-12-01</date>
 <releaseinfo
->KMyMoney 5.0</releaseinfo>
+>KMyMoney 5.2</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -188,7 +188,7 @@
 >kmymoney</command
 ></refname>
 <refpurpose
->the personal finances manager by &kde;</refpurpose>
+>hemekonomihanteringsprogrammet av &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -207,7 +207,7 @@
 ><option
 >--timers</option
 > <replaceable
-> column</replaceable
+> kolumn</replaceable
 ></group
 > <group choice="opt"
 ><option
@@ -220,11 +220,10 @@
 > <group choice="opt"
 ><option
 ><replaceable
->file</replaceable
+>fil</replaceable
 ></option
 ></group
 > </cmdsynopsis>
-
 </refsynopsisdiv>
 
 <refsect1>
@@ -232,8 +231,7 @@
 >Beskrivning</title>
 
 <para
->&kmymoney; is the Personal Finance Manager by &kde;. It provides the functions required to balance your checkbooks, manage your personal loans and categories your incomes and expenses using a checkbook style graphical user interface.</para>
-
+>&kmymoney; är hemekonomihanteringsprogrammet av &kde;. Det tillhandahåller alla funktioner som behövs för att balansera checkar, hantera personliga lån och kategorisera inkomster och utgifter med ett grafiskt användargränssnitt som påminner om ett checkhäfte. </para>
 </refsect1>
 
 <refsect1>
@@ -249,7 +247,7 @@
 ></term>
 <listitem>
 <para
->Språk att använda </para>
+>Språk att använda</para>
 </listitem>
 </varlistentry>
 
@@ -260,7 +258,7 @@
 ></term>
 <listitem>
 <para
->Öppna inte senast använda fil </para>
+>Öppna inte senast använda fil</para>
 </listitem>
 </varlistentry>
 
@@ -271,7 +269,7 @@
 ></term>
 <listitem>
 <para
->Aktivera prestandatidmätning </para>
+>Aktivera prestandatidmätning</para>
 </listitem>
 </varlistentry>
 
@@ -282,7 +280,7 @@
 ></term>
 <listitem>
 <para
->Fånga inte globalt ofångade undantag </para>
+>Fånga inte globalt ofångade undantag</para>
 </listitem>
 </varlistentry>
 
@@ -319,17 +317,15 @@
 
 <simplelist>
 <member
->The full documentation for &kmymoney; is maintained as a docbook manual. If the &khelpcenter; program is properly installed at your site, the command <userinput
+>Den fullständiga dokumentationen av &kmymoney; underhålls som en handbok i Docbook. Om programmet &khelpcenter; är riktigt installerat på datorn, ska kommandot <userinput
 ><command
 >khelpcenter</command
 > <parameter
 >help:/kmymoney</parameter
 ></userinput
-> should give you access to the complete manual. Alternatively the manual can be browsed in &konqueror; giving it the <acronym
->URL</acronym
-> <ulink url="help:/kmymoney"
+> ge tillgång till den fullständiga handboken. Som alternativ kan man bläddra i handboken med &konqueror;, genom att ange webbadressen <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-></member>
+>. </member>
 <member
 >kf5options(7)</member>
 <member

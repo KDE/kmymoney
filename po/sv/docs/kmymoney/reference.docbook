@@ -2,11 +2,10 @@
 <chapter id="reference">
 <chapterinfo>
   <date
->2016-12-05</date>
+>2024-12-01</date>
   <releaseinfo
->5.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Referens</title>
 
@@ -14,17 +13,18 @@
 <sect1info>
   <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title
 >Menyer</title>
 
 <para
->Nedan är en fullständig lista med alla menyalternativ i &kmymoney;, med en mycket kortfattad beskrivning av vad vart och ett gör. Observera att många av menyalternativen inte är tillgängliga, eller gråa, beroende på nuvarande visningsstatus i programmet. Du kan till exempel inte redigera ett konto om du inte har markerat ett konto, eller det inte visas i den nuvarande vyn. </para>
+>Nedan följer en fullständig lista över menyalternativen i &kmymoney;, med en mycket kort beskrivning av vad vart och ett gör. Observera att många av menyalternativen är otillgängliga eller gråa, beroende på aktuell vy eller programmets tillstånd. Dessutom kanske vissa inte finns om det relaterar till en funktion som inte ingår i din specifika version. Du kan till exempel inte redigera ett konto om du inte har ett konto valt eller visat i den aktuella vyn. </para>
 
-<sect2 id="reference.menus.file">
-<title
+<sect2 id="reference.menus.file"
+><title
 >Menyn Arkiv</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -38,14 +38,12 @@
 > <guimenu
 >Arkiv</guimenu
 ><guimenuitem
->Ny</guimenuitem
+>Ny bok</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Skapar en ny tom &kmymoney;-datafil. Bara en fil kan vara öppen åt gången i &kmymoney;, så detta stänger först den nuvarande filen, om någon är öppen. </action
-></para>
+>Skapar en ny tom &kmymoney;-datafil. Bara en fil kan vara öppen åt gången i &kmymoney;, så detta stänger först den nuvarande filen, om någon är öppen. </para>
     </listitem>
   </varlistentry>
 
@@ -66,9 +64,7 @@
 ></term>
     <listitem>
       <para
-><action
->Öppnar en befintlig &kmymoney;-datafil.</action
-></para>
+>Öppnar en befintlig &kmymoney;-datafil.</para>
     </listitem>
   </varlistentry>
 
@@ -79,15 +75,13 @@
 >Arkiv</guimenu
 > <guimenuitem
 >Öppna senaste</guimenuitem
-> <guimenuitem
+><guimenuitem
 >...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Tillåter snabb åtkomst av de senast öppnade filerna.</action
-></para>
+>Tillhandahåller snabb åtkomst av de senast öppnade filerna.</para>
     </listitem>
   </varlistentry>
 
@@ -102,9 +96,7 @@
 ></term>
     <listitem>
       <para
-><action
->Öppnar en befintlig databas.</action
-></para>
+>Öppnar en befintlig databas.</para>
     </listitem>
   </varlistentry>
 
@@ -125,11 +117,10 @@
 ></term>
     <listitem>
       <para
-><action
->Sparar filen som för närvarande är öppen.</action
-></para>
+>Sparar filen som för närvarande är öppen. Endast aktiverat om det finns några ändringar att spara. </para>
     </listitem>
   </varlistentry>
+
 
   <varlistentry>
     <term
@@ -148,28 +139,7 @@
 ></term>
     <listitem>
       <para
-><action
->Sparar filen som för närvarande är öppen med ett annat filnamn.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Arkiv</guimenu
-> <guimenuitem
->Spara som databas...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Sparar filen som för närvarande är öppen i en <link linkend="details.database"
->databas</link
->.</action
-></para>
+>Sparar filen som för närvarande är öppen med ett annat filnamn.</para>
     </listitem>
   </varlistentry>
 
@@ -186,9 +156,7 @@
 ></term>
     <listitem>
       <para
-><action
->Importerar ekonomidata från andra filtyper, som QIF och &gnucash;, eller en mallfil med konton och kategorier som kan användas för att ställa in nya konton.</action
-></para>
+>Importerar ekonomidata från andra filtyper, som QIF och &gnucash;, eller en mallfil med konton och kategorier som kan användas för att ställa in nya konton. </para>
     </listitem>
   </varlistentry>
 
@@ -205,9 +173,7 @@
 ></term>
     <listitem>
       <para
-><action
->Exportera nuvarande fil med en annan filtyp, som QIF, eller exporterar en lista med konton och kategorier som en mall. </action
-></para>
+>Exporterar den aktuella filen som en annan filtyp, till exempel QIF, eller exporterar en lista över konton och kategorier som en mall. </para>
     </listitem>
   </varlistentry>
 
@@ -223,14 +189,12 @@
 > <guimenu
 >Arkiv</guimenu
 > <guimenuitem
->Skriv ut</guimenuitem
+>Skriv ut...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Skriver ut nuvarande fil.</action
-></para>
+>Skriver ut nuvarande fil.</para>
     </listitem>
   </varlistentry>
 
@@ -240,14 +204,12 @@
 ><guimenu
 >Arkiv</guimenu
 > <guimenuitem
->Säkerhetskopiera</guimenuitem
+>Säkerhetskopiera...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Sparar en säkerhetskopia av nuvarande fil.</action
-></para>
+>Sparar en säkerhetskopia av nuvarande fil.</para>
     </listitem>
   </varlistentry>
 
@@ -257,14 +219,12 @@
 ><guimenu
 >Arkiv</guimenu
 > <guimenuitem
->Personlig information</guimenuitem
+>Personlig information...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Gör det möjligt att redigera personlig information.</action
-></para>
+>Gör det möjligt att redigera personlig information.</para>
     </listitem>
   </varlistentry>
 
@@ -274,17 +234,15 @@
 ><guimenu
 >Arkiv</guimenu
 > <guimenuitem
->Filinformation</guimenuitem
+>Filinformation...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Visar information om filen som för närvarande är öppen i &kmymoney;.</action
-></para>
+>Visar information om filen som för närvarande är öppen i &kmymoney;.</para>
     </listitem>
   </varlistentry>
-  <!--Dump Memory what i sthis?-->
+
   <varlistentry>
     <term
 ><menuchoice
@@ -302,9 +260,7 @@
 ></term>
     <listitem>
       <para
-><action
->Stänger nuvarande fil.</action
-></para>
+>Stänger den för närvarande öppna datafilen.</para>
     </listitem>
   </varlistentry>
 
@@ -325,17 +281,60 @@
 ></term>
     <listitem>
       <para
-><action
->Avslutar &kmymoney;.</action
-></para>
+>Avslutar &kmymoney;. Erbjuder att spara den för närvarande öppna datafilen, om det finns några ändringar. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit">
-<title
+<sect2 id="reference.menus.edit"
+><title
 >Menyn Redigera</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+> Redigera</guimenu
+> <guimenuitem
+>Ångra</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Återkallar den senaste åtgärden.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+> Redigera</guimenu
+> <guimenuitem
+>Ångra</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Gör om senast ångrade åtgärd.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 
 <variablelist>
   <varlistentry>
@@ -343,7 +342,7 @@
 ><menuchoice
 ><shortcut
 > <keycombo
->&Ctrl;<keycap
+>&Ctrl;&Shift;<keycap
 >F</keycap
 ></keycombo
 > </shortcut
@@ -355,18 +354,15 @@
 ></term>
     <listitem>
       <para
-><action
->Sök efter transaktioner.</action
-></para>
+>Söker efter transaktioner.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view">
-<title
+<sect2 id="reference.menus.view"
+><title
 >Menyn Visa</title>
-
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
     <term
@@ -385,11 +381,9 @@
 ></term>
     <listitem>
       <para
-><action
->Visa transaktionsinformation i <link linkend="details.ledgers"
->huvudboksvyn</link
->. När alternativet är aktiverat, visas transaktionens alla rader i huvudboken. När det är avstängt, visas bara en rad. </action
-></para>
+>Visar transaktionsinformation i vyn <link linkend="details.ledgers"
+>Huvudbok</link
+>. Med alternativet aktiverat visas alla rader i transaktionen. När det är inaktiverat visas endast en rad. </para>
       <para
 >Om du bara vill se information för transaktionen som för närvarande är markerad, men bara en rad för de övriga, kan du aktivera <link linkend="details.settings.register.lens"
 >huvudbokens lins</link
@@ -414,9 +408,7 @@
 ></term>
     <listitem>
       <para
-><action
->Döljer avstämda transaktioner i registret</action
-></para>
+>Döljer avstämda transaktioner i huvudboken.</para>
     </listitem>
   </varlistentry>
 
@@ -437,9 +429,7 @@
 ></term>
     <listitem>
       <para
-><action
->Döljer oanvända kategorier i vyerna.</action
-></para>
+>Döljer oanvända kategorier i vyerna.</para>
     </listitem>
   </varlistentry>
 
@@ -460,18 +450,15 @@
 ></term>
     <listitem>
       <para
-><action
->Visar alla konton i vyerna.</action
-></para>
+>Visar alla konton i vyerna, inklusive stängda konton och konton med ingen behållning. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution">
-<title
+<sect2 id="reference.menus.institution"
+><title
 >Menyn Institution</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -484,9 +471,7 @@
 ></term>
     <listitem>
       <para
-><action
->Lägg till en ny institution.</action
-></para>
+>Lägg till en ny institution.</para>
     </listitem>
   </varlistentry>
 
@@ -501,9 +486,7 @@
 ></term>
     <listitem>
       <para
-><action
->Redigera en institution.</action
-></para>
+>Redigera en institution.</para>
     </listitem>
   </varlistentry>
 
@@ -518,18 +501,15 @@
 ></term>
     <listitem>
       <para
-><action
->Ta bort en institution.</action
-></para>
+>Ta bort en institution.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account">
-<title
+<sect2 id="reference.menus.account"
+><title
 >Menyn Konto</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -542,9 +522,7 @@
 ></term>
     <listitem>
       <para
-><action
->Lägger till ett nytt konto.</action
-></para>
+>Lägger till ett nytt konto.</para>
     </listitem>
   </varlistentry>
 
@@ -559,9 +537,7 @@
 ></term>
     <listitem>
       <para
-><action
->Redigerar ett konto.</action
-></para>
+>Redigerar ett konto.</para>
     </listitem>
   </varlistentry>
 
@@ -576,9 +552,7 @@
 ></term>
     <listitem>
       <para
-><action
->Tar bort ett konto.</action
-></para>
+>Tar bort ett konto.</para>
     </listitem>
   </varlistentry>
 
@@ -593,9 +567,7 @@
 ></term>
     <listitem>
       <para
-><action
->Visar huvudboksvyn för ett konto.</action
-></para>
+>Visar huvudboksvyn för det valda kontot.</para>
     </listitem>
   </varlistentry>
 
@@ -616,9 +588,7 @@
 ></term>
     <listitem>
       <para
-><action
->Stämmer av ett konto via avstämningsguiden.</action
-></para>
+>Stämmer av ett konto via avstämningsguiden.</para>
     </listitem>
   </varlistentry>
 
@@ -627,15 +597,13 @@
 ><menuchoice
 ><guimenu
 >Konto</guimenu
-> <guimenuitem
->Senarelägg avstämning</guimenuitem
+><guimenuitem
+>Senarelägg</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Senarelägger avstämningen av ett konto.</action
-></para>
+>Senarelägger avstämningen av ett konto.</para>
     </listitem>
   </varlistentry>
 
@@ -650,9 +618,22 @@
 ></term>
     <listitem>
       <para
-><action
->Slutför avstämningen av ett konto.</action
-></para>
+>Slutför avstämningen av ett konto.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Avbryt</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Avbryter avstämning av ett konto.</para>
     </listitem>
   </varlistentry>
 
@@ -667,9 +648,22 @@
 ></term>
     <listitem>
       <para
-><action
->Öppnar en transaktionsrapport för ett konto.</action
-></para>
+>Öppnar en transaktionsrapport för det valda kontot.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Visa behållningsdiagram...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Öppnar ett diagram från År till datum (ÅTD) över behållningen för det valda kontot.</para>
     </listitem>
   </varlistentry>
 
@@ -684,9 +678,7 @@
 ></term>
     <listitem>
       <para
-><action
->Stänger ett konto.</action
-></para>
+>Stänger ett konto.</para>
     </listitem>
   </varlistentry>
 
@@ -701,9 +693,7 @@
 ></term>
     <listitem>
       <para
-><action
->Återöppnar ett konto, om stängt.</action
-></para>
+>Återöppnar ett konto, om stängt.</para>
     </listitem>
   </varlistentry>
 
@@ -712,15 +702,13 @@
 ><menuchoice
 ><guimenu
 >Konto</guimenu
-> <guimenuitem
->Ta bort kontoanslutning</guimenuitem
+><guimenuitem
+>Ta bort kontoanslutning...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Tar bort kontoanslutning för nätkonto.</action
-></para>
+>Tar bort kontoanslutning för nätkonto.</para>
     </listitem>
   </varlistentry>
 
@@ -729,15 +717,13 @@
 ><menuchoice
 ><guimenu
 >Konto</guimenu
-> <guimenuitem
->Koppla till direktkonto</guimenuitem
+><guimenuitem
+>Anslut konto...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Ansluter ett konto till ett Internetbankkonto på nätet.</action
-></para>
+>Ansluter ett konto till ett Internetbankkonto på nätet.</para>
     </listitem>
   </varlistentry>
 
@@ -752,9 +738,7 @@
 ></term>
     <listitem>
       <para
-><action
->Importerar transaktioner från en Internetbank för ett konto.</action
-></para>
+>Importerar transaktioner från internetbanken för det valda kontot.</para>
     </listitem>
   </varlistentry>
 
@@ -769,19 +753,15 @@
 ></term>
     <listitem>
       <para
-><action
->Importera transaktioner från Internetbank för alla konton.</action
-></para>
+>Importerar transaktioner från internetbanken för alla anslutna konton.</para>
     </listitem>
   </varlistentry>
-  <!--New credit transfer-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category">
-<title
+<sect2 id="reference.menus.category"
+><title
 >Menyn Kategori</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -794,9 +774,7 @@
 ></term>
     <listitem>
       <para
-><action
->Lägger till en ny kategori.</action
-></para>
+>Lägger till en ny kategori.</para>
     </listitem>
   </varlistentry>
 
@@ -811,9 +789,7 @@
 ></term>
     <listitem>
       <para
-><action
->Redigerar en kategori.</action
-></para>
+>Redigerar en kategori.</para>
     </listitem>
   </varlistentry>
 
@@ -828,9 +804,7 @@
 ></term>
     <listitem>
       <para
-><action
->Tar bort en kategori.</action
-></para>
+>Tar bort en kategori.</para>
     </listitem>
   </varlistentry>
 
@@ -845,18 +819,15 @@
 ></term>
     <listitem>
       <para
-><action
->Visar huvudboksvyn för en kategori.</action
-></para>
+>Visar huvudboksvyn för en kategori.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction">
-<title
+<sect2 id="reference.menus.transaction"
+><title
 >Menyn Transaktion</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -870,89 +841,109 @@
 > <guimenu
 >Transaktion</guimenu
 > <guimenuitem
->Ny</guimenuitem
+>Ny transaktion</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Lägger till en ny transaktion</action
-></para>
+>Lägger till en ny transaktion</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transaktion</guimenu
-> <guimenuitem
+><guimenuitem
 >Redigera</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Redigerar en transaktion.</action
-></para>
+>Redigerar en transaktion.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transaktion</guimenu
-> <guimenuitem
+><guimenuitem
 >Redigera delningar</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Redigerar delningarna i en transaktion.</action
-></para>
+>Redigerar delningarna i en transaktion.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Delete</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transaktion</guimenu
-> <guimenuitem
+><guimenuitem
 >Ta bort</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Tar bort en transaktion.</action
-></para>
+>Tar bort en transaktion.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transaktion</guimenu
-> <guimenuitem
+><guimenuitem
 >Duplicera</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Duplicerar en transaktion.</action
-></para>
+>Duplicerar en transaktion.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;&Shift;<keycap
+>Mellanslag</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transaktion</guimenu
 > <guimenuitem
 >Markera transaktion som...</guimenuitem
@@ -962,9 +953,7 @@
 ></term>
     <listitem>
       <para
-><action
->Ändrar en transaktion till status inte avstämd.</action
-></para>
+>Ändrar status för den valda transaktionen eller de valda transaktionerna till Inte avstämd. </para>
     </listitem>
   </varlistentry>
 
@@ -987,9 +976,7 @@
 ></term>
     <listitem>
       <para
-><action
->Ändrar en transaktion till status kontrollerad.</action
-></para>
+>Ändrar status för den valda transaktionen eller de valda transaktionerna till Kontrollerad.</para>
     </listitem>
   </varlistentry>
 
@@ -1012,9 +999,7 @@
 ></term>
     <listitem>
       <para
-><action
->Ändrar en transaktion till status avstämd.</action
-></para>
+>Ändrar status för den valda transaktionen eller de valda transaktionerna till Avstämd.</para>
     </listitem>
   </varlistentry>
 
@@ -1023,32 +1008,34 @@
 ><menuchoice
 ><guimenu
 >Transaktion</guimenu
-> <guimenuitem
->Gå till konto</guimenuitem
+><guimenuitem
+>Gå till "konto"</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Visar transaktionens andra konto.</action
-></para>
+>Visar det andra kontot för en transaktion i huvudboken.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transaktion</guimenu
-> <guimenuitem
->Gå till betalare</guimenuitem
+><guimenuitem
+>Gå till betalningsmottagare</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Visar betalarvyn och fokusera på betalaren för den markerade transaktionen.</action
-></para>
+>Visar vyn Betalningsmottagare och fokuserar på betalningsmottagaren för den valda transaktionen. </para>
     </listitem>
   </varlistentry>
 
@@ -1063,9 +1050,7 @@
 ></term>
     <listitem>
       <para
-><action
->Skapar en ny schemalagd transaktion.</action
-></para>
+>Skapar en ny schemalagd transaktion med hjälp av informationen i den valda transaktionen. </para>
     </listitem>
   </varlistentry>
 
@@ -1080,9 +1065,7 @@
 ></term>
     <listitem>
       <para
-><action
->Matchar importerade transaktioner.</action
-></para>
+>Matchar två transaktioner. Det används oftast för att matcha en importerad och en manuellt inmatad transaktion, men andra kombinationer fungerar också. </para>
     </listitem>
   </varlistentry>
 
@@ -1097,9 +1080,7 @@
 ></term>
     <listitem>
       <para
-><action
->Tar bort matchning för en transaktion som &kmymoney; har föreslagit som en matchning för en importerad transaktion.</action
-> Observera att menyalternativet är bara tillgängligt om det finns en matchad transaktion. </para>
+>Ta bort matchning av en transaktion som &kmymoney; har föreslagit som en matchning av importerade transaktioner. Observera att menyalternativet bara finns om en matchad transaktion finns och är vald. </para>
     </listitem>
   </varlistentry>
 
@@ -1114,9 +1095,7 @@
 ></term>
     <listitem>
       <para
-><action
->Accepterar en föreslagen sammanfogning av importerade transaktioner.</action
-></para>
+>Accepterar en föreslagen sammanslagning av två transaktioner.</para>
     </listitem>
   </varlistentry>
 
@@ -1137,9 +1116,7 @@
 ></term>
     <listitem>
       <para
-><action
->Markerar alla transaktioner i registret.</action
-></para>
+>Markerar alla transaktioner i huvudboken.</para>
     </listitem>
   </varlistentry>
 
@@ -1154,38 +1131,18 @@
 ></term>
     <listitem>
       <para
-><action
->Skriver ut innehållet av den markerade transaktionen i det visade registret, formaterade enligt den valda mallen.</action
-> Observera att menyalternativet bara är tillgängligt om en transaktion är markerad i registret. Se avsnittet om hur insticksprogrammet <link linkend="details.settings.plugins"
+>Skriver ut innehållet i den valda transaktionen i den visade huvudboken, formaterad enligt den valda mallen. Se avsnittet om inställning av insticksprogrammet <link linkend="details.settings.plugins"
 >Skriv ut check</link
-> anpassas för mer information. </para>
+> för mer information. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools">
-<title
+<sect2 id="reference.menus.tools"
+><title
 >Menyn Verktyg</title>
-
 <variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Verktyg</guimenu
-> <guimenuitem
->QIF-profileditor...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Ändrar QIF-profilen som används för att importera eller exportera QIF-filer.</action
-></para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term
 ><menuchoice
@@ -1197,9 +1154,7 @@
 ></term>
     <listitem>
       <para
-><action
->Listar valutor som är kända av &kmymoney;.</action
-></para>
+>Listar valutor som är kända av &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -1214,9 +1169,7 @@
 ></term>
     <listitem>
       <para
-><action
->Listar aktiekurser och valutakurser.</action
-></para>
+>Listar aktiekurser och valutakurser.</para>
     </listitem>
   </varlistentry>
 
@@ -1231,11 +1184,9 @@
 ></term>
     <listitem>
       <para
-><action
 >Uppdaterar aktiekurser och valutakurser från källor på nätet med användning av funktionen <link linkend="details.investments.onlinequotes"
 >direktuppdatering av kurser</link
->.</action
-></para>
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -1250,9 +1201,7 @@
 ></term>
     <listitem>
       <para
-><action
->Utför en kontroll av filen och försöker rätta eventuella problem som hittas, om möjligt.</action
-></para>
+>Kör en kontroll av filen, åtgärdar eventuella problem och visar en rapport med resultaten. </para>
       <para
 >Skapa en säkerhetskopia av filen innan alternativet utförs.</para>
     </listitem>
@@ -1269,25 +1218,49 @@
 ></term>
     <listitem>
       <para
-><action
->Utför en prestandakontroll av filen och visar resultaten.</action
-></para>
+>Utför en prestandakontroll av filen och visar resultaten.</para>
     </listitem>
   </varlistentry>
-  <!--Generate Database SQL
-  Debug Traces
-  Debug Timers-->
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+><guimenuitem
+>Generera SQL för databas</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Genererar den SQL-kod som krävs för att skapa en databas.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+><guimenuitem
+>Felsök tidtagare</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Det här är ett verktyg för utvecklare.</para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings.help">
-<title
+<sect2 id="reference.menus.settings.help"
+><title
 >Menyerna Inställningar och Hjälp</title>
-
 <para
->&kmymoney; har &kde;:s vanliga inställnings- och hjälpmenyer som beskrivs i <ulink url="help:/fundamentals/menus.html"
+>Menyerna Inställningar och Hjälp i &kmymoney; är baserade på de som beskrivs i <ulink url="help:/fundamentals/menus.html"
 >&kde;:s grunder</ulink
->, med ytterligare ett alternativ:</para>
+> med några ytterligare alternativ. </para>
 
 <variablelist>
   <varlistentry>
@@ -1301,14 +1274,51 @@
 ></term>
     <listitem>
       <para
-><action
 >Aktiverar alla meddelanden igen som du kan ha stängt av genom att markera <guimenuitem
 >Visa inte det här meddelandet igen</guimenuitem
-> i en dialogruta.</action
-></para>
+> i en dialogruta.</para>
     </listitem>
   </varlistentry>
+
   <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa språk...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Normalt beror språket som används av &kmymoney; på de systemövergripande inställningarna för plats eller språk. Det här låter dig ändra språket och ange ett reservspråk som används för text som inte har översatts till det primära språket. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>,</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa snabbtangenter...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Låter dig lägga till eller ändra snabbtangenter för olika åtgärder. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
     <term
 ><menuchoice
 ><guimenu
@@ -1319,20 +1329,57 @@
 ></term>
     <listitem>
       <para
-><action
->Anpassa inställningar av internetbank</action
->, se <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
->Hur ställer man in internetbank</ulink
-> för ytterligare information. </para>
-      <para
->Observera att menyalternativet bara är tillgängligt om modulen KBanking är aktiverad. Se avsnittet om att ställa in <link linkend="details.settings.plugins.kbanking"
+>Anpassa inställningar för Internetbank, men endast om modulen KBanking är aktiverad. Mer information finns i avsnittet om inställning av <link linkend="details.settings.plugins.kbanking"
 >insticksprogrammet KBanking</link
-> för mer information. </para>
+> samt i <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
+>&gnucash;-dokumentationen</ulink
+>. </para>
+
+      <para
+>Processen för att ställa in nätåtkomst i AqBanking beskrivs i <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
+>&gnucash; wiki (endast tyska)</ulink
+>. Menyalternativet öppnar dialogrutan som visas i steg nr. 3. Processen fram till steg nr. 18 är densamma för KMyMoney. När du är klar kan du ansluta kontot i &kmymoney; med hjälp av <guimenu
+>Konto</guimenu
+> <guisubmenu
+>Anslut konto</guisubmenu
+> och välja kontot från listan som visas. Därifrån använder du helt enkelt <guimenu
+>Konto</guimenu
+> <guisubmenu
+>Uppdatera konto</guisubmenu
+>, eller om du har fler än ett nätkonto anslutet, <guimenu
+>Konto</guimenu
+> <guisubmenu
+>Uppdatera alla konton</guisubmenu
+>. </para>
+
+      <para
+>Se <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>How do I configure online banking</ulink
+> för ytterligare information. </para>
     </listitem>
   </varlistentry>
 
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Hjälp</guimenu
+><guimenuitem
+>Sök efter åtgärd...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Visar namnen och genvägarna för alla åtgärder i &kmymoney;. Om du klickar på en av dem utförs åtgärden, om den för närvarande är aktiverad. </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
-
 </sect1
 >&details-widgets; </chapter>

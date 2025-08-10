@@ -3,23 +3,24 @@
 <chapterinfo>
   <authorgroup>
     <author
->&Colin.Wright; &Colin.Wright.mail; </author>
+>&Colin.Wright; &Colin.Wright.mail; </author
+> 
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2010-07-25</date>
+>2024-12-01</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Prognoser</title>
 
-<sect1 id="details.forecast.define">
-<title
+<sect1 id="details.forecast.define"
+><title
 >Vad är en prognos?</title>
-
 <para
->I &kmymoney; är en prognos en förutsägelse om behållningen i konton under en angiven tidsperiod i framtiden.</para>
+>I &kmymoney; är en prognos en förutsägelse om behållningen i konton under en angiven tidsperiod i framtiden. </para>
 
 <para
 >Prognoser kan framställas med en av två metoder. </para>
@@ -30,7 +31,7 @@
 >Schemalagda och framtida transaktioner</term>
     <listitem>
       <para
->&kmymoney; använder en kombination av framtida transaktioner redan inskriva in huvudböckerna och schemalagda poster.</para>
+>&kmymoney; använder en kombination av framtida transaktioner redan inskriva in huvudböckerna och schemalagda poster. </para>
     </listitem>
   </varlistentry>
 
@@ -39,50 +40,244 @@
 >Historikbaserad</term>
     <listitem>
       <para
->&kmymoney; använder värden från tidigare transaktioner i huvudböckerna för att förutsäga framtida transaktioner.</para>
+>&kmymoney; använder värden från tidigare transaktioner. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->Prognosmetod och prognosperiod kan ställas in i &kmymoney;s inställningar, på sidan Prognos. </para>
+><guilabel
+>Prognosvyn</guilabel
+> visar förväntad behållning vid kontocykeldatum och den förväntade skillnaden mellan start- och slutbehållning. Sammanfattningen visar också meddelanden om betydande förväntade förändringar av kontona under prognosperioden. Utöver sammanfattningen kan du också visa daglig behållning samt minimal och maximal behållning för varje prognoskontocykel. </para>
 
 <para
->&kmymoney;s prognos ger en sammanfattning, som visar förutsagd behållning vid kontonas cykeldatum och förväntad skillnad mellan ingående och utgående behållning. Längden på kontocykeln kan ställas in av användaren. Sammanfattningen visar också meddelanden om större förutsagda ändringar i konton under prognosperioden. </para>
-
-<para
->Förutom sammanfattningen, låter &kmymoney;s prognos dig också visa daglig behållning och visa minimal och maximal behållning för varje förutsagda kontocykel. </para>
-
-<para
->Normalt skapas prognosen för 90 dagar, med 30 dagars kontocykler, och med användning av schemalagda och framtida transaktioner. </para>
+>Nästa avsnitt beskriver hur du kan anpassa prognosmetod och andra parametrar som används för att beräkna en prognos. Därefter följer ett avsnitt med mer information om prognosvyn. </para>
 </sect1>
 
-<sect1 id="details.forecast.view">
-<title
->Visa prognoser</title>
+<sect1 id="details.forecast.configure"
+><title
+>Anpassa prognosen</title>
 
 <para
->Du kan visa en prognos genom att klicka på den lämpliga ikonen i navigeringsrutan på vänster sida i &kmymoney;s fönster. </para>
+>Parametrarna som används för att beräkna en prognos, inklusive prognosmetoden, kan ställas in i inställningsdialogrutan <link linkend="details.settings.plugins.forecast"
+> <guilabel
+>Prognosvy</guilabel
+> </link
+>. Eftersom prognosfunktionen är implementerad som ett <link linkend="makingmostof.plugins"
+>insticksprogram i &kmymoney;</link
+> kan du nå dialogrutan genom att använda menyalternativet <menuchoice
+> <guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kmymoney;...</guimenuitem
+> </menuchoice
+>, välja <guilabel
+>Insticksprogram</guilabel
+> i den vänstra rutan och klicka på ikonen <guilabel
+>anpassa</guilabel
+> intill <guilabel
+>Prognosvy</guilabel
+>. </para>
+
+<screenshot>
+  <screeninfo
+>prognosanpassning</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="plugin_config_forecast.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>prognosanpassning</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Antal dagar i prognos</term>
+    <listitem>
+      <para
+>Prognosen beräknas fram till så här långt in i framtiden. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Antal dagar i kontocykel</term>
+    <listitem>
+      <para
+>En prognos baseras inte på faktiska månader, utan på upprepade perioder med det antal dagar som anges i det här fältet. De vanligaste värdena som används är 30 eller 31. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Dag under månaden att starta prognos</term>
+    <listitem>
+      <para
+>Ställer in dagen i den aktuella månaden som används som startpunkt för att räkna båda cyklerna och antalet dagar som ska prognostiseras. Värdet 0 innebär att den aktuella dagen ska användas. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Prognosmetod</term>
+    <listitem>
+      <para
+>Som nämnts i föregående avsnitt kan du välja om &kmymoney; använder schemalagda och framtida transaktioner eller historiska transaktioner för att beräkna en prognos. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Historikbaserad inställningar</term>
+    <listitem>
+      <para
+>Inställningarna i den här delen av dialogrutan gäller endast om prognosmetoden är inställd på <quote
+>Historikbaserad</quote
+> </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+>Antal cykler att använda i prognos</term>
+          <listitem>
+            <para
+>Anger antal cykler av historisk data som ska användas för att förutsäga framtida värden. </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+>Historikbaserad prognos</term>
+          <listitem>
+            <para
+>Genom att välja en av de tre alternativknapparna, <guilabel
+>Enkelt glidande medelvärde</guilabel
+>, <guilabel
+>Vägt glidande medelvärde</guilabel
+> (det är standardinställningen) och <guilabel
+>Linjär regression</guilabel
+>, anges den matematiska formeln som &kmymoney; använder för en historikbaserad prognos. </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
 
 <para
->Prognosfönstret är uppdelat i fem flikar: </para>
+>Prognosmetoden som ställs in här gäller för alla prognoser. De andra inställningarna får standardvärden, vilka kan ändras när en prognos beräknas och visas i prognosvyn. </para>
 
-<sect2>
-<title
+<para
+>Längst ner i dialogrutan återställer <guibutton
+>Förval</guibutton
+> alla värden till standardvärden. <guibutton
+>Ok</guibutton
+> och <guibutton
+>Avbryt</guibutton
+> har sina vanliga betydelser. </para>
+</sect1>
+
+<sect1 id="details.forecast.view"
+><title
+>Visa prognoserna</title>
+<para
+>Du kan visa prognosvyn genom att klicka på lämplig ikon i navigeringsfönstret till vänster i &kmymoney;s fönster. </para>
+
+<screenshot>
+  <screeninfo
+>prognosvy</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="forecast_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>prognosvy</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Det översta området i prognosvyn är <guilabel
+>Prognosinställningar</guilabel
+>. Till vänster finns flera fält för att styra prognosberäkningarna. Standardvärden för dem ställs in i prognosvyns inställningsdialogruta, enligt beskrivningen i föregående avsnitt. Värdena (med namnet som används i inställningsdialogrutan inom parentes om det skiljer sig åt) är: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Dagar i prognos (Antal dagar i prognos)</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Dagar i kontocykel (Antal dagar i kontocykel)</para>
+  </listitem>
+
+  <listitem>
+        <para
+>Dag under månaden att starta prognos</para>
+  </listitem>
+    
+  <listitem>
+        <para
+>Historikcykler (Antal cykler att använda i prognos)</para>
+  </listitem>
+    
+  <listitem>
+    <para
+>Diagramdetaljnivå: Alternativet ställs inte in i inställningsdialogrutan. Välj ett av följande värden för att bestämma resultaten som visas under fliken <guilabel
+>Diagram</guilabel
+>. <itemizedlist>
+        <listitem>
+          <para
+>Alla</para>
+        </listitem>
+        <listitem>
+          <para
+>Toppnivå</para>
+        </listitem>
+        <listitem>
+          <para
+>Grupper</para>
+        </listitem>
+        <listitem>
+          <para
+>Totalt</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </listitem>
+</itemizedlist>
+    
+<para
+>Till höger om alternativen visar &kmymoney; <guilabel
+>Aktuell prognosmetod</guilabel
+>. Till höger om den finns knappen <guibutton
+>Prognos</guibutton
+>. När du klickar på knappen beräknar &kmymoney; prognosen baserat på inställningarna till vänster och visar resultaten i den nedre delen av fönstret. Strax under dem finns <guilabel
+>Historikprognosmetod</guilabel
+>, som bara är aktiverad om den aktuella prognosmetoden är inställd på <quote
+>Historik</quote
+>. </para>
+
+<para
+>Det nedre området i prognosvyn har fem flikar. </para>
+
+<sect2 id="details.forecast.summary"
+><title
 >Sammanfattningsflik</title>
-
 <para
->Sammanfattningsfliken är delad vertikalt i två halvor. </para>
+>Sammanfattningsfliken har två delar. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Kontosammanfattning</title>
-
 <para
->Kontosammanfattningen innehåller ett rutnät som visar en rad med information för varje tillgång och skuld. </para>
-
-<para
->Följande kolumner visas: </para>
+>Till vänster visas kontoöversikten, som har en rad med information för varje tillgång och skuld, med kolumnerna nedan. Observera att om prognosen baseras på schemalagda och framtida transaktioner, finns bara rader för konton som refereras till i sådana transaktioner. </para>
 
 <variablelist>
   <varlistentry>
@@ -96,10 +291,10 @@
 
   <varlistentry>
     <term
->Aktuell behållning (Aktuell)</term>
+>Aktuell</term>
     <listitem>
       <para
->Den aktuella behållningen i kontot visas.</para>
+>Kontots aktuella behållning</para>
     </listitem>
   </varlistentry>
 
@@ -108,13 +303,13 @@
 >Kontocykelns behållning</term>
     <listitem>
       <para
->Prognosperioden är uppdelad i kontocykler. Standardlängden på en kontocykel är 30 dagar, men kan ställas in av användaren.</para>
+>Prognosperioden är uppdelad i kontocykler. Standardlängden på en kontocykel är 30 dagar, men kan ställas in av användaren. </para>
 
       <para
->Det första datumet i kontocykeln är det första prognosdatumet. Normalt är det aktuellt datum plus en kontocykel, men det kan ändras beroende på inställningen "Dag under månaden att starta prognos".</para>
+>Det första kontocykeldatumet är det första prognosdatumet. Normalt är det dagens datum plus en kontocykel, men det kan ändras beroende på inställningen "Dag under månaden att starta prognos". </para>
 
       <para
->Återstående datum i kontocykeln bestäms genom att addera kontocykelns längd med det föregående datumet i kontocykeln. Det fortsätter till det beräknade datumet i kontocykeln är bortom prognosperioden.</para>
+>De återstående kontocykeldatumen bestäms genom att lägga till kontocykelns längd till det föregående kontocykeldatumet. Det fortsätter tills det beräknade kontocykeldatumet skulle vara bortom prognosperioden, eller Dagar i prognos.</para>
 
       <para
 >För varje datum i kontocykeln visas förutsagd behållning.</para>
@@ -126,19 +321,17 @@
 >Total variation</term>
     <listitem>
       <para
->Kolumnen längst till höger visar den förutsagda skillnaden i värde mellan behållningen i början av prognosen och i slutet. Om kontots förutsagda slutvärde (i form av nettotillgångar) är mindre än startvärdet färgläggs hela raden med rött.</para>
+>Kolumnen längst till höger visar den förutsagda skillnaden i värde mellan behållningen i början av prognosen och i slutet. Om kontots förutsagda slutvärde (i form av nettotillgångar) är mindre än startvärdet färgläggs hela raden med rött. </para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Viktig sammanfattningsinformation</title>
-
 <para
->Den nedre halvan av sammanfattningsfliken visar värdefull information om konton. Det omfattar: </para>
+>Den högra delen av fliken Sammanfattning visar viktig information om konton. Det omfattar: </para>
 
 <variablelist>
   <varlistentry>
@@ -146,7 +339,7 @@
 >Tillgångar under noll</term>
     <listitem>
       <para
->Ett meddelande visas för någon tillgång där värdet börjar eller kommer att falla under noll inom prognosperioden.</para>
+>Ett meddelande visas (i rött) för alla tillgångskonton vars värdet börjar eller sjunker under noll under prognosperioden. </para>
     </listitem>
   </varlistentry>
 
@@ -155,19 +348,18 @@
 >Skulder över noll</term>
     <listitem>
       <para
->Ett meddelande visas för alla skulder där värdet börjar eller kommer att stiga över noll inom prognosperioden. Observera att värdet av en skuld är det negativa värdet av behållningen i huvudboken, eftersom en positiv behållning anger pengar du är skyldig.</para>
+>Ett meddelande visas för alla skuldkonton vars värde börjar eller stiger över noll under prognosperioden. Observera att värdet på en skuld är det negativa värdet av dess saldo i huvudboken, eftersom ett positivt saldo indikerar skulder. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect3>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Informationsfliken</title>
-
 <para
->Informationsfliken innehåller ett rutnät som visar en rad med information för varje tillgång och skuld. </para>
+>Informationsfliken visar också en rad för varje tillgångs- och skuldkonto, men kolumnerna som visas skiljer sig från fliken Sammanfattning. </para>
 
 <variablelist>
   <varlistentry>
@@ -184,7 +376,7 @@
 >Datum</term>
     <listitem>
       <para
->För varje datum i prognosperioden visar en kolumn förutsagd behållning på kontot det datumet. Datumkolumnerna är i stigande ordning från vänster till höger.</para>
+>För varje datum i prognosperioden visar en kolumn förutsagd behållning på kontot det datumet. Datumkolumnerna är i stigande ordning från vänster till höger. </para>
     </listitem>
   </varlistentry>
 
@@ -193,18 +385,17 @@
 >Total variation</term>
     <listitem>
       <para
->Kolumnen längst till höger visar den förutsagda skillnaden i värde mellan behållningen i början av prognosen och i slutet. Om kontots förutsagda slutvärde (i form av nettotillgångar) är mindre än startvärdet färgläggs hela raden med rött.</para>
+>Kolumnen längst till höger visar den förutsagda skillnaden i värde mellan behållningen i början av prognosen och i slutet. Om kontots förutsagda slutvärde (i form av nettotillgångar) är mindre än startvärdet färgläggs hela raden med rött. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Fliken Avancerat</title>
-
 <para
->Fliken Avancerat innehåller ett rutnät som visar en rad med information för varje tillgång och skuld. Informationen är uppdelat i kolumner på följande sätt: </para>
+>Fliken Avancerat visar också en rad med information för varje tillgångs- och skuldkonto. Informationen är uppdelad i kolumner enligt följande: </para>
 
 <variablelist>
   <varlistentry>
@@ -218,91 +409,76 @@
 
   <varlistentry>
     <term
->Minimal behållning i kontocykel</term>
+>Information om minimal behållning under kontocykeln</term>
     <listitem>
       <para
->För varje kontocykel &lt;n&gt; under prognosperioden visas följande kolumner:</para>
+>För varje kontocykel &lt;n&gt; under prognosperioden visas följande kolumner: </para>
 
       <variablelist>
 	<varlistentry>
 	  <term
->Minimal behållning (Min &lt;n&gt;)</term>
+>Min &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >Den minimala förutsagda behållningen under kontocykeln</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
 	  <term
->Datum för minimal behållning (Min datum &lt;n&gt;)</term>
+>Min datum &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >Datum då behållningen når sitt förutsagda minimum.</para>
 	  </listitem>
 	</varlistentry>
-      </variablelist>
-    </listitem>
-  </varlistentry>
 
-  <varlistentry>
-    <term
->Maximal behållning i kontocykel</term>
-
-    <listitem>
-      <para
->För varje kontocykel &lt;n&gt; under prognosperioden visas följande kolumner:</para>
-
-      <variablelist>
 	<varlistentry>
 	  <term
->Maximal behållning (Max &lt;n&gt;)</term>
+>Max &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >Den maximala förutsagda behållningen under kontocykeln</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
 	  <term
->Datum för maximal behållning (Max datum &lt;n&gt;)</term>
+>Max datum &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >Datum då behållningen når sitt förutsagda maximum.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
+      <para
+>Observera att alla minimala behållningar och datum visas före alla maximala behållningar och datum. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 >Medeltal</term>
-
     <listitem>
       <para
 >Medeltal av behållningen på kontot under prognosperioden</para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Budgetprognosflik</title>
-
 <para
->Budgetfliken visar en prognos beräknad för kategorierna inkomst och utgift. Kolumnerna liknar sammanfattnings- och informationsflikarna. </para>
-
+>Budgetfliken visar en prognosberäkning för alla inkomst- och utgiftskategorier. Till skillnad från fliken Sammanfattning finns det en kolumn per månad, med början i januari innevarande år och slut i den månad som inkluderar slutet av prognosperioden. Den sista kolumnen är en totalsumma, snarare än ett förutspått värde eller ett värde beräknat baserat på ett förutspått värde. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Diagramflik</title>
-
 <para
->Den visar ett diagram som visar prognosen. Detaljnivån varierar beroende på detaljnivån vald i alternativet ovan. </para>
-
+>Visar prognosen i ett diagram eller en grafisk form. Detaljnivån varierar beroende på vilken detaljnivå som valts i alternativet ovan. </para>
 </sect2>
-
 </sect1>
 </chapter>

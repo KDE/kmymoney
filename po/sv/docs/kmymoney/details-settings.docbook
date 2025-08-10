@@ -5,71 +5,87 @@
     <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
     <author
-><personname
-><firstname
->Michael</firstname
-><surname
->Carpino</surname
-></personname
-> <email
->mfcarpino@gmail.com</email
-> </author>
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2019-03-31</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.3</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Inställning av &kmymoney;</title>
 
 <para
->Inställningarna som beskrivs nedan ändrar &kmymoney;s beteende, vilket gör det möjligt att anpassa det för att motsvara behoven för dina unika ekonomiska förutsättningar, och ändra dess utseende och känsla för att motsvara din personliga smak. Inställningarna kan ändras med menyalternativet <menuchoice
-><guimenu
+>Inställningarna som beskrivs i det här kapitlet modifierar &kmymoney;:s beteende, vilket gör att du kan anpassa det för att möta dina unika ekonomiska behov, och ändra dess utseende och känsla för att matcha din personlighet. Inställningarna kan ändras via menyalternativet <menuchoice
+> <guimenu
 >Inställningar</guimenu
-><guimenuitem
+> <guimenuitem
 >Anpassa &kmymoney;...</guimenuitem
-></menuchoice
-> eller snabbtangenten <keycombo action="simul"
->&Ctrl;&Shift;<keycap
+> </menuchoice
+> eller genom att använda snabbtangenten <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
 >,</keycap
 ></keycombo
->. För att ändringarna ska få effekt, måste knappen <guibutton
+>. För att ändringarna ska träda i kraft måste knappen <guibutton
 >Verkställ</guibutton
 > klickas. </para>
 
 <para
->Till vänster i inställningsdialogrutan finns en lista med ikoner och beteckningar, som var och en representerar en viss del av programmet. När du klickar på en av dessa ikoner, visar högra sidan av dialogrutan komponenter för att ställa in den delen av programmet, ofta uppdelade i flera flikar. </para>
+>Till vänster om <guilabel
+>Anpassa</guilabel
+>- eller inställningsdialogrutan finns en lista med ikoner och beteckningar, som var och en representerar ett visst område i programmet. När du klickar på en av ikonerna visar den högra delen av dialogrutan kontroller för att anpassa det området i programmet, ofta uppdelade i flera flikar. </para>
 
-<sect1 id="details.settings.general">
-<title
+<sect1 id="details.settings.general"
+><title
 >Allmänt</title>
 
-<sect2 id="details.settings.general.global">
-<title
+<sect2 id="details.settings.general.global"
+><title
 >Fliken Allmänt</title>
+<screenshot>
+  <screeninfo
+>KMyMoney inställning, allmänt, fliken allmänt</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_global.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney inställning, allmänt, fliken allmänt</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<!-- FIXME: I would prefer a more consistent hierarchy and use of levels here, such
+     as with using sectX and variablelist.  For now, I minimize layout changes. -->
 <variablelist>
   <varlistentry>
     <term
 ><guilabel
 >Alternativ för spara automatiskt</guilabel
 ></term>
-<!-- I would prefer to use a more consistent hierarchy and use of levels on this
-     page, but for now, I'm minimizing changes. -->
     <listitem>
       <para
->Att markera rutan <guilabel
->Spara automatiskt periodiskt</guilabel
-> instruerar &kmymoney; att spara dina filer automatiskt med ett definierat intervall. Förvalt värde är 10 minuter. Du kan ändra inställningen från 0 (säkerhetskopiera omedelbart efter en transaktion har matats in) upp till 60 minuter.</para>
+>En automatiskt sparad fil är bara en kopia av datafilen. Huvudpoängen med dessa är att de skapas automatiskt, enligt konfigurationsinställningarna, så du behöver inte komma ihåg att vidta några åtgärder. Alla automatiskt sparade filer som skapas kommer att finnas i samma katalog som datafilen som för närvarande är öppen. </para>
 
       <para
->Att markera rutan <guilabel
+>Om du markerar rutan <guilabel
+>Alternativ för spara automatiskt</guilabel
+> instrueras &kmymoney; att automatiskt spara filen med det intervall som definieras av fältet <guilabel
+>minuter</guilabel
+>. Standardvärdet är 10 minuter. Du kan ändra inställningen från 0 (spara automatiskt omedelbart efter att en transaktion har registrerats) upp till 60 minuter. </para>
+
+      <para
+>Om du markerar rutan <guilabel
 >Spara automatiskt när filen är ändrad vid stängning</guilabel
-> instruerar &kmymoney; att spara din fil automatiskt när programmet stängs. Du har också möjlighet att säkerhetskopiera din &kmymoney;-fil vid stängning. Antal säkerhetskopior att behålla kan ställas in till 0 (av) upp till 20 säkerhetskopior. Alla säkerhetskopior lagras i samma katalog som huvudfilen. De betecknas i ordning med 1 som den mest aktuella.</para>
+> instrueras &kmymoney; att automatiskt spara filen när programmet stängs, men bara om några ändringar har gjorts. Du har också möjlighet att säkerhetskopiera &kmymoney;s fil när programmet stängs. </para>
+
+      <para
+><guilabel
+>Antal säkerhetskopior att behålla</guilabel
+> kan ställas in från 0 (Av) upp till 20. De automatiskt sparade filerna lagras i samma katalog som huvudfilen. Om datafilen är Min_ekonomi.kmy, kommer en automatiskt sparad fil att kallas Min_ekonomi.kmy.1~ när den skapas. Alla befintliga automatiskt sparade filer får sina nummer ökade med 1, upp till det angivna numret. </para>
     </listitem>
   </varlistentry>
 
@@ -80,7 +96,7 @@
 ></term>
     <listitem>
       <para
->Ange dag och månad för räkenskapsåret. Värdet används för budgetar och vissa rapporter.</para>
+>Med &kmymoney; kan du ange ett annat räkenskapsår än kalenderåret. För att göra det, ange dagen och månaden då räkenskapsåret börjar. Värdet används för budgetar och vissa rapporter. </para>
     </listitem>
   </varlistentry>
 
@@ -93,42 +109,51 @@
       <para
 >Inställningen påverkar inte direkt hur &kmymoney; fungerar, men ger ett bekvämt sätt att starta ett externt verktyg, såsom en avancerad räknare. Det första steget är att skriva in fullständig sökväg till valt program i textrutan <guilabel
 >Räknare</guilabel
->. Därefter finns det två sätt att starta programmet.</para>
+>. </para>
+
       <para
->För det första kan du använda menyalternativet <menuchoice
-><guimenu
+>Det finns för närvarande inget direkt menyalternativ för att starta räknaren, eller det externa program du har ställt in. Det finns då två sätt att starta programmet. </para>
+
+      <para
+>Först kan du använda menyalternativet <guimenu
 >Inställningar</guimenu
-><guimenuitem
+> <guimenuitem
 >Anpassa verktygsrader...</guimenuitem
-></menuchoice
-> för att lägga till ikonen <guilabel
->Räknare</guilabel
-> i verktygsraden. När du därefter klickar på ikonen i verktygsraden, startar &kmymoney; valt program.</para>
-      <!-- FIXME since the Settings menu is deferred to the Frameworks docs and
-           not explicitly described in this manual, it would at least be nice to
-           refer to the actual Calculator icon here, but I cannot find the
-           source png.  It might also be nice to have a link to Settings Menu
-           doc page. -->
+> för att placera räknarikonen <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-accessories-calculator.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> på verktygsraden. När du sedan klickar på ikonen på verktygsraden startar &kmymoney; det valda programmet. </para>
+
       <para
->För det andra kan du använda menyalternativet <menuchoice
-><guimenu
+>För det andra kan du använda menyalternativet <guimenu
 >Inställningar</guimenu
-><guimenuitem
+> <guimenuitem
 >Anpassa genvägar...</guimenuitem
-></menuchoice
-> för att ange en egen snabbtangent. (Posten finns under &kmymoney;/Räknare i listan.) Därefter kan genvägen användas för att starta programmet.</para>
-      <!-- FIXME is not currently possible to launch the calculator from some menu
-           item.  I have filed a wishlist, and when implemented, it should be
-           described here, probably as the first choice. -->
-       
+> för att ställa in en egen snabbtangent. (Posten finns under &kmymoney;/Räknare i listan.) Du kan sedan använda snabbtangenten för att starta programmet. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.views">
-<title
+<sect2 id="details.settings.general.views"
+><title
 >Fliken Vyer</title>
+<screenshot>
+  <screeninfo
+>KMyMoney inställning, allmänt, fliken vyer</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_views.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney inställning, allmänt, fliken vyer</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <variablelist>
   <varlistentry>
@@ -138,7 +163,11 @@
 ></term>
     <listitem>
       <para
->När &kmymoney; startar, anger alternativet om det ska starta med hemsidan eller med vyn som visades när programmet senast stängdes.</para>
+>När &kmymoney; startar, anger alternativet om man ska börja med hemvyn (<guilabel
+>Starta med hemsida</guilabel
+>) eller med den vy som visades när programmet senast stängdes (<guilabel
+>Börja med senast valda vy</guilabel
+>.) </para>
     </listitem>
   </varlistentry>
 
@@ -149,159 +178,198 @@
 ></term>
     <listitem>
       <para
->En av tre generella layouter kan väljas att användas av &kmymoney;. Om du väljer lista eller träd, placeras ikonerna och deras beteckningar på vänster sida av fönstret. Listvyn visar större ikoner, medan trädvyn har mindre. Vyn med flikar placerar ikonerna och beteckningarna längs fönstrets överkant.</para>
+>Det låter dig välja en av tre layouter för vyväljaren, där du väljer <guilabel
+>Listvy</guilabel
+> eller <guilabel
+>Trädvy</guilabel
+>, ikonerna och deras beteckningar placeras på vänster sida av fönstret. Listvyn visar större ikoner ovanför namnet på varje vy, medan trädvyn har mindre ikoner till vänster om namnen. I <guilabel
+>Flikvyn</guilabel
+> placeras ikonerna och beteckningar i flikar längst upp i fönstret. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><guilabel
->Visa rubrikrad på varje sida</guilabel
-></term>
+    <term>
+      <guilabel
+>Synkronisera huvudbokvyns och investeringsvyns kontoval </guilabel>
+    </term>
     <listitem>
       <para
->Att markera rutan visar &kmymoney;s blåa rubrikrad längst upp på varje sida. Avmarkeras den tas rubrikraden bort och ger ett större område för att visa sidornas innehåll.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Synkronisera kontoval i huvudbok och investeringsvy</guilabel
-></term>
-    <listitem>
-      <para
->Om alternativet markeras, synkroniseras kontona som visas i huvudboksvyn och investeringsvyn, vilket betyder om kontot som visas i en av vyerna ändras, och du därefter byter till den andra vyn, visas information om samma konto. Det ökar effektiviteten vid byte mellan dessa två flikvyer. Om det inte markeras, visas samma konto som tidigare valts i vyn vid byte mellan vyerna, oberoende av kontot som är valt i den andra vyn.</para>
+>Om alternativet väljs synkroniseras kontona som visas i huvudboksvyn och investeringsvyn. Det betyder att om du ändrar kontot som visas i en av vyerna och sedan byter till den andra vyn, visas informationen för samma konto. Det ökar effektiviteten i att navigera mellan de två vyerna. Om det inte är valt visar val av någon av vyerna samma konto som tidigare valts i den vyn, oavsett vilket konto som valts i den andra vyn. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.filter">
-<title
+<sect2 id="details.settings.general.filter"
+><title
 >Filterfliken</title>
+<screenshot>
+  <screeninfo
+>KMyMoney inställning, allmänt, fliken filter</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_filter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney inställning, allmänt, fliken filter</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-<sect3>
-<title
->Konton / Kategorier</title>
 <variablelist>
   <varlistentry>
     <term
-><guilabel
+>Konton / Kategorier</term>
+    <listitem>
+      <para
+>Att markera rutan <guilabel
 >Visa inte oanvända kategorier</guilabel
-></term>
-    <listitem>
-      <para
->Att markera rutan döljer oanvända kategorier i kategorivyn. En dold kategori är fortfarande tillgänglig om en transaktion skulle kräva det. Genom att skriva in en dold kategori i huvudboken blir den tillgänglig för användning.</para>
-    </listitem>
-  </varlistentry>
+> döljs oanvända kategorier i kategorivyn. En dold kategori är fortfarande tillgänglig om en transaktion kräver det. Genom att skriva in en dold kategori i huvudboken blir den tillgänglig för användning. </para>
 
-  <varlistentry>
-    <term
-><guilabel
+      <para
+>Aktiekonton används för att spåra enskilda aktier eller investeringar som finns i ett investeringskonto. De ska inte förväxlas med den översta kontogruppen <emphasis
+>Eget kapital</emphasis
+>, som inkluderar det eller de konton som innehåller de ingående saldona för andra konton. Normalt är aktiekonton dolda i kontovyn. Om du markerar rutan <guilabel
 >Visa aktiekonton</guilabel
-></term>
-    <listitem>
-      <para
->Normalt är aktiekonton dolda i kontovyn. Att markera alternativet visar aktiekontona i kontovyn. Aktiekonton används för att följa individuella aktier eller investeringar som finns i ett investeringskonto. Det ska inte blandas ihop med toppnivågruppen med konton <emphasis
->Aktiekonto</emphasis
->, som inkluderar de konton som innehåller ingående behållning för andra konton.</para>
-    </listitem>
-  </varlistentry>
+> visas aktiekontona i kontovyn. </para>
 
-  <varlistentry>
-  <term
-><guilabel
+      <para
+>Normalt är kategorier dolda i kontovyn. Om du markerar <guilabel
 >Visa kategorierna i kontovyns lista</guilabel
-></term>
-    <listitem>
-      <para
->Normalt är kategorier dolda i kontovyn. Att markera alternativet gör att kategorier visas i konton.</para>
-    </listitem>
-  </varlistentry>
+> visas kategorierna i kontovyn. </para>
 
-  <varlistentry>
-  <term
-><guilabel
+      <para
+>Om du markerar rutan <guilabel
 >Visa inte aktiekonton utan saldo</guilabel
-></term>
-    <listitem>
-      <para
->Att markera alternativet tar bort eventuella konton utan behållning från visning i kontovyn.</para>
+> visas alla konton med behållningen noll i kontovyn. </para>
     </listitem>
   </varlistentry>
-</variablelist>
-</sect3>
 
-<sect3>
-<title
->Scheman</title>
-<variablelist>
-    <varlistentry>
+  <varlistentry
+> 
     <term
-><guilabel
+>Scheman</term>
+    <listitem>
+      <para
+>Om du markerar rutan <guilabel
 >Visa inte färdiga scheman</guilabel
-></term>
+> döljs alla färdiga scheman från att visas i vyn Schemalagda transaktioner. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Transaktioner</term>
     <listitem>
       <para
->Att markera den här rutan döljer alla färdiga scheman från att dyka upp i den schemalagda transaktionsvyn.</para>
+>Transaktioner innan datumet i fältet <guilabel
+>Visa inte transaktioner före</guilabel
+> visas inte huvudboksvyn. Det kan vara användbart om data innehåller transaktioner för många år. Om du anger det till ett eller två år sedan döljs äldre transaktioner. </para>
+      
+      <para
+>Att ställa in alternativet till 1:a januari, 1900 är ett bra sätt att felsöka datumrelaterade problem vid import av filer, ifall vissa datum felaktigt är för mycket länge sedan. </para>
+
+      <para
+>Om du markerar rutan <guilabel
+>Visa inte avstämda transaktioner</guilabel
+> filtreras transaktionerna efter avstämningsstatus. Transaktioner som är markerade som <emphasis
+>Avstämda</emphasis
+> visas inte i huvudboksvyn. </para>
     </listitem>
   </varlistentry>
 </variablelist>
-</sect3>
+</sect2>
 
-<sect3>
-<title
->Transaktioner</title>
+<sect2 id="details.settings.general.support"
+><title
+>Stödfliken</title>
+<screenshot>
+  <screeninfo
+>KMyMoney inställning, sektionen allmänt, stödfliken</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_support.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney inställning, sektionen allmänt, stödfliken</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <variablelist>
   <varlistentry>
     <term
-><guilabel
->Visa inte transaktioner före</guilabel
-></term>
+>Loggning</term>
     <listitem>
       <para
->Transaktioner för det datum som matas in här visas inte i huvudboksvyn. Det kan vara användbart om data omfattar många år av transaktioner: att ställa in det till ett eller två år döljer äldre transaktioner.</para>
-      <para
->Att ställa in alternativet till 1:a januari, 1900 är ett bra sätt att felsöka datumrelaterade problem vid import av filer, ifall vissa datum felaktigt är för mycket länge sedan.</para>
-    </listitem>
-  </varlistentry>
+>&kmymoney; kan skapa en loggfil när data importeras. Det kan vara användbart för felsökning av problem, men det är viktigt att vara försiktig, eftersom loggfilerna kan innehålla känslig information, såsom användarnamn och lösenord i klartext, vilket anges i dialogrutan. </para>
 
-  <varlistentry>
-    <term
-><guilabel
->Visa inte avstämda transaktioner</guilabel
-></term>
-    <listitem>
       <para
->Att markera rutan kommer att filtrera transaktioner enligt avstämningstillstånd. Transaktioner som är markerade som <emphasis
->Avstämda</emphasis
-> visas inte i huvudboken.</para>
+>För att loggning ska kunna ske, ange sökvägen till katalogen där loggarna ska skapas i fältet <guilabel
+>Loggsökväg</guilabel
+>. Du kan också klicka på <guibutton
+>...</guibutton
+> till höger om fältet och använda fildialogrutan för att navigera till den valda katalogen. </para>
+
+      <para
+>Om du markerar rutan <guilabel
+>Logga importerade utdrag</guilabel
+>, sparar &kmymoney;, när data importeras, en fil som heter <quote
+> <literal
+>kmm-statement-</literal
+>ååå-mm-dd<literal
+>T</literal
+>tt-mm-ss.sss<literal
+>.txt</literal
+> </quote
+> i den angivna katalogen. Filen är en &XML;-fil med all data som just importerats. </para>
+
+      <para
+>Om du markerar rutan <guilabel
+>Logga OFX-transaktioner</guilabel
+>, loggar &kmymoney;, när <link linkend="details.impexp.ofxdirectconnect"
+>OFX-direktanslutning</link
+> används för att hämta transaktionsdata, alla interaktioner med den fjärranslutna OFX-servern. De läggs till i en fil som heter <literal
+>ofxlog.txt</literal
+> i den angivna katalogen. Som nämnts ovan innehåller filen sannolikt konto- och användarnamn samt lösenord i klartext. </para>
     </listitem>
   </varlistentry>
 </variablelist>
-</sect3>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.home">
-<title
+<sect1 id="details.settings.home"
+><title
 >Hem</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Hemsidan visar sektioner</title>
+<screenshot>
+  <screeninfo
+>KMyMoney inställning, hemvyn</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_home.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney inställning, hemvyn</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para
->De här alternativen låter dig anpassa utseende för <link linkend="firsttime.mainwindow"
+>Med alternativen kan du anpassa utseendet på <link linkend="firsttime.mainwindow"
 >Hemvyn</link
-> (också kallad hemsidan eller huvudfönstret) genom att välja vilken information som ska visas där och ordningen som den visas. Markerade sektioner kan ordnas om genom att klicka på respektive knapp <guibutton
->Upp</guibutton
-> och <guibutton
->Ner</guibutton
->. </para>
-<!-- FIXME Many of these sections need a <link
-> to the doc section actually
-     describing the content. -->
+> (även kallad startsidan eller huvudfönstret) genom att välja vilken information som ska visas där och i vilken ordning den visas. Valda delar kan ändras genom att klicka på respektive knapp <guibutton
+>Uppåtpil</guibutton
+> eller <guibutton
+>Neråtpil</guibutton
+>. En del kanske inte visas, även om motsvarande post är markerad, om det skulle vara tomt. </para>
 
 <variablelist>
   <varlistentry>
@@ -311,40 +379,42 @@
 ></term>
     <listitem>
       <para
->Detta visar tillgångs- och skuldkonton som är öppna tillsammans med deras nuvarande behållningar. Dessa och andra kontolistor på hemsidan är sorterade i alfabetisk ordning, om inget annat anges.</para>
+>Visar en lista över tillgångskonton till vänster och skuldkonton till höger. De och de andra kontolistorna på hemsidan är sorterade i alfabetisk ordning, om inget annat anges. Normalt sett listas endast öppna konton, såvida inte <link linkend="reference.menus.view"
+>Visa alla konton</link
+> har valts. </para>
+
+      <para
+>För den och de andra kontolistorna i hemvyn innehåller vyn kontonamn, datum för senaste avstämning och aktuell behållning. Dessutom kan det finnas andra kolumner som visas, enligt inställningen i <guilabel
+>Visning av kontoinformation</guilabel
+> längre ner i fönstret. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><guilabel
->Betalningar</guilabel
+>Schemalagda betalningar</guilabel
 ></term>
     <listitem>
       <para
->Detta visar kommande förekomster av schemalagda transaktioner, och skiljer på försenade betalningar från framtida betalningar. Det visar datum, schemanamn, konto och betalningens belopp, samt kontots behållning efter betalningen. Normalt visar det upp till sex transaktioner. Om sex stycken visas, finns en länk som kan väljas för att visa fler, upp till 30 dagar i förväg.</para>
+>Det visar kommande förekomster av <link linkend="details.schedules"
+>schemalagda transaktioner</link
+>, och skiljer de som är försenade, förfaller idag eller förfaller i framtiden. Det visar datum, schemanamn, konto och betalningsbelopp samt kontobehållning efter betalningen. Normalt visas upp till sex transaktioner. Om sex visas finns det en länk som du kan välja för att visa fler, upp till 30 dagar i förväg. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><guilabel
->Föredragna konton</guilabel
+>Favoritkonton</guilabel
 ></term>
     <listitem>
       <para
->Detta visar konton som identifierats som föredragna konton med inställningsdialogrutan <menuchoice
-><guimenu
+>Visar konton som identifierats som favoritkonton i inställningsdialogrutan <guimenu
 >Konto</guimenu
-><guimenuitem
+> <guimenuitem
 >Redigera konto...</guimenuitem
-></menuchoice
->.</para>
-      <para
->För denna och alla andra kontolistsektioner som alternativuppsättningen gäller, inkluderar visningen kontonamn och nuvarande behållning, samt andra kolumner specifika för rapporttypen, och i vissa fall enligt inställningar på andra ställen.</para>
-      <!-- FIXME - the menu item (or maybe link to actual doc page) should point
-           to the actual other config location and perhaps which items for
-           which account type. -->
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -355,7 +425,7 @@
 ></term>
     <listitem>
       <para
->Detta visar alla betalningskonton: de omfattar alla konton där inkomst kan sättas in, och som räkningar kan betalas från.</para>
+>Detta visar alla betalningskonton: de omfattar alla konton där inkomst kan sättas in, och som räkningar kan betalas från. </para>
     </listitem>
   </varlistentry>
 
@@ -366,7 +436,9 @@
 ></term>
     <listitem>
       <para
->Detta visar en lista över alla rapporter som har identifierats som favoriter i rapportens inställningsdialogruta. Listan är ordnad i kronologisk ordning enligt när rapporten markerades som favorit.</para>
+>Det visar en lista över alla rapporter som har identifierats som favoriter i rapportens <link linkend="details.reports.config"
+>inställningsdialogrutan</link
+>. Listan är ordnad efter det datum då varje rapport markerades som favorit. </para>
     </listitem>
   </varlistentry>
 
@@ -377,8 +449,11 @@
 ></term>
     <listitem>
       <para
->Detta visar en 30-, 60-, och 90-dagars prognos för tillgångs- och skuldkonton med någon behållning och med oavstämda transaktioner.</para>
-      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s). -->
+>Det visar en prognos för tillgångs- och skuldkonton, liknande <link linkend="details.forecast.summary"
+>fliken Sammanfattning</link
+> i prognosvyn. Information i visningen kan styras med dialogrutan <link linkend="details.forecast.configure"
+>Prognosinställning</link
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -389,11 +464,9 @@
 ></term>
     <listitem>
       <para
->Visar ett diagram över prognos av nettotillgångar under följande 90 dagar.</para>
+>Visar ett diagram över prognos av nettotillgångar under följande 90 dagar. </para>
     </listitem>
   </varlistentry>
-
-  <!-- FIXME "Forecast (history) removed as apparently not actually used. -->
 
   <varlistentry>
     <term
@@ -402,7 +475,9 @@
 ></term>
     <listitem>
       <para
->Detta visar en sammanfattning för innevarande månad och underskott för alla definierade budgetar. Om ingen budget är definierad, visas inga budgetunderskott, med verkliga utgifter under månaden.</para>
+>Det visar en sammanfattning av innevarande månad och överskridningar för alla <link linkend="details.budgets"
+>definierade budgetar</link
+>. Om ingen budget är definierad visas ingen budget eller överskridning med de faktiska utgifterna för innevarande månad. </para>
     </listitem>
   </varlistentry>
 
@@ -419,11 +494,10 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Skalning av hemsida och sammanfattningssida</title>
 <variablelist>
-
   <varlistentry>
     <term
 ><guilabel
@@ -431,7 +505,7 @@
 ></term>
     <listitem>
       <para
->Alternativet gör det möjligt att välja teckenstorlek som ett procentvärde för att anpassa hemvyn baserat på vad användaren föredrar.</para>
+>Alternativet gör det möjligt att välja teckenstorlek som ett procentvärde för att anpassa hemvyn baserat på vad användaren föredrar. </para>
     </listitem>
   </varlistentry>
 
@@ -442,17 +516,18 @@
 ></term>
     <listitem>
       <para
->Genom att markera det här sparas din föredragna teckenstorlek om du har ändrat den på hemsidan genom att använda mushjulet.</para>
+>Genom att markera det här sparas din föredragna teckenstorlek om du har ändrat den på hemsidan genom att använda mushjulet. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title
+<sect2 id="details.settings.home.acctinfo"
+><title
 >Visning av kontoinformation</title>
 <para
->Alternativen låter dig anpassa vilken information som ingår i alla kontolistor.</para>
+>Alternativen låter dig anpassa vilken information som ingår i alla kontolistor på hemvyn. </para>
+
 <variablelist>
   <varlistentry>
     <term
@@ -461,7 +536,9 @@
 ></term>
     <listitem>
       <para
->Visar kontogränsen som är inställd i kontots redigeringsdialogruta. Det påverkar alla listor som innehåller betalningskonton.</para>
+>Visar kontogränsen som ställts in i dialogrutan <link linkend="details.accounts.edit"
+>Kontoredigering</link
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -472,9 +549,25 @@
 ></term>
     <listitem>
       <para
->Visa behållningsstatus för kopplade konton, symboliserade av en ikon i kolumnerna som föregår kontonamnen. En grön bock anger att behållningen på nätet och den lokala filen är likadana. En brevlåda med en grön pil anger att den lokala filen har senare transaktioner än den senaste nätuppdateringen. Det uppmanar användaren att starta en uppdatering av nätet. Ett rött varningstecken anger att behållningen inte stämmer mellan den lokala filen och nätet.</para>
-      <!-- Note: the colors might be different depending on the selected theme
-           -->
+>Visar behållningsstatus för anslutna konton och konton som har haft transaktioner importerade. Statusen symboliseras av en ikon i kolumnen före kontonamnet. Observera att färgerna som beskrivs här kan skilja sig från de som visas för dig, beroende på vilket visningstema som valts. En <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-dialog-ok.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> grön bockmarkering indikerar att nätbehållningen och den lokala behållningen är desamma. Ett <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-dialog-cancel.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> rött varningstecken indikerar skillnad mellan den lokala filen och nätbehållningen. En <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-mail-receive.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> brevlåda med en grön pil indikerar att den lokala filen har transaktioner som är nyare än den senaste nätuppdateringen. Det varnar användaren att utföra en nätuppdatering. </para>
     </listitem>
   </varlistentry>
 
@@ -485,7 +578,7 @@
 ></term>
     <listitem>
       <para
->Infogar ytterligare en kolumn intill kontonamnet som visar antal omarkerade transaktioner i kontot.</para>
+>Infogar en kolumn efter kontonamnet som visar antalet omarkerade transaktioner i kontot. </para>
     </listitem>
   </varlistentry>
 
@@ -496,7 +589,7 @@
 ></term>
     <listitem>
       <para
->Infogar ytterligare en kolumn som visar antalet kontrollerade transaktioner i kontot.</para>
+>Infogar en kolumn som visar antalet kontrollerade transaktioner i kontot. </para>
     </listitem>
   </varlistentry>
 
@@ -507,7 +600,7 @@
 ></term>
     <listitem>
       <para
->Infogar ytterligare en kolumn som visar antalet oavstämda transaktioner i kontot, dvs. summan av alla inte markerade eller kontrollerade transaktioner.</para>
+>Infogar en kolumn som visar antalet oavstämda transaktioner i kontot, dvs. summan av alla inte markerade eller kontrollerade transaktioner. </para>
     </listitem>
   </varlistentry>
 
@@ -518,61 +611,31 @@
 ></term>
     <listitem>
       <para
->Infogar ytterligare en kolumn som visar kontots senaste avstämningsdatum.</para>
+>Infogar ytterligare en kolumn som visar kontots senaste avstämningsdatum. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.register">
-<title
+<sect1 id="details.settings.register"
+><title
 >Huvudbok</title>
-
 <para
->Följande alternativ som skissas i avsnittet gör det möjligt att ändra transaktionsregistret som finns under huvudbokens flik. </para>
+>Inställningarna och alternativen i avsnittet möjliggör modifiering av transaktioner som visas i huvudboksvyn. </para>
 
-<sect2 id="details.settings.register.display">
-<title
+<sect2 id="details.settings.register.display"
+><title
 >Fliken Visning</title>
-
 <variablelist>
   <varlistentry>
     <term
 ><guilabel
->Visa ett rutnät i registret</guilabel
+>Visa ett rutnät i huvudboken</guilabel
 ></term>
     <listitem>
       <para
->Genom att markera alternativet visas rutnätslinjer i transaktionsregistret eller huvudboksvyn. Det ger ett ytterligare visningsalternativ som kan göra det enklare att åskådliggöra separata transaktioner och deras ingående delar.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Visa alla registerposter i fullständig detalj</guilabel
-></term>
-    <listitem>
-      <para
->Genom att markera alternativet visar registret all information för alla visade transaktioner med separata rader i informationskolumnen för kategorier och etiketter, och för anteckningar. Om det inte är markerat, visas inte kategorier, etiketter och anteckningar.</para>
-      <para
->Det får samma effekt som att välja menyalternativet <link linkend="reference.menus.settings.transactiondetail"
->Visa transaktionsinformation</link
->.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry id="details.settings.register.lens">
-    <term
-><guilabel
->Använd huvudbokens lins</guilabel
-></term>
-    <listitem>
-      <para
->Genom att markera alternativet visas alla informationsrader för markerad transaktion, även om <guilabel
->Visa alla registerposter i fullständig detalj</guilabel
-> inte är markerat.</para>
+>Om du markerar alternativet visas rutnät i huvudboksvyn. Det är ett ytterligare visningsalternativ som kan göra det enklare att visualisera separata transaktioner och deras beståndsdelar. </para>
     </listitem>
   </varlistentry>
 
@@ -583,44 +646,9 @@
 ></term>
     <listitem>
       <para
->Genom att markera alternativet visas <link linkend="details.ledger.transactionform"
+>Att markera alternativet visas <link linkend="details.ledger.transactionform"
 >transaktionsformuläret</link
-> längst ner i registret, och det är då platsen som transaktioner redigeras. Om transaktionsformuläret inte visas, redigeras transaktioner i själva huvudboken. Med alternativet aktiverat visas färre transaktioner i huvudboken, jämfört med om det är inaktiverat.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Visa alltid fältet Nr.</guilabel
-></term>
-    <listitem>
-      <para
->Visar alltid nummerfältet (<quote
->Nr.</quote
-> när en transaktion matas in eller redigeras. När det är aktiverat kan nummer som matas in i fältet för checkkonton kontrolleras.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Visa grupprubriker mellan transaktioner</guilabel
-></term>
-    <listitem>
-      <para
->Genom att markera alternativet visas grupprubriker i registret. De gäller tidsperioder eller milstenar som förra månaden, förra veckan, innevarande månad, senaste avstämning, nästa vecka och nästa månad.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Visa rubrik för föregående och innevarande räkenskapsår </guilabel
-></term>
-    <listitem>
-      <para
->Genom att markera alternativet visas grupprubriker i registret för innevarande och föregående räkenskapsår.</para>
+> längst ner i huvudboken, och det är där du anger eller redigerar en transaktion. Om transaktionsformuläret inte visas redigerar du en transaktion i själva huvudboken. Med alternativet aktiverat syns färre transaktioner i huvudboken jämfört med när det är inaktiverat. </para>
     </listitem>
   </varlistentry>
 
@@ -631,39 +659,118 @@
 ></term>
     <listitem>
       <para
->Schemalagda transaktioner med planerade datum visas i huvudboksvyn för relevant konto. När datumet har passerats, och en schemalagd transaktion blir försenad, visas den inte längre i huvudboken, om inte alternativet är markerat.</para>
+>Schemalagda transaktioner med framtida datum visas i huvudboksvyn för det aktuella kontot. När datumet passerar och en schemalagd transaktion blir förfallen visas den inte längre i huvudboken, såvida inte alternativ är valt. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Information om huvudbokspost</guilabel
+></term>
+    <listitem>
+      <formalpara>
+        <title
+><guilabel
+>Visa alla huvudboksposter i fullständig detalj</guilabel
+></title>
+        <para
+>Att markera alternativet visas all information för alla visade transaktioner i huvudboken, med separata rader i detaljkolumnen för kategori, etiketter och anteckningar. Om det inte är markerat visas inte kategori, etiketter och anteckningar. Det har samma effekt som att välja menyalternativet <link linkend="reference.menus.settings.transactiondetail"
+>Visa transaktionsinformation</link
+>. </para>
+      </formalpara>
+
+      <formalpara id="details.settings.register.lens">
+        <title
+><guilabel
+>Använd huvudbokens lins</guilabel
+></title>
+        <para
+>Om du markerar alternativet visas alla detaljerade rader för den valda transaktionen, även om <guilabel
+>Visa alla huvudboksposter i fullständig detalj</guilabel
+> inte är valt. </para>
+      </formalpara>
+
+      <formalpara
+><title
+>Visa all delningsinformation i huvudbok</title>
+      <para
+>Om du markerar alternativet visas mer information om delade transaktioner. </para>
+      </formalpara>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Informationsrubriker</guilabel
+></term>
+    <listitem>
+      <formalpara>
+        <title
+><guilabel
+>Visa grupprubriker mellan transaktioner</guilabel
+></title>
+        <para
+>Om du markerar alternativet visas grupprubriker i huvudboken. De hänvisar till tidsperioder eller milstolpar som Förra månaden, Förra veckan, Denna månad, Senaste avstämning, Nästa vecka och Nästa månad. </para>
+      </formalpara>
+
+      <formalpara>
+        <title>
+          <guilabel
+>Visa rubrik för föregående och innevarande räkenskapsår</guilabel>
+        </title>
+        <para
+>Om du markerar alternativet visas grupprubriker i huvudboken för innevarande och föregående räkenskapsår. </para>
+      </formalpara>
+
+      <formalpara>
+        <title
+><guilabel
+>Grupprubriker för avstämning</guilabel
+></title>
+        <para
+>Kombinationsmeny bestämmer visningen av grupprubriker för avstämningar. Om <guilabel
+>Visa inte avstämningsposter</guilabel
+> är markerat visas inga grupprubriker för avstämningar. Om <guilabel
+>Visa senaste avstämningspost med datum och behållning i huvudbok</guilabel
+> är markerat indikeras endast den senaste avstämningen med en grupprubrik. Om <guilabel
+>Visa alla avstämningsposter med datum och behållning i huvudbok</guilabel
+> är markerat visas en grupprubrik för alla tidigare avstämningar. </para>
+      </formalpara>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.register.sorting">
-<title
+<sect2 id="details.settings.register.sorting"
+><title
 >Fliken Sortering</title>
 <para
->Dessa tre sektioner låter dig ställa in förvald sorteringsordning för transaktionerna i huvudboksvyn. I alla fall visar listan till vänster alla fält tillgängliga för sortering. För att sortera enligt ett fält, markera det (enkelklick med musen) och klicka på högerpilen mellan de två listorna. Listan till höger visar alla fält som har valts att ingå i sorteringsordningen för vyn. Det går att justera den relativa ordningen mellan fälten genom att markera ett och justera dess position i listan med uppåt- och neråtpilarna till höger om listan. Det går också att byta mellan stigande och fallande sorteringsordning för vilket fält som helst genom att dubbelklicka på det. </para>
-<para
->Fälten tillgängliga för sortering är likadana i alla tre sektionerna: Belopp, Kategori, Posternas ordning (datum transaktionen skapades), Nummer, Betalningsmottagare, Registreringsdatum, Avstämningstillstånd, Värdepapper och Typ. </para>
+>De tre delarna låter dig ställa in normal sorteringsordning för transaktioner i huvudboksvyn. I samtliga fall visar listan till höger de fält som har valts som en del av sorteringsordningen för den vyn, och listan till vänster visar alla fält som är tillgängliga för sortering men som ännu inte har valts. För att sortera enligt ett objekt, markera det (enkelt musklick) och klicka på högerpilen mellan de två listorna. Du kan justera den relativa ordningen för fälten genom att markera ett och justera dess position i listan med hjälp av uppåt- och neråtpilarna till höger om listan. Du kan byta mellan stigande och fallande sortering för ett objekt genom att dubbelklicka på det. </para>
 
-<sect3 id="details.settings.register.sorting.normal">
-<title
->Fliken Normal vy</title>
 <para
->Fliken bestämmer normal sorteringsordning i den vanliga huvudboksvyn. </para>
+>Fälten tillgängliga för sortering är desamma för alla tre delar: Belopp, Kategori, Transaktionsordning (datumet då transaktionen skapades, inte transaktionens interna id), Nummer, Betalningsmottagare, Bokföringsdatum, Avstämningsstatus, Avstämningsdatum, Värdepapper och Typ. </para>
+
+<sect3 id="details.settings.register.sorting.normal"
+><title
+>Underfliken Normal vy</title>
+<para
+>Fliken styr den normala sorteringsordningen för den vanliga huvudboksvyn. </para>
 </sect3>
 
-<sect3 id="details.settings.register.sorting.reconciliation">
-<title
->Fliken Avstämningsvy</title>
+<sect3 id="details.settings.register.sorting.reconciliation"
+><title
+>Underfliken Avstämningsvy</title>
 <para
->Fliken bestämmer normal sorteringsordning i huvudboksvyn när avstämningsvyn används. Det är visningen av transaktioner under <link linkend="details.reconcile"
+>Fliken styr den normala sorteringsordningen för huvudboken i avstämningsvyn. Det är visningen av transaktioner som visas under <link linkend="details.reconcile"
 >avstämningsprocessen</link
 >. </para>
 </sect3>
 
-<sect3 id="details.settings.register.sorting.search">
-<title
->Fliken Sökvy</title>
+<sect3 id="details.settings.register.sorting.search"
+><title
+>Underfliken Sökvy</title>
 <para
 >Fliken bestämmer normal sorteringsordning i huvudboken när <link linkend="details.search"
 >sökvyn</link
@@ -671,8 +778,8 @@
 </sect3>
 </sect2>
 
-<sect2 id="details.settings.register.dataentry">
-<title
+<sect2 id="details.settings.register.dataentry"
+><title
 >Fliken Datainmatning</title>
 <para
 >Alternativen påverkar processen att skapa nya transaktioner.</para>
@@ -685,18 +792,18 @@
 ></term>
     <listitem>
       <para
->Genom att aktivera detta ökas checknummer automatiskt så snart en ny checktransaktion matas in. Det får samma effekt vare sig huvudbokens lins eller transaktionsformuläret används.</para>
+>Om du aktiverar det ökar checknumret automatiskt varje gång en ny checktransaktion registreras. Det har samma effekt oavsett om du använder huvudbokens lins eller transaktionsformuläret. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><guilabel
->Behåll ändringar när en annan transaktion eller delning markeras</guilabel
-></term>
+    <term>
+      <guilabel
+>Behåll ändringar när en annan transaktion eller delning markeras</guilabel>
+    </term>
     <listitem>
       <para
->Om aktiverat, sparas redigeringar av nuvarande transaktion om en annan transaktion eller delning väljes. Om inaktiverat, blir du tillfrågat om ändringar ska sparas när en annan transaktionsdelning väljes.</para>
+>När den är aktiverad sparas eventuella ändringar i den aktuella transaktionen om du väljer en annan transaktion eller delning. Om den är inaktiverad får du frågan om du vill spara ändringarna eller inte. </para>
     </listitem>
   </varlistentry>
 
@@ -718,14 +825,14 @@
 ></term>
     <listitem>
       <para
->Alternativet styr <link linkend="details.payees.personalinformation.matching"
+>Alternativet bestämmer <link linkend="details.payees.details.matching"
 >matchning av betalningsmottagare</link
->. Om aktiverat matchas alltid namn på betalningsmottagare från början. Om inaktiverat, matchas alla delsträngar. Dessutom kan ytterligare alternativ för matchning ställas in under fliken Matchning i betalarvyn om det är aktiverat.</para>
+>. När det är aktiverat matchas betalningsmottagarnamn alltid från början. När det är inaktiverat matchas alla delsträngar. När det är aktiverat kan ytterligare alternativ för matchning anges under fliken Matchning i betalarvyn. </para>
     </listitem>
   </varlistentry>
 
-  <!--FIXME missing Automatic reconciliation-->
   <varlistentry>
+    <!-- FIXME:   missing description of Automatic reconciliation -->
     <term
 ><guilabel
 >Automatisk avstämning</guilabel
@@ -739,11 +846,22 @@
   <varlistentry>
     <term
 ><guilabel
+>Ursprunglig markörposition i datumfältet</guilabel
+></term>
+    <listitem>
+      <para
+>När du går vidare till en transaktions datumfält (antingen genom att skapa eller redigera en transaktion, eller genom att använda tabulator eller returtangenten), avgör kombinationsmenyn om markören ska börja i dag, månad eller år i datumet. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
 >Förvalt tillstånd för avstämning</guilabel
 ></term>
     <listitem>
       <para
->Välj standardtillstånd för nya transaktioner: Inte avstämd, Kontrollerad och Avstämd.</para>
+>I kombinationsmenyn kan du välja normalt avstämningstillstånd för nya transaktioner: Inte avstämd, Kontrollerad eller Avstämd. </para>
     </listitem>
   </varlistentry>
 
@@ -754,27 +872,32 @@
 ></term>
     <listitem>
       <para
->Alternativet gör det möjligt att välja önskat beteende för automatisk ifyllnad. Det bestämmer hur föregående transaktioner för samma betalningsmottagare visas, om det finns några, och vilka av transaktionerna, om det finns några, som används för att automatiskt fylla i den nya transaktionens information.</para>
+>Alternativet gör det möjligt att välja önskat beteende för automatisk ifyllnad. Det bestämmer hur föregående transaktioner för samma betalningsmottagare visas, om det finns några, och vilka av transaktionerna, om det finns några, som används för att automatiskt fylla i den nya transaktionens information. </para>
+
       <itemizedlist>
         <listitem>
           <para
 >Ingen automatisk ifyllnad</para>
           <para
->Inaktiverar automatisk ifyllnad, och all information måste matas in manuellt för den nya transaktionen.</para>
+>Inaktiverar automatisk ifyllnad, och all information måste matas in manuellt för den nya transaktionen. </para>
         </listitem>
+        
         <listitem>
           <para
 >Samma transaktion om beloppet skiljer sig mindre än procentvärdet nedan</para>
           <para
->Om alternativet är markerat, och du matar in en ny transaktion, visar &kmymoney; en lista över tidigare transaktioner för samma betalningsmottagare och konto. Om beloppet för en tidigare transaktion skiljer sig mindre än X procent från beloppet du har skrivit in, anses de vara identiska, och information från den föregående transaktionen används för att automatiskt fylla i information om den nya transaktionen. Värdet "X" ovan anges i rutan intill <guilabel
->Samma transaktion om beloppet skiljer sig mindre än procentvärdet nedan</guilabel
->, och kan gå från 0 till 100 %. Om procentvärdet är 0, visas alla tidigare transaktioner för betalningsmottagaren och kontot, och du kan välja en av transaktionerna att använda för automatisk ifyllnad genom att klicka på den.</para>
+>Med det här alternativet markerat, visar &kmymoney; en lista över tidigare transaktioner för samma betalningsmottagare och konto när du anger en ny transaktion. Om beloppet för en tidigare transaktion är tillräckligt nära det belopp du har angett, betraktas det som en matchning, och detaljer från den tidigare transaktionen används för att automatiskt fylla i information om den nya transaktionen. <quote
+>Tillräckligt nära</quote
+> betyder inom den procentandel som anges i rutan intill <guilabel
+>Samma transaktion om beloppet skiljer sig mindre än</guilabel
+>, och kan variera från 0 till 100 %. Om procentandelen är 0 visas alla tidigare transaktioner för betalningsmottagaren och kontot, och du kan välja en av transaktionerna att använda för att fylla i automatiskt genom att klicka på den. </para>
         </listitem>
+
         <listitem>
           <para
 >Med föregående oftast använda transaktion för betalningsmottagaren</para>
           <para
->Om alternativet är markerat och en ny transaktion matas in, fyller &kmymoney; i all transaktionsinformation baserat på den föregående oftast använda transaktionen för vald betalningsmottagare.</para>
+>Om alternativet är markerat och en ny transaktion matas in, fyller &kmymoney; i all transaktionsinformation baserat på den föregående oftast använda transaktionen för vald betalningsmottagare. </para>
         </listitem>
       </itemizedlist>
     </listitem>
@@ -793,10 +916,9 @@
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.register.import">
-<title
+<sect2 id="details.settings.register.import"
+><title
 >Fliken Import</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -805,7 +927,7 @@
 ></term>
     <listitem>
       <para
->Sök efter matchande transaktioner inom intervallet för den importerade transaktionen ± antal angivna dagar, vilket kan ställas in från 0 till 99.</para>
+>Sök efter matchande transaktioner inom intervallet för den importerade transaktionen ± antal angivna dagar, vilket kan ställas in från 0 till 99. </para>
     </listitem>
   </varlistentry>
 
@@ -816,25 +938,24 @@
 ></term>
     <listitem>
       <para
->Om alternativet är markerat, och en ny betalare detekteras vid import, blir användaren tillfrågad om standardkategorin för betalningsmottagaren.</para>
+>Om alternativet är markerat, och en ny betalare detekteras vid import, blir användaren tillfrågad om standardkategorin för betalningsmottagaren. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.schedules">
-<title
+<sect1 id="details.settings.schedules"
+><title
 >Schemalagda transaktioner</title>
-
 <para
->Alternativen gör det möjligt att ändra beteendet hos <link linkend="details.schedules"
+>Alternativen låter dig ändra beteendet för <link linkend="details.schedules"
 >schemalagda transaktioner</link
 >. </para>
 
-<sect2>
-<title
->Startup options</title>
+<sect2
+><title
+>Startalternativ</title>
 <variablelist>
   <varlistentry>
     <term
@@ -848,20 +969,20 @@
   </varlistentry>
 
   <varlistentry>
-    <term
-><guilabel
->Skriv in transaktionen så här många dagar i förväg</guilabel
-></term>
-    <listitem
-><para
->Ange hur många dagar i förväg som en schemalagd transaktion ska skrivas in.</para>
+    <term>
+      <guilabel
+>Skriv in transaktionen så här många dagar i förväg</guilabel>
+    </term>
+    <listitem>
+      <para
+>Ange hur många dagar i förväg som en schemalagd transaktion ska skrivas in. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.schedules.calendar">
-<title
+<sect2 id="details.settings.schedules.calendar"
+><title
 >Behandlingsdagar</title>
 <variablelist>
   <varlistentry>
@@ -869,8 +990,8 @@
 ><guilabel
 >Använd regionens helgkalender</guilabel
 ></term>
-    <listitem
-><para
+    <listitem>
+      <para
 >Välj område i världen som bäst passar dina behov.</para>
     </listitem>
   </varlistentry>
@@ -879,7 +1000,14 @@
 
 <sect2
 ><title
-></title>
+>Ogrupperat objekt</title>
+<!-- FIXME: This is a good example of problems with the current mix of sectX and variablelist.  Without a title, this
+     sect has inadequate spacing above.  so it looks part of the previous group, but the actual title doesn't match the
+     lack of title in the actual config dialog.  I'm open to suggestions on how to deal with this.  Not using sect2 for
+     boxes might help, but would be a lot of effort.  Perhaps just adding a box and title to the config dialog?-->
+<literallayout
+>
+</literallayout>
 <variablelist>
   <varlistentry>
     <term
@@ -888,54 +1016,54 @@
 ></term>
     <listitem>
       <para
->Ange hur många dagar som schemalagda transaktioner ska visas i huvudboken.</para>
-      <para
->Schemalagda transaktioner listas i huvudboken. Du kan registrera eller hoppa över de schemalagda transaktionerna genom att högerklicka på dem.</para>
+>Ange hur många dagar i förväg schemalagda transaktioner ska visas i huvudboken. För framtida schemalagda transaktioner som visas i huvudboken kan du lägga till eller hoppa över dem genom att högerklicka på dem. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.onlinequote">
-<title
+<sect1 id="details.settings.onlinequote"
+><title
 >Direktkurser</title>
+<para
+>Inställningarna avgör hur kursuppgifter hämtas från olika direktkällor. De inkluderar aktie-, obligations- och andra aktiekurser, samt priser på ädelmetaller och kurser för valutaomvandling. </para>
 
 <para
->Inställningarna ändrar hur direktkurser hämtas från olika källor på nätet. De omfattar aktie-, obligations- och andra värdepapperskurser, samt kurser för ädelmetaller och valutakonvertering. </para>
-
-<para
->Fliken låter dig ändra direktkurskällor i &kmymoney;. I allmänhet anses det vara en avancerad funktion, och bör endast försökas av de mest tekniskt skickliga användarna. </para>
+>Den här delen låter dig ändra källorna för direktkurser i &kmymoney;. Generellt sett är det en avancerad funktion och bör endast provas av de mest tekniskt skickliga användarna. </para>
 
 <para
 >För mer information, se avsnittet <link linkend="details.investments.onlinequotes"
 >Direktuppdatering av kurser</link
 >. </para>
+
+<note>
+  <para
+>Den initiala listan och inställningen av direktkurser ställs in när &kmymoney; först skapar datafilen. Om en direktkälla gör en ändring som kräver en ändring av inställningarna för att &kmymoney; ska fortsätta att använda den som en giltig källa, måste användaren göra nödvändiga ändringar med hjälp av dialogrutan, baserat på instruktioner som publiceras på ett av de föreslagna <link linkend="firsttime.contact"
+>supportalternativen</link
+>. Förhoppningsvis ändras sättet som direktkällans inställning hanteras inom en inte alltför avlägsen framtid så att &kmymoney; automatiskt kan hämta alla nödvändiga uppdateringar av inställningarna utan att användaren behöver göra några manuella ändringar. </para>
+</note>
 </sect1>
 
-
-<sect1 id="details.settings.colors">
-<title
+<sect1 id="details.settings.colors"
+><title
 >Färger</title>
-
 <para
 >Inställningarna låter dig anpassa färgerna som används i &kmymoney;. Om <guilabel
 >Egna färger</guilabel
 > inte är markerat, används standardfärger. </para>
 
 <para
->Markera rutan Egna färger för att anpassa färger. </para>
-
-<para
->Ändra någon av färgerna genom att klicka på färgknappen, vilket visar färgvalspaletten. Det ger obegränsade alternativ för val av färg. Det går att välja en definierad basfärg, välja en färg genom att klicka var som helst på skärmen, mata in en &HTML;-definierad färg, eller ange värden för nyans, mättnad, ljushet, röd, grön och blå. </para>
+>För att anpassa färger markera kryssrutan <guilabel
+>Egna färger</guilabel
+>. Du kan sedan ändra valfri färg genom att klicka på färgknappen, vilket öppnar färgpaletten. Det ger obegränsade alternativ för färgval. Du kan välja en definierad grundfärg, välja en färg genom att klicka var som helst på den visade färgpaletten, ange en &HTML;-definierad färg eller ange värden för Färgton, Färgmättnad, Värde, Röd, Grön och Blå. </para>
 </sect1>
 
-<sect1 id="details.settings.fonts">
-<title
+<sect1 id="details.settings.fonts"
+><title
 >Teckensnitt</title>
-
 <para
->Alternativen låter dig ändra teckensnitten i cell- eller rubrikfälten. </para>
+>I det här avsnittet kan du ändra teckensnitten som används i fälten Cell och Rubrik. </para>
 
 <variablelist>
   <varlistentry>
@@ -945,7 +1073,7 @@
 ></term>
     <listitem>
       <para
->Markera det här för att använda systemteckensnitt. Att avmarkera alternativet möjliggör val av önskat teckensnitt.</para>
+>Markera alternativet för att använda systemteckensnitt. Om du avmarkerar alternativet kan du välja önskade teckensnitt. </para>
     </listitem>
   </varlistentry>
 
@@ -956,7 +1084,7 @@
 ></term>
     <listitem>
       <para
->Ange det egna teckensnittet att använda för varje cell i registren.</para>
+>Ange det egna teckensnittet som ska användas i varje cell i huvudböckerna.</para>
     </listitem>
   </varlistentry>
 
@@ -967,16 +1095,15 @@
 ></term>
     <listitem>
       <para
->Ange det egna teckensnittet att använda för rubrikerna i varje vy i registret.</para>
+>Ange det egna teckensnittet som ska användas för rubrikerna i varje vy i huvudboken. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect1>
 
-<sect1 id="details.settings.icons">
-<title
+<sect1 id="details.settings.icons"
+><title
 >Ikoner</title>
-
 <para
 >Alternativet gör det möjligt att välja ikoner som ska visas. </para>
 
@@ -988,61 +1115,71 @@
 ></term>
     <listitem>
       <para
->Genom att använda kombinationsmenyn finns ett urval av tillgängliga ikoner att använda. Ytterligare ikoner kan vara tillgängliga för nerladdning och användning beroende på installerat operativsystem.</para>
+>Listrutan visar ett urval av ikonteman som är tillgängliga för användning. Ytterligare ikoner kan vara tillgängliga för nerladdning och användning beroende på installerat operativsystem eller installerad &Linux;-distribution. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect1>
 
-<sect1 id="details.settings.plugins">
-<title
+<sect1 id="details.settings.plugins"
+><title
 >Insticksprogram</title>
+<para
+>Den här delen ger information om tillgängliga insticksprogram och låter dig ändra beteendet hos några av dem. Observera att listan över insticksprogram som visas beror på vilka insticksprogram &kmymoney; hittade när det startade. Det spelar ingen roll om insticksprogrammet kompilerades som en del av programmet eller lades till som ett separat paket. </para>
+  
+<screenshot>
+  <screeninfo
+>KMyMoney inställning, insticksprogram</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney inställning, insticksprogram</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Sektionen tillhandahåller information om tillgängliga insticksprogram, och låter dig ändra beteendet hos installerade insticksprogram. Observera att listan med insticksprogram som visas beror på vilka insticksprogram som &kmymoney; hittade vid start. Det spelar ingen roll om insticksprogrammet kompilerades som en del av programmet eller har lagts till som ett separat paket. <screenshot
-> <screeninfo
->Anpassa insticksprogram</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="configure_plugins.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Anpassa insticksprogram</phrase
-> </textobject
-> </mediaobject
-> </screenshot
-> Alla insticksprogram kan aktiveras eller inaktiveras, enligt kryssrutan intill insticksprogrammets namn. Dessutom finns knappen <guibutton
+>Varje insticksprogram kan aktiveras eller inaktiveras, beroende på statusen för kryssrutan till vänster om insticksprogrammets namn och ikon. Dessutom finns knappen <guibutton
 >Information</guibutton
-> (&infoicon;) för varje program, som visar insticksprogrammets version och upphovsman. För vissa insticksprogram kan ytterligare information om hur man anpassar och använder det visas genom att klicka på anpassa, eller verktygsikonen till höger om informationsknappen. Det enda insticksprogrammet som kräver inställning är insticksprogrammet Skriv ut check. </para>
+> &infoicon; till höger  om varje insticksprogram, som visar insticksprogrammets version och upphovsmän. För vissa insticksprogram kan ytterligare information om inställning och användning hittas genom att klicka på &configicon; <guibutton
+>anpassa</guibutton
+> precis till vänster om informationsknappen. </para>
 
-<sect2 id="details.settings.plugins.printchecks">
-<title
+<para
+>Fram tills nyligen fanns det bara ett insticksprogram som krävde inställning, insticksprogrammet för checkutskrift. Nu finns det flera insticksprogram som har inställningssidor som anropas från den här sidan. De listas i följande avsnitt. Observera dock att många av dem redan har beskrivits tidigare i dokumentet. </para>
+
+<sect2 id="details.settings.plugins.printchecks"
+><title
 >Insticksprogram för checkutskrift</title>
+<para
+>Det finns ett insticksprogram för utskrift av checkar, vilket ingår i &kmymoney;s källkod, och som alltid ska vara aktiverat. Det tillåter utskrift av en check baserad på data från en vald transaktion, med layouten styrd av en &HTML;-mall. Du behöver använda en mall som matchar förtryckta checkar. En inbyggd mall tillhandahålls. Du kan också välja en egen mall. För att göra det, klicka på &configicon; <guibutton
+>anpassa</guibutton
+> för att visa inställningsdialogrutan <guilabel
+>Checkutskrift</guilabel
+>. Överst kan du markera rutan för att använda en egen mall. Till höger om den finns en knapp som visar en filväljare för att välja en alternativ mallfil. </para>
 
 <para
->As one example, there is a plugin for printing checks, which is included with the source of &kmymoney;, and should always be enabled. It allows printing of a check based on the data from a selected transaction, with the layout controlled by an &HTML; template. You need to use a template which is matched to your pre-printed checks. A default, built-in template is provided. You may also choose a custom template. To do so, click on the <guibutton
->configure</guibutton
-> (&configicon;) button to get the <guilabel
->Check printing</guilabel
-> configuration dialog displayed. At the top you can check the box to use a custom template. To the right of that is a button which brings up a file chooser, to select an alternate template file. </para>
-
-<para
->A template file is an &HTML; file, in which specific strings are used to reference the fields from the transaction and from the current account and institution to show where they will be printed on the check. &kmymoney; ships with a default, built-in template. At <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
->this</ulink
-> address you can find the HTML source file of default template, as well as some additional templates. You should either be able to use one of them, or modify one to suit your needs. Note that only a <emphasis
->subset</emphasis
-> of the HTML standard is supported — the detailed documentation on that can be found <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
->here</ulink
+>En mallfil är en &HTML;-fil där specifika strängar används för att referera till fält från transaktionen och från det nuvarande kontot och institutionen för att visa var de ska att skrivas ut på checken. &kmymoney; levereras med en inbyggd standardmall. På <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+> den här adressen</ulink
+> hittar du HTML-källfilen för standardmallen, samt några ytterligare mallar. Du ska antingen kunna använda en av dem eller modifiera en för att passa dina behov. Observera att endast en <emphasis
+>delmängd</emphasis
+> av HTML-standarden stöds: detaljerad dokumentationen om det finns <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
+>här</ulink
 >. </para>
 
-
-<!-- info from source code on substitution variables
+<!-- FIXME: do we want to actually include these checkwriting variables here, and if
+           so, with how much detail? -->
+<!-- info from source code on substitution variables.  Future exercise to list/describe them here.
     // data about the user
     checkHTML.replace("$OWNER_NAME", file->user().name());
     checkHTML.replace("$OWNER_ADDRESS", file->user().address());
     checkHTML.replace("$OWNER_CITY", file->user().city());
     checkHTML.replace("$OWNER_STATE", file->user().state());
-    // data about the account institution
+
+    // data about the account's institution
     checkHTML.replace("$INSTITUTION_NAME", institution.name());
     checkHTML.replace("$INSTITUTION_STREET", institution.street());
     checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
@@ -1050,6 +1187,7 @@
     checkHTML.replace("$INSTITUTION_CITY", institution.city());
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+
     // data about the transaction
     checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
@@ -1062,18 +1200,144 @@
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 -->
-
-
 </sect2>
-<sect2 id="details.settings.plugins.kbanking">
-<title
+
+<sect2 id="details.settings.plugins.csvimporter"
+><title
+>CSV-importverktyg</title>
+<para
+>Vissa aspekter av inställning av CSV-importinsticksprogrammet har redan diskuterats <link linkend="details.settings.plugins.csvimporter"
+>här</link
+>. Det finns dock också en dialogruta som kan öppnas här. </para>
+
+<screenshot>
+  <screeninfo
+>anpassa csv-importinsticksprogram</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_csvimporter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>anpassa csv-importinsticksprogram</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect3
+><title
+>Automatisk detektering</title>
+<para
+>Det är generellt bäst att låta insticksprogrammet automatiskt upptäcka fältavgränsare, decimaltecken och datumformat. Det är dock möjligt att inaktivera beteendet för vart och ett av objekten genom att avmarkera lämplig ruta. </para>
+
+<para
+>I vissa fall innehåller en csv-fil som ska importeras kontonamnet någonstans i filens första rader. Du kan begära att insticksprogrammet automatiskt letar efter det genom att markera lämplig ruta, separat för bank- och investeringsimport. </para>
+</sect3>
+
+<sect3
+><title
+>QIF-exportprofil</title>
+<para
+>Även om det för närvarande är bättre att bara använda insticksprogrammet QIF-export direkt, är det fortfarande möjligt att låta CSV-import exportera en QIF-fil. I det fallet kan du använda kombinationsmenyn för att välja QIF-exportprofilen som ska användas. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.plugins.forecast"
+><title
+>Prognosvy</title>
+<para
+>Det beskrivs i avsnittet <link linkend="details.forecast.configure"
+>Anpassa prognosen</link
+> i <link linkend="details.forecast"
+>Prognoskapitlet.</link
+> </para>
+</sect2>
+
+<sect2
+><title
+>iCalendar</title>
+<para
+>&kmymoney; kan exportera en fil med formatet <quote
+>iCalendar</quote
+>, så att du kan importera schemalagda transaktioner i &korganizer; eller ett annat kalenderprogram, för att kunna bli påmind om schemalagda transaktioner. Exporten av filen görs faktiskt med menyalternativet <menuchoice
+> <guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Exportera</guisubmenu
+> <guimenuitem
+>Schema till iCalendar</guimenuitem
+> </menuchoice
+>. </para>
+
+<screenshot>
+  <screeninfo
+>anpassa export av icalendar</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_ical.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>anpassa export av icalendar</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Den exporterade filen innehåller en händelse för varje schemalagd transaktion. Det finns alternativ för att ställa in om kalendern ska visa påminnelser för händelserna, samt hur många påminnelser och hur långt innan händelserna påminnelser skapas, även om de för närvarande inte verkar ha någon effekt på den skapade filen. </para>
+
+<para
+>I det sista fältet i dialogrutan kan du ange standardnamn och sökväg för den exporterade filen. Som vanligt kan du antingen skriva in hela sökvägen eller klicka på ikonen till höger för att visa en fildialogruta. För närvarande används normalt den katalog som anges här i dialogrutan för att spara filer, men du måste fortfarande ange det faktiska filnamnet vid exporttillfället. </para>
+</sect2>
+
+<!-- FIXME: There is some overlap between here and the Reference/Settings section.
+            There should be better coordination between the two areas.  -->
+<sect2 id="details.settings.plugins.kbanking"
+><title
 >KBanking</title>
 
 <para
->Insticksprogrammet lägger till stöd för HBCI/FinTs, OFX och PayPal internetbank i KMyMoney. När insticksprogrammet har aktiverats kan internetbank ställas in under menyn <link linkend="reference.menus.settings.help"
->Inställningar</link
->. </para>
+>Insticksprogrammet lägger till stöd för HBCI/FinTs, OFX och PayPals Internetbank genom att använda <ulink url="https://www.aquamaniac.de/rdm/"
+>AqBanking</ulink
+>, vilket är ett eget projekt med öppen källkod. HBCI/FinTs som används för att kommunicera med banker används endast i Tyskland. </para>
 
+<para
+>Insticksprogrammets inställning görs inte via dialogrutan, utan med menyalternativet <link linkend="reference.menus.settings.help"
+> <guimenu
+>Inställningar</guimenu
+> <guisubmenu
+>Anpassa Aqbanking...</guisubmenu
+> </link
+>, och det finns ytterligare information där. </para>
+</sect2>
+
+<sect2
+><title
+>Export av QIF, Import av QIF</title>
+<para
+>De här beskrivs i avsnittet om <link linkend="details.impexp.qif.profile"
+>QIF-profiler</link
+>. Som påpekats i det avsnittet implementeras QIF Import och QIF Export som separata insticksprogram, de använder båda samma uppsättning profiler. </para>
+</sect2>
+
+<sect2 id="details.settings.plugins.reports"
+><title
+>Rapportvy</title>
+<para
+>Öppnar en dialogruta där du kan ställa in standardvärden som ska användas när <link linkend="details.reports"
+>rapporter</link
+> visas. En detaljerad beskrivning finns i <link linkend="details.reports.config.plugin"
+>Rapportinställning</link
+>. </para>
+</sect2>
+
+<sect2
+><title
+>XML-lagring</title>
+<para
+>Normalt lagras data med &XML;-format, vilket beskrivs i kapitlet om <link linkend="details.formats"
+>Filformat</link
+>. Eftersom koden som läser och sparar data är implementerad som ett insticksprogram, nås inställningsdialogrutan som bestämmer vissa aspekter av lagring via väljaren av insticksprogram i den allmänna inställningen av KMyMoney, även om den beskrivs i avsnittet länkat ovan. </para>
 </sect2>
 </sect1>
 </chapter>

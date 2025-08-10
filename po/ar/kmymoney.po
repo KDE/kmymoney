@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-04 03:55+0000\n"
-"PO-Revision-Date: 2025-08-04 18:35+0400\n"
+"PO-Revision-Date: 2025-08-09 23:21+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -10466,23 +10466,24 @@ msgstr "يجب اختيار تشكيلة قبل اختيار ملف."
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
-msgstr "<center>اللاحة <b>%1</b> موجودة بالفعل.<br>رجاءً أدخِل اسمًا آخر</center>"
+msgstr ""
+"<center>التشكيلة <b>%1</b> موجودة من قبل.<br>رجاءً أدخِل اسمًا آخر</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:563
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
-msgstr "<center>أُضيفت اللاحة <b>%1</b>.</center>"
+msgstr "<center>أُضيفت التشكيلة <b>%1</b>.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:569
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
-msgstr "<center>أُزيلت اللاحة <b>%1</b>.</center>"
+msgstr "<center>أُزيلت التشكيلة <b>%1</b>.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:575
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
-msgstr "<center>غيّرتُ اسم اللاحة من <b>%1</b> إلى <b>%2</b>.</center>"
+msgstr "<center>غيّرتُ اسم التشكيلة من <b>%1</b> إلى <b>%2</b>.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:922
 #, kde-format
@@ -10720,7 +10721,7 @@ msgstr "العملات"
 #: kmymoney/plugins/csv/import/introwizardpage.ui:167
 #, kde-format
 msgid "After entering new profile name, press this button to add it."
-msgstr "بعد إدخال اسم اللاحة الجديدة، انقر هذا الزّرّ لإضافته."
+msgstr "بعد إدخال اسم التشكيلة الجديدة، انقر هذا الزّرّ لإضافته."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_skipSetup)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:184
@@ -10740,13 +10741,13 @@ msgstr "تخطّ الإعداد"
 #: kmymoney/plugins/csv/import/introwizardpage.ui:203
 #, kde-format
 msgid "Press this button to remove selected profile."
-msgstr "انقر هذا الزّرّ لإزالة اللاحة المحدّدة."
+msgstr "انقر هذا الزّرّ لإزالة التشكيلة المحدّدة."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_rename)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:222
 #, kde-format
 msgid "Press this button after renaming your profile."
-msgstr "انقر هذا الزّرّ بعد تغيير اسم اللاحة."
+msgstr "انقر هذا الزّرّ بعد تغيير اسم التشكيلة."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_rename)
 #. i18n: ectx: property (text), widget (QPushButton, m_renameButton)
@@ -13659,7 +13660,7 @@ msgstr "أدخل اسم التشكيلة الجديدة"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:395
 #, kde-format
 msgid "The profile name cannot be empty. Please provide a name or cancel."
-msgstr "لا يمكن أن يكون اسم اللاحة فارغًا. رجاءً ضع اسمًا أو ألغِ العمليّة."
+msgstr "لا يمكن أن يكون اسم التشكيلة فارغًا. رجاءً ضع اسمًا أو ألغِ العمليّة."
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:397
 #, kde-format
