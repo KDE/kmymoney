@@ -244,13 +244,6 @@ bool LedgerSortProxyModel::filterAcceptsRow(int source_row, const QModelIndex& s
         return true;
     }
 
-    // now do the filtering
-
-    if (d->hideReconciledTransactions
-        && idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>() >= eMyMoney::Split::State::Reconciled) {
-        return false;
-    }
-
     return true;
 }
 
