@@ -492,8 +492,11 @@ void KInvestmentView::showEvent(QShowEvent* event)
             const auto id = d->m_equitySelections.firstSelection(SelectedObjects::Account);
             if (!id.isEmpty()) {
                 const auto gotoAccount = pActions[eMenu::Action::GoToAccount];
+                const auto enabled = gotoAccount->isEnabled();
+                gotoAccount->setEnabled(true);
                 gotoAccount->setData(id);
                 gotoAccount->trigger();
+                gotoAccount->setEnabled(enabled);
             }
         });
 
