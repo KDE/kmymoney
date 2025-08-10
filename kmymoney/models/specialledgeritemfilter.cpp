@@ -127,7 +127,8 @@ public:
      * simplifies the calculation of the balance.
      *
      * @Note One must pay attention to use @c qAbs(x) when creating the QModelIndex
-     * to access the data.
+     * to access the data. Please keep in mind that the actual balance calculation
+     * is performed on the source model.
      */
     BalanceParameter initializeBalanceCalculation() const
     {
@@ -135,14 +136,14 @@ public:
         // we only display balances when sorted by a date field
         const auto order = sourceModel->ledgerSortOrder();
         if (isSortingByDate()) {
-            const auto rows = q->rowCount();
+            const auto rows = sourceModel->rowCount();
             if (rows > 0) {
                 parameter.sortOrder = order.first().sortOrder;
                 parameter.startRow = (parameter.sortOrder == Qt::AscendingOrder) ? 0 : -(rows - 1);
                 parameter.lastRow = (parameter.sortOrder == Qt::AscendingOrder) ? rows - 1 : 0;
 
                 for (int row = parameter.startRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
-                    const auto idx = q->index(qAbs(row), 0);
+                    const auto idx = sourceModel->index(qAbs(row), 0);
                     if (isJournalModel(idx) || isSchedulesJournalModel(idx)) {
                         parameter.setFirstRow(row);
                         break;
@@ -153,6 +154,11 @@ public:
         return parameter;
     }
 
+    /**
+     * Recalculate the balances.
+     *
+     * @note Please keep in mind that the actual balance calculation is performed on the source model.
+     */
     void recalculateBalances()
     {
         QMap<QString, MyMoneyMoney> balances;
@@ -160,7 +166,7 @@ public:
         const auto parameter = initializeBalanceCalculation();
 
         if (parameter.isValid()) {
-            auto idx = q->index(qAbs(parameter.firstRow), 0);
+            auto idx = sourceModel->index(qAbs(parameter.firstRow), 0);
             const MyMoneyMoney showValuesInverted = idx.data(eMyMoney::Model::ShowValueInvertedRole).toBool() ? MyMoneyMoney::MINUS_ONE : MyMoneyMoney::ONE;
             auto accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
             const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
@@ -171,7 +177,7 @@ public:
                 // if sorted by entry date or by security, we need to find the balance of the oldest
                 // transaction in the set. This may not be the date of the first transaction displayed
                 for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
-                    idx = q->index(qAbs(row), 0);
+                    idx = sourceModel->index(qAbs(row), 0);
                     if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty() && isJournalModel(idx)) {
                         if (idx.data(eMyMoney::Model::TransactionPostDateRole).toDate() < startDate) {
                             startDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
@@ -186,7 +192,7 @@ public:
             // take care of
             for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
                 // check if we have the balance for this account
-                idx = q->index(qAbs(row), 0);
+                idx = sourceModel->index(qAbs(row), 0);
                 if (!(isJournalModel(idx) || isSchedulesJournalModel(idx))) {
                     continue;
                 }
@@ -207,7 +213,7 @@ public:
                 } else {
                     balances[accountId] += (shares * showValuesInverted);
                 }
-                q->setData(idx, QVariant::fromValue(balances[accountId]), eMyMoney::Model::JournalBalanceRole);
+                sourceModel->setData(idx, QVariant::fromValue(balances[accountId]), eMyMoney::Model::JournalBalanceRole);
             }
         }
     }
@@ -492,6 +498,13 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
     case eMyMoney::Model::SecurityAccountNameEntryRole:
         // Don't show online balance items if display is not sorted by date
         if (!d->isSortingBySecurity()) {
+            return false;
+        }
+        break;
+
+    case eMyMoney::Model::JournalEntryRole:
+        if (d->hideReconciledTransactions
+            && idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>() >= eMyMoney::Split::State::Reconciled) {
             return false;
         }
         break;

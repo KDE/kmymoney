@@ -167,6 +167,13 @@ void LedgerViewPage::initModel()
 
     setShowEntryForNewTransaction(d->showEntryForNewTransaction);
 
+    // make sure we have the correct initial settings
+    const auto settings = LedgerViewSettings::instance();
+    d->accountFilter->setHideReconciledTransactions(settings->hideReconciledTransactions());
+    d->accountFilter->setHideTransactionsBefore(settings->hideTransactionsBefore());
+    d->specialItemFilter->setHideReconciledTransactions(settings->hideReconciledTransactions());
+    d->specialItemFilter->setShowReconciliationEntries(settings->showReconciliationEntries());
+
     // now sort everything
     d->accountFilter->setSortingEnabled(true);
     // the next call will also take care of enabling
