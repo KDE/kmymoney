@@ -5,14 +5,14 @@
 #
 # Stefan Nilsen <stefan.nilsen@millnet.se>, 2007.
 # Konrad Skeri <konrad@skeri.com>, 2008.
-# SPDX-FileCopyrightText: 2009, 2010, 2023, 2024, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2009, 2010, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
 # Stefan Asserhall <stefan.asserhall@gmail.com>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-04 02:14+0000\n"
-"PO-Revision-Date: 2025-07-29 14:59+0200\n"
+"PO-Revision-Date: 2025-08-09 14:38+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -961,7 +961,7 @@ msgstr "Användare"
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
 #, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr "Växlingskurseditor, kurseditor"
+msgstr "Växelkurs/Kurseditor"
 
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
@@ -1083,7 +1083,7 @@ msgstr "Till &belopp"
 #: kmymoney/dialogs/kcurrencycalculator.ui:237
 #, kde-format
 msgid "Exchange &rate / Price"
-msgstr "Växlingsku&rs eller kurs"
+msgstr "Växelku&rs"
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionExample)
 #: kmymoney/dialogs/kcurrencycalculator.ui:298
@@ -1300,7 +1300,7 @@ msgstr "Kursprecision:"
 msgctxt "@info:tooltip"
 msgid ""
 "Enter the price precision for this currency to be used for exchange rates."
-msgstr "Ange valutans kursnoggrannhet för användning i växlingskurser."
+msgstr "Ange valutans kursnoggrannhet för användning i växelkurser."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, lblName)
@@ -4477,7 +4477,7 @@ msgstr "(Ingen)"
 #: kmymoney/settings/kmymoney.kcfg:70
 #, kde-format
 msgid "Number of days to preview schedules in ledger"
-msgstr "Antal dagar att förhandsgranska scheman i huvudbok"
+msgstr "Antal dagar att förhandsgranska scheman i huvudboken"
 
 #: kmymoney/dialogs/splitadjustdialog.cpp:55
 #, kde-format
@@ -4905,7 +4905,7 @@ msgstr "Slutför"
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
-msgstr "Skjut upp"
+msgstr "Senarelägg"
 
 #: kmymoney/kmymoney.cpp:1416
 #, kde-format
@@ -5456,7 +5456,7 @@ msgstr "Transaktion redan avstämd"
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Vill du verkligen ändra den markerade transaktionen?"
-msgstr[1] "Vill du verkligen ändra alla %1 markerade transaktioner?"
+msgstr[1] "Vill du verkligen ta bort alla %1 markerade transaktioner?"
 
 #: kmymoney/kmymoney.cpp:2712
 #, kde-format
@@ -8795,7 +8795,7 @@ msgstr "Belopp"
 #, kde-format
 msgctxt "@title:column"
 msgid "Value"
-msgstr "Saldo"
+msgstr "Värde"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:71
 #, kde-format
@@ -8807,7 +8807,7 @@ msgstr "Behållning"
 #, kde-format
 msgctxt "@title:column Entry date"
 msgid "Entry"
-msgstr "Post"
+msgstr "Inmatning"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, kde-format
@@ -9513,7 +9513,7 @@ msgstr "%1 hundra"
 #, kde-format
 msgctxt "@item %1 = tens text, %2 = ones text"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr "%1%2"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:56
 #, kde-format
@@ -9535,7 +9535,7 @@ msgctxt ""
 "@item Can be used to script translation of numerals. Leave untranslated when "
 "not needed. %1 = integer, %2 = fraction, %3 = denominator"
 msgid "%1 %2 %3"
-msgstr "%1 %2 %3"
+msgstr "%1 %2/%3"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:108
 #, kde-format
@@ -13409,7 +13409,7 @@ msgstr "Filval för OFX-import"
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr "OFX-filer (*.ofx *.qfx *.ofc);;Alla filer (*)"
+msgstr "OFX filer (*.ofx *.qfx *.ofc);;Alla filer (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:196
 #, kde-format
@@ -18761,7 +18761,7 @@ msgstr "Visa kategorier i kontovyn"
 #: kmymoney/settings/kmymoney.kcfg:240
 #, kde-format
 msgid "Hide zero balance equities"
-msgstr "Dölj aktiekonton med nollsaldo"
+msgstr "Dölj aktiekonton utan saldo"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
@@ -19380,8 +19380,8 @@ msgstr ""
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
 msgid_plural "Tags: "
-msgstr[0] "Etikett: "
-msgstr[1] "Etiketter: "
+msgstr[0] "Etikett:"
+msgstr[1] "Etiketter:"
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:209
@@ -21068,7 +21068,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
-msgstr "Skillnaden mellan kontots behållning och nätbehållningen är %1."
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:1015
 #, kde-format
@@ -21307,22 +21307,19 @@ msgstr "Kostnadsställe"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
-"Den här grafiska komponenten är inaktiverad eftersom en kategori måste "
-"väljas först."
 
 #: kmymoney/views/newtransactioneditor.cpp:179
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use this to delete all splits of this transaction."
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr ""
-"Använd den här grafiska komponenten för att lägga till etiketter för "
-"transaktionen."
+msgstr "Använd det här för att rensa transaktionens alla delningar."
 
 #: kmymoney/views/newtransactioneditor.cpp:182
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr "Använd delningseditorn för att tilldela etiketter."
+msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:255
 #, kde-format
@@ -21573,7 +21570,7 @@ msgstr "Övertilldelat"
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
-msgstr "Ej tilldelat"
+msgstr "Ej tilldelad"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
@@ -21693,7 +21690,7 @@ msgstr "Delningsalternativ"
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
-msgstr "Ny..."
+msgstr "Nytt..."
 
 #: kmymoney/views/splitview.cpp:129
 #, kde-format
@@ -24194,13 +24191,13 @@ msgstr "Avrunda"
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
-msgstr "Tak"
+msgstr "Uppåt"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
-msgstr "Golv"
+msgstr "Nedåt"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
@@ -24212,7 +24209,7 @@ msgstr "Avkorta"
 #, kde-format
 msgctxt "Rounding method"
 msgid "Promote"
-msgstr "Befordra"
+msgstr "Promovera"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
@@ -25961,153 +25958,6 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ msgstr[0] "    %1 skapad"
 #~ msgstr[1] "    %1 skapade"
 
-#~ msgid "Duplicate open"
-#~ msgstr "Dubblett öppen"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>Kontot \"%1\" skapades tidigare som ett lånekonto, men en del "
-#~ "information saknas.</p><p>Guiden för nytt lån kommer att startas för att "
-#~ "samla in all relevant information.</p><p>Använd KMyMoney version 0.8.7 "
-#~ "eller senare men tidigare än version 0.9 för att korrigera problemet.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Kontoproblem"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid ""
-#~ "This activity cannot be modified because the security account is closed."
-#~ msgstr "Aktiviteten kan inte ändras eftersom säkerhetskontot är stängt."
-
-#~ msgid "Select category or account."
-#~ msgstr "Markera kategori eller konto."
-
-#~ msgid "Today's due payments"
-#~ msgstr "Dagens förfallna betalningar"
-
-#~ msgid ""
-#~ "The results of this report may be incorrect if categories are included"
-#~ msgstr "Resultaten av rapporten kan vara felaktiga om kategorier ingår"
-
-#~ msgctxt "@info Online price update %1 online id, %2 internal id"
-#~ msgid "Price for %1 updated (id %2)"
-#~ msgstr "Kurs för %1 uppdaterad (id %2)"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "KMyMoney har upptäckt några försenade schemalagda transaktioner för "
-#~ "kontot. Vill du registrera dessa schemalagda transaktioner nu?"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Ta bort denna kurs från filen"
-
-#~ msgid "Stock Name"
-#~ msgstr "Aktienamn"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Källa"
-
-#~ msgid "Upd"
-#~ msgstr "Upp"
-
-#~ msgid "Res"
-#~ msgstr "Åter"
-
-#~ msgid "Close this window"
-#~ msgstr "Stäng det här fönstret"
-
-#~ msgid "Preferred account"
-#~ msgstr "Föredraget konto"
-
-#~ msgid "CashFlow"
-#~ msgstr "Kassaflöde"
-
-#~ msgid "Select Account:"
-#~ msgstr "Välj konto:"
-
-#~ msgid "Investment details"
-#~ msgstr "Investeringsinformation"
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Ange telegrafsymbolen (t.ex. RHAT)."
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "Skriv in CUSIP, ISIN eller WKN identifikationsnummer här"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Den här guiden låter dig ändra det markerade värdepappret."
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Den valda symbolen finns redan registrerad. Vill du återanvända det "
-#~ "befintliga värdepappret?"
-
-#~ msgid "Security found"
-#~ msgstr "Värdepapper hittades"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Namn"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Källa"
-
-#~ msgid ""
-#~ "For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want "
-#~ "to replace it with <b>%4</b>?"
-#~ msgstr ""
-#~ "För <b>%1</b> på <b>%2</b> finns kursen <b>%3</b> redan.<br>Vill du "
-#~ "ersätta den med <b>%4</b>?"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "Kurs finns redan"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "Tog emot en kurs för %1 (id %2), men symbolen finns inte i listan. "
-#~ "Avbryter hela uppdateringen."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr "Lista med kända värdepapper, och datum de senast uppdaterades."
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Symbol"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Identifikationsnummer"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Namn"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Ny kurskälla"
-
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "Värdepapper <b>%1</b> använder den här kurskällan.<br>Vill du verkligen "
-#~ "ta bort den?"
-
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Ta bort kurskälla"
-
 #~ msgid "Source <placeholder>%1</placeholder> does not exist."
 #~ msgstr "Källan <placeholder>%1</placeholder> finns inte."
 
@@ -26165,42 +26015,6 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ msgid "Unable to update price for %1 (empty quote data)"
 #~ msgstr "Kan inte uppdatera kurs för %1 (tom kursinformation)"
 
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Kan inte uppdatera kurs för %1 (fel påträffades: %2)"
-
-#, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Etikett"
-
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Organiserar om konton..."
-
-#~ msgctxt "Credit suffix"
-#~ msgid "Cr."
-#~ msgstr "Kr"
-
-#~ msgctxt "Debit suffix"
-#~ msgid "Dr."
-#~ msgstr "Db"
-
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Dölj skuldkonton utan saldo på hemsidan"
-
-#~ msgctxt "@info consistency check"
-#~ msgid ""
-#~ "    Please enter a price for the currency on or before the date of first "
-#~ "usage."
-#~ msgstr ""
-#~ "    Ange en kurs för valutan på eller innan första användningsdatum."
-
-#~ msgid "There are no entries in this account.\n"
-#~ msgstr "Det finns inga poster i kontot.\n"
-
-#~ msgid "Invalid account"
-#~ msgstr "Ogiltigt konto"
-
 #~ msgctxt "Total value"
 #~ msgid "Total"
 #~ msgstr "Totalt"
@@ -26223,6 +26037,30 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ "Cannot enter transaction with postdate prior to account's opening date."
 #~ msgstr "Kan inte mata in transaktion med datum innan kontots öppningsdatum."
 
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid ""
+#~ "For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want "
+#~ "to replace it with <b>%4</b>?"
+#~ msgstr ""
+#~ "För <b>%1</b> på <b>%2</b> finns kursen <b>%3</b> redan.<br>Vill du "
+#~ "ersätta den med <b>%4</b>?"
+
+#~ msgid "Price Already Exists"
+#~ msgstr "Kurs finns redan"
+
+#~ msgid ""
+#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
+#~ "Aborting entire update."
+#~ msgstr ""
+#~ "Tog emot en kurs för %1 (id %2), men symbolen finns inte i listan. "
+#~ "Avbryter hela uppdateringen."
+
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr "Lista med kända värdepapper, och datum de senast uppdaterades."
+
 #~ msgctxt "@info:tooltip for find transaction Open button"
 #~ msgid "Search transactions"
 #~ msgstr "Sök transaktioner"
@@ -26234,6 +26072,13 @@ msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgid "MyDialog"
 #~ msgstr "Min dialogruta"
+
+#~ msgid "Remove this price item from the file"
+#~ msgstr "Ta bort denna kurs från filen"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "Källa"
 
 #~ msgid "Delete..."
 #~ msgstr "Ta bort..."
@@ -26324,6 +26169,31 @@ msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgid "Show title bar on each page"
 #~ msgstr "Visa rubrikrad på varje sida"
+
+#~ msgid "New Quote Source"
+#~ msgstr "Ny kurskälla"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Symbol"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Identifikationsnummer"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid ""
+#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
+#~ "remove it?"
+#~ msgstr ""
+#~ "Värdepapper <b>%1</b> använder den här kurskällan.<br>Vill du verkligen "
+#~ "ta bort den?"
+
+#~ msgid "Delete quote source"
+#~ msgstr "Ta bort kurskälla"
 
 #~ msgid "Always show a No. field"
 #~ msgstr "Visa alltid fältet Nr."
@@ -26477,6 +26347,20 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ msgid "Allan Anderson ✝"
 #~ msgstr "Allan Anderson ✝"
 
+#~ msgid ""
+#~ "<p>The account \"%1\" was previously created as loan account but some "
+#~ "information is missing.</p><p>The new loan wizard will be started to "
+#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
+#~ "or later and earlier than version 0.9 to correct the problem.</p>"
+#~ msgstr ""
+#~ "<p>Kontot \"%1\" skapades tidigare som ett lånekonto, men en del "
+#~ "information saknas.</p><p>Guiden för nytt lån kommer att startas för att "
+#~ "samla in all relevant information.</p><p>Använd KMyMoney version 0.8.7 "
+#~ "eller senare men tidigare än version 0.9 för att korrigera problemet.</p>"
+
+#~ msgid "Account problem"
+#~ msgstr "Kontoproblem"
+
 #~ msgid "&Show tip of the day"
 #~ msgstr "Vi&sa dagens tips"
 
@@ -26494,6 +26378,9 @@ msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
 #~ msgstr "<p><b>%1</b> kan inte flyttas till <b>%2</b>. Orsak: %3</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "Kassaflöde"
 
 #~ msgctxt "Unknown reconciliation state"
 #~ msgid "Unknown"
@@ -26526,6 +26413,14 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ msgid "Deposit"
 #~ msgstr "Insättning"
 
+#~ msgctxt "Credit suffix"
+#~ msgid "Cr."
+#~ msgstr "Kr"
+
+#~ msgctxt "Debit suffix"
+#~ msgid "Dr."
+#~ msgstr "Db"
+
 #~ msgid "Cost Center"
 #~ msgstr "Kostnadsställe"
 
@@ -26546,6 +26441,12 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ msgid "Check template file"
 #~ msgstr "Mallfil för checkar"
 
+#~ msgid "There are no entries in this account.\n"
+#~ msgstr "Det finns inga poster i kontot.\n"
+
+#~ msgid "Invalid account"
+#~ msgstr "Ogiltigt konto"
+
 #~ msgid "CSV exporter"
 #~ msgstr "Export till CSV"
 
@@ -26554,6 +26455,9 @@ msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgid "GnuCash importer"
 #~ msgstr "Import av GnuCash"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "Organiserar om konton..."
 
 #~ msgid "IBAN/BIC Data"
 #~ msgstr "IBAN- och BIC-data"
@@ -26649,6 +26553,12 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ msgid "Name"
 #~ msgstr "Namn"
 
+#~ msgid "Upd"
+#~ msgstr "Upp"
+
+#~ msgid "Res"
+#~ msgstr "Åter"
+
 #~ msgid "Forecast view"
 #~ msgstr "Prognosvy"
 
@@ -26667,6 +26577,9 @@ msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgid "Copy"
 #~ msgstr "Kopiera"
+
+#~ msgid "Close this window"
+#~ msgstr "Stäng det här fönstret"
 
 #~ msgid ""
 #~ "*.css|CSS files\n"
@@ -26862,8 +26775,14 @@ msgstr "sparar rapport '%1' i '%2'"
 #~ msgid "Show KMyMoney welcome page"
 #~ msgstr "Visa KMyMoneys välkomstsida"
 
+#~ msgid "Today's due payments"
+#~ msgstr "Dagens förfallna betalningar"
+
 #~ msgid "Last Reconciled"
 #~ msgstr "Senaste avstämning"
+
+#~ msgid "Select Account:"
+#~ msgstr "Välj konto:"
 
 #~ msgid "Change the security information of the selected entry."
 #~ msgstr "Ändra den markerade postens värdepappersinformation."
@@ -26922,9 +26841,6 @@ msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgid "Loans"
 #~ msgstr "Lån"
-
-#~ msgid "Filter Accounts"
-#~ msgstr "Kontofilter"
 
 #~ msgid "Type/Name"
 #~ msgstr "Typ eller namn"
@@ -27229,6 +27145,28 @@ msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgid "No Title specified"
 #~ msgstr "Ingen rubrik angiven"
+
+#~ msgid "Preferred account"
+#~ msgstr "Föredraget konto"
+
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Ange telegrafsymbolen (t.ex. RHAT)."
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Skriv in CUSIP, ISIN eller WKN identifikationsnummer här"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "Den här guiden låter dig ändra det markerade värdepappret."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Den valda symbolen finns redan registrerad. Vill du återanvända det "
+#~ "befintliga värdepappret?"
+
+#~ msgid "Security found"
+#~ msgstr "Värdepapper hittades"
 
 #~ msgid "Routing number"
 #~ msgstr "Clearingnummer"
