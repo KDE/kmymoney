@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>Vad är nytt i den här utgåvan</title>
+
+<sect1
+><title
+>Felrättningar och förbättringar av funktionalitet</title>
+<para
+>Liksom vid varje utgåva, har &kmymoney;s utvecklingsgrupp fortsatt arbeta hårt för att göra varje utgåva bättre och enklare att använda på alla sätt. Många fel har åtgärdats sedan den tidigare stabila versionen, 5.1.3. Flera delar av programmet har fått funktionsförbättringar, men de stora märkbara förändringarna från 5.1-serien av utgåvor finns i huvudboken: mer information nedan. </para>
+
+<para
+>Konverteringen från att använda tidigare &kde;-bibliotek till att använda &kde; Ramverk var i stort sett färdig i de tidiga 5.1.x utgåvorna, med mycket av det arbetet bakom kulisserna, och inte direkt synligt för slutanvändaren. Det allmänna utseendet och känslan bör förbli stabila, även om några mindre ändringar fortfarande kan vara märkbara. Dessutom har gruppen börjat göra ändringar för att stödja konverteringen till att använda Qt6- och KDE6-bibliotek, som redan har börjat ersätta Qt5 och KDE5. Trots alla dessa ändringar, förblir programmets grundläggande funktionalitet densamma, förutom avsiktliga felrättningar, förbättringar och tillägg. </para>
+
+<para
+>I tidigare utgåvor har den här sidan i handboken inkluderat en lista med många av de specifika felrättningarna och funktionsförbättringarna. Men istället för att duplicera informationen, hittar du den direkt i <ulink url="https://kmymoney.org/changelog.html"
+>versionsfakta</ulink
+>. </para>
+
+<para
+>Serierna 5.0.x och 5.1.x inkluderade några ändringar som kräver justeringar på användarens sida, om de uppgraderar från 4.8.x eller en äldre version. Vi förväntar oss dock att de flesta användare har konverterat till 5.1.x vid det här laget. Specifikt bör det inte behövas några justeringar av användare som konverterar från 5.1.x till 5.2. Om du av någon anledning fortfarande använder &kmymoney; version 4, uppmuntras du starkt att uppgradera, eftersom det blir allt svårare för teamet att ge någon hjälp för mycket gamla versioner. </para>
+</sect1>
+
+<sect1
+><title
+>Uppdateringar av den här handboken</title>
+<para
+>Det här avsnittet användes för att presentera viss information relaterade till avsaknaden av en fullständig uppdatering av handboken från 4.x till 5.x. Eftersom handboken nu är fullständigt uppdaterad för 5.2 är avsnittet inte längre nödvändigt. </para>
+</sect1>
+</chapter>

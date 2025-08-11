@@ -1,0 +1,53 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>Borttagna saker</title>
+
+<sect2
+><title
+>Accepterar de importerade transaktionerna</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>Importerade transaktioner</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Importerade transaktioner</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Vissa av transaktionerna kan blinka rött i huvudboken. Det beror på att de måste tilldelas en kategori. Importverktyget kunde inte automatiskt tilldela en kategori baserat på tidigare transaktionshistorik.. </para>
+
+<para
+>Transaktionsdata kan redigeras eller till och med raderas om det behövs. För att redigera en transaktion dubbelklicka helt enkelt på posten eller tryck på returtangenten när posten är markerad. När du är klar klicka på <guibutton 
+>Ok</guibutton 
+> för att acceptera de importerade transaktionerna eller <guibutton 
+>Avbryt</guibutton 
+> för att ta bort de importerade transaktionerna.. </para>
+</sect2>
+
+
+<sect2
+><title
+>Importera investeringar</title>
+<para
+>Observera att om du importerar en fil med investeringstransaktioner, måste investeringarna först finnas i &kmymoney;s fil. Aktiesymbolen används för matchning, så försäkra dig om att symbolen i &kmymoney; är exakt likadan som den i filen du importerar.. </para>
+</sect2>
+</sect1>
+
