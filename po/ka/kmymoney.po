@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-04 02:14+0000\n"
-"PO-Revision-Date: 2025-08-09 18:56+0200\n"
+"POT-Creation-Date: 2025-08-11 00:43+0000\n"
+"PO-Revision-Date: 2025-08-10 12:46+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -204,7 +204,7 @@ msgstr " - ანგარისის ნომერი: %1"
 #: kmymoney/converter/mymoneystatementreader.cpp:1492
 #, kde-format
 msgid "Do you want to import transactions to this account?"
-msgstr ""
+msgstr "გნებავთ ტრანზაქციების შემოტანა ამ ანგარიშზე?"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1495
 #, kde-format
@@ -239,7 +239,7 @@ msgstr ""
 #: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
-msgstr ""
+msgstr "დაგეგმილ ტრანზაქციაში '%1' შესვლა შეუძლებელია"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1699
 #, kde-format
@@ -433,7 +433,7 @@ msgstr "ახალი ანგარიშის/კატეგორიი�
 #: kmymoney/dialogs/kaccountselectdlg.cpp:89
 #, kde-format
 msgid "Use this to add a new account/category to the file"
-msgstr ""
+msgstr "გამოიყენეთ ეს ახალი ფაილისთვის ახალი ანგარიშის/კატეგორიის დასამატებლად"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_kButtonAbort)
 #: kmymoney/dialogs/kaccountselectdlg.cpp:93
@@ -445,7 +445,7 @@ msgstr "გაუქმება"
 #: kmymoney/dialogs/kaccountselectdlg.cpp:95
 #, kde-format
 msgid "Abort the import operation and dismiss all changes"
-msgstr ""
+msgstr "შემოტანის ოპერაციის შეწყვეტა და ყველა ცვლილების გაუქმება"
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:96
 #, kde-format
@@ -825,7 +825,7 @@ msgstr ""
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:61
 #, kde-format
 msgid "Please choose what you wish to do with the above changes"
-msgstr ""
+msgstr "აირჩიეთ, რა გნებავთ უქნათ ზემო ცვლილებებს"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_discardRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:67
@@ -1003,7 +1003,7 @@ msgstr "ფასების ისტორიის განახლებ�
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
-msgstr ""
+msgstr "%1-ის საბაზისო ვალუტად დაყენება შეუძლებელია: %2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
@@ -1220,7 +1220,7 @@ msgstr "სახელი"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the name of the currency here (e.g. Euro)"
-msgstr ""
+msgstr "შეიყვანეთ აქ ვალუტის სახელი (მაგ: ევრო)"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leIsoCode)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:97
@@ -1573,7 +1573,7 @@ msgstr "%1-ის ფასი განახლდა %3-ზე %4-სთვ�
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
-msgstr ""
+msgstr "მიღებულია არასწორი ფასი %1-სთვის. განახლება შეუძლებელია."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:699
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
@@ -1903,7 +1903,7 @@ msgstr "მონიშნული ჩანაწერის შეცვლ�
 #: kmymoney/dialogs/kmymoneypricedlg.ui:79
 #, kde-format
 msgid "Change the details of selected price information."
-msgstr ""
+msgstr "მონიშნული ფასის ინფორმაციის დეტალების შეცვლა."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:82
@@ -2041,6 +2041,8 @@ msgid ""
 "You have not specified a name.\n"
 "Please fill in this field."
 msgstr ""
+"სახელი არ მიგითითებიათ.\n"
+"შეავსეთ ეს ველი."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:831
 #, kde-format
@@ -2968,7 +2970,7 @@ msgstr "წუთი"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:92
 #, kde-format
 msgid "Autosave when file is modified upon close"
-msgstr ""
+msgstr "შეცვლილი ფაილის ავტოშენახვა დახურვისას"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
@@ -3009,7 +3011,7 @@ msgstr "გაფართოება მარქაფის ფაილე�
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:153
 #, kde-format
 msgid "Number of backups to keep (0=off)"
-msgstr ""
+msgstr "შესანარჩუნებელი მარქაფების რაოდენობა (0=გამორთვა)"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:180
@@ -3214,7 +3216,7 @@ msgstr "კატეგორიების ჩვენება ანგა�
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
 #, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr ""
+msgstr "საწყისი ეკრანიდან ნულოვანი ბალანსის მქონე ანგარიშების დამალვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
@@ -3256,7 +3258,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:535
 #, kde-format
 msgid "Do not show reconciled transactions"
-msgstr ""
+msgstr "შეთანხმებული ტრანზაქციების არჩვენება"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:562
@@ -3783,7 +3785,7 @@ msgstr "გროსბუხის ჩანაწერის დეტალ�
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
 #, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr ""
+msgstr "ყველა გროსბუხის ჩანაწერის ჩვენება სრულ დეტალებში"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -3807,7 +3809,7 @@ msgstr "გროსბუხის ლინზის ჩვენება"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:89
 #, kde-format
 msgid "Show all split details in ledger"
-msgstr ""
+msgstr "ყველა გაყოფილი დეტალის ჩვენება გროსბუხში"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:99
@@ -3839,7 +3841,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:126
 #, kde-format
 msgid "Don't show reconciliation entries"
-msgstr ""
+msgstr "არ აჩვენო შეთანხმების ჩანაწერები"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:131
@@ -3899,7 +3901,7 @@ msgstr "მონაცემების ჩანაწერი"
 #: kmymoney/settings/kmymoney.kcfg:21
 #, kde-format
 msgid "Auto increment check number"
-msgstr ""
+msgstr "ჩეკის ნომრის ავტომატური გაზრდა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusChangeIsEnter)
 #. i18n: ectx: label, entry (FocusChangeIsEnter), group (General Options)
@@ -4228,7 +4230,7 @@ msgstr ""
 #: kmymoney/dialogs/splitadjustdialog.cpp:73
 #, kde-format
 msgid "&Leave %1 unassigned."
-msgstr ""
+msgstr "%1-ის მიუნიჭებ&ლად დატოვება."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitAdjustDialog)
 #: kmymoney/dialogs/splitadjustdialog.ui:14
@@ -4252,17 +4254,17 @@ msgstr "GPG დაშიფვრა"
 #: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:79
 #, kde-format
 msgid "Addressbook integration"
-msgstr ""
+msgstr "მისამართების წიგნის ინტეგრაცია"
 
 #: kmymoney/kcreditswindow.cpp:37
 #, kde-format
 msgid "Holiday regions integration"
-msgstr ""
+msgstr "დასვენების რეგიონების ინტეგრაცია"
 
 #: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:91
 #, kde-format
 msgid "Online banking"
-msgstr ""
+msgstr "ინტერნეტბანკი"
 
 #: kmymoney/kcreditswindow.cpp:43
 #, kde-format
@@ -4395,7 +4397,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:111
 #, kde-format
 msgid "Library for creating diagrams"
-msgstr ""
+msgstr "ბიბლიოთეკა დიაგრამების შესაქმნელად"
 
 #: kmymoney/kcreditswindow.cpp:116
 #, kde-format
@@ -4410,7 +4412,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format
 msgid "SQLite database encryption"
-msgstr ""
+msgstr "SQLite მონაცემთა ბაზის დაშიფვრა"
 
 #: kmymoney/kcreditswindow.cpp:135
 #, kde-format
@@ -4487,7 +4489,7 @@ msgstr "უსათაურო"
 #: kmymoney/kmymoney.cpp:762
 #, kde-format
 msgid "Plugin responded with error during close."
-msgstr ""
+msgstr "დამატებამ დახურვისას შეცდომა დააბრუნა."
 
 #: kmymoney/kmymoney.cpp:870
 #, kde-format
@@ -4565,7 +4567,7 @@ msgstr "ტრანზაქციის დეტალების ჩვე�
 #: kmymoney/kmymoney.cpp:1399 kmymoney/settings/kmymoney.kcfg:256
 #, kde-format
 msgid "Hide reconciled transactions"
-msgstr ""
+msgstr "შეთანხმებული ტრანზაქციების დამალვა"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
 #: kmymoney/kmymoney.cpp:1400 kmymoney/settings/kmymoney.kcfg:228
@@ -5231,7 +5233,7 @@ msgstr "პერსონალური მონაცემების ჩ�
 #: kmymoney/kmymoney.cpp:3143
 #, kde-format
 msgid "Unable to store user information: %1"
-msgstr ""
+msgstr "ვერ დავიმახსოვრე მომხმარებლის ინფორმაცია: %1"
 
 #: kmymoney/kmymoney.cpp:3151
 #, kde-format
@@ -5355,12 +5357,12 @@ msgstr "დასრულებულია"
 #: kmymoney/kmymoney.cpp:3561 kmymoney/kmymoney.cpp:3581
 #, kde-format
 msgid "File successfully backed up"
-msgstr ""
+msgstr "ფაილი წარმატებით დამარქაფდა"
 
 #: kmymoney/kmymoney.cpp:3567
 #, kde-format
 msgid "Error copying file to device"
-msgstr ""
+msgstr "ფაილის მოწყობილობაზე კოპირების შეცდომა"
 
 #: kmymoney/kmymoney.cpp:3583
 #, kde-format
@@ -5382,7 +5384,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr ""
+msgstr "პასუხისმგებლობის ბალანსის გახსნა"
 
 #: kmymoney/kmymoney.cpp:3651
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -5443,6 +5445,8 @@ msgid ""
 "Unable to import %1 using %2 plugin. The plugin returned the following "
 "error: %3"
 msgstr ""
+"%1-ის შემოტანა დამატებით %2 შეუძლებელია. დამატებამ დააბრუნა შემდეგი შეცდომა: "
+"%3"
 
 #: kmymoney/kmymoney.cpp:3989 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
@@ -5482,7 +5486,7 @@ msgstr "ფაილის გახსნა."
 #: kmymoney/kmymoney.cpp:4256
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
-msgstr ""
+msgstr "საცავის გასახსნელად დამატება აღმჩენილი არაა."
 
 #: kmymoney/kmymoney.cpp:4260
 #, kde-format
@@ -5515,7 +5519,7 @@ msgstr "საცავის გახსნის პრობლემა"
 #: kmymoney/kmymoney.cpp:4319
 #, kde-format
 msgid "Cannot open file as requested."
-msgstr ""
+msgstr "მოთხოვნისამებრ ფაილის გახსნა შეუძლებელია."
 
 #: kmymoney/kmymoney.cpp:4326
 #, kde-format
@@ -5537,7 +5541,7 @@ msgstr "თქვენი მონაცემების შენახვ�
 #: kmymoney/kmymoney.cpp:4355
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr ""
+msgstr "თქვენი მონაცემების შესანახად საჭირო მოდული აღმოჩენილი არაა."
 
 #: kmymoney/kmymoney.cpp:4361
 #, kde-format
@@ -5547,12 +5551,12 @@ msgstr "ფაილის შენახვა, როგორც..."
 #: kmymoney/kmymoney.cpp:4377
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr ""
+msgstr "მონაცემების შესანახად დამატება აღმოჩენილი არაა."
 
 #: kmymoney/kmymoney.cpp:4406
 #, kde-format
 msgid "Failed to save your storage."
-msgstr ""
+msgstr "თქვენი საცავის შენახვა ჩავარდა."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54
@@ -5576,7 +5580,7 @@ msgstr "&გატანა"
 #: kmymoney/kmymoneyui.rc:40
 #, kde-format
 msgid "&Institution"
-msgstr ""
+msgstr "და&წესებულება"
 
 #. i18n: ectx: Menu (account)
 #: kmymoney/kmymoneyui.rc:46
@@ -5601,14 +5605,14 @@ msgstr "&ტრანზაქცია"
 #: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:234
 #, kde-format
 msgid "Mark transaction as..."
-msgstr ""
+msgstr "ტრანზაქციის დანიშვნა, როგორც..."
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
 #: kmymoney/kmymoneyui.rc:88 kmymoney/kmymoneyui.rc:235
 #, kde-format
 msgid "Mark transaction"
-msgstr ""
+msgstr "ტრანზაქციის დანიშვნა"
 
 #. i18n: ectx: Menu (kmmtools)
 #: kmymoney/kmymoneyui.rc:106 kmymoney/plugins/sql/sqlstorage.rc:9
@@ -5737,19 +5741,19 @@ msgstr "რჩეული ანგარიშები"
 
 #: kmymoney/kmymoneyutils.cpp:122
 msgid "Forecast (schedule)"
-msgstr ""
+msgstr "პროგნოზი (გეგმა)"
 
 #: kmymoney/kmymoneyutils.cpp:123
 msgid "Net worth forecast"
-msgstr ""
+msgstr "სუფთა კაპიტალის მაჩვენებლების პროგნოზი"
 
 #: kmymoney/kmymoneyutils.cpp:124
 msgid "Forecast (history)"
-msgstr ""
+msgstr "პროგნოზი (ისტორია)"
 
 #: kmymoney/kmymoneyutils.cpp:125
 msgid "Assets and Liabilities"
-msgstr ""
+msgstr "აქტივები და ვალდებულებები"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:126 kmymoney/mymoney/storage/budgetsmodel.cpp:68
@@ -5767,7 +5771,7 @@ msgstr "ფულის დინება"
 #: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
 #, kde-format
 msgid "Unable to load schedule details"
-msgstr ""
+msgstr "გეგმის დეტალების ჩატვირთვა შეუძლებელია"
 
 #: kmymoney/kmymoneyutils.cpp:376
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:119
@@ -6187,14 +6191,14 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
-msgstr ""
+msgstr "ანგარიშის ბალანსი (ანგარიშის ვალუტაში)"
 
 #: kmymoney/models/statementmodel.cpp:131
 #: kmymoney/mymoney/storage/accountsmodel.cpp:481
 #: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, kde-format
 msgid "Posted Value"
-msgstr ""
+msgstr "გამოტანილი მნიშვნელობა"
 
 #: kmymoney/models/statementmodel.cpp:133
 #: kmymoney/mymoney/storage/accountsmodel.cpp:519
@@ -6235,13 +6239,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
-msgstr ""
+msgstr "ბიზნეს იდენტიფიკატორის კოდი, რომელიც ასევე ცნობილია როგორც SWIFT."
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:443
 #, kde-format
 msgctxt "Brokerage (suffix for account names)"
 msgid "Brokerage"
-msgstr ""
+msgstr "ბროკერული ანგარიში"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:540
 #, kde-format
@@ -6348,7 +6352,7 @@ msgstr "უცნობი"
 #: kmymoney/mymoney/mymoneyfile.cpp:757
 #, kde-format
 msgid "Fix transactions"
-msgstr ""
+msgstr "ტრანზაქციების აღდგენა"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:1868 kmymoney/mymoney/mymoneyfile.cpp:1869
 #, kde-format
@@ -6411,7 +6415,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3122
 #, kde-format
 msgid "    The payee will be removed."
-msgstr ""
+msgstr "    მიმღები წაიშლება."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3141
 #, kde-format
@@ -6538,7 +6542,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3397
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    გაასწორეთ ხელით."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3410
 #, kde-format
@@ -6630,7 +6634,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3581
 #, kde-format
 msgid "  * Payee '%1' removed."
-msgstr ""
+msgstr "  * მიმღები '%1' წაიშალა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3655
 #, kde-format
@@ -6675,7 +6679,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3706
 #, kde-format
 msgid "* Problem with budget '%1'"
-msgstr ""
+msgstr "* პრობლემა ბიუჯეტთან '%1'"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3708
 #, kde-format
@@ -6686,26 +6690,26 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3709
 #, kde-format
 msgid "    The account reference will be removed."
-msgstr ""
+msgstr "    ანგარიშის მითითება წაიშლება."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3723
 #, kde-format
 msgid "Finished: data is consistent."
-msgstr ""
+msgstr "დასრულდა. მონაცემები მთლიანია."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3725
 #, kde-format
 msgid "%1 problem corrected."
 msgid_plural "%1 problems corrected."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "გასწორდა %1 პრობლემა."
+msgstr[1] "გასწორდა %1 პრობლემა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3726
 #, kde-format
 msgid "%1 problem still present."
 msgid_plural "%1 problems still present."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ჯერ კიდევ არსებობს %1 პრობლემა."
+msgstr[1] "ჯერ კიდევ არსებობს %1 პრობლემა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3729
 #, kde-format
@@ -6993,7 +6997,7 @@ msgstr "CFA ფრანკი BCEAO"
 #: kmymoney/mymoney/mymoneyfile.cpp:4056
 #, kde-format
 msgid "CFP Franc Pacifique"
-msgstr ""
+msgstr "წყნარი ოკეანის ფრანკი CFP"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4057
 #, kde-format
@@ -7677,7 +7681,7 @@ msgstr "კვირაში ერთხელ"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Fortnightly"
-msgstr ""
+msgstr "ორკვირიანი"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:888
 #: kmymoney/mymoney/mymoneyschedule.cpp:938
@@ -7883,12 +7887,12 @@ msgstr "პირდაპირი სესხი"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1038
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
-msgstr ""
+msgstr "პირდაპირი დეპოზიტი"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1041
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
-msgstr ""
+msgstr "ხელით დეპოზიტი"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1044
 msgctxt "Scheduled Transaction payment type"
@@ -7898,7 +7902,7 @@ msgstr "სხვა"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1047
 msgctxt "Scheduled Transaction payment type"
 msgid "Write check"
-msgstr ""
+msgstr "ჩეკის დაწერა"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1050
 msgctxt "Scheduled Transaction payment type"
@@ -7908,7 +7912,7 @@ msgstr "დალაგების მიმდევრობა"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1053
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
-msgstr ""
+msgstr "ბანკის გადარიცხვა"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1056
 msgctxt "Scheduled Transaction payment type"
@@ -8041,7 +8045,7 @@ msgstr "საპროცენტო განაკვეთის შემ�
 #, kde-format
 msgctxt "Investment action"
 msgid "Reinvest dividends"
-msgstr ""
+msgstr "დივიდენდების რეინვესტიცია"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:523
 #, kde-format
@@ -8166,7 +8170,7 @@ msgstr "ტრანზაქციის გაყოფა"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1037
 #, kde-format
 msgid "*** UNASSIGNED ***"
-msgstr ""
+msgstr "*** მიუნიჭებელია ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
 #: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
@@ -8344,12 +8348,12 @@ msgstr "წელი"
 #: kmymoney/mymoney/storage/costcentermodel.cpp:51
 #, kde-format
 msgid "Cost center"
-msgstr ""
+msgstr "ღირებულებების წენტრი"
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:238
 #, kde-format
 msgid "Accounts with no institution assigned"
-msgstr ""
+msgstr "დაწესებულებაზე არმინიჭებული ანგარიშები"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:57
 #, kde-format
@@ -8465,7 +8469,7 @@ msgstr "შეთანხმების ანგარიში"
 #, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
-msgstr ""
+msgstr "ღირებულებების წენტრი"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:78
 #, kde-format
@@ -8513,7 +8517,7 @@ msgstr "აქციების დამატება"
 #, kde-format
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
-msgstr ""
+msgstr "აქციების წაშლა"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:126
 #, kde-format
@@ -8554,7 +8558,7 @@ msgstr "აქციების გაყოფა"
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
-msgstr ""
+msgstr "საპროცენტო განაკვეთის შემოსავალი"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:140
 #, kde-format
@@ -8692,7 +8696,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "This job is ready for sending."
-msgstr ""
+msgstr "ეს დავალება მზადაა გასაგზავნად."
 
 #: kmymoney/mymoney/storage/parametersmodel.cpp:62
 #, kde-format
@@ -8735,7 +8739,7 @@ msgstr "სასაქონლო"
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
 #, kde-format
 msgid "Stock name"
-msgstr ""
+msgstr "ფონდის სახელი"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:43
 #, kde-format
@@ -8795,7 +8799,7 @@ msgstr "რაოდენობა"
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:185
 msgctxt "Schedule header"
 msgid "Next Due Date"
-msgstr ""
+msgstr "შემდეგი გადახდის თარიღი"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:186
 msgctxt "Schedule header"
@@ -8805,7 +8809,7 @@ msgstr "სიხშირე"
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:187
 msgctxt "Schedule header"
 msgid "Payment Method"
-msgstr ""
+msgstr "გადახდის მეთოდი"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:246
 #, kde-format
@@ -9369,6 +9373,7 @@ msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
 "qt>"
 msgstr ""
+"<qt>ფაილი <b>%1</b> უკვე არსებობს. მართლა გნებავთ, თავზე გადააწეროთ?</qt>"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:78
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
@@ -9386,7 +9391,7 @@ msgstr "გატანა დასრულდა.\n"
 #: kmymoney/plugins/xml/xmlstorage.cpp:210
 #, kde-format
 msgid "Unable to open file '%1' for writing"
-msgstr ""
+msgstr "ფაილის '%1' ჩასაწერად გახსნა შეუძ₾ებელია"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:99
 #, kde-format
@@ -9519,7 +9524,7 @@ msgstr "დაყოფილიკატეგორია"
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
-msgstr ""
+msgstr "გაყოფის შენიშვნა"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:256
 #, kde-format
@@ -9609,7 +9614,7 @@ msgstr "%1-ის მიღება"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:20
 #, kde-format
 msgid "Banking Wizard Page"
-msgstr ""
+msgstr "ბანკის ოსტატის გვერდი"
 
 #. i18n: ectx: property (text), widget (QLabel, header)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:33
@@ -9618,6 +9623,8 @@ msgid ""
 "Please select the appropriate columns to use,\n"
 " corresponding to your data."
 msgstr ""
+"აირჩიეთ თქვენი მონაცემების შესაბამისი\n"
+"   სვეტები."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_number)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:81
@@ -9630,13 +9637,13 @@ msgstr "ნომერი"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:106
 #, kde-format
 msgid "Select column containing number field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც ნომრის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_numberColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:119
 #, kde-format
 msgid "Clear number field selection."
-msgstr ""
+msgstr "ნომრის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_dateCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:157
@@ -9644,32 +9651,32 @@ msgstr ""
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:160
 #, kde-format
 msgid "Select column containing date field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც თარიღის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_dateColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:167
 #, kde-format
 msgid "Clear date field selection."
-msgstr ""
+msgstr "თარიღის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_payee)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:180
 #, kde-format
 msgctxt "column containing payee or description field"
 msgid "Payee/Description"
-msgstr ""
+msgstr "მიმღები/აღწერა"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_payeeCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:199
 #, kde-format
 msgid "Select column containing payee or description field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც მიმღების, ან აღწერის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_payeeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:209
 #, kde-format
 msgid "Clear payee field selection."
-msgstr ""
+msgstr "მიმღების ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_category)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:228
@@ -9682,13 +9689,13 @@ msgstr "კატეგორია"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:247
 #, kde-format
 msgid "Select column containing category field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც კატეგორიის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_categoryColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:257
 #, kde-format
 msgid "Clear category field selection."
-msgstr ""
+msgstr "კატეგორიის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, memoLabel)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkMemo)
@@ -9716,7 +9723,7 @@ msgstr "მემორანდუმი"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:289
 #, kde-format
 msgid "Select column containing memo field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც შენიშვნის ველს შეიცავს."
 
 #. i18n: ectx: property (text), widget (QLabel, m_currentMemoColumns)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:305
@@ -9728,7 +9735,7 @@ msgstr "მონიშნული"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:315
 #, kde-format
 msgid "Clear memo field selection."
-msgstr ""
+msgstr "შენიშვნის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkBalance)
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
@@ -9747,13 +9754,13 @@ msgstr "ბალანსი"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:344
 #, kde-format
 msgid "Select column containing balance field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც ბალანსის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_balanceColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:351
 #, kde-format
 msgid "Clear balance field selection."
-msgstr ""
+msgstr "ბალანსის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:409
@@ -9767,55 +9774,55 @@ msgstr "რაოდენობა"
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:118
 #, kde-format
 msgid "Select column containing amount field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც თანხის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, kde-format
 msgid "Clear amount field selection."
-msgstr ""
+msgstr "თანხის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
 #, kde-format
 msgid "Debit/Credit Indicator"
-msgstr ""
+msgstr "დებიტის/კრედიტის ინდიკატორი"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_creditDebitIndicatorCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:461
 #, kde-format
 msgid "Select column containing indicator field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც ინდიკატორის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, kde-format
 msgid "Clear indicator field selection."
-msgstr ""
+msgstr "ინდიკატორის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
 #, kde-format
 msgid "Indicator for Credit"
-msgstr ""
+msgstr "კრედიტის ინდიკატორი"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_creditIndicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:488
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a credit."
-msgstr ""
+msgstr "შეიყვანეთ ტექსტი, რომელიც კრედიტის თანხის რაოდენობას მიუთითებს."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:498
 #, kde-format
 msgid "Indicator for Debit"
-msgstr ""
+msgstr "ინდიკატორი დებეტისთვის"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_debitIndicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:508
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a debit."
-msgstr ""
+msgstr "შეიყვანეთ ტექსტი, რომელიც დებიტის თანხის რაოდენობას მიუთითებს."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_opposite)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:518
@@ -9846,13 +9853,13 @@ msgstr "დებიტი"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:599
 #, kde-format
 msgid "Select column containing debit field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც დებეტის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_debitColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:609
 #, kde-format
 msgid "Clear debit field selection."
-msgstr ""
+msgstr "დებეტის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credits)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:625
@@ -9865,13 +9872,13 @@ msgstr "კრედიტი"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:644
 #, kde-format
 msgid "Select column containing credit field."
-msgstr ""
+msgstr "აირჩიეთ სვეტი, რომელიც კრედიტის ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:654
 #, kde-format
 msgid "Clear credit field selection."
-msgstr ""
+msgstr "კრედიტის ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:719
@@ -9911,25 +9918,25 @@ msgstr "შეძენა"
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
-msgstr ""
+msgstr "გაყიდვა,თავიდან შეძენა"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
-msgstr ""
+msgstr "რეინვესტიცია,რეინვ,რე-ინვ"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
-msgstr ""
+msgstr "დივიდენდი"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
-msgstr ""
+msgstr "საპროცენტო განაკვეთი,შემოსავალი"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
 #, kde-format
@@ -10000,7 +10007,7 @@ msgstr "CSV-ის შემოტანა"
 #: kmymoney/plugins/csv/import/csvwizard.cpp:924
 #, kde-format
 msgid "Make QIF File"
-msgstr ""
+msgstr "QIF ფაილის შექმნა"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:961
 #, kde-format
@@ -10065,13 +10072,13 @@ msgstr "ვალუტები"
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:26
 #, kde-format
 msgid "Missing currencies"
-msgstr ""
+msgstr "ნაკლული ვალუტები"
 
 #. i18n: ectx: property (text), widget (QLabel, label_info)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:36
 #, kde-format
 msgid "You need to select from currency and to currency."
-msgstr ""
+msgstr "უნდა აირჩიოთ, რომელი ვალუტიდან რომელ ვალუტაზე."
 
 #. i18n: ectx: property (text), widget (QLabel, lblFrom)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:61
@@ -10200,25 +10207,25 @@ msgstr ""
 #: kmymoney/plugins/csv/import/introwizardpage.ui:96
 #, kde-format
 msgid "Ban&king"
-msgstr ""
+msgstr "ბან&კინგი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesInvest)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:112
 #, kde-format
 msgid "In&vestment"
-msgstr ""
+msgstr "ინ&ვესტიცია"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesStockPrices)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:125
 #, kde-format
 msgid "Stock p&rices"
-msgstr ""
+msgstr "ფონდის ფასე&ბი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesCurrencyPrices)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:132
 #, kde-format
 msgid "C&urrency prices"
-msgstr ""
+msgstr "ვალ&უტის ფასები"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_add)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:167
@@ -10238,19 +10245,19 @@ msgstr ""
 #: kmymoney/plugins/csv/import/introwizardpage.ui:187
 #, kde-format
 msgid "Skip setup"
-msgstr ""
+msgstr "მორგების გამოტოვება"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_remove)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:203
 #, kde-format
 msgid "Press this button to remove selected profile."
-msgstr ""
+msgstr "დააწკაპუნეთ ამ ღილაკზე მონიშნული პროფილის წასაშლელად."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_rename)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:222
 #, kde-format
 msgid "Press this button after renaming your profile."
-msgstr ""
+msgstr "დააწკაპუნეთ ამ ღილაკზე თქვენი პროფილის სახელის გადარქმევის შემდეგ."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_rename)
 #. i18n: ectx: property (text), widget (QPushButton, m_renameButton)
@@ -10264,7 +10271,7 @@ msgstr "გადარქმევა"
 #: kmymoney/plugins/csv/import/introwizardpage.ui:241
 #, kde-format
 msgid "Select your importing profile here."
-msgstr ""
+msgstr "აირჩიეთ თქვენი შემოტანის პროფილი აქ."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
 #, kde-format
@@ -10321,7 +10328,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:20
 #, kde-format
 msgid "Investment Wizard Page"
-msgstr ""
+msgstr "ინვესტიციის ოსტატის გვერდი"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:55
@@ -10386,7 +10393,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:211
 #, kde-format
 msgid "Clear selected column entries."
-msgstr ""
+msgstr "მონიშნული სვეტის ჩანაწერების გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #. i18n: ectx: property (text), widget (QPushButton, button_clear)
@@ -10406,7 +10413,7 @@ msgctxt ""
 "noun, conversion fraction/multiplier to use to make compatible the csv "
 "pricing with KMM pricing."
 msgid "Price Fraction"
-msgstr ""
+msgstr "კურსის კოეფიციენტი"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_symbolCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:308
@@ -10427,7 +10434,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:342
 #, kde-format
 msgid "Fee is Percentage"
-msgstr ""
+msgstr "საკომისიო პროცენტებში"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_feeCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:358
@@ -10461,14 +10468,14 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:428
 #, kde-format
 msgid "Fee rate"
-msgstr ""
+msgstr "კურსის მოგება"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_type)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:451
 #, kde-format
 msgctxt "column containing investment type/action field"
 msgid "Type/Action"
-msgstr ""
+msgstr "ტიპი/ქმედება"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_memoCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:469
@@ -10501,7 +10508,7 @@ msgstr "საფასურის დათვლა"
 #, kde-format
 msgctxt "@item:inlistbox No QIF profile defined"
 msgid "No profile setup"
-msgstr ""
+msgstr "პროფილის მორგების გარეშე"
 
 #: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
 #, kde-format
@@ -10544,7 +10551,7 @@ msgstr "CSV-დან შემოტანის მორგება"
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:20
 #, kde-format
 msgid "Autodetecting"
-msgstr ""
+msgstr "ავტოაღმოჩენა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFieldDelimiter)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:32
@@ -10592,7 +10599,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:100
 #, kde-format
 msgid "QIF export profile"
-msgstr ""
+msgstr "QIF პროფილის გატანა"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PricesPage)
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:20
@@ -10916,7 +10923,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:75
 #, kde-format
 msgid "Cannot read the file: %1"
-msgstr ""
+msgstr "ვერ წავიკითხე ფაილი: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:80
 #, kde-format
@@ -10928,13 +10935,13 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:133
 #, kde-format
 msgid "GnuCash files (*.gnucash *.xac *.gnc)"
-msgstr ""
+msgstr "GnuCash ფაილები (*.gnucash *.xac *.gnc)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KGncImportOptionsDlg)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:20
 #, kde-format
 msgid "GnuCash Import Options"
-msgstr ""
+msgstr "GnuCash-დან შემოტანის პარამეტრები"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:26
@@ -10946,7 +10953,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:39
 #, kde-format
 msgid "Investment Handling"
-msgstr ""
+msgstr "ინვესტიციის დამუშავება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioInvest1)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:45
@@ -10970,7 +10977,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:81
 #, kde-format
 msgid "Online price quotes"
-msgstr ""
+msgstr "ფასის კვოტები ინტერნეტში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkFinanceQuote)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:87
@@ -10982,7 +10989,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:100
 #, kde-format
 msgid "Scheduled Transactions"
-msgstr ""
+msgstr "დაგეგმილი ტრანზაქციები"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkSchedules)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:106
@@ -10994,19 +11001,19 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:119
 #, kde-format
 msgid "Decoding option"
-msgstr ""
+msgstr "დეკოდირების პარამეტრი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkDecode)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:142
 #, kde-format
 msgid "Decode using"
-msgstr ""
+msgstr "დეკოდირება რით"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox18)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:176
 #, kde-format
 msgid "Transaction Notes option"
-msgstr ""
+msgstr "ტრანზაქციის შენიშვნის პარამეტრი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkTxNotes)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:182
@@ -11018,41 +11025,41 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:205
 #, kde-format
 msgid "Debug Options"
-msgstr ""
+msgstr "გამართვის მორგება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkDebugGeneral)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:211
 #, kde-format
 msgid "General debug data"
-msgstr ""
+msgstr "ზოგადი გამართვის მონაცემები"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkDebugXML)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:221
 #, kde-format
 msgid "Display XML data"
-msgstr ""
+msgstr "XML მონაცემების ჩვენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkAnonymize)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:231
 #, kde-format
 msgid "Anonymize data"
-msgstr ""
+msgstr "მონაცემების ანონიმიზება"
 
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.cpp:59
 #, kde-format
 msgid "Investment: %1"
-msgstr ""
+msgstr "ინვესტიცია: %1"
 
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.cpp:60
 #, kde-format
 msgid "Quote source: %1"
-msgstr ""
+msgstr "კოტის წყარო: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KGncPriceSourceDlg)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:20
 #, kde-format
 msgid "Online Quotes - Select price source"
-msgstr ""
+msgstr "კვოტები ინტერნეტში - აირჩიეთ ფასის წყარო"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:46
@@ -11095,17 +11102,17 @@ msgstr "ანგარიში%1"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:254
 #, kde-format
 msgid "Stock%1"
-msgstr ""
+msgstr "აქციები%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:263
 #, kde-format
 msgid "Payee%1"
-msgstr ""
+msgstr "მიღები%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:270
 #, kde-format
 msgid "Schedule%1"
-msgstr ""
+msgstr "გეგმა%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1222
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1261
@@ -11128,7 +11135,7 @@ msgstr "შემოტანა დასრულებულია"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1430
 #, kde-format
 msgid "Disguise your wealth"
-msgstr ""
+msgstr "თქვენი სიმდიდრის შენიღბვა"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
 #, kde-format
@@ -11145,7 +11152,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1450
 #, kde-format
 msgid "Loading commodities..."
-msgstr ""
+msgstr "ფინანსური ინსტრუმენტების ჩატვირთვა..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
 #, kde-format
@@ -11215,7 +11222,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2085
 #, kde-format
 msgid "Loading schedules..."
-msgstr ""
+msgstr "იტვირთება გეგმები..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2173
 #, kde-format
@@ -11283,8 +11290,8 @@ msgstr ""
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 ფინანსური ინსტრუმენტი (კაპიტალი)\n"
+msgstr[1] "%1 ფინანსური ინსტრუმენტი (კაპიტალი)\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
 #, kde-format
@@ -11317,7 +11324,7 @@ msgstr[1] "%1 გეგმა\n"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "No inconsistencies were detected\n"
-msgstr ""
+msgstr "შეუსაბამობები არ გამოვლენილა\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
@@ -11546,7 +11553,7 @@ msgstr ""
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:47
 #, kde-format
 msgid "Create reminders"
-msgstr ""
+msgstr "შეხსენებების შექმნა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_repeatingReminders)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:83
@@ -11652,7 +11659,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:104
 #, kde-format
 msgid "Regular Expression for"
-msgstr ""
+msgstr "რეგულარული გამოსახულება რისთვის"
 
 #. i18n: ectx: attribute (title), widget (QWidget, downloadTab)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:118
@@ -11674,7 +11681,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:127
 #, kde-format
 msgid "Download transactions from institution"
-msgstr ""
+msgstr "ტრანზაქციების გადმოწერა დაწესებულებიდან"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:145
@@ -11745,7 +11752,7 @@ msgstr ""
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:14
 #, kde-format
 msgid "Account Mapping"
-msgstr ""
+msgstr "ანგარიშების მიბმა"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:23
@@ -11761,7 +11768,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:39
 #, kde-format
 msgid "Application Account"
-msgstr ""
+msgstr "ანგარიში აპლიაციაში"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
@@ -11801,7 +11808,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:14
 #, kde-format
 msgid "Pick Start Date"
-msgstr ""
+msgstr "აირჩიეთ დაწყების თარიღი"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroup)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:39
@@ -11825,19 +11832,19 @@ msgstr "&ბოლო განახლება"
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:75
 #, kde-format
 msgid "F&irst possible date"
-msgstr ""
+msgstr "პ&ირველი შესაძლო თარიღი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pickDateButton)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:98
 #, kde-format
 msgid "Pick &date"
-msgstr ""
+msgstr "აირჩიეთ თა&რიღი"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:307
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
-msgstr ""
+msgstr "ინტერნეტბანკის პარამეტრები"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:313
 #, kde-format
@@ -11847,12 +11854,12 @@ msgstr ""
 #: kmymoney/plugins/kbanking/kbanking.cpp:333
 #, kde-format
 msgid "Configure Aq&Banking..."
-msgstr ""
+msgstr "Aq&Banking-ის მორგება..."
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:338
 #, kde-format
 msgid "AqBanking importer..."
-msgstr ""
+msgstr "AqBanking-დან შემოტანის..."
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:524
 #: kmymoney/plugins/kbanking/kbanking.cpp:773
@@ -11865,7 +11872,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/kbanking.cpp:530
 #, kde-format
 msgid "Account Not Mapped"
-msgstr ""
+msgstr "ანგარიში მიბმული არაა"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:602
 #: kmymoney/plugins/kbanking/kbanking.cpp:624
@@ -11921,7 +11928,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:14
 #, kde-format
 msgid "Order confirmation"
-msgstr ""
+msgstr "შეკვეთის დადასტურება"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, reduceButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:24
@@ -11933,7 +11940,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:27
 #, kde-format
 msgid "Reduce"
-msgstr ""
+msgstr "შემცირება"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, enlargeButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:39
@@ -11983,13 +11990,13 @@ msgstr "ID"
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Code"
-msgstr ""
+msgstr "დაწესებულების კოდი"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Name"
-msgstr ""
+msgstr "დაწესებულების დასახელება"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
 #, kde-format
@@ -12018,12 +12025,12 @@ msgstr "უკანბოლო"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:68
 #, kde-format
 msgid "Get Balance"
-msgstr ""
+msgstr "ბალანსის მიღება"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:71
 #, kde-format
 msgid "Get Transactions"
-msgstr ""
+msgstr "ტრანზაქციების მიღება"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
 #: kmymoney/plugins/views/reports/core/querytable.cpp:835
@@ -12035,7 +12042,7 @@ msgstr "Გადაცემა"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:77
 #, kde-format
 msgid "Debit Note"
-msgstr ""
+msgstr "დებეტის შენიშვნა"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:80
 #, kde-format
@@ -12065,13 +12072,13 @@ msgstr "ახალი"
 #, kde-format
 msgctxt "Status of the job"
 msgid "accepted"
-msgstr ""
+msgstr "მიღებულია"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:107
 #, kde-format
 msgctxt "Status of the job"
 msgid "rejected"
-msgstr ""
+msgstr "უარყოფილია"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:110
 #, kde-format
@@ -12083,19 +12090,19 @@ msgstr "pending"
 #, kde-format
 msgctxt "Status of the job"
 msgid "sending"
-msgstr ""
+msgstr "იგზავნება"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:116
 #, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (auto)"
-msgstr ""
+msgstr "შეთანხმებული (ავტო)"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:119
 #, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (manual)"
-msgstr ""
+msgstr "შეთანხმებული (ხელით)"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:122
 #, kde-format
@@ -12113,7 +12120,7 @@ msgstr "aborted"
 #, kde-format
 msgctxt "Status of the job"
 msgid "enqueued"
-msgstr ""
+msgstr "რიგში ჩაემატა"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:131
 #, kde-format
@@ -12140,7 +12147,7 @@ msgstr "დავალების ტიპი"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
 #, kde-format
 msgid "Institute"
-msgstr ""
+msgstr "დაწესებულება"
 
 #. i18n: ectx: property (text), widget (QLabel, accountLabel)
 #. i18n: ectx: property (text), widget (QLabel, assetAccountLabel)
@@ -12178,7 +12185,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgid "The HTTP request failed."
-msgstr ""
+msgstr "HTTP მოთხოვნა ჩავარდა."
 
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:216
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
@@ -12191,18 +12198,18 @@ msgstr "წარუმატებელია"
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:14
 #, kde-format
 msgid "OFX Direct Connect"
-msgstr ""
+msgstr "OFX პირდაპირი კავშირი"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:23
 #, kde-format
 msgid "Contacting bank..."
-msgstr ""
+msgstr "ბანკთან დაკავშირება..."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:84
 #, kde-format
 msgid "Loading banklist"
-msgstr ""
+msgstr "იტვირთება ბანკების სია"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:85
 #, kde-format
@@ -12229,7 +12236,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:306
 #, kde-format
 msgid "Supports investments<br/>"
-msgstr ""
+msgstr "აქვს ინვესტიციების მხარდაჭერა<br/>"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:254
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:308
@@ -12252,42 +12259,42 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:268
 #, kde-format
 msgid "Does not support online banking"
-msgstr ""
+msgstr "არ აქვს ინტერნეტბანკინგის მხარდაჭერა"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:278
 #, kde-format
 msgid "Please choose a bank."
-msgstr ""
+msgstr "აირჩიეთ ბანკი."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:284
 #, kde-format
 msgid "Please fill all fields with values."
-msgstr ""
+msgstr "შეავსეთ ყველა ველი მნიშვნელობებით."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:288
 #, kde-format
 msgid "<p>Details for %1:</p>"
-msgstr ""
+msgstr "<p>დეტალები %1-სთვის:</p>"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:411
 #, kde-format
 msgid "No suitable accounts were found at this bank."
-msgstr ""
+msgstr "ამ ბანკისთვის შესაფერისი ანგარიშები აღმოჩენილი არაა."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:427
 #, kde-format
 msgid "Please choose an account"
-msgstr ""
+msgstr "აირჩიეთ ანგარიში"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:530
 #, kde-format
 msgid "Server message: %1\n"
-msgstr ""
+msgstr "სერვერის შეტყობინება: %1\n"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:538
 #, kde-format
 msgid "Your bank returned warnings when signing on"
-msgstr ""
+msgstr "თქვენმა ბანკმა დააბრუნა გაფრთხილებები შესვლისას"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:538
 #, kde-format
@@ -12298,7 +12305,7 @@ msgstr "გაფრთხილება: %1"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:541
 #, kde-format
 msgid "Error signing onto your bank"
-msgstr ""
+msgstr "შეცდომა თქვენს ბანკში შესვლისას"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:541
 #, kde-format
@@ -12309,13 +12316,13 @@ msgstr "შეცდომა: %1"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:14
 #, kde-format
 msgid "Online Banking Account Setup"
-msgstr ""
+msgstr "ინტერნეტბანკის ანგარიშის მორგება"
 
 #. i18n: ectx: property (title), widget (QWizardPage, FIPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:18
 #, kde-format
 msgid "Select Financial Institution"
-msgstr ""
+msgstr "აირჩიეთ ფინანსური დაწესებულება"
 
 #. i18n: ectx: property (text), widget (QLabel, m_instructionLabel)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
@@ -12347,19 +12354,19 @@ msgstr "FID"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:107
 #, kde-format
 msgid "Org"
-msgstr ""
+msgstr "Org"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:123
 #, kde-format
 msgid "UserAgent"
-msgstr ""
+msgstr "UserAgent"
 
 #. i18n: ectx: property (title), widget (QWizardPage, LoginPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:171
 #, kde-format
 msgid "Enter Login Details"
-msgstr ""
+msgstr "შეიყვანეთ შესვლის დეტალები"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:192
@@ -12399,7 +12406,7 @@ msgstr "პაროლის დამახსოვრება"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:190
 #, kde-format
 msgid "Identify as"
-msgstr ""
+msgstr "იდენტიფიკაცია, როგორც"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_applicationEdit)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:250
@@ -12414,7 +12421,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:219
 #, kde-format
 msgid "Header Version"
-msgstr ""
+msgstr "თავსართის ვერსია"
 
 #. i18n: ectx: property (text), widget (QLabel, m_clientUidLabel)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:318
@@ -12484,11 +12491,12 @@ msgid ""
 "Congratulations: you have successfully set up your bank for online banking "
 "via OFX."
 msgstr ""
+"გილოცავთ: თქვენი წარმატებით მოირგეთ თქვენი ბანკის ინტერნეტბანკი OFX-ით."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatus.cpp:52
 #, kde-format
 msgid "Enabled & configured"
-msgstr ""
+msgstr "ჩართული და მორგებულია"
 
 #. i18n: ectx: attribute (title), widget (QWidget, accountTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:21
@@ -12512,7 +12520,7 @@ msgstr "მიუწვდომელია"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:82
 #, kde-format
 msgid "BANK/BROKER:"
-msgstr ""
+msgstr "ბანკი/ბროკერი:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_textBank)
 #. i18n: ectx: property (text), widget (QLabel, m_textOnlineAccount)
@@ -12520,19 +12528,19 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:136
 #, kde-format
 msgid "&lt;Not configured&gt;"
-msgstr ""
+msgstr "&lt;მორგებული არაა&gt;"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:114
 #, kde-format
 msgid "ACCOUNT:"
-msgstr ""
+msgstr "ანგარიში:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, ofxTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:179
 #, kde-format
 msgid "OFX Details"
-msgstr ""
+msgstr "OFX დეტალები"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:242
@@ -12550,25 +12558,25 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:278
 #, kde-format
 msgid "Import Details"
-msgstr ""
+msgstr "შემოტანის დეტალები"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:284
 #, kde-format
 msgid "Start date of import"
-msgstr ""
+msgstr "შემოტანის დაწყების თარიღი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_lastUpdateRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:305
 #, kde-format
 msgid "Last &update"
-msgstr ""
+msgstr "ბოლო განა&ხლება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_todayRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:325
 #, kde-format
 msgid "To&day minus"
-msgstr ""
+msgstr "&დღევანდელი დღე მინუს"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:345
@@ -12581,7 +12589,7 @@ msgstr "დღე"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:355
 #, kde-format
 msgid "Pi&ck date"
-msgstr ""
+msgstr "აირჩიეთ თა&რიღი"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
@@ -12595,7 +12603,7 @@ msgstr "ფასის ინფორმაცია"
 #: kmymoney/plugins/ofx/import/importoption.ui:179
 #, kde-format
 msgid "Value and number of shares"
-msgstr ""
+msgstr "აქციების ღირებულება და რაოდენობა"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:417
@@ -12627,7 +12635,7 @@ msgstr "-"
 #, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
-msgstr ""
+msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:467
@@ -12677,14 +12685,14 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:166
 #, kde-format
 msgid "Price is derived from"
-msgstr ""
+msgstr "ფასის წყაროა"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
 #: kmymoney/plugins/ofx/import/importoption.ui:49
 #, kde-format
 msgid "Timezone offset"
-msgstr ""
+msgstr "დროის სარტყლის წანაცვლება"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:542
@@ -12783,7 +12791,7 @@ msgstr "Quicken Windows (Expert)"
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
 #, kde-format
 msgid "Quicken Mac (Expert)"
-msgstr ""
+msgstr "Quicken Mac-სთვის (ექსპერტი)"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
 #, kde-format
@@ -12823,19 +12831,19 @@ msgstr "MS-Money (Expert)"
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:230
 #, kde-format
 msgid "Enter your password for account <b>%1</b>"
-msgstr ""
+msgstr "შეიყვანეთ თქვენი პაროლი ანგარიშისთვის <b>%1</b>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/importoption.ui:36
 #, kde-format
 msgid "OFX FITID"
-msgstr ""
+msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/importoption.ui:41
 #, kde-format
 msgid "KMyMoney Hash"
-msgstr ""
+msgstr "KMyMoney ჰეში"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:160
 #, kde-format
@@ -12845,13 +12853,13 @@ msgstr "OFX..."
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:174
 #, kde-format
 msgid "OFX import file selection"
-msgstr ""
+msgstr "OFX შემოტანის ფაილის არჩევანი"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:176
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr ""
+msgstr "OFX ფაილები (*.ofx *.qfx *.ofc);;ყველა ფაილი (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:196
 #, kde-format
@@ -12863,22 +12871,22 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:197
 #, kde-format
 msgid "Incorrect format"
-msgstr ""
+msgstr "არასწორი ფორმატი"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:243
 #, kde-format
 msgid "Unable to parse file"
-msgstr ""
+msgstr "ფაილის დამუშავების შეცდომა"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:846
 #, kde-format
 msgid "No accounts found."
-msgstr ""
+msgstr "ანგარიშები აღმოჩენილი არაა."
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1034
 #, kde-format
 msgid "Error connecting to bank: %1"
-msgstr ""
+msgstr "ბანკთან დაკავშირების შეცდომა: %1"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1047
 #, kde-format
@@ -12959,25 +12967,25 @@ msgstr[1] ""
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "აუცილებელია დანიშნულება."
+msgstr[1] "დანიშნულება, სულ ცოტა, %1 სიმბოლოს უნდა შეიცავდეს."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.h:44
 #, kde-format
 msgid "SEPA Credit Transfer"
-msgstr ""
+msgstr "SEPA გადარიცხვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:17
 #, kde-format
 msgid "Beneficiary &Name"
-msgstr ""
+msgstr "ბე&ნეფიციარის სახელი"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:99
 #, kde-format
 msgid "End-to-end reference"
-msgstr ""
+msgstr "გამჭოლი მიმართვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:115
@@ -13008,29 +13016,29 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:14
 #, kde-format
 msgid "QIF Profile Editor"
-msgstr ""
+msgstr "QIF პროფილის რედაქტორი"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:139
 #, kde-format
 msgid "QIF Profile Selector"
-msgstr ""
+msgstr "QIF პროფილის ამრჩევი"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:219
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:129
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:174
 #, kde-format
 msgid "The default QIF profile"
-msgstr ""
+msgstr "ნაგულისხმევი QIF პროფილი"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:385
 #, kde-format
 msgid "Enter new profile name"
-msgstr ""
+msgstr "შეიყვანეთ ახალი პროფილის სახელი"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:395
 #, kde-format
 msgid "The profile name cannot be empty. Please provide a name or cancel."
-msgstr ""
+msgstr "პროფილის სახელი ცარიელი ვერ იქნება. შეიყვანეთ სახელი, ან გააუქმეთ."
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:397
 #, kde-format
@@ -13040,18 +13048,18 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:399
 #, kde-format
 msgid "QIF profile name problem"
-msgstr ""
+msgstr "QIF პროფილის სახელის პრობლემა"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:415
 #, kde-format
 msgid "Do you really want to delete profile '%1'?"
-msgstr ""
+msgstr "მართლა გნებავთ, წაშალოთ პროფილი '%1'?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr ""
+msgstr "QIF პროფილის წაშლა"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -13064,25 +13072,25 @@ msgstr "საერთო"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:67
 #, kde-format
 msgid "Void mark"
-msgstr ""
+msgstr "განულების ნიშანი"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:83
 #, kde-format
 msgid "Opening Balance text"
-msgstr ""
+msgstr "საწყისი ბალანსის აღწერა"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:102
 #, kde-format
 msgid "Type field text"
-msgstr ""
+msgstr "აკრიფეთ ველის ტექსტი"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2_2)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:124
 #, kde-format
 msgid "Account delimiter"
-msgstr ""
+msgstr "ანგარიშების გამყოფი"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:146
@@ -13102,13 +13110,13 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:196
 #, kde-format
 msgid "Output filter location"
-msgstr ""
+msgstr "გამოტანის ფილტრის მდებარეობა"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_4_3)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:222
 #, kde-format
 msgid "Input filter file type"
-msgstr ""
+msgstr "შეყვანის ფილტრის ფაილის ტიპი"
 
 #. i18n: ectx: property (text), widget (KLineEdit, m_editInputFilterFileType)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:232
@@ -13120,7 +13128,7 @@ msgstr "*.qif"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:245
 #, kde-format
 msgid "Input filter location"
-msgstr ""
+msgstr "შეყვანის ფილტრის მდებარეობა"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_editDateFormat)
 #. i18n: ectx: property (whatsThis), widget (QLabel, TextLabel3)
@@ -13128,7 +13136,7 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:297
 #, kde-format
 msgid "The format of the dates in the QIF file."
-msgstr ""
+msgstr "თარიღის ფორმატი QIF ფაილში."
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_editApostrophe)
 #. i18n: ectx: property (whatsThis), widget (QLabel, TextLabel4)
@@ -13147,13 +13155,13 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:326
 #, kde-format
 msgid "Apostrophe Handling"
-msgstr ""
+msgstr "ორციფრიანი წელი"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabMoney)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:373
 #, kde-format
 msgid "Amounts"
-msgstr ""
+msgstr "თანხები"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:389
@@ -13166,19 +13174,19 @@ msgstr "ველი"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:394
 #, kde-format
 msgid "QIF-Record"
-msgstr ""
+msgstr "QIF-ჩანაწერი"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:404
 #, kde-format
 msgid "Thousand Delimiter"
-msgstr ""
+msgstr "ათასების გამყოფი"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:409
 #, kde-format
 msgid "SortColumnInvisible"
-msgstr ""
+msgstr "SortColumnInvisible"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:417
@@ -13196,7 +13204,7 @@ msgstr "0"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:431
 #, kde-format
 msgid "Split-Value"
-msgstr ""
+msgstr "გაყოფის-მნიშვნელობა"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:434
@@ -13400,7 +13408,7 @@ msgstr "საწყის მნიშვნელობაზე დაბრ�
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:14
 #, kde-format
 msgid "QIF Export"
-msgstr ""
+msgstr "QIF გატანა"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:66
@@ -13424,7 +13432,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:92
 #, kde-format
 msgid "QIF Profile"
-msgstr ""
+msgstr "QIF პროფილი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
@@ -13452,7 +13460,7 @@ msgstr "QIF..."
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Use this to start the import operation"
-msgstr ""
+msgstr "გამოიყენეთ ეს შემოტანის ოპერაციის დასაწყებად"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:66
 #, kde-format
@@ -13463,7 +13471,7 @@ msgstr "&ახალი..."
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:69
 #, kde-format
 msgid "Use this to open the profile editor"
-msgstr ""
+msgstr "გამოიყენეთ ეს პროფილის რედაქტორის გასახსნელად"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:94
 #, kde-format
@@ -13473,13 +13481,13 @@ msgstr "ფაილის შემოტანა.."
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:96
 #, kde-format
 msgid "Import files (%1);;All files (%2)"
-msgstr ""
+msgstr "შემოტანის ფაილები (%1);;ყველა ფაილი (%2)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportDlgDecl)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:14
 #, kde-format
 msgid "QIF Import"
-msgstr ""
+msgstr "QIF-ის სემოტანა"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:36
@@ -13498,13 +13506,13 @@ msgstr ""
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:54
 #, kde-format
 msgid "QIF File to Import:"
-msgstr ""
+msgstr "QIF ფაილი შემოსატანად:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:82
 #, kde-format
 msgid "Source of QIF"
-msgstr ""
+msgstr "QIF-ის წყარო"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_typeComboBox)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:102
@@ -13519,37 +13527,37 @@ msgstr ""
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:106
 #, kde-format
 msgid "Bank statement"
-msgstr ""
+msgstr "ბანკის ამონაწერი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeComboBox)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:111
 #, kde-format
 msgid "Other application"
-msgstr ""
+msgstr "სხვა აპლიკაცია"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:172
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested interest"
-msgstr ""
+msgstr "პროცენტების რეინვესტირება"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:175
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend"
-msgstr ""
+msgstr "დივიდენდის რეინვესტირება"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:178
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (long term)"
-msgstr ""
+msgstr "დივიდენდის რეინვესტირება (გრძელვადიანი)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:181
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (short term)"
-msgstr ""
+msgstr "დივიდენდის რეინვესტირება (მოკლევადიანი)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:184
 #, kde-format
@@ -13567,53 +13575,53 @@ msgstr "ინტერესი"
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (short term)"
-msgstr ""
+msgstr "კაპიტალის მოგება (მოკლევადიანი)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:193
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (mid term)"
-msgstr ""
+msgstr "კაპიტალის მოგება (საშუალოვადიანი)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:196
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (long term)"
-msgstr ""
+msgstr "კაპიტალის მოგება (გრძელვადიანი)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:199
 #, kde-format
 msgctxt "Category name"
 msgid "Returned capital"
-msgstr ""
+msgstr "შემოსავალი კაპიტალზე"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:202
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous income"
-msgstr ""
+msgstr "სხვადასხვა შემოსავალი"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:205
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous expense"
-msgstr ""
+msgstr "სხვადასხვა ხარჯი"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:208
 #, kde-format
 msgctxt "Category name"
 msgid "Investment fees"
-msgstr ""
+msgstr "საინვესტიციო მოსაკრებლები"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:210
 #, kde-format
 msgid "Unknown QIF type %1"
-msgstr ""
+msgstr "უცნობი QIF ტიპი %1"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:370
 #, kde-format
 msgid "Date format selection"
-msgstr ""
+msgstr "თარიღის ფორმატის არჩევანი"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:370
 #, kde-format
@@ -13623,12 +13631,12 @@ msgstr ""
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:385
 #, kde-format
 msgid "Importing QIF..."
-msgstr ""
+msgstr "QIF-ის შემოტანა..."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:485
 #, kde-format
 msgid "Reading QIF..."
-msgstr ""
+msgstr "QIF-ის წაკითხვა..."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:490
 #, kde-format
@@ -13644,13 +13652,13 @@ msgstr "ფილტრის შეცდომა"
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
-msgstr ""
+msgstr "Oth L"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:529
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
-msgstr ""
+msgstr "Invst"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:543
 #, kde-format
@@ -13687,12 +13695,12 @@ msgstr ""
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:740
 #, kde-format
 msgid "Overwrite opening balance"
-msgstr ""
+msgstr "საწყისი ბალანსის თავზე გადაწერა"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:907
 #, kde-format
 msgid "Unable to find account: %1"
-msgstr ""
+msgstr "ვერ ვიპოვე ანგარიში: %1"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:921
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:931
@@ -13717,7 +13725,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:987
 #, kde-format
 msgid "Opening balance problem"
-msgstr ""
+msgstr "საწყისი ბალანსის პრობლემა"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1010
 #, kde-format
@@ -13752,7 +13760,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1966
 #, kde-format
 msgid "%1 (Investment)"
-msgstr ""
+msgstr "%1 (ინვესტიცია)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1967
 #, kde-format
@@ -13769,7 +13777,7 @@ msgstr "შეთანხმების ანგარიში"
 #: kmymoney/plugins/reconciliationreport/kreconciliationreportdlgdecl.ui:27
 #, kde-format
 msgid "Summar&y"
-msgstr ""
+msgstr "&მიმოხილვა"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_detailsTab)
 #: kmymoney/plugins/reconciliationreport/kreconciliationreportdlgdecl.ui:33
@@ -13786,7 +13794,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:111
 #, kde-format
 msgid "All values shown in %1"
-msgstr ""
+msgstr "ყველა მნიშვნელობა, ნაჩვენები %1-ში"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryEditWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
@@ -13802,7 +13810,7 @@ msgstr "შეჯამება"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:138
 #, kde-format
 msgid "Starting balance on bank statement"
-msgstr ""
+msgstr "საწყისი ბალანსი ამონაწერით"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:144
 #, kde-format
@@ -13921,12 +13929,12 @@ msgstr[1] ""
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:71
 #, kde-format
 msgid "Create Tables"
-msgstr ""
+msgstr "ცხრილების შექმნა"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:72
 #, kde-format
 msgid "Save SQL"
-msgstr ""
+msgstr "SQL-ის შენახვა"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:164
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:93
@@ -13940,7 +13948,7 @@ msgstr ""
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:94
 #, kde-format
 msgid "No Qt SQL Drivers"
-msgstr ""
+msgstr "Qt-ის SQL-ის დრაივერები დაყენებული არაა"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:199
 #, kde-format
@@ -13952,7 +13960,7 @@ msgstr ""
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:205
 #, kde-format
 msgid "Tables successfully created"
-msgstr ""
+msgstr "ცხრილები წარმატებით შეიქმნა"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:215
 #, kde-format
@@ -13981,7 +13989,7 @@ msgstr ""
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:32
 #, kde-format
 msgid "KMyMoney - Generate SQL"
-msgstr ""
+msgstr "KMyMoney - SQL-ის გენერაცია"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #. i18n: ectx: property (text), widget (QLabel, label_6)
@@ -14025,7 +14033,7 @@ msgstr "მომხმარებლის სახელი"
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:128
 #, kde-format
 msgid "SQL for creation"
-msgstr ""
+msgstr "SQL შესაქმნელად"
 
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:86
 #, kde-format
@@ -14036,13 +14044,13 @@ msgstr ""
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:26
 #, kde-format
 msgid "KMyMoney - Select Database"
-msgstr ""
+msgstr "KMyMoney - აირჩიეთ მონაცემთა ბაზა"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox6)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:75
 #, kde-format
 msgid "PLEASE NOTE"
-msgstr ""
+msgstr "გაითვალისწინეთ"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, plainTextEdit)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:166
@@ -14087,7 +14095,7 @@ msgstr "&პაროლი"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:293
 #, kde-format
 msgid "Preload &all data"
-msgstr ""
+msgstr "მონაცემების წინასწარ სრულად ჩატვირთვ&ა"
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:135
 #, kde-format
@@ -14115,12 +14123,12 @@ msgstr ""
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:930
 #, kde-format
 msgid "Inserting online jobs."
-msgstr ""
+msgstr "ინტერნეტ-დავალებების ჩასმა."
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2027
 #, kde-format
 msgid "SQLite file %1 does not exist"
-msgstr ""
+msgstr "SQLite-ის ფაილი %1 არ არსებობს"
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
@@ -14137,7 +14145,7 @@ msgstr ""
 #: kmymoney/plugins/sql/sqlstorage.cpp:137
 #, kde-format
 msgid "Cannot open database %1\n"
-msgstr ""
+msgstr "ვერ გავხსენი მონაცემთა ბაზა %1\n"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:170
 #, kde-format
@@ -14148,7 +14156,7 @@ msgstr ""
 #: kmymoney/plugins/sql/sqlstorage.cpp:204
 #, kde-format
 msgid "Database malfunction"
-msgstr ""
+msgstr "მონაცემთა ბაზის გაუმართაობა"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:193
 #: kmymoney/plugins/xml/xmlstorage.cpp:515
@@ -14166,17 +14174,17 @@ msgstr ""
 #: kmymoney/plugins/sql/sqlstorage.cpp:236
 #, kde-format
 msgid "Cannot save to current database."
-msgstr ""
+msgstr "მიმდინარე მონაცემთა ბაზაში ჩაწერა შეუძლებელია."
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:241
 #, kde-format
 msgid "Cannot save to current database: %1"
-msgstr ""
+msgstr "მიმდინარე მონაცემთა ბაზაში ჩაწერა შეუძლებელია: %1"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:264
 #, kde-format
 msgid "Database files (*.db *.sql)"
-msgstr ""
+msgstr "მონაცემთა ბაზის ფაილები (*.db *.sql)"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:270
 #, kde-format
@@ -14186,7 +14194,7 @@ msgstr "მონაცემთა ბაზის გახსნა..."
 #: kmymoney/plugins/sql/sqlstorage.cpp:275
 #, kde-format
 msgid "Generate Database SQL"
-msgstr ""
+msgstr "მონაცემთა ბაზის SQL-ის გენერაცია"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:334
 #, kde-format
@@ -14216,7 +14224,7 @@ msgstr ""
 #, kde-format
 msgctxt "Auto assignment (caption)"
 msgid "Auto assignment"
-msgstr ""
+msgstr "ავტომატური მინიჭება"
 
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:268
 #, kde-format
@@ -14265,19 +14273,19 @@ msgstr "ინდივიდუალური"
 #, kde-format
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
-msgstr ""
+msgstr "ბიუჯეტი %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:98
 #, kde-format
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
-msgstr ""
+msgstr "ბიუჯეტი %1 (%2)"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:114
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:174
 #, kde-format
 msgid "Unable to add budget"
-msgstr ""
+msgstr "ბიუჯეტის დამატება შეუძლებელია"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:131
 #, kde-format
@@ -14287,7 +14295,7 @@ msgstr ""
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:133
 #, kde-format
 msgid "Do you really want to remove all selected budgets?"
-msgstr ""
+msgstr "მართლა გნებავთ ყველა მონიშნული ბიუჯეტის წაშლა?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:135
 #, kde-format
@@ -14298,7 +14306,7 @@ msgstr "ბიუჯეტის წაშლა"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:154
 #, kde-format
 msgid "Unable to remove budget."
-msgstr ""
+msgstr "ბიუჯეტის წაშლა შეუძლებელია."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:169
 #: kmymoney/plugins/views/reports/kreportsview.cpp:471
@@ -14322,17 +14330,17 @@ msgstr "შეტყობინება"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:221
 #, kde-format
 msgid "Unable to modify budget."
-msgstr ""
+msgstr "ბიუჯეტის შეცვლა შეუძლებელია."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:236
 #, kde-format
 msgid "Unable to reset budget"
-msgstr ""
+msgstr "ბიუჯეტის ჩამოყრა შეუძლებელია"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:251
 #, kde-format
 msgid "Unable to modify budget"
-msgstr ""
+msgstr "ბიუჯეტის შეცვლა შეუძლებელია"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:369
 #, kde-format
@@ -14354,7 +14362,7 @@ msgstr "ახალი ბიუჯეტი"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:447
 #, kde-format
 msgid "Rename budget"
-msgstr ""
+msgstr "ბიუჯეტის სახელის გადარქმევა"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:448
 #, kde-format
@@ -14369,19 +14377,19 @@ msgstr "ბიუჯეტის კოპირება"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:452
 #, kde-format
 msgid "Budget based on forecast"
-msgstr ""
+msgstr "პროგნოზზე დაფუძნებული ბიუჯეტი"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
 #, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr ""
+msgstr "შეცვლა შემოსავალზე"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, kde-format
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
-msgstr ""
+msgstr "შეცვლა ხარჯზე"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:494
 #, kde-format
@@ -14399,19 +14407,21 @@ msgstr "ანგარიშის პარამეტრები"
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
-msgstr ""
+msgstr "აირჩიეთ, როგორ მოვექცეთ ამ ანგარიშის ბიუჯეტს."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:552
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
 msgstr ""
+"ეს პარამეტრი, მხოლოდ, მაშინაა ხელმისაწვდომი, როცა ბიუჯეტის მნიშვნელობა "
+"მინიჭებულია."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:39
 #, kde-format
 msgid "Your budgets"
-msgstr ""
+msgstr "თქვენი ბიუჯეტები"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:47
@@ -14438,13 +14448,13 @@ msgstr "Del"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:114
 #, kde-format
 msgid "Accepts the entered values and stores the budget."
-msgstr ""
+msgstr "იღებს შეყვანილ მნიშვნელობას და ინახავს ბიუჯეტს."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_updateButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:117
 #, kde-format
 msgid "Use this to store the modified data."
-msgstr ""
+msgstr "გამოიყენეთ ეს შეცვლილი მონაცემების დასამახსოვრებლად."
 
 #. i18n: ectx: property (text), widget (QToolButton, m_updateButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_updateButton)
@@ -14458,19 +14468,19 @@ msgstr "განახლება"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:133
 #, kde-format
 msgid "Revert budget to last saved state."
-msgstr ""
+msgstr "ბიუჯეტის დაბრუნება ბოლოს შენახულ მდებარეობაზე."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_resetButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:136
 #, kde-format
 msgid "Use this to discard the modified data."
-msgstr ""
+msgstr "გამოიყენეთ ეს შეცვლილი მონაცემების მოსაცილებლად."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
 #, kde-format
 msgid "Collapse the items of the account tree"
-msgstr ""
+msgstr "ანგარიშის ხის ელემენტების ჩამოშლა"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
@@ -14482,7 +14492,7 @@ msgstr "ანგარიშები ხის ელემენტები�
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
 #, kde-format
 msgid "Hide unused budget categories"
-msgstr ""
+msgstr "გამოუყენებელი ბიუჯეტის კატეგორიების დამალვა"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_assignmentBox)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:185
@@ -14501,13 +14511,13 @@ msgstr "ჯამში"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:247
 #, kde-format
 msgid "Include subaccounts"
-msgstr ""
+msgstr "ქვეანგარისების ჩათვლით"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
 #: kmymoney/views/kpayeesview_p.h:809
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
-msgstr ""
+msgstr "<qt>გნებავთ ცვლილებების შენახვა ბიუჯეტისთვის <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
 #: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
@@ -14518,7 +14528,7 @@ msgstr "ცვლილებების შენახვა"
 #: kmymoney/plugins/views/budget/knewbudgetdlg.cpp:89
 #, kde-format
 msgid "Please specify a budget name"
-msgstr ""
+msgstr "მიუთითეთ ბიუჯეტის სახელი"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewBudgetDlg)
 #: kmymoney/plugins/views/budget/knewbudgetdlg.ui:14
@@ -14546,35 +14556,35 @@ msgstr "პროგნოზი"
 #: kmymoney/settings/kmymoney.kcfg:433
 #, kde-format
 msgid "Method to calculate forecast"
-msgstr ""
+msgstr "პროგნოზის გამოთვლის მეთოდი"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
 #: kmymoney/settings/kmymoney.kcfg:437
 #, kde-format
 msgid "Days to forecast"
-msgstr ""
+msgstr "დღეები პროგნოზისთვის"
 
 #. i18n: ectx: label, entry (forecastAccountCycle), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:21
 #: kmymoney/settings/kmymoney.kcfg:443
 #, kde-format
 msgid "Days of normal account cycle"
-msgstr ""
+msgstr "ნორმალური ანგარიშის ციკლის დღეები"
 
 #. i18n: ectx: label, entry (forecastCycles), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:27
 #: kmymoney/settings/kmymoney.kcfg:449
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
-msgstr ""
+msgstr "პროგნოზში გამოყენებული ისტორიული ციკლების რაოდენობა"
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
 #: kmymoney/settings/kmymoney.kcfg:455
 #, kde-format
 msgid "Day of month to start forecast"
-msgstr ""
+msgstr "თვის დღე პროგნოზის დასაწყებად"
 
 #. i18n: ectx: label, entry (historyMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:39
@@ -14616,7 +14626,7 @@ msgstr "პროგნოზის პარამეტრები"
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:44
 #, kde-format
 msgid "Number of Days of Account Cycle:"
-msgstr ""
+msgstr "ანგარიშის ციკლის დღეების რაოდენობა:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -14624,43 +14634,43 @@ msgstr ""
 #: kmymoney/plugins/views/forecast/kforecastview.ui:107
 #, kde-format
 msgid "Day of Month to start Forecast:"
-msgstr ""
+msgstr "თვის დღე პროგნოზის დასაწყებად:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:70
 #, kde-format
 msgid "Number of Days to Forecast:"
-msgstr ""
+msgstr "დღეების რაოდენობა პროგნოზისთვის:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_forecastMethod)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:100
 #, kde-format
 msgid "Forecast Method"
-msgstr ""
+msgstr "პროგნოზის მეთოდი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton9)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:106
 #, kde-format
 msgid "Scheduled and Future Transactions"
-msgstr ""
+msgstr "დაგეგმილი და სამომავლო ტრანზაქციები"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton10)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:113
 #, kde-format
 msgid "History-based"
-msgstr ""
+msgstr "ისტორიაზე დაფუძნებული"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:123
 #, kde-format
 msgid "History-based settings"
-msgstr ""
+msgstr "ისტორიაზე დაფუძნებული პარამეტრები"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:131
 #, kde-format
 msgid "Number of Cycles to use in Forecast:"
-msgstr ""
+msgstr "პროგნოზში გამოყენებული ციკლების რაოდენობა"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_historyMethodGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_historyMethod)
@@ -14668,7 +14678,7 @@ msgstr ""
 #: kmymoney/plugins/views/forecast/kforecastview.ui:281
 #, kde-format
 msgid "History Forecast Method"
-msgstr ""
+msgstr "ისტორიის პროგნოზის მეთოდი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton11)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:168
@@ -14682,7 +14692,7 @@ msgstr "მარტივი მოძრავი საშუალო"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:297
 #, kde-format
 msgid "Weighted Moving Average"
-msgstr ""
+msgstr "აწონილი მოძრავი საშუალო"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton13)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:182
@@ -14695,31 +14705,31 @@ msgstr "წრფივი რეგრესია"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:49
 #, kde-format
 msgid "Days to Forecast:"
-msgstr ""
+msgstr "დღეები პროგნოზისთვის:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:81
 #, kde-format
 msgid "Days of Accounts Cycle:"
-msgstr ""
+msgstr "ანგარიშების ციკლის დღეები:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:133
 #, kde-format
 msgid "Historic Cycles:"
-msgstr ""
+msgstr "ისტორიული ციკლები:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:159
 #, kde-format
 msgid "Chart Detail:"
-msgstr ""
+msgstr "დიაგრამის დეტალები:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:169
 #, kde-format
 msgid "<p>Choose what level of detail to show on the chart.</p>"
-msgstr ""
+msgstr "<p>აირჩიეთ რა დონის დეტალები იქნება დიაგრამაზე ნაჩვენები.</p>"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:176
@@ -14734,7 +14744,7 @@ msgstr "&ყველა"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
-msgstr ""
+msgstr "ზედა დონე"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
@@ -14756,7 +14766,7 @@ msgstr "მთლიანი ჯამი"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:224
 #, kde-format
 msgid "Current Forecast Method:"
-msgstr ""
+msgstr "მიმდინარე პროგნოზის მეთოდი:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_forecastMethod)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:246
@@ -14783,7 +14793,7 @@ msgstr "დამატებითი"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:441
 #, kde-format
 msgid "Budget Forecast"
-msgstr ""
+msgstr "ბიუჯეტის პროგნოზი"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_tabChart)
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
@@ -14806,7 +14816,7 @@ msgstr "მიმდინარე"
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:309
 #, kde-format
 msgid "Total variation"
-msgstr ""
+msgstr "სულ ვარიაცია"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:305
 #, kde-format
@@ -14866,22 +14876,22 @@ msgstr ""
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:492
 #, kde-format
 msgid "Min Bal %1"
-msgstr ""
+msgstr "მინ. ნაშთი %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:493
 #, kde-format
 msgid "Min Date %1"
-msgstr ""
+msgstr "მინ. თარიღი %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:496
 #, kde-format
 msgid "Max Bal %1"
-msgstr ""
+msgstr "მაქს. ნაშთი %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:497
 #, kde-format
 msgid "Max Date %1"
-msgstr ""
+msgstr "მაქს. თარიღი %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:499
 #, kde-format
@@ -14948,24 +14958,24 @@ msgstr "უცნობ"
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
 #, kde-format
 msgid "Send transfer"
-msgstr ""
+msgstr "გადარიცხვის გაგზავნა"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, kde-format
 msgid "New credit transfer"
-msgstr ""
+msgstr "ახალი საკრედიტო გადარიცხვა"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
 #, kde-format
 msgid "Remove transfer"
-msgstr ""
+msgstr "გადარიცხვის წაშლა"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
 #, kde-format
 msgid "Edit transfer"
-msgstr ""
+msgstr "გადარიცხვის ცასწორება"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:204
 #, kde-format
@@ -14976,7 +14986,7 @@ msgstr "ჟურნალის ჩვენება"
 #, kde-format
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
-msgstr ""
+msgstr "საკრედიტო გადარიცხვის პარამეტრები"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:278
 #, kde-format
@@ -15001,7 +15011,7 @@ msgstr ""
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:292
 #, kde-format
 msgid "Send transfers"
-msgstr ""
+msgstr "გადარიცხვების გაგზავნა"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:392
 #, kde-format
@@ -15015,7 +15025,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window Online transfers"
 msgid "Cannot send transfers"
-msgstr ""
+msgstr "გადარიცხვების გაგზავნა შეუძლებელია"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sendMail)
 #. i18n: ectx: property (text), widget (QPushButton, buttonSend)
@@ -15050,19 +15060,19 @@ msgstr ""
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:20
 #, kde-format
 msgid "Order Account"
-msgstr ""
+msgstr "შეკვეთის ანგარიში"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:26
 #, kde-format
 msgid "Account Balance"
-msgstr ""
+msgstr "ანგარიშის ბალანსი"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:55
 #, kde-format
 msgid "Credit Transfer"
-msgstr ""
+msgstr "საკრედიტო გადარიცხვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:132
@@ -15083,7 +15093,7 @@ msgstr "რიგში ჩაყენება"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:52
 #, kde-format
 msgid "Information to find issues."
-msgstr ""
+msgstr "ინფორმაცია პრობლემების მოსაძებნად."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:54
 #, kde-format
@@ -15098,7 +15108,7 @@ msgstr ""
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:58
 #, kde-format
 msgid "Warning message."
-msgstr ""
+msgstr "გაფრთხილების შეტყობინება."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:127
 #, kde-format
@@ -15115,7 +15125,7 @@ msgstr "გამავლები"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.rc:4
 #, kde-format
 msgid "Credit transfer options"
-msgstr ""
+msgstr "საკრედიტო გადარიცხვის პარამეტრები"
 
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:143
 #, kde-format
@@ -15131,23 +15141,23 @@ msgstr "შინაარსი"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:290
 #, kde-format
 msgid "Initial Market Value"
-msgstr ""
+msgstr "საწყისი საბაზრო ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:291
 #: kmymoney/plugins/views/reports/core/listtable.cpp:817
 #, kde-format
 msgid "Ending Market Value"
-msgstr ""
+msgstr "საბოლოო საბაზრო ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:294
 #, kde-format
 msgid "Opening Balance"
-msgstr ""
+msgstr "საწყისი ბალანსი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:295
 #, kde-format
 msgid "Closing Balance"
-msgstr ""
+msgstr "საბოლოო ბალანსი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
@@ -15161,7 +15171,7 @@ msgstr "გრანდ-ჯამი"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:383
 #, kde-format
 msgid "Calculated"
-msgstr ""
+msgstr "გამოთვლილია"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:693
 #, kde-format
@@ -15184,7 +15194,7 @@ msgstr "ჭდეები"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:705
 #, kde-format
 msgid "Top Category"
-msgstr ""
+msgstr "საუკეთესო კატეგორია"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:707
 #, kde-format
@@ -15218,82 +15228,82 @@ msgstr "აქციები"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:721
 #, kde-format
 msgid "Last Price"
-msgstr ""
+msgstr "ბოლო ფასი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:723
 #, kde-format
 msgid "Buy Price"
-msgstr ""
+msgstr "ყიდვის ფასი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:725
 #, kde-format
 msgid "Net Value"
-msgstr ""
+msgstr "წმინდა ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:727
 #, kde-format
 msgid "Buy Value"
-msgstr ""
+msgstr "ყიდვის ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:729
 #, kde-format
 msgid "Sell Value"
-msgstr ""
+msgstr "გაყიდვის ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:731
 #, kde-format
 msgid "Short-term Buy Value"
-msgstr ""
+msgstr "მოკლევადიანი შესყიდვის ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:733
 #, kde-format
 msgid "Short-term Sell Value"
-msgstr ""
+msgstr "მოკლევადიანი გაყიდვის ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:735
 #, kde-format
 msgid "Long-term Buy Value"
-msgstr ""
+msgstr "გრძელვადიანი ყიდვის ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:737
 #, kde-format
 msgid "Long-term Sell Value"
-msgstr ""
+msgstr "გრძელვადიანი გაყიდვის ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:739
 #, kde-format
 msgid "Dividends Reinvested"
-msgstr ""
+msgstr "რეინვესტირებული დივიდენდები"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:741
 #, kde-format
 msgid "Dividends Paid Out"
-msgstr ""
+msgstr "გადახდილი დივიდენდები"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:743
 #, kde-format
 msgid "Starting Balance"
-msgstr ""
+msgstr "საწყისი ბალანსი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:745
 #, kde-format
 msgid "Ending Balance"
-msgstr ""
+msgstr "საბოლოო ბალანსი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:747
 #, kde-format
 msgid "Market Value"
-msgstr ""
+msgstr "საბაზრო ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:749
 #, kde-format
 msgid "Annualized Return"
-msgstr ""
+msgstr "წლიური შემოსავალი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:751
 #, kde-format
 msgid "Extended internal rate of return"
-msgstr ""
+msgstr "დაბრუნების გაფართოებული შიდა კურსი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:753
 #, kde-format
@@ -15303,7 +15313,7 @@ msgstr "Enter"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:755
 #, kde-format
 msgid "Return On Investment"
-msgstr ""
+msgstr "ინვესტიციის დაბრუნება"
 
 #. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
 #. i18n: ectx: property (text), widget (QLabel, feesLabel)
@@ -15339,7 +15349,7 @@ msgstr "სახელი"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:769
 #, kde-format
 msgid "Next Due Date"
-msgstr ""
+msgstr "შემდეგი გადახდის თარიღი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:771
 #, kde-format
@@ -15349,32 +15359,32 @@ msgstr "შემთხვევა"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:773
 #, kde-format
 msgid "Payment Method"
-msgstr ""
+msgstr "გადახდის მეთოდი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:779
 #, kde-format
 msgid "Opening Date"
-msgstr ""
+msgstr "გახსნის თარიღი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:783
 #, kde-format
 msgid "Balance Early Warning"
-msgstr ""
+msgstr "ბალანსის ადრეული გაფრთხილება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:785
 #, kde-format
 msgid "Balance Max Limit"
-msgstr ""
+msgstr "ბალანსის მაქსიმალური ლიმიტი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:787
 #, kde-format
 msgid "Credit Early Warning"
-msgstr ""
+msgstr "კრედიტის ადრეული გაფრთხილება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:789
 #, kde-format
 msgid "Credit Max Limit"
-msgstr ""
+msgstr "კრედიტის მაქსიმალური ლიმიტი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:791
 #, kde-format
@@ -15389,19 +15399,19 @@ msgstr "მირჩევნია"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:795
 #, kde-format
 msgid "Loan Amount"
-msgstr ""
+msgstr "სესხის ოდენობა"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestEditWizardPage)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:797
 #: kmymoney/wizards/newloanwizard/interesteditwizardpage.ui:6
 #, kde-format
 msgid "Interest Rate"
-msgstr ""
+msgstr "საპროცენტო განაკვეთი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:799
 #, kde-format
 msgid "Next Interest Change"
-msgstr ""
+msgstr "შემდეგი საპროცენტო განაკვეთის ცვლილება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:801
 #, kde-format
@@ -15411,37 +15421,37 @@ msgstr "პერიოდული გადახდა"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:803
 #, kde-format
 msgid "Final Payment"
-msgstr ""
+msgstr "საბოლოო გადახდა"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:805
 #, kde-format
 msgid "Current Balance"
-msgstr ""
+msgstr "მიმდინარე ბალანსი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:807
 #, kde-format
 msgid "Capital Gain"
-msgstr ""
+msgstr "კაპიტალის მოგება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:809
 #, kde-format
 msgid "Percentage Gain"
-msgstr ""
+msgstr "პროცენტული მოგება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:811
 #, kde-format
 msgid "Short-term Gain"
-msgstr ""
+msgstr "მოკლევადიანი მოგება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:813
 #, kde-format
 msgid "Long-term Gain"
-msgstr ""
+msgstr "გრძელვადიანი მოგება"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:815
 #, kde-format
 msgid "Starting Market Value"
-msgstr ""
+msgstr "საწყისი საბაზრო ღირებულება"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:974
@@ -15450,7 +15460,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/querytable.cpp:2079
 #, kde-format
 msgid "Transfer from %1"
-msgstr ""
+msgstr "გადარიცხვა %1-დან"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
 #: kmymoney/plugins/views/reports/core/querytable.cpp:975
@@ -15534,7 +15544,7 @@ msgstr "მცოცავი საშუალო"
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
-msgstr ""
+msgstr "მოძრავი საშუალო ფასი"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2231
 #, kde-format
@@ -15546,19 +15556,19 @@ msgstr "ფასი"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:609
 #, kde-format
 msgid "[No Tag]"
-msgstr ""
+msgstr "[ჭდის გარეშე]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:622
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1892
 #, kde-format
 msgid "Month of %1"
-msgstr ""
+msgstr "%1-ის თვე"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:623
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1893
 #, kde-format
 msgid "Week of %1"
-msgstr ""
+msgstr "%1-ის კვირა"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
@@ -15574,19 +15584,19 @@ msgstr "აქციების გაყიდვა"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:2193
 #, kde-format
 msgid "No Institution"
-msgstr ""
+msgstr "დაწესებულების გარეშე"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:818
 #: kmymoney/plugins/views/reports/core/querytable.cpp:2032
 #, kde-format
 msgid "[Empty Payee]"
-msgstr ""
+msgstr "[ცარიელი მიმღები]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:852
 #: kmymoney/plugins/views/reports/core/querytable.cpp:2065
 #, kde-format
 msgid "[Split Transaction]"
-msgstr ""
+msgstr "[ტრანზაქციის გაყოფა]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:853
 #: kmymoney/plugins/views/reports/core/querytable.cpp:854
@@ -15606,13 +15616,13 @@ msgstr "არცერთ"
 #, kde-format
 msgctxt "Report date range"
 msgid "%1 through %2"
-msgstr ""
+msgstr "%1 %2-ის გავლით"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:106
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:129
 #, kde-format
 msgid "All currencies converted to %1"
-msgstr ""
+msgstr "ყველა ვალუტა გადაყვანილია %1-ში"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:107
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:130
@@ -15623,7 +15633,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:117
 #, kde-format
 msgid "Unable to generate report"
-msgstr ""
+msgstr "ანგარიშის გენერაცია შეუძლებელია"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:118
 #, kde-format
@@ -15652,7 +15662,7 @@ msgstr "%1-ის ბალანსის ისტორია"
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
 #, kde-format
 msgid "Balance of %1"
-msgstr ""
+msgstr "%1-ის ბალანსი"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
@@ -15662,24 +15672,24 @@ msgstr "ფაილი არ არსებობს: %1"
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
 msgid "it is not a plain file"
-msgstr ""
+msgstr "უბრალო ფაილი არაა"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:86
 #, kde-format
 msgid "it is not readable"
-msgstr ""
+msgstr "წაკთხვადი არაა"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:90
 #, kde-format
 msgid "it is empty"
-msgstr ""
+msgstr "ცარიელია"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:98
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "პრობლემა ფაილთან %1"
+msgstr[1] "პრობლემები ფაილთან %1"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
@@ -15696,13 +15706,13 @@ msgstr "ყველა ფაილი"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:103
 #, kde-format
 msgid "Report Configuration"
-msgstr ""
+msgstr "ანგარიშის მორგება"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:110
 #, kde-format
 msgctxt "@info:tooltip for report configuration apply button"
 msgid "Apply the configuration changes to the report"
-msgstr ""
+msgstr "კონფიგურაციის ცვლილებების გადატარება ანგარიშზე"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:129
 #, kde-format
@@ -15720,7 +15730,7 @@ msgstr "საერთო"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:164
 #, kde-format
 msgid "Rows/Columns"
-msgstr ""
+msgstr "მწკრივები/სვეტები"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -15762,21 +15772,21 @@ msgstr "&ყველა"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
-msgstr ""
+msgstr "შემოსავალი და ხარჯები"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:459
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
-msgstr ""
+msgstr "აქტივები და ვალდებულებები"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:71
 #, kde-format
 msgid "Top Categories"
-msgstr ""
+msgstr "საუკეთესო კატეგორიები"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
@@ -15793,7 +15803,7 @@ msgstr "ანგარიშები"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:91
 #, kde-format
 msgid "Top Accounts"
-msgstr ""
+msgstr "საუკეთესო ანგარიშები"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:589
@@ -15817,7 +15827,7 @@ msgstr "კვირაში ერთხელ"
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
 msgid "Bi-Monthly"
-msgstr ""
+msgstr "ორ თვეში ერთხელ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:607
@@ -15839,23 +15849,23 @@ msgstr "წლიურად"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:637
 #, kde-format
 msgid "Only owned"
-msgstr ""
+msgstr "მხოლოდ საკუთრები"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:626
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
 #, kde-format
 msgid "Only sold"
-msgstr ""
+msgstr "მხოლოდ გაყიდულები"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:635
 #, kde-format
 msgid "From period"
-msgstr ""
+msgstr "პერიოდიდან"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:636
 #, kde-format
 msgid "Owned and sold"
-msgstr ""
+msgstr "საკუთრები და გაყიდულები"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSearchTransactionDlg)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KTransactionFilter)
@@ -15865,28 +15875,28 @@ msgstr ""
 #: kmymoney/widgets/ktransactionfilter.ui:14
 #, kde-format
 msgid "Search transactions"
-msgstr ""
+msgstr "ტრანზაქციების ძებნა"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:33
 #, kde-format
 msgid "Configure your report"
-msgstr ""
+msgstr "მოირგეთ თქვენი ანგარიში"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:306
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
-msgstr ""
+msgstr "უცნობი ბრძანება '%1' ფუნქციაში KReportsView::slotOpenUrl()"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:326
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
-msgstr ""
+msgstr "უცნობი ხედი '%1' ფუნქციაში KReportsView::slotOpenUrl()"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:376
 #, kde-format
 msgid "Failed to save: %1"
-msgstr ""
+msgstr "შენახვის შეცდომა: %1"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:401
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1499
@@ -15895,7 +15905,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reportsview.cpp:177
 #, kde-format
 msgid "Generated Report"
-msgstr ""
+msgstr "გენერირებული ანგარიში"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:401
 #: kmymoney/plugins/views/reports/kreportsview.cpp:472
@@ -15955,18 +15965,18 @@ msgstr ""
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1429
 #, kde-format
 msgid "Default Report"
-msgstr ""
+msgstr "ნაგულისხმები ანგარიში"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:402
 #: kmymoney/plugins/views/reports/kreportsview.cpp:473
 #, kde-format
 msgid "Custom Report"
-msgstr ""
+msgstr "მორგებული ანგარიში"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:403
 #, kde-format
 msgid "%1 (Customized)"
-msgstr ""
+msgstr "%1 (მორგებულია)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:430
 #: kmymoney/plugins/views/reports/kreportsview.cpp:489
@@ -15979,29 +15989,29 @@ msgstr ""
 #: kmymoney/plugins/views/reports/kreportsview.cpp:450
 #, kde-format
 msgid "Failed to configure report: %1"
-msgstr ""
+msgstr "ანგარიშის მორგება ჩავარდა: %1"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:508
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
-msgstr ""
+msgstr "ანგარიშის დამატება შეუძლებელია. მიზეზი: \"%1\""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
-msgstr ""
+msgstr "<b>%1</b> ნაგულისხმევი ანგარიშია. მას ვერ წაშლით."
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:544
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
-msgstr ""
+msgstr "წავშალო ანგარიში?"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:741
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
-msgstr ""
+msgstr "ანგარიშის მორგება"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:742
 #, kde-format
@@ -16019,7 +16029,7 @@ msgstr "&ბეჭდვა"
 #, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
-msgstr ""
+msgstr "PDF ფაილში გატან&ა"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:751
 #, kde-format
@@ -16030,7 +16040,7 @@ msgstr "&მორგება"
 #: kmymoney/plugins/views/reports/kreportsview.cpp:754
 #, kde-format
 msgid "&New report"
-msgstr ""
+msgstr "ახალი ა&ნგარიში"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:764
 #, kde-format
@@ -16041,7 +16051,7 @@ msgstr "&წაშლა"
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
-msgstr ""
+msgstr "გატანა PDF ფაილ&ებში"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:822
 #, kde-format
@@ -16052,7 +16062,7 @@ msgstr "გატანა საქაღალდეში"
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
 #, kde-format
 msgid "KReportsView"
-msgstr ""
+msgstr "KReportsView"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_listTab)
 #: kmymoney/plugins/views/reports/kreportsview.ui:27
@@ -16082,12 +16092,12 @@ msgstr "კომენტარი"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
-msgstr ""
+msgstr "ამ ანგარიშის დიაგრამის ვერსიის ჩვენება"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:448
 #, kde-format
 msgid "Show the report version of this chart"
-msgstr ""
+msgstr "ამ დიაგრამის ანგარიშის ვერსიის ჩვენება"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:578
 #, kde-format
@@ -16106,42 +16116,42 @@ msgstr "რჩეული ანგარიშები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:711
 msgid "Old Customized Reports"
-msgstr ""
+msgstr "ძველი მორგებული ანგარიშები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:822
 #, kde-format
 msgid "Income and Expenses"
-msgstr ""
+msgstr "შემოსავალი და ხარჯები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:829
 #, kde-format
 msgid "Income and Expenses This Month"
-msgstr ""
+msgstr "შემოსავალი და ხარჯები ამ თვეში"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:837
 #, kde-format
 msgid "Income and Expenses This Year"
-msgstr ""
+msgstr "შემოსავალი და ხარჯები წელს"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:845
 #, kde-format
 msgid "Income and Expenses By Year"
-msgstr ""
+msgstr "შემოსავალი და ხარჯები წელიწადში"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:854
 #, kde-format
 msgid "Income and Expenses Graph"
-msgstr ""
+msgstr "შემოსავლისა და ხარჯების გრაფიკი"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:866
 #, kde-format
 msgid "Income and Expenses Bar Graph"
-msgstr ""
+msgstr "შემოსავლისა და ხარჯების ზოლოვანი გრაფიკი"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:879
 #, kde-format
 msgid "Income and Expenses Pie Chart"
-msgstr ""
+msgstr "შემოსავლისა და ხარჯების სექტორული დიაგრამა"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:889
 #: kmymoney/views/khomeview_p.h:1546
@@ -16152,93 +16162,93 @@ msgstr "წმინდა კაპიტალი"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:896
 #, kde-format
 msgid "Net Worth By Month"
-msgstr ""
+msgstr "წმინდა ქონება თვის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:904
 #, kde-format
 msgid "Net Worth Today"
-msgstr ""
+msgstr "წმინდა ქონება დღეს"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:912
 #, kde-format
 msgid "Net Worth By Year"
-msgstr ""
+msgstr "წმინდა ქონება წელიწადში"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:920
 #, kde-format
 msgid "7-day Cash Flow Forecast"
-msgstr ""
+msgstr "7 დღიანი ფულადი ნაკადის პროგნოზი"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:931
 #, kde-format
 msgid "Net Worth Graph"
-msgstr ""
+msgstr "წმინდა ღირებულების გრაფიკი"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:944
 #, kde-format
 msgid "Account Balances by Institution"
-msgstr ""
+msgstr "ანგარიშის ნაშთები დაწესებულების მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:953
 #, kde-format
 msgid "Account Balances by Type"
-msgstr ""
+msgstr "ანგარიშის ნაშთები ტიპის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:967
 #, kde-format
 msgid "Transactions by Account"
-msgstr ""
+msgstr "ტრანზაქციები ანგარიშის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:976
 #, kde-format
 msgid "Transactions by Category"
-msgstr ""
+msgstr "ტრანზაქციები კატეგორიის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:984
 #, kde-format
 msgid "Transactions by Payee"
-msgstr ""
+msgstr "ტრანზაქციები მიმღების მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:992
 #, kde-format
 msgid "Transactions by Tag"
-msgstr ""
+msgstr "ტრანზაქციები ჭდის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1000
 #, kde-format
 msgid "Transactions by Month"
-msgstr ""
+msgstr "ტრანზაქციები თვის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1008
 #, kde-format
 msgid "Transactions by Week"
-msgstr ""
+msgstr "ტრანზაქციები კვირის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1016
 #, kde-format
 msgid "Loan Transactions"
-msgstr ""
+msgstr "სესხის ტრანზაქციები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1025
 #, kde-format
 msgid "Transactions by Reconciliation Status"
-msgstr ""
+msgstr "გარიგებები შეთანხმებით სტატუსით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1036
 #, kde-format
 msgid "Cash Flow Transactions This Month"
-msgstr ""
+msgstr "ნაღდი ფულადი ნაკადის ტრანზაქციები ამ თვეში"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1041
 #: kmymoney/views/kmymoneyview.cpp:194
 #, kde-format
 msgid "Investments"
-msgstr ""
+msgstr "ინვესტიციები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1048
 #, kde-format
 msgid "Investment Transactions"
-msgstr ""
+msgstr "საინვესტიციო ტრანზაქციები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1058
 #, kde-format
@@ -16303,27 +16313,27 @@ msgstr ""
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1223
 #, kde-format
 msgid "Taxes"
-msgstr ""
+msgstr "გადასახადები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1230
 #, kde-format
 msgid "Tax Transactions by Category"
-msgstr ""
+msgstr "გადასახადის ტრანზაქციები კატეგორიის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1239
 #, kde-format
 msgid "Tax Transactions by Payee"
-msgstr ""
+msgstr "გადასახადის ტრანზაქციები მიმღების მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1248
 #, kde-format
 msgid "Tax Transactions by Category Last Fiscal Year"
-msgstr ""
+msgstr "გადასახადის ტრანზაქციები ბოლო ფისკალური წლის კატეგორიის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1257
 #, kde-format
 msgid "Tax Transactions by Payee Last Fiscal Year"
-msgstr ""
+msgstr "გადასახადის ტრანზაქციები მიმღების ბოლო ფისკალური წლის მიხედვით"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1264
 #, kde-format
@@ -16413,7 +16423,7 @@ msgstr "ანგარიშის ინფორმაცია"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1428
 #, kde-format
 msgid "Loan Information"
-msgstr ""
+msgstr "სესხის ინფორმაცია"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1498
 #, kde-format
@@ -16544,7 +16554,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:88
 #, kde-format
 msgid "Charts palette"
-msgstr ""
+msgstr "დიაგრამების პალიტრა"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ChartsPalette)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:101
@@ -16565,19 +16575,19 @@ msgstr "ცისარტყელა"
 #, kde-format
 msgctxt "@item KDChart color palette"
 msgid "Subdued"
-msgstr ""
+msgstr "დაქვეითებული"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:134
 #, kde-format
 msgid "Default CSS file"
-msgstr ""
+msgstr "ნაგულისხმები CSS ფაილი"
 
 #. i18n: ectx: property (toolTip), widget (KUrlRequester, kcfg_CssFileDefault)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:141
 #, kde-format
 msgid "default style sheet"
-msgstr ""
+msgstr "ნაგულისხმები სტილების ფურცელი"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -16587,7 +16597,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:14
 #, kde-format
 msgid "Report Tab"
-msgstr ""
+msgstr "ანგარიშის ჩანართი"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabCapitalGain)
@@ -16603,13 +16613,13 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:28
 #, kde-format
 msgid "Settlement period"
-msgstr ""
+msgstr "ანგარიშსწორების პერიოდი"
 
 #. i18n: ectx: property (text), widget (QLabel, lblTermsSeparator)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:35
 #, kde-format
 msgid "Terms separator"
-msgstr ""
+msgstr "ვადების გამყოფი"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, m_termSeparator)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:45
@@ -16628,7 +16638,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:31
 #, kde-format
 msgid "Sum investments"
-msgstr ""
+msgstr "ჯამური ინვესტიციები"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_settlementPeriod)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:66
@@ -16644,7 +16654,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:393
 #, kde-format
 msgid "Hide Totals"
-msgstr ""
+msgstr "ჯამების დამალვა"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabChart)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRange)
@@ -16652,7 +16662,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrange.ui:14
 #, kde-format
 msgid "Chart Tab"
-msgstr ""
+msgstr "დიაგრამის ჩანართი"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabChart)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRange)
@@ -16680,7 +16690,7 @@ msgstr "გრაფიკის ტიპი"
 #: kmymoney/plugins/views/reports/reporttabchart.ui:79
 #, kde-format
 msgid "Chart Palette"
-msgstr ""
+msgstr "დიაგრამის პალიტრა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkValues)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:112
@@ -16694,7 +16704,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:115
 #, kde-format
 msgid "Draw values on chart"
-msgstr ""
+msgstr "მნიშვნელობების დახატვა დიაგრამაზე"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkShowChart)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:122
@@ -16708,7 +16718,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:125
 #, kde-format
 msgid "Show as chart by default"
-msgstr ""
+msgstr "ნაგულისხმევად დახატვა დიაგრამის სახით"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkCHGridLines)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:139
@@ -16722,13 +16732,13 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:149
 #, kde-format
 msgid "Logarithmic vertical axis"
-msgstr ""
+msgstr "ლოგარითმული ვერტიკალური ღერძი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_negExpenses)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:156
 #, kde-format
 msgid "Plot expenses downwards"
-msgstr ""
+msgstr "ნაკვეთის ხარჯები ქვემოთ"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textLabel6)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:173
@@ -16746,7 +16756,7 @@ msgstr "ხაზის სიგანე"
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:28
 #, kde-format
 msgid "Report Name"
-msgstr ""
+msgstr "ანგარიშის სახელი"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editName)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:38
@@ -16890,27 +16900,27 @@ msgstr "ცისარტყელა"
 #, kde-format
 msgctxt "type of graphic palette"
 msgid "Subdued"
-msgstr ""
+msgstr "დაქვეითებული"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:111
 #, kde-format
 msgid "Show circular grid lines"
-msgstr ""
+msgstr "წრიული ბადის ხაზების ჩვენება"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:112
 #, kde-format
 msgid "Show sagittal grid lines"
-msgstr ""
+msgstr "საგიტალური ბადის ხაზების ჩვენება"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:118
 #, kde-format
 msgid "Show horizontal grid lines"
-msgstr ""
+msgstr "ჰორიზონტალური ბადის ხაზების ჩვენება"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:119
 #, kde-format
 msgid "Show vertical grid lines"
-msgstr ""
+msgstr "ვერტიკალური ბადის ხაზების ჩვენება"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26
@@ -16934,7 +16944,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrange.ui:120
 #, kde-format
 msgid "Data range"
-msgstr ""
+msgstr "მონაცემების შუალედი"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDataRangeStart)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:138
@@ -16979,7 +16989,7 @@ msgstr "სადამდე"
 #: kmymoney/plugins/views/reports/reporttabrange.ui:222
 #, kde-format
 msgid "Labels precision"
-msgstr ""
+msgstr "ჭდეების სიზუსტე"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
@@ -16987,7 +16997,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:20
 #, kde-format
 msgid "Rows/Columns Tab"
-msgstr ""
+msgstr "მწკრივების/სვეტების ჩანართი"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColQuery)
@@ -17003,7 +17013,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:30
 #, kde-format
 msgid "Average days"
-msgstr ""
+msgstr "ს"
 
 #. i18n: ectx: property (text), widget (QLabel, m_rowsLabel)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:50
@@ -17015,7 +17025,7 @@ msgstr "სტრიქონები"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:60
 #, kde-format
 msgid "Show totals row"
-msgstr ""
+msgstr "ჯამების მწკრივის ჩვენება"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboRows)
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboDetail)
@@ -17030,7 +17040,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:87
 #, kde-format
 msgid "Show totals column"
-msgstr ""
+msgstr "ჯამების სვეტის ჩვენება"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:148
@@ -17064,7 +17074,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:400
 #, kde-format
 msgid "Include transfers"
-msgstr ""
+msgstr "გადარიცხვების ჩასმა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkUnused)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:218
@@ -17076,7 +17086,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:43
 #, kde-format
 msgid "Organize by:"
-msgstr ""
+msgstr "ორგანიზების ავტორი:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:62
@@ -17217,7 +17227,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:376
 #, kde-format
 msgid "Include only Tax categories"
-msgstr ""
+msgstr "მხოლოდ გადასახადის კატეგორიების ჩასმა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkHideTransactions)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:383
@@ -17246,18 +17256,18 @@ msgstr "ისტორია"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:129
 #, kde-format
 msgid "Loading Woob backend..."
-msgstr ""
+msgstr "იტვირთება Woob უკანაბოლო..."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:130
 #, kde-format
 msgid "Getting list of backends."
-msgstr ""
+msgstr "უკანაბოლოების სიის მიღება."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:142
 #: kmymoney/plugins/woob/woob.cpp:172
 #, kde-format
 msgid "Connecting to bank..."
-msgstr ""
+msgstr "ბანკთან დაკავშირება..."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:143
 #, kde-format
@@ -17334,12 +17344,12 @@ msgstr ""
 #: kmymoney/plugins/woob/woob.cpp:121
 #, kde-format
 msgid "Woob configuration"
-msgstr ""
+msgstr "Woob-ის მორგება"
 
 #: kmymoney/plugins/woob/woob.cpp:173
 #, kde-format
 msgid "Retrieving transactions..."
-msgstr ""
+msgstr "ტრანზაქციების მიღება..."
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:56
 #, kde-format
@@ -17366,7 +17376,7 @@ msgstr ""
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
 #, kde-format
 msgid "GPG encryption activated"
-msgstr ""
+msgstr "GPG-ით დაშიფვრა გააქტიურდა"
 
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:81
 #, kde-format
@@ -17377,7 +17387,7 @@ msgstr "დაშიფვრის გარეშე"
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:14
 #, kde-format
 msgid "Select additional keys"
-msgstr ""
+msgstr "აირჩიეთ დამატებითი გასაღებები"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:26
@@ -17391,7 +17401,7 @@ msgstr ""
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:39
 #, kde-format
 msgid "Add additional keys here"
-msgstr ""
+msgstr "დაამატეთ დამატებითი გასაღებები აქ"
 
 #. i18n: ectx: property (whatsThis), widget (KEditListWidget, m_listWidget)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:46
@@ -17414,13 +17424,13 @@ msgstr ""
 #: kmymoney/views/kaccountsview.cpp:312
 #, kde-format
 msgid " (Brokerage)"
-msgstr ""
+msgstr " (ბროკერული ანგარიში)"
 
 #: kmymoney/plugins/xml/mymoneyanonwriter.cpp:420
 #: kmymoney/plugins/xml/mymoneyanonwriter.cpp:421
 #, kde-format
 msgid "%1 (Brokerage)"
-msgstr ""
+msgstr "%1 (ბროკერული ანგარიში)"
 
 #: kmymoney/plugins/xml/mymoneyxmlreader.cpp:445
 #, kde-format
@@ -17439,7 +17449,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstorage.cpp:115
 #, kde-format
 msgid "GPG not found"
-msgstr ""
+msgstr "GPG აღმოჩენილი არაა"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:123
 #, kde-format
@@ -17456,7 +17466,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstorage.cpp:141
 #, kde-format
 msgid "GPG Key not found"
-msgstr ""
+msgstr "GPG-ის გასაღები აღმჩენილი არაა"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:137
 #, kde-format
@@ -17478,12 +17488,12 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstorage.cpp:151
 #, kde-format
 msgid "Store GPG encrypted"
-msgstr ""
+msgstr "GPG-ით დაშიფრულად შენახვა"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
 #, kde-format
 msgid "Unable to open file '%1' for writing."
-msgstr ""
+msgstr "ვერ გავხსენი ფაილი '%1' ჩასაწერად."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
@@ -17503,7 +17513,7 @@ msgstr[1] ""
 #: kmymoney/plugins/xml/xmlstorage.cpp:280
 #, kde-format
 msgid "Recover key expires soon"
-msgstr ""
+msgstr "აღდგენის გასაღების ვადა მალე იწურება"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:355
 #, kde-format
@@ -17526,13 +17536,13 @@ msgstr "შენახვა, როგორც"
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
-msgstr ""
+msgstr "KMyMoney-ის ფაილები"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:627
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
-msgstr ""
+msgstr "ანონიმური ფაილები"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:628
 #, kde-format
@@ -17549,13 +17559,13 @@ msgstr "ყველა ფაილი"
 #: kmymoney/plugins/xml/xmlstorage.cpp:703
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
-msgstr ""
+msgstr "KMyMoney-ის ფაილები (*.kmy *.xml)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, XMLStorageSettings)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:14
 #, kde-format
 msgid "GPG encryption settings"
-msgstr ""
+msgstr "GPG-ით დაშიფვრის მორგება"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, XMLStorageSettings)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:19
@@ -17575,7 +17585,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:25
 #, kde-format
 msgid "Use GPG encryption"
-msgstr ""
+msgstr "GPG დაშიფვრის გამოყენება"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:43
@@ -17698,13 +17708,13 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:43
 #, kde-format
 msgid "Autosave interval in minutes"
-msgstr ""
+msgstr "ავტოშენახვის ინტერვალი წუთებში"
 
 #. i18n: ectx: label, entry (AutoSaveOnClose), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:49
 #, kde-format
 msgid "Autosave file upon close"
-msgstr ""
+msgstr "ფაილის ავტოშენახვა დახურვისას"
 
 #. i18n: ectx: label, entry (CheckSchedule), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:53
@@ -17740,7 +17750,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:100
 #, kde-format
 msgid "The last selected view"
-msgstr ""
+msgstr "ბოლოს არჩეული ხედი"
 
 #. i18n: ectx: label, entry (WriteDataEncrypted), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:104
@@ -17758,13 +17768,13 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:112
 #, kde-format
 msgid "GPG User ID (deprecated)"
-msgstr ""
+msgstr "GPG-ის მომხმარებლის ID (მოძველებულია)"
 
 #. i18n: ectx: label, entry (GpgRecipientList), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:115
 #, kde-format
 msgid "GPG User ID"
-msgstr ""
+msgstr "GPG-ის მომხმარებლის ID"
 
 #. i18n: ectx: label, entry (ExpertMode), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:118
@@ -17878,7 +17888,7 @@ msgstr "ფერების ხელით მითითება"
 #: kmymoney/settings/kmymoney.kcfg:190
 #, kde-format
 msgid "Background color for imported transactions"
-msgstr ""
+msgstr "ფონის ფერი შემოტანილი ტრანზაქციებისთვის"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -17890,7 +17900,7 @@ msgstr "ტექსტის ფერი შემოტანილი ტრ
 #: kmymoney/settings/kmymoney.kcfg:198
 #, kde-format
 msgid "Background color for matched transactions"
-msgstr ""
+msgstr "ფონის ფერი დამთხვეული ტრანზაქციებისთვის"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -17902,43 +17912,43 @@ msgstr "ტექსტის ფერი დამთხვეული ტრ
 #: kmymoney/settings/kmymoney.kcfg:206
 #, kde-format
 msgid "List color for erroneous transactions"
-msgstr ""
+msgstr "სიის ფერი შეცდომიანი ტრანზაქციებისთვის"
 
 #. i18n: ectx: label, entry (missingConversionRateColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:210
 #, kde-format
 msgid "List color for missing conversion rate"
-msgstr ""
+msgstr "სიის ფერი ნაკლული გადაცვლის კურსი"
 
 #. i18n: ectx: label, entry (groupMarkerColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
 #, kde-format
 msgid "Background color for group marker"
-msgstr ""
+msgstr "ფონის ფერი ჯგუფის მარკერისთვის"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
 #, kde-format
 msgid "Text color for group marker"
-msgstr ""
+msgstr "ტექსტის ფერი ჯგუფის მარკერისთვის"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:222
 #, kde-format
 msgid "Background color for required fields"
-msgstr ""
+msgstr "ფონის ფერი აუცილებელი ველებისთვის"
 
 #. i18n: ectx: label, entry (ShowCategoriesInAccountsView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Show categories in the accounts view"
-msgstr ""
+msgstr "კატეგორიების ჩვენება ანგარიშების ხედში"
 
 #. i18n: ectx: label, entry (HideZeroBalanceEquities), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
 #, kde-format
 msgid "Hide zero balance equities"
-msgstr ""
+msgstr "ნულოვანი ბალანსის კაპიტალების დამალვა"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
@@ -17956,43 +17966,43 @@ msgstr "ნულოვანი ბალანსის მქონე ან
 #: kmymoney/settings/kmymoney.kcfg:252
 #, kde-format
 msgid "Hide finished schedules"
-msgstr ""
+msgstr "დასრულებული გეგმების დამალვა"
 
 #. i18n: ectx: label, entry (ShowRegisterDetailed), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:260
 #, kde-format
 msgid "Show all register entries in full detail"
-msgstr ""
+msgstr "რეესტრის ყველა ჩანაწერის სრული დეტალების ჩვენება"
 
 #. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show all split details in register"
-msgstr ""
+msgstr "რეესტრსი ყველა გაყოფის დეტალების ჩვენება"
 
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:268
 #, kde-format
 msgid "Show schedules with planned date"
-msgstr ""
+msgstr "გრაფიკის ჩვენება დაგეგმილი თარიღით"
 
 #. i18n: ectx: label, entry (ShowGrid), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:272
 #, kde-format
 msgid "Show a grid in the register"
-msgstr ""
+msgstr "ბადის ჩვენება რეესტრში"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
 #, kde-format
 msgid "Show fancy group markers"
-msgstr ""
+msgstr "ლამაზი ჯგუფის მარკერების ჩვენება"
 
 #. i18n: ectx: label, entry (ShowFiscalMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:280
 #, kde-format
 msgid "Show fancy markers for previous and current fiscal year"
-msgstr ""
+msgstr "ლამაზი მარკერების ჩვენება წინა და მიმდინარე ფისკალური წლისთვის"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
@@ -18072,37 +18082,37 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:376
 #, kde-format
 msgid "additional names for cash account"
-msgstr ""
+msgstr "დამატებითი სახელები ნაღდი ფულის ანგარიშისთვის"
 
 #. i18n: ectx: label, entry (qifBank), group (QIF Options)
 #: kmymoney/settings/kmymoney.kcfg:380
 #, kde-format
 msgid "additional names for checking account"
-msgstr ""
+msgstr "დამატებითი სახელები მიმდინარე ანგარიშისთვის"
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
 #: kmymoney/settings/kmymoney.kcfg:384
 #, kde-format
 msgid "additional names for credit card account"
-msgstr ""
+msgstr "დამატებითი სახელები საკრედიტო ბარათის ანგარიშისთვის"
 
 #. i18n: ectx: label, entry (qifAsset), group (QIF Options)
 #: kmymoney/settings/kmymoney.kcfg:388
 #, kde-format
 msgid "additional names for asset account"
-msgstr ""
+msgstr "დამატებითი სახელები აქტივების ანგარიშისთვის"
 
 #. i18n: ectx: label, entry (qifOpeningBalance), group (QIF Options)
 #: kmymoney/settings/kmymoney.kcfg:392
 #, kde-format
 msgid "additional names for opening balance payee"
-msgstr ""
+msgstr "დამატებითი სახელები ღია ბალანსის მიმღებისთვის"
 
 #. i18n: ectx: label, entry (qifInvoice), group (QIF Options)
 #: kmymoney/settings/kmymoney.kcfg:396
 #, kde-format
 msgid "additional names for invoice accounts"
-msgstr ""
+msgstr "დამატებითი სახელები ინვოისის ანგარიშებისთვის"
 
 #. i18n: ectx: label, entry (showAccountsExpanded), group (Account View Settings)
 #: kmymoney/settings/kmymoney.kcfg:402
@@ -18126,19 +18136,19 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:426
 #, kde-format
 msgid "Name of default CSS file"
-msgstr ""
+msgstr "ნაგულისხმევი CSS ფაილის სახელი"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KLoadTemplateDlg)
 #: kmymoney/templates/kloadtemplatedlg.ui:14
 #, kde-format
 msgid "Load Account Hierarchy"
-msgstr ""
+msgstr "ანგარიშის იერარქიის ჩატვირთვა"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTemplateExportDlg)
 #: kmymoney/templates/ktemplateexportdlg.ui:14
 #, kde-format
 msgid "Template Export Attributes"
-msgstr ""
+msgstr "შაბლონის გატანის ატრიბუტები"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/templates/ktemplateexportdlg.ui:26
@@ -18161,7 +18171,7 @@ msgstr "სათაური"
 #: kmymoney/templates/templateloader.cpp:95
 #, kde-format
 msgid "<p><b>%1</b> is not a template file.</p>"
-msgstr ""
+msgstr "<p><b>%1</b> შაბლონის ფაილი არაა.</p>"
 
 #: kmymoney/templates/templateloader.cpp:96
 #, kde-format
@@ -18201,24 +18211,24 @@ msgstr ""
 #: kmymoney/templates/templatewriter.cpp:178
 #, kde-format
 msgid "Invalid template URL '%1'"
-msgstr ""
+msgstr "არასწორი შაბლონის URL '%1'"
 
 #: kmymoney/templates/templatewriter.cpp:188
 #: kmymoney/templates/templatewriter.cpp:202
 #, kde-format
 msgid "Unable to write changes to '%1'"
-msgstr ""
+msgstr "'%1'-ში ცვლილებების ჩაწერა შეუძლებელია"
 
 #: kmymoney/templates/templatewriter.cpp:192
 #: kmymoney/templates/templatewriter.cpp:206
 #, kde-format
 msgid "Unable to open template file '%1'"
-msgstr ""
+msgstr "ვერ გავხსენი შაბლონის ფაილი '%1'"
 
 #: kmymoney/templates/templatewriter.cpp:215
 #, kde-format
 msgid "Unable to upload to '%1'.<br />%2"
-msgstr ""
+msgstr "ვერ ავტვირთე '%1'-ზე.<br />%2"
 
 #: kmymoney/views/investactivities.cpp:284
 #, kde-format
@@ -18230,13 +18240,13 @@ msgstr "აქციები"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
-msgstr ""
+msgstr "ფასი/წილი"
 
 #: kmymoney/views/investactivities.cpp:297
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
-msgstr ""
+msgstr "ტრანზაქციის თანხა"
 
 #: kmymoney/views/investactivities.cpp:299
 #, kde-format
@@ -18248,7 +18258,7 @@ msgstr "ფასი"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
-msgstr ""
+msgstr "პროპორცია 1/"
 
 #: kmymoney/views/investtransactioneditor.cpp:99
 #, kde-format
@@ -18272,7 +18282,7 @@ msgstr "დივიდენდი"
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
-msgstr ""
+msgstr "დივიდენდის რეინვესტირება"
 
 #: kmymoney/views/investtransactioneditor.cpp:103
 #, kde-format
@@ -18290,7 +18300,7 @@ msgstr "აქციების დამატება"
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
-msgstr ""
+msgstr "აქციების წაშლა"
 
 #: kmymoney/views/investtransactioneditor.cpp:106
 #, kde-format
@@ -18302,7 +18312,7 @@ msgstr "აქციების გაყოფა"
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
-msgstr ""
+msgstr "საპროცენტო განაკვეთის შემოსავალი"
 
 #: kmymoney/views/investtransactioneditor.cpp:306
 #: kmymoney/views/multitransactioneditor.cpp:229
@@ -18357,7 +18367,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
-msgstr ""
+msgstr "გაყოფის კოეფიციენტი"
 
 #: kmymoney/views/investtransactioneditor.cpp:634
 #, kde-format
@@ -18432,7 +18442,7 @@ msgstr ""
 #: kmymoney/views/investtransactioneditor.ui:32
 #, kde-format
 msgid "Price/share"
-msgstr ""
+msgstr "ფასი/წილი"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
@@ -18545,21 +18555,21 @@ msgstr ""
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
 msgid_plural "Tags: "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ჭდე: "
+msgstr[1] "ჭდეები: "
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:209
 #, kde-format
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
-msgstr ""
+msgstr "წმინდა ღირებულება: ~ %1"
 
 #: kmymoney/views/kaccountsview.cpp:171
 #: kmymoney/views/kinstitutionsview.cpp:210
 #, kde-format
 msgid "Net Worth: %1"
-msgstr ""
+msgstr "წმინდა ღირებულება: %1"
 
 #: kmymoney/views/kaccountsview.cpp:244
 #, kde-format
@@ -18632,7 +18642,7 @@ msgstr ""
 #: kmymoney/views/kinstitutionsview.ui:113
 #, kde-format
 msgid "Total Profits:"
-msgstr ""
+msgstr "მთლიანი მოგება:"
 
 #: kmymoney/views/kaccountsview_p.h:192
 #, kde-format
@@ -19325,17 +19335,17 @@ msgstr "დაწესებულების წაშლა"
 msgid "Unable to delete institution: %1"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:601
+#: kmymoney/views/kinvestmentview.cpp:604
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:602
+#: kmymoney/views/kinvestmentview.cpp:605
 #, kde-format
 msgid "Delete investment"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:613
+#: kmymoney/views/kinvestmentview.cpp:616
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr ""
@@ -19917,7 +19927,7 @@ msgstr "კრიტერიუმი"
 #, kde-format
 msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
-msgstr ""
+msgstr "ტრანზაქციების ძებნა"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:110
 #, kde-format
@@ -20837,7 +20847,7 @@ msgstr "სადამდე"
 #: kmymoney/widgets/kaccounttemplateselector.ui:43
 #, kde-format
 msgid "Detailed description"
-msgstr ""
+msgstr "დეტალური აღწერა"
 
 #. i18n: ectx: property (html), widget (KTextEdit, m_description)
 #: kmymoney/widgets/kaccounttemplateselector.ui:77
@@ -20911,7 +20921,7 @@ msgstr "აქციების გაყიდვა"
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:46
 #, kde-format
 msgid "Reinvest dividend"
-msgstr ""
+msgstr "დივიდენდის რეინვესტირება"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:48
 #, kde-format
@@ -20921,7 +20931,7 @@ msgstr "აქციების დამატება"
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:49
 #, kde-format
 msgid "Remove shares"
-msgstr ""
+msgstr "აქციების წაშლა"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:50
 #, kde-format
@@ -20995,7 +21005,7 @@ msgstr ""
 #: kmymoney/widgets/kmymoneybriefschedule.ui:309
 #, kde-format
 msgid "Enter..."
-msgstr ""
+msgstr "შეყვანა..."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_skipButton)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:319
@@ -22071,7 +22081,7 @@ msgstr "ანგარიშის ნომერი"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:75
 #, kde-format
 msgid "Write check"
-msgstr ""
+msgstr "ჩეკის დაწერა"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:76
 #, kde-format
@@ -22091,7 +22101,7 @@ msgstr "დალაგების მიმდევრობა"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:79
 #, kde-format
 msgid "Manual deposit"
-msgstr ""
+msgstr "ხელით დეპოზიტი"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:80
 #, kde-format

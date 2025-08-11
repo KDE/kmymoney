@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-04 02:14+0000\n"
-"PO-Revision-Date: 2025-08-09 14:38+0200\n"
+"POT-Creation-Date: 2025-08-11 00:43+0000\n"
+"PO-Revision-Date: 2025-08-10 07:42+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -20202,17 +20202,17 @@ msgstr "Ta bort institution"
 msgid "Unable to delete institution: %1"
 msgstr "Kan inte ta bort institution: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:601
+#: kmymoney/views/kinvestmentview.cpp:604
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Vill du verkligen ta bort investeringen <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:602
+#: kmymoney/views/kinvestmentview.cpp:605
 #, kde-format
 msgid "Delete investment"
 msgstr "Ta bort investering"
 
-#: kmymoney/views/kinvestmentview.cpp:613
+#: kmymoney/views/kinvestmentview.cpp:616
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Kan inte ta bort investeringen: %1"
@@ -21068,7 +21068,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
-msgstr ""
+msgstr "Skillnaden mellan kontots behållning och nätbehållningen är %1."
 
 #: kmymoney/views/ledgerview.cpp:1015
 #, kde-format
@@ -21307,19 +21307,22 @@ msgstr "Kostnadsställe"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
+"Den här grafiska komponenten är inaktiverad eftersom en kategori måste "
+"väljas först."
 
 #: kmymoney/views/newtransactioneditor.cpp:179
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "Använd det här för att rensa transaktionens alla delningar."
+msgstr ""
+"Använd den här grafiska komponenten för att lägga till etiketter för "
+"transaktionen."
 
 #: kmymoney/views/newtransactioneditor.cpp:182
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr ""
+msgstr "Använd delningseditorn för att tilldela etiketter."
 
 #: kmymoney/views/newtransactioneditor.cpp:255
 #, kde-format
