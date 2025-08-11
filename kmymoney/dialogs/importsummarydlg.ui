@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string comment="@title:window">Import summary</string>
+   <string comment="@title:window, this is a compound word (one noun)">Import summary</string>
   </property>
   <property name="modal">
    <bool>true</bool>
