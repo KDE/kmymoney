@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-04 03:55+0000\n"
+"POT-Creation-Date: 2025-08-12 03:31+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -21357,17 +21357,17 @@ msgstr "Διαγραφή ιδρύματος..."
 msgid "Unable to delete institution: %1"
 msgstr "Αδυναμία διαγραφής ιδρύματος: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:601
+#: kmymoney/views/kinvestmentview.cpp:604
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Θέλετε πράγματι να διαγράψετε την επένδυση <b>%1</b>;</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:602
+#: kmymoney/views/kinvestmentview.cpp:605
 #, kde-format
 msgid "Delete investment"
 msgstr "Διαγραφή επένδυσης"
 
-#: kmymoney/views/kinvestmentview.cpp:613
+#: kmymoney/views/kinvestmentview.cpp:616
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Αδυναμία διαγραφής επένδυσης: %1"
