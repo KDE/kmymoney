@@ -151,9 +151,7 @@
     <para
 >Hi ha diverses opcions que controlen quines operacions es mostraran a la vista del llibre major d'un compte. Primer, comproveu l'<link linkend="details.ledgers.view.filter"
 >àrea de filtre del llibre major</link
->. Si hi ha alguna cosa escrita al quadre de cerca, només es mostraran les operacions que continguin aquest text. Si la llista desplegable d'estat ha canviat de <quote
->Qualsevol estat</quote
->, només es mostraran les operacions del tipus seleccionat. A més, hi ha dues opcions importants a la secció d'<link linkend="details.settings.general.filter"
+>. Si hi ha alguna cosa escrita al quadre de cerca, només es mostraran les operacions que continguin aquest text. Si la llista desplegable d'estat ha canviat de «Qualsevol estat», només es mostraran les operacions del tipus seleccionat. A més, hi ha dues opcions importants a la secció d'<link linkend="details.settings.general.filter"
 >opcions del filtre</link
 > al diàleg de configuració del &kmymoney;. Si s'estableix el camp a <guilabel
 >No mostris les operacions anteriors a</guilabel

@@ -47,38 +47,16 @@
 >Imagineu els vostres diners com boles o fesols, i per a evitar que rodin i es perdin, els deseu en una caixa o pot. La comptabilitat o tenidoria de llibres, és el procés de comptar i fer un seguiment dels fesols al pot, o més important, a diversos pots. </para>
 
 <para
->Teniu alguns diners al pot marcat com <quote
->Efectiu</quote
->. Compreu alguns productes, de manera que traieu alguns fesols d'aquest pot i els col·loqueu en un altre marcat com <quote
->Proveïdor</quote
->. El proveïdor us lliurarà alguns béns a canvi de diners en efectiu, de manera que els traieu del pot marcat com <quote
->Proveïdor</quote
-> i els col·loqueu en el pot marcat com <quote
->Productes</quote
->. </para>
+>Teniu alguns diners al pot marcat com «Efectiu». Compreu alguns productes, de manera que traieu alguns fesols d'aquest pot i els col·loqueu en un altre marcat com «Proveïdor». El proveïdor us lliurarà alguns béns a canvi de diners en efectiu, de manera que els traieu del pot marcat com «Proveïdor» i els col·loqueu en el pot marcat com «Productes». </para>
 
 <para
 >Els productes tenen un valor (el preu que heu pagat), de manera que encara teniu la mateixa quantitat de fesols, alguns que representen efectiu i altres que representen béns. </para>
 
 <para
->En aquest cas tindreu dos moviments de fesols o operacions. Cada operació necessita dues entrades, una per a treure els fesols i una altra per a posar-los. Això s'anomena <quote
->comptabilitat de doble entrada</quote
->. El registre de les operacions es realitza en un <quote
->Llibre major</quote
->. Cada pot es coneix com un <quote
->Compte</quote
-> o <quote
->Codi comptable</quote
->. </para>
+>En aquest cas tindreu dos moviments de fesols o operacions. Cada operació necessita dues entrades, una per a treure els fesols i una altra per a posar-los. Això s'anomena «comptabilitat de doble entrada». El registre de les operacions es realitza en un «Llibre major». Cada pot es coneix com un «Compte» o «Codi comptable». </para>
 
 <para
->Ara preneu alguns béns i els doneu a un client, el qual us donarà una mica d'efectiu a canvi. Els béns valien alguns fesols i, amb sort, el client ens n'ha donat de més, així que hem obtingut guanys. Per a simplificar-ho, els fesols del pot Béns tornen com a Efectiu, però podem desglossar-ho com el <quote
->Cost dels béns venuts</quote
-> i <quote
->Benefici</quote
->. Aquesta operació té tres entrades; s'ha desglossat una banda de la <quote
->doble entrada</quote
->. </para>
+>Ara preneu alguns béns i els doneu a un client, el qual us donarà una mica d'efectiu a canvi. Els béns valien alguns fesols i, amb sort, el client ens n'ha donat de més, així que hem obtingut guanys. Per a simplificar-ho, els fesols del pot Béns tornen com a Efectiu, però podem desglossar-ho com el «Cost dels béns venuts» i «Benefici». Aquesta operació té tres entrades; s'ha desglossat una banda de la «doble entrada». </para>
 
 <para
 >Això es tractarà més endavant amb més detall en aquest manual a la secció sobre <link linkend="details.ledgers.split"
@@ -89,27 +67,13 @@
   <title
 >Definir els comptes (registres personals)</title>
 <para
->La majoria dels comptes, o pots, com s'ha descrit anteriorment, representen una mesura del nostre <quote
->Patrimoni</quote
->. L'efectiu i els béns representen els nostres <quote
->Actius</quote
->, que també inclouen qualsevol quantitat que algú ens deu per béns que els vam proporcionar o diners que els hem prestat. Els diners que devem als altres, p. ex. si no havíem pagat als nostres proveïdors, són els nostres <quote
->Passius</quote
->. Aquests comptes són transferibles a efectiu i tenen un valor. </para>
+>La majoria dels comptes, o pots, com s'ha descrit anteriorment, representen una mesura del nostre «Patrimoni». L'efectiu i els béns representen els nostres «Actius», que també inclouen qualsevol quantitat que algú ens deu per béns que els vam proporcionar o diners que els hem prestat. Els diners que devem als altres, p. ex. si no havíem pagat als nostres proveïdors, són els nostres «Passius». Aquests comptes són transferibles a efectiu i tenen un valor. </para>
 
 <para
->Qualsevol pot que no es pugui valorar serà <quote
->Ingressos</quote
-> o <quote
->Despeses</quote
->. La nostra factura telefònica (o la companyia telefònica a qui paguem la factura) no es pot valorar, sabem quant hem pagat, però no quant han pagat els altres. Sabem quant ens ha pagat el nostre patró/ona, però no sabem quant li ha pagat a ningú més o quants diners els queda per a pagar-nos el mes vinent. Tot i que no podem determinar un valor real per a aquests pots, és útil fer un seguiment de quant hem posat o tret de cadascun d'ells. </para>
+>Qualsevol pot que no es pugui valorar serà «Ingressos» o «Despeses». La nostra factura telefònica (o la companyia telefònica a qui paguem la factura) no es pot valorar, sabem quant hem pagat, però no quant han pagat els altres. Sabem quant ens ha pagat el nostre patró/ona, però no sabem quant li ha pagat a ningú més o quants diners els queda per a pagar-nos el mes vinent. Tot i que no podem determinar un valor real per a aquests pots, és útil fer un seguiment de quant hem posat o tret de cadascun d'ells. </para>
 
 <para
->En alguns casos, un proveïdor és un <quote
->Passiu</quote
->, en altres és una <quote
->Despesa</quote
->. Aquesta és una cosa que hem de considerar i decidir per a cada cas. De la mateixa manera, podreu establir un préstec com un Passiu, en particular si transferiu els diners al vostre compte bancari, però podria ser una Despesa si fos per a comprar alguns mobles. </para>
+>En alguns casos, un proveïdor és un «Passiu», en altres és una «Despesa». Aquesta és una cosa que hem de considerar i decidir per a cada cas. De la mateixa manera, podreu establir un préstec com un Passiu, en particular si transferiu els diners al vostre compte bancari, però podria ser una Despesa si fos per a comprar alguns mobles. </para>
 
 <para
 >Penseu com voleu seguir i analitzar els vostres ingressos i despeses. Això us ajudarà a decidir com configurar-los al &kmymoney;. </para>
@@ -122,9 +86,7 @@
 ><title
 >Definir els comptes (registres comercials)</title>
 <para
->Existeixen similituds amb la configuració dels comptes per a ús personal, però hi ha consideracions addicionals, que inclouen pautes i requisits legals. El &kmymoney; no aborda explícitament cap d'aquests problemes, ja que ha estat dissenyat com un gestor de finances <quote
->personals</quote
->. A més, aquests problemes addicionals no s'aborden en aquest manual, però haureu de tenir-los en compte si intenteu emprar el &kmymoney; per a un negoci. </para>
+>Existeixen similituds amb la configuració dels comptes per a ús personal, però hi ha consideracions addicionals, que inclouen pautes i requisits legals. El &kmymoney; no aborda explícitament cap d'aquests problemes, ja que ha estat dissenyat com un gestor de finances «personals». A més, aquests problemes addicionals no s'aborden en aquest manual, però haureu de tenir-los en compte si intenteu emprar el &kmymoney; per a un negoci. </para>
 </sect2>
 </sect1>
 

@@ -201,9 +201,7 @@
 ><title
 >Nom de la màquina</title>
 <para
->Per a l'usuari mitjà, el nom predeterminat de <quote
->localhost</quote
-> -el qual és la màquina que esteu utilitzant- és correcte. Per a les bases de dades en xarxa, introduïu el nom de la màquina del servidor de base de dades. </para>
+>Per a l'usuari mitjà, el nom predeterminat de «localhost» -el qual és la màquina que esteu utilitzant- és correcte. Per a les bases de dades en xarxa, introduïu el nom de la màquina del servidor de base de dades. </para>
 </sect3>
 
 <sect3

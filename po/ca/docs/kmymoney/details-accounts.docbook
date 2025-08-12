@@ -19,36 +19,20 @@
 >Comptes</title>
 
 <para
->El fitxer del &kmymoney; conté un o més comptes. Tots els vostres diners estan en un d'aquests comptes. Hi ha diversos tipus de comptes diferents. Els comptes típics d'<quote
->Actiu</quote
-> inclouen comptes bancaris, diners en efectiu i inversions. Els comptes típics de <quote
->Passiu</quote
-> inclouen targetes de crèdit i préstecs. </para>
+>El fitxer del &kmymoney; conté un o més comptes. Tots els vostres diners estan en un d'aquests comptes. Hi ha diversos tipus de comptes diferents. Els comptes típics d'«Actiu» inclouen comptes bancaris, diners en efectiu i inversions. Els comptes típics de «Passiu» inclouen targetes de crèdit i préstecs. </para>
 
 <para
->Hi ha dos altres tipus de comptes: <quote
->Ingressos</quote
-> i <quote
->Despeses</quote
->. Aquests comptes són <quote
->Categories</quote
->, i són una manera d'organitzar les operacions. El &kmymoney; els tractarà internament com a comptes, i es descriuen amb més detall en la secció sobre les <link linkend="details.categories"
+>Hi ha dos altres tipus de comptes: «Ingressos» i «Despeses». Aquests comptes són «Categories», i són una manera d'organitzar les operacions. El &kmymoney; els tractarà internament com a comptes, i es descriuen amb més detall en la secció sobre les <link linkend="details.categories"
 >Categories</link
 >. Els comptes d'ingressos i despeses sempre es mostraran a la vista de les categories, però és possible <link linkend="details.settings"
 >configurar el &kmymoney;</link
 > perquè també es mostrin a la vista dels comptes. </para>
 
 <para
->També podeu veure <quote
->Acció</quote
-> com a tipus de compte. Qualsevol compte d'aquest tipus és un compte especial en el &kmymoney;, usat per a mantenir les operacions de saldo d'obertura d'altres comptes. </para>
+>També podeu veure «Acció» com a tipus de compte. Qualsevol compte d'aquest tipus és un compte especial en el &kmymoney;, usat per a mantenir les operacions de saldo d'obertura d'altres comptes. </para>
 
 <para
->El tipus final, tot i que es mostra primer a la llista, és <quote
->Favorit</quote
->. Aquests són comptes de qualsevol altre tipus que heu indicat que són comptes <quote
->favorits</quote
-> en els detalls quan es crea o edita aquest compte. </para>
+>El tipus final, tot i que es mostra primer a la llista, és «Favorit». Aquests són comptes de qualsevol altre tipus que heu indicat que són comptes «favorits» en els detalls quan es crea o edita aquest compte. </para>
 
 <sect1 id="details.accounts.view"
 ><title

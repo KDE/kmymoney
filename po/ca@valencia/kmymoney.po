@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-11 00:43+0000\n"
-"PO-Revision-Date: 2025-07-28 10:09+0200\n"
+"PO-Revision-Date: 2025-08-11 19:23+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -2886,7 +2886,7 @@ msgstr "Anomena i guarda l'emmagatzematge…"
 #: kmymoney/dialogs/ksaveasquestion.ui:23
 #, kde-format
 msgid "Choose XML if unsure."
-msgstr "Seleccioneu XML si no n'esteu segur."
+msgstr "Trieu XML si no n'esteu segur."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
@@ -3121,19 +3121,19 @@ msgstr "Primer pla"
 #: kmymoney/dialogs/settings/ksettingsicons.ui:14
 #, kde-format
 msgid "Font settings"
-msgstr "Configureu el tipus de lletra"
+msgstr "Configureu la lletra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useSystemFont)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:20
 #, kde-format
 msgid "Use system fonts"
-msgstr "Utilitza els tipus de lletra del sistema"
+msgstr "Utilitza les lletres del sistema"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
 #, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Configuració individual del tipus de lletra per als llibres majors"
+msgstr "Configuració individual de les lletres per als llibres majors"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -3141,7 +3141,7 @@ msgstr "Configuració individual del tipus de lletra per als llibres majors"
 #: kmymoney/settings/kmymoney.kcfg:322
 #, kde-format
 msgid "Cell font"
-msgstr "Tipus de lletra de la cel·la"
+msgstr "Lletra de la cel·la"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
@@ -3149,7 +3149,7 @@ msgstr "Tipus de lletra de la cel·la"
 #: kmymoney/settings/kmymoney.kcfg:325
 #, kde-format
 msgid "Header font"
-msgstr "Tipus de lletra de la capçalera"
+msgstr "Lletra de la capçalera"
 
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:96
 #, kde-format
@@ -3734,7 +3734,7 @@ msgstr "Colors"
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:59
 #, kde-format
 msgid "Fonts"
-msgstr "Tipus de lletra"
+msgstr "Lletres"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:61
 #, kde-format
@@ -10057,7 +10057,7 @@ msgid ""
 "'%4'.</center><center>Please choose which you wish to accept.</center>"
 msgstr ""
 "<center>El camp %1 conté «%2»</center><center>i el camp %3 conté «%4».</"
-"center><center>Seleccioneu quin voleu acceptar.</center>"
+"center><center>Trieu quin voleu acceptar.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:398
 #, kde-format
@@ -12474,7 +12474,7 @@ msgstr "La pr&imera data que es puga"
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:98
 #, kde-format
 msgid "Pick &date"
-msgstr "Seleccioneu una &data"
+msgstr "Trieu una &data"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:307
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
@@ -14710,7 +14710,7 @@ msgstr ""
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:239
 #, kde-format
 msgid "Select output file"
-msgstr "Seleccioneu el fitxer d'eixida"
+msgstr "Trieu el fitxer d'eixida"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:267
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:175
@@ -17592,7 +17592,7 @@ msgstr "Nom de l'informe"
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:38
 #, kde-format
 msgid "<p>Choose a name for this report.</p>"
-msgstr "<p>Seleccioneu un nom per a este informe.</p>"
+msgstr "<p>Trieu un nom per a este informe.</p>"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editComment)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:59
@@ -17809,8 +17809,7 @@ msgstr "Marques"
 #, kde-format
 msgid "<p>Choose how large of a time period each column should encompass</p>"
 msgstr ""
-"<p>Seleccioneu la llargària del període de temps que ha d'abastar cada "
-"columna.</p>"
+"<p>Trieu la llargària del període de temps que ha d'abastar cada columna.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dataRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:120
@@ -17909,8 +17908,8 @@ msgstr "Mostra la fila de totals"
 msgid ""
 "<p>Choose what kind of accounts to display as the rows of this report.</p>"
 msgstr ""
-"<p>Seleccioneu la classe de comptes que es mostraran com a files d'este "
-"informe.</p>"
+"<p>Trieu la classe de comptes que es mostraran com a files d'este informe.</"
+"p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTotalColumn)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:87
@@ -17970,7 +17969,7 @@ msgstr "Organitza per:"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:62
 #, kde-format
 msgid "<p>Choose how to group the transactions in this report</p>"
-msgstr "<p>Seleccioneu com agrupar les operacions en este informe</p>"
+msgstr "<p>Trieu com agrupar les operacions en este informe</p>"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:138
@@ -17979,8 +17978,8 @@ msgid ""
 "<p>Choose which columns should be shown in the report.</p><p>The date and "
 "transaction amount are always shown.</p>"
 msgstr ""
-"<p>Seleccioneu les columnes que s'han de mostrar en l'informe.</p><p>Sempre "
-"es mostren la data i l'import de l'operació.</p>"
+"<p>Trieu les columnes que s'han de mostrar en l'informe.</p><p>Sempre es "
+"mostren la data i l'import de l'operació.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:141
@@ -18306,8 +18305,8 @@ msgid ""
 "You have configured KMyMoney to save your data secured with GPG. Please "
 "choose the key you want to use for encryption of your data."
 msgstr ""
-"Heu configurat KMyMoney per a guardar les dades assegurades amb GPG. "
-"Seleccioneu la clau que voleu utilitzar per a encriptar les dades."
+"Heu configurat KMyMoney per a guardar les dades assegurades amb GPG. Trieu "
+"la clau que voleu utilitzar per a encriptar les dades."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:39
@@ -19024,7 +19023,7 @@ msgstr "Camí cap al fitxer de registre"
 #: kmymoney/settings/kmymoney.kcfg:318
 #, kde-format
 msgid "Use system font"
-msgstr "Utilitza el tipus de lletra del sistema"
+msgstr "Utilitza la lletra del sistema"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)

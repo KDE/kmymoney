@@ -313,9 +313,7 @@
 > de la barra d'eines. A més, si es mostra la pàgina de benvinguda principal, també podreu seleccionar el primer enllaç: «Comença i inicia els comptes». </para>
 
 <para
->El &kmymoney; obrirà l'<quote
->Assistent de configuració del fitxer nou</quote
->, el qual us guiarà a través del procés de creació del fitxer. </para>
+>El &kmymoney; obrirà l'«Assistent de configuració del fitxer nou», el qual us guiarà a través del procés de creació del fitxer. </para>
 
 <screenshot>
   <screeninfo
@@ -430,9 +428,7 @@
 > per a continuar. </para>
 
 <para
->Aquesta és la pàgina final de l'assistent. Si seleccioneu la casella de selecció <quote
->Configura les preferències després de finalitzar l'assistent</quote
->, es mostrarà el diàleg de configuració de l'aplicació després d'haver completat l'assistent de configuració del compte. </para>
+>Aquesta és la pàgina final de l'assistent. Si seleccioneu la casella de selecció «Configura les preferències després de finalitzar l'assistent», es mostrarà el diàleg de configuració de l'aplicació després d'haver completat l'assistent de configuració del compte. </para>
 
 <screenshot>
   <screeninfo
@@ -449,9 +445,7 @@
 </screenshot>
 
 <para
->En aquest punt, en fer clic a <quote
->Finalitza</quote
-> s'iniciarà el diàleg «Desa l'emmagatzematge com a...», on triareu el tipus d'emmagatzematge (XML, possiblement amb encriptatge, o SQL) i especificareu els detalls d'aquest mètode d'emmagatzematge, com ara el nom de fitxer i la ubicació o els detalls de la base de dades SQL. Vegeu els capítols <link linkend="details.formats"
+>En aquest punt, en fer clic a «Finalitza» s'iniciarà el diàleg «Desa l'emmagatzematge com a...», on triareu el tipus d'emmagatzematge (XML, possiblement amb encriptatge, o SQL) i especificareu els detalls d'aquest mètode d'emmagatzematge, com ara el nom de fitxer i la ubicació o els detalls de la base de dades SQL. Vegeu els capítols <link linkend="details.formats"
 >Formats de fitxer</link
 > i <link linkend="details.database"
 >Formats de fitxer</link
@@ -859,9 +853,7 @@
 ></menuchoice
 > i completant la informació requerida. No obstant això, en cas que es tingui dificultats amb aquest mètode, podreu informar-ne (presentar una llista de desitjos o una sol·licitud de millora) directament al <ulink url="https://bugs.kde.org"
 >lloc web d'informes d'error del &kde;</ulink
->. Els informes s'hauran de presentar per al producte <quote
->kmymoney</quote
->. </para>
+>. Els informes s'hauran de presentar per al producte «kmymoney». </para>
 
 <para
 >En qualsevol cas, abans d'informar d'un error, llegiu les directrius a continuació. Seguir-les farà que sigui més probable que els desenvolupadors puguin identificar ràpidament el problema sense haver de demanar-vos més informació. També intenteu assegurar-vos que el que esteu informant realment sigui un error (o una sol·licitud de llista de desitjos/millora). Si les coses simplement no funcionen de la manera que espereu, o necessiteu ajuda utilitzant alguna característica del &kmymoney;, si us plau, utilitzeu un dels canals de suport alternatius que s'enumeren a dalt. </para>
@@ -908,11 +900,7 @@
 ><title
 >Incloure els passos específics</title>
 <para
->Aquest és un informe d'error: <quote
->I entered a transaction, and &kmymoney; crashed.</quote
-> Un informe d'error molt millor és: <quote
->Using the transaction form, I entered a new transaction in my Credit Card account. I selected the Transfer tab, entered an amount, then changed to the Deposit tab, and back to the Transfer tab. When I returned to the Transfer tab, &kmymoney; crashed. This bug is fully reproducible for me.</quote
-> </para>
+>Aquest és un informe d'error: «I entered a transaction, and &kmymoney; crashed.» Un informe d'error molt millor és: «Using the transaction form, I entered a new transaction in my Credit Card account. I selected the Transfer tab, entered an amount, then changed to the Deposit tab, and back to the Transfer tab. When I returned to the Transfer tab, &kmymoney; crashed. This bug is fully reproducible for me.» </para>
 </formalpara>
 
 <formalpara
@@ -928,9 +916,7 @@
 <para
 >En compilar una versió configurada amb <option
 >--enable-debug=full</option
->, podreu assegurar-vos que es generen les millors traces inverses possibles. Si trobeu una fallada, executeu el &kmymoney; de nou des de «gdb» i reproduïu la fallada. Quan es bloquegi, escriviu <quote
->bt</quote
-> per a generar una traça inversa. </para>
+>, podreu assegurar-vos que es generen les millors traces inverses possibles. Si trobeu una fallada, executeu el &kmymoney; de nou des de «gdb» i reproduïu la fallada. Quan es bloquegi, escriviu «bt» per a generar una traça inversa. </para>
 </formalpara>
 
 <para

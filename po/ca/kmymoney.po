@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-11 00:43+0000\n"
-"PO-Revision-Date: 2025-07-28 10:09+0200\n"
+"PO-Revision-Date: 2025-08-11 19:23+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3127,19 +3127,19 @@ msgstr "Primer pla"
 #: kmymoney/dialogs/settings/ksettingsicons.ui:14
 #, kde-format
 msgid "Font settings"
-msgstr "Arranjament del tipus de lletra"
+msgstr "Arranjament de la lletra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useSystemFont)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:20
 #, kde-format
 msgid "Use system fonts"
-msgstr "Usa els tipus de lletra del sistema"
+msgstr "Usa les lletres del sistema"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
 #, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Configuració individual del tipus de lletra per als llibres majors"
+msgstr "Configuració individual de les lletres per als llibres majors"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -3147,7 +3147,7 @@ msgstr "Configuració individual del tipus de lletra per als llibres majors"
 #: kmymoney/settings/kmymoney.kcfg:322
 #, kde-format
 msgid "Cell font"
-msgstr "Tipus de lletra de la cel·la"
+msgstr "Lletra de la cel·la"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
@@ -3155,7 +3155,7 @@ msgstr "Tipus de lletra de la cel·la"
 #: kmymoney/settings/kmymoney.kcfg:325
 #, kde-format
 msgid "Header font"
-msgstr "Tipus de lletra de la capçalera"
+msgstr "Lletra de la capçalera"
 
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:96
 #, kde-format
@@ -3739,7 +3739,7 @@ msgstr "Colors"
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:59
 #, kde-format
 msgid "Fonts"
-msgstr "Tipus de lletra"
+msgstr "Lletres"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:61
 #, kde-format
@@ -19028,7 +19028,7 @@ msgstr "Camí al fitxer de registre"
 #: kmymoney/settings/kmymoney.kcfg:318
 #, kde-format
 msgid "Use system font"
-msgstr "Usa el tipus de lletra del sistema"
+msgstr "Usa la lletra del sistema"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)

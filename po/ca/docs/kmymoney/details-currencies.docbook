@@ -207,9 +207,7 @@
 <para
 >La primera columna del diàleg està etiquetada com a <guilabel
 >Mercaderia</guilabel
->, i mostra tant els símbols comercials de valors com els símbols de divises. En el &kmymoney;, un <quote
->Preu</quote
-> és el preu del títol d'acord amb una divisa en termes d'una segona divisa. Per exemple, mentre escric això, el preu d'1 USD en termes d'1 EUR és de 0,94, això és, 1 USD costa 0,94 EUR. La primera divisa és la que es compra o ven, i la segona és la divisa utilitzada per a comprar-la o vendre-la. </para>
+>, i mostra tant els símbols comercials de valors com els símbols de divises. En el &kmymoney;, un «Preu» és el preu del títol d'acord amb una divisa en termes d'una segona divisa. Per exemple, mentre escric això, el preu d'1 USD en termes d'1 EUR és de 0,94, això és, 1 USD costa 0,94 EUR. La primera divisa és la que es compra o ven, i la segona és la divisa utilitzada per a comprar-la o vendre-la. </para>
 
 <para
 >Per a introduir manualment un tipus de canvi nou, premeu el botó <guibutton
