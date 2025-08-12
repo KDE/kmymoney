@@ -78,6 +78,7 @@
         "Name[fi]": "KBanking",
         "Name[fr]": "KBanking",
         "Name[gl]": "KBanking",
+        "Name[he]": "KBanking",
         "Name[it]": "KBanking",
         "Name[ka]": "KBanking",
         "Name[ko]": "KBanking",

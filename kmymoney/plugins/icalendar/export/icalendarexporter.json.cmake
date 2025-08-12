@@ -82,6 +82,7 @@
         "Name[fi]": "iCalendar",
         "Name[fr]": "iCalendar",
         "Name[gl]": "iCalendar",
+        "Name[he]": "iCalendar",
         "Name[ia]": "iCalendar",
         "Name[it]": "iCalendar",
         "Name[ka]": "iCalendar",

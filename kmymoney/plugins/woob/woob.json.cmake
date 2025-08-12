@@ -16,6 +16,7 @@
                 "Name[fi]": "Romain Bignon",
                 "Name[fr]": "Romain Bignon",
                 "Name[gl]": "Romain Bignon",
+                "Name[he]": "רומה ביניון",
                 "Name[ia]": "Romain Bignon",
                 "Name[it]": "Romain Bignon",
                 "Name[ka]": "Romain Bignon",
