@@ -2169,7 +2169,7 @@ msgstr "رجاء اختر حساب أبّ."
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
 "category with the same name."
-msgstr "هناك فئة لها الاسم <b>%1</b>بالفعل. لا يمكن إنشاء فئة أخرى بنفس الاسم."
+msgstr "هناك فئة لها الاسم <b>%1</b>فعلًا. لا يمكن إنشاء فئة أخرى بنفس الاسم."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:911
 #, fuzzy, kde-format
@@ -3705,7 +3705,7 @@ msgstr "ملفّ CSV هذا <b>%1</b> موجود بالفعل. أمتأكّد م
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:139
 #, kde-format
 msgid "CSV Profile Already Exists"
-msgstr "لاحة CSV موجودة بالفعل"
+msgstr "لاحة CSV موجودة فعلًا"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, groupParsing)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:36
@@ -5562,12 +5562,12 @@ msgstr "خطأ في القالب"
 #: kmymoney/kmymoney.cpp:3229
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
-msgstr "الملف <b>%1</b> موجود بالفعل. أتود حقًّا الكتابة فوقه؟"
+msgstr "الملف <b>%1</b> موجود فعلًا. أتود حقًّا الكتابة فوقه؟"
 
 #: kmymoney/kmymoney.cpp:3231 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
-msgstr "الملف موجود بالفعل"
+msgstr "الملف موجود فعلًا"
 
 #: kmymoney/kmymoney.cpp:3269
 #, kde-format
@@ -5615,7 +5615,7 @@ msgstr "يضمّ %1"
 #: kmymoney/kmymoney.cpp:3474
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
-msgstr "ملف النسخ الاحتياطي لليوم موجود بالفعل على ذاك الجهاز. أأستبدله؟"
+msgstr "ملف النسخ الاحتياطي لليوم موجود فعلًا على ذاك الجهاز. أأستبدله؟"
 
 #: kmymoney/kmymoney.cpp:3474
 #, kde-format
@@ -9827,7 +9827,7 @@ msgstr "مصدّر CSV"
 msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
 "qt>"
-msgstr "<qt>الملفّ <b>%1</b> موجود بالفعل. أمتأكّد من الكتابة عليه؟</qt>"
+msgstr "<qt>الملفّ <b>%1</b> موجود فعلًا. أمتأكّد من الكتابة عليه؟</qt>"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:78
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
@@ -13646,7 +13646,7 @@ msgstr "لا يمكن أن يكون اسم التشكيلة فارغًا. رجا
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:397
 #, kde-format
 msgid "The name <b>%1</b> is already taken. Please change the name or cancel."
-msgstr "الاسم <b>%1</b> مأخوذ بالفعل. رجاءً غيّر الاسم أو ألغِ العمليّة."
+msgstr "الاسم <b>%1</b> مأخوذ فعلًا. رجاءً غيّر الاسم أو ألغِ العمليّة."
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:399
 #, kde-format
@@ -20949,8 +20949,8 @@ msgid ""
 "multiple tags with the same identification name. Are you sure you would like "
 "to rename the tag?"
 msgstr ""
-"هناك وسم بالاسم '%1' بالفعل. لا يُنصح بعدّة وسوم بنفس اسم التعريف. هل أنت "
-"متأكد من إعادة تسمية الوسم؟"
+"هناك وسم بالاسم '%1' فعلًا. لا يُنصح بعدّة وسوم بنفس اسم التعريف. هل أنت متأكد "
+"من إعادة تسمية الوسم؟"
 
 #: kmymoney/views/ktagsview.cpp:381
 #, fuzzy, kde-format
