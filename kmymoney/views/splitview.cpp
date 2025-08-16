@@ -252,6 +252,7 @@ SplitView::SplitView(QWidget* parent)
     });
 
     setTabKeyNavigation(false);
+    setEditTriggers(DoubleClicked | EditKeyPressed);
 
     d->splitDelegate = new SplitDelegate(this);
     setItemDelegate(d->splitDelegate);
