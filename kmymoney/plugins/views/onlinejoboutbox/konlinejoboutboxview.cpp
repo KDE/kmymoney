@@ -266,27 +266,30 @@ void KOnlineJobOutboxView::updateActions(const SelectedObjects& selections)
 
     if (selections.count(SelectedObjects::OnlineJob) == 1) {
         const QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
-        const auto jobIdx = indexes.first();
+        if (!indexes.isEmpty()) {
+            const auto jobIdx = indexes.first();
 
-        sendableItems = jobIdx.data(eMyMoney::Model::OnlineJobSendableRole).toBool();
+            sendableItems = jobIdx.data(eMyMoney::Model::OnlineJobSendableRole).toBool();
 
-        if (!jobIdx.data(eMyMoney::Model::OnlineJobEditableRole).toBool()) {
-            editable = false;
-            if (jobIdx.data(eMyMoney::Model::OnlineJobSendDateRole).toDate().isValid()) {
-                /// @todo maybe add a word about unable to edit but able to copy here
-                // I don't do it right away since we are in string freeze for 5.0.7
-                tooltip = i18n("This job cannot be edited anymore because it was sent already.");
-                editable = true;
-            } else if (jobIdx.data(eMyMoney::Model::OnlineJobLockedRole).toBool())
-                tooltip = i18n("Job is being processed at the moment.");
-            else
-                Q_ASSERT(false);
-        } else if (!onlineJobAdministration::instance()->canEditOnlineJob(jobIdx.data(eMyMoney::Model::IdRole).toString())) {
-            editable = false;
-            tooltip = i18n("The plugin to edit this job is not available.");
+            if (!jobIdx.data(eMyMoney::Model::OnlineJobEditableRole).toBool()) {
+                editable = false;
+                if (jobIdx.data(eMyMoney::Model::OnlineJobSendDateRole).toDate().isValid()) {
+                    /// @todo maybe add a word about unable to edit but able to copy here
+                    // I don't do it right away since we are in string freeze for 5.0.7
+                    tooltip = i18n("This job cannot be edited anymore because it was sent already.");
+                    editable = true;
+                } else if (jobIdx.data(eMyMoney::Model::OnlineJobLockedRole).toBool())
+                    tooltip = i18n("Job is being processed at the moment.");
+                else
+                    Q_ASSERT(false);
+            } else if (!onlineJobAdministration::instance()->canEditOnlineJob(jobIdx.data(eMyMoney::Model::IdRole).toString())) {
+                editable = false;
+                tooltip = i18n("The plugin to edit this job is not available.");
+            }
+            d->m_actions[eMenu::OnlineAction::SendOnlineJobs]->setText(i18n("Send transfer"));
         }
-        d->m_actions[eMenu::OnlineAction::SendOnlineJobs]->setText(i18n("Send transfer"));
     } else {
+        d->ui->m_onlineJobView->setCurrentIndex(QModelIndex());
         editable = false;
         tooltip = i18n("You need to select a single job for editing.");
         d->m_actions[eMenu::OnlineAction::SendOnlineJobs]->setText(i18n("Send transfers"));
@@ -477,8 +480,18 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
 
 void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
-    Q_UNUSED(action)
     Q_UNUSED(selections)
+    Q_D(KOnlineJobOutboxView);
+    switch (action) {
+    case eMenu::Action::FileClose:
+        if (!d->m_needLoad) {
+            d->ui->m_onlineJobView->selectionModel()->clearSelection();
+            d->m_selections.clearSelections();
+        }
+        break;
+    default:
+        break;
+    }
 }
 
 QString KOnlineJobOutboxView::slotOnlineJobSave(onlineJob job)
