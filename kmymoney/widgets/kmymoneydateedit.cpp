@@ -564,8 +564,9 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
 
     case Qt::Key_Plus:
     case Qt::Key_Minus:
+    case Qt::Key_Equal:
         if (isValid()) {
-            d->adjustDate(key == Qt::Key_Plus ? 1 : -1, QDateEdit::NoSection);
+            d->adjustDate(key != Qt::Key_Minus ? 1 : -1, QDateEdit::NoSection);
         }
         break;
 
