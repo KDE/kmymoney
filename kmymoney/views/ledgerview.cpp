@@ -621,6 +621,7 @@ LedgerView::LedgerView(QWidget* parent)
     });
 
     setTabKeyNavigation(false);
+    setEditTriggers(DoubleClicked | EditKeyPressed);
 }
 
 LedgerView::~LedgerView()
