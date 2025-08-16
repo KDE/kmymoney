@@ -484,8 +484,10 @@ void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObj
     Q_D(KOnlineJobOutboxView);
     switch (action) {
     case eMenu::Action::FileClose:
-        d->ui->m_onlineJobView->selectionModel()->clearSelection();
-        d->m_selections.clearSelections();
+        if (!d->m_needLoad) {
+            d->ui->m_onlineJobView->selectionModel()->clearSelection();
+            d->m_selections.clearSelections();
+        }
         break;
     default:
         break;
