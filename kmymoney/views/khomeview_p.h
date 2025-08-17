@@ -497,13 +497,15 @@ public:
                         break;
 
                     case 3: // payment accounts
+                    {
+                        const auto sectionHeader = i18nc("@title Home page section", "Payment Accounts");
                         // Check if preferred accounts are shown separately
                         if (settings.contains("2")) {
-                            showAccounts(static_cast<paymentTypeE>(Payment | Preferred), i18n("Payment Accounts"));
+                            showAccounts(Payment, sectionHeader);
                         } else {
-                            showAccounts(Payment, i18nc("@title Home page section", "Payment Accounts"));
+                            showAccounts(static_cast<paymentTypeE>(Payment | Preferred), sectionHeader);
                         }
-                        break;
+                    } break;
                     case 4: // favorite reports
                         showFavoriteReports();
                         break;
