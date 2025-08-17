@@ -87,7 +87,9 @@ public:
             AccountsModel::Column::PostedValue,
             AccountsModel::Column::BankCode,
             AccountsModel::Column::Bic,
+#ifndef ENABLE_COSTCENTER
             AccountsModel::Column::CostCenter,
+#endif
         }));
 
         ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
