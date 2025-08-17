@@ -97,6 +97,12 @@ void KHomeView::executeCustomAction(eView::Action action)
     }
 }
 
+void KHomeView::delayedRefresh()
+{
+    Q_D(KHomeView);
+    d->m_refreshDelayTimer.start();
+}
+
 void KHomeView::refresh()
 {
     Q_D(KHomeView);

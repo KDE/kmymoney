@@ -44,6 +44,12 @@ public:
     void executeCustomAction(eView::Action action) override;
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
     void refresh();
+    /**
+     * Don't start refresh() immediately but wait 100ms for
+     * another call and re-trigger the delay if it happens
+     * without calling refresh().
+     */
+    void delayedRefresh();
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
