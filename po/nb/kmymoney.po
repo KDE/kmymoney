@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-11 00:43+0000\n"
+"POT-Creation-Date: 2025-08-17 00:42+0000\n"
 "PO-Revision-Date: 2025-07-27 12:52+0200\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -15598,7 +15598,7 @@ msgid "Unknown"
 msgstr "Ukjent"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:289
 #, kde-format
 msgid "Send transfer"
 msgstr "Send overføring"
@@ -15631,32 +15631,32 @@ msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
 msgstr "Valg for kredittoverføring"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:278
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:279
 #, kde-format
 msgid "This job cannot be edited anymore because it was sent already."
 msgstr "Denne jobben kan ikke endres lenger fordi den er allerede sendt."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:281
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:282
 #, kde-format
 msgid "Job is being processed at the moment."
 msgstr "Jobben behandles for øyeblikket."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:286
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
 #, kde-format
 msgid "The plugin to edit this job is not available."
 msgstr "Programtillegget for å endre denne jobben er ikke tilgjengelig."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:294
 #, kde-format
 msgid "You need to select a single job for editing."
 msgstr "Du må velge en enkelt jobb for å endre."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:292
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:295
 #, kde-format
 msgid "Send transfers"
 msgstr "Send overføringer"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:392
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:395
 #, kde-format
 msgctxt "The user selected credit transfers to send. But they cannot be sent"
 msgid ""
@@ -15666,7 +15666,7 @@ msgstr ""
 "Ikke alle de valgte kredittoverføringene kan sendes fordi noen av dem er "
 "ugyldig eller allerede sendt."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:393
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:396
 #, kde-format
 msgctxt "@title:window Online transfers"
 msgid "Cannot send transfers"
@@ -21005,7 +21005,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Gå til «%1»"
 
-#: kmymoney/views/ledgerview.cpp:753
+#: kmymoney/views/ledgerview.cpp:754
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21016,32 +21016,32 @@ msgstr ""
 "KMyMoney støtter ikke endring av to transaksjoner samtidig. <a href="
 "\"jumpToEditor\">Gå til gjeldende endringsboks</a>"
 
-#: kmymoney/views/ledgerview.cpp:882
+#: kmymoney/views/ledgerview.cpp:883
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transaksjon mangler tilordning til kategori."
 
-#: kmymoney/views/ledgerview.cpp:889
+#: kmymoney/views/ledgerview.cpp:890
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transaksjonen mangler tilordning av <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:898
+#: kmymoney/views/ledgerview.cpp:899
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Denne tidsplanen gikk over dato den %1. Klikk på ikonet for å legge den inn."
 
-#: kmymoney/views/ledgerview.cpp:904
+#: kmymoney/views/ledgerview.cpp:905
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Transaksjonen er importert. Klikk på ikonet for å godta den."
 
-#: kmymoney/views/ledgerview.cpp:910
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21050,38 +21050,38 @@ msgstr ""
 "Denne transaksjonen samsvarer. Klikk på ikonet for å godta eller avvise "
 "samsvar."
 
-#: kmymoney/views/ledgerview.cpp:955
+#: kmymoney/views/ledgerview.cpp:956
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr "Forskjellen mellom konosaldo og salfo på nett er %1."
 
-#: kmymoney/views/ledgerview.cpp:1015
+#: kmymoney/views/ledgerview.cpp:1016
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Ikke legg inn planlagte transaksjoner som er gått over dato."
 
-#: kmymoney/views/ledgerview.cpp:1016
+#: kmymoney/views/ledgerview.cpp:1017
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Legg inn planlagte transaksjoner som er gått over dato."
 
-#: kmymoney/views/ledgerview.cpp:1019
+#: kmymoney/views/ledgerview.cpp:1020
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Vil du legge inn den overløpte tidsplanen nå?"
 
-#: kmymoney/views/ledgerview.cpp:1020
+#: kmymoney/views/ledgerview.cpp:1021
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Legg inn overløpt tidsplan"
 
-#: kmymoney/views/ledgerview.cpp:1040
+#: kmymoney/views/ledgerview.cpp:1041
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21091,7 +21091,7 @@ msgstr ""
 "Koble fra den skjulte (samsvarende) transaksjonen fra den som vises og legg "
 "den inn i hovedboken igjen."
 
-#: kmymoney/views/ledgerview.cpp:1042
+#: kmymoney/views/ledgerview.cpp:1043
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21101,13 +21101,13 @@ msgstr ""
 "Godta samsvaret som vist og fjern dataene fra den skjulte (samsvarende) "
 "transaksjonen."
 
-#: kmymoney/views/ledgerview.cpp:1046
+#: kmymoney/views/ledgerview.cpp:1047
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Vil du godta eller oppheve samsvar i den koblede transaksjonen nå?"
 
-#: kmymoney/views/ledgerview.cpp:1047
+#: kmymoney/views/ledgerview.cpp:1048
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -21970,7 +21970,7 @@ msgid "&Close"
 msgstr "Lu&kk"
 
 #: kmymoney/widgets/kmymoneydateedit.cpp:499
-#: kmymoney/widgets/kmymoneydateedit.cpp:583
+#: kmymoney/widgets/kmymoneydateedit.cpp:584
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
