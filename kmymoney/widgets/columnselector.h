@@ -106,6 +106,8 @@ public:
      */
     void setColumnSelectionEnabled();
 
+    bool eventFilter(QObject* o, QEvent* e) override;
+
 protected Q_SLOTS:
     void slotColumnsMenu(const QPoint);
     void slotUpdateHeaderState();
