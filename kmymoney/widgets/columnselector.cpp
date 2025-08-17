@@ -8,11 +8,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
+#include <QDebug>
+#include <QEvent>
 #include <QHeaderView>
+#include <QList>
 #include <QMenu>
 #include <QPoint>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -119,6 +120,7 @@ public:
                 q->connect(headerView, &QWidget::customContextMenuRequested, q, &ColumnSelector::slotColumnsMenu);
                 q->connect(headerView, &QHeaderView::sectionResized, q, &ColumnSelector::slotUpdateHeaderState);
                 q->connect(headerView, &QHeaderView::sectionMoved, q, &ColumnSelector::slotUpdateHeaderState);
+                headerView->installEventFilter(q);
                 isInit = true;
             }
 
@@ -326,4 +328,26 @@ void ColumnSelector::setColumnSelectionDisabled()
 {
     Q_D(ColumnSelector);
     d->columnSelectionEnabled = false;
+}
+
+bool ColumnSelector::eventFilter(QObject* o, QEvent* e)
+{
+    Q_D(ColumnSelector);
+    if (e->type() == QEvent::Show) {
+        // It has been noticed, that if the application's configuration is lost, the
+        // inital setup hidden columns are not filled with data but they are visible
+        // in the view. Calling the hide/showSection again when the header view is
+        // about to be displayed solves the issue and removes them completely.
+        // Turns out that on Qt6 one needs to call showColumn before the hideColumn
+        // call has an effect.
+        const auto maxColumn = d->model->columnCount();
+        for (int col = 0; col < maxColumn; ++col) {
+            const auto hidden = d->isColumnHidden(col);
+            d->headerView->showSection(col);
+            if (hidden) {
+                d->headerView->hideSection(col);
+            }
+        }
+    }
+    return QObject::eventFilter(o, e);
 }
