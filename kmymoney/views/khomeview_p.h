@@ -162,10 +162,13 @@ public:
 
         q->connect(m_view, &QTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
 
-        q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
+        q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::delayedRefresh);
 
         m_resizeRefreshTimer.setSingleShot(true);
         q->connect(&m_resizeRefreshTimer, &QTimer::timeout, q, &KHomeView::refresh);
+
+        m_refreshDelayTimer.setSingleShot(true);
+        q->connect(&m_refreshDelayTimer, &QTimer::timeout, q, &KHomeView::refresh);
 
         m_needsRefresh = false;
     }
@@ -1994,6 +1997,7 @@ public:
     int m_adjustedIconSize;
     double m_devRatio;
     QTimer m_resizeRefreshTimer;
+    QTimer m_refreshDelayTimer;
     QSize m_startSize;
     bool m_endSkipWithTimerRunning;
 };
