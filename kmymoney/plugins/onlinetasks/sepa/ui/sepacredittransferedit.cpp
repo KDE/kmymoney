@@ -202,6 +202,8 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
 
     connect(m_requiredFields, QOverload<bool>::of(&KMandatoryFieldGroup::stateChanged), this, &sepaCreditTransferEdit::requiredFieldsCompleted);
 
+    // make sure to disconnect the textChanged() signals manually in our dtor
+    // before we destruct the widgets
     connect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryNameChanged);
     connect(ui->beneficiaryIban, &KIbanLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryIbanChanged);
     connect(ui->beneficiaryBankCode, &KBicEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryBicChanged);
@@ -270,6 +272,17 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
 
 sepaCreditTransferEdit::~sepaCreditTransferEdit()
 {
+    // disconnect the signals before the widgets are destroyed
+    // because they could still emit signals as part of their
+    // distruction which may bite us back in this object.
+    // See https://discuss.kde.org/t/kmymoney-5-2-crash-after-saving-bank-transfer-via-aqbanking/38517/3
+    // for an example
+    disconnect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryNameChanged);
+    disconnect(ui->beneficiaryIban, &KIbanLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryIbanChanged);
+    disconnect(ui->beneficiaryBankCode, &KBicEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryBicChanged);
+    disconnect(ui->value, &AmountEdit::amountChanged, this, &sepaCreditTransferEdit::valueChanged);
+    disconnect(ui->sepaReference, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::endToEndReferenceChanged);
+    disconnect(ui->purpose, &KMyMoneyTextEdit::textChanged, this, &sepaCreditTransferEdit::purposeChanged);
     delete ui;
 }
 
