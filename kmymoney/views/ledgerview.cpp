@@ -96,6 +96,7 @@ public:
         , reselectAfterResetPending(false)
         , resizeToContents(false)
         , selectOnly(false)
+        , selectionByMouseOrKeyboard(false)
     {
         infoMessage->hide();
 
@@ -532,6 +533,7 @@ public:
     bool reselectAfterResetPending;
     bool resizeToContents;
     bool selectOnly;
+    bool selectionByMouseOrKeyboard;
     QString accountId;
     QString groupName;
     QPersistentModelIndex editIndex;
@@ -987,7 +989,9 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
             // make sure that if multiple transactions are selected and the reconciliation
             // column is clicked that the selection will not change.
             if (column != JournalModel::Column::Reconciliation || !selectionModel()->isSelected(indexAt(pos))) {
+                d->selectionByMouseOrKeyboard = true;
                 QTableView::mousePressEvent(event);
+                d->selectionByMouseOrKeyboard = false;
             }
 
             switch (column) {
@@ -1128,7 +1132,9 @@ void LedgerView::keyPressEvent(QKeyEvent* kev)
             }
         }
 #endif
+        d->selectionByMouseOrKeyboard = true;
         QTableView::keyPressEvent(kev);
+        d->selectionByMouseOrKeyboard = false;
     }
 }
 
@@ -1194,11 +1200,13 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
     QTableView::currentChanged(current, previous);
 
     if (current.isValid() && current.row() != previous.row()) {
-        QModelIndex idx = current.model()->index(current.row(), 0);
-        QString id = idx.data(eMyMoney::Model::IdRole).toString();
+        const QModelIndex idx = current.model()->index(current.row(), 0);
+        const QString id = idx.data(eMyMoney::Model::IdRole).toString();
         // For a new transaction the id is completely empty, for a split view the transaction
         // part is filled but the split id is empty and the string ends with a dash
-        if (id.isEmpty() || id.endsWith('-')) {
+        // we only start the editor on this item only if it was selected by the user
+        // and not by a filtering operation.
+        if ((id.isEmpty() || id.endsWith('-')) && d->selectionByMouseOrKeyboard) {
             // the next two lines prevent an endless recursive call of this method
             if (idx == previous) {
                 return;
@@ -1217,6 +1225,10 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
             edit(idx);
         } else {
             Q_EMIT transactionSelected(idx);
+            if (id.isEmpty()) {
+                selectionModel()->clearSelection();
+                setCurrentIndex(QModelIndex());
+            }
             QMetaObject::invokeMethod(this, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
         }
         QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
