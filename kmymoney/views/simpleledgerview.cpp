@@ -266,13 +266,10 @@ public:
             view->showTransactionForm(KMyMoneySettings::transactionForm());
 
             // insert new ledger view page in tab view
-            int newIdx = ui->ledgerTab->insertTab(ui->ledgerTab->count()-1, view, acc.name());
+            int newIdx = ui->ledgerTab->insertTab(ui->ledgerTab->count(), view, acc.name());
             if (makeCurrentLedger) {
                 view->prepareToShow();
-                // selecting the last tab (the one with the +) and then the new one
-                // makes sure that all signals about the new selection are emitted
-                ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count()-1);
-                ui->ledgerTab->setCurrentIndex(newIdx);
+                showTab(newIdx);
                 // let the newly opened ledger receive the keyboard focus
                 const auto ledgerView = view->findChild<LedgerView*>();
                 if (ledgerView)
@@ -313,10 +310,10 @@ public:
         }
 
         // check the position of the new tab
-        auto newPos = ui->ledgerTab->count() - 1;
+        auto newPos = ui->ledgerTab->count();
         LedgerViewPage* view = nullptr;
         // check if ledger is already opened
-        for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+        for (int idx = 1; idx < ui->ledgerTab->count(); ++idx) {
             view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
             if (view) {
                 if (accountId == view->accountId()) {
@@ -327,7 +324,7 @@ public:
             view = nullptr; // not found
         }
 
-        // need a new tab, we insert it before the rightmost one
+        // need a new tab, we append it to the rightmost one
         if (!acc.id().isEmpty()) {
             QString configGroupName;
             switch (acc.accountType()) {
@@ -374,11 +371,8 @@ public:
             q->connect(q, &SimpleLedgerView::resizeSection, reconciliationView, &LedgerViewPage::resizeSection);
             q->connect(q, &SimpleLedgerView::moveSection, reconciliationView, &LedgerViewPage::moveSection);
 
-            // selecting the last tab (the one with the +) and then the new one
-            // makes sure that all signal about the new selection are emitted
             reconciliationView->prepareToShow();
-            ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count() - 1);
-            ui->ledgerTab->setCurrentIndex(newIdx);
+            showTab(newIdx);
         }
     }
 
@@ -397,7 +391,7 @@ public:
         // collect account ids of open ledgers
         QStringList openLedgers;
         LedgerViewPage* view = nullptr;
-        for(int idx = 0; idx < ui->ledgerTab->count()-1; ++idx) {
+        for (int idx = 1; idx < ui->ledgerTab->count(); ++idx) {
             view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
             if(view) {
                 auto id = view->accountId();
@@ -416,12 +410,11 @@ public:
         // check that we have a least one tab that can be closed
         if(tabCount > 1) {
             // we keep the tab with the selector open at all times
-            // which is located in the right most position
-            --tabCount;
+            // which is located in the left most position
             do {
                 --tabCount;
                 q->closeLedger(tabCount);
-            } while(tabCount > 0);
+            } while (tabCount > 1);
         }
     }
 
@@ -429,7 +422,7 @@ public:
     {
         if (!m_needInit) {
             LedgerViewPage* view = nullptr;
-            for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+            for (int idx = 1; idx < ui->ledgerTab->count(); ++idx) {
                 view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
                 if (view) {
                     view->executeAction(action, selections);
@@ -457,7 +450,7 @@ public:
             }
 
             // check if ledger is already opened
-            for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+            for (int idx = 1; idx < ui->ledgerTab->count(); ++idx) {
                 const auto view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
                 if (view) {
                     if (accountId == view->accountId()) {
@@ -489,7 +482,7 @@ public:
     {
         createAccountsCombo();
 
-        const auto idx = ui->ledgerTab->count() - 1;
+        const auto idx = 0;
         const auto rect = ui->ledgerTab->tabBar()->tabRect(idx);
         if (!accountCombo->isVisible()) {
             accountCombo->lineEdit()->clear();
@@ -512,6 +505,14 @@ public:
         } else {
             accountCombo->move(rect.left() + rect.width() - popupView->header()->sectionSize(0), rect.bottom());
         }
+    }
+
+    void showTab(int idx)
+    {
+        // selecting the first tab (the one with the +) and then the new one
+        // makes sure that all signals about the new selection are emitted
+        ui->ledgerTab->setCurrentIndex(0);
+        ui->ledgerTab->setCurrentIndex(idx);
     }
 
     Ui_SimpleLedgerView*          ui;
@@ -593,7 +594,7 @@ void SimpleLedgerView::openLedger(QString accountId)
 void SimpleLedgerView::tabClicked(int idx)
 {
     Q_D(SimpleLedgerView);
-    if (idx == (d->ui->ledgerTab->count()-1)) {
+    if (idx == 0) {
         d->showAccountSelector(this);
     } else {
         // make sure the view's model is initialized before
@@ -611,7 +612,7 @@ void SimpleLedgerView::tabSelected(int idx)
     Q_D(SimpleLedgerView);
     // make sure that the ledger does not change
     // when the user accesses the account selection combo box
-    if(idx != (d->ui->ledgerTab->count()-1)) {
+    if (idx != 0) {
         d->lastIdx = idx;
 
     } else {
@@ -632,7 +633,7 @@ void SimpleLedgerView::closeLedger(int idx)
     Q_D(SimpleLedgerView);
     // don't react on the close request for the new ledger function
     // and non-existing tabs
-    if ((idx >= 0) && (idx != (d->ui->ledgerTab->count() - 1))) {
+    if (idx > 0) {
         // if the currently selected ledger is closed, we
         // remove any selection
         d->m_selections.clearSelections();
@@ -647,17 +648,16 @@ void SimpleLedgerView::closeLedger(int idx)
             if (view) {
                 view->prepareToShow();
                 d->ui->ledgerTab->insertTab(idx, view, view->accountName());
-                d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count() - 1);
-                d->ui->ledgerTab->setCurrentIndex(idx);
+                d->showTab(idx);
                 d->reconciledAccount.clear();
             }
         }
         delete tab;
 
         // make sure we always show an account
-        if (d->ui->ledgerTab->currentIndex() == (d->ui->ledgerTab->count()-1)) {
+        if (d->ui->ledgerTab->currentIndex() == 0) {
             if (d->ui->ledgerTab->count() > 1) {
-                d->ui->ledgerTab->setCurrentIndex((d->ui->ledgerTab->count()-2));
+                d->ui->ledgerTab->setCurrentIndex((d->ui->ledgerTab->count() - 1));
             }
         } else {
             tabSelected(d->ui->ledgerTab->currentIndex());
@@ -673,10 +673,8 @@ void SimpleLedgerView::checkTabOrder(int from, int to)
 
     QTabBar* bar = d->ui->ledgerTab->findChild<QTabBar*>();
     if(bar) {
-        const int rightMostIdx = d->ui->ledgerTab->count()-1;
-
-        if(from == rightMostIdx) {
-            // someone tries to move the new account tab away from the rightmost position
+        if (from == 0) {
+            // someone tries to move the new account tab away from the leftmost position
             d->inModelUpdate = true;
             bar->moveTab(to, from);
             d->inModelUpdate = false;
