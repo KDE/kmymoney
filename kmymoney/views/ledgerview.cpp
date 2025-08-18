@@ -1409,11 +1409,21 @@ void LedgerView::editNewTransaction()
     if (d->selectOnly == false) {
         auto startEditing = [&](const QModelIndex& idx) {
             if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-                scrollTo(idx, QAbstractItemView::EnsureVisible);
-                selectRow(idx.row());
-                // if the empty row is already selected, we have to start editing here
-                // otherwise, it will happen in currentChanged()
                 const auto currentRow = currentIndex().row();
+                scrollTo(idx, QAbstractItemView::EnsureVisible);
+
+                // pressing the button or keyboard shortcut for
+                // the new transaction which causes the code to
+                // execute this part is a mouse or keyboard action
+                // so we need to raise the flag. Otherwise, the
+                // action will not start the editor in currentChanged()
+                d->selectionByMouseOrKeyboard = true;
+                selectRow(idx.row());
+                d->selectionByMouseOrKeyboard = false;
+
+                // if the empty row is already selected, we have to start editing here
+                // otherwise, it already happened in currentChanged() triggered by
+                // selectRow above
                 setCurrentIndex(idx);
                 if (idx.row() == currentRow) {
                     edit(idx);
