@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-17 00:42+0000\n"
+"POT-Creation-Date: 2025-08-18 00:42+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -997,7 +997,7 @@ msgstr "Umtauschkurs-Editor"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:691
-#: kmymoney/views/khomeview_p.h:620 kmymoney/views/newspliteditor.ui:32
+#: kmymoney/views/khomeview_p.h:625 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:59
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:117
@@ -1075,7 +1075,7 @@ msgstr "xxx"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:689
 #: kmymoney/views/investtransactioneditor.ui:260
-#: kmymoney/views/khomeview_p.h:605 kmymoney/views/newtransactioneditor.ui:84
+#: kmymoney/views/khomeview_p.h:610 kmymoney/views/newtransactioneditor.ui:84
 #: kmymoney/views/newtransactionform.ui:110
 #: kmymoney/widgets/ktransactionfilter.cpp:108
 #: kmymoney/widgets/ktransactionfilter.ui:138
@@ -1951,7 +1951,7 @@ msgstr "Typ"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:54
 #: kmymoney/views/investtransactioneditor.ui:236
-#: kmymoney/views/khomeview_p.h:1075
+#: kmymoney/views/khomeview_p.h:1080
 #, kde-format
 msgid "Total"
 msgstr "Summe"
@@ -2126,7 +2126,7 @@ msgid "Liability"
 msgstr "Verbindlichkeiten"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:447
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1833
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1838
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4340,7 +4340,7 @@ msgstr "Verrechnet"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:348
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1050
+#: kmymoney/views/khomeview_p.h:1055
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6456,7 +6456,7 @@ msgid "Last Price Update"
 msgstr "&Letzte Aktualisierung"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:221
+#: kmymoney/widgets/columnselector.cpp:223
 #, kde-format
 msgid "Displayed columns"
 msgstr "Angezeigte Spalten"
@@ -10366,7 +10366,7 @@ msgstr "Auswahl des Notizfeldes löschen."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:763
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1054
+#: kmymoney/views/khomeview_p.h:1059
 #, kde-format
 msgid "Balance"
 msgstr "Saldo"
@@ -12958,8 +12958,8 @@ msgstr "Geldinstitut"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
-#: kmymoney/views/khomeview_p.h:617 kmymoney/views/khomeview_p.h:1037
-#: kmymoney/views/khomeview_p.h:1166 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:622 kmymoney/views/khomeview_p.h:1042
+#: kmymoney/views/khomeview_p.h:1171 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:102
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:74
@@ -13725,24 +13725,24 @@ msgstr "Importprozess unvorhergesehen abgebrochen."
 msgid "Failed to import all statements."
 msgstr "Fehler beim Import aller Kontoauszüge."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:428
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:441
 #, kde-format
 msgid "For this beneficiary's country the BIC is mandatory."
 msgstr "Für das Land dieses Begünstigten ist der BIC obligatorisch."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:444
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:457
 #, kde-format
 msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
 msgstr[0] "Der Name des Empfängers ist erforderlich."
 msgstr[1] "Der Name des Empfängers muss mindestens %1 Zeichen lang sein."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:455
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:468
 #, kde-format
 msgid "A positive amount to transfer is needed."
 msgstr "Für die Überweisung ist ein positiver Betrag erforderlich."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:466
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:479
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below your credit "
@@ -13751,7 +13751,7 @@ msgstr ""
 "Nach dieser Überweisung liegt das Guthaben des Kontos unter Ihrem "
 "Kreditlimit."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:468
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:481
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below the minimal "
@@ -13760,7 +13760,7 @@ msgstr ""
 "Nach dieser Überweisung liegt das Guthaben des Kontos unter dem "
 "Mindestguthaben."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:478
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:491
 #, kde-format
 msgid "The end-to-end reference cannot contain more than one character."
 msgid_plural "The end-to-end reference cannot contain more than %1 characters."
@@ -13768,14 +13768,14 @@ msgstr[0] ""
 "Die Ende-zu-Ende-Referenz darf nicht mehr als ein Zeichen enthalten. "
 msgstr[1] "Die Ende-zu-Ende-Referenz darf nicht mehr als %1 Zeichen enthalten."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:494
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:507
 #, kde-format
 msgid "The maximal line length of %1 character per line is exceeded."
 msgid_plural "The maximal line length of %1 characters per line is exceeded."
 msgstr[0] "Die maximale Länge von %1 Zeichen je Zeile wird überschritten."
 msgstr[1] "Die maximale Länge von %1 Zeichen je Zeile wird überschritten."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:498
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:511
 #, kde-format
 msgid ""
 "The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /"
@@ -13783,14 +13783,14 @@ msgstr ""
 "Der Verwendungszweck darf nur die Zeichen A-Z, Leerzeichen und ':?.,-()+ "
 "und / enthalten"
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:500
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:513
 #, kde-format
 msgid "In the purpose only a single line is allowed."
 msgid_plural "The purpose cannot contain more than %1 lines."
 msgstr[0] "Als Verwendungszweck ist nur eine Zeile zulässig."
 msgstr[1] "Der Verwendungszweck darf nicht mehr als %1 Zeilen enthalten."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:504
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:517
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
@@ -15756,13 +15756,13 @@ msgstr[0] "1 Tag"
 msgstr[1] "%1 Tage"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1235
+#: kmymoney/views/khomeview_p.h:1240
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Der aktuelle Saldo von %1 liegt heute unterhalb des Minimal-Saldo %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1239
+#: kmymoney/views/khomeview_p.h:1244
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15773,19 +15773,19 @@ msgstr[1] ""
 "Der Saldo von %2 wird in %1 Tagen unterhalb des Minimal-Saldos %3 fallen."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1257
+#: kmymoney/views/khomeview_p.h:1262
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Der Saldo von %1 ist heute unterhalb %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1262
+#: kmymoney/views/khomeview_p.h:1267
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Der Saldo von %1 ist heute oberhalb %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1268
+#: kmymoney/views/khomeview_p.h:1273
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15793,7 +15793,7 @@ msgstr[0] "Der Saldo von %2 wird in %1 Tag unterhalb %3 fallen."
 msgstr[1] "Der Saldo von %2 wird in %1 Tagen unterhalb %3 fallen."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1275
+#: kmymoney/views/khomeview_p.h:1280
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15864,7 +15864,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Aktivieren Sie das Berichtmodul um dieses Diagramm anzuzeigen"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1572
+#: kmymoney/views/khomeview_p.h:576 kmymoney/views/khomeview_p.h:1577
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Aktivieren Sie das Berichtmodul um dieses Diagramm anzuzeigen"
@@ -16715,7 +16715,7 @@ msgstr "Bereich"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:447
-#: kmymoney/views/khomeview_p.h:1109
+#: kmymoney/views/khomeview_p.h:1114
 #, kde-format
 msgid "Report"
 msgstr "Bericht"
@@ -17058,7 +17058,7 @@ msgstr "Berichte"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1111
+#: kmymoney/views/khomeview_p.h:1116
 #, kde-format
 msgid "Comment"
 msgstr "Kommentar"
@@ -17132,7 +17132,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Tortendiagramm für Einnahmen und Ausgaben"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:889
-#: kmymoney/views/khomeview_p.h:1546
+#: kmymoney/views/khomeview_p.h:1551
 #, kde-format
 msgid "Net Worth"
 msgstr "Eigenkapital"
@@ -17454,7 +17454,7 @@ msgid "Net Worth Forecast"
 msgstr "Eigenkapital-Vorhersage"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/views/khomeview_p.h:1568
+#: kmymoney/views/khomeview_p.h:1573
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title Home page section"
@@ -19874,24 +19874,24 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Gesamtgewinn:"
 
-#: kmymoney/views/kaccountsview_p.h:192
+#: kmymoney/views/kaccountsview_p.h:194
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Konto „%1“ bearbeiten"
 
-#: kmymoney/views/kaccountsview_p.h:248
+#: kmymoney/views/kaccountsview_p.h:250
 #, fuzzy, kde-format
 #| msgid "Edit account..."
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Konto bearbeiten ..."
 
-#: kmymoney/views/kaccountsview_p.h:282
+#: kmymoney/views/kaccountsview_p.h:284
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Kann Konto „%1“ nicht verändern. Ursache: %2"
 
-#: kmymoney/views/kaccountsview_p.h:358
+#: kmymoney/views/kaccountsview_p.h:360
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
@@ -19899,19 +19899,19 @@ msgstr ""
 "Der Saldo eines Kontos muss Null sein, damit das Konto geschlossen werden "
 "kann"
 
-#: kmymoney/views/kaccountsview_p.h:361
+#: kmymoney/views/kaccountsview_p.h:363
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 "Alle Unterkonten müssen geschlossen werden, bevor das Konto selbst "
 "geschlossen werden kann"
 
-#: kmymoney/views/kaccountsview_p.h:364
+#: kmymoney/views/kaccountsview_p.h:366
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Dieses Konto ist immer noch in einer geplanten Buchung enthalten"
 
-#: kmymoney/views/kaccountsview_p.h:367
+#: kmymoney/views/kaccountsview_p.h:369
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Dieses Konto ist immer noch in einem Onlinekonto zugeordnet"
@@ -20276,7 +20276,7 @@ msgstr "Ignorieren"
 msgid "Cancel processing of schedule entry."
 msgstr "Erfassen von geplanten Buchungen abbrechen."
 
-#: kmymoney/views/khomeview.cpp:224
+#: kmymoney/views/khomeview.cpp:230
 #, kde-format
 msgid ""
 "Before KMyMoney can give you detailed information about your financial "
@@ -20294,17 +20294,12 @@ msgctxt "@info:placeholder Shown when the application starts up"
 msgid "Loading..."
 msgstr "%1 wird geladen ..."
 
-#: kmymoney/views/khomeview_p.h:496
+#: kmymoney/views/khomeview_p.h:499
 #, fuzzy, kde-format
 #| msgid "Preferred Accounts"
 msgctxt "@title Home page section"
 msgid "Preferred Accounts"
 msgstr "Bevorzugte Konten"
-
-#: kmymoney/views/khomeview_p.h:502
-#, kde-format
-msgid "Payment Accounts"
-msgstr "Zahlungskonten"
 
 #: kmymoney/views/khomeview_p.h:504
 #, fuzzy, kde-format
@@ -20313,112 +20308,112 @@ msgctxt "@title Home page section"
 msgid "Payment Accounts"
 msgstr "Zahlungskonten"
 
-#: kmymoney/views/khomeview_p.h:557
+#: kmymoney/views/khomeview_p.h:562
 #, fuzzy, kde-format
 #| msgid "Net Worth Forecast"
 msgctxt "@title Home page section"
 msgid "Net Worth Forecast"
 msgstr "Eigenkapital-Vorhersage"
 
-#: kmymoney/views/khomeview_p.h:608
+#: kmymoney/views/khomeview_p.h:613
 #, fuzzy, kde-format
 #| msgid "&Next"
 msgid "Next"
 msgstr "&Weiter"
 
-#: kmymoney/views/khomeview_p.h:611
+#: kmymoney/views/khomeview_p.h:616
 #, kde-format
 msgid "Skip"
 msgstr "Auslassen"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
-#: kmymoney/views/khomeview_p.h:614
+#: kmymoney/views/khomeview_p.h:619
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:79
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:6
 #, kde-format
 msgid "Schedule"
 msgstr "Planung"
 
-#: kmymoney/views/khomeview_p.h:623
+#: kmymoney/views/khomeview_p.h:628
 #, kde-format
 msgid "Balance after"
 msgstr "Saldo nach"
 
-#: kmymoney/views/khomeview_p.h:677
+#: kmymoney/views/khomeview_p.h:682
 #, fuzzy, kde-format
 #| msgid "Schedule name:"
 msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "Name der geplanten Buchung:"
 
-#: kmymoney/views/khomeview_p.h:685
+#: kmymoney/views/khomeview_p.h:690
 #, fuzzy, kde-format
 #| msgid "Overdue payments"
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Überfällige Zahlungen"
 
-#: kmymoney/views/khomeview_p.h:721
+#: kmymoney/views/khomeview_p.h:726
 #, fuzzy, kde-format
 #| msgid "Payments to"
 msgctxt "@title Home page sub-section"
 msgid "Payments due today"
 msgstr "Zahlungen an"
 
-#: kmymoney/views/khomeview_p.h:736
+#: kmymoney/views/khomeview_p.h:741
 #, fuzzy, kde-format
 #| msgid "Future payments"
 msgctxt "@title Home page sub-section"
 msgid "Future payments"
 msgstr "Zukünftige Zahlungen"
 
-#: kmymoney/views/khomeview_p.h:799
+#: kmymoney/views/khomeview_p.h:804
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
 msgstr "Weniger geplante Buchungen auflisten"
 
-#: kmymoney/views/khomeview_p.h:801
+#: kmymoney/views/khomeview_p.h:806
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Mehr geplante Buchungen auflisten"
 
-#: kmymoney/views/khomeview_p.h:854
+#: kmymoney/views/khomeview_p.h:859
 #, kde-format
 msgid "Enter schedule"
 msgstr "Buchung planen"
 
-#: kmymoney/views/khomeview_p.h:859
+#: kmymoney/views/khomeview_p.h:864
 #, kde-format
 msgid "Skip schedule"
 msgstr "Buchung überspringen"
 
-#: kmymoney/views/khomeview_p.h:865
+#: kmymoney/views/khomeview_p.h:870
 #, kde-format
 msgid "Edit schedule"
 msgstr "Geplante Buchung ändern"
 
-#: kmymoney/views/khomeview_p.h:869
+#: kmymoney/views/khomeview_p.h:874
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] " (%1 Zahlung)"
 msgstr[1] " (%1 Zahlungen)"
 
-#: kmymoney/views/khomeview_p.h:1041
+#: kmymoney/views/khomeview_p.h:1046
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1044
+#: kmymoney/views/khomeview_p.h:1049
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "V"
 
-#: kmymoney/views/khomeview_p.h:1047
+#: kmymoney/views/khomeview_p.h:1052
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag R"
 #| msgid "R"
@@ -20426,20 +20421,20 @@ msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "A"
 
-#: kmymoney/views/khomeview_p.h:1060
+#: kmymoney/views/khomeview_p.h:1065
 #, fuzzy, kde-format
 #| msgid "To Minimum Balance / Maximum Credit"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Zu Minimum-Saldo / Maximum-Kredit"
 
-#: kmymoney/views/khomeview_p.h:1104
+#: kmymoney/views/khomeview_p.h:1109
 #, fuzzy, kde-format
 #| msgid "Favorite Reports"
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
 msgstr "Bevorzugte Berichte"
 
-#: kmymoney/views/khomeview_p.h:1160
+#: kmymoney/views/khomeview_p.h:1165
 #, fuzzy, kde-format
 #| msgctxt "Forecast days"
 #| msgid "%1 Day Forecast"
@@ -20450,7 +20445,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "%1-Tage-Vorhersage"
 msgstr[1] "%1-Tage-Vorhersage"
 
-#: kmymoney/views/khomeview_p.h:1171
+#: kmymoney/views/khomeview_p.h:1176
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -20458,20 +20453,20 @@ msgid_plural "%1 days"
 msgstr[0] "%1 Tag"
 msgstr[1] "%1 Tage"
 
-#: kmymoney/views/khomeview_p.h:1394
+#: kmymoney/views/khomeview_p.h:1399
 #, fuzzy, kde-format
 #| msgid "Assets and Liabilities Summary"
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Übersicht Anlagen und Verbindlichkeiten"
 
-#: kmymoney/views/khomeview_p.h:1418
+#: kmymoney/views/khomeview_p.h:1423
 #, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1422
+#: kmymoney/views/khomeview_p.h:1427
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag C"
 #| msgid "C"
@@ -20479,7 +20474,7 @@ msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "V"
 
-#: kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1431
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag R"
 #| msgid "R"
@@ -20487,112 +20482,112 @@ msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "A"
 
-#: kmymoney/views/khomeview_p.h:1430
+#: kmymoney/views/khomeview_p.h:1435
 #, fuzzy, kde-format
 #| msgid "Reconciled"
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Abgeglichen"
 
-#: kmymoney/views/khomeview_p.h:1433
+#: kmymoney/views/khomeview_p.h:1438
 #, fuzzy, kde-format
 #| msgid "Balance"
 msgctxt "@title:column table on home page"
 msgid "Balance"
 msgstr "Saldo"
 
-#: kmymoney/views/khomeview_p.h:1437
+#: kmymoney/views/khomeview_p.h:1442
 #, fuzzy, kde-format
 #| msgid "Asset Accounts"
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Anlagekonten"
 
-#: kmymoney/views/khomeview_p.h:1442
+#: kmymoney/views/khomeview_p.h:1447
 #, fuzzy, kde-format
 #| msgid "Liability Accounts"
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Verbindlichkeitskonten"
 
-#: kmymoney/views/khomeview_p.h:1527
+#: kmymoney/views/khomeview_p.h:1532
 #, kde-format
 msgid "Total Assets"
 msgstr "Summe aller Anlagen"
 
-#: kmymoney/views/khomeview_p.h:1535
+#: kmymoney/views/khomeview_p.h:1540
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Summe aller Verbindlichkeiten"
 
-#: kmymoney/views/khomeview_p.h:1823
+#: kmymoney/views/khomeview_p.h:1828
 #, fuzzy, kde-format
 #| msgid "Cash Flow Summary"
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Übersicht Geldfluß"
 
-#: kmymoney/views/khomeview_p.h:1828
+#: kmymoney/views/khomeview_p.h:1833
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Einnahmen und Ausgaben im aktuellen Monat"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1841
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Geplante Einnahme"
 
-#: kmymoney/views/khomeview_p.h:1839
+#: kmymoney/views/khomeview_p.h:1844
 #, kde-format
 msgid "Expenses"
 msgstr "Ausgaben"
 
-#: kmymoney/views/khomeview_p.h:1842
+#: kmymoney/views/khomeview_p.h:1847
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Geplante Ausgaben"
 
-#: kmymoney/views/khomeview_p.h:1870
+#: kmymoney/views/khomeview_p.h:1875
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Umlaufvermögen und -verbindlichkeiten"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1880
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Umlaufvermögen"
 
-#: kmymoney/views/khomeview_p.h:1878
+#: kmymoney/views/khomeview_p.h:1883
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Umbuchungen auf Umlaufverbindlichkeiten"
 
-#: kmymoney/views/khomeview_p.h:1881
+#: kmymoney/views/khomeview_p.h:1886
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Umlaufverbindlichkeiten"
 
-#: kmymoney/views/khomeview_p.h:1884
+#: kmymoney/views/khomeview_p.h:1889
 #, kde-format
 msgid "Other Transfers"
 msgstr "Andere Umbuchungen"
 
-#: kmymoney/views/khomeview_p.h:1927
+#: kmymoney/views/khomeview_p.h:1932
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Geldflußstatus"
 
-#: kmymoney/views/khomeview_p.h:1932
+#: kmymoney/views/khomeview_p.h:1937
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Erwartetes Umlaufvermögen"
 
-#: kmymoney/views/khomeview_p.h:1935
+#: kmymoney/views/khomeview_p.h:1940
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Erwartete Umlaufverbindlichkeiten"
 
-#: kmymoney/views/khomeview_p.h:1938
+#: kmymoney/views/khomeview_p.h:1943
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Erwarteter Gewinn/Verlust"
@@ -21453,31 +21448,31 @@ msgstr "Eine vorhandene KMyMoney-Datei öffnen"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Lernen, KMyMoney zu benutzen"
 
-#: kmymoney/views/ledgerview.cpp:211
+#: kmymoney/views/ledgerview.cpp:212
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Gehe zu Konto"
 
-#: kmymoney/views/ledgerview.cpp:213
+#: kmymoney/views/ledgerview.cpp:214
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Gehe zu Zahlungsempfänger"
 
-#: kmymoney/views/ledgerview.cpp:258
+#: kmymoney/views/ledgerview.cpp:259
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Gehe zu „%1“"
 
-#: kmymoney/views/ledgerview.cpp:268
+#: kmymoney/views/ledgerview.cpp:269
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Gehe zu „%1“"
 
-#: kmymoney/views/ledgerview.cpp:754
+#: kmymoney/views/ledgerview.cpp:756
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21485,33 +21480,33 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:883
+#: kmymoney/views/ledgerview.cpp:885
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 
-#: kmymoney/views/ledgerview.cpp:890
+#: kmymoney/views/ledgerview.cpp:892
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Die Buchung hat eine fehlende Zuordnung von <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:899
+#: kmymoney/views/ledgerview.cpp:901
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Zahlungen enden zu einem bestimmten Termin"
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:907
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
 
-#: kmymoney/views/ledgerview.cpp:911
+#: kmymoney/views/ledgerview.cpp:913
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -21519,14 +21514,14 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
 
-#: kmymoney/views/ledgerview.cpp:956
+#: kmymoney/views/ledgerview.cpp:958
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1016
+#: kmymoney/views/ledgerview.cpp:1020
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21534,14 +21529,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
 
-#: kmymoney/views/ledgerview.cpp:1017
+#: kmymoney/views/ledgerview.cpp:1021
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Geplante Buchung eintragen"
 
-#: kmymoney/views/ledgerview.cpp:1020
+#: kmymoney/views/ledgerview.cpp:1024
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21549,7 +21544,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
 
-#: kmymoney/views/ledgerview.cpp:1021
+#: kmymoney/views/ledgerview.cpp:1025
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21557,7 +21552,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Eintragen oder planen?"
 
-#: kmymoney/views/ledgerview.cpp:1041
+#: kmymoney/views/ledgerview.cpp:1045
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -21569,7 +21564,7 @@ msgstr ""
 "Verwenden Sie dies, um die Buchung für einen späteren Eintrag in das "
 "Kontenbuch vorzusehen."
 
-#: kmymoney/views/ledgerview.cpp:1043
+#: kmymoney/views/ledgerview.cpp:1047
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21577,7 +21572,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1047
+#: kmymoney/views/ledgerview.cpp:1051
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21585,7 +21580,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Sind Sie sicher, dass Sie die ausgewählte Buchung löschen möchten?"
 
-#: kmymoney/views/ledgerview.cpp:1048
+#: kmymoney/views/ledgerview.cpp:1052
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
@@ -21959,7 +21954,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Differenz: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:365
+#: kmymoney/views/simpleledgerview.cpp:362
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21967,7 +21962,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:471
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21975,7 +21970,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:481
+#: kmymoney/views/simpleledgerview.cpp:474
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21983,19 +21978,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:755
+#: kmymoney/views/simpleledgerview.cpp:753
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Webseite von <b>%1</b> in Ihrem Browser öffnen."
 
-#: kmymoney/views/simpleledgerview.cpp:941
+#: kmymoney/views/simpleledgerview.cpp:939
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:942
+#: kmymoney/views/simpleledgerview.cpp:940
 #, fuzzy, kde-format
 #| msgid "Closed tags cannot be used."
 msgctxt "@title:info In reconciliation"
@@ -26470,6 +26465,9 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
+
+#~ msgid "Payment Accounts"
+#~ msgstr "Zahlungskonten"
 
 #~ msgid "Importing statement for account %1"
 #~ msgstr "Kontoauszug für Konto %1 wird importiert"
