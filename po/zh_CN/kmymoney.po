@@ -25041,6 +25041,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Payment Accounts"
-#~ msgstr "支出账户"
