@@ -157,6 +157,7 @@ public:
         ui->m_securitiesTree->setModel(m_securitiesProxyModel);
         m_securitiesProxyModel->setSourceModel(MyMoneyFile::instance()->securitiesModel());
         m_securitiesProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        m_securitiesProxyModel->setSortLocaleAware(true);
 
         m_securityColumnSelector = new ColumnSelector(ui->m_securitiesTree, QStringLiteral("KInvestmentView_Securities"));
         m_securityColumnSelector->setModel(MyMoneyFile::instance()->securitiesModel());
