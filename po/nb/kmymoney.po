@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 00:42+0000\n"
+"POT-Creation-Date: 2025-08-21 00:43+0000\n"
 "PO-Revision-Date: 2025-07-27 12:52+0200\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -20184,17 +20184,17 @@ msgstr "Slett institusjon"
 msgid "Unable to delete institution: %1"
 msgstr "Kan ikke slette institusjon: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:604
+#: kmymoney/views/kinvestmentview.cpp:605
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Er du sikker på at du vil slette investeringen <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:605
+#: kmymoney/views/kinvestmentview.cpp:606
 #, kde-format
 msgid "Delete investment"
 msgstr "Slett investering"
 
-#: kmymoney/views/kinvestmentview.cpp:616
+#: kmymoney/views/kinvestmentview.cpp:617
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Kan ikke slette investering: %1"
@@ -25886,6 +25886,3 @@ msgstr "Kun en av --csv og --html er støttet"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "lagrer rapport «%1» til «%2»"
-
-#~ msgid "Payment Accounts"
-#~ msgstr "Betalingskonti"
