@@ -377,8 +377,11 @@ public:
             report.endingBalance = endingBalanceDlg->endingBalance();
 
             if (!report.accountId.isEmpty() && !report.journalEntryIds.isEmpty() && report.statementDate.isValid()) {
+                const auto enabled = pActions[eMenu::Action::ReconciliationReport]->isEnabled();
+                pActions[eMenu::Action::ReconciliationReport]->setEnabled(true);
                 pActions[eMenu::Action::ReconciliationReport]->setData(QVariant::fromValue(report));
                 pActions[eMenu::Action::ReconciliationReport]->trigger();
+                pActions[eMenu::Action::ReconciliationReport]->setEnabled(enabled);
             }
 
         } catch (const MyMoneyException&) {
