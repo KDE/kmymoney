@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.aqbanking">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ralf.Habacker; &Ralf.Habacker.mail; </author>
+  </authorgroup>
+  <date
+>31 de juliol de 2025</date>
+  <releaseinfo
+>5.2.70</releaseinfo>
+</chapterinfo>
+<title
+>Banca en línia</title>
+
+<para
+>La banca en línia es configura seleccionant l'entrada de menú Arranjament -&gt; Configura l'Aqbanking, </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Menú de configuració del KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_menu.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Menú de configuració del KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Aquest element de menú és visible després que s'hagi activat el connector KBanking associat, el qual es pot fer a través de l'element de menú «Configura el KMyMoney» i després de seleccionar l'entrada «Connectors» a l'àrea esquerra de la finestra. </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Menú de configuració del KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Menú de configuració del KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot
+>Assegureu-vos que la casella de selecció davant de la línia amb KBanking està marcada. </para>
+
+<sect1>
+<title
+>Configuració de l'Aqbanking</title>
+<para
+>Després de prémer l'entrada de menú «Configura l'Aqbanking» veureu el diàleg següent: </para>
+
+<para>
+<screenshot>
+  <screeninfo
+></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="aqbanking-wizard-page1.png"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>L'addició té lloc en dos passos. El primer pas és afegir un usuari i el segon pas és afegir un compte. </para>
+</sect1>
+
+<sect1 id="create_user">
+  <title
+>Creació d'un usuari</title>
+  <para
+>Després de prémer «Crea un usuari», se us redirigirà al diàleg «Assistent d'usuari nou» que es mostra a continuació: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+<sect2 id="hbci_create_user">
+  <title
+>Creació d'un usuari per a HBCI</title>
+<sect3 id="hbci_select_online_banking_protocol">
+  <title
+>Selecció del protocol de banca en línia</title>
+  <para
+>Després de prémer «Següent» veureu una llista dels protocols de banca en línia disponibles: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page2-hbci.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_configuring_a_account">
+  <title
+>Configurar un compte de HBCI</title>
+  <para
+>Després de triar el «Dorsal HBCI utilitzant AqHBCI» i prement «Següent» veureu la pàgina següent, en la qual podreu seleccionar el tipus de seguretat: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Vegeu la <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle#section-2"
+>AqBanking6 Bank Table</ulink
+> per als detalls sobre els tipus de seguretat admesos pels bancs. Si el vostre banc no apareix a la llista, primer heu de provar Pin/TAN. </para>
+</sect3>
+<sect3 id="hbci_setup_pintan">
+  <title
+>Configuració del pin/Tan</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_bank_and_server_url">
+  <title
+>Seleccioneu l'URL del banc i del servidor</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>A <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle"
+>AqBanking6 Bankentabelle</ulink
+> podeu trobar una llista d'URL del servidor bancari que se sap que funciona. </para>
+</sect3>
+<sect3 id="hbci_select_bank_account_and_user_name">
+  <title
+>Seleccioneu un compte bancari i un nom d'usuari</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_choose_extended_settings_or_continue">
+  <title
+>Trieu la configuració ampliada o continueu</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_extended_settings">
+  <title
+>Seleccioneu la configuració ampliada</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_finish_creating_user">
+  <title
+>Finalitzeu la creació de l'usuari</title>
+  <para
+>Després de prémer «Següent», «aqbanking» es posarà en contacte amb el servidor i recuperarà el certificat del servidor i la informació del banc. </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Després de prémer «Tanca» es crearà el vostre compte d'usuari. </para>
+</sect3>
+<sect3 id="add_account">
+  <title
+>Afegir un compte</title>
+  <para
+>En cas que no falli l'addició d'un compte d'usuari, els comptes associats al banc indicat ja haurien d'estar presents a la llista de comptes. </para>
+</sect3>
+</sect2>
+<sect2 id="paypal_create_user">
+  <title
+>Paypal</title>
+<sect3 id="paypal_select_online_banking_protocol">
+  <title
+>Selecció del protocol de banca en línia</title>
+  <para
+>Després de prémer «Següent» veureu una llista dels protocols de banca en línia disponibles: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_1">
+  <title
+>Configuració d'un usuari per a Paypal</title>
+  <para
+>Després de triar «Paypal» i prémer «Següent» veureu la pàgina d'informació següent: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Premeu «Executa» per a continuar. </para>
+</sect3>
+<sect3 id="paypal_user_name_and_email">
+  <title
+>Introduïu el nom d'usuari i l'adreça de correu electrònic de Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_api_password_and_signature">
+  <title
+>Seleccioneu la configuració de l'API</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_2">
+  <title
+>Resum de la informació abans de crear l'usuari</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_setup_password">
+  <title
+>Introduïu una contrasenya nova per a l'usuari Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_finish_creating_user">
+  <title
+>Finalitzeu la creació de l'usuari</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Després de prémer «Finalitza» es crearà el compte d'usuari. </para>
+  <para
+>El pas restant és crear un compte nou basat en aquest usuari. </para>
+</sect3>
+<sect3 id="paypal_choose_backend">
+  <title
+>Afegir un compte de Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_add_account">
+  <title
+>Afegir un compte de Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

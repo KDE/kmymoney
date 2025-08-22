@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.aqbanking">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ralf.Habacker; &Ralf.Habacker.mail; </author>
+  </authorgroup>
+  <date
+>31 липня 2025 року</date>
+  <releaseinfo
+>5.2.70</releaseinfo>
+</chapterinfo>
+<title
+>Клієнт-банк</title>
+
+<para
+>Систему «клієнт-банк» можна налаштувати після вибору пункту меню «Параметри -&gt; Налаштувати Aqbanking». </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Меню налаштовування KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_menu.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Меню налаштовування KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Цим пунктом меню можна буде скористатися після активації відповідного додатка KBanking. Активувати додаток можна за допомогою пункту меню «Налаштувати KMyMoney». Перейдіть на сторінку «Додатки» у лівій частині вікна налаштувань. </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Меню налаштовування KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Меню налаштовування KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot
+>Переконайтеся, що у списку позначено пункт KBanking. </para>
+
+<sect1>
+<title
+>Налаштовування Aqbanking</title>
+<para
+>Після натискання пункту меню «Налаштувати Aqbanking» ви побачите таке вікно: </para>
+
+<para>
+<screenshot>
+  <screeninfo
+></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="aqbanking-wizard-page1.png"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Додавання слід виконати у два кроки. На першому кроці буде додано запис користувача, а на другому — рахунок. </para>
+</sect1>
+
+<sect1 id="create_user">
+  <title
+>Створення запису користувача</title>
+  <para
+>Після натискання кнопки «Створити запис користувача» програма покаже вікно «Майстер створення запису користувача», зразок якого показано нижче: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+<sect2 id="hbci_create_user">
+  <title
+>Створення запису користувача для HBCI</title>
+<sect3 id="hbci_select_online_banking_protocol">
+  <title
+>Вибір протоколу клієнт-банк</title>
+  <para
+>Після натискання кнопки «Далі» ви побачите список доступних протоколів клієнт-банк: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page2-hbci.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_configuring_a_account">
+  <title
+>Налаштовування рахунку HBCI</title>
+  <para
+>Після вибору «Модуль HBCI з використанням AqHBCI» і натискання «Далі», ви побачите наступну сторінку, за допомогою якої ви зможете вибрати тип цінного паперу: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Докладніший опис типів цінних паперів, підтримку яких здійснюють банки, наведено у <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle#section-2"
+>Таблиці банків AqBanking6</ulink
+>. Якщо вашого банку немає у цьому списку, вам слід спочатку спробувати ввести дані Pin/TAN. </para>
+</sect3>
+<sect3 id="hbci_setup_pintan">
+  <title
+>Налаштовування pin/Tan</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_bank_and_server_url">
+  <title
+>Вибір банку і адреси сервера</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>У <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle"
+>AqBanking6 Bankentabelle</ulink
+> ви знайдете список відомих і працездатних адрес серверів банків. </para>
+</sect3>
+<sect3 id="hbci_select_bank_account_and_user_name">
+  <title
+>Виберіть банківський рахунок та ім'я користувача</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_choose_extended_settings_or_continue">
+  <title
+>Виберіть «Розширені параметри» або «Продовжити»</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_extended_settings">
+  <title
+>Вибір розширених параметрів</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_finish_creating_user">
+  <title
+>Завершення створення облікового запису користувача</title>
+  <para
+>Після натискання кнопки «Далі» aqbanking встановить зв'язок із сервером і отримає сертифікат сервера та відомості щодо банку. </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Після натискання кнопки «Закрити» буде створено ваш рахунок. </para>
+</sect3>
+<sect3 id="add_account">
+  <title
+>Додати рахунок</title>
+  <para
+>Якщо додавання запису користувача буде вдалим, рахунки, які пов'язано із відповідним банком, мають з'явитися у списку рахунків. </para>
+</sect3>
+</sect2>
+<sect2 id="paypal_create_user">
+  <title
+>Paypal</title>
+<sect3 id="paypal_select_online_banking_protocol">
+  <title
+>Вибір протоколу клієнт-банк</title>
+  <para
+>Після натискання кнопки «Далі» ви побачите список доступних протоколів клієнт-банк: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_1">
+  <title
+>Налаштовування користувача для Paypal</title>
+  <para
+>Після вибору «Paypal» і натискання «Далі», ви побачите наступну сторінку з відомостями: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Натисніть «Виконати», щоб продовжити. </para>
+</sect3>
+<sect3 id="paypal_user_name_and_email">
+  <title
+>Введіть ім'я користувача і адресу електронної пошти Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_api_password_and_signature">
+  <title
+>Вибір параметрів програмного інтерфейсу</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_2">
+  <title
+>Резюме до створення запису користувача</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_setup_password">
+  <title
+>Введіть новий пароль для користувача Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_finish_creating_user">
+  <title
+>Завершення створення облікового запису користувача</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Після натискання кнопки «Завершити» буде створено обліковий запис користувача. </para>
+  <para
+>На останньому кроці лишилося створити рахунок на основі цього облікового запису. </para>
+</sect3>
+<sect3 id="paypal_choose_backend">
+  <title
+>Додавання рахунку paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_add_account">
+  <title
+>Додавання рахунку paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
