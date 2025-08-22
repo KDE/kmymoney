@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 03:28+0000\n"
+"POT-Creation-Date: 2025-08-22 03:27+0000\n"
 "PO-Revision-Date: 2023-08-15 06:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -19866,17 +19866,17 @@ msgstr "დაწესებულების წაშლა..."
 msgid "Unable to delete institution: %1"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:604
+#: kmymoney/views/kinvestmentview.cpp:605
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:605
+#: kmymoney/views/kinvestmentview.cpp:606
 #, kde-format
 msgid "Delete investment"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:616
+#: kmymoney/views/kinvestmentview.cpp:617
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr ""
