@@ -7,12 +7,17 @@
 #include "kreconciliationreportdlg.h"
 
 // Qt includes
+
+#include <QDebug>
+#include <QPointer>
 #include <QPushButton>
 #include <QTabWidget>
-#include <QPointer>
 
 // KDE includes
+
 #include <KStandardGuiItem>
+
+// Project includes
 
 #include "kmm_printer.h"
 #include "kmmtextbrowser.h"
@@ -33,6 +38,8 @@ KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const 
 
     QPushButton* printButton = m_buttonBox->addButton(QString(), QDialogButtonBox::ActionRole);
     KGuiItem::assign(printButton, KStandardGuiItem::print());
+
+    qDebug() << "KReportDlg constructed";
 
     // signals and slots connections
     connect(printButton, &QPushButton::clicked, this, &KReportDlg::print);

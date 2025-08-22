@@ -64,6 +64,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                                                             const MyMoneyMoney& endingBalance,
                                                             const QStringList& transactionList)
 {
+    qDebug() << "slotGenerateReconciliationReport called";
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySecurity currency = file->currency(account.currencyId());
 
@@ -333,6 +334,8 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
 
         // end of the table
         + "</table>\n";
+
+    qDebug() << "reconciliation report generated";
 
     QPointer<KReportDlg> dlg = new KReportDlg(nullptr, header + report + footer, header + detailsReport + footer);
     dlg->exec();
