@@ -23,6 +23,9 @@ set(KDE_COMPILERSETTINGS_LEVEL ${KDE${QT_MAJOR_VERSION}_MIN_LEVEL})
 
 if (NOT BUILD_STATIC_PLUGINS)
     set(AKONADI_MIN_VERSION 5.14.2)
+    if(BUILD_WITH_QT6)
+        set(AKONADI_MIN_VERSION 6.0.0)
+    endif()
 endif()
 
 
@@ -224,7 +227,11 @@ if (DEFINED AKONADI_MIN_VERSION)
     # for config-kmymoney.h.cmake
     set(ADDRESSBOOK_VERSION ${${PIMPREFIX}Akonadi_VERSION})
   endif()
-  find_package(${PIMPREFIX}IdentityManagement ${AKONADI_MIN_VERSION} QUIET)
+  if(AKONADI_MIN_VERSION VERSION_GREATER_EQUAL "6.0.0")
+    find_package(${PIMPREFIX}IdentityManagementCore ${AKONADI_MIN_VERSION} QUIET)
+  else()
+    find_package(${PIMPREFIX}IdentityManagement ${AKONADI_MIN_VERSION} QUIET)
+  endif()
 endif()
 
 find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG REQUIRED)
@@ -318,7 +325,7 @@ if(QT_MAJOR_VERSION LESS 6)
 endif()
 
 cmake_dependent_option(ENABLE_ADDRESSBOOK "Enable addressbook support." ON
-                       "${PIMPREFIX}IdentityManagement_FOUND;${PIMPREFIX}Akonadi_FOUND;KF${QT_MAJOR_VERSION}Contacts_FOUND" OFF)
+                       "${PIMPREFIX}IdentityManagement_FOUND OR ${PIMPREFIX}IdentityManagementCore_FOUND;${PIMPREFIX}Akonadi_FOUND;KF${QT_MAJOR_VERSION}Contacts_FOUND" OFF)
 
 add_feature_info("Address book" ENABLE_ADDRESSBOOK "Allows fetching payee information from KDE PIM system.")
 
