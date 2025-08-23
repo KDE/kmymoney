@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-21 00:43+0000\n"
+"POT-Creation-Date: 2025-08-23 00:42+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -891,7 +891,7 @@ msgstr "Keitimo kurso rengyklė"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:398
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:691
 #: kmymoney/views/khomeview_p.h:625 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:59
@@ -967,7 +967,7 @@ msgstr "xxx"
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:46
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:122
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:274
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:240
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:241
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:689
 #: kmymoney/views/investtransactioneditor.ui:260
@@ -9002,7 +9002,7 @@ msgstr "Reikšmė"
 #: kmymoney/mymoney/storage/payeesmodel.cpp:96
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
 #: kmymoney/plugins/views/reports/core/listtable.cpp:695
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:455
@@ -10111,7 +10111,7 @@ msgstr "Panaikinti pažymėjimą"
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
 #: kmymoney/plugins/views/reports/core/listtable.cpp:703
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:164
@@ -12977,7 +12977,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:241
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
 #: kmymoney/views/newspliteditor.ui:130
 #: kmymoney/views/newtransactioneditor.ui:247
@@ -14342,12 +14342,12 @@ msgstr "Santrauka"
 msgid "&Details"
 msgstr "&Detalės"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:121
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:122
 #, fuzzy, kde-format
 msgid "Reconciliation report of account %1"
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:128
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:129
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:111
 #, fuzzy, kde-format
 #| msgid "All values shown in %1 unless otherwise noted"
@@ -14357,7 +14357,7 @@ msgstr "Visos vertės rodomos: %1 (jei kitaip nepažymėta)"
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryEditWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
 #. i18n: ectx: attribute (title), widget (QWidget, summary)
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:133
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:134
 #: kmymoney/plugins/views/forecast/kforecastview.ui:335
 #: kmymoney/wizards/newloanwizard/summaryeditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:6
@@ -14365,13 +14365,13 @@ msgstr "Visos vertės rodomos: %1 (jei kitaip nepažymėta)"
 msgid "Summary"
 msgstr "Santrauka"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:138
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:139
 #, fuzzy, kde-format
 #| msgid "Starting balance of this statement:"
 msgid "Starting balance on bank statement"
 msgstr "Šio pranešimo pradžios balansas:"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:144
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:145
 #, fuzzy, kde-format
 msgid "%1 cleared payment"
 msgid_plural "%1 cleared payments in total"
@@ -14380,7 +14380,7 @@ msgstr[1] "Kreditinė kortelė"
 msgstr[2] "Kreditinė kortelė"
 msgstr[3] "Kreditinė kortelė"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:150
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:151
 #, fuzzy, kde-format
 #| msgid "Direct deposit"
 msgid "%1 cleared deposit"
@@ -14390,19 +14390,19 @@ msgstr[1] "Tiesioginis indėlis"
 msgstr[2] "Tiesioginis indėlis"
 msgstr[3] "Tiesioginis indėlis"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:156
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
 #, fuzzy, kde-format
 #| msgid "Ending balance of this statement:"
 msgid "Ending balance on bank statement"
 msgstr "Šio pranešimo pabaigos balansas:"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:166
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:167
 #, fuzzy, kde-format
 #| msgid "Cleared Balance:"
 msgid "Cleared balance"
 msgstr "Suderintas balansas:"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:172
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:173
 #, fuzzy, kde-format
 #| msgid "Future payments"
 msgid "%1 outstanding payment"
@@ -14412,7 +14412,7 @@ msgstr[1] "Mokėjimai ateityje"
 msgstr[2] "Mokėjimai ateityje"
 msgstr[3] "Mokėjimai ateityje"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:178
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:179
 #, fuzzy, kde-format
 #| msgid "Manual deposit"
 msgid "%1 outstanding deposit"
@@ -14422,12 +14422,12 @@ msgstr[1] "Rankinis indėlis"
 msgstr[2] "Rankinis indėlis"
 msgstr[3] "Rankinis indėlis"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:184
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:185
 #, fuzzy, kde-format
 msgid "Register balance as of %1"
 msgstr "Balansas: "
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:218
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:219
 #, fuzzy, kde-format
 msgid "%1 payment after %2"
 msgid_plural "%1 payments after %2"
@@ -14436,7 +14436,7 @@ msgstr[1] "Viso mokėti:"
 msgstr[2] "Viso mokėti:"
 msgstr[3] "Viso mokėti:"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:224
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:225
 #, fuzzy, kde-format
 msgid "%1 deposit after %2"
 msgid_plural "%1 deposits after %2"
@@ -14445,7 +14445,7 @@ msgstr[1] "%1 indėliai."
 msgstr[2] "%1 indėliai."
 msgstr[3] "%1 indėliai."
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:230
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:231
 #, fuzzy, kde-format
 msgid "Register ending balance"
 msgstr "Atidarymo balanso tekstas"
@@ -14453,7 +14453,7 @@ msgstr "Atidarymo balanso tekstas"
 #. i18n: ectx: property (text), widget (QLabel, categoryLabel)
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:699
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
 #: kmymoney/views/newspliteditor.ui:160
@@ -14466,13 +14466,13 @@ msgstr "Atidarymo balanso tekstas"
 msgid "Category"
 msgstr "Kategorija"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:249
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:250
 #, fuzzy, kde-format
 #| msgid "Future payments"
 msgid "Outstanding payments"
 msgstr "Mokėjimai ateityje"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:291
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:292
 #, fuzzy, kde-format
 #| msgid "Future payments"
 msgid "One outstanding payment of"
@@ -14482,19 +14482,19 @@ msgstr[1] "Mokėjimai ateityje"
 msgstr[2] "Mokėjimai ateityje"
 msgstr[3] "Mokėjimai ateityje"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:297
 #, fuzzy, kde-format
 #| msgid "Future payments"
 msgid "Outstanding charges"
 msgstr "Mokėjimai ateityje"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:297
 #, fuzzy, kde-format
 #| msgid "Manual deposit"
 msgid "Outstanding deposits"
 msgstr "Rankinis indėlis"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:330
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:331
 #, fuzzy, kde-format
 #| msgid "Future payments"
 msgid "One outstanding charges of"
@@ -14504,7 +14504,7 @@ msgstr[1] "Mokėjimai ateityje"
 msgstr[2] "Mokėjimai ateityje"
 msgstr[3] "Mokėjimai ateityje"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:331
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:332
 #, fuzzy, kde-format
 #| msgid "Manual deposit"
 msgid "One outstanding deposit of"
@@ -21073,7 +21073,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:443
+#: kmymoney/views/reconciliationledgerviewpage.cpp:446
 #, fuzzy, kde-format
 #| msgid "Cleared"
 msgctxt "@label:textbox Cleared balance"
@@ -21369,13 +21369,13 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "Rasti operaciją..."
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:442
+#: kmymoney/views/reconciliationledgerviewpage.cpp:445
 #, fuzzy, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Statement"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:444
+#: kmymoney/views/reconciliationledgerviewpage.cpp:447
 #, fuzzy, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

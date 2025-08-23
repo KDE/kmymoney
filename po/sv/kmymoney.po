@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-21 00:43+0000\n"
+"POT-Creation-Date: 2025-08-23 00:42+0000\n"
 "PO-Revision-Date: 2025-08-10 07:42+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -972,7 +972,7 @@ msgstr "Växelkurs/Kurseditor"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:398
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:691
 #: kmymoney/views/khomeview_p.h:625 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:59
@@ -1048,7 +1048,7 @@ msgstr "xxx"
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:46
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:122
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:274
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:240
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:241
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:689
 #: kmymoney/views/investtransactioneditor.ui:260
@@ -9075,7 +9075,7 @@ msgstr "Värde"
 #: kmymoney/mymoney/storage/payeesmodel.cpp:96
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
 #: kmymoney/plugins/views/reports/core/listtable.cpp:695
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:455
@@ -10087,7 +10087,7 @@ msgstr "Rensa val av kategorifält."
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
 #: kmymoney/plugins/views/reports/core/listtable.cpp:703
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:164
@@ -12999,7 +12999,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:241
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
 #: kmymoney/views/newspliteditor.ui:130
 #: kmymoney/views/newtransactioneditor.ui:247
@@ -14386,12 +14386,12 @@ msgstr "Samman&fattning"
 msgid "&Details"
 msgstr "&Information"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:121
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:122
 #, kde-format
 msgid "Reconciliation report of account %1"
 msgstr "Avstämningsrapport för kontot %1"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:128
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:129
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:111
 #, kde-format
 msgid "All values shown in %1"
@@ -14400,7 +14400,7 @@ msgstr "Alla värden visas i %1"
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryEditWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
 #. i18n: ectx: attribute (title), widget (QWidget, summary)
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:133
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:134
 #: kmymoney/plugins/views/forecast/kforecastview.ui:335
 #: kmymoney/wizards/newloanwizard/summaryeditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:6
@@ -14408,69 +14408,69 @@ msgstr "Alla värden visas i %1"
 msgid "Summary"
 msgstr "Summering"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:138
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:139
 #, kde-format
 msgid "Starting balance on bank statement"
 msgstr "Ingående behållning på bankutdraget"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:144
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:145
 #, kde-format
 msgid "%1 cleared payment"
 msgid_plural "%1 cleared payments in total"
 msgstr[0] "%1 kontrollerad betalning "
 msgstr[1] "Totalt %1 kontrollerade betalningar "
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:150
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:151
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
 msgstr[0] "%1 kontrollerad insättning"
 msgstr[1] "Totalt %1 kontrollerade insättningar"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:156
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
 #, kde-format
 msgid "Ending balance on bank statement"
 msgstr "Utgående behållning på bankutdraget"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:166
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:167
 #, kde-format
 msgid "Cleared balance"
 msgstr "Kontrollerad behållning"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:172
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:173
 #, kde-format
 msgid "%1 outstanding payment"
 msgid_plural "%1 outstanding payments in total"
 msgstr[0] "%1 återstående betalning"
 msgstr[1] "Totalt %1 återstående betalningar"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:178
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:179
 #, kde-format
 msgid "%1 outstanding deposit"
 msgid_plural "%1 outstanding deposits in total"
 msgstr[0] "%1 återstående insättning"
 msgstr[1] "Totalt %1 återstående insättningar"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:184
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:185
 #, kde-format
 msgid "Register balance as of %1"
 msgstr "Registrerad behållning %1 "
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:218
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:219
 #, kde-format
 msgid "%1 payment after %2"
 msgid_plural "%1 payments after %2"
 msgstr[0] "%1 betalning efter %2"
 msgstr[1] "%1 betalningar efter %2"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:224
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:225
 #, kde-format
 msgid "%1 deposit after %2"
 msgid_plural "%1 deposits after %2"
 msgstr[0] "%1 insättning efter %2"
 msgstr[1] "%1 insättningar efter %2"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:230
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:231
 #, kde-format
 msgid "Register ending balance"
 msgstr "Registrerad utgående behållning"
@@ -14478,7 +14478,7 @@ msgstr "Registrerad utgående behållning"
 #. i18n: ectx: property (text), widget (QLabel, categoryLabel)
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:699
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
 #: kmymoney/views/newspliteditor.ui:160
@@ -14491,36 +14491,36 @@ msgstr "Registrerad utgående behållning"
 msgid "Category"
 msgstr "Kategori"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:249
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:250
 #, kde-format
 msgid "Outstanding payments"
 msgstr "Återstående betalningar"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:291
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:292
 #, kde-format
 msgid "One outstanding payment of"
 msgid_plural "Total of %1 outstanding payments amounting to"
 msgstr[0] "En återstående betalning av"
 msgstr[1] "Totalt %1 återstående betalningar av"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:297
 #, kde-format
 msgid "Outstanding charges"
 msgstr "Utestående ändringar"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:297
 #, kde-format
 msgid "Outstanding deposits"
 msgstr "Återstående insättningar"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:330
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:331
 #, kde-format
 msgid "One outstanding charges of"
 msgid_plural "Total of %1 outstanding charges amounting to"
 msgstr[0] "En utestående ändring av"
 msgstr[1] "Totalt %1 utestående ändringar av"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:331
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:332
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"
@@ -21151,7 +21151,7 @@ msgstr ""
 "inaktuellt och kan skilja sig från kontobehållningen."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:443
+#: kmymoney/views/reconciliationledgerviewpage.cpp:446
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21467,13 +21467,13 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "Stämmer av transaktioner..."
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:442
+#: kmymoney/views/reconciliationledgerviewpage.cpp:445
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Utdrag: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:444
+#: kmymoney/views/reconciliationledgerviewpage.cpp:447
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

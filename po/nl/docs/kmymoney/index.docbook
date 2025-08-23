@@ -216,6 +216,7 @@
   <!ENTITY whatsnew SYSTEM "whatsnew.docbook">
   <!ENTITY details-institutions SYSTEM "details-institutions.docbook">
   <!ENTITY details-accounts SYSTEM "details-accounts.docbook">
+  <!ENTITY details-aqbanking SYSTEM "details-aqbanking.docbook">
   <!ENTITY details-loans SYSTEM "details-loans.docbook">
   <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
   <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
@@ -288,7 +289,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 
 <copyright>
 <year
->2000-2024</year>
+>2000-2025</year>
 <holder
 >Het ontwikkelteam van &kmymoney;</holder>
 </copyright>
@@ -385,6 +386,7 @@ consistent documentation style across all KDE apps. -->
 &details-formats;
 &details-database;
 &details-settings;
+&details-aqbanking;
 &faq;
 &reference;
 &credits;

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.aqbanking">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ralf.Habacker; &Ralf.Habacker.mail; </author>
+  </authorgroup>
+  <date
+>2025-07-31</date>
+  <releaseinfo
+>5.2.70</releaseinfo>
+</chapterinfo>
+<title
+>Online bankieren</title>
+
+<para
+>Online bankieren wordt geconfigureerd door het menu-item Instellingen -&gt; Aqbanking configureren, </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Configuratiemenu van KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_menu.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Configuratiemenu van KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Dit menu-item is zichtbaar nadat de bijbehorende plug-in KBanking is geactiveerd, wat gedaan kan worden via het menu-item &quot;KMyMoney configureren&quot; en na selecteren van het item &quot;Plug-ins&quot; in het linker gebied van het venster. </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Configuratiemenu van KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Configuratiemenu van KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot
+>Ga na dat het keuzevakje vóór de regel met KBanking is geactiveerd. </para>
+
+<sect1>
+<title
+>Opzet van Aqbanking</title>
+<para
+>Nadat u het menu-item &quot;Aqbanking configureren&quot; hebt ingedrukt zult u de volgende dialoog zien: </para>
+
+<para>
+<screenshot>
+  <screeninfo
+></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="aqbanking-wizard-page1.png"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Toevoegen gaat in twee stappen. De eerste stap is om een gebruiker toe te voegen en de tweede stap is een rekening toe te voegen. </para>
+</sect1>
+
+<sect1 id="create_user">
+  <title
+>Een gebruiker aanmaken</title>
+  <para
+>Na indrukken van &quot;Gebruiker aanmaken&quot; zult u doorgestuurd worden naar de dialoog &quot;Assistent nieuwe gebruiker Wizard&quot; onderstaand getoond: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+<sect2 id="hbci_create_user">
+  <title
+>Gebruiker voor HBCI aanmaken</title>
+<sect3 id="hbci_select_online_banking_protocol">
+  <title
+>Selecteer online protocol voor bankieren</title>
+  <para
+>Na indrukken &quot;Volgende&quot; zult u een lijst zien met beschikbare online protocollen voor bankieren: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page2-hbci.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_configuring_a_account">
+  <title
+>Een HBCI-rekening configureren</title>
+  <para
+>Na het kiezen van &quot;HBCI-backend met gebruik van AqHBCI&quot; en drukken op &quot;Volgende&quot; zult u de volgende pagina zien, waarop u het type waardepapier kunt kiezen: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Zie <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle#section-2"
+>AqBanking6 Banktabel</ulink
+> voor enige details over de door banken ondersteunde typen waardepapieren. Als uw bank daar niet in de lijst staat, zou u Pin/TAN eerst moeten proberen. </para>
+</sect3>
+<sect3 id="hbci_setup_pintan">
+  <title
+>Opzetten van pin/Tan</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_bank_and_server_url">
+  <title
+>Selecteer bank- en server-url</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Op <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle"
+>AqBanking6 Bankentabel</ulink
+> kunt u een lijst met url's van bankservers zien die werken. </para>
+</sect3>
+<sect3 id="hbci_select_bank_account_and_user_name">
+  <title
+>Selecteer bankrekening en gebruikersnaam</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_choose_extended_settings_or_continue">
+  <title
+>Kies uitgebreide instellingen of ga door</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_extended_settings">
+  <title
+>Selecteer uitgebreide instellingen</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_finish_creating_user">
+  <title
+>Voltooi aanmaken van gebruiker</title>
+  <para
+>Na indrukken van &quot;volgende&quot; zal aqbanking contact maken met de server en het servercertificaat en bankinformatie ophalen. </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Na indrukken van &quot;Sluiten&quot; is uw gebruikersaccount aangemaakt. </para>
+</sect3>
+<sect3 id="add_account">
+  <title
+>Account toevoegen</title>
+  <para
+>In het geval dat toevoegen van een gebruikersaccount niet mislukte, zouden de rekeningen geassocieerd met de gegeven bank al aanwezig moeten zijn in de lijst met rekeningen. </para>
+</sect3>
+</sect2>
+<sect2 id="paypal_create_user">
+  <title
+>Paypal</title>
+<sect3 id="paypal_select_online_banking_protocol">
+  <title
+>Selecteer online protocol voor bankieren</title>
+  <para
+>Na indrukken &quot;Volgende&quot; zult u een lijst zien met beschikbare online protocollen voor bankieren: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_1">
+  <title
+>Een gebruiker configureren voor Paypal</title>
+  <para
+>Na kiezen van &quot;Paypal&quot; en indrukken van &quot;Volgende&quot; zult u de volgende informatiepagina zien: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Druk op &quot;Uitvoeren&quot; om door te gaan. </para>
+</sect3>
+<sect3 id="paypal_user_name_and_email">
+  <title
+>Voer gebruikersnaam en het Paypal e-mailadres in</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_api_password_and_signature">
+  <title
+>Selecteer API-instellingen</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_2">
+  <title
+>Samenvatting voor aanmaken van de gebruiker</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_setup_password">
+  <title
+>Voer wachtwoord in voor de Paypal gebruiker</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_finish_creating_user">
+  <title
+>Voltooi aanmaken van gebruiker</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Na indrukken van &quot;Sluiten&quot; is uw gebruikersaccount aangemaakt. </para>
+  <para
+>De overblijvende stap is het aanmaken van een nieuw account gebaseerd op deze gebruiker. </para>
+</sect3>
+<sect3 id="paypal_choose_backend">
+  <title
+>Paypal-account toevoegen</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_add_account">
+  <title
+>Paypal-account toevoegen</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

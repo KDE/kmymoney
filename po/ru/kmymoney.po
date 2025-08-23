@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-21 00:43+0000\n"
+"POT-Creation-Date: 2025-08-23 00:42+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -988,7 +988,7 @@ msgstr "Редактор курсов"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:398
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:691
 #: kmymoney/views/khomeview_p.h:625 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:59
@@ -1064,7 +1064,7 @@ msgstr "xxx"
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:46
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:122
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:274
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:240
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:241
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:689
 #: kmymoney/views/investtransactioneditor.ui:260
@@ -9250,7 +9250,7 @@ msgstr "Значение"
 #: kmymoney/mymoney/storage/payeesmodel.cpp:96
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
 #: kmymoney/plugins/views/reports/core/listtable.cpp:695
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:455
@@ -10278,7 +10278,7 @@ msgstr "Отмените выбор поля статьи."
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
 #: kmymoney/plugins/views/reports/core/listtable.cpp:703
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:164
@@ -13205,7 +13205,7 @@ msgstr "Выберите счёт в соответствующем финанс
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:241
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
 #: kmymoney/views/newspliteditor.ui:130
 #: kmymoney/views/newtransactioneditor.ui:247
@@ -14613,12 +14613,12 @@ msgstr "&Сводка"
 msgid "&Details"
 msgstr "&Подробно"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:121
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:122
 #, kde-format
 msgid "Reconciliation report of account %1"
 msgstr "Акт сверки по счёту %1"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:128
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:129
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:111
 #, kde-format
 msgid "All values shown in %1"
@@ -14627,7 +14627,7 @@ msgstr "Все суммы указаны в «%1»"
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryEditWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
 #. i18n: ectx: attribute (title), widget (QWidget, summary)
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:133
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:134
 #: kmymoney/plugins/views/forecast/kforecastview.ui:335
 #: kmymoney/wizards/newloanwizard/summaryeditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:6
@@ -14635,12 +14635,12 @@ msgstr "Все суммы указаны в «%1»"
 msgid "Summary"
 msgstr "Сводка"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:138
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:139
 #, kde-format
 msgid "Starting balance on bank statement"
 msgstr "Начальный баланс по выписке"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:144
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:145
 #, kde-format
 msgid "%1 cleared payment"
 msgid_plural "%1 cleared payments in total"
@@ -14649,7 +14649,7 @@ msgstr[1] "%1 учтённых выплаты"
 msgstr[2] "%1 учтённых выплат"
 msgstr[3] "%1 учтённая выплата"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:150
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:151
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
@@ -14658,17 +14658,17 @@ msgstr[1] "%1 учтённых зачисления"
 msgstr[2] "%1 учтённых зачислений"
 msgstr[3] "%1 учтённое зачисление"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:156
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
 #, kde-format
 msgid "Ending balance on bank statement"
 msgstr "Баланс на конец периода по выписке"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:166
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:167
 #, kde-format
 msgid "Cleared balance"
 msgstr "Чистый остаток"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:172
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:173
 #, kde-format
 msgid "%1 outstanding payment"
 msgid_plural "%1 outstanding payments in total"
@@ -14677,7 +14677,7 @@ msgstr[1] "%1 просроченных платежа"
 msgstr[2] "%1 просроченных платежей"
 msgstr[3] "%1 просроченный платёж"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:178
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:179
 #, kde-format
 msgid "%1 outstanding deposit"
 msgid_plural "%1 outstanding deposits in total"
@@ -14686,12 +14686,12 @@ msgstr[1] "%1 просроченных зачисления"
 msgstr[2] "%1 просроченных зачислений"
 msgstr[3] "%1 просроченное зачисление"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:184
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:185
 #, kde-format
 msgid "Register balance as of %1"
 msgstr "Баланс по реестру на %1"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:218
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:219
 #, kde-format
 msgid "%1 payment after %2"
 msgid_plural "%1 payments after %2"
@@ -14700,7 +14700,7 @@ msgstr[1] "%1 платежа после %2"
 msgstr[2] "%1 платежей после %2"
 msgstr[3] "%1 платёж после %2"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:224
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:225
 #, kde-format
 msgid "%1 deposit after %2"
 msgid_plural "%1 deposits after %2"
@@ -14709,7 +14709,7 @@ msgstr[1] "%1 зачисления после %2"
 msgstr[2] "%1 зачислений после %2"
 msgstr[3] "%1 зачисление после %2"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:230
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:231
 #, kde-format
 msgid "Register ending balance"
 msgstr "Баланс на конец периода по реестру"
@@ -14717,7 +14717,7 @@ msgstr "Баланс на конец периода по реестру"
 #. i18n: ectx: property (text), widget (QLabel, categoryLabel)
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:699
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
 #: kmymoney/views/newspliteditor.ui:160
@@ -14730,12 +14730,12 @@ msgstr "Баланс на конец периода по реестру"
 msgid "Category"
 msgstr "Статья бюджета"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:249
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:250
 #, kde-format
 msgid "Outstanding payments"
 msgstr "Просроченные платежи"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:291
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:292
 #, kde-format
 msgid "One outstanding payment of"
 msgid_plural "Total of %1 outstanding payments amounting to"
@@ -14744,17 +14744,17 @@ msgstr[1] "%1 просроченных платежа общей суммой"
 msgstr[2] "%1 просроченных платежей общей суммой"
 msgstr[3] "%1 просроченный платёж общей суммой"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:297
 #, kde-format
 msgid "Outstanding charges"
 msgstr "Просроченные выплаты"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:297
 #, kde-format
 msgid "Outstanding deposits"
 msgstr "Просроченные зачисления"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:330
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:331
 #, kde-format
 msgid "One outstanding charges of"
 msgid_plural "Total of %1 outstanding charges amounting to"
@@ -14763,7 +14763,7 @@ msgstr[1] "Всего %1 просроченные выплаты в сумме"
 msgstr[2] "Всего %1 просроченных выплат в сумме"
 msgstr[3] "Одна просроченная выплата в сумме"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:331
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:332
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"
@@ -21490,7 +21490,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:443
+#: kmymoney/views/reconciliationledgerviewpage.cpp:446
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21809,13 +21809,13 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "Идёт выборка операций..."
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:442
+#: kmymoney/views/reconciliationledgerviewpage.cpp:445
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Выписка: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:444
+#: kmymoney/views/reconciliationledgerviewpage.cpp:447
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
