@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-22 03:27+0000\n"
-"PO-Revision-Date: 2025-07-29 00:15+0200\n"
+"PO-Revision-Date: 2025-08-21 18:13+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -18729,7 +18729,8 @@ msgstr "Il tipo di vista di KMyMoney"
 #: kmymoney/settings/kmymoney.kcfg:130
 #, kde-format
 msgid "First time switch to start new user wizard"
-msgstr "Inizio della procedura di prima configurazione"
+msgstr ""
+"Passaggio iniziale alla procedura guidata di creazione di un nuovo utente"
 
 #. i18n: ectx: label, entry (stringMatchFromStart), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:134
