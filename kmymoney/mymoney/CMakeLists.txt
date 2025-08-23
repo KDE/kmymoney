@@ -137,7 +137,13 @@ target_link_libraries(kmm_mymoney
 )
 
 if(ENABLE_ADDRESSBOOK)
-target_link_libraries(kmm_mymoney PUBLIC ${PIMPREFIX}::IdentityManagement ${PIMPREFIX}::AkonadiCore KF${QT_MAJOR_VERSION}::Contacts)
+  target_link_libraries(kmm_mymoney
+    PUBLIC
+    $<$<BOOL:${${PIMPREFIX}IdentityManagement_FOUND}>:${PIMPREFIX}::IdentityManagement>
+    $<$<BOOL:${${PIMPREFIX}IdentityManagementCore_FOUND}>:${PIMPREFIX}::IdentityManagementCore>
+    ${PIMPREFIX}::AkonadiCore
+    KF${QT_MAJOR_VERSION}::Contacts
+  )
 endif()
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})

@@ -52,6 +52,8 @@ Dependencies:
     'frameworks/kxmlgui': '@latest-kf6'
     'graphics/kdiagram': '@latest-kf6'
     'office/alkimia': '@latest-kf6'
+    'pim/akonadi': '@latest-kf6'
+    'pim/kidentitymanagement': '@latest-kf6'
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]

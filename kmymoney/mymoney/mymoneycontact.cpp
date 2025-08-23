@@ -8,9 +8,16 @@
 #include "mymoneycontact.h"
 
 #ifdef ENABLE_ADDRESSBOOK
+#include <akonadi_version.h>
+
+#if AKONADI_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <KIdentityManagementCore/Identity>
+#include <KIdentityManagementCore/IdentityManager>
+namespace KIdentityManagement = KIdentityManagementCore;
+#else
 #include <KIdentityManagement/Identity>
 #include <KIdentityManagement/IdentityManager>
-#include <akonadi_version.h>
+#endif
 
 #if AKONADI_VERSION >= QT_VERSION_CHECK(5, 18, 41)
 #include <Akonadi/Collection>
