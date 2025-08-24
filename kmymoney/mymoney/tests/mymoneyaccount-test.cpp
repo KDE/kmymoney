@@ -496,3 +496,37 @@ void MyMoneyAccountTest::testPriceMode()
     account.setPriceMode(priceMode);
     QCOMPARE(account.priceMode(), priceMode);
 }
+
+void MyMoneyAccountTest::testAccountTypeToStdAccId_data()
+{
+    QTest::addColumn<eMyMoney::Account::Type>("accountType");
+    QTest::addColumn<eMyMoney::Account::Standard>("accountStandard");
+
+    QTest::newRow("Checkings") << eMyMoney::Account::Type::Checkings << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("Savings") << eMyMoney::Account::Type::Savings << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("Cash") << eMyMoney::Account::Type::Cash << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("CertificateDep") << eMyMoney::Account::Type::CertificateDep << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("Investment") << eMyMoney::Account::Type::Investment << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("MoneyMarket") << eMyMoney::Account::Type::MoneyMarket << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("Asset") << eMyMoney::Account::Type::Asset << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("Currency") << eMyMoney::Account::Type::Currency << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("AssetLoan") << eMyMoney::Account::Type::AssetLoan << eMyMoney::Account::Standard::Asset;
+    QTest::newRow("Stock") << eMyMoney::Account::Type::Stock << eMyMoney::Account::Standard::Asset;
+
+    QTest::newRow("CreditCard") << eMyMoney::Account::Type::CreditCard << eMyMoney::Account::Standard::Liability;
+    QTest::newRow("Loan") << eMyMoney::Account::Type::Loan << eMyMoney::Account::Standard::Liability;
+    QTest::newRow("Liability") << eMyMoney::Account::Type::Liability << eMyMoney::Account::Standard::Liability;
+
+    QTest::newRow("Income") << eMyMoney::Account::Type::Income << eMyMoney::Account::Standard::Income;
+    QTest::newRow("Expense") << eMyMoney::Account::Type::Expense << eMyMoney::Account::Standard::Expense;
+
+    QTest::newRow("Equity") << eMyMoney::Account::Type::Equity << eMyMoney::Account::Standard::Equity;
+}
+
+void MyMoneyAccountTest::testAccountTypeToStdAccId()
+{
+    QFETCH(eMyMoney::Account::Type, accountType);
+    QFETCH(eMyMoney::Account::Standard, accountStandard);
+
+    QCOMPARE(MyMoneyAccount::stdAccName(accountType), MyMoneyAccount::stdAccName(accountStandard));
+}

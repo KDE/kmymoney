@@ -682,6 +682,7 @@ public:
     void setBudgetAccountType(eMyMoney::Account::Type type);
 
     static QString stdAccName(eMyMoney::Account::Standard stdAccID);
+    static QString stdAccName(eMyMoney::Account::Type type);
     static QString accountSeparator();
 
     static MyMoneyMoney balanceFactor(eMyMoney::Account::Type accountType);
@@ -709,11 +710,11 @@ inline MyMoneyAccount & MyMoneyAccount::operator=(MyMoneyAccount other) // krazy
 }
 
 /**
- * Make it possible to hold @ref MyMoneyAccount objects,
- * @ref accountTypeE and @ref amountTypeE inside @ref QVariant objects.
+ * Make it possible to hold objects inside @ref QVariant objects.
  */
 Q_DECLARE_METATYPE(MyMoneyAccount)
 Q_DECLARE_METATYPE(eMyMoney::Account::Type)
 Q_DECLARE_METATYPE(eMyMoney::Account::PayeeCreation)
+Q_DECLARE_METATYPE(eMyMoney::Account::Standard)
 
 #endif

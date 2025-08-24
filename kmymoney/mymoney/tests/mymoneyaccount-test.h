@@ -45,6 +45,8 @@ private Q_SLOTS:
     void testPayeeCreation_data();
     void testPriceMode();
     void testPriceMode_data();
+    void testAccountTypeToStdAccId();
+    void testAccountTypeToStdAccId_data();
 };
 
 #endif
