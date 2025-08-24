@@ -163,6 +163,21 @@ QString MyMoneyXmlReaderTest::createCategoryData() const
         "<PAIR key=\"Tax\" value=\"Yes\"/>"
         "<PAIR key=\"VatRate\" value=\"1900/10000\"/>"
         "</KEYVALUEPAIRS>"
+        "</ACCOUNT>"
+
+        "<ACCOUNT currency=\"EUR\" description=\"\" id=\"A000002\" institution=\"\" lastmodified=\"2022-04-06\" lastreconciled=\"\" name=\"Goods\" number=\"\" "
+        "opened=\"1900-01-01\" parentaccount=\"AStd::Expense\" type=\"13\">"
+        "<KEYVALUEPAIRS>"
+        "<PAIR key=\"VatAccount\" value=\"A000136\"/>"
+        "</KEYVALUEPAIRS>"
+        "</ACCOUNT>"
+
+        "<ACCOUNT currency=\"EUR\" description=\"\" id=\"A000003\" institution=\"\" lastmodified=\"2022-05-20\" lastreconciled=\"\" name=\"Sales tax 19%\" "
+        "number=\"\" opened=\"1900-01-01\" parentaccount=\"AStd::Expense\" type=\"13\">"
+        "<KEYVALUEPAIRS>"
+        "<PAIR key=\"Tax\" value=\"Yes\"/>"
+        "<PAIR key=\"VatRate\" value=\"1900/10000\"/>"
+        "</KEYVALUEPAIRS>"
         "</ACCOUNT>");
 }
 

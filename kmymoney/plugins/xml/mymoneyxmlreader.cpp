@@ -24,6 +24,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneybudget.h"
 #include "mymoneycostcenter.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneykeyvaluecontainer.h"
@@ -187,6 +188,7 @@ public:
     MyMoneySecurity m_security;
     MyMoneyPrice m_price;
     onlineJob m_onlineJob;
+    QSet<QString> m_validAccountIds;
 
     uint m_fileVersionRead;
 
@@ -652,6 +654,9 @@ public:
         Q_ASSERT(m_reader->isStartElement() && (m_reader->name() == nodeName(Node::Account)));
 
         m_account = MyMoneyAccount(readId());
+        if (!MyMoneyFile::instance()->isStandardAccount(m_account.id())) {
+            m_validAccountIds.insert(m_account.id());
+        }
         m_account.setName(readStringAttribute(attributeName(Attribute::Account::Name)));
         m_account.setDescription(readStringAttribute(attributeName(Attribute::Account::Description)));
         m_account.setParentAccountId(readStringAttribute(attributeName(Attribute::Account::ParentAccount)));
@@ -762,6 +767,13 @@ public:
         m_split.setNumber(readStringAttribute(attributeName(Attribute::Split::Number)));
         m_split.setBankID(readStringAttribute(attributeName(Attribute::Split::BankID)));
 
+        if (!m_validAccountIds.contains(m_split.accountId())) {
+            throw MYMONEYEXCEPTION(i18nc("@info XML reader",
+                                         "Corrupted data: transaction '%1', split '%2' references unknown account id '%3'",
+                                         m_transaction.id(),
+                                         readId(),
+                                         m_split.accountId()));
+        }
         QList<QString> tagList;
         while (m_reader->readNextStartElement()) {
             const auto tag = m_reader->name();
