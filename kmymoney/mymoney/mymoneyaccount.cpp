@@ -669,6 +669,19 @@ bool MyMoneyAccount::hasOnlineMapping() const
     return !d->m_onlineBankingSettings.value(QLatin1String("provider")).isEmpty();
 }
 
+QString MyMoneyAccount::stdAccName(eMyMoney::Account::Type type)
+{
+    static const QHash<eMyMoney::Account::Type, eMyMoney::Account::Standard> stdAccTypes{
+        {eMyMoney::Account::Type::Liability, eMyMoney::Account::Standard::Liability},
+        {eMyMoney::Account::Type::Asset, eMyMoney::Account::Standard::Asset},
+        {eMyMoney::Account::Type::Expense, eMyMoney::Account::Standard::Expense},
+        {eMyMoney::Account::Type::Income, eMyMoney::Account::Standard::Income},
+        {eMyMoney::Account::Type::Equity, eMyMoney::Account::Standard::Equity},
+    };
+    // make sure to operate only on accountGroups
+    return stdAccName(stdAccTypes.value(accountGroup(type)));
+}
+
 QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
 {
     static const QHash<eMyMoney::Account::Standard, QString> stdAccNames {
