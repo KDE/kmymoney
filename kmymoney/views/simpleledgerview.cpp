@@ -183,15 +183,19 @@ public:
         Q_Q(SimpleLedgerView);
         // get storage id without the enclosing braces
         const auto storageId = MyMoneyFile::instance()->storageId().toString(QUuid::WithoutBraces);
+        const auto openMode = static_cast<AccountsOpenAtStart>(KMyMoneySettings::showAccountsAfterOpen());
         KSharedConfigPtr config = KSharedConfig::openConfig();
         KConfigGroup grp = config->group("OpenLedgers");
 
         // in case we have a previous setting, we open them
         const auto openLedgers = grp.readEntry(storageId, QStringList());
-        if (!openLedgers.isEmpty()) {
+        if (!openLedgers.isEmpty() && (openMode != AccountsOpenAtStart::FavoriteAccounts)) {
             for (const auto& id: qAsConst(openLedgers)) {
                 auto thisId = id;
-                openLedger(thisId.remove(QLatin1String("*")), id.endsWith(QLatin1String("*")));
+                const auto lastUsedAtClose = id.endsWith(QLatin1String("*"));
+                if ((openMode == AccountsOpenAtStart::AccountsOpenedLastTime) || lastUsedAtClose) {
+                    openLedger(thisId.remove(QLatin1String("*")), lastUsedAtClose);
+                }
             }
 
             // in case we have not opened any ledger, we proceed with the favorites
@@ -200,7 +204,6 @@ public:
                 return;
             }
         }
-
 
         AccountsModel* model = MyMoneyFile::instance()->accountsModel();
 
@@ -212,8 +215,12 @@ public:
             const auto indexes = model->match(model->index(0, 0, startIdx), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
 
             // indexes now has a list of favorite accounts
+            bool haveSelected = false; // true if an account was selected
             for (const auto& idx : indexes) {
-                openLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString(), false);
+                const auto id = idx.data(eMyMoney::Model::Roles::IdRole).toString();
+                const auto select = openLedgers.contains(QStringLiteral("%1*").arg(id));
+                haveSelected |= select;
+                openLedger(id, select);
                 if (stopAfterFirstAccount) {
                     break;
                 }
@@ -222,6 +229,9 @@ public:
             // if at least one account was found and opened
             // we stop processing
             if (!indexes.isEmpty()) {
+                if (!haveSelected) {
+                    ui->ledgerTab->setCurrentIndex(1);
+                }
                 break;
             }
             stopAfterFirstAccount = true;

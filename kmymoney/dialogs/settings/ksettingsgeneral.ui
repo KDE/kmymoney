@@ -13,11 +13,11 @@
   <property name="windowTitle">
    <string>General Settings</string>
   </property>
-  <layout class="QVBoxLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_8">
    <item>
     <widget class="QTabWidget" name="tabWidget2">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -323,26 +323,56 @@ Set it to 0 to turn the feature off.</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <widget class="QGroupBox" name="kcfg_StartLastViewSelected">
+        <widget class="QGroupBox" name="groupBox_9">
          <property name="title">
-          <string>Startup page options</string>
+          <string>Startup options</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="QRadioButton" name="radioButton1">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_7">
             <property name="text">
-             <string>Start with ho&amp;mepage</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
+             <string>View to show</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton2">
+          <item row="0" column="1">
+           <widget class="QComboBox" name="kcfg_StartLastViewSelected">
+            <item>
+             <property name="text">
+              <string>Homepage</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Last selected view</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_6">
             <property name="text">
-             <string>Start with last selected view</string>
+             <string>Accounts to open in ledger</string>
             </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="kcfg_ShowAccountsAfterOpen">
+            <item>
+             <property name="text">
+              <string>Last account used</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>All favorite accounts</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>All accounts open at last close</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -354,7 +384,7 @@ Set it to 0 to turn the feature off.</string>
           <string>Type of the KMyMoney view</string>
          </property>
          <layout class="QGridLayout">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QRadioButton" name="radioButton3">
             <property name="text">
              <string>List</string>
@@ -364,14 +394,14 @@ Set it to 0 to turn the feature off.</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="1" column="1">
            <widget class="QRadioButton" name="radioButton4">
             <property name="text">
              <string>Tree</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
+          <item row="1" column="2">
            <widget class="QRadioButton" name="radioButton5">
             <property name="text">
              <string>Tabbed</string>
@@ -379,13 +409,6 @@ Set it to 0 to turn the feature off.</string>
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_syncLedgerInvestment">
-         <property name="text">
-          <string>Synchronize account selection of ledger and investment view</string>
-         </property>
         </widget>
        </item>
        <item>

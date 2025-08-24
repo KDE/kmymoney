@@ -96,6 +96,10 @@
    <label>Show transaction form</label>
    <default>true</default>
   </entry>
+  <entry name="ShowAccountsAfterOpen" type="Int">
+   <label>Select which accounts to show in ledger after file open</label>
+   <default>0</default>
+  </entry>
   <entry name="StartLastViewSelected" type="Int">
    <label>Start with last selected view or homepage</label>
    <default>0</default>

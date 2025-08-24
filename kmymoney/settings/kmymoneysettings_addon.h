@@ -43,4 +43,11 @@ enum class AutoFillMethod {
     AutoFillWithClosestInValue,
     AutoFillWithMostOftenUsed,
 };
+
+enum class AccountsOpenAtStart {
+    LastAccountUsed,
+    FavoriteAccounts,
+    AccountsOpenedLastTime,
+};
+
 #endif
