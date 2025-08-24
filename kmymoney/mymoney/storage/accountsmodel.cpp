@@ -165,7 +165,7 @@ struct AccountsModel::Private
                 continue;
             // parent does not exist?
             if (!_list.contains((*ita).parentAccountId())) {
-                const auto newParentid = MyMoneyAccount::stdAccName(static_cast<eMyMoney::Account::Standard>((*ita).accountGroup()));
+                const auto newParentid = MyMoneyAccount::stdAccName((*ita).accountType());
                 (*ita).setParentAccountId(newParentid);
                 qDebug() << "check account hierarchy:" << "reparented" << (*ita).id() << "to" << newParentid;
             }
@@ -1131,13 +1131,17 @@ void AccountsModel::updateAccountBalances(const QHash<QString, AccountBalances>&
     d->updateOnBalanceChange = false;
     bool approximate = false;
     for (auto it = balances.cbegin(); it != balances.cend(); ++it) {
-        MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexById(it.key()).internalPointer())->dataRef();
-        account.setBalance(it.value().m_totalBalance);
+        const auto index = indexById(it.key());
+        if (index.isValid()) {
+            MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(index.internalPointer())->dataRef();
+            account.setBalance(it.value().m_totalBalance);
+            const auto result = d->balanceToValue(account, it.value().m_totalBalance);
 
-        const auto result = d->balanceToValue(account, it.value().m_totalBalance);
-
-        account.setPostedValue(result.first);
-        approximate |= result.second;
+            account.setPostedValue(result.first);
+            approximate |= result.second;
+        } else {
+            qDebug() << "AccountsModel::updateAccountBalances" << it.key() << "not found in model.";
+        }
     }
 
     // now that we have all values, we can calculate the total values in the parent accounts
