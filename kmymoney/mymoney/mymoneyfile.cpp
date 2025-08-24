@@ -1680,11 +1680,14 @@ bool MyMoneyFile::hasActiveSplits(const QString& id) const
 
 bool MyMoneyFile::isStandardAccount(const QString& id) const
 {
-    return id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability) //
-           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset) //
-           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense) //
-           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income) //
-           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity);
+    static QSet<QString> standardAccountIds = {
+        MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability),
+        MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset),
+        MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense),
+        MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income),
+        MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity),
+    };
+    return standardAccountIds.contains(id);
 }
 
 bool MyMoneyFile::isInvestmentTransaction(const MyMoneyTransaction& t) const

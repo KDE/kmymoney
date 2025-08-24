@@ -1112,6 +1112,7 @@ void MyMoneyFileTest::testIsStandardAccount()
     QCOMPARE(m->isStandardAccount(m->asset().id()), true);
     QCOMPARE(m->isStandardAccount(m->expense().id()), true);
     QCOMPARE(m->isStandardAccount(m->income().id()), true);
+    QCOMPARE(m->isStandardAccount(m->equity().id()), true);
     QCOMPARE(m->isStandardAccount("A00001"), false);
 }
 
