@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -12144,17 +12144,17 @@ msgstr "Ennen"
 msgid "After"
 msgstr "Jälkeen"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Siirrä %1:stä %2:een, maksunsaaja %3, summa %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:212
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "%1:stä %2:ksi, luokka %3, summa %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:213
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Tililtä %1, maksu %2:een, luokka %3, summa %4"

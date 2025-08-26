@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
-"PO-Revision-Date: 2025-07-28 11:04+0300\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"PO-Revision-Date: 2025-08-25 09:42+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -12097,17 +12097,17 @@ msgstr "Önce"
 msgid "After"
 msgstr "Sonra"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "%1 hesabından %2 hesabına havale yap, alacaklı %3, tutar %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:212
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "%1 hesabından %2 hesabına, kategori %3, %4 toplamı"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:213
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "%1 hesabından %2 hesabına öde, kategori %3, %4 toplamı"
@@ -18171,6 +18171,8 @@ msgid ""
 "Corrupted data: transaction '%1', split '%2' references unknown account id "
 "'%3'"
 msgstr ""
+"Hasarlı veri: “%1” işlemindeki “%2” bölmesi, bilinmeyen “%3” hesap kimliğine "
+"başvuruyor"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:113
 #, kde-format

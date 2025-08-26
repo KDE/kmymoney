@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
-"PO-Revision-Date: 2025-07-28 06:11+0200\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"PO-Revision-Date: 2025-08-25 10:22+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -12150,17 +12150,17 @@ msgstr "Pred"
 msgid "After"
 msgstr "Po"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Prenos od %1 za %2, Prejemnik %3, znesek %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:212
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "Od %1 v %2, Kategorija %3, skupaj %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:213
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Iz računa %1, Plačilo za %2, Kategorija %3, skupaj %4"
@@ -18252,6 +18252,8 @@ msgid ""
 "Corrupted data: transaction '%1', split '%2' references unknown account id "
 "'%3'"
 msgstr ""
+"Poškodovani podatki: transakcija '%1', razcepitev '%2' se sklicuje na neznan "
+"ID računa '%3'"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:113
 #, kde-format

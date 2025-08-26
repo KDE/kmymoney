@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
-"PO-Revision-Date: 2025-08-20 12:34-0300\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"PO-Revision-Date: 2025-08-25 12:01-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -12098,7 +12098,7 @@ msgstr ""
 "sejamreconhecidas pelo Google Agenda. O padrão é escrever entradas <a href="
 "\"https://icalendar.org/iCalendar-RFC-5545/3-6-2-to-do-component.html"
 "\">VTODO</a>no arquivo iCalendar, mas para o Google Agenda entradas do tipo "
-"<ahref=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html"
+"<a href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html"
 "\">VEVENT</a> são necessárias.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_createAlarm)
@@ -12167,17 +12167,17 @@ msgstr "Antes"
 msgid "After"
 msgstr "Após"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Transferência de %1 para %2, beneficiário %3, montante %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:212
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "De %1 para %2, categoria %3, total de %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:213
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Da conta %1, Pagamento a %2, Categoria %3, total de %4"
@@ -18276,6 +18276,8 @@ msgid ""
 "Corrupted data: transaction '%1', split '%2' references unknown account id "
 "'%3'"
 msgstr ""
+"Dados corrompidos: transação '%1', divisão '%2' faz referência a ID de conta "
+"desconhecido '%3'"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:113
 #, kde-format

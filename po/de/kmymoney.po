@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2025 lipor <collect.aqua019@passinbox.com>
 # Jochen Rundholz <jochen_r@gmx.de>, 2005.
 # Frank Schmischke <frank.schmischke@t-online.de>, 2006.
 # Holger Bunzel <holger.bunzel@gmx.net>, 2006.
@@ -20,16 +21,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:42+0000\n"
-"PO-Revision-Date: 2022-11-07 20:00+0100\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"PO-Revision-Date: 2025-08-14 15:51+0200\n"
+"Last-Translator: lipor <collect.aqua019@passinbox.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -63,8 +64,7 @@ msgid "Invalid Statement"
 msgstr "Ungültiger Kontoauszug"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
 msgstr "Kein Geldinstitut"
@@ -124,13 +124,14 @@ msgid "(Fees) %1"
 msgstr "(Gebühren) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
-#, fuzzy, kde-format
-#| msgid "Additional Fees: %1"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr "Zusätzliche Kosten: %1"
+msgstr ""
+"Ursprünglicher Zahler: %1\n"
+"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1061
 #, kde-format
@@ -322,15 +323,13 @@ msgid "Schedule found"
 msgstr "Geplante Buchung gefunden"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Neues Anlagekonto anlegen"
+msgstr "Konto erstellen"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
 msgstr "Kategorie erstellen"
@@ -447,11 +446,10 @@ msgstr[1] "%1 Kontoauszüge wurde mit folgendem Ergebnissen verarbeitet:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "Importierter Verlauf"
+msgstr "Importzusammenfassung"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -974,8 +972,7 @@ msgstr "Alle weiteren Einträge &in diesem Buchungsplan auf diese Werte setzen."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:438
 #: kmymoney/mymoney/mymoneyfile.cpp:3682
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Benutzer"
@@ -1361,6 +1358,9 @@ msgid ""
 "for the Euro). This cannot be changed once the currency is created.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Geben Sie hier den ISO4217-Code für die Währung ein (z."
+"B. EUR für Euro). Sobald die Währung erstellt wurde, kann sie nicht mehr "
+"verändert werden.</p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leSymbol)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:104
@@ -1377,6 +1377,9 @@ msgid ""
 "Enter the smallest fraction of the currency used for bank accounts here. "
 "This cannot be changed once the currency is created."
 msgstr ""
+"Geben Sie hier die kleinste Währungseinheit für das verwendete Bankkonto "
+"ein. Nachdem die Währung erstellt wurde, kann sie nicht mehr verändert "
+"werden."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leCashFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:118
@@ -1386,6 +1389,9 @@ msgid ""
 "Enter the smallest fraction of the currency used for cash accounts here. "
 "This cannot be changed once the currency is created."
 msgstr ""
+"Geben Sie hier die kleinste Währungseinheit für das verwendete Bargeldkonto "
+"ein. Nachdem die Währung erstellt wurde, kann sie nicht mehr verändert "
+"werden."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:125
@@ -1396,6 +1402,9 @@ msgid ""
 "<span style=\" font-weight:600;\">What's this</span> for more details.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Geben Sie die für diese Währung verwendete "
+"Rundungsmethode ein. Siehe <span style=\" font-weight:600;\">hier</span> für "
+"mehr Details.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:128
@@ -2279,7 +2288,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
-msgstr ""
+msgstr "Sie können kein Konto oder Kategorie mit %1 im Namen erstellen."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1078
 #, kde-format
@@ -2312,18 +2321,14 @@ msgid "Create category"
 msgstr "Kategorie erstellen"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1172
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
-#| "it?</p><p><i>The parent account will default to <b>%2</b> but can be "
-#| "changed in the following dialog</i>.</p>"
+#, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
 "</p><p><i>The parent account will default to <b>%2</b> but can be changed in "
 "the following dialog</i>.</p>"
 msgstr ""
-"<p>Die Kategorie <b>%1</b> existiert derzeit nicht. Möchten Sie sie anlegen?"
-"</p><p><i>Das übergeordnete Konto ist standardmäßig <b>%2</b>, kann aber im "
+"<p>Das Konto <b>%1</b> existiert derzeit nicht. Möchten Sie es anlegen?</"
+"p><p><i>Das übergeordnete Konto ist standardmäßig <b>%2</b>, kann aber im "
 "folgenden Dialog verändert werden</i>.</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1194
@@ -3718,9 +3723,9 @@ msgid ""
 "<html><head/><body><p align=\"center\">Tip: Install Oxygen, Tango or Breeze "
 "icon theme to get wider selection.</p></body></html>"
 msgstr ""
-"<html><head/><body><p align=\"center\">Hinweis: Installieren Sie die Designs "
-"Oxygen, Tango oder Breeze, um eine größere Auswahl zu haben.</p></body></"
-"html>"
+"<html><head/><body><p align=\"center\">Hinweis: Installieren Sie die Symbol-"
+"Designs Oxygen, Tango oder Breeze, um eine größere Auswahl zu haben.</p></"
+"body></html>"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
 #, kde-format
@@ -5162,11 +5167,10 @@ msgid "Duplicate"
 msgstr "Duplizieren"
 
 #: kmymoney/kmymoney.cpp:1463
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
-msgstr "Wertpapiere hinzufügen"
+msgstr "Rückbuchung erstellen"
 
 #: kmymoney/kmymoney.cpp:1464
 #, kde-format
@@ -5211,18 +5215,16 @@ msgid "Show transaction"
 msgstr "Buchung anzeigen"
 
 #: kmymoney/kmymoney.cpp:1471
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Buchungsdetails anzeigen"
 
 #: kmymoney/kmymoney.cpp:1473
-#, fuzzy, kde-format
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "Ö&ffnen"
+msgstr "Adresse öffnen"
 
 #: kmymoney/kmymoney.cpp:1474
 #, kde-format
@@ -9033,11 +9035,10 @@ msgid "Cost center"
 msgstr "Kostenstelle"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:78
-#, fuzzy, kde-format
-#| msgid "Entry order"
+#, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr "Eingabe-Reihenfolge"
+msgstr "Eingabedatum"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:81
 #, fuzzy, kde-format
@@ -12380,17 +12381,17 @@ msgstr "Vorher"
 msgid "After"
 msgstr "Hinterher"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Von %1 nach %2 überweisen, Zahlungsempfänger %3, Betrag %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:212
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "Von %1 nach %2, Kategorie %3, Summe von %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:213
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Von Konto %1, Zahlen nach %2, Kategorie %3, Summe von %4"
@@ -21762,10 +21763,9 @@ msgstr "Buchungen für ein geschlossenes Konto können nicht gelöscht werden."
 #: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:101
 #: kmymoney/views/newtransactionform.ui:40
-#, fuzzy, kde-format
-#| msgid "Payer/Receiver"
+#, kde-format
 msgid "Payer/Payee"
-msgstr "Zahler/Empfänger"
+msgstr "Zahler/Zahlungsempfänger"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
 #: kmymoney/views/newspliteditor.ui:167
@@ -23821,7 +23821,7 @@ msgstr "Ich gebe einen Kredit"
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:58
 #, kde-format
 msgid "Who is the payee/payer of the loan?"
-msgstr "Wer ist der Geber/Empfänger des Darlehens?"
+msgstr "Wer ist der Zahler/Zahlungsempfänger des Darlehens?"
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyPayeeCombo, m_payee)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:70
@@ -24916,11 +24916,10 @@ msgid "Security detail wizard"
 msgstr "Wertpapier-Detail-Assistent"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:217
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "Wertpapier-Detail-Assistent"
+msgstr "Sicherheitsdetails"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:250
 #, kde-format
@@ -25468,11 +25467,10 @@ msgstr ""
 "fortfahren?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:284
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Information"
+msgstr "Bestätigung"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:72
 #, kde-format
@@ -26406,26 +26404,24 @@ msgstr ""
 "KMyMoney-Datei hinterlegt.</p>"
 
 #: tools/kmmreport-export.cpp:116
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Bericht exportieren"
+msgstr "KMyMoney-Berichte exportieren"
 
 #: tools/kmmreport-export.cpp:120
 #, kde-format
 msgid "Export in csv format (default)"
-msgstr ""
+msgstr "Im CSV-Format exportieren (Standard)"
 
 #: tools/kmmreport-export.cpp:123
 #, kde-format
 msgid "Export in HTML format"
-msgstr ""
+msgstr "Im HTML-Format exportieren"
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Bericht exportieren"
+msgstr "Im XML-Format exportieren"
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -26435,44 +26431,42 @@ msgstr ""
 #: tools/kmmreport-export.cpp:132
 #, kde-format
 msgid "Use info table for exporting"
-msgstr ""
+msgstr "Info-Tabelle zum Exportieren verwenden"
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
 msgid "Use pivot table for exporting"
-msgstr ""
+msgstr "Pivottabelle zum Exportieren verwenden"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Abfragetabelle zum Exportieren verwenden (Standard)"
 
 #: tools/kmmreport-export.cpp:141
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Alte kundenspezifische Berichte"
+msgstr "Alle benutzerdefinierten Berichte auflisten"
 
 #: tools/kmmreport-export.cpp:144
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Der Bericht kann nicht erstellt werden"
+msgstr "Dateiname für erstellte Ausgabe"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Einen spezifischen Bericht verarbeiten"
 
 #: tools/kmmreport-export.cpp:160
 #, kde-format
 msgid "Only one of --csv and --html is supported"
-msgstr ""
+msgstr "Nur einer der Parameter --csv und --html wird unterstützt"
 
 #: tools/kmmreport-export.cpp:196
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
+msgstr "Bericht '%1' wird in '%2' gespeichert"
 
 #~ msgid "Payment Accounts"
 #~ msgstr "Zahlungskonten"
