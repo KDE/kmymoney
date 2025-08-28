@@ -1,6 +1,3 @@
-install(PROGRAMS financequote.pl
-        DESTINATION ${KDE_INSTALL_DATADIR}/kmymoney/misc)
-
 set( kmm_utils_validators_SRCS
   charvalidator.cpp
   validators.cpp
