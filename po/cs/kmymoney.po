@@ -6604,17 +6604,12 @@ msgid "    Account: %1, Amount: %2"
 msgstr ""
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3304
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains a reference to invalid account "
-#| "%3. Please fix manually."
+#, kde-format
 msgctxt "Consistency check, all params are internal ids"
 msgid ""
 "  * Split %2 in transaction '%1' referenced standard account %3 and has been "
 "removed."
 msgstr ""
-"  * Rozdělená transakce %2 v transakci '%1' obsahuje odkaz na neplatný účet "
-"%3. Prosím, opravte to ručně."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3317
 #, kde-format
@@ -6652,22 +6647,16 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * hodnota nastavená podle akcií v transakci '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3379
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains a reference to invalid account "
-#| "%3. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
-"  * Rozdělená transakce %2 v transakci '%1' obsahuje odkaz na neplatný účet "
-"%3. Prosím, opravte to ručně."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3396
-#, fuzzy, kde-format
-#| msgid "Investment Transactions"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Investiční transakce"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3400
 #, kde-format
@@ -8128,89 +8117,76 @@ msgid "HalfUp"
 msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:482
-#, fuzzy, kde-format
-#| msgctxt "@title:column Shows VAT percentage rate, if configured"
-#| msgid "VAT"
+#, kde-format
 msgctxt "Investment action"
 msgid "ATM"
-msgstr "DPH"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:486
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Add shares"
-msgstr "Přidat akcie"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:490
-#, fuzzy, kde-format
-#| msgid "Amortization"
+#, kde-format
 msgctxt "Investment action"
 msgid "Amortization"
-msgstr "Amortizace"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:494
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Buy shares"
-msgstr "Nákup akcií"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:498
-#, fuzzy, kde-format
-#| msgid "Checking"
+#, kde-format
 msgctxt "Investment action"
 msgid "Check"
-msgstr "Běžný účet"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:502
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Investment action"
 msgid "Deposit"
-msgstr "Vklad"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:506
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Dividend"
-msgstr "Dividenda"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:510
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest"
-msgstr "Úrok"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:514
-#, fuzzy, kde-format
-#| msgid "Interest Rate"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest income"
-msgstr "Úroková sazba"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:518
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Reinvest dividends"
-msgstr "Investovat dividendu"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:523
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Split shares"
-msgstr "Rozdělit akcie"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:527
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgctxt "Investment action"
 msgid "Transfer"
-msgstr "Převod"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:531
 #, kde-format
@@ -8219,11 +8195,10 @@ msgid "Withdrawal"
 msgstr ""
 
 #: kmymoney/mymoney/mymoneysplit.cpp:535
-#, fuzzy, kde-format
-#| msgid "Yield"
+#, kde-format
 msgctxt "Investment action"
 msgid "Yield"
-msgstr "Výnos"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
@@ -15830,11 +15805,10 @@ msgstr "%1 týden"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
-msgstr "Prodej akcií"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:814
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1040
@@ -19733,10 +19707,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
 #: kmymoney/views/kinvestmentview.ui:57
-#, fuzzy, kde-format
-#| msgid "Open ledger"
+#, kde-format
 msgid "Goto ledger"
-msgstr "Otevřít peněžní deník"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:87
@@ -20763,11 +20736,10 @@ msgid "This widget is disabled because you need to select a category first."
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:179
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "Použijte toto tlačítko pro zaznamenání transakce"
+msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:182
 #, kde-format
@@ -25304,6 +25276,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Payment Accounts"
-#~ msgstr "Platební účty"
