@@ -2,7 +2,7 @@
 # Copyright (C) 2006-2025 This_file_is_part_of_KDE
 # This file is put in the public domain.
 #
-# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Antoni Bella Pérez <antonibella5@yahoo.com>
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2006, 2010, 2011.
 # SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-26 00:43+0000\n"
-"PO-Revision-Date: 2025-08-25 09:38+0200\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"PO-Revision-Date: 2025-08-28 14:05+0200\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -10688,7 +10688,7 @@ msgid ""
 msgstr ""
 "Cliqueu damunt «Banca», «Inversió» o «Cotitzacions»a \n"
 "Llavors seleccioneu un perfil existent o creeu-ne\n"
-"un de nou entrant el seu nom i triat «Afig».\n"
+"un de nou entrant el seu nom i seleccionant «Afig».\n"
 "Després obriu el fitxer que voleu importar."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesBank)
@@ -11340,7 +11340,7 @@ msgid ""
 "Select field delimiter/separator character.\n"
 "This will reset any existing field choices."
 msgstr ""
-"Trieu el caràcter delimitador/separador de camp.\n"
+"Trieu el caràcter delimitador o separador de camp.\n"
 "Reiniciarà qualsevol selecció de camp existent."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
@@ -17983,45 +17983,46 @@ msgstr "Columnes que s'han de mostrar"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:156
 #, kde-format
 msgid "<p>Select this option to show the Memo column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Recordatori</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Recordatori»</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkShares)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:169
 #, kde-format
 msgid "<p>Select this option to show the Shares column for investments</p>"
 msgstr ""
-"<p>Trieu esta opció per a mostrar la columna Accions per a les inversions</p>"
+"<p>Trieu esta opció per a mostrar la columna «Accions» per a les inversions</"
+"p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkPrice)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:182
 #, kde-format
 msgid "<p>Select this option to show the Price column for investments</p>"
 msgstr ""
-"<p>Trieu esta opció per a mostrar la columna Preu per a les inversions</p>"
+"<p>Trieu esta opció per a mostrar la columna «Preu» per a les inversions</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkReconciled)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:195
 #, kde-format
 msgid "<p>Select this option to show the Reconciled column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Conciliació</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Conciliació»</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkAccount)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:208
 #, kde-format
 msgid "<p>Select this option to show the Account column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Compte</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Compte»</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkNumber)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:227
 #, kde-format
 msgid "<p>Select this option to show the Number column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Número</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Número»</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:246
 #, kde-format
 msgid "<p>Select this option to show the Tag column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Etiqueta</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Etiqueta»</p>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_tagTab)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
@@ -18037,25 +18038,25 @@ msgstr "Etiqueta"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:265
 #, kde-format
 msgid "<p>Select this option to show the Payee column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Beneficiari</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Beneficiari»</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkCategory)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:284
 #, kde-format
 msgid "<p>Select this option to show the Category column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Categoria</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Categoria»</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkAction)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:297
 #, kde-format
 msgid "<p>Select this option to show the Action column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Acció</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Acció»</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkBalance)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:310
 #, kde-format
 msgid "<p>Select this option to show the Running balance column</p>"
-msgstr "<p>Trieu esta opció per a mostrar la columna Saldo actual</p>"
+msgstr "<p>Trieu esta opció per a mostrar la columna «Saldo» actual</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkLoans)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:346
