@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-26 00:43+0000\n"
-"PO-Revision-Date: 2025-08-21 18:13+0200\n"
+"PO-Revision-Date: 2025-08-25 16:57+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18314,6 +18314,8 @@ msgid ""
 "Corrupted data: transaction '%1', split '%2' references unknown account id "
 "'%3'"
 msgstr ""
+"Dati danneggiati: transazione «%1», la suddivisione «%2» fa riferimento a un "
+"ID di conto sconosciuto«%3»"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:113
 #, kde-format
