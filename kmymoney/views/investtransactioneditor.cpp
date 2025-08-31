@@ -211,7 +211,10 @@ public:
 
 void InvestTransactionEditor::Private::removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel)
 {
-    for (const auto& sp : qAsConst(t.splits())) {
+    // iterate over a copy of the splits as
+    // the one in the transaction gets modified here
+    const auto splits = t.splits();
+    for (const auto& sp : splits) {
         if (sp.id() == stockSplit.id()) {
             continue;
         }
