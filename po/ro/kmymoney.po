@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"POT-Creation-Date: 2025-09-01 00:43+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -20185,7 +20185,7 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Venit din dobândă"
 
-#: kmymoney/views/investtransactioneditor.cpp:306
+#: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:335
 #, fuzzy, kde-format
@@ -20196,7 +20196,7 @@ msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 "  * Contul '%1' în moneda '%2' nu are un preț pentru data deschiderii '%3'."
 
-#: kmymoney/views/investtransactioneditor.cpp:424
+#: kmymoney/views/investtransactioneditor.cpp:427
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -20204,7 +20204,7 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:607
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
@@ -20212,7 +20212,7 @@ msgid "Select the activity for this transaction."
 msgstr ""
 "Folosește acest buton pentru a înregistra această tranzacție în registru"
 
-#: kmymoney/views/investtransactioneditor.cpp:607
+#: kmymoney/views/investtransactioneditor.cpp:610
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20220,14 +20220,14 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:620
+#: kmymoney/views/investtransactioneditor.cpp:623
 #, fuzzy, kde-format
 #| msgid "Number of Days to Forecast:"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Număr de zile de estimat:"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:625
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20235,28 +20235,28 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:626
+#: kmymoney/views/investtransactioneditor.cpp:629
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Introducere tranzacție următoare..."
 
-#: kmymoney/views/investtransactioneditor.cpp:632
+#: kmymoney/views/investtransactioneditor.cpp:635
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Împarte tranzacția"
 
-#: kmymoney/views/investtransactioneditor.cpp:634
+#: kmymoney/views/investtransactioneditor.cpp:637
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:638
+#: kmymoney/views/investtransactioneditor.cpp:641
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
@@ -20264,49 +20264,49 @@ msgid "Enter the split ratio for this transaction"
 msgstr ""
 "Folosește acest buton pentru a înregistra această tranzacție în registru"
 
-#: kmymoney/views/investtransactioneditor.cpp:650
+#: kmymoney/views/investtransactioneditor.cpp:653
 #, fuzzy, kde-format
 #| msgid "Change the price information of the selected entry."
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Scimbă informația de preț a intrării selectate."
 
-#: kmymoney/views/investtransactioneditor.cpp:666
+#: kmymoney/views/investtransactioneditor.cpp:669
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Selectare tranzacție pentru autocompletare"
 
-#: kmymoney/views/investtransactioneditor.cpp:673
+#: kmymoney/views/investtransactioneditor.cpp:676
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Categorie implicită pentru beneficiar"
 
-#: kmymoney/views/investtransactioneditor.cpp:676
+#: kmymoney/views/investtransactioneditor.cpp:679
 #, fuzzy, kde-format
 #| msgid "Enter additional fees"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Introdu taxe adiționale"
 
-#: kmymoney/views/investtransactioneditor.cpp:682
+#: kmymoney/views/investtransactioneditor.cpp:685
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Categorii de cheltuieli"
 
-#: kmymoney/views/investtransactioneditor.cpp:685
+#: kmymoney/views/investtransactioneditor.cpp:688
 #, fuzzy, kde-format
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Tipul de dobândă"
 
-#: kmymoney/views/investtransactioneditor.cpp:690
+#: kmymoney/views/investtransactioneditor.cpp:693
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
@@ -20314,7 +20314,7 @@ msgid "Select the security for this transaction"
 msgstr ""
 "Folosește acest buton pentru a înregistra această tranzacție în registru"
 
-#: kmymoney/views/investtransactioneditor.cpp:695
+#: kmymoney/views/investtransactioneditor.cpp:698
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

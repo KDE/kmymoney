@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"POT-Creation-Date: 2025-09-01 00:43+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -20194,7 +20194,7 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Έσοδα από τόκους"
 
-#: kmymoney/views/investtransactioneditor.cpp:306
+#: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:335
 #, fuzzy, kde-format
@@ -20206,7 +20206,7 @@ msgstr ""
 "  * Ο λογαριασμός « %1 » στο νόμισμα « %2 » δεν έχει μια ορισμένη τιμή για "
 "την ημερομηνία έναρξης « %3 »."
 
-#: kmymoney/views/investtransactioneditor.cpp:424
+#: kmymoney/views/investtransactioneditor.cpp:427
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -20214,14 +20214,14 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:607
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Χρησιμοποιήστε αυτό το κουμπί για την εγγραφή αυτής της συναλλαγής"
 
-#: kmymoney/views/investtransactioneditor.cpp:607
+#: kmymoney/views/investtransactioneditor.cpp:610
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20229,14 +20229,14 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:620
+#: kmymoney/views/investtransactioneditor.cpp:623
 #, fuzzy, kde-format
 #| msgid "Number of Days to Forecast:"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Αριθμός ημερών για τις προβλέψεις:"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:625
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20244,84 +20244,84 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:626
+#: kmymoney/views/investtransactioneditor.cpp:629
 #, fuzzy, kde-format
 #| msgid "Enter the number of the first transaction line."
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Εισάγετε τον αριθμό της γραμμής της πρώτης συναλλαγής."
 
-#: kmymoney/views/investtransactioneditor.cpp:632
+#: kmymoney/views/investtransactioneditor.cpp:635
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Διαχωρισμός συναλλαγής"
 
-#: kmymoney/views/investtransactioneditor.cpp:634
+#: kmymoney/views/investtransactioneditor.cpp:637
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:638
+#: kmymoney/views/investtransactioneditor.cpp:641
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Χρησιμοποιήστε αυτό το κουμπί για την εγγραφή αυτής της συναλλαγής"
 
-#: kmymoney/views/investtransactioneditor.cpp:650
+#: kmymoney/views/investtransactioneditor.cpp:653
 #, fuzzy, kde-format
 #| msgid "Enter the number of the first transaction line."
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Εισάγετε τον αριθμό της γραμμής της πρώτης συναλλαγής."
 
-#: kmymoney/views/investtransactioneditor.cpp:666
+#: kmymoney/views/investtransactioneditor.cpp:669
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Επιλέξτε την αυτόματη συμπλήρωση των συναλλαγών"
 
-#: kmymoney/views/investtransactioneditor.cpp:673
+#: kmymoney/views/investtransactioneditor.cpp:676
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Προεπιλεγμένη κατηγορία για τον δικαιούχο"
 
-#: kmymoney/views/investtransactioneditor.cpp:676
+#: kmymoney/views/investtransactioneditor.cpp:679
 #, fuzzy, kde-format
 #| msgid "Enter additional fees"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Εισαγωγή πρόσθετων αμοιβών"
 
-#: kmymoney/views/investtransactioneditor.cpp:682
+#: kmymoney/views/investtransactioneditor.cpp:685
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Κατηγορίες εξόδων"
 
-#: kmymoney/views/investtransactioneditor.cpp:685
+#: kmymoney/views/investtransactioneditor.cpp:688
 #, fuzzy, kde-format
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Τύπος τόκου"
 
-#: kmymoney/views/investtransactioneditor.cpp:690
+#: kmymoney/views/investtransactioneditor.cpp:693
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Χρησιμοποιήστε αυτό το κουμπί για την εγγραφή αυτής της συναλλαγής"
 
-#: kmymoney/views/investtransactioneditor.cpp:695
+#: kmymoney/views/investtransactioneditor.cpp:698
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

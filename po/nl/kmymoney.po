@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-26 00:43+0000\n"
+"POT-Creation-Date: 2025-09-01 00:43+0000\n"
 "PO-Revision-Date: 2025-08-25 11:20+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -19266,7 +19266,7 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Rente-inkomsten"
 
-#: kmymoney/views/investtransactioneditor.cpp:306
+#: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:335
 #, kde-format
@@ -19274,7 +19274,7 @@ msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 "De plaatsingsdatum is ouder dan de openingsdatum van rekening <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:424
+#: kmymoney/views/investtransactioneditor.cpp:427
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19284,13 +19284,13 @@ msgstr ""
 "De transactiezaak is gewijzigd die mogelijk alle prijsinformatie ongeldig "
 "zal maken. Controleer dat."
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:607
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "De activiteit voor deze transactie selecteren."
 
-#: kmymoney/views/investtransactioneditor.cpp:607
+#: kmymoney/views/investtransactioneditor.cpp:610
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19300,13 +19300,13 @@ msgstr ""
 "Het waardepapier voor deze transactie kan niet gewijzigd worden omdat het "
 "account voor het waardepapier gesloten is."
 
-#: kmymoney/views/investtransactioneditor.cpp:620
+#: kmymoney/views/investtransactioneditor.cpp:623
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Aantal aandelen"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:625
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19316,19 +19316,19 @@ msgstr ""
 "Het aantal aandelen kan niet gewijzigd worden omdat het account voor het "
 "waardepapier gesloten is."
 
-#: kmymoney/views/investtransactioneditor.cpp:626
+#: kmymoney/views/investtransactioneditor.cpp:629
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Het aantal aandelen voor deze transactie invoeren."
 
-#: kmymoney/views/investtransactioneditor.cpp:632
+#: kmymoney/views/investtransactioneditor.cpp:635
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Splitsverhouding"
 
-#: kmymoney/views/investtransactioneditor.cpp:634
+#: kmymoney/views/investtransactioneditor.cpp:637
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19337,55 +19337,55 @@ msgstr ""
 "De splitsverhouding kan niet gewijzigd worden omdat het account voor het "
 "waardepapier gesloten is."
 
-#: kmymoney/views/investtransactioneditor.cpp:638
+#: kmymoney/views/investtransactioneditor.cpp:641
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "De splitsverhouding voor deze transactie invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:650
+#: kmymoney/views/investtransactioneditor.cpp:653
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "De prijsinformatie voor deze transactie invoeren."
 
-#: kmymoney/views/investtransactioneditor.cpp:666
+#: kmymoney/views/investtransactioneditor.cpp:669
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "De rekening selecteren om de transactie gelijk te trekken"
 
-#: kmymoney/views/investtransactioneditor.cpp:673
+#: kmymoney/views/investtransactioneditor.cpp:676
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Categorie voor kosten invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:676
+#: kmymoney/views/investtransactioneditor.cpp:679
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Het bedrag van de kosten invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:682
+#: kmymoney/views/investtransactioneditor.cpp:685
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Categorie voor rente invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:685
+#: kmymoney/views/investtransactioneditor.cpp:688
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Bedrag aan rente"
 
-#: kmymoney/views/investtransactioneditor.cpp:690
+#: kmymoney/views/investtransactioneditor.cpp:693
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Het waardepapier voor deze transactie selecteren"
 
-#: kmymoney/views/investtransactioneditor.cpp:695
+#: kmymoney/views/investtransactioneditor.cpp:698
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
