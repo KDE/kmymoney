@@ -1238,13 +1238,30 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     // make sure that there is no selection left in the background
     // in case there is no text in the edit field
-    connect(d->ui->payeeEdit->lineEdit(), &QLineEdit::textEdited, [&](const QString& txt) {
+    connect(d->ui->payeeEdit->lineEdit(), &QLineEdit::textEdited, this, [&](const QString& txt) {
         if (txt.isEmpty()) {
             d->ui->payeeEdit->setCurrentIndex(-1);
         }
     });
 
-    connect(d->ui->categoryCombo->lineEdit(), &QLineEdit::textEdited, [&](const QString& txt) {
+    connect(
+        d->ui->payeeEdit->lineEdit(),
+        &QLineEdit::textEdited,
+        this,
+        [&](const QString& txt) {
+            if (!txt.isEmpty()) {
+                // when the user types something, select the first entry in the popup
+                const auto view = d->ui->payeeEdit->completer()->popup();
+                const auto model = view->model();
+                // prevent that setting the current index propagates the full
+                // name into the edit widget
+                QSignalBlocker blocker(view->selectionModel());
+                view->setCurrentIndex(model->index(0, 0));
+            }
+        },
+        Qt::QueuedConnection);
+
+    connect(d->ui->categoryCombo->lineEdit(), &QLineEdit::textEdited, this, [&](const QString& txt) {
         if (txt.isEmpty()) {
             d->ui->categoryCombo->setSelected(QString());
         }
@@ -1386,7 +1403,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule, Schedul
         QSignalBlocker splitModelSignalBlocker(d->splitModel);
 
         // block the signals sent out from the payee edit widget so that
-        // the autofill logic is not trigger when loading the schdule
+        // the autofill logic is not triggered when loading the schdule
         QSignalBlocker autoFillSignalBlocker(d->ui->payeeEdit);
 
         for (const auto& split : d->m_transaction.splits()) {
@@ -1681,6 +1698,18 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                 }
 
             } else if (o == d->ui->payeeEdit) {
+                // in case the popup for the payee is visible we need to copy the
+                // selected text into the combobox widget so that the payee can
+                // be found in the list
+                if (combobox->lineEdit()->completer()->popup()->isVisible()) {
+                    const auto view = combobox->lineEdit()->completer()->popup();
+                    const auto model = view->selectionModel();
+                    const auto selectedRows = model->selectedRows();
+                    if (!selectedRows.isEmpty()) {
+                        combobox->setCurrentText(selectedRows.at(0).data(eMyMoney::Model::PayeeNameRole).toString());
+                    }
+                }
+
                 if (needCreatePayee(combobox)) {
                     createPayee(combobox);
 
