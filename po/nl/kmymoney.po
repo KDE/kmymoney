@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 03:42+0000\n"
+"POT-Creation-Date: 2025-09-02 03:52+0000\n"
 "PO-Revision-Date: 2025-08-26 19:10+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -21471,7 +21471,7 @@ msgstr "Selecteer automatisch aanvullen van transactie"
 msgid "Link"
 msgstr "Koppeling"
 
-#: kmymoney/views/newtransactioneditor.cpp:1608
+#: kmymoney/views/newtransactioneditor.cpp:1625
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21480,7 +21480,7 @@ msgstr ""
 "Wilt u memo<p><i>%1</i></p>vervangen door memo<p><i>%2</i></p>in de andere "
 "splitsing?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1609
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, kde-format
 msgid "Copy memo"
 msgstr "Memo kopiëren"

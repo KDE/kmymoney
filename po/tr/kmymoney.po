@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 03:42+0000\n"
+"POT-Creation-Date: 2025-09-02 03:52+0000\n"
 "PO-Revision-Date: 2025-06-16 12:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -22061,14 +22061,14 @@ msgstr "Otomatik doldurulan aktarımı seç"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1608
+#: kmymoney/views/newtransactioneditor.cpp:1625
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr "<p><i>%1</i></p>notunu<p><i>%2</i></p>ile değiştirmek ister misiniz?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1609
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, kde-format
 msgid "Copy memo"
 msgstr "Notu kopyala"

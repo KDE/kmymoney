@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 03:42+0000\n"
+"POT-Creation-Date: 2025-09-02 03:52+0000\n"
 "PO-Revision-Date: 2025-08-13 18:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -21450,14 +21450,14 @@ msgstr "اختر المعاملات"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1608
+#: kmymoney/views/newtransactioneditor.cpp:1625
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1609
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"
