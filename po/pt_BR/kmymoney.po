@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 00:43+0000\n"
+"POT-Creation-Date: 2025-09-02 00:43+0000\n"
 "PO-Revision-Date: 2025-08-25 12:01-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -21453,7 +21453,7 @@ msgstr "Selecionar transação auto-preenchida"
 msgid "Link"
 msgstr "Vincular"
 
-#: kmymoney/views/newtransactioneditor.cpp:1626
+#: kmymoney/views/newtransactioneditor.cpp:1643
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21462,7 +21462,7 @@ msgstr ""
 "Deseja substituir o memorando<p><i>%1</i></p>pelo memorando<p><i>%2</i></"
 "p>na outra parcela?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1627
+#: kmymoney/views/newtransactioneditor.cpp:1644
 #, kde-format
 msgid "Copy memo"
 msgstr "Copiar memorando"

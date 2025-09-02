@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 00:43+0000\n"
+"POT-Creation-Date: 2025-09-02 00:43+0000\n"
 "PO-Revision-Date: 2025-08-28 14:05+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -5184,7 +5184,7 @@ msgstr "Obri un URL"
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
-msgstr "Tria-ho tot"
+msgstr "Selecciona-ho tot"
 
 #: kmymoney/kmymoney.cpp:1475
 #, kde-format
@@ -17591,7 +17591,7 @@ msgstr "<p>Trieu un nom per a este informe.</p>"
 #, kde-format
 msgid "<p>Enter a comment to help you remember the details of this report.</p>"
 msgstr ""
-"<p>Introduïu un comentari per a ajudar-vos a recordar els detalls d'este "
+"<p>Introduïu un comentari per ajudar-vos a recordar els detalls d'este "
 "informe.</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkCurrency)
@@ -21545,7 +21545,7 @@ msgstr "Trieu autocompleció d'operació"
 msgid "Link"
 msgstr "Enllaç"
 
-#: kmymoney/views/newtransactioneditor.cpp:1626
+#: kmymoney/views/newtransactioneditor.cpp:1643
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21554,7 +21554,7 @@ msgstr ""
 "Voleu substituir el recordatori<p><i>%1</i></p>per al recordatori<p><i>%2</"
 "i></p>a l'altre desglossament?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1627
+#: kmymoney/views/newtransactioneditor.cpp:1644
 #, kde-format
 msgid "Copy memo"
 msgstr "Copia el recordatori"
@@ -22448,7 +22448,7 @@ msgstr "Tria les operacions sense etiquetes"
 #: kmymoney/widgets/ktransactionfilter.ui:531
 #, kde-format
 msgid "Select all"
-msgstr "Tria-ho tot"
+msgstr "Selecciona-ho tot"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clearTagsButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_clearPayeesButton)

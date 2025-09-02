@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 00:43+0000\n"
+"POT-Creation-Date: 2025-09-02 00:43+0000\n"
 "PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -21408,7 +21408,7 @@ msgstr "Select autofill transaction"
 msgid "Link"
 msgstr "Link"
 
-#: kmymoney/views/newtransactioneditor.cpp:1626
+#: kmymoney/views/newtransactioneditor.cpp:1643
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21417,7 +21417,7 @@ msgstr ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1627
+#: kmymoney/views/newtransactioneditor.cpp:1644
 #, fuzzy, kde-format
 #| msgctxt "@info placeholder for memo of matched transaction if empty"
 #| msgid "Empty memo"

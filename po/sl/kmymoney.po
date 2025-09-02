@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-01 00:43+0000\n"
+"POT-Creation-Date: 2025-09-02 00:43+0000\n"
 "PO-Revision-Date: 2025-08-25 10:22+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -21429,7 +21429,7 @@ msgstr "Izberite samodejno izpolnjeno transakcijo"
 msgid "Link"
 msgstr "Povezava"
 
-#: kmymoney/views/newtransactioneditor.cpp:1626
+#: kmymoney/views/newtransactioneditor.cpp:1643
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21438,7 +21438,7 @@ msgstr ""
 "Ali želite zamenjati beležko<p><i>%1</i></p>z beležko<p><i>%2</i></p>v "
 "drugem razdelku?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1627
+#: kmymoney/views/newtransactioneditor.cpp:1644
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopiraj zabeležko"
