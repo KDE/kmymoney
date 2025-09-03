@@ -1238,11 +1238,11 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
             if (!txt.isEmpty()) {
                 // when the user types something, select the first entry in the popup
                 const auto view = d->ui->payeeEdit->completer()->popup();
-                const auto model = view->model();
+                const auto viewsModel = view->model();
                 // prevent that setting the current index propagates the full
                 // name into the edit widget
                 QSignalBlocker blocker(view->selectionModel());
-                view->setCurrentIndex(model->index(0, 0));
+                view->setCurrentIndex(viewsModel->index(0, 0));
             }
         },
         Qt::QueuedConnection);
