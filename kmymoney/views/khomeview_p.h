@@ -950,6 +950,7 @@ public:
         QList<MyMoneyAccount> accounts;
 
         const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
+        const bool hideZeroBalanceAccounts = KMyMoneySettings::hideZeroBalanceAccountsHome() && !showAllAccounts;
 
         // get list of all accounts
         file->accountList(accounts);
@@ -1011,6 +1012,11 @@ public:
 
             } else if ((*it).isClosed() || (*it).isInvest()) {
                 // don't show if closed or a stock account
+                removeAccount = true;
+            }
+
+            // don't show zero balance accounts if the option is active
+            if (MyMoneyFile::instance()->balance((*it).id()).isZero() && hideZeroBalanceAccounts) {
                 removeAccount = true;
             }
 
