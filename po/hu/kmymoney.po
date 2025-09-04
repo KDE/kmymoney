@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-02 00:43+0000\n"
+"POT-Creation-Date: 2025-09-04 00:43+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1929,7 +1929,7 @@ msgstr "Típus"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:54
 #: kmymoney/views/investtransactioneditor.ui:236
-#: kmymoney/views/khomeview_p.h:1080
+#: kmymoney/views/khomeview_p.h:1086
 #, kde-format
 msgid "Total"
 msgstr "Összesen"
@@ -2106,7 +2106,7 @@ msgid "Liability"
 msgstr "Kötelezettség"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:447
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1838
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1844
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4229,7 +4229,7 @@ msgstr "Tisztázott"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:348
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1055
+#: kmymoney/views/khomeview_p.h:1061
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -10438,7 +10438,7 @@ msgstr "Kijelölések törlése"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:763
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1059
+#: kmymoney/views/khomeview_p.h:1065
 #, kde-format
 msgid "Balance"
 msgstr "Egyenleg"
@@ -13022,8 +13022,8 @@ msgstr "Intézet"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
-#: kmymoney/views/khomeview_p.h:622 kmymoney/views/khomeview_p.h:1042
-#: kmymoney/views/khomeview_p.h:1171 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:622 kmymoney/views/khomeview_p.h:1048
+#: kmymoney/views/khomeview_p.h:1177 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:102
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:74
@@ -15810,13 +15810,13 @@ msgstr[0] "1 nap"
 msgstr[1] "%1 nap"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1240
+#: kmymoney/views/khomeview_p.h:1246
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "A %1 egyenlege a %2 minimum egyenleg alá csökken ma."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1244
+#: kmymoney/views/khomeview_p.h:1250
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15825,19 +15825,19 @@ msgstr[0] "A %2 egyenlege %3 minimum egyenleg alá fog csökkenni %1 nap múlva.
 msgstr[1] "A %2 egyenlege %3 minimum egyenleg alá fog csökkenni %1 nap múlva."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1262
+#: kmymoney/views/khomeview_p.h:1268
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "A %1 egyenlege a %2 alá csökken ma."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1267
+#: kmymoney/views/khomeview_p.h:1273
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "A %1 egyenlege a %2 fölé nő ma."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1273
+#: kmymoney/views/khomeview_p.h:1279
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15845,7 +15845,7 @@ msgstr[0] "A %2 egyenlege %3 alá fog csökkenni a %1. napon."
 msgstr[1] "A %2 egyenlege %3 alá fog esni a %1. napon."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1280
+#: kmymoney/views/khomeview_p.h:1286
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15916,7 +15916,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "A jelentés beszámoló verziójának megjelenítése"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
-#: kmymoney/views/khomeview_p.h:576 kmymoney/views/khomeview_p.h:1577
+#: kmymoney/views/khomeview_p.h:576 kmymoney/views/khomeview_p.h:1583
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
@@ -16786,7 +16786,7 @@ msgstr "Idősáv"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:447
-#: kmymoney/views/khomeview_p.h:1114
+#: kmymoney/views/khomeview_p.h:1120
 #, kde-format
 msgid "Report"
 msgstr "Jelentés"
@@ -17128,7 +17128,7 @@ msgstr "Jelentések"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1116
+#: kmymoney/views/khomeview_p.h:1122
 #, kde-format
 msgid "Comment"
 msgstr "Megjegyzés"
@@ -17206,7 +17206,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Bevételek és költségek kördiagram"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:889
-#: kmymoney/views/khomeview_p.h:1551
+#: kmymoney/views/khomeview_p.h:1557
 #, kde-format
 msgid "Net Worth"
 msgstr "Teljes vagyon"
@@ -17529,7 +17529,7 @@ msgid "Net Worth Forecast"
 msgstr "Teljes vagyon előrejelzés"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/views/khomeview_p.h:1573
+#: kmymoney/views/khomeview_p.h:1579
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title Home page section"
@@ -20401,20 +20401,20 @@ msgid_plural " (%1 payments)"
 msgstr[0] " (%1 fizetés)"
 msgstr[1] " (%1 fizetések)"
 
-#: kmymoney/views/khomeview_p.h:1046
+#: kmymoney/views/khomeview_p.h:1052
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1049
+#: kmymoney/views/khomeview_p.h:1055
 #, fuzzy, kde-format
 #| msgid "C"
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1052
+#: kmymoney/views/khomeview_p.h:1058
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag R"
 #| msgid "R"
@@ -20422,20 +20422,20 @@ msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "R"
 
-#: kmymoney/views/khomeview_p.h:1065
+#: kmymoney/views/khomeview_p.h:1071
 #, fuzzy, kde-format
 #| msgid "To Minimum Balance / Maximum Credit"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Minimum egyenleg / Maximum hitel"
 
-#: kmymoney/views/khomeview_p.h:1109
+#: kmymoney/views/khomeview_p.h:1115
 #, fuzzy, kde-format
 #| msgid "Favorite Reports"
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
 msgstr "Kedvenc jelentések"
 
-#: kmymoney/views/khomeview_p.h:1165
+#: kmymoney/views/khomeview_p.h:1171
 #, fuzzy, kde-format
 #| msgid "%1 Day Forecast"
 msgctxt "@title Home page section Forecast days"
@@ -20444,7 +20444,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "%1 napos előrejelzés"
 msgstr[1] "%1 napos előrejelzés"
 
-#: kmymoney/views/khomeview_p.h:1176
+#: kmymoney/views/khomeview_p.h:1182
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -20452,20 +20452,20 @@ msgid_plural "%1 days"
 msgstr[0] "%1 nap"
 msgstr[1] "%1 nap"
 
-#: kmymoney/views/khomeview_p.h:1399
+#: kmymoney/views/khomeview_p.h:1405
 #, fuzzy, kde-format
 #| msgid "Assets and Liabilities Summary"
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Vagyontárgyak és kötelezettségek áttekintő"
 
-#: kmymoney/views/khomeview_p.h:1423
+#: kmymoney/views/khomeview_p.h:1429
 #, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1427
+#: kmymoney/views/khomeview_p.h:1433
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag C"
 #| msgid "C"
@@ -20473,7 +20473,7 @@ msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1431
+#: kmymoney/views/khomeview_p.h:1437
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag R"
 #| msgid "R"
@@ -20481,112 +20481,112 @@ msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "R"
 
-#: kmymoney/views/khomeview_p.h:1435
+#: kmymoney/views/khomeview_p.h:1441
 #, fuzzy, kde-format
 #| msgid "Reconciled"
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Egyeztetett"
 
-#: kmymoney/views/khomeview_p.h:1438
+#: kmymoney/views/khomeview_p.h:1444
 #, fuzzy, kde-format
 #| msgid "Balance"
 msgctxt "@title:column table on home page"
 msgid "Balance"
 msgstr "Egyenleg"
 
-#: kmymoney/views/khomeview_p.h:1442
+#: kmymoney/views/khomeview_p.h:1448
 #, fuzzy, kde-format
 #| msgid "Asset Accounts"
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Vagyontárgy számlák"
 
-#: kmymoney/views/khomeview_p.h:1447
+#: kmymoney/views/khomeview_p.h:1453
 #, fuzzy, kde-format
 #| msgid "Liability Accounts"
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Kötelezettség számlák"
 
-#: kmymoney/views/khomeview_p.h:1532
+#: kmymoney/views/khomeview_p.h:1538
 #, kde-format
 msgid "Total Assets"
 msgstr "Összes vagyontárgy"
 
-#: kmymoney/views/khomeview_p.h:1540
+#: kmymoney/views/khomeview_p.h:1546
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Összes kötelezettség"
 
-#: kmymoney/views/khomeview_p.h:1828
+#: kmymoney/views/khomeview_p.h:1834
 #, fuzzy, kde-format
 #| msgid "Cash Flow Summary"
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Pénzforgalom áttekintő"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Jelenlegi hónap bevételei és költségei"
 
-#: kmymoney/views/khomeview_p.h:1841
+#: kmymoney/views/khomeview_p.h:1847
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Ütemezett bevétel"
 
-#: kmymoney/views/khomeview_p.h:1844
+#: kmymoney/views/khomeview_p.h:1850
 #, kde-format
 msgid "Expenses"
 msgstr "Költségek"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1853
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Ütemezett költségek"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Felhasználható tőke és kötelezettségek"
 
-#: kmymoney/views/khomeview_p.h:1880
+#: kmymoney/views/khomeview_p.h:1886
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Felhasználható tőke"
 
-#: kmymoney/views/khomeview_p.h:1883
+#: kmymoney/views/khomeview_p.h:1889
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Hitelkerethez utalás"
 
-#: kmymoney/views/khomeview_p.h:1886
+#: kmymoney/views/khomeview_p.h:1892
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Hitelkeret"
 
-#: kmymoney/views/khomeview_p.h:1889
+#: kmymoney/views/khomeview_p.h:1895
 #, kde-format
 msgid "Other Transfers"
 msgstr "Egyéb átutalások"
 
-#: kmymoney/views/khomeview_p.h:1932
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Pénzforgalom állapota"
 
-#: kmymoney/views/khomeview_p.h:1937
+#: kmymoney/views/khomeview_p.h:1943
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Várható felhasználható tőke"
 
-#: kmymoney/views/khomeview_p.h:1940
+#: kmymoney/views/khomeview_p.h:1946
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Várható hitel"
 
-#: kmymoney/views/khomeview_p.h:1943
+#: kmymoney/views/khomeview_p.h:1949
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Várható profit/veszteség"

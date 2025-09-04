@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-02 00:43+0000\n"
+"POT-Creation-Date: 2025-09-04 00:43+0000\n"
 "PO-Revision-Date: 2025-08-27 07:52+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -1833,7 +1833,7 @@ msgstr "ტიპით"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:54
 #: kmymoney/views/investtransactioneditor.ui:236
-#: kmymoney/views/khomeview_p.h:1080
+#: kmymoney/views/khomeview_p.h:1086
 #, kde-format
 msgid "Total"
 msgstr "ჯამში"
@@ -2007,7 +2007,7 @@ msgid "Liability"
 msgstr "პასუხიმგებლობა"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:447
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1838
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1844
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4043,7 +4043,7 @@ msgstr "გასუფთავებულია"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:348
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1055
+#: kmymoney/views/khomeview_p.h:1061
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -9785,7 +9785,7 @@ msgstr "შენიშვნის ველის არჩევნის გ
 #: kmymoney/plugins/views/reports/core/listtable.cpp:763
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1059
+#: kmymoney/views/khomeview_p.h:1065
 #, kde-format
 msgid "Balance"
 msgstr "ბალანსი"
@@ -12217,8 +12217,8 @@ msgstr "დაწესებულება"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
-#: kmymoney/views/khomeview_p.h:622 kmymoney/views/khomeview_p.h:1042
-#: kmymoney/views/khomeview_p.h:1171 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:622 kmymoney/views/khomeview_p.h:1048
+#: kmymoney/views/khomeview_p.h:1177 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:102
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:74
@@ -14879,13 +14879,13 @@ msgstr[0] "1 დღე"
 msgstr[1] "%1 დღე"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1240
+#: kmymoney/views/khomeview_p.h:1246
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "%1-ის ბალანსი დღეს %2-ის მინიმალურ ბალანსზე ქვემოთაა."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1244
+#: kmymoney/views/khomeview_p.h:1250
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -14894,19 +14894,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1262
+#: kmymoney/views/khomeview_p.h:1268
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "დღეს %1-ის ბალანსი %2-ზე ქვემოთაა."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1267
+#: kmymoney/views/khomeview_p.h:1273
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "დღეს %1-ის ბალანსი %2-ზე ზემოთაა."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1273
+#: kmymoney/views/khomeview_p.h:1279
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -14914,7 +14914,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1280
+#: kmymoney/views/khomeview_p.h:1286
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -14984,7 +14984,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "ანგარიშების დამატებას ამ დიაგრამისთვის მონაცემები არ გადმოუცია."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
-#: kmymoney/views/khomeview_p.h:576 kmymoney/views/khomeview_p.h:1577
+#: kmymoney/views/khomeview_p.h:576 kmymoney/views/khomeview_p.h:1583
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "ამ დიაგრამის სანახავად ჩართეთ ანგარიშების დამატება."
@@ -15799,7 +15799,7 @@ msgstr "დიაპაზონი"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:447
-#: kmymoney/views/khomeview_p.h:1114
+#: kmymoney/views/khomeview_p.h:1120
 #, kde-format
 msgid "Report"
 msgstr "ანგარიში"
@@ -16135,7 +16135,7 @@ msgstr "ანგარიში"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1116
+#: kmymoney/views/khomeview_p.h:1122
 #, kde-format
 msgid "Comment"
 msgstr "კომენტარი"
@@ -16207,7 +16207,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "შემოსავლისა და ხარჯების სექტორული დიაგრამა"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:889
-#: kmymoney/views/khomeview_p.h:1551
+#: kmymoney/views/khomeview_p.h:1557
 #, kde-format
 msgid "Net Worth"
 msgstr "წმინდა კაპიტალი"
@@ -16527,7 +16527,7 @@ msgid "Net Worth Forecast"
 msgstr "ზუსტი პროგნოზი"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/views/khomeview_p.h:1573
+#: kmymoney/views/khomeview_p.h:1579
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
@@ -19190,36 +19190,36 @@ msgid_plural " (%1 payments)"
 msgstr[0] " (%1 გადახდა)"
 msgstr[1] " (%1 გადახდა)"
 
-#: kmymoney/views/khomeview_p.h:1046
+#: kmymoney/views/khomeview_p.h:1052
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr "!მ"
 
-#: kmymoney/views/khomeview_p.h:1049
+#: kmymoney/views/khomeview_p.h:1055
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1052
+#: kmymoney/views/khomeview_p.h:1058
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!შ"
 
-#: kmymoney/views/khomeview_p.h:1065
+#: kmymoney/views/khomeview_p.h:1071
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1109
+#: kmymoney/views/khomeview_p.h:1115
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
 msgstr "რჩეული ანგარიშები"
 
-#: kmymoney/views/khomeview_p.h:1165
+#: kmymoney/views/khomeview_p.h:1171
 #, kde-format
 msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
@@ -19227,7 +19227,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "%1 დღიანი პროგნოზი"
 msgstr[1] "%1 დღიანი პროგნოზი"
 
-#: kmymoney/views/khomeview_p.h:1176
+#: kmymoney/views/khomeview_p.h:1182
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -19235,131 +19235,131 @@ msgid_plural "%1 days"
 msgstr[0] "%1 დღე"
 msgstr[1] "%1 დღე"
 
-#: kmymoney/views/khomeview_p.h:1399
+#: kmymoney/views/khomeview_p.h:1405
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "აქტივებისა და ვალდებულებების შეჯამება"
 
-#: kmymoney/views/khomeview_p.h:1423
+#: kmymoney/views/khomeview_p.h:1429
 #, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr "!მ"
 
-#: kmymoney/views/khomeview_p.h:1427
+#: kmymoney/views/khomeview_p.h:1433
 #, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1431
+#: kmymoney/views/khomeview_p.h:1437
 #, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "!R"
 
-#: kmymoney/views/khomeview_p.h:1435
+#: kmymoney/views/khomeview_p.h:1441
 #, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "შეთანხმებულია"
 
-#: kmymoney/views/khomeview_p.h:1438
+#: kmymoney/views/khomeview_p.h:1444
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Balance"
 msgstr "ბალანსი"
 
-#: kmymoney/views/khomeview_p.h:1442
+#: kmymoney/views/khomeview_p.h:1448
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "ანგარიშების შემოწმება"
 
-#: kmymoney/views/khomeview_p.h:1447
+#: kmymoney/views/khomeview_p.h:1453
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "პასუხიმგებლობის ანგარიშები"
 
-#: kmymoney/views/khomeview_p.h:1532
+#: kmymoney/views/khomeview_p.h:1538
 #, kde-format
 msgid "Total Assets"
 msgstr "სულ აქტივები"
 
-#: kmymoney/views/khomeview_p.h:1540
+#: kmymoney/views/khomeview_p.h:1546
 #, kde-format
 msgid "Total Liabilities"
 msgstr "სულ ვალდებულებები"
 
-#: kmymoney/views/khomeview_p.h:1828
+#: kmymoney/views/khomeview_p.h:1834
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "ნაღდი ფულის დინების შეჯამება"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "მიმდინარე თვის შემოსავალი და ხარჯები"
 
-#: kmymoney/views/khomeview_p.h:1841
+#: kmymoney/views/khomeview_p.h:1847
 #, kde-format
 msgid "Scheduled Income"
 msgstr "გეგმიური შემოსავალი"
 
-#: kmymoney/views/khomeview_p.h:1844
+#: kmymoney/views/khomeview_p.h:1850
 #, kde-format
 msgid "Expenses"
 msgstr "ხარჯები"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1853
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "დაგეგმილი ხარჯები"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "ლიკვიდური აქტივები და ვალდებულებები"
 
-#: kmymoney/views/khomeview_p.h:1880
+#: kmymoney/views/khomeview_p.h:1886
 #, kde-format
 msgid "Liquid Assets"
 msgstr "ლიკვიდური აქტივები"
 
-#: kmymoney/views/khomeview_p.h:1883
+#: kmymoney/views/khomeview_p.h:1889
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "გადარიცხვები ლიკვიდურ ვალდებულებებზე"
 
-#: kmymoney/views/khomeview_p.h:1886
+#: kmymoney/views/khomeview_p.h:1892
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "ლიკვიდური ვალდებულებები"
 
-#: kmymoney/views/khomeview_p.h:1889
+#: kmymoney/views/khomeview_p.h:1895
 #, kde-format
 msgid "Other Transfers"
 msgstr "სხვა გადარიცხვები"
 
-#: kmymoney/views/khomeview_p.h:1932
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "ნაღდი ფულის დინების სტატუსი"
 
-#: kmymoney/views/khomeview_p.h:1937
+#: kmymoney/views/khomeview_p.h:1943
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "მოსალოდნელი ლიკვიდური აქტივები"
 
-#: kmymoney/views/khomeview_p.h:1940
+#: kmymoney/views/khomeview_p.h:1946
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "მოსალოდნელი ლიკვიდური ვალდებულებები"
 
-#: kmymoney/views/khomeview_p.h:1943
+#: kmymoney/views/khomeview_p.h:1949
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "მოსალოდნელი მოგება/ზარალი"
