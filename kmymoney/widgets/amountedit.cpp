@@ -816,6 +816,7 @@ void AmountEdit::slotCalculatorResult()
         MyMoneyMoney amount(d->m_calculator->result());
         amount = d->adjustToPrecision(d->m_state, amount);
         setText(amount.formatMoney(QString(), d->precision(d->m_state), false));
+        Q_EMIT amountChanged();
     }
 }
 
