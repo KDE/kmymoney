@@ -11,6 +11,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAction>
 #include <QDate>
 #include <QLocale>
 #include <QMap>
@@ -340,4 +341,14 @@ QString MyMoneyUtils::convertRegularExpressionToWildcard(const QString& pattern)
         ++pos;
     }
     return rc;
+}
+
+void MyMoneyUtils::triggerAction(QAction* action)
+{
+    if (action) {
+        const auto enabled = action->isEnabled();
+        action->setEnabled(true);
+        action->trigger();
+        action->setEnabled(enabled);
+    }
 }

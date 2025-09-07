@@ -1094,10 +1094,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
 
     connect(d->m_myMoneyView, &KMyMoneyView::requestActionTrigger, this, [&](eMenu::Action action) {
         if (pActions.contains(action)) {
-            const bool enabled = pActions[action]->isEnabled();
-            pActions[action]->setEnabled(true);
-            pActions[action]->trigger();
-            pActions[action]->setEnabled(enabled);
+            MyMoneyUtils::triggerAction(pActions[action]);
         }
     });
 

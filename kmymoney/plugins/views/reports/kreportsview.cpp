@@ -321,7 +321,7 @@ void KReportsView::slotOpenUrl(const QUrl &url)
         selection.setSelection(SelectedObjects::JournalEntry, tid);
         Q_EMIT requestSelectionChange(selection);
 
-        gotoAccount->trigger();
+        MyMoneyUtils::triggerAction(gotoAccount);
     } else {
         qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
     }
