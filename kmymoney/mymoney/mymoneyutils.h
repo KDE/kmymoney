@@ -16,6 +16,7 @@
 
 #include <QLocale>
 #include <QString>
+class QAction;
 class QDate;
 class QProcess;
 
@@ -120,6 +121,15 @@ KMM_MYMONEY_EXPORT QString formatDate(const QDate& date, QLocale::FormatType for
 KMM_MYMONEY_EXPORT QString formatTime(const QTime& date);
 KMM_MYMONEY_EXPORT QString formatDateTime(const QDateTime& date);
 KMM_MYMONEY_EXPORT QDate stringToDate(const QString& text, QLocale::FormatType formatType = QLocale::ShortFormat);
+
+/**
+ * Helper method to trigger a currently disabled action nevertheless.
+ * The method temporarily enables the action and resets it to
+ * the state it was before after the @a action was triggered.
+ *
+ * @param action pointer to QAction to be triggered
+ */
+KMM_MYMONEY_EXPORT void triggerAction(QAction* action);
 
 /**
  * This method is used to convert the payment type from its

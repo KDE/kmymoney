@@ -29,6 +29,7 @@
 #include "menuenums.h"
 #include "mymoneyfile.h"
 #include "mymoneytransactionfilter.h"
+#include "mymoneyutils.h"
 #include "selectedobjects.h"
 #include "specialdatesmodel.h"
 #include "ui_ksearchtransactiondlg.h"
@@ -124,7 +125,7 @@ public:
 
         Q_EMIT q->requestSelectionChange(selections);
         pActions[eMenu::Action::GoToAccount]->setData(accountId);
-        pActions[eMenu::Action::GoToAccount]->trigger();
+        MyMoneyUtils::triggerAction(pActions[eMenu::Action::GoToAccount]);
     }
 
     KSearchTransactionDlg* q_ptr;
