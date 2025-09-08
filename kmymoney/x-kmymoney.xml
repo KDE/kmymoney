@@ -29,6 +29,7 @@
     <comment xml:lang="sv">KMyMoney-fil</comment>
     <comment xml:lang="tr">K Param Dosyası</comment>
     <comment xml:lang="uk">файл KMyMoney</comment>
+    <comment xml:lang="x_test">xxKMyMoney Filexx</comment>
     <comment xml:lang="zh_CN">KMyMoney 文件</comment>
     <comment xml:lang="zh_TW">KMyMoney 檔案</comment>
     <glob pattern="*.kmy"/>
