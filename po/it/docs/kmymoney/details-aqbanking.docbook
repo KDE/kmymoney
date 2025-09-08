@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.aqbanking">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ralf.Habacker; &Ralf.Habacker.mail; </author>
+  </authorgroup>
+  <date
+>31/7/2025</date>
+  <releaseinfo
+>5.2.70</releaseinfo>
+</chapterinfo>
+<title
+>Servizi bancari in linea</title>
+
+<para
+>I servizi bancari in linea si configurano selezionando la voce di menu Impostazioni -> Configura Aqbanking, </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Menu di configurazione di KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_menu.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Menu di configurazione di KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Questa voce di menu è visibile dopo aver attivato l'estensione KBanking associata, operazione che può essere effettuata tramite la voce di menu &quot;Configura KMyMoney&quot; e dopo aver selezionato la voce &quot;Estensione&quot; nell'area sinistra della finestra. </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Menu di configurazione di KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Menu di configurazione di KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot
+>Assicurarsi che la casella di selezione davanti alla riga con KBanking sia selezionata. </para>
+
+<sect1>
+<title
+>Configurazione di Aqbanking</title>
+<para
+>Dopo aver premuto la voce di menu &quot;Configura Aqbanking&quot; sarà visualizzata la seguente finestra: </para>
+
+<para>
+<screenshot>
+  <screeninfo
+></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="aqbanking-wizard-page1.png"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>L'aggiunta avviene in due fasi. La prima consiste nell'aggiungere un utente, la seconda nell'aggiungere un account. </para>
+</sect1>
+
+<sect1 id="create_user">
+  <title
+>Creare un utente</title>
+  <para
+>Dopo aver premuto &quot;Crea utente&quot; sarete reindirizzati alla finestra &quot;Creazione guidata nuovo utente&quot; mostrata di seguito: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+<sect2 id="hbci_create_user">
+  <title
+>Creare un utente per HBCI</title>
+<sect3 id="hbci_select_online_banking_protocol">
+  <title
+>Selezionare il protocollo dei servizi bancari in linea</title>
+  <para
+>Dopo aver premuto &quot;Avanti&quot; sarà visualizzato un elenco dei protocolli di servizi bancari in linea disponibili: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page2-hbci.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_configuring_a_account">
+  <title
+>Configurare un account HBCI</title>
+  <para
+>Dopo aver scelto &quot;Backend HBCI tramite AqHBCI&quot; e aver premuto &quot;Avanti&quot;, sarà visualizzata la seguente pagina, in cui è possibile selezionare il tipo di sicurezza: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Consultare la <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle#section-2"
+>Tabella delle banche AqBanking6</ulink
+> per maggiori dettagli sui tipi di sicurezza supportati dalle banche. Se la propria banca non è elencata, provare prima con PIN/TAN. </para>
+</sect3>
+<sect3 id="hbci_setup_pintan">
+  <title
+>Configurazione PIN/TAN</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_bank_and_server_url">
+  <title
+>Selezionare la banca e l'URL del server</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Su <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle"
+>AqBanking6 Bankentabelle</ulink
+> è possibile trovare un elenco di URL di server bancari funzionanti. </para>
+</sect3>
+<sect3 id="hbci_select_bank_account_and_user_name">
+  <title
+>Selezionare il conto bancario e il nome utente</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_choose_extended_settings_or_continue">
+  <title
+>Scegliere le impostazioni estese o continuare</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_extended_settings">
+  <title
+>Selezionare impostazioni estese</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_finish_creating_user">
+  <title
+>Completare la creazione dell'utente</title>
+  <para
+>Dopo aver premuto &quot;Avanti&quot;, aqbanking contatterà il server e recupererà il certificato del server e le informazioni bancarie. </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Dopo aver premuto &quot;Chiudi&quot; il proprio account utente è stato creato. </para>
+</sect3>
+<sect3 id="add_account">
+  <title
+>Aggiungere un conto</title>
+  <para
+>Nel caso in cui l'aggiunta di un account utente non abbia avuto esito positivo, gli account associati alla banca specificata dovrebbero essere già presenti nell'elenco degli account. </para>
+</sect3>
+</sect2>
+<sect2 id="paypal_create_user">
+  <title
+>Paypal</title>
+<sect3 id="paypal_select_online_banking_protocol">
+  <title
+>Selezionare il protocollo dei servizi bancari in linea</title>
+  <para
+>Dopo aver premuto &quot;Avanti&quot; sarà visualizzato un elenco dei protocolli di servizi bancari in linea disponibili: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_1">
+  <title
+>Configurare di un utente per Paypal</title>
+  <para
+>Dopo aver scelto &quot;Paypal&quot; e premuto &quot;Avanti&quot;, sarà visualizzata la seguente pagina informativa: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Premere &quot;Esegui&quot; per continuare. </para>
+</sect3>
+<sect3 id="paypal_user_name_and_email">
+  <title
+>Digitare il nome utente e l'indirizzo di posta di Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_api_password_and_signature">
+  <title
+>Selezionare le impostazioni API</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_2">
+  <title
+>Informazioni d riepilogo prima di creare l'utente</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_setup_password">
+  <title
+>Inserire la nuova password per l'utente Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_finish_creating_user">
+  <title
+>Completare la creazione dell'utente</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Dopo aver premuto &quot;Fine&quot; l'account utente è stato creato. </para>
+  <para
+>Il passaggio rimanente consiste nel creare un nuovo account basato su questo utente. </para>
+</sect3>
+<sect3 id="paypal_choose_backend">
+  <title
+>Aggiungere un conto paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_add_account">
+  <title
+>Aggiungere un conto paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
