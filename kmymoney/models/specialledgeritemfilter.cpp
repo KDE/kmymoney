@@ -28,7 +28,7 @@ using namespace eMyMoney;
 class SpecialLedgerItemFilterPrivate : public LedgerSortProxyModelPrivate
 {
     struct BalanceParameter {
-        Qt::SortOrder sortOrder;
+        Qt::SortOrder sortOrder = Qt::AscendingOrder;
         int startRow = 0;
         int lastRow = 0;
         int firstRow = 0;
