@@ -142,6 +142,7 @@ public:
 
     void loadForecast(ForecastViewTab tab)
     {
+        Q_ASSERT(tab < MaxViewTabs);
         if (m_needReload[tab]) {
             switch (tab) {
             case ListView:
