@@ -155,6 +155,7 @@ void DateRangeDlg::setDateRange(TransactionFilter::Date idx)
     case TransactionFilter::Date::UserDefined:
         break;
     default:
+        Q_ASSERT(idx < TransactionFilter::Date::LastDateItem);
         d->ui->m_fromDate->setDate(d->m_startDates[(int)idx]);
         d->ui->m_toDate->setDate(d->m_endDates[(int)idx]);
         break;
