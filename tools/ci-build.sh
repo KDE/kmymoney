@@ -106,7 +106,13 @@ if test "$ci_build" = "yes"; then
     # kmymoney specific command line
     case $ci_variant in
         (kf6*)
-            cmake $cmake_options -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 -DWARNINGS_AS_ERRORS=on -Werror=dev ..
+            ecm_version=$(rpm -q --queryformat="%{version}" kf6-extra-cmake-modules | sed 's,\.,,g');
+            if test $ecm_version -lt 6180; then
+                cmake_options+=-Wno-error=dev
+            else
+                cmake_options+=-Werror=dev
+            fi
+            cmake $cmake_options -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 -DWARNINGS_AS_ERRORS=on ..
             ;;
         (*)
             cmake $cmake_options ..
