@@ -44,6 +44,7 @@ private Q_SLOTS:
     void testAutoDecimalSymbol();
     void testInvAccountAutodetection();
     void testCalculatedFeeColumn();
+    void testSortSecurities_duplicateInSymbolsAndNames();
 
 private:
     void setupBaseCurrency();
