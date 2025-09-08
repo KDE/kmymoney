@@ -347,3 +347,46 @@ void CSVImporterCoreTest::testCalculatedFeeColumn()
     QVERIFY(st.m_listTransactions[0].m_amount == MyMoneyMoney(-131));
     QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(6));  // minimal fee is 6 now, so fee of 5 from above test must be increased to 6
 }
+
+void CSVImporterCoreTest::testSortSecurities_duplicateInSymbolsAndNames()
+{
+    PricesProfile symbolAndNameProfile;
+    symbolAndNameProfile.m_colTypeNum.insert(Column::Symbol, 0);
+    symbolAndNameProfile.m_colTypeNum.insert(Column::Name, 1);
+    symbolAndNameProfile.m_colTypeNum.insert(Column::Price, 2);
+    symbolAndNameProfile.m_startLine = 1; // skip header
+    symbolAndNameProfile.m_dontAsk = true; // avoid dialogs in
+
+    CSVImporterCore core;
+    core.m_profile = &symbolAndNameProfile;
+
+    MyMoneySecurity sec1;
+    sec1.setTradingSymbol("SYM1");
+    sec1.setName("DUPLICATE");
+
+    MyMoneySecurity sec2;
+    sec2.setTradingSymbol("SYM2");
+    sec2.setName("DUPLICATE");
+
+    MyMoneyFileTransaction ft;
+    file->addSecurity(sec1);
+    file->addSecurity(sec2);
+    ft.commit();
+
+    KMMStringSet onlySymbols;
+    KMMStringSet onlyNames;
+    onlyNames.insert("DUPLICATE");
+    QMap<QString, QString> mapSymbolName;
+
+    const bool result = core.sortSecurities(onlySymbols, onlyNames, mapSymbolName);
+    QVERIFY(result);
+    QVERIFY(onlyNames.isEmpty());
+    QVERIFY(onlySymbols.isEmpty());
+    QCOMPARE(mapSymbolName.size(), 1);
+    QVERIFY(mapSymbolName.contains("SYM1") || mapSymbolName.contains("SYM2"));
+
+    MyMoneyFileTransaction ftCleanup;
+    file->removeSecurity(sec1);
+    file->removeSecurity(sec2);
+    ftCleanup.commit();
+}
