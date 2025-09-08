@@ -1359,7 +1359,9 @@ bool CSVImporterCore::sortSecurities(KMMStringSet& onlySymbols, KMMStringSet& on
         } else if (!filteredSecurities.isEmpty()) {                             // multiple securities matched by the name
             // TODO: Ask user which security should we match to
             mapSymbolName.insert(filteredSecurities.first().tradingSymbol(), *name);
-            name = onlySymbols.erase(name);
+            auto currentName = *name;
+            name = onlyNames.erase(name);
+            onlySymbols.erase(currentName);
         } else                                                                  // no security matched, so leave it as unknown
             ++name;
     }
