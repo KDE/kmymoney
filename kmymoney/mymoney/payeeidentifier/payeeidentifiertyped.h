@@ -17,6 +17,8 @@ public:
     //explicit payeeIdentifierTyped();
     explicit payeeIdentifierTyped(const payeeIdentifier& other);
 
+    ~payeeIdentifierTyped();
+
     T* operator->();
     const T* operator->() const;
 
@@ -88,6 +90,12 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifier& other)
             throw PAYEEIDENTIFIEREMPTYEXCEPTION;
         throw PAYEEIDENTIFIERBADCASTEXCEPTION;
     }
+}
+
+template<class T>
+payeeIdentifierTyped<T>::~payeeIdentifierTyped()
+{
+    delete m_payeeIdentifierTyped;
 }
 
 template< class T >
