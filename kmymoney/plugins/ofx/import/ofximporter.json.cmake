@@ -30,7 +30,6 @@
                 "Name[sv]": "Ace Jones,Thomas Baumgart",
                 "Name[tr]": "Ace Jones, Thomas Baumgart",
                 "Name[uk]": "Ace Jones,Thomas Baumgart",
-                "Name[x-test]": "xxAce Jones,Thomas Baumgartxx",
                 "Name[zh_CN]": "Ace Jones,Thomas Baumgart",
                 "Name[zh_TW]": "Ace Jones、Thomas Baumgart"
             }
@@ -61,7 +60,6 @@
         "Description[sv]": "Lägg till OFX-import till KMyMoney",
         "Description[tr]": "K Param’a OFX içe aktarma ekleyin",
         "Description[uk]": "Імпортування даних OFX у KMyMoney",
-        "Description[x-test]": "xxAdd OFX importing to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 QFX 导入服务",
         "Description[zh_TW]": "提供 OFX 匯入功能給 KMyMoney",
         "EnabledByDefault": true,
@@ -96,7 +94,6 @@
         "Name[sv]": "QFX-import",
         "Name[tr]": "OFX İçe Aktarıcısı",
         "Name[uk]": "Інструмент імпортування OFX",
-        "Name[x-test]": "xxOFX Importerxx",
         "Name[zh_CN]": "OFX 导入工具",
         "Name[zh_TW]": "OFX 匯入工具",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",

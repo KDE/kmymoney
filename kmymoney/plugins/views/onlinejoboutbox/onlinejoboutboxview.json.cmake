@@ -31,7 +31,6 @@
                 "Name[sv]": "Christian Dávid",
                 "Name[tr]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
-                "Name[x-test]": "xxChristian Dávidxx",
                 "Name[zh_CN]": "Christian Dávid",
                 "Name[zh_TW]": "Christian Dávid"
             }
@@ -60,7 +59,6 @@
         "Description[sv]": "Lägger till utkorgsvy för nätjobb i KMyMoney",
         "Description[tr]": "K Param’a çevrimiçi iş giden kutusu görünümü ekleyin",
         "Description[uk]": "Панель вихідних інтернет-завдань у KMyMoney",
-        "Description[x-test]": "xxAdds online job outbox view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加在线任务发件箱视图",
         "EnabledByDefault": true,
         "Icon": "online-banking",
@@ -90,7 +88,6 @@
         "Name[sv]": "Utkorgsvy för nätjobb",
         "Name[tr]": "Çevrimiçi İş Giden Kutusu Görünümü",
         "Name[uk]": "Панель вихідних даних інтернет-завдань",
-        "Name[x-test]": "xxOnline job outbox viewxx",
         "Name[zh_CN]": "线上任务发件箱视图",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

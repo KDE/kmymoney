@@ -31,7 +31,6 @@
                 "Name[sv]": "Christian Dávid",
                 "Name[tr]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
-                "Name[x-test]": "xxChristian Dávidxx",
                 "Name[zh_CN]": "Christian Dávid",
                 "Name[zh_TW]": "Christian Dávid"
             }
@@ -63,7 +62,6 @@
         "Description[sv]": "Lägger till fördefinierade IBAN/BIC-nummer i KMyMoney",
         "Description[tr]": "K Param’a önceden tanımlanmış IBAN/BIC numaralarını ekleyinr",
         "Description[uk]": "Попередньо визначені номери IBAN/BIC у KMyMoney",
-        "Description[x-test]": "xxAdds predefined IBAN/BIC numbers to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加预定义的国际银行账号/银行识别码",
         "Description[zh_TW]": "提供預先定義的 IBAN/BIC 號碼給 KMyMoney",
         "EnabledByDefault": true,
@@ -97,7 +95,6 @@
         "Name[sv]": "IBAN- och BIC-data",
         "Name[tr]": "IBAN/BIC Verisi",
         "Name[uk]": "Дані IBAN та BIC",
-        "Name[x-test]": "xxIBAN/BIC Dataxx",
         "Name[zh_CN]": "国际银行账号/银行识别码数据",
         "Name[zh_TW]": "IBAN/BIC Data",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",

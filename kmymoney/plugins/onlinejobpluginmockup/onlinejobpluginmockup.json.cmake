@@ -31,7 +31,6 @@
                 "Name[sv]": "Christian David",
                 "Name[tr]": "Christian David",
                 "Name[uk]": "Christian David",
-                "Name[x-test]": "xxChristian Davidxx",
                 "Name[zh_CN]": "Christian David",
                 "Name[zh_TW]": "Christian David"
             }
@@ -61,7 +60,6 @@
         "Description[sv]": "Om tilldelad till ett konto, låtsas det att det kan hantera alla nätuppgifter (bara för utvecklare).",
         "Description[tr]": "Bir hesapla eşlenirse tüm çevrimiçi görevleri halledebilirmiş gibi görünür (yalnızca geliştiriciler için).",
         "Description[uk]": "Якщо пов'язано із рахунком, імітує можливість обробки усіх інтернет-завдань (лише для розробників).",
-        "Description[x-test]": "xxIf mapped to an account, it pretends it could handle all onlineTasks (for developers only).xx",
         "Description[zh_CN]": "绑定到账号上会假装可以处理所有在线任务 (仅限开发者用)",
         "EnabledByDefault": true,
         "Id": "onlinejobpluginmockup",
@@ -91,7 +89,6 @@
         "Name[sv]": "Insticksprogram med nätjobbsattrapp",
         "Name[tr]": "çevrimiçiişeklentimockup",
         "Name[uk]": "onlinejobpluginmockup",
-        "Name[x-test]": "xxonlinejobpluginmockupxx",
         "Name[zh_CN]": "onlinejobpluginmockup",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org"
