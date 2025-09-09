@@ -32,7 +32,6 @@
                 "Name[sv]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[tr]": "Allan Anderson, Łukasz Wojniłowicz",
                 "Name[uk]": "Allan Anderson,Łukasz Wojniłowicz",
-                "Name[x-test]": "xxAllan Anderson,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[zh_TW]": "Allan Anderson、Łukasz Wojniłowicz"
             }
@@ -64,7 +63,6 @@
         "Description[sv]": "Lägg till CSV-import till KMyMoney",
         "Description[tr]": "K Param’a CSV içe aktarma ekleyin",
         "Description[uk]": "Імпортування даних CSV у KMyMoney",
-        "Description[x-test]": "xxAdd CSV importing to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 CSV 导入服务",
         "Description[zh_TW]": "提供 CSV 匯入功能給 KMyMoney",
         "EnabledByDefault": true,
@@ -100,7 +98,6 @@
         "Name[sv]": "CSV-import",
         "Name[tr]": "CSV İçe Aktarıcısı",
         "Name[uk]": "Імпортування CSV",
-        "Name[x-test]": "xxCSV Importerxx",
         "Name[zh_CN]": "CSV 导入工具",
         "Name[zh_TW]": "CSV 匯入工具",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
