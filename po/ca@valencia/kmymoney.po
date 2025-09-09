@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:43+0000\n"
+"POT-Creation-Date: 2025-09-09 00:55+0000\n"
 "PO-Revision-Date: 2025-08-28 14:05+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -10375,37 +10375,37 @@ msgstr ""
 "%2</b> no s'ha pogut reconéixer.<br>El perfil no es pot utilitzar per a fer "
 "açò.<br>El voleu suprimir?</center>"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1586
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
 msgstr "compra"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
 msgstr "venda,recompra"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
 msgstr "reinversió,reinv"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "dividend"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
 msgstr "interés,ingrés"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1598
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid ""
@@ -10414,7 +10414,7 @@ msgstr ""
 "afegit,dividend en accions,reinv dividend,transferència rebuda,reinscripció,"
 "entrada de diari"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1598
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1600
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
@@ -12796,10 +12796,10 @@ msgstr "Institució"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:189
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:293
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:481
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:613
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:190
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:482
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:614
 #: kmymoney/plugins/views/reports/core/listtable.cpp:701
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
@@ -15578,33 +15578,33 @@ msgstr "Previsió del pressupost"
 msgid "Chart"
 msgstr "Gràfic"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:192
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:193
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:295
 #, kde-format
 msgctxt "Today's forecast"
 msgid "Current"
 msgstr "Actual"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:200
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:309
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:201
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:310
 #, kde-format
 msgid "Total variation"
 msgstr "Variació total"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:305
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:306
 #, kde-format
 msgid "1 day"
 msgid_plural "%1 days"
 msgstr[0] "1 dia"
 msgstr[1] "%1 dies"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:379
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:380
 #: kmymoney/views/khomeview_p.h:1246
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Hui, el saldo de %1 està per davall del saldo mínim de %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:384
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:385
 #: kmymoney/views/khomeview_p.h:1250
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
@@ -15615,19 +15615,19 @@ msgstr[0] ""
 msgstr[1] ""
 "El saldo de %2 se situarà per davall del saldo mínim de %3 d'ací a %1 dies."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:403
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:404
 #: kmymoney/views/khomeview_p.h:1268
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Hui, el saldo de %1 està per davall de %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:408
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:409
 #: kmymoney/views/khomeview_p.h:1273
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Hui, el saldo de %1 està per damunt de %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:415
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:416
 #: kmymoney/views/khomeview_p.h:1279
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
@@ -15635,7 +15635,7 @@ msgid_plural "The balance of %2 will drop below %3 in %1 days."
 msgstr[0] "El saldo de %2 se situarà per davall de %3 d'ací a %1 dia."
 msgstr[1] "El saldo de %2 se situarà per davall de %3 d'ací a %1 dies."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:422
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:423
 #: kmymoney/views/khomeview_p.h:1286
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
@@ -15643,39 +15643,39 @@ msgid_plural "The balance of %2 will raise above %3 in %1 days."
 msgstr[0] "El saldo de %2 se situarà per damunt de %3 d'ací a %1 dia."
 msgstr[1] "El saldo de %2 se situarà per damunt de %3 d'ací a %1 dies."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:437
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:438
 #, kde-format
 msgid "The account %1 is decreasing %2 per cycle."
 msgstr "El compte %1 està disminuint %2 per cicle."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:492
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
 #, kde-format
 msgid "Min Bal %1"
 msgstr "Sal mín %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:494
 #, kde-format
 msgid "Min Date %1"
 msgstr "Data mín %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:496
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
 #, kde-format
 msgid "Max Bal %1"
 msgstr "Sal màx %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:498
 #, kde-format
 msgid "Max Date %1"
 msgstr "Data màx %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:499
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
 #, kde-format
 msgctxt "Average balance"
 msgid "Average"
 msgstr "Mitjana"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:626
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:751
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:627
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:752
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
@@ -15693,7 +15693,7 @@ msgctxt "Total balance"
 msgid "Total"
 msgstr "Total"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:644
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:645
 #, kde-format
 msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
@@ -15702,30 +15702,30 @@ msgstr ""
 "la previsió del pressupost es basa en les operacions històriques trobades "
 "entre %1 i %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:664
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:665
 #, kde-format
 msgid "No data provided by reports plugin for this chart."
 msgstr "El connector d'informes no ha proporcionat cap dada per a este gràfic."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:667
 #: kmymoney/views/khomeview_p.h:576 kmymoney/views/khomeview_p.h:1583
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Activa el connector d'informes per a veure este gràfic."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:690
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:691
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "Planificació"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:695
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:696
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "Historial"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:700
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:701
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"

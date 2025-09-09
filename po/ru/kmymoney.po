@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:43+0000\n"
+"POT-Creation-Date: 2025-09-09 00:55+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -10485,37 +10485,37 @@ msgstr ""
 "распознан.<br>По этой причине использование профиля невозможно.<br>Удалить "
 "его?</center>"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1586
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
 msgstr "покупка"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
 msgstr "продажа,обратная покупка"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
 msgstr "реинвестиция,реинвест,реинв"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "дивиденды"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
 msgstr "процент,доход"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1598
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid ""
@@ -10524,7 +10524,7 @@ msgstr ""
 "начисление,дивиденд по акциям,реинв дивид,перевод в,переоформление,запись "
 "журнала"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1598
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1600
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
@@ -12895,10 +12895,10 @@ msgstr "Учреждение"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:189
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:293
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:481
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:613
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:190
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:482
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:614
 #: kmymoney/plugins/views/reports/core/listtable.cpp:701
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
@@ -15701,20 +15701,20 @@ msgstr "Прогноз бюджета"
 msgid "Chart"
 msgstr "Диаграмма"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:192
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:193
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:295
 #, kde-format
 msgctxt "Today's forecast"
 msgid "Current"
 msgstr "Текущий"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:200
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:309
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:201
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:310
 #, kde-format
 msgid "Total variation"
 msgstr "Общая разница"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:305
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:306
 #, kde-format
 msgid "1 day"
 msgid_plural "%1 days"
@@ -15723,13 +15723,13 @@ msgstr[1] "%1 дня"
 msgstr[2] "%1 дней"
 msgstr[3] "%1 день"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:379
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:380
 #: kmymoney/views/khomeview_p.h:1246
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Остаток на счёте %1 сегодня ниже минимального остатка в %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:384
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:385
 #: kmymoney/views/khomeview_p.h:1250
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
@@ -15744,19 +15744,19 @@ msgstr[2] ""
 msgstr[3] ""
 "Остаток на счёте %2 опустится ниже минимального остатка в %3 через %1 день."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:403
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:404
 #: kmymoney/views/khomeview_p.h:1268
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Остаток на счёте %1 сегодня меньше %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:408
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:409
 #: kmymoney/views/khomeview_p.h:1273
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Остаток на счёте %1 сегодня больше %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:415
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:416
 #: kmymoney/views/khomeview_p.h:1279
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
@@ -15766,7 +15766,7 @@ msgstr[1] "Остаток на счёте %2 опустится ниже %3 че
 msgstr[2] "Остаток на счёте %2 опустится ниже %3 через %1 дней."
 msgstr[3] "Остаток на счёте %2 опустится ниже %3 через %1 день."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:422
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:423
 #: kmymoney/views/khomeview_p.h:1286
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
@@ -15776,39 +15776,39 @@ msgstr[1] "Остаток на счету %2 будет больше %3 чере
 msgstr[2] "Остаток на счете %2 поднимется выше %3 через %1 дней."
 msgstr[3] "Остаток на счёте %2 поднимется выше %3 через день."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:437
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:438
 #, kde-format
 msgid "The account %1 is decreasing %2 per cycle."
 msgstr "Счёт %1 уменьшается на %2 каждый учётный период."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:492
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
 #, kde-format
 msgid "Min Bal %1"
 msgstr "Мин. остаток %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:494
 #, kde-format
 msgid "Min Date %1"
 msgstr "Мин. дата %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:496
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
 #, kde-format
 msgid "Max Bal %1"
 msgstr "Макс. остаток %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:498
 #, kde-format
 msgid "Max Date %1"
 msgstr "Макс. дата %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:499
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
 #, kde-format
 msgctxt "Average balance"
 msgid "Average"
 msgstr "Среднее"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:626
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:751
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:627
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:752
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
@@ -15826,37 +15826,37 @@ msgctxt "Total balance"
 msgid "Total"
 msgstr "Итого"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:644
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:645
 #, kde-format
 msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:664
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:665
 #, kde-format
 msgid "No data provided by reports plugin for this chart."
 msgstr "Для этой диаграммы отсутствуют данные от модуля создания отчётов."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:667
 #: kmymoney/views/khomeview_p.h:576 kmymoney/views/khomeview_p.h:1583
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Включить модуль создания отчётов для просмотра диаграммы."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:690
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:691
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "запланированный"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:695
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:696
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "ретроспективный"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:700
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:701
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
