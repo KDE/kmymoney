@@ -43,7 +43,6 @@
   <name xml:lang="sv">KMyMoney</name>
   <name xml:lang="tr">K Param</name>
   <name xml:lang="uk">KMyMoney</name>
-  <name xml:lang="x-test">xxKMyMoneyxx</name>
   <name xml:lang="zh-CN">KMyMoney</name>
   <name xml:lang="zh-TW">KMyMoney</name>
   <summary>Personal finance manager based on double-entry bookkeeping</summary>
@@ -75,7 +74,6 @@
   <summary xml:lang="sv">Hemekonomihanterare baserad på dubbel bokföring</summary>
   <summary xml:lang="tr">Çift girişli muhasebeye dayalı kişisel finans yöneticisi</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами, яку засновано на бухгалтерській системі із подвійним записом</summary>
-  <summary xml:lang="x-test">xxPersonal finance manager based on double-entry bookkeepingxx</summary>
   <summary xml:lang="zh-CN">基于复式簿记的个人财务管理工具</summary>
   <summary xml:lang="zh-TW">基於複式簿記的個人財務管理工具</summary>
   <description>
@@ -108,7 +106,6 @@
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare av KDE. Den levereras med ett stort antal funktioner, medan den är lätt att använda för den icke-tekniska användaren.</p>
     <p xml:lang="tr">K Param, KDE tarafından yapılmış bir kişisel finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolaydır ve büyük bir özellik kümesiyle birlikte gelir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
-    <p xml:lang="x-test">xxKMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.xx</p>
     <p xml:lang="zh-CN">KMyMoney 是一款 KDE 开发的个人财务管理工具。它不但功能丰富，而且非专业人士也可轻松上手。</p>
     <p xml:lang="zh-TW">KMyMoney 是來自 KDE 的個人財務管理工具。它包含許多功能，但同時也能讓不熟悉的使用者輕鬆使用。</p>
     <p>
@@ -145,7 +142,6 @@
     <p xml:lang="sv">Den stöder olika kontotyper, kategorisering av utgifter och inkomster, avstämning av bankkonton samt import från och export till filformatet "QIF". Direkt nerladdning med användning av formaten OFX och HBCI är också möjlig via insticksprogram. Stöd för internetbank (nerladdning av kontoutdrag) tillhandahålls också för protokollen OFX och HBCI.</p>
     <p xml:lang="tr">Farklı hesap türlerini, gider ve gelirlerin sınıflandırılmasını, banka hesaplarının mutabakatını ve “QIF” dosya formatına içe/dışa aktarmayı doğrudan indirmek de olanaklıdır. Çevrimiçi bankacılık desteği (ekstre destekler. Eklentiler aracılığıyla OFX ve HBCI biçimlerini kullanarak indirme) ayrıca OFX ve HBCI protokolleri için sağlanmıştır.</p>
     <p xml:lang="uk">У програмі передбачено різні типи рахунків, категоризацію за витратами та надходженнями коштів, звірення банківських рахунків, а також імпортування та експортування даних у форматі QIF. Крім того, можливе безпосереднє отримання банківських даних (виписок) з інтернету у форматах OFX та HBCI за допомогою додатків.</p>
-    <p xml:lang="x-test">xxIt supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.xx</p>
     <p xml:lang="zh-CN">它支持多种账户类型，收入费用归集，银行账户对账，导入/导出“QIF”文件格式。可通过插件支持直接下载 OFX 和 HBCI 格式文件。此外 OFX 和 HBCI 协议还提供了网银支持 (报表下载)。</p>
     <p xml:lang="zh-TW">它支援不同的帳戶類型、支出與收入的分類、銀行帳戶的對帳與 "QIF" 檔案格式的匯入與匯出。透過外掛程式，它也能夠直接利用 OFX 或 HBCI 格式進行下載。透過 OFX 和 HBCI 協定，它支援線上銀行帳戶（報表下載）。</p>
   </description>
@@ -181,7 +177,6 @@
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång</caption>
       <caption xml:lang="tr">K Param, yeni kullanıcıların iyi bir başlangıç yapması için bir karşılama sayfası sunar</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
-      <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
       <caption xml:lang="zh-CN">KMyMoney 会显示一个欢迎页面来帮助新用户轻松上手</caption>
       <caption xml:lang="zh-TW">KMyMoney 有歡迎頁面讓新使用者知道從哪開始</caption>
       <image>https://cdn.kde.org/screenshots/kmymoney/kmymoney.png</image>
@@ -218,7 +213,6 @@
       <caption xml:lang="sv">Den ekonomiska sammanfattningen ger en översikt av ekonomin</caption>
       <caption xml:lang="tr">Finansal özet, size mali durumunuz hakkında genel bir bakış sunar</caption>
       <caption xml:lang="uk">За допомогою сторінки фінансового резюме вам буде простіше розібратися з поточним фінансовим станом.</caption>
-      <caption xml:lang="x-test">xxThe financial summary gives you an overview of your financesxx</caption>
       <caption xml:lang="zh-CN">财务概览让您轻松掌握个人财务概况</caption>
       <caption xml:lang="zh-TW">財務摘要提供您自己的財務的概覽</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm2.png</image>
@@ -252,7 +246,6 @@
       <caption xml:lang="sv">Hantera konton, t.ex. enligt institution som de hör till</caption>
       <caption xml:lang="tr">Hesapları bulundukları kurumlardan yönetin</caption>
       <caption xml:lang="uk">Керування рахунками, наприклад, за установами, де їх відкрито.</caption>
-      <caption xml:lang="x-test">xxManage accounts e.g. by institutions they are held atxx</caption>
       <caption xml:lang="zh-CN">按开户机构管理账户</caption>
       <caption xml:lang="zh-TW">管理帳戶，例如依帳戶所處於的機構</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm3.png</image>
