@@ -426,6 +426,10 @@ KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
         }
     });
 
+    auto optionSettings = options();
+    optionSettings &= ~WarnOnInvalid;
+    setOptions(optionSettings);
+
     setDate(QDate::currentDate());
 }
 
