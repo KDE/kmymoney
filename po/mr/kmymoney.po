@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-09 00:55+0000\n"
+"POT-Creation-Date: 2025-09-11 00:42+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -21281,8 +21281,8 @@ msgstr ""
 msgid "&Close"
 msgstr "बंद करा (&C)"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:499
-#: kmymoney/widgets/kmymoneydateedit.cpp:584
+#: kmymoney/widgets/kmymoneydateedit.cpp:503
+#: kmymoney/widgets/kmymoneydateedit.cpp:588
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"

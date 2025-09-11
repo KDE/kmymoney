@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-09 00:55+0000\n"
+"POT-Creation-Date: 2025-09-11 00:42+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -21880,8 +21880,8 @@ msgstr "Išrinkti operacijas be korespondento"
 msgid "&Close"
 msgstr "&Užverti"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:499
-#: kmymoney/widgets/kmymoneydateedit.cpp:584
+#: kmymoney/widgets/kmymoneydateedit.cpp:503
+#: kmymoney/widgets/kmymoneydateedit.cpp:588
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
