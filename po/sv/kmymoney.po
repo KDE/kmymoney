@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-10 03:23+0000\n"
+"POT-Creation-Date: 2025-09-11 03:20+0000\n"
 "PO-Revision-Date: 2025-08-26 20:17+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -10292,37 +10292,37 @@ msgstr ""
 "kännas igen.<br>Profilen kan inte användas av den orsaken.<br>Vill du ta "
 "bort den?</center>"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1586
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
 msgstr "köp"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
 msgstr "sälj,återköp"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
 msgstr "återinvestera,återinv"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "utdelning"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
 msgstr "ränta,inkomst"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1598
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid ""
@@ -10331,7 +10331,7 @@ msgstr ""
 "lägg till,aktieutdelning,utdeln återinv,överför in,återregistrering in,"
 "journalanteckning"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1598
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1600
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
@@ -21963,8 +21963,8 @@ msgstr "Använd knappen för att hoppa över transaktionen"
 msgid "&Close"
 msgstr "Stän&g"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:499
-#: kmymoney/widgets/kmymoneydateedit.cpp:584
+#: kmymoney/widgets/kmymoneydateedit.cpp:503
+#: kmymoney/widgets/kmymoneydateedit.cpp:588
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
