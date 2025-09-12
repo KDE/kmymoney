@@ -1047,6 +1047,10 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
     // because they are not yet set (d->ui->creditDebitEdit)
     QSignalBlocker blocker(splitModel);
 
+    // make sure that the split model is empty when a new
+    // transaction is loaded
+    splitModel.unload();
+
     for (const auto& splitIdx : list) {
         if (selectedSplitRow == splitIdx.row()) {
             ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
