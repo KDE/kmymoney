@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 00:42+0000\n"
+"POT-Creation-Date: 2025-09-13 00:49+0000\n"
 "PO-Revision-Date: 2025-09-02 17:52+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -20485,7 +20485,7 @@ msgid "Select autofill transaction"
 msgstr "Selige  transaction autoreimplente"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1133
+#: kmymoney/views/newtransactioneditor.cpp:1137
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -20493,14 +20493,14 @@ msgstr "Selige  transaction autoreimplente"
 msgid "Link"
 msgstr "Ligamine"
 
-#: kmymoney/views/newtransactioneditor.cpp:1643
+#: kmymoney/views/newtransactioneditor.cpp:1647
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1644
+#: kmymoney/views/newtransactioneditor.cpp:1648
 #, kde-format
 msgid "Copy memo"
 msgstr "Copia memo"
