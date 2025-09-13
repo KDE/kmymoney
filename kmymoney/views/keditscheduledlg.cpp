@@ -256,7 +256,6 @@ public:
 
         ui->endOptionsFrame->setEnabled(m_schedule.willEnd());
         if (m_schedule.willEnd()) {
-            ui->remainingEdit->setValue(m_schedule.transactionsRemaining());
             ui->finalPaymentDateEdit->setDate(m_schedule.endDate());
         }
 
