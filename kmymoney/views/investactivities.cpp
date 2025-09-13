@@ -137,7 +137,7 @@ public:
         if (sharesWidget && priceWidget && feesWidget && interestWidget) {
             const auto shares = sharesWidget->shares();
             const auto totalAmount = m_editor->totalAmount();
-            const auto price = priceWidget->value();
+            const auto price = (priceMode() == eMyMoney::Invest::PriceMode::PricePerShare) ? priceWidget->value() : priceWidget->value() / shares;
             const auto fees = feesWidget->value();
             const auto interest = interestWidget->value();
             const auto calculatedPrice =
