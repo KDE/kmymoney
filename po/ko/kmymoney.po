@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 03:20+0000\n"
+"POT-Creation-Date: 2025-09-13 03:39+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -21190,7 +21190,7 @@ msgid "Select autofill transaction"
 msgstr "거래 자동 완성 선택"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1119
+#: kmymoney/views/newtransactioneditor.cpp:1123
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21198,7 +21198,7 @@ msgstr "거래 자동 완성 선택"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1625
+#: kmymoney/views/newtransactioneditor.cpp:1629
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21206,7 +21206,7 @@ msgid ""
 msgstr ""
 "다른 분할의 메모<p><i>%1</i></p>을(를)<p><i>%2</i></p>(으)로 바꾸시겠습니까?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1626
+#: kmymoney/views/newtransactioneditor.cpp:1630
 #, kde-format
 msgid "Copy memo"
 msgstr "메모 복사"

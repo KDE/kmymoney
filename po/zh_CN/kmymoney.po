@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-11 03:20+0000\n"
+"POT-Creation-Date: 2025-09-13 03:39+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -21308,7 +21308,7 @@ msgid "Select autofill transaction"
 msgstr "选择自动填充交易"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1119
+#: kmymoney/views/newtransactioneditor.cpp:1123
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21316,7 +21316,7 @@ msgstr "选择自动填充交易"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1625
+#: kmymoney/views/newtransactioneditor.cpp:1629
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21325,7 +21325,7 @@ msgstr ""
 "您要在其他交易拆分中，将备忘 <p><i>%1</i></p> 替换为备忘 <p><i>%2</i></p> "
 "吗？"
 
-#: kmymoney/views/newtransactioneditor.cpp:1626
+#: kmymoney/views/newtransactioneditor.cpp:1630
 #, kde-format
 msgid "Copy memo"
 msgstr "复制备忘"
