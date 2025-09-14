@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-13 03:39+0000\n"
+"POT-Creation-Date: 2025-09-14 03:22+0000\n"
 "PO-Revision-Date: 2025-08-26 20:17+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -19645,7 +19645,7 @@ msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Kategorin är ett nödvändigt fält för ett schema"
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:311
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19658,30 +19658,30 @@ msgstr ""
 "informationen visas bara en gång för det här schemats redigeringssession.</"
 "qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:313
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Schemafrekvens ändrad"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Kan inte lägga till schemalagd transaktion: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Lägg till schemalagd transaktion"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:638
+#: kmymoney/views/keditscheduledlg.cpp:681
+#: kmymoney/views/keditscheduledlg.cpp:691
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Kan inte ändra schemalagd transaktion: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:667
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19696,7 +19696,7 @@ msgstr ""
 "on inte det sista betalningsdatumet återställs. Vill du återställa det sista "
 "betalningsdatumet?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:672
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Återställ sista avbetalningsdatum"
@@ -21024,7 +21024,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Gå till '%1'"
 
-#: kmymoney/views/ledgerview.cpp:756
+#: kmymoney/views/ledgerview.cpp:759
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21035,31 +21035,31 @@ msgstr ""
 "redigering av två transaktioner i parallell. <a href=\"jumpToEditor\">Gå "
 "till nuvarande editor</a>."
 
-#: kmymoney/views/ledgerview.cpp:881
+#: kmymoney/views/ledgerview.cpp:884
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transaktionen saknar en kategoritilldelning."
 
-#: kmymoney/views/ledgerview.cpp:888
+#: kmymoney/views/ledgerview.cpp:891
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transaktionen saknar en tilldelning av <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:897
+#: kmymoney/views/ledgerview.cpp:900
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Schemat är försenat sedan %1. Klicka på ikonen för att registrera det."
 
-#: kmymoney/views/ledgerview.cpp:903
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Transaktionen är importerad. Klicka på ikonen för att acceptera den."
 
-#: kmymoney/views/ledgerview.cpp:908
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21068,31 +21068,31 @@ msgstr ""
 "Transaktionen är matchad. Klicka på ikonen för att acceptera den eller ta "
 "bort matchning för den."
 
-#: kmymoney/views/ledgerview.cpp:988
+#: kmymoney/views/ledgerview.cpp:991
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Registrera inte den försenade schemalagda transaktionen."
 
-#: kmymoney/views/ledgerview.cpp:989
+#: kmymoney/views/ledgerview.cpp:992
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Registrera den försenade schemalagda transaktionen."
 
-#: kmymoney/views/ledgerview.cpp:992
+#: kmymoney/views/ledgerview.cpp:995
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Vill du verkligen registrera det försenade schemat nu?"
 
-#: kmymoney/views/ledgerview.cpp:993
+#: kmymoney/views/ledgerview.cpp:996
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Registrera det försenade schemat"
 
-#: kmymoney/views/ledgerview.cpp:1013
+#: kmymoney/views/ledgerview.cpp:1016
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21102,7 +21102,7 @@ msgstr ""
 "Koppla loss den dolda (matchade) transaktionen från den som visas och skriv "
 "in den i huvudboken igen."
 
-#: kmymoney/views/ledgerview.cpp:1015
+#: kmymoney/views/ledgerview.cpp:1018
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21112,14 +21112,14 @@ msgstr ""
 "Acceptera matchning som visas och ta bort data för den dolda (matchade) "
 "transaktionen"
 
-#: kmymoney/views/ledgerview.cpp:1019
+#: kmymoney/views/ledgerview.cpp:1022
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr ""
 "Vill du acceptera eller ta bort matchning från den matchade transaktionen nu?"
 
-#: kmymoney/views/ledgerview.cpp:1020
+#: kmymoney/views/ledgerview.cpp:1023
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-13 03:39+0000\n"
+"POT-Creation-Date: 2025-09-14 03:22+0000\n"
 "PO-Revision-Date: 2024-06-02 12:16+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -20037,7 +20037,7 @@ msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:311
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -20046,31 +20046,31 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:313
 #, fuzzy, kde-format
 #| msgid "Schedule found"
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Schedule found"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Unable to add scheduled transaction: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Add scheduled transaction"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:638
+#: kmymoney/views/keditscheduledlg.cpp:681
+#: kmymoney/views/keditscheduledlg.cpp:691
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Unable to modify scheduled transaction '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:667
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -20085,7 +20085,7 @@ msgstr ""
 "the last payment date is reset.  Do you want to reset the last payment date?"
 "</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:672
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Reset Last Payment Date"
@@ -21467,7 +21467,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Go to '%1'"
 
-#: kmymoney/views/ledgerview.cpp:756
+#: kmymoney/views/ledgerview.cpp:759
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21475,54 +21475,54 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:881
+#: kmymoney/views/ledgerview.cpp:884
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transaction is missing a category assignment."
 
-#: kmymoney/views/ledgerview.cpp:888
+#: kmymoney/views/ledgerview.cpp:891
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "The transaction has a missing assignment of <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:897
+#: kmymoney/views/ledgerview.cpp:900
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:903
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:908
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:988
+#: kmymoney/views/ledgerview.cpp:991
 #, fuzzy, kde-format
 #| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Checking for overdue scheduled transactions..."
 
-#: kmymoney/views/ledgerview.cpp:989
+#: kmymoney/views/ledgerview.cpp:992
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Enter scheduled transaction"
 
-#: kmymoney/views/ledgerview.cpp:992
+#: kmymoney/views/ledgerview.cpp:995
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21530,7 +21530,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Do you really want to delete the selected price entry?"
 
-#: kmymoney/views/ledgerview.cpp:993
+#: kmymoney/views/ledgerview.cpp:996
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21538,7 +21538,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Enter or schedule?"
 
-#: kmymoney/views/ledgerview.cpp:1013
+#: kmymoney/views/ledgerview.cpp:1016
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -21548,7 +21548,7 @@ msgid ""
 "the ledger again."
 msgstr "Use this to schedule the transaction for later entry into the ledger."
 
-#: kmymoney/views/ledgerview.cpp:1015
+#: kmymoney/views/ledgerview.cpp:1018
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21556,7 +21556,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1019
+#: kmymoney/views/ledgerview.cpp:1022
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21564,7 +21564,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Do you really want to delete the selected transaction?"
 
-#: kmymoney/views/ledgerview.cpp:1020
+#: kmymoney/views/ledgerview.cpp:1023
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"

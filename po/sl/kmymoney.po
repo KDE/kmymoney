@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-13 03:39+0000\n"
+"POT-Creation-Date: 2025-09-14 03:22+0000\n"
 "PO-Revision-Date: 2025-08-26 07:21+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -19725,7 +19725,7 @@ msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Kategorija je zahtevano polje za časovni načrt"
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:311
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19737,30 +19737,30 @@ msgstr ""
 "prilagodite naslednji datum zapadlosti.<br><i>Opomba:</i> Te informacije "
 "bodo prikazane samo enkrat za sejo urejanja tega časovnega plana.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:313
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Spremenjena pogostost časovnega plana"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Ni mogoče dodatni načrtovano transakcijo: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Dodaj načrtovano transakcijo"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:638
+#: kmymoney/views/keditscheduledlg.cpp:681
+#: kmymoney/views/keditscheduledlg.cpp:691
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Ni bilo mogoče spremeniti načrtovane transakcije '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:667
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19775,7 +19775,7 @@ msgstr ""
 "ponastavite zadnji datum plačila. Ali želite ponastaviti zadnji datum "
 "plačila?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:672
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Ponastavi zadnji datum plačila"
@@ -21112,7 +21112,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Pojdi na '%1'"
 
-#: kmymoney/views/ledgerview.cpp:756
+#: kmymoney/views/ledgerview.cpp:759
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21123,31 +21123,31 @@ msgstr ""
 "urejanja dveh transakcij. <a href=\"jumpToEditor\">Skoči v trenutni "
 "urejevalnik</a>"
 
-#: kmymoney/views/ledgerview.cpp:881
+#: kmymoney/views/ledgerview.cpp:884
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transakciji manjka dodeljena kategorija."
 
-#: kmymoney/views/ledgerview.cpp:888
+#: kmymoney/views/ledgerview.cpp:891
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transakciji manjka dodelitev <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:897
+#: kmymoney/views/ledgerview.cpp:900
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Ta časovni načrt je pretečen od %1. Kliknite na ikono za vstop."
 
-#: kmymoney/views/ledgerview.cpp:903
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Ta transakcija je uvožena. Kliknite na ikono, da jo sprejmete."
 
-#: kmymoney/views/ledgerview.cpp:908
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21156,31 +21156,31 @@ msgstr ""
 "Ta transakcija se ujema. Kliknite na ikono, da jo sprejmete ali zavrnete "
 "ujemanje."
 
-#: kmymoney/views/ledgerview.cpp:988
+#: kmymoney/views/ledgerview.cpp:991
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Ne vnesite transakcije, ki je že pretečena."
 
-#: kmymoney/views/ledgerview.cpp:989
+#: kmymoney/views/ledgerview.cpp:992
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Vnesi pretečeno načrtovano transakcijo."
 
-#: kmymoney/views/ledgerview.cpp:992
+#: kmymoney/views/ledgerview.cpp:995
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Ali res želite zdaj vnesti že pretečeni časovni načrt?"
 
-#: kmymoney/views/ledgerview.cpp:993
+#: kmymoney/views/ledgerview.cpp:996
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Vnesi pretečeni časovni načrt"
 
-#: kmymoney/views/ledgerview.cpp:1013
+#: kmymoney/views/ledgerview.cpp:1016
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21190,7 +21190,7 @@ msgstr ""
 "Loči skrito (ujemajočo se) transakcijo od prikazane in jo ponovno vnesi v "
 "glavno knjigo."
 
-#: kmymoney/views/ledgerview.cpp:1015
+#: kmymoney/views/ledgerview.cpp:1018
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21200,13 +21200,13 @@ msgstr ""
 "Sprejmite ujemanje kot je prikazano in odstranite podatke o skriti "
 "(ujamajoči) transakciji."
 
-#: kmymoney/views/ledgerview.cpp:1019
+#: kmymoney/views/ledgerview.cpp:1022
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Ali res zdaj želite sprejeti ali odpraviti ujemanje transakcije?"
 
-#: kmymoney/views/ledgerview.cpp:1020
+#: kmymoney/views/ledgerview.cpp:1023
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
