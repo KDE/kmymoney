@@ -188,6 +188,10 @@ endif()
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets)
 
+if (Qt6Sql_VERSION VERSION_GREATER_EQUAL "6.10.0")
+  find_package(Qt6 REQUIRED COMPONENTS SqlPrivate)
+endif()
+
 find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets Crash I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
 
 # For KF < 5.100 we need to fix a few method names that
