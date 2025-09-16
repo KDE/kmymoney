@@ -301,8 +301,9 @@
 </para>
 
 <para>
-  The resulting URL is displayed as link in the general ledger at the corresponding
-  transactions (see column "Detail").
+  The resulting URL is displayed as a link in the general ledger for the corresponding
+  transactions (see “Detail” column) and in the detail view at the bottom left of the
+  memo entry field.
 
 <screenshot>
   <screeninfo>Show link in the general ledger</screeninfo>
@@ -313,12 +314,24 @@
   </mediaobject>
 </screenshot>
 
-The link can be accessed via the context menu of a transaction or via a keyboard shortcut.
+The link can also be accessed via the “Open URL” menu item in the context menu of a
+transaction or via a keyboard shortcut.
 <screenshot>
-  <screeninfo>....</screeninfo>
+  <screeninfo>Show transaction context menu</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-open-url.png" format="PNG" />
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+The associated keyboard shortcut can be configured in the
+<link linkend='reference.menus.settings.help'>Setting and Help Menu</link>.
+<screenshot>
+  <screeninfo>Show keyboard shortcut for opening an url</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="shortcut-payee-open-url.png" format="PNG" />
     </imageobject>
   </mediaobject>
 </screenshot>
