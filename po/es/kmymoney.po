@@ -23824,7 +23824,7 @@ msgstr "KMyMoney calculó el importe del préstamo como %1."
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:311
 #, kde-format
 msgid "KMyMoney has calculated the interest rate to %1%."
-msgstr "KMyMoney calculó el interés como %1%."
+msgstr "KMyMoney calculó el interés como %1 %."
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:199
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:323
