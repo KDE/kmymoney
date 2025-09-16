@@ -1467,7 +1467,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ShowTransaction,               QStringLiteral("transaction_show"),               i18nc("Show transaction", "Show transaction"),      Icon::Empty},     // not directly available in UI
             {Action::DisplayTransactionDetails,     QStringLiteral("transaction_display_details"),    i18nc("Display transaction details", "Show transaction details"),   Icon::DocumentProperties},
 
-            {Action::TransactionOpenURL,            QStringLiteral("transaction_open_url"),           i18nc("Open URL", "Open URL"),                      Icon::Empty},     // not directly available in UI
+            {Action::TransactionOpenURL,            QStringLiteral("transaction_open_url"),           i18nc("Open URL", "Open URL"),                      Icon::Link},
             {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::SelectAll},
             {Action::GoToAccount,                   QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::BankAccount},
             {Action::GoToPayee,                     QStringLiteral("transaction_goto_payee"),         i18n("Go to payee"),                                Icon::Payee},
