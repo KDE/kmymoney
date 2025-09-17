@@ -452,7 +452,8 @@ bool MyMoneyStatement::readXMLFile(MyMoneyStatement& _s, const QString& _filenam
 {
     bool result = false;
     QFile f(_filename);
-    f.open(QIODevice::ReadOnly);
+    if (!f.open(QIODevice::ReadOnly))
+        return result;
     QDomDocument* doc = new QDomDocument;
     if (doc->setContent(&f, false)) {
         QDomElement rootElement = doc->documentElement();
