@@ -304,6 +304,7 @@
   The resulting URL is displayed as a link in the general ledger for the corresponding
   transactions (see “Detail” column) and in the detail view at the bottom left of the
   memo entry field.
+</para>
 
 <screenshot>
   <screeninfo>Show link in the general ledger</screeninfo>
@@ -314,8 +315,10 @@
   </mediaobject>
 </screenshot>
 
+<para>
 The link can also be accessed via the “Open URL” menu item in the context menu of a
 transaction or via a keyboard shortcut.
+</para>
 <screenshot>
   <screeninfo>Show transaction context menu</screeninfo>
   <mediaobject>
@@ -325,8 +328,10 @@ transaction or via a keyboard shortcut.
   </mediaobject>
 </screenshot>
 
+<para>
 The associated keyboard shortcut can be configured in the
-<link linkend='reference.menus.settings.help'>Setting and Help Menu</link>.
+<link linkend="reference.menus.settings.help">Setting and Help Menu</link>.
+</para>
 <screenshot>
   <screeninfo>Show keyboard shortcut for opening an url</screeninfo>
   <mediaobject>
@@ -335,7 +340,6 @@ The associated keyboard shortcut can be configured in the
     </imageobject>
   </mediaobject>
 </screenshot>
-</para>
 
 <sect2 id="details.payees.linkmatching.pattern"><title>Hints</title>
 <para>
