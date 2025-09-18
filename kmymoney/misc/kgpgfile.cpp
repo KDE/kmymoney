@@ -429,7 +429,7 @@ void KGPGFile::publicKeyList(QStringList& list)
 
 void KGPGFile::secretKeyList(QStringList& list)
 {
-    // qDebug("Reading secrect keys");
+    // qDebug("Reading secret keys");
     KGPGFile file;
     file.keyList(list, true);
 }

@@ -94,7 +94,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     // allow matching two manual transactions
 
     if ((!allowImportedTransactions && tm.isImported()) || sm.isMatched() || si.isMatched())
-        throw MYMONEYEXCEPTION_CSTRING("Transactions does not fullfil requirements for matching");
+        throw MYMONEYEXCEPTION_CSTRING("Transactions does not fulfill requirements for matching");
 
     // verify that the amounts are the same, otherwise we should not be matching!
     if (sm.shares() != si.shares()) {

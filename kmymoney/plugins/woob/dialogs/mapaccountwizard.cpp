@@ -77,7 +77,7 @@ MapAccountWizard::MapAccountWizard(QWidget* parent, WoobInterface* woob)
 }
 
 /**
- * @internal Deconstructer stub needed to delete unique_ptrs with type Private
+ * @internal Destructor stub needed to delete unique_ptrs with type Private
  */
 MapAccountWizard::~MapAccountWizard()
 {

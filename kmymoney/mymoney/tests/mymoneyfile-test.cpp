@@ -1286,7 +1286,7 @@ void MyMoneyFileTest::testRemoveTransaction()
  * This function is currently not implemented. It's kind of tricky
  * because it modifies a lot of objects in a single call. This might
  * be a problem for the undo/redo stuff. That's why I left it out in
- * the first run. We migh add it, if we need it.
+ * the first run. We might add it, if we need it.
  * /
 void testMoveSplits() {
         testModifyTransactionNewPostDate();

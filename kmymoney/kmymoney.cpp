@@ -1935,7 +1935,7 @@ void KMyMoneyApp::readOptions()
     const auto action = actionCollection()->action(KStandardAction::name(KStandardAction::ShowMenubar));
     action->setChecked(showMenu);
     // setting the action does not emit the triggered signal
-    // so we set the intial state directly
+    // so we set the initial state directly
     showMenu ? menuBar()->show() : menuBar()->hide();
 
     pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());

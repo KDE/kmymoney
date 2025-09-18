@@ -647,7 +647,7 @@ void KReportChartView::adjustVerticalRange(const int precision)
             // if data model is represented by a horizontal line,
             // extend vertical range by two orders of magnitude upwards and downwards
             // if the whole data range is equal to zero,
-            // at least draw an empty chart with four orders of magnitude on the vertical exis
+            // at least draw an empty chart with four orders of magnitude on the vertical axis
             dataRangeStart = dataRangeStart > 0 ? qPow(10, qFloor(log10(dataRangeStart)) - 2) : precisionLimit;
             dataRangeEnd = dataRangeEnd > 0 ? qPow(10, qCeil(log10(dataRangeEnd)) + 2) : qPow(10, -precision + 4);
             dataRangeStartAdjusted = true;

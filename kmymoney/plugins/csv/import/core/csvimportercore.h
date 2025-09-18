@@ -318,7 +318,7 @@ public:
 
     /**
     * This method gets file into buffer
-    * It will laso store file's end column and row.
+    * It will also store file's end column and row.
     */
     void readFile(CSVProfile *profile);
 

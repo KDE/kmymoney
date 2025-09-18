@@ -274,7 +274,7 @@ sepaCreditTransferEdit::~sepaCreditTransferEdit()
 {
     // disconnect the signals before the widgets are destroyed
     // because they could still emit signals as part of their
-    // distruction which may bite us back in this object.
+    // destruction which may bite us back in this object.
     // See https://discuss.kde.org/t/kmymoney-5-2-crash-after-saving-bank-transfer-via-aqbanking/38517/3
     // for an example
     disconnect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryNameChanged);

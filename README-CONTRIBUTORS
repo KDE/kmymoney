@@ -44,7 +44,7 @@ For import in general, I'd love to add a discussion of what parts are file type
   specific, and what things are done after an import is processed into a common
   format for final processing.
 
-The Woob import chapter needs reveiw by Woob user.
+The Woob import chapter needs review by Woob user.
 
 The Budgets chapter needs additional screenshots.
 
@@ -101,7 +101,7 @@ Items which need to be addressed, but so far not sure where (or more likely in m
 
 - In Accounts View, the type of "Favorite" is "Asset" instead of "Favorite" or blank.
 
-- I decided to use "click" and not "click on" but the style sugggestions I read suggest that "click"
+- I decided to use "click" and not "click on" but the style suggestions I read suggest that "click"
   may not be best.  I know we don't have to worry about "tap" as we don't have a mobile version, but
   there are touchpad laptops and screen readers to consider.  I'll leave "click" for now, but will
   revisit and consider "select."  There is also a question of whether you need to specify the type
@@ -133,7 +133,7 @@ Items which need to be addressed, but so far not sure where (or more likely in m
   altered due to field separators in the date?  It shouldn't, so am I mis-remembering, or was there
   a problem?
 
-- How much of the online price retrieval needs to be re-written due to moving that funcionality to
+- How much of the online price retrieval needs to be re-written due to moving that functionality to
   libalkimia?
 
 - Price Editor dialog first column is labelled Commodity, but in New price entry, it is called
@@ -146,9 +146,9 @@ Items which need to be addressed, but so far not sure where (or more likely in m
   are right aligned. *** MR225 ***
 
 - CSV importer: list of steps is lower left in most of wizard, but all of left on start page.
-  Should it be lower left on all for consistancy?
+  Should it be lower left on all for consistency?
 
-- CSV importer - Banking cols, many have "X" to clear the value, and ther is "clear all."
+- CSV importer - Banking cols, many have "X" to clear the value, and there is "clear all."
   Investment cols do not have "x" and only "Clear" not "Clear all", plus Clear Fee.  Low priority to
   make consistent?
 
@@ -222,7 +222,7 @@ elsewhere.
 - Search dialog - some tabs say "All"/"None" but some say "Select all"/"Select none."  These should
   be consistent.
 
-- The Search Dialog Deatils subtab has a problem with vertical alignment.  "Search number in range"
+- The Search Dialog Details subtab has a problem with vertical alignment.  "Search number in range"
   is at the vertical midpoint of from and to (looks good) but "Search this number" seems lower than
   the text field for that number.
 
@@ -235,7 +235,7 @@ elsewhere.
 - on the config dialog, home section, should the top area be put in a box as are the other two
   areas, and most of the contents on the other sections?
 
-- "Show all split details in ledger" seems to act inconsistenly.  With a split transaction, if a
+- "Show all split details in ledger" seems to act inconsistently.  With a split transaction, if a
   split has a memo, that memo is shown instead of the second category.  I don't know if this is
   related to the bug I filed (and now can't find) about splits getting duplicated if you toggle that
   setting while the transaction is open for editing.
@@ -266,11 +266,11 @@ elsewhere.
   two months?
   -- wording updated, but I wonder if we should eliminate all intervals which are multiples of other
      intervals.  However, the confusion of making the change might be worse than the confusion when
-     picking the righ frequency and interval.
+     picking the right frequency and interval.
 
 - Price downloads allow you to specify data (date range?) yet this is never used in actually
   fetching prices (stocks or currency.)  Should we just drop the field, or at least note it is
-  ignored?  IS there any way to retreive historic prices? (How does this relate to the more of price
+  ignored?  IS there any way to retrieve historic prices? (How does this relate to the more of price
   downloads to alkimia?
 
   >> T This has recently changed. If the price source has a #x in its regex for price or date then
@@ -327,7 +327,7 @@ elsewhere.
       need to revise the Handbook which still says both ways can be used to enter/edit transactions.
 
 - The handbook uses "Schedules" as the formal name, but the View Selector says "Scheduled
-  transactions."  Shoule we be consistent and shorten it?  (hard to find in code, since it includes
+  transactions."  Should we be consistent and shorten it?  (hard to find in code, since it includes
   \n.
 
 - In Gnucash import, matching of account types, some map to things that are only applicable to

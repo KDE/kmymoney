@@ -45,7 +45,7 @@ class KMyMoneyAccountCombo;
  *
  * Use @c setComboBox() to identify the combobox to be used.
  * Using @c setAccountType() the preferred account type can
- * be set. This is useful when an amout is already known and
+ * be set. This is useful when an amount is already known and
  * one can determine if the account type shall be expense or
  * income.
  *

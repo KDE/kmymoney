@@ -19,7 +19,7 @@
   The conversion from using the earlier &kde; libraries to &kde-frameworks; was
   essentially complete in the early 5.1.x releases, with much of that work behind the
   scenes and not directly visible to the end user.  The general look and feel should
-  continue to remain stable, although some minor changes may be noticable.  In
+  continue to remain stable, although some minor changes may be noticeable.  In
   addition, the team has begun to make changes to support the conversion to using Qt6
   and KDE6 libraries, which have already started to replace Qt5 and KDE5.  With all
   these changes, the basic functionality of the program remains the same, aside from

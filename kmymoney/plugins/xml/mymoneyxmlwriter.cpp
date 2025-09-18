@@ -109,7 +109,7 @@ void MyMoneyXmlWriterPrivate::writeAddress(QXmlStreamWriter* writer,
     writer->writeAttribute(attributeName(Attribute::General::ZipCode), zip);
     writer->writeAttribute(attributeName(Attribute::General::Telephone), phone);
     /// @todo eventually remove
-    // the following four lines only for backward compatability to version 5.1 code
+    // the following four lines only for backward compatibility to version 5.1 code
     writer->writeAttribute(attributeName(Attribute::General::Country), state);
     writer->writeAttribute(attributeName(Attribute::General::AltCountry), state);
     writer->writeAttribute(attributeName(Attribute::General::AltZipCode), zip);

@@ -255,7 +255,7 @@ public:
 
         // there are multiple identifiers used for the state in different
         // locations of the KMM file. We try to read all until we find an
-        // entry to maintain backward compatability
+        // entry to maintain backward compatibility
         rc.state = readStringAttribute(attributeName(Attribute::General::State));
         if (rc.state.isEmpty()) {
             rc.state = readStringAttribute(attributeName(Attribute::General::Country));
@@ -266,7 +266,7 @@ public:
 
         // there are multiple identifiers used for the zipcode in different
         // locations of the KMM file. We try to read all until we find an
-        // entry to maintain backward compatability
+        // entry to maintain backward compatibility
         rc.zipcode = readStringAttribute(attributeName(Attribute::General::ZipCode));
         if (rc.zipcode.isEmpty()) {
             rc.zipcode = readStringAttribute(attributeName(Attribute::General::AltZipCode));

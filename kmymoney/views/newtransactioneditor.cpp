@@ -1407,7 +1407,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule, Schedul
         QSignalBlocker splitModelSignalBlocker(d->splitModel);
 
         // block the signals sent out from the payee edit widget so that
-        // the autofill logic is not triggered when loading the schdule
+        // the autofill logic is not triggered when loading the schedule
         QSignalBlocker autoFillSignalBlocker(d->ui->payeeEdit);
 
         for (const auto& split : d->m_transaction.splits()) {

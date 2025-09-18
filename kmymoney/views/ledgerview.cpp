@@ -1118,7 +1118,7 @@ void LedgerView::keyPressEvent(QKeyEvent* kev)
             // key press into an F2 to start editing the transaction.
             // This is otherwise suppressed. Comment from QAbstractItemView:
             //
-            // ### we can't open the editor on enter, becuse
+            // ### we can't open the editor on enter, because
             // some widgets will forward the enter event back
             // to the viewport, starting an endless loop
 
