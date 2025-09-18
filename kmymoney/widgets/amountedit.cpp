@@ -332,7 +332,7 @@ public:
             if (q->isEnabled() && !txt.isEmpty()) {
                 ensureFractionalPart(widgetTextCache, state);
                 // ensureFractionalPart is used to add digits but
-                // ist should not remove some. If that's the
+                // it should not remove some. If that's the
                 // case we revert what it has done
                 if (widgetTextCache.length() < txt.length()) {
                     widgetTextCache = txt;

@@ -29,7 +29,7 @@ class kOnlineTransferForm;
 /**
  * @brief The kOnlineTransferForm class
  *
- * @todo Disable Send/Enque button if no task is shown.
+ * @todo Disable Send/Enqueue button if no task is shown.
  * @todo If this dialog is shown a second time without setting a onlineJob it, it shows the previous content.
  *       Fix this by creating the IonlineJobEdit widgets on demand and destroying them afterwards.
  */

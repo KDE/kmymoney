@@ -77,7 +77,7 @@ public:
         ui->m_investmentDetailsPage->init(m_account, m_security);
         ui->m_onlineUpdatePage->init(m_security);
 
-        // setup the signal here, so that the initialization does not interfer.
+        // setup the signal here, so that the initialization does not interfere.
         q->connect(ui->m_investmentDetailsPage, &KInvestmentDetailsWizardPage::securityIdChanged, q, [&](const QString& id) {
             m_security = MyMoneySecurity(id, m_security);
         });

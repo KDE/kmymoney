@@ -335,7 +335,7 @@ bool ColumnSelector::eventFilter(QObject* o, QEvent* e)
     Q_D(ColumnSelector);
     if (e->type() == QEvent::Show) {
         // It has been noticed, that if the application's configuration is lost, the
-        // inital setup hidden columns are not filled with data but they are visible
+        // initial setup hidden columns are not filled with data but they are visible
         // in the view. Calling the hide/showSection again when the header view is
         // about to be displayed solves the issue and removes them completely.
         // Turns out that on Qt6 one needs to call showColumn before the hideColumn

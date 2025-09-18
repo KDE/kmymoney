@@ -645,7 +645,7 @@ public:
      * Helper method to extract string data from online price model
      *
      * @param row row to get data from
-     * @param coloumn column to get data from
+     * @param column column to get data from
      * @returns data found in cell converted to string
      *
      * @sa QVariant::toString()

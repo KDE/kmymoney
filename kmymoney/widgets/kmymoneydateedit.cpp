@@ -624,7 +624,7 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
         if (keyEvent->text().length() > 0) {
             const auto ch(keyEvent->text().at(0));
 
-            // prevent two delimters in a row and simply
+            // prevent two delimiters in a row and simply
             // fake an overwrite and select the next section
             if (d->isValidDelimiter(ch)) {
                 if (d->isDelimiterAtPos(pos)) {

@@ -102,7 +102,7 @@ void MyMoneyUtilsTest::testIsoStringToDateTime_data()
     QTest::addColumn<QString>("testvalue");
 
     QTest::newRow("Central European Summertime") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 7200 << QStringLiteral("2023-10-03T11:12:13+02:00");
-    QTest::newRow("Island of New Foundland") << QDate(2023, 10, 3) << QTime(11, 12, 13) << -12600 << QStringLiteral("2023-10-03T11:12:13-03:30");
+    QTest::newRow("Island of Newfoundland") << QDate(2023, 10, 3) << QTime(11, 12, 13) << -12600 << QStringLiteral("2023-10-03T11:12:13-03:30");
     QTest::newRow("French Polynesia") << QDate(2023, 10, 3) << QTime(11, 12, 13) << -34200 << QStringLiteral("2023-10-03T11:12:13-09:30");
     QTest::newRow("Tonga") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 46800 << QStringLiteral("2023-10-03T11:12:13+13:00");
     QTest::newRow("UTC") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 0 << QStringLiteral("2023-10-03T11:12:13+00:00");
@@ -129,7 +129,7 @@ void MyMoneyUtilsTest::testDateTimeToIsoString_data()
     QTest::addColumn<QString>("result");
 
     QTest::newRow("Central European Summertime") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 7200 << QStringLiteral("2023-10-03T11:12:13+02:00");
-    QTest::newRow("Island of New Foundland") << QDate(2023, 10, 3) << QTime(11, 12, 13) << -12600 << QStringLiteral("2023-10-03T11:12:13-03:30");
+    QTest::newRow("Island of Newfoundland") << QDate(2023, 10, 3) << QTime(11, 12, 13) << -12600 << QStringLiteral("2023-10-03T11:12:13-03:30");
     QTest::newRow("French Polynesia") << QDate(2023, 10, 3) << QTime(11, 12, 13) << -34200 << QStringLiteral("2023-10-03T11:12:13-09:30");
     QTest::newRow("Tonga") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 46800 << QStringLiteral("2023-10-03T11:12:13+13:00");
     QTest::newRow("UTC") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 0 << QStringLiteral("2023-10-03T11:12:13+00:00");
