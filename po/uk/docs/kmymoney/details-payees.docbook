@@ -286,24 +286,43 @@
 </para>
 
 <para
->Адресу-результат буде показано як посилання у загальній обліковій книзі для відповідної операції (див. стовпчик «Подробиці»). <screenshot
-> <screeninfo
->Показ посилання у загальній обліковій книзі</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
-> </mediaobject
-> </screenshot
-> Доступ до посилання можна отримати за допомогою контекстного меню операції або за допомогою клавіатурного скорочення. <screenshot>
+>Адресу-результат буде показано як посилання у загальній обліковій книзі для відповідної операції (див. стовпчик «Подробиці») і на панелі перегляду подробиць нижній лівій частині поля введення нотатки. </para>
+
+<screenshot>
   <screeninfo
->....</screeninfo>
+>Показ посилання у загальній обліковій книзі</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Доступ до посилання можна отримати за допомогою пункту «Відкрити адресу» у контекстному меню операції або за допомогою клавіатурного скорочення. </para>
+<screenshot>
+  <screeninfo
+>Показ контекстного меню операції</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
     </imageobject>
   </mediaobject>
 </screenshot>
-</para>
+
+<para
+>Пов'язане клавіатурне скорочення можна налаштувати у <link linkend="reference.menus.settings.help"
+>меню параметрів і довідки</link
+>. </para>
+<screenshot>
+  <screeninfo
+>Показ клавіатурного скорочення для відкриття адреси</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="shortcut-payee-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
 
 <sect2 id="details.payees.linkmatching.pattern"
 ><title
