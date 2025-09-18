@@ -99,7 +99,6 @@
             "name": "kdiagram",
             "buildsystem": "cmake-ninja",
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
                 "-DBUILD_TESTING=OFF"
             ],
             "sources": [
@@ -417,7 +416,6 @@
             "name": "kmymoney",
             "buildsystem": "cmake-ninja",
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
                 "-DBUILD_WITH_QT6=ON"
             ],
             "builddir": true,
