@@ -335,13 +335,13 @@
                             "sources": [
                                 {
                                     "type": "archive",
-                                    "url": "https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.11.2.tar.bz2",
+                                    "url": "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.11.2.tar.bz2",
                                     "sha256": "6ba59dd192270e8c1d22ddb41a07d95dcdbc1f0fb02d03c4b54b235814330aac",
                                     "x-checker-data": {
                                         "type": "anitya",
                                         "project-id": 1623,
                                         "stable-only": true,
-                                        "url-template": "https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-$version.tar.bz2"
+                                        "url-template": "https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-$version.tar.bz2"
                                     }
                                 }
                             ],
@@ -358,13 +358,13 @@
                                     "sources": [
                                         {
                                             "type": "archive",
-                                            "url": "https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.55.tar.bz2",
+                                            "url": "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.55.tar.bz2",
                                             "sha256": "95b178148863f07d45df0cea67e880a79b9ef71f5d230baddc0071128516ef78",
                                             "x-checker-data": {
                                                 "type": "anitya",
                                                 "project-id": 1628,
                                                 "stable-only": true,
-                                                "url-template": "https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-$version.tar.bz2"
+                                                "url-template": "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-$version.tar.bz2"
                                             }
                                         }
                                     ],
