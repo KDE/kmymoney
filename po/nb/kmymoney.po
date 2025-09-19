@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-13 03:39+0000\n"
+"POT-Creation-Date: 2025-09-14 03:22+0000\n"
 "PO-Revision-Date: 2025-07-27 12:52+0200\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -19632,7 +19632,7 @@ msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Kategori er et påkrevd felt for tidsplanen"
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:311
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19644,30 +19644,30 @@ msgstr ""
 "neste forfallsdatoen etter hver liknende endring.<br> <i>Merk:</i> Denne "
 "informasjonen vil bare vises en gang for endring av denne planen.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:313
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Tidsplanfrekvens er endret"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Kan ikke legge inn planlagt transaksjon: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Legg til planlagt transaksjon"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:638
+#: kmymoney/views/keditscheduledlg.cpp:681
+#: kmymoney/views/keditscheduledlg.cpp:691
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Kan ikke endre planlagt transaksjon «%1»"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:667
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19682,7 +19682,7 @@ msgstr ""
 "mindre den siste betalingsdatoen blir tilbakestilt. Vil du tilbakestille den "
 "siste betalingsdatoen?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:672
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Tilbakestill sist betalingsdato"
@@ -21008,7 +21008,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Gå til «%1»"
 
-#: kmymoney/views/ledgerview.cpp:756
+#: kmymoney/views/ledgerview.cpp:759
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21019,32 +21019,32 @@ msgstr ""
 "KMyMoney støtter ikke endring av to transaksjoner samtidig. <a "
 "href=\"jumpToEditor\">Gå til gjeldende endringsboks</a>"
 
-#: kmymoney/views/ledgerview.cpp:881
+#: kmymoney/views/ledgerview.cpp:884
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transaksjon mangler tilordning til kategori."
 
-#: kmymoney/views/ledgerview.cpp:888
+#: kmymoney/views/ledgerview.cpp:891
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transaksjonen mangler tilordning av <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:897
+#: kmymoney/views/ledgerview.cpp:900
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Denne tidsplanen gikk over dato den %1. Klikk på ikonet for å legge den inn."
 
-#: kmymoney/views/ledgerview.cpp:903
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Transaksjonen er importert. Klikk på ikonet for å godta den."
 
-#: kmymoney/views/ledgerview.cpp:908
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21053,31 +21053,31 @@ msgstr ""
 "Denne transaksjonen samsvarer. Klikk på ikonet for å godta eller avvise "
 "samsvar."
 
-#: kmymoney/views/ledgerview.cpp:988
+#: kmymoney/views/ledgerview.cpp:991
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Ikke legg inn planlagte transaksjoner som er gått over dato."
 
-#: kmymoney/views/ledgerview.cpp:989
+#: kmymoney/views/ledgerview.cpp:992
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Legg inn planlagte transaksjoner som er gått over dato."
 
-#: kmymoney/views/ledgerview.cpp:992
+#: kmymoney/views/ledgerview.cpp:995
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Vil du legge inn den overløpte tidsplanen nå?"
 
-#: kmymoney/views/ledgerview.cpp:993
+#: kmymoney/views/ledgerview.cpp:996
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Legg inn overløpt tidsplan"
 
-#: kmymoney/views/ledgerview.cpp:1013
+#: kmymoney/views/ledgerview.cpp:1016
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21087,7 +21087,7 @@ msgstr ""
 "Koble fra den skjulte (samsvarende) transaksjonen fra den som vises og legg "
 "den inn i hovedboken igjen."
 
-#: kmymoney/views/ledgerview.cpp:1015
+#: kmymoney/views/ledgerview.cpp:1018
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21097,13 +21097,13 @@ msgstr ""
 "Godta samsvaret som vist og fjern dataene fra den skjulte (samsvarende) "
 "transaksjonen."
 
-#: kmymoney/views/ledgerview.cpp:1019
+#: kmymoney/views/ledgerview.cpp:1022
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Vil du godta eller oppheve samsvar i den koblede transaksjonen nå?"
 
-#: kmymoney/views/ledgerview.cpp:1020
+#: kmymoney/views/ledgerview.cpp:1023
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
