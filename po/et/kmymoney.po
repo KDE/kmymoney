@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 00:42+0000\n"
+"POT-Creation-Date: 2025-09-19 00:42+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -424,7 +424,7 @@ msgstr[1] "%1 pangaväljavõtte töötlemisel saadi järgmised tulemused:"
 #: kmymoney/dialogs/importsummarydlg.ui:14
 #, fuzzy, kde-format
 #| msgid "Imported History"
-msgctxt "@title:window"
+msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
 msgstr "Imporditud ajalugu"
 

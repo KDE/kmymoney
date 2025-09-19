@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 00:42+0000\n"
+"POT-Creation-Date: 2025-09-19 00:42+0000\n"
 "PO-Revision-Date: 2025-08-25 23:22+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -433,8 +433,10 @@ msgstr[1] "Se han procesado %1 extractos con el siguiente resultado:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, kde-format
-msgctxt "@title:window"
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import summary"
+msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
 msgstr "Importar resumen"
 

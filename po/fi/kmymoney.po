@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 00:42+0000\n"
+"POT-Creation-Date: 2025-09-19 00:42+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -431,8 +431,10 @@ msgstr[1] "%1 tiliotetta on käsitelty seuraavin tuloksin:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, kde-format
-msgctxt "@title:window"
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import summary"
+msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
 msgstr "Tuonnin yhteenveto"
 

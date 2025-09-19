@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 00:42+0000\n"
+"POT-Creation-Date: 2025-09-19 00:42+0000\n"
 "PO-Revision-Date: 2025-09-02 17:52+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -386,7 +386,7 @@ msgstr[1] ""
 #: kmymoney/dialogs/importsummarydlg.ui:14
 #, fuzzy, kde-format
 #| msgid "Import"
-msgctxt "@title:window"
+msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
 msgstr "Importa"
 

@@ -280,24 +280,43 @@
 </para>
 
 <para
->L'URL resultant es mostra com a enllaç al llibre major general a les operacions corresponents (vegeu la columna «Detall»). <screenshot
-> <screeninfo
->Mostra l'enllaç al llibre major general</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
-> </mediaobject
-> </screenshot
-> L'enllaç es pot accedir a través del menú contextual d'una operació o mitjançant una drecera de teclat. <screenshot>
+>The resulting URL is displayed as a link in the general ledger for the corresponding transactions (see “Detail” column) and in the detail view at the bottom left of the memo entry field. </para>
+
+<screenshot>
   <screeninfo
->...</screeninfo>
+>Show link in the general ledger</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>The link can also be accessed via the “Open URL” menu item in the context menu of a transaction or via a keyboard shortcut. </para>
+<screenshot>
+  <screeninfo
+>Show transaction context menu</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
     </imageobject>
   </mediaobject>
 </screenshot>
-</para>
+
+<para
+>The associated keyboard shortcut can be configured in the <link linkend="reference.menus.settings.help"
+>Setting and Help Menu</link
+>. </para>
+<screenshot>
+  <screeninfo
+>Mostra la drecera de teclat per a OBRIR UN url</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="shortcut-payee-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
 
 <sect2 id="details.payees.linkmatching.pattern"
 ><title
