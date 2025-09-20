@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 00:42+0000\n"
-"PO-Revision-Date: 2025-08-25 09:42+0300\n"
+"PO-Revision-Date: 2025-09-19 09:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -428,12 +428,10 @@ msgstr[1] "%1 hesap özeti aşağıdaki sonuçlarla işlendi:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Import summary"
+#, kde-format
 msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
-msgstr "Özet İçe Aktar"
+msgstr "İçe Aktarma Özeti"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 00:42+0000\n"
-"PO-Revision-Date: 2025-08-25 10:22+0200\n"
+"PO-Revision-Date: 2025-09-19 07:51+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -441,12 +441,10 @@ msgstr[3] "%1 izkazov je bilo obdelanih z naslednjimi rezultati:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Import summary"
+#, kde-format
 msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
-msgstr "Uvožen povzetek"
+msgstr "Uvozi povzetek"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
