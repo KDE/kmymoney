@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-14 03:22+0000\n"
-"PO-Revision-Date: 2025-08-27 00:04+0100\n"
+"PO-Revision-Date: 2025-09-20 20:23+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4340,7 +4340,7 @@ msgstr ""
 "misma categoría con un importe +/- X % como idénticos. Si se encuentra más "
 "de un asiento, se presenta una lista de ellos al usuario.\n"
 "\n"
-"Seleccionando 0% se mostrarán todos los asientos."
+"Seleccionando 0 % se mostrarán todos los asientos."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:398
@@ -14538,7 +14538,7 @@ msgstr[1] "%1 pagos librados en total"
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
-msgstr[0] "1% depósito librado"
+msgstr[0] "%1 depósito librado"
 msgstr[1] "%1 depósitos librados en total"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
@@ -23799,7 +23799,7 @@ msgstr "KMyMoney calculó el importe del préstamo como %1."
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:311
 #, kde-format
 msgid "KMyMoney has calculated the interest rate to %1%."
-msgstr "KMyMoney calculó el interés como %1%."
+msgstr "KMyMoney calculó el interés como %1 %."
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:199
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:323
