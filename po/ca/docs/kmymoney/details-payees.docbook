@@ -280,11 +280,11 @@
 </para>
 
 <para
->The resulting URL is displayed as a link in the general ledger for the corresponding transactions (see “Detail” column) and in the detail view at the bottom left of the memo entry field. </para>
+>L'URL resultant es mostra com un enllaç en el llibre major general a les operacions corresponents (vegeu la columna «Detall») i en la vista de detall a la part inferior esquerra del camp d'entrada del recordatori. </para>
 
 <screenshot>
   <screeninfo
->Show link in the general ledger</screeninfo>
+>Mostra un enllaç en el llibre major general</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/>
@@ -293,10 +293,10 @@
 </screenshot>
 
 <para
->The link can also be accessed via the “Open URL” menu item in the context menu of a transaction or via a keyboard shortcut. </para>
+>També es pot accedir a l'enllaç a través de l'element de menú «Obre un URL» en el menú contextual d'una operació o a través d'una drecera de teclat. </para>
 <screenshot>
   <screeninfo
->Show transaction context menu</screeninfo>
+>Mostra el menú contextual de l'operació</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
@@ -305,8 +305,8 @@
 </screenshot>
 
 <para
->The associated keyboard shortcut can be configured in the <link linkend="reference.menus.settings.help"
->Setting and Help Menu</link
+>La drecera de teclat associada es port configurara en el <link linkend="reference.menus.settings.help"
+>Menú de configuració i ajuda</link
 >. </para>
 <screenshot>
   <screeninfo

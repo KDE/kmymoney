@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-19 00:42+0000\n"
-"PO-Revision-Date: 2025-09-19 14:02+0100\n"
+"PO-Revision-Date: 2025-09-20 17:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -4339,7 +4339,7 @@ msgstr ""
 "misma categoría con un importe +/- X % como idénticos. Si se encuentra más "
 "de un asiento, se presenta una lista de ellos al usuario.\n"
 "\n"
-"Seleccionando 0% se mostrarán todos los asientos."
+"Seleccionando 0 % se mostrarán todos los asientos."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:398
@@ -14537,7 +14537,7 @@ msgstr[1] "%1 pagos librados en total"
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
-msgstr[0] "1% depósito librado"
+msgstr[0] "%1 depósito librado"
 msgstr[1] "%1 depósitos librados en total"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
