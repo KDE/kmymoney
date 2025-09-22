@@ -5,6 +5,7 @@
 
 #include "csvimporttestcommon.h"
 
+#include <QDebug>
 #include <QFile>
 #include <QTextStream>
 
@@ -15,10 +16,13 @@
 void writeStatementToCSV(const QString& content, const QString& filename)
 {
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream stream (&g);
-    stream << content;
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream stream(&g);
+        stream << content;
+        g.close();
+    } else {
+        qDebug() << "Unable to open" << filename << "for writing";
+    }
 }
 
 QString csvDataset(const int set) {

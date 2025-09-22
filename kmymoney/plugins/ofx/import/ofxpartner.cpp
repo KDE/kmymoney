@@ -318,7 +318,9 @@ OfxHttpRequest::OfxHttpRequest(const QString& method,
     if (KMyMoneySettings::logOfxTransactions()) {
         QString logPath = KMyMoneySettings::logPath();
         d->m_fpTrace.setFileName(QString("%1/ofxlog.txt").arg(logPath));
-        d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
+        if (!d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append)) {
+            qDebug() << "Could not open" << d->m_fpTrace.fileName();
+        }
     }
 
     auto jobFlags = KIO::DefaultFlags | KIO::Overwrite;
@@ -369,7 +371,9 @@ void OfxHttpRequest::slotOfxConnected(KIO::Job*)
 {
     qDebug() << "OfxHttpRequest::slotOfxConnected" << m_dst;
     m_file.setFileName(m_dst);
-    m_file.open(QIODevice::WriteOnly);
+    if (m_file.open(QIODevice::WriteOnly)) {
+        ; // nothing to do here, just keeping the compiler happy
+    }
 }
 
 void OfxHttpRequest::slotOfxData(KIO::Job*, const QByteArray& _ba)

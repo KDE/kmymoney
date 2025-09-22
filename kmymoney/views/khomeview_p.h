@@ -92,9 +92,11 @@ QString QPixmapToDataUri(const QPixmap& pixmap)
     QImage image(pixmap.toImage());
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
-    buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
-    return QLatin1String("data:image/png;base64,") + QString(byteArray.toBase64());
+    if (buffer.open(QIODevice::WriteOnly)) {
+        image.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
+        return QLatin1String("data:image/png;base64,") + QString(byteArray.toBase64());
+    }
+    return {};
 }
 
 bool accountNameLess(const MyMoneyAccount &acc1, const MyMoneyAccount &acc2)

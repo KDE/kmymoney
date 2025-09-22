@@ -45,10 +45,12 @@ MyMoneyStorageMgrTest::MyMoneyStorageMgrTest() :
     m_emptyFile(this)
 {
     // Open and close the temp file so that it exists
-    m_file.open();
+    if (m_file.open())
+        ; // just keeping the compiler happy
     m_file.close();
     // The same with the empty db file
-    m_emptyFile.open();
+    if (m_emptyFile.open())
+        ; // just keeping the compiler happy
     m_emptyFile.close();
 
     testCaseTimer.start();
@@ -64,7 +66,8 @@ void MyMoneyStorageMgrTest::init()
     testStepTimer.start();
     m = new MyMoneyStorageMgr;
     // Create file and close it to release possible read-write locks
-    m_file.open();
+    if (m_file.open())
+        ; // just keeping the compiler happy
     m_file.close();
 }
 

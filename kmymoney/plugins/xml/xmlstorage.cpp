@@ -163,10 +163,13 @@ public:
         QString writeFile = localFile;
         if (QFile::exists(localFile)) {
             QTemporaryFile tmpFile(writeFile);
-            tmpFile.open();
-            writeFile = tmpFile.fileName();
-            // Since file is going to be replaced, stash the original permissions so they can be restored
-            fmode = QFile::permissions(localFile);
+            if (tmpFile.open()) {
+                writeFile = tmpFile.fileName();
+                // Since file is going to be replaced, stash the original permissions so they can be restored
+                fmode = QFile::permissions(localFile);
+            } else {
+                qDebug() << "saveToLocalFile(): Cannot create tmpFile";
+            }
         }
 
         // check if we have a filename or were able to create a temporary file
@@ -570,12 +573,15 @@ bool XMLStorage::save(const QUrl &url)
 
             Q_CONSTEXPR int permission = -1;
             QFile file(fileName);
-            file.open(QIODevice::ReadOnly);
-            KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
-            if (!putjob->exec()) {
-                throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
+            if (file.open(QIODevice::ReadOnly)) {
+                KIO::StoredTransferJob* putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+                if (!putjob->exec()) {
+                    throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
+                }
+                file.close();
+            } else {
+                qDebug() << "Cannot open" << fileName;
             }
-            file.close();
             // remove the temporary file from the local medium
             file.remove();
         }

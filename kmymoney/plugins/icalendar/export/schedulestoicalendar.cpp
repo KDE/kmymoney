@@ -244,12 +244,16 @@ KMMSchedulesToiCalendar::~KMMSchedulesToiCalendar()
 void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEventVsTodo)
 {
     QFile icsFile(filePath);
+    QTextStream stream;
 
     const icalcomponent_kind newEntryKind = writeEventVsTodo ? ICAL_VEVENT_COMPONENT : ICAL_VTODO_COMPONENT;
-    icsFile.open(QIODevice::ReadOnly);
-    QTextStream stream(&icsFile);
-    d->m_icalendarAsString = stream.readAll();
-    icsFile.close();
+    if (icsFile.open(QIODevice::ReadOnly)) {
+        stream.setDevice(&icsFile);
+        d->m_icalendarAsString = stream.readAll();
+        icsFile.close();
+    } else {
+        qDebug() << "Cannot read" << filePath;
+    }
 
     // create the calendar
     bool newCalendar = false;
@@ -407,11 +411,14 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEv
 
     // write out the ics file
 
-    icsFile.open(QIODevice::WriteOnly);
-    d->m_icalendarAsString = QString::fromUtf8(icalcomponent_as_ical_string(vCalendar));
-    // reclaim some memory :)
-    icalcomponent_free(vCalendar);
-    // write the calendar to the file
-    stream << d->m_icalendarAsString << Qt::endl;
-    icsFile.close();
+    if (icsFile.open(QIODevice::WriteOnly)) {
+        d->m_icalendarAsString = QString::fromUtf8(icalcomponent_as_ical_string(vCalendar));
+        // reclaim some memory :)
+        icalcomponent_free(vCalendar);
+        // write the calendar to the file
+        stream << d->m_icalendarAsString << Qt::endl;
+        icsFile.close();
+    } else {
+        qDebug() << "Cannot write" << filePath;
+    }
 }

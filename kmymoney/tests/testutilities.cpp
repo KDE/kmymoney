@@ -353,12 +353,12 @@ void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename)
     }
 
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
+    if (g.open(QIODevice::WriteOnly)) {
+        QXmlStreamWriter writer(&g);
+        writeRCFtoXMLDoc(filter, &writer);
 
-    QXmlStreamWriter writer(&g);
-    writeRCFtoXMLDoc(filter, &writer);
-
-    g.close();
+        g.close();
+    }
 }
 
 bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QXmlStreamReader* reader)
@@ -396,13 +396,12 @@ bool readRCFfromXML(QList<MyMoneyReport>& list, const QString& filename)
 {
     int result = false;
     QFile f(filename);
-    f.open(QIODevice::ReadOnly);
+    if (f.open(QIODevice::ReadOnly)) {
+        QXmlStreamReader reader;
+        reader.setDevice(&f);
 
-    QXmlStreamReader reader;
-    reader.setDevice(&f);
-
-    result = readRCFfromXMLDoc(list, &reader);
-
+        result = readRCFfromXMLDoc(list, &reader);
+    }
     return result;
 
 }

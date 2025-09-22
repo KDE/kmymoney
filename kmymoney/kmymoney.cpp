@@ -3020,11 +3020,14 @@ void KMyMoneyApp::slotFileFileInfo()
     }
 
     QFile g("kmymoney.dump");
-    g.open(QIODevice::WriteOnly);
-    QDataStream st(&g);
-    MyMoneyStorageDump dumper;
-    dumper.writeStream(st, MyMoneyFile::instance());
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QDataStream st(&g);
+        MyMoneyStorageDump dumper;
+        dumper.writeStream(st, MyMoneyFile::instance());
+        g.close();
+    } else {
+        qDebug() << "Cannot write kmymoney.dump";
+    }
 }
 
 void KMyMoneyApp::slotToggleTraces()

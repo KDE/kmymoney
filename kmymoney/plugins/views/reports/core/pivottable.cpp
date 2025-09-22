@@ -2010,9 +2010,12 @@ QString PivotTable::renderHTML() const
 void PivotTable::dump(const QString& file, const QString& /* context */) const
 {
     QFile g(file);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << renderHTML();
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream(&g) << renderHTML();
+        g.close();
+    } else {
+        qDebug() << "Cannot dump to" << file;
+    }
 }
 
 bool PivotTable::saveToXml(const QString& file)

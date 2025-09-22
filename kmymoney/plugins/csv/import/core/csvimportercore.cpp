@@ -1834,19 +1834,24 @@ void CSVFile::readFile(CSVProfile *profile)
     QFile inFile(m_inFileName);
     if (!inFile.exists())
         return;
-    inFile.open(QIODevice::ReadOnly);
+    QString decodedData;
+    if (inFile.open(QIODevice::ReadOnly)) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QTextStream inStream(&inFile);
-    QTextCodec* codec = QTextCodec::codecForMib(profile->m_encodingMIBEnum);
-    inStream.setCodec(codec);
-    const QString decodedData = inStream.readAll();
+        QTextStream inStream(&inFile);
+        QTextCodec* codec = QTextCodec::codecForMib(profile->m_encodingMIBEnum);
+        inStream.setCodec(codec);
+        decodedData = inStream.readAll();
 #else
-    const auto encodedData = inFile.readAll();
-    QStringDecoder decoder(KMM_Codec::codecNameForMib(profile->m_encodingMIBEnum).toUtf8());
-    const QString decodedData = decoder.decode(encodedData);
+        const auto encodedData = inFile.readAll();
+        QStringDecoder decoder(KMM_Codec::codecNameForMib(profile->m_encodingMIBEnum).toUtf8());
+        decodedData = decoder.decode(encodedData);
 #endif
 
-    inFile.close();
+        inFile.close();
+    } else {
+        qDebug() << "Cannot read" << m_inFileName;
+    }
+
     m_model->clear();
     m_parse->setTextDelimiter(profile->m_textDelimiter);
     QStringList rows = m_parse->parseFile(decodedData); // parse the buffer

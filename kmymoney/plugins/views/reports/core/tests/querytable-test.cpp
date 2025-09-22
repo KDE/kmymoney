@@ -44,9 +44,10 @@ void writeTabletoHTML(const QueryTable& table, const QString& basename = QString
     }
 
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << table.renderHTML();
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream(&g) << table.renderHTML();
+        g.close();
+    }
 }
 
 void writeTabletoCSV(const QueryTable& table, const QString& basename = QString())
@@ -61,9 +62,10 @@ void writeTabletoCSV(const QueryTable& table, const QString& basename = QString(
     }
 
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << table.renderCSV();
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream(&g) << table.renderCSV();
+        g.close();
+    }
 }
 
 void writeTabletoXML(const QueryTable& table, const QString& basename = QString())
@@ -78,9 +80,10 @@ void writeTabletoXML(const QueryTable& table, const QString& basename = QString(
     }
 
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << table.toXml();
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream(&g) << table.toXml();
+        g.close();
+    }
 }
 
 void writeFile(const QString& basename)
@@ -99,14 +102,16 @@ void writeFile(const QString& basename)
     QByteArray data;
     QBuffer buffer;
     buffer.setBuffer(&data);
-    buffer.open(QIODevice::WriteOnly);
-    writer.write(&buffer);
+    if (buffer.open(QIODevice::WriteOnly)) {
+        writer.write(&buffer);
 
-    QString filename = QString::fromLatin1("%1/test-%2.xml").arg(CMAKE_CURRENT_BINARY_DIR).arg(basename);
-    QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << data;
-    g.close();
+        QString filename = QString::fromLatin1("%1/test-%2.xml").arg(CMAKE_CURRENT_BINARY_DIR).arg(basename);
+        QFile g(filename);
+        if (g.open(QIODevice::WriteOnly)) {
+            QTextStream(&g) << data;
+            g.close();
+        }
+    }
 }
 
 void writeTable(const QueryTable& table, const QString& basename = QString())

@@ -493,13 +493,15 @@ QString ListTable::renderCSV() const
 void ListTable::dump(const QString& file, const QString& context) const
 {
     QFile g(file);
-    g.open(QIODevice::WriteOnly | QIODevice::Text);
-
-    if (! context.isEmpty())
-        QTextStream(&g) << context.arg(renderHTML());
-    else
-        QTextStream(&g) << renderHTML();
-    g.close();
+    if (g.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        if (!context.isEmpty())
+            QTextStream(&g) << context.arg(renderHTML());
+        else
+            QTextStream(&g) << renderHTML();
+        g.close();
+    } else {
+        qDebug() << "Cannot dump to" << file;
+    }
 }
 
 bool ListTable::saveToXml(const QString& file)

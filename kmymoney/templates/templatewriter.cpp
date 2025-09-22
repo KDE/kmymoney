@@ -194,28 +194,34 @@ public:
             }
         } else {
             QTemporaryFile tmpfile;
-            tmpfile.open();
-            QSaveFile qfile(tmpfile.fileName());
-            if (qfile.open(QIODevice::WriteOnly)) {
-                saveToLocalFile(&qfile);
-                if (!qfile.commit()) {
-                    m_errMsg = i18n("Unable to write changes to '%1'", tmpfile.fileName());
+            if (tmpfile.open()) {
+                QSaveFile qfile(tmpfile.fileName());
+                if (qfile.open(QIODevice::WriteOnly)) {
+                    saveToLocalFile(&qfile);
+                    if (!qfile.commit()) {
+                        m_errMsg = i18n("Unable to write changes to '%1'", tmpfile.fileName());
+                        return false;
+                    }
+                } else {
+                    m_errMsg = i18n("Unable to open template file '%1'", tmpfile.fileName());
                     return false;
                 }
-            } else {
-                m_errMsg = i18n("Unable to open template file '%1'", tmpfile.fileName());
-                return false;
-            }
 
-            int permission = -1;
-            QFile file(tmpfile.fileName());
-            file.open(QIODevice::ReadOnly);
-            KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
-            if (!putjob->exec()) {
-                m_errMsg = i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString());
-                return false;
+                int permission = -1;
+                QFile file(tmpfile.fileName());
+                if (file.open(QIODevice::ReadOnly)) {
+                    KIO::StoredTransferJob* putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+                    if (!putjob->exec()) {
+                        m_errMsg = i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString());
+                        return false;
+                    }
+                    file.close();
+                } else {
+                    qDebug() << "saveTemplate: cannot open created file for reading";
+                }
+            } else {
+                qDebug() << "saveTemplate: cannot open temp file";
             }
-            file.close();
         }
         return true;
     }
