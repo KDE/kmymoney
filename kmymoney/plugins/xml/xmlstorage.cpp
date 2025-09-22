@@ -565,25 +565,29 @@ bool XMLStorage::save(const QUrl &url)
             // once the file is opened) and destroy the object (which
             // closes the file on the filesystem) to avoid such problems.
             const auto tmpfile = new QTemporaryFile;
-            tmpfile->open();
-            const auto fileName = tmpfile->fileName();
-            delete tmpfile;
+            QString fileName;
+            if (tmpfile->open()) {
+                fileName = tmpfile->fileName();
+                delete tmpfile;
 
-            d->saveToLocalFile(fileName, storageWriter.get(), plaintext, keyList);
+                d->saveToLocalFile(fileName, storageWriter.get(), plaintext, keyList);
 
-            Q_CONSTEXPR int permission = -1;
-            QFile file(fileName);
-            if (file.open(QIODevice::ReadOnly)) {
-                KIO::StoredTransferJob* putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
-                if (!putjob->exec()) {
-                    throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
+                Q_CONSTEXPR int permission = -1;
+                QFile file(fileName);
+                if (file.open(QIODevice::ReadOnly)) {
+                    KIO::StoredTransferJob* putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+                    if (!putjob->exec()) {
+                        throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
+                    }
+                    file.close();
+                } else {
+                    qDebug() << "Cannot open" << fileName;
                 }
-                file.close();
+                // remove the temporary file from the local medium
+                file.remove();
             } else {
-                qDebug() << "Cannot open" << fileName;
+                qDebug() << "Unable to create temporary file";
             }
-            // remove the temporary file from the local medium
-            file.remove();
         }
     } catch (const MyMoneyException &e) {
         KMessageBox::error(nullptr, QString::fromLatin1(e.what()));
