@@ -86,7 +86,9 @@ bool KOfxDirectConnectDlg::init()
     if (KMyMoneySettings::logOfxTransactions()) {
         QString logPath = KMyMoneySettings::logPath();
         d->m_fpTrace.setFileName(QString("%1/ofxlog.txt").arg(logPath));
-        d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
+        if (d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append)) {
+            ; // nothing here, just making the compiler happy
+        }
     }
 
     // Check if we need to tweak the request for specific institutions

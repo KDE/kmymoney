@@ -82,10 +82,13 @@ public:
             }
             QTemporaryFile file;
             file.setAutoRemove(false);
-            file.open();
-            file.write(transferjob->data());
-            filename = file.fileName();
-            file.close();
+            if (file.open()) {
+                file.write(transferjob->data());
+                filename = file.fileName();
+                file.close();
+            } else {
+                qDebug() << "loadTemplate: cannot open temp file";
+            }
         }
 
         bool rc = true;

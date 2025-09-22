@@ -564,7 +564,11 @@ bool InvestmentPage::validateSecurity()
 void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName, const MyMoneyQifProfile& qifProfile)
 {
     QFile oFile(outFileName);
-    oFile.open(QIODevice::WriteOnly);
+    if (!oFile.open(QIODevice::WriteOnly)) {
+        qDebug() << "Cannot write" << outFileName;
+        return;
+    }
+
     QTextStream out(&oFile);
 
     QString buffer;

@@ -52,9 +52,10 @@ void writeTabletoHTML(const PivotTable& table, const QString& basename = QString
     }
 
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << table.renderHTML();
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream(&g) << table.renderHTML();
+        g.close();
+    }
 }
 
 void writeTabletoCSV(const PivotTable& table, const QString& basename = QString())
@@ -69,9 +70,10 @@ void writeTabletoCSV(const PivotTable& table, const QString& basename = QString(
     }
 
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << table.renderCSV();
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream(&g) << table.renderCSV();
+        g.close();
+    }
 }
 
 void writeTabletoXML(const PivotTable& table, const QString& basename = QString())
@@ -86,9 +88,10 @@ void writeTabletoXML(const PivotTable& table, const QString& basename = QString(
     }
 
     QFile g(filename);
-    g.open(QIODevice::WriteOnly);
-    QTextStream(&g) << table.toXml();
-    g.close();
+    if (g.open(QIODevice::WriteOnly)) {
+        QTextStream(&g) << table.toXml();
+        g.close();
+    }
 }
 
 void writeTable(const PivotTable& table, const QString& basename = QString())

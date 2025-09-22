@@ -18,6 +18,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLocalizedString>
 #include <KMessageBox>
 
 // ----------------------------------------------------------------------------
@@ -418,49 +419,52 @@ bool BankingPage::validateCreditDebit()
 void BankingPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName, const MyMoneyQifProfile& qifProfile)
 {
     QFile oFile(outFileName);
-    oFile.open(QIODevice::WriteOnly);
-    QTextStream out(&oFile);
+    if (oFile.open(QIODevice::WriteOnly)) {
+        QTextStream out(&oFile);
 
-    QString buffer;
-    QString strEType;
+        QString buffer;
+        QString strEType;
 
-    switch (st.m_eType) {
-    case eMyMoney::Statement::Type::CreditCard:
-        strEType = QStringLiteral("CCard");
-        break;
-    case eMyMoney::Statement::Type::Savings:
-    case eMyMoney::Statement::Type::Checkings:
-    default:
-        strEType = QStringLiteral("Bank");
-    }
-
-    const auto eol(QLatin1Char('\n'));
-
-    if (!st.m_strAccountName.isEmpty()) {
-        buffer.append(QStringLiteral("!Account\n"));
-        buffer.append(QLatin1Char('N') + st.m_strAccountName + eol);
-        buffer.append(QLatin1Char('T') + strEType + eol);
-        buffer.append(QStringLiteral("^\n"));
-    }
-
-    buffer.append(QStringLiteral("!Type:") + strEType + eol);
-
-    for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.cbegin(); it != st.m_listTransactions.cend(); ++it) {
-        buffer.append(QLatin1Char('D') + qifProfile.date(it->m_datePosted) + eol);
-        buffer.append(QLatin1Char('T') + qifProfile.value(QLatin1Char('T'), it->m_amount) + eol);
-        buffer.append(QLatin1Char('P') + it->m_strPayee + eol);
-        if (!it->m_listSplits.isEmpty()) {
-            buffer.append(QLatin1Char('L') + it->m_listSplits.first().m_strCategoryName + eol);
+        switch (st.m_eType) {
+        case eMyMoney::Statement::Type::CreditCard:
+            strEType = QStringLiteral("CCard");
+            break;
+        case eMyMoney::Statement::Type::Savings:
+        case eMyMoney::Statement::Type::Checkings:
+        default:
+            strEType = QStringLiteral("Bank");
         }
-        if (!it->m_strNumber.isEmpty()) {
-            buffer.append(QLatin1Char('N') + it->m_strNumber + eol);
+
+        const auto eol(QLatin1Char('\n'));
+
+        if (!st.m_strAccountName.isEmpty()) {
+            buffer.append(QStringLiteral("!Account\n"));
+            buffer.append(QLatin1Char('N') + st.m_strAccountName + eol);
+            buffer.append(QLatin1Char('T') + strEType + eol);
+            buffer.append(QStringLiteral("^\n"));
         }
-        if (!it->m_strMemo.isEmpty()) {
-            buffer.append(QLatin1Char('M') + it->m_strMemo + eol);
+
+        buffer.append(QStringLiteral("!Type:") + strEType + eol);
+
+        for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.cbegin(); it != st.m_listTransactions.cend(); ++it) {
+            buffer.append(QLatin1Char('D') + qifProfile.date(it->m_datePosted) + eol);
+            buffer.append(QLatin1Char('T') + qifProfile.value(QLatin1Char('T'), it->m_amount) + eol);
+            buffer.append(QLatin1Char('P') + it->m_strPayee + eol);
+            if (!it->m_listSplits.isEmpty()) {
+                buffer.append(QLatin1Char('L') + it->m_listSplits.first().m_strCategoryName + eol);
+            }
+            if (!it->m_strNumber.isEmpty()) {
+                buffer.append(QLatin1Char('N') + it->m_strNumber + eol);
+            }
+            if (!it->m_strMemo.isEmpty()) {
+                buffer.append(QLatin1Char('M') + it->m_strMemo + eol);
+            }
+            buffer.append(QStringLiteral("^\n"));
+            out << buffer; // output qif file
+            buffer.clear();
         }
-        buffer.append(QStringLiteral("^\n"));
-        out << buffer;// output qif file
-        buffer.clear();
+        oFile.close();
+    } else {
+        KMessageBox::error(nullptr, i18n("Unable to open file '%1' for writing", outFileName));
     }
-    oFile.close();
 }

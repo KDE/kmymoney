@@ -559,10 +559,13 @@ QString KMyMoneyUtils::downloadFile(const QUrl &url)
 
     QTemporaryFile file;
     file.setAutoRemove(false);
-    file.open();
-    file.write(transferjob->data());
-    filename = file.fileName();
-    file.close();
+    if (file.open()) {
+        file.write(transferjob->data());
+        filename = file.fileName();
+        file.close();
+    } else {
+        qDebug() << "Cannot write" << file.fileName();
+    }
     return filename;
 }
 
