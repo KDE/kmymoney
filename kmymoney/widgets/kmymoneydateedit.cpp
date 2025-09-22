@@ -22,13 +22,15 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
-class KMyMoneyDateEditSettings
+KMyMoneyDateEditSettings* KMyMoneyDateEditSettings::instance()
 {
-public:
-    QDateEdit::Section initialSection{QDateEdit::DaySection};
-};
+    static KMyMoneyDateEditSettings* m_instance = nullptr;
 
-Q_GLOBAL_STATIC(KMyMoneyDateEditSettings, s_globalKMyMoneyDateEditSettings)
+    if (m_instance == nullptr) {
+        m_instance = new KMyMoneyDateEditSettings;
+    }
+    return m_instance;
+}
 
 class KMyMoneyDateEditPrivate
 {
@@ -40,6 +42,7 @@ public:
         , m_dateValidity(false)
         , m_lastKeyPressWasEscape(false)
         , m_firstFocusIn(true)
+        , m_settings(KMyMoneyDateEditSettings::instance())
     {
         int sectionIndex(0);
         int sectionSize(0);
@@ -409,6 +412,7 @@ public:
     bool m_dateValidity;
     bool m_lastKeyPressWasEscape;
     bool m_firstFocusIn;
+    KMyMoneyDateEditSettings* m_settings;
 };
 
 KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
@@ -470,12 +474,12 @@ void KMyMoneyDateEdit::setInitialSection(QDateEdit::Section section)
         section = QDateEdit::DaySection;
         break;
     }
-    s_globalKMyMoneyDateEditSettings()->initialSection = section;
+    d->m_settings->initialSection = section;
 }
 
-QDateEdit::Section KMyMoneyDateEdit::initialSection() const
+void KMyMoneyDateEdit::setTabHandling(KMyMoneyDateEdit::TabHandling method)
 {
-    return s_globalKMyMoneyDateEditSettings()->initialSection;
+    d->m_settings->tabHandling = method;
 }
 
 QDate KMyMoneyDateEdit::date() const
@@ -527,10 +531,17 @@ void KMyMoneyDateEdit::focusInEvent(QFocusEvent* event)
 
     switch (event->reason()) {
     case Qt::TabFocusReason:
-    case Qt::BacktabFocusReason:
     case Qt::OtherFocusReason:
-        d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
+        d->selectSection(d->m_settings->initialSection);
         break;
+    case Qt::BacktabFocusReason:
+        if (d->m_settings->tabHandling == ChangeFocus) {
+            d->selectSection(d->m_settings->initialSection);
+        } else {
+            d->selectSection(d->m_sections[d->m_sections.count() - 1]);
+        }
+        break;
+
     default:
         break;
     }
@@ -617,7 +628,7 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
     case Qt::Key_T:
         d->setDate(QDate::currentDate());
         Q_EMIT dateValidityChanged(QDate::currentDate());
-        d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
+        d->selectSection(d->m_settings->initialSection);
         break;
 
     default:
@@ -671,4 +682,27 @@ void KMyMoneyDateEdit::setDisplayFormat(QLocale::FormatType format)
 void KMyMoneyDateEdit::setAllowEmptyDate(bool emptyDateAllowed)
 {
     d->m_emptyDateAllowed = emptyDateAllowed;
+}
+
+bool KMyMoneyDateEdit::event(QEvent* e)
+{
+    if (e->type() == QEvent::KeyPress) {
+        if (d->m_settings->tabHandling == ChangeSection) {
+            QKeyEvent* kev = static_cast<QKeyEvent*>(e);
+            if (kev->key() == Qt::Key_Tab) {
+                const auto nextIndex = d->partBySection(d->sectionByCursorPos()) + 1;
+                if (nextIndex < d->m_sections.size()) {
+                    d->selectSection(d->m_sections[nextIndex]);
+                    return true;
+                }
+            } else if (kev->key() == Qt::Key_Backtab) {
+                const auto nextIndex = d->partBySection(d->sectionByCursorPos()) - 1;
+                if (nextIndex > -1) {
+                    d->selectSection(d->m_sections[nextIndex]);
+                    return true;
+                }
+            }
+        }
+    }
+    return KDateComboBox::event(e);
 }

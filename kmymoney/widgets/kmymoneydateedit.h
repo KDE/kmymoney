@@ -50,6 +50,11 @@ class KMM_BASE_WIDGETS_EXPORT KMyMoneyDateEdit : public KDateComboBox
     Q_PROPERTY(QDate date READ date WRITE setDate)
 
 public:
+    typedef enum {
+        ChangeFocus,
+        ChangeSection,
+    } TabHandling;
+
     explicit KMyMoneyDateEdit(QWidget* parent = nullptr);
     virtual ~KMyMoneyDateEdit();
 
@@ -98,11 +103,14 @@ public:
     void setInitialSection(QDateEdit::Section section);
 
     /**
-     * Returns the global setting of the initial section
-     *
-     * @returns One of DaySection, MonthSection or YearSection.
+     * Globally setup how the TAB key shall be handled. If @a method
+     * is specified as @c ChangeFocus (the default) the focus is
+     * moved on to the next widget in the tab order. If set to
+     * @c ChangeSection the next section will be selected. Once the
+     * last section is reached, the next widget will receive the
+     * focuse.
      */
-    QDateEdit::Section initialSection() const;
+    void setTabHandling(KMyMoneyDateEdit::TabHandling method);
 
 public Q_SLOTS:
     /**
@@ -122,6 +130,13 @@ public Q_SLOTS:
      */
     void setDisplayFormat(QLocale::FormatType format);
 
+    /**
+     * Overridden to handle TAB/BACKTAB to switch sections
+     * instead of focus when setTabSwitchesSections is set
+     * to @c true.
+     */
+    bool event(QEvent* e) override;
+
 Q_SIGNALS:
     /**
      * This signal is send out if the validity of the date
@@ -138,4 +153,21 @@ protected:
 private:
     KMyMoneyDateEditPrivate* d;
 };
+
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyDateEditSettings
+{
+    friend KMyMoneyDateEdit;
+
+public:
+    static KMyMoneyDateEditSettings* instance();
+    ~KMyMoneyDateEditSettings() = default;
+
+protected:
+    QDateEdit::Section initialSection{QDateEdit::DaySection};
+    KMyMoneyDateEdit::TabHandling tabHandling{KMyMoneyDateEdit::ChangeFocus};
+
+private:
+    KMyMoneyDateEditSettings() = default;
+};
+
 #endif // KMYMONEYDATEEDIT_H

@@ -80,6 +80,10 @@
    <label>Using the Enter key moves between the fields</label>
    <default>false</default>
   </entry>
+  <entry name="TabMovesBetweenDateParts" type="Bool">
+   <label>Using the TAB key moves between the date parts</label>
+   <default>false</default>
+  </entry>
   <entry name="LedgerLens" type="Bool">
    <label>Use the ledger lens</label>
    <default>false</default>

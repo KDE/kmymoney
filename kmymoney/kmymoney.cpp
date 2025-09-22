@@ -1204,6 +1204,9 @@ KMyMoneyApp::~KMyMoneyApp()
     // make sure all settings are written to disk
     KMyMoneySettings::self()->save();
 
+    // delete global settings object
+    delete KMyMoneyDateEditSettings::instance();
+
     delete d;
 
     // clear the pointer because it could still be used in connected lambdas
@@ -3303,6 +3306,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         KMyMoneyDateEdit().setInitialSection(QDateTimeEdit::YearSection);
         break;
     }
+    KMyMoneyDateEdit().setTabHandling(KMyMoneySettings::tabMovesBetweenDateParts() ? KMyMoneyDateEdit::ChangeSection : KMyMoneyDateEdit::ChangeFocus);
 
     const auto ledgerViewSettings = LedgerViewSettings::instance();
     ledgerViewSettings->setHideReconciledTransactions(KMyMoneySettings::hideReconciledTransactions());

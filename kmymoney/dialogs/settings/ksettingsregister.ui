@@ -252,6 +252,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="kcfg_TabMovesBetweenDateParts">
+         <property name="text">
+          <string>Use TAB to switch between parts of date</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="kcfg_stringMatchFromStart">
          <property name="whatsThis">
           <string>Mark this option, if you always want to match names e.g. for payees from the start. If unset, any substring is matched.</string>
