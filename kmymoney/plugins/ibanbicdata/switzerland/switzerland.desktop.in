@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Swiss IBAN and BIC
+Name[ar]=رقم IBAN ورقم BIC السويسريان
 Name[ca]=IBAN i BIC suïssos
 Name[ca@valencia]=IBAN i BIC suïssos
 Name[en_GB]=Swiss IBAN and BIC
@@ -24,6 +25,7 @@ Name[uk]=Швейцарський IBAN і BIC
 Name[zh_CN]=瑞士版国际银行账号和银行识别码
 Name[zh_TW]=瑞士 IBAN and BIC
 Comment=Make information about swiss IBANs and BICs available.
+Comment[ar]=إتاحة المعلومات المتعلقة بأرقام IBAN و BIC السويسرية.
 Comment[ca]=Posa a disposició la informació sobre els IBAN i BIC suïssos.
 Comment[ca@valencia]=Posa a disposició la informació sobre els IBAN i BIC suïssos.
 Comment[en_GB]=Make information about swiss IBANs and BICs available.

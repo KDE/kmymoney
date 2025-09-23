@@ -2,6 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=KMyMoney/IbanBicData
 Name=A database for institution names and iban to bic rules
+Name[ar]=قاعدة بيانات لأسماء المؤسسات وقواعد iban إلى bic
 Name[ca]=Una base de dades per als noms de les institucions i les regles «iban» a «bic»
 Name[ca@valencia]=Una base de dades per als noms de les institucions i les regles «iban» a «bic»
 Name[en_GB]=A database for institution names and IBAN to BIC rules

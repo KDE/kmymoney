@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Target2Participants
+Name[ar]=Target2Participants
 Name[ca]=Objectiu2Participants
 Name[ca@valencia]=Objectiu2Participants
 Name[cs]=Target2Participants
@@ -25,6 +26,7 @@ Name[uk]=Target2Participants
 Name[zh_CN]=泛欧实时全额自动清算系统成员
 Name[zh_TW]=Target2Participants
 Comment=Contains the BIC and name of all target2 participants
+Comment[ar]=يحتوي على رمز BIC واسم جميع المشاركين في نظام Target2
 Comment[ca]=Conté el BIC i el nom de tots els participants objectiu 2
 Comment[ca@valencia]=Conté el BIC i el nom de tots els participants objectiu 2
 Comment[en_GB]=Contains the BIC and name of all target2 participants

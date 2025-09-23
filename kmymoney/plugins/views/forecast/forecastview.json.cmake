@@ -4,6 +4,7 @@
             {
                 "Email": "asoliverez@gmail.com,lukasz.wojnilowicz@gmail.com",
                 "Name": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[ar]": "ألفارو سوليفيريز، لوكاس فوينيلوفيتش",
                 "Name[ca@valencia]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ca]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[cs]": "Alvaro Soliverez,Łukasz Wojniłowicz",
@@ -36,6 +37,7 @@
             }
         ],
         "Description": "Adds forecast view to KMyMoney",
+        "Description[ar]": "أضف عرض التنبؤ إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la vista de la previsió a KMyMoney",
         "Description[ca]": "Afegeix la vista de la previsió al KMyMoney",
         "Description[en_GB]": "Adds forecast view to KMyMoney",
@@ -68,6 +70,7 @@
         "Id": "forecastview",
         "License": "GPL",
         "Name": "Forecast view",
+        "Name[ar]": "عرض التنبؤ",
         "Name[ca@valencia]": "Vista de la previsió",
         "Name[ca]": "Vista de la previsió",
         "Name[de]": "Vorhersageansicht",

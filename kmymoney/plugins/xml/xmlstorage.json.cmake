@@ -4,6 +4,7 @@
             {
                 "Email": "ktambascio@users.sourceforge.net,tbaumgart@kde.org,acejones@users.sourceforge.net,lukasz.wojnilowicz@gmail.com",
                 "Name": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
+                "Name[ar]": "كيفن تامباسيو، توماس باومغارت، آيس جونز، لوكاس ووجنيلوفيتش",
                 "Name[ca@valencia]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[ca]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[de]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
@@ -35,6 +36,7 @@
             }
         ],
         "Description": "Adds XML storage support to KMyMoney",
+        "Description[ar]": "أضف دعم تخزين XML إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en XML a KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en XML al KMyMoney",
         "Description[en_GB]": "Adds XML storage support to KMyMoney",
@@ -67,6 +69,7 @@
         "Id": "xmlstorage",
         "License": "GPL",
         "Name": "XML Storage",
+        "Name[ar]": "تخزين XML",
         "Name[ca@valencia]": "Emmagatzematge XML",
         "Name[ca]": "Emmagatzematge XML",
         "Name[de]": "XML-Speicher",

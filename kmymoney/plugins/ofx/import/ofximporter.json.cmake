@@ -4,6 +4,7 @@
             {
                 "Email": "acejones@users.sourceforge.net,ipwizard@users.sourceforge.net",
                 "Name": "Ace Jones,Thomas Baumgart",
+                "Name[ar]": "آيس جونز، توماس باومغارت",
                 "Name[ca@valencia]": "Ace Jones,Thomas Baumgart",
                 "Name[ca]": "Ace Jones,Thomas Baumgart",
                 "Name[de]": "Ace Jones,Thomas Baumgart",
@@ -35,6 +36,7 @@
             }
         ],
         "Description": "Add OFX importing to KMyMoney",
+        "Description[ar]": "أضف استيراد OFX إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la importació des d'OFX a KMyMoney",
         "Description[ca]": "Afegeix la importació des d'OFX al KMyMoney",
         "Description[de]": "Fügt OFX-Import zu KMyMoney hinzu",
@@ -67,6 +69,7 @@
         "Id": "ofximporter",
         "License": "GPL",
         "Name": "OFX Importer",
+        "Name[ar]": "مُستورد OFX",
         "Name[ca@valencia]": "Importador d'OFX",
         "Name[ca]": "Importador d'OFX",
         "Name[cs]": "Importér OXF",
