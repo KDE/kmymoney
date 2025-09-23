@@ -4,6 +4,7 @@
             {
                 "Email": "romain@symlink.me",
                 "Name": "Romain Bignon",
+                "Name[ar]": "رومان بينيون",
                 "Name[ca@valencia]": "Romain Bignon",
                 "Name[ca]": "Romain Bignon",
                 "Name[cs]": "Romain Bignon",
@@ -37,6 +38,7 @@
             }
         ],
         "Description": "Plugin for Woob",
+        "Description[ar]": "ملحق لـ Woob",
         "Description[ca@valencia]": "Connector per a Woob",
         "Description[ca]": "Connector per al Woob",
         "Description[cs]": "Modul Woob",
@@ -67,6 +69,7 @@
         "Id": "woob",
         "License": "GPL",
         "Name": "Woob",
+        "Name[ar]": "Woob",
         "Name[ca@valencia]": "Woob",
         "Name[ca]": "Woob",
         "Name[cs]": "Woob",

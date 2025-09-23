@@ -4,6 +4,7 @@
             {
                 "Email": "mte@users.sourceforge.net",
                 "Name": "Michael Edwardes",
+                "Name[ar]": "مايكل إدواردز",
                 "Name[ca@valencia]": "Michael Edwardes",
                 "Name[ca]": "Michael Edwardes",
                 "Name[cs]": "Michael Edwardes",
@@ -37,6 +38,7 @@
             }
         ],
         "Description": "Add QIF exporting to KMyMoney",
+        "Description[ar]": "أضف تصدير QIF إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig l'exportació cap a QIF a KMyMoney",
         "Description[ca]": "Afegeix l'exportació a QIF al KMyMoney",
         "Description[de]": "Fügt QIF-Export zu KMyMoney hinzu",
@@ -70,6 +72,7 @@
         "Id": "qifexporter",
         "License": "GPL",
         "Name": "QIF Exporter",
+        "Name[ar]": "مُصدّر QIF",
         "Name[ca@valencia]": "Exportador a QIF",
         "Name[ca]": "Exportador a QIF",
         "Name[de]": "QIF-Export",

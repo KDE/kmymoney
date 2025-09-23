@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=GermanIbanBicDatabase
+Name[ar]=قاعدة بيانات IbanBic الألمانية
 Name[ca]=Basededades_alemanya_IbanBic
 Name[ca@valencia]=Basededades_alemanya_IbanBic
 Name[cs]=GermanIbanBicDatabase
@@ -26,6 +27,7 @@ Name[uk]=GermanIbanBicDatabase
 Name[zh_CN]=德国版国际银行账号及银行识别码数据库
 Name[zh_TW]=GermanIbanBicDatabase
 Comment=IBAN and BIC information as published by Deutsche Bundesbank, Frankfurt am Main, Deutschland.
+Comment[ar]=معلومات IBAN و BIC كما نشرتها Deutsche Bundesbank، فرانكفورت أم ماين، ألمانيا.
 Comment[ca]=Informació IBAN i BIC publicada pel Deutsche Bundesbank, Frankfurt del Main, Alemanya.
 Comment[ca@valencia]=Informació IBAN i BIC publicada pel Deutsche Bundesbank, Frankfurt del Main, Alemanya.
 Comment[en_GB]=IBAN and BIC information as published by Deutsche Bundesbank, Frankfurt am Main, Deutschland.

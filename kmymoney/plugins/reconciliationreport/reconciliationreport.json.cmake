@@ -4,6 +4,7 @@
             {
                 "Email": "onet.cristian@gmail.com",
                 "Name": "Cristian Oneț",
+                "Name[ar]": "كريستيان أونيتش",
                 "Name[ca@valencia]": "Cristian Oneț",
                 "Name[ca]": "Cristian Oneț",
                 "Name[cs]": "Cristian Oneț",
@@ -36,6 +37,7 @@
             }
         ],
         "Description": "Creates a report after each reconciliation containing data about the reconciliation process",
+        "Description[ar]": "أَنشِئْ تقريراً بعد كل تسوية يحتوي على بيانات حول عملية التسوية",
         "Description[ca@valencia]": "Crea un informe després de cada conciliació que conté dades del procés de conciliació",
         "Description[ca]": "Crea un informe després de cada conciliació que conté dades del procés de conciliació",
         "Description[de]": "Erstellt nach jedem Abgleich einen Bericht, der Daten über den Abgleich-Prozess enthält",
@@ -67,6 +69,7 @@
         "Id": "reconciliationreport",
         "License": "GPL",
         "Name": "Reconciliation report",
+        "Name[ar]": "تقرير التسوية",
         "Name[ca@valencia]": "Informe de conciliació",
         "Name[ca]": "Informe de conciliació",
         "Name[cs]": "Hlášení rozvahy",

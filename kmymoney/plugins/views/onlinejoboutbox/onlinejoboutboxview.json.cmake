@@ -4,6 +4,7 @@
             {
                 "Email": "christian-david@web.de",
                 "Name": "Christian Dávid",
+                "Name[ar]": "كريستيان دافيد",
                 "Name[ca@valencia]": "Christian Dávid",
                 "Name[ca]": "Christian Dávid",
                 "Name[cs]": "Christian Dávid",
@@ -37,6 +38,7 @@
             }
         ],
         "Description": "Adds online job outbox view to KMyMoney",
+        "Description[ar]": "أضف عرض صندوق صادر المهام عبر الإنترنت إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la vista de la safata d'eixida dels treballs en línia a KMyMoney",
         "Description[ca]": "Afegeix la vista de la safata de sortida dels treballs en línia al KMyMoney",
         "Description[en_GB]": "Adds online job outbox view to KMyMoney",
@@ -66,6 +68,7 @@
         "Id": "onlinejoboutboxview",
         "License": "GPL",
         "Name": "Online job outbox view",
+        "Name[ar]": "عرض صندوق صادر المهام عبر الإنترنت",
         "Name[ca@valencia]": "Vista en línia de la safata d'eixida dels treballs",
         "Name[ca]": "Vista en línia de la safata de sortida dels treballs",
         "Name[en_GB]": "Online job outbox view",

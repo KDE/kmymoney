@@ -4,6 +4,7 @@
             {
                 "Email": "asoliverez@gmail.com,lukasz.wojnilowicz@gmail.com",
                 "Name": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[ar]": "ألفارو سوليفيريز، لوكاس فوينيلوفيتش",
                 "Name[ca@valencia]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ca]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[cs]": "Alvaro Soliverez,Łukasz Wojniłowicz",
@@ -37,6 +38,7 @@
             }
         ],
         "Description": "Adds reports view to KMyMoney",
+        "Description[ar]": "أضف عرض التقارير إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la vista dels informes a KMyMoney",
         "Description[ca]": "Afegeix la vista dels informes al KMyMoney",
         "Description[en_GB]": "Adds reports view to KMyMoney",
@@ -69,6 +71,7 @@
         "Id": "reportsview",
         "License": "GPL",
         "Name": "Reports view",
+        "Name[ar]": "عرض التقارير",
         "Name[ca@valencia]": "Vista dels informes",
         "Name[ca]": "Vista dels informes",
         "Name[de]": "Berichtsansicht",

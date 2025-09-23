@@ -4,6 +4,7 @@
             {
                 "Email": "mte@users.sourceforge.net",
                 "Name": "Michael Edwardes",
+                "Name[ar]": "مايكل إدواردز",
                 "Name[ca@valencia]": "Michael Edwardes",
                 "Name[ca]": "Michael Edwardes",
                 "Name[cs]": "Michael Edwardes",
@@ -37,6 +38,7 @@
             }
         ],
         "Description": "Add GnuCash importing to KMyMoney",
+        "Description[ar]": "أضف استيراد GnuCash إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la importació des de GnuCash a KMyMoney",
         "Description[ca]": "Afegeix la importació des del GnuCash al KMyMoney",
         "Description[de]": "Fügt GnuCash-Import zu KMyMoney hinzu",
@@ -70,6 +72,7 @@
         "Id": "gncimporter",
         "License": "GPL",
         "Name": "GNC Importer",
+        "Name[ar]": "مُستورد GNC",
         "Name[ca@valencia]": "Importador de GNC",
         "Name[ca]": "Importador de GNC",
         "Name[de]": "GNC-Import",

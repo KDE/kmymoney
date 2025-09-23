@@ -4,6 +4,7 @@
             {
                 "Email": "onet.cristian@gmail.com",
                 "Name": "Cristian Oneț",
+                "Name[ar]": "كريستيان أونيتش",
                 "Name[ca@valencia]": "Cristian Oneț",
                 "Name[ca]": "Cristian Oneț",
                 "Name[cs]": "Cristian Oneț",
@@ -36,6 +37,7 @@
             }
         ],
         "Description": "Provides the capability to print checks",
+        "Description[ar]": "يوفّر القدرة على طباعة الشيكات",
         "Description[ca@valencia]": "Proporciona la capacitat d'imprimir xecs",
         "Description[ca]": "Proporciona la capacitat d'imprimir xecs",
         "Description[de]": "Stellt die Möglichkeit bereit, Schecks zu drucken",
@@ -68,6 +70,7 @@
         "Id": "checkprinting",
         "License": "GPL",
         "Name": "Check printing",
+        "Name[ar]": "طباعة الشيكات",
         "Name[ca@valencia]": "Impressió de xecs",
         "Name[ca]": "Impressió de xecs",
         "Name[de]": "Scheckdruck",

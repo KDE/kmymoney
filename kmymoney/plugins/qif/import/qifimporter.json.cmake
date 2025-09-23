@@ -4,6 +4,7 @@
             {
                 "Email": "mte@users.sourceforge.net",
                 "Name": "Michael Edwardes",
+                "Name[ar]": "مايكل إدواردز",
                 "Name[ca@valencia]": "Michael Edwardes",
                 "Name[ca]": "Michael Edwardes",
                 "Name[cs]": "Michael Edwardes",
@@ -37,6 +38,7 @@
             }
         ],
         "Description": "Add QIF importing to KMyMoney",
+        "Description[ar]": "أضف استيراد QIF إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la importació des de QIF a KMyMoney",
         "Description[ca]": "Afegeix la importació des de QIF al KMyMoney",
         "Description[de]": "Fügt QIF-Import zu KMyMoney hinzu",
@@ -70,6 +72,7 @@
         "Id": "qifimporter",
         "License": "GPL",
         "Name": "QIF Importer",
+        "Name[ar]": "مُستورد QIF",
         "Name[ca@valencia]": "Importador de QIF",
         "Name[ca]": "Importador de QIF",
         "Name[de]": "QIF-Import",

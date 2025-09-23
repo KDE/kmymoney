@@ -4,6 +4,7 @@
             {
                 "Email": "onet.cristian@gmail.com",
                 "Name": "Cristian Oneț",
+                "Name[ar]": "كريستيان أونيتش",
                 "Name[ca@valencia]": "Cristian Oneț",
                 "Name[ca]": "Cristian Oneț",
                 "Name[cs]": "Cristian Oneț",
@@ -36,6 +37,7 @@
             }
         ],
         "Description": "Exports schedules to iCalendar files",
+        "Description[ar]": "يصدّر الجداول الزمنية إلى ملفات iCalendar",
         "Description[ca@valencia]": "Exporta les planificacions a fitxers iCalendar",
         "Description[ca]": "Exporta les planificacions a fitxers iCalendar",
         "Description[de]": "Exportiert geplante Buchungen in iCalendar-Dateien",
@@ -68,6 +70,7 @@
         "Id": "icalendarexporter",
         "License": "GPL",
         "Name": "iCalendar",
+        "Name[ar]": "iCalendar",
         "Name[ca@valencia]": "iCalendar",
         "Name[ca]": "iCalendar",
         "Name[cs]": "iCalendar",
