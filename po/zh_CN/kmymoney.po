@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-14 03:22+0000\n"
+"POT-Creation-Date: 2025-09-23 03:38+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -405,7 +405,7 @@ msgstr[0] "已处理 %1 份对账单，结果如下："
 #: kmymoney/dialogs/importsummarydlg.ui:14
 #, fuzzy, kde-format
 #| msgid "Imported History"
-msgctxt "@title:window"
+msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
 msgstr "导入历史"
 
