@@ -280,24 +280,43 @@
 </para>
 
 <para
->L'URL resultant es mostra com a enllaç al llibre major general a les operacions corresponents (vegeu la columna «Detall»). <screenshot
-> <screeninfo
->Mostra l'enllaç al llibre major general</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
-> </mediaobject
-> </screenshot
-> L'enllaç es pot accedir a través del menú contextual d'una operació o mitjançant una drecera de teclat. <screenshot>
+>L'URL resultant es mostra com un enllaç en el llibre major general a les operacions corresponents (vegeu la columna «Detall») i en la vista de detall a la part inferior esquerra del camp d'entrada del recordatori. </para>
+
+<screenshot>
   <screeninfo
->...</screeninfo>
+>Mostra un enllaç en el llibre major general</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>També es pot accedir a l'enllaç a través de l'element de menú «Obre un URL» en el menú contextual d'una operació o a través d'una drecera de teclat. </para>
+<screenshot>
+  <screeninfo
+>Mostra el menú contextual de l'operació</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
     </imageobject>
   </mediaobject>
 </screenshot>
-</para>
+
+<para
+>La drecera de teclat associada es port configurara en el <link linkend="reference.menus.settings.help"
+>Menú de configuració i ajuda</link
+>. </para>
+<screenshot>
+  <screeninfo
+>Mostra la drecera de teclat per a obrir un URL</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="shortcut-payee-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
 
 <sect2 id="details.payees.linkmatching.pattern"
 ><title

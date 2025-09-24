@@ -292,24 +292,43 @@
 </para>
 
 <para
->De resulterende URL wordt getoond als koppeling in het algemene grootboek bij de bijbehorende transacties (zie kolom "Detail"). <screenshot
-> <screeninfo
->Koppeling tonen in het algemene grootboek</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
-> </mediaobject
-> </screenshot
-> De toegang tot de koppeling gaat via het contextmenu van een transactie of via een sneltoets. <screenshot>
+>De resulterende URL wordt getoond als een koppeling in het algemene grootboek voor de bijbehorende transacties (zie kolom “Detail”) en in de detailweergave links onderaan van het invoerveld memo. </para>
+
+<screenshot>
   <screeninfo
->....</screeninfo>
+>Toon koppeling in het grootboek</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>De koppeling kan ook benaderd worden via het menu-item “URL openen” in het contextmenu van een transactie of via een sneltoets. </para>
+<screenshot>
+  <screeninfo
+>Contextmenu van transactie tonen</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
     </imageobject>
   </mediaobject>
 </screenshot>
-</para>
+
+<para
+>De bijbehorende sneltoets kan geconfigureerd worden in het <link linkend="reference.menus.settings.help"
+>Menu Instellingen en Help</link
+>. </para>
+<screenshot>
+  <screeninfo
+>Sneltoets voor openen van een URL tonen</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="shortcut-payee-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
 
 <sect2 id="details.payees.linkmatching.pattern"
 ><title

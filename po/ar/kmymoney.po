@@ -435,9 +435,7 @@ msgstr[5] "%1 كشف حساب عولجت مع النتائج التالية:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Import summary"
+#, kde-format
 msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
 msgstr "ملخص الاستيراد"
