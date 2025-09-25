@@ -49,6 +49,7 @@
         "Description[fi]": "Woob-liitännäinen",
         "Description[fr]": "Module externe pour Woob",
         "Description[gl]": "Complemento para Woob.",
+        "Description[he]": "תוסף ל־Woob",
         "Description[it]": "Estensione per Woob",
         "Description[ka]": "Woob-ის დამატება",
         "Description[ko]": "Woob용 플러그인",

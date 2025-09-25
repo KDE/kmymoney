@@ -48,6 +48,7 @@
         "Description[fi]": "Lisää KMyMoneyyn SQL-varastotuen",
         "Description[fr]": "Ajoute la prise en charge du stockage « SQL » à KMyMoney",
         "Description[gl]": "Engade a posibilidade de almacenamento de SQL en KMyMoney",
+        "Description[he]": "הוספת תמיכה באחסון SQL ל־KMyMoney",
         "Description[it]": "Aggiunge il supporto di archiviazione a KMyMoney",
         "Description[ka]": "KMyMoney-ში SQL საცავის მხარდაჭერის დამატება",
         "Description[ko]": "KMyMoney에 SQL 저장소 지원 추가",
