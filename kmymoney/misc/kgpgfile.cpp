@@ -512,7 +512,7 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
 
 // NOOP implementation
 KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options)
-    : d(0)
+    : d(nullptr)
 {
     Q_UNUSED(fn);
     Q_UNUSED(homedir);
