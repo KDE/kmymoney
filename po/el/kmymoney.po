@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:42+0000\n"
+"POT-Creation-Date: 2025-09-28 00:44+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -598,10 +598,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3474
-#: kmymoney/kmymoney.cpp:3545 kmymoney/kmymoney.cpp:3561
-#: kmymoney/kmymoney.cpp:3567 kmymoney/kmymoney.cpp:3581
-#: kmymoney/kmymoney.cpp:3583
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3478
+#: kmymoney/kmymoney.cpp:3549 kmymoney/kmymoney.cpp:3565
+#: kmymoney/kmymoney.cpp:3571 kmymoney/kmymoney.cpp:3585
+#: kmymoney/kmymoney.cpp:3587
 #, kde-format
 msgid "Backup"
 msgstr "Υποστηρικτικό αντίγραφο"
@@ -1157,7 +1157,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_updateButton)
 #. i18n: ectx: label, entry (PriceHistoryUpdate), group (General Options)
 #: kmymoney/dialogs/kcurrencycalculator.ui:310
-#: kmymoney/settings/kmymoney.kcfg:88
+#: kmymoney/settings/kmymoney.kcfg:92
 #, kde-format
 msgid "Update price history"
 msgstr "Ενημέρωση του ιστορικού τιμών"
@@ -1875,7 +1875,7 @@ msgstr "Κατάσταση:"
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:171
 #: kmymoney/dialogs/knewaccountdlg.ui:409
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:602
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:625
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:122
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:170
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:212
@@ -1887,7 +1887,7 @@ msgstr "Κατάσταση:"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
 #: kmymoney/plugins/views/reports/kreportsview.ui:80
-#: kmymoney/settings/kmymoney.kcfg:481 kmymoney/views/kinstitutionsview.ui:53
+#: kmymoney/settings/kmymoney.kcfg:489 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
@@ -1970,7 +1970,7 @@ msgstr "Λογαριασμοί/Κατηγορίες"
 #. i18n: ectx: property (text), widget (QLabel, textLabel8)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:493
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:516
 #: kmymoney/plugins/views/reports/kreportsview_p.h:960
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1500
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
@@ -1989,7 +1989,7 @@ msgstr "Διαχωρισμοί"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMyMoneyBriefSchedule)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:188
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:474
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:497
 #: kmymoney/widgets/kmymoneybriefschedule.ui:14
 #, kde-format
 msgid "Schedules"
@@ -3243,7 +3243,7 @@ msgstr "Προσωπικές ρυθμίσεις γραμματοσειράς"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:71
-#: kmymoney/settings/kmymoney.kcfg:322
+#: kmymoney/settings/kmymoney.kcfg:330
 #, kde-format
 msgid "Cell font"
 msgstr "Γραμματοσειρά κυψέλης"
@@ -3251,7 +3251,7 @@ msgstr "Γραμματοσειρά κυψέλης"
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:81
-#: kmymoney/settings/kmymoney.kcfg:325
+#: kmymoney/settings/kmymoney.kcfg:333
 #, kde-format
 msgid "Header font"
 msgstr "Γραμματοσειρά κεφαλίδας"
@@ -3449,73 +3449,102 @@ msgstr "Αριθμομηχανή"
 msgid "Views"
 msgstr "Προβολές"
 
-#. i18n: ectx: property (title), widget (QGroupBox, kcfg_StartLastViewSelected)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_9)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox6)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:328
+#: kmymoney/dialogs/settings/ksettingsschedules.ui:23
 #, kde-format
-msgid "Startup page options"
-msgstr "Επιλογές της σελίδας εκκίνησης"
+msgid "Startup options"
+msgstr "Επιλογές εκκίνησης"
 
-#. i18n: ectx: property (text), widget (QRadioButton, radioButton1)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:334
-#, fuzzy, kde-format
-#| msgid "Start with homepage"
-msgid "Start with ho&mepage"
-msgstr "Εκκίνηση στην αρχική σελίδα"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:344
 #, kde-format
-msgid "Start with last selected view"
-msgstr "Εκκίνηση στην τελευταία επιλεγμένη προβολή"
+msgid "View to show"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:342
+#, fuzzy, kde-format
+#| msgid "Home Page"
+msgid "Homepage"
+msgstr "Αρχική σελίδα"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:347
+#, fuzzy, kde-format
+#| msgid "The last selected view"
+msgid "Last selected view"
+msgstr "Η τελευταία επιλεγμένη προβολή"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:355
+#, fuzzy, kde-format
+#| msgid "Account to export"
+msgid "Accounts to open in ledger"
+msgstr "Λογαριασμός προς εξαγωγή"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:363
+#, fuzzy, kde-format
+#| msgid "Asset accounts"
+msgid "Last account used"
+msgstr "Λογαριασμοί ενεργητικού"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:368
+#, fuzzy, kde-format
+#| msgid "Create a new asset account"
+msgid "All favorite accounts"
+msgstr "Δημιουργία νέου λογαριασμού ενεργητικού"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:373
+#, fuzzy, kde-format
+#| msgid "Expand all accounts in the list"
+msgid "All accounts open at last close"
+msgstr "Ξετύλιγμα όλων των λογαριασμών στη λίστα"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_viewType)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:354
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:384
 #, kde-format
 msgid "Type of the KMyMoney view"
 msgstr "Τύπος προβολής του KMyMoney"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:360
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:390
 #, kde-format
 msgid "List"
 msgstr "Λίστα"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton4)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:370
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:400
 #, kde-format
 msgid "Tree"
 msgstr "Δέντρο"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton5)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:377
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:407
 #, kde-format
 msgid "Tabbed"
 msgstr "Με καρτέλες"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_syncLedgerInvestment)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:387
-#, kde-format
-msgid "Synchronize account selection of ledger and investment view"
-msgstr ""
-"Συγχρονισμός της επιλογής λογαριασμού για την προβολή καθολικού και "
-"επενδύσεων"
-
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage)
 #. i18n: ectx: attribute (title), widget (QWidget, tabFilter)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:411
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:434
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:182
 #, kde-format
 msgid "Filter"
 msgstr "Φίλτρο"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_6)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:440
 #, kde-format
 msgid "Accounts / Categories"
 msgstr "Λογαριασμοί / Κατηγορίες"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideUnusedCategory)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:423
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:446
 #, kde-format
 msgid ""
 "This option hides all categories in the categories view that are not used in "
@@ -3527,53 +3556,53 @@ msgstr ""
 "στις λίστες επιλογής κατηγοριών."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:426
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:449
 #, kde-format
 msgid "Do not show unused categories"
 msgstr "Να μην εμφανίζονται οι κατηγορίες που δεν χρησιμοποιούνται"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpertMode)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:433
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:456
 #, kde-format
 msgid "Show equity accounts"
 msgstr "Παρουσίαση των λογαριασμών μετοχών"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:440
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:463
 #, kde-format
 msgid "This option will display the categories in the accounts view also."
 msgstr ""
 "Η επιλογή αυτή θα εμφανίσει τις κατηγορίες και στην προβολή λογαριασμών."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:443
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:466
 #, kde-format
 msgid "Show categories in the accounts list view"
 msgstr "Εμφάνιση των κατηγοριών στην προβολή λίστας των λογαριασμών"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:450
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:473
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
 #, kde-format
 msgid "Hide accounts with a zero balance from Home"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:480
 #, fuzzy, kde-format
 #| msgid "Hide closed accounts"
 msgid "Hide accounts with a zero balance from Accounts"
 msgstr "Απόκρυψη κλειστών λογαριασμών"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:487
 #, fuzzy, kde-format
 #| msgid "Do not show closed accounts"
 msgid "Do not show zero balance equities"
 msgstr "Να μην εμφανίζονται οι κλειστοί λογαριασμοί"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideFinishedSchedules)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:480
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:503
 #, kde-format
 msgid "This option hides all finished schedules in the schedules view."
 msgstr ""
@@ -3581,20 +3610,20 @@ msgstr ""
 "στην προβολή προγραμματισμών."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideFinishedSchedules)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:483
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:506
 #, kde-format
 msgid "Do not show finished schedules"
 msgstr ""
 "Να μην εμφανίζονται οι προγραμματισμένες συναλλαγές που έχουν τερματιστεί"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:501
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:524
 #, kde-format
 msgid "Do not show transactions prior to"
 msgstr "Να μην εμφανίζονται οι συναλλαγές πριν από"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideReconciledTransactions)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:532
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:555
 #, kde-format
 msgid "This option hides all reconciled transactions in the ledger view."
 msgstr ""
@@ -3602,32 +3631,32 @@ msgstr ""
 "καθολικού."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideReconciledTransactions)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:535
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:558
 #, kde-format
 msgid "Do not show reconciled transactions"
 msgstr "Να μην εμφανίζονται οι συμφωνηθείσες συναλλαγές"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:562
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:585
 #, fuzzy, kde-format
 #| msgid "Report"
 msgid "Support"
 msgstr "Αναφορά"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_8)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:568
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:591
 #, kde-format
 msgid "Logging"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:576
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:599
 #, kde-format
 msgid "Log path"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:624
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:647
 #, kde-format
 msgid ""
 "On choosing a log file path please keep in mind that log files may contain "
@@ -3636,8 +3665,8 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
 #. i18n: ectx: label, entry (logImportedStatements), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:634
-#: kmymoney/settings/kmymoney.kcfg:312
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:657
+#: kmymoney/settings/kmymoney.kcfg:320
 #, fuzzy, kde-format
 #| msgid "Failed to import all statements."
 msgid "Log imported statements"
@@ -3645,8 +3674,8 @@ msgstr "Η εισαγωγή όλων των αποσπασμάτων απέτυ�
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logOfxTransactions)
 #. i18n: ectx: label, entry (logOfxTransactions), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:641
-#: kmymoney/settings/kmymoney.kcfg:315
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:664
+#: kmymoney/settings/kmymoney.kcfg:323
 #, fuzzy, kde-format
 #| msgid "Fix transactions"
 msgid "Log OFX transactions"
@@ -3797,7 +3826,7 @@ msgstr "Προσωπικές ρυθμίσεις γραμματοσειράς"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (IconsTheme), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsicons.ui:52
-#: kmymoney/settings/kmymoney.kcfg:328
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Icon theme"
 msgstr ""
@@ -4158,7 +4187,7 @@ msgstr "Εμφάνιση ενός καννάβου"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:40
-#: kmymoney/settings/kmymoney.kcfg:92
+#: kmymoney/settings/kmymoney.kcfg:96
 #, kde-format
 msgid "Show transaction form"
 msgstr "Εμφάνιση της φόρμας συναλλαγών"
@@ -4208,7 +4237,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:76
-#: kmymoney/settings/kmymoney.kcfg:84
+#: kmymoney/settings/kmymoney.kcfg:88
 #, kde-format
 msgid "Use the ledger lens"
 msgstr "Εμφάνιση των λεπτομερειών με κλικ στην καταχώρηση"
@@ -4341,8 +4370,14 @@ msgstr ""
 msgid "Use Enter to move between fields"
 msgstr "Χρήση του Enter για την μετακίνηση μεταξύ των πεδίων"
 
-#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMovesBetweenDateParts)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:257
+#, kde-format
+msgid "Use TAB to switch between parts of date"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:264
 #, kde-format
 msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
@@ -4353,13 +4388,13 @@ msgstr ""
 "αντιστοίχιση θα πραγματοποιηθεί σε οποιαδήποτε θέση της συμβολοσειράς."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:260
+#: kmymoney/dialogs/settings/ksettingsregister.ui:267
 #, kde-format
 msgid "Match names from start"
 msgstr "Ταίριασμα ονομάτων από την αρχή της πρότασης"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_AutoReconciliation)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:267
+#: kmymoney/dialogs/settings/ksettingsregister.ui:274
 #, kde-format
 msgid ""
 "After entering the reconciliation data automatically detect the transactions "
@@ -4370,7 +4405,7 @@ msgstr ""
 "μη μπορεί να γίνει αυτό)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoReconciliation)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:270
+#: kmymoney/dialogs/settings/ksettingsregister.ui:277
 #: kmymoney/views/reconciliationledgerviewpage.cpp:127
 #, kde-format
 msgid "Automatic reconciliation"
@@ -4378,14 +4413,14 @@ msgstr "Αυτόματη συμφωνία"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_1)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:282
-#: kmymoney/settings/kmymoney.kcfg:344
+#: kmymoney/dialogs/settings/ksettingsregister.ui:289
+#: kmymoney/settings/kmymoney.kcfg:352
 #, kde-format
 msgid "Initial cursor position within the date field"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:290
+#: kmymoney/dialogs/settings/ksettingsregister.ui:297
 #, fuzzy, kde-format
 #| msgctxt "Schedule occurrence period"
 #| msgid "Day"
@@ -4394,7 +4429,7 @@ msgstr "Ημέρα"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:295
+#: kmymoney/dialogs/settings/ksettingsregister.ui:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:711
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:537
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
@@ -4404,20 +4439,20 @@ msgstr "Μήνας"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:300
+#: kmymoney/dialogs/settings/ksettingsregister.ui:307
 #: kmymoney/plugins/views/budget/knewbudgetdlg.ui:39
 #, kde-format
 msgid "Year"
 msgstr "Έτος"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:324
+#: kmymoney/dialogs/settings/ksettingsregister.ui:331
 #, kde-format
 msgid "Default reconciliation state"
 msgstr "Προκαθορισμένη κατάσταση συμφωνίας"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_defaultReconciliationState)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:334
+#: kmymoney/dialogs/settings/ksettingsregister.ui:341
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation "
@@ -4427,7 +4462,7 @@ msgstr ""
 "συμφωνία του λογαριασμού"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:338
+#: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
 msgid "Not marked"
@@ -4435,7 +4470,7 @@ msgstr "Μη σημειωμένο"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:343
+#: kmymoney/dialogs/settings/ksettingsregister.ui:350
 #: kmymoney/widgets/ktransactionfilter.ui:605
 #, kde-format
 msgctxt "@item reconciliation status"
@@ -4444,7 +4479,7 @@ msgstr "Εκκαθαρισμένο"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:348
+#: kmymoney/dialogs/settings/ksettingsregister.ui:355
 #: kmymoney/plugins/views/reports/core/listtable.cpp:715
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
 #: kmymoney/views/khomeview_p.h:1063
@@ -4454,25 +4489,25 @@ msgid "Reconciled"
 msgstr "Συμφωνημένο"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_AutoFillTransaction)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:374
+#: kmymoney/dialogs/settings/ksettingsregister.ui:381
 #, kde-format
 msgid "Autofill"
 msgstr "Αυτόματη συμπλήρωση"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:383
+#: kmymoney/dialogs/settings/ksettingsregister.ui:390
 #, kde-format
 msgid "Do not auto-fill transaction data at all."
 msgstr "Να μη γίνεται καθόλου αυτόματη συμπλήρωση συναλλαγών."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:386
+#: kmymoney/dialogs/settings/ksettingsregister.ui:393
 #, kde-format
 msgid "No Autofill"
 msgstr "Χωρίς αυτόματη συμπλήρωση"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:395
+#: kmymoney/dialogs/settings/ksettingsregister.ui:402
 #, no-c-format, kde-format
 msgid ""
 "Collect all transactions for the given payee. Treat all transactions that "
@@ -4490,14 +4525,14 @@ msgstr ""
 "Επιλέγοντας 0% θα δώσει μία λίστα με όλες τις συναλλαγές."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:398
+#: kmymoney/dialogs/settings/ksettingsregister.ui:405
 #, fuzzy, kde-format
 #| msgid "Same transaction if amount differs less than"
 msgid "Same transaction if amount differs less than percentage set below"
 msgstr "Πανομοιότυπη συναλλαγή αν το ποσό διαφέρει λιγότερο από "
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:411
+#: kmymoney/dialogs/settings/ksettingsregister.ui:418
 #, kde-format
 msgid ""
 "The data of the last transaction assigned to the category used most often "
@@ -4508,21 +4543,21 @@ msgstr ""
 "στον επεξεργαστή συναλλαγών."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:414
+#: kmymoney/dialogs/settings/ksettingsregister.ui:421
 #, kde-format
 msgid "With previously most often used transaction for the payee"
 msgstr ""
 "Με την προηγούμενη συχνότερα χρησιμοποιημένη συναλλαγή για τον δικαιούχο"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:433
+#: kmymoney/dialogs/settings/ksettingsregister.ui:440
 #, fuzzy, kde-format
 #| msgid "Same transaction if amount differs less than"
 msgid "Same transaction if amount differs less than "
 msgstr "Πανομοιότυπη συναλλαγή αν το ποσό διαφέρει λιγότερο από "
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_AutoFillDifference)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:440
+#: kmymoney/dialogs/settings/ksettingsregister.ui:447
 #, kde-format
 msgid ""
 "Two transactions are usually treated identical for autofill, if they refer "
@@ -4534,13 +4569,13 @@ msgstr ""
 "ποσό τους κυμαίνεται πάνω από το ποσοστό που δίνεται εδώ."
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_AutoFillDifference)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:443
+#: kmymoney/dialogs/settings/ksettingsregister.ui:450
 #, no-c-format, kde-format
 msgid "%"
 msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_AutoFillUseMemos)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:472
+#: kmymoney/dialogs/settings/ksettingsregister.ui:479
 #, kde-format
 msgid ""
 "If this option is checked the memos from the previous transaction will be "
@@ -4552,25 +4587,25 @@ msgstr ""
 "συμπλήρωση της συναλλαγής."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFillUseMemos)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:475
+#: kmymoney/dialogs/settings/ksettingsregister.ui:482
 #, kde-format
 msgid "Use memos from previous transaction"
 msgstr "Χρήση σημειώσεων από την προηγούμενη συναλλαγή"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:502
+#: kmymoney/dialogs/settings/ksettingsregister.ui:509
 #, kde-format
 msgid "Import"
 msgstr "Εισαγωγή"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:510
+#: kmymoney/dialogs/settings/ksettingsregister.ui:517
 #, kde-format
 msgid "Match transactions within days"
 msgstr "Αντιστοίχιση συναλλαγών σε αυτό το εύρος (+/- ημέρες)"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_matchInterval)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:520
+#: kmymoney/dialogs/settings/ksettingsregister.ui:527
 #, kde-format
 msgid ""
 "Search for matching transactions within the range of the posting date of the "
@@ -4580,7 +4615,7 @@ msgstr ""
 "της εισηγμένης συναλλαγής +/- τον αριθμό των δοσμένων ημερών."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:557
+#: kmymoney/dialogs/settings/ksettingsregister.ui:564
 #, kde-format
 msgid ""
 "Whenever a new payee is detected during import of a statement, the user will "
@@ -4592,7 +4627,7 @@ msgstr ""
 "χρήστη αυτόν με αυτήν την "
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_askForPayeeCategory)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:560
+#: kmymoney/dialogs/settings/ksettingsregister.ui:567
 #, kde-format
 msgid "Ask for a new payee's default category"
 msgstr "Να γίνεται η ερώτηση για μια νέα προκαθορισμένη κατηγορία δικαιούχου"
@@ -4615,12 +4650,6 @@ msgstr "Κανένα"
 #, kde-format
 msgid "Schedule Settings"
 msgstr "ρυθμίσεις προγραμματισμού"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox6)
-#: kmymoney/dialogs/settings/ksettingsschedules.ui:23
-#, kde-format
-msgid "Startup options"
-msgstr "Επιλογές εκκίνησης"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CheckSchedule)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:29
@@ -5005,255 +5034,255 @@ msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Νέος λογαριασμός..."
 
-#: kmymoney/kmymoney.cpp:1237
+#: kmymoney/kmymoney.cpp:1240
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1250
+#: kmymoney/kmymoney.cpp:1253
 #, fuzzy, kde-format
 #| msgid "Copy this report to the clipboard"
 msgid "Copy to clipboard"
 msgstr "αντιγραφή αυτής της αναφοράς στο πρόχειρο"
 
-#: kmymoney/kmymoney.cpp:1251
+#: kmymoney/kmymoney.cpp:1254
 #, fuzzy, kde-format
 #| msgid "Unable to parse file"
 msgid "Save to file"
 msgstr "Αδυναμία ανάλυσης του αρχείου"
 
-#: kmymoney/kmymoney.cpp:1379
+#: kmymoney/kmymoney.cpp:1382
 #, kde-format
 msgid "Backup..."
 msgstr "Υποστηρικτικό αντίγραφο (backup)..."
 
-#: kmymoney/kmymoney.cpp:1380
+#: kmymoney/kmymoney.cpp:1383
 #, kde-format
 msgid "Statement file..."
 msgstr "Αρχείο αποσπάσματος κίνησης λογαριασμού..."
 
-#: kmymoney/kmymoney.cpp:1381 kmymoney/kmymoney.cpp:1382
+#: kmymoney/kmymoney.cpp:1384 kmymoney/kmymoney.cpp:1385
 #, kde-format
 msgid "Account Template..."
 msgstr "Πρότυπο λογαριασμού..."
 
-#: kmymoney/kmymoney.cpp:1383
+#: kmymoney/kmymoney.cpp:1386
 #, kde-format
 msgid "Personal Data..."
 msgstr "Προσωπικά στοιχεία..."
 
-#: kmymoney/kmymoney.cpp:1385
+#: kmymoney/kmymoney.cpp:1388
 #, kde-format
 msgid "Dump Memory"
 msgstr "Αντιγραφή της μνήμης"
 
-#: kmymoney/kmymoney.cpp:1387
+#: kmymoney/kmymoney.cpp:1390
 #, kde-format
 msgid "File-Information..."
 msgstr "Πληροφορίες αρχείου..."
 
-#: kmymoney/kmymoney.cpp:1391
+#: kmymoney/kmymoney.cpp:1394
 #, kde-format
 msgid "Find transaction..."
 msgstr "Αναζήτηση συναλλαγής..."
 
-#: kmymoney/kmymoney.cpp:1395
+#: kmymoney/kmymoney.cpp:1398
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Προβολή λεπτομερειών συναλλαγής"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1396 kmymoney/settings/kmymoney.kcfg:256
+#: kmymoney/kmymoney.cpp:1399 kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Απόκρυψη συμφωνημένων συναλλαγών"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1397 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1400 kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Απόκρυψη αχρησιμοποίητων κατηγοριών"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1398 kmymoney/settings/kmymoney.kcfg:232
+#: kmymoney/kmymoney.cpp:1401 kmymoney/settings/kmymoney.kcfg:240
 #, kde-format
 msgid "Show all accounts"
 msgstr "Εμφάνιση όλων των λογαριασμών"
 
-#: kmymoney/kmymoney.cpp:1402
+#: kmymoney/kmymoney.cpp:1405
 #, kde-format
 msgid "New institution..."
 msgstr "Νέο ίδρυμα..."
 
-#: kmymoney/kmymoney.cpp:1403
+#: kmymoney/kmymoney.cpp:1406
 #, kde-format
 msgid "Edit institution..."
 msgstr "Επεξεργασία ιδρύματος..."
 
-#: kmymoney/kmymoney.cpp:1404
+#: kmymoney/kmymoney.cpp:1407
 #, kde-format
 msgid "Delete institution..."
 msgstr "Διαγραφή ιδρύματος..."
 
-#: kmymoney/kmymoney.cpp:1408
+#: kmymoney/kmymoney.cpp:1411
 #, kde-format
 msgid "New account..."
 msgstr "Νέος λογαριασμός..."
 
-#: kmymoney/kmymoney.cpp:1409
+#: kmymoney/kmymoney.cpp:1412
 #, kde-format
 msgid "Open ledger"
 msgstr "Άνοιγμα καθολικού"
 
-#: kmymoney/kmymoney.cpp:1410
+#: kmymoney/kmymoney.cpp:1413
 #, kde-format
 msgid "Reconcile..."
 msgstr "Συμφωνία..."
 
-#: kmymoney/kmymoney.cpp:1411
+#: kmymoney/kmymoney.cpp:1414
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Τερματισμός"
 
-#: kmymoney/kmymoney.cpp:1412
+#: kmymoney/kmymoney.cpp:1415
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Ταχυδρομικός κώδικας:"
 
-#: kmymoney/kmymoney.cpp:1413
+#: kmymoney/kmymoney.cpp:1416
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: kmymoney/kmymoney.cpp:1414
+#: kmymoney/kmymoney.cpp:1417
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgid "Report reconciliation"
 msgstr "Τελευταία συμφωνία"
 
-#: kmymoney/kmymoney.cpp:1415
+#: kmymoney/kmymoney.cpp:1418
 #, kde-format
 msgid "Edit account..."
 msgstr "Επεξεργασία λογαριασμού..."
 
-#: kmymoney/kmymoney.cpp:1416
+#: kmymoney/kmymoney.cpp:1419
 #, kde-format
 msgid "Delete account..."
 msgstr "Διαγραφή λογαριασμού..."
 
-#: kmymoney/kmymoney.cpp:1417
+#: kmymoney/kmymoney.cpp:1420
 #, kde-format
 msgid "Close account"
 msgstr "Κλείσιμο λογαριασμού"
 
-#: kmymoney/kmymoney.cpp:1418
+#: kmymoney/kmymoney.cpp:1421
 #, kde-format
 msgid "Reopen account"
 msgstr "Άνοιγμα εκ νέου του λογαριασμού"
 
-#: kmymoney/kmymoney.cpp:1419
+#: kmymoney/kmymoney.cpp:1422
 #, kde-format
 msgid "Transaction report"
 msgstr "Αναφορά συναλλαγής"
 
-#: kmymoney/kmymoney.cpp:1420
+#: kmymoney/kmymoney.cpp:1423
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Εμφάνιση διαγράμματος υπολοίπου..."
 
-#: kmymoney/kmymoney.cpp:1421
+#: kmymoney/kmymoney.cpp:1424
 #, fuzzy, kde-format
 #| msgid "Unmap account..."
 msgid "Map account..."
 msgstr "Αποσυσχέτιση λογαριασμού..."
 
-#: kmymoney/kmymoney.cpp:1422
+#: kmymoney/kmymoney.cpp:1425
 #, kde-format
 msgid "Unmap account..."
 msgstr "Αποσυσχέτιση λογαριασμού..."
 
-#: kmymoney/kmymoney.cpp:1423
+#: kmymoney/kmymoney.cpp:1426
 #, kde-format
 msgid "Update account..."
 msgstr "Ενημέρωση λογαριασμού..."
 
-#: kmymoney/kmymoney.cpp:1424
+#: kmymoney/kmymoney.cpp:1427
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Ενημέρωση όλων των λογαριασμών..."
 
-#: kmymoney/kmymoney.cpp:1428
+#: kmymoney/kmymoney.cpp:1431
 #, kde-format
 msgid "New category..."
 msgstr "Νέα κατηγορία..."
 
-#: kmymoney/kmymoney.cpp:1429
+#: kmymoney/kmymoney.cpp:1432
 #, kde-format
 msgid "Edit category..."
 msgstr "Επεξεργασία κατηγορίας..."
 
-#: kmymoney/kmymoney.cpp:1430
+#: kmymoney/kmymoney.cpp:1433
 #, kde-format
 msgid "Delete category..."
 msgstr "Διαγραφή κατηγορίας..."
 
-#: kmymoney/kmymoney.cpp:1434
+#: kmymoney/kmymoney.cpp:1437
 #, kde-format
 msgid "Currencies..."
 msgstr "Νομίσματα..."
 
-#: kmymoney/kmymoney.cpp:1435
+#: kmymoney/kmymoney.cpp:1438
 #, kde-format
 msgid "Prices..."
 msgstr "Τιμές..."
 
-#: kmymoney/kmymoney.cpp:1436
+#: kmymoney/kmymoney.cpp:1439
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Ενημέρωση τιμών μετοχών και νομισμάτων..."
 
-#: kmymoney/kmymoney.cpp:1437
+#: kmymoney/kmymoney.cpp:1440
 #, kde-format
 msgid "Consistency Check"
 msgstr "Έλεγχος ακεραιότητας"
 
-#: kmymoney/kmymoney.cpp:1438
+#: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgid "Performance-Test"
 msgstr "Δοκιμή απόδοσης"
 
-#: kmymoney/kmymoney.cpp:1439
+#: kmymoney/kmymoney.cpp:1442
 #, kde-format
 msgid "Calculator..."
 msgstr "Αριθμομηχανή..."
 
-#: kmymoney/kmymoney.cpp:1443
+#: kmymoney/kmymoney.cpp:1446
 #, kde-format
 msgid "Enable all messages"
 msgstr "Ενεργοποίηση όλων των μηνυμάτων"
 
-#: kmymoney/kmymoney.cpp:1447 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1450 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Ζητήστε βοήθεια από την κοινότητά μας"
 
-#: kmymoney/kmymoney.cpp:1448 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1451 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Δείτε τι νέο υπάρχει σε αυτήν την έκδοση"
 
-#: kmymoney/kmymoney.cpp:1449 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1452 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Επισκεφτείτε την ιστοσελίδα μας"
 
-#: kmymoney/kmymoney.cpp:1453
+#: kmymoney/kmymoney.cpp:1456
 #, fuzzy, kde-format
 #| msgid "%1 transaction\n"
 #| msgid_plural "%1 transactions\n"
@@ -5261,101 +5290,101 @@ msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "%1 συναλλαγή\n"
 
-#: kmymoney/kmymoney.cpp:1454
+#: kmymoney/kmymoney.cpp:1457
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: kmymoney/kmymoney.cpp:1455
+#: kmymoney/kmymoney.cpp:1458
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Εισαγωγή"
 
-#: kmymoney/kmymoney.cpp:1456
+#: kmymoney/kmymoney.cpp:1459
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Επεξεργασία διαχωρισμών"
 
-#: kmymoney/kmymoney.cpp:1457
+#: kmymoney/kmymoney.cpp:1460
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: kmymoney/kmymoney.cpp:1458
+#: kmymoney/kmymoney.cpp:1461
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: kmymoney/kmymoney.cpp:1459
+#: kmymoney/kmymoney.cpp:1462
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Δημιουργία αντιγράφου"
 
-#: kmymoney/kmymoney.cpp:1460
+#: kmymoney/kmymoney.cpp:1463
 #, fuzzy, kde-format
 #| msgid "Add shares"
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Προσθήκη μετοχών"
 
-#: kmymoney/kmymoney.cpp:1461
+#: kmymoney/kmymoney.cpp:1464
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Αποδοχή"
 
-#: kmymoney/kmymoney.cpp:1462
+#: kmymoney/kmymoney.cpp:1465
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Εναλλαγή"
 
-#: kmymoney/kmymoney.cpp:1463
+#: kmymoney/kmymoney.cpp:1466
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Εκκαθαρισμένο"
 
-#: kmymoney/kmymoney.cpp:1464
+#: kmymoney/kmymoney.cpp:1467
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Συμφωνημένο"
 
-#: kmymoney/kmymoney.cpp:1465
+#: kmymoney/kmymoney.cpp:1468
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Μη συμφωνημένο"
 
-#: kmymoney/kmymoney.cpp:1466
+#: kmymoney/kmymoney.cpp:1469
 #, fuzzy, kde-format
 #| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Μετακίνηση συναλλαγής προς..."
 
-#: kmymoney/kmymoney.cpp:1467
+#: kmymoney/kmymoney.cpp:1470
 #, fuzzy, kde-format
 #| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Εμφάνιση της φόρμας συναλλαγών"
 
-#: kmymoney/kmymoney.cpp:1468
+#: kmymoney/kmymoney.cpp:1471
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Προβολή λεπτομερειών συναλλαγής"
 
-#: kmymoney/kmymoney.cpp:1470
+#: kmymoney/kmymoney.cpp:1473
 #, fuzzy, kde-format
 #| msgctxt "To open a new report"
 #| msgid "&Open"
@@ -5363,237 +5392,237 @@ msgctxt "Open URL"
 msgid "Open URL"
 msgstr "&Άνοιγμα"
 
-#: kmymoney/kmymoney.cpp:1471
+#: kmymoney/kmymoney.cpp:1474
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Επιλογή όλων"
 
-#: kmymoney/kmymoney.cpp:1472
+#: kmymoney/kmymoney.cpp:1475
 #, kde-format
 msgid "Go to account"
 msgstr "Μετάβαση στο λογαριασμό"
 
-#: kmymoney/kmymoney.cpp:1473
+#: kmymoney/kmymoney.cpp:1476
 #, kde-format
 msgid "Go to payee"
 msgstr "Μετάβαση στους δικαιούχους"
 
-#: kmymoney/kmymoney.cpp:1474
+#: kmymoney/kmymoney.cpp:1477
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Δημιουργία προγραμματισμένης συναλλαγής..."
 
-#: kmymoney/kmymoney.cpp:1475
+#: kmymoney/kmymoney.cpp:1478
 #, kde-format
 msgid "Assign next number"
 msgstr "Αναθέστε τον επόμενο αριθμό"
 
-#: kmymoney/kmymoney.cpp:1476
+#: kmymoney/kmymoney.cpp:1479
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Συνδυασμός"
 
-#: kmymoney/kmymoney.cpp:1477
+#: kmymoney/kmymoney.cpp:1480
 #, fuzzy, kde-format
 #| msgid "As of today"
 msgid "Move to today"
 msgstr "Από σήμερα"
 
-#: kmymoney/kmymoney.cpp:1478
+#: kmymoney/kmymoney.cpp:1481
 #, fuzzy, kde-format
 #| msgid "Correct splits"
 msgid "Copy splits"
 msgstr "Διόρθωση διαχωρισμών"
 
-#: kmymoney/kmymoney.cpp:1479
+#: kmymoney/kmymoney.cpp:1482
 #, kde-format
 msgid "Show filter widget"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1481
+#: kmymoney/kmymoney.cpp:1484
 #, kde-format
 msgid "New investment..."
 msgstr "Νέα επένδυση..."
 
-#: kmymoney/kmymoney.cpp:1482
+#: kmymoney/kmymoney.cpp:1485
 #, kde-format
 msgid "Edit investment..."
 msgstr "Επεξεργασία επένδυσης..."
 
-#: kmymoney/kmymoney.cpp:1483
+#: kmymoney/kmymoney.cpp:1486
 #, kde-format
 msgid "Delete investment..."
 msgstr "Διαγραφή επένδυσης..."
 
-#: kmymoney/kmymoney.cpp:1484
+#: kmymoney/kmymoney.cpp:1487
 #, kde-format
 msgid "Online price update..."
 msgstr "Ενημέρωση τιμής από το διαδίκτυο... "
 
-#: kmymoney/kmymoney.cpp:1485
+#: kmymoney/kmymoney.cpp:1488
 #, kde-format
 msgid "Manual price update..."
 msgstr "Χειροκίνητη ενημέρωση τιμών..."
 
-#: kmymoney/kmymoney.cpp:1486
+#: kmymoney/kmymoney.cpp:1489
 #, fuzzy, kde-format
 #| msgid "Hide security"
 msgid "Edit security..."
 msgstr "Απόκρυψη αξιόγραφου"
 
-#: kmymoney/kmymoney.cpp:1487
+#: kmymoney/kmymoney.cpp:1490
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "Διαγραφή αξιόγραφου"
 
-#: kmymoney/kmymoney.cpp:1490
+#: kmymoney/kmymoney.cpp:1493
 #, fuzzy, kde-format
 #| msgid "&New Schedule..."
 msgid "New schedule..."
 msgstr "Νέα προγραμματισμένη συναλλαγή..."
 
-#: kmymoney/kmymoney.cpp:1491 kmymoney/kmymoney.cpp:1492
+#: kmymoney/kmymoney.cpp:1494 kmymoney/kmymoney.cpp:1495
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Επεξεργασία προγραμματισμένης συναλλαγής"
 
-#: kmymoney/kmymoney.cpp:1493
+#: kmymoney/kmymoney.cpp:1496
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Διαγραφή προγραμματισμένης συναλλαγής"
 
-#: kmymoney/kmymoney.cpp:1494
+#: kmymoney/kmymoney.cpp:1497
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Αντιγραφή προγραμματισμένης συναλλαγής"
 
-#: kmymoney/kmymoney.cpp:1495
+#: kmymoney/kmymoney.cpp:1498
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Εισαγωγή επόμενης πληρωμής..."
 
-#: kmymoney/kmymoney.cpp:1496
+#: kmymoney/kmymoney.cpp:1499
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Παράλειψη επόμενης συναλλαγής..."
 
-#: kmymoney/kmymoney.cpp:1498
+#: kmymoney/kmymoney.cpp:1501
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New payee..."
 msgstr "Νέος δικαιούχος"
 
-#: kmymoney/kmymoney.cpp:1499
+#: kmymoney/kmymoney.cpp:1502
 #, kde-format
 msgid "Rename payee"
 msgstr "Μετονομασία δικαιούχου"
 
-#: kmymoney/kmymoney.cpp:1500
+#: kmymoney/kmymoney.cpp:1503
 #, kde-format
 msgid "Delete payee"
 msgstr "Διαγραφή δικαιούχου"
 
-#: kmymoney/kmymoney.cpp:1501
+#: kmymoney/kmymoney.cpp:1504
 #, kde-format
 msgid "Merge payees"
 msgstr "Συγχώνευση δικαιούχων"
 
-#: kmymoney/kmymoney.cpp:1503
+#: kmymoney/kmymoney.cpp:1506
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "Νέα ετικέτα"
 
-#: kmymoney/kmymoney.cpp:1504
+#: kmymoney/kmymoney.cpp:1507
 #, kde-format
 msgid "Rename tag"
 msgstr "Μετονομασία ετικέτας"
 
-#: kmymoney/kmymoney.cpp:1505
+#: kmymoney/kmymoney.cpp:1508
 #, kde-format
 msgid "Delete tag"
 msgstr "Διαγραφή ετικέτας"
 
-#: kmymoney/kmymoney.cpp:1507
+#: kmymoney/kmymoney.cpp:1510
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "&Νέα αναφορά"
 
-#: kmymoney/kmymoney.cpp:1508
+#: kmymoney/kmymoney.cpp:1511
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "&Νέα αναφορά"
 
-#: kmymoney/kmymoney.cpp:1509
+#: kmymoney/kmymoney.cpp:1512
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Copy report"
 msgstr "&Νέα αναφορά"
 
-#: kmymoney/kmymoney.cpp:1510
+#: kmymoney/kmymoney.cpp:1513
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
 msgstr "Διαμόρφωση αυτής της αναφοράς"
 
-#: kmymoney/kmymoney.cpp:1511
+#: kmymoney/kmymoney.cpp:1514
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "Προτιμώμενες αναφορές"
 
-#: kmymoney/kmymoney.cpp:1512
+#: kmymoney/kmymoney.cpp:1515
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "Διαγραφή της αναφοράς;"
 
-#: kmymoney/kmymoney.cpp:1513
+#: kmymoney/kmymoney.cpp:1516
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "&Νέα αναφορά"
 
-#: kmymoney/kmymoney.cpp:1514
+#: kmymoney/kmymoney.cpp:1517
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
 msgid "Toggle chart"
 msgstr "Εναλλαγή"
 
-#: kmymoney/kmymoney.cpp:1515
+#: kmymoney/kmymoney.cpp:1518
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Edit tab order"
 msgstr "Συμπερίληψη μεταβιβάσεων"
 
-#: kmymoney/kmymoney.cpp:1517
+#: kmymoney/kmymoney.cpp:1520
 #, kde-format
 msgid "Ledger Quick Open"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1519
+#: kmymoney/kmymoney.cpp:1522
 #, kde-format
 msgid "Test new feature"
 msgstr "Δοκιμή νέου χαρακτηριστικού"
 
-#: kmymoney/kmymoney.cpp:1520
+#: kmymoney/kmymoney.cpp:1523
 #, kde-format
 msgid "Debug Traces"
 msgstr "Ίχνη διόρθωσης σφαλμάτων"
 
-#: kmymoney/kmymoney.cpp:1522
+#: kmymoney/kmymoney.cpp:1525
 #, kde-format
 msgid "Debug Timers"
 msgstr "Μετρητές διόρθωσης σφαλμάτων"
 
-#: kmymoney/kmymoney.cpp:1541
+#: kmymoney/kmymoney.cpp:1544
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5601,7 +5630,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "Συσχέτιση"
 
-#: kmymoney/kmymoney.cpp:1542
+#: kmymoney/kmymoney.cpp:1545
 #, fuzzy, kde-format
 #| msgctxt "Button text for unmatch transaction"
 #| msgid "Unmatch"
@@ -5609,45 +5638,45 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Αποσυσχέτιση"
 
-#: kmymoney/kmymoney.cpp:1668
+#: kmymoney/kmymoney.cpp:1671
 #, fuzzy, kde-format
 #| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Διπλασιασμός της τρέχουσας επιλογής συναλλαγών"
 
-#: kmymoney/kmymoney.cpp:1669
+#: kmymoney/kmymoney.cpp:1672
 #, fuzzy, kde-format
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Αναβολή της συμφωνίας"
 
-#: kmymoney/kmymoney.cpp:1670
+#: kmymoney/kmymoney.cpp:1673
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Τελευταία συμφωνία"
 
-#: kmymoney/kmymoney.cpp:1671
+#: kmymoney/kmymoney.cpp:1674
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Τελευταία συμφωνία"
 
-#: kmymoney/kmymoney.cpp:1780
+#: kmymoney/kmymoney.cpp:1783
 #, kde-format
 msgid "View back"
 msgstr "Προηγούμενη προβολή"
 
-#: kmymoney/kmymoney.cpp:1781
+#: kmymoney/kmymoney.cpp:1784
 #, kde-format
 msgid "View forward"
 msgstr "Επόμενη προβολή"
 
-#: kmymoney/kmymoney.cpp:2175
+#: kmymoney/kmymoney.cpp:2178
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5656,43 +5685,43 @@ msgstr ""
 "Τουλάχιστο μία διάσπαση των επιλεγμένων συναλλαγών έχει συμφωνηθεί. Θέλετε "
 "οπωσδήποτε να διαγράψετε τη συναλλαγή;"
 
-#: kmymoney/kmymoney.cpp:2177
+#: kmymoney/kmymoney.cpp:2180
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "Η συναλλαγή έχει ήδη συμφωνηθεί"
 
-#: kmymoney/kmymoney.cpp:2182
+#: kmymoney/kmymoney.cpp:2185
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] "Θέλετε πραγματικά να διαγράψετε την επιλεγμένη συναλλαγή;"
 msgstr[1] "Θέλετε πραγματικά να διαγράψετε όλες τις %1 επιλεγμένες συναλλαγές;"
 
-#: kmymoney/kmymoney.cpp:2186
+#: kmymoney/kmymoney.cpp:2189
 #, kde-format
 msgid "Delete transaction"
 msgstr "Διαγραφή συναλλαγής"
 
-#: kmymoney/kmymoney.cpp:2263
+#: kmymoney/kmymoney.cpp:2266
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Αδυναμία προσθήκης συναλλαγών"
 
-#: kmymoney/kmymoney.cpp:2375
+#: kmymoney/kmymoney.cpp:2378
 #, fuzzy, kde-format
 #| msgid "Close"
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Κλείσιμο"
 
-#: kmymoney/kmymoney.cpp:2554
+#: kmymoney/kmymoney.cpp:2557
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "Αδυναμία προσθήκης συναλλαγών"
 
-#: kmymoney/kmymoney.cpp:2698
+#: kmymoney/kmymoney.cpp:2701
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5704,14 +5733,14 @@ msgstr ""
 "Τουλάχιστο μία διάσπαση των επιλεγμένων συναλλαγών έχει συμφωνηθεί. Θέλετε "
 "οπωσδήποτε να διαγράψετε τη συναλλαγή;"
 
-#: kmymoney/kmymoney.cpp:2700
+#: kmymoney/kmymoney.cpp:2703
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Η συναλλαγή έχει ήδη συμφωνηθεί"
 
-#: kmymoney/kmymoney.cpp:2705
+#: kmymoney/kmymoney.cpp:2708
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5720,20 +5749,20 @@ msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Θέλετε πραγματικά να διαγράψετε την επιλεγμένη συναλλαγή;"
 msgstr[1] "Θέλετε πραγματικά να διαγράψετε όλες τις %1 επιλεγμένες συναλλαγές;"
 
-#: kmymoney/kmymoney.cpp:2709
+#: kmymoney/kmymoney.cpp:2712
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Όλες οι συναλλαγές"
 
-#: kmymoney/kmymoney.cpp:2794
+#: kmymoney/kmymoney.cpp:2797
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Αδυναμία προσθήκης συναλλαγών"
 
-#: kmymoney/kmymoney.cpp:2834
+#: kmymoney/kmymoney.cpp:2837
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5746,12 +5775,12 @@ msgstr ""
 "προγραμματιστεί για αυτόν τον λογαριασμό. Θέλετε να κάνετε εισαγωγή αυτών "
 "των προγραμματισμένων συναλλαγών τώρα;"
 
-#: kmymoney/kmymoney.cpp:2837
+#: kmymoney/kmymoney.cpp:2840
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Βρέθηκαν προγραμματισμένες συναλλαγές"
 
-#: kmymoney/kmymoney.cpp:2912
+#: kmymoney/kmymoney.cpp:2915
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5770,17 +5799,17 @@ msgstr ""
 "ξανά επιλέγοντας από το μενού Προβολή <b>Εμφάνιση όλων των λογαριασμών</b> ή "
 "με αναίρεση της ρύθμισης <b>Να μην εμφανίζονται οι κλειστοί λογαριασμοί</b>."
 
-#: kmymoney/kmymoney.cpp:2914
+#: kmymoney/kmymoney.cpp:2917
 #, kde-format
 msgid "Information"
 msgstr "Πληροφορίες"
 
-#: kmymoney/kmymoney.cpp:3018 kmymoney/kmymoney.cpp:3117
+#: kmymoney/kmymoney.cpp:3021 kmymoney/kmymoney.cpp:3120
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Κανένα αρχείο KMyMoney ανοιχτό"
 
-#: kmymoney/kmymoney.cpp:3054 kmymoney/kmymoney.cpp:3056
+#: kmymoney/kmymoney.cpp:3057 kmymoney/kmymoney.cpp:3059
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1375
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
@@ -5788,43 +5817,43 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Έτοιμο."
 
-#: kmymoney/kmymoney.cpp:3121
+#: kmymoney/kmymoney.cpp:3124
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Εμφάνιση προσωπικών δεδομένων..."
 
-#: kmymoney/kmymoney.cpp:3128
+#: kmymoney/kmymoney.cpp:3131
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Επεξεργασία προσωπικών δεδομένων"
 
-#: kmymoney/kmymoney.cpp:3143
+#: kmymoney/kmymoney.cpp:3146
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Αδυναμία αποθήκευσης των πληροφοριών του χρήστη: %1"
 
-#: kmymoney/kmymoney.cpp:3151
+#: kmymoney/kmymoney.cpp:3154
 #, kde-format
 msgid "Importing account templates."
 msgstr "Εισαγωγή προτύπων λογαριασμών."
 
-#: kmymoney/kmymoney.cpp:3165
+#: kmymoney/kmymoney.cpp:3168
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "Αδυναμία εισαγωγής του (ή των) προτύπου (ών): %1, ανεστάλη στο %2:%3"
 
-#: kmymoney/kmymoney.cpp:3173
+#: kmymoney/kmymoney.cpp:3176
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Εξαγωγή προτύπων του λογαριασμού"
 
-#: kmymoney/kmymoney.cpp:3179
+#: kmymoney/kmymoney.cpp:3182
 #, kde-format
 msgid "Save as..."
 msgstr "Αποθήκευση Ως..."
 
-#: kmymoney/kmymoney.cpp:3180
+#: kmymoney/kmymoney.cpp:3183
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5834,35 +5863,35 @@ msgstr ""
 "*kmt|KMyMoney αρχεία προτύπων\n"
 "*|Όλα τα αρχεία"
 
-#: kmymoney/kmymoney.cpp:3211
+#: kmymoney/kmymoney.cpp:3214
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Σφάλμα στο πρότυπο"
 
-#: kmymoney/kmymoney.cpp:3229
+#: kmymoney/kmymoney.cpp:3232
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Το αρχείο <b>%1</b> υπάρχει ήδη. Θέλετε να το αντικαταστήσετε;"
 
-#: kmymoney/kmymoney.cpp:3231 kmymoney/plugins/csv/export/csvexporter.cpp:106
+#: kmymoney/kmymoney.cpp:3234 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "Το αρχείο υπάρχει ήδη"
 
-#: kmymoney/kmymoney.cpp:3269
+#: kmymoney/kmymoney.cpp:3272
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3270
+#: kmymoney/kmymoney.cpp:3273
 #, kde-format
 msgid "Hide menu bar"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3380
+#: kmymoney/kmymoney.cpp:3384
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5871,13 +5900,13 @@ msgstr ""
 "Το αρχείο πρέπει πρώτα να αποθηκευτεί πριν τη δημιουργία υποστηρικτικού "
 "αντιγράφου (backup). Θέλετε να συνεχίσετε;"
 
-#: kmymoney/kmymoney.cpp:3382
+#: kmymoney/kmymoney.cpp:3386
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3399
+#: kmymoney/kmymoney.cpp:3403
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5887,72 +5916,72 @@ msgstr ""
 "τοπικά αρχεία μόνο ως πηγαία αρχεία. Το τρέχον πηγαίο αρχείο σας είναι το "
 "'%1'."
 
-#: kmymoney/kmymoney.cpp:3401
+#: kmymoney/kmymoney.cpp:3405
 #, kde-format
 msgid "Local files only"
 msgstr "Μόνο τοπικά αρχεία"
 
-#: kmymoney/kmymoney.cpp:3440
+#: kmymoney/kmymoney.cpp:3444
 #, kde-format
 msgid "Mounting %1"
 msgstr "Προσάρτηση του %1 σε εξέλιξη"
 
-#: kmymoney/kmymoney.cpp:3474
+#: kmymoney/kmymoney.cpp:3478
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "Το σημερινό αρχείο υποστηρικτικής αποθήκευσης (backup) υπάρχει σε αυτήν τη "
 "συσκευή. Να αντικατασταθεί;"
 
-#: kmymoney/kmymoney.cpp:3474
+#: kmymoney/kmymoney.cpp:3478
 #, kde-format
 msgid "&Replace"
 msgstr "&Αντικατάσταση"
 
-#: kmymoney/kmymoney.cpp:3482
+#: kmymoney/kmymoney.cpp:3486
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Αδυναμία δημιουργίας λογαριασμού: %1"
 
-#: kmymoney/kmymoney.cpp:3487
+#: kmymoney/kmymoney.cpp:3491
 #, kde-format
 msgid "Writing %1"
 msgstr "Εγγραφή του %1"
 
-#: kmymoney/kmymoney.cpp:3508
+#: kmymoney/kmymoney.cpp:3512
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Αποπροσάρτηση του %1 σε εξέλιξη"
 
-#: kmymoney/kmymoney.cpp:3545
+#: kmymoney/kmymoney.cpp:3549
 #, kde-format
 msgid "Error mounting device"
 msgstr "Σφάλμα κατά την προσάρτηση της συσκευής"
 
-#: kmymoney/kmymoney.cpp:3560 kmymoney/kmymoney.cpp:3579
+#: kmymoney/kmymoney.cpp:3564 kmymoney/kmymoney.cpp:3583
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Ολοκληρώθηκε"
 
-#: kmymoney/kmymoney.cpp:3561 kmymoney/kmymoney.cpp:3581
+#: kmymoney/kmymoney.cpp:3565 kmymoney/kmymoney.cpp:3585
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Το υποστηρικτικό αντίγραφο του αρχείου δημιουργήθηκε επιτυχώς"
 
-#: kmymoney/kmymoney.cpp:3567
+#: kmymoney/kmymoney.cpp:3571
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Σφάλμα στην αντιγραφή του αρχείου στη συσκευή"
 
-#: kmymoney/kmymoney.cpp:3583
+#: kmymoney/kmymoney.cpp:3587
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Σφάλμα κατά την αποπροσάρτηση της συσκευής"
 
-#: kmymoney/kmymoney.cpp:3630
+#: kmymoney/kmymoney.cpp:3634
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5970,30 +5999,30 @@ msgstr ""
 "Με κλικ στο Όχι ο λογαριασμός παραμένει %2,\n"
 "Με κλικ στο Ακύρωση εγκαταλείπετε τη δημιουργία του λογαριασμού."
 
-#: kmymoney/kmymoney.cpp:3640
+#: kmymoney/kmymoney.cpp:3644
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Πρόβλημα ισολογισμού ανοίγματος"
 
-#: kmymoney/kmymoney.cpp:3651
+#: kmymoney/kmymoney.cpp:3655
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Αδυναμία προσθήκης του λογαριασμού: %1"
 
-#: kmymoney/kmymoney.cpp:3721
+#: kmymoney/kmymoney.cpp:3725
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Εκτέλεση ελέγχου ακεραιότητας..."
 
-#: kmymoney/kmymoney.cpp:3728
+#: kmymoney/kmymoney.cpp:3732
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Ο έλεγχος ακεραιότητας απέτυχε: %1"
 
-#: kmymoney/kmymoney.cpp:3738
+#: kmymoney/kmymoney.cpp:3742
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -6002,7 +6031,7 @@ msgstr ""
 "Ο έλεγχος ακεραιότητας δεν βρήκε προβλήματα με τα δεδομένα σας. Οι "
 "λεπτομέρειες παρουσιάζονται παρακάτω."
 
-#: kmymoney/kmymoney.cpp:3740
+#: kmymoney/kmymoney.cpp:3744
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -6013,17 +6042,17 @@ msgstr ""
 "λεπτομέρειες παρουσιάζονται παρακάτω. Τα προβλήματα αυτά που δεν μπορούν να "
 "διορθωθούν αυτόματα χρειάζεται να επιλυθούν από τον χρήστη."
 
-#: kmymoney/kmymoney.cpp:3743
+#: kmymoney/kmymoney.cpp:3747
 #, kde-format
 msgid "Consistency check result"
 msgstr "Αποτέλεσμα του ελέγχου ακεραιότητας"
 
-#: kmymoney/kmymoney.cpp:3809
+#: kmymoney/kmymoney.cpp:3813
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Έλεγχος για εκπρόθεσμες προγραμματισμένες συναλλαγές..."
 
-#: kmymoney/kmymoney.cpp:3972
+#: kmymoney/kmymoney.cpp:3976
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -6031,12 +6060,12 @@ msgstr ""
 "Πρέπει πρώτα να επιλέξετε ένα αρχείο KMyMoney πριν κάνετε εισαγωγή κίνησης "
 "λογαριασμού."
 
-#: kmymoney/kmymoney.cpp:3977
+#: kmymoney/kmymoney.cpp:3981
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Εισαγωγή κίνησης μέσω σύνδεσης διαδικτύου"
 
-#: kmymoney/kmymoney.cpp:3989
+#: kmymoney/kmymoney.cpp:3993
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -6049,60 +6078,60 @@ msgstr ""
 "Αδυναμία εισαγωγής %1 με χρήση του πρόσθετου %2.  Το πρόσθετο επέστρεψε το "
 "ακόλουθο σφάλμα: %3"
 
-#: kmymoney/kmymoney.cpp:3989 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:3993 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "Σφάλμα κατά την εισαγωγή"
 
-#: kmymoney/kmymoney.cpp:4015
+#: kmymoney/kmymoney.cpp:4019
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Όλα τα μηνύματα έχουν ενεργοποιηθεί."
 
-#: kmymoney/kmymoney.cpp:4015
+#: kmymoney/kmymoney.cpp:4019
 #, kde-format
 msgid "All messages"
 msgstr "Όλα τα μηνύματα"
 
-#: kmymoney/kmymoney.cpp:4051
+#: kmymoney/kmymoney.cpp:4055
 #, kde-format
 msgid "Auto saving..."
 msgstr "Αυτόματη αποθήκευση..."
 
-#: kmymoney/kmymoney.cpp:4171
+#: kmymoney/kmymoney.cpp:4175
 #, kde-format
 msgid "Creating new document..."
 msgstr "Δημιουργία νέου εγγράφου..."
 
-#: kmymoney/kmymoney.cpp:4231
+#: kmymoney/kmymoney.cpp:4235
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Δημιουργία ενός νέου προφίλ"
 
-#: kmymoney/kmymoney.cpp:4242
+#: kmymoney/kmymoney.cpp:4246
 #, kde-format
 msgid "Open a file."
 msgstr "Άνοιγμα ενός αρχείου."
 
-#: kmymoney/kmymoney.cpp:4256
+#: kmymoney/kmymoney.cpp:4260
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4260
+#: kmymoney/kmymoney.cpp:4264
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Όλα τα αρχεία"
 
-#: kmymoney/kmymoney.cpp:4273
+#: kmymoney/kmymoney.cpp:4277
 #, kde-format
 msgid "Loading file..."
 msgstr "Φόρτωση αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4281
+#: kmymoney/kmymoney.cpp:4285
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6111,58 +6140,58 @@ msgstr ""
 "<p>Το αρχείο <b>%1</b> έχει ένα μη έγκυρο όνομα ή δεν υπάρχει. Μπορείτε να "
 "ανοίξετε ένα άλλο αρχείο ή να δημιουργήσετε ένα νέο.</p>"
 
-#: kmymoney/kmymoney.cpp:4281
+#: kmymoney/kmymoney.cpp:4285
 #, kde-format
 msgid "File not found"
 msgstr "Το αρχείο δεν βρέθηκε"
 
-#: kmymoney/kmymoney.cpp:4313
+#: kmymoney/kmymoney.cpp:4317
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4319
+#: kmymoney/kmymoney.cpp:4323
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested. Error was: %1"
 msgid "Cannot open file as requested."
 msgstr "Αδύνατο το άνοιγμα του ζητούμενου αρχείου. Το σφάλμα ήταν: %1"
 
-#: kmymoney/kmymoney.cpp:4326
+#: kmymoney/kmymoney.cpp:4330
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4337
+#: kmymoney/kmymoney.cpp:4341
 #, kde-format
 msgid "Saving file..."
 msgstr "Αποθήκευση του αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4349
+#: kmymoney/kmymoney.cpp:4353
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Αποτυχία αποθήκευσης: %1"
 
-#: kmymoney/kmymoney.cpp:4355
+#: kmymoney/kmymoney.cpp:4359
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4361
+#: kmymoney/kmymoney.cpp:4365
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Αποθήκευση του αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4377
+#: kmymoney/kmymoney.cpp:4381
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4406
+#: kmymoney/kmymoney.cpp:4410
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -16072,63 +16101,63 @@ msgstr "Πρόβλεψη"
 
 #. i18n: ectx: label, entry (forecastMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:11
-#: kmymoney/settings/kmymoney.kcfg:433
+#: kmymoney/settings/kmymoney.kcfg:441
 #, kde-format
 msgid "Method to calculate forecast"
 msgstr "Μέθοδος υπολογισμού πρόβλεψης"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
-#: kmymoney/settings/kmymoney.kcfg:437
+#: kmymoney/settings/kmymoney.kcfg:445
 #, kde-format
 msgid "Days to forecast"
 msgstr "Ημέρες πρόβλεψης"
 
 #. i18n: ectx: label, entry (forecastAccountCycle), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:21
-#: kmymoney/settings/kmymoney.kcfg:443
+#: kmymoney/settings/kmymoney.kcfg:451
 #, kde-format
 msgid "Days of normal account cycle"
 msgstr "Ημέρες τυπικού κύκλου λογαριασμού"
 
 #. i18n: ectx: label, entry (forecastCycles), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:27
-#: kmymoney/settings/kmymoney.kcfg:449
+#: kmymoney/settings/kmymoney.kcfg:457
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
 msgstr "Αριθμός ιστορικών κύκλων για χρήση στην πρόβλεψη"
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
-#: kmymoney/settings/kmymoney.kcfg:455
+#: kmymoney/settings/kmymoney.kcfg:463
 #, kde-format
 msgid "Day of month to start forecast"
 msgstr "Ημέρα του μήνα εκκίνησης της πρόβλεψης"
 
 #. i18n: ectx: label, entry (historyMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:39
-#: kmymoney/settings/kmymoney.kcfg:461
+#: kmymoney/settings/kmymoney.kcfg:469
 #, kde-format
 msgid "Method to calculate history-based forecast"
 msgstr "Μέθοδος υπολογισμού πρόβλεψης με βάση το ιστορικό"
 
 #. i18n: ectx: label, entry (skipOpeningDate), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:43
-#: kmymoney/settings/kmymoney.kcfg:465
+#: kmymoney/settings/kmymoney.kcfg:473
 #, kde-format
 msgid "Skip opening date when fetching transactions"
 msgstr "Παράλειψη ημερομηνίας ανοίγματος κατά την προσκόμιση συναλλαγών"
 
 #. i18n: ectx: label, entry (includeFutureTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:47
-#: kmymoney/settings/kmymoney.kcfg:469
+#: kmymoney/settings/kmymoney.kcfg:477
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr "Συμπερίληψη μελλοντικών συναλλαγών κατά την πρόβλεψη προγραμματισμού"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
-#: kmymoney/settings/kmymoney.kcfg:473
+#: kmymoney/settings/kmymoney.kcfg:481
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr ""
@@ -18149,7 +18178,7 @@ msgstr "Πλάτος γραμμής διαγραμμάτων"
 #. i18n: ectx: label, entry (LineWidth), group (Chart Settings)
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_LineWidth)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:66
-#: kmymoney/settings/kmymoney.kcfg:414
+#: kmymoney/settings/kmymoney.kcfg:422
 #, kde-format
 msgid "Line width for diagrams, in pixels"
 msgstr "Πλάτος γραμμής για διαγράμματα, σε εικονοστοιχεία"
@@ -19565,68 +19594,81 @@ msgstr "Όνομα περιοχής για τις μη-εργάσιμες ημέ
 msgid "Using the Enter key moves between the fields"
 msgstr "Με το πλήκτρο Enter μετακινήστε ανάμεσα στα πεδία"
 
+#. i18n: ectx: label, entry (TabMovesBetweenDateParts), group (General Options)
+#: kmymoney/settings/kmymoney.kcfg:84
+#, fuzzy, kde-format
+#| msgid "Using the Enter key moves between the fields"
+msgid "Using the TAB key moves between the date parts"
+msgstr "Με το πλήκτρο Enter μετακινήστε ανάμεσα στα πεδία"
+
+#. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
+#: kmymoney/settings/kmymoney.kcfg:100
+#, kde-format
+msgid "Select which accounts to show in ledger after file open"
+msgstr ""
+
 #. i18n: ectx: label, entry (StartLastViewSelected), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:96
+#: kmymoney/settings/kmymoney.kcfg:104
 #, kde-format
 msgid "Start with last selected view or homepage"
 msgstr "Εκκίνηση στην τελευταία επιλεγμένη προβολή ή στην αρχική σελίδα"
 
 #. i18n: ectx: label, entry (LastViewSelected), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:100
+#: kmymoney/settings/kmymoney.kcfg:108
 #, kde-format
 msgid "The last selected view"
 msgstr "Η τελευταία επιλεγμένη προβολή"
 
 #. i18n: ectx: label, entry (WriteDataEncrypted), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:104
+#: kmymoney/settings/kmymoney.kcfg:112
 #, kde-format
 msgid "Use GPG to encrypt data file"
 msgstr "Χρησιμοποιήστε GPG για την κρυπτογράφηση αρχείου δεδομένων"
 
 #. i18n: ectx: label, entry (EncryptRecover), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:108
+#: kmymoney/settings/kmymoney.kcfg:116
 #, kde-format
 msgid "Also encrypt against recover key"
 msgstr "Κρυπτογραφήστε επίσης με βάση το κλειδί ανάκτησης"
 
 #. i18n: ectx: label, entry (GpgRecipient), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:112
+#: kmymoney/settings/kmymoney.kcfg:120
 #, kde-format
 msgid "GPG User ID (deprecated)"
 msgstr "Αναγνωριστικό χρήστη GPG (ανεπιθύμητο)"
 
 #. i18n: ectx: label, entry (GpgRecipientList), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:115
+#: kmymoney/settings/kmymoney.kcfg:123
 #, kde-format
 msgid "GPG User ID"
 msgstr "Αναγνωριστικό χρήστη GPG"
 
 #. i18n: ectx: label, entry (ExpertMode), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:118
+#: kmymoney/settings/kmymoney.kcfg:126
 #, kde-format
 msgid "Run in expert (accountant) mode"
 msgstr "Εκτέλεση σε λειτουργία ειδικού (λογιστή)"
 
 #. i18n: ectx: label, entry (syncLedgerInvestment), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:122
+#: kmymoney/settings/kmymoney.kcfg:130
 #, kde-format
 msgid "Synchronize account in ledger and investment view"
 msgstr "Συγχρονισμός λογαριασμού στην προβολή καθολικού και επενδύσεων"
 
 #. i18n: ectx: label, entry (viewType), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:126
+#: kmymoney/settings/kmymoney.kcfg:134
 #, kde-format
 msgid "The type of the KMyMoney view"
 msgstr "Ο τύπος προβολής του KMyMoney"
 
 #. i18n: ectx: label, entry (firstTimeRun), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:130
+#: kmymoney/settings/kmymoney.kcfg:138
 #, kde-format
 msgid "First time switch to start new user wizard"
 msgstr "Εναλλαγή πρώτης φοράς για εκκίνηση βοηθού νέου χρήστη"
 
 #. i18n: ectx: label, entry (stringMatchFromStart), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:134
+#: kmymoney/settings/kmymoney.kcfg:142
 #, kde-format
 msgid ""
 "Match strings in auto-completion only from the first letter on. A substring "
@@ -19634,25 +19676,25 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: label, entry (stdTransactionFormTabOrder), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:138
+#: kmymoney/settings/kmymoney.kcfg:146
 #, kde-format
 msgid "Tab order of edit widgets in transaction form"
 msgstr "Σειρά καρτελών επεξεργασίας γραφικών συστατικών στη φόρμα συναλλαγών"
 
 #. i18n: ectx: label, entry (stdTransactionRegisterTabOrder), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:142
+#: kmymoney/settings/kmymoney.kcfg:150
 #, kde-format
 msgid "Tab order of edit widgets in register"
 msgstr "Σειρά καρτελών επεξεργασίας γραφικών συστατικών στο καθολικό"
 
 #. i18n: ectx: label, entry (ItemList), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:148
+#: kmymoney/settings/kmymoney.kcfg:156
 #, kde-format
 msgid "Order of items on homepage"
 msgstr "Σειρά αντικειμένων στην αρχική σελίδα"
 
 #. i18n: ectx: label, entry (ZoomFactor), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:152
+#: kmymoney/settings/kmymoney.kcfg:160
 #, fuzzy, kde-format
 #| msgid "Percentage of default font size used for home view HTML page"
 msgid "Zoom factor used for home view HTML page"
@@ -19661,7 +19703,7 @@ msgstr ""
 "HTML"
 
 #. i18n: ectx: label, entry (RememberZoomFactor), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:156
+#: kmymoney/settings/kmymoney.kcfg:164
 #, fuzzy, kde-format
 #| msgid "Remember (manually adjusted) font size in home view on program end."
 msgid "Remember (manually adjusted) zoom factor in home view on program end."
@@ -19670,14 +19712,14 @@ msgstr ""
 "την αρχική σελίδα κατά τον τερματισμό του προγράμματος."
 
 #. i18n: ectx: label, entry (ShowLimitInfo), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:160
+#: kmymoney/settings/kmymoney.kcfg:168
 #, kde-format
 msgid "Show account limit information on the Homepage"
 msgstr ""
 "Εμφανίζει πληροφορίες σχετικά με τα όρια των λογαριασμών στην αρχική σελίδα"
 
 #. i18n: ectx: label, entry (ShowBalanceStatusOfOnlineAccounts), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:164
+#: kmymoney/settings/kmymoney.kcfg:172
 #, kde-format
 msgid ""
 "Show balance status on the Homepage for accounts where data imports include "
@@ -19685,7 +19727,7 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: label, entry (ShowCountOfUnmarkedTransactions), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:168
+#: kmymoney/settings/kmymoney.kcfg:176
 #, kde-format
 msgid "Show number of not marked transactions per account on the Homepage [!M]"
 msgstr ""
@@ -19693,7 +19735,7 @@ msgstr ""
 "Αρχική σελίδα [!M]"
 
 #. i18n: ectx: label, entry (ShowCountOfClearedTransactions), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:172
+#: kmymoney/settings/kmymoney.kcfg:180
 #, kde-format
 msgid "Show number of cleared transactions per account on the Homepage [C]"
 msgstr ""
@@ -19701,7 +19743,7 @@ msgstr ""
 "Αρχική σελίδα [C]"
 
 #. i18n: ectx: label, entry (ShowCountOfNotReconciledTransactions), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:176
+#: kmymoney/settings/kmymoney.kcfg:184
 #, kde-format
 msgid ""
 "Show number of not reconciled (not marked + cleared) transactions per "
@@ -19711,7 +19753,7 @@ msgstr ""
 "συναλλαγών ανά λογαριασμό στην Αρχική σελίδα [!R]"
 
 #. i18n: ectx: label, entry (ShowDateOfLastReconciliation), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:180
+#: kmymoney/settings/kmymoney.kcfg:188
 #, fuzzy, kde-format
 #| msgid "Show account limit information on the Homepage"
 msgid "Show date of last reconciliation on the Homepage"
@@ -19719,191 +19761,191 @@ msgstr ""
 "Εμφανίζει πληροφορίες σχετικά με τα όρια των λογαριασμών στην αρχική σελίδα"
 
 #. i18n: ectx: label, entry (useCustomColors), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:186
+#: kmymoney/settings/kmymoney.kcfg:194
 #, fuzzy, kde-format
 #| msgid "Use system colors"
 msgid "Use custom colors"
 msgstr "Χρήση των χρωμάτων του συστήματος"
 
 #. i18n: ectx: label, entry (transactionImportedColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:190
+#: kmymoney/settings/kmymoney.kcfg:198
 #, kde-format
 msgid "Background color for imported transactions"
 msgstr "Χρώμα φόντου για εισηγμένες συναλλαγές"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:194
+#: kmymoney/settings/kmymoney.kcfg:202
 #, fuzzy, kde-format
 #| msgid "Background color for imported transactions"
 msgid "Text color for imported transactions"
 msgstr "Χρώμα φόντου για εισηγμένες συναλλαγές"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:198
+#: kmymoney/settings/kmymoney.kcfg:206
 #, kde-format
 msgid "Background color for matched transactions"
 msgstr "Χρώμα φόντου για τις συσχετισμένες συναλλαγές"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:202
+#: kmymoney/settings/kmymoney.kcfg:210
 #, fuzzy, kde-format
 #| msgid "Background color for matched transactions"
 msgid "Text color for matched transactions"
 msgstr "Χρώμα φόντου για τις συσχετισμένες συναλλαγές"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:206
+#: kmymoney/settings/kmymoney.kcfg:214
 #, kde-format
 msgid "List color for erroneous transactions"
 msgstr "Χρώμα λίστας για λανθασμένες συναλλαγές"
 
 #. i18n: ectx: label, entry (missingConversionRateColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:210
+#: kmymoney/settings/kmymoney.kcfg:218
 #, kde-format
 msgid "List color for missing conversion rate"
 msgstr "Χρώμα λίστας για έλλειψη συναλλαγματικής ισοτιμίας"
 
 #. i18n: ectx: label, entry (groupMarkerColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:214
+#: kmymoney/settings/kmymoney.kcfg:222
 #, kde-format
 msgid "Background color for group marker"
 msgstr "Χρώμα φόντου για την σημείωση της ομάδας"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:218
+#: kmymoney/settings/kmymoney.kcfg:226
 #, fuzzy, kde-format
 #| msgid "Background color for group marker"
 msgid "Text color for group marker"
 msgstr "Χρώμα φόντου για την σημείωση της ομάδας"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:222
+#: kmymoney/settings/kmymoney.kcfg:230
 #, kde-format
 msgid "Background color for required fields"
 msgstr "Χρώμα φόντου για τα απαιτούμενα πεδία"
 
 #. i18n: ectx: label, entry (ShowCategoriesInAccountsView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:236
+#: kmymoney/settings/kmymoney.kcfg:244
 #, kde-format
 msgid "Show categories in the accounts view"
 msgstr "Εμφάνιση κατηγοριών στην προβολή λογαριασμών"
 
 #. i18n: ectx: label, entry (HideZeroBalanceEquities), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:240
+#: kmymoney/settings/kmymoney.kcfg:248
 #, kde-format
 msgid "Hide zero balance equities"
 msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:244
+#: kmymoney/settings/kmymoney.kcfg:252
 #, fuzzy, kde-format
 #| msgid "Hide closed accounts"
 msgid "Hide zero balance accounts from Accounts"
 msgstr "Απόκρυψη κλειστών λογαριασμών"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:248
+#: kmymoney/settings/kmymoney.kcfg:256
 #, fuzzy, kde-format
 #| msgid "Hide closed accounts"
 msgid "Hide zero balance accounts from Home"
 msgstr "Απόκρυψη κλειστών λογαριασμών"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:252
+#: kmymoney/settings/kmymoney.kcfg:260
 #, kde-format
 msgid "Hide finished schedules"
 msgstr "Απόκρυψη ολοκληρωμένων προγραμματισμών"
 
 #. i18n: ectx: label, entry (ShowRegisterDetailed), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:260
+#: kmymoney/settings/kmymoney.kcfg:268
 #, kde-format
 msgid "Show all register entries in full detail"
 msgstr "Εμφάνιση όλων των γραμμών καταχωρήσεων με όλες τις λεπτομέρειες"
 
 #. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:264
+#: kmymoney/settings/kmymoney.kcfg:272
 #, fuzzy, kde-format
 #| msgid "Show a grid in the register"
 msgid "Show all split details in register"
 msgstr "Εμφάνιση ενός καννάβου"
 
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:268
+#: kmymoney/settings/kmymoney.kcfg:276
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgid "Show schedules with planned date"
 msgstr "Προγραμματισμένες συναλλαγές"
 
 #. i18n: ectx: label, entry (ShowGrid), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:272
+#: kmymoney/settings/kmymoney.kcfg:280
 #, kde-format
 msgid "Show a grid in the register"
 msgstr "Εμφάνιση ενός καννάβου"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:276
+#: kmymoney/settings/kmymoney.kcfg:284
 #, kde-format
 msgid "Show fancy group markers"
 msgstr "Εμφάνιση κομψών ενδείξεων ομάδων"
 
 #. i18n: ectx: label, entry (ShowFiscalMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:280
+#: kmymoney/settings/kmymoney.kcfg:288
 #, kde-format
 msgid "Show fancy markers for previous and current fiscal year"
 msgstr ""
 "Εμφάνιση κομψών ενδείξεων για το προηγούμενο και το τρέχον οικονομικό έτος"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:284
+#: kmymoney/settings/kmymoney.kcfg:292
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
 msgstr ""
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:293
+#: kmymoney/settings/kmymoney.kcfg:301
 #, kde-format
 msgid "Starting month of the fiscal year"
 msgstr "Μήνας έναρξης οικονομικού έτους"
 
 #. i18n: ectx: label, entry (FiscalYearBeginDay), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:299
+#: kmymoney/settings/kmymoney.kcfg:307
 #, kde-format
 msgid "Starting day of the fiscal year"
 msgstr "Ημέρα έναρξης οικονομικού έτους"
 
 #. i18n: ectx: label, entry (StartDate), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:305
+#: kmymoney/settings/kmymoney.kcfg:313
 #, kde-format
 msgid "Start date"
 msgstr "Ημερομηνία έναρξης"
 
 #. i18n: ectx: label, entry (logPath), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:309
+#: kmymoney/settings/kmymoney.kcfg:317
 #, kde-format
 msgid "Log file path"
 msgstr ""
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:318
+#: kmymoney/settings/kmymoney.kcfg:326
 #, kde-format
 msgid "Use system font"
 msgstr "Χρήση της γραμματοσειράς του συστήματος"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:332 kmymoney/settings/kmymoney.kcfg:336
+#: kmymoney/settings/kmymoney.kcfg:340 kmymoney/settings/kmymoney.kcfg:344
 #, kde-format
 msgid "Sort order of register in normal view"
 msgstr "Σειρά ταξινόμησης καθολικού σε κανονική προβολή"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:348
 #, kde-format
 msgid "Sort order of register in search dialog"
 msgstr "Σειρά ταξινόμησης καθολικού στο διάλογο αναζήτησης"
 
 #. i18n: ectx: label, entry (defaultReconciliationState), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:353
+#: kmymoney/settings/kmymoney.kcfg:361
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
@@ -19911,13 +19953,13 @@ msgstr ""
 "Προεπιλεγμένη κατάσταση συμφωνίας για εισηγμένες συναλλαγές κατά τη συμφωνία"
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:359
+#: kmymoney/settings/kmymoney.kcfg:367
 #, kde-format
 msgid "Number of days (plus/minus) to search for matching transactions"
 msgstr "Αριθμός ημερών (συν/πλην) για αναζήτηση ταιριάσματος συναλλαγών"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:363
+#: kmymoney/settings/kmymoney.kcfg:371
 #, kde-format
 msgid "During import, ask for a new payee's default category"
 msgstr ""
@@ -19925,67 +19967,67 @@ msgstr ""
 "δικαιούχου"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
-#: kmymoney/settings/kmymoney.kcfg:370
+#: kmymoney/settings/kmymoney.kcfg:378
 #, kde-format
 msgid "Post date last entered by the user"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifCash), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:376
+#: kmymoney/settings/kmymoney.kcfg:384
 #, kde-format
 msgid "additional names for cash account"
 msgstr "πρόσθετα ονόματα για το λογαριασμό μετρητών"
 
 #. i18n: ectx: label, entry (qifBank), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:380
+#: kmymoney/settings/kmymoney.kcfg:388
 #, kde-format
 msgid "additional names for checking account"
 msgstr "πρόσθετα ονόματα για τον τρεχούμενο λογαριασμό"
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:384
+#: kmymoney/settings/kmymoney.kcfg:392
 #, kde-format
 msgid "additional names for credit card account"
 msgstr "πρόσθετα ονόματα για το λογαριασμό πιστωτικής κάρτας"
 
 #. i18n: ectx: label, entry (qifAsset), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:388
+#: kmymoney/settings/kmymoney.kcfg:396
 #, kde-format
 msgid "additional names for asset account"
 msgstr "πρόσθετα ονόματα για το λογαριασμό ενεργητικού"
 
 #. i18n: ectx: label, entry (qifOpeningBalance), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:392
+#: kmymoney/settings/kmymoney.kcfg:400
 #, kde-format
 msgid "additional names for opening balance payee"
 msgstr "επιπλέον ονομασίες για τον δικαιούχο του ισολογισμού ανοίγματος"
 
 #. i18n: ectx: label, entry (qifInvoice), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:396
+#: kmymoney/settings/kmymoney.kcfg:404
 #, kde-format
 msgid "additional names for invoice accounts"
 msgstr "πρόσθετα ονόματα για λογαριασμούς τιμολογίου"
 
 #. i18n: ectx: label, entry (showAccountsExpanded), group (Account View Settings)
-#: kmymoney/settings/kmymoney.kcfg:402
+#: kmymoney/settings/kmymoney.kcfg:410
 #, kde-format
 msgid "Show accounts view expanded when loaded"
 msgstr "Εμφάνιση επέκτασης της προβολής λογαριασμού όταν έχει φορτωθεί"
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:408
+#: kmymoney/settings/kmymoney.kcfg:416
 #, kde-format
 msgid "Maximum quantity of legend items to display on charts"
 msgstr "Μέγιστη ποσότητα αντικειμένων τίτλου προς εμφάνιση σε διαγράμματα"
 
 #. i18n: ectx: label, entry (ChartsPalette), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:420
+#: kmymoney/settings/kmymoney.kcfg:428
 #, kde-format
 msgid "The palette used to render charts"
 msgstr "Η παλέτα για την αποτύπωση διαγραμμάτων"
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:426
+#: kmymoney/settings/kmymoney.kcfg:434
 #, kde-format
 msgid "Name of default CSS file"
 msgstr "όνομα του προκαθορισμένου αρχείου CSS"
@@ -22733,7 +22775,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Διαφορά: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:362
+#: kmymoney/views/simpleledgerview.cpp:372
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -22741,7 +22783,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:471
+#: kmymoney/views/simpleledgerview.cpp:481
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22749,7 +22791,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:474
+#: kmymoney/views/simpleledgerview.cpp:484
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22757,19 +22799,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:753
+#: kmymoney/views/simpleledgerview.cpp:763
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:939
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:940
+#: kmymoney/views/simpleledgerview.cpp:950
 #, fuzzy, kde-format
 #| msgid "Closed tags can't be used."
 msgctxt "@title:info In reconciliation"
@@ -23273,8 +23315,8 @@ msgstr "Χρησιμοποιήστε αυτό το κουμπί για να πα
 msgid "&Close"
 msgstr "&Κλείσιμο"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:503
-#: kmymoney/widgets/kmymoneydateedit.cpp:588
+#: kmymoney/widgets/kmymoneydateedit.cpp:507
+#: kmymoney/widgets/kmymoneydateedit.cpp:599
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
@@ -27308,6 +27350,22 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
+
+#~ msgid "Startup page options"
+#~ msgstr "Επιλογές της σελίδας εκκίνησης"
+
+#, fuzzy
+#~| msgid "Start with homepage"
+#~ msgid "Start with ho&mepage"
+#~ msgstr "Εκκίνηση στην αρχική σελίδα"
+
+#~ msgid "Start with last selected view"
+#~ msgstr "Εκκίνηση στην τελευταία επιλεγμένη προβολή"
+
+#~ msgid "Synchronize account selection of ledger and investment view"
+#~ msgstr ""
+#~ "Συγχρονισμός της επιλογής λογαριασμού για την προβολή καθολικού και "
+#~ "επενδύσεων"
 
 #~ msgid "Payment Accounts"
 #~ msgstr "Λογαριασμοί πληρωμών"
