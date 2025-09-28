@@ -2745,8 +2745,7 @@ msgstr "Creează o categorie"
 #. i18n: ectx: Menu (budget_context_menu)
 #: kmymoney/dialogs/knewaccountdlg.ui:925
 #: kmymoney/plugins/views/budget/budgetview.rc:4
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgid "Budget options"
 msgstr "Opțiuni buget"
 
@@ -5404,7 +5403,8 @@ msgid "Delete security..."
 msgstr "Șterge titlul de valoare"
 
 #: kmymoney/kmymoney.cpp:1490
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New schedule..."
 msgid "New schedule..."
 msgstr "Programare nouă..."
 
@@ -10062,28 +10062,22 @@ msgid "Billion"
 msgstr "Miliard"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:37
-#, fuzzy, kde-format
-#| msgctxt "@item This comes after the hundred value digit"
-#| msgid " Hundred"
+#, kde-format
 msgctxt "@item %1 = hundred value digit"
 msgid "%1 Hundred"
-msgstr " sute"
+msgstr "%1 sute"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:47
 #, kde-format
 msgctxt "@item %1 = tens text, %2 = ones text"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:56
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label The first argument is the amount in words, the second is the "
-#| "fractional part and the third is the denominator of the fractional part"
-#| msgid "%1 and %2/%3"
+#, kde-format
 msgctxt "@item %1 = hundreds text, %2 = tens and ones text"
 msgid "%1 and %2"
-msgstr "%1 și %2/%3"
+msgstr "%1 %2"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:79
 #, kde-format
