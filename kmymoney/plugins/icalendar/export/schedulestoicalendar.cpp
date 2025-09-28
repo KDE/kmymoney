@@ -382,8 +382,9 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEv
             int triggerInterval = beforeAfterToInt(ICalendarSettings::beforeAfter()) * ICalendarSettings::timeUnits() * timeUnitsInSeconds(ICalendarSettings::timeUnitInSeconds());
             icalcomponent_add_property(alarm, icalproperty_new_trigger(icaltriggertype_from_int(triggerInterval)));
             // alarm: duration
-            int intervalBetweenReminders = ICalendarSettings::intervalBetweenRemindersTimeUnits() * timeUnitsInSeconds(ICalendarSettings::intervalBetweenRemindersTimeUnitInSeconds());
-            icalcomponent_set_duration(alarm, icaldurationtype_from_int(intervalBetweenReminders));
+            const unsigned int intervalBetweenReminders = ICalendarSettings::intervalBetweenRemindersTimeUnits() * timeUnitsInSeconds(ICalendarSettings::intervalBetweenRemindersTimeUnitInSeconds());
+            const struct icaldurationtype durtype = { .seconds = intervalBetweenReminders };
+            icalcomponent_set_duration(alarm, durtype);
             if (ICalendarSettings::repeatingReminders()) {
                 // alarm: repeat
                 icalcomponent_add_property(alarm, icalproperty_new_repeat(ICalendarSettings::numberOfReminders()));
