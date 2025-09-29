@@ -25942,15 +25942,3 @@ msgstr "Kun en av --csv og --html er støttet"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "lagrer rapport «%1» til «%2»"
-
-#~ msgid "Startup page options"
-#~ msgstr "Oppstartsvalg"
-
-#~ msgid "Start with ho&mepage"
-#~ msgstr "Start med hje&mmeside"
-
-#~ msgid "Start with last selected view"
-#~ msgstr "Start med sist valgte visning"
-
-#~ msgid "Synchronize account selection of ledger and investment view"
-#~ msgstr "Synkroniser kontovalg av hovedbok og investeringsvisning"

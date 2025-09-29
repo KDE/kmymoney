@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-28 00:44+0000\n"
-"PO-Revision-Date: 2025-09-19 07:08+0200\n"
+"PO-Revision-Date: 2025-09-28 06:09+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3158,49 +3158,43 @@ msgstr "გაშვების მორგება"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:334
 #, kde-format
 msgid "View to show"
-msgstr ""
+msgstr "საჩვენებელი ხედი"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:342
-#, fuzzy, kde-format
-#| msgid "Home Page"
+#, kde-format
 msgid "Homepage"
 msgstr "საწყისი გვერდი"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:347
-#, fuzzy, kde-format
-#| msgid "The last selected view"
+#, kde-format
 msgid "Last selected view"
 msgstr "ბოლოს არჩეული ხედი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:355
-#, fuzzy, kde-format
-#| msgid "    Account opening date updated."
+#, kde-format
 msgid "Accounts to open in ledger"
-msgstr "    ანგარიშის გახსნის თარიღი განახლდა."
+msgstr "გროსბუხში გასახსნელი ანგარიშები"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:363
-#, fuzzy, kde-format
-#| msgid "Asset accounts"
+#, kde-format
 msgid "Last account used"
-msgstr "აქტივების ანგარიშები"
+msgstr "ბოლო გამოყენებული ანგარიში"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:368
-#, fuzzy, kde-format
-#| msgid "Favorite account"
+#, kde-format
 msgid "All favorite accounts"
-msgstr "რჩეული ანგარიში"
+msgstr "ყველა რჩეული ანგარიში"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:373
-#, fuzzy, kde-format
-#| msgid "Expand all accounts in the list"
+#, kde-format
 msgid "All accounts open at last close"
-msgstr "სიაში ყველა ანგარიშის აკეცვა"
+msgstr "ყველა ანგარიში, რომელიც ღია იყო ბოლო დახურვისას"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_viewType)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:384
@@ -3983,7 +3977,7 @@ msgstr "Enter-ის გამოყენება ველებს შორ
 #: kmymoney/dialogs/settings/ksettingsregister.ui:257
 #, kde-format
 msgid "Use TAB to switch between parts of date"
-msgstr ""
+msgstr "TAB ღილაკის გამოყენება თარიღის ნაწილებს შორის სამოძრაოდ"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:264
@@ -6441,7 +6435,7 @@ msgstr "* პრობლემა ანგარიშთან '%1'"
 #: kmymoney/mymoney/mymoneyfile.cpp:3016
 #, kde-format
 msgid "  * Loop detected between this account and account '%1'."
-msgstr ""
+msgstr "  * აღმოჩენილია მარყუჟი ამ და '%1' ანგარიშებს შორის."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3017
 #, kde-format
@@ -17840,10 +17834,9 @@ msgstr "Enter-ის გამოყენება ველებს შორ
 
 #. i18n: ectx: label, entry (TabMovesBetweenDateParts), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Using the Enter key moves between the fields"
+#, kde-format
 msgid "Using the TAB key moves between the date parts"
-msgstr "Enter-ის გამოყენება ველებს შორის სამოძრაოდ"
+msgstr "TAB ღილაკის მოძრაობა გადადის თარიღის ნაწილებს შორის"
 
 #. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:100
@@ -18181,7 +18174,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:371
 #, kde-format
 msgid "During import, ask for a new payee's default category"
-msgstr ""
+msgstr "შემოტანისას ახალი მიმღების ნაგულისხმევი კატეგორიის კითხვა"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
 #: kmymoney/settings/kmymoney.kcfg:378
@@ -18229,7 +18222,7 @@ msgstr "დამატებითი სახელები ინვოი�
 #: kmymoney/settings/kmymoney.kcfg:410
 #, kde-format
 msgid "Show accounts view expanded when loaded"
-msgstr ""
+msgstr "ანგარიშების ხედის ჩამოშლილად ჩვენება, როცა ჩატვირთულია"
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
 #: kmymoney/settings/kmymoney.kcfg:416
@@ -19446,7 +19439,7 @@ msgstr "ვერ წავშალე დაწესებულება: %1
 #: kmymoney/views/kinvestmentview.cpp:602
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
-msgstr ""
+msgstr "<p>მართლა გნებავთ, წაშალოთ ინვესტიცია <b>%1</b>?</p>"
 
 #: kmymoney/views/kinvestmentview.cpp:603
 #, kde-format
@@ -19739,7 +19732,7 @@ msgstr "ნაგულისხმები კატეგორია"
 #: kmymoney/views/kpayeesview.ui:445
 #, kde-format
 msgid "Use the default category for new transactions with this payee"
-msgstr ""
+msgstr "ნაგულისხმევი კატეგორია ამ მიმღების მქონე ახალი ტრანზაქციებისთვის"
 
 #. i18n: ectx: property (text), widget (QLabel, labelDefaultCategory)
 #: kmymoney/views/kpayeesview.ui:454
@@ -19919,7 +19912,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview_p.h:581
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
-msgstr ""
+msgstr "ტრანზაქციის/გაყოფის მიმღების თავიდან მინიჭება შეუძლებელია"
 
 #: kmymoney/views/kpayeesview_p.h:585
 #, kde-format
@@ -19935,7 +19928,7 @@ msgstr "მიმღებების წაშლა შეუძლებე�
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
-msgstr ""
+msgstr "<p>მართლა გნებავთ, წაშალოთ დაგეგმილი ტრანზქცია <b>%1</b>?</p>"
 
 #: kmymoney/views/kscheduledview.cpp:188
 #, kde-format
@@ -19953,7 +19946,7 @@ msgstr "განრიგის წაშლა"
 #: kmymoney/views/kscheduledview.cpp:198
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
-msgstr ""
+msgstr "ვერ წავშალე დაგეგმილი ტრანზაქცია '%1'"
 
 #: kmymoney/views/kscheduledview.cpp:212
 #, kde-format
@@ -19964,7 +19957,7 @@ msgstr "%1-ის კოპირება"
 #: kmymoney/views/kscheduledview.cpp:237
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
-msgstr ""
+msgstr "ვერ დავადუბლირე დაგეგმილი ტრანზაქცია; '%1'"
 
 #: kmymoney/views/kscheduledview.cpp:251 kmymoney/views/kscheduledview.cpp:264
 #: kmymoney/views/kscheduledview_p.h:411
@@ -20023,7 +20016,7 @@ msgstr "დაგეგმილი ტრანზაქციის გამ�
 #: kmymoney/views/kscheduledview_p.h:364
 #, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
-msgstr ""
+msgstr "<qt>ვერ გამოვტოვე დაგეგმილი ტრანზაქცია <b>%1</b>.</qt>"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:55
 #, kde-format
@@ -20386,6 +20379,7 @@ msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
 msgstr ""
+"მონიშნულ კატეგორიაში ტრანზაქციისთვის ფასის ცენტრის მინიჭება აუცილებელია."
 
 #: kmymoney/views/multitransactioneditor.cpp:276
 #, kde-format
@@ -20399,7 +20393,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr ""
+msgstr "ერთზე მეტ გეგმას ერთდროულად ვერ ჩაასწორებთ."
 
 #: kmymoney/views/multitransactioneditor.cpp:743
 #, kde-format
@@ -20408,6 +20402,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"კატეგორიის, ან ანგარიშის არჩევა შეუძლებელია, როცა გაყოფილი ტრანზაქციები "
+"მონიშნულის ნაწილია."
 
 #: kmymoney/views/multitransactioneditor.cpp:747
 #, kde-format
@@ -20416,6 +20412,7 @@ msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
+"ჭდეების არჩევა შეუძლებელია, როცა გაყოფილი ტრანზაქციები მონიშნულის ნაწილია."
 
 #: kmymoney/views/multitransactioneditor.cpp:751
 #, kde-format
@@ -20424,12 +20421,14 @@ msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
+"ფასის ცენტრის არჩევა შეუძლებელია, როცა გაყოფილი ტრანზაქციები მონიშნულის "
+"ნაწილია."
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
-msgstr ""
+msgstr "ღირებულების ცენტრი, რომელსაც ეს ტრანზაქცია მიენიჭება."
 
 #: kmymoney/views/newspliteditor.cpp:187
 #, kde-format
@@ -20438,18 +20437,19 @@ msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
 msgstr ""
+"მონიშნულ კატეგორიაში ტრანზაქციისთვის ფასის ცენტრის მინიჭება აუცილებელია."
 
 #: kmymoney/views/newspliteditor.cpp:198
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
-msgstr ""
+msgstr "კატეგორიგა, რომელსაც ეს გაყოფა მიენიჭება."
 
 #: kmymoney/views/newspliteditor.cpp:243
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
-msgstr ""
+msgstr "გაყოფისთვის კატეგორიის მინიჭება აუცილებელია."
 
 #: kmymoney/views/newspliteditor.cpp:252
 #, kde-format
@@ -20460,7 +20460,7 @@ msgstr "ტრანზაქციისთვის გამოყენე�
 #: kmymoney/views/newtransactioneditor.cpp:487
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
-msgstr ""
+msgstr "ჩეკი ნომრით <b>%1</b> უკვე გამოიყენება ამ ანგარიშში."
 
 #: kmymoney/views/newspliteditor.cpp:772
 #: kmymoney/views/newtransactioneditor.cpp:206
@@ -20470,6 +20470,7 @@ msgid ""
 "This widget is currently protected because the transaction references a "
 "closed account."
 msgstr ""
+"ეს ვიჯეტი ამჟამად დაცულია, რადგან ტრანზაქცია მიუთითებს დახურულ ანგარიშზე."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -20493,7 +20494,7 @@ msgstr "ხარჯების ცენტრი"
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
-msgstr ""
+msgstr "ანგარიში გათიშულია, რადგან ჯერ კატეგორია უნდა აირჩიოთ."
 
 #: kmymoney/views/newtransactioneditor.cpp:179
 #, kde-format
@@ -20565,14 +20566,14 @@ msgstr "ტრანზაქციის რაოდენობა."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The cost center this transaction should be assigned to."
-msgstr ""
+msgstr "ღირებულების ცენტრი, რომელსაც ეს ტრანზაქცია მიენიჭება."
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, categoryCombo)
 #: kmymoney/views/newtransactioneditor.ui:281
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr ""
+msgstr "შეიყვანეთ ტრანზაქციის კატეგორია, ან ანგარიში."
 
 #: kmymoney/views/newtransactionform.cpp:135
 #, kde-format
@@ -22021,7 +22022,7 @@ msgstr "ანგარიშის სახელი"
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:60
 #, kde-format
 msgid "Enter a name under which this account is known within KMyMoney."
-msgstr ""
+msgstr "შეიყვანეთ სახელი, რომლითაც ეს ანგარიში იქნება ცნობილი KMyMoney-ში."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:67
@@ -22072,7 +22073,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:129
 #, kde-format
 msgid "Select the currency in which this account is denominated."
-msgstr ""
+msgstr "აირჩიეთ ვალუტა, რომელშიც ეს ანგარიშია დენომინირებული."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
@@ -22597,7 +22598,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:54
 #, kde-format
 msgid "Select the institution which manages this account or leave empty"
-msgstr ""
+msgstr "აირჩიეთ დაწესებულება, რომელიც მართავს ამ ანგარიშს, ან დატოვეთ ცარიელი"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newInstitutionButton)
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:61
@@ -22619,7 +22620,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:97
 #, kde-format
 msgid "Enter the International Bank Account Number into this field"
-msgstr ""
+msgstr "ამ ველში შეიყვანეთ საერთაშორისო ბანკის ანგარიშის ნომერი"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_iban)
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:104
@@ -22688,7 +22689,7 @@ msgstr "კრედიტის დაფარვა ერთხელ მთ
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:352
 #, kde-format
 msgid "KMyMoney has calculated the term of your loan as %1. "
-msgstr ""
+msgstr "KMyMoney-მა გამოთვალა თქვენი სესხის ვადა, როგორც %1. "
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:263
 #, kde-format
@@ -24397,7 +24398,7 @@ msgstr ""
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:58
 #, kde-format
 msgid "The name of the institution that issued the account."
-msgstr ""
+msgstr "დაწესებულების სახელი, რომელმაც ეს ანგარიში გამოუშვა."
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_institutionNumberEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:65
@@ -24568,7 +24569,7 @@ msgstr ""
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
 #, kde-format
 msgid "Configure preferences after finishing the wizard."
-msgstr ""
+msgstr "პარამეტრების მორგება ოსტატის დასრულების შემდეგ."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:60
