@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-28 00:44+0000\n"
-"PO-Revision-Date: 2025-09-20 16:47+0200\n"
+"PO-Revision-Date: 2025-09-29 09:21+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -3354,49 +3354,43 @@ msgstr "Opzioni di avvio"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:334
 #, kde-format
 msgid "View to show"
-msgstr ""
+msgstr "Visualizza per mostrare"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:342
-#, fuzzy, kde-format
-#| msgid "Home Page"
+#, kde-format
 msgid "Homepage"
-msgstr "Pagina principale"
+msgstr "Pagina iniziale"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:347
-#, fuzzy, kde-format
-#| msgid "The last selected view"
+#, kde-format
 msgid "Last selected view"
 msgstr "L'ultima vista selezionata"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:355
-#, fuzzy, kde-format
-#| msgid "    Account opening date updated."
+#, kde-format
 msgid "Accounts to open in ledger"
-msgstr "    Data di apertura del conto aggiornata."
+msgstr "Conti da aprire nel registro"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:363
-#, fuzzy, kde-format
-#| msgid "Asset accounts"
+#, kde-format
 msgid "Last account used"
-msgstr "Conti attività"
+msgstr "Ultimo conto utilizzato"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:368
-#, fuzzy, kde-format
-#| msgid "Favorite account"
+#, kde-format
 msgid "All favorite accounts"
-msgstr "Conto preferito"
+msgstr "Tutti i conti preferiti"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:373
-#, fuzzy, kde-format
-#| msgid "Expand all accounts in the list"
+#, kde-format
 msgid "All accounts open at last close"
-msgstr "Espandi tutti i conti nell'elenco"
+msgstr "Tutti i conti aperti all'ultima chiusura"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_viewType)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:384
@@ -4224,7 +4218,7 @@ msgstr "Usa Invio per spostarti tra i campi"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:257
 #, kde-format
 msgid "Use TAB to switch between parts of date"
-msgstr ""
+msgstr "Utilizza TAB per passare da una parte all'altra della data"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:264
@@ -18716,16 +18710,16 @@ msgstr "Usare il tasto Invio per spostarsi tra i campi"
 
 #. i18n: ectx: label, entry (TabMovesBetweenDateParts), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Using the Enter key moves between the fields"
+#, kde-format
 msgid "Using the TAB key moves between the date parts"
-msgstr "Usare il tasto Invio per spostarsi tra i campi"
+msgstr "Con l'utilizzo del tasto TAB ci si sposta tra le parti della data"
 
 #. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:100
 #, kde-format
 msgid "Select which accounts to show in ledger after file open"
 msgstr ""
+"Seleziona quali conti visualizzare nel registro dopo l'apertura del file"
 
 #. i18n: ectx: label, entry (StartLastViewSelected), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:104
