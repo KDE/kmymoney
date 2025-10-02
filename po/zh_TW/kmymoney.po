@@ -4,13 +4,13 @@
 # Franklin Weng <franklin@goodhorse.idv.tw>, 2010, 2011, 2012.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2009.
 # pan93412 <pan93412@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-28 00:44+0000\n"
-"PO-Revision-Date: 2024-05-09 17:33+0900\n"
+"PO-Revision-Date: 2025-10-01 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -7312,10 +7312,9 @@ msgid "Andorran Peseta"
 msgstr "安道爾─陪士特（Peseta）"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4035
-#, fuzzy, kde-format
-#| msgid "Angolan New Kwanza"
+#, kde-format
 msgid "Angolan Kwanza"
-msgstr "安哥拉─新寬札（New Kwanza）"
+msgstr "安哥拉─匡撒（Kwanza）"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4036
 #, kde-format
@@ -7385,7 +7384,7 @@ msgstr "玻利維亞─玻利維亞銀幣（Boliviano）"
 #: kmymoney/mymoney/mymoneyfile.cpp:4050
 #, kde-format
 msgid "Bosnian Convertible Mark"
-msgstr "波士尼亞─可兌換馬克（Convertible Mark）"
+msgstr "波士尼亞─波赫馬克（Convertible Mark）"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4051
 #, kde-format
@@ -7776,7 +7775,7 @@ msgstr "緬甸─元（Kyat）"
 #: kmymoney/mymoney/mymoneyfile.cpp:4129
 #, kde-format
 msgid "Namibian Dollar"
-msgstr "那米比亞─元（Dollar）"
+msgstr "納米比亞─元（Dollar）"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4130
 #, kde-format
