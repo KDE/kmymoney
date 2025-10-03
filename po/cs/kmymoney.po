@@ -414,11 +414,10 @@ msgstr[2] "%1 výpisů bylo zpracováno s následujícími výsledky:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
-msgstr "Importovaná historie"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -3204,38 +3203,33 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:342
-#, fuzzy, kde-format
-#| msgid "Home Page"
+#, kde-format
 msgid "Homepage"
-msgstr "Domov"
+msgstr "Domovská stránka"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:347
-#, fuzzy, kde-format
-#| msgid "Start with last selected view"
+#, kde-format
 msgid "Last selected view"
-msgstr "Při startu zobrazit poslední použitý pohled"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:355
-#, fuzzy, kde-format
-#| msgid "Account to export"
+#, kde-format
 msgid "Accounts to open in ledger"
-msgstr "Účet pro export"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:363
-#, fuzzy, kde-format
-#| msgid "Asset accounts"
+#, kde-format
 msgid "Last account used"
-msgstr "Účty aktiv"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:368
-#, fuzzy, kde-format
-#| msgid "Favorite account"
+#, kde-format
 msgid "All favorite accounts"
-msgstr "Oblíbený účet"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:373
@@ -18093,10 +18087,9 @@ msgstr "Použitím klávesy \"Enter\" se můžete pohybovat mezi poli"
 
 #. i18n: ectx: label, entry (TabMovesBetweenDateParts), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Using the Enter key moves between the fields"
+#, kde-format
 msgid "Using the TAB key moves between the date parts"
-msgstr "Použitím klávesy \"Enter\" se můžete pohybovat mezi poli"
+msgstr ""
 
 #. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:100
@@ -25322,12 +25315,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Startup page options"
-#~ msgstr "Možnosti úvodní stránky"
-
-#~ msgid "Start with ho&mepage"
-#~ msgstr "Při startu zobrazit do&mácí stránku"
-
-#~ msgid "Synchronize account selection of ledger and investment view"
-#~ msgstr "Sjednotit výběr účtu v peněžním deníku a v investicích"
