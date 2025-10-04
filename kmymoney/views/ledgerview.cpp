@@ -628,7 +628,15 @@ LedgerView::LedgerView(QWidget* parent)
 
 LedgerView::~LedgerView()
 {
+    if (d->editor) {
+        disconnect(d->editor, &QObject::destroyed, this, &LedgerView::transactionEditorDestroyed);
+    }
     delete d;
+}
+
+void LedgerView::transactionEditorDestroyed()
+{
+    Q_EMIT editTransaction(this, false);
 }
 
 void LedgerView::setColumnSelectorGroupName(const QString& groupName)
@@ -811,9 +819,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
                 Q_EMIT editTransaction(this, true);
 
                 // and announce when we are done too
-                connect(d->editor, &QObject::destroyed, this, [&]() {
-                    Q_EMIT editTransaction(this, false);
-                });
+                connect(d->editor, &QObject::destroyed, this, &LedgerView::transactionEditorDestroyed);
             }
         }
         return rc;

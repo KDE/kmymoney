@@ -175,6 +175,7 @@ protected:
 protected Q_SLOTS:
     void selectionChanged ( const QItemSelection& selected, const QItemSelection& deselected ) override;
     void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
+    void transactionEditorDestroyed();
     void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
     void resizeEditorRow();
 
