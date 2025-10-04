@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-28 00:44+0000\n"
+"POT-Creation-Date: 2025-10-04 14:14+0000\n"
 "PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -6101,7 +6101,7 @@ msgstr "Budget"
 msgid "Cash Flow"
 msgstr "Cash Flow"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:151
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Unable to load schedule details"
@@ -19881,7 +19881,7 @@ msgstr "Number of transactions remaining:"
 msgid "Date of final transaction:"
 msgstr "Date of final transaction:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:240
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -19896,7 +19896,7 @@ msgstr ""
 "(You will be asked what you intend after pressing OK in the following "
 "dialog)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:243
+#: kmymoney/views/kenterscheduledlg.cpp:244
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Enter scheduled transaction"
@@ -21125,7 +21125,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Go to '%1'"
 
-#: kmymoney/views/ledgerview.cpp:759
+#: kmymoney/views/ledgerview.cpp:767
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21136,31 +21136,31 @@ msgstr ""
 "support editing two transactions in parallel. <a href=\"jumpToEditor\">Jump "
 "to current editor</a>"
 
-#: kmymoney/views/ledgerview.cpp:888
+#: kmymoney/views/ledgerview.cpp:894
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transaction is missing a category assignment."
 
-#: kmymoney/views/ledgerview.cpp:895
+#: kmymoney/views/ledgerview.cpp:901
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "The transaction has a missing assignment of <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:904
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "This schedule is overdue since %1. Click on the icon to enter it."
 
-#: kmymoney/views/ledgerview.cpp:910
+#: kmymoney/views/ledgerview.cpp:916
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "This transaction is imported. Click on the icon to accept it."
 
-#: kmymoney/views/ledgerview.cpp:916
+#: kmymoney/views/ledgerview.cpp:922
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21168,38 +21168,38 @@ msgid ""
 msgstr ""
 "This transaction is matched. Click on the icon to accept or unmatch it."
 
-#: kmymoney/views/ledgerview.cpp:961
+#: kmymoney/views/ledgerview.cpp:967
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1023
+#: kmymoney/views/ledgerview.cpp:1029
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Do not enter the overdue scheduled transaction."
 
-#: kmymoney/views/ledgerview.cpp:1024
+#: kmymoney/views/ledgerview.cpp:1030
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Enter the overdue scheduled transaction."
 
-#: kmymoney/views/ledgerview.cpp:1027
+#: kmymoney/views/ledgerview.cpp:1033
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Do you want to enter the overdue schedule now?"
 
-#: kmymoney/views/ledgerview.cpp:1028
+#: kmymoney/views/ledgerview.cpp:1034
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Enter overdue schedule"
 
-#: kmymoney/views/ledgerview.cpp:1048
+#: kmymoney/views/ledgerview.cpp:1054
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21209,7 +21209,7 @@ msgstr ""
 "Detach the hidden (matched) transaction from the one shown and enter it into "
 "the ledger again."
 
-#: kmymoney/views/ledgerview.cpp:1050
+#: kmymoney/views/ledgerview.cpp:1056
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21219,13 +21219,13 @@ msgstr ""
 "Accept the match as shown and remove the data of the hidden (matched) "
 "transaction."
 
-#: kmymoney/views/ledgerview.cpp:1054
+#: kmymoney/views/ledgerview.cpp:1060
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Do you want to accept or unmatch the matched transaction now?"
 
-#: kmymoney/views/ledgerview.cpp:1055
+#: kmymoney/views/ledgerview.cpp:1061
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
