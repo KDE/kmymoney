@@ -73,6 +73,9 @@ protected:
     /** overridden for internal reasons */
     bool focusNextPrevChild(bool next) override;
 
+    /** overridden for internal reasons */
+    void keyPressEvent(QKeyEvent* e) override;
+
 public Q_SLOTS:
     int exec() override;
 

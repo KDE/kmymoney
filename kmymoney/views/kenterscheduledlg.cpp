@@ -10,6 +10,7 @@
 
 #include <QDate>
 #include <QIcon>
+#include <QKeyEvent>
 #include <QWindow>
 
 // ----------------------------------------------------------------------------
@@ -288,4 +289,21 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
         }
     }
     return QWidget::focusNextPrevChild(next);
+}
+
+void KEnterScheduleDlg::keyPressEvent(QKeyEvent* e)
+{
+    if (!e->modifiers() || ((e->modifiers() & Qt::KeypadModifier) && (e->key() == Qt::Key_Enter))) {
+        Q_D(KEnterScheduleDlg);
+        switch (e->key()) {
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+            // move focus so that some focusOutEvent handlers are called
+            d->ui->buttonOk->setFocus();
+            break;
+        default:
+            break;
+        }
+    }
+    QDialog::keyPressEvent(e);
 }
