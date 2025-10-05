@@ -7,13 +7,13 @@
 #include "schedulestoicalendar.h"
 
 #include <QDateTime>
-#include <QLocale>
 #include <QFile>
+#include <QLocale>
 
 // KDE includes
-#include <KPluginFactory>
-#include <KLocalizedString>
 #include <KFile>
+#include <KLocalizedString>
+#include <KPluginFactory>
 
 // libical includes
 #include <libical/ical.h>
@@ -34,6 +34,11 @@
 // plugin includes
 #include "icalendarsettings.h"
 
+#if !ICAL_CHECK_VERSION(3, 99, 99)
+#define icaltriggertype_from_seconds icaltriggertype_from_int
+#define icaldurationtype_from_seconds icaldurationtype_from_int
+#endif
+
 using namespace eMyMoney;
 
 int timeUnitsInSeconds(int optionValue)
@@ -47,9 +52,9 @@ int timeUnitsInSeconds(int optionValue)
     case minute:
         return 60;
     case hour:
-        return 60*60;
+        return 60 * 60;
     case day:
-        return 24*60*60;
+        return 24 * 60 * 60;
     default:
         return 1;
     }
@@ -71,7 +76,8 @@ int beforeAfterToInt(int optionValue)
     }
 }
 
-struct icaltimetype qdateToIcalTimeType(const QDate& date) {
+struct icaltimetype qdateToIcalTimeType(const QDate& date)
+{
     struct icaltimetype icalDate = icaltime_null_date();
     icalDate.year = date.year();
     icalDate.month = date.month();
@@ -80,7 +86,8 @@ struct icaltimetype qdateToIcalTimeType(const QDate& date) {
     return icalDate;
 }
 
-struct icaltimetype qdateTimeToIcalTimeType(const QDateTime& dateTime) {
+struct icaltimetype qdateTimeToIcalTimeType(const QDateTime& dateTime)
+{
     struct icaltimetype icalDateTime = icaltime_null_date();
     icalDateTime.year = dateTime.date().year();
     icalDateTime.month = dateTime.date().month();
@@ -93,12 +100,14 @@ struct icaltimetype qdateTimeToIcalTimeType(const QDateTime& dateTime) {
 }
 
 #if ICAL_CHECK_VERSION(3, 99, 99)
-struct icalrecurrencetype *scheduleToRecurenceRule(const MyMoneySchedule& schedule) {
-    struct icalrecurrencetype *recurrence = icalrecurrencetype_new();
+struct icalrecurrencetype* scheduleToRecurenceRule(const MyMoneySchedule& schedule)
+{
+    struct icalrecurrencetype* recurrence = icalrecurrencetype_new();
 #else
-struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedule) {
+struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedule)
+{
     struct icalrecurrencetype recurrenceObject;
-    struct icalrecurrencetype *recurrence = &recurrenceObject;
+    struct icalrecurrencetype* recurrence = &recurrenceObject;
     icalrecurrencetype_clear(recurrence);
 #endif
     if (schedule.willEnd())
@@ -178,7 +187,7 @@ struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedul
         recurrence->freq = ICAL_NO_RECURRENCE;
         break;
     }
-    recurrence->interval = frequencyFactor*schedule.occurrenceMultiplier();
+    recurrence->interval = frequencyFactor * schedule.occurrenceMultiplier();
 #if ICAL_CHECK_VERSION(3, 99, 99)
     return recurrence;
 #else
@@ -206,8 +215,7 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
             const MyMoneyAccount& splitAccount = file->account(split.accountId());
             category += splitAccount.name();
 
-            isTransfer = splitAccount.accountGroup() == Account::Type::Asset ||
-                         splitAccount.accountGroup() == Account::Type::Liability;
+            isTransfer = splitAccount.accountGroup() == Account::Type::Asset || splitAccount.accountGroup() == Account::Type::Liability;
             isIncome = splitAccount.accountGroup() == Account::Type::Income;
         } else {
             payeeName = file->payee(split.payeeId()).name();
@@ -216,12 +224,21 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
         }
     }
 
-    QString description =
-        isTransfer ? i18n("Transfer from %1 to %2, Payee %3, amount %4", account.name(), category, payeeName, MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
-        : (
-            isIncome ? i18n("From %1 into %2, Category %3, sum of %4", payeeName, account.name(), category, MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
-            : i18n("From account %1, Pay to %2, Category %3, sum of %4", account.name(), payeeName, category, MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
-        );
+    QString description = isTransfer ? i18n("Transfer from %1 to %2, Payee %3, amount %4",
+                                            account.name(),
+                                            category,
+                                            payeeName,
+                                            MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
+                                     : (isIncome ? i18n("From %1 into %2, Category %3, sum of %4",
+                                                        payeeName,
+                                                        account.name(),
+                                                        category,
+                                                        MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
+                                                 : i18n("From account %1, Pay to %2, Category %3, sum of %4",
+                                                        account.name(),
+                                                        payeeName,
+                                                        category,
+                                                        MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId()))));
     if (!transaction.memo().isEmpty())
         description = i18nc<QString, QString>("The first string is the schedules details", "%1, memo %2", description, transaction.memo());
     return description;
@@ -302,7 +319,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEv
         const MyMoneySchedule& myMoneySchedule = *itSchedule;
 
         if (myMoneySchedule.isFinished())
-            continue;  // skip this schedule if it is already finished
+            continue; // skip this schedule if it is already finished
 
         icalcomponent* schedule = nullptr;
         bool newEntry = false;
@@ -379,11 +396,13 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEv
             // alarm: description
             icalcomponent_set_description(alarm, scheduleToDescription(myMoneySchedule).toUtf8());
             // alarm: trigger
-            int triggerInterval = beforeAfterToInt(ICalendarSettings::beforeAfter()) * ICalendarSettings::timeUnits() * timeUnitsInSeconds(ICalendarSettings::timeUnitInSeconds());
-            icalcomponent_add_property(alarm, icalproperty_new_trigger(icaltriggertype_from_int(triggerInterval)));
+            int triggerInterval = beforeAfterToInt(ICalendarSettings::beforeAfter()) * ICalendarSettings::timeUnits()
+                * timeUnitsInSeconds(ICalendarSettings::timeUnitInSeconds());
+            icalcomponent_add_property(alarm, icalproperty_new_trigger(icaltriggertype_from_seconds(triggerInterval)));
             // alarm: duration
-            int intervalBetweenReminders = ICalendarSettings::intervalBetweenRemindersTimeUnits() * timeUnitsInSeconds(ICalendarSettings::intervalBetweenRemindersTimeUnitInSeconds());
-            icalcomponent_set_duration(alarm, icaldurationtype_from_int(intervalBetweenReminders));
+            int intervalBetweenReminders =
+                ICalendarSettings::intervalBetweenRemindersTimeUnits() * timeUnitsInSeconds(ICalendarSettings::intervalBetweenRemindersTimeUnitInSeconds());
+            icalcomponent_set_duration(alarm, icaldurationtype_from_seconds(intervalBetweenReminders));
             if (ICalendarSettings::repeatingReminders()) {
                 // alarm: repeat
                 icalcomponent_add_property(alarm, icalproperty_new_repeat(ICalendarSettings::numberOfReminders()));
