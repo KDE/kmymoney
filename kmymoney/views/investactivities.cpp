@@ -128,23 +128,27 @@ public:
 
     void priceConsistency() const
     {
-        Q_Q(const Activity);
-        auto sharesWidget = haveWidget<AmountEdit>(QLatin1String("sharesAmountEdit"));
-        auto priceWidget = haveWidget<AmountEdit>(QLatin1String("priceAmountEdit"));
-        auto feesWidget = haveWidget<AmountEdit>(QLatin1String("feesAmountEdit"));
-        auto interestWidget = haveWidget<AmountEdit>(QLatin1String("interestAmountEdit"));
+        // we need to check the price consistency only when we enter
+        // the price per share not when we enter the total value
+        if (priceMode() == eMyMoney::Invest::PriceMode::PricePerShare) {
+            Q_Q(const Activity);
+            auto sharesWidget = haveWidget<AmountEdit>(QLatin1String("sharesAmountEdit"));
+            auto priceWidget = haveWidget<AmountEdit>(QLatin1String("priceAmountEdit"));
+            auto feesWidget = haveWidget<AmountEdit>(QLatin1String("feesAmountEdit"));
+            auto interestWidget = haveWidget<AmountEdit>(QLatin1String("interestAmountEdit"));
 
-        if (sharesWidget && priceWidget && feesWidget && interestWidget) {
-            const auto shares = sharesWidget->shares();
-            const auto totalAmount = m_editor->totalAmount();
-            const auto price = (priceMode() == eMyMoney::Invest::PriceMode::PricePerShare) ? priceWidget->value() : priceWidget->value() / shares;
-            const auto fees = feesWidget->value();
-            const auto interest = interestWidget->value();
-            const auto calculatedPrice =
-                (((-totalAmount + interest - fees) / shares) * q->sharesFactor()).convert(MyMoneyMoney::precToDenom(priceWidget->precision()));
-            if (calculatedPrice != price) {
-                qDebug() << "Correcting price from" << price.toDouble() << "to" << calculatedPrice.toDouble();
-                priceWidget->setValue(calculatedPrice);
+            if (sharesWidget && priceWidget && feesWidget && interestWidget) {
+                const auto shares = sharesWidget->shares();
+                const auto totalAmount = m_editor->totalAmount();
+                const auto price = priceWidget->value();
+                const auto fees = feesWidget->value();
+                const auto interest = interestWidget->value();
+                const auto calculatedPrice =
+                    (((-totalAmount + interest - fees) / shares) * q->sharesFactor()).convert(MyMoneyMoney::precToDenom(priceWidget->precision()));
+                if (calculatedPrice != price) {
+                    qDebug() << "Correcting price from" << price.toDouble() << "to" << calculatedPrice.toDouble();
+                    priceWidget->setValue(calculatedPrice);
+                }
             }
         }
     }
