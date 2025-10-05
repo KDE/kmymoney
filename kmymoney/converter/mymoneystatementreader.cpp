@@ -1050,7 +1050,16 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // some details which are otherwise lost
             const auto payee = file->payeesModel()->itemById(payeeid);
             if ((s1.memo() == transactionUnderImport.memo()) && (payee.name().toLower() != importedPayeeName.toLower())) {
-                s1.setMemo(i18nc("Prepend name of payee (%1) to original memo (%2)", "Original payee: %1\n%2", importedPayeeName, s1.memo()));
+                switch (KMyMoneySettings::keepOriginalPayeeInfo()) {
+                case KMyMoneySettings::DontKeep:
+                    break;
+                case KMyMoneySettings::AppendToMemo:
+                    s1.setMemo(i18nc("Append name of payee (%1) to original memo (%2)", "%2\nOriginal payee: %1", importedPayeeName, s1.memo()));
+                    break;
+                case KMyMoneySettings::PrependToMemo:
+                    s1.setMemo(i18nc("Prepend name of payee (%1) to original memo (%2)", "Original payee: %1\n%2", importedPayeeName, s1.memo()));
+                    break;
+                }
             }
         } catch (const MyMoneyException &) {
             MyMoneyPayee payee;

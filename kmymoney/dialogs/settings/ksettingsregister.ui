@@ -13,13 +13,13 @@
   <property name="windowTitle">
    <string>Register settings</string>
   </property>
-  <layout class="QVBoxLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
     <widget class="QTabWidget" name="tab">
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab1">
+     <widget class="QWidget" name="display">
       <attribute name="title">
        <string comment="@title The way in which items will be displayed">Display</string>
       </attribute>
@@ -52,7 +52,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="groupBox2">
          <property name="title">
           <string>Ledger entry details</string>
          </property>
@@ -94,7 +94,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="groupBox1">
          <property name="title">
           <string>Information headers</string>
          </property>
@@ -142,7 +142,7 @@
         </widget>
        </item>
        <item>
-        <spacer name="spacer6">
+        <spacer name="sp1">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -192,7 +192,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="TabPage">
+         <widget class="QWidget" name="tab5">
           <attribute name="title">
            <string>Search view</string>
           </attribute>
@@ -208,7 +208,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="qLabel2">
+        <widget class="QLabel" name="l1">
          <property name="text">
           <string>Use the &lt;i&gt;left&lt;/i&gt; and &lt;i&gt;right&lt;/i&gt; buttons to add and remove sort options. Use the &lt;i&gt;up&lt;/i&gt; and &lt;i&gt;down&lt;/i&gt; buttons to modify the sort order. Double-Click a selected entry to toggle the sort order between &lt;i&gt;ascending&lt;/i&gt; and &lt;i&gt;descending&lt;/i&gt;.</string>
          </property>
@@ -219,7 +219,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="TabPage1">
+     <widget class="QWidget" name="dateEntry">
       <attribute name="title">
        <string>Data entry</string>
       </attribute>
@@ -282,9 +282,9 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
+        <layout class="QGridLayout" name="gridLayout1">
          <item row="0" column="0">
-          <widget class="QLabel" name="textLabel2_1">
+          <widget class="QLabel" name="l2">
            <property name="text">
             <string>Initial cursor position within the date field</string>
            </property>
@@ -310,7 +310,7 @@
           </widget>
          </item>
          <item row="0" column="2">
-          <spacer name="spacer16">
+          <spacer name="sp3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -326,7 +326,7 @@
           </spacer>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="textLabel2_2">
+          <widget class="QLabel" name="l3">
            <property name="text">
             <string>Default reconciliation state</string>
            </property>
@@ -358,7 +358,7 @@
           </widget>
          </item>
          <item row="1" column="2">
-          <spacer name="spacer15">
+          <spacer name="sp2">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -435,7 +435,7 @@ Selecting 0% will list all transactions.</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="l4">
             <property name="text">
              <string>Same transaction if amount differs less than </string>
             </property>
@@ -458,7 +458,7 @@ Selecting 0% will list all transactions.</string>
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer">
+           <spacer name="sp4">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -487,7 +487,7 @@ Selecting 0% will list all transactions.</string>
         </widget>
        </item>
        <item>
-        <spacer name="spacer4">
+        <spacer name="sp5">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -504,15 +504,15 @@ Selecting 0% will list all transactions.</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="TabPage2">
+     <widget class="QWidget" name="import">
       <attribute name="title">
        <string>Import</string>
       </attribute>
-      <layout class="QVBoxLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
-        <layout class="QHBoxLayout">
-         <item>
-          <widget class="QLabel" name="textLabel1_2">
+        <layout class="QGridLayout" name="gridLayout2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="l6">
            <property name="text">
             <string>Match transactions within days</string>
            </property>
@@ -521,7 +521,7 @@ Selecting 0% will list all transactions.</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="1">
           <widget class="QSpinBox" name="kcfg_matchInterval">
            <property name="whatsThis">
             <string>Search for matching transactions within the range of the posting date of the imported transaction +/- the number of given days.</string>
@@ -540,8 +540,34 @@ Selecting 0% will list all transactions.</string>
            </property>
           </widget>
          </item>
-         <item>
-          <spacer name="spacer13">
+         <item row="1" column="0">
+          <widget class="QLabel" name="l5">
+           <property name="text">
+            <string>Keep original payee information in memo</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="kcfg_KeepOriginalPayeeInfo">
+           <item>
+            <property name="text">
+             <string>Off</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Append to memo</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Prepend to memo</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="sp7">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -550,7 +576,20 @@ Selecting 0% will list all transactions.</string>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>61</width>
+             <width>38</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="2">
+          <spacer name="sp6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
              <height>20</height>
             </size>
            </property>
@@ -572,17 +611,14 @@ Selecting 0% will list all transactions.</string>
         </widget>
        </item>
        <item>
-        <spacer name="spacer14">
+        <spacer name="sp8">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>60</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>

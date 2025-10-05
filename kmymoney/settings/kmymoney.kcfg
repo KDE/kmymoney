@@ -367,6 +367,15 @@
    <label>Number of days (plus/minus) to search for matching transactions</label>
    <default>4</default>
   </entry>
+  <entry name="KeepOriginalPayeeInfo" type="Int">
+   <label>Where to place the original payee info in the memo field</label>
+   <default>PrependToMemo</default>
+   <choices name="OriginalPayeePositionInMemo">
+     <choice name="DontKeep"/>
+     <choice name="AppendToMemo"/>
+     <choice name="PrependToMemo"/>
+   </choices>
+  </entry>
   <entry name="askForPayeeCategory" type="Bool">
    <label>During import, ask for a new payee's default category</label>
    <default>false</default>
