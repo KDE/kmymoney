@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-26 03:29+0000\n"
+"POT-Creation-Date: 2025-10-05 03:24+0000\n"
 "PO-Revision-Date: 2025-09-23 10:09+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -6131,7 +6131,7 @@ msgstr "Pressupost"
 msgid "Cash Flow"
 msgstr "Flux de caixa"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:151
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "No s'han pogut carregar els detalls de la planificació"
@@ -19981,7 +19981,7 @@ msgstr "Nombre d'operacions restants:"
 msgid "Date of final transaction:"
 msgstr "Data de la darrera operació:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:240
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -19996,7 +19996,7 @@ msgstr ""
 "d'aquesta planificació (se us preguntarà què voleu fer després de prémer "
 "«D'acord» en el diàleg següent)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:243
+#: kmymoney/views/kenterscheduledlg.cpp:244
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Introdueix l'operació planificada"
@@ -21205,7 +21205,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Ves a «%1»"
 
-#: kmymoney/views/ledgerview.cpp:759
+#: kmymoney/views/ledgerview.cpp:767
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21216,19 +21216,19 @@ msgstr ""
 "editar dues operacions en paral·lel.<a href=\"jumpToEditor\">Aneu a l'editor "
 "actual</a>"
 
-#: kmymoney/views/ledgerview.cpp:884
+#: kmymoney/views/ledgerview.cpp:890
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Manca assignar una categoria a l'operació."
 
-#: kmymoney/views/ledgerview.cpp:891
+#: kmymoney/views/ledgerview.cpp:897
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Manca assignar una categoria a l'operació de <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:900
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
@@ -21236,14 +21236,14 @@ msgstr ""
 "Aquesta planificació està endarrerida des del %1. Feu clic sobre la icona "
 "per a entrar-hi."
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:912
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "Aquesta operació és importada. Feu clic sobre la icona per a acceptar-la."
 
-#: kmymoney/views/ledgerview.cpp:911
+#: kmymoney/views/ledgerview.cpp:917
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21252,31 +21252,31 @@ msgstr ""
 "Aquesta operació és concordant. Feu clic sobre la icona per a acceptar-la o "
 "marcar-la com desaparellada."
 
-#: kmymoney/views/ledgerview.cpp:991
+#: kmymoney/views/ledgerview.cpp:997
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "No introduïu l'operació de la planificació endarrerida."
 
-#: kmymoney/views/ledgerview.cpp:992
+#: kmymoney/views/ledgerview.cpp:998
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Introduïu l'operació de la planificació endarrerida."
 
-#: kmymoney/views/ledgerview.cpp:995
+#: kmymoney/views/ledgerview.cpp:1001
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Voleu introduir ara la planificació endarrerida?"
 
-#: kmymoney/views/ledgerview.cpp:996
+#: kmymoney/views/ledgerview.cpp:1002
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Introducció de la planificació endarrerida"
 
-#: kmymoney/views/ledgerview.cpp:1016
+#: kmymoney/views/ledgerview.cpp:1022
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21286,7 +21286,7 @@ msgstr ""
 "Separeu l'operació oculta (concordant) des de la qual es mostra i torneu a "
 "introduir-la en el llibre major."
 
-#: kmymoney/views/ledgerview.cpp:1018
+#: kmymoney/views/ledgerview.cpp:1024
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21296,13 +21296,13 @@ msgstr ""
 "Accepteu la coincidència com es mostra i elimineu les dades de l'operació "
 "oculta (concordant)."
 
-#: kmymoney/views/ledgerview.cpp:1022
+#: kmymoney/views/ledgerview.cpp:1028
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Voleu acceptar o desfer ara l'operació concordant?"
 
-#: kmymoney/views/ledgerview.cpp:1023
+#: kmymoney/views/ledgerview.cpp:1029
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
