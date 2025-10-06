@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -20131,35 +20131,35 @@ msgstr "Nu s-a putut deschide fișierul „%1” pentru scriere"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Nu s-a putut încărca la „%1”"
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Acțiuni"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, fuzzy, kde-format
 #| msgid "Price/share"
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Preț/acțiune"
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, fuzzy, kde-format
 #| msgid "Transaction amount"
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Suma tranzacției"
 
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Preț"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, fuzzy, kde-format
 #| msgid "Ratio 1/"
 msgctxt "@label:textbox"

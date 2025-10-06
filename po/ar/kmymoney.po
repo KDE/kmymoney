@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
-"PO-Revision-Date: 2025-09-22 19:38+0400\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
+"PO-Revision-Date: 2025-10-05 10:16+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3311,49 +3311,43 @@ msgstr "خيارات البدء"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:334
 #, kde-format
 msgid "View to show"
-msgstr ""
+msgstr "المنظور لعرضه"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:342
-#, fuzzy, kde-format
-#| msgid "Home Page"
+#, kde-format
 msgid "Homepage"
 msgstr "الصفحة الرئيسة"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:347
-#, fuzzy, kde-format
-#| msgid "The last selected view"
+#, kde-format
 msgid "Last selected view"
 msgstr "آخر عرض محدّد"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:355
-#, fuzzy, kde-format
-#| msgid "    Account opening date updated."
+#, kde-format
 msgid "Accounts to open in ledger"
-msgstr "    حُدّث تاريخ فتح الحساب."
+msgstr "الحسابات المطلوب فتحها في دفتر الأستاذ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:363
-#, fuzzy, kde-format
-#| msgid "Asset accounts"
+#, kde-format
 msgid "Last account used"
-msgstr "حسابات الأصول"
+msgstr "آخر حساب مستخدم"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:368
-#, fuzzy, kde-format
-#| msgid "Favorite account"
+#, kde-format
 msgid "All favorite accounts"
-msgstr "حساب مفضل"
+msgstr "جميع الحسابات مفضلة"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:373
-#, fuzzy, kde-format
-#| msgid "Expand all accounts in the list"
+#, kde-format
 msgid "All accounts open at last close"
-msgstr "وسّع كل الحسابات في القائمة"
+msgstr "جميع الحسابات المفتوحة عند الإغلاق الأخير"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_viewType)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:384
@@ -4160,7 +4154,7 @@ msgstr "استخدم مفتاح Enter للتّنقّل بين الحقول"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:257
 #, kde-format
 msgid "Use TAB to switch between parts of date"
-msgstr ""
+msgstr "استخدم مفتاح الجدولة للتبديل بين أجزاء التاريخ"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:264
@@ -18558,16 +18552,15 @@ msgstr "استخدام مفتاح Enter يتّنقّل بين الحقول"
 
 #. i18n: ectx: label, entry (TabMovesBetweenDateParts), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Using the Enter key moves between the fields"
+#, kde-format
 msgid "Using the TAB key moves between the date parts"
-msgstr "استخدام مفتاح Enter يتّنقّل بين الحقول"
+msgstr "استخدام مفتاح الجدولة يتّنقّل بين أجزاء التاريخ"
 
 #. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:100
 #, kde-format
 msgid "Select which accounts to show in ledger after file open"
-msgstr ""
+msgstr "حدد الحسابات التي تريد عرضها في دفتر الأستاذ بعد فتح الملف"
 
 #. i18n: ectx: label, entry (StartLastViewSelected), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:104
@@ -19068,19 +19061,19 @@ msgstr "تعذّر فتح ملفّ القالب ’%1‘"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "تعذّر الرّفع إلى ’%1‘<br />%2"
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "الأسهم"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "السّعر/السّهم"
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
@@ -19088,13 +19081,13 @@ msgstr "مبلغ المعاملة"
 
 # غالبا سنواجه خطأ ما بسبب كثرة استخدامه في كل مكان
 # قد نحتاج سياقا
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "الثّمن"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

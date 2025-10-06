@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -18469,34 +18469,34 @@ msgstr ""
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr ""
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, fuzzy, kde-format
 #| msgid "Value"
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "मूल्य"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "किंमत"
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "क्रिया"
 
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "किंमत"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

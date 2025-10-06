@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -19123,31 +19123,31 @@ msgstr "Mallipohjatiedostoa ”%1” ei voida avata"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Lähetys '%1':een ei ole mahdollista.<br /> %2"
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Osakkeet"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Hinta / osake"
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Tapahtuman summa"
 
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Hinta"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

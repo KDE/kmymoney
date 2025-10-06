@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -19014,34 +19014,34 @@ msgstr "Nepavyksta atverti „%1“ failo rašymui"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Nepavyksta įkelti į „%1“"
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Akcijos"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Kaina"
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, fuzzy, kde-format
 #| msgid "Transactions by Account"
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Operacijos pagal sąskaitas"
 
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Kaina"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, fuzzy, kde-format
 #| msgid "Ratio 1/"
 msgctxt "@label:textbox"

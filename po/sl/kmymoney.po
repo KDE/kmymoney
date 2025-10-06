@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
 "PO-Revision-Date: 2025-09-28 09:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -19165,31 +19165,31 @@ msgstr "Ni mogoče odpreti datoteke predloge '%1'"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Ni mogoče prenesti v '%1'. <br />%2"
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Delnice"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Cena/delnico"
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Znesek transakcije"
 
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Cena"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

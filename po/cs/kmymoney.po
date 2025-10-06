@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
 "PO-Revision-Date: 2024-09-17 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18591,31 +18591,31 @@ msgstr ""
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Nelze odeslat na '%1'.<br />%2"
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Akcie"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Cena akcie "
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Částka za celou transakci"
 
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Cena"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

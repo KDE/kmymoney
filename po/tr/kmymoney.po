@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-04 14:14+0000\n"
-"PO-Revision-Date: 2025-09-28 20:25+0300\n"
+"POT-Creation-Date: 2025-10-06 00:42+0000\n"
+"PO-Revision-Date: 2025-10-05 19:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -14826,7 +14826,7 @@ msgstr "Geçerli veritabanına kaydedilemiyor: %1"
 #: kmymoney/plugins/sql/sqlstorage.cpp:264
 #, kde-format
 msgid "Database files (*.db *.sql)"
-msgstr "Veritabanı dosyaları (Yalnızca SQLite)"
+msgstr "Veritabanı dosyaları (*.db *.sql)"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:270
 #, kde-format
@@ -19071,31 +19071,31 @@ msgstr "Şablon dosyası “%1” yazmak için açılamadı"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "“%1” konumuna yüklenemedi.<br />%2"
 
-#: kmymoney/views/investactivities.cpp:284
+#: kmymoney/views/investactivities.cpp:288
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Hisseler"
 
-#: kmymoney/views/investactivities.cpp:295
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Fiyat/Hisse"
 
-#: kmymoney/views/investactivities.cpp:297
+#: kmymoney/views/investactivities.cpp:301
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "İşlem tutarı"
 
-#: kmymoney/views/investactivities.cpp:299
+#: kmymoney/views/investactivities.cpp:303
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Fiyat"
 
-#: kmymoney/views/investactivities.cpp:656
+#: kmymoney/views/investactivities.cpp:660
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
@@ -25587,7 +25587,7 @@ msgid ""
 "can modify it later."
 msgstr ""
 "Her kurumun, ABD’de yönlendirme numarası veya Birleşik Krallık’ta sıralama "
-"kodu olarak bilinen bir banka kodu vardır.Onu buraya girin. Emin değilseniz "
+"kodu olarak bilinen bir banka kodu vardır. Onu buraya girin. Emin değilseniz "
 "alanı boş bırakın. Daha sonra değiştirebilirsiniz."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
@@ -25760,7 +25760,7 @@ msgid ""
 "your account numbers and other important financial information will be very "
 "secure.</p>"
 msgstr ""
-"<p>K Param, veri dosyanızı GPG Şifrelemesi kullanarak şifreleyebilir. GPG "
+"<p>K Param, veri dosyanızı GPG şifrelemesi kullanarak şifreleyebilir. GPG "
 "şifrelemesi, verileri korumak için dünyadaki en güvenli yöntemlerden "
 "biridir. Tüm hesap numaralarınız ve diğer önemli finansal bilgileriniz "
 "güvenle saklanır.</p>"
