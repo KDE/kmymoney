@@ -246,8 +246,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/aqbanking/aqbanking/archive/refs/tags/6.6.3.tar.gz",
-                    "sha256": "32e2f50d0266048eb84f5400417d0b545c5423b31e1934cb22ad6085f26c96e9",
+                    "url": "https://github.com/aqbanking/aqbanking/archive/refs/tags/6.6.4.tar.gz",
+                    "sha256": "db32f8525087ac103f2ef0837a7d83e0720c133a57d8bf6b2d72b07a1f98a026",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 6890,
@@ -306,8 +306,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/aqbanking/gwenhywfar/archive/refs/tags/5.12.2.tar.gz",
-                            "sha256": "64e044f41a4ea59d3c5a7afe77ed8fed3ee850277f9310183bb5fcb0b2329633",
+                            "url": "https://github.com/aqbanking/gwenhywfar/archive/refs/tags/5.13.0.tar.gz",
+                            "sha256": "2c3564e7a327c483a69a85b9d563f0408fb32c21765a9c992a04a892ac05dab5",
                             "x-checker-data": {
                                 "type": "anitya",
                                 "project-id": 6891,
@@ -358,8 +358,8 @@
                                     "sources": [
                                         {
                                             "type": "archive",
-                                            "url": "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.55.tar.bz2",
-                                            "sha256": "95b178148863f07d45df0cea67e880a79b9ef71f5d230baddc0071128516ef78",
+                                            "url": "https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.56.tar.bz2",
+                                            "sha256": "82c3d2deb4ad96ad3925d6f9f124fe7205716055ab50e291116ef27975d169c0",
                                             "x-checker-data": {
                                                 "type": "anitya",
                                                 "project-id": 1628,
