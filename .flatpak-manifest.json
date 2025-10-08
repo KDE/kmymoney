@@ -9,6 +9,7 @@
     "copy-icon": true,
     "finish-args": [
         "--device=dri",
+        "--filesystem=home",
         "--share=ipc",
         "--share=network",
         "--socket=fallback-x11",
