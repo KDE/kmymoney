@@ -123,6 +123,8 @@ void CreditDebitEdit::setValue(const MyMoneyMoney& amount, bool forceUpdate)
 
     if (amount.isAutoCalc()) {
         setEnabled(false);
+        d->ui->creditAmount->setReadOnly(true);
+        d->ui->debitAmount->setReadOnly(true);
         d->ui->creditAmount->setText(i18nc("@info:placeholder amount widget", "calculated"));
         d->ui->debitAmount->setText(i18nc("@info:placeholder amount widget", "calculated"));
     } else if (amount.isNegative()) {
@@ -153,6 +155,8 @@ void CreditDebitEdit::setShares(const MyMoneyMoney& amount)
 
     if (amount.isAutoCalc()) {
         setEnabled(false);
+        d->ui->creditAmount->setReadOnly(true);
+        d->ui->debitAmount->setReadOnly(true);
         d->ui->creditAmount->setText(i18nc("@info:placeholder amount widget", "calculated"));
         d->ui->debitAmount->setText(i18nc("@info:placeholder amount widget", "calculated"));
     } else if (amount.isNegative()) {

@@ -36,9 +36,7 @@ struct ExchangeAction {
         }
 
         actionReleased->setVisible(!keyPressed);
-        actionReleased->setEnabled(!keyPressed);
         actionPressed->setVisible(keyPressed);
-        actionPressed->setEnabled(keyPressed);
 
         if (activateAction) {
             menu->setActiveAction(activateAction);
@@ -107,7 +105,7 @@ bool KMenuActionExchanger::eventFilter(QObject* o, QEvent* e)
                 QKeyEvent* keyEvent = static_cast<QKeyEvent*>(e);
                 if (action.key == keyEvent->key()) {
                     action.toggle(e->type() == QEvent::KeyPress);
-                    break;
+                    return true;
                 }
             }
         }

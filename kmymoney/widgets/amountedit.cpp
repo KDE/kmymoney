@@ -522,7 +522,7 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
     Q_D(AmountEdit);
     QLineEdit::focusOutEvent(event);
 
-    if (event->reason() != Qt::ActiveWindowFocusReason) {
+    if ((event->reason() != Qt::ActiveWindowFocusReason) && !isReadOnly()) {
         // make sure we have a zero value in case the current text
         // is empty but this is not allowed
         if (text().isEmpty() && !d->m_allowEmpty) {
@@ -547,58 +547,59 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
 void AmountEdit::keyPressEvent(QKeyEvent* event)
 {
     Q_D(AmountEdit);
-    switch(event->key()) {
-    case Qt::Key_Plus:
-    case Qt::Key_Minus:
-        d->cut();
-        if (text().length() == 0) {
-            break;
-        }
-        // in case of '-' we do not enter the calculator when
-        // the current position is the beginning and there is
-        // no '-' sign at the first position.
-        if (event->key() == Qt::Key_Minus) {
-            if (cursorPosition() == 0 && text().at(0) != '-') {
+    if (!isReadOnly()) {
+        switch (event->key()) {
+        case Qt::Key_Plus:
+        case Qt::Key_Minus:
+            d->cut();
+            if (text().length() == 0) {
                 break;
             }
-        }
-        // intentional fall through
+            // in case of '-' we do not enter the calculator when
+            // the current position is the beginning and there is
+            // no '-' sign at the first position.
+            if (event->key() == Qt::Key_Minus) {
+                if (cursorPosition() == 0 && text().at(0) != '-') {
+                    break;
+                }
+            }
+            // intentional fall through
 
-    case Qt::Key_Slash:
-    case Qt::Key_Asterisk:
-    case Qt::Key_Percent:
-        d->cut();
-        d->calculatorOpen(event);
-        return;
-
-    case Qt::Key_Return:
-    case Qt::Key_Escape:
-    case Qt::Key_Enter:
-        break;
-
-    case Qt::Key_Space:
-        if (event->modifiers() == Qt::ControlModifier) {
-            event->accept();
-            d->m_currencyButton->animateClick();
+        case Qt::Key_Slash:
+        case Qt::Key_Asterisk:
+        case Qt::Key_Percent:
+            d->cut();
+            d->calculatorOpen(event);
             return;
-        }
-        break;
 
-    default:
-        // make sure to use the locale's decimalPoint when the
-        // keypad comma/dot is pressed
-        QString keyText = event->text();
-        int key = event->key();
-        if (event->modifiers() & Qt::KeypadModifier) {
-            if ((key == Qt::Key_Period) || (key == Qt::Key_Comma)) {
+        case Qt::Key_Return:
+        case Qt::Key_Escape:
+        case Qt::Key_Enter:
+            break;
+
+        case Qt::Key_Space:
+            if (event->modifiers() == Qt::ControlModifier) {
+                event->accept();
+                d->m_currencyButton->animateClick();
+                return;
+            }
+            break;
+
+        default:
+            // make sure to use the locale's decimalPoint when the
+            // keypad comma/dot is pressed
+            QString keyText = event->text();
+            int key = event->key();
+            if (event->modifiers() & Qt::KeypadModifier) {
+                if ((key == Qt::Key_Period) || (key == Qt::Key_Comma)) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 key = QLocale().decimalPoint().unicode();
 #else
                 key = QLocale().decimalPoint().at(0).unicode();
 #endif
                 keyText = QLocale().decimalPoint();
+                }
             }
-        }
         // create a (possibly adjusted) copy of the event
         QKeyEvent newEvent(event->type(),
                            key,
@@ -622,8 +623,8 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         }
         QLineEdit::keyPressEvent(&newEvent);
         return;
+        }
     }
-
     // in case we have not processed anything, we
     // need to call the base class implementation
     QLineEdit::keyPressEvent(event);

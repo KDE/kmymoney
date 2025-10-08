@@ -401,12 +401,12 @@ public:
         return {};
     }
 
-    void editSchedule(QAction* action = nullptr)
+    void editSchedule(QAction* action = nullptr, bool forceEdit = false)
     {
         Q_Q(KScheduledView);
         const auto schedule = selectedSchedule(action);
         try {
-            KEditScheduleDlg::editSchedule(schedule);
+            KEditScheduleDlg::editSchedule(schedule, forceEdit);
         } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(q, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
         }

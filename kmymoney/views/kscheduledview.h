@@ -74,6 +74,7 @@ public:
 public Q_SLOTS:
     void slotEditSchedule();
     void slotEditSchedule(const QModelIndex& index);
+    void slotForceEditSchedule();
 
     void updateActions(const SelectedObjects& selections) override;
 
