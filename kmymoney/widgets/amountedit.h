@@ -264,7 +264,6 @@ public:
      */
     void setFont(const QFont& font);
 
-private:
 public Q_SLOTS:
 
     /**

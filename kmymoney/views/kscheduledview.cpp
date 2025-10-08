@@ -35,7 +35,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
     const QHash<eMenu::Action, KScheduledViewFunc> actionConnections {
         {eMenu::Action::NewSchedule,        &KScheduledView::slotNewSchedule},
         {eMenu::Action::EditSchedule,       &KScheduledView::slotEditSchedule},
-        {eMenu::Action::EditScheduleForce,  &KScheduledView::slotEditSchedule},
+        {eMenu::Action::EditScheduleForce,  &KScheduledView::slotForceEditSchedule},
         {eMenu::Action::DeleteSchedule,     &KScheduledView::slotDeleteSchedule},
         {eMenu::Action::DuplicateSchedule,  &KScheduledView::slotDuplicateSchedule},
         {eMenu::Action::EnterSchedule,      &KScheduledView::slotEnterSchedule},
@@ -91,13 +91,18 @@ void KScheduledView::updateActions(const SelectedObjects& selections)
 {
     Q_D(KScheduledView);
 
-    const QVector<eMenu::Action> actionsToBeDisabled {
-        eMenu::Action::EditSchedule, eMenu::Action::DuplicateSchedule, eMenu::Action::DeleteSchedule,
-        eMenu::Action::EnterSchedule, eMenu::Action::SkipSchedule,
+    const QVector<eMenu::Action> actionsToBeDisabled{
+        eMenu::Action::EditSchedule,
+        eMenu::Action::EditScheduleForce,
+        eMenu::Action::DuplicateSchedule,
+        eMenu::Action::DeleteSchedule,
+        eMenu::Action::EnterSchedule,
+        eMenu::Action::SkipSchedule,
     };
 
-    for (const auto& a : actionsToBeDisabled)
+    for (const auto& a : actionsToBeDisabled) {
         pActions[a]->setEnabled(false);
+    }
 
     if (!selections.selection(SelectedObjects::Schedule).isEmpty()) {
         d->m_selectedSchedule = MyMoneyFile::instance()->schedulesModel()->itemById(selections.selection(SelectedObjects::Schedule).at(0));
@@ -107,6 +112,7 @@ void KScheduledView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::DeleteSchedule]->setEnabled(!MyMoneyFile::instance()->isReferenced(d->m_selectedSchedule));
             if (!d->m_selectedSchedule.isFinished()) {
                 pActions[eMenu::Action::EnterSchedule]->setEnabled(true);
+                pActions[eMenu::Action::EditScheduleForce]->setEnabled(true);
                 // a schedule with a single occurrence cannot be skipped
                 if (d->m_selectedSchedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
                     pActions[eMenu::Action::SkipSchedule]->setEnabled(true);
@@ -172,7 +178,13 @@ void KScheduledView::slotEditSchedule(const QModelIndex& index)
 void KScheduledView::slotEditSchedule()
 {
     Q_D(KScheduledView);
-    d->editSchedule(pActions[eMenu::Action::EditSchedule]);
+    d->editSchedule(pActions[eMenu::Action::EditSchedule], false);
+}
+
+void KScheduledView::slotForceEditSchedule()
+{
+    Q_D(KScheduledView);
+    d->editSchedule(pActions[eMenu::Action::EditSchedule], true);
 }
 
 void KScheduledView::slotDeleteSchedule()

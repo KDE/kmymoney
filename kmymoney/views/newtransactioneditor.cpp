@@ -140,6 +140,7 @@ public:
     void updateVAT(TaxValueChange amountChanged);
     MyMoneyMoney removeVatSplit();
     MyMoneyMoney splitsSum() const;
+    bool hasCalculatedSplit() const;
     void defaultCategoryAssignment();
     void loadTransaction(QModelIndex idx);
     MyMoneySplit prepareSplit(const MyMoneySplit& sp);
@@ -235,7 +236,7 @@ bool NewTransactionEditor::Private::checkForValidAmount()
     if (!difference.isZero()) {
         if (splitModel.rowCount() == 0) {
             WidgetHintFrame::show(ui->categoryCombo, i18nc("@info:tooltip", "The transaction is missing a category assignment."));
-        } else {
+        } else if (!hasCalculatedSplit()) {
             WidgetHintFrame::show(
                 ui->creditDebitEdit,
                 i18nc("@info:tooltip", "The amount entered is different from the sum of all splits by %1.", difference.formatMoney(m_account.fraction())));
@@ -752,6 +753,19 @@ bool NewTransactionEditor::Private::tagsChanged(const QStringList& ids)
         splitModel.setData(idx, ids, eMyMoney::Model::SplitTagIdRole);
     }
     return true;
+}
+
+bool NewTransactionEditor::Private::hasCalculatedSplit() const
+{
+    const auto rows = splitModel.rowCount();
+    MyMoneyMoney value;
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = splitModel.index(row, 0);
+        if (idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().isAutoCalc()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 MyMoneyMoney NewTransactionEditor::Private::splitsSum() const
