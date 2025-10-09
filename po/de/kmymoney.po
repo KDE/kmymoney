@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 03:43+0000\n"
+"POT-Creation-Date: 2025-10-09 03:36+0000\n"
 "PO-Revision-Date: 2025-08-14 15:51+0200\n"
 "Last-Translator: lipor <collect.aqua019@passinbox.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -8738,10 +8738,10 @@ msgstr "*** NICHT ZUGEWIESEN ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
 #: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
-#: kmymoney/widgets/creditdebitedit.cpp:126
-#: kmymoney/widgets/creditdebitedit.cpp:127
-#: kmymoney/widgets/creditdebitedit.cpp:156
-#: kmymoney/widgets/creditdebitedit.cpp:157
+#: kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/widgets/creditdebitedit.cpp:129
+#: kmymoney/widgets/creditdebitedit.cpp:160
+#: kmymoney/widgets/creditdebitedit.cpp:161
 #, fuzzy, kde-format
 #| msgid "calculate"
 msgctxt "@info:placeholder amount widget"
@@ -19529,7 +19529,7 @@ msgstr "Zinseinkünfte"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:317
+#: kmymoney/views/newtransactioneditor.cpp:318
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -21165,7 +21165,7 @@ msgstr "Nichts zum Zusammenführen."
 msgid "Unable to remove payee(s)"
 msgstr "Zahlungsempfänger kann nicht entfernt werden"
 
-#: kmymoney/views/kscheduledview.cpp:185
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
@@ -21173,7 +21173,7 @@ msgstr ""
 "<p>Sind Sie sicher, dass Sie die geplante Buchung <b>%1</b> löschen möchten?"
 "</p>"
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:200
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -21182,30 +21182,30 @@ msgstr ""
 "Im Falle von Kreditzahlungen ist es derzeit nicht möglich, eine geplante "
 "Buchung neu zu erstellen."
 
-#: kmymoney/views/kscheduledview.cpp:190
+#: kmymoney/views/kscheduledview.cpp:202
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Planungen wählen"
 
-#: kmymoney/views/kscheduledview.cpp:198
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Kann geplante Buchung „%1“ nicht löschen"
 
-#: kmymoney/views/kscheduledview.cpp:212
+#: kmymoney/views/kscheduledview.cpp:224
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopie von %1"
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:249
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Die geplante Buchung „%1“ kann nicht dupliziert werden."
 
-#: kmymoney/views/kscheduledview.cpp:251 kmymoney/views/kscheduledview.cpp:264
+#: kmymoney/views/kscheduledview.cpp:263 kmymoney/views/kscheduledview.cpp:276
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -21643,14 +21643,14 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:208
-#: kmymoney/views/newtransactioneditor.cpp:300
+#: kmymoney/views/newtransactioneditor.cpp:301
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Kontoauszug ohne Buchungen wird importiert"
 
 #: kmymoney/views/multitransactioneditor.cpp:244
-#: kmymoney/views/newtransactioneditor.cpp:344
+#: kmymoney/views/newtransactioneditor.cpp:345
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21738,13 +21738,13 @@ msgid "The check number used for this transaction."
 msgstr "Die Schecknummer für diese Buchung."
 
 #: kmymoney/views/newspliteditor.cpp:261
-#: kmymoney/views/newtransactioneditor.cpp:469
+#: kmymoney/views/newtransactioneditor.cpp:470
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Die Schecknummer <b>%1</b> wird bereits in diesem Konto benutzt."
 
 #: kmymoney/views/newspliteditor.cpp:772
-#: kmymoney/views/newtransactioneditor.cpp:188
+#: kmymoney/views/newtransactioneditor.cpp:189
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info:tooltip Protected"
@@ -21771,20 +21771,20 @@ msgstr "Zahler/Zahlungsempfänger"
 msgid "Costcenter"
 msgstr "Kostenstelle"
 
-#: kmymoney/views/newtransactioneditor.cpp:237
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 
-#: kmymoney/views/newtransactioneditor.cpp:241
+#: kmymoney/views/newtransactioneditor.cpp:242
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:621
+#: kmymoney/views/newtransactioneditor.cpp:622
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21792,7 +21792,7 @@ msgid "Select autofill transaction"
 msgstr "Automatisch ausgefüllte Buchung wählen"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1123
+#: kmymoney/views/newtransactioneditor.cpp:1137
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21800,7 +21800,7 @@ msgstr "Automatisch ausgefüllte Buchung wählen"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1629
+#: kmymoney/views/newtransactioneditor.cpp:1643
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21809,7 +21809,7 @@ msgstr ""
 "Möchten Sie die Notiz <p><i>%1</i></p> durch die Notiz <p><i>%2</i></p> aus "
 "der anderen Split-Buchung ersetzen."
 
-#: kmymoney/views/newtransactioneditor.cpp:1630
+#: kmymoney/views/newtransactioneditor.cpp:1644
 #, kde-format
 msgid "Copy memo"
 msgstr "Notiz kopieren"

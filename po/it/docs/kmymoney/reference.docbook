@@ -1321,7 +1321,7 @@
       <para
 >Configura le impostazioni dell'online banking, ma solo se il modulo KBanking è abilitato. Ulteriori informazioni sono disponibili nella sezione sulla configurazione dell'<link linkend="details.settings.plugins.kbanking"
 >estensione di KBanking</link
-> e nella <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
+> e nella <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
 >documentazione di &gnucash;</ulink
 >. </para>
 

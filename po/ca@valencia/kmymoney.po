@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 03:43+0000\n"
+"POT-Creation-Date: 2025-10-09 03:36+0000\n"
 "PO-Revision-Date: 2025-09-23 10:09+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -8598,10 +8598,10 @@ msgstr "*** SENSE ASSIGNAR ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
 #: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
-#: kmymoney/widgets/creditdebitedit.cpp:126
-#: kmymoney/widgets/creditdebitedit.cpp:127
-#: kmymoney/widgets/creditdebitedit.cpp:156
-#: kmymoney/widgets/creditdebitedit.cpp:157
+#: kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/widgets/creditdebitedit.cpp:129
+#: kmymoney/widgets/creditdebitedit.cpp:160
+#: kmymoney/widgets/creditdebitedit.cpp:161
 #, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
@@ -19296,7 +19296,7 @@ msgstr "Interessos rebuts"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:317
+#: kmymoney/views/newtransactioneditor.cpp:318
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -20877,13 +20877,13 @@ msgstr "No hi ha res per a fusionar."
 msgid "Unable to remove payee(s)"
 msgstr "No s'han pogut eliminar els beneficiari/s"
 
-#: kmymoney/views/kscheduledview.cpp:185
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Segur que voleu suprimir l'operació planificada <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:200
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20892,29 +20892,29 @@ msgstr ""
 "En cas de pagaments de préstecs, actualment no es pot tornar a crear "
 "l'operació planificada."
 
-#: kmymoney/views/kscheduledview.cpp:190
+#: kmymoney/views/kscheduledview.cpp:202
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Suprimiu la planificació"
 
-#: kmymoney/views/kscheduledview.cpp:198
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "No s'ha pogut eliminar l'operació planificada: «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:212
+#: kmymoney/views/kscheduledview.cpp:224
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Còpia de %1"
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:249
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "No s'ha pogut duplicar l'operació planificada: «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:251 kmymoney/views/kscheduledview.cpp:264
+#: kmymoney/views/kscheduledview.cpp:263 kmymoney/views/kscheduledview.cpp:276
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -21345,13 +21345,13 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:208
-#: kmymoney/views/newtransactioneditor.cpp:300
+#: kmymoney/views/newtransactioneditor.cpp:301
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "La data de situació no és vàlida."
 
 #: kmymoney/views/multitransactioneditor.cpp:244
-#: kmymoney/views/newtransactioneditor.cpp:344
+#: kmymoney/views/newtransactioneditor.cpp:345
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21440,13 +21440,13 @@ msgid "The check number used for this transaction."
 msgstr "El número de xec utilitzat per a esta operació."
 
 #: kmymoney/views/newspliteditor.cpp:261
-#: kmymoney/views/newtransactioneditor.cpp:469
+#: kmymoney/views/newtransactioneditor.cpp:470
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "El número de xec <b>%1</b> ja s'ha utilitzat en este compte."
 
 #: kmymoney/views/newspliteditor.cpp:772
-#: kmymoney/views/newtransactioneditor.cpp:188
+#: kmymoney/views/newtransactioneditor.cpp:189
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21474,27 +21474,27 @@ msgstr "Pagador/Beneficiari"
 msgid "Costcenter"
 msgstr "Centre de despesa"
 
-#: kmymoney/views/newtransactioneditor.cpp:237
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Falta assignar una categoria a l'operació."
 
-#: kmymoney/views/newtransactioneditor.cpp:241
+#: kmymoney/views/newtransactioneditor.cpp:242
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 "L'import introduït és diferent de la suma de tots els desglossaments en %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:621
+#: kmymoney/views/newtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Trieu autocompleció d'operació"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1123
+#: kmymoney/views/newtransactioneditor.cpp:1137
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21502,7 +21502,7 @@ msgstr "Trieu autocompleció d'operació"
 msgid "Link"
 msgstr "Enllaç"
 
-#: kmymoney/views/newtransactioneditor.cpp:1629
+#: kmymoney/views/newtransactioneditor.cpp:1643
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21511,7 +21511,7 @@ msgstr ""
 "Voleu substituir el recordatori<p><i>%1</i></p>per al recordatori<p><i>%2</"
 "i></p>a l'altre desglossament?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1630
+#: kmymoney/views/newtransactioneditor.cpp:1644
 #, kde-format
 msgid "Copy memo"
 msgstr "Copia el recordatori"

@@ -1331,7 +1331,7 @@
       <para
 >Anpassa inställningar för Internetbank, men endast om modulen KBanking är aktiverad. Mer information finns i avsnittet om inställning av <link linkend="details.settings.plugins.kbanking"
 >insticksprogrammet KBanking</link
-> samt i <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
+> samt i <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
 >&gnucash;-dokumentationen</ulink
 >. </para>
 
