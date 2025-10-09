@@ -1329,7 +1329,7 @@
       <para
 >Налаштувати параметри інтернет-банкінґу, але лише якщо увімкнено модуль KBanking. Докладніші відомості можна знайти у розділі щодо налаштовування <link linkend="details.settings.plugins.kbanking"
 >додаток KBanking</link
->, а також у <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
+>, а також у <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
 >документації до &gnucash;</ulink
 >. </para>
 

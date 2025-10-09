@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 00:42+0000\n"
+"POT-Creation-Date: 2025-10-09 00:43+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -8589,10 +8589,10 @@ msgstr "*** MÄÄRITTÄMÄTÖN ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
 #: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
-#: kmymoney/widgets/creditdebitedit.cpp:126
-#: kmymoney/widgets/creditdebitedit.cpp:127
-#: kmymoney/widgets/creditdebitedit.cpp:156
-#: kmymoney/widgets/creditdebitedit.cpp:157
+#: kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/widgets/creditdebitedit.cpp:129
+#: kmymoney/widgets/creditdebitedit.cpp:160
+#: kmymoney/widgets/creditdebitedit.cpp:161
 #, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
@@ -19209,7 +19209,7 @@ msgstr "Korkotulot"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:335
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Kirjauspäivä on ennen tilin <b>%1</b> avauspäivää."
@@ -20795,13 +20795,13 @@ msgstr "Ei mitään yhdistettäväksi."
 msgid "Unable to remove payee(s)"
 msgstr "Maksunsaajaa ei voitu poistaa"
 
-#: kmymoney/views/kscheduledview.cpp:185
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Haluatko varmasti poistaa ajoitetun tapahtuman <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:200
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20810,29 +20810,29 @@ msgstr ""
 "Lainanlyhennysten maksuaikataulua ei toistaiseksi ole mahdollista luoda "
 "uudelleen."
 
-#: kmymoney/views/kscheduledview.cpp:190
+#: kmymoney/views/kscheduledview.cpp:202
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Poista ajastus"
 
-#: kmymoney/views/kscheduledview.cpp:198
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Ajoitettua tapahtumaa '%1' ei voitu poistaa"
 
-#: kmymoney/views/kscheduledview.cpp:212
+#: kmymoney/views/kscheduledview.cpp:224
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1 – kopio"
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:249
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Ajoitettua tapahtumaa '%1' ei voitu monistaa"
 
-#: kmymoney/views/kscheduledview.cpp:251 kmymoney/views/kscheduledview.cpp:264
+#: kmymoney/views/kscheduledview.cpp:263 kmymoney/views/kscheduledview.cpp:276
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -21275,13 +21275,13 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:207
-#: kmymoney/views/newtransactioneditor.cpp:318
+#: kmymoney/views/newtransactioneditor.cpp:319
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Kirjauspäivä on virheellinen."
 
 #: kmymoney/views/multitransactioneditor.cpp:243
-#: kmymoney/views/newtransactioneditor.cpp:362
+#: kmymoney/views/newtransactioneditor.cpp:363
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21373,13 +21373,13 @@ msgid "The check number used for this transaction."
 msgstr "Sekkinumero jota käytetään tälle tapahtumalle."
 
 #: kmymoney/views/newspliteditor.cpp:261
-#: kmymoney/views/newtransactioneditor.cpp:487
+#: kmymoney/views/newtransactioneditor.cpp:488
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Sekkinumero <b>%1</b> on jo käytössä tälle tilille."
 
 #: kmymoney/views/newspliteditor.cpp:772
-#: kmymoney/views/newtransactioneditor.cpp:206
+#: kmymoney/views/newtransactioneditor.cpp:207
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info:tooltip Protected"
@@ -21406,39 +21406,39 @@ msgstr "Maksaja/maksunsaaja"
 msgid "Costcenter"
 msgstr "Kustannuspaikka"
 
-#: kmymoney/views/newtransactioneditor.cpp:176
+#: kmymoney/views/newtransactioneditor.cpp:177
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr "Tämä alkio ei ole käytössä, koska ensin pitää valita luokka."
 
-#: kmymoney/views/newtransactioneditor.cpp:179
+#: kmymoney/views/newtransactioneditor.cpp:180
 #, fuzzy, kde-format
 #| msgid "Use this to delete all splits of this transaction."
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
 msgstr "Käytä tätä poistaaksesi tämän tapahtuman kaikki jaottelut."
 
-#: kmymoney/views/newtransactioneditor.cpp:182
+#: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:255
+#: kmymoney/views/newtransactioneditor.cpp:256
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Tapahtumalle ei ole määritelty kategoriaa."
 
-#: kmymoney/views/newtransactioneditor.cpp:259
+#: kmymoney/views/newtransactioneditor.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:639
+#: kmymoney/views/newtransactioneditor.cpp:640
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21446,7 +21446,7 @@ msgid "Select autofill transaction"
 msgstr "Valitse täytä automaattisesti -tapahtuma"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1137
+#: kmymoney/views/newtransactioneditor.cpp:1151
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21454,7 +21454,7 @@ msgstr "Valitse täytä automaattisesti -tapahtuma"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1647
+#: kmymoney/views/newtransactioneditor.cpp:1661
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21463,7 +21463,7 @@ msgstr ""
 "Korvataanko muistiinpano<p><i>%1</i></p>muistiinpanolla<p><i>%2</i></"
 "p>toisessa jaottelussa?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1648
+#: kmymoney/views/newtransactioneditor.cpp:1662
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopioi muistiinpano"

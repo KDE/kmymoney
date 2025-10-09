@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 00:42+0000\n"
+"POT-Creation-Date: 2025-10-09 00:43+0000\n"
 "PO-Revision-Date: 2025-10-05 19:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -8535,10 +8535,10 @@ msgstr "*** ATANMAMIŞ ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
 #: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
-#: kmymoney/widgets/creditdebitedit.cpp:126
-#: kmymoney/widgets/creditdebitedit.cpp:127
-#: kmymoney/widgets/creditdebitedit.cpp:156
-#: kmymoney/widgets/creditdebitedit.cpp:157
+#: kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/widgets/creditdebitedit.cpp:129
+#: kmymoney/widgets/creditdebitedit.cpp:160
+#: kmymoney/widgets/creditdebitedit.cpp:161
 #, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
@@ -19157,7 +19157,7 @@ msgstr "Faiz Geliri"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:335
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "<b>%1</b> hesabının kayıt tarihi açılış tarihinden önce."
@@ -20720,13 +20720,13 @@ msgstr "Birleştirilecek bir şey yok."
 msgid "Unable to remove payee(s)"
 msgstr "Alacaklılar kaldırılamıyor"
 
-#: kmymoney/views/kscheduledview.cpp:185
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> planlı işlemini silmeyi gerçekten istiyor musunuz?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:200
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20735,29 +20735,29 @@ msgstr ""
 "Kredi ödemeleri durumunda, planlı işlemi yeniden oluşturmak şu anda olanaklı "
 "değildir."
 
-#: kmymoney/views/kscheduledview.cpp:190
+#: kmymoney/views/kscheduledview.cpp:202
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Planı Sil"
 
-#: kmymoney/views/kscheduledview.cpp:198
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "“%1” planlı işlemi silinemiyor"
 
-#: kmymoney/views/kscheduledview.cpp:212
+#: kmymoney/views/kscheduledview.cpp:224
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1 kopyası"
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:249
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Planlı işlem çoğaltılamıyor: “%1”"
 
-#: kmymoney/views/kscheduledview.cpp:251 kmymoney/views/kscheduledview.cpp:264
+#: kmymoney/views/kscheduledview.cpp:263 kmymoney/views/kscheduledview.cpp:276
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -21189,13 +21189,13 @@ msgid "Balance: %1"
 msgstr "Bakiye: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:207
-#: kmymoney/views/newtransactioneditor.cpp:318
+#: kmymoney/views/newtransactioneditor.cpp:319
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Kayıt tarihi geçersiz."
 
 #: kmymoney/views/multitransactioneditor.cpp:243
-#: kmymoney/views/newtransactioneditor.cpp:362
+#: kmymoney/views/newtransactioneditor.cpp:363
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21282,13 +21282,13 @@ msgid "The check number used for this transaction."
 msgstr "Bu işlem için kullanılan çek numarası."
 
 #: kmymoney/views/newspliteditor.cpp:261
-#: kmymoney/views/newtransactioneditor.cpp:487
+#: kmymoney/views/newtransactioneditor.cpp:488
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "<b>%1</b> çek numarası bu hesapta halihazırda kullanılmış."
 
 #: kmymoney/views/newspliteditor.cpp:772
-#: kmymoney/views/newtransactioneditor.cpp:206
+#: kmymoney/views/newtransactioneditor.cpp:207
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21315,45 +21315,45 @@ msgstr "Ödeyen/Alacaklı"
 msgid "Costcenter"
 msgstr "Maliyet Merkezi"
 
-#: kmymoney/views/newtransactioneditor.cpp:176
+#: kmymoney/views/newtransactioneditor.cpp:177
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
 "Bu araç takımı devre dışıdır; çünkü önce bir kategori seçmeniz gerekir."
 
-#: kmymoney/views/newtransactioneditor.cpp:179
+#: kmymoney/views/newtransactioneditor.cpp:180
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
 msgstr "Bu işlem için künyeler eklemek üzere bu araç takımını kullanın."
 
-#: kmymoney/views/newtransactioneditor.cpp:182
+#: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
 msgstr "Künyeler atamak için lütfen bölme düzenleyicisini kullanın."
 
-#: kmymoney/views/newtransactioneditor.cpp:255
+#: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "İşlemde bir kategori ataması eksik."
 
-#: kmymoney/views/newtransactioneditor.cpp:259
+#: kmymoney/views/newtransactioneditor.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr "Girilen tutar, tüm bölmelerin toplamından %1 kadar farklı."
 
-#: kmymoney/views/newtransactioneditor.cpp:639
+#: kmymoney/views/newtransactioneditor.cpp:640
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Kendiliğinden Doldurulacak İşlem Seç"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1137
+#: kmymoney/views/newtransactioneditor.cpp:1151
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21361,7 +21361,7 @@ msgstr "Kendiliğinden Doldurulacak İşlem Seç"
 msgid "Link"
 msgstr "Bağlantı"
 
-#: kmymoney/views/newtransactioneditor.cpp:1647
+#: kmymoney/views/newtransactioneditor.cpp:1661
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21370,7 +21370,7 @@ msgstr ""
 "Diğer bölmedeki<p><i>%1</i></p>notunu<p><i>%2</i></p>notuyla değiştirmek "
 "istiyor musunuz?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1648
+#: kmymoney/views/newtransactioneditor.cpp:1662
 #, kde-format
 msgid "Copy memo"
 msgstr "Notu Kopyala"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-06 00:42+0000\n"
+"POT-Creation-Date: 2025-10-09 00:43+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -8810,10 +8810,10 @@ msgstr "*** Nepriradené ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
 #: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
-#: kmymoney/widgets/creditdebitedit.cpp:126
-#: kmymoney/widgets/creditdebitedit.cpp:127
-#: kmymoney/widgets/creditdebitedit.cpp:156
-#: kmymoney/widgets/creditdebitedit.cpp:157
+#: kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/widgets/creditdebitedit.cpp:129
+#: kmymoney/widgets/creditdebitedit.cpp:160
+#: kmymoney/widgets/creditdebitedit.cpp:161
 #, fuzzy, kde-format
 #| msgid "calculate"
 msgctxt "@info:placeholder amount widget"
@@ -19854,7 +19854,7 @@ msgstr "Úrokový príjem"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:335
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * Transaction '%1' post date '%2' is older than opening date '%4' of "
@@ -21518,13 +21518,13 @@ msgstr "Nie je čo zlúčiť."
 msgid "Unable to remove payee(s)"
 msgstr "Nemožno odstrániť príjemcu(ov)"
 
-#: kmymoney/views/kscheduledview.cpp:185
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Ste si istí, že chcete vymazať plánovanú transakciu <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:200
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -21533,30 +21533,30 @@ msgstr ""
 "V prípade splátok pôžičky v súčasnej dobe nie je možné znovu vytvoriť "
 "plánovanú transakciu."
 
-#: kmymoney/views/kscheduledview.cpp:190
+#: kmymoney/views/kscheduledview.cpp:202
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Vybrať úlohy"
 
-#: kmymoney/views/kscheduledview.cpp:198
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Nemožno odstrániť plánovanú transakciu '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:212
+#: kmymoney/views/kscheduledview.cpp:224
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kópia %1"
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:249
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Nemožno duplikovať plánovanú transakciu: '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:251 kmymoney/views/kscheduledview.cpp:264
+#: kmymoney/views/kscheduledview.cpp:263 kmymoney/views/kscheduledview.cpp:276
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -22017,14 +22017,14 @@ msgid "Balance: %1"
 msgstr "Bilancia: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:207
-#: kmymoney/views/newtransactioneditor.cpp:318
+#: kmymoney/views/newtransactioneditor.cpp:319
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Príkaz importu bez transakcií"
 
 #: kmymoney/views/multitransactioneditor.cpp:243
-#: kmymoney/views/newtransactioneditor.cpp:362
+#: kmymoney/views/newtransactioneditor.cpp:363
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -22113,13 +22113,13 @@ msgid "The check number used for this transaction."
 msgstr "Použiť toto tlačidlo na záznam tejto transakcie."
 
 #: kmymoney/views/newspliteditor.cpp:261
-#: kmymoney/views/newtransactioneditor.cpp:487
+#: kmymoney/views/newtransactioneditor.cpp:488
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:772
-#: kmymoney/views/newtransactioneditor.cpp:206
+#: kmymoney/views/newtransactioneditor.cpp:207
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info:tooltip Protected"
@@ -22147,39 +22147,39 @@ msgstr "Doručiteľ/Príjemca"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:176
+#: kmymoney/views/newtransactioneditor.cpp:177
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:179
+#: kmymoney/views/newtransactioneditor.cpp:180
 #, fuzzy, kde-format
 #| msgid "Use this to clear all splits of this transaction"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
 msgstr "Použiť na vyčistenie všetkých rozdelení tejto transakcie"
 
-#: kmymoney/views/newtransactioneditor.cpp:182
+#: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:255
+#: kmymoney/views/newtransactioneditor.cpp:256
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Transakcií chýba priradenie kategórie."
 
-#: kmymoney/views/newtransactioneditor.cpp:259
+#: kmymoney/views/newtransactioneditor.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:639
+#: kmymoney/views/newtransactioneditor.cpp:640
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -22187,7 +22187,7 @@ msgid "Select autofill transaction"
 msgstr "Vybrať automatické vypĺňanie transakcie"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1137
+#: kmymoney/views/newtransactioneditor.cpp:1151
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -22195,14 +22195,14 @@ msgstr "Vybrať automatické vypĺňanie transakcie"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1647
+#: kmymoney/views/newtransactioneditor.cpp:1661
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1648
+#: kmymoney/views/newtransactioneditor.cpp:1662
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"
