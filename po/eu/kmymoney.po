@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 00:43+0000\n"
+"POT-Creation-Date: 2025-10-10 00:42+0000\n"
 "PO-Revision-Date: 2025-09-28 21:51+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -12183,17 +12183,17 @@ msgstr "Aurretik"
 msgid "After"
 msgstr "Ondoren"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:227
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Transferentzia %1(e)tik %2(e)ra, onuraduna %3, zenbatekoa %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:232
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "%1(e)tik %2(e)ra; %3 kategoria, %4 kantitatea"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:237
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "%1 kontutik ordaindu %2(r)i; %3 kategoria, %4 kantitatea"

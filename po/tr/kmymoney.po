@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 00:43+0000\n"
+"POT-Creation-Date: 2025-10-10 00:42+0000\n"
 "PO-Revision-Date: 2025-10-05 19:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -12124,17 +12124,17 @@ msgstr "Önce"
 msgid "After"
 msgstr "Sonra"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:227
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "%1 hesabından %2 hesabına havale yap, alacaklı %3, tutar %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:232
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "%1 hesabından %2 hesabına, kategori %3, %4 toplamı"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:237
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "%1 hesabından %2 hesabına öde, kategori %3, %4 toplamı"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 00:43+0000\n"
+"POT-Creation-Date: 2025-10-10 00:42+0000\n"
 "PO-Revision-Date: 2025-02-15 14:15+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -12162,17 +12162,17 @@ msgstr "Antaŭ"
 msgid "After"
 msgstr "Post"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:227
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Transdono de %1 al %2, Pagato %3, kvanto %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:232
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "De %1 en %2, Kategorio %3, sumo de %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:237
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "De konto %1, Pagu al %2, Kategorio %3, sumo de %4"

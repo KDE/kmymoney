@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 00:43+0000\n"
+"POT-Creation-Date: 2025-10-10 00:42+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -12874,17 +12874,17 @@ msgstr "înainte"
 msgid "After"
 msgstr "după"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:220
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:227
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Transferă din %1 în %2 cu beneficiarul/plătitorul %3 și suma %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:222
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:232
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "Din %1 în %2, categoria %3, suma %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:223
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:237
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Din contul %1, plata către %2, categoria %3 suma de %4"
