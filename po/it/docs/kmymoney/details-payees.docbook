@@ -294,24 +294,43 @@
 </para>
 
 <para
->L'URL risultante viene visualizzato come collegamento nel registro generale nelle transazioni corrispondenti (vedere la colonna «Dettaglio»). <screenshot
-> <screeninfo>
-Mostra il collegamento nel registro generale</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
-> </mediaobject
-> </screenshot
-> È possibile accedere al collegamento tramite il menu contestuale di una transazione o tramite una scorciatoia da tastiera. <screenshot>
+>L'URL risultante viene visualizzato come collegamento nel libro mastro per le transazioni corrispondenti (vedere la colonna «Dettaglio») e nella vista dettagliata in basso a sinistra del campo di inserimento note. </para>
+
+<screenshot>
   <screeninfo
->....</screeninfo>
+>Mostra il collegamento nel registro generale</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>È possibile accedere al collegamento anche tramite la voce di menu «Apri URL» nel menu contestuale di una transazione o tramite una scorciatoia da tastiera. </para>
+<screenshot>
+  <screeninfo
+>Mostra il menu contestuale delle transazioni</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
     </imageobject>
   </mediaobject>
 </screenshot>
-</para>
+
+<para
+>La scorciatoia da tastiera associata può essere configurata nel <link linkend="reference.menus.settings.help"
+>menu Impostazioni e Guida</link
+>. </para>
+<screenshot>
+  <screeninfo
+>Mostra la scorciatoia da tastiera per aprire un URL</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="shortcut-payee-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
 
 <sect2 id="details.payees.linkmatching.pattern"
 ><title
