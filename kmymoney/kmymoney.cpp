@@ -3957,6 +3957,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
     // only start processing if this is the only import so far
     if (d->m_importUrlsQueue.count() == 1) {
+        KMyMoneyPlugin::pluginInterfaces().statementInterface->resetMessages();
         MyMoneyStatementReader::clearImportResults();
         while (!d->m_importUrlsQueue.isEmpty()) {
             // get the value of the next item from the queue
@@ -4006,6 +4007,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
             // remove the current processed item from the queue
             d->m_importUrlsQueue.dequeue();
         }
+        KMyMoneyPlugin::pluginInterfaces().statementInterface->showMessages();
     }
 }
 

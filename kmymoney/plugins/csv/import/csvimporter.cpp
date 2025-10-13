@@ -51,7 +51,9 @@ public:
         m_action = q->actionCollection()->addAction(kpartgui);
         m_action->setText(i18n("CSV..."));
         q->connect(m_action, &QAction::triggered, q, [&]() {
+            q->statementInterface()->resetMessages();
             q->import(QString());
+            q->statementInterface()->showMessages();
         });
         connect(q->viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, q->action(kpartgui.toLatin1().constData()), &QAction::setEnabled);
     }
@@ -107,9 +109,7 @@ bool CSVImporter::import(const QString& filename)
             statement.m_strAccountName = account.name();
             statement.m_strAccountNumber = account.number();
         }
-        statementInterface()->resetMessages();
         rc = statementInterface()->import(statement);
-        statementInterface()->showMessages();
     }
     if (wizard) {
         wizard->deleteLater();
