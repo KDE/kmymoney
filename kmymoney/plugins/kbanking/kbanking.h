@@ -151,14 +151,6 @@ private:
     bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts) override;
 
     /**
-      * Kept for backward compatibility. Use
-      * updateAccount(const MyMoneyAccount& acc, bool moreAccounts) instead.
-      *
-      * @deprecated
-      */
-    bool updateAccount(const MyMoneyAccount& acc) KMYMONEY_DEPRECATED;
-
-    /**
       * Trigger the password cache timer
       */
     void startPasswordTimer();
