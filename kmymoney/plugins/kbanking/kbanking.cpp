@@ -495,13 +495,6 @@ bool KBanking::accountIsMapped(const MyMoneyAccount& acc)
     return aqbAccount(acc) != nullptr;
 }
 
-
-bool KBanking::updateAccount(const MyMoneyAccount& acc)
-{
-    return updateAccount(acc, false);
-}
-
-
 bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 {
     if (!m_kbanking)
