@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 12:28+0000\n"
+"POT-Creation-Date: 2025-10-14 03:28+0000\n"
 "PO-Revision-Date: 2025-06-16 12:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -64,8 +64,8 @@ msgid "Error creating security record: %1"
 msgstr "Menkul kıymet kaydı oluşturulurken hata: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:605
-#: kmymoney/plugins/kbanking/kbanking.cpp:627
+#: kmymoney/plugins/kbanking/kbanking.cpp:598
+#: kmymoney/plugins/kbanking/kbanking.cpp:620
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -5899,7 +5899,7 @@ msgstr "Tutarlılık kontolü sonucu"
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Vadesi geçmiş planlanmış işlemler kontrol ediliyor..."
 
-#: kmymoney/kmymoney.cpp:3972
+#: kmymoney/kmymoney.cpp:3973
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -5907,12 +5907,12 @@ msgstr ""
 "Bir beyanı içeri aktarmadan önce ilk olarak bir KMyMoney dosyası "
 "seçmelisiniz."
 
-#: kmymoney/kmymoney.cpp:3977
+#: kmymoney/kmymoney.cpp:3978
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Web Bağlantısı yoluyla bir beyan içeri aktarılıyor"
 
-#: kmymoney/kmymoney.cpp:3989
+#: kmymoney/kmymoney.cpp:3990
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5925,60 +5925,60 @@ msgstr ""
 "%2 eklentisini kullanan %1 içeri aktarılamadı. Eklenti aşağıdaki hatayı "
 "döndü: %3"
 
-#: kmymoney/kmymoney.cpp:3989 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:3990 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "İçeri aktarma hatası"
 
-#: kmymoney/kmymoney.cpp:4015
+#: kmymoney/kmymoney.cpp:4017
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Tüm uyarılar etkinleştirildi."
 
-#: kmymoney/kmymoney.cpp:4015
+#: kmymoney/kmymoney.cpp:4017
 #, kde-format
 msgid "All messages"
 msgstr "Tüm İletiler"
 
-#: kmymoney/kmymoney.cpp:4051
+#: kmymoney/kmymoney.cpp:4053
 #, kde-format
 msgid "Auto saving..."
 msgstr "Otomatik kayıt..."
 
-#: kmymoney/kmymoney.cpp:4171
+#: kmymoney/kmymoney.cpp:4173
 #, kde-format
 msgid "Creating new document..."
 msgstr "Yeni belge oluşturuluyor..."
 
-#: kmymoney/kmymoney.cpp:4231
+#: kmymoney/kmymoney.cpp:4233
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Yeni bir profil oluştur"
 
-#: kmymoney/kmymoney.cpp:4242
+#: kmymoney/kmymoney.cpp:4244
 #, kde-format
 msgid "Open a file."
 msgstr "Bir dosya aç."
 
-#: kmymoney/kmymoney.cpp:4256
+#: kmymoney/kmymoney.cpp:4258
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4260
+#: kmymoney/kmymoney.cpp:4262
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Tüm dosyalar"
 
-#: kmymoney/kmymoney.cpp:4273
+#: kmymoney/kmymoney.cpp:4275
 #, kde-format
 msgid "Loading file..."
 msgstr "Dosya yükleniyor..."
 
-#: kmymoney/kmymoney.cpp:4281
+#: kmymoney/kmymoney.cpp:4283
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5987,24 +5987,24 @@ msgstr ""
 "<p><b>%1</b> ya geçersiz bir dosya ismi ya da dosya yok. Başka bir dosya "
 "açabilir ya da yeni bir tane oluşturabilirsin.</p>"
 
-#: kmymoney/kmymoney.cpp:4281
+#: kmymoney/kmymoney.cpp:4283
 #, kde-format
 msgid "File not found"
 msgstr "Dosya bulunamadı"
 
-#: kmymoney/kmymoney.cpp:4313
+#: kmymoney/kmymoney.cpp:4315
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4319
+#: kmymoney/kmymoney.cpp:4321
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested. Error was: %1"
 msgid "Cannot open file as requested."
 msgstr "İstenen dosya açılamadı. Hata : %1"
 
-#: kmymoney/kmymoney.cpp:4326
+#: kmymoney/kmymoney.cpp:4328
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6013,36 +6013,36 @@ msgstr ""
 "Veri kaynağınız okunamadı. Lütfen gerekli eklentinin etkinleştirildiğini "
 "KMyMoney ayarlarını kontrol edin."
 
-#: kmymoney/kmymoney.cpp:4337
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "Saving file..."
 msgstr "Dosya kaydediliyor..."
 
-#: kmymoney/kmymoney.cpp:4349
+#: kmymoney/kmymoney.cpp:4351
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Kaydedilemedi: %1 "
 
-#: kmymoney/kmymoney.cpp:4355
+#: kmymoney/kmymoney.cpp:4357
 #, fuzzy, kde-format
 #| msgid "Could not load responsible plugin to view this task."
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Bu görevi görüntülemekle sorumlu eklenti yüklenemedi."
 
-#: kmymoney/kmymoney.cpp:4361
+#: kmymoney/kmymoney.cpp:4363
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Dosya kaydediliyor..."
 
-#: kmymoney/kmymoney.cpp:4377
+#: kmymoney/kmymoney.cpp:4379
 #, fuzzy, kde-format
 #| msgid "Could not load responsible plugin to view this task."
 msgid "Couldn't find any plugin for saving data."
 msgstr "Bu görevi görüntülemekle sorumlu eklenti yüklenemedi."
 
-#: kmymoney/kmymoney.cpp:4406
+#: kmymoney/kmymoney.cpp:4408
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -12880,8 +12880,8 @@ msgstr "Aq&Banking'i Yapılandır..."
 msgid "AqBanking importer..."
 msgstr "AqBanking içeri aktarıcısı..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:524
-#: kmymoney/plugins/kbanking/kbanking.cpp:773
+#: kmymoney/plugins/kbanking/kbanking.cpp:517
+#: kmymoney/plugins/kbanking/kbanking.cpp:766
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12889,13 +12889,13 @@ msgid ""
 msgstr ""
 "<qt>Verilen uygulama hesabı<b>%1</b>, aktif bir hesapla eşlenmedi.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:530
+#: kmymoney/plugins/kbanking/kbanking.cpp:523
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Eşlenmemiş Hesap"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:602
-#: kmymoney/plugins/kbanking/kbanking.cpp:624
+#: kmymoney/plugins/kbanking/kbanking.cpp:595
+#: kmymoney/plugins/kbanking/kbanking.cpp:617
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12904,12 +12904,12 @@ msgstr ""
 "<qt>İş kuyruğa eklenemedi.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1566
+#: kmymoney/plugins/kbanking/kbanking.cpp:1559
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Bilanço içeri aktarılırken hata. Devam etmek istiyor musunuz?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1567
+#: kmymoney/plugins/kbanking/kbanking.cpp:1560
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514

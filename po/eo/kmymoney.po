@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 12:28+0000\n"
+"POT-Creation-Date: 2025-10-14 03:28+0000\n"
 "PO-Revision-Date: 2025-01-05 23:54+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -63,8 +63,8 @@ msgid "Error creating security record: %1"
 msgstr "Eraro dum kreado de sekureca rikordo: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:605
-#: kmymoney/plugins/kbanking/kbanking.cpp:627
+#: kmymoney/plugins/kbanking/kbanking.cpp:598
+#: kmymoney/plugins/kbanking/kbanking.cpp:620
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -5831,19 +5831,19 @@ msgstr "Rezulto de la kontrolo de konsistenco"
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Kontrolante por posttempaj planitaj transakcioj..."
 
-#: kmymoney/kmymoney.cpp:3972
+#: kmymoney/kmymoney.cpp:3973
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Vi unue devas elekti dosieron de KMyMoney antaŭ ol vi povas importi deklaron."
 
-#: kmymoney/kmymoney.cpp:3977
+#: kmymoney/kmymoney.cpp:3978
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importi deklaron per Web Connect"
 
-#: kmymoney/kmymoney.cpp:3989
+#: kmymoney/kmymoney.cpp:3990
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The "
@@ -5856,57 +5856,57 @@ msgstr ""
 "<p>Ne eblas importi <b>'%1'</b> per la OFX-importila kromaĵo. La kromaĵo "
 "redonis la jenan eraron:</p><p>%2</p>"
 
-#: kmymoney/kmymoney.cpp:3989 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:3990 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "Importa eraro"
 
-#: kmymoney/kmymoney.cpp:4015
+#: kmymoney/kmymoney.cpp:4017
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Ĉiuj mesaĝoj estas ebligitaj."
 
-#: kmymoney/kmymoney.cpp:4015
+#: kmymoney/kmymoney.cpp:4017
 #, kde-format
 msgid "All messages"
 msgstr "Ĉiuj mesaĝoj"
 
-#: kmymoney/kmymoney.cpp:4051
+#: kmymoney/kmymoney.cpp:4053
 #, kde-format
 msgid "Auto saving..."
 msgstr "Aŭtomata konservado..."
 
-#: kmymoney/kmymoney.cpp:4171
+#: kmymoney/kmymoney.cpp:4173
 #, kde-format
 msgid "Creating new document..."
 msgstr "Kreanta novan dokumenton..."
 
-#: kmymoney/kmymoney.cpp:4231
+#: kmymoney/kmymoney.cpp:4233
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Ne eblis krei novan dosieron."
 
-#: kmymoney/kmymoney.cpp:4242
+#: kmymoney/kmymoney.cpp:4244
 #, kde-format
 msgid "Open a file."
 msgstr "Malfermi dosieron."
 
-#: kmymoney/kmymoney.cpp:4256
+#: kmymoney/kmymoney.cpp:4258
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Ne eblis trovi ajnan kromprogramon por malfermi konservejon."
 
-#: kmymoney/kmymoney.cpp:4260
+#: kmymoney/kmymoney.cpp:4262
 #, kde-format
 msgid "All files (*)"
 msgstr "Ĉiuj dosieroj (*)"
 
-#: kmymoney/kmymoney.cpp:4273
+#: kmymoney/kmymoney.cpp:4275
 #, kde-format
 msgid "Loading file..."
 msgstr "Ŝargas dosieron..."
 
-#: kmymoney/kmymoney.cpp:4281
+#: kmymoney/kmymoney.cpp:4283
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5915,23 +5915,23 @@ msgstr ""
 "<p><b>%1</b> aŭ estas nevalida dosiernomo aŭ la dosiero ne ekzistas. Vi "
 "povas malfermi alian dosieron aŭ krei novan.</p>"
 
-#: kmymoney/kmymoney.cpp:4281
+#: kmymoney/kmymoney.cpp:4283
 #, kde-format
 msgid "File not found"
 msgstr "La dosiero ne troviĝis"
 
-#: kmymoney/kmymoney.cpp:4313
+#: kmymoney/kmymoney.cpp:4315
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4319
+#: kmymoney/kmymoney.cpp:4321
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Ne povas malfermi dosieron kiel petis."
 
-#: kmymoney/kmymoney.cpp:4326
+#: kmymoney/kmymoney.cpp:4328
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5940,32 +5940,32 @@ msgstr ""
 "Ne eblis legi vian datumfonton. Bonvolu kontroli la agordojn de KMyMoney, ke "
 "la necesa kromaĵo estas ebligita."
 
-#: kmymoney/kmymoney.cpp:4337
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "Saving file..."
 msgstr "Konservante dosieron..."
 
-#: kmymoney/kmymoney.cpp:4349
+#: kmymoney/kmymoney.cpp:4351
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Malsukcesis konservi viajn datumojn."
 
-#: kmymoney/kmymoney.cpp:4355
+#: kmymoney/kmymoney.cpp:4357
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Ne eblis trovi taŭgan kromprogramon por konservi viajn datumojn."
 
-#: kmymoney/kmymoney.cpp:4361
+#: kmymoney/kmymoney.cpp:4363
 #, kde-format
 msgid "Saving file as...."
 msgstr "Konservante dosieron kiel...."
 
-#: kmymoney/kmymoney.cpp:4377
+#: kmymoney/kmymoney.cpp:4379
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Ne eblis trovi ajnan kromprogramon por konservi datumojn."
 
-#: kmymoney/kmymoney.cpp:4406
+#: kmymoney/kmymoney.cpp:4408
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Malsukcesis konservi viajn konservaĵojn."
@@ -12640,8 +12640,8 @@ msgstr "Agordi Aq&Banking..."
 msgid "AqBanking importer..."
 msgstr "AqBanking-importisto..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:524
-#: kmymoney/plugins/kbanking/kbanking.cpp:773
+#: kmymoney/plugins/kbanking/kbanking.cpp:517
+#: kmymoney/plugins/kbanking/kbanking.cpp:766
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12649,13 +12649,13 @@ msgid ""
 msgstr ""
 "<qt>La donita aplikaĵa konto <b>%1</b> ne estas mapita al reta konto.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:530
+#: kmymoney/plugins/kbanking/kbanking.cpp:523
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Konto Ne Mapita"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:602
-#: kmymoney/plugins/kbanking/kbanking.cpp:624
+#: kmymoney/plugins/kbanking/kbanking.cpp:595
+#: kmymoney/plugins/kbanking/kbanking.cpp:617
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12664,12 +12664,12 @@ msgstr ""
 "<qt>Ne eblis envicigi la taskon.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1566
+#: kmymoney/plugins/kbanking/kbanking.cpp:1559
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Eraro dum importo de deklaro. Ĉu vi volas daŭrigi?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1567
+#: kmymoney/plugins/kbanking/kbanking.cpp:1560
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514
