@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-10 00:42+0000\n"
+"POT-Creation-Date: 2025-10-14 00:42+0000\n"
 "PO-Revision-Date: 2025-09-28 06:09+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -60,8 +60,8 @@ msgid "Error creating security record: %1"
 msgstr "ფასიანი ქაღალდის ჩანაწერის შექმნის შეცდომა: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:605
-#: kmymoney/plugins/kbanking/kbanking.cpp:627
+#: kmymoney/plugins/kbanking/kbanking.cpp:598
+#: kmymoney/plugins/kbanking/kbanking.cpp:620
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -136,7 +136,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1077
-#: kmymoney/kmymoneyutils.cpp:581
+#: kmymoney/kmymoneyutils.cpp:582
 #, kde-format
 msgid "New payee/receiver"
 msgstr "ახალი თანხის მიმღები/მიმღები"
@@ -380,7 +380,7 @@ msgstr "საფოსტო კოდი:"
 msgid "Load from Addressbook"
 msgstr "მისამართების წიგნაკიდან ჩატვირთვა"
 
-#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:742
+#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:743
 #, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
@@ -5489,18 +5489,18 @@ msgstr "თანმიმდევრულობის შემოწმე�
 msgid "Checking for overdue scheduled transactions..."
 msgstr "გადაცილებული დაგეგმილი ტრანზაქციების შემოწმება..."
 
-#: kmymoney/kmymoney.cpp:3976
+#: kmymoney/kmymoney.cpp:3977
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3981
+#: kmymoney/kmymoney.cpp:3982
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "ამონაწერის შემოტანა ვებ-კავშირით"
 
-#: kmymoney/kmymoney.cpp:3993
+#: kmymoney/kmymoney.cpp:3994
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5510,112 +5510,112 @@ msgstr ""
 "%1-ის შემოტანა დამატებით %2 შეუძლებელია. დამატებამ დააბრუნა შემდეგი შეცდომა: "
 "%3"
 
-#: kmymoney/kmymoney.cpp:3993 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:3994 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "შემოტანის შეცდომა"
 
-#: kmymoney/kmymoney.cpp:4019
+#: kmymoney/kmymoney.cpp:4021
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "ყველა შეტყობინება ჩართულია."
 
-#: kmymoney/kmymoney.cpp:4019
+#: kmymoney/kmymoney.cpp:4021
 #, kde-format
 msgid "All messages"
 msgstr "ყველა შეტყობინება"
 
-#: kmymoney/kmymoney.cpp:4055
+#: kmymoney/kmymoney.cpp:4057
 #, kde-format
 msgid "Auto saving..."
 msgstr "ავტოშენახვა..."
 
-#: kmymoney/kmymoney.cpp:4175
+#: kmymoney/kmymoney.cpp:4177
 #, kde-format
 msgid "Creating new document..."
 msgstr "ახალი დოკუმენტის შექმნა..."
 
-#: kmymoney/kmymoney.cpp:4235
+#: kmymoney/kmymoney.cpp:4237
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "ახალი ფაილის შექმნის შეცდომა."
 
-#: kmymoney/kmymoney.cpp:4246
+#: kmymoney/kmymoney.cpp:4248
 #, kde-format
 msgid "Open a file."
 msgstr "ფაილის გახსნა."
 
-#: kmymoney/kmymoney.cpp:4260
+#: kmymoney/kmymoney.cpp:4262
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "საცავის გასახსნელად დამატება აღმჩენილი არაა."
 
-#: kmymoney/kmymoney.cpp:4264
+#: kmymoney/kmymoney.cpp:4266
 #, kde-format
 msgid "All files (*)"
 msgstr "ყველა ფაილი (*)"
 
-#: kmymoney/kmymoney.cpp:4277
+#: kmymoney/kmymoney.cpp:4279
 #, kde-format
 msgid "Loading file..."
 msgstr "ფაილის ჩატვირთვა..."
 
-#: kmymoney/kmymoney.cpp:4285
+#: kmymoney/kmymoney.cpp:4287
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
 "can open another file or create a new one.</p>"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4285
+#: kmymoney/kmymoney.cpp:4287
 #, kde-format
 msgid "File not found"
 msgstr "ფაილი ვერ მოიძებნა"
 
-#: kmymoney/kmymoney.cpp:4317
+#: kmymoney/kmymoney.cpp:4319
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "საცავის გახსნის პრობლემა"
 
-#: kmymoney/kmymoney.cpp:4323
+#: kmymoney/kmymoney.cpp:4325
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "მოთხოვნისამებრ ფაილის გახსნა შეუძლებელია."
 
-#: kmymoney/kmymoney.cpp:4330
+#: kmymoney/kmymoney.cpp:4332
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4341
+#: kmymoney/kmymoney.cpp:4343
 #, kde-format
 msgid "Saving file..."
 msgstr "ფაილის შენახვა..."
 
-#: kmymoney/kmymoney.cpp:4353
+#: kmymoney/kmymoney.cpp:4355
 #, kde-format
 msgid "Failed to save your data."
 msgstr "თქვენი მონაცემების შენახვა ვერ ჩავარდა."
 
-#: kmymoney/kmymoney.cpp:4359
+#: kmymoney/kmymoney.cpp:4361
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "თქვენი მონაცემების შესანახად საჭირო მოდული აღმოჩენილი არაა."
 
-#: kmymoney/kmymoney.cpp:4365
+#: kmymoney/kmymoney.cpp:4367
 #, kde-format
 msgid "Saving file as...."
 msgstr "ფაილის შენახვა, როგორც..."
 
-#: kmymoney/kmymoney.cpp:4381
+#: kmymoney/kmymoney.cpp:4383
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "მონაცემების შესანახად დამატება აღმოჩენილი არაა."
 
-#: kmymoney/kmymoney.cpp:4410
+#: kmymoney/kmymoney.cpp:4412
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "თქვენი საცავის შენახვა ჩავარდა."
@@ -5755,87 +5755,87 @@ msgstr "აირჩიეთ ანგარიში"
 msgid "Main Toolbar"
 msgstr "ხელსაწყოთა მთავარი ზოლი"
 
-#: kmymoney/kmymoneyutils.cpp:99
+#: kmymoney/kmymoneyutils.cpp:100
 #, kde-format
 msgid "&New Schedule..."
 msgstr "&ახალი განრიგი..."
 
-#: kmymoney/kmymoneyutils.cpp:101
+#: kmymoney/kmymoneyutils.cpp:102
 #, kde-format
 msgid "Create a new schedule."
 msgstr "ახალი განრიგის შექმნა."
 
-#: kmymoney/kmymoneyutils.cpp:102
+#: kmymoney/kmymoneyutils.cpp:103
 #, kde-format
 msgid "Use this to create a new schedule."
 msgstr "გამოიყენეთ ახალი განრიგის შესაქმნელად."
 
-#: kmymoney/kmymoneyutils.cpp:109
+#: kmymoney/kmymoneyutils.cpp:110
 #, kde-format
 msgid "&Filter"
 msgstr "&ფილტრი"
 
-#: kmymoney/kmymoneyutils.cpp:111
+#: kmymoney/kmymoneyutils.cpp:112
 #, kde-format
 msgid "Filter out accounts"
 msgstr "ანგარიშების გაფილტვრა"
 
-#: kmymoney/kmymoneyutils.cpp:112
+#: kmymoney/kmymoneyutils.cpp:113
 #, kde-format
 msgid "Use this to filter out accounts"
 msgstr "გამოიყენეთ ანგარიშების გასაფილტრად"
 
-#: kmymoney/kmymoneyutils.cpp:118
+#: kmymoney/kmymoneyutils.cpp:119
 msgid "Scheduled payments"
 msgstr "დაგეგმილი გადახდები"
 
-#: kmymoney/kmymoneyutils.cpp:119
+#: kmymoney/kmymoneyutils.cpp:120
 msgid "Preferred accounts"
 msgstr "სასურველი ანგარიშები"
 
-#: kmymoney/kmymoneyutils.cpp:120
+#: kmymoney/kmymoneyutils.cpp:121
 msgid "Payment accounts"
 msgstr "გადახდის ანგარიშები"
 
-#: kmymoney/kmymoneyutils.cpp:121
+#: kmymoney/kmymoneyutils.cpp:122
 msgid "Favorite reports"
 msgstr "რჩეული ანგარიშები"
 
-#: kmymoney/kmymoneyutils.cpp:122
+#: kmymoney/kmymoneyutils.cpp:123
 msgid "Forecast (schedule)"
 msgstr "პროგნოზი (გეგმა)"
 
-#: kmymoney/kmymoneyutils.cpp:123
+#: kmymoney/kmymoneyutils.cpp:124
 msgid "Net worth forecast"
 msgstr "სუფთა კაპიტალის მაჩვენებლების პროგნოზი"
 
-#: kmymoney/kmymoneyutils.cpp:124
+#: kmymoney/kmymoneyutils.cpp:125
 msgid "Forecast (history)"
 msgstr "პროგნოზი (ისტორია)"
 
-#: kmymoney/kmymoneyutils.cpp:125
+#: kmymoney/kmymoneyutils.cpp:126
 msgid "Assets and Liabilities"
 msgstr "აქტივები და ვალდებულებები"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/kmymoneyutils.cpp:126 kmymoney/mymoney/storage/budgetsmodel.cpp:68
+#: kmymoney/kmymoneyutils.cpp:127 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
 #, kde-format
 msgid "Budget"
 msgstr "ბიუჯეტი"
 
-#: kmymoney/kmymoneyutils.cpp:127
+#: kmymoney/kmymoneyutils.cpp:128
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1031
 #, kde-format
 msgid "Cash Flow"
 msgstr "ფულის დინება"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:151
+#: kmymoney/kmymoneyutils.cpp:281 kmymoney/views/kenterscheduledlg.cpp:151
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "გეგმის დეტალების ჩატვირთვა შეუძლებელია"
 
-#: kmymoney/kmymoneyutils.cpp:376
+#: kmymoney/kmymoneyutils.cpp:377
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:119
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
@@ -5843,47 +5843,47 @@ msgctxt "Go to next page of the wizard"
 msgid "&Next"
 msgstr "&შემდეგი"
 
-#: kmymoney/kmymoneyutils.cpp:465
+#: kmymoney/kmymoneyutils.cpp:466
 #, kde-format
 msgid "Prices Importer"
 msgstr "ფასების შემომტანი"
 
-#: kmymoney/kmymoneyutils.cpp:475
+#: kmymoney/kmymoneyutils.cpp:476
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:476
+#: kmymoney/kmymoneyutils.cpp:477
 #, kde-format
 msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
 "still want to continue?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:480
+#: kmymoney/kmymoneyutils.cpp:481
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:481
+#: kmymoney/kmymoneyutils.cpp:482
 #, kde-format
 msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
 "to continue?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:485
+#: kmymoney/kmymoneyutils.cpp:486
 #, kde-format
 msgid "Delete security"
 msgstr "ფასიანი ქაღალდის წაშლა"
 
-#: kmymoney/kmymoneyutils.cpp:493
+#: kmymoney/kmymoneyutils.cpp:494
 #, kde-format
 msgid "Delete prices"
 msgstr "ფასების წაშლა"
 
-#: kmymoney/kmymoneyutils.cpp:554
+#: kmymoney/kmymoneyutils.cpp:555
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:143
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:437
 #: kmymoney/templates/templateloader.cpp:78
@@ -5891,7 +5891,7 @@ msgstr "ფასების წაშლა"
 msgid "Error while loading file '%1'."
 msgstr "შეცდომა ფაილის '%1' ჩატვირთვისას."
 
-#: kmymoney/kmymoneyutils.cpp:556
+#: kmymoney/kmymoneyutils.cpp:557
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:145
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:437
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1012
@@ -5900,54 +5900,54 @@ msgstr "შეცდომა ფაილის '%1' ჩატვირთვ�
 msgid "File access error"
 msgstr "ფაილის წვდომის შეცდომა"
 
-#: kmymoney/kmymoneyutils.cpp:577 kmymoney/views/kpayeesview.cpp:568
+#: kmymoney/kmymoneyutils.cpp:578 kmymoney/views/kpayeesview.cpp:568
 #, kde-format
 msgid "New Payee"
 msgstr "ახალი მიმღები"
 
-#: kmymoney/kmymoneyutils.cpp:579
+#: kmymoney/kmymoneyutils.cpp:580
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "<qt>გნებავთ, დაამატოთ <b>%1</b> მიმღების სახით?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:618
+#: kmymoney/kmymoneyutils.cpp:619
 #, kde-format
 msgid "Unable to add payee"
 msgstr "მიმღების დამატება შეუძლებელია"
 
-#: kmymoney/kmymoneyutils.cpp:630 kmymoney/views/ktagsview.cpp:645
+#: kmymoney/kmymoneyutils.cpp:631 kmymoney/views/ktagsview.cpp:645
 #, kde-format
 msgid "New Tag"
 msgstr "ახალი ჭდე"
 
-#: kmymoney/kmymoneyutils.cpp:632
+#: kmymoney/kmymoneyutils.cpp:633
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>გნებავთ, დაამატოთ <b>%1</b> ჭდის სახით?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:634
+#: kmymoney/kmymoneyutils.cpp:635
 #, kde-format
 msgid "New tag"
 msgstr "ახალი ჭდე"
 
-#: kmymoney/kmymoneyutils.cpp:668
+#: kmymoney/kmymoneyutils.cpp:669
 #, kde-format
 msgid "Unable to add tag"
 msgstr "ჭდის დამატება შეუძლებელია"
 
-#: kmymoney/kmymoneyutils.cpp:685 kmymoney/views/kinstitutionsview.cpp:230
+#: kmymoney/kmymoneyutils.cpp:686 kmymoney/views/kinstitutionsview.cpp:230
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "დაწესებულების დამატება შეუძლებელია: %1"
 
-#: kmymoney/kmymoneyutils.cpp:747
+#: kmymoney/kmymoneyutils.cpp:748
 #, kde-format
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] "ახალი ტრანზაქცია არ შემოტანილა."
 msgstr[1] "ახალი ტრანზაქციები არ შემოტანილა."
 
-#: kmymoney/kmymoneyutils.cpp:748
+#: kmymoney/kmymoneyutils.cpp:749
 #, kde-format
 msgid "Statement import statistics"
 msgstr "ამონაწერის შემოტანის სტატისტიკა"
@@ -11937,21 +11937,21 @@ msgstr "Aq&Banking-ის მორგება..."
 msgid "AqBanking importer..."
 msgstr "AqBanking-დან შემოტანის..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:524
-#: kmymoney/plugins/kbanking/kbanking.cpp:773
+#: kmymoney/plugins/kbanking/kbanking.cpp:517
+#: kmymoney/plugins/kbanking/kbanking.cpp:766
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
 "account.</qt>"
 msgstr ""
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:530
+#: kmymoney/plugins/kbanking/kbanking.cpp:523
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "ანგარიში მიბმული არაა"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:602
-#: kmymoney/plugins/kbanking/kbanking.cpp:624
+#: kmymoney/plugins/kbanking/kbanking.cpp:595
+#: kmymoney/plugins/kbanking/kbanking.cpp:617
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -11960,12 +11960,12 @@ msgstr ""
 "<qt>დავალების რიგში ჩაყენება შეუძლებელია.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1566
+#: kmymoney/plugins/kbanking/kbanking.cpp:1559
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "ამონაწერის შემოტანის შეცდომა. გნებავთ, გააგრძელოთ?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1567
+#: kmymoney/plugins/kbanking/kbanking.cpp:1560
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514
