@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-14 00:42+0000\n"
+"POT-Creation-Date: 2025-10-16 00:42+0000\n"
 "PO-Revision-Date: 2025-09-20 10:09+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -126,7 +126,21 @@ msgstr "Aucune quantité de parts fournie"
 msgid "(Fees) %1"
 msgstr "(Commissions) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1053
+#: kmymoney/converter/mymoneystatementreader.cpp:1057
+#, fuzzy, kde-format
+#| msgctxt "Prepend name of payee (%1) to original memo (%2)"
+#| msgid ""
+#| "Original payee: %1\n"
+#| "%2"
+msgctxt "Append name of payee (%1) to original memo (%2)"
+msgid ""
+"%2\n"
+"Original payee: %1"
+msgstr ""
+"Bénéficiaire initial : %1 \n"
+"%2"
+
+#: kmymoney/converter/mymoneystatementreader.cpp:1060
 #, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
@@ -136,7 +150,7 @@ msgstr ""
 "Bénéficiaire initial : %1 \n"
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1061
+#: kmymoney/converter/mymoneystatementreader.cpp:1070
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -145,7 +159,7 @@ msgstr ""
 "Voulez-vous ajouter « %1 » comme bénéficiaire ?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1063
+#: kmymoney/converter/mymoneystatementreader.cpp:1072
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -164,81 +178,81 @@ msgstr ""
 "question », l'information sur le bénéficiaire de toutes les opérations "
 "suivantes faisant référence à « %1 » sera supprimée."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1077
+#: kmymoney/converter/mymoneystatementreader.cpp:1086
 #: kmymoney/kmymoneyutils.cpp:582
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Nouveau bénéficiaire"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1108
+#: kmymoney/converter/mymoneystatementreader.cpp:1117
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Catégorie par défaut pour le bénéficiaire"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1115
+#: kmymoney/converter/mymoneystatementreader.cpp:1124
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Veuillez sélectionner une catégorie par défaut pour le bénéficiaire %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1138
+#: kmymoney/converter/mymoneystatementreader.cpp:1147
 #, kde-format
 msgid "Save Category"
 msgstr "Enregistrer la Catégorie"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1139
+#: kmymoney/converter/mymoneystatementreader.cpp:1148
 #, kde-format
 msgid "No Category"
 msgstr "Aucune Catégorie"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1140
+#: kmymoney/converter/mymoneystatementreader.cpp:1149
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Abandonner"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1166
+#: kmymoney/converter/mymoneystatementreader.cpp:1175
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Impossible d'ajouter un bénéficiaire"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1426
+#: kmymoney/converter/mymoneystatementreader.cpp:1435
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Problème lors de l'ajout ou de la correspondance de l'opération importée "
 "avec l'identifiant « %1 » : %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1484
+#: kmymoney/converter/mymoneystatementreader.cpp:1493
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr ""
 "<b>Vous avez téléchargé un relevé pour le compte suivant : </b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1485
+#: kmymoney/converter/mymoneystatementreader.cpp:1494
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Nom du Compte : %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1486
+#: kmymoney/converter/mymoneystatementreader.cpp:1495
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Type de Compte : %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1487
+#: kmymoney/converter/mymoneystatementreader.cpp:1496
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Numéro de Compte : %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1492
+#: kmymoney/converter/mymoneystatementreader.cpp:1501
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Voulez-vous importer les opérations vers ce compte ?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1495
+#: kmymoney/converter/mymoneystatementreader.cpp:1504
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -249,7 +263,7 @@ msgstr ""
 "nouveau compte en appuyant sur <b>Créer</b> ou en sélectionnant manuellement "
 "un autre compte à partir de la boîte de sélection ci-dessous."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1508
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -261,12 +275,12 @@ msgstr ""
 "dans la fenêtre, ou créer un nouveau compte en appuyant sur le bouton "
 "<b>Créer</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1528
+#: kmymoney/converter/mymoneystatementreader.cpp:1537
 #, kde-format
 msgid "Import transactions"
 msgstr "Importer des opérations"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1571
+#: kmymoney/converter/mymoneystatementreader.cpp:1580
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -275,14 +289,14 @@ msgstr ""
 "Vous devez sélectionner un compte, en créer un nouveau, ou cliquer sur le "
 "bouton <b>Abandonner</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1679
+#: kmymoney/converter/mymoneystatementreader.cpp:1688
 #: kmymoney/views/kscheduledview_p.h:199 kmymoney/views/kscheduledview_p.h:319
 #: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Impossible de saisir l'échéance « %1 »"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1699
+#: kmymoney/converter/mymoneystatementreader.cpp:1708
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -295,7 +309,7 @@ msgstr ""
 "%2 %3</i><br/> Voulez-vous que KMyMoney saisisse cette échéance maintenant "
 "afin que l'opération puisse correspondre ?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1708
+#: kmymoney/converter/mymoneystatementreader.cpp:1717
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -320,7 +334,7 @@ msgstr[1] ""
 "que KMyMoney saisisse cette échéance maintenant afin que l'opération puisse "
 "correspondre ?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1722
+#: kmymoney/converter/mymoneystatementreader.cpp:1731
 #, kde-format
 msgid "Schedule found"
 msgstr "Opération récurrente trouvée"
@@ -1857,7 +1871,7 @@ msgstr "État :"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
 #: kmymoney/plugins/views/reports/kreportsview.ui:80
-#: kmymoney/settings/kmymoney.kcfg:489 kmymoney/views/kinstitutionsview.ui:53
+#: kmymoney/settings/kmymoney.kcfg:498 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
@@ -4082,7 +4096,7 @@ msgstr "Opérations de banque en ligne"
 msgid "Register settings"
 msgstr "Paramètres du grand livre"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab1)
+#. i18n: ectx: attribute (title), widget (QWidget, display)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:24
 #, kde-format
 msgctxt "@title The way in which items will be displayed"
@@ -4120,7 +4134,7 @@ msgstr ""
 msgid "Display overdue schedules with planned date"
 msgstr "Afficher les échéances arriérées à la date initialement prévue"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
 #, kde-format
 msgid "Ledger entry details"
@@ -4161,7 +4175,7 @@ msgstr "Utiliser la loupe du grand livre"
 msgid "Show all split details in ledger"
 msgstr "Afficher tous les détails du fractionnement dans le grand livre"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:99
 #, kde-format
 msgid "Information headers"
@@ -4227,13 +4241,13 @@ msgstr "Vue normale"
 msgid "Reconciliation view"
 msgstr "Vue Rapprochement"
 
-#. i18n: ectx: attribute (title), widget (QWidget, TabPage)
+#. i18n: ectx: attribute (title), widget (QWidget, tab5)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:197
 #, kde-format
 msgid "Search view"
 msgstr "Vue Recherche"
 
-#. i18n: ectx: property (text), widget (QLabel, qLabel2)
+#. i18n: ectx: property (text), widget (QLabel, l1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:213
 #, kde-format
 msgid ""
@@ -4247,7 +4261,7 @@ msgstr ""
 "modifier l'ordre de tri. Double-cliquez sur une ligne sélectionnée pour "
 "changer l'ordre de tri entre <i>montant</i> et <i>descendant</i>."
 
-#. i18n: ectx: attribute (title), widget (QWidget, TabPage1)
+#. i18n: ectx: attribute (title), widget (QWidget, dateEntry)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:224
 #, kde-format
 msgid "Data entry"
@@ -4318,7 +4332,7 @@ msgstr ""
 msgid "Automatic reconciliation"
 msgstr "Rapprochement automatique"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_1)
+#. i18n: ectx: property (text), widget (QLabel, l2)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:289
 #: kmymoney/settings/kmymoney.kcfg:352
@@ -4350,7 +4364,7 @@ msgstr "Mois"
 msgid "Year"
 msgstr "Année"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#. i18n: ectx: property (text), widget (QLabel, l3)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:331
 #, kde-format
 msgid "Default reconciliation state"
@@ -4455,7 +4469,7 @@ msgid "With previously most often used transaction for the payee"
 msgstr ""
 "Avec l'opération la plus souvent utilisée auparavant pour le bénéficiaire"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
+#. i18n: ectx: property (text), widget (QLabel, l4)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:440
 #, kde-format
 msgid "Same transaction if amount differs less than "
@@ -4498,14 +4512,14 @@ msgstr ""
 msgid "Use memos from previous transaction"
 msgstr "Utiliser les mémos de l'opération précédente"
 
-#. i18n: ectx: attribute (title), widget (QWidget, TabPage2)
+#. i18n: ectx: attribute (title), widget (QWidget, import)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:509
 #, kde-format
 msgid "Import"
 msgstr "Importer"
 
 # Ancien: Faire correspondre les opérations des jours identiques
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#. i18n: ectx: property (text), widget (QLabel, l6)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:517
 #, kde-format
 msgid "Match transactions within days"
@@ -4521,8 +4535,32 @@ msgstr ""
 "Chercher les opérations correspondantes dans une fenêtre de plus ou moins le "
 "nombre de jours donnés autour de la date de l'opération importée."
 
-#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
+#. i18n: ectx: property (text), widget (QLabel, l5)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:546
+#, kde-format
+msgid "Keep original payee information in memo"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:554
+#, kde-format
+msgid "Off"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:559
+#, kde-format
+msgid "Append to memo"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:564
+#, kde-format
+msgid "Prepend to memo"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:603
 #, kde-format
 msgid ""
 "Whenever a new payee is detected during import of a statement, the user will "
@@ -4534,7 +4572,7 @@ msgstr ""
 "quand cette option est sélectionnée."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_askForPayeeCategory)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:567
+#: kmymoney/dialogs/settings/ksettingsregister.ui:606
 #, kde-format
 msgid "Ask for a new payee's default category"
 msgstr "Demander une catégorie par défaut pour un nouveau bénéficiaire"
@@ -15457,56 +15495,56 @@ msgstr "Prévisions"
 
 #. i18n: ectx: label, entry (forecastMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:11
-#: kmymoney/settings/kmymoney.kcfg:441
+#: kmymoney/settings/kmymoney.kcfg:450
 #, kde-format
 msgid "Method to calculate forecast"
 msgstr "Méthode de calcul des prévisions"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
-#: kmymoney/settings/kmymoney.kcfg:445
+#: kmymoney/settings/kmymoney.kcfg:454
 #, kde-format
 msgid "Days to forecast"
 msgstr "Jours pour les prévisions"
 
 #. i18n: ectx: label, entry (forecastAccountCycle), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:21
-#: kmymoney/settings/kmymoney.kcfg:451
+#: kmymoney/settings/kmymoney.kcfg:460
 #, kde-format
 msgid "Days of normal account cycle"
 msgstr "Jours du cycle normal des comptes"
 
 #. i18n: ectx: label, entry (forecastCycles), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:27
-#: kmymoney/settings/kmymoney.kcfg:457
+#: kmymoney/settings/kmymoney.kcfg:466
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
 msgstr "Nombre de cycles d'historique à utiliser dans les prévisions"
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
-#: kmymoney/settings/kmymoney.kcfg:463
+#: kmymoney/settings/kmymoney.kcfg:472
 #, kde-format
 msgid "Day of month to start forecast"
 msgstr "Jour du mois pour commencer les prévisions"
 
 #. i18n: ectx: label, entry (historyMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:39
-#: kmymoney/settings/kmymoney.kcfg:469
+#: kmymoney/settings/kmymoney.kcfg:478
 #, kde-format
 msgid "Method to calculate history-based forecast"
 msgstr "Méthode de calcul utilisant l'historique des prévisions"
 
 #. i18n: ectx: label, entry (skipOpeningDate), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:43
-#: kmymoney/settings/kmymoney.kcfg:473
+#: kmymoney/settings/kmymoney.kcfg:482
 #, kde-format
 msgid "Skip opening date when fetching transactions"
 msgstr "Ignorer la date d'ouverture lors de la réception des opérations"
 
 #. i18n: ectx: label, entry (includeFutureTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:47
-#: kmymoney/settings/kmymoney.kcfg:477
+#: kmymoney/settings/kmymoney.kcfg:486
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr ""
@@ -15515,7 +15553,7 @@ msgstr ""
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
-#: kmymoney/settings/kmymoney.kcfg:481
+#: kmymoney/settings/kmymoney.kcfg:490
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr ""
@@ -17479,7 +17517,7 @@ msgstr "Largeur des lignes des graphiques"
 #. i18n: ectx: label, entry (LineWidth), group (Chart Settings)
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_LineWidth)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:66
-#: kmymoney/settings/kmymoney.kcfg:422
+#: kmymoney/settings/kmymoney.kcfg:431
 #, kde-format
 msgid "Line width for diagrams, in pixels"
 msgstr "Largeur de ligne des diagrammes, en pixels"
@@ -19208,8 +19246,14 @@ msgstr ""
 "Nombre de jours (plus ou moins) pour rechercher les opérations "
 "correspondantes"
 
-#. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
+#. i18n: ectx: label, entry (KeepOriginalPayeeInfo), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:371
+#, kde-format
+msgid "Where to place the original payee info in the memo field"
+msgstr ""
+
+#. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
+#: kmymoney/settings/kmymoney.kcfg:380
 #, kde-format
 msgid "During import, ask for a new payee's default category"
 msgstr ""
@@ -19217,67 +19261,67 @@ msgstr ""
 "bénéficiaire"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
-#: kmymoney/settings/kmymoney.kcfg:378
+#: kmymoney/settings/kmymoney.kcfg:387
 #, kde-format
 msgid "Post date last entered by the user"
 msgstr "La dernière date de valeur saisie par l'utilisateur"
 
 #. i18n: ectx: label, entry (qifCash), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:384
+#: kmymoney/settings/kmymoney.kcfg:393
 #, kde-format
 msgid "additional names for cash account"
 msgstr "noms supplémentaires pour le compte courant"
 
 #. i18n: ectx: label, entry (qifBank), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:388
+#: kmymoney/settings/kmymoney.kcfg:397
 #, kde-format
 msgid "additional names for checking account"
 msgstr "noms supplémentaires pour le compte chèque"
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:392
+#: kmymoney/settings/kmymoney.kcfg:401
 #, kde-format
 msgid "additional names for credit card account"
 msgstr "noms supplémentaires pour le compte de carte de crédit"
 
 #. i18n: ectx: label, entry (qifAsset), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:396
+#: kmymoney/settings/kmymoney.kcfg:405
 #, kde-format
 msgid "additional names for asset account"
 msgstr "noms supplémentaires pour le compte d'actif"
 
 #. i18n: ectx: label, entry (qifOpeningBalance), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:400
+#: kmymoney/settings/kmymoney.kcfg:409
 #, kde-format
 msgid "additional names for opening balance payee"
 msgstr "noms supplémentaires pour le solde d'ouverture du bénéficiaire"
 
 #. i18n: ectx: label, entry (qifInvoice), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:404
+#: kmymoney/settings/kmymoney.kcfg:413
 #, kde-format
 msgid "additional names for invoice accounts"
 msgstr "noms supplémentaires pour les comptes de facture"
 
 #. i18n: ectx: label, entry (showAccountsExpanded), group (Account View Settings)
-#: kmymoney/settings/kmymoney.kcfg:410
+#: kmymoney/settings/kmymoney.kcfg:419
 #, kde-format
 msgid "Show accounts view expanded when loaded"
 msgstr "Afficher la vue des comptes dépliée lorsqu'elle est chargée"
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:416
+#: kmymoney/settings/kmymoney.kcfg:425
 #, kde-format
 msgid "Maximum quantity of legend items to display on charts"
 msgstr "Quantité maximale d'éléments de légende à afficher sur les graphiques"
 
 #. i18n: ectx: label, entry (ChartsPalette), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:428
+#: kmymoney/settings/kmymoney.kcfg:437
 #, kde-format
 msgid "The palette used to render charts"
 msgstr "La palette utilisée pour le rendu des graphes"
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:434
+#: kmymoney/settings/kmymoney.kcfg:443
 #, kde-format
 msgid "Name of default CSS file"
 msgstr "Nom du fichier CSS par défaut"
