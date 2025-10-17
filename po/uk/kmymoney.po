@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-16 00:42+0000\n"
-"PO-Revision-Date: 2025-09-28 16:29+0300\n"
+"PO-Revision-Date: 2025-10-16 09:00+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -113,18 +113,14 @@ msgid "(Fees) %1"
 msgstr "(Мита) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1057
-#, fuzzy, kde-format
-#| msgctxt "Prepend name of payee (%1) to original memo (%2)"
-#| msgid ""
-#| "Original payee: %1\n"
-#| "%2"
+#, kde-format
 msgctxt "Append name of payee (%1) to original memo (%2)"
 msgid ""
 "%2\n"
 "Original payee: %1"
 msgstr ""
-"Початковий платник: %1\n"
-"%2"
+"%2\n"
+"Початковий платник: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1060
 #, kde-format
@@ -4488,25 +4484,25 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:546
 #, kde-format
 msgid "Keep original payee information in memo"
-msgstr ""
+msgstr "Зберігати початкові відомості щодо платника у нотатці"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:554
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Вимкнено"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:559
 #, kde-format
 msgid "Append to memo"
-msgstr ""
+msgstr "Дописати до нотатки"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:564
 #, kde-format
 msgid "Prepend to memo"
-msgstr ""
+msgstr "Дописати перед нотаткою"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:603
@@ -19180,6 +19176,7 @@ msgstr "Діапазон днів (плюс/мінус) для пошуку ві
 #, kde-format
 msgid "Where to place the original payee info in the memo field"
 msgstr ""
+"Де слід розташовувати відомості щодо початкового платника у полі нотатки"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:380

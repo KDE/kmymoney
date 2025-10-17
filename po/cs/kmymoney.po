@@ -4270,7 +4270,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:554
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Vypnuto"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:559
