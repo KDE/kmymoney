@@ -48,7 +48,7 @@ public:
         m_sections.resize(3);
         const auto format(q->locale().dateFormat(QLocale::ShortFormat).toLower());
 
-        for (int pos = 0; pos < format.length(); ++pos) {
+        for (int pos = 0; (pos < format.length()) && (sectionIndex < 3); ++pos) {
             const auto ch = format[pos];
             ++sectionSize;
             if (ch == QLatin1Char('d')) {
@@ -61,25 +61,38 @@ public:
                 m_sections[sectionIndex] = QDateTimeEdit::YearSection;
                 lastWasDelimiter = false;
             } else {
+                if (!lastWasDelimiter) {
+                    ++sectionIndex;
+                    sectionSize = 0;
+                }
                 // in case we detect multiple delimiters in row, we
                 // only keep the last one. E.g. in "dd. MMM. yyyy" the
                 // space is the delimiter and the dot is a fill character
                 if (lastWasDelimiter && lastDelimiterAdded) {
+                    const auto invalidDelim = m_validDelims.at(m_validDelims.length() - 1);
+                    if (!m_invalidDelims.contains(invalidDelim)) {
+                        m_invalidDelims.append(invalidDelim);
+                    }
                     m_validDelims.remove(m_validDelims.length() - 1, 1);
                     lastDelimiterAdded = false;
                 }
-                if (!m_validDelims.contains(ch)) {
-                    m_validDelims.append(ch);
-                    lastDelimiterAdded = true;
-                } else {
-                    lastDelimiterAdded = false;
+
+                // only add delimiters between after first and second section
+                // Some format may have another delimiter after the third
+                // section which we don't care for here (e.g. Hungarian)
+                if (sectionIndex < 3) {
+                    if (!m_validDelims.contains(ch)) {
+                        m_validDelims.append(ch);
+                        lastDelimiterAdded = true;
+                    } else {
+                        lastDelimiterAdded = false;
+                    }
                 }
+
                 if (!lastWasDelimiter) {
                     if (sectionSize > 2) {
                         /// @todo special handling for non-numeric fields
                     }
-                    ++sectionIndex;
-                    sectionSize = 0;
                     lastWasDelimiter = true;
                 }
             }
@@ -152,7 +165,7 @@ public:
             const auto ch(text.at(idx));
             if (isValidDelimiter(ch)) {
                 ++partIndex;
-            } else {
+            } else if (!m_invalidDelims.contains(ch)) {
                 parts[partIndex].append(ch);
             }
         }
@@ -181,6 +194,10 @@ public:
         const auto dayIndex = partBySection(QDateTimeEdit::DaySection);
         const auto monthIndex = partBySection(QDateTimeEdit::MonthSection);
         const auto yearIndex = partBySection(QDateTimeEdit::YearSection);
+
+        // make sure we have a valid indeces into the vector
+        if ((dayIndex == -1) || (monthIndex == -1) || (yearIndex == -1))
+            return {};
 
         if (parts.at(dayIndex).isEmpty() || parts.at(monthIndex).isEmpty()) {
             return {};
@@ -403,6 +420,7 @@ public:
 
     KMyMoneyDateEdit* q;
     QVector<QChar> m_validDelims;
+    QVector<QChar> m_invalidDelims;
     QVector<QDateTimeEdit::Section> m_sections;
     int m_originalDay;
     bool m_emptyDateAllowed;
@@ -418,11 +436,13 @@ KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
     setOptions(KDateComboBox::EditDate | KDateComboBox::SelectDate | KDateComboBox::DatePicker | KDateComboBox::WarnOnInvalid);
 
     connect(lineEdit(), &QLineEdit::textChanged, this, [&](const QString& text) {
-        const auto newDate(d->fixupDate());
-        auto newDateIsValid = newDate.isValid() || (d->m_emptyDateAllowed && text.isEmpty());
-        if (newDateIsValid != d->m_dateValidity) {
-            Q_EMIT dateValidityChanged(newDate);
-            d->m_dateValidity = newDateIsValid;
+        if (!text.isEmpty()) {
+            const auto newDate(d->fixupDate());
+            auto newDateIsValid = newDate.isValid() || (d->m_emptyDateAllowed && text.isEmpty());
+            if (newDateIsValid != d->m_dateValidity) {
+                Q_EMIT dateValidityChanged(newDate);
+                d->m_dateValidity = newDateIsValid;
+            }
         }
     });
 
