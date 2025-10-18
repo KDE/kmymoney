@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-16 00:42+0000\n"
+"POT-Creation-Date: 2025-10-18 00:42+0000\n"
 "PO-Revision-Date: 2025-10-16 10:29+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -22221,8 +22221,8 @@ msgstr "Gebruik deze knop om deze transactie over te slaan"
 msgid "&Close"
 msgstr "Sl&uiten"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:507
-#: kmymoney/widgets/kmymoneydateedit.cpp:599
+#: kmymoney/widgets/kmymoneydateedit.cpp:527
+#: kmymoney/widgets/kmymoneydateedit.cpp:619
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
