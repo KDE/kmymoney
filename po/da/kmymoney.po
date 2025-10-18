@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-14 03:28+0000\n"
+"POT-Creation-Date: 2025-10-18 04:33+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -22963,8 +22963,8 @@ msgstr "Brug denne knap til at skippe transaktionen"
 msgid "&Close"
 msgstr "&Luk"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:503
-#: kmymoney/widgets/kmymoneydateedit.cpp:588
+#: kmymoney/widgets/kmymoneydateedit.cpp:523
+#: kmymoney/widgets/kmymoneydateedit.cpp:608
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
