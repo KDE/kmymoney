@@ -673,8 +673,12 @@ void LedgerView::setModel(QAbstractItemModel* model)
         // but only the first time we come around here
         if (!d->reselectAfterResetPending) {
             d->selectionBeforeReset = selectedJournalEntryIds();
-            d->currentBeforeReset = currentIndex().data(eMyMoney::Model::IdRole).toString();
-
+            const auto index = currentIndex();
+            const auto modelRole = index.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>();
+            // prevent selection from invalid model
+            if ((modelRole == eMyMoney::Model::JournalEntryRole) || (modelRole == eMyMoney::Model::SchedulesJournalEntryRole)) {
+                d->currentBeforeReset = currentIndex().data(eMyMoney::Model::IdRole).toString();
+            }
             // turn off updates of the view to reduce flicker
             viewport()->setUpdatesEnabled(false);
         }
