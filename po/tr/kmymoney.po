@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-18 00:42+0000\n"
-"PO-Revision-Date: 2025-10-05 19:40+0300\n"
+"PO-Revision-Date: 2025-10-18 17:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -113,18 +113,14 @@ msgid "(Fees) %1"
 msgstr "(Ücretler) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1057
-#, fuzzy, kde-format
-#| msgctxt "Prepend name of payee (%1) to original memo (%2)"
-#| msgid ""
-#| "Original payee: %1\n"
-#| "%2"
+#, kde-format
 msgctxt "Append name of payee (%1) to original memo (%2)"
 msgid ""
 "%2\n"
 "Original payee: %1"
 msgstr ""
-"Özgün alacaklı: %1\n"
-"%2"
+"%2\n"
+"Özgün alacaklı: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1060
 #, kde-format
@@ -4425,25 +4421,25 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:546
 #, kde-format
 msgid "Keep original payee information in memo"
-msgstr ""
+msgstr "Notta özgün alacaklı bilgisini tut"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:554
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Kapalı"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:559
 #, kde-format
 msgid "Append to memo"
-msgstr ""
+msgstr "Notun sonuna iliştir"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:564
 #, kde-format
 msgid "Prepend to memo"
-msgstr ""
+msgstr "Notun başına iliştir"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:603
@@ -18944,7 +18940,7 @@ msgstr "Eşleşen işlemleri aramak için gün sayısı (artı/eksi)"
 #: kmymoney/settings/kmymoney.kcfg:371
 #, kde-format
 msgid "Where to place the original payee info in the memo field"
-msgstr ""
+msgstr "Not alanında özgün alacaklı bilgisinin nereye koyulacağı"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:380

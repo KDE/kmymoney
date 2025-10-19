@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-18 00:42+0000\n"
-"PO-Revision-Date: 2025-09-28 21:51+0200\n"
+"PO-Revision-Date: 2025-10-18 16:59+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -119,18 +119,14 @@ msgid "(Fees) %1"
 msgstr "(Kuotak) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1057
-#, fuzzy, kde-format
-#| msgctxt "Prepend name of payee (%1) to original memo (%2)"
-#| msgid ""
-#| "Original payee: %1\n"
-#| "%2"
+#, kde-format
 msgctxt "Append name of payee (%1) to original memo (%2)"
 msgid ""
 "%2\n"
 "Original payee: %1"
 msgstr ""
-"Jatorrizko onuraduna: %1\n"
-"%2"
+"%2\n"
+"Jatorrizko onuraduna: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1060
 #, kde-format
@@ -4463,25 +4459,25 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:546
 #, kde-format
 msgid "Keep original payee information in memo"
-msgstr ""
+msgstr "Mantendu jatorrizko onuradunaren informazioa oharrean"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:554
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Itzalita"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:559
 #, kde-format
 msgid "Append to memo"
-msgstr ""
+msgstr "Erantsi oharrean"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:564
 #, kde-format
 msgid "Prepend to memo"
-msgstr ""
+msgstr "Aurrean erantsi oharrean"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:603
@@ -19025,7 +19021,7 @@ msgstr "Bat datozen transakzioak bilatzeko egun kopurua (+/-)"
 #: kmymoney/settings/kmymoney.kcfg:371
 #, kde-format
 msgid "Where to place the original payee info in the memo field"
-msgstr ""
+msgstr "Ohar-eremuan jatorrizko onuradunaren informazioa non ipini"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:380
