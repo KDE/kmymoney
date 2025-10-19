@@ -282,9 +282,11 @@ public:
             q->connect(q, &SimpleLedgerView::settingsChanged, view, &LedgerViewPage::slotSettingsChanged);
             q->connect(view, &LedgerViewPage::sectionResized, q, &SimpleLedgerView::sectionResized);
             q->connect(view, &LedgerViewPage::sectionMoved, q, &SimpleLedgerView::sectionMoved);
+            q->connect(view, &LedgerViewPage::searchWidgetPinned, q, &SimpleLedgerView::searchWidgetPinned);
 
             q->connect(q, &SimpleLedgerView::resizeSection, view, &LedgerViewPage::resizeSection);
             q->connect(q, &SimpleLedgerView::moveSection, view, &LedgerViewPage::moveSection);
+            q->connect(q, &SimpleLedgerView::pinSearchWidget, view, &LedgerViewPage::pinSearchWidget);
 
             q->connect(view, &LedgerViewPage::requestView, q, &SimpleLedgerView::requestView);
 
@@ -368,8 +370,10 @@ public:
             q->connect(q, &SimpleLedgerView::settingsChanged, reconciliationView, &LedgerViewPage::slotSettingsChanged);
             q->connect(reconciliationView, &LedgerViewPage::sectionResized, q, &SimpleLedgerView::sectionResized);
             q->connect(reconciliationView, &LedgerViewPage::sectionMoved, q, &SimpleLedgerView::sectionMoved);
+            q->connect(reconciliationView, &LedgerViewPage::searchWidgetPinned, q, &SimpleLedgerView::searchWidgetPinned);
             q->connect(q, &SimpleLedgerView::resizeSection, reconciliationView, &LedgerViewPage::resizeSection);
             q->connect(q, &SimpleLedgerView::moveSection, reconciliationView, &LedgerViewPage::moveSection);
+            q->connect(q, &SimpleLedgerView::pinSearchWidget, reconciliationView, &LedgerViewPage::pinSearchWidget);
 
             reconciliationView->prepareToShow();
             showTab(newIdx);
@@ -915,6 +919,12 @@ void SimpleLedgerView::sectionResized(QWidget* view, const QString& configGroupN
 void SimpleLedgerView::sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const
 {
     Q_EMIT const_cast<SimpleLedgerView*>(this)->moveSection(view, section, oldIndex, newIndex);
+}
+
+void SimpleLedgerView::searchWidgetPinned(bool pinned)
+{
+    Q_EMIT const_cast<SimpleLedgerView*>(this)->pinSearchWidget(pinned);
+    KMyMoneySettings::setShowLedgerFilter(pinned);
 }
 
 bool SimpleLedgerView::hasClosableView() const

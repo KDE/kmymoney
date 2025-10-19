@@ -87,6 +87,7 @@ public Q_SLOTS:
     void splitterChanged(int pos, int index);
     void slotSettingsChanged();
     virtual void updateSummaryInformation(const QHash<QString, AccountBalances>& balances);
+    void pinSearchWidget(bool pinned);
 
 protected Q_SLOTS:
     void startEdit();
@@ -111,6 +112,8 @@ Q_SIGNALS:
     void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
 
     void editTransaction(void* id, bool isEditing);
+
+    void searchWidgetPinned(bool pinned);
 };
 
 #endif // LEDGERVIEWPAGE_H

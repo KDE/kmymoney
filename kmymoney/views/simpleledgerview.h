@@ -53,6 +53,7 @@ private Q_SLOTS:
 
     void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
     void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
+    void searchWidgetPinned(bool pinned);
 
 protected:
     bool eventFilter(QObject* o, QEvent* e) override;
@@ -62,6 +63,7 @@ Q_SIGNALS:
     void settingsChanged();
     void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
     void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
+    void pinSearchWidget(bool pinned);
 
 private:
     Q_DECLARE_PRIVATE(SimpleLedgerView)

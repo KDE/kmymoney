@@ -35,6 +35,7 @@ public:
     QComboBox* comboBox() const;
 
     void close();
+    void setWidgetPinned(bool pinned);
 
 protected:
     bool eventFilter(QObject* watched, QEvent* event) override;
@@ -42,6 +43,7 @@ protected:
 
 Q_SIGNALS:
     void closed();
+    void widgetPinned(bool pinned);
 
 private:
     Q_DECLARE_PRIVATE(KMMSearchWidget)

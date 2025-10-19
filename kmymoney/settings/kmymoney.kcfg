@@ -272,6 +272,10 @@
    <label>Show a grid in the register</label>
    <default>true</default>
   </entry>
+  <entry name="ShowLedgerFilter" type="Bool">
+   <label>Show the filter widget when an account is opened</label>
+   <default>true</default>
+  </entry>
   <entry name="ShowFancyMarker" type="Bool">
    <label>Show fancy group markers</label>
    <default>true</default>

@@ -34,6 +34,7 @@ public:
     {
         ui->setupUi(qq);
         ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
+        ui->m_pinButton->setIcon(Icons::get(Icon::FilterPin));
     }
     virtual ~KMMSearchWidgetPrivate() = default;
 
@@ -45,11 +46,39 @@ KMMSearchWidget::KMMSearchWidget(QWidget* parent)
     : QWidget(parent)
     , d_ptr(new KMMSearchWidgetPrivate(this))
 {
+    Q_D(KMMSearchWidget);
     hide();
     lineEdit()->installEventFilter(this);
     connect(closeButton(), &QToolButton::clicked, this, [&] {
         close();
     });
+
+    connect(d->ui->m_pinButton, &QToolButton::toggled, this, [&](bool checked) {
+        Q_D(KMMSearchWidget);
+        d->ui->m_closeButton->setDisabled(checked);
+        if (isVisible()) {
+            Q_EMIT widgetPinned(checked);
+        }
+    });
+}
+
+void KMMSearchWidget::setWidgetPinned(bool pinned)
+{
+    Q_D(KMMSearchWidget);
+    QSignalBlocker blocker(d->ui->m_pinButton);
+    d->ui->m_pinButton->setChecked(pinned);
+
+    // close button is only available in case the widget is not pinned
+    d->ui->m_closeButton->setDisabled(pinned);
+
+    // if the embedding view is currently not visible
+    // we hide the widget if it is unpinned. In case
+    // it is pinned we always show it
+    if (!pinned && !parentWidget()->isVisible()) {
+        hide();
+    } else if (pinned) {
+        show();
+    }
 }
 
 QToolButton* KMMSearchWidget::closeButton() const
