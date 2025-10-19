@@ -206,6 +206,7 @@ KMM_ICONS_EXPORT QIcon get(Icon icon)
         {Icon::TransactionStateCleared, QStringLiteral("view-financial-transfer-cleared")},
         {Icon::Unlink, QStringLiteral("remove-link")},
         {Icon::Vault, QStringLiteral("plasmavault")},
+        {Icon::FilterPin, QStringLiteral("pin")},
     };
 
     initIconResources();

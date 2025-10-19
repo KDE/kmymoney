@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 # Usage: ./copy_from_breeze.sh breeze-icons\
-# where breeze-icon\ is a path to a root folder of a cloned breeze-icon git repository
+# where breeze-icons\ is a path to a root folder of a cloned breeze-icon git repository
 # (must contain "icons" and "icons-dark" subfolders).
 
 function show_help()

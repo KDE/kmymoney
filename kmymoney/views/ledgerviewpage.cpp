@@ -109,6 +109,9 @@ void LedgerViewPage::initModel()
         }
     });
 
+    connect(d->ui->m_searchWidget, &KMMSearchWidget::widgetPinned, this, &LedgerViewPage::searchWidgetPinned);
+    d->ui->m_searchWidget->setWidgetPinned(KMyMoneySettings::showLedgerFilter());
+
     // Moving rows in a source model to a QConcatenateTablesProxyModel
     // does not get propagated through it which destructs our ledger in such cases.
     //
@@ -184,6 +187,11 @@ void LedgerViewPage::initModel()
 LedgerViewPage::~LedgerViewPage()
 {
     delete d;
+}
+
+void LedgerViewPage::pinSearchWidget(bool pinned)
+{
+    d->ui->m_searchWidget->setWidgetPinned(pinned);
 }
 
 /**

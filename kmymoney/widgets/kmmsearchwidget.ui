@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,2,0">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,2,0">
    <property name="spacing">
     <number>2</number>
    </property>
@@ -33,6 +33,22 @@
     <widget class="QToolButton" name="m_closeButton">
      <property name="text">
       <string>...</string>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="m_pinButton">
+     <property name="toolTip">
+      <string>Used to keep the filter widget visible. If not visible, it can be shown using Ctrl+F</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
      <property name="autoRaise">
       <bool>true</bool>
