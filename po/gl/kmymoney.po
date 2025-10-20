@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-18 00:42+0000\n"
+"POT-Creation-Date: 2025-10-20 00:43+0000\n"
 "PO-Revision-Date: 2025-06-22 06:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -21218,7 +21218,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Ir a «%1»"
 
-#: kmymoney/views/ledgerview.cpp:767
+#: kmymoney/views/ledgerview.cpp:771
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21228,31 +21228,31 @@ msgstr ""
 "Xa está a editar un asento noutra vista. KMyMoney non permite editar dous "
 "asentos en paralelo. <a href=\"jumpToEditor\">Saltar ao editor actual</a>"
 
-#: kmymoney/views/ledgerview.cpp:894
+#: kmymoney/views/ledgerview.cpp:898
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Ao asento fáltalle unha asignación de categoría."
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:905
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "A este asento fáltalle unha asignación de <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:910
+#: kmymoney/views/ledgerview.cpp:914
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Esta planificación venceu o %1. Prema na icona para introducila."
 
-#: kmymoney/views/ledgerview.cpp:916
+#: kmymoney/views/ledgerview.cpp:920
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "O asento importouse. Prema na icona para aceptalo."
 
-#: kmymoney/views/ledgerview.cpp:922
+#: kmymoney/views/ledgerview.cpp:926
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21260,38 +21260,38 @@ msgid ""
 msgstr ""
 "Este asento está emparellado. Prema na icona para aceptalo ou desemparellalo."
 
-#: kmymoney/views/ledgerview.cpp:967
+#: kmymoney/views/ledgerview.cpp:971
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr "A diferenza entre o saldo da conta e o saldo en Internet é de %1."
 
-#: kmymoney/views/ledgerview.cpp:1029
+#: kmymoney/views/ledgerview.cpp:1033
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Non introducir os asentos planificados vencidos."
 
-#: kmymoney/views/ledgerview.cpp:1030
+#: kmymoney/views/ledgerview.cpp:1034
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Introducir os asentos planificados vencidos."
 
-#: kmymoney/views/ledgerview.cpp:1033
+#: kmymoney/views/ledgerview.cpp:1037
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Quere introducir a planificación vencida agora?"
 
-#: kmymoney/views/ledgerview.cpp:1034
+#: kmymoney/views/ledgerview.cpp:1038
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Introducir a planificación vencida"
 
-#: kmymoney/views/ledgerview.cpp:1054
+#: kmymoney/views/ledgerview.cpp:1058
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21301,7 +21301,7 @@ msgstr ""
 "Desconectar a transacción agochada (vencida) da amosara e introducila de "
 "novo no libro maior."
 
-#: kmymoney/views/ledgerview.cpp:1056
+#: kmymoney/views/ledgerview.cpp:1060
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21311,13 +21311,13 @@ msgstr ""
 "Aceptar o emparellamento como se amosa e retirar os datos do asento agochado "
 "(emparellado)."
 
-#: kmymoney/views/ledgerview.cpp:1060
+#: kmymoney/views/ledgerview.cpp:1064
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Quere aceptar ou desemparellar o asento emparellado agora?"
 
-#: kmymoney/views/ledgerview.cpp:1061
+#: kmymoney/views/ledgerview.cpp:1065
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
