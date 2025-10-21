@@ -7,10 +7,6 @@
 
 #include "gwenkdegui.h"
 
-#include <gwenhywfar/debug.h>
-#include "gwen-gui-qt5/qt5dialogbox.hpp"
-
-
 #include <QString>
 #include <QStringList>
 #include <QRegularExpression>
@@ -25,13 +21,9 @@
 #include "widgets/chiptandialog.h"
 #include "widgets/phototandialog.h"
 
-#define KBANKING_TANMETHOD_TEXT          0x00000001
-#define KBANKING_TANMETHOD_CHIPTAN       0x00000002
-#define KBANKING_TANMETHOD_CHIPTAN_OPTIC 0x00000003
-#define KBANKING_TANMETHOD_CHIPTAN_USB   0x00000004
-#define KBANKING_TANMETHOD_CHIPTAN_QR    0x00000005
-#define KBANKING_TANMETHOD_PHOTOTAN      0x00000006
-
+#include "aqbanking/banking.h"
+#include "gwen-gui-qt5/qt5dialogbox.hpp"
+#include "gwenhywfar/debug.h"
 
 gwenKdeGui::gwenKdeGui()
     : QT5_Gui()
@@ -226,7 +218,7 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     case GWEN_Gui_PasswordMethod_OpticalHHD:
         int tanMethodId = GWEN_DB_GetIntValue(methodParams, "tanMethodId", 0, 0);
         switch(tanMethodId) {
-        case KBANKING_TANMETHOD_CHIPTAN_OPTIC:
+        case AB_BANKING_TANMETHOD_CHIPTAN_OPTIC:
             return getPasswordHhd(flags,
                                   token,
                                   title,
@@ -236,8 +228,8 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
                                   maxLen,
                                   methodId, methodParams,
                                   guiid);
-        case KBANKING_TANMETHOD_CHIPTAN_QR:
-        case KBANKING_TANMETHOD_PHOTOTAN:
+        case AB_BANKING_TANMETHOD_CHIPTAN_QR:
+        case AB_BANKING_TANMETHOD_PHOTOTAN:
             return getPasswordPhoto(flags,
                                     token,
                                     title,
