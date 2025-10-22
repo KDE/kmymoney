@@ -188,11 +188,15 @@ if (PkgConfig_FOUND)
   pkg_check_modules(SQLCIPHER sqlcipher IMPORTED_TARGET)
 endif()
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml PrintSupport)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets)
 
 if (Qt6Sql_VERSION VERSION_GREATER_EQUAL "6.10.0")
   find_package(Qt6 REQUIRED COMPONENTS SqlPrivate)
+endif()
+
+if(BUILD_TESTING)
+  find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} REQUIRED)
 endif()
 
 find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets Crash I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
