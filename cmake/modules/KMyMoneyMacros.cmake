@@ -49,6 +49,7 @@ endfunction()
 # supported global variables:
 # - KMM_ADD_TESTS_ENVIRONMENT   add environment settings to all tests defined with kmm_add_tests()
 #
+include(ECMAddTests)
 function(kmm_add_tests)
   set(options GUI)
   set(oneValueArgs NAME_PREFIX TARGET_NAMES_VAR TEST_NAMES_VAR WORKING_DIRECTORY)

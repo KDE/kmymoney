@@ -1,5 +1,3 @@
-include(ECMAddTests)
-
 set(tests_sources
   pivotgrid-test.cpp
   pivottable-test.cpp

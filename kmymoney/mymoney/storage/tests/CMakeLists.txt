@@ -1,5 +1,3 @@
-include(ECMAddTests)
-
 file(GLOB tests_sources "*-test.cpp")
 
 # @todo for now don't use storagemgr-test which will be replaced

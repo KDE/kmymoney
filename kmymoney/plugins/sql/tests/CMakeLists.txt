@@ -1,5 +1,3 @@
-include(ECMAddTests)
-
 set(sqlstoragestatic_SOURCES
   ../mymoneystoragesql.cpp
   ../mymoneydbdef.cpp

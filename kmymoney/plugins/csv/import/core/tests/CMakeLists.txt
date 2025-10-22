@@ -1,5 +1,3 @@
-include(ECMAddTests)
-
 add_library(csvimport_testcommon STATIC
   csvimporttestcommon.cpp
 )

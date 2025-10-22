@@ -1,5 +1,3 @@
-include(ECMAddTests)
-
 set(mymoneystoragexml_SOURCES
   ../mymoneystoragenames.cpp
   ../mymoneyxmlreader.cpp
