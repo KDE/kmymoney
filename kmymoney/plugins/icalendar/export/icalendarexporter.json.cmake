@@ -67,7 +67,6 @@
         "Description[zh_TW]": "匯出行程到 iCalendar 檔案",
         "EnabledByDefault": true,
         "Icon": "x-office-calendar",
-        "Id": "icalendarexporter",
         "License": "GPL",
         "Name": "iCalendar",
         "Name[ar]": "iCalendar",

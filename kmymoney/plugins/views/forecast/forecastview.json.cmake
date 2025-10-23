@@ -68,7 +68,6 @@
         "Description[zh_TW]": "提供預測檢視給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "forecast",
-        "Id": "forecastview",
         "License": "GPL",
         "Name": "Forecast view",
         "Name[ar]": "عرض التنبؤ",

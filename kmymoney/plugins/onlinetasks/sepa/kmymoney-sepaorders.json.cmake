@@ -84,7 +84,6 @@
         "Description[zh_CN]": "单一欧元支付区订单类型",
         "EnabledByDefault": true,
         "Icon": "network-connect",
-        "Id": "SEPA orders for online banking",
         "License": "GPLv2+",
         "Name": "SEPA orders",
         "Name[ar]": "طلبات SEPA",

@@ -68,7 +68,6 @@
         "Description[zh_TW]": "提供回報檢視給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "report",
-        "Id": "reportsview",
         "License": "GPL",
         "Name": "Reports view",
         "Name[ar]": "عرض التقارير",

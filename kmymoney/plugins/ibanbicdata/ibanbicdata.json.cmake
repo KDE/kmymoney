@@ -69,7 +69,6 @@
         "Description[zh_TW]": "提供預先定義的 IBAN/BIC 號碼給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "server-database",
-        "Id": "ibanbicdata",
         "License": "GPL",
         "Name": "IBAN/BIC Data",
         "Name[ar]": "بيانات IBAN/BIC",

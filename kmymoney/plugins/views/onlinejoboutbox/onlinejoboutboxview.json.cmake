@@ -65,7 +65,6 @@
         "Description[zh_CN]": "为 KMyMoney 添加在线任务发件箱视图",
         "EnabledByDefault": true,
         "Icon": "online-banking",
-        "Id": "onlinejoboutboxview",
         "License": "GPL",
         "Name": "Online job outbox view",
         "Name[ar]": "عرض صندوق صادر المهام عبر الإنترنت",

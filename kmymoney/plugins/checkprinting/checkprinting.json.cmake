@@ -67,7 +67,6 @@
         "Description[zh_TW]": "提供列印支票的功能",
         "EnabledByDefault": true,
         "Icon": "document-print",
-        "Id": "checkprinting",
         "License": "GPL",
         "Name": "Check printing",
         "Name[ar]": "طباعة الشيكات",

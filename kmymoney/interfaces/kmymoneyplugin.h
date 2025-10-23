@@ -85,7 +85,6 @@ namespace KMyMoneyPlugin {
         "Description": "Short description for plugin list (translateable)",
         "EnabledByDefault": true,
         "Icon": "icon to be shown in plugin list",
-        "Id": "a unique identifier",
         "License": "see KPluginMetaData for list of predefined licenses (translateable)",
         "Name": "Name of the plugin (translateable)",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",

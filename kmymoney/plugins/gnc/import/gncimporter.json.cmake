@@ -69,7 +69,6 @@
         "Description[zh_TW]": "提供 GnuCash 匯入功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "document-import",
-        "Id": "gncimporter",
         "License": "GPL",
         "Name": "GNC Importer",
         "Name[ar]": "مُستورد GNC",

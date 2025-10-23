@@ -69,7 +69,6 @@
         "Description[zh_TW]": "提供 CSV 匯出功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "document-export",
-        "Id": "csvexporter",
         "License": "GPL",
         "Name": "CSV Exporter",
         "Name[ar]": "مُصدّر CSV",

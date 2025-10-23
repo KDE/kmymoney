@@ -66,7 +66,6 @@
         "Description[zh_CN]": "每次对账后生成包含对账过程数据的报表",
         "EnabledByDefault": true,
         "Icon": "application-vnd.oasis.opendocument.spreadsheet",
-        "Id": "reconciliationreport",
         "License": "GPL",
         "Name": "Reconciliation report",
         "Name[ar]": "تقرير التسوية",

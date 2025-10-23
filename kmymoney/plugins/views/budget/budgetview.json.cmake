@@ -68,7 +68,6 @@
         "Description[zh_TW]": "提供預算檢視給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "budget",
-        "Id": "budgetview",
         "License": "GPL",
         "Name": "Budget view",
         "Name[ar]": "عرض الموازنة",

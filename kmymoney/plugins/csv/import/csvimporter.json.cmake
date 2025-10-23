@@ -69,7 +69,6 @@
         "Description[zh_TW]": "提供 CSV 匯入功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "document-import",
-        "Id": "csvimporter",
         "License": "GPL",
         "Name": "CSV Importer",
         "Name[ar]": "مُستورد CSV",

@@ -67,7 +67,6 @@
         "Description[zh_TW]": "提供 SQL 儲存功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "server-database",
-        "Id": "sqlstorage",
         "License": "GPL",
         "Name": "SQL Storage",
         "Name[ar]": "تخزين SQL",

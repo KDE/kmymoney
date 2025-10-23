@@ -68,7 +68,6 @@
         "Description[zh_TW]": "提供 OFX 匯入功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "network-connect",
-        "Id": "ofximporter",
         "License": "GPL",
         "Name": "OFX Importer",
         "Name[ar]": "مُستورد OFX",
