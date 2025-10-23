@@ -68,7 +68,6 @@
         "Description[zh_TW]": "提供 XML 儲存功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "server-database",
-        "Id": "xmlstorage",
         "License": "GPL",
         "Name": "XML Storage",
         "Name[ar]": "تخزين XML",

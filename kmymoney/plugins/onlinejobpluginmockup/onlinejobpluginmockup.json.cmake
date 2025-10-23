@@ -66,7 +66,6 @@
         "Description[uk]": "Якщо пов'язано із рахунком, імітує можливість обробки усіх інтернет-завдань (лише для розробників).",
         "Description[zh_CN]": "绑定到账号上会假装可以处理所有在线任务 (仅限开发者用)",
         "EnabledByDefault": true,
-        "Id": "onlinejobpluginmockup",
         "License": "GPL",
         "Name": "onlinejobpluginmockup",
         "Name[ar]": "نموذج وظيفي عبر الإنترنت",

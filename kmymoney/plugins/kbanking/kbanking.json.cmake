@@ -65,7 +65,6 @@
         "Description[zh_TW]": "提供 HBCI/FinTs、OFX 與 PayPal 線上理財功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "network-connect",
-        "Id": "kbanking",
         "License": "GPL",
         "Name": "KBanking",
         "Name[ar]": "KBanking",

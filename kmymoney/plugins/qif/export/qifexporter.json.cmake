@@ -69,7 +69,6 @@
         "Description[zh_TW]": "提供 QIF 匯出功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "document-export",
-        "Id": "qifexporter",
         "License": "GPL",
         "Name": "QIF Exporter",
         "Name[ar]": "مُصدّر QIF",

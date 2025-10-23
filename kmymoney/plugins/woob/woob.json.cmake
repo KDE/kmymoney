@@ -68,7 +68,6 @@
         "Description[zh_TW]": "Woob 外掛程式",
         "EnabledByDefault": true,
         "Icon": "network-connect",
-        "Id": "woob",
         "License": "GPL",
         "Name": "Woob",
         "Name[ar]": "Woob",
