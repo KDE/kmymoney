@@ -122,7 +122,7 @@ public:
         int sectionIndex(0);
 
         for (int idx(0); idx < pos; ++idx) {
-            if (isValidDelimiter(text[idx])) {
+            if (isValidDelimiter(text[idx]) && (sectionIndex < (m_sections.size() - 1))) {
                 ++sectionIndex;
             }
         }
@@ -168,8 +168,11 @@ public:
             const auto ch(text.at(idx));
             if (isValidDelimiter(ch)) {
                 ++partIndex;
-            } else if (!m_invalidDelims.contains(ch)) {
+            } else if (!m_invalidDelims.contains(ch) && (partIndex < parts.size())) {
                 parts[partIndex].append(ch);
+            } else {
+                parts.clear();
+                break;
             }
         }
         return parts;
@@ -194,6 +197,10 @@ public:
             return QDate::fromJulianDay(1);
         }
         QVector<QString> parts(editParts());
+        if (parts.isEmpty()) {
+            return {};
+        }
+
         const auto dayIndex = partBySection(QDateTimeEdit::DaySection);
         const auto monthIndex = partBySection(QDateTimeEdit::MonthSection);
         const auto yearIndex = partBySection(QDateTimeEdit::YearSection);
