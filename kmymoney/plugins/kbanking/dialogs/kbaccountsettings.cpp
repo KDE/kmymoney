@@ -8,15 +8,18 @@
 
 #include "kbaccountsettings.h"
 
+// KDE Includes
 #include <KMessageBox>
 #include <KLocalizedString>
 
-#include "mymoneykeyvaluecontainer.h"
+// Project Includes
+#include "aqbanking/version.h"
+#include "kbankingsettings.h"
 #include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "passstore.h"
 
 #include "ui_kbaccountsettings.h"
-
-#include <aqbanking/version.h>
 
 struct KBAccountSettings::Private {
     Ui::KBAccountSettings ui;
@@ -53,6 +56,14 @@ void KBAccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
     // don't present the option to the user if it is not available
 #if QT_VERSION_CHECK(AQBANKING_VERSION_MAJOR, AQBANKING_VERSION_MINOR, AQBANKING_VERSION_PATCHLEVEL) <= QT_VERSION_CHECK(6, 2, 0)
     d->ui.m_includePayeeDetails->hide();
+#endif
+
+    d->ui.m_autoLoadPassword->setChecked(KBankingSettings::autoLoadPassword());
+    d->ui.m_autoLoadPassword->hide();
+#ifdef ENABLE_GPG
+    if (PassStore::isAvailable(QLatin1String("KMyMoney/KBanking"))) {
+        d->ui.m_autoLoadPassword->show();
+    }
 #endif
 }
 
@@ -91,4 +102,6 @@ void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
         kvp["kbanking-memo-includepayeedetails"] = "no";
 
     kvp["kbanking-statementDate"] = QString("%1").arg(d->ui.m_preferredStatementDate->currentIndex());
+
+    KBankingSettings::setAutoLoadPassword(d->ui.m_autoLoadPassword->isChecked());
 }

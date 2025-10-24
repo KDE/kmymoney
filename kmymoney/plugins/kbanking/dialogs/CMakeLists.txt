@@ -19,6 +19,7 @@ add_library(kbanking_dialogs STATIC ${kbanking_dialogs_la_SOURCES})
 target_link_libraries(kbanking_dialogs
   Qt::Widgets
   kmm_base_widgets
+  kbanking_widgets
   aqbanking::aqbanking
 )
 

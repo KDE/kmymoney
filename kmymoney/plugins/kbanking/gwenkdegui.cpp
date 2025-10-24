@@ -7,23 +7,24 @@
 
 #include "gwenkdegui.h"
 
+// Qt Includes
+#include <QApplication>
+#include <QLineEdit>
+#include <QPointer>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
-#include <QRegularExpression>
-#include <QApplication>
 
-#include <QDebug>
-#include <QPointer>
-#include <QLineEdit>
+// Project Includes
+#include "aqbanking/banking.h"
+#include "gwen-gui-qt5/qt5dialogbox.hpp"
+#include "gwenhywfar/debug.h"
 
+#include "kbankingsettings.h"
 #include "passstore.h"
 #include "passwordtoggle.h"
 #include "widgets/chiptandialog.h"
 #include "widgets/phototandialog.h"
-
-#include "aqbanking/banking.h"
-#include "gwen-gui-qt5/qt5dialogbox.hpp"
-#include "gwenhywfar/debug.h"
 
 gwenKdeGui::gwenKdeGui()
     : QT5_Gui()
@@ -56,6 +57,10 @@ int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
             }
             QObject::connect(passStore, &PassStore::doubleClicked, dialog, &QDialog::accept);
             new PasswordToggle(edit);
+
+            if (KBankingSettings::autoLoadPassword()) {
+                passStore->autoFillAndAccept(dialog);
+            }
             break;
         }
     }

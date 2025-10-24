@@ -15,4 +15,10 @@
       <default>50</default>
     </entry>
   </group>
+  <group name="credentials">
+    <entry name="autoLoadPassword" type="Bool">
+      <label>Load passphrase from password store if available without asking user.</label>
+      <default>false</default>
+    </entry>
+  </group>
 </kcfg>

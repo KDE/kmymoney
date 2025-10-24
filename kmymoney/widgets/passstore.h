@@ -22,6 +22,7 @@
 
 class QLineEdit;
 class QAction;
+class QDialog;
 
 class PassStorePrivate;
 /**
@@ -84,6 +85,23 @@ public:
     bool isActionVisible() const;
 
     bool eventFilter(QObject* o, QEvent* event) override;
+
+    /**
+     * When called and the action icon is visible, then the
+     * passphrase will be loaded and the @a dialog accepted.
+     * QDialog::accept() will be called upon return to the
+     * eventloop. This allows to call this function before
+     * QDialog::exec() but don't miss the call of accept.
+     *
+     * @sa isActionVisible()
+     */
+    void autoFillAndAccept(QDialog* dialog);
+
+    /**
+     * Returns @c true if the @a applicationPrefix is
+     * available in the passstore directory
+     */
+    static bool isAvailable(const QString& applicationPrefix);
 
 Q_SIGNALS:
     /**

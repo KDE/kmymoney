@@ -12,6 +12,7 @@
 // QT Includes
 
 #include <QAction>
+#include <QDialog>
 #include <QDir>
 #include <QFileInfo>
 #include <QLineEdit>
@@ -50,9 +51,14 @@ public:
     QString m_applicationPrefix;
     QString m_passwordId;
 
+    QString passwordDir() const
+    {
+        return QStringLiteral("%1/.password-store/%2").arg(QDir::home().absolutePath(), m_applicationPrefix);
+    }
+
     QString passwordFile()
     {
-        return QStringLiteral("%1/.password-store/%2/%3.gpg").arg(QDir::home().absolutePath(), m_applicationPrefix, m_passwordId);
+        return QStringLiteral("%1/%2.gpg").arg(passwordDir(), m_passwordId);
     }
 };
 
@@ -101,6 +107,19 @@ PassStore::~PassStore()
     delete d;
 }
 
+bool PassStore::isAvailable(const QString& applicationPrefix)
+{
+#ifdef ENABLE_GPG
+    PassStorePrivate privateData(nullptr);
+    privateData.m_applicationPrefix = applicationPrefix;
+    if (KGPGFile::GPGAvailable()) {
+        QDir passstore(privateData.passwordDir());
+        return passstore.exists() && passstore.isReadable();
+    }
+#endif
+    return false;
+}
+
 bool PassStore::eventFilter(QObject* o, QEvent* event)
 {
     Q_D(PassStore);
@@ -141,4 +160,15 @@ bool PassStore::isActionVisible() const
 {
     Q_D(const PassStore);
     return d->m_loadPasswordAction->isVisible();
+}
+
+void PassStore::autoFillAndAccept(QDialog* dialog)
+{
+    Q_D(PassStore);
+    if (isActionVisible()) {
+        d->m_loadPasswordAction->trigger();
+        if (dialog && !d->m_lineEdit->text().isEmpty()) {
+            metaObject()->invokeMethod(dialog, &QDialog::accept, Qt::QueuedConnection);
+        }
+    }
 }

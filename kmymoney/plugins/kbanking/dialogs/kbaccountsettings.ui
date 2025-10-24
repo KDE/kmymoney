@@ -170,6 +170,13 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="m_autoLoadPassword">
+         <property name="text">
+          <string>Automatically load login credentials if available (affects all mapped accounts)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="spacer2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
