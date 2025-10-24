@@ -5,10 +5,7 @@
 
 */
 
-#ifdef HAVE_CONFIG_H
-# include <config-kmymoney.h>
-#endif
-
+#include "config-kmymoney.h"
 
 #include "kbaccountlist.h"
 #include <assert.h>

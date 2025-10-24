@@ -9,9 +9,7 @@
 #ifndef KBANKING_H
 #define KBANKING_H
 
-#ifdef HAVE_CONFIG_H
-#include <config-kmymoney.h>
-#endif
+#include "config-kmymoney.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes

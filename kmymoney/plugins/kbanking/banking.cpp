@@ -4,10 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifdef HAVE_CONFIG_H
-# include <config-kmymoney.h>
-#endif
-
+#include "config-kmymoney.h"
 
 #include "banking.hpp"
 

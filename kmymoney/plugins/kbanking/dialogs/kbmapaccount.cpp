@@ -5,13 +5,9 @@
 
 */
 
+#include "config-kmymoney.h"
 
-#ifdef HAVE_CONFIG_H
-# include <config-kmymoney.h>
-#endif
-
-
-// QBanking includes
+// KBanking includes
 #include "kbmapaccount.h"
 #include "../widgets/kbaccountlist.h"
 #include "../kbanking.h"

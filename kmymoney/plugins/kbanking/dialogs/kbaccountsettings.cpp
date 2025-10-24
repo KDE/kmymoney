@@ -3,9 +3,8 @@
     SPDX-FileCopyrightText: 2008 Thomas Baumgart ipwizard @users.sourceforge.net
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
-#ifdef HAVE_CONFIG_H
-# include <config-kmymoney.h>
-#endif
+
+#include "config-kmymoney.h"
 
 #include "kbaccountsettings.h"
 
