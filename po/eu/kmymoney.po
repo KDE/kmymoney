@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-24 00:42+0000\n"
+"POT-Creation-Date: 2025-10-25 00:42+0000\n"
 "PO-Revision-Date: 2025-10-18 16:59+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -1740,7 +1740,7 @@ msgstr "%1(e)ren prezio baliogabe bat jaso da, ezin da eguneratu."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:699
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
-#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
+#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:37
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
@@ -10182,7 +10182,7 @@ msgstr "Garbitu kategori-eremu hautapena."
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:62
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:199
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
 #: kmymoney/plugins/views/reports/core/listtable.cpp:705
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
@@ -11247,7 +11247,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, statusLabel)
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:72
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
 #: kmymoney/views/investtransactioneditor.ui:119
 #: kmymoney/views/newtransactioneditor.ui:34
 #: kmymoney/views/newtransactionform.ui:152
@@ -12234,7 +12234,7 @@ msgstr "%1(e)tik %2(e)ra; %3 kategoria, %4 kantitatea"
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "%1 kontutik ordaindu %2(r)i; %3 kategoria, %4 kantitatea"
 
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:79
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:89
 #, kde-format
 msgid ""
 "You selected to extract the payee from the memo field but did not supply a "
@@ -12245,7 +12245,7 @@ msgstr ""
 "adierazpen erregularrik onuraduna eta oharrak ateratzeko. Aukera ez da "
 "aktibatuko."
 
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:81
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:91
 #, kde-format
 msgid "Missing information"
 msgstr "Falta den informazioa"
@@ -12317,8 +12317,16 @@ msgstr "Aukeratu daitekeen lehena"
 msgid "Default start date for statement download"
 msgstr "Kontu-laburpena jaisteko hasiera-data lehenetsia"
 
+#. i18n: ectx: property (text), widget (QCheckBox, m_autoLoadPassword)
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:175
+#, kde-format
+msgid ""
+"Automatically load login credentials if available (affects all mapped "
+"accounts)"
+msgstr ""
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:198
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
 #, kde-format
 msgid ""
 "<html><head/><body><p>Remove the line breaks in the memo field that have "
@@ -12329,7 +12337,7 @@ msgstr ""
 "helburutako eremuen artean sartu direnak.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:201
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:208
 #, kde-format
 msgid ""
 "<html><head/><body><p>Some institutions take multiple purpose fields of a "
@@ -12343,13 +12351,13 @@ msgstr ""
 "egingo dira aukera hau gaitua dagoenean.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:204
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
 #, kde-format
 msgid "Remove line breaks from memo field"
 msgstr "Kendu lerro jauziak ohar-eremutik"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:218
 #, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
@@ -12359,7 +12367,7 @@ msgstr ""
 "gehigarriak oharrera.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:221
 #, kde-format
 msgid "Include the payee details in memo"
 msgstr "Sartu onuradunaren xehetasunak oharrean"
@@ -12418,7 +12426,7 @@ msgstr "Online kontuak"
 msgid "Assign"
 msgstr "Esleitu"
 
-#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:71
+#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:70
 #, kde-format
 msgid ""
 "<qt><p>Please select the first date for which transactions are to be "
@@ -12547,6 +12555,12 @@ msgstr ""
 "Ordulariaren ondoren lehen dirdira barra aldatzen da (byte-erdi bakoitza "
 "2*ordulari-ezarpena bidaltzen da)."
 
+#. i18n: ectx: label, entry (autoLoadPassword), group (credentials)
+#: kmymoney/plugins/kbanking/kbanking.kcfg:20
+#, kde-format
+msgid "Load passphrase from password store if available without asking user."
+msgstr ""
+
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
 #, kde-format
@@ -12603,179 +12617,179 @@ msgstr "Bizkortu"
 msgid "To confirm this order enter the tan displayed by your generator"
 msgstr "Agindu hau berresteko sartu zure sortzaileak erakutsitako 'tan'"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:74
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:83
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:93
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:71
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:80
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:90
 #, kde-format
 msgctxt "replacement for institution or account w/o name"
 msgid "(unnamed)"
 msgstr "(izengabea)"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:114
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:111
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Id"
 msgstr "IDa"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:112
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Code"
 msgstr "Erakunde-IDa"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:113
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Name"
 msgstr "Erakunde-izena"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:114
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Account Number"
 msgstr "Kontu-zenbakia"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:118
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Account Name"
 msgstr "Kontu-izena"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:119
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Owner"
 msgstr "Jabea"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:120
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Backend"
 msgstr "Motorra"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:68
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:66
 #, kde-format
 msgid "Get Balance"
 msgstr "Hartu saldoa"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:71
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:69
 #, kde-format
 msgid "Get Transactions"
 msgstr "Hartu transakzioak"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:72
 #: kmymoney/plugins/views/reports/core/querytable.cpp:835
 #: kmymoney/plugins/views/reports/core/querytable.cpp:977
 #, kde-format
 msgid "Transfer"
 msgstr "Transferitu"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:77
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:75
 #, kde-format
 msgid "Debit Note"
 msgstr "Zordunketa-agiria"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:80
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:78
 #, kde-format
 msgctxt "Unknown job type"
 msgid "(unknown)"
 msgstr "(ezezaguna)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:88
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:86
 #, kde-format
 msgctxt "Unknown bank code"
 msgid "(unknown)"
 msgstr "(ezezaguna)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:94
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:92
 #, kde-format
 msgctxt "Unknown account number"
 msgid "(unknown)"
 msgstr "(ezezaguna)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:101
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:99
 #, kde-format
 msgctxt "Status of the job"
 msgid "new"
 msgstr "berria"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:104
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:102
 #, kde-format
 msgctxt "Status of the job"
 msgid "accepted"
 msgstr "Onartua"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:107
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:105
 #, kde-format
 msgctxt "Status of the job"
 msgid "rejected"
 msgstr "Ukatuta"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:110
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:108
 #, kde-format
 msgctxt "Status of the job"
 msgid "pending"
 msgstr "Burutu gabe"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:113
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:111
 #, kde-format
 msgctxt "Status of the job"
 msgid "sending"
 msgstr "Bidaltzen"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:116
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:114
 #, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (auto)"
 msgstr "Berdinkatuta (auto)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:119
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:117
 #, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (manual)"
 msgstr "Berdinkatuta (eskuz)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:122
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:120
 #, kde-format
 msgctxt "Status of the job"
 msgid "revoked"
 msgstr "Indargabetuta"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:125
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:123
 #, kde-format
 msgctxt "Status of the job"
 msgid "aborted"
 msgstr "Abortatuta"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:128
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:126
 #, kde-format
 msgctxt "Status of the job"
 msgid "enqueued"
 msgstr "ilaran"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:131
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:129
 #, kde-format
 msgctxt "Status of the job"
 msgid "error"
 msgstr "errorea"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:134
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:132
 #, kde-format
 msgctxt "Status of the job"
 msgid "(unknown)"
 msgstr "(ezezaguna)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:153
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:151
 #, kde-format
 msgid "Job Id"
 msgstr "Lan-IDa"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:152
 #, kde-format
 msgid "Job Type"
 msgstr "Lan mota"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:153
 #, kde-format
 msgid "Institute"
 msgstr "Erakundea"
@@ -12786,7 +12800,7 @@ msgstr "Erakundea"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAccount)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxAccount)
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:190
@@ -22530,7 +22544,7 @@ msgstr "&Iragazkia"
 msgid "Close"
 msgstr "Itxi"
 
-#: kmymoney/widgets/passstore.cpp:67
+#: kmymoney/widgets/passstore.cpp:73
 #, kde-format
 msgid "Read the password from pass store"
 msgstr "Irakurri pasahitza pasahitza-dendatik"

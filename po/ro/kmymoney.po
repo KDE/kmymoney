@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-24 00:42+0000\n"
+"POT-Creation-Date: 2025-10-25 00:42+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1792,7 +1792,7 @@ msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:699
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
-#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
+#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:37
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
@@ -10769,7 +10769,7 @@ msgstr "Alegere categorie"
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:62
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:199
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
 #: kmymoney/plugins/views/reports/core/listtable.cpp:705
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
@@ -11896,7 +11896,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, statusLabel)
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:72
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
 #: kmymoney/views/investtransactioneditor.ui:119
 #: kmymoney/views/newtransactioneditor.ui:34
 #: kmymoney/views/newtransactionform.ui:152
@@ -12924,7 +12924,7 @@ msgstr "Din %1 în %2, categoria %3, suma %4"
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Din contul %1, plata către %2, categoria %3 suma de %4"
 
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:79
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:89
 #, kde-format
 msgid ""
 "You selected to extract the payee from the memo field but did not supply a "
@@ -12935,7 +12935,7 @@ msgstr ""
 "detalii dar nu ați dat o expresie regulată pentru a efectua această "
 "extragere. Opțiunea nu va fi activată."
 
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:81
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:91
 #, kde-format
 msgid "Missing information"
 msgstr "Informații lipsă"
@@ -13011,8 +13011,16 @@ msgstr "Primul posibil"
 msgid "Default start date for statement download"
 msgstr "Data de start implicită pentru descărcarea extraselor de cont"
 
+#. i18n: ectx: property (text), widget (QCheckBox, m_autoLoadPassword)
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:175
+#, kde-format
+msgid ""
+"Automatically load login credentials if available (affects all mapped "
+"accounts)"
+msgstr ""
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:198
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
 #, kde-format
 msgid ""
 "<html><head/><body><p>Remove the line breaks in the memo field that have "
@@ -13021,7 +13029,7 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:201
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:208
 #, kde-format
 msgid ""
 "<html><head/><body><p>Some institutions take multiple purpose fields of a "
@@ -13031,14 +13039,14 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:204
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
 #, fuzzy, kde-format
 #| msgid "Remove this price item from the file"
 msgid "Remove line breaks from memo field"
 msgstr "Șterge această intrare de preț din fișier"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:218
 #, fuzzy, kde-format
 #| msgid "Use this to clear all splits of this transaction"
 msgid ""
@@ -13047,7 +13055,7 @@ msgid ""
 msgstr "Folosește aceasta pentru a șterge toate părțile acestei tranzacții"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:221
 #, kde-format
 msgid "Include the payee details in memo"
 msgstr ""
@@ -13106,7 +13114,7 @@ msgstr "Conturi online"
 msgid "Assign"
 msgstr "Atribuie"
 
-#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:71
+#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:70
 #, kde-format
 msgid ""
 "<qt><p>Please select the first date for which transactions are to be "
@@ -13237,6 +13245,12 @@ msgid ""
 "in 2*clocksetting)."
 msgstr ""
 
+#. i18n: ectx: label, entry (autoLoadPassword), group (credentials)
+#: kmymoney/plugins/kbanking/kbanking.kcfg:20
+#, kde-format
+msgid "Load passphrase from password store if available without asking user."
+msgstr ""
+
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
 #, kde-format
@@ -13299,103 +13313,103 @@ msgstr "Acceptă"
 msgid "To confirm this order enter the tan displayed by your generator"
 msgstr ""
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:74
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:83
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:93
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:71
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:80
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:90
 #, kde-format
 msgctxt "replacement for institution or account w/o name"
 msgid "(unnamed)"
 msgstr "(nedenumit)"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:114
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:111
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Id"
 msgstr "Identificator"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:112
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Code"
 msgstr "Cod instituție"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:113
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Name"
 msgstr "Nume instituție"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:114
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Account Number"
 msgstr "Numărul contului"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:118
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Account Name"
 msgstr "Numele contului"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:119
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Owner"
 msgstr "Proprietar"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:120
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Backend"
 msgstr "Platformă"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:68
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:66
 #, kde-format
 msgid "Get Balance"
 msgstr "Actualizează soldul"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:71
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:69
 #, kde-format
 msgid "Get Transactions"
 msgstr "Descarcă tranzacțiile"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:72
 #: kmymoney/plugins/views/reports/core/querytable.cpp:835
 #: kmymoney/plugins/views/reports/core/querytable.cpp:977
 #, kde-format
 msgid "Transfer"
 msgstr "Transfer"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:77
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:75
 #, kde-format
 msgid "Debit Note"
 msgstr "Notă de debit"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:80
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:78
 #, kde-format
 msgctxt "Unknown job type"
 msgid "(unknown)"
 msgstr "(necunoscut)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:88
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:86
 #, kde-format
 msgctxt "Unknown bank code"
 msgid "(unknown)"
 msgstr "(necunoscut)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:94
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:92
 #, kde-format
 msgctxt "Unknown account number"
 msgid "(unknown)"
 msgstr "(necunoscut)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:101
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:99
 #, kde-format
 msgctxt "Status of the job"
 msgid "new"
 msgstr "nou"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:104
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:102
 #, fuzzy, kde-format
 #| msgctxt "Accept 'imported' and 'matched' transaction"
 #| msgid "Accept"
@@ -13403,19 +13417,19 @@ msgctxt "Status of the job"
 msgid "accepted"
 msgstr "Acceptă"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:107
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:105
 #, kde-format
 msgctxt "Status of the job"
 msgid "rejected"
 msgstr ""
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:110
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:108
 #, kde-format
 msgctxt "Status of the job"
 msgid "pending"
 msgstr "în lucru"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:113
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:111
 #, fuzzy, kde-format
 #| msgctxt "Status of the job"
 #| msgid "pending"
@@ -13423,7 +13437,7 @@ msgctxt "Status of the job"
 msgid "sending"
 msgstr "în lucru"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:116
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:114
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation status 'Reconciled'"
 #| msgid "reconciled"
@@ -13431,7 +13445,7 @@ msgctxt "Status of the job"
 msgid "reconciled (auto)"
 msgstr "reconciliate"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:119
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:117
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation status 'Reconciled'"
 #| msgid "reconciled"
@@ -13439,48 +13453,48 @@ msgctxt "Status of the job"
 msgid "reconciled (manual)"
 msgstr "reconciliate"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:122
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:120
 #, kde-format
 msgctxt "Status of the job"
 msgid "revoked"
 msgstr ""
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:125
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:123
 #, fuzzy, kde-format
 #| msgid "Imported"
 msgctxt "Status of the job"
 msgid "aborted"
 msgstr "Importate"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:128
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:126
 #, kde-format
 msgctxt "Status of the job"
 msgid "enqueued"
 msgstr "de executat"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:131
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:129
 #, kde-format
 msgctxt "Status of the job"
 msgid "error"
 msgstr "eronat"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:134
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:132
 #, kde-format
 msgctxt "Status of the job"
 msgid "(unknown)"
 msgstr "(necunoscut)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:153
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:151
 #, kde-format
 msgid "Job Id"
 msgstr "Identificatorul sarcinii"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:152
 #, kde-format
 msgid "Job Type"
 msgstr "Tipul sarcinii"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:153
 #, kde-format
 msgid "Institute"
 msgstr "Instituție"
@@ -13491,7 +13505,7 @@ msgstr "Instituție"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAccount)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxAccount)
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:190
@@ -23716,7 +23730,7 @@ msgstr "Filtru"
 msgid "Close"
 msgstr "Închide"
 
-#: kmymoney/widgets/passstore.cpp:67
+#: kmymoney/widgets/passstore.cpp:73
 #, kde-format
 msgid "Read the password from pass store"
 msgstr ""

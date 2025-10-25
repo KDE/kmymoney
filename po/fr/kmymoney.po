@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-24 00:42+0000\n"
+"POT-Creation-Date: 2025-10-25 00:42+0000\n"
 "PO-Revision-Date: 2025-09-20 10:09+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -1775,7 +1775,7 @@ msgstr "A reçu un cours non valable pour %1, impossible de le mettre à jour."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:699
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
-#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
+#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:37
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
@@ -10302,7 +10302,7 @@ msgstr "Effacer la sélection du champ de catégorie."
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:62
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:199
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
 #: kmymoney/plugins/views/reports/core/listtable.cpp:705
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
@@ -11388,7 +11388,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, statusLabel)
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:72
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
 #: kmymoney/views/investtransactioneditor.ui:119
 #: kmymoney/views/newtransactioneditor.ui:34
 #: kmymoney/views/newtransactionform.ui:152
@@ -12396,7 +12396,7 @@ msgstr "De %1 vers %2, catégorie %3, somme de %4"
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Du compte %1, payer à %2, catégorie %3, somme de %4"
 
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:79
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:89
 #, kde-format
 msgid ""
 "You selected to extract the payee from the memo field but did not supply a "
@@ -12407,7 +12407,7 @@ msgstr ""
 "n'avez pas soumis d'expression rationnelle pour l'extraction du bénéficiaire "
 "depuis le champ mémo. Cette option ne sera pas activée."
 
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:81
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:91
 #, kde-format
 msgid "Missing information"
 msgstr "Information manquante"
@@ -12482,8 +12482,16 @@ msgstr "Premier possible"
 msgid "Default start date for statement download"
 msgstr "Date de début par défaut pour le téléchargement des relevés"
 
+#. i18n: ectx: property (text), widget (QCheckBox, m_autoLoadPassword)
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:175
+#, kde-format
+msgid ""
+"Automatically load login credentials if available (affects all mapped "
+"accounts)"
+msgstr ""
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:198
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
 #, kde-format
 msgid ""
 "<html><head/><body><p>Remove the line breaks in the memo field that have "
@@ -12494,7 +12502,7 @@ msgstr ""
 "entre plusieurs champs de motif de la transaction.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:201
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:208
 #, kde-format
 msgid ""
 "<html><head/><body><p>Some institutions take multiple purpose fields of a "
@@ -12508,13 +12516,13 @@ msgstr ""
 "activée.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_removeLineBreaksFromMemo)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:204
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
 #, kde-format
 msgid "Remove line breaks from memo field"
 msgstr "Supprimer les sauts de ligne du champ mémo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:218
 #, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
@@ -12524,7 +12532,7 @@ msgstr ""
 "trouvés dans la transaction au mémo</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:221
 #, kde-format
 msgid "Include the payee details in memo"
 msgstr "Inclure les détails du bénéficiaire dans le mémo"
@@ -12583,7 +12591,7 @@ msgstr "Comptes en ligne"
 msgid "Assign"
 msgstr "Assigner"
 
-#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:71
+#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:70
 #, kde-format
 msgid ""
 "<qt><p>Please select the first date for which transactions are to be "
@@ -12714,6 +12722,12 @@ msgstr ""
 "La première barre clignotante change après une période (chaque demi-octet "
 "est transféré en 2 périodes)."
 
+#. i18n: ectx: label, entry (autoLoadPassword), group (credentials)
+#: kmymoney/plugins/kbanking/kbanking.kcfg:20
+#, kde-format
+msgid "Load passphrase from password store if available without asking user."
+msgstr ""
+
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
 #, kde-format
@@ -12772,179 +12786,179 @@ msgstr ""
 "Afin de confirmer cet ordre, veuillez saisir le tan affiché par votre "
 "générateur"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:74
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:83
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:93
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:71
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:80
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:90
 #, kde-format
 msgctxt "replacement for institution or account w/o name"
 msgid "(unnamed)"
 msgstr "(sans nom)"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:114
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:111
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Id"
 msgstr "Id"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:112
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Code"
 msgstr "Code de l'établissement"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:113
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Name"
 msgstr "Nom de l'établissement"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:114
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Account Number"
 msgstr "Numéro du compte"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:118
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Account Name"
 msgstr "Nom du compte"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:119
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Owner"
 msgstr "Propriétaire"
 
-#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:120
+#: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Backend"
 msgstr "Moteur"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:68
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:66
 #, kde-format
 msgid "Get Balance"
 msgstr "Obtenir le solde"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:71
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:69
 #, kde-format
 msgid "Get Transactions"
 msgstr "Obtenir les opérations"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:72
 #: kmymoney/plugins/views/reports/core/querytable.cpp:835
 #: kmymoney/plugins/views/reports/core/querytable.cpp:977
 #, kde-format
 msgid "Transfer"
 msgstr "Virement"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:77
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:75
 #, kde-format
 msgid "Debit Note"
 msgstr "Note de Débit"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:80
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:78
 #, kde-format
 msgctxt "Unknown job type"
 msgid "(unknown)"
 msgstr "(inconnu)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:88
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:86
 #, kde-format
 msgctxt "Unknown bank code"
 msgid "(unknown)"
 msgstr "(inconnu)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:94
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:92
 #, kde-format
 msgctxt "Unknown account number"
 msgid "(unknown)"
 msgstr "(inconnu)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:101
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:99
 #, kde-format
 msgctxt "Status of the job"
 msgid "new"
 msgstr "nouveau"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:104
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:102
 #, kde-format
 msgctxt "Status of the job"
 msgid "accepted"
 msgstr "accepté"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:107
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:105
 #, kde-format
 msgctxt "Status of the job"
 msgid "rejected"
 msgstr "rejeté"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:110
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:108
 #, kde-format
 msgctxt "Status of the job"
 msgid "pending"
 msgstr "en attente"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:113
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:111
 #, kde-format
 msgctxt "Status of the job"
 msgid "sending"
 msgstr "envoi"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:116
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:114
 #, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (auto)"
 msgstr "rapproché (auto)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:119
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:117
 #, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (manual)"
 msgstr "rapproché (manuel)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:122
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:120
 #, kde-format
 msgctxt "Status of the job"
 msgid "revoked"
 msgstr "révoqué"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:125
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:123
 #, kde-format
 msgctxt "Status of the job"
 msgid "aborted"
 msgstr "abandonné"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:128
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:126
 #, kde-format
 msgctxt "Status of the job"
 msgid "enqueued"
 msgstr "mis en file d'attente"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:131
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:129
 #, kde-format
 msgctxt "Status of the job"
 msgid "error"
 msgstr "erreur"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:134
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:132
 #, kde-format
 msgctxt "Status of the job"
 msgid "(unknown)"
 msgstr "(inconnu)"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:153
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:151
 #, kde-format
 msgid "Job Id"
 msgstr "Identifiant de la tâche"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:152
 #, kde-format
 msgid "Job Type"
 msgstr "Type de tâche"
 
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:153
 #, kde-format
 msgid "Institute"
 msgstr "Établissement"
@@ -12955,7 +12969,7 @@ msgstr "Établissement"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAccount)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxAccount)
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:190
@@ -22813,7 +22827,7 @@ msgstr "Fi&ltre :"
 msgid "Close"
 msgstr "Fermer"
 
-#: kmymoney/widgets/passstore.cpp:67
+#: kmymoney/widgets/passstore.cpp:73
 #, kde-format
 msgid "Read the password from pass store"
 msgstr "Lisez le mot de passe à partir du coffre-fort de mots de passe"
