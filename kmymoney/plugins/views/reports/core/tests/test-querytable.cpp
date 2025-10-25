@@ -127,10 +127,10 @@ void QueryTableTest::init()
     file = MyMoneyFile::instance();
     file->unload();
     MyMoneyFileTransaction ft;
-    file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
-    file->addCurrency(MyMoneySecurity("USD", "US Dollar",              "$"));
-    file->addCurrency(MyMoneySecurity("JPY", "Japanese Yen",           QChar(0x00A5), 1));
-    file->addCurrency(MyMoneySecurity("GBP", "British Pound",           "#"));
+    file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar", "C$"));
+    file->addCurrency(MyMoneySecurity("USD", "US Dollar", "$"));
+    file->addCurrency(MyMoneySecurity("JPY", "Japanese Yen", QChar(0x00A5), 1));
+    file->addCurrency(MyMoneySecurity("GBP", "British Pound", "#"));
     file->setBaseCurrency(file->currency("USD"));
 
     MyMoneyPayee payeeTest;
@@ -185,7 +185,7 @@ void QueryTableTest::testQueryBasics()
         MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::Category);
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         filter.setName("Transactions by Category");
         XMLandback(filter);
         QueryTable qtbl_1(filter);
@@ -202,14 +202,14 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[14][ListTable::ctPostDate] == "2005-01-01");
 
         QVERIFY(MyMoneyMoney(rows[6][ListTable::ctValue]) == -(moParent1 + moParent2) * 3);
-        QVERIFY(MyMoneyMoney(rows[10][ListTable::ctValue]) == -(moChild) * 3);
-        QVERIFY(MyMoneyMoney(rows[16][ListTable::ctValue]) == -(moSolo) * 3);
+        QVERIFY(MyMoneyMoney(rows[10][ListTable::ctValue]) == -(moChild)*3);
+        QVERIFY(MyMoneyMoney(rows[16][ListTable::ctValue]) == -(moSolo)*3);
         QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
         QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
         filter.setRowType(eMyMoney::Report::RowType::TopCategory);
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         filter.setName("Transactions by Top Category");
         XMLandback(filter);
         QueryTable qtbl_2(filter);
@@ -229,14 +229,14 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[12][ListTable::ctPostDate] == "2005-01-01");
 
         QVERIFY(MyMoneyMoney(rows[9][ListTable::ctValue]) == -(moParent1 + moParent2 + moChild) * 3);
-        QVERIFY(MyMoneyMoney(rows[13][ListTable::ctValue]) == -(moSolo) * 3);
+        QVERIFY(MyMoneyMoney(rows[13][ListTable::ctValue]) == -(moSolo)*3);
         QVERIFY(MyMoneyMoney(rows[14][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
         QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setName("Transactions by Account");
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         XMLandback(filter);
         QueryTable qtbl_3(filter);
 
@@ -262,14 +262,14 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[11][ListTable::ctPostDate] == "2005-09-01");
 #endif
 
-        QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == -(moSolo) * 3 + moCheckingOpen);
+        QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == -(moSolo)*3 + moCheckingOpen);
         QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
         QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
         filter.setRowType(eMyMoney::Report::RowType::Payee);
         filter.setName("Transactions by Payee");
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Memo | eMyMoney::Report::QueryColumn::Category;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         XMLandback(filter);
         QueryTable qtbl_4(filter);
         writeTable(qtbl_4, filter.name());
@@ -293,7 +293,7 @@ void QueryTableTest::testQueryBasics()
         filter.setRowType(eMyMoney::Report::RowType::Month);
         filter.setName("Transactions by Month");
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         XMLandback(filter);
         QueryTable qtbl_5(filter);
         writeTable(qtbl_5, filter.name());
@@ -312,14 +312,14 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[20][ListTable::ctPostDate] == "2005-09-01");
 
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == -moSolo);
-        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild) * 3);
+        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild)*3);
         QVERIFY(MyMoneyMoney(rows[9][ListTable::ctValue]) == -moParent1 + moCheckingOpen);
         QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
         filter.setRowType(eMyMoney::Report::RowType::Week);
         filter.setName("Transactions by Week");
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         XMLandback(filter);
         QueryTable qtbl_6(filter);
         writeTable(qtbl_6, filter.name());
@@ -335,10 +335,10 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[20][ListTable::ctPostDate] == "2005-09-01");
 
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == -moSolo);
-        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild) * 3);
+        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild)*3);
         QVERIFY(MyMoneyMoney(rows[21][ListTable::ctValue]) == -moParent2);
         QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 
@@ -420,7 +420,6 @@ void QueryTableTest::testCashFlowAnalysis()
     XIRR = MyMoneyMoney(list.XIRR(), 1000);
     QCOMPARE(XIRR.toDouble(), MyMoneyMoney(-307, 1000).toDouble());
 
-
     // not enough entries
     list.pop_back();
 
@@ -428,7 +427,7 @@ void QueryTableTest::testCashFlowAnalysis()
     try {
         XIRR = MyMoneyMoney(list.XIRR(), 1000);
     } catch (MyMoneyException&) {
-        result  = true;
+        result = true;
     }
     QVERIFY(result);
 }
@@ -488,7 +487,7 @@ void QueryTableTest::testAccountQuery()
 
         QVERIFY(rows.count() == 6);
         QVERIFY(rows[0][ListTable::ctAccount] == "Checking Account");
-        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctValue]) == (moCheckingOpen - moSolo*3));
+        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctValue]) == (moCheckingOpen - moSolo * 3));
         QVERIFY(rows[2][ListTable::ctAccount] == "Credit Card");
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctValue]) == (moCreditOpen - (moParent1 + moParent2 + moChild) * 3));
 
@@ -539,20 +538,101 @@ void QueryTableTest::testInvestment()
         acFees = makeAccount("Fees", eMyMoney::Account::Type::Expense, moZero, QDate(2003, 11, 1), acExpense);
 
         // Transactions
-        //                         Date             Action                                               Shares                Price   Stock     Asset       Income
-        InvTransactionHelper s1b1(QDate(2003, 12, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock3, acChecking, QString());
-        InvTransactionHelper s1b2(QDate(2004, 1, 30), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(500.00), MyMoneyMoney(100.00), acStock4, acChecking, acFees, MyMoneyMoney(100.00));
-        InvTransactionHelper s1b3(QDate(2004, 1, 30), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(500.00), MyMoneyMoney(90.00), acStock4, acChecking, acFees, MyMoneyMoney(100.00));
-        InvTransactionHelper s1b4(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1b5(QDate(2004, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1s1(QDate(2004, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(-200.00), MyMoneyMoney(120.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1s2(QDate(2004, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(-200.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1s3(QDate(2004, 5, 30), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(-1000.00), MyMoneyMoney(120.00), acStock4, acChecking, acFees, MyMoneyMoney(200.00));
-        InvTransactionHelper s1r1(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend), MyMoneyMoney(50.00), MyMoneyMoney(100.00), acStock1, QString(), acDividends);
-        InvTransactionHelper s1r2(QDate(2004, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend), MyMoneyMoney(50.00), MyMoneyMoney(80.00), acStock1, QString(), acDividends);
-        InvTransactionHelper s1c1(QDate(2004, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),         MyMoneyMoney(10.00), MyMoneyMoney(100.00), acStock1, acChecking, acDividends);
-        InvTransactionHelper s1c2(QDate(2004, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),         MyMoneyMoney(10.00), MyMoneyMoney(120.00), acStock1, acChecking, acDividends);
-        InvTransactionHelper s1y1(QDate(2004, 9, 15), MyMoneySplit::actionName(eMyMoney::Split::Action::Yield),           MyMoneyMoney(10.00), MyMoneyMoney(110.00), acStock1, acChecking, acInterest);
+        //                         Date             Action                                               Shares                Price   Stock     Asset Income
+        InvTransactionHelper s1b1(QDate(2003, 12, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(1000.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock3,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1b2(QDate(2004, 1, 30),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(500.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock4,
+                                  acChecking,
+                                  acFees,
+                                  MyMoneyMoney(100.00));
+        InvTransactionHelper s1b3(QDate(2004, 1, 30),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(500.00),
+                                  MyMoneyMoney(90.00),
+                                  acStock4,
+                                  acChecking,
+                                  acFees,
+                                  MyMoneyMoney(100.00));
+        InvTransactionHelper s1b4(QDate(2004, 2, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(1000.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1b5(QDate(2004, 3, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(1000.00),
+                                  MyMoneyMoney(110.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1s1(QDate(2004, 4, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(-200.00),
+                                  MyMoneyMoney(120.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1s2(QDate(2004, 5, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(-200.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1s3(QDate(2004, 5, 30),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(-1000.00),
+                                  MyMoneyMoney(120.00),
+                                  acStock4,
+                                  acChecking,
+                                  acFees,
+                                  MyMoneyMoney(200.00));
+        InvTransactionHelper s1r1(QDate(2004, 6, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend),
+                                  MyMoneyMoney(50.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  QString(),
+                                  acDividends);
+        InvTransactionHelper s1r2(QDate(2004, 7, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend),
+                                  MyMoneyMoney(50.00),
+                                  MyMoneyMoney(80.00),
+                                  acStock1,
+                                  QString(),
+                                  acDividends);
+        InvTransactionHelper s1c1(QDate(2004, 8, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),
+                                  MyMoneyMoney(10.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  acChecking,
+                                  acDividends);
+        InvTransactionHelper s1c2(QDate(2004, 9, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),
+                                  MyMoneyMoney(10.00),
+                                  MyMoneyMoney(120.00),
+                                  acStock1,
+                                  acChecking,
+                                  acDividends);
+        InvTransactionHelper s1y1(QDate(2004, 9, 15),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::Yield),
+                                  MyMoneyMoney(10.00),
+                                  MyMoneyMoney(110.00),
+                                  acStock1,
+                                  acChecking,
+                                  acInterest);
 
         makeEquityPrice(eqStock1, QDate(2004, 10, 1), MyMoneyMoney(100.00));
         makeEquityPrice(eqStock3, QDate(2004, 10, 1), MyMoneyMoney(110.00));
@@ -709,7 +789,7 @@ void QueryTableTest::testInvestment()
         invhold.dump("invhold.html", "<html><head></head><body>%1</body></html>");
 #endif
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
@@ -730,13 +810,31 @@ void QueryTableTest::testSplitShares()
 
         // Accounts
         acInvestment = makeAccount("Investment", eMyMoney::Account::Type::Investment, moZero, QDate(2017, 8, 1), acAsset);
-        acStock1 =     makeAccount("Stock 1",    eMyMoney::Account::Type::Stock,      moZero, QDate(2017, 8, 1), acInvestment, eqStock1);
+        acStock1 = makeAccount("Stock 1", eMyMoney::Account::Type::Stock, moZero, QDate(2017, 8, 1), acInvestment, eqStock1);
 
         // Transactions
         //                        Date               Action                           Shares                Price             Stock     Asset       Income
-        InvTransactionHelper s1b1(QDate(2017, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),   firstSharesPurchase,  priceBeforeSplit, acStock1, acChecking, QString());
-        InvTransactionHelper s1s1(QDate(2017, 8, 2), MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares), splitFactor,          MyMoneyMoney(),   acStock1, QString(),  QString());
-        InvTransactionHelper s1b2(QDate(2017, 8, 3), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),   secondSharesPurchase, priceAfterSplit,  acStock1, acChecking, QString());
+        InvTransactionHelper s1b1(QDate(2017, 8, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  firstSharesPurchase,
+                                  priceBeforeSplit,
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1s1(QDate(2017, 8, 2),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares),
+                                  splitFactor,
+                                  MyMoneyMoney(),
+                                  acStock1,
+                                  QString(),
+                                  QString());
+        InvTransactionHelper s1b2(QDate(2017, 8, 3),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  secondSharesPurchase,
+                                  priceAfterSplit,
+                                  acStock1,
+                                  acChecking,
+                                  QString());
 
         //
         // Investment Performance Report
@@ -760,7 +858,7 @@ void QueryTableTest::testSplitShares()
         QVERIFY(rows.count() == 3);
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctBuys]) == sharesAtTheEnd * priceAfterSplit * MyMoneyMoney(-1));
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
@@ -784,8 +882,9 @@ void QueryTableTest::testConversionRate()
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 2));
         filter.setName("Transactions by Account (conversion rate)");
-        auto cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        auto cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category
+            | eMyMoney::Report::QueryColumn::Balance;
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         XMLandback(filter);
         QueryTable qtbl(filter);
         writeTable(qtbl, filter.name());
@@ -798,14 +897,13 @@ void QueryTableTest::testConversionRate()
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctBalance]) == amountWithdrawn * secondConversionRate * MyMoneyMoney(-1));
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctPrice]) == secondConversionRate);
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
-
 }
 
-//this is to prevent me from making mistakes again when modifying balances - asoliverez
-//this case tests only the opening and ending balance of the accounts
+// this is to prevent me from making mistakes again when modifying balances - asoliverez
+// this case tests only the opening and ending balance of the accounts
 void QueryTableTest::testBalanceColumn()
 {
     try {
@@ -830,8 +928,9 @@ void QueryTableTest::testBalanceColumn()
 
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setName("Transactions by Account (balance column)");
-        cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
-        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
+        cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category
+            | eMyMoney::Report::QueryColumn::Balance;
+        filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols)); //
         XMLandback(filter);
         QueryTable qtbl_3(filter);
         writeTable(qtbl_3, filter.name());
@@ -842,7 +941,7 @@ void QueryTableTest::testBalanceColumn()
 
         QVERIFY(rows.count() == 19);
 
-        //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
+        // this is to make sure that the dates of closing and opening balances and the balance numbers are ok
         QString openingDate = MyMoneyUtils::formatDate(QDate(2004, 1, 1));
         QString closingDate = MyMoneyUtils::formatDate(QDate(2005, 9, 1));
         QVERIFY(html.indexOf(openingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance")) > 0);
@@ -852,7 +951,7 @@ void QueryTableTest::testBalanceColumn()
         QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance")
                              + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>")
                 > 0);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
@@ -860,7 +959,6 @@ void QueryTableTest::testBalanceColumn()
 void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 {
     try {
-
         MyMoneyMoney moJpyOpening(0.0, 1);
         MyMoneyMoney moJpyPrice(0.010, 100);
         MyMoneyMoney moJpyPrice2(0.011, 100);
@@ -914,7 +1012,8 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setName("Transactions by Account (multiple currencies)");
-        cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
+        cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category
+            | eMyMoney::Report::QueryColumn::Balance;
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));
         // don't convert values to the default currency
         filter.setConvertCurrency(false);
@@ -928,7 +1027,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
         QVERIFY(rows.count() == 24);
 
-        //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
+        // this is to make sure that the dates of closing and opening balances and the balance numbers are ok
         QString openingDateString = MyMoneyUtils::formatDate(openingDate);
         QString intermediateDateString = MyMoneyUtils::formatDate(intermediateDate);
         QString closingDateString = MyMoneyUtils::formatDate(closingDate);
@@ -1044,7 +1143,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
                                "class=\"value\">&nbsp;-1.00</td><td>&nbsp;-3.00</td></tr>")
                 > 0);
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
@@ -1072,18 +1171,23 @@ void QueryTableTest::testTaxReport()
 
         qtbl_3.renderHTML();
         QVERIFY(rows.count() == 5);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
 
-class QueryTableProtectedTester : QueryTable {
+class QueryTableProtectedTester : QueryTable
+{
 public:
-    QueryTableProtectedTester(): QueryTable(MyMoneyReport(eMyMoney::Report::RowType::Account,
-                                                static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                                eMyMoney::TransactionFilter::Date::YearToDate,
-                                                eMyMoney::Report::DetailLevel::Top,
-                                                "Yearly Budgeted vs. Actual", "Default Report")) {}
+    QueryTableProtectedTester()
+        : QueryTable(MyMoneyReport(eMyMoney::Report::RowType::Account,
+                                   static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                   eMyMoney::TransactionFilter::Date::YearToDate,
+                                   eMyMoney::Report::DetailLevel::Top,
+                                   "Yearly Budgeted vs. Actual",
+                                   "Default Report"))
+    {
+    }
 
     void testHelperAROI()
     {
@@ -1192,7 +1296,7 @@ void QueryTableTest::testROI()
 {
     try {
         QueryTableProtectedTester().testHelperROI();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
     try {

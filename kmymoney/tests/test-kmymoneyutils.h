@@ -19,7 +19,6 @@ class KMyMoneyUtilsTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 protected:
-
 private Q_SLOTS:
     void initTestCase();
     void init();

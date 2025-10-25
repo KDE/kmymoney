@@ -16,7 +16,7 @@ class MyMoneyKeyValueContainerTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 protected:
-    MyMoneyKeyValueContainer *m;
+    MyMoneyKeyValueContainer* m;
 
 private Q_SLOTS:
     void init();

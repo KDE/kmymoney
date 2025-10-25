@@ -35,13 +35,12 @@ private Q_SLOTS:
     void initTestCase_data();
 
     /**
-    * This method is used to test that a quoted string containing
-    * a comma, which would get split by QString::split() when comma
-    * is the field separator, is detected and rebuilt.  If the field
-    * separator is not a comma, the split does not occur.
-    */
+     * This method is used to test that a quoted string containing
+     * a comma, which would get split by QString::split() when comma
+     * is the field separator, is detected and rebuilt.  If the field
+     * separator is not a comma, the split does not occur.
+     */
     void parseSplitString();
     void parse_data();
-
 };
 #endif

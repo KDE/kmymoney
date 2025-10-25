@@ -14,9 +14,13 @@
 
 QTEST_GUILESS_MAIN(onlineJobTypedTest)
 
-class dummyTask2 : public dummyTask {};
+class dummyTask2 : public dummyTask
+{
+};
 
-class onlineTaskInterface {};
+class onlineTaskInterface
+{
+};
 class onlineTaskDummy3 : public onlineTask, public onlineTaskInterface
 {
 public:
@@ -36,11 +40,12 @@ public:
     }
 
 protected:
-
-    onlineTaskDummy3* clone() const final override {
+    onlineTaskDummy3* clone() const final override
+    {
         return (new onlineTaskDummy3);
     }
-    bool hasReferenceTo(const QString&) const final override {
+    bool hasReferenceTo(const QString&) const final override
+    {
         return false;
     }
     KMMStringSet referencedObjects() const final override
@@ -51,7 +56,8 @@ protected:
     {
         return (new onlineTaskDummy3);
     }
-    QString responsibleAccount() const final override {
+    QString responsibleAccount() const final override
+    {
         return QString();
     }
     QString purpose() const final override
@@ -62,12 +68,10 @@ protected:
 
 void onlineJobTypedTest::initTestCase()
 {
-
 }
 
 void onlineJobTypedTest::cleanupTestCase()
 {
-
 }
 
 void onlineJobTypedTest::copyContructor()

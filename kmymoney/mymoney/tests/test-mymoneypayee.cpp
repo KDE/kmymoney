@@ -12,9 +12,9 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyPayeeTest;
 
+#include "mymoneyenums.h"
 #include "mymoneypayee.h"
 #include "mymoneypayee_p.h"
-#include "mymoneyenums.h"
 
 using namespace std;
 

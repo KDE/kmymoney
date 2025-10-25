@@ -18,7 +18,7 @@ class MyMoneySplitTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 protected:
-    MyMoneySplit *m;
+    MyMoneySplit* m;
 
 private Q_SLOTS:
     void init();

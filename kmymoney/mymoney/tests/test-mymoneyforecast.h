@@ -45,7 +45,7 @@ private Q_SLOTS:
     void testLinearRegression();
 
 protected:
-    MyMoneyForecast *m;
+    MyMoneyForecast* m;
 
 private:
     MyMoneyStorageMgr* storage;

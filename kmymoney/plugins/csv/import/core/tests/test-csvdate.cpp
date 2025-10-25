@@ -25,7 +25,7 @@ void CsvDateTest::cleanup()
 
 void CsvDateTest::testConvertDate()
 {
-    m_convert->setDateFormatIndex(DateFormat::YearMonthDay);  //           ISO date format
+    m_convert->setDateFormatIndex(DateFormat::YearMonthDay); //           ISO date format
 
     QVERIFY(m_convert->convertDate("2001-11-30") == QDate(2001, 11, 30));
     QVERIFY(m_convert->convertDate("20011130") == QDate(2001, 11, 30));
@@ -39,14 +39,14 @@ void CsvDateTest::testConvertDate()
     QVERIFY(m_convert->convertDate("11-30-2001") == QDate());
     QVERIFY(m_convert->convertDate("11302001") == QDate());
 
-    m_convert->setDateFormatIndex(DateFormat::MonthDayYear);  //           US date format
+    m_convert->setDateFormatIndex(DateFormat::MonthDayYear); //           US date format
 
     QVERIFY(m_convert->convertDate("2001-11-30") == QDate(2001, 11, 30));
     QVERIFY(m_convert->convertDate("20011130") == QDate());
     QVERIFY(m_convert->convertDate("11-30-2001") == QDate(2001, 11, 30));
     QVERIFY(m_convert->convertDate("11302001") == QDate(2001, 11, 30));
 
-    m_convert->setDateFormatIndex(DateFormat::DayMonthYear);  //             UK/EU date format;
+    m_convert->setDateFormatIndex(DateFormat::DayMonthYear); //             UK/EU date format;
 
     QVERIFY(m_convert->convertDate("13/09/81") == QDate(1981, 9, 13));
     QVERIFY(m_convert->convertDate("13/09/01") == QDate(2001, 9, 13));
@@ -71,8 +71,8 @@ void CsvDateTest::testConvertDate()
 
 void CsvDateTest::testLastDayInFebruary()
 {
-    m_convert->setDateFormatIndex(DateFormat::YearMonthDay);  //           ISO date format
+    m_convert->setDateFormatIndex(DateFormat::YearMonthDay); //           ISO date format
 
-    QCOMPARE(m_convert->convertDate(QLatin1String("2018-02-30")).toString(), QDate(2018,2,28).toString());
-    QCOMPARE(m_convert->convertDate(QLatin1String("2020-02-30")).toString(), QDate(2020,2,29).toString());
+    QCOMPARE(m_convert->convertDate(QLatin1String("2018-02-30")).toString(), QDate(2018, 2, 28).toString());
+    QCOMPARE(m_convert->convertDate(QLatin1String("2020-02-30")).toString(), QDate(2020, 2, 29).toString());
 }

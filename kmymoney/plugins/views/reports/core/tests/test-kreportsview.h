@@ -18,7 +18,7 @@ class KReportsViewTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 private:
-    MyMoneyAccount  *m;
+    MyMoneyAccount* m;
 
     MyMoneyStorageMgr* storage;
     MyMoneyFile* file;

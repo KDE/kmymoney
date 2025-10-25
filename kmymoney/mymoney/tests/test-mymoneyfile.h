@@ -7,8 +7,8 @@
 #ifndef MYMONEYFILETEST_H
 #define MYMONEYFILETEST_H
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyFileTest;
 
@@ -23,8 +23,8 @@ public:
     MyMoneyFileTest();
 
 protected:
-    MyMoneyFile *m;
-    MyMoneyAccount  m_inv;
+    MyMoneyFile* m;
+    MyMoneyAccount m_inv;
 
 private Q_SLOTS:
     void initTestCase();
@@ -98,8 +98,8 @@ private Q_SLOTS:
     void testAddSecurity();
 
 private Q_SLOTS:
-    void objectAdded(eMyMoney::File::Object type, const QString &id);
-    void objectModified(eMyMoney::File::Object type, const QString &id);
+    void objectAdded(eMyMoney::File::Object type, const QString& id);
+    void objectModified(eMyMoney::File::Object type, const QString& id);
     void objectRemoved(eMyMoney::File::Object type, const QString& id);
     void balanceChanged(const MyMoneyAccount& account);
     void valueChanged(const MyMoneyAccount& account);

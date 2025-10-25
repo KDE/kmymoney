@@ -16,7 +16,7 @@ class MyMoneyFinancialCalculatorTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 protected:
-    MyMoneyFinancialCalculator *m;
+    MyMoneyFinancialCalculator* m;
 
 private Q_SLOTS:
 

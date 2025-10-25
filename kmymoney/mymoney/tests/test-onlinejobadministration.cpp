@@ -7,13 +7,13 @@
 
 #include <QTest>
 
-#include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "onlinetasks/dummy/tasks/dummytask.h"
-#include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneysecurity.h"
+#include "onlinejobadministration.h"
+#include "onlinetasks/dummy/tasks/dummytask.h"
 
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
@@ -37,7 +37,6 @@ void onlineJobAdministrationTest::setupBaseCurrency()
     ft.commit();
 }
 
-
 void onlineJobAdministrationTest::initTestCase()
 {
     setupBaseCurrency();
@@ -52,7 +51,7 @@ void onlineJobAdministrationTest::initTestCase()
         file->addAccount(account, asset);
         accountId = account.id();
         transaction.commit();
-    } catch (const MyMoneyException &ex) {
+    } catch (const MyMoneyException& ex) {
         QFAIL(qPrintable(QString::fromLatin1("Unexpected exception %1").arg(ex.what())));
     }
 }
@@ -73,7 +72,7 @@ void onlineJobAdministrationTest::getSettings()
 
 void onlineJobAdministrationTest::registerOnlineTask()
 {
-    dummyTask *task = new dummyTask;
+    dummyTask* task = new dummyTask;
     onlineJobAdministration::instance()->registerOnlineTask(task);
     QCOMPARE(onlineJobAdministration::instance()->m_onlineTasks.count(), 1);
     QVERIFY(onlineJobAdministration::instance()->m_onlineTasks.value(task->taskName()));

@@ -6,9 +6,9 @@
 
 #include "test-mymoneyinstitution.h"
 
-#include <QTest>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyInstitutionTest;
 
@@ -21,8 +21,7 @@ QTEST_GUILESS_MAIN(MyMoneyInstitutionTest)
 void MyMoneyInstitutionTest::init()
 {
     m = new MyMoneyInstitution();
-    n = new MyMoneyInstitution("name", "town", "street", "postcode",
-                               "telephone", "manager", "sortcode");
+    n = new MyMoneyInstitution("name", "town", "street", "postcode", "telephone", "manager", "sortcode");
 }
 
 void MyMoneyInstitutionTest::cleanup()
@@ -75,7 +74,7 @@ void MyMoneyInstitutionTest::testNonemptyConstructor()
 
 void MyMoneyInstitutionTest::testCopyConstructor()
 {
-    QScopedPointer<MyMoneyInstitution> n1 (new MyMoneyInstitution("GUID1", *n));
+    QScopedPointer<MyMoneyInstitution> n1(new MyMoneyInstitution("GUID1", *n));
     MyMoneyInstitution n2(*n1);
 
     QVERIFY(*n1 == n2);
@@ -83,7 +82,7 @@ void MyMoneyInstitutionTest::testCopyConstructor()
 
 void MyMoneyInstitutionTest::testMyMoneyFileConstructor()
 {
-    QScopedPointer<MyMoneyInstitution> t (new MyMoneyInstitution("GUID", *n));
+    QScopedPointer<MyMoneyInstitution> t(new MyMoneyInstitution("GUID", *n));
 
     QVERIFY(t->id() == "GUID");
 
@@ -98,8 +97,7 @@ void MyMoneyInstitutionTest::testMyMoneyFileConstructor()
 
 void MyMoneyInstitutionTest::testEquality()
 {
-    MyMoneyInstitution t("name", "town", "street", "postcode",
-                         "telephone", "manager", "sortcode");
+    MyMoneyInstitution t("name", "town", "street", "postcode", "telephone", "manager", "sortcode");
 
     QVERIFY(t == *n);
     t.setStreet("x");
@@ -127,8 +125,8 @@ void MyMoneyInstitutionTest::testEquality()
     t.setManager("manager");
     QVERIFY(t == *n);
 
-    QScopedPointer<MyMoneyInstitution> n1 (new MyMoneyInstitution("GUID1", *n));
-    QScopedPointer<MyMoneyInstitution> n2 (new MyMoneyInstitution("GUID1", *n));
+    QScopedPointer<MyMoneyInstitution> n1(new MyMoneyInstitution("GUID1", *n));
+    QScopedPointer<MyMoneyInstitution> n2(new MyMoneyInstitution("GUID1", *n));
 
     n1->addAccountId("A000001");
     n2->addAccountId("A000001");
@@ -138,10 +136,10 @@ void MyMoneyInstitutionTest::testEquality()
 
 void MyMoneyInstitutionTest::testInequality()
 {
-    QScopedPointer<MyMoneyInstitution> n1 (new MyMoneyInstitution("GUID0", *n));
-    QScopedPointer<MyMoneyInstitution> n2 (new MyMoneyInstitution("GUID1", *n));
-    QScopedPointer<MyMoneyInstitution> n3 (new MyMoneyInstitution("GUID2", *n));
-    QScopedPointer<MyMoneyInstitution> n4 (new MyMoneyInstitution("GUID2", *n));
+    QScopedPointer<MyMoneyInstitution> n1(new MyMoneyInstitution("GUID0", *n));
+    QScopedPointer<MyMoneyInstitution> n2(new MyMoneyInstitution("GUID1", *n));
+    QScopedPointer<MyMoneyInstitution> n3(new MyMoneyInstitution("GUID2", *n));
+    QScopedPointer<MyMoneyInstitution> n4(new MyMoneyInstitution("GUID2", *n));
 
     QVERIFY(!(*n1 == *n2));
     QVERIFY(!(*n1 == *n3));
@@ -186,5 +184,4 @@ void MyMoneyInstitutionTest::testAccountIDList()
     list = institution.accountList();
     QVERIFY(list.count() == 1);
     QVERIFY(list.contains("A000002") == 1);
-
 }

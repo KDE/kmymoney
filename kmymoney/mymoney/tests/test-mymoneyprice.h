@@ -27,6 +27,5 @@ private Q_SLOTS:
     void testConstructor();
     void testValidity();
     void testRate();
-
 };
 #endif

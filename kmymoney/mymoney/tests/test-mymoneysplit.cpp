@@ -10,12 +10,12 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySplitTest;
 
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneysplit_p.h"
 #include "mymoneytransaction.h"
-#include "mymoneyexception.h"
-#include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(MyMoneySplitTest)
 
@@ -75,7 +75,6 @@ void MyMoneySplitTest::testSetFunctions()
     QCOMPARE(m->value("Key"), QLatin1String("Value"));
     QCOMPARE(m->costCenterId(), QLatin1String("CostCenter"));
 }
-
 
 void MyMoneySplitTest::testCopyConstructor()
 {

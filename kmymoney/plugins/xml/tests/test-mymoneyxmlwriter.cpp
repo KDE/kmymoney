@@ -4,6 +4,7 @@
 */
 
 #include "test-mymoneyxmlwriter.h"
+
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
 

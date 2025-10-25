@@ -31,9 +31,9 @@
 #include "mymoneystatement.h"
 #include "mymoneystoragedump.h"
 
+#include "kmymoneysettings.h"
 #include "pivottable.h"
 #include "tests/testutilities.h"
-#include "kmymoneysettings.h"
 
 using namespace reports;
 using namespace test;
@@ -107,10 +107,10 @@ void PivotTableTest::init()
     file->unload();
 
     MyMoneyFileTransaction ft;
-    file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
-    file->addCurrency(MyMoneySecurity("USD", "US Dollar",              "$"));
-    file->addCurrency(MyMoneySecurity("JPY", "Japanese Yen",           QChar(0x00A5), 1));
-    file->addCurrency(MyMoneySecurity("GBP", "British Pound",           "#"));
+    file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar", "C$"));
+    file->addCurrency(MyMoneySecurity("USD", "US Dollar", "$"));
+    file->addCurrency(MyMoneySecurity("JPY", "Japanese Yen", QChar(0x00A5), 1));
+    file->addCurrency(MyMoneySecurity("GBP", "British Pound", "#"));
     file->setBaseCurrency(file->currency("USD"));
 
     MyMoneyPayee payeeTest;
@@ -163,7 +163,7 @@ void PivotTableTest::testNetWorthSingle()
         QVERIFY(networth_f.m_grid.m_total[eActual][4] == moZero);
         QVERIFY(networth_f.m_grid.m_total[eActual][5] == moCheckingOpen);
         QVERIFY(networth_f.m_grid.m_total[eActual][6] == moCheckingOpen);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
@@ -182,7 +182,6 @@ void PivotTableTest::testNetWorthOfsetting()
     QVERIFY(networth_f.m_grid["Liability"]["Credit Card"][ReportAccount(acCredit)][eActual][7] == -moCreditOpen);
     QVERIFY(networth_f.m_grid.m_total[eActual][0] == moZero);
     QVERIFY(networth_f.m_grid.m_total[eActual][12] == moCheckingOpen + moCreditOpen);
-
 }
 
 void PivotTableTest::testNetWorthOpeningPrior()
@@ -233,7 +232,6 @@ void PivotTableTest::testNetWorthDateFilter()
     XMLandback(filter);
     PivotTable networth_f(filter);
     QVERIFY(networth_f.m_grid.m_total[eActual][1] == moZero);
-
 }
 
 void PivotTableTest::testNetWorthOpening()
@@ -248,12 +246,20 @@ void PivotTableTest::testNetWorthOpening()
     TransactionHelper t3(QDate(2016, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-200000), acBasicAccount, ctBasicIncome);
     TransactionHelper t4(QDate(2016, 10, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
     TransactionHelper t5(QDate(2016, 11, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-    TransactionHelper t6(QDate(2016, 12, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(100000), acBasicAccount, ctBasicExpense);
+    TransactionHelper t6(QDate(2016, 12, 1),
+                         MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                         MyMoneyMoney(100000),
+                         acBasicAccount,
+                         ctBasicExpense);
     TransactionHelper t7(QDate(2017, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
     TransactionHelper t8(QDate(2017, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
     TransactionHelper t9(QDate(2017, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
     TransactionHelper t10(QDate(2017, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
-    TransactionHelper t11(QDate(2017, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(4500000), acBasicAccount, ctBasicExpense);
+    TransactionHelper t11(QDate(2017, 5, 1),
+                          MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                          MyMoneyMoney(4500000),
+                          acBasicAccount,
+                          ctBasicExpense);
     TransactionHelper t12(QDate(2017, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
     TransactionHelper t13(QDate(2017, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
 
@@ -363,7 +369,6 @@ void PivotTableTest::testSubAccount()
 
     QVERIFY(networth_f.m_grid["Liability"]["Credit Card"].m_total[eActual][3] == moParent + moChild - moCreditOpen);
     QVERIFY(networth_f.m_grid.m_total[eActual][4] == -moParent - moChild + moCreditOpen + moCheckingOpen);
-
 }
 
 void PivotTableTest::testFilterIEvsIE()
@@ -384,7 +389,6 @@ void PivotTableTest::testFilterIEvsIE()
     QVERIFY(spending_f.m_grid["Expense"]["Parent"].m_total[eActual][2] == moChild);
     QVERIFY(spending_f.m_grid["Expense"].m_total[eActual][1] == moSolo);
     QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moSolo - moChild);
-
 }
 
 void PivotTableTest::testFilterALvsAL()
@@ -578,8 +582,10 @@ void PivotTableTest::testMultipleCurrencies()
     QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][1] == (moJpyTransaction * moJpyPrice));
     QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][2] == (moJpyTransaction * moJpyPrice));
     QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][3] == (moJpyTransaction * moJpyPrice));
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual][1] == (moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice));
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual].m_total == (moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice + moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice + moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual][1] == (moJpyTransaction * moJpyPrice + moCanTransaction * moCanPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual].m_total
+            == (moJpyTransaction * moJpyPrice + moCanTransaction * moCanPrice + moJpyTransaction * moJpyPrice + moCanTransaction * moCanPrice
+                + moJpyTransaction * moJpyPrice + moCanTransaction * moCanPrice));
 
     // Test the report type where we DO NOT convert the currency
     filter.setConvertCurrency(false);
@@ -632,9 +638,12 @@ void PivotTableTest::testMultipleCurrencies()
             == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction) * moJpyPrice4));
 
     // test multiple currencies totalled up
-    QVERIFY(networth_f.m_grid["Asset"].m_total[eActual][4] == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction)*moCanPrice) + ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice));
-    QVERIFY(networth_f.m_grid["Asset"].m_total[eActual][5] == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction)*moCanPrice) + ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice2) + moCheckingOpen);
-
+    QVERIFY(networth_f.m_grid["Asset"].m_total[eActual][4]
+            == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction) * moCanPrice)
+                + ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction) * moJpyPrice));
+    QVERIFY(networth_f.m_grid["Asset"].m_total[eActual][5]
+            == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction) * moCanPrice)
+                + ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction) * moJpyPrice2) + moCheckingOpen);
 }
 
 void PivotTableTest::testAdvancedFilter()
@@ -660,7 +669,8 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
         TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
         TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
-        TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
+        TransactionHelper
+            t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
 
         MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
@@ -679,7 +689,8 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
         TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
         TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
-        TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moNoPayee, acCredit, acParent, QString(), QString());
+        TransactionHelper
+            t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moNoPayee, acCredit, acParent, QString(), QString());
 
         MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
@@ -696,7 +707,8 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t1(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
         TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
         TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
-        TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
+        TransactionHelper
+            t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
 
         MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
@@ -740,7 +752,7 @@ void PivotTableTest::testAdvancedFilter()
         PivotTable networth_f4(filter);
 
         QVERIFY(networth_f4.m_grid["Asset"].m_total[eActual][11] == moCheckingOpen + moChild);
-        QVERIFY(networth_f4.m_grid["Liability"].m_total[eActual][11] == - moCreditOpen + moChild);
+        QVERIFY(networth_f4.m_grid["Liability"].m_total[eActual][11] == -moCreditOpen + moChild);
         QVERIFY(networth_f4.m_grid.m_total[eActual][9] == moCheckingOpen + moCreditOpen);
         QVERIFY(networth_f4.m_grid.m_total[eActual][10] == moCheckingOpen + moCreditOpen);
     }
@@ -861,10 +873,9 @@ void PivotTableTest::testAdvancedFilter()
         filter.clearTransactionFilter();
         XMLandback(filter);
         PivotTable spending_f2(filter);
-        QVERIFY(spending_f2.m_grid.m_total[eActual].m_total == -moSolo - moParent1 - moParent2 - moSolo - moParent1 - moParent2 - moSolo - moParent1 - moParent2);
-
+        QVERIFY(spending_f2.m_grid.m_total[eActual].m_total
+                == -moSolo - moParent1 - moParent2 - moSolo - moParent1 - moParent2 - moSolo - moParent1 - moParent2);
     }
-
 }
 
 void PivotTableTest::testColumnType()
@@ -1001,7 +1012,6 @@ void PivotTableTest::testColumnType()
     QVERIFY(spending_weeks.m_grid.m_total[eActual][3] == -moParent2);
     QVERIFY(spending_weeks.m_grid.m_total[eActual][4] == moZero);
     QVERIFY(spending_weeks.m_grid.m_total[eActual].m_total == -moSolo - moParent - moParent2);
-
 }
 
 void PivotTableTest::testInvestment()
@@ -1018,15 +1028,63 @@ void PivotTableTest::testInvestment()
         acDividends = makeAccount("Dividends", eMyMoney::Account::Type::Income, moZero, QDate(2004, 1, 1), acIncome);
 
         // Transactions
-        //                         Date             Action                                              Shares                 Price   Stock     Asset       Income
-        InvTransactionHelper s1b1(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(1000.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1b2(QDate(2004, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(1000.00), MyMoneyMoney(110.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1s1(QDate(2004, 4, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(-200.00), MyMoneyMoney(120.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1s2(QDate(2004, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),        MyMoneyMoney(-200.00), MyMoneyMoney(100.00), acStock1, acChecking, QString());
-        InvTransactionHelper s1r1(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend), MyMoneyMoney(50.00), MyMoneyMoney(100.00), acStock1, QString(), acDividends);
-        InvTransactionHelper s1r2(QDate(2004, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend), MyMoneyMoney(50.00), MyMoneyMoney(80.00), acStock1, QString(), acDividends);
-        InvTransactionHelper s1c1(QDate(2004, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),         MyMoneyMoney(10.00), MyMoneyMoney(100.00), acStock1, acChecking, acDividends);
-        InvTransactionHelper s1c2(QDate(2004, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),         MyMoneyMoney(10.00), MyMoneyMoney(120.00), acStock1, acChecking, acDividends);
+        //                         Date             Action                                              Shares                 Price   Stock     Asset Income
+        InvTransactionHelper s1b1(QDate(2004, 2, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(1000.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1b2(QDate(2004, 3, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(1000.00),
+                                  MyMoneyMoney(110.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1s1(QDate(2004, 4, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(-200.00),
+                                  MyMoneyMoney(120.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1s2(QDate(2004, 5, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                  MyMoneyMoney(-200.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  acChecking,
+                                  QString());
+        InvTransactionHelper s1r1(QDate(2004, 6, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend),
+                                  MyMoneyMoney(50.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  QString(),
+                                  acDividends);
+        InvTransactionHelper s1r2(QDate(2004, 7, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend),
+                                  MyMoneyMoney(50.00),
+                                  MyMoneyMoney(80.00),
+                                  acStock1,
+                                  QString(),
+                                  acDividends);
+        InvTransactionHelper s1c1(QDate(2004, 8, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),
+                                  MyMoneyMoney(10.00),
+                                  MyMoneyMoney(100.00),
+                                  acStock1,
+                                  acChecking,
+                                  acDividends);
+        InvTransactionHelper s1c2(QDate(2004, 9, 1),
+                                  MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend),
+                                  MyMoneyMoney(10.00),
+                                  MyMoneyMoney(120.00),
+                                  acStock1,
+                                  acChecking,
+                                  acDividends);
 
         makeEquityPrice(eqStock1, QDate(2004, 10, 1), MyMoneyMoney(100.00));
 
@@ -1075,14 +1133,13 @@ void PivotTableTest::testInvestment()
         invhold.dump("invhold.html", "<html><head></head><body>%1</body></html>");
 #endif
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
 
 void PivotTableTest::testBudget()
 {
-
     // 1. Budget on A, transactions on A
     {
         BudgetHelper budget;
@@ -1092,7 +1149,8 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1104,7 +1162,8 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1120,7 +1179,8 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1137,7 +1197,8 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1154,7 +1215,8 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 }

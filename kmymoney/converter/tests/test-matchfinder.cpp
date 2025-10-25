@@ -6,22 +6,21 @@
 */
 
 #include "test-matchfinder.h"
-#include "existingtransactionmatchfinder.h"
 
 #include <QTest>
 
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
-#include "mymoneymoney.h"
+#include "existingtransactionmatchfinder.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 
 QTEST_GUILESS_MAIN(MatchFinderTest)
 
-MatchFinderTest::MatchFinderTest() :
-    file(nullptr),
-    matchResult(TransactionMatchFinder::MatchResult::MatchNotFound)
+MatchFinderTest::MatchFinderTest()
+    : file(nullptr)
+    , matchResult(TransactionMatchFinder::MatchResult::MatchNotFound)
 {
-
 }
 
 void MatchFinderTest::init()
@@ -72,7 +71,6 @@ void MatchFinderTest::setupAccounts()
     account.reset(new MyMoneyAccount);
     otherAccount.reset(new MyMoneyAccount);
 
-
     account->setName("Expenses account");
     account->setAccountType(eMyMoney::Account::Type::Expense);
     account->setOpeningDate(QDate(2012, 12, 01));
@@ -89,8 +87,6 @@ void MatchFinderTest::setupAccounts()
     file->addAccount(*otherAccount, parentAccount);
     ft.commit();
 }
-
-
 
 MyMoneyTransaction MatchFinderTest::buildDefaultTransaction() const
 {
@@ -126,8 +122,6 @@ QString MatchFinderTest::addTransactionToLedger(MyMoneyTransaction transaction) 
     return transaction.id();
 }
 
-
-
 MyMoneySchedule MatchFinderTest::buildNonOverdueSchedule() const
 {
     QDate tomorrow = QDate::currentDate().addDays(1);
@@ -135,7 +129,15 @@ MyMoneySchedule MatchFinderTest::buildNonOverdueSchedule() const
     MyMoneyTransaction transaction = buildDefaultTransaction();
     transaction.setPostDate(tomorrow);
 
-    MyMoneySchedule nonOverdueSchedule("schedule name", eMyMoney::Schedule::Type::Transfer, eMyMoney::Schedule::Occurrence::Monthly, 1, eMyMoney::Schedule::PaymentType::BankTransfer, tomorrow, tomorrow.addMonths(2), false, false);
+    MyMoneySchedule nonOverdueSchedule("schedule name",
+                                       eMyMoney::Schedule::Type::Transfer,
+                                       eMyMoney::Schedule::Occurrence::Monthly,
+                                       1,
+                                       eMyMoney::Schedule::PaymentType::BankTransfer,
+                                       tomorrow,
+                                       tomorrow.addMonths(2),
+                                       false,
+                                       false);
     nonOverdueSchedule.setTransaction(transaction);
 
     return nonOverdueSchedule;
@@ -148,8 +150,6 @@ void MatchFinderTest::addSchedule(MyMoneySchedule schedule) const
     ft.commit();
 }
 
-
-
 void MatchFinderTest::expectMatchWithExistingTransaction(TransactionMatchFinder::MatchResult expectedResult)
 {
     matchResult = existingTrFinder->findMatch(importTransaction, importTransaction.splits().first());
@@ -161,8 +161,6 @@ void MatchFinderTest::expectMatchWithScheduledTransaction(TransactionMatchFinder
     matchResult = scheduledTrFinder->findMatch(importTransaction, importTransaction.splits().first());
     QCOMPARE(matchResult, expectedResult);
 }
-
-
 
 void MatchFinderTest::testDuplicate_allMatch()
 {
@@ -197,8 +195,6 @@ void MatchFinderTest::testDuplicate_splitIsMarkedAsMatched()
     expectMatchWithExistingTransaction(TransactionMatchFinder::MatchDuplicate);
 }
 
-
-
 void MatchFinderTest::testPreciseMatch_noBankId()
 {
     ledgerTransaction.splits().first().setBankID("");
@@ -227,11 +223,8 @@ void MatchFinderTest::testPreciseMatch_payeeEmpty()
     expectMatchWithExistingTransaction(TransactionMatchFinder::MatchPrecise);
 }
 
-
-
 void MatchFinderTest::testImpreciseMatch_matchWindowLowerBound()
 {
-
     ledgerTransaction.splits().first().setBankID("");
     importTransaction.splits().first().setBankID("");
     importTransaction.setPostDate(importTransaction.postDate().addDays(-MATCH_WINDOW));
@@ -260,8 +253,6 @@ void MatchFinderTest::testImpreciseMatch_payeeEmpty()
 
     expectMatchWithExistingTransaction(TransactionMatchFinder::MatchImprecise);
 }
-
-
 
 void MatchFinderTest::testNoMatch_bankIdMismatch()
 {
@@ -360,8 +351,6 @@ void MatchFinderTest::testNoMatch_postDateMismatch_noBankId()
     expectMatchWithExistingTransaction(TransactionMatchFinder::MatchNotFound);
 }
 
-
-
 void MatchFinderTest::testExistingTransactionMatch_sameTransactionId_withBankId()
 {
     QString transactionId = addTransactionToLedger(ledgerTransaction);
@@ -378,7 +367,6 @@ void MatchFinderTest::testExistingTransactionMatch_sameTransactionId_noBankId()
 
     expectMatchWithExistingTransaction(TransactionMatchFinder::MatchNotFound);
 }
-
 
 void MatchFinderTest::testExistingTransactionMatch_multipleAccounts_withBankId()
 {
@@ -415,7 +403,6 @@ void MatchFinderTest::testExistingTransactionMatch_multipleAccounts_noBankId()
 
     expectMatchWithExistingTransaction(TransactionMatchFinder::MatchNotFound);
 }
-
 
 void MatchFinderTest::testScheduleMatch_allMatch()
 {

@@ -9,9 +9,9 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyFinancialCalculatorTest;
 
-#include "mymoneymoney.h"
 #include "mymoneyfinancialcalculator.h"
 #include "mymoneyfinancialcalculator_p.h"
+#include "mymoneymoney.h"
 
 QTEST_GUILESS_MAIN(MyMoneyFinancialCalculatorTest)
 
@@ -131,34 +131,34 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
     try {
         m->numPayments();
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         m->setPv(-80000.0);
         m->numPayments();
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         m->setIr(12.0);
         m->numPayments();
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         m->setPmt(7108.0);
         m->numPayments();
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         m->setFv(0.0);
         m->numPayments();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 

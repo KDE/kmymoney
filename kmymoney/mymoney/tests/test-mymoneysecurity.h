@@ -6,8 +6,8 @@
 #ifndef MYMONEYSECURITYTEST_H
 #define MYMONEYSECURITYTEST_H
 
-#include <memory>
 #include <QObject>
+#include <memory>
 
 #include "mymoneytestutils.h"
 
@@ -18,7 +18,7 @@ class MyMoneySecurityTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 protected:
-    MyMoneySecurity *m;
+    MyMoneySecurity* m;
 
 private Q_SLOTS:
     void init();

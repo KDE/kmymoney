@@ -16,8 +16,8 @@ class onlineJobTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 private Q_SLOTS:
-//    void initTestCase();
-//    void cleanupTestCase();
+    //    void initTestCase();
+    //    void cleanupTestCase();
 
     void testDefaultConstructor();
     void testCopyConstructor();

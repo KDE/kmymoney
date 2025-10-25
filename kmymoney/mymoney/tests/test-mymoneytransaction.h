@@ -19,7 +19,7 @@ class MyMoneyTransactionTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 protected:
-    MyMoneyTransaction *m;
+    MyMoneyTransaction* m;
 
 private Q_SLOTS:
     void init();
@@ -38,8 +38,8 @@ private Q_SLOTS:
     void testDeleteAllSplits();
     void testSplitSum();
     void testIsLoanPayment();
-    //void testAddDuplicateAccount();
-    //void testModifyDuplicateAccount();
+    // void testAddDuplicateAccount();
+    // void testModifyDuplicateAccount();
     void testAutoCalc();
     void testHasReferenceTo();
     void testIsStockSplit();

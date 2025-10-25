@@ -20,8 +20,9 @@ class MyMoneyStorageMgrTest : public QObject, public MyMoneyTestBase
 
 public:
     void testAccount();
+
 protected:
-    MyMoneyStorageMgr *m;
+    MyMoneyStorageMgr* m;
 private Q_SLOTS:
     void init();
     void cleanup();
@@ -55,9 +56,9 @@ private Q_SLOTS:
     void testTagName();
     void testRemoveTag();
     void testRemoveAccountFromTree();
-//  void testAssignment();
+    //  void testAssignment();
     void testEquality(const MyMoneyStorageMgr* t);
-//  void testDuplicate();
+    //  void testDuplicate();
     void testAddSchedule();
     void testSchedule();
     void testModifySchedule();

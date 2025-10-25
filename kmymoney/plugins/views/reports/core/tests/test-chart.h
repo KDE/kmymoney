@@ -9,13 +9,12 @@
 
 #include <QObject>
 
-class ChartTest: public QObject
+class ChartTest : public QObject
 {
     Q_OBJECT
 
 private Q_SLOTS:
     void createChart();
-
 };
 
 #endif // CHARTTEST_H

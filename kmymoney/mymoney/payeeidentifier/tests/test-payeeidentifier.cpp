@@ -70,5 +70,3 @@ void payeeidentifier_test::createTypedIdent()
         QFAIL("Unexpected exception");
     }
 }
-
-

@@ -8,15 +8,15 @@
 #include <iostream>
 #include <map>
 
-#include <QTest>
 #include <QString>
+#include <QTest>
 
 #include "../csvutil.h"
 
 QTEST_GUILESS_MAIN(ParseDataTest);
 
-ParseDataTest::ParseDataTest() :
-    m_parse(nullptr)
+ParseDataTest::ParseDataTest()
+    : m_parse(nullptr)
 {
 }
 

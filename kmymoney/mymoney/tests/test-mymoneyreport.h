@@ -18,7 +18,7 @@ class MyMoneyReportTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 protected:
-    MyMoneyReport *m;
+    MyMoneyReport* m;
 
 private Q_SLOTS:
     void init();

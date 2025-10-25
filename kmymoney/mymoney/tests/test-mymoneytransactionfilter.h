@@ -38,6 +38,7 @@ private Q_SLOTS:
     void testMatchTransactionTypePayments();
     void testMatchTransactionTypeTransfers();
     void testMatchTransactionValidity();
+
 private:
     QString payeeId;
     QList<QString> tagIdList;

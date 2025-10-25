@@ -37,7 +37,6 @@ private Q_SLOTS:
     void scheduleAttributeNames();
     void onlineJobElementNames();
     void onlineJobAttributeNames();
-
 };
 
 #endif

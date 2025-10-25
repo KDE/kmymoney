@@ -7,27 +7,27 @@
 #include "test-mymoneyfile.h"
 #include <iostream>
 
-#include <memory>
-#include <QFile>
 #include <QDataStream>
+#include <QFile>
 #include <QList>
 #include <QTest>
+#include <memory>
 
-#include "mymoneytestutils.h"
-#include "mymoneyexception.h"
-#include "mymoneymoney.h"
-#include "mymoneyinstitution.h"
+#include "accountsmodel.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyinstitution.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytestutils.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "mymoneysplit.h"
-#include "mymoneyprice.h"
-#include "mymoneypayee.h"
-#include "mymoneyenums.h"
 #include "onlinejob.h"
 #include "payeesmodel.h"
-#include "accountsmodel.h"
 
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifiertyped.h"
@@ -166,7 +166,7 @@ void MyMoneyFileTest::testAddOneInstitution()
         QCOMPARE(m_balanceChanged.count(), 0);
         QCOMPARE(m_valueChanged.count(), 0);
         QCOMPARE(m_objectsAdded[0], QLatin1String("I000001"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -175,7 +175,7 @@ void MyMoneyFileTest::testAddOneInstitution()
     try {
         m->addInstitution(institution_id);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(1));
     }
@@ -184,7 +184,7 @@ void MyMoneyFileTest::testAddOneInstitution()
     try {
         m->addInstitution(institution_noname);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(1));
     }
@@ -217,7 +217,7 @@ void MyMoneyFileTest::testAddTwoInstitutions()
         QCOMPARE(institution.id(), QLatin1String("I000002"));
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(2));
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -233,7 +233,7 @@ void MyMoneyFileTest::testAddTwoInstitutions()
         QCOMPARE(institution.id(), QLatin1String("I000002"));
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(2));
         QCOMPARE(m->dirty(), false);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -266,7 +266,7 @@ void MyMoneyFileTest::testRemoveInstitution()
         QCOMPARE(m_balanceChanged.count(), 0);
         QCOMPARE(m_valueChanged.count(), 0);
         QCOMPARE(m_objectsRemoved[0], QLatin1String("I000001"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -275,7 +275,7 @@ void MyMoneyFileTest::testRemoveInstitution()
     try {
         m->institution("I000001");
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(1));
         QCOMPARE(m->dirty(), false);
     }
@@ -285,7 +285,7 @@ void MyMoneyFileTest::testRemoveInstitution()
     try {
         m->removeInstitution(i);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(1));
         QCOMPARE(m->dirty(), false);
@@ -295,7 +295,6 @@ void MyMoneyFileTest::testRemoveInstitution()
 
 void MyMoneyFileTest::testInstitutionRetrieval()
 {
-
     testAddOneInstitution();
 
     m->setDirty(false);
@@ -308,14 +307,14 @@ void MyMoneyFileTest::testInstitutionRetrieval()
         institution = m->institution("I000001");
         QCOMPARE(institution.id(), QLatin1String("I000001"));
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(1));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
     try {
         institution = m->institution("I000002");
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(1));
     }
 
@@ -343,7 +342,7 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
 
     QVERIFY((*it).name() == "institution1" || (*it).name() == "institution2");
     ++it;
-    QVERIFY((*it).name() == "institution2"  || (*it).name() == "institution1");
+    QVERIFY((*it).name() == "institution2" || (*it).name() == "institution1");
     ++it;
     QVERIFY(it == list.cend());
 }
@@ -379,7 +378,7 @@ void MyMoneyFileTest::testInstitutionModify()
         QCOMPARE(m_balanceChanged.count(), 0);
         QCOMPARE(m_valueChanged.count(), 0);
         QCOMPARE(m_objectsModified[0], QLatin1String("I000001"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -402,7 +401,7 @@ void MyMoneyFileTest::testInstitutionModify()
     try {
         m->modifyInstitution(failInstitution2);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
         QCOMPARE(failInstitution2.id(), QLatin1String("I000003"));
         QCOMPARE(m->institutionCount(), static_cast<unsigned>(2));
@@ -468,7 +467,7 @@ void MyMoneyFileTest::testAddAccounts()
 {
     testAddTwoInstitutions();
     setupBaseCurrency();
-    MyMoneyAccount  a, b, c;
+    MyMoneyAccount a, b, c;
     a.setAccountType(eMyMoney::Account::Type::Checkings);
     b.setAccountType(eMyMoney::Account::Type::Checkings);
 
@@ -513,7 +512,7 @@ void MyMoneyFileTest::testAddAccounts()
         QVERIFY(m_objectsModified.contains(QLatin1String("I000001")));
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -523,7 +522,7 @@ void MyMoneyFileTest::testAddAccounts()
         MyMoneyAccount parent = m->asset();
         m->addAccount(a, parent);
         QFAIL("Expecting exception!");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
     }
 
@@ -582,7 +581,7 @@ void MyMoneyFileTest::testAddAccounts()
         QVERIFY(m_objectsModified.contains(QLatin1String("I000002")));
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -600,7 +599,7 @@ void MyMoneyFileTest::testAddCategories()
 {
     setupBaseCurrency();
 
-    MyMoneyAccount  a, b, c;
+    MyMoneyAccount a, b, c;
     a.setAccountType(eMyMoney::Account::Type::Income);
     a.setOpeningDate(QDate::currentDate());
     b.setAccountType(eMyMoney::Account::Type::Expense);
@@ -630,7 +629,7 @@ void MyMoneyFileTest::testAddCategories()
         QCOMPARE(m->income().accountList().count(), 1);
         QCOMPARE(m->income().accountList()[0], QLatin1String("A000001"));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -664,7 +663,7 @@ void MyMoneyFileTest::testAddCategories()
         QVERIFY(m_objectsAdded.contains(QLatin1String("A000002")));
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Expense")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -699,7 +698,7 @@ void MyMoneyFileTest::testModifyAccount()
         QCOMPARE(m_valueChanged.count(), 0);
         QVERIFY(m_objectsModified.contains(QLatin1String("A000001")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
     m->setDirty(false);
@@ -735,7 +734,7 @@ void MyMoneyFileTest::testModifyAccount()
         QVERIFY(m_objectsModified.contains(QLatin1String("I000001")));
         QVERIFY(m_objectsModified.contains(QLatin1String("I000002")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
     m->setDirty(false);
@@ -752,7 +751,7 @@ void MyMoneyFileTest::testModifyAccount()
         QCOMPARE(p.accountType(), eMyMoney::Account::Type::Savings);
         QCOMPARE(p.name(), QLatin1String("New account name"));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
     m->setDirty(false);
@@ -763,7 +762,7 @@ void MyMoneyFileTest::testModifyAccount()
     try {
         m->modifyAccount(p);
         QFAIL("Expecting exception!");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
     }
     m->setDirty(false);
@@ -774,7 +773,7 @@ void MyMoneyFileTest::testModifyAccount()
     try {
         m->modifyAccount(p);
         QFAIL("Expecting exception!");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
     }
 }
@@ -815,7 +814,7 @@ void MyMoneyFileTest::testReparentAccount()
 
         o = m->account(o.id());
         QCOMPARE(o.accountCount(), 1);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -828,7 +827,7 @@ void MyMoneyFileTest::testRemoveStdAccount(const MyMoneyAccount& acc)
     try {
         m->removeAccount(acc);
         QFAIL(qPrintable(txt));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
     }
 }
@@ -850,7 +849,7 @@ void MyMoneyFileTest::testRemoveAccount()
         MyMoneyAccount q("Ainvalid", p);
         m->removeAccount(q);
         QFAIL("Exception expected!");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.commit();
     }
 
@@ -881,7 +880,7 @@ void MyMoneyFileTest::testRemoveAccount()
         institution = m->institution("I000002");
         QCOMPARE(institution.accountCount(), static_cast<unsigned>(1));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -915,7 +914,7 @@ void MyMoneyFileTest::testRemoveAccountTree()
         QVERIFY(m_objectsModified.contains(QLatin1String("I000002")));
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
     QCOMPARE(m->accountsModel()->itemList().count(), 1);
@@ -924,14 +923,14 @@ void MyMoneyFileTest::testRemoveAccountTree()
     try {
         m->account("A000002");
         QFAIL("Exception expected!");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // make sure that children are re-parented to parent account
     try {
         a = m->account("A000001");
         QCOMPARE(a.parentAccountId(), m->asset().id());
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -977,7 +976,7 @@ void MyMoneyFileTest::testAddTransaction()
         m->addAccount(exp1, parent);
         m->addAccount(exp2, parent);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -989,7 +988,7 @@ void MyMoneyFileTest::testAddTransaction()
     try {
         m->modifyAccount(a);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
     ft.restart();
@@ -1014,7 +1013,7 @@ void MyMoneyFileTest::testAddTransaction()
     try {
         t.addSplit(split1);
         t.addSplit(split2);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -1041,7 +1040,7 @@ void MyMoneyFileTest::testAddTransaction()
         QCOMPARE(m_balanceChanged.count("A000001"), 1);
         QCOMPARE(m_balanceChanged.count("A000003"), 1);
         QCOMPARE(m_valueChanged.count(), 0);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
     ft.restart();
@@ -1073,7 +1072,7 @@ void MyMoneyFileTest::testAddTransaction()
         QCOMPARE(p.memo(), QLatin1String("Memotext"));
         QCOMPARE(p.splits()[0].accountId(), QLatin1String("A000001"));
         QCOMPARE(p.splits()[1].accountId(), QLatin1String("A000003"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -1088,7 +1087,7 @@ void MyMoneyFileTest::testAddTransaction()
         QCOMPARE(p.memo(), QLatin1String("Memotext"));
         QCOMPARE(p.splits()[0].accountId(), QLatin1String("A000001"));
         QCOMPARE(p.splits()[1].accountId(), QLatin1String("A000003"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -1101,7 +1100,7 @@ void MyMoneyFileTest::testAddTransaction()
         QCOMPARE(p.memo(), QLatin1String("Memotext"));
         QCOMPARE(p.splits()[0].accountId(), QLatin1String("A000001"));
         QCOMPARE(p.splits()[1].accountId(), QLatin1String("A000003"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -1150,7 +1149,7 @@ void MyMoneyFileTest::testModifyTransactionSimple()
         QCOMPARE(t.memo(), QLatin1String("New Memotext"));
         QCOMPARE(m->dirty(), true);
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -1183,7 +1182,7 @@ void MyMoneyFileTest::testModifyTransactionNewPostDate()
         QCOMPARE(m_balanceChanged.count(QLatin1String("A000001")), 1);
         QCOMPARE(m_balanceChanged.count(QLatin1String("A000003")), 1);
         QCOMPARE(m_valueChanged.count(), 0);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -1237,8 +1236,7 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
         QCOMPARE(m_balanceChanged.count(QLatin1String("A000003")), 1);
         QCOMPARE(m_valueChanged.count(), 0);
 
-
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -1277,7 +1275,7 @@ void MyMoneyFileTest::testRemoveTransaction()
         QCOMPARE(m_balanceChanged.count(QLatin1String("A000003")), 1);
         QCOMPARE(m_valueChanged.count(), 0);
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -1356,7 +1354,7 @@ void MyMoneyFileTest::testBalanceTotal()
         QVERIFY(m->balance("A000001", QDate(2002, 1, 15)).isZero());
         QVERIFY(m->balance("A000002", QDate(2002, 1, 15)).isZero());
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -1365,16 +1363,15 @@ void MyMoneyFileTest::testBalanceTotal()
         // Account not found for balance()
         QVERIFY(m->balance("A000005").isZero());
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         // Account not found for totalBalance()
         QVERIFY(m->totalBalance("A000005").isZero());
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
-
 }
 
 void MyMoneyFileTest::testModifyStandardAccountNames()
@@ -1394,7 +1391,7 @@ void MyMoneyFileTest::testModifyStandardAccountNames()
         QCOMPARE(m_valueChanged.count(), 0);
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Liability")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
     ft.restart();
@@ -1412,7 +1409,7 @@ void MyMoneyFileTest::testModifyStandardAccountNames()
         QCOMPARE(m_valueChanged.count(), 0);
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
     ft.restart();
@@ -1430,7 +1427,7 @@ void MyMoneyFileTest::testModifyStandardAccountNames()
         QCOMPARE(m_valueChanged.count(), 0);
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Expense")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
     ft.restart();
@@ -1448,7 +1445,7 @@ void MyMoneyFileTest::testModifyStandardAccountNames()
         QCOMPARE(m_valueChanged.count(), 0);
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Income")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
     ft.restart();
@@ -1479,7 +1476,7 @@ void MyMoneyFileTest::testAddPayee()
         QCOMPARE(m_valueChanged.count(), 0);
 
         QVERIFY(m_objectsAdded.contains(QLatin1String("P000001")));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -1507,7 +1504,7 @@ void MyMoneyFileTest::testModifyPayee()
         QCOMPARE(m_valueChanged.count(), 0);
 
         QVERIFY(m_objectsModified.contains(QLatin1String("P000001")));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -1535,7 +1532,7 @@ void MyMoneyFileTest::testRemovePayee()
 
         QVERIFY(m_objectsRemoved.contains(QLatin1String("P000001")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -1569,7 +1566,7 @@ void MyMoneyFileTest::testPayeeWithIdentifier()
             QFAIL("Unexpected exception");
         }
         QCOMPARE(iban->electronicIban(), QLatin1String("DE82200700240066644600"));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1598,7 +1595,7 @@ void MyMoneyFileTest::testAddTransactionStd()
     try {
         t.addSplit(split1);
         t.addSplit(split2);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -1618,12 +1615,11 @@ void MyMoneyFileTest::testAddTransactionStd()
         m->addTransaction(t);
         ft.commit();
         QFAIL("Missing expected exception!");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     QCOMPARE(m->dirty(), false);
 }
-
 
 void MyMoneyFileTest::testAccount2Category()
 {
@@ -1645,7 +1641,7 @@ void MyMoneyFileTest::testCategory2Account()
         QCOMPARE(m->categoryToAccount("Expense1"), QLatin1String("A000003"));
         QCOMPARE(m->categoryToAccount("Expense1:Expense2"), QLatin1String("A000004"));
         QVERIFY(m->categoryToAccount("Acc2").isEmpty());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1667,7 +1663,7 @@ void MyMoneyFileTest::testHasAccount()
         QCOMPARE(m->hasAccount("A000001", "Account3"), true);
         QCOMPARE(m->hasAccount("A000001", "Account2"), false);
         QCOMPARE(m->hasAccount("A000002", "Account3"), false);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1685,7 +1681,7 @@ void MyMoneyFileTest::testAddEquityAccount()
         MyMoneyAccount parent = m->asset();
         m->addAccount(i, parent);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
     // keep a copy for later use
@@ -1718,7 +1714,7 @@ void MyMoneyFileTest::testAddEquityAccount()
             m->addAccount(a, i);
             const auto msg = QStringLiteral("Can add non-equity type %1 to investment").arg(static_cast<int>(*it));
             QFAIL(msg.toLatin1());
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
             ft.commit();
         }
     }
@@ -1728,7 +1724,7 @@ void MyMoneyFileTest::testAddEquityAccount()
         a.setAccountType(eMyMoney::Account::Type::Stock);
         m->addAccount(a, i);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1776,7 +1772,7 @@ void MyMoneyFileTest::testReparentEquity()
     try {
         m->reparentAccount(stock, inv);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1796,7 +1792,7 @@ void MyMoneyFileTest::testReparentEquity(QList<eMyMoney::Account::Type>& list, M
             m->reparentAccount(stock, a);
             const auto msg = QStringLiteral("Can reparent stock to non-investment type %1 to account").arg(static_cast<int>(*it));
             QFAIL(msg.toLatin1());
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
             ft.commit();
         }
         ft.restart();
@@ -1812,7 +1808,7 @@ void MyMoneyFileTest::testBaseCurrency()
     try {
         ref = m->baseCurrency();
         QVERIFY(ref.id().isEmpty());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -1820,7 +1816,7 @@ void MyMoneyFileTest::testBaseCurrency()
     try {
         m->setBaseCurrency(base);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     MyMoneyFileTransaction ft;
@@ -1829,7 +1825,7 @@ void MyMoneyFileTest::testBaseCurrency()
         m->addCurrency(base);
         m->setBaseCurrency(base);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
     ft.restart();
@@ -1840,7 +1836,7 @@ void MyMoneyFileTest::testBaseCurrency()
         QCOMPARE(ref.id(), QLatin1String("EUR"));
         QCOMPARE(ref.name(), QLatin1String("Euro"));
         QVERIFY(ref.tradingSymbol().at(0) == QChar(0x20ac));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1854,7 +1850,7 @@ void MyMoneyFileTest::testOpeningBalanceNoBase()
         base = m->baseCurrency();
         openingAcc = m->openingBalanceAccount(base);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -1869,7 +1865,7 @@ void MyMoneyFileTest::testOpeningBalance()
         QCOMPARE(openingAcc.parentAccountId(), m->equity().id());
         QCOMPARE(openingAcc.name(), MyMoneyFile::openingBalancesPrefix());
         QCOMPARE(openingAcc.openingDate(), QDate::currentDate());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -1878,7 +1874,7 @@ void MyMoneyFileTest::testOpeningBalance()
     try {
         m->addCurrency(second);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -1888,7 +1884,7 @@ void MyMoneyFileTest::testOpeningBalance()
         QCOMPARE(openingAcc.parentAccountId(), m->equity().id());
         QCOMPARE(openingAcc.name(), refName);
         QCOMPARE(openingAcc.openingDate(), QDate::currentDate());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1912,7 +1908,7 @@ void MyMoneyFileTest::testModifyStdAccount()
 
         QCOMPARE(m->asset().name(), QLatin1String("Anlagen"));
         QCOMPARE(m->asset().currencyId(), m->baseCurrency().id());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -1922,10 +1918,9 @@ void MyMoneyFileTest::testModifyStdAccount()
         acc.setNumber("Test");
         m->modifyAccount(acc);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         ft.rollback();
     }
-
 }
 
 void MyMoneyFileTest::testAddPrice()
@@ -1953,7 +1948,7 @@ void MyMoneyFileTest::testAddPrice()
         ft.commit();
 
         QCOMPARE(m->account("A000002").currencyId(), QLatin1String("RON"));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -1996,7 +1991,7 @@ void MyMoneyFileTest::testGetPrice()
     QVERIFY(m->price("EUR", "RON", QDate::currentDate()).isValid());
     // the price for the current date is returned when asking for the next day with exact date set to false
     {
-        const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(1), false);
+        const MyMoneyPrice& price = m->price("EUR", "RON", QDate::currentDate().addDays(1), false);
         QVERIFY(price.isValid() && price.date() == QDate::currentDate());
     }
     // no price is returned while asking for the next day with exact date set to true
@@ -2015,23 +2010,23 @@ void MyMoneyFileTest::testGetPrice()
 
     // extra tests for the exactDate=false behavior
     {
-        const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(2), false);
+        const MyMoneyPrice& price = m->price("EUR", "RON", QDate::currentDate().addDays(2), false);
         QVERIFY(price.isValid() && price.date() == QDate::currentDate());
     }
     {
-        const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(3), false);
+        const MyMoneyPrice& price = m->price("EUR", "RON", QDate::currentDate().addDays(3), false);
         QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(3));
     }
     {
-        const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(4), false);
+        const MyMoneyPrice& price = m->price("EUR", "RON", QDate::currentDate().addDays(4), false);
         QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(3));
     }
     {
-        const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(5), false);
+        const MyMoneyPrice& price = m->price("EUR", "RON", QDate::currentDate().addDays(5), false);
         QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(5));
     }
     {
-        const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(6), false);
+        const MyMoneyPrice& price = m->price("EUR", "RON", QDate::currentDate().addDays(6), false);
         QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(5));
     }
 }
@@ -2040,7 +2035,7 @@ void MyMoneyFileTest::testAddAccountMissingCurrency()
 {
     testAddTwoInstitutions();
     MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
-    MyMoneyAccount  a;
+    MyMoneyAccount a;
     a.setAccountType(eMyMoney::Account::Type::Checkings);
 
     MyMoneyInstitution institution;
@@ -2064,7 +2059,7 @@ void MyMoneyFileTest::testAddAccountMissingCurrency()
         m->addAccount(a, parent);
         ft.commit();
         QCOMPARE(m->account("A000001").currencyId(), QLatin1String("EUR"));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -2091,7 +2086,7 @@ void MyMoneyFileTest::testStorageId()
     try {
         m->setValue("kmm-id", "");
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -2101,7 +2096,7 @@ void MyMoneyFileTest::testStorageId()
         QVERIFY(!id.isNull());
         // check that it is the same if we ask again
         QCOMPARE(id, m->storageId());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -2161,7 +2156,6 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutAnyTransaction_afterLastImp
 
 void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastImportedTransaction()
 {
-
     addOneAccount();
     setupBaseCurrency();
 
@@ -2190,7 +2184,6 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastI
 
 void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImportedTransaction()
 {
-
     addOneAccount();
     setupBaseCurrency();
 
@@ -2222,7 +2215,7 @@ void MyMoneyFileTest::addOneAccount()
 {
     setupBaseCurrency();
     QString accountId = "A000001";
-    MyMoneyAccount  a;
+    MyMoneyAccount a;
     a.setAccountType(eMyMoney::Account::Type::Checkings);
 
     m->setDirty(false);
@@ -2254,7 +2247,7 @@ void MyMoneyFileTest::addOneAccount()
         QVERIFY(m_objectsAdded.contains(accountId.toLatin1()));
         QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -2521,8 +2514,7 @@ void MyMoneyFileTest::testClearedBalance()
         // Date before first transaction
         QVERIFY(m->clearedBalance("A000002", QDate(2002, 1, 15)).isZero());
 
-
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -2542,7 +2534,7 @@ void MyMoneyFileTest::testAdjustedValues()
         MyMoneyAccount parent = m->expense();
         m->addAccount(exp1, parent);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -2558,7 +2550,7 @@ void MyMoneyFileTest::testAdjustedValues()
         m->addCurrency(tradingCurrency);
         m->addSecurity(stockSecurity);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -2571,7 +2563,7 @@ void MyMoneyFileTest::testAdjustedValues()
         stock.setAccountType(eMyMoney::Account::Type::Stock);
         m->addAccount(stock, i);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -2605,7 +2597,7 @@ void MyMoneyFileTest::testAdjustedValues()
     try {
         m->addTransaction(t);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -2642,7 +2634,7 @@ void MyMoneyFileTest::testAdjustedValues()
     try {
         m->modifyTransaction(t);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -2682,7 +2674,7 @@ void MyMoneyFileTest::testVatAssignment()
         expense.setValue(QLatin1String("VatAccount"), vat.id());
         m->modifyAccount(expense);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -2715,7 +2707,7 @@ void MyMoneyFileTest::testVatAssignment()
         expense.setValue(QLatin1String("VatAmount"), QLatin1String("net"));
         m->modifyAccount(expense);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -2745,12 +2737,12 @@ void MyMoneyFileTest::testEmptyFilter()
     testAddTransaction();
 
     try {
-        QList<QPair<MyMoneyTransaction, MyMoneySplit> > tList;
+        QList<QPair<MyMoneyTransaction, MyMoneySplit>> tList;
         MyMoneyTransactionFilter filter;
         MyMoneyFile::instance()->transactionList(tList, filter);
         QCOMPARE(tList.count(), 2);
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -2770,7 +2762,7 @@ void MyMoneyFileTest::testAddSecurity()
         MyMoneyAccount parent = m->expense();
         m->addAccount(exp1, parent);
         ft.commit();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -2783,21 +2775,21 @@ void MyMoneyFileTest::testAddSecurity()
     try {
         m->addSecurity(stockSecurity);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
     // check that we can get it via the security method
     try {
         MyMoneySecurity sec = m->security(stockSecurity.id());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
     // and also via the currency method
     try {
         MyMoneySecurity sec = m->currency(stockSecurity.id());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }

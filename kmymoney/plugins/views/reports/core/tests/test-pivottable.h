@@ -9,8 +9,7 @@
 
 #include <QObject>
 
-namespace reports
-{
+namespace reports {
 class PivotTableTest;
 }
 
@@ -20,8 +19,7 @@ class PivotTableTest;
 #include "mymoneytestutils.h"
 #include "reporttable.h"
 
-namespace reports
-{
+namespace reports {
 
 class PivotTableTest : public QObject, public MyMoneyTestBase
 {

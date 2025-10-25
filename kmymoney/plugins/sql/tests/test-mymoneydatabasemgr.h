@@ -25,7 +25,7 @@ class MyMoneyStorageMgrTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 protected:
-    MyMoneyStorageMgr *m;
+    MyMoneyStorageMgr* m;
     bool m_dbAttached;
     bool m_canOpen;
     bool m_haveEmptyDataBase;
@@ -89,8 +89,8 @@ private Q_SLOTS:
     void testTagName();
     void testRemoveTag();
     void testRemoveAccountFromTree();
-//  void testAssignment();
-//  void testDuplicate();
+    //  void testAssignment();
+    //  void testDuplicate();
     void testAddSchedule();
     void testSchedule();
     void testModifySchedule();

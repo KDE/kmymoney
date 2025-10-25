@@ -6,8 +6,8 @@
 #ifndef AMOUNTVALIDATORTEST_H
 #define AMOUNTVALIDATORTEST_H
 
-#include <QObject>
 #include <QLocale>
+#include <QObject>
 #include <QString>
 
 #include "mymoneytestutils.h"
@@ -19,10 +19,10 @@ class AmountValidatorTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 protected:
-    QLocale         defaultLocale;
-    QString         currentLocale;
-    QChar           currentDecimalPoint;
-    QChar           currentGroupSeparator;
+    QLocale defaultLocale;
+    QString currentLocale;
+    QChar currentDecimalPoint;
+    QChar currentGroupSeparator;
 
 private Q_SLOTS:
     void init();

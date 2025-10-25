@@ -9,9 +9,9 @@
 
 #include <QTest>
 
-#include "mymoneytestutils.h"
-#include "mymoneyexception.h"
 #include "mymoneybalancecache.h"
+#include "mymoneyexception.h"
+#include "mymoneytestutils.h"
 
 QTEST_GUILESS_MAIN(MyMoneyBalanceCacheTest)
 
@@ -29,24 +29,22 @@ void MyMoneyBalanceCacheTest::testCacheItem()
 {
     MyMoneyBalanceCacheItem item(MyMoneyMoney(10, 100), QDate(2010, 9, 18));
     MyMoneyBalanceCacheItem invalid(MyMoneyMoney::minValue, QDate());
-    //MyMoneyBalanceCacheItem noarg;
-
+    // MyMoneyBalanceCacheItem noarg;
 
     QVERIFY(item.balance() == MyMoneyMoney(10, 100));
     QVERIFY(item.date() == QDate(2010, 9, 18));
     QVERIFY(item.isValid());
 
-    QVERIFY(! invalid.isValid());
+    QVERIFY(!invalid.isValid());
 
-    //QVERIFY(! noarg.isValid());
-
+    // QVERIFY(! noarg.isValid());
 }
 
 void MyMoneyBalanceCacheTest::testEmpty()
 {
     QVERIFY(m->isEmpty());
     testInsert();
-    QVERIFY(! m->isEmpty());
+    QVERIFY(!m->isEmpty());
 }
 
 void MyMoneyBalanceCacheTest::testInsert()
@@ -87,10 +85,9 @@ void MyMoneyBalanceCacheTest::testClear()
     // Verify that searching for something not in the list is safe
     try {
         m->clear("A000001");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
-
 }
 
 void MyMoneyBalanceCacheTest::testSize()
@@ -105,7 +102,7 @@ void MyMoneyBalanceCacheTest::testRetrieve()
     testInsert();
 
     MyMoneyBalanceCacheItem item = m->balance("A000003", QDate(2010, 9, 17));
-    QVERIFY(! item.isValid());
+    QVERIFY(!item.isValid());
 
     item = m->balance("A000001", QDate(2010, 9, 16));
     QVERIFY(item.isValid());
@@ -113,7 +110,7 @@ void MyMoneyBalanceCacheTest::testRetrieve()
     QVERIFY(item.date() == QDate(2010, 9, 16));
 
     item = m->balance("A000001", QDate(2010, 9, 17));
-    QVERIFY(! item.isValid());
+    QVERIFY(!item.isValid());
 
     item = m->balance("A000001", QDate(2010, 9, 18));
     QVERIFY(item.isValid());
@@ -122,7 +119,7 @@ void MyMoneyBalanceCacheTest::testRetrieve()
 
     // Test bad acct
     item = m->mostRecentBalance("A000003", QDate(2010, 9, 17));
-    QVERIFY(! item.isValid());
+    QVERIFY(!item.isValid());
 
     // Test date too old
     item = m->mostRecentBalance("A000001", QDate(2010, 9, 15));

@@ -24,19 +24,19 @@ class MatchFinderTest : public QObject, public MyMoneyTestBase
     Q_OBJECT
 
 private:
-    MyMoneyFile *                       file;
-    QScopedPointer<MyMoneyAccount>      account;
-    QScopedPointer<MyMoneyAccount>      otherAccount;
-    MyMoneyPayee                        payee;
-    MyMoneyPayee                        otherPayee;
-    static const int                    MATCH_WINDOW = 4;
+    MyMoneyFile* file;
+    QScopedPointer<MyMoneyAccount> account;
+    QScopedPointer<MyMoneyAccount> otherAccount;
+    MyMoneyPayee payee;
+    MyMoneyPayee otherPayee;
+    static const int MATCH_WINDOW = 4;
 
-    MyMoneyTransaction                  ledgerTransaction;
-    MyMoneyTransaction                  importTransaction;
+    MyMoneyTransaction ledgerTransaction;
+    MyMoneyTransaction importTransaction;
     TransactionMatchFinder::MatchResult matchResult;
     QScopedPointer<ExistingTransactionMatchFinder> existingTrFinder;
 
-    MyMoneySchedule                     m_schedule;
+    MyMoneySchedule m_schedule;
     QScopedPointer<ScheduledTransactionMatchFinder> scheduledTrFinder;
 
     void setupStorage();
@@ -93,6 +93,7 @@ private Q_SLOTS:
     void testScheduleMatch_overdue();
     void testScheduleMismatch_dueDate();
     void testScheduleMismatch_amount();
+
 public:
     MatchFinderTest();
 };

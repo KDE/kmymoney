@@ -23,12 +23,12 @@ class CSVImporterCoreTest : public QObject, public MyMoneyTestBase
 public:
     ~CSVImporterCoreTest() = default;
 
-    CSVImporterCore     *csvImporter;
-    BankingProfile      *debitCreditProfile;
-    BankingProfile      *amountProfile;
-    PricesProfile       *pricesProfile;
-    InvestmentProfile   *investmentProfile;
-    MyMoneyFile         *file;
+    CSVImporterCore* csvImporter;
+    BankingProfile* debitCreditProfile;
+    BankingProfile* amountProfile;
+    PricesProfile* pricesProfile;
+    InvestmentProfile* investmentProfile;
+    MyMoneyFile* file;
 private Q_SLOTS:
     void initTestCase();
     void init();

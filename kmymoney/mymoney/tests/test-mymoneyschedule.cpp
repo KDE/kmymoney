@@ -7,19 +7,19 @@
 
 #include "test-mymoneyschedule.h"
 
-#include <QList>
-#include <QTest>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QList>
+#include <QTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyScheduleTest;
 
-#include "mymoneysplit.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneyschedule.h"
 #include "mymoneyschedule_p.h"
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransaction_p.h"
 
@@ -47,14 +47,8 @@ void MyMoneyScheduleTest::testEmptyConstructor()
 
 void MyMoneyScheduleTest::testConstructor()
 {
-    MyMoneySchedule s("A Name",
-                      Schedule::Type::Bill,
-                      Schedule::Occurrence::Weekly, 1,
-                      Schedule::PaymentType::DirectDebit,
-                      QDate::currentDate(),
-                      QDate(),
-                      true,
-                      true);
+    MyMoneySchedule
+        s("A Name", Schedule::Type::Bill, Schedule::Occurrence::Weekly, 1, Schedule::PaymentType::DirectDebit, QDate::currentDate(), QDate(), true, true);
 
     QCOMPARE(s.type(), Schedule::Type::Bill);
     QCOMPARE(s.baseOccurrence(), Schedule::Occurrence::Weekly);
@@ -325,7 +319,6 @@ void MyMoneyScheduleTest::testModifyNextDueDate()
     QCOMPARE(dates.count(), 2);
     QCOMPARE(dates[0], QDate(2007, 1, 24));
     QCOMPARE(dates[1], QDate(2007, 2, 2));
-
 }
 
 void MyMoneyScheduleTest::testDaysBetweenEvents()
@@ -444,13 +437,15 @@ void MyMoneyScheduleTest::testOccurrenceToString()
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Weekly), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::Weekly));
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherWeek), MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::Weekly));
     // Fortnightly will no longer be used: only Every Other Week
-    QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryHalfMonth), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::EveryHalfMonth));
+    QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryHalfMonth),
+             MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::EveryHalfMonth));
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeWeeks), MyMoneySchedule::occurrenceToString(3, Schedule::Occurrence::Weekly));
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourWeeks), MyMoneySchedule::occurrenceToString(4, Schedule::Occurrence::Weekly));
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Monthly), MyMoneySchedule::occurrenceToString(1, Schedule::Occurrence::Monthly));
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryEightWeeks), MyMoneySchedule::occurrenceToString(8, Schedule::Occurrence::Weekly));
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherMonth), MyMoneySchedule::occurrenceToString(2, Schedule::Occurrence::Monthly));
-    QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeMonths), MyMoneySchedule::occurrenceToString(3, Schedule::Occurrence::Monthly));
+    QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryThreeMonths),
+             MyMoneySchedule::occurrenceToString(3, Schedule::Occurrence::Monthly));
     // Quarterly will no longer be used: only Every Three Months
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryFourMonths), MyMoneySchedule::occurrenceToString(4, Schedule::Occurrence::Monthly));
     QCOMPARE(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::TwiceYearly), MyMoneySchedule::occurrenceToString(6, Schedule::Occurrence::Monthly));
@@ -863,7 +858,7 @@ void MyMoneyScheduleTest::testSimpleToFromCompoundOccurrence()
     mult = 3;
     MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
     QVERIFY(occ == Schedule::Occurrence::EveryThreeWeeks && mult == 1);
-    occ = Schedule::Occurrence::Weekly ;
+    occ = Schedule::Occurrence::Weekly;
     mult = 4;
     MyMoneySchedule::compoundToSimpleOccurrence(mult, occ);
     QVERIFY(occ == Schedule::Occurrence::EveryFourWeeks && mult == 1);
@@ -924,8 +919,6 @@ void MyMoneyScheduleTest::testProcessingDates()
     QCOMPARE(s.isProcessingDate(QDate(2010, 1, 2)), false);
 }
 
-
-
 void MyMoneyScheduleTest::testAdjustedNextPayment()
 {
     MyMoneySchedule s;
@@ -936,12 +929,12 @@ void MyMoneyScheduleTest::testAdjustedNextPayment()
     s.setOccurrence(Schedule::Occurrence::Monthly);
     s.setWeekendOption(Schedule::WeekendOption::MoveBefore);
 
-    //if adjustedNextPayment works ok with adjusted date prior to the current date, it should return 2010-06-23
+    // if adjustedNextPayment works ok with adjusted date prior to the current date, it should return 2010-06-23
     QDate nextDueDate(2010, 6, 23);
-    //this is the current behaviour, and it is wrong
-    //QCOMPARE(s.adjustedNextPayment(adjustedDueDate), adjustedDueDate);
+    // this is the current behaviour, and it is wrong
+    // QCOMPARE(s.adjustedNextPayment(adjustedDueDate), adjustedDueDate);
 
-    //this is the expected behaviour
+    // this is the expected behaviour
     QCOMPARE(s.adjustedNextPayment(s.adjustedNextDueDate()), s.adjustedDate(nextDueDate, s.weekendOption()));
 }
 
@@ -1006,19 +999,19 @@ void MyMoneyScheduleTest::testProcessLastDayInMonth()
     s.setLastDayInMonth(true);
     s.setNextDueDate(QDate(2010, 1, 1));
     QCOMPARE(s.nextDueDate(), QDate(2010, 1, 31));
-    QCOMPARE(s.adjustedNextDueDate(), QDate(2010,1,31));
+    QCOMPARE(s.adjustedNextDueDate(), QDate(2010, 1, 31));
     s.setNextDueDate(QDate(2010, 2, 1));
     QCOMPARE(s.nextDueDate(), QDate(2010, 2, 28));
-    QCOMPARE(s.adjustedNextDueDate(), QDate(2010,2,28));
+    QCOMPARE(s.adjustedNextDueDate(), QDate(2010, 2, 28));
     s.setNextDueDate(QDate(2016, 2, 1));
     QCOMPARE(s.nextDueDate(), QDate(2016, 2, 29));
-    QCOMPARE(s.adjustedNextDueDate(), QDate(2016,2,29));
+    QCOMPARE(s.adjustedNextDueDate(), QDate(2016, 2, 29));
     s.setNextDueDate(QDate(2016, 4, 1));
     QCOMPARE(s.nextDueDate(), QDate(2016, 4, 30));
-    QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,30));
+    QCOMPARE(s.adjustedNextDueDate(), QDate(2016, 4, 30));
     s.setLastDayInMonth(false);
     QCOMPARE(s.nextDueDate(), QDate(2016, 4, 1));
-    QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,1));
+    QCOMPARE(s.adjustedNextDueDate(), QDate(2016, 4, 1));
 }
 
 void MyMoneyScheduleTest::testFixDate()

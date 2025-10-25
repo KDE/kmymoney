@@ -5,13 +5,13 @@
 
 #include "test-mymoneyobject.h"
 
-#include <QTest>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QTest>
 
-#include "mymoneyobject_p.h"
-#include "mymoneyexception.h"
 #include "mymoneyaccount.h"
+#include "mymoneyexception.h"
+#include "mymoneyobject_p.h"
 
 QTEST_GUILESS_MAIN(MyMoneyObjectTest)
 

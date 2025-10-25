@@ -6,12 +6,12 @@
 
 #include "test-qsqlcipher.h"
 
-#include <QTest>
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QSqlResult>
-#include <QSqlRecord>
 #include <QCoreApplication>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlResult>
+#include <QTest>
 
 QTEST_GUILESS_MAIN(qsqlciphertest)
 
@@ -29,8 +29,8 @@ void qsqlciphertest::initTestCase()
     auto drivers = QSqlDatabase::drivers();
     QVERIFY(drivers.contains(sqlDriverName));
     QVERIFY(m_file.open()); // open new temporary file just to get it's filename
-    m_file.resize(0);       // it's important for the file to be empty during creation of encrypted database
-    m_file.close();         // only filename was needed, so close it
+    m_file.resize(0); // it's important for the file to be empty during creation of encrypted database
+    m_file.close(); // only filename was needed, so close it
     m_db = QSqlDatabase::addDatabase(sqlDriverName);
     QVERIFY(m_db.isValid());
     m_db.setDatabaseName(m_file.fileName());
@@ -41,7 +41,7 @@ void qsqlciphertest::initTestCase()
 void qsqlciphertest::cleanupTestCase()
 {
     m_db.close();
-    m_db = QSqlDatabase();  // otherwise QSqlDatabase::removeDatabase says that m_db is still in use
+    m_db = QSqlDatabase(); // otherwise QSqlDatabase::removeDatabase says that m_db is still in use
     m_db.removeDatabase(QSqlDatabase::defaultConnection);
 }
 
@@ -49,7 +49,7 @@ void qsqlciphertest::isSQLCipherUsed()
 {
     QSqlQuery query(m_db);
     QVERIFY(query.exec("PRAGMA cipher_version"));
-    QVERIFY(query.next());  // if that fails, then probably libsqlite3 instead libsqlcipher is in use
+    QVERIFY(query.next()); // if that fails, then probably libsqlite3 instead libsqlcipher is in use
     qInfo() << "Cipher version: " << query.value(0).toString();
 }
 
@@ -60,7 +60,8 @@ void qsqlciphertest::isSQLCipherUsed()
 void qsqlciphertest::createEncryptedDatabase()
 {
     QSqlQuery query(m_db);
-    QVERIFY(query.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(passphrase))); // this should happen immediately after opening the database, otherwise it cannot be encrypted
+    QVERIFY(query.exec(QString::fromLatin1("PRAGMA key = '%1'")
+                           .arg(passphrase))); // this should happen immediately after opening the database, otherwise it cannot be encrypted
     if (m_file.open()) {
         // https://www.sqlite.org/fileformat.html#database_header
         auto header = QString(m_file.read(16));
@@ -72,11 +73,11 @@ void qsqlciphertest::createEncryptedDatabase()
 void qsqlciphertest::createTable()
 {
     QSqlQuery query(m_db);
-    QVERIFY(query.exec("CREATE TABLE test ("
-                       "id int PRIMARY_KEY,"
-                       "text varchar(20)"
-                       ");"
-                      ));
+    QVERIFY(
+        query.exec("CREATE TABLE test ("
+                   "id int PRIMARY_KEY,"
+                   "text varchar(20)"
+                   ");"));
     QVERIFY(!query.lastError().isValid());
 }
 
@@ -91,9 +92,9 @@ void qsqlciphertest::writeData()
     QFETCH(QString, text);
 
     QSqlQuery query(m_db);
-    query.prepare("INSERT INTO test (id, text) "
-                  "VALUES (:id, :text);"
-                 );
+    query.prepare(
+        "INSERT INTO test (id, text) "
+        "VALUES (:id, :text);");
     query.bindValue(":id", id);
     query.bindValue(":text", text);
     QVERIFY(query.exec());
@@ -116,7 +117,8 @@ void qsqlciphertest::reopenDatabase()
     QVERIFY(m_db.open());
 
     QSqlQuery query(m_db);
-    QVERIFY(query.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(passphrase))); // this should happen immediately after opening the database, to decrypt it properly
+    QVERIFY(query.exec(
+        QString::fromLatin1("PRAGMA key = '%1'").arg(passphrase))); // this should happen immediately after opening the database, to decrypt it properly
 
     QVERIFY(query.exec("SELECT count(*) FROM sqlite_master;")); // this is a check if the password correctly decrypts the database
     QVERIFY(!query.lastError().isValid());

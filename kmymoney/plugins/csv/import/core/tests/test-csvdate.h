@@ -24,9 +24,9 @@ private Q_SLOTS:
     void cleanup();
 
     /**
-    * This method is used to test a series of valid and invalid dates,
-    * including alpha month names, and different field separators.
-    */
+     * This method is used to test a series of valid and invalid dates,
+     * including alpha month names, and different field separators.
+     */
     void testConvertDate();
     /**
      * This test checks that Feb 30th is mapped to the last day in February

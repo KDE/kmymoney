@@ -11,8 +11,7 @@
 
 #include "mymoneytestutils.h"
 
-namespace reports
-{
+namespace reports {
 class PivotGridTest;
 }
 
@@ -20,8 +19,7 @@ class PivotGridTest;
 
 #include "mymoneyfile.h"
 
-namespace reports
-{
+namespace reports {
 
 class PivotGridTest : public QObject, public MyMoneyTestBase
 {
