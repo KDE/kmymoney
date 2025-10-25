@@ -62,7 +62,8 @@ macro(to_test_and_file_name)
 
   string(REGEX REPLACE "[ .]" "-" _rn ${TTAFN_REPORT_NAME})
   string(REGEX REPLACE "[^. a-zA-Z0-9_-]" "_" _rn ${_rn})
-  set(${TTAFN_RETURN_TEST_NAME} reports-${TTAFN_TYPE}-${TTAFN_BASENAME}-${_rn})
+  string(REPLACE "test-" "test-reports-${TTAFN_TYPE}-" _basename ${TTAFN_BASENAME})
+  set(${TTAFN_RETURN_TEST_NAME} ${_basename}-${_rn})
   set(${TTAFN_RETURN_FILE_NAME} ${TTAFN_BASENAME}-report-${TTAFN_TYPE}-${_rn})
 endmacro()
 
