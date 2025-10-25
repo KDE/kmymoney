@@ -1,4 +1,4 @@
-file(GLOB tests_sources "*-test.cpp")
+file(GLOB tests_sources "test-*.cpp")
 kmm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Test
@@ -6,7 +6,7 @@ kmm_add_tests(${tests_sources}
     kmm_testutils
 )
 
-target_compile_definitions(qsqlcipher-test
+target_compile_definitions(test-qsqlcipher
   PRIVATE
   QSQLCIPHERPATH="${CMAKE_INSTALL_PREFIX}/${PLUGIN_INSTALL_DIR}")
 

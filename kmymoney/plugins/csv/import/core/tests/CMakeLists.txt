@@ -8,7 +8,7 @@ target_link_libraries(csvimport_testcommon
   kmm_mymoney
 )
 
-file(GLOB tests_sources "*-test.cpp")
+file(GLOB tests_sources "test-*.cpp")
 kmm_add_tests(${tests_sources}
   NAME_PREFIX
     "csvimport-"

@@ -5,7 +5,7 @@ target_link_libraries(kmm_testutils
     kmm_mymoney
 )
 
-file(GLOB tests_sources "*-test.cpp")
+file(GLOB tests_sources "test-*.cpp")
 kmm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Core

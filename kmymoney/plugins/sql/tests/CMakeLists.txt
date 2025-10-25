@@ -17,11 +17,11 @@ PUBLIC
   xmlstoragehelper
 )
 
-file(GLOB tests_sources "*-test.cpp")
+file(GLOB tests_sources "test-*.cpp")
 
 # for now don't build database test as it will be replaced
-message("mymoneydatabasemgr-test.cpp disabled in ${CMAKE_CURRENT_SOURCE_DIR}")
-list(REMOVE_ITEM tests_sources ${CMAKE_CURRENT_SOURCE_DIR}/mymoneydatabasemgr-test.cpp)
+message("test-mymoneydatabasemgr.cpp disabled in ${CMAKE_CURRENT_SOURCE_DIR}")
+list(REMOVE_ITEM tests_sources ${CMAKE_CURRENT_SOURCE_DIR}/test-mymoneydatabasemgr.cpp)
 
 kmm_add_tests(${tests_sources}
   LINK_LIBRARIES

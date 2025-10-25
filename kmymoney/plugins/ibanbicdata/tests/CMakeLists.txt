@@ -1,4 +1,4 @@
-file(GLOB tests_sources "*-test.cpp")
+file(GLOB tests_sources "test-*.cpp")
 kmm_add_tests(${tests_sources}
   NAME_PREFIX
     "ibanandbic-"

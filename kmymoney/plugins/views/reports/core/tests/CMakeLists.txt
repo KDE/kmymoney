@@ -1,7 +1,7 @@
 set(tests_sources
-  pivotgrid-test.cpp
-  pivottable-test.cpp
-  querytable-test.cpp
+  test-pivotgrid.cpp
+  test-pivottable.cpp
+  test-querytable.cpp
 )
 
 add_definitions(-DCMAKE_CURRENT_BINARY_DIR=\"${CMAKE_CURRENT_BINARY_DIR}\")
@@ -20,7 +20,7 @@ kmm_add_tests(${tests_sources}
 )
 
 set(tests_gui_sources
-  chart-test.cpp
+  test-chart.cpp
 )
 
 # do not run this test on KDE CI, as it is broken for unknown reason
