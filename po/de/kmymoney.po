@@ -4645,10 +4645,9 @@ msgstr ""
 "Unterstützung in Form von Quellcode und/oder Vorschlägen ist sehr willkommen."
 
 #: kmymoney/kcreditswindow.cpp:45
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "© 2000–2022 Das KMyMoney-Entwicklerteam"
+msgstr "© 2000–2025 Das KMyMoney-Entwicklungsteam"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
