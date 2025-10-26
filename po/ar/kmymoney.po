@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-25 00:42+0000\n"
-"PO-Revision-Date: 2025-10-23 10:07+0400\n"
+"PO-Revision-Date: 2025-10-25 16:58+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -12237,6 +12237,7 @@ msgid ""
 "Automatically load login credentials if available (affects all mapped "
 "accounts)"
 msgstr ""
+"حمِّل بيانات الولوج آلياً إذا كانت متوفرة (يؤثر على جميع الحسابات المرتبطة)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
@@ -12467,7 +12468,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/kbanking.kcfg:20
 #, kde-format
 msgid "Load passphrase from password store if available without asking user."
-msgstr ""
+msgstr "حمّل عبارة المرور من مخزن كلمات السر إن كانت متوفرة دون سؤال المستخدم."
 
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
@@ -18873,10 +18874,9 @@ msgstr "اعرض شبكة في السّجلّ"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "أظهر الفئات في عرض قائمة الحسابات"
+msgstr "اعرض أداة التصفية عند فتح حساب"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:288
@@ -21896,6 +21896,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"يستخدم لإبقاء أداة التصفية مرئية. إذا لم تكن مرئية، فيمكن عرضها باستخدام Ctrl"
+"+F."
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format

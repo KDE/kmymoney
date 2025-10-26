@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-25 00:42+0000\n"
-"PO-Revision-Date: 2025-10-24 16:59+0300\n"
+"PO-Revision-Date: 2025-10-25 21:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -12264,6 +12264,8 @@ msgid ""
 "Automatically load login credentials if available (affects all mapped "
 "accounts)"
 msgstr ""
+"Kullanılabiliyorsa oturum açma bilgilerini kendiliğinden yükle (eşlemli tüm "
+"hesapları etkiler)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
@@ -12499,7 +12501,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/kbanking.kcfg:20
 #, kde-format
 msgid "Load passphrase from password store if available without asking user."
-msgstr ""
+msgstr "Kullanıcıya sormadan parola deposundan geçiş parolasını yükler."
 
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90

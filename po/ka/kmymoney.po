@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-25 00:42+0000\n"
-"PO-Revision-Date: 2025-10-24 06:43+0200\n"
+"PO-Revision-Date: 2025-10-25 06:35+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -244,6 +244,8 @@ msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr ""
+"თქვენ უნდა ან აირჩიოთ ანგარიში, ან ახალი შექმნათ, ან დააჭიროთ ღილაკს "
+"<b>შეწყვეტა</b>."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1688
 #: kmymoney/views/kscheduledview_p.h:199 kmymoney/views/kscheduledview_p.h:319
@@ -2041,7 +2043,7 @@ msgstr "ხარჯები"
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
 "account"
-msgstr ""
+msgstr "პარამეტრი გამორთულია, რადგან ამ ანგარიშზე ტრანზაქციები მინიჭებული არაა"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:608
 #, kde-format
