@@ -64,6 +64,7 @@
 #include "gwenhywfarqtoperators.h"
 #include "gwenkdegui.h"
 #include "kbaccountsettings.h"
+#include "kbankingsettings.h"
 #include "kbmapaccount.h"
 #include "kbpickstartdate.h"
 #include "kmymoneyview.h"
@@ -181,6 +182,10 @@ KBanking::~KBanking()
 {
     delete d;
     qDebug("Plugins: kbanking unloaded");
+
+    if (KBankingSettings::self()->isSaveNeeded()) {
+        KBankingSettings::self()->save();
+    }
 }
 
 void KBanking::plug(KXMLGUIFactory* guiFactory)
