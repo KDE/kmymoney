@@ -88,6 +88,8 @@ macro(add_report_tests)
         continue()
       endif()
       foreach(format ${ART_FORMATS})
+        set(working_dir ${CMAKE_CURRENT_BINARY_DIR}/${format})
+        execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${working_dir})
         to_test_and_file_name(TYPE ${ART_TYPE} BASENAME ${basename} REPORT_NAME ${rn} RETURN_TEST_NAME test_name RETURN_FILE_NAME file_name)
         message(" * adding test '${test_name}-${format}' for report '${rn}' with type '${rt}' and id '${id}'")
         add_test(
@@ -98,9 +100,9 @@ macro(add_report_tests)
             -Dformat=${format}
             -Dtype=${ART_TYPE}
             -Dreport=${rn}
-            -Doutfilename=${CMAKE_CURRENT_BINARY_DIR}/${file_name}.${format}
-            -Dreffilename=${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.${format}
-            -Dworkingdir=${CMAKE_CURRENT_BINARY_DIR}
+            -Doutfilename=${CMAKE_CURRENT_BINARY_DIR}/${format}/${file_name}.${format}
+            -Dreffilename=${CMAKE_CURRENT_SOURCE_DIR}/${format}/${file_name}.${format}
+            -Dworkingdir=${working_dir}
             -P ${CMAKE_CURRENT_SOURCE_DIR}/compare.cmake
         )
         set_tests_properties(${test_name}-${format}
