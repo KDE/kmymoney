@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-24 03:23+0000\n"
+"POT-Creation-Date: 2025-10-27 03:26+0000\n"
 "PO-Revision-Date: 2024-11-30 09:29+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -66,8 +66,8 @@ msgid "Error creating security record: %1"
 msgstr "Błąd przy tworzeniu wpisu papieru: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:598
-#: kmymoney/plugins/kbanking/kbanking.cpp:620
+#: kmymoney/plugins/kbanking/kbanking.cpp:603
+#: kmymoney/plugins/kbanking/kbanking.cpp:625
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12419,29 +12419,29 @@ msgstr "P&ierwszy możliwy termin"
 msgid "Pick &date"
 msgstr "Wybierz &datę"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:307
+#: kmymoney/plugins/kbanking/kbanking.cpp:312
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
 msgstr "Ustawienia połączenia"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:313
+#: kmymoney/plugins/kbanking/kbanking.cpp:318
 #, kde-format
 msgid "KBanking module not correctly initialized"
 msgstr "Moduł KBanking nie został prawidłowo uruchomiony"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:333
+#: kmymoney/plugins/kbanking/kbanking.cpp:338
 #, kde-format
 msgid "Configure Aq&Banking..."
 msgstr "Ustawienia Aq&Banking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:338
+#: kmymoney/plugins/kbanking/kbanking.cpp:343
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "Zaimportuj z AqBanking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:517
-#: kmymoney/plugins/kbanking/kbanking.cpp:766
+#: kmymoney/plugins/kbanking/kbanking.cpp:522
+#: kmymoney/plugins/kbanking/kbanking.cpp:771
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12450,13 +12450,13 @@ msgstr ""
 "<qt><p>Podane konto <b>%1</b> nie zostało przypisane do konta internetowego."
 "</p></qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:523
+#: kmymoney/plugins/kbanking/kbanking.cpp:528
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Konto niepowiązane"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:595
-#: kmymoney/plugins/kbanking/kbanking.cpp:617
+#: kmymoney/plugins/kbanking/kbanking.cpp:600
+#: kmymoney/plugins/kbanking/kbanking.cpp:622
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12465,12 +12465,12 @@ msgstr ""
 "<qt>Nie mogę dodać zadania do kolejki.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1559
+#: kmymoney/plugins/kbanking/kbanking.cpp:1564
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Błąd importowania wyciągu. Czy chcesz kontynuować?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1560
+#: kmymoney/plugins/kbanking/kbanking.cpp:1565
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514

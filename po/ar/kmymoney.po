@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-24 03:23+0000\n"
+"POT-Creation-Date: 2025-10-27 03:26+0000\n"
 "PO-Revision-Date: 2025-09-22 19:38+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -61,8 +61,8 @@ msgid "Error creating security record: %1"
 msgstr "خطأ أثناء إنشاء سجلّ الأمن: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:598
-#: kmymoney/plugins/kbanking/kbanking.cpp:620
+#: kmymoney/plugins/kbanking/kbanking.cpp:603
+#: kmymoney/plugins/kbanking/kbanking.cpp:625
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12314,42 +12314,42 @@ msgstr "&أوّل تاريخ ممكن"
 msgid "Pick &date"
 msgstr "انت&قِ تاريخًا"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:307
+#: kmymoney/plugins/kbanking/kbanking.cpp:312
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
 msgstr "إعدادات الإنترنت"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:313
+#: kmymoney/plugins/kbanking/kbanking.cpp:318
 #, kde-format
 msgid "KBanking module not correctly initialized"
 msgstr "وحدة KBacking لم تُهيّء بشكل صحيح"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:333
+#: kmymoney/plugins/kbanking/kbanking.cpp:338
 #, kde-format
 msgid "Configure Aq&Banking..."
 msgstr "اضبط Aq&Banking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:338
+#: kmymoney/plugins/kbanking/kbanking.cpp:343
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "مستورد AqBanking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:517
-#: kmymoney/plugins/kbanking/kbanking.cpp:766
+#: kmymoney/plugins/kbanking/kbanking.cpp:522
+#: kmymoney/plugins/kbanking/kbanking.cpp:771
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
 "account.</qt>"
 msgstr "<qt>حساب التّطبيق المعطى <b>%1</b> لم يربط بحساب متصل.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:523
+#: kmymoney/plugins/kbanking/kbanking.cpp:528
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "لم يربط الحساب"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:595
-#: kmymoney/plugins/kbanking/kbanking.cpp:617
+#: kmymoney/plugins/kbanking/kbanking.cpp:600
+#: kmymoney/plugins/kbanking/kbanking.cpp:622
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12358,12 +12358,12 @@ msgstr ""
 "<qt>لم يمكن إدراج الوظيفة في طابور.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1559
+#: kmymoney/plugins/kbanking/kbanking.cpp:1564
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "خطأ أثناء استيراد البيان. أتريد المتابعة؟"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1560
+#: kmymoney/plugins/kbanking/kbanking.cpp:1565
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514

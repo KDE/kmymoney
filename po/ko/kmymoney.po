@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-24 03:23+0000\n"
+"POT-Creation-Date: 2025-10-27 03:26+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -61,8 +61,8 @@ msgid "Error creating security record: %1"
 msgstr "유가증권 기록 생성 중 오류 발생: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:598
-#: kmymoney/plugins/kbanking/kbanking.cpp:620
+#: kmymoney/plugins/kbanking/kbanking.cpp:603
+#: kmymoney/plugins/kbanking/kbanking.cpp:625
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12330,29 +12330,29 @@ msgstr "첫 가능한 날짜(&I)"
 msgid "Pick &date"
 msgstr "날짜 선택(&D)"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:307
+#: kmymoney/plugins/kbanking/kbanking.cpp:312
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
 msgstr "온라인 설정"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:313
+#: kmymoney/plugins/kbanking/kbanking.cpp:318
 #, kde-format
 msgid "KBanking module not correctly initialized"
 msgstr "KBanking 모듈이 올바르게 초기화되지 않았음"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:333
+#: kmymoney/plugins/kbanking/kbanking.cpp:338
 #, kde-format
 msgid "Configure Aq&Banking..."
 msgstr "AqBanking 설정(&B) ..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:338
+#: kmymoney/plugins/kbanking/kbanking.cpp:343
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "AqBanking 가져오기 도구..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:517
-#: kmymoney/plugins/kbanking/kbanking.cpp:766
+#: kmymoney/plugins/kbanking/kbanking.cpp:522
+#: kmymoney/plugins/kbanking/kbanking.cpp:771
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12360,13 +12360,13 @@ msgid ""
 msgstr ""
 "<qt>지정한 앱 계좌 <b>%1</b>이(가) 온라인 계좌에 매핑되지 않았습니다.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:523
+#: kmymoney/plugins/kbanking/kbanking.cpp:528
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "계좌가 매핑되지 않음"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:595
-#: kmymoney/plugins/kbanking/kbanking.cpp:617
+#: kmymoney/plugins/kbanking/kbanking.cpp:600
+#: kmymoney/plugins/kbanking/kbanking.cpp:622
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12375,12 +12375,12 @@ msgstr ""
 "<qt>작업을 대기열에 추가할 수 없습니다.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1559
+#: kmymoney/plugins/kbanking/kbanking.cpp:1564
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "거래 내역을 가져오는 중 오류가 발생했습니다. 계속 진행하시겠습니까?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1560
+#: kmymoney/plugins/kbanking/kbanking.cpp:1565
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514
