@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-25 00:42+0000\n"
+"POT-Creation-Date: 2025-10-27 00:42+0000\n"
 "PO-Revision-Date: 2025-10-25 09:02+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -65,8 +65,8 @@ msgid "Error creating security record: %1"
 msgstr "S'ha produït un error en crear el registre de títol: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:598
-#: kmymoney/plugins/kbanking/kbanking.cpp:620
+#: kmymoney/plugins/kbanking/kbanking.cpp:603
+#: kmymoney/plugins/kbanking/kbanking.cpp:625
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12540,29 +12540,29 @@ msgstr "La pr&imera data que es puga"
 msgid "Pick &date"
 msgstr "Trieu una &data"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:307
+#: kmymoney/plugins/kbanking/kbanking.cpp:312
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
 msgstr "Configuració en línia"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:313
+#: kmymoney/plugins/kbanking/kbanking.cpp:318
 #, kde-format
 msgid "KBanking module not correctly initialized"
 msgstr "El mòdul KBanking no s'ha inicialitzat correctament"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:333
+#: kmymoney/plugins/kbanking/kbanking.cpp:338
 #, kde-format
 msgid "Configure Aq&Banking..."
 msgstr "Configura l'Aq&Banking…"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:338
+#: kmymoney/plugins/kbanking/kbanking.cpp:343
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "Importador d'AqBanking…"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:517
-#: kmymoney/plugins/kbanking/kbanking.cpp:766
+#: kmymoney/plugins/kbanking/kbanking.cpp:522
+#: kmymoney/plugins/kbanking/kbanking.cpp:771
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12571,13 +12571,13 @@ msgstr ""
 "<qt>El compte d'aplicació indicat <b>%1</b> no està vinculat amb cap compte "
 "en línia.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:523
+#: kmymoney/plugins/kbanking/kbanking.cpp:528
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Compte sense vincular"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:595
-#: kmymoney/plugins/kbanking/kbanking.cpp:617
+#: kmymoney/plugins/kbanking/kbanking.cpp:600
+#: kmymoney/plugins/kbanking/kbanking.cpp:622
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12586,12 +12586,12 @@ msgstr ""
 "<qt>No s'ha pogut enviar el treball a la cua.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1559
+#: kmymoney/plugins/kbanking/kbanking.cpp:1564
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "S'ha produït un error en importar un extracte. Voleu continuar?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1560
+#: kmymoney/plugins/kbanking/kbanking.cpp:1565
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514

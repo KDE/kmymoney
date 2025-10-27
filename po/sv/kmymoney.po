@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-25 00:42+0000\n"
-"PO-Revision-Date: 2025-10-22 20:18+0200\n"
+"POT-Creation-Date: 2025-10-27 00:42+0000\n"
+"PO-Revision-Date: 2025-10-26 20:52+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -64,8 +64,8 @@ msgid "Error creating security record: %1"
 msgstr "Fel när värdepapperspost skulle skapas: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:598
-#: kmymoney/plugins/kbanking/kbanking.cpp:620
+#: kmymoney/plugins/kbanking/kbanking.cpp:603
+#: kmymoney/plugins/kbanking/kbanking.cpp:625
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12281,6 +12281,8 @@ msgid ""
 "Automatically load login credentials if available (affects all mapped "
 "accounts)"
 msgstr ""
+"Läs in inloggningsuppgifter automatiskt om tillgängliga (påverkar alla "
+"kopplade konton)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
@@ -12430,29 +12432,29 @@ msgstr "Första möjl&iga datum"
 msgid "Pick &date"
 msgstr "Välj &datum"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:307
+#: kmymoney/plugins/kbanking/kbanking.cpp:312
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
 msgstr "Direktinställningar"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:313
+#: kmymoney/plugins/kbanking/kbanking.cpp:318
 #, kde-format
 msgid "KBanking module not correctly initialized"
 msgstr "Modulen Kbanking är inte riktigt initierad"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:333
+#: kmymoney/plugins/kbanking/kbanking.cpp:338
 #, kde-format
 msgid "Configure Aq&Banking..."
 msgstr "Anpassa Aq&Banking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:338
+#: kmymoney/plugins/kbanking/kbanking.cpp:343
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "AqBanking importerar..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:517
-#: kmymoney/plugins/kbanking/kbanking.cpp:766
+#: kmymoney/plugins/kbanking/kbanking.cpp:522
+#: kmymoney/plugins/kbanking/kbanking.cpp:771
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12461,13 +12463,13 @@ msgstr ""
 "<qt>Det angivna programkontot <b>%1</b> har inte kopplats till ett "
 "Internetkonto.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:523
+#: kmymoney/plugins/kbanking/kbanking.cpp:528
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Konto inte kopplat"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:595
-#: kmymoney/plugins/kbanking/kbanking.cpp:617
+#: kmymoney/plugins/kbanking/kbanking.cpp:600
+#: kmymoney/plugins/kbanking/kbanking.cpp:622
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12476,12 +12478,12 @@ msgstr ""
 "<qt>Kunde inte köa jobbet.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1559
+#: kmymoney/plugins/kbanking/kbanking.cpp:1564
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Fel vid import av utdrag. Vill du fortsätta?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1560
+#: kmymoney/plugins/kbanking/kbanking.cpp:1565
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
 #: kmymoney/plugins/views/reports/kreportsview.cpp:495
 #: kmymoney/plugins/views/reports/kreportsview.cpp:514
@@ -12519,6 +12521,8 @@ msgstr ""
 #, kde-format
 msgid "Load passphrase from password store if available without asking user."
 msgstr ""
+"Läs in lösenordsfras från lösenordslagring om tillgängligt utan att fråga "
+"användaren."
 
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
@@ -18906,10 +18910,9 @@ msgstr "Visa ett rutnät i registret"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Visa kategorierna i kontovyns lista"
+msgstr "Visa filterkomponenten när ett konto öppnas"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:288
@@ -21965,6 +21968,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"Används för att hålla filterkomponenten synlig. Om den inte syns kan den "
+"visas med Ctrl+F"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
