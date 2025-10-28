@@ -16,6 +16,7 @@
 #include <QRegularExpressionMatch>
 #include <QStandardPaths>
 #include <QStringList>
+#include <QStyleFactory>
 #include <QWidget>
 #ifdef KMM_DBUS
 #include <QDBusConnection>
@@ -104,19 +105,21 @@ int main(int argc, char *argv[])
      * Create application first
      */
     QApplication app(argc, argv);
+    qDebug() << QStyleFactory::keys();
 
 #if HAVE_STYLE_MANAGER
     /**
      * trigger initialisation of proper application style
      */
     KStyleManager::initStyle();
+    qDebug() << "Have style manager";
 #else
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
     /**
      * For Windows and macOS: use Breeze if available
      * Of all tested styles that works the best for us
      */
-    QApplication::setStyle(QStringLiteral("breeze"));
+    QApplication::setStyle(QStringLiteral("Fusion"));
 #endif
 #endif
 
