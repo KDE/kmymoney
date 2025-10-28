@@ -72,11 +72,6 @@ public:
         ui->m_filterContainer->hide();
         ui->m_searchWidget->installEventFilter(q);
 
-        ui->m_accountTree->setProxyModel(new InstitutionsProxyModel);
-        m_proxyModel = ui->m_accountTree->proxyModel();
-        m_proxyModel->setClosedSelectable(true);
-        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-
         auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
         columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
         columnSelector->setAlwaysHidden(QVector<int>({
@@ -88,6 +83,11 @@ public:
             AccountsModel::Column::Number,
             AccountsModel::Column::HasOnlineMapping,
         }));
+
+        ui->m_accountTree->setProxyModel(new InstitutionsProxyModel);
+        m_proxyModel = ui->m_accountTree->proxyModel();
+        m_proxyModel->setClosedSelectable(true);
+        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
         ui->m_accountTree->setModel(MyMoneyFile::instance()->institutionsModel());
         m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
