@@ -190,7 +190,7 @@ public:
         // in case we have a previous setting, we open them
         const auto openLedgers = grp.readEntry(storageId, QStringList());
         if (!openLedgers.isEmpty() && (openMode != AccountsOpenAtStart::FavoriteAccounts)) {
-            for (const auto& id: qAsConst(openLedgers)) {
+            for (const auto& id : qAsConst(openLedgers)) {
                 auto thisId = id;
                 const auto lastUsedAtClose = id.endsWith(QLatin1String("*"));
                 if ((openMode == AccountsOpenAtStart::AccountsOpenedLastTime) || lastUsedAtClose) {
@@ -214,13 +214,39 @@ public:
             // retrieve all items in the current subtree
             const auto indexes = model->match(model->index(0, 0, startIdx), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
 
-            // indexes now has a list of favorite accounts
+            // indexes now has a list of favorite, toplevel asset or
+            // toplevel liability accounts depending on the iteration
+            // of the for loop over the subtrees.
             bool haveSelected = false; // true if an account was selected
+            if (startIdx == model->favoriteIndex()) {
+                // if favorite accounts were previously opened, we open them
+                // in the same order
+                if (!openLedgers.isEmpty()) {
+                    for (const auto& id : qAsConst(openLedgers)) {
+                        // make sure to only look at favorite accounts
+                        auto thisId = id;
+                        thisId.remove(QLatin1String("*"));
+                        for (const auto& idx : indexes) {
+                            if (idx.data(eMyMoney::Model::Roles::IdRole).toString() == thisId) {
+                                const auto lastUsedAtClose = id.endsWith(QLatin1String("*"));
+                                openLedger(thisId, lastUsedAtClose);
+                                break;
+                            }
+                        }
+                    }
+                }
+                // if there are more favorite accounts to open
+                // then they will be opened in the following loop
+            }
+
             for (const auto& idx : indexes) {
                 const auto id = idx.data(eMyMoney::Model::Roles::IdRole).toString();
                 const auto select = openLedgers.contains(QStringLiteral("%1*").arg(id));
                 haveSelected |= select;
-                openLedger(id, select);
+                if (!isLedgerOpen(id)) {
+                    openLedger(id, select);
+                }
+
                 if (stopAfterFirstAccount) {
                     break;
                 }
@@ -237,6 +263,11 @@ public:
             stopAfterFirstAccount = true;
         }
         ui->ledgerTab->setCurrentIndex(0);
+    }
+
+    bool isLedgerOpen(QString accountId) const
+    {
+        return tabIdByAccountId(accountId) != -1;
     }
 
     void openLedger(QString accountId, bool makeCurrentLedger)
@@ -452,7 +483,7 @@ public:
      * @note updates accountId to point to the investment account in case
      * @a accountId references a stock account
      */
-    int tabIdByAccountId(QString& accountId)
+    int tabIdByAccountId(QString& accountId) const
     {
         if (!m_needInit && !accountId.isEmpty()) {
             // in case a stock account is selected, we switch to the parent which
