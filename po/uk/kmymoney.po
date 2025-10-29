@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 00:42+0000\n"
+"POT-Creation-Date: 2025-10-29 00:44+0000\n"
 "PO-Revision-Date: 2025-10-25 17:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -6320,49 +6320,49 @@ msgstr[3] "Не було імпортовано жодного нового за
 msgid "Statement import statistics"
 msgstr "Статистика імпортування виписок"
 
-#: kmymoney/main.cpp:134
+#: kmymoney/main.cpp:137
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:156
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "мова, яку буде використано"
 
-#: kmymoney/main.cpp:160
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "не відкривати попередній використаний файл"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "увімкнути таймери швидкодії"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "не перехоплювати на загальному рівні неперехоплені виключення"
 
-#: kmymoney/main.cpp:174
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "увімкнути трасування програми"
 
-#: kmymoney/main.cpp:178
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "надіслати список всіх визначених об'єктів QAction до stdout і завершити "
 "роботу програми"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "файл, який слід відкрити"
 
-#: kmymoney/main.cpp:291
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr ""
@@ -21821,7 +21821,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Різниця: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:374
+#: kmymoney/views/simpleledgerview.cpp:405
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21831,7 +21831,7 @@ msgstr ""
 "Кнопку закриття для цього рахунку вилучено, оскільки ви його узгоджуєте. "
 "Завершіть, скасуйте або відкладіть узгодження, щоб повернути кнопку на місце."
 
-#: kmymoney/views/simpleledgerview.cpp:485
+#: kmymoney/views/simpleledgerview.cpp:516
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21841,7 +21841,7 @@ msgstr ""
 "На цій сторінці показано бухгалтерську книгу рахунків. Поки що не створено "
 "жодних записів рахунків, тому показано цей напис."
 
-#: kmymoney/views/simpleledgerview.cpp:488
+#: kmymoney/views/simpleledgerview.cpp:519
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21851,12 +21851,12 @@ msgstr ""
 "На цій сторінці показано бухгалтерську книгу рахунків. Поки що не вибрано "
 "жодних записів рахунків, тому показано цей напис."
 
-#: kmymoney/views/simpleledgerview.cpp:767
+#: kmymoney/views/simpleledgerview.cpp:798
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Відкрити сайт <b>%1</b> у вашій програмі для перегляду інтернету."
 
-#: kmymoney/views/simpleledgerview.cpp:959
+#: kmymoney/views/simpleledgerview.cpp:990
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21865,7 +21865,7 @@ msgstr ""
 "Ви не можете закрити панель перегляду цього рахунку, оскільки ви узгоджуєте "
 "рахунок. Спочатку, завершіть дію, скасуйте або відкладіть узгодження."
 
-#: kmymoney/views/simpleledgerview.cpp:960
+#: kmymoney/views/simpleledgerview.cpp:991
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

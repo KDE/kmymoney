@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 00:42+0000\n"
+"POT-Creation-Date: 2025-10-29 00:44+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -6261,47 +6261,47 @@ msgstr[0] "가져온 새 거래가 없습니다."
 msgid "Statement import statistics"
 msgstr "명세서 가져오기 통계"
 
-#: kmymoney/main.cpp:134
+#: kmymoney/main.cpp:137
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:156
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "사용할 언어"
 
-#: kmymoney/main.cpp:160
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "마지막으로 사용한 파일 열지 않기"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "성능 타이머 활성화"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "잡히지 않은 예외를 전역적으로 잡지 않기"
 
-#: kmymoney/main.cpp:174
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "프로그램 추적 켜기"
 
-#: kmymoney/main.cpp:178
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "정의된 모든 QAction 객체의 이름을 표준 출력에 출력하고 끝내기"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "열 파일"
 
-#: kmymoney/main.cpp:291
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "잡히지 않은 오류. 자세한 정보를 개발자에게 보고해 주십시오"
@@ -21489,7 +21489,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "차액: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:374
+#: kmymoney/views/simpleledgerview.cpp:405
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21499,7 +21499,7 @@ msgstr ""
 "이 계좌를 정산하고 있으므로 계좌 폐쇄 단추가 삭제되었습니다. 계좌 폐쇄 단추"
 "를 복원하려면 정산 작업을 완료나 취소, 연기하십시오."
 
-#: kmymoney/views/simpleledgerview.cpp:485
+#: kmymoney/views/simpleledgerview.cpp:516
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21507,7 +21507,7 @@ msgid ""
 "text is shown instead."
 msgstr "이 페이지에서는 계좌 원장을 표시합니다. 현재 설정된 계좌가 없습니다."
 
-#: kmymoney/views/simpleledgerview.cpp:488
+#: kmymoney/views/simpleledgerview.cpp:519
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21515,12 +21515,12 @@ msgid ""
 "this text is shown instead."
 msgstr "이 페이지에서는 계좌 원장을 표시합니다. 현재 선택한 계좌가 없습니다."
 
-#: kmymoney/views/simpleledgerview.cpp:767
+#: kmymoney/views/simpleledgerview.cpp:798
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "브라우저에서 <b>%1</b> 웹사이트를 여십시오."
 
-#: kmymoney/views/simpleledgerview.cpp:959
+#: kmymoney/views/simpleledgerview.cpp:990
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21529,7 +21529,7 @@ msgstr ""
 "이 계좌를 정산하고 있으므로 계좌를 폐쇄할 수 없습니다. 정산 작업을 완료나 취"
 "소, 연기하십시오."
 
-#: kmymoney/views/simpleledgerview.cpp:960
+#: kmymoney/views/simpleledgerview.cpp:991
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

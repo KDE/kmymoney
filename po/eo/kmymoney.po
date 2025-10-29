@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 00:42+0000\n"
+"POT-Creation-Date: 2025-10-29 00:44+0000\n"
 "PO-Revision-Date: 2025-02-15 14:15+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -6262,48 +6262,48 @@ msgstr[1] "Neniuj novaj transakcioj estis importitaj."
 msgid "Statement import statistics"
 msgstr "Deklara importstatistiko"
 
-#: kmymoney/main.cpp:134
+#: kmymoney/main.cpp:137
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:156
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "lingvo uzota"
 
-#: kmymoney/main.cpp:160
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "ne malfermu la lastan uzitan dosieron"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "ebligi agado-tempigilojn"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "ne tutamplekse kapti nekaptitajn esceptojn"
 
-#: kmymoney/main.cpp:174
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "ŝalti programspurojn"
 
-#: kmymoney/main.cpp:178
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "forĵeti la nomojn de ĉiuj difinitaj QAction-objektoj al stdout kaj ĉesi"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "dosiero por malfermi"
 
-#: kmymoney/main.cpp:291
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Nekaptita eraro. Bonvolu raporti la detalojn al la programistoj"
@@ -21600,7 +21600,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Diferenco: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:374
+#: kmymoney/views/simpleledgerview.cpp:405
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21610,7 +21610,7 @@ msgstr ""
 "La fermbutono por ĉi tiu konto estis forigita ĉar vi akordigas ĝin. Finu, "
 "nuligi aŭ prokrasti la repaciĝon por reakiri ĝin."
 
-#: kmymoney/views/simpleledgerview.cpp:485
+#: kmymoney/views/simpleledgerview.cpp:516
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21620,7 +21620,7 @@ msgstr ""
 "Ĉi tiu paĝo montras la kontolibron. Nuntempe, neniuj kontoj ekzistas do ĉi "
 "tiu teksto estas montrita anstataŭe."
 
-#: kmymoney/views/simpleledgerview.cpp:488
+#: kmymoney/views/simpleledgerview.cpp:519
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21630,12 +21630,12 @@ msgstr ""
 "Ĉi tiu paĝo montras la kontolibron. Nuntempe, neniuj kontoj estas elektitaj "
 "do ĉi tiu teksto estas montrita anstataŭe."
 
-#: kmymoney/views/simpleledgerview.cpp:767
+#: kmymoney/views/simpleledgerview.cpp:798
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Malfermi retejon de <b>%1</b> en via retumilo."
 
-#: kmymoney/views/simpleledgerview.cpp:959
+#: kmymoney/views/simpleledgerview.cpp:990
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21644,7 +21644,7 @@ msgstr ""
 "Vi ne povas fermi ĉi tiun vidon ĉar vi akordigas la konton. Unue fini, "
 "nuligi aŭ prokrasti la repaciĝon."
 
-#: kmymoney/views/simpleledgerview.cpp:960
+#: kmymoney/views/simpleledgerview.cpp:991
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 00:42+0000\n"
+"POT-Creation-Date: 2025-10-29 00:44+0000\n"
 "PO-Revision-Date: 2025-10-01 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -6305,48 +6305,48 @@ msgstr[0] "文件與翻譯均已改進"
 msgid "Statement import statistics"
 msgstr "報表統計"
 
-#: kmymoney/main.cpp:134
+#: kmymoney/main.cpp:137
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:156
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "要使用的語言"
 
-#: kmymoney/main.cpp:160
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "不要開啟上次使用的檔案"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "開啟效能計時器"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "不要全域抓取未捕捉到的例外"
 
-#: kmymoney/main.cpp:174
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "開啟程式追蹤"
 
-#: kmymoney/main.cpp:178
+#: kmymoney/main.cpp:181
 #, fuzzy, kde-format
 #| msgid "dump the names of all defined KAction objects to stdout and quit"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "印出所有定義的 KAction 物件名稱到標準輸出，然後離開"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "要開啟的檔案"
 
-#: kmymoney/main.cpp:291
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "未捕捉到的錯誤。請回報詳情給開發者"
@@ -21880,7 +21880,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "差異：%1"
 
-#: kmymoney/views/simpleledgerview.cpp:374
+#: kmymoney/views/simpleledgerview.cpp:405
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21888,7 +21888,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:485
+#: kmymoney/views/simpleledgerview.cpp:516
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21896,7 +21896,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:488
+#: kmymoney/views/simpleledgerview.cpp:519
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21904,19 +21904,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:767
+#: kmymoney/views/simpleledgerview.cpp:798
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:959
+#: kmymoney/views/simpleledgerview.cpp:990
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:960
+#: kmymoney/views/simpleledgerview.cpp:991
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

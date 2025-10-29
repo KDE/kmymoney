@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 00:42+0000\n"
+"POT-Creation-Date: 2025-10-29 00:44+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -6461,49 +6461,49 @@ msgstr[1] "Não foram importadas transacções novas."
 msgid "Statement import statistics"
 msgstr "Estatísticas da importação do extracto"
 
-#: kmymoney/main.cpp:134
+#: kmymoney/main.cpp:137
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:156
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "língua a usar"
 
-#: kmymoney/main.cpp:160
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "não abrir o último ficheiro usado"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "activar as medições de desempenho"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "não capturar globalmente as excepções não-capturadas"
 
-#: kmymoney/main.cpp:174
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "activar o registo de eventos do programa"
 
-#: kmymoney/main.cpp:178
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "apresentar os nomes de todos os objectos QAction definidos para o 'stdout' e "
 "sair"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "ficheiro a abrir"
 
-#: kmymoney/main.cpp:291
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr ""
@@ -21994,7 +21994,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Diferença: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:374
+#: kmymoney/views/simpleledgerview.cpp:405
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -22004,7 +22004,7 @@ msgstr ""
 "O botão de fecho desta conta foi removido porque você está a consolidá-la. "
 "Termine, cancele ou adie a consolidação para o ter de volta."
 
-#: kmymoney/views/simpleledgerview.cpp:485
+#: kmymoney/views/simpleledgerview.cpp:516
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22014,7 +22014,7 @@ msgstr ""
 "Esta página mostra o livro de registos das contas. De momento não existem "
 "contas, pelo que é apresentado este texto em alternativa."
 
-#: kmymoney/views/simpleledgerview.cpp:488
+#: kmymoney/views/simpleledgerview.cpp:519
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22024,12 +22024,12 @@ msgstr ""
 "Esta página mostra o livro de registos das contas. De momento não estão "
 "seleccionadas contas, pelo que é apresentado este texto em alternativa."
 
-#: kmymoney/views/simpleledgerview.cpp:767
+#: kmymoney/views/simpleledgerview.cpp:798
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Abrir a página Web do <b>%1</b> no seu navegador."
 
-#: kmymoney/views/simpleledgerview.cpp:959
+#: kmymoney/views/simpleledgerview.cpp:990
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -22038,7 +22038,7 @@ msgstr ""
 "Não pode fechar esta janela porque a está a consolidar. Termine, cancele ou "
 "adie a consolidação para poder voltar a fechar."
 
-#: kmymoney/views/simpleledgerview.cpp:960
+#: kmymoney/views/simpleledgerview.cpp:991
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

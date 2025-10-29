@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 00:42+0000\n"
+"POT-Creation-Date: 2025-10-29 00:44+0000\n"
 "PO-Revision-Date: 2025-10-26 07:05+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -6008,48 +6008,48 @@ msgstr[1] "ახალი ტრანზაქციები არ შემ
 msgid "Statement import statistics"
 msgstr "ამონაწერის შემოტანის სტატისტიკა"
 
-#: kmymoney/main.cpp:134
+#: kmymoney/main.cpp:137
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:156
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "ენის გამოყენება"
 
-#: kmymoney/main.cpp:160
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "არ გახსნა ბოლო გამოყენებული ფაილი"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "წარმადობის ტაიმერების ჩართვა"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "არ დაიჭირო გლობალურად დაუჭერელი გამონაკლისები"
 
-#: kmymoney/main.cpp:174
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "პროგრამის ტრეისების ჩართვა"
 
-#: kmymoney/main.cpp:178
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "ყველა აღწერილი QAction ობიექტების სახელების გადმოფურთხება stdout-ზე და გასვლა"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "გასახსნელი ფაილი"
 
-#: kmymoney/main.cpp:291
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "ჩაუჭერელი შეცდომა. მისწერეთ დეტალები პროგრამისტებს"
@@ -20816,7 +20816,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "სხვაობა: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:374
+#: kmymoney/views/simpleledgerview.cpp:405
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20826,7 +20826,7 @@ msgstr ""
 "ამ ანგარიშის დახურვის ღილაკი მოცილებულია, რადგან მიმდინარეობს მისი "
 "შეთანხმება. დასაბრუნებლად ჯერ დაასრულეთ, გააუქმეთ, ან გადადეთ შეთანხმება."
 
-#: kmymoney/views/simpleledgerview.cpp:485
+#: kmymoney/views/simpleledgerview.cpp:516
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20834,7 +20834,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:488
+#: kmymoney/views/simpleledgerview.cpp:519
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20842,12 +20842,12 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:767
+#: kmymoney/views/simpleledgerview.cpp:798
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "<b>%1</b>-ის ვებგვერდის გახსნა ბრაუზერში."
 
-#: kmymoney/views/simpleledgerview.cpp:959
+#: kmymoney/views/simpleledgerview.cpp:990
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20856,7 +20856,7 @@ msgstr ""
 "ამ ხედის დახურვა შეუძლებელია, რადგან მიმდინარეობს ანგარიშის შეთანხმება. ჯერ "
 "დაასრულეთ, გააუქმეთ, ან გადადეთ შეთანხმება."
 
-#: kmymoney/views/simpleledgerview.cpp:960
+#: kmymoney/views/simpleledgerview.cpp:991
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
