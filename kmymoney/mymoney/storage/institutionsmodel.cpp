@@ -263,12 +263,31 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 void InstitutionsModel::slotLoadAccountsWithoutInstitutions(const QModelIndexList& indexes)
 {
     bool dirty = m_dirty;
-    for (const auto idx : indexes) {
-        // Don't include stock accounts which also don't have an institution assigned
-        if (idx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() != eMyMoney::Account::Type::Stock) {
-            addAccount(QString(), idx.data(eMyMoney::Model::IdRole).toString());
+
+    const auto parentIdx = indexById(QString()); // locate the no-institution entry
+    if (parentIdx.isValid() && (rowCount(parentIdx) == 0)) {
+        // adjust row count so that we do not include stock accounts that also
+        // don't have an institution assigned
+        QStringList accountIds;
+        for (const auto idx : indexes) {
+            // Don't include stock accounts which also don't have an institution assigned
+            if (idx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() != eMyMoney::Account::Type::Stock) {
+                accountIds << idx.data(eMyMoney::Model::IdRole).toString();
+            }
         }
+
+        const auto lastRow = accountIds.count();
+        insertRows(0, lastRow, parentIdx);
+        for (int row = 0; row < lastRow; ++row) {
+            const auto subIdx = index(row, 0, parentIdx);
+            MyMoneyInstitution account(accountIds.at(row), MyMoneyInstitution());
+            static_cast<TreeItem<MyMoneyInstitution>*>(subIdx.internalPointer())->dataRef() = account;
+        }
+        const auto firstIndex = index(0, 0, parentIdx);
+        const auto lastIndex = index(lastRow - 1, columnCount(parentIdx) - 1, parentIdx);
+        Q_EMIT dataChanged(firstIndex, lastIndex);
     }
+
     m_dirty = dirty;
 }
 
