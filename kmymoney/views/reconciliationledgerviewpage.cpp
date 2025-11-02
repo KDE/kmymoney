@@ -290,24 +290,6 @@ public:
         reconciliationAccount.deletePair("statementBalance");
         reconciliationAccount.deletePair("statementDate");
 
-        auto progressDialog =
-            new QProgressDialog(i18nc("@label Reconciliation progress dialog", "Reconciling transactions..."), QString(), 0, journalEntryIds.count());
-        progressDialog->setModal(true);
-        progressDialog->setAutoReset(false);
-        progressDialog->setAutoClose(true);
-        progressDialog->setCancelButton(nullptr); // no cancel button available
-        progressDialog->hide();
-
-        // Set up a QTimer
-        auto timer = new QTimer();
-        timer->setSingleShot(true);
-
-        // Connect the QTimer's timeout signal to the show slot of the progress dialog
-        QObject::connect(timer, &QTimer::timeout, progressDialog, &QProgressDialog::show);
-
-        // Start the timer with a little delay
-        timer->start(1000);
-
         try {
             // update the account data
             file->modifyAccount(reconciliationAccount);
@@ -315,22 +297,9 @@ public:
             // walk the list of transactions/splits and mark the cleared ones as reconciled
             QStringList reconciledJournalEntryIds;
             TransactionMatcher matcher;
-            int counter(0);
+            file->journalModel()->startBulkOperation();
             for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
                 // update the progress dialog
-                ++counter;
-
-                // only update the progress value if the timer is not running
-                // otherwise, the dialog will pop up immediately
-                if (!timer->isActive()) {
-                    progressDialog->setValue(counter);
-                }
-
-                // process events only every 4th iteration. Doing it more
-                // often slows down the process additionally
-                if (!(counter % 4)) {
-                    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-                }
 
                 const auto journalEntry = journalModel->itemById(journalEntryId);
                 auto sp = journalEntry.split();
@@ -354,13 +323,8 @@ public:
                 // ... and the list
                 reconciledJournalEntryIds.append(journalEntryId);
             }
+            file->journalModel()->endBulkOperation();
             ft.commit();
-
-            // make sure the progress dialog is not triggered anymore
-            delete timer;
-            timer = nullptr;
-            delete progressDialog;
-            progressDialog = nullptr;
 
             /// send information to plugins through a QAction. Data is
             /// a) accountId
@@ -384,10 +348,7 @@ public:
         } catch (const MyMoneyException&) {
             qDebug("Unexpected exception when setting cleared to reconcile");
         }
-
-        // Clean up the progress dialog
-        delete progressDialog;
-        delete timer;
+        file->journalModel()->resetBulkOperation();
 
         return true;
     }
