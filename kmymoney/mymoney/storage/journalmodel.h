@@ -252,6 +252,27 @@ public:
 
     bool hasReferenceTo(const QString& id) const override;
 
+    /**
+     * This starts the modification by a bulk operation and suppresses
+     * the balance cache update until endBulkOperation() is called
+     * which does it in one go. If already in a bulk operation has
+     * no effect.
+     */
+    void startBulkOperation();
+
+    /**
+     * This ends the modifications made during a bulk operation and
+     * recalculates the balance caches of all accounts affected.
+     * If called when no bulk operation it has no effect.
+     */
+    void endBulkOperation();
+
+    /**
+     * Needs to be called when a bulk operation is not finished
+     * and committed.
+     */
+    void resetBulkOperation();
+
 protected:
     explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
 

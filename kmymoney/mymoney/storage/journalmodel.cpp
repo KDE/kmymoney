@@ -80,6 +80,7 @@ struct JournalModel::Private
         , headerToolTipData(QHash<Column, QString>({
               {Balance, i18nc("@info:toolbox Balance)", "Account balance or security units")},
           }))
+        , bulkBalanceCacheOperation(false)
     {
     }
 
@@ -314,8 +315,10 @@ struct JournalModel::Private
 
     void startBalanceCacheOperation()
     {
-        balanceChangedSet.clear();
-        fullBalanceRecalc.clear();
+        if (!bulkBalanceCacheOperation) {
+            balanceChangedSet.clear();
+            fullBalanceRecalc.clear();
+        }
     }
 
     void updateTransactionFromBalance(int startRow, int rows, BalanceCacheDirection direction)
@@ -395,33 +398,35 @@ struct JournalModel::Private
 
     void finishBalanceCacheOperation()
     {
-        if (!fullBalanceRecalc.isEmpty()) {
-            const auto journalRows = q->rowCount();
-            for (const auto& accountId : qAsConst(fullBalanceRecalc)) {
-                balanceCache[accountId].clear();
-            }
+        if (!bulkBalanceCacheOperation) {
+            if (!fullBalanceRecalc.isEmpty()) {
+                const auto journalRows = q->rowCount();
+                for (const auto& accountId : qAsConst(fullBalanceRecalc)) {
+                    balanceCache[accountId].clear();
+                }
 
-            for (int row = 0; row < journalRows; ++row) {
-                const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(row, 0).internalPointer())->constDataRef();
-                if (fullBalanceRecalc.contains(journalEntry.split().accountId())) {
-                    if (journalEntry.transaction().isStockSplit()) {
-                        const auto accountId = journalEntry.split().accountId();
-                        balanceCache[accountId] = stockSplit(accountId, balanceCache[accountId], journalEntry.split().shares(), StockSplitForward);
-                    } else {
-                        balanceCache[journalEntry.split().accountId()] += journalEntry.split();
+                for (int row = 0; row < journalRows; ++row) {
+                    const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(row, 0).internalPointer())->constDataRef();
+                    if (fullBalanceRecalc.contains(journalEntry.split().accountId())) {
+                        if (journalEntry.transaction().isStockSplit()) {
+                            const auto accountId = journalEntry.split().accountId();
+                            balanceCache[accountId] = stockSplit(accountId, balanceCache[accountId], journalEntry.split().shares(), StockSplitForward);
+                        } else {
+                            balanceCache[journalEntry.split().accountId()] += journalEntry.split();
+                        }
                     }
                 }
             }
-        }
 
-        // inform others about the changes
-        QHash<QString, AccountBalances> balances;
-        for (const auto& accountId : qAsConst(balanceChangedSet)) {
-            balances.insert(accountId, balanceCache.value(accountId));
-            Q_EMIT q->balanceChanged(accountId);
-        }
-        if (!balances.isEmpty()) {
-            Q_EMIT q->balancesChanged(balances);
+            // inform others about the changes
+            QHash<QString, AccountBalances> balances;
+            for (const auto& accountId : qAsConst(balanceChangedSet)) {
+                balances.insert(accountId, balanceCache.value(accountId));
+                Q_EMIT q->balanceChanged(accountId);
+            }
+            if (!balances.isEmpty()) {
+                Q_EMIT q->balancesChanged(balances);
+            }
         }
     }
 
@@ -496,6 +501,7 @@ struct JournalModel::Private
     QHash<QString, MyMoneyAccount> accountCache;
     KMMStringSet fullBalanceRecalc;
     KMMStringSet balanceChangedSet;
+    bool bulkBalanceCacheOperation;
 };
 
 JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
@@ -1355,8 +1361,8 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
 
     const auto balanceChanges = d->checkBalanceChange(oldTransaction, newTransaction);
 
-    d->startBalanceCacheOperation();
     if (balanceChanges) {
+        d->startBalanceCacheOperation();
         d->removeTransactionFromBalance(srcIdx.row(), oldSplitCount);
     }
 
@@ -1509,9 +1515,9 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
 
     if (balanceChanges) {
         d->addTransactionToBalance(srcIdx.row(), newTransaction.splitCount());
+        d->finishBalanceCacheOperation();
     }
 
-    d->finishBalanceCacheOperation();
     doUpdateReferencedObjects();
 
     if (oldKey != newKey) {
@@ -1830,4 +1836,21 @@ bool JournalModel::hasReferenceTo(const QString& id) const
         }
     }
     return rc;
+}
+
+void JournalModel::startBulkOperation()
+{
+    d->startBalanceCacheOperation();
+    d->bulkBalanceCacheOperation = true;
+}
+
+void JournalModel::endBulkOperation()
+{
+    d->bulkBalanceCacheOperation = false;
+    d->finishBalanceCacheOperation();
+}
+
+void JournalModel::resetBulkOperation()
+{
+    d->bulkBalanceCacheOperation = false;
 }
