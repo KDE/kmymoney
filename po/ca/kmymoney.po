@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-29 00:44+0000\n"
+"POT-Creation-Date: 2025-11-03 00:42+0000\n"
 "PO-Revision-Date: 2025-10-25 09:02+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -8665,7 +8665,7 @@ msgid "Split transaction"
 msgstr "Operació desglossada"
 
 #: kmymoney/mymoney/splitmodel.cpp:119
-#: kmymoney/mymoney/storage/journalmodel.cpp:202
+#: kmymoney/mymoney/storage/journalmodel.cpp:203
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1037
 #, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8689,14 +8689,14 @@ msgid "Not reconciled"
 msgstr "No conciliat"
 
 #: kmymoney/mymoney/statusmodel.cpp:36
-#: kmymoney/mymoney/storage/journalmodel.cpp:93
+#: kmymoney/mymoney/storage/journalmodel.cpp:94
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/mymoney/statusmodel.cpp:41
-#: kmymoney/mymoney/storage/journalmodel.cpp:95
+#: kmymoney/mymoney/storage/journalmodel.cpp:96
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
@@ -8709,7 +8709,7 @@ msgid "Reconciled"
 msgstr "Conciliat"
 
 #: kmymoney/mymoney/statusmodel.cpp:46
-#: kmymoney/mymoney/storage/journalmodel.cpp:97
+#: kmymoney/mymoney/storage/journalmodel.cpp:98
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
@@ -8982,95 +8982,95 @@ msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
 msgstr "Saldo del compte o unitats de títols"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:107
+#: kmymoney/mymoney/storage/journalmodel.cpp:108
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
 msgstr "No conciliat"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:109
+#: kmymoney/mymoney/storage/journalmodel.cpp:110
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
 msgstr "Liquidada"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:111
+#: kmymoney/mymoney/storage/journalmodel.cpp:112
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "Reconciled"
 msgstr "Conciliat"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:113
+#: kmymoney/mymoney/storage/journalmodel.cpp:114
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "Frozen"
 msgstr "Congelat"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:122
+#: kmymoney/mymoney/storage/journalmodel.cpp:123
 #, kde-format
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
 msgstr "Afegeix accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:124
+#: kmymoney/mymoney/storage/journalmodel.cpp:125
 #, kde-format
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
 msgstr "Elimina les accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:126
+#: kmymoney/mymoney/storage/journalmodel.cpp:127
 #, kde-format
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
 msgstr "Compra accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:128
+#: kmymoney/mymoney/storage/journalmodel.cpp:129
 #, kde-format
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
 msgstr "Ven accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:130
+#: kmymoney/mymoney/storage/journalmodel.cpp:131
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:45
 #, kde-format
 msgid "Dividend"
 msgstr "Dividend"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:132
+#: kmymoney/mymoney/storage/journalmodel.cpp:133
 #, kde-format
 msgid "Reinvest Dividend"
 msgstr "Reinversió del dividend"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:134
+#: kmymoney/mymoney/storage/journalmodel.cpp:135
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:47
 #, kde-format
 msgid "Yield"
 msgstr "Rendiment"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:136
+#: kmymoney/mymoney/storage/journalmodel.cpp:137
 #, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "Desdoblament d'accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:138
+#: kmymoney/mymoney/storage/journalmodel.cpp:139
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
 msgstr "Interessos rebuts"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:140
+#: kmymoney/mymoney/storage/journalmodel.cpp:141
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "Desconeguda"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, kde-format
 msgid "Multiple fee categories"
 msgstr "Categories múltiples de despeses"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, kde-format
 msgid "Multiple interest categories"
 msgstr "Categories múltiples d'interès"
@@ -21467,7 +21467,7 @@ msgstr ""
 "podria no estar actualitzat i podria diferir del saldo del compte."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:443
+#: kmymoney/views/reconciliationledgerviewpage.cpp:404
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21778,19 +21778,13 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Confirmeu el final de la conciliació"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, kde-format
-msgctxt "@label Reconciliation progress dialog"
-msgid "Reconciling transactions..."
-msgstr "S'estan conciliant operacions..."
-
-#: kmymoney/views/reconciliationledgerviewpage.cpp:442
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Extracte: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:444
+#: kmymoney/views/reconciliationledgerviewpage.cpp:405
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
@@ -26282,6 +26276,10 @@ msgstr "Només s'admet un d'entre --csv o --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "s'està desant l'informe «%1» en «%2»"
+
+#~ msgctxt "@label Reconciliation progress dialog"
+#~ msgid "Reconciling transactions..."
+#~ msgstr "S'estan conciliant operacions..."
 
 #~ msgid "Startup page options"
 #~ msgstr "Opcions de la pàgina principal"

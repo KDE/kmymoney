@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-29 00:44+0000\n"
+"POT-Creation-Date: 2025-11-03 00:42+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -8533,7 +8533,7 @@ msgid "Split transaction"
 msgstr ""
 
 #: kmymoney/mymoney/splitmodel.cpp:119
-#: kmymoney/mymoney/storage/journalmodel.cpp:202
+#: kmymoney/mymoney/storage/journalmodel.cpp:203
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1037
 #, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8558,14 +8558,14 @@ msgid "Not reconciled"
 msgstr ""
 
 #: kmymoney/mymoney/statusmodel.cpp:36
-#: kmymoney/mymoney/storage/journalmodel.cpp:93
+#: kmymoney/mymoney/storage/journalmodel.cpp:94
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "G"
 
 #: kmymoney/mymoney/statusmodel.cpp:41
-#: kmymoney/mymoney/storage/journalmodel.cpp:95
+#: kmymoney/mymoney/storage/journalmodel.cpp:96
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
@@ -8578,7 +8578,7 @@ msgid "Reconciled"
 msgstr "Réitithe"
 
 #: kmymoney/mymoney/statusmodel.cpp:46
-#: kmymoney/mymoney/storage/journalmodel.cpp:97
+#: kmymoney/mymoney/storage/journalmodel.cpp:98
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
@@ -8887,7 +8887,7 @@ msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
 msgstr ""
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:107
+#: kmymoney/mymoney/storage/journalmodel.cpp:108
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation state 'Reconciled'"
 #| msgid "Reconciled"
@@ -8895,7 +8895,7 @@ msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
 msgstr "Réitithe"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:109
+#: kmymoney/mymoney/storage/journalmodel.cpp:110
 #, fuzzy, kde-format
 #| msgctxt "@item reconciliation status"
 #| msgid "Cleared"
@@ -8903,7 +8903,7 @@ msgctxt "Reconciliation flag C"
 msgid "Cleared"
 msgstr "Glanta"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:111
+#: kmymoney/mymoney/storage/journalmodel.cpp:112
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation state 'Reconciled'"
 #| msgid "Reconciled"
@@ -8911,7 +8911,7 @@ msgctxt "Reconciliation flag R"
 msgid "Reconciled"
 msgstr "Réitithe"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:113
+#: kmymoney/mymoney/storage/journalmodel.cpp:114
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation state 'Frozen'"
 #| msgid "Frozen"
@@ -8919,76 +8919,76 @@ msgctxt "Reconciliation flag F"
 msgid "Frozen"
 msgstr "Calctha"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:122
+#: kmymoney/mymoney/storage/journalmodel.cpp:123
 #, kde-format
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
 msgstr ""
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:124
+#: kmymoney/mymoney/storage/journalmodel.cpp:125
 #, fuzzy, kde-format
 #| msgid "Remove Tag"
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
 msgstr "Bain Clib"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:126
+#: kmymoney/mymoney/storage/journalmodel.cpp:127
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
 msgstr "Praghas"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:128
+#: kmymoney/mymoney/storage/journalmodel.cpp:129
 #, fuzzy, kde-format
 #| msgid "Value"
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
 msgstr "Luach"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:130
+#: kmymoney/mymoney/storage/journalmodel.cpp:131
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:45
 #, kde-format
 msgid "Dividend"
 msgstr "Rannann"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:132
+#: kmymoney/mymoney/storage/journalmodel.cpp:133
 #, kde-format
 msgid "Reinvest Dividend"
 msgstr ""
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:134
+#: kmymoney/mymoney/storage/journalmodel.cpp:135
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:47
 #, kde-format
 msgid "Yield"
 msgstr "Toradh"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:136
+#: kmymoney/mymoney/storage/journalmodel.cpp:137
 #, fuzzy, kde-format
 #| msgid "Value"
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "Luach"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:138
+#: kmymoney/mymoney/storage/journalmodel.cpp:139
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
 msgstr "Ioncam Úis"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:140
+#: kmymoney/mymoney/storage/journalmodel.cpp:141
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr ""
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, fuzzy, kde-format
 #| msgid "Available tags:"
 msgid "Multiple fee categories"
 msgstr "Clibeanna ar fáil:"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, fuzzy, kde-format
 #| msgid "Interest rate"
 msgid "Multiple interest categories"
@@ -21275,7 +21275,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:443
+#: kmymoney/views/reconciliationledgerviewpage.cpp:404
 #, fuzzy, kde-format
 #| msgctxt "@item reconciliation status"
 #| msgid "Cleared"
@@ -21577,21 +21577,14 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr ""
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Fraction"
-msgctxt "@label Reconciliation progress dialog"
-msgid "Reconciling transactions..."
-msgstr "Codán"
-
-#: kmymoney/views/reconciliationledgerviewpage.cpp:442
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, fuzzy, kde-format
 #| msgid "Start date"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Dáta tosaigh"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:444
+#: kmymoney/views/reconciliationledgerviewpage.cpp:405
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@label:textbox Difference to statement"
@@ -25739,6 +25732,12 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Fraction"
+#~ msgctxt "@label Reconciliation progress dialog"
+#~ msgid "Reconciling transactions..."
+#~ msgstr "Codán"
 
 #, fuzzy
 #~| msgid "Sort options"
