@@ -2,6 +2,7 @@
 # This file is put in the public domain.
 #
 # SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2023 Xavier Besnard <xavier.besnard@kde.org>
 # Stéphane Deraco <stephane@deraco.fr>, 2006.
 # Patrick PETIT <patrick.petit17@orange.fr>, 2006,2007, 2008, 2009.
 # Sebastien Renard <Sebastien.Renard@digitalfox.org>, 2009.
@@ -12,17 +13,16 @@
 # Pascal Billery-Schneider <pascal.billery-schneider@laposte.net>, 2014.
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
 # Xavier Besnard <xavier.besnard@kde.org>, 2022, 2023.
-# A. Villemain <nepasrepondre@monadresse.fr>, 2023.
-# SPDX-FileCopyrightText: 2023 Xavier Besnard <xavier.besnard@kde.org>
+# A. Villemain <nepasrepondre@monadresse.fr>, 2023, 2025.
 # jaaf, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-03 00:42+0000\n"
-"PO-Revision-Date: 2025-09-20 10:09+0200\n"
+"PO-Revision-Date: 2025-10-23 22:26+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <French <kde-francophone@kde.org>>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -127,18 +127,14 @@ msgid "(Fees) %1"
 msgstr "(Commissions) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1057
-#, fuzzy, kde-format
-#| msgctxt "Prepend name of payee (%1) to original memo (%2)"
-#| msgid ""
-#| "Original payee: %1\n"
-#| "%2"
+#, kde-format
 msgctxt "Append name of payee (%1) to original memo (%2)"
 msgid ""
 "%2\n"
 "Original payee: %1"
 msgstr ""
-"Bénéficiaire initial : %1 \n"
-"%2"
+"%2  \n"
+"Bénéficiaire initial : %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1060
 #, kde-format
@@ -261,7 +257,7 @@ msgid ""
 msgstr ""
 "KMyMoney ne peut pas déterminer quel compte utiliser. Vous pouvez créer un "
 "nouveau compte en appuyant sur <b>Créer</b> ou en sélectionnant manuellement "
-"un autre compte à partir de la boîte de sélection ci-dessous."
+"un autre compte à partir de la boite de sélection ci-dessous."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1508
 #, kde-format
@@ -271,7 +267,7 @@ msgid ""
 "account by pressing the <b>Create</b> button."
 msgstr ""
 "Aucune information n'a été trouvée dans le fichier de relevé de compte "
-"sélectionné. Veuillez choisir un compte en utilisant la boîte de sélection "
+"sélectionné. Veuillez choisir un compte en utilisant la boite de sélection "
 "dans la fenêtre, ou créer un nouveau compte en appuyant sur le bouton "
 "<b>Créer</b>."
 
@@ -382,7 +378,7 @@ msgid ""
 "All information is optional and is provided to personalize\n"
 "your KMyMoney file."
 msgstr ""
-"Utilisez cette boîte de dialogue pour saisir les informations vous "
+"Utilisez cette boite de dialogue pour saisir les informations vous "
 "concernant.\n"
 "\n"
 "Ces renseignements sont optionnels, ils permettent de personnaliser votre "
@@ -625,12 +621,12 @@ msgid ""
 "\n"
 "Click OK to perform the backup."
 msgstr ""
-"Utilisez cette boîte de dialogue pour effectuer une copie de sauvegarde de "
+"Utilisez cette boite de dialogue pour effectuer une copie de sauvegarde de "
 "vos données.\n"
 "\n"
 "Vérifiez qu'un disque est inséré et que le lecteur est prêt. Choisissez "
 "ensuite le point de montage, soit avec le bouton Choisir, soit en saisissant "
-"l'emplacement dans la boîte de dialogue.\n"
+"l'emplacement dans la boite de dialogue.\n"
 "Appuyez sur « Ok » pour effectuer la sauvegarde."
 
 #. i18n: ectx: property (text), widget (QLabel, txtAutoMount)
@@ -697,7 +693,7 @@ msgid ""
 "This dialog does not allow new categories to be created. Please pick a "
 "category from the list."
 msgstr ""
-"Cette boîte de dialogue ne permet pas de créer de nouvelles catégories. "
+"Cette boite de dialogue ne permet pas de créer de nouvelles catégories. "
 "Veuillez choisir une catégorie dans la liste."
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:94
@@ -777,7 +773,7 @@ msgstr ""
 "Une explication simple\n"
 "du type d'exportation est disponible en bas de l'écran et est mise à jour "
 "quand\n"
-"vous sélectionnez un objet dans la boîte des choix.\n"
+"vous sélectionnez un objet dans la boite des choix.\n"
 "\n"
 "Une fois que vous avez choisi un type d'exportation, appuyez sur le bouton "
 "« Ok »."
@@ -815,7 +811,7 @@ msgid ""
 msgstr ""
 "Les fichiers QIF sont produits par le célèbre programme de comptabilité "
 "Quicken.\n"
-"Si vous choisissez ce type, une boîte de dialogue s'ouvrira pour vous "
+"Si vous choisissez ce type, une boite de dialogue s'ouvrira pour vous "
 "réclamer des\n"
 "informations complémentaires sur le format Quicken."
 
@@ -1792,7 +1788,7 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
-"La prochaine fois que vous ouvrirez cette boîte de dialogue, la source de "
+"La prochaine fois que vous ouvrirez cette boite de dialogue, la source de "
 "prix modifiés ne sera chargée que si vous l'avez utilisée pour une mise à "
 "jour de prix réussie. Sinon, l'ancien réglage sera affiché."
 
@@ -2278,7 +2274,7 @@ msgid ""
 "accounts views."
 msgstr ""
 "Vous avez choisi de supprimer l'affichage des comptes avec un solde à zéro "
-"dans la boîte de dialogue de configuration de KMyMoney. Le compte que vous "
+"dans la boite de dialogue de configuration de KMyMoney. Le compte que vous "
 "venez de créer ne sera donc affiché que si il est utilisé. Sinon, il sera "
 "masqué dans la vue « Comptes / Catégories »."
 
@@ -2298,7 +2294,7 @@ msgid ""
 "categories view."
 msgstr ""
 "Vous avez choisi de supprimer l'affichage des catégories inutilisées dans la "
-"boîte de dialogue de configuration de KMyMoney. La catégorie que vous venez "
+"boite de dialogue de configuration de KMyMoney. La catégorie que vous venez "
 "de créer ne sera donc affichée que si elle est utilisée. Sinon, elle sera "
 "cachée dans la vue « Comptes / Catégories »."
 
@@ -3262,7 +3258,7 @@ msgstr "Option de sauvegarde :"
 msgid ""
 "Enter a character or string that will be added to backup files. Default is ~"
 msgstr ""
-"Veuillez saisir un caractère ou une chaîne qui sera ajouté aux fichiers de "
+"Veuillez saisir un caractère ou une chaine qui sera ajouté aux fichiers de "
 "sauvegarde. La valeur par défaut est « ~ »."
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
@@ -3414,49 +3410,43 @@ msgstr "Options de démarrage"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:334
 #, kde-format
 msgid "View to show"
-msgstr ""
+msgstr "Vue pour affichage"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:342
-#, fuzzy, kde-format
-#| msgid "Home Page"
+#, kde-format
 msgid "Homepage"
 msgstr "Page d'accueil"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_StartLastViewSelected)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:347
-#, fuzzy, kde-format
-#| msgid "The last selected view"
+#, kde-format
 msgid "Last selected view"
-msgstr "La dernière vue sélectionnée"
+msgstr "Dernière vue sélectionnée"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:355
-#, fuzzy, kde-format
-#| msgid "    Account opening date updated."
+#, kde-format
 msgid "Accounts to open in ledger"
-msgstr "    Date d'ouverture du compte mise à jour."
+msgstr "Comptes à ouvrir dans le grand livre"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:363
-#, fuzzy, kde-format
-#| msgid "Asset accounts"
+#, kde-format
 msgid "Last account used"
-msgstr "Comptes d'actif"
+msgstr "Dernier compte utilisé"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:368
-#, fuzzy, kde-format
-#| msgid "Favorite account"
+#, kde-format
 msgid "All favorite accounts"
-msgstr "Compte préféré"
+msgstr "Tous les comptes préférés"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowAccountsAfterOpen)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:373
-#, fuzzy, kde-format
-#| msgid "Expand all accounts in the list"
+#, kde-format
 msgid "All accounts open at last close"
-msgstr "Développe tous les comptes de la liste"
+msgstr "Tous les comptes à la dernière clôture"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_viewType)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:384
@@ -4297,7 +4287,7 @@ msgstr "Utiliser la touche Entrée pour se déplacer dans les champs"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:257
 #, kde-format
 msgid "Use TAB to switch between parts of date"
-msgstr ""
+msgstr "Utilisez la touche « Tab » pour basculer entre les parties de date"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:264
@@ -4308,7 +4298,7 @@ msgid ""
 msgstr ""
 "Sélectionnez cette option si vous voulez toujours faire correspondre les "
 "noms (par exemple pour les bénéficiaires) à partir du début. Dans le cas "
-"contraire toute sous-chaîne correspondra."
+"contraire toute sous-chaine correspondra."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:267
@@ -4541,25 +4531,25 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:546
 #, kde-format
 msgid "Keep original payee information in memo"
-msgstr ""
+msgstr "Conserver les informations originales sur le bénéficiaire dans la note"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:554
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Arrêté"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:559
 #, kde-format
 msgid "Append to memo"
-msgstr ""
+msgstr "Ajouter à la note"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:564
 #, kde-format
 msgid "Prepend to memo"
-msgstr ""
+msgstr "Ajouter avant la note"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:603
@@ -6563,7 +6553,7 @@ msgstr "Compensée"
 #, kde-format
 msgctxt "Payment made with credit card"
 msgid "Charge"
-msgstr "Commissions"
+msgstr "Dépense"
 
 #: kmymoney/models/ledgerfilterbase.cpp:68
 #: kmymoney/models/ledgerfilterbase.cpp:94
@@ -6583,7 +6573,7 @@ msgstr "Recette"
 #, kde-format
 msgctxt "Payment towards credit card"
 msgid "Payment"
-msgstr "Paiement"
+msgstr "Recette"
 
 #: kmymoney/models/payeeidentifiercontainermodel.cpp:35
 #: kmymoney/mymoney/payeeidentifiermodel.cpp:100
@@ -6869,7 +6859,7 @@ msgstr "Corriger les opérations"
 #: kmymoney/mymoney/mymoneyfile.cpp:1871 kmymoney/mymoney/mymoneyfile.cpp:1872
 #, kde-format
 msgid "Loan payout"
-msgstr "Versement du prêt"
+msgstr "Versement final du prêt"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3015 kmymoney/mymoney/mymoneyfile.cpp:3044
 #: kmymoney/mymoney/mymoneyfile.cpp:3063 kmymoney/mymoney/mymoneyfile.cpp:3077
@@ -8716,13 +8706,13 @@ msgstr "Étiquettes"
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
-msgstr "Versement"
+msgstr "Dépense"
 
 #: kmymoney/mymoney/splitmodel.cpp:42
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
-msgstr "Dépôt"
+msgstr "Recette"
 
 #: kmymoney/mymoney/splitmodel.cpp:101
 #, kde-format
@@ -8978,7 +8968,7 @@ msgstr "Versement"
 #, kde-format
 msgctxt "@title:column Deposit into account"
 msgid "Deposit"
-msgstr "Dépôt"
+msgstr "Recette"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:67
 #, kde-format
@@ -9861,7 +9851,7 @@ msgid ""
 "all the transactions between the specified dates,  or just choose to export "
 "Categories."
 msgstr ""
-"À partir de cette boîte de dialogue, vous pouvez exporter des opérations "
+"À partir de cette boite de dialogue, vous pouvez exporter des opérations "
 "vers un fichier de valeurs séparées par des virgules (aussi appelé fichier "
 "CSV d'où son extension). Toutefois, vous pouvez égaler choisir un autre "
 "délimiteur ci-dessous. Veuillez saisir l'emplacement d'enregistrement du "
@@ -10908,7 +10898,7 @@ msgstr "Sélectionnez le profil d'importation ici."
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
 #, kde-format
 msgid "Fee"
-msgstr "Commissions"
+msgstr "Commission"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:179
 #, kde-format
@@ -12489,6 +12479,8 @@ msgid ""
 "Automatically load login credentials if available (affects all mapped "
 "accounts)"
 msgstr ""
+"Charger automatiquement les identifiants de connexion si disponibles "
+"(affecte tous les comptes associés)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
@@ -12727,6 +12719,8 @@ msgstr ""
 #, kde-format
 msgid "Load passphrase from password store if available without asking user."
 msgstr ""
+"Chargez la phrase de passe à partir du magasin de mots de passe si "
+"disponible sans demander à l'utilisateur."
 
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
@@ -14286,7 +14280,7 @@ msgid ""
 "Export button a message box will appear when the export has completed "
 "detailing how many transactions, categories and payees were exported."
 msgstr ""
-"À partir de cette boîte de dialogue, vous pouvez exporter des opérations "
+"À partir de cette boite de dialogue, vous pouvez exporter des opérations "
 "vers un fichier compatible « Quicken » (connu comme fichier QIF, en raison "
 "de son extension). Merci de saisir l'emplacement du fichier QIF, ou de le "
 "sélectionner en appuyant sur le bouton Parcourir.\n"
@@ -14295,7 +14289,7 @@ msgstr ""
 "fichier QIF (profil). Choisissez Compte pour exporter toutes les opérations "
 "entre les dates spécifiées ou uniquement les catégories. Vous pouvez aussi "
 "limiter les opérations à exporter par des dates de début et de fin. Quand "
-"vous aurez appuyé sur Exporter, un message apparaîtra à la fin de "
+"vous aurez appuyé sur Exporter, un message apparaitra à la fin de "
 "l'exportation, indiquant combien d'opérations, catégories et bénéficiaires "
 "ont été exportés."
 
@@ -14376,7 +14370,7 @@ msgid ""
 "KMyMoney will import all the transactions, categories and payees it finds.</"
 "p>"
 msgstr ""
-"<p>À partir de cette boîte de dialogue, vous pouvez importer des opérations "
+"<p>À partir de cette boite de dialogue, vous pouvez importer des opérations "
 "d'un fichier compatible Quicken <b>&trade;</b> (connu sous le nom de fichier "
 "QIF, en raison de l'extension).</p>\n"
 "\n"
@@ -14722,15 +14716,15 @@ msgstr "Solde initial sur le relevé bancaire"
 #, kde-format
 msgid "%1 cleared payment"
 msgid_plural "%1 cleared payments in total"
-msgstr[0] "%1 versement compensé"
-msgstr[1] "%1 remboursements compensés au total"
+msgstr[0] "%1 dépense compensée"
+msgstr[1] "%1 dépenses compensées au total"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:151
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
-msgstr[0] "%1 dépôt compensé"
-msgstr[1] "%1 dépôts compensés au total"
+msgstr[0] "%1 recette compensée"
+msgstr[1] "%1 recettes compensées au total"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
 #, kde-format
@@ -18863,7 +18857,7 @@ msgstr "Nombre de fichiers de sauvegarde à conserver"
 #: kmymoney/settings/kmymoney.kcfg:39
 #, kde-format
 msgid "Character or string appended to backup filename"
-msgstr "Caractère ou chaîne ajouté au nom du fichier de sauvegarde"
+msgstr "Caractère ou chaine ajouté au nom du fichier de sauvegarde"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:43
@@ -18903,16 +18897,19 @@ msgstr "Utiliser la touche Entrée pour vous déplacer entre les champs"
 
 #. i18n: ectx: label, entry (TabMovesBetweenDateParts), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Using the Enter key moves between the fields"
+#, kde-format
 msgid "Using the TAB key moves between the date parts"
-msgstr "Utiliser la touche Entrée pour vous déplacer entre les champs"
+msgstr ""
+"L'utilisation de la touche « Tab » permet de vous déplacer entre les parties "
+"de la date."
 
 #. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:100
 #, kde-format
 msgid "Select which accounts to show in ledger after file open"
 msgstr ""
+"Sélectionnez les comptes à afficher dans le grand livre après l'ouverture du "
+"fichier"
 
 #. i18n: ectx: label, entry (StartLastViewSelected), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:104
@@ -18981,8 +18978,8 @@ msgid ""
 "Match strings in auto-completion only from the first letter on. A substring "
 "behind the first letter is not found."
 msgstr ""
-"Faire correspondre les chaînes de caractères à partir de la première lettre "
-"pour le complètement automatique. Une sous-chaîne commençant après la "
+"Faire correspondre les chaines de caractères à partir de la première lettre "
+"pour le complètement automatique. Une sous-chaine commençant après la "
 "première lettre ne sera pas trouvée."
 
 #. i18n: ectx: label, entry (stdTransactionFormTabOrder), group (General Options)
@@ -19185,10 +19182,10 @@ msgstr "Afficher une grille dans le grand livre"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Afficher les catégories dans la vue de la liste des comptes"
+msgstr ""
+"Afficher le composant graphique de filtre lors de l'ouverture du compte"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:288
@@ -19274,6 +19271,7 @@ msgstr ""
 #, kde-format
 msgid "Where to place the original payee info in the memo field"
 msgstr ""
+"Où placer les informations d'origine du bénéficiaire dans le champ de la note"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:384
@@ -20744,7 +20742,7 @@ msgstr "Afficher la page des prévisions"
 #: kmymoney/views/kmymoneyview.cpp:576
 #, kde-format
 msgid "Show outbox page"
-msgstr "Afficher la page boîte d'envoi"
+msgstr "Afficher la page boite d'envoi"
 
 #: kmymoney/views/kpayeesview.cpp:158
 #, kde-format
@@ -21588,7 +21586,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
-msgstr "Effacé : %1"
+msgstr "Compensé : %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:152
 #, kde-format
@@ -22211,7 +22209,7 @@ msgstr "Les valeurs sont présentées en %1."
 #: kmymoney/widgets/creditdebitedit.ui:42
 #, kde-format
 msgid "Deposit"
-msgstr "Dépôt"
+msgstr "Recette"
 
 #: kmymoney/widgets/daterangedlg.cpp:72
 #, kde-format
@@ -22295,6 +22293,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"Utilisé pour maintenir visible le composant graphique de filtre . S'il est "
+"invisible, il peut être affiché grâce au raccourci «CTRL » + « F »."
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
@@ -22756,7 +22756,7 @@ msgstr "Versements"
 #: kmymoney/widgets/ktransactionfilter.ui:629
 #, kde-format
 msgid "Deposits"
-msgstr "Dépôts"
+msgstr "Recettes"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
 #: kmymoney/widgets/ktransactionfilter.ui:643
@@ -23556,7 +23556,7 @@ msgid ""
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
 "La sélection de la case à cocher <b>Compte préféré</b> vous permettra d'y "
-"accéder plus rapidement dans certaines boîtes de dialogue et vues de "
+"accéder plus rapidement dans certaines boites de dialogue et vues de "
 "KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
@@ -25443,7 +25443,7 @@ msgid ""
 "statement."
 msgstr ""
 "Vous n'avez sélectionné que des versements déjà effectués pour ce prêt. Vous "
-"devez donc saisir le montant du prêt tel qu'il apparaît sur votre dernier "
+"devez donc saisir le montant du prêt tel qu'il apparait sur votre dernier "
 "relevé."
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:119
@@ -26292,7 +26292,7 @@ msgid ""
 "<b>Settings</b> menu."
 msgstr ""
 "Vous pouvez modifier les options de configuration à tout moment en utilisant "
-"la boîte de dialogue de configuration. Il vous suffira de sélectionner "
+"la boite de dialogue de configuration. Il vous suffira de sélectionner "
 "l'option <b>Configurer KMyMoney...</b> dans le menu <b>Paramètres</b>."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
