@@ -1,7 +1,7 @@
 {
     "id": "org.kde.kmymoney",
     "runtime": "org.kde.Platform",
-    "runtime-version": "6.9",
+    "runtime-version": "6.10",
     "sdk": "org.kde.Sdk",
     "command": "kmymoney",
     "desktop-file-name-suffix": " (Nightly)",
@@ -254,23 +254,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/aqbanking/aqbanking/archive/refs/tags/6.6.4.tar.gz",
-                    "sha256": "db32f8525087ac103f2ef0837a7d83e0720c133a57d8bf6b2d72b07a1f98a026",
-                    "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 6890,
-                        "stable-only": true,
-                        "url-template": "https://github.com/aqbanking/aqbanking/archive/refs/tags/$version.tar.gz"
-                    }
-                },
-                {
-                    "type": "shell",
-                    "commands": [
-                        "make -fMakefile.cvs",
-                        "./configure",
-                        "make typedefs",
-                        "make typefiles"
-                    ]
+                    "url": "https://www.aquamaniac.de/rdm/attachments/download/548/aqbanking-6.6.4.tar.gz",
+                    "sha256": "a25c209538fa163f3749676a084493c9a43d9045a945aeee2db25dfd9a502b7f"
                 }
             ],
             "cleanup": [
@@ -314,20 +299,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/aqbanking/gwenhywfar/archive/refs/tags/5.13.0.tar.gz",
-                            "sha256": "2c3564e7a327c483a69a85b9d563f0408fb32c21765a9c992a04a892ac05dab5",
-                            "x-checker-data": {
-                                "type": "anitya",
-                                "project-id": 6891,
-                                "stable-only": true,
-                                "url-template": "https://github.com/aqbanking/gwenhywfar/archive/refs/tags/$version.tar.gz"
-                            }
-                        },
-                        {
-                            "type": "shell",
-                            "commands": [
-                                "make -fMakefile.cvs"
-                            ]
+                            "url": "https://www.aquamaniac.de/rdm/attachments/download/550/gwenhywfar-5.13.0.tar.gz",
+                            "sha256": "26513d4b032eb8108ff2b6bf234b7d60c710fd16059fb80077acd79c250824b9"
                         }
                     ],
                     "cleanup": [
@@ -418,6 +391,38 @@
             ],
             "cleanup": [
                 "/bin"
+            ],
+            "modules": [
+                {
+                    "name": "tcl",
+                    "buildsystem": "autotools",
+                    "config-opts": [
+                        "--disable-symbols"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "http://prdownloads.sourceforge.net/tcl/tcl8.6.17-src.tar.gz",
+                            "sha256": "a3903371efcce8a405c5c245d029e9f6850258a60fa3761c4d58995610949b31",
+                            "x-checker-data": {
+                                "type": "anitya",
+                                "project-id": 4941,
+                                "stable-only": true,
+                                "url-template": "http://prdownloads.sourceforge.net/tcl/tcl$version-src.tar.gz",
+                                "versions": {
+                                    "<": "9.0"
+                                }
+                            }
+                        }
+                    ],
+                    "subdir": "unix",
+                    "post-install": [
+                        "chmod 755 /app/lib/libtcl*.so"
+                    ],
+                    "cleanup": [
+                        "*"
+                    ]
+                }
             ]
         },
         {
