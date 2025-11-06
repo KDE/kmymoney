@@ -98,7 +98,7 @@ public:
         m_accountsProxyModel->addAccountType(eMyMoney::Account::Type::Investment);
         m_accountsProxyModel->setHideEquityAccounts(false);
         m_accountsProxyModel->setHideZeroBalancedEquityAccounts(false);
-        m_accountsProxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
+        m_accountsProxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts() && !KMyMoneySettings::showAllAccounts());
         m_accountsProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
         m_accountsProxyModel->sort(AccountsModel::Column::AccountName);
         ui->m_accountComboBox->setModel(m_accountsProxyModel);
@@ -692,9 +692,22 @@ void KInvestmentView::slotSettingsChanged()
         return;
     }
 
+    d->m_accountsProxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts() && !KMyMoneySettings::showAllAccounts());
+
+    // make sure current account is still visible and if not, clear out the last selected one
+    const auto indexes = d->m_accountsProxyModel->match(d->m_accountsProxyModel->index(0, 0), eMyMoney::Model::IdRole, d->m_idInvAcc, 1, Qt::MatchRecursive);
+    if (indexes.isEmpty()) {
+        d->m_idInvAcc.clear();
+        d->m_equitiesProxyModel->setHideAllEntries(true);
+        d->ui->m_accountComboBox->setSelected(QString());
+    }
+
     const bool showAllAccounts = KMyMoneySettings::showAllAccounts();
     if (d->m_equitiesProxyModel->hideClosedAccounts() == showAllAccounts) {
         d->m_equitiesProxyModel->setHideClosedAccounts(!showAllAccounts);
+        if (d->m_idInvAcc.isEmpty()) {
+            d->selectDefaultInvestmentAccount();
+        }
         d->loadAccount(d->m_idInvAcc);
     }
 }
