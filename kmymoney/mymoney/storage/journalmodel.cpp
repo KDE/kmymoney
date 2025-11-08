@@ -1695,7 +1695,7 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
     if (date.isValid()) {
         MyMoneyMoney balance;
         QModelIndex lastIdx = upperBound(MyMoneyTransaction::uniqueSortKey(date, QStringLiteral("x")), 0, rowCount()-1);
-        // in case the index is invalid, we search for a data past
+        // in case the index is invalid, we search for a date past
         // the end of the journal, so we can simply use the cached
         // balance if it is available. Otherwise, we have to go
         // through the journal
