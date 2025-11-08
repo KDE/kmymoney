@@ -688,8 +688,19 @@ void PivotTable::calculateOpeningBalances()
     QList<MyMoneyAccount>::const_iterator it_account = accounts.cbegin();
 
     JournalModel* journalModel = file->journalModel();
-    const auto start = journalModel->MyMoneyModelBase::lowerBound(journalModel->keyForDate(m_beginDate)).row();
-    const auto end = journalModel->MyMoneyModelBase::upperBound(journalModel->keyForDate(m_endDate)).row();
+
+    // Determine the first and last journal row that needs
+    // to be included in the report datewise. In case the
+    // row is -1, adjust it to 0 for the beginning or the last
+    // row in the model for the end.
+    auto firstRow = journalModel->MyMoneyModelBase::lowerBound(journalModel->keyForDate(m_beginDate)).row();
+    auto lastRow = journalModel->MyMoneyModelBase::upperBound(journalModel->keyForDate(m_endDate)).row();
+    if (firstRow == -1) {
+        firstRow = 0;
+    }
+    if (lastRow == -1) {
+        lastRow = journalModel->rowCount() - 1;
+    }
 
     while (it_account != accounts.cend()) {
         ReportAccount account(*it_account);
@@ -697,18 +708,14 @@ void PivotTable::calculateOpeningBalances()
         // only include this item if its account group is included in this report
         // and if the report includes this account
         if (m_config.includes(*it_account)) {
-
-            //do not include account if it is closed and it has no transactions in the report period
+            // do not include account if it is closed and it has no transactions in the report period
             if (account.isClosed()) {
                 // check if the account has transactions for the report timeframe
-                if ((start == -1) || (end == -1)) {
-                    ++it_account;
-                    continue;
-                }
                 QModelIndex idx;
                 bool canSkip = true;
-                for (int row = start; canSkip && (row < end); ++row) {
+                for (int row = firstRow; canSkip && (row <= lastRow); ++row) {
                     idx = journalModel->index(row, 0);
+                    qDebug() << idx.data(eMyMoney::Model::SplitAccountIdRole).toString() << account.id();
                     if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == account.id()) {
                         if (!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
                             canSkip = false;

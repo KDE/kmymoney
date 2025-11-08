@@ -667,16 +667,16 @@ public:
     void removeTransaction(const MyMoneyTransaction& transaction);
 
     /**
-      * This method is used to return the actual balance of an account
-      * without it's sub-ordinate accounts. If a @p date is presented,
-      * the balance at the beginning of this date (not including any
-      * transaction on this date) is returned. Otherwise all recorded
-      * transactions are included in the balance.
-      *
-      * @param id id of the account in question
-      * @param date return balance for specific date (default = QDate())
-      * @return balance of the account as MyMoneyMoney object
-      */
+     * This method is used to return the actual balance of an account
+     * without it's sub-ordinate accounts. If a @p date is presented,
+     * the balance at the end of this date (including any
+     * transactions on this date) is returned. Otherwise all recorded
+     * transactions are included in the balance.
+     *
+     * @param id id of the account in question
+     * @param date return balance for specific date (default = QDate())
+     * @return balance of the account as MyMoneyMoney object
+     */
     MyMoneyMoney balance(const QString& id, const QDate& date) const;
     MyMoneyMoney balance(const QString& id) const;
 
