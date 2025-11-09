@@ -253,9 +253,7 @@ protected:
     virtual QString var(int i) const;
     // anonymize data
     virtual QString hide(QString, unsigned int);
-    unsigned int kvpCount() const {
-        return (m_kvpList.count());
-    } //!
+    unsigned int kvpCount() const;
 
     MyMoneyGncReader *pMain;    // pointer to 'main' class
     // used at start of each transaction so same money hide factor is applied to all splits
