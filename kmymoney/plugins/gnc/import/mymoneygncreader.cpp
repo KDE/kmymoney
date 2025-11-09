@@ -290,6 +290,11 @@ QString GncObject::hide(QString data, unsigned int anonClass)
     PASS
 }
 
+unsigned int GncObject::kvpCount() const
+{
+    return m_kvpList.count();
+}
+
 // dump current object data values // only called if gncdebug set
 void GncObject::debugDump()
 {
