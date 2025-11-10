@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-09 00:43+0000\n"
+"POT-Creation-Date: 2025-11-10 00:43+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -5565,7 +5565,7 @@ msgid "No KMyMoneyFile open"
 msgstr "KMyMoneyFile이 열려 있지 않음"
 
 #: kmymoney/kmymoney.cpp:3057 kmymoney/kmymoney.cpp:3059
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
 msgctxt "Application is ready to use"
@@ -11649,9 +11649,9 @@ msgstr "수취인%1"
 msgid "Schedule%1"
 msgstr "일정%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1222
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1261
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1227
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1266
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1374
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11662,17 +11662,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1378
 #, kde-format
 msgid "Import complete"
 msgstr "가져오기 완료"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1430
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "내 부 숨기기"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11688,33 +11688,33 @@ msgstr ""
 "지정한 값을 곱할 수도 있습니다.\n"
 "이 숫자는 파일에 저장되지 않습니다."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1450
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1455
 #, kde-format
 msgid "Loading commodities..."
 msgstr "상품 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1507
 #, kde-format
 msgid "Loading prices..."
 msgstr "가격 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1506
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1514
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1511
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1519
 #, kde-format
 msgid "Imported History"
 msgstr "가져온 내역"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1535
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1540
 #, kde-format
 msgid "Loading accounts..."
 msgstr "계좌 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1680
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1685
 #, kde-format
 msgid "Loading transactions..."
 msgstr "거래 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1783
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1788
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11723,54 +11723,54 @@ msgstr ""
 "계좌 또는 분류 %1, 거래 날짜 %2의 분할에 잘못된 값이 있습니다. 확인해 주십시"
 "오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1825
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1830
 #, kde-format
 msgid "Imported Transaction"
 msgstr "가져온 거래"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1879
 #, kde-format
 msgid "Loading templates..."
 msgstr "템플릿 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1888
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1893
 #, kde-format
 msgid "Unknown payee"
 msgstr "알 수 없는 수취인"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "%1 일정에 알 수 없는 작업이 포함되어 있습니다(키 = %2, 형식 = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2024
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2029
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "%1 일정에 여러 작업이 포함되어 있습니다. 하나만 가져왔습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2030
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "%1 일정에 올바른 분할이 없습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2040
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
 "convertible"
 msgstr "%1 일정에 수식이 포함된 것 같습니다. GnuCash 수식은 변환할 수 없습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2085
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2090
 #, kde-format
 msgid "Loading schedules..."
 msgstr "일정 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2173
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2178
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr "%1 일정의 간격이 %2이며 현재 사용할 수 없습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2180
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2185
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11778,7 +11778,7 @@ msgid ""
 msgstr ""
 "%1 일정에 알 수 없는 간격이 지정되었습니다. 올바르게 작동하는지 확인하십시오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2216
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2221
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11786,12 +11786,12 @@ msgid ""
 msgstr ""
 "%1 일정에 지연된 간격이 지정되었습니다. 올바르게 작동하는지 확인하십시오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2241
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2246
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "사용자 요청에 따라 %1 일정이 삭제되었습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2294
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -11799,29 +11799,29 @@ msgid ""
 msgstr ""
 "주 통화가 %1(%2)인 것 같습니다. 이 통화를 기본 통화로 설정하시겠습니까?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2312
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2317
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "더 보기"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "완료"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2316
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2321
 #, kde-format
 msgid "Save Report"
 msgstr "보고서 저장"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2333
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2338
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "'%1' 일정을 변환하는 데 문제가 발생했습니다."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11830,82 +11830,82 @@ msgstr ""
 "발견됨:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "상품(주식) %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2365
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "가격 %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "계좌 %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2367
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "거래 %1건\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "일정 %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "불일치가 감지되지 않았습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "불일치 %1개가 감지되어 수정했습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "고아 계좌 %1개가 생성되었습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "가능한 일정 문제 %1개가 지적되었습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2388
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "소규모 비즈니스 기능(고객, 송장 등)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2384
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "예산"
 
 # https://wiki.gnucash.org/wiki/Concept_of_Lots
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2385
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
 #, kde-format
 msgid "Lots"
 msgstr "로트"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr "파일에 있는 다음 기능은 현재 지원되지 않습니다:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
 #, kde-format
 msgid ""
 "\n"
@@ -11916,17 +11916,17 @@ msgstr ""
 "\n"
 "자세한 내용을 보려면 더 보기를 누르십시오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2409
 #, kde-format
 msgid "Save report as"
 msgstr "보고서를 다른 이름으로 저장"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2446
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "알 수 없는 GnuCash 계좌에서 생성된 고아"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2456
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11936,7 +11936,7 @@ msgstr ""
 "하나 이상의 거래에서 알 수 없는 계좌를 참조합니다.\n"
 "데이터를 보관하는 이름이 %1인 자산 계좌가 생성되었습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2495
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11945,7 +11945,7 @@ msgstr ""
 "투자 계좌는 자산 계좌의 하위 계좌여야 합니다.\n"
 "%1 계좌는 기본 자산 계좌 아래에 저장됩니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2502
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11954,7 +11954,7 @@ msgstr ""
 "수입 계좌는 수입 계좌의 하위 계좌여야 합니다.\n"
 "%1 계좌는 기본 수입 계좌 아래에 저장됩니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2504
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2509
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -11963,23 +11963,23 @@ msgstr ""
 "지출 계좌는 지출 계좌의 하위 계좌여야 합니다.\n"
 "%1 계좌는 기본 지출 계좌 아래에 저장됩니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2553
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2558
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "투자 계좌 이름 입력 "
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2555
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2560
 #, kde-format
 msgid "My Investments"
 msgstr "내 투자"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2594
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2599
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "부모 투자 계좌를 선택하거나 새 이름을 입력하십시오. 주식 %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2621
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2638
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2626
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2643
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1이(가) 투자 계좌가 아닙니다. 투자 계좌를 생성하시겠습니까?"

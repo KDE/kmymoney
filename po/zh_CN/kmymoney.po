@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-09 00:43+0000\n"
+"POT-Creation-Date: 2025-11-10 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -5380,7 +5380,7 @@ msgid "No KMyMoneyFile open"
 msgstr "未打开任何KMyMoney文件"
 
 #: kmymoney/kmymoney.cpp:3057 kmymoney/kmymoney.cpp:3059
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
 msgctxt "Application is ready to use"
@@ -11350,9 +11350,9 @@ msgstr "付款人%1"
 msgid "Schedule%1"
 msgstr "计划%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1222
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1261
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1227
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1266
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1374
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11363,17 +11363,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1378
 #, kde-format
 msgid "Import complete"
 msgstr "导入已完成"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1430
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "隐藏您的财富"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11388,135 +11388,135 @@ msgstr ""
 "不同的随机数）。为了进一步的隐藏 真实数值，您还可以输入一个介于%1和%2之间的"
 "数，它会被加到所有的金额中。这些数字不会被保存在文件中。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1450
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1455
 #, kde-format
 msgid "Loading commodities..."
 msgstr "正在加载商品信息..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1507
 #, kde-format
 msgid "Loading prices..."
 msgstr "正在加载价格..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1506
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1514
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1511
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1519
 #, kde-format
 msgid "Imported History"
 msgstr "导入历史"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1535
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1540
 #, kde-format
 msgid "Loading accounts..."
 msgstr "正在加载账户..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1680
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1685
 #, kde-format
 msgid "Loading transactions..."
 msgstr "正在加载交易..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1783
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1788
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
 "please check"
 msgstr "账户或交易类型%1，交易日期%2;拆分包含非法数值;请检查"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1825
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1830
 #, kde-format
 msgid "Imported Transaction"
 msgstr "已倒入的交易"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1879
 #, kde-format
 msgid "Loading templates..."
 msgstr "正在加载模板..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1888
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1893
 #, kde-format
 msgid "Unknown payee"
 msgstr "未知收款人"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "计划%1中包含未知操作（关键字(key)为%2，类型(type)为%3）"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2024
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2029
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "计划%1中包含多个操作。只导入了其中之一"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2030
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "计划交易 %1 中不含有效交易拆分"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2040
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
 "convertible"
 msgstr "计划%1中似乎包含一个公司。无法转换GnuCash公式"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2085
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2090
 #, kde-format
 msgid "Loading schedules..."
 msgstr "正在加载计划..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2173
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2178
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr "计划%1使用了当前不存在的时间间隔%2"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2180
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2185
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
 "correct operation"
 msgstr "计划%1中包含未知的时间间隔定义。请检查正确的操作。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2216
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2221
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
 "correct operation"
 msgstr "计划%1包含一个被推迟的时间定义。请检查正确的操作。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2241
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2246
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "根据用户的请求，计划%1已删除"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2294
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
 "currency?"
 msgstr "您的首选货币似乎是%1(%2)。您想将它设为基准货币吗？"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2312
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2317
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "更多"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "完成"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2316
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2321
 #, kde-format
 msgid "Save Report"
 msgstr "保存报表"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2333
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2338
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "转换计划交易“%1”时出现问题。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11525,81 +11525,81 @@ msgstr ""
 "找到：\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 件商品 (股票)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2365
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 个价格\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 个账户\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2367
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 笔交易\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 计划交易\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "未检测到不一致之处\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "检测并更正了 %1 处不一致的地方\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] ""
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] ""
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2388
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "为小型公司准备的功能(顾客，发票等等）"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2384
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "预算"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2385
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
 #, kde-format
 msgid "Lots"
 msgstr "批发"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr "在您的文件中发现目前还不支持的功能："
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
 #, kde-format
 msgid ""
 "\n"
@@ -11610,17 +11610,17 @@ msgstr ""
 "\n"
 "点击“更多”以获取更多信息"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2409
 #, kde-format
 msgid "Save report as"
 msgstr "报告另存为"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2446
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr ""
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2456
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11630,7 +11630,7 @@ msgstr ""
 "一个或多个交易内含有对未知账户的引用。 为保存这些交易，已自动建立一个名为%1的"
 "资产账户。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2495
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11638,7 +11638,7 @@ msgid ""
 msgstr ""
 "投资账户<b>必须</b>是资产账户的子账户。 账户%1将会被存储在主资产账户下。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2502
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11647,7 +11647,7 @@ msgstr ""
 "收入账户必须是主收入账户的子账户。\n"
 "账户%1将被保存在主收入账户下。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2504
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2509
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -11656,23 +11656,23 @@ msgstr ""
 "支出账户必须是主支出账户的子账户。\n"
 "账户%1将被保存在主支出账户下。"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2553
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2558
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "输入投资账户名称"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2555
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2560
 #, kde-format
 msgid "My Investments"
 msgstr "我的投资"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2594
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2599
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "选择父投资账户或者输入新名称。股票%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2621
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2638
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2626
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2643
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1不是一个投资账户。您想为它建立一个账户吗？"
