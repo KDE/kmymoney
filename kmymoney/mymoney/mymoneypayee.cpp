@@ -328,13 +328,20 @@ void MyMoneyPayee::setUrlTemplate(const QString& urlTemplate)
 QUrl MyMoneyPayee::payeeLink(const QString& text) const
 {
     QStringList matches = matchingLinks(text);
-    if (matches.size() == 2) {
-        return QUrl(urlTemplate().arg(matches[1]));
-    } else if (matches.size() == 3) {
-        return QUrl(urlTemplate().arg(matches[1], matches[2]));
-    } else {
+    if (matches.size() < 2)
         return QUrl();
+
+    QString result = urlTemplate();
+
+    // Iterate in reverse to avoid partial replacements (%10 before %1)
+    for (int i = matches.size() - 1; i >= 1; --i) {
+        const QString placeholder = "%" + QString::number(i);
+        if (result.contains(placeholder)) {
+            result.replace(placeholder, matches[i]);
+        }
     }
+
+    return QUrl(result);
 }
 
 QString MyMoneyPayee::decorateLink(const QString& text) const
