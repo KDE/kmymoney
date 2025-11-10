@@ -102,6 +102,7 @@ void NewTransactionForm::Private::updateMemoLink()
         ui->linkLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
         ui->linkLabel->setOpenExternalLinks(true);
         ui->linkLabel->setText(QString("<a href=\"%1\">%2</a>").arg(url.toString(), i18n("Link")));
+        ui->linkLabel->setToolTip(url.toString());
         qDebug() << url;
     } catch (MyMoneyException&) {
         ui->linkLabel->setText("");
