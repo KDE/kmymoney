@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-04 03:57+0000\n"
+"POT-Creation-Date: 2025-11-10 03:38+0000\n"
 "PO-Revision-Date: 2025-10-25 21:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -5486,7 +5486,7 @@ msgid "No KMyMoneyFile open"
 msgstr "Açılacak K Param Dosyası yok"
 
 #: kmymoney/kmymoney.cpp:3054 kmymoney/kmymoney.cpp:3056
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
 msgctxt "Application is ready to use"
@@ -11560,9 +11560,9 @@ msgstr "Alacaklı%1"
 msgid "Schedule%1"
 msgstr "Plan%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1222
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1261
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1227
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1266
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1374
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11573,17 +11573,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1378
 #, kde-format
 msgid "Import complete"
 msgstr "İçe aktarma tamamlandı"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1430
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "Varsıllığını gizle"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11600,33 +11600,33 @@ msgstr ""
 "değerleri daha da gizlemek için %1 ile %2 arasında bir sayı girebilirsiniz.\n"
 "Bu numaralar dosyada depolanmaz."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1450
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1455
 #, kde-format
 msgid "Loading commodities..."
 msgstr "Emtialar yükleniyor…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1507
 #, kde-format
 msgid "Loading prices..."
 msgstr "Fiyatlar yükleniyor…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1506
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1514
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1511
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1519
 #, kde-format
 msgid "Imported History"
 msgstr "İçe Aktarılan Geçmiş"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1535
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1540
 #, kde-format
 msgid "Loading accounts..."
 msgstr "Hesaplar yükleniyor…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1680
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1685
 #, kde-format
 msgid "Loading transactions..."
 msgstr "İşlemler yükleniyor…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1783
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1788
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11635,37 +11635,37 @@ msgstr ""
 "Hesap ya da Kategori %1, işlem tarihi %2; bölme geçersiz değer içeriyor; "
 "lütfen denetleyin"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1825
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1830
 #, kde-format
 msgid "Imported Transaction"
 msgstr "İçe Aktarılan İşlem"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1879
 #, kde-format
 msgid "Loading templates..."
 msgstr "Şablonlar yükleniyor…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1888
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1893
 #, kde-format
 msgid "Unknown payee"
 msgstr "Bilinmeyen alacaklı"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "Plan %1 bilinmeyen eylem içeriyor (anahtar = %2, tür = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2024
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2029
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "Plan %1 birden çok eylem içeriyor; yalnızca bir tanesi içe aktarıldı"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2030
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "Plan %1 hiç geçerli bölme içermiyor"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2040
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -11674,17 +11674,17 @@ msgstr ""
 "Plan %1 bir formül içeriyor görünüyor. GnuCash formülleri dönüştürülebilir "
 "değildir"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2085
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2090
 #, kde-format
 msgid "Loading schedules..."
 msgstr "Planlar yükleniyor…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2173
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2178
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr "Plan %1, şu anda kullanılamayan %2 aralığına sahip"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2180
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2185
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11693,7 +11693,7 @@ msgstr ""
 "Plan %1 bilinmeyen aralık belirtimi içeriyor; lütfen doğru çalışıp "
 "çalışmadığını denetleyin"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2216
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2221
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11702,12 +11702,12 @@ msgstr ""
 "Plan %1 ertelenmiş bir aralık belirtimi içeriyor; lütfen doğru çalışıp "
 "çalışmadığını denetleyin"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2241
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2246
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "Plan %1 kullanıcı isteği ile silindi"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2294
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -11716,29 +11716,29 @@ msgstr ""
 "Ana para biriminiz %1 (%2) gibi görünüyor; bunu temel para biriminiz olarak "
 "ayarlamak ister misiniz?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2312
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2317
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Daha Fazla"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Bitti"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2316
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2321
 #, kde-format
 msgid "Save Report"
 msgstr "Raporu Kaydet"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2333
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2338
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "“%1” planı dönüştürülürken sorunlarla karşılaşıldı."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11747,89 +11747,89 @@ msgstr ""
 "Bulundu:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 emtia (özkaynak)}\n"
 msgstr[1] "%1 emtia (özkaynaklar)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2365
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 fiyat\n"
 msgstr[1] "%1 fiyat\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 hesap\n"
 msgstr[1] "%1 hesap\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2367
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 işlem\n"
 msgstr[1] "%1 işlem\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 plan\n"
 msgstr[1] "%1 plan\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "Hiçbir tutarsızlık algılanmadı\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "%1 tutarsızlık tespit edildi ve düzeltildi\n"
 msgstr[1] "%1 tutarsızlık tespit edildi ve düzeltildi\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "%1 sahipsiz hesap oluşturuldu\n"
 msgstr[1] "%1 sahipsiz hesap oluşturuldu\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "%1 olası plan sorunu not edildi\n"
 msgstr[1] "%1 olası plan sorunu not edildi\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2388
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Küçük İşletme Özellikleri (Müşteriler, Faturalar, vb.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2384
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Bütçeler"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2385
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
 #, kde-format
 msgid "Lots"
 msgstr "Birçok Şey"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr "Dosyanızda bulunan aşağıdaki özellikler şu anda desteklenmiyor:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
 #, kde-format
 msgid ""
 "\n"
@@ -11840,17 +11840,17 @@ msgstr ""
 "\n"
 "Ek bilgi için Daha Fazla düğmesine basın"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2409
 #, kde-format
 msgid "Save report as"
 msgstr "Raporu farklı kaydet"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2446
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "Sahipsiz hesap, bilinmeyen bir GnuCash hesabından oluşturuldu"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2456
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11860,7 +11860,7 @@ msgstr ""
 "Bir veya daha fazla işlem, bilinmeyen bir hesaba başvuru içeriyor\n"
 "Verileri tutmak için %1 adlı bir varlık hesabı oluşturuldu"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2495
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11869,7 +11869,7 @@ msgstr ""
 "Yatırım hesabı, bir Varlık hesabının alt ögesi olmalıdır\n"
 "Hesap %1, ana Varlık hesabı altında depolanacak"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2502
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11878,7 +11878,7 @@ msgstr ""
 "Gelir hesabı, başka bir Gelir hesabının alt ögesi olmalıdır\n"
 "Hesap %1, ana Varlık hesabı altında depolanacak"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2504
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2509
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -11887,23 +11887,23 @@ msgstr ""
 "Gider hesabı, başka bir Gider hesabının alt ögesi olmalıdır\n"
 "Hesap %1, ana Varlık hesabı altında depolanacak"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2553
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2558
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "Yatırım hesabı adını girin "
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2555
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2560
 #, kde-format
 msgid "My Investments"
 msgstr "Yatırımlarım"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2594
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2599
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "Ana yatırım hesabı seçin veya yeni bir ad girin. Hisse senedi%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2621
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2638
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2626
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2643
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr ""
@@ -15538,12 +15538,12 @@ msgstr "Ortalama"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1427
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1567
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1617
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1694
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1874
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1945
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15801,8 +15801,8 @@ msgstr "Kapanış Bakiyesi"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1641
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1982
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
 #, kde-format
 msgid "Grand Total"
 msgstr "Genel Toplam"
@@ -16143,50 +16143,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Açılış"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1413
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1681
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Hesap"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2204
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2211
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Güncel"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2209
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2216
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Bütçe"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2214
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2221
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Fark"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2219
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2226
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Öngörü"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2224
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2231
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Hareketli Ortalama"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2229
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2236
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Hareketli Ortalama Fiyatı"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2234
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2241
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"

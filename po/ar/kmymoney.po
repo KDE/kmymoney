@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-04 03:57+0000\n"
+"POT-Creation-Date: 2025-11-10 03:38+0000\n"
 "PO-Revision-Date: 2025-09-22 19:38+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -5466,7 +5466,7 @@ msgid "No KMyMoneyFile open"
 msgstr "لا ملف «أموالك» مفتوح"
 
 #: kmymoney/kmymoney.cpp:3054 kmymoney/kmymoney.cpp:3056
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
 msgctxt "Application is ready to use"
@@ -11513,9 +11513,9 @@ msgstr "مُتسلِّم%1"
 msgid "Schedule%1"
 msgstr "جدول%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1222
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1261
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1227
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1266
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1374
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11526,17 +11526,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1378
 #, kde-format
 msgid "Import complete"
 msgstr "اكتمل الاستيراد"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1430
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "أخفِ ثروتك"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11552,33 +11552,33 @@ msgstr ""
 "يمكنك إدخال رقم بين %1 و %2 سيُطبق على كل القيم.\n"
 "هذه الأرقام لن تُخزن في الملف."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1450
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1455
 #, kde-format
 msgid "Loading commodities..."
 msgstr "يحمّل السّلع..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1507
 #, kde-format
 msgid "Loading prices..."
 msgstr "يحمّل الأثمان..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1506
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1514
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1511
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1519
 #, kde-format
 msgid "Imported History"
 msgstr "تأريخ مستورد"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1535
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1540
 #, kde-format
 msgid "Loading accounts..."
 msgstr "يحمّل الحسابات..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1680
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1685
 #, kde-format
 msgid "Loading transactions..."
 msgstr "يحمّل المعاملات..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1783
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1788
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11587,54 +11587,54 @@ msgstr ""
 "الحساب أو الفئة %1، تاريخ المعاملة %2؛ التجزئة يحتوي على قيمة غير صالحة؛ "
 "الرجاء التحقق"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1825
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1830
 #, kde-format
 msgid "Imported Transaction"
 msgstr "معاملة مستوردة"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1879
 #, kde-format
 msgid "Loading templates..."
 msgstr "يحمّل القوالب..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1888
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1893
 #, kde-format
 msgid "Unknown payee"
 msgstr "مُتسلِّم مجهول"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "يحتوي الجدول %1 إجراء مجهول (المفتاح = %2، النّوع = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2024
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2029
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "يحتوي الجدول %1 إجراءات متعدّدة، استُورد واحد فقط"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2030
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "لا يحتوي الجدول %1 سكربتات صالحة"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2040
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
 "convertible"
 msgstr "يبدو أن الجدول %1 يحتوي على صيغة. صيغ GnuCash ليست قابلة للتحويل"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2085
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2090
 #, kde-format
 msgid "Loading schedules..."
 msgstr "يحمّل الجداول..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2173
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2178
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr "للجدول %1 الفترة %2 وهي غير مدعومة حاليًّا"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2180
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2185
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11643,7 +11643,7 @@ msgstr ""
 "الجدول %1 يحتوي على مواصفات فاصل زمني غير معروفة؛ الرجاء التحقق من العملية "
 "الصحيحة"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2216
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2221
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11651,41 +11651,41 @@ msgid ""
 msgstr ""
 "الجدول %1 يحتوي على مواصفات فاصل زمني مؤجل؛ الرجاء التحقق من العملية الصحيحة"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2241
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2246
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "أُسقط الجدول %1 بطلب المستخدم"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2294
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
 "currency?"
 msgstr "يبدو أن عملتك الرّئيسيّة هي %1 ‏(%2)، أتريد ضبطها كعملتك الأساسيّة؟"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2312
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2317
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "أكثر"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "تمّ"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2316
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2321
 #, kde-format
 msgid "Save Report"
 msgstr "احفظ التّقرير"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2333
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2338
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "حدثت أخطاء أثناء تحويل الجدول ’%1‘."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11694,7 +11694,7 @@ msgstr ""
 "عُثر على:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
@@ -11705,7 +11705,7 @@ msgstr[3] "%1 سلع (أسهم)\n"
 msgstr[4] "%1 سلعة (أسهم)\n"
 msgstr[5] "%1 سلعة (أسهم)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2365
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
@@ -11716,7 +11716,7 @@ msgstr[3] "%1 أثمان\n"
 msgstr[4] "%1 ثمنًا\n"
 msgstr[5] "%1 ثمن\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
@@ -11727,7 +11727,7 @@ msgstr[3] "%1 حسابات\n"
 msgstr[4] "%1 حسابًا\n"
 msgstr[5] "%1 حساب\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2367
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
@@ -11738,7 +11738,7 @@ msgstr[3] "%1 معاملات\n"
 msgstr[4] "%1 معاملة\n"
 msgstr[5] "%1 معاملة\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
@@ -11749,12 +11749,12 @@ msgstr[3] "%1 جداول\n"
 msgstr[4] "%1 جدولًا\n"
 msgstr[5] "%1 جدول\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "لم تُكتشف أيّة تناقضات\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
@@ -11765,7 +11765,7 @@ msgstr[3] "اكتُشفت %1 تناقضات وأُصلحت\n"
 msgstr[4] "اكتُشف %1 تناقضًا وأُصلح\n"
 msgstr[5] "اكتُشف %1 تناقض وأُصلح\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
@@ -11776,7 +11776,7 @@ msgstr[3] "أُنشئت %1 حسابات يتيمة\n"
 msgstr[4] "أُنشئ %1 حسابًا يتيمًا\n"
 msgstr[5] "أُنشئ %1 حساب يتيم\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
@@ -11787,28 +11787,28 @@ msgstr[3] "دُوّنت %1 مشاكل محتملة في الجدول\n"
 msgstr[4] "دُوّنت %1 مشكلة محتملة في الجدول\n"
 msgstr[5] "دُوّنت %1 مشكلة محتملة في الجدول\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2388
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "ميزات الأعمال الصغيرة (العملاء، الفواتير، إلخ.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2384
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "الميزانيّات"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2385
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
 #, kde-format
 msgid "Lots"
 msgstr "مجموعات"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr "الميزات الآتية التي عُثر عليها في ملفّك غير مدعومة حاليًّا:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
 #, kde-format
 msgid ""
 "\n"
@@ -11819,17 +11819,17 @@ msgstr ""
 "\n"
 "انقر أكثر لمزيد من المعلومات"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2409
 #, kde-format
 msgid "Save report as"
 msgstr "احفظ التّقرير ك‍"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2446
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "يتيم أنشِئ من حساب GnuCash غير معروف"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2456
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11839,7 +11839,7 @@ msgstr ""
 "معاملة واحدة أو أكثر تحتوي على إشارة إلى حساب غير معروف\n"
 "أنشِئ حساب أصول بالاسم %1 لاحتواء البيانات"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2495
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11848,7 +11848,7 @@ msgstr ""
 "حساب الاستثمار يجب أن يكون ابنًا لأحد حسابات الأصول\n"
 "سيُخزّن الحساب %1 تحت حساب الأصول الرّئيسيّ"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2502
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11857,7 +11857,7 @@ msgstr ""
 "حساب الإيراد يجب أن يكون ابنًا لأحد حسابات الإيرادات\n"
 "سيُخزّن الحساب %1 تحت حساب الإيرادات الرّئيسيّ"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2504
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2509
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -11866,23 +11866,23 @@ msgstr ""
 "حساب المصروفات يجب أن يكون ابنًا لأحد حسابات المصروفات\n"
 "سيُخزّن الحساب %1 تحت حساب المصروفات الرّئيسيّ"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2553
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2558
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "أدخل اسم حساب الاستثمار "
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2555
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2560
 #, kde-format
 msgid "My Investments"
 msgstr "استثماراتي"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2594
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2599
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "اختر حساب استثمار أبّ أو أدخل اسمًا جديدًا. المخزون %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2621
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2638
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2626
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2643
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "ليس %1 حساب استثمار. أتريد عمل واحد؟"
@@ -15542,12 +15542,12 @@ msgstr "المتوسّط"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1427
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1567
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1617
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1694
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1874
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1945
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15803,8 +15803,8 @@ msgstr "الرّصيد الختاميّ"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1641
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1982
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
 #, kde-format
 msgid "Grand Total"
 msgstr "المجموع الكلي"
@@ -16145,44 +16145,44 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "الافتتاح"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1413
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1681
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "الحساب"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2204
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2211
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "الفعلي"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2209
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2216
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "الموازنة"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2214
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2221
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "الفرق"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2219
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2226
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "التّنبّؤ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2224
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2231
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "المتوسط المتحرك"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2229
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2236
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
@@ -16190,7 +16190,7 @@ msgstr "متوسط السعر المتحرك"
 
 # غالبا سنواجه خطأ ما بسبب كثرة استخدامه في كل مكان
 # قد نحتاج سياقا
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2234
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2241
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"

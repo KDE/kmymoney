@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-04 03:57+0000\n"
+"POT-Creation-Date: 2025-11-10 03:38+0000\n"
 "PO-Revision-Date: 2025-09-23 10:09+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -5551,7 +5551,7 @@ msgid "No KMyMoneyFile open"
 msgstr "No s'ha obert cap fitxer del KMyMoney"
 
 #: kmymoney/kmymoney.cpp:3054 kmymoney/kmymoney.cpp:3056
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
 msgctxt "Application is ready to use"
@@ -11671,9 +11671,9 @@ msgstr "Beneficiari%1"
 msgid "Schedule%1"
 msgstr "Planificació%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1222
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1261
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1227
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1266
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1374
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11684,17 +11684,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1378
 #, kde-format
 msgid "Import complete"
 msgstr "S'ha completat la importació"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1430
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "Oculteu la vostra riquesa"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11713,33 +11713,33 @@ msgstr ""
 "valors.\n"
 "Aquests números no s'emmagatzemaran al fitxer."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1450
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1455
 #, kde-format
 msgid "Loading commodities..."
 msgstr "S'estan carregant les mercaderies..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1507
 #, kde-format
 msgid "Loading prices..."
 msgstr "S'estan carregant les cotitzacions..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1506
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1514
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1511
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1519
 #, kde-format
 msgid "Imported History"
 msgstr "Historial importat"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1535
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1540
 #, kde-format
 msgid "Loading accounts..."
 msgstr "S'estan carregant els comptes..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1680
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1685
 #, kde-format
 msgid "Loading transactions..."
 msgstr "S'estan carregant les operacions..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1783
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1788
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11748,38 +11748,38 @@ msgstr ""
 "Compte o categoria %1, data de l'operació %2: el desglossament conté un "
 "valor no vàlid. Comproveu-ho"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1825
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1830
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Operació importada"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1879
 #, kde-format
 msgid "Loading templates..."
 msgstr "S'estan carregant les plantilles..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1888
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1893
 #, kde-format
 msgid "Unknown payee"
 msgstr "Beneficiari desconegut"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr ""
 "La planificació %1 conté una acció desconeguda (tecla = %2, tipus = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2024
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2029
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "La planificació %1 conté múltiples accions; només se n'ha importat una"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2030
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "La planificació %1 no conté desglossaments vàlids"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2040
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -11788,18 +11788,18 @@ msgstr ""
 "Sembla que la planificació %1 contingui una fórmula. Les fórmules del "
 "GnuCash no es poden convertir"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2085
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2090
 #, kde-format
 msgid "Loading schedules..."
 msgstr "S'estan carregant les planificacions..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2173
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2178
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr ""
 "La planificació %1 conté l'interval %2 el qual no està disponible actualment"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2180
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2185
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11808,7 +11808,7 @@ msgstr ""
 "La planificació %1 conté una especificació d'interval desconeguda. Si us "
 "plau, comproveu que l'operació sigui correcta"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2216
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2221
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11817,12 +11817,12 @@ msgstr ""
 "La planificació %1 conté una especificació d'interval diferida. Si us plau, "
 "comproveu que l'operació sigui correcta"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2241
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2246
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "S'ha descartat la planificació %1 a petició de l'usuari"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2294
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -11831,29 +11831,29 @@ msgstr ""
 "Sembla que la vostra divisa principal és %1 (%2); voleu establir-la com a "
 "divisa base?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2312
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2317
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Més"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Fet"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2316
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2321
 #, kde-format
 msgid "Save Report"
 msgstr "Desa l'informe"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2333
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2338
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "S'han trobat problemes en convertir la planificació «%1»."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11862,91 +11862,91 @@ msgstr ""
 "S'ha trobat:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 mercaderia (acció)\n"
 msgstr[1] "%1 mercaderies (accions)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2365
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 preu\n"
 msgstr[1] "%1 preus\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 compte\n"
 msgstr[1] "%1 compte\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2367
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 operació\n"
 msgstr[1] "%1 operacions\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 planificació\n"
 msgstr[1] "%1 planificacions\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "No s'ha detectat cap inconsistència\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "S'ha detectat %1 incoherència i s'ha corregit\n"
 msgstr[1] "S'han detectat %1 incoherències i s'han corregit\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "S'ha creat %1 compte orfe\n"
 msgstr[1] "S'han creat %1 comptes orfes\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "S'ha detectat %1 possible problema de planificació\n"
 msgstr[1] "S'han detectat %1 possibles problemes de planificació\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2388
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Funcionalitats per a negocis petits (Clients, Factures, etc.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2384
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Pressupostos"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2385
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
 #, kde-format
 msgid "Lots"
 msgstr "Lots"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
 "S'han trobat les següents característiques en el fitxer que encara no estan "
 "admeses:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
 #, kde-format
 msgid ""
 "\n"
@@ -11957,17 +11957,17 @@ msgstr ""
 "\n"
 "Premeu «Més» per a informació addicional"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2409
 #, kde-format
 msgid "Save report as"
 msgstr "Desa l'informe com a"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2446
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "S'ha creat un orfe a partir d'un compte desconegut del GnuCash"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2456
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11977,7 +11977,7 @@ msgstr ""
 "Una o més operacions contenen referències a comptes desconeguts\n"
 "S'ha creat un compte d'actiu amb el nom %1 per a mantenir les dades"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2495
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11986,7 +11986,7 @@ msgstr ""
 "Els comptes d'inversió han de ser fills d'un compte d'actiu\n"
 "El compte %1 s'emmagatzemarà sota el compte d'actiu principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2502
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11995,7 +11995,7 @@ msgstr ""
 "Els comptes d'ingressos han de ser fills d'un compte d'ingressos\n"
 "El compte %1 s'emmagatzemarà sota el compte d'ingressos principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2504
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2509
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -12004,24 +12004,24 @@ msgstr ""
 "Els comptes de despeses han de ser fills d'un compte de despeses\n"
 "El compte %1 s'emmagatzemarà sota el compte de despeses principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2553
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2558
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "Introduïu el nom del compte d'inversions"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2555
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2560
 #, kde-format
 msgid "My Investments"
 msgstr "Les meves inversions"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2594
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2599
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr ""
 "Seleccioneu el compte d'inversions pare o introduïu un nom nou. Valor %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2621
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2638
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2626
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2643
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 no és cap compte d'inversions. Voleu fer-ne un?"
@@ -15678,12 +15678,12 @@ msgstr "Mitjana"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1427
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1567
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1617
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1694
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1874
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1945
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15946,8 +15946,8 @@ msgstr "Saldo final"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1641
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1982
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
 #, kde-format
 msgid "Grand Total"
 msgstr "Suma total"
@@ -16291,50 +16291,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "En obrir"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1413
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1681
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Compte"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2204
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2211
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Real"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2209
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2216
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Pressupost"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2214
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2221
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Diferència"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2219
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2226
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Previsió"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2224
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2231
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Mitjana mòbil"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2229
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2236
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Mitjana mòbil del preu"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2234
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2241
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
