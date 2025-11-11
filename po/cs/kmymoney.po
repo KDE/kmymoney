@@ -25377,7 +25377,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgctxt "@label Reconciliation progress dialog"
-#~ msgid "Reconciling transactions..."
-#~ msgstr "Schvaluji transakce..."
