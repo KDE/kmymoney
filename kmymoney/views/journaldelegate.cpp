@@ -534,8 +534,8 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
             opt.backgroundBrush = opt.palette.base();
             if (selected) {
-                // always use the normal palette since the background is also in normal
-                painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
+                opt.backgroundBrush = option.palette.brush(cg, QPalette::Highlight);
+                painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
                 style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
             } else if (erroneous) {
