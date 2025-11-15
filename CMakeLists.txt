@@ -294,6 +294,12 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# freeBSD error: passing no argument for the '...' parameter of a
+# variadic macro is a C++20 extension [-Werror,-Wc++20-extensions]
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(-Wno-c++20-extensions)
+endif()
+
 # use DBus only on Linux
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(KMM_DBUS 1)
