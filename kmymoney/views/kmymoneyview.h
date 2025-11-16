@@ -117,8 +117,6 @@ public:
     void enableViewsIfFileOpen(bool fileOpen);
     void switchToHomeView();
 
-    void addWidget(QWidget* w);
-
     void showPageAndFocus(View idView);
     void showPage(View idView, bool forceShow = false);
 
