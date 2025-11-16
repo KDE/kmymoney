@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:43+0000\n"
+"POT-Creation-Date: 2025-11-16 00:42+0000\n"
 "PO-Revision-Date: 2025-08-14 15:51+0200\n"
 "Last-Translator: lipor <collect.aqua019@passinbox.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -21937,7 +21937,7 @@ msgstr "Automatisch ausgefüllte Buchung wählen"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1661
+#: kmymoney/views/newtransactioneditor.cpp:1662
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21946,7 +21946,7 @@ msgstr ""
 "Möchten Sie die Notiz <p><i>%1</i></p> durch die Notiz <p><i>%2</i></p> aus "
 "der anderen Split-Buchung ersetzen."
 
-#: kmymoney/views/newtransactioneditor.cpp:1662
+#: kmymoney/views/newtransactioneditor.cpp:1663
 #, kde-format
 msgid "Copy memo"
 msgstr "Notiz kopieren"
@@ -21983,7 +21983,7 @@ msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Verwenden Sie dies, um die Buchung aufzunehmen"
 
-#: kmymoney/views/newtransactionform.cpp:135
+#: kmymoney/views/newtransactionform.cpp:136
 #, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
