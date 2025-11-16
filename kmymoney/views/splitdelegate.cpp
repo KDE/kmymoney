@@ -199,6 +199,7 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
                 cg = QPalette::Inactive;
             }
             if (opt.state & QStyle::State_Selected) {
+                opt.backgroundBrush = opt.palette.brush(cg, QPalette::Highlight);
                 painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
             } else {
                 painter->setPen(opt.palette.color(cg, QPalette::Text));

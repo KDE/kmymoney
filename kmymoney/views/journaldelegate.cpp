@@ -534,7 +534,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
             opt.backgroundBrush = opt.palette.base();
             if (selected) {
-                opt.backgroundBrush = option.palette.brush(cg, QPalette::Highlight);
+                opt.backgroundBrush = opt.palette.brush(cg, QPalette::Highlight);
                 painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
                 style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
