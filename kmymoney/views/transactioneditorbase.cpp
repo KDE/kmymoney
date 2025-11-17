@@ -73,7 +73,7 @@ TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& acc
     Q_UNUSED(accountId)
     d->frameCollection = new WidgetHintFrameCollection(this);
     setAutoFillBackground(true);
-    setBackgroundRole(QPalette::Highlight);
+    setBackgroundRole(QPalette::Window);
 #if 0
     d->focusFrame = new WidgetHintFrame(this, WidgetHintFrame::Focus);
     WidgetHintFrame::show(this);
