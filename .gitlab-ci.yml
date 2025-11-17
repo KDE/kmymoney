@@ -14,6 +14,11 @@ include:
 #      - /gitlab-templates/craft-macos-x86-64.yml
       - /gitlab-templates/flatpak.yml
 
+windows_qt69:
+  variables:
+    # Fix error "fatal: Unable to persist credentials with the 'wincredman' credential store"
+    GCM_CREDENTIAL_STORE: "none"
+
 # custom builds
 
 build_local_ubuntu_2110:
