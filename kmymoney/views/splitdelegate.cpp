@@ -192,32 +192,28 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
         }
 
         // draw the text items
-        if (!opt.text.isEmpty() || !lines.isEmpty()) {
-            QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
+        QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
 
-            if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
-                cg = QPalette::Inactive;
-            }
-            if (opt.state & QStyle::State_Selected) {
-                opt.backgroundBrush = opt.palette.brush(cg, QPalette::Highlight);
-                painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
-            } else {
-                painter->setPen(opt.palette.color(cg, QPalette::Text));
-            }
-            if (opt.state & QStyle::State_Editing) {
-                painter->setPen(opt.palette.color(cg, QPalette::Text));
-                painter->drawRect(textArea.adjusted(0, 0, -1, -1));
+        if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
+            cg = QPalette::Inactive;
+        }
+        if (opt.state & QStyle::State_Selected) {
+            opt.backgroundBrush = opt.palette.brush(cg, QPalette::Highlight);
+            painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
+            style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+        } else {
+            painter->setPen(opt.palette.color(cg, QPalette::Text));
+            style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+        }
+
+        // collect data for the various columns
+        if (index.column() == SplitModel::Column::Memo) {
+            for (int i = 0; i < lines.count(); ++i) {
+                painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);
             }
 
-            // collect data for the various columns
-            if (index.column() == SplitModel::Column::Memo) {
-                for (int i = 0; i < lines.count(); ++i) {
-                    painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);
-                }
-
-            } else {
-                painter->drawText(textArea, opt.displayAlignment, opt.text);
-            }
+        } else {
+            painter->drawText(textArea, opt.displayAlignment, opt.text);
         }
 
         // draw the focus rect
@@ -228,7 +224,6 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
             o.state |= QStyle::State_KeyboardFocusChange;
             o.state |= QStyle::State_Item;
 
-            QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
             o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected) ? QPalette::Highlight : QPalette::Window);
             style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
         }

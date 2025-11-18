@@ -602,20 +602,6 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
             }
         }
 
-        // draw the focus rect
-        if(opt.state & QStyle::State_HasFocus) {
-            QStyleOptionFocusRect o;
-            o.QStyleOption::operator=(opt);
-            o.rect = style->proxy()->subElementRect(QStyle::SE_ItemViewItemFocusRect, &opt, opt.widget);
-            o.state |= QStyle::State_KeyboardFocusChange;
-            o.state |= QStyle::State_Item;
-
-            cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
-            o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected)
-                                                  ? QPalette::Highlight : QPalette::Window);
-            style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
-        }
-
         // take care of icons on the transaction
         if (index.column() == JournalModel::Column::Detail) {
             QRect iconArea = QRect(opt.rect.x() + margin, opt.rect.y(), opt.rect.width() - 2 * margin, opt.rect.height());
@@ -648,16 +634,19 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 }
             }
         }
-    } else {
-        // Skip painting the CE_FocusFrame on Windows and with AppImages
-        // because it seems to be the cause that the background of the
-        // editor is painted completely black.
-#ifndef Q_OS_WIN
-        if (!AlkEnvironment::isRunningAsAppImage()) {
-            // paint focus frame around edit widget
-            style->drawControl(QStyle::CE_FocusFrame, &opt, painter, editWidget);
-        }
-#endif
+    }
+
+    if (opt.state & QStyle::State_HasFocus) {
+        QStyleOptionFocusRect o;
+        o.QStyleOption::operator=(opt);
+        o.rect = style->proxy()->subElementRect(QStyle::SE_ItemViewItemFocusRect, &opt, opt.widget);
+        o.state |= QStyle::State_KeyboardFocusChange;
+        o.state |= QStyle::State_Item;
+
+        QPalette::ColorGroup cg;
+        cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
+        o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected) ? QPalette::Highlight : QPalette::Window);
+        style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
     }
 
     painter->restore();
