@@ -520,21 +520,6 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
             event->ignore();
             return;
         }
-    } else {
-        const auto keySeq = QKeySequence(event->modifiers() | event->key());
-
-        if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
-            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
-            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
-            if (tabOrderWidget) {
-                tabOrderDialog->setTarget(tabOrderWidget);
-                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
-                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
-                }
-            }
-            tabOrderDialog->deleteLater();
-            return;
-        }
     }
     QWidget::keyPressEvent(event);
 }
@@ -758,6 +743,25 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
             }
         }
     }
+
+    if (e->type() == QEvent::KeyPress) {
+        auto kev = static_cast<QKeyEvent*>(e);
+        const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
+
+        if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
+            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
+            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
+            if (tabOrderWidget) {
+                tabOrderDialog->setTarget(tabOrderWidget);
+                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+                }
+            }
+            tabOrderDialog->deleteLater();
+            return true;
+        }
+    }
+
     return QWidget::eventFilter(o, e);
 }
 
