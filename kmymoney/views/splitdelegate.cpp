@@ -201,8 +201,10 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
             if (opt.state & QStyle::State_Selected) {
                 opt.backgroundBrush = opt.palette.brush(cg, QPalette::Highlight);
                 painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
+                style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
             } else {
                 painter->setPen(opt.palette.color(cg, QPalette::Text));
+                style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
             }
             if (opt.state & QStyle::State_Editing) {
                 painter->setPen(opt.palette.color(cg, QPalette::Text));
