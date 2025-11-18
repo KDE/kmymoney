@@ -715,7 +715,6 @@ void PivotTable::calculateOpeningBalances()
                 bool canSkip = true;
                 for (int row = firstRow; canSkip && (row <= lastRow); ++row) {
                     idx = journalModel->index(row, 0);
-                    qDebug() << idx.data(eMyMoney::Model::SplitAccountIdRole).toString() << account.id();
                     if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == account.id()) {
                         if (!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
                             canSkip = false;
