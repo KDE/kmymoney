@@ -299,7 +299,7 @@
    <label>Starting day of the fiscal year</label>
    <default>1</default>
    <min>1</min>
-   <max>28</max>
+   <max>31</max>
   </entry>
   <entry name="StartDate" type="DateTime">
    <label>Start date</label>
