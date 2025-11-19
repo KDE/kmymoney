@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2025-11-19 00:43+0000\n"
 "PO-Revision-Date: 2024-11-30 09:29+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -15722,12 +15722,12 @@ msgstr "Średnio"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1433
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1573
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1623
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1700
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1880
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15989,8 +15989,8 @@ msgstr "Saldo zamknięcia"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1647
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1988
 #, kde-format
 msgid "Grand Total"
 msgstr "Suma całkowita"
@@ -16332,50 +16332,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Data otwarcia"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1419
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1687
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Konto"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2211
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2210
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Rzeczywisty"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2216
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2215
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Budżet"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2221
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2220
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Różnica"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2226
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2225
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Prognoza"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2231
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2230
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Średnia ruchoma"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2236
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2235
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Średnia ruchoma cena"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2241
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2240
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -21544,7 +21544,7 @@ msgstr "Numer rozliczeniowy użyty dla tej transakcji."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Numer rozliczeniowy <b>%1</b> został już użyty w tym koncie."
 
-#: kmymoney/views/newspliteditor.cpp:772
+#: kmymoney/views/newspliteditor.cpp:776
 #: kmymoney/views/newtransactioneditor.cpp:207
 #, kde-format
 msgctxt "@info:tooltip Protected"

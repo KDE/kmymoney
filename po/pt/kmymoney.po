@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2025-11-19 00:43+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -15937,12 +15937,12 @@ msgstr "Média"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1433
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1573
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1623
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1700
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1880
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16203,8 +16203,8 @@ msgstr "Saldo de Fechamento"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1647
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1988
 #, kde-format
 msgid "Grand Total"
 msgstr "Total Completo"
@@ -16546,50 +16546,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Abertura"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1419
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1687
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Conta"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2211
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2210
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Real"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2216
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2215
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Orçamento"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2221
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2220
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Diferença"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2226
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2225
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Previsão"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2231
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2230
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Média dos Movimentos"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2236
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2235
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Preço Médio dos Movimentos"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2241
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2240
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -21778,7 +21778,7 @@ msgstr "O número de cheque usado para esta transacção."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "O número de cheque <b>%1</b> já foi usado nesta conta."
 
-#: kmymoney/views/newspliteditor.cpp:772
+#: kmymoney/views/newspliteditor.cpp:776
 #: kmymoney/views/newtransactioneditor.cpp:207
 #, kde-format
 msgctxt "@info:tooltip Protected"
