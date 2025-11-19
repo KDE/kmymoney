@@ -143,7 +143,15 @@ int KMyMoneySettings::firstFiscalMonth()
 
 int KMyMoneySettings::firstFiscalDay()
 {
-    return fiscalYearBeginDay();
+    const auto day = fiscalYearBeginDay();
+    const auto month = fiscalYearBegin() + 1;
+
+    // make sure to use the calendar of a non leap year to keep
+    // the last day in February at 28 days
+    const auto maxDay = QDate(2001, month, 1).addMonths(1).addDays(-1).day();
+
+    // Clamp to the valid range
+    return (day > maxDay) ? maxDay : day;
 }
 
 QDate KMyMoneySettings::firstFiscalDate()
