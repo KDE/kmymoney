@@ -222,7 +222,7 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
             return securityIdx.data(eMyMoney::Model::SecuritySymbolRole);
 
         case Value: {
-            const auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+            const auto balance = file->balance(acc.id(), QDate::currentDate());
             const auto tradingCurrencyId = tradingCurrencyIdx.data(eMyMoney::Model::IdRole).toString();
             const auto prec = MyMoneyMoney::denomToPrec(tradingCurrencyIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
             const auto tradingCurrencySymbol = tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
@@ -237,7 +237,7 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
         }
 
         case Quantity: {
-            const auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+            const auto balance = file->balance(acc.id(), QDate::currentDate());
             const auto prec = MyMoneyMoney::denomToPrec(securityIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
 
             if(role == Qt::EditRole) {
