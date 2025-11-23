@@ -719,7 +719,7 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
             if (ui->numberEdit->isVisible() && !number.isEmpty()) {
                 ui->numberEdit->setText(number);
             } else if (!m_split.number().isEmpty()) {
-                ui->numberEdit->setText(KMyMoneyUtils::nextFreeCheckNumber(m_account));
+                ui->numberEdit->setText(MyMoneyFile::instance()->nextCheckNumber(m_account.id()));
             }
 
             // if the user already entered an amount we use it to proceed

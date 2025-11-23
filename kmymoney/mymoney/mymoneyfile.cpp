@@ -162,6 +162,8 @@ public:
         , m_dirty(false)
         , m_inTransaction(false)
         , m_journalBlocking(false)
+        //                                                      +-#1--+ +#2++-#3-++-#4--+
+        , m_numericalCheckNumberExp(QRegularExpression(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?")))
         , payeesModel(qq, &undoStack)
         , userModel(qq, &undoStack)
         , costCenterModel(qq, &undoStack)
@@ -912,11 +914,36 @@ public:
         qDebug("Duplicate account in transaction %s", qPrintable(t.id()));
     }
 
+    AlkValue numericCheckNumberPart(const QString& checkNumber) const
+    {
+        const auto match = m_numericalCheckNumberExp.match(checkNumber);
+        if (match.hasMatch()) {
+            return AlkValue(match.captured(3), QChar());
+        }
+        return AlkValue(-1);
+    }
+
+    QString nextCheckNumber(const QString& checkNumber, int offset = 1) const
+    {
+        // make sure the offset is either -1 or 1
+        offset = (offset >= 0) ? 1 : -1;
+
+        const auto match = m_numericalCheckNumberExp.match(checkNumber);
+        if (match.hasMatch()) {
+            const auto nextNumber = (MyMoneyMoney(match.captured(3)) + MyMoneyMoney(offset, 1)).formatMoney(1, false);
+            return QStringLiteral("%1%2%3%4")
+                .arg(match.captured(1), match.captured(2), QString::number(match.captured(3).toULong() + offset), match.captured(4));
+        }
+        return QLatin1String("1");
+    }
+
     MyMoneyFile* m_file;
     bool m_dirty;
     bool m_inTransaction;
     bool m_journalBlocking;
     MyMoneySecurity m_baseCurrency;
+
+    QRegularExpression m_numericalCheckNumberExp;
 
     /**
      * @brief Cache for MyMoneyObjects
@@ -4686,50 +4713,69 @@ KMMStringSet MyMoneyFile::referencedObjects() const
     return ids;
 }
 
-bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
+bool MyMoneyFile::isCheckNumberInUse(const QString& accId, const QString& number) const
 {
     // by definition, an empty string or a non-numeric string is not used
-    static const QRegularExpression checkNumberExp(QLatin1String("(.*\\D)?(\\d+)(\\D.*)?"));
-    if (no.isEmpty() || !checkNumberExp.match(no).hasMatch())
+    const auto actualNumber = d->numericCheckNumberPart(number);
+    if (actualNumber == AlkValue(-1)) {
         return false;
+    }
 
     const auto model = &d->journalModel;
     const auto rows = model->rowCount();
     for (int row = 0; row < rows; ++row) {
         const auto idx = model->index(row, 0);
         if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accId) {
-            const auto number = idx.data(eMyMoney::Model::JournalSplitNumberRole).toString();
-            if (!number.isEmpty() && number == no) {
-                return true;
+            const auto splitNumber = idx.data(eMyMoney::Model::JournalSplitNumberRole).toString();
+            if (!splitNumber.isEmpty()) {
+                if (d->numericCheckNumberPart(splitNumber) == actualNumber) {
+                    return true;
+                }
             }
         }
     }
     return false;
 }
 
-QString MyMoneyFile::highestCheckNo(const QString& accId) const
+QString MyMoneyFile::highestCheckNumberUsed(const QString& accId) const
 {
-    unsigned64 lno = 0;
-    unsigned64 cno;
-    QString no;
+    const auto account = d->accountsModel.itemById(accId);
+    QString highestCheckNumber = QLatin1String("0");
 
-    const auto model = &d->journalModel;
-    const auto rows = model->rowCount();
-    for (int row = 0; row < rows; ++row) {
-        const auto idx = model->index(row, 0);
-        if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accId) {
-            const auto number = idx.data(eMyMoney::Model::JournalSplitNumberRole).toString();
-            if (!number.isEmpty()) {
-                // non-numerical values stored in number will return 0 in the next line
-                cno = number.toULongLong();
-                if (cno > lno) {
-                    lno = cno;
-                    no = number;
+    if (!account.id().isEmpty()) {
+        if (!account.value("lastNumberUsed").isEmpty()) {
+            highestCheckNumber = account.value("lastNumberUsed");
+        }
+
+        auto highestActualNumber = d->numericCheckNumberPart(highestCheckNumber);
+        const auto model = &d->journalModel;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accId) {
+                const auto splitNumber = idx.data(eMyMoney::Model::JournalSplitNumberRole).toString();
+                if (!splitNumber.isEmpty()) {
+                    const auto actualSplitNumber = d->numericCheckNumberPart(splitNumber);
+                    if (actualSplitNumber > highestActualNumber) {
+                        highestCheckNumber = splitNumber;
+                        highestActualNumber = actualSplitNumber;
+                    }
                 }
             }
         }
     }
-    return no;
+
+    return highestCheckNumber;
+}
+
+QString MyMoneyFile::nextCheckNumber(const QString& accId) const
+{
+    return nextCheckNumberFromTemplate(highestCheckNumberUsed(accId));
+}
+
+QString MyMoneyFile::nextCheckNumberFromTemplate(const QString& numberUsed) const
+{
+    return d->nextCheckNumber(numberUsed);
 }
 
 bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) const

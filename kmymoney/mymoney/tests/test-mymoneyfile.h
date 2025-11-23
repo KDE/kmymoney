@@ -96,6 +96,8 @@ private Q_SLOTS:
     void testVatAssignment();
     void testEmptyFilter();
     void testAddSecurity();
+    void testNextCheckNumber_data();
+    void testNextCheckNumber();
 
 private Q_SLOTS:
     void objectAdded(eMyMoney::File::Object type, const QString& id);

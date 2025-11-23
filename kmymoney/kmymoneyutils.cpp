@@ -282,57 +282,6 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
     }
 }
 
-QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
-{
-    return getAdjacentNumber(acc.value("lastNumberUsed"), 1);
-}
-
-QString KMyMoneyUtils::nextFreeCheckNumber(const MyMoneyAccount& acc)
-{
-    auto file = MyMoneyFile::instance();
-    auto num = acc.value("lastNumberUsed");
-
-    if (num.isEmpty())
-        num = QStringLiteral("1");
-
-    // now check if this number has been used already
-    if (file->checkNoUsed(acc.id(), num)) {
-        // if a number has been entered which is immediately prior to
-        // an existing number, the next new number produced would clash
-        // so need to look ahead for free next number
-        // we limit that to a number of tries which depends on the
-        // number of splits in that account (we can't have more)
-        MyMoneyTransactionFilter filter(acc.id());
-        QList<MyMoneyTransaction> transactions;
-        file->transactionList(transactions, filter);
-        const int maxNumber = transactions.count();
-        for (int i = 0; i < maxNumber; i++) {
-            if (file->checkNoUsed(acc.id(), num)) {
-                //  increment and try again
-                num = getAdjacentNumber(num);
-            } else {
-                //  found a free number
-                break;
-            }
-        }
-    }
-    return num;
-}
-
-QString KMyMoneyUtils::getAdjacentNumber(const QString& number, int offset)
-{
-    // make sure the offset is either -1 or 1
-    offset = (offset >= 0) ? 1 : -1;
-
-    //                              +-#1--+ +#2++-#3-++-#4--+
-    static const QRegularExpression exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
-    QRegularExpressionMatch match = exp.match(number);
-    if (match.hasMatch()) {
-        return QStringLiteral("%1%2%3%4").arg(match.captured(1), match.captured(2), QString::number(match.captured(3).toULong() + offset), match.captured(4));
-    }
-    return QStringLiteral("1");
-}
-
 QString KMyMoneyUtils::reconcileStateToString(eMyMoney::Split::State flag, bool text)
 {
     QString txt;

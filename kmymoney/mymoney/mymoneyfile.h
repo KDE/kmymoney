@@ -1661,26 +1661,36 @@ public:
     bool referencesClosedAccount(const MyMoneySplit& s) const;
 
     /**
-      * This method checks if the given check no &p no is used in
-      * a transaction referencing account &p accId. If  @p accId is empty,
-      * @p false is returned.
-      *
-      * @param accId id of account to checked
-      * @param no check number to be verified if used or not
-      * @retval false @p no is not in use
-      * @retval true @p no is already assigned
-      */
-    bool checkNoUsed(const QString& accId, const QString& no) const;
+     * This method checks if the given check number @p number is used in
+     * a transaction referencing account @p accId. If  @p accId is empty,
+     * @p false is returned. Only the numeric part of check numbers
+     * is used, passing "Test 1" with a check number "Something 1" on
+     * file returns @c true.
+     *
+     * @param accId id of account to check
+     * @param no check number to be verified if used or not
+     * @retval false @p no is not in use
+     * @retval true @p no is already assigned
+     */
+    bool isCheckNumberInUse(const QString& accId, const QString& number) const;
 
     /**
-      * This method returns the highest assigned check no for
-      * account @p accId.
-      *
-      * @param accId id of account to be scanned
-      * @return highest check no. used
-      */
-    QString highestCheckNo(const QString& accId) const;
+     * This method returns the highest assigned check number for
+     * account @p accId.
+     *
+     * @param accId id of account to be scanned
+     * @return highest check number used
+     */
+    QString highestCheckNumberUsed(const QString& accId) const;
 
+    /**
+     * This method returns the next available check number for
+     * account @p accId.
+     *
+     * @param accId id of account to be scanned
+     * @return next unused check number
+     */
+    QString nextCheckNumber(const QString& accId) const;
 
     /**
       * This method checks if there is a transaction
@@ -1899,6 +1909,15 @@ private:
      * Make sure that the splits value has the precision of the corresponding account
      */
     void fixSplitPrecision(MyMoneyTransaction& t) const;
+
+    /**
+     * Return the next check number based on the template @a numberUsed.
+     * This replaces only the numeric part and lets all other parts
+     * unaffected.
+     *
+     * E.g. nextCheckNumber("ABC 123 DEF") returns "ABC 124 DEF"
+     */
+    QString nextCheckNumberFromTemplate(const QString& numberUsed) const;
 
 private:
     /// \internal d-pointer class.
