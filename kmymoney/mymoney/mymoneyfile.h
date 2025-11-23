@@ -196,6 +196,11 @@ public:
         UserID,
     } FixedKey;
 
+    typedef enum {
+        IncludeAccountValue,
+        ExcludeAccountValue,
+    } LastCheckNumberUsed;
+
     /**
       * This is the function to access the MyMoneyFile object.
       * It returns a pointer to the single instance of the object.
@@ -1676,12 +1681,15 @@ public:
 
     /**
      * This method returns the highest assigned check number for
-     * account @p accId.
+     * account @p accId or "0" if none is found.
      *
      * @param accId id of account to be scanned
+     * @param accountValue controls if the value stored with the account
+     *                     shall be taken into account or not
+     *
      * @return highest check number used
      */
-    QString highestCheckNumberUsed(const QString& accId) const;
+    QString highestCheckNumberUsed(const QString& accId, LastCheckNumberUsed accountValue = IncludeAccountValue) const;
 
     /**
      * This method returns the next available check number for

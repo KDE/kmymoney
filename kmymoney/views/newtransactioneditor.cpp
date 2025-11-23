@@ -167,6 +167,7 @@ public:
     KMyMoneyAccountComboSplitHelper* m_splitHelper;
     TabOrder* m_externalTabOrder;
     TabOrder m_tabOrder;
+    QString m_initialCheckNumber;
 };
 
 void NewTransactionEditor::Private::enableTagContainer(bool enable) const
@@ -476,19 +477,10 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
 {
     bool rc = true; // number did change
     WidgetHintFrame::hide(ui->numberEdit);
-    if (!newNumber.isEmpty()) {
-        auto model = MyMoneyFile::instance()->journalModel();
-        const QModelIndexList list = model->match(model->index(0, 0), eMyMoney::Model::SplitNumberRole,
-                                     QVariant(newNumber),
-                                     -1,                         // all splits
-                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-        for (const auto& idx : list) {
-            if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == m_account.id()
-                && idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().compare(m_transaction.id())) {
-                WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
-                rc = false;
-                break;
-            }
+    if (!newNumber.isEmpty() && (newNumber != m_initialCheckNumber)) {
+        if (MyMoneyFile::instance()->isCheckNumberInUse(m_account.id(), newNumber)) {
+            WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
+            rc = false;
         }
     }
     return rc;
@@ -718,7 +710,7 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
 
             if (ui->numberEdit->isVisible() && !number.isEmpty()) {
                 ui->numberEdit->setText(number);
-            } else if (!m_split.number().isEmpty()) {
+            } else if (!m_split.number().isEmpty() && (m_account.accountType() == eMyMoney::Account::Type::Checkings)) {
                 ui->numberEdit->setText(MyMoneyFile::instance()->nextCheckNumber(m_account.id()));
             }
 
@@ -1056,6 +1048,7 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
     // keep a copy of the transaction and split
     m_transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
     m_split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
+    m_initialCheckNumber = m_split.number();
     const auto list = idx.model()->match(idx.model()->index(0, 0),
                                          eMyMoney::Model::JournalTransactionIdRole,
                                          idx.data(eMyMoney::Model::JournalTransactionIdRole),
@@ -1485,6 +1478,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule, Schedul
         d->checkForValidAmount();
 
         d->m_splitHelper->updateWidget();
+        d->m_initialCheckNumber.clear();
     }
 }
 
@@ -1519,11 +1513,17 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 
         d->m_split = MyMoneySplit();
         d->m_split.setAccountId(d->m_account.id());
+        d->m_initialCheckNumber.clear();
         const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
         if (lastUsedPostDate.isValid()) {
             d->ui->dateEdit->setDate(lastUsedPostDate.date());
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
+        }
+
+        // in case user selected to fill number field with next number ...
+        if ((d->m_account.accountType() == eMyMoney::Account::Type::Checkings) && KMyMoneySettings::autoIncCheckNumber()) {
+            d->ui->numberEdit->setText(MyMoneyFile::instance()->nextCheckNumber(d->m_account.id()));
         }
 
         d->ui->creditDebitEdit->setSharesCommodity(commodity);
@@ -1679,21 +1679,30 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
 
 QStringList NewTransactionEditor::saveTransaction(const QStringList& selectedJournalEntries)
 {
+    const auto file = MyMoneyFile::instance();
     auto t = transaction();
 
     auto selection(selectedJournalEntries);
-    connect(MyMoneyFile::instance()->journalModel(), &JournalModel::idChanged, this, [&](const QString& currentId, const QString& previousId) {
+    connect(file->journalModel(), &JournalModel::idChanged, this, [&](const QString& currentId, const QString& previousId) {
         selection.replaceInStrings(previousId, currentId);
     });
 
     MyMoneyFileTransaction ft;
     try {
         if (t.id().isEmpty()) {
-            MyMoneyFile::instance()->addTransaction(t);
+            file->addTransaction(t);
             selection = journalEntrySelection(t.id(), d->m_account.id());
         } else {
             t.setImported(false);
-            MyMoneyFile::instance()->modifyTransaction(t);
+            file->modifyTransaction(t);
+        }
+        // in case we have a check number
+        const auto highestCheckNumberUsed = file->highestCheckNumberUsed(d->m_account.id());
+        if (highestCheckNumberUsed.compare(QLatin1String("0"))) {
+            // update property on account
+            d->m_account = file->account(d->m_account.id());
+            d->m_account.setValue(QLatin1String("lastNumberUsed"), highestCheckNumberUsed);
+            file->modifyAccount(d->m_account);
         }
         ft.commit();
 

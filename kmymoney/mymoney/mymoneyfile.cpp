@@ -4737,13 +4737,13 @@ bool MyMoneyFile::isCheckNumberInUse(const QString& accId, const QString& number
     return false;
 }
 
-QString MyMoneyFile::highestCheckNumberUsed(const QString& accId) const
+QString MyMoneyFile::highestCheckNumberUsed(const QString& accId, LastCheckNumberUsed accountValue) const
 {
     const auto account = d->accountsModel.itemById(accId);
     QString highestCheckNumber = QLatin1String("0");
 
     if (!account.id().isEmpty()) {
-        if (!account.value("lastNumberUsed").isEmpty()) {
+        if ((accountValue == IncludeAccountValue) && !account.value("lastNumberUsed").isEmpty()) {
             highestCheckNumber = account.value("lastNumberUsed");
         }
 
