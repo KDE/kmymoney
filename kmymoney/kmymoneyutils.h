@@ -257,23 +257,6 @@ public:
     static void calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTransaction& transaction, const QMap<QString, MyMoneyMoney>& balances);
 
     /**
-      * Returns the next check number for account @a acc. No check is performed, if the
-      * number is already in use.
-      */
-    static QString nextCheckNumber(const MyMoneyAccount& acc);
-
-    /**
-      * Returns the next check free number for account @a acc.
-      */
-    static QString nextFreeCheckNumber(const MyMoneyAccount& acc);
-
-    /**
-     * Returns previous number if offset is -1 or
-     * the following number if offset is 1.
-     */
-    static QString getAdjacentNumber(const QString& number, int offset = 1);
-
-    /**
      * Returns the text representing the reconcile flag. If @a text is @p true
      * then the full text will be returned otherwise a short form (usually one character).
      */

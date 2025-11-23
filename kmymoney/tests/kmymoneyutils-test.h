@@ -24,8 +24,6 @@ private Q_SLOTS:
     void initTestCase();
     void init();
     void cleanup();
-    void testGetAdjacentNumber_data();
-    void testGetAdjacentNumber();
 };
 
 #endif
