@@ -44,6 +44,7 @@ public:
         , storageOffset(0)
         , isInit(false)
         , columnSelectionEnabled(true)
+        , skipSaveConfiguration(true) // suppress saving header state until we are visible
     {
     }
 
@@ -120,6 +121,7 @@ public:
                 q->connect(headerView, &QWidget::customContextMenuRequested, q, &ColumnSelector::slotColumnsMenu);
                 q->connect(headerView, &QHeaderView::sectionResized, q, &ColumnSelector::slotUpdateHeaderState);
                 q->connect(headerView, &QHeaderView::sectionMoved, q, &ColumnSelector::slotUpdateHeaderState);
+                q->connect(headerView, &QHeaderView::sortIndicatorChanged, q, &ColumnSelector::slotUpdateHeaderState);
                 headerView->installEventFilter(q);
                 isInit = true;
             }
@@ -145,6 +147,7 @@ public:
     int                   storageOffset;
     bool                  isInit;
     bool columnSelectionEnabled;
+    bool skipSaveConfiguration;
 };
 
 
@@ -181,7 +184,7 @@ ColumnSelector::~ColumnSelector()
 void ColumnSelector::slotUpdateHeaderState()
 {
     Q_D(ColumnSelector);
-    if (!d->configGroupName.isEmpty()) {
+    if (!d->skipSaveConfiguration && !d->configGroupName.isEmpty()) {
         auto grp = KSharedConfig::openConfig()->group(d->configGroupName);
         grp.writeEntry("HeaderState", d->headerView->saveState());
         grp.sync();
@@ -339,7 +342,9 @@ bool ColumnSelector::eventFilter(QObject* o, QEvent* e)
         // in the view. Calling the hide/showSection again when the header view is
         // about to be displayed solves the issue and removes them completely.
         // Turns out that on Qt6 one needs to call showColumn before the hideColumn
-        // call has an effect.
+        // call has an effect. While we're doing that, we make sure that we don't
+        // save the configuration on the fly
+        d->skipSaveConfiguration = true;
         const auto maxColumn = d->model->columnCount();
         for (int col = 0; col < maxColumn; ++col) {
             const auto hidden = d->isColumnHidden(col);
@@ -348,6 +353,7 @@ bool ColumnSelector::eventFilter(QObject* o, QEvent* e)
                 d->headerView->hideSection(col);
             }
         }
+        d->skipSaveConfiguration = false;
     }
     return QObject::eventFilter(o, e);
 }
