@@ -355,4 +355,7 @@
       </artifacts>
     </release>
   </releases>
+  <custom>
+    <value key="KDE::supporters">Tim Lobner</value>
+  </custom>
 </component>
