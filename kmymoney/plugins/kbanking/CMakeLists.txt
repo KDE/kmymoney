@@ -22,8 +22,6 @@ set(kbanking_PART_SRCS
     gwenkdegui.cpp
 )
 
-kconfig_add_kcfg_files(kbanking_PART_SRCS kbankingsettings.kcfgc)
-
 # Add new menu entries if debugging is enabled
 set(KMM_BANKING_DEBUG_OPTIONS)
 # preprocessor definitions in case this is a debug build
