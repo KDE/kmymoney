@@ -408,7 +408,9 @@ void KOnlineJobOutboxView::slotEditJob()
     if (!indexes.isEmpty()) {
         const auto jobId = indexes.first().data(eMyMoney::Model::IdRole).toString();
         Q_ASSERT(!jobId.isEmpty());
-        d->editJob(jobId);
+        if (!jobId.isEmpty()) {
+            d->editJob(jobId);
+        }
 //    Q_EMIT editJob(jobId);
     }
 }
