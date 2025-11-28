@@ -211,6 +211,8 @@ ReportTabRange::ReportTabRange(QWidget *parent)
     connect(ui->m_dataMajorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMajor);
     connect(ui->m_dataMinorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMinor);
     connect(ui->m_dataLock, &QComboBox::currentIndexChanged, this, &ReportTabRange::slotDataLockChanged);
+    ui->m_dataLock->setItemData(0, QVariant::fromValue(eMyMoney::Report::DataLock::Automatic));
+    ui->m_dataLock->setItemData(1, QVariant::fromValue(eMyMoney::Report::DataLock::UserDefined));
     Q_EMIT ui->m_dataLock->currentIndexChanged(ui->m_dataLock->currentIndex());
 }
 
@@ -353,7 +355,8 @@ void ReportTabRange::slotYLabelsPrecisionChanged(const int& value)
     updateDataRangeValidators(value);
 }
 
-void ReportTabRange::slotDataLockChanged(int index) {
+void ReportTabRange::slotDataLockChanged(int index)
+{
     if (ui->m_dataLock->itemData(index).value<eMyMoney::Report::DataLock>() == eMyMoney::Report::DataLock::Automatic) {
         ui->m_dataRangeStart->setText(QStringLiteral("0"));
         ui->m_dataRangeEnd->setText(QStringLiteral("0"));
