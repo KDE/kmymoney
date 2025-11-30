@@ -235,6 +235,13 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
                     }
                 }
             }
+            if (!rc) {
+                rc = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().contains(d->filterString, Qt::CaseInsensitive);
+            }
+            if (!rc) {
+                const auto dateIdx = sourceModel()->index(source_row, JournalModel::Column::Date, source_parent);
+                rc = dateIdx.data(Qt::DisplayRole).toString().contains(d->filterString, Qt::CaseInsensitive);
+            }
             if (!rc)
                 return false;
         }
