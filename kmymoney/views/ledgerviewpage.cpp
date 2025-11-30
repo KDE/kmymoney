@@ -93,6 +93,8 @@ void LedgerViewPage::initModel()
     d->stateFilter->setSourceModel(d->accountFilter);
     d->stateFilter->setComboBox(d->ui->m_searchWidget->comboBox());
     d->stateFilter->setLineEdit(d->ui->m_searchWidget->lineEdit());
+    d->ui->m_searchWidget->lineEdit()->setPlaceholderText(i18nc("@info:placeholder Description of filter", "Filter text"));
+    d->ui->m_searchWidget->lineEdit()->setToolTip(i18nc("@info:tooltip", "Only show transactions matching the entered text"));
 
     d->specialItemFilter = new SpecialLedgerItemFilter(this);
     d->specialItemFilter->setSourceModel(d->stateFilter);
