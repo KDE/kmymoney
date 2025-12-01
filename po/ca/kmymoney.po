@@ -26115,10 +26115,3 @@ msgstr "Només s'admet un d'entre --csv o --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "s'està desant l'informe «%1» en «%2»"
-
-#~ msgctxt "@label Reconciliation progress dialog"
-#~ msgid "Reconciling transactions..."
-#~ msgstr "S'estan conciliant operacions..."
-
-#~ msgid "Payment Accounts"
-#~ msgstr "Comptes monetaris"
