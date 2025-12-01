@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -20364,6 +20364,18 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Pilih tahun"
 
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Penapis"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr ""
+
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, fuzzy, kde-format
 msgctxt "@label:textbox Reconciliation date"
@@ -25493,10 +25505,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Security Name"
 #~ msgstr "Keselamatan"
-
-#, fuzzy
-#~ msgid "Filter text"
-#~ msgstr "Penapis"
 
 #, fuzzy
 #~ msgctxt "%1"

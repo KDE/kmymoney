@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -21298,6 +21298,20 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Accept or unmatch transaction"
 
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter text"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Filter text"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, fuzzy, kde-format
+#| msgid "Search transactions containing the following text"
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr "Search transactions containing the following text"
+
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
@@ -28744,9 +28758,6 @@ msgstr "saving report '%1' into '%2'"
 #~ msgid "Security Name"
 #~ msgstr "Security Name"
 
-#~ msgid "Filter text"
-#~ msgstr "Filter text"
-
 #~ msgid ""
 #~ "If the Name column has an activity type prefixed by a standard text,\n"
 #~ "enter the text here. For instance, if a field contains, say, 'type: "
@@ -31399,9 +31410,6 @@ msgstr "saving report '%1' into '%2'"
 #, fuzzy
 #~ msgid "Edit Schedule"
 #~ msgstr "Edit Bill Schedule"
-
-#~ msgid "Search transactions containing the following text"
-#~ msgstr "Search transactions containing the following text"
 
 #~ msgid "&Search"
 #~ msgstr "&Search"

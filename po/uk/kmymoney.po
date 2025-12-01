@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2025-10-25 17:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -21470,6 +21470,19 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Прийняття або скасування встановлення відповідності операції"
+
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Фільтр"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2025-07-27 12:52+0200\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -21230,6 +21230,19 @@ msgstr "Vil du godta eller oppheve samsvar i den koblede transaksjonen nå?"
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Godta eller oppheve samsvar for transaksjon"
+
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Filter"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -21134,6 +21134,19 @@ msgstr "일치하는 거래를 수락하거나 일치를 해제하시겠습니�
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "거래 수락 또는 일치 해제"
+
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "필터"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format

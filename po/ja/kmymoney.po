@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -20233,6 +20233,18 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
+msgstr ""
+
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, kde-format
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr ""
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:98

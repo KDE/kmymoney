@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -21711,6 +21711,19 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "%1 kritériumoknak megfelelő tranzakció található"
 
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter text"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Szöveg szűrése"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr ""
+
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
@@ -28620,9 +28633,6 @@ msgstr ""
 
 #~ msgid "Security Name"
 #~ msgstr "Kötvénynév"
-
-#~ msgid "Filter text"
-#~ msgstr "Szöveg szűrése"
 
 #, fuzzy
 #~| msgctxt "verb"

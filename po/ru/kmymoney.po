@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -21580,6 +21580,19 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Принять или отменить соответствие операции"
 
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter text"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Текст фильтра"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr ""
+
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
@@ -28969,9 +28982,6 @@ msgstr ""
 
 #~ msgid "Security Name"
 #~ msgstr "Название ценной бумаги"
-
-#~ msgid "Filter text"
-#~ msgstr "Текст фильтра"
 
 #, fuzzy
 #~ msgctxt "%1"

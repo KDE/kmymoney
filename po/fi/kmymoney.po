@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -21293,6 +21293,20 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Hyväksy tai poista sovitus tapahtumalta"
 
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter text"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Suodatinteksti"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, fuzzy, kde-format
+#| msgid "Search transactions containing the following text"
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr "Hae seuraavan tekstin sisältävät tapahtumat"
+
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
@@ -28725,9 +28739,6 @@ msgstr "tallennetaan raporttia ”%1” tiedostoon ”%2”"
 #~ msgid "Security Name"
 #~ msgstr "Arvopaperin nimi"
 
-#~ msgid "Filter text"
-#~ msgstr "Suodatinteksti"
-
 #, fuzzy
 #~| msgid ""
 #~| "<p align=\"center\">If the Detail column has an activity type prefixed "
@@ -32247,9 +32258,6 @@ msgstr "tallennetaan raporttia ”%1” tiedostoon ”%2”"
 
 #~ msgid "Edit Schedule"
 #~ msgstr "Muuta ajoitettua tapahtumaa"
-
-#~ msgid "Search transactions containing the following text"
-#~ msgstr "Hae seuraavan tekstin sisältävät tapahtumat"
 
 #~ msgid "&Search"
 #~ msgstr "Et&si"

@@ -19,10 +19,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
-"PO-Revision-Date: 2025-10-23 22:26+0200\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
+"PO-Revision-Date: 2025-11-29 19:20+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.11.80\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -1101,7 +1101,7 @@ msgstr "xxx"
 #: kmymoney/widgets/ktransactionfilter.ui:138
 #, kde-format
 msgid "Date"
-msgstr "Date"
+msgstr "Date d'exécution"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2_2)
 #: kmymoney/dialogs/kcurrencycalculator.ui:130
@@ -2425,7 +2425,7 @@ msgstr "Type :"
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:85
 #, kde-format
 msgid "Date:"
-msgstr "Date :"
+msgstr "Date d'exécution :"
 
 #. i18n: ectx: property (text), widget (QLabel, m_openingBalanceLabel)
 #: kmymoney/dialogs/knewaccountdlg.ui:138
@@ -6593,7 +6593,7 @@ msgstr "Nom"
 #, kde-format
 msgctxt "@title:column Shows the date of statement"
 msgid "Date"
-msgstr "Date"
+msgstr "Date d'exécution"
 
 #: kmymoney/models/statementmodel.cpp:97
 #, kde-format
@@ -6993,8 +6993,8 @@ msgstr ""
 #, kde-format
 msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
 msgstr ""
-" * La somme des fractionnements de l'opération « %1 » signalée sur %2 n'est "
-"pas égale à zéro. "
+" * La somme des fractionnements de l'opération « %1 » effectuée en date du "
+"%2 est différente de zéro. "
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3312
 #, kde-format
@@ -8663,7 +8663,7 @@ msgstr "Cours"
 #, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
-msgstr "Date"
+msgstr "Date d'exécution"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
 #, kde-format
@@ -8919,7 +8919,7 @@ msgstr "N°."
 #, kde-format
 msgctxt "@title:column Valuta date"
 msgid "Date"
-msgstr "Date"
+msgstr "Date d'exécution"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:59
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
@@ -9005,7 +9005,7 @@ msgstr "Solde"
 #, kde-format
 msgctxt "@title:column Entry date"
 msgid "Entry"
-msgstr "Entrée"
+msgstr "Date de l'opération"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, kde-format
@@ -9029,7 +9029,7 @@ msgstr "Centre de coûts"
 #, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr "Date d'entrée"
+msgstr "Date de l'opération"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:81
 #, kde-format
@@ -9164,7 +9164,7 @@ msgstr "inconnu"
 #, kde-format
 msgctxt "@title:column"
 msgid "Date"
-msgstr "Date"
+msgstr "Date d'exécution"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
 #, kde-format
@@ -9975,7 +9975,7 @@ msgstr "Nom du compte :"
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Date"
-msgstr "Date"
+msgstr "Date d'exécution"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #, kde-format
@@ -21553,6 +21553,20 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Accepter ou désapprouver une transaction"
 
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter text"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "Filtrer le Texte"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, fuzzy, kde-format
+#| msgid "Search transactions containing the following text"
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr "Rechercher des opérations contenant le texte suivant"
+
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
@@ -22888,7 +22902,7 @@ msgstr "Date saisie"
 
 #: kmymoney/widgets/transactionsortoption.cpp:41
 msgid "Entry order"
-msgstr "Saisir l'ordre"
+msgstr "Demande d'opération"
 
 #: kmymoney/widgets/transactionsortoption.cpp:44
 msgid "Reconcile state"
@@ -29161,9 +29175,6 @@ msgstr "enregistrement du rapport « %1 » dans « %2 »"
 #~ msgid "Security Name"
 #~ msgstr "Nom du titre  "
 
-#~ msgid "Filter text"
-#~ msgstr "Filtrer le Texte"
-
 #, fuzzy
 #~ msgid ""
 #~ "If the Name column has an activity type prefixed by a standard text,\n"
@@ -32819,9 +32830,6 @@ msgstr "enregistrement du rapport « %1 » dans « %2 »"
 
 #~ msgid "Edit Schedule"
 #~ msgstr "Éditer une échéance"
-
-#~ msgid "Search transactions containing the following text"
-#~ msgstr "Rechercher des opérations contenant le texte suivant"
 
 #~ msgid "&Search"
 #~ msgstr "&Rechercher"

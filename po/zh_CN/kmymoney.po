@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -20581,6 +20581,19 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
+msgstr ""
+
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+#| msgid "Filter"
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "过滤器"
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:98

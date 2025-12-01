@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:42+0000\n"
+"POT-Creation-Date: 2025-12-01 00:43+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -20566,6 +20566,18 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "क्रिया"
 
+#: kmymoney/views/ledgerviewpage.cpp:96
+#, fuzzy, kde-format
+msgctxt "@info:placeholder Description of filter"
+msgid "Filter text"
+msgstr "मजकूर गाळणी (&X)..."
+
+#: kmymoney/views/ledgerviewpage.cpp:97
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Only show transactions matching the entered text"
+msgstr ""
+
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, fuzzy, kde-format
 msgctxt "@label:textbox Reconciliation date"
@@ -25463,10 +25475,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Column "
 #~ msgstr "स्तंभ"
-
-#, fuzzy
-#~ msgid "Filter text"
-#~ msgstr "मजकूर गाळणी (&X)..."
 
 #, fuzzy
 #~ msgctxt "%1"
