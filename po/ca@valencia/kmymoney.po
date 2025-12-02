@@ -45,8 +45,8 @@ msgstr "_Dividend"
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr ""
-"S'ha produït un error en importar %1: Este fitxer no és un fitxer d'extracte "
-"vàlid del KMM."
+"S'ha produït un error mentre s'importava %1: Este fitxer no és un fitxer "
+"d'extracte vàlid del KMM."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:373
 #, kde-format
@@ -62,7 +62,7 @@ msgstr "Sense institució"
 #: kmymoney/converter/mymoneystatementreader.cpp:639
 #, kde-format
 msgid "Error creating security record: %1"
-msgstr "S'ha produït un error en crear el registre de títol: %1"
+msgstr "S'ha produït un error mentre es creava el registre de títol: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
 #: kmymoney/plugins/kbanking/kbanking.cpp:603
@@ -195,7 +195,8 @@ msgstr "No s'ha pogut afegir el beneficiari/receptor"
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
-"Problema en afegir o emparellar una operació que coincidix amb ID «%1»: %2"
+"Problema mentre s'afegia o s'emparellava una operació que coincidix amb ID "
+"«%1»: %2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1484
 #, kde-format
@@ -1701,9 +1702,9 @@ msgid ""
 "updating this security during future price updates or <b>Cancel</b> to stop "
 "the current update operation."
 msgstr ""
-"No s'ha pogut recuperar una cotització per a %1 des de %2. Premeu <b>No</b> "
-"per a eliminar permanentment la font del preu en línia per a este títol, "
-"<b>Sí</b> per a continuar actualitzant este títol per a les futures "
+"Ha fallat mentre es recuperava una cotització per a %1 des de %2. Premeu "
+"<b>No</b> per a eliminar permanentment la font del preu en línia per a este "
+"títol, <b>Sí</b> per a continuar actualitzant este títol per a les futures "
 "actualitzacions de preu o <b>Cancel·la</b> per a parar l'operació "
 "d'actualització en curs."
 
@@ -3520,8 +3521,8 @@ msgid ""
 "On choosing a log file path please keep in mind that log files may contain "
 "sensitive data (e.g. passwords in clear-text etc)."
 msgstr ""
-"En seleccionar el camí cap al fitxer de registre cal tindre en compte que "
-"els fitxers de registre poden contindre dades confidencials (p. ex., "
+"Quan se seleccione el camí cap al fitxer de registre cal tindre en compte "
+"que els fitxers de registre poden contindre dades confidencials (p. ex., "
 "contrasenyes en text clar, etc.)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
@@ -5688,7 +5689,7 @@ msgstr "S'està desmuntant %1"
 #: kmymoney/kmymoney.cpp:3545
 #, kde-format
 msgid "Error mounting device"
-msgstr "S'ha produït un error en muntar el dispositiu"
+msgstr "S'ha produït un error mentre es muntava el dispositiu"
 
 #: kmymoney/kmymoney.cpp:3560 kmymoney/kmymoney.cpp:3579
 #, kde-format
@@ -5704,12 +5705,12 @@ msgstr "S'ha efectuat correctament la còpia de seguretat del fitxer"
 #: kmymoney/kmymoney.cpp:3567
 #, kde-format
 msgid "Error copying file to device"
-msgstr "S'ha produït un error en copiar el fitxer al dispositiu"
+msgstr "S'ha produït un error mentre es copiava el fitxer al dispositiu"
 
 #: kmymoney/kmymoney.cpp:3583
 #, kde-format
 msgid "Error unmounting device"
-msgstr "S'ha produït un error en desmuntar el dispositiu"
+msgstr "S'ha produït un error mentre es desmuntava el dispositiu"
 
 #: kmymoney/kmymoney.cpp:3630
 #, kde-format
@@ -5870,7 +5871,7 @@ msgstr "No s'ha trobat el fitxer"
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
-msgstr "S'ha produït un problema en obrir l'emmagatzematge"
+msgstr "S'ha produït un problema mentre s'obria l'emmagatzematge"
 
 #: kmymoney/kmymoney.cpp:4321
 #, kde-format
@@ -5894,7 +5895,7 @@ msgstr "S'està guardant el fitxer…"
 #: kmymoney/kmymoney.cpp:4351
 #, kde-format
 msgid "Failed to save your data."
-msgstr "No s'han pogut guardar les dades."
+msgstr "Ha fallat mentre es guardaven les dades."
 
 #: kmymoney/kmymoney.cpp:4357
 #, kde-format
@@ -5914,7 +5915,7 @@ msgstr "No s'ha trobat cap connector per a guardar les dades."
 #: kmymoney/kmymoney.cpp:4408
 #, kde-format
 msgid "Failed to save your storage."
-msgstr "No s'ha pogut guardar l'emmagatzematge."
+msgstr "Ha fallat mentre es guardava l'emmagatzematge."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54
@@ -6190,7 +6191,7 @@ msgstr "Suprimix els preus"
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
-msgstr "S'ha produït un error en carregar el fitxer «%1»."
+msgstr "S'ha produït un error mentre es carregava el fitxer «%1»."
 
 #: kmymoney/kmymoneyutils.cpp:505
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:145
@@ -12506,7 +12507,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/kbanking.cpp:1564
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
-msgstr "S'ha produït un error en importar un extracte. Voleu continuar?"
+msgstr "S'ha produït un error mentre s'importava un extracte. Voleu continuar?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1565
 #: kmymoney/plugins/views/reports/kreportsview.cpp:436
@@ -12940,7 +12941,7 @@ msgstr "AVÍS %1"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:541
 #, kde-format
 msgid "Error signing onto your bank"
-msgstr "S'ha produït un error en connectar-se al vostre banc"
+msgstr "S'ha produït un error mentre es connectava amb el vostre banc"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:541
 #, kde-format
@@ -13540,7 +13541,7 @@ msgstr "No s'ha trobat cap compte."
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1034
 #, kde-format
 msgid "Error connecting to bank: %1"
-msgstr "S'ha produït un error en connectar amb el banc: %1"
+msgstr "S'ha produït un error mentre es connectava amb el banc: %1"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1047
 #, kde-format
@@ -13559,7 +13560,7 @@ msgstr "El procés d'importació ha finalitzat inesperadament."
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1084
 #, kde-format
 msgid "Failed to import all statements."
-msgstr "No s'han pogut importar tots els extractes."
+msgstr "Ha fallat mentre s'importaven tots els extractes."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:441
 #, kde-format
@@ -14334,7 +14335,7 @@ msgstr "S'està llegint el QIF…"
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:490
 #, kde-format
 msgid "Error while running the filter '%1'."
-msgstr "S'ha produït un error en executar el filtre «%1»."
+msgstr "S'ha produït un error mentre s'executava el filtre «%1»."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:490
 #, kde-format
@@ -14429,7 +14430,7 @@ msgstr "Hi ha un problema amb el saldo d'obertura"
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1010
 #, kde-format
 msgid "Error while creating opening balance transaction"
-msgstr "S'ha produït un error en crear l'operació de saldo d'obertura"
+msgstr "S'ha produït un error mentre es creava l'operació de saldo d'obertura"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1089
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1323
@@ -14877,7 +14878,8 @@ msgstr ""
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr ""
-"S'ha produït un error en crear la base de dades %1; teniu permís de creació?"
+"S'ha produït un error mentre es creava la base de dades %1; teniu permís de "
+"creació?"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:137
 #, kde-format
@@ -16421,7 +16423,7 @@ msgid ""
 "There was an error creating your report: \"%1\".\n"
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
-"S'ha produït un error en crear el vostre informe: «%1».\n"
+"S'ha produït un error mentre es creava el vostre informe: «%1».\n"
 "Per favor, comuniqueu l'error a la llista dels desenvolupadors: kmymoney-"
 "devel@kde.org"
 
@@ -16679,7 +16681,7 @@ msgstr "Vista desconeguda «%1» en KReportsView::slotOpenUrl()"
 #: kmymoney/plugins/views/reports/kreportsview.cpp:376
 #, kde-format
 msgid "Failed to save: %1"
-msgstr "No s'ha pogut guardar: %1"
+msgstr "Ha fallat mentre es guardava: %1"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:401
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1499
@@ -19157,8 +19159,8 @@ msgstr "S'ha produït un error amb el tipus de fitxer"
 msgid ""
 "<p>Error while reading template file <b>%1</b> in line %2, column %3</p>"
 msgstr ""
-"<p>S'ha produït un error en llegir el fitxer de plantilla <b>%1</b> en la "
-"línia %2, columna %3</p>"
+"<p>S'ha produït un error mentre es llegia el fitxer de plantilla <b>%1</b> a "
+"la línia %2, columna %3</p>"
 
 #: kmymoney/templates/templateloader.cpp:108
 #, kde-format
@@ -23894,7 +23896,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:407
 #, kde-format
 msgid "Calculation error"
-msgstr "S'ha produït un error en el càlcul"
+msgstr "S'ha produït un error durant el càlcul"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:283
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:411
@@ -26095,7 +26097,3 @@ msgstr "Només s'admet un d'entre --csv o --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "s'està guardant l'informe «%1» en «%2»"
-
-#~ msgctxt "@label Reconciliation progress dialog"
-#~ msgid "Reconciling transactions..."
-#~ msgstr "S'estan conciliant operacions…"
