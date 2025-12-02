@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:43+0000\n"
-"PO-Revision-Date: 2025-10-25 07:03+0200\n"
+"PO-Revision-Date: 2025-12-01 07:14+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21319,17 +21319,16 @@ msgid "Accept or unmatch transaction"
 msgstr "Sprejmi transakcijo ali jo proglasi za neujemajočo"
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
-msgstr "Filter"
+msgstr "Besedilo filtra"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"
-msgstr ""
+msgstr "Prikaži samo transakcije, ki ustrezajo vnesenemu besedilu"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format

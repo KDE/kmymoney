@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:43+0000\n"
-"PO-Revision-Date: 2025-10-26 07:05+0100\n"
+"PO-Revision-Date: 2025-12-01 06:04+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3471,6 +3471,7 @@ msgstr "ანგარიშის ინფორმაციის ჩვე�
 #, kde-format
 msgid "Show number of not marked transactions per account [!M]"
 msgstr ""
+"მარკერის არმქონე ტრანზაქციების რაოდენობის ჩვენება თითოეული ანგარიშისთვის [!M]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowDateOfLastReconciliation)
 #: kmymoney/dialogs/settings/ksettingshome.ui:203
@@ -3489,6 +3490,7 @@ msgstr "მიმაგრებული ინტერნეტ-ანგა�
 #, kde-format
 msgid "Show number of cleared transactions per account [C]"
 msgstr ""
+"გასუფთავებული ტრანზაქციების რაოდენობის ჩვენება თითოეული ანგარიშისთვის [C]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCountOfNotReconciledTransactions)
 #: kmymoney/dialogs/settings/ksettingshome.ui:224
@@ -6712,7 +6714,7 @@ msgstr "    პოსტის თარიღი არ განახლდ�
 #: kmymoney/mymoney/mymoneyfile.cpp:3528
 #, kde-format
 msgid "  * Payee id updated in split of schedule '%1'."
-msgstr ""
+msgstr "  * მიმღების id განახლდა გეგმის '%1' გაყოფისას."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3534
 #, kde-format
@@ -18095,6 +18097,7 @@ msgstr ""
 #, kde-format
 msgid "Show number of cleared transactions per account on the Homepage [C]"
 msgstr ""
+"გასუფთავებული ტრანზაქციების რაოდენობის ჩვენება თითოეული ანგარიშისთვის [!M]"
 
 #. i18n: ectx: label, entry (ShowCountOfNotReconciledTransactions), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:184
@@ -18108,7 +18111,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:188
 #, kde-format
 msgid "Show date of last reconciliation on the Homepage"
-msgstr ""
+msgstr "ბოლო შეთანხმების თარიღის ჩვენება საწყის გვერდზე"
 
 #. i18n: ectx: label, entry (useCustomColors), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18246,7 +18249,7 @@ msgstr "ლამაზი მარკერების ჩვენება 
 #: kmymoney/settings/kmymoney.kcfg:296
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "შეთანხმების ჩანაწერების ჩვენება თარიღით და ბალანსით"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:305
@@ -18297,12 +18300,14 @@ msgstr "რეესტრის დალაგების მიმდევ�
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
 msgstr ""
+"ნაგულისხმევი შეთანხმების მდგომარეობა შეთანხმებისას შეყვანილი "
+"ტრანზაქციებისთვის"
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:371
 #, kde-format
 msgid "Number of days (plus/minus) to search for matching transactions"
-msgstr ""
+msgstr "დღეების რაოდენობა (დაახლოებით) მოსაძებნად დამთხვეული ტრანზაქციებისთვის"
 
 #. i18n: ectx: label, entry (KeepOriginalPayeeInfo), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:375
@@ -18568,7 +18573,7 @@ msgstr "საპროცენტო განაკვეთის შემ�
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
-msgstr ""
+msgstr "დაპოსტვის თარიღი ანგარიშის <b>%1</b> გახსნის თარიღამდეა."
 
 #: kmymoney/views/investtransactioneditor.cpp:427
 #, kde-format
@@ -19401,7 +19406,7 @@ msgstr "!შ"
 #: kmymoney/views/khomeview_p.h:1073
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
-msgstr ""
+msgstr "მინიმალურ ბალანსამდე<br>/ მაქსიმალურ კრედიტამდე"
 
 #: kmymoney/views/khomeview_p.h:1117
 #, kde-format
@@ -20396,7 +20401,7 @@ msgstr "ტრანზაქციას აკლია კატეგორ�
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
-msgstr ""
+msgstr "ტრანზაქციას აქვს <b>%1</b>-ის ნაკლული მინიჭება."
 
 #: kmymoney/views/ledgerview.cpp:914
 #, kde-format
@@ -20417,6 +20422,8 @@ msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
+"ეს ტრანზაქცია ემთხვევა. დააწკაპუნეთ ხატულაზე, რომ მიიღოთ ის, ან გააუქმოთ "
+"დამთხვევა."
 
 #: kmymoney/views/ledgerview.cpp:971
 #, kde-format
@@ -20470,6 +20477,7 @@ msgstr ""
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr ""
+"გნებავთ, მიიღოთ, ან გააუქმოთ დამთხვევა ტრანზაქციისთვის, რომელიც დაემთხვა?"
 
 #: kmymoney/views/ledgerview.cpp:1065
 #, kde-format
@@ -20478,17 +20486,16 @@ msgid "Accept or unmatch transaction"
 msgstr "ტრანზაქციის მიღება ან დამთხვევის გაუქმება"
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
-msgstr "ფილტრი"
+msgstr "ტექსტის გაფილტვრა"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"
-msgstr ""
+msgstr "მხოლოდ იმ ტრანზაქციების ჩვენება, რომლებიც შეყვანილ ტექსტს ემთვევა"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
@@ -23941,6 +23948,8 @@ msgid ""
 "\n"
 "Please enter the interest rate or leave the field empty to calculate it."
 msgstr ""
+"\n"
+"შეიყვანეთ საპროცენტო განაკვეთი, ან დატოვეთ ველი ცარიელი მის გამოსათვლელად."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7_3)
 #: kmymoney/wizards/newloanwizard/interesteditwizardpage.ui:93

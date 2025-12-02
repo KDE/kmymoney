@@ -20584,11 +20584,10 @@ msgid "Accept or unmatch transaction"
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
-msgstr "过滤器"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format

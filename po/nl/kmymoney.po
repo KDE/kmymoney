@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:43+0000\n"
-"PO-Revision-Date: 2025-10-25 14:40+0200\n"
+"PO-Revision-Date: 2025-12-01 18:17+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 25.08.3\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -21382,8 +21382,7 @@ msgid "Accept or unmatch transaction"
 msgstr "Transacties accepteren of niet overeen laten komen"
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter text"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Tekst filteren"
@@ -21392,7 +21391,7 @@ msgstr "Tekst filteren"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"
-msgstr ""
+msgstr "Alleen transacties tonen die overeenkomen met de ingevoerde tekst"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
