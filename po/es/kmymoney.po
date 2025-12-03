@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:43+0000\n"
-"PO-Revision-Date: 2025-10-25 03:57+0100\n"
+"PO-Revision-Date: 2025-12-02 01:36+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -21386,17 +21386,16 @@ msgid "Accept or unmatch transaction"
 msgstr "Aceptar o desemparejar transacción"
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
-msgstr "Filtro"
+msgstr "Filtro texto"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"
-msgstr ""
+msgstr "Mostrar solo las transacciones que coinciden con el texto introducido."
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
@@ -26202,7 +26201,3 @@ msgstr "Solo se permite una de las opciones --csv y --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "guardando informe «%1» en «%2»"
-
-#~ msgctxt "@label Reconciliation progress dialog"
-#~ msgid "Reconciling transactions..."
-#~ msgstr "Conciliando transacciones…"
