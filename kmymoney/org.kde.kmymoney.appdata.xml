@@ -272,7 +272,7 @@
     <value key="KDE::mailinglist">kmymoney@kde.org</value>
     <value key="KDE::mailinglist-devel">kmymoney-devel@kde.org</value>
     <value key="KDE::irc">#kmymoney</value>
-    <value key="KDE::supporters">Tim Lobner, plasmac0r, Michał Walenciak</value>
+    <value key="KDE::supporters">Tim Lobner, plasmac0r, Michał Walenciak,lorberi</value>
   </custom>
   <releases>
     <!-- Note: website infrastructure uses the appstream file from the master branch
