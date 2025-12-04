@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:43+0000\n"
-"PO-Revision-Date: 2025-11-29 19:20+0100\n"
+"PO-Revision-Date: 2025-12-02 08:39+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.11.80\n"
+"X-Generator: Lokalize 25.11.90\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -21554,18 +21554,16 @@ msgid "Accept or unmatch transaction"
 msgstr "Accepter ou désapprouver une transaction"
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter text"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
-msgstr "Filtrer le Texte"
+msgstr "Filtrer le texte"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
-#, fuzzy, kde-format
-#| msgid "Search transactions containing the following text"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"
-msgstr "Rechercher des opérations contenant le texte suivant"
+msgstr "Afficher uniquement les opérations associé au texte suivant"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format

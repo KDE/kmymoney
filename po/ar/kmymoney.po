@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:43+0000\n"
-"PO-Revision-Date: 2025-10-25 16:58+0400\n"
+"PO-Revision-Date: 2025-12-03 16:20+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -21185,17 +21185,16 @@ msgid "Accept or unmatch transaction"
 msgstr "اقبل أو أزل مطابقة المعاملة"
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
-msgstr "المرشّح"
+msgstr "مرشّح نص"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"
-msgstr ""
+msgstr "اعرض فقط المعاملات التي تطابق النص المدخل"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
