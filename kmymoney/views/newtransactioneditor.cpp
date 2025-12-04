@@ -548,6 +548,10 @@ void NewTransactionEditor::Private::payeeChanged(int payeeIndex)
 
 void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
 {
+    // Capture user's amount immediately at function entry (before any processing)
+    const auto userAmountFilled = ui->creditDebitEdit->haveValue();
+    const auto userAmount = ui->creditDebitEdit->value();
+    const auto userShares = ui->creditDebitEdit->shares();
     struct uniqTransaction {
         QString journalEntryId;
         MyMoneyMoney amount;
@@ -662,8 +666,6 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
             // keep data we don't want to change by loading
             const auto postDate = ui->dateEdit->date();
             const auto number = ui->numberEdit->text();
-            const auto amountFilled = ui->creditDebitEdit->haveValue();
-            const auto amount = ui->creditDebitEdit->value();
             const auto memo = ui->memoEdit->toPlainText();
 
             // now load the existing transaction into the editor
@@ -687,22 +689,13 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                     splitModel.setData(idx, QString(), eMyMoney::Model::SplitActionRole);
                 }
                 // copy payee information to second split if there are only two splits
-                // overwrite amount in split if value was already available
                 if (splitModel.rowCount() == 1) {
                     splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
                     if (!memo.isEmpty()) {
                         splitModel.setData(idx, memo, eMyMoney::Model::SplitMemoRole);
                     }
-                    if (amountFilled) {
-                        const auto value = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-                        const auto shares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                        auto price = MyMoneyMoney::ONE;
-                        if (!shares.isZero()) {
-                            price = value / shares;
-                        }
-                        splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-amount), eMyMoney::Model::SplitValueRole);
-                        splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>((-amount / price).convert()), eMyMoney::Model::SplitSharesRole);
-                    }
+                    // Don't update split amounts - let them come from the loaded transaction
+                    // The UI amount preservation happens separately
                 }
             }
             // restore data we don't want to change by loading
@@ -714,9 +707,10 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                 ui->numberEdit->setText(MyMoneyFile::instance()->nextCheckNumber(m_account.id()));
             }
 
-            // if the user already entered an amount we use it to proceed
-            if (amountFilled) {
-                ui->creditDebitEdit->setValue(amount);
+            // If user had entered an amount, restore it (loadTransaction would have overwritten it)
+            if (userAmountFilled) {
+                ui->creditDebitEdit->setValue(userAmount);
+                ui->creditDebitEdit->setShares(userShares);
             }
 
             // if the user already entered a memo we use it
@@ -1123,8 +1117,11 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
 
     // then setup the amount widget and update the state
     // of all other widgets
-    ui->creditDebitEdit->setValue(amountValue);
-    ui->creditDebitEdit->setShares(amountShares);
+    // Only set amount if user hasn't already entered one
+    if (!ui->creditDebitEdit->haveValue()) {
+        ui->creditDebitEdit->setValue(amountValue);
+        ui->creditDebitEdit->setShares(amountShares);
+    }
 
     m_splitHelper->updateWidget();
 }
