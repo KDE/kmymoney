@@ -124,6 +124,7 @@
 #include "ledgerviewsettings.h"
 #include "schedulesjournalmodel.h"
 #include "specialdatesmodel.h"
+#include "views/ledgerview.h"
 #include "widgets/amountedit.h"
 #include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneydateedit.h"
@@ -2785,6 +2786,16 @@ void KMyMoneyApp::slotMoveToToday()
         }
     }
     ft.commit();
+    // clear selection after moving transactions to today
+    d->m_selections.clearSelections();
+    // update action states immediately
+    d->updateActions(d->m_selections);
+    // clear any visible selection in ledger views
+    const auto ledgerViews = d->m_myMoneyView->findChildren<LedgerView*>();
+    for (auto lv : ledgerViews) {
+        if (lv && lv->selectionModel())
+            lv->selectionModel()->clearSelection();
+    }
 }
 
 void KMyMoneyApp::slotMatchTransaction()
