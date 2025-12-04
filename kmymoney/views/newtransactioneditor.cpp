@@ -529,7 +529,8 @@ void NewTransactionEditor::Private::payeeChanged(int payeeIndex)
     // in case there is no category assigned for a new transaction,
     // we search for the last transaction of this payee
     // in the selected account.
-    if (m_transaction.id().isEmpty() && (splitModel.rowCount() == 0) && (autoFillMethod != AutoFillMethod::NoAutoFill)) {
+    // Don't autofill if user has already entered an amount - preserve their entry
+    if (m_transaction.id().isEmpty() && (splitModel.rowCount() == 0) && (autoFillMethod != AutoFillMethod::NoAutoFill) && !ui->creditDebitEdit->haveValue()) {
         // if we got here, we have to autofill. Because we will open a dialog,
         // we simply postpone the call until we reach the main event loop. We
         // do this because running the dialog directly has some unknown influence
@@ -666,9 +667,18 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
             const auto amount = ui->creditDebitEdit->value();
             const auto memo = ui->memoEdit->toPlainText();
 
+            // Block amount widget signals during load to prevent overwriting user's entered amount
+            QSignalBlocker amountBlocker(ui->creditDebitEdit);
+
             // now load the existing transaction into the editor
             auto index = MyMoneyFile::instance()->journalModel()->indexById(journalEntryId);
             loadTransaction(index);
+
+            // Immediately restore user's amount before any other processing
+            // This must happen while signals are still blocked
+            if (amountFilled) {
+                ui->creditDebitEdit->setValue(amount);
+            }
 
             // make sure to really create a new transaction
             m_transaction.clearId();
@@ -687,12 +697,12 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                     splitModel.setData(idx, QString(), eMyMoney::Model::SplitActionRole);
                 }
                 // copy payee information to second split if there are only two splits
-                // overwrite amount in split if value was already available
                 if (splitModel.rowCount() == 1) {
                     splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
                     if (!memo.isEmpty()) {
                         splitModel.setData(idx, memo, eMyMoney::Model::SplitMemoRole);
                     }
+                    // Update split amounts to match user-entered amount if already filled
                     if (amountFilled) {
                         const auto value = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
                         const auto shares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
@@ -714,10 +724,9 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                 ui->numberEdit->setText(MyMoneyFile::instance()->nextCheckNumber(m_account.id()));
             }
 
-            // if the user already entered an amount we use it to proceed
-            if (amountFilled) {
-                ui->creditDebitEdit->setValue(amount);
-            }
+            // Amount was already restored immediately after loadTransaction (above)
+            // Now unblock signals so subsequent processing works normally
+            amountBlocker.unblock();
 
             // if the user already entered a memo we use it
             if (!memo.isEmpty()) {
