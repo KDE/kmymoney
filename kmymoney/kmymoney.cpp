@@ -2720,6 +2720,26 @@ void KMyMoneyApp::slotMoveToToday()
 
     MyMoneyFileTransaction ft;
     const QDate today = QDate::currentDate();
+
+    // Save transaction and split IDs for restoration
+    struct SelectionInfo {
+        QString transactionId;
+        QString splitId;
+        QString accountId;
+    };
+    QVector<SelectionInfo> selectionInfos;
+
+    for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+        const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+        if (!journalEntry.id().isEmpty()) {
+            SelectionInfo info;
+            info.transactionId = journalEntry.transaction().id();
+            info.splitId = journalEntry.split().id();
+            info.accountId = journalEntry.split().accountId();
+            selectionInfos.append(info);
+        }
+    }
+
     for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
         const auto journalEntry = file->journalModel()->itemById(journalEntryId);
         if (!journalEntry.id().isEmpty()) {
@@ -2733,16 +2753,32 @@ void KMyMoneyApp::slotMoveToToday()
         }
     }
     ft.commit();
-    // clear selection after moving transactions to today
-    d->m_selections.clearSelections();
-    // update action states immediately
-    d->updateActions(d->m_selections);
-    // clear any visible selection in ledger views
+
+    // Restore selection immediately by finding journal entries with matching transaction and split IDs
+    SelectedObjects newSelections;
+    for (const auto& info : selectionInfos) {
+        const auto indices = file->journalModel()->indexesByTransactionId(info.transactionId);
+        for (const auto& idx : indices) {
+            if (idx.data(eMyMoney::Model::JournalSplitIdRole).toString() == info.splitId
+                && idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == info.accountId) {
+                newSelections.addSelection(SelectedObjects::JournalEntry, idx.data(eMyMoney::Model::IdRole).toString());
+                break;
+            }
+        }
+    }
+
+    // Update internal selections
+    d->m_selections.setSelection(SelectedObjects::JournalEntry, newSelections.selection(SelectedObjects::JournalEntry));
+
+    // Use LedgerView's own method to set selection
     const auto ledgerViews = d->m_myMoneyView->findChildren<LedgerView*>();
     for (auto lv : ledgerViews) {
-        if (lv && lv->selectionModel())
-            lv->selectionModel()->clearSelection();
+        if (lv) {
+            lv->setSelectedJournalEntries(newSelections.selection(SelectedObjects::JournalEntry));
+        }
     }
+
+    d->updateActions(d->m_selections);
 }
 
 void KMyMoneyApp::slotMatchTransaction()

@@ -758,7 +758,7 @@ MyMoneyMoney NewTransactionEditor::Private::splitsSum() const
 {
     const auto rows = splitModel.rowCount();
     MyMoneyMoney value;
-    for(int row = 0; row < rows; ++row) {
+    for (int row = 0; row < rows; ++row) {
         const auto idx = splitModel.index(row, 0);
         value += idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
     }
@@ -1517,7 +1517,6 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 
     setInitialFocus();
 }
-
 
 void NewTransactionEditor::editSplits()
 {
