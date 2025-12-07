@@ -557,11 +557,6 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 style->drawPrimitive(QStyle::PE_PanelItemViewRow, &opt, painter, opt.widget);
             }
 
-            if (opt.state & QStyle::State_Editing) {
-                painter->setPen(opt.palette.color(cg, QPalette::Text));
-                painter->drawRect(textArea.adjusted(0, 0, -1, -1));
-            }
-
             painter->save();
             // collect data for the various columns
             for (int i = 0; i < lineCount; ++i) {
