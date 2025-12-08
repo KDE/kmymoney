@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:43+0000\n"
+"POT-Creation-Date: 2025-12-08 00:43+0000\n"
 "PO-Revision-Date: 2025-12-01 06:04+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18807,7 +18807,7 @@ msgid ""
 msgstr ""
 "მიმდინარე განხორციელებას ამ ხედში ერთზე მეტი ტრანზაქციის შეცვლა არ შეუძლია."
 
-#: kmymoney/views/journaldelegate.cpp:581
+#: kmymoney/views/journaldelegate.cpp:576
 #, kde-format
 msgctxt "Label for tags in ledger"
 msgid "Tag: "

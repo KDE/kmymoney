@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:43+0000\n"
-"PO-Revision-Date: 2025-10-18 16:59+0200\n"
+"POT-Creation-Date: 2025-12-08 00:43+0000\n"
+"PO-Revision-Date: 2025-12-07 10:52+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -158,14 +158,14 @@ msgid ""
 "payee information for all following transactions referencing \"%1\" will be "
 "removed."
 msgstr ""
-"\"Bai\" hautatuz gero, onuraduna sortuko da; \"Ez\" hautatuz gero, ez da "
-"onuradunik sortuko, eta onuradunaren informazioa kenduko da transakzio "
-"honetatik. \"Utzi\" sakatuz gero,eragiketa honen inportazio-prozesua etengo "
-"da.\n"
+"\"Bai\" hautatuta, onuraduna sortuko du; \"Ez\" hautatuta, onuraduna "
+"erregistroa sortzea saihestuko du eta onuradunaren informazioa transakziotik "
+"kenduko du. \"Utzi\" sakatuta, inportazio-eragiketa bertan behera utziko "
+"du.\n"
 "\n"
-"\"Ez\" aukeratzen baduzu, eta \"Ez galdetu berriro\" kontrol-laukia "
-"markatzen baduzu, onuradunaren informazioa kendu egingo da \"%1\" "
-"erreferentzia duten hurrengo transakzio guztietan."
+"Hemen \"Ez\" hautatu eta \"Ez galdetu berriro\" kontrol-laukia markatzen "
+"baduzu, \"%1\" erreferentzia duten ondorengo transakzio guztietan "
+"onuradunaren informazioa kendu egingo da."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1086
 #: kmymoney/kmymoneyutils.cpp:531
@@ -12324,6 +12324,8 @@ msgid ""
 "Automatically load login credentials if available (affects all mapped "
 "accounts)"
 msgstr ""
+"Automatikoki zamatu saioa hasteko egiaztagiriak, erabilgarri badaude "
+"(mapatutako kontu guztiei eragiten die)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:205
@@ -12560,6 +12562,8 @@ msgstr ""
 #, kde-format
 msgid "Load passphrase from password store if available without asking user."
 msgstr ""
+"Zamatu pasaesaldia pasahitz-biltegitik, erabilgarri badago, erabiltzaileari "
+"galdetu gabe"
 
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
@@ -18961,10 +18965,9 @@ msgstr "Erakutsi sareta erregistroan"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Erakutsi kategoriak kontu-zerrendaren ikuspegian"
+msgstr "Erakutsi iragazki-trepeta kontu bat irekitzen denean"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:288
@@ -19544,7 +19547,7 @@ msgstr ""
 "Uneko inplementazioak, ikuspegi honetan, ezin ditu transakzio anizkoitzak "
 "aldatu."
 
-#: kmymoney/views/journaldelegate.cpp:581
+#: kmymoney/views/journaldelegate.cpp:576
 #, kde-format
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
@@ -21291,17 +21294,16 @@ msgid "Accept or unmatch transaction"
 msgstr "Onartu edo desparekatu transakzioa"
 
 #: kmymoney/views/ledgerviewpage.cpp:96
-#, fuzzy, kde-format
-#| msgid "Filter text"
+#, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
-msgstr "Iragazi testua"
+msgstr "Iragazi beharreko testua"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"
-msgstr ""
+msgstr "Sartutako testuarekin bat datozen transakzioak bakarrik erakutsi"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
@@ -22022,6 +22024,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"Iragazki-trepeta ikusgai mantentzeko erabilia. Ikusgai ez badago, Ktrl+F "
+"erabiliz erakuts daiteke."
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
