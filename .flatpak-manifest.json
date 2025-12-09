@@ -258,8 +258,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://www.aquamaniac.de/rdm/attachments/download/548/aqbanking-6.6.4.tar.gz",
-                    "sha256": "a25c209538fa163f3749676a084493c9a43d9045a945aeee2db25dfd9a502b7f"
+                    "url": "https://www.aquamaniac.de/rdm/attachments/download/634/aqbanking-6.8.2.tar.gz",
+                    "sha256": "10b14c92d76ff13652e00b5c496001601f0d9465c5acb1b1b682d451022406ec"
                 }
             ],
             "cleanup": [
@@ -275,8 +275,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/lsh123/xmlsec/releases/download/1.3.8/xmlsec1-1.3.8.tar.gz",
-                            "sha256": "d0180916ae71be28415a6fa919a0684433ec9ec3ba1cc0866910b02e5e13f5bd",
+                            "url": "https://github.com/lsh123/xmlsec/releases/download/1.3.9/xmlsec1-1.3.9.tar.gz",
+                            "sha256": "a631c8cd7a6b86e6adb9f5b935d45a9cf9768b3cb090d461e8eb9d043cf9b62f",
                             "x-checker-data": {
                                 "type": "anitya",
                                 "project-id": 5200,
@@ -303,8 +303,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://www.aquamaniac.de/rdm/attachments/download/550/gwenhywfar-5.13.0.tar.gz",
-                            "sha256": "26513d4b032eb8108ff2b6bf234b7d60c710fd16059fb80077acd79c250824b9"
+                            "url": "https://www.aquamaniac.de/rdm/attachments/download/630/gwenhywfar-5.14.1.tar.gz",
+                            "sha256": "8916feaa99cb954f963f2cba8dd2dffe57cacf7f284daf00eab071aad6fe2ab3"
                         }
                     ],
                     "cleanup": [
