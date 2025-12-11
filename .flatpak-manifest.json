@@ -18,6 +18,7 @@
         "--share=network",
         "--socket=fallback-x11",
         "--socket=wayland",
+        "--socket=pcsc",
         "--system-talk-name=org.freedesktop.UDisks2"
     ],
     "cleanup": [
@@ -360,6 +361,52 @@
                                     ]
                                 }
                             ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "libchipcard",
+            "buildsystem": "autotools",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.aquamaniac.de/rdm/attachments/download/382/libchipcard-5.1.6.tar.gz",
+                    "sha256": "6c07f527417f7562074f99012da4d11eb4dbafd33f49e66b442ccd6e3b8cfd20"
+                }
+            ],
+            "cleanup": [
+                "/bin"
+            ],
+            "modules": [
+                {
+                    "name": "pcsc-lite",
+                    "buildsystem": "meson",
+                    "config-opts": [
+                        "-Dlibudev=false",
+                        "-Dlibsystemd=false",
+                        "-Dpolkit=false"
+                    ],
+                    "cleanup": [
+                        "/lib/libpcscspy.so",
+                        "/lib/libpcsclite.so",
+                        "/sbin"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://pcsclite.apdu.fr/files/pcsc-lite-2.4.0.tar.xz",
+                            "sha256": "22307017a99e123dbecb991136783beca07966f1376d74d9ad0004ba5f81c4f1",
+                            "x-checker-data": {
+                                "type": "anitya",
+                                "project-id": 2611,
+                                "url-template": "https://pcsclite.apdu.fr/files/pcsc-lite-$version.tar.xz"
+                            }
+                        },
+                        {
+                            "type": "patch",
+                            "path": "packaging/pcsc-lite-negotiate_protocol.diff"
                         }
                     ]
                 }
