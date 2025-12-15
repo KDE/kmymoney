@@ -533,27 +533,30 @@ const MyMoneySchedule& KEditScheduleDlg::schedule()
         break;
     }
 
-    d->m_schedule.setType(Schedule::Type::Bill);
+    // only modify the type if it's not a loan payment
+    if (d->m_schedule.type() != Schedule::Type::LoanPayment) {
+        d->m_schedule.setType(Schedule::Type::Bill);
 
-    const auto amount = d->transactionEditor->transactionAmount();
-    if (d->m_schedule.transaction().splitCount() == 2) {
-        const auto splits = d->m_schedule.transaction().splits();
-        bool isTransfer = true;
-        for (const auto& split : splits) {
-            const auto idx = MyMoneyFile::instance()->accountsModel()->indexById(split.accountId());
-            if (idx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool() == false) {
-                isTransfer = false;
-                break;
+        const auto amount = d->transactionEditor->transactionAmount();
+        if (d->m_schedule.transaction().splitCount() == 2) {
+            const auto splits = d->m_schedule.transaction().splits();
+            bool isTransfer = true;
+            for (const auto& split : splits) {
+                const auto idx = MyMoneyFile::instance()->accountsModel()->indexById(split.accountId());
+                if (idx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool() == false) {
+                    isTransfer = false;
+                    break;
+                }
+            }
+            if (isTransfer) {
+                d->m_schedule.setType(Schedule::Type::Transfer);
             }
         }
-        if (isTransfer) {
-            d->m_schedule.setType(Schedule::Type::Transfer);
-        }
-    }
 
-    if (d->m_schedule.type() != Schedule::Type::Transfer) {
-        if (!amount.isNegative()) {
-            d->m_schedule.setType(Schedule::Type::Deposit);
+        if (d->m_schedule.type() != Schedule::Type::Transfer) {
+            if (!amount.isNegative()) {
+                d->m_schedule.setType(Schedule::Type::Deposit);
+            }
         }
     }
 

@@ -398,8 +398,13 @@ public:
                     m_file->setFileFixVersion(9);
                     break;
 
-                // add new levels above. Don't forget to increase availableFixVersion() for all
-                // the storage backends this fix applies to
+                case 9:
+                    fixFile_9();
+                    m_file->setFileFixVersion(10);
+                    break;
+
+                // add new levels above. Don't forget to add a corresponding fix routine
+                // to MyMoneyStorageSqlPrivate::upgradeDb()
                 default:
                     throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown fix level in input file"));
                 }
@@ -414,6 +419,27 @@ public:
     /* DO NOT ADD code to this function or any of it's called ones.
        Instead, create a new function, fixFile_n, and modify the applyFileFixes()
        logic above to call it */
+
+    void fixFile_9()
+    {
+        const auto file = MyMoneyFile::instance();
+        auto count = 0;
+        auto schedules = file->scheduleList();
+        for (auto schedule : schedules) {
+            if (schedule.type() != Schedule::Type::LoanPayment) {
+                const auto splits = schedule.transaction().splits();
+                for (const auto& split : splits) {
+                    if (split.value() == MyMoneyMoney::autoCalc) {
+                        schedule.setType(Schedule::Type::LoanPayment);
+                        file->modifySchedule(schedule);
+                        ++count;
+                        break;
+                    }
+                }
+            }
+        }
+        qDebug() << count << "schedule(s) fixed in" << __FUNCTION__;
+    }
 
     void fixFile_8()
     {

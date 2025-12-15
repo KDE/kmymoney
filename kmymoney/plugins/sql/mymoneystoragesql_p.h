@@ -198,6 +198,11 @@ class MyMoneyStorageSqlPrivate
     Q_DECLARE_PUBLIC(MyMoneyStorageSql)
 
 public:
+    typedef enum {
+        WriteTransactionData,
+        SkipWritingTransactionData,
+    } ScheduleUpdateOption;
+
     explicit MyMoneyStorageSqlPrivate(MyMoneyStorageSql* qq) :
         q_ptr(qq),
         m_dbVersion(0),
@@ -567,9 +572,9 @@ public:
             query2.prepare(m_db.m_tables["kmmSchedules"].insertString());
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
-                writeSchedule(it, query, false);
+                writeSchedule(it, query, false, WriteTransactionData);
             } else {
-                writeSchedule(it, query2, true);
+                writeSchedule(it, query2, true, WriteTransactionData);
             }
             signalProgress(++m_schedules, 0);
         }
@@ -1349,7 +1354,7 @@ public:
         writeKeyValuePairs("SPLIT", kvpIdList, kvpPairsList);
     }
 
-    void writeSchedule(const MyMoneySchedule& sch, QSqlQuery& query, bool insert)
+    void writeSchedule(const MyMoneySchedule& sch, QSqlQuery& query, bool insert, ScheduleUpdateOption updateOption)
     {
         query.bindValue(":id", sch.id());
         query.bindValue(":name", sch.name());
@@ -1406,7 +1411,10 @@ public:
         } else {
             query.prepare(m_db.m_tables["kmmTransactions"].insertString());
         }
-        writeTransaction(sch.id(), sch.transaction(), query, "S");
+
+        if (updateOption == WriteTransactionData) {
+            writeTransaction(sch.id(), sch.transaction(), query, "S");
+        }
 
         // Add in Key-Value Pairs for schedules.
         QVariantList idList;
@@ -2243,6 +2251,11 @@ public:
                     return 1;
                 ++m_dbVersion;
                 break;
+            case 14:
+                if ((rc = upgradeToV15()) != 0)
+                    return 1;
+                ++m_dbVersion;
+                break;
             default:
                 qWarning("Unknown version number in database - %d", m_dbVersion);
             }
@@ -2642,6 +2655,40 @@ public:
                     qc &= ~eMyMoney::Report::QueryColumn::Price;
                     report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
                     writeReport(report, query);
+                }
+            }
+        }
+        q->endCommitUnit(Q_FUNC_INFO);
+        return 0;
+    }
+
+    int upgradeToV15()
+    {
+        Q_Q(MyMoneyStorageSql);
+        q->startCommitUnit(Q_FUNC_INFO);
+        QSqlQuery query(*q);
+
+        query.prepare("SELECT count(*) FROM kmmSchedules;");
+        if (!query.exec() || !query.next()) {
+            throw MYMONEYEXCEPTIONSQL("checking fileinfo"); // krazy:exclude=crashy
+        }
+        // we only need to run the fix if there are schedules defined
+        if (query.value(0).toInt() > 0) {
+            QMap<QString, MyMoneySchedule> scheduleList = q->fetchSchedules();
+            QMap<QString, MyMoneySchedule>::const_iterator it_s;
+
+            query.prepare(m_db.m_tables["kmmSchedules"].updateString());
+            for (it_s = scheduleList.cbegin(); it_s != scheduleList.cend(); ++it_s) {
+                if ((*it_s).type() != Schedule::Type::LoanPayment) {
+                    MyMoneySchedule schedule = *it_s;
+                    const auto splits = schedule.transaction().splits();
+                    for (const auto& split : splits) {
+                        if ((split.value() == MyMoneyMoney::autoCalc)) {
+                            schedule.setType(Schedule::Type::LoanPayment);
+                            writeSchedule(schedule, query, false, SkipWritingTransactionData);
+                            break;
+                        }
+                    }
                 }
             }
         }
