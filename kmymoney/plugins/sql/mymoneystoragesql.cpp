@@ -786,7 +786,7 @@ void MyMoneyStorageSql::addSchedule(const MyMoneySchedule& sched)
     MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
     QSqlQuery q(*this);
     q.prepare(d->m_db.m_tables["kmmSchedules"].insertString());
-    d->writeSchedule(sched, q, true);
+    d->writeSchedule(sched, q, true, MyMoneyStorageSqlPrivate::WriteTransactionData);
     ++d->m_schedules;
     d->writeFileInfo();
 }
@@ -797,7 +797,7 @@ void MyMoneyStorageSql::modifySchedule(const MyMoneySchedule& sched)
     MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
     QSqlQuery q(*this);
     q.prepare(d->m_db.m_tables["kmmSchedules"].updateString());
-    d->writeSchedule(sched, q, false);
+    d->writeSchedule(sched, q, false, MyMoneyStorageSqlPrivate::WriteTransactionData);
     d->writeFileInfo();
 }
 
