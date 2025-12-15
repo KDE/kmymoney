@@ -254,8 +254,8 @@ void KNewInstitutionDlg::slotIconLoaded(KJob* job)
         break;
     default:
         // There is problem with the URL from
-        qDebug() << "KIO::FavIconRequestJob error" << job->error();
-    // intentional fall through
+        qDebug() << "KIO::FavIconRequestJob error" << job->error() << job->errorString();
+        // intentional fall through
 
     case EALREADY:    // invalid URL, no server response
         d->ui->iconButton->setEnabled(false);
