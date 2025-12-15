@@ -109,6 +109,7 @@ enum class Action {
     NewSchedule, EditSchedule, EditScheduleForce,
     DeleteSchedule, DuplicateSchedule,
     EnterSchedule, SkipSchedule,
+    DisplayScheduleDetails,
     // *************
     // The payee menu
     // *************

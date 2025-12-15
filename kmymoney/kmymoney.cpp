@@ -112,6 +112,7 @@
 #include "journalmodel.h"
 #include "keditscheduledlg.h"
 #include "kmm_menuactionexchanger.h"
+#include "schedulesmodel.h"
 #ifdef KMM_DBUS
 #include "kmymoneyadaptor.h"
 #endif
@@ -1497,6 +1498,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DuplicateSchedule,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
             {Action::EnterSchedule,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
             {Action::SkipSchedule,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::SeekForward},
+            {Action::DisplayScheduleDetails,        QStringLiteral("schedule_display_details"),       i18nc("Display scheudule details", "Show schedule details"),   Icon::DocumentProperties},
+
             //Payees
             {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee..."),                               Icon::PayeeNew},
             {Action::RenamePayee,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
@@ -1625,6 +1628,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DuplicateTransaction,          &KMyMoneyApp::slotDuplicateTransactions},
             {Action::AddReversingTransaction,       &KMyMoneyApp::slotDuplicateTransactions},
             {Action::DisplayTransactionDetails,     &KMyMoneyApp::slotDisplayTransactionDetails},
+            {Action::DisplayScheduleDetails,        &KMyMoneyApp::slotDisplayTransactionDetails},
             {Action::CopySplits,                    &KMyMoneyApp::slotCopySplits},
             {Action::MarkCleared,                   &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkReconciled,                &KMyMoneyApp::slotMarkTransactions},
@@ -2271,110 +2275,120 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
 {
     // Display popup with full transaction details, since some are never displayed in the UI
     const auto file = MyMoneyFile::instance();
-    QString head =
-        "<html><head><style>table, tr, th, td {border: 1px solid black; border-collapse: collapse; padding: 4px} "
-        ".spec {border-bottom-width: 3px}"
-        "</style></head><body>";
+
+    QString head;
+    const QString foot = "</body></html>";
     QString trans;
     QString kvpt;
     QString splits;
     QString kvps;
-    for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
-        const auto journalEntry = file->journalModel()->itemById(journalEntryId);
-        if (!journalEntry.id().isEmpty()) {
-            const auto t = journalEntry.transaction();
-            const auto commodity = t.commodity();
-            const auto safraction = MyMoneyFile::instance()->security(commodity).smallestAccountFraction();
-            if (!t.id().isEmpty()) {
-                head += "<H1>Transaction: " + t.id() + "</H1>";
-                // transaction
-                trans = "<table>";
-                trans += "<tr><th>Entry date</th><td>" + t.entryDate().toString(Qt::ISODate) + "</td></tr>";
-                trans += "<tr><th>Post date</th><td>" + t.postDate().toString(Qt::ISODate) + "</td></tr>";
-                trans += "<tr><th>Currency</th><td>" + t.commodity() + "</td></tr>";
-                trans += "<tr><th>Memo</th><td>" + t.memo() + "</td></tr>";
-                trans += "</table>";
-                // Transaction KVPs
-                if (t.pairs().count() > 0) {
-                    kvpt = "<p><b>Key Value Pairs</b></p><table><tr><th>Key</th><th>Value</th></tr>";
-                    for (auto it = t.pairs().cbegin(); it != t.pairs().cend(); ++it) {
-                        kvpt += "<tr><th>" + it.key() + "</th><th>" + it.value() + "</th></tr>";
-                    }
-                    kvpt += "</table><br/><br/>";
-                } else {
-                    kvpt = "<br/>";
-                }
-                // splits: [id] payee account reconcileFlag reconcileDate action shares price value memo costCenter tagList number
-                splits =
-                    "<table>"
-                    "<tr><th>Split</th><th>Number</th><th>Payee</th><th>Account</th><th>_CR</th><th>ReconcileDate</th>"
-                    "<th>Action</th><th>Shares</th><th>Price</th><th>Value</th>"
-                    "<th>BankID</th></th></tr>"
-                    "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Memo</th></tr>"
-                    "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Tags</th></tr>";
-                for (const auto& split : t.splits()) {
-                    // split: id payee account reconcileflag reconciledate activity shares price value memo
-                    const auto splitAccount = MyMoneyFile::instance()->account(split.accountId());
-                    const auto pairs = splitAccount.pairs();
-                    const auto accopen = !splitAccount.isClosed();
-                    const auto splitSymbol = splitAccount.accountType() == eMyMoney::Account::Type::Stock
-                        ? MyMoneyFile::instance()->security(splitAccount.currencyId()).tradingSymbol()
-                        : splitAccount.currencyId();
-                    splits += "<tr></tr><tr><td>" + split.id() + "</td><td>";
-                    splits += split.number() + "</td><td>";
-                    splits += split.payeeId() + "<br/>" + MyMoneyFile::instance()->payee(split.payeeId()).name() + "</td><td>";
-                    if (accopen == true) {
-                        splits += split.accountId();
-                    } else {
-                        splits += "<s>" + split.accountId() + "</s> (Closed)";
-                    }
-                    splits += "<br/>" + splitAccount.name() + "</td><td>" + KMyMoneyUtils::reconcileStateToString(split.reconcileFlag());
-                    splits += "</td><td>" + split.reconcileDate().toString(Qt::ISODate) + "</td><td>" + split.action() + "</td><td>";
-                    splits += split.shares().formatMoney(splitAccount.fraction(), true) + "<br/>(" + splitSymbol + " ";
-                    splits += QString::number(splitAccount.fraction()) + ")</td><td>";
-                    splits += split.possiblyCalculatedPrice().formatMoney(safraction > splitAccount.fraction() ? safraction / splitAccount.fraction()
-                                                                                                               : splitAccount.fraction(),
-                                                                          true);
-                    splits += "</td><td>" + split.value().formatMoney(safraction, true) + "<br/>(" + t.commodity() + " " + QString::number(safraction);
-                    splits += ")</td><td>" + split.bankID() + "</td></tr><tr><td>&nbsp;</td><td colspan=\"10\">" + split.memo() + "</td></tr>";
 
-                    // collect tags and add them to the view
-                    const auto tagIdList = split.tagIdList();
-                    QString tagList;
-                    for (const auto& tagId : qAsConst(tagIdList)) {
-                        if (!tagList.isEmpty()) {
-                            tagList += QLatin1String(", ");
-                        }
-                        const auto tag = MyMoneyFile::instance()->tag(tagId);
-                        tagList += tag.name().simplified();
-                    }
-                    splits += "<tr><td>&nbsp;</td><td colspan=\"10\">" + tagList + "</td></tr>";
-
-                    if (split.pairs().count() > 0) {
-                        splits += "<tr><th>KVP</th><th colspan=\"2\">Key</th><th colspan=\"8\">Value</th></tr>";
-                        for (auto it = split.pairs().cbegin(); it != split.pairs().cend(); ++it) {
-                            splits += "<tr><td></td><td colspan=\"2\">" + it.key() + "</td><td colspan=\"8\">" + it.value() + "</td></tr>";
-                        }
-                    }
-                }
-                splits +=
-                    "</table><p align=\"center\">The Value column uses the currency of the transaction, which may not be the currency of the account "
-                    "of the split.<br/>Shown in parentheses are the currency or trading symbol of the split and the fraction used to display value.</p>";
-            } else {
-                head += "<p>There is no selected Transaction.</p>";
-            }
+    auto dumpValue = [&](const MyMoneyMoney& value, int fraction, const QString& symbol) -> QString {
+        QString result = QLatin1String("<td>");
+        if (value.isAutoCalc()) {
+            result += i18nc("@info:placeholder amount widget", "calculated");
         } else {
-            head += "<p>There appears to be nothing selected.</p>";
+            result += QStringLiteral("%1<br/>(%2 %3)").arg(value.formatMoney(fraction, true)).arg(symbol).arg(fraction);
         }
-        QString foot = "</body></html>";
-        QString all = head + trans + kvpt + splits + foot;
+        result += QLatin1String("</td>");
+        return result;
+    };
 
+    auto dumpTransaction = [&](const MyMoneyTransaction& t) {
+        const auto commodity = t.commodity();
+        const auto safraction = MyMoneyFile::instance()->security(commodity).smallestAccountFraction();
+        if (!t.id().isEmpty()) {
+            head += "<H1>Transaction: " + t.id() + "</H1>";
+
+            // transaction
+            trans = "<table>";
+            trans += "<tr><th>Entry date</th><td>" + t.entryDate().toString(Qt::ISODate) + "</td></tr>";
+            trans += "<tr><th>Post date</th><td>" + t.postDate().toString(Qt::ISODate) + "</td></tr>";
+            trans += "<tr><th>Currency</th><td>" + t.commodity() + "</td></tr>";
+            trans += "<tr><th>Memo</th><td>" + t.memo() + "</td></tr>";
+            trans += "</table>";
+            // Transaction KVPs
+            if (t.pairs().count() > 0) {
+                kvpt = "<p><b>Key Value Pairs</b></p><table><tr><th>Key</th><th>Value</th></tr>";
+                for (auto it = t.pairs().cbegin(); it != t.pairs().cend(); ++it) {
+                    kvpt += "<tr><th>" + it.key() + "</th><th>" + it.value() + "</th></tr>";
+                }
+                kvpt += "</table><br/><br/>";
+            } else {
+                kvpt = "<br/>";
+            }
+            // splits: [id] payee account reconcileFlag reconcileDate action shares price value memo costCenter tagList number
+            splits =
+                "<table>"
+                "<tr><th>Split</th><th>Number</th><th>Payee</th><th>Account</th><th>_CR</th><th>ReconcileDate</th>"
+                "<th>Action</th><th>Shares</th><th>Price</th><th>Value</th>"
+                "<th>BankID</th></th></tr>"
+                "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Memo</th></tr>"
+                "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Tags</th></tr>";
+            for (const auto& split : t.splits()) {
+                // split: id payee account reconcileflag reconciledate activity shares price value memo
+                const auto splitAccount = MyMoneyFile::instance()->account(split.accountId());
+                const auto pairs = splitAccount.pairs();
+                const auto accopen = !splitAccount.isClosed();
+                const auto splitSymbol = splitAccount.accountType() == eMyMoney::Account::Type::Stock
+                    ? MyMoneyFile::instance()->security(splitAccount.currencyId()).tradingSymbol()
+                    : splitAccount.currencyId();
+                splits += "<tr></tr><tr><td>" + split.id() + "</td><td>";
+                splits += split.number() + "</td><td>";
+                splits += split.payeeId() + "<br/>" + MyMoneyFile::instance()->payee(split.payeeId()).name() + "</td><td>";
+                if (accopen == true) {
+                    splits += split.accountId();
+                } else {
+                    splits += "<s>" + split.accountId() + "</s> (Closed)";
+                }
+                splits += "<br/>" + splitAccount.name() + "</td><td>" + KMyMoneyUtils::reconcileStateToString(split.reconcileFlag());
+                splits += "</td><td>" + split.reconcileDate().toString(Qt::ISODate) + "</td><td>" + split.action() + "</td>";
+                splits += dumpValue(split.shares(), splitAccount.fraction(), splitSymbol);
+                // splits += split.shares().formatMoney(splitAccount.fraction(), true) + "<br/>(" + splitSymbol + " ";
+                // splits += QString::number(splitAccount.fraction()) + ")</td><td>";
+                splits += QLatin1String("<td>")
+                    + split.possiblyCalculatedPrice().formatMoney(safraction > splitAccount.fraction() ? safraction / splitAccount.fraction()
+                                                                                                       : splitAccount.fraction(),
+                                                                  true)
+                    + QLatin1String("</td>");
+                splits += dumpValue(split.value(), safraction, t.commodity());
+                // splits += "</td><td>" + split.value().formatMoney(safraction, true) + "<br/>(" + t.commodity() + " " + QString::number(safraction);
+                splits += "<td>" + split.bankID() + "</td></tr><tr><td>&nbsp;</td><td colspan=\"10\">" + split.memo() + "</td></tr>";
+
+                // collect tags and add them to the view
+                const auto tagIdList = split.tagIdList();
+                QString tagList;
+                for (const auto& tagId : qAsConst(tagIdList)) {
+                    if (!tagList.isEmpty()) {
+                        tagList += QLatin1String(", ");
+                    }
+                    const auto tag = MyMoneyFile::instance()->tag(tagId);
+                    tagList += tag.name().simplified();
+                }
+                splits += "<tr><td>&nbsp;</td><td colspan=\"10\">" + tagList + "</td></tr>";
+
+                if (split.pairs().count() > 0) {
+                    splits += "<tr><th>KVP</th><th colspan=\"2\">Key</th><th colspan=\"8\">Value</th></tr>";
+                    for (auto it = split.pairs().cbegin(); it != split.pairs().cend(); ++it) {
+                        splits += "<tr><td></td><td colspan=\"2\">" + it.key() + "</td><td colspan=\"8\">" + it.value() + "</td></tr>";
+                    }
+                }
+            }
+            splits +=
+                "</table><p align=\"center\">The Value column uses the currency of the transaction, which may not be the currency of the account "
+                "of the split.<br/>Shown in parentheses are the currency or trading symbol of the split and the fraction used to display value.</p>";
+        } else {
+            head += "<p>There is no selected Transaction.</p>";
+        }
+    };
+
+    auto showDialog = [](const QString& content) {
         QDialog* txInfo = new QDialog;
         txInfo->setAttribute(Qt::WA_DeleteOnClose);
 
         txInfo->setMinimumSize(900, 600);
         QTextBrowser* text = new QTextBrowser();
-        text->setHtml(all);
+        text->setHtml(content);
         QPushButton* doneButton = new QPushButton(i18nc("@action:button", "Close"), txInfo);
         doneButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         connect(doneButton, &QPushButton::clicked, txInfo, &QDialog::deleteLater);
@@ -2383,6 +2397,42 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
         layout->addWidget(doneButton);
         layout->setAlignment(doneButton, Qt::AlignHCenter);
         txInfo->show();
+    };
+
+    // in case the function is selected on a schedule shown in the ledger,
+    // both the schedule and journalEntry objects are selected. Therefore,
+    // we check for selections first and transactions next
+    if (!d->m_selections.selection(SelectedObjects::Schedule).isEmpty()) {
+        for (const auto& scheduleId : d->m_selections.selection(SelectedObjects::Schedule)) {
+            head =
+                "<html><head><style>table, tr, th, td {border: 1px solid black; border-collapse: collapse; padding: 4px} "
+                ".spec {border-bottom-width: 3px}"
+                "</style></head><body>";
+            if (!scheduleId.isEmpty()) {
+                const auto schedule = file->schedulesModel()->itemById(scheduleId);
+                dumpTransaction(MyMoneyTransaction(scheduleId, schedule.transaction()));
+
+            } else {
+                head += "<p>There appears to be nothing selected.</p>";
+            }
+            showDialog(head + trans + kvpt + splits + foot);
+        }
+
+    } else if (!d->m_selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
+        for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+            head =
+                "<html><head><style>table, tr, th, td {border: 1px solid black; border-collapse: collapse; padding: 4px} "
+                ".spec {border-bottom-width: 3px}"
+                "</style></head><body>";
+
+            const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+            if (!journalEntry.id().isEmpty()) {
+                dumpTransaction(journalEntry.transaction());
+            } else {
+                head += "<p>There appears to be nothing selected.</p>";
+            }
+            showDialog(head + trans + kvpt + splits + foot);
+        }
     }
 }
 

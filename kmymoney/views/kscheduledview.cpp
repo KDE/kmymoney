@@ -98,6 +98,7 @@ void KScheduledView::updateActions(const SelectedObjects& selections)
         eMenu::Action::DeleteSchedule,
         eMenu::Action::EnterSchedule,
         eMenu::Action::SkipSchedule,
+        eMenu::Action::DisplayScheduleDetails,
     };
 
     for (const auto& a : actionsToBeDisabled) {
@@ -109,6 +110,7 @@ void KScheduledView::updateActions(const SelectedObjects& selections)
         if (!d->m_selectedSchedule.id().isEmpty()) {
             pActions[eMenu::Action::EditSchedule]->setEnabled(true);
             pActions[eMenu::Action::DuplicateSchedule]->setEnabled(true);
+            pActions[eMenu::Action::DisplayScheduleDetails]->setEnabled(true);
             pActions[eMenu::Action::DeleteSchedule]->setEnabled(!MyMoneyFile::instance()->isReferenced(d->m_selectedSchedule));
             if (!d->m_selectedSchedule.isFinished()) {
                 pActions[eMenu::Action::EnterSchedule]->setEnabled(true);
