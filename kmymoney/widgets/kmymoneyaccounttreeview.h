@@ -61,6 +61,10 @@ public:
      */
     void setProxyModel(AccountsProxyModel* model);
 
+protected:
+    /// Overridden for internal reasons
+    void resizeEvent(QResizeEvent* event) override;
+
 protected Q_SLOTS:
     void customContextMenuRequested(const QPoint);
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
