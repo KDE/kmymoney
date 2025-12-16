@@ -73,12 +73,12 @@ void BalanceChartView::addMarker()
     if (!m_account.value("maxCreditEarly").isEmpty()) {
         needRow = true;
         haveMaxCredit = true;
-        maxCredit = MyMoneyMoney(m_account.value("maxCreditEarly")) * factor;
+        maxCredit = MyMoneyMoney(m_account.value("maxCreditEarly")) * -factor;
     }
     if (!m_account.value("maxCreditAbsolute").isEmpty()) {
         needRow = true;
         haveMaxCredit = true;
-        maxCredit = MyMoneyMoney(m_account.value("maxCreditAbsolute")) * factor;
+        maxCredit = MyMoneyMoney(m_account.value("maxCreditAbsolute")) * -factor;
     }
 
     if (!m_account.value("minBalanceEarly").isEmpty()) {
