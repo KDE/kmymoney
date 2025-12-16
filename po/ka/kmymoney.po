@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-16 06:51+0000\n"
-"PO-Revision-Date: 2025-12-01 06:04+0100\n"
+"PO-Revision-Date: 2025-12-16 10:34+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5084,11 +5084,10 @@ msgid "Skip next transaction..."
 msgstr "შემდეგი ტრანზაქციის გამოტოვება..."
 
 #: kmymoney/kmymoney.cpp:1501
-#, fuzzy, kde-format
-#| msgid "Schedule Details"
+#, kde-format
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
-msgstr "გეგმის დეტალები"
+msgstr "გეგმის დეტალების ჩვენება"
 
 #: kmymoney/kmymoney.cpp:1504
 #, kde-format
