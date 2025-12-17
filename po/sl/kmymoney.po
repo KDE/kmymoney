@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-16 06:51+0000\n"
-"PO-Revision-Date: 2025-12-01 07:14+0100\n"
+"PO-Revision-Date: 2025-12-16 16:41+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -5314,11 +5314,10 @@ msgid "Skip next transaction..."
 msgstr "Preskoči naslednjo transakcijo..."
 
 #: kmymoney/kmymoney.cpp:1501
-#, fuzzy, kde-format
-#| msgid "Schedule Details"
+#, kde-format
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
-msgstr "Podrobnosti načrta"
+msgstr "Pokaži podrobnosti načrta"
 
 #: kmymoney/kmymoney.cpp:1504
 #, kde-format
