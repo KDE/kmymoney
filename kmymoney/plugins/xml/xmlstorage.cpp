@@ -174,7 +174,7 @@ public:
 
         // check if we have a filename or were able to create a temporary file
         if (writeFile.isEmpty()) {
-            throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(localFile));
+            throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.", localFile));
         }
 
         QSignalBlocker blockMyMoneyFile(MyMoneyFile::instance());
@@ -210,7 +210,7 @@ public:
         ft.commit();
 
         if (!device || !device->open(QIODevice::WriteOnly)) {
-            throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing").arg(localFile).append(QString::fromLatin1(": ") + device->errorString()));
+            throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing", localFile).append(QString::fromLatin1(": ") + device->errorString()));
         }
 
         pWriter->setFile(MyMoneyFile::instance());
@@ -355,7 +355,7 @@ bool XMLStorage::open(const QUrl &url)
     if (url.isLocalFile()) {
         fileName = url.toLocalFile();
         if (!d->lock(fileName)) {
-            d->m_openErrorMessage = i18nc("@info Problem opening data file", "File <b>%1</b> is already opened by another process.").arg(fileName);
+            d->m_openErrorMessage = i18nc("@info Problem opening data file", "File <b>%1</b> is already opened by another process.", fileName);
             return false;
         }
     } else {
