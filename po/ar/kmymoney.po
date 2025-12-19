@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-16 06:51+0000\n"
-"PO-Revision-Date: 2025-12-03 16:20+0400\n"
+"PO-Revision-Date: 2025-12-18 09:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -5262,11 +5262,10 @@ msgid "Skip next transaction..."
 msgstr "تخطّ المعاملة التالية..."
 
 #: kmymoney/kmymoney.cpp:1501
-#, fuzzy, kde-format
-#| msgid "Schedule Details"
+#, kde-format
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
-msgstr "تفاصيل الجدول"
+msgstr "اعرض تفاصيل الجدول"
 
 #: kmymoney/kmymoney.cpp:1504
 #, kde-format

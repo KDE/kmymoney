@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-16 06:51+0000\n"
-"PO-Revision-Date: 2025-12-01 10:56+0300\n"
+"PO-Revision-Date: 2025-12-18 15:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -5289,11 +5289,10 @@ msgid "Skip next transaction..."
 msgstr "Sonraki İşlemi Atla…"
 
 #: kmymoney/kmymoney.cpp:1501
-#, fuzzy, kde-format
-#| msgid "Schedule Details"
+#, kde-format
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
-msgstr "Plan Ayrıntıları"
+msgstr "Plan Ayrıntılarını Göster"
 
 #: kmymoney/kmymoney.cpp:1504
 #, kde-format
