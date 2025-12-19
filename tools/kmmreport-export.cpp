@@ -27,8 +27,6 @@
 #include "pivottable.h"
 #include "querytable.h"
 
-#define i18n(a) QLatin1String(a)
-
 using namespace reports;
 
 class Options
@@ -193,7 +191,7 @@ int main(int argc, char** argv)
                 QFile of(options.outFileName);
                 if (!of.open(QIODevice::WriteOnly))
                     return 3;
-                qDebug() << i18n("saving report '%1' into '%2'").arg(report.name(), of.fileName());
+                qDebug() << QLatin1String("saving report '%1' into '%2'").arg(report.name(), of.fileName());
                 qStdOut() << of.fileName() << "\n";
                 QTextStream o(&of);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
