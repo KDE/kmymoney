@@ -466,7 +466,7 @@ bool XMLStorage::open(const QUrl &url)
     QByteArray txt(qbaFileHeader, 70);
     const auto docType(kmyexp.match(txt));
     if (!docType.hasMatch()) {
-        d->m_openErrorMessage = i18nc("@info Problem opening data file", "File <b>%1</b> is not a KMyMoney data file.").arg(fileName);
+        d->m_openErrorMessage = i18nc("@info Problem opening data file", "File <b>%1</b> is not a KMyMoney data file.", fileName);
         return false;
     }
 

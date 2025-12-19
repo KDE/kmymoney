@@ -1076,10 +1076,10 @@ void KNewAccountDlg::slotCheckFinished()
         WidgetHintFrame::show(d->ui->accountNameEdit, i18nc("@info:tooltip Hint to provide name", "Please provide a name for the new category or account."));
 
     } else if (d->ui->accountNameEdit->text().contains(MyMoneyAccount::accountSeparator())) {
-        WidgetHintFrame::show(
-            d->ui->accountNameEdit,
-            i18nc("@info:tooltip %1 contains invalid character combination", "You cannot create an account or category that contains %1 in the name.")
-                .arg(MyMoneyAccount::accountSeparator()));
+        WidgetHintFrame::show(d->ui->accountNameEdit,
+                              i18nc("@info:tooltip %1 contains invalid character combination",
+                                    "You cannot create an account or category that contains %1 in the name.",
+                                    MyMoneyAccount::accountSeparator()));
     }
 
     if (d->ui->m_vatCategory->isChecked() && ((d->ui->m_vatRate->value() <= MyMoneyMoney()) || (d->ui->m_vatRate->value() >= MyMoneyMoney(100)))) {

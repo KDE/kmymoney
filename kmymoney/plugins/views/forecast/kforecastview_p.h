@@ -641,9 +641,10 @@ public:
         adjustHeadersAndResizeToContents(ui->m_budgetList);
 
         // Show the range which historic transactions are used to calculate the forecast
-        ui->m_budgetHistoryRange->setText(
-            i18nc("@info Hint about the base of the budget forecast", "Budget forecast is based on historic transactions found between %1 and %2.")
-                .arg(MyMoneyUtils::formatDate(historyStartDate), MyMoneyUtils::formatDate(historyEndDate)));
+        ui->m_budgetHistoryRange->setText(i18nc("@info Hint about the base of the budget forecast",
+                                                "Budget forecast is based on historic transactions found between %1 and %2.",
+                                                MyMoneyUtils::formatDate(historyStartDate),
+                                                MyMoneyUtils::formatDate(historyEndDate)));
         ui->m_budgetHistoryRange->setVisible(forecast.forecastMethod() == MyMoneyForecast::eForecastMethod::Historic);
     }
 

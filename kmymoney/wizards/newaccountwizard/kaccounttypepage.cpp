@@ -102,10 +102,10 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
         const bool invalidAccountName = txt.contains(MyMoneyAccount::accountSeparator());
         d->m_mandatoryGroup->setExternalMandatoryState(!invalidAccountName);
         if (invalidAccountName) {
-            WidgetHintFrame::show(
-                d->ui->m_accountName,
-                i18nc("@info:tooltip %1 contains invalid character combination", "You cannot create an account or category that contains %1 in the name.")
-                    .arg(MyMoneyAccount::accountSeparator()));
+            WidgetHintFrame::show(d->ui->m_accountName,
+                                  i18nc("@info:tooltip %1 contains invalid character combination",
+                                        "You cannot create an account or category that contains %1 in the name.",
+                                        MyMoneyAccount::accountSeparator()));
         }
     });
 }

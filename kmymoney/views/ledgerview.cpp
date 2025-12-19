@@ -910,9 +910,9 @@ bool LedgerView::viewportEvent(QEvent* event)
 
                     } else if (idx.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
                         const auto overdueSince = MyMoneyUtils::formatDate(idx.data(eMyMoney::Model::ScheduleIsOverdueSinceRole).toDate());
-                        tooltips[iconCount] =
-                            i18nc("@info:tooltip icon description, param is date", "This schedule is overdue since %1. Click on the icon to enter it.")
-                                .arg(overdueSince);
+                        tooltips[iconCount] = i18nc("@info:tooltip icon description, param is date",
+                                                    "This schedule is overdue since %1. Click on the icon to enter it.",
+                                                    overdueSince);
                         ++iconCount;
                     }
 
@@ -968,8 +968,9 @@ bool LedgerView::viewportEvent(QEvent* event)
                         const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
 
                         QToolTip::showText(helpEvent->globalPos(),
-                                           i18nc("@info:tooltip", "The difference between the account balance and the online balance is %1.")
-                                               .arg(difference.formatMoney(security.tradingSymbol(), prec)));
+                                           i18nc("@info:tooltip",
+                                                 "The difference between the account balance and the online balance is %1.",
+                                                 difference.formatMoney(security.tradingSymbol(), prec)));
                         return true;
                     }
                 }
