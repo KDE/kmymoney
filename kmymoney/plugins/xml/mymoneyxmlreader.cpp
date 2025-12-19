@@ -444,7 +444,7 @@ public:
         } else if (identifierType == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()) {
             identData = readNationalAccount();
         } else {
-            m_reader->raiseError(i18nc("Error message when reading XML file", "Unknown payee identifier type %1").arg(identifierType));
+            m_reader->raiseError(i18nc("Error message when reading XML file", "Unknown payee identifier type %1", identifierType));
         }
 
         return identData;

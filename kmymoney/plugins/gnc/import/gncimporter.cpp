@@ -57,11 +57,11 @@ bool GNCImporter::open(const QUrl &url)
         return false;
 
     const auto fileName = url.toLocalFile();
-    const auto sFileToShort = i18n("The size of the file is too small to be a valid GnuCash format: %1").arg(fileName);
+    const auto sFileToShort = i18n("The size of the file is too small to be a valid GnuCash format: %1", fileName);
 
     QScopedPointer<QIODevice> qfile(new QFile(fileName));
     if (!qfile->open(QIODevice::ReadOnly))
-        throw MYMONEYEXCEPTION(i18n("Cannot read the file: %1").arg(fileName));
+        throw MYMONEYEXCEPTION(i18n("Cannot read the file: %1", fileName));
 
     QByteArray qbaFileHeader(2, '\0');
     if (qfile->read(qbaFileHeader.data(), 2) != 2)
@@ -72,7 +72,7 @@ bool GNCImporter::open(const QUrl &url)
 
         qfile.reset(new KCompressionDevice(fileName, COMPRESSION_TYPE));
         if (!qfile->open(QIODevice::ReadOnly))
-            throw MYMONEYEXCEPTION(i18n("Cannot read the file: %1").arg(fileName));
+            throw MYMONEYEXCEPTION(i18n("Cannot read the file: %1", fileName));
         qfile->read(qbaFileHeader.data(), 2);
     }
 
