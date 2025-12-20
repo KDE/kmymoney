@@ -122,5 +122,5 @@ QString KMMOnlineQuotesProfileManager::availabilityHint(const QString& profileNa
     if (tooltips.contains(profileName)) {
         return tooltips.value(profileName);
     }
-    return i18nc("@info:tooltip", "Online quote source with name '%1' unknown.").arg(profileName);
+    return i18nc("@info:tooltip", "Online quote source with name '%1' unknown.", profileName);
 }

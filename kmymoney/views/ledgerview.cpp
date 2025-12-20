@@ -902,9 +902,9 @@ bool LedgerView::viewportEvent(QEvent* event)
 
                 } else if (idx.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
                     const auto overdueSince = MyMoneyUtils::formatDate(idx.data(eMyMoney::Model::ScheduleIsOverdueSinceRole).toDate());
-                    tooltips[iconCount] =
-                        i18nc("@info:tooltip icon description, param is date", "This schedule is overdue since %1. Click on the icon to enter it.")
-                            .arg(overdueSince);
+                    tooltips[iconCount] = i18nc("@info:tooltip icon description, param is date",
+                                                "This schedule is overdue since %1. Click on the icon to enter it.",
+                                                overdueSince);
                     ++iconCount;
                 }
 
