@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:51+0000\n"
+"POT-Creation-Date: 2025-12-20 00:42+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -4844,15 +4844,6 @@ msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Udviklere og designere"
 
-#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
-#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
-#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
-#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
-#: kmymoney/kcreditswindow.cpp:131
-#, kde-format
-msgid "%1 (build against %2)"
-msgstr ""
-
 #: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:92
 #: kmymoney/kcreditswindow.cpp:99 kmymoney/kcreditswindow.cpp:106
 #: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:117
@@ -4861,6 +4852,15 @@ msgstr ""
 #, kde-format
 msgid "Unknown"
 msgstr "Ukendt"
+
+#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
+#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
+#: kmymoney/kcreditswindow.cpp:131
+#, kde-format
+msgid "%1 (build against %2)"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:85
 #, kde-format
@@ -6544,7 +6544,7 @@ msgstr "slå program-traces til"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "dump navnene på alle definerede KAction-objekter til stdout og afslut"
 
-#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:148
 #, kde-format
 msgid "file to open"
 msgstr "fil der skal åbnes"
@@ -16304,7 +16304,7 @@ msgid "Average"
 msgstr "Gennemsnit"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:627
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:752
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:753
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
@@ -16329,32 +16329,32 @@ msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:665
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "No data provided by reports plugin for this chart."
 msgstr "Vis rapportudgaven af dette diagram"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:667
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
 msgstr "Vis rapportudgaven af dette diagram"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:691
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:692
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "Skemalagt"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:696
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:697
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "Historik"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:701
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:702
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -22125,14 +22125,14 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Første transaktion opfylder ikke kravene for matchning"
 
-#: kmymoney/views/ledgerview.cpp:971
+#: kmymoney/views/ledgerview.cpp:972
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1033
+#: kmymoney/views/ledgerview.cpp:1034
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -22140,14 +22140,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Vil du virkelig slette den valgte prisindgang?"
 
-#: kmymoney/views/ledgerview.cpp:1034
+#: kmymoney/views/ledgerview.cpp:1035
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Angiv skemalagt transaktion"
 
-#: kmymoney/views/ledgerview.cpp:1037
+#: kmymoney/views/ledgerview.cpp:1038
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -22155,7 +22155,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Vil du virkelig slette den valgte prisindgang?"
 
-#: kmymoney/views/ledgerview.cpp:1038
+#: kmymoney/views/ledgerview.cpp:1039
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -22163,7 +22163,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Sæt ind eller skemalæg?"
 
-#: kmymoney/views/ledgerview.cpp:1058
+#: kmymoney/views/ledgerview.cpp:1059
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -22173,7 +22173,7 @@ msgid ""
 "the ledger again."
 msgstr "Brug dette "
 
-#: kmymoney/views/ledgerview.cpp:1060
+#: kmymoney/views/ledgerview.cpp:1061
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -22181,7 +22181,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1064
+#: kmymoney/views/ledgerview.cpp:1065
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -22189,7 +22189,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Vil du virkelig slette den valgte transaktion?"
 
-#: kmymoney/views/ledgerview.cpp:1065
+#: kmymoney/views/ledgerview.cpp:1066
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -27021,73 +27021,68 @@ msgstr ""
 "<p>Al information er valgfri og bruges kun til at personliggøre din KMyMoney-"
 "fil.</p>"
 
-#: tools/kmmreport-export.cpp:116
+#: tools/kmmreport-export.cpp:114
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export KMyMoney reports"
 msgstr "Favoritrapporter"
 
-#: tools/kmmreport-export.cpp:120
+#: tools/kmmreport-export.cpp:118
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:123
+#: tools/kmmreport-export.cpp:121
 #, kde-format
 msgid "Export in HTML format"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:126
+#: tools/kmmreport-export.cpp:124
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export in xml format"
 msgstr "Favoritrapporter"
 
-#: tools/kmmreport-export.cpp:129
+#: tools/kmmreport-export.cpp:127
 #, kde-format
 msgid "Create reference file from output"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:132
+#: tools/kmmreport-export.cpp:130
 #, kde-format
 msgid "Use info table for exporting"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:135
+#: tools/kmmreport-export.cpp:133
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:138
+#: tools/kmmreport-export.cpp:136
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:141
+#: tools/kmmreport-export.cpp:139
 #, fuzzy, kde-format
 #| msgid "Old Customized Reports"
 msgid "List all custom reports"
 msgstr "Gamle brugertilpassede rapporter"
 
-#: tools/kmmreport-export.cpp:144
+#: tools/kmmreport-export.cpp:142
 #, fuzzy, kde-format
 #| msgid "Unable to generate report"
 msgid "Filename for generated output"
 msgstr "Kan ikke generere rapport"
 
-#: tools/kmmreport-export.cpp:147
+#: tools/kmmreport-export.cpp:145
 #, kde-format
 msgid "Process a specific report"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:160
+#: tools/kmmreport-export.cpp:158
 #, kde-format
 msgid "Only one of --csv and --html is supported"
-msgstr ""
-
-#: tools/kmmreport-export.cpp:196
-#, kde-format
-msgid "saving report '%1' into '%2'"
 msgstr ""
 
 #, fuzzy

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-16 06:51+0000\n"
+"POT-Creation-Date: 2025-12-20 00:42+0000\n"
 "PO-Revision-Date: 2025-12-17 00:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -4743,15 +4743,6 @@ msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Desarrollador, refactorización del código fuente"
 
-#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
-#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
-#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
-#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
-#: kmymoney/kcreditswindow.cpp:131
-#, kde-format
-msgid "%1 (build against %2)"
-msgstr "%1 (compilada con %2)"
-
 #: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:92
 #: kmymoney/kcreditswindow.cpp:99 kmymoney/kcreditswindow.cpp:106
 #: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:117
@@ -4760,6 +4751,15 @@ msgstr "%1 (compilada con %2)"
 #, kde-format
 msgid "Unknown"
 msgstr "Desconocida"
+
+#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
+#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
+#: kmymoney/kcreditswindow.cpp:131
+#, kde-format
+msgid "%1 (build against %2)"
+msgstr "%1 (compilada con %2)"
 
 #: kmymoney/kcreditswindow.cpp:85
 #, kde-format
@@ -6363,7 +6363,7 @@ msgstr ""
 "volcar los nombres de todos los objetos QAction definidos en la salida "
 "estándar y salir"
 
-#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:148
 #, kde-format
 msgid "file to open"
 msgstr "archivo a abrir"
@@ -15748,7 +15748,7 @@ msgid "Average"
 msgstr "Promedio"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:627
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:752
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:753
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
@@ -15775,31 +15775,31 @@ msgstr ""
 "El pronóstico de presupuestos se basa en transacciones históricas realizadas "
 "entre %1 y %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:665
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
 #, kde-format
 msgid "No data provided by reports plugin for this chart."
 msgstr ""
 "No hay datos proporcionados por el complemento de informes para este gráfico."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:667
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Activar el complemento de informes para ver este gráfico."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:691
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:692
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "Planificado"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:696
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:697
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "Histórico"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:701
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:702
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -21328,38 +21328,38 @@ msgstr ""
 "Esta transacción está emparejada. Pulse el icono para aceptarla o para "
 "desemparejarla."
 
-#: kmymoney/views/ledgerview.cpp:971
+#: kmymoney/views/ledgerview.cpp:972
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr "La diferencia entre el saldo de la cuenta y el saldo en línea es %1."
 
-#: kmymoney/views/ledgerview.cpp:1033
+#: kmymoney/views/ledgerview.cpp:1034
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "No introducir la transacción programada vencida."
 
-#: kmymoney/views/ledgerview.cpp:1034
+#: kmymoney/views/ledgerview.cpp:1035
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Introducir la transacción programada vencida."
 
-#: kmymoney/views/ledgerview.cpp:1037
+#: kmymoney/views/ledgerview.cpp:1038
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "¿Desea introducir ahora la planificación vencida?"
 
-#: kmymoney/views/ledgerview.cpp:1038
+#: kmymoney/views/ledgerview.cpp:1039
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Introducir planificación vencida"
 
-#: kmymoney/views/ledgerview.cpp:1058
+#: kmymoney/views/ledgerview.cpp:1059
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21369,7 +21369,7 @@ msgstr ""
 "Desprender la transacción oculta (emparejada) de la que se muestra e "
 "introducirla de nuevo en el libro mayor."
 
-#: kmymoney/views/ledgerview.cpp:1060
+#: kmymoney/views/ledgerview.cpp:1061
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21379,13 +21379,13 @@ msgstr ""
 "Aceptar la coincidencia como se muestra y eliminar los datos de la "
 "transacción oculta (emparejada)."
 
-#: kmymoney/views/ledgerview.cpp:1064
+#: kmymoney/views/ledgerview.cpp:1065
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "¿Desea aceptar o desemparejar la transacción emparejada ahora?"
 
-#: kmymoney/views/ledgerview.cpp:1065
+#: kmymoney/views/ledgerview.cpp:1066
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -26143,67 +26143,65 @@ msgstr ""
 "<p>Toda la información es opcional y solo se usa para personalizar su "
 "archivo de KMyMoney.</p>"
 
-#: tools/kmmreport-export.cpp:116
+#: tools/kmmreport-export.cpp:114
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Exportar informes de KMyMoney"
 
-#: tools/kmmreport-export.cpp:120
+#: tools/kmmreport-export.cpp:118
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Exportar en formato CSV (predeterminado)"
 
-#: tools/kmmreport-export.cpp:123
+#: tools/kmmreport-export.cpp:121
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Exportar en formato HTML"
 
-#: tools/kmmreport-export.cpp:126
+#: tools/kmmreport-export.cpp:124
 #, kde-format
 msgid "Export in xml format"
 msgstr "Exportar en formato XML"
 
-#: tools/kmmreport-export.cpp:129
+#: tools/kmmreport-export.cpp:127
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Crear archivo de referencias a partir de la salida"
 
-#: tools/kmmreport-export.cpp:132
+#: tools/kmmreport-export.cpp:130
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Usar la tabla de información para exportar"
 
-#: tools/kmmreport-export.cpp:135
+#: tools/kmmreport-export.cpp:133
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Usar la tabla dinámica para exportar"
 
-#: tools/kmmreport-export.cpp:138
+#: tools/kmmreport-export.cpp:136
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Usar la tabla de consultas para exportar (predeterminado)"
 
-#: tools/kmmreport-export.cpp:141
+#: tools/kmmreport-export.cpp:139
 #, kde-format
 msgid "List all custom reports"
 msgstr "Listar todos los informes personalizados"
 
-#: tools/kmmreport-export.cpp:144
+#: tools/kmmreport-export.cpp:142
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Nombre de archivo para la salida generada"
 
-#: tools/kmmreport-export.cpp:147
+#: tools/kmmreport-export.cpp:145
 #, kde-format
 msgid "Process a specific report"
 msgstr "Procesar un informe específico"
 
-#: tools/kmmreport-export.cpp:160
+#: tools/kmmreport-export.cpp:158
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Solo se permite una de las opciones --csv y --html"
 
-#: tools/kmmreport-export.cpp:196
-#, kde-format
-msgid "saving report '%1' into '%2'"
-msgstr "guardando informe «%1» en «%2»"
+#~ msgid "saving report '%1' into '%2'"
+#~ msgstr "guardando informe «%1» en «%2»"
