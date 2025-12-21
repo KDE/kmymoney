@@ -258,9 +258,22 @@
             "buildsystem": "autotools",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://www.aquamaniac.de/rdm/attachments/download/646/aqbanking-6.8.4.tar.gz",
-                    "sha256": "53e297a202312dffae1091eaaa86e46a699febe0947857606bc2535adfdbf191"
+                    "type": "git",
+                    "url": "https://git.aquamaniac.de/git/aqbanking",
+                    "commit": "a70a96589cff4b32364e1e856d0e735170312000",
+                    "tag": "6.8.4",
+                    "x-checker-data": {
+                        "type": "git"
+                    }
+                },
+                {
+                    "type": "shell",
+                    "commands": [
+                        "make -fMakefile.cvs",
+                        "./configure",
+                        "make typedefs",
+                        "make typefiles"
+                    ]
                 }
             ],
             "cleanup": [
@@ -303,9 +316,20 @@
                     },
                     "sources": [
                         {
-                            "type": "archive",
-                            "url": "https://www.aquamaniac.de/rdm/attachments/download/630/gwenhywfar-5.14.1.tar.gz",
-                            "sha256": "8916feaa99cb954f963f2cba8dd2dffe57cacf7f284daf00eab071aad6fe2ab3"
+                            "type": "git",
+                            "url": "https://git.aquamaniac.de/git/gwenhywfar",
+                            "commit": "424949d0c6e61028eaccd6e46e4c0c41931c2b2f",
+                            "tag": "5.14.1",
+                            "x-checker-data": {
+                                "type": "git"
+                            }
+                        },
+                        {
+                            "type": "shell",
+                            "commands": [
+                                "if test ! -f i18nsources; then echo > i18nsources; fi",
+                                "autoreconf -fi -I ./m4 -I /usr/share/gettext/m4"
+                            ]
                         }
                     ],
                     "cleanup": [
@@ -371,9 +395,19 @@
             "buildsystem": "autotools",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://www.aquamaniac.de/rdm/attachments/download/382/libchipcard-5.1.6.tar.gz",
-                    "sha256": "6c07f527417f7562074f99012da4d11eb4dbafd33f49e66b442ccd6e3b8cfd20"
+                    "type": "git",
+                    "url": "https://git.aquamaniac.de/git/libchipcard",
+                    "commit": "49062eb5ff54e8eddf4840969066178fe666c379",
+                    "tag": "5.1.6",
+                    "x-checker-data": {
+                        "type": "git"
+                    }
+                },
+                {
+                    "type": "shell",
+                    "commands": [
+                        "make -fMakefile.cvs"
+                    ]
                 }
             ],
             "cleanup": [
