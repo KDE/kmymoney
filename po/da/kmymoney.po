@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-17 03:22+0000\n"
+"POT-Creation-Date: 2025-12-21 03:32+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -4785,15 +4785,6 @@ msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Udviklere og designere"
 
-#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
-#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
-#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
-#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
-#: kmymoney/kcreditswindow.cpp:131
-#, kde-format
-msgid "%1 (build against %2)"
-msgstr ""
-
 #: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:92
 #: kmymoney/kcreditswindow.cpp:99 kmymoney/kcreditswindow.cpp:106
 #: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:117
@@ -4802,6 +4793,15 @@ msgstr ""
 #, kde-format
 msgid "Unknown"
 msgstr "Ukendt"
+
+#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
+#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
+#: kmymoney/kcreditswindow.cpp:131
+#, kde-format
+msgid "%1 (build against %2)"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:85
 #, kde-format
@@ -6466,7 +6466,7 @@ msgstr "slå program-traces til"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "dump navnene på alle definerede KAction-objekter til stdout og afslut"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:148
 #, kde-format
 msgid "file to open"
 msgstr "fil der skal åbnes"
@@ -16224,7 +16224,7 @@ msgid "Average"
 msgstr "Gennemsnit"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:626
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:751
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:752
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
@@ -16249,32 +16249,32 @@ msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:664
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:665
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "No data provided by reports plugin for this chart."
 msgstr "Vis rapportudgaven af dette diagram"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:667
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
 msgstr "Vis rapportudgaven af dette diagram"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:690
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:691
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "Skemalagt"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:695
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:696
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "Historik"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:700
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:701
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -26865,72 +26865,67 @@ msgstr ""
 "<p>Al information er valgfri og bruges kun til at personliggøre din KMyMoney-"
 "fil.</p>"
 
-#: tools/kmmreport-export.cpp:116
+#: tools/kmmreport-export.cpp:114
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export KMyMoney reports"
 msgstr "Favoritrapporter"
 
-#: tools/kmmreport-export.cpp:120
+#: tools/kmmreport-export.cpp:118
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:123
+#: tools/kmmreport-export.cpp:121
 #, kde-format
 msgid "Export in HTML format"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:126
+#: tools/kmmreport-export.cpp:124
 #, kde-format
 msgid "Export in xml format"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:129
+#: tools/kmmreport-export.cpp:127
 #, kde-format
 msgid "Create reference file from output"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:132
+#: tools/kmmreport-export.cpp:130
 #, kde-format
 msgid "Use info table for exporting"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:135
+#: tools/kmmreport-export.cpp:133
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:138
+#: tools/kmmreport-export.cpp:136
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:141
+#: tools/kmmreport-export.cpp:139
 #, fuzzy, kde-format
 #| msgid "Old Customized Reports"
 msgid "List all custom reports"
 msgstr "Gamle brugertilpassede rapporter"
 
-#: tools/kmmreport-export.cpp:144
+#: tools/kmmreport-export.cpp:142
 #, fuzzy, kde-format
 #| msgid "Unable to generate report"
 msgid "Filename for generated output"
 msgstr "Kan ikke generere rapport"
 
-#: tools/kmmreport-export.cpp:147
+#: tools/kmmreport-export.cpp:145
 #, kde-format
 msgid "Process a specific report"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:160
+#: tools/kmmreport-export.cpp:158
 #, kde-format
 msgid "Only one of --csv and --html is supported"
-msgstr ""
-
-#: tools/kmmreport-export.cpp:196
-#, kde-format
-msgid "saving report '%1' into '%2'"
 msgstr ""
 
 #, fuzzy

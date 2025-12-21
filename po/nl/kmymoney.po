@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-17 03:22+0000\n"
+"POT-Creation-Date: 2025-12-21 03:32+0000\n"
 "PO-Revision-Date: 2025-09-23 10:30+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -4687,15 +4687,6 @@ msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Ontwikkelaar en herziening van code"
 
-#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
-#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
-#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
-#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
-#: kmymoney/kcreditswindow.cpp:131
-#, kde-format
-msgid "%1 (build against %2)"
-msgstr "%1 (gebouwd tegen %2)"
-
 #: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:92
 #: kmymoney/kcreditswindow.cpp:99 kmymoney/kcreditswindow.cpp:106
 #: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:117
@@ -4704,6 +4695,15 @@ msgstr "%1 (gebouwd tegen %2)"
 #, kde-format
 msgid "Unknown"
 msgstr "Onbekend"
+
+#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
+#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
+#: kmymoney/kcreditswindow.cpp:131
+#, kde-format
+msgid "%1 (build against %2)"
+msgstr "%1 (gebouwd tegen %2)"
 
 #: kmymoney/kcreditswindow.cpp:85
 #, kde-format
@@ -6286,7 +6286,7 @@ msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "dump alle namen die zijn gedefinieerd in QAction-objecten naar stdout en stop"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:148
 #, kde-format
 msgid "file to open"
 msgstr "te openen bestand"
@@ -15643,7 +15643,7 @@ msgid "Average"
 msgstr "Gemiddeld"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:626
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:751
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:752
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
@@ -15670,31 +15670,31 @@ msgstr ""
 "Budget prognose is gebaseerd op historische transacties gevonden tussen %1 "
 "en %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:664
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:665
 #, kde-format
 msgid "No data provided by reports plugin for this chart."
 msgstr ""
 "Geen gegevens geleverd door de plug-in voor rapporten voor deze grafiek."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:667
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Plug-in voor rapporten om deze grafiek te zien."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:690
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:691
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "Gepland"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:695
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:696
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "Geschiedenis"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:700
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:701
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -25992,70 +25992,68 @@ msgstr ""
 "<p>Alle informatie is optioneel en wordt gebruikt voor het persoonlijk maken "
 "van uw KMyMoney bestand.</p>"
 
-#: tools/kmmreport-export.cpp:116
+#: tools/kmmreport-export.cpp:114
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "KMyMoney rapporten exporteren"
 
-#: tools/kmmreport-export.cpp:120
+#: tools/kmmreport-export.cpp:118
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "In csv formaat exporteren (standaard)"
 
-#: tools/kmmreport-export.cpp:123
+#: tools/kmmreport-export.cpp:121
 #, kde-format
 msgid "Export in HTML format"
 msgstr "In HTML formaat exporteren"
 
-#: tools/kmmreport-export.cpp:126
+#: tools/kmmreport-export.cpp:124
 #, kde-format
 msgid "Export in xml format"
 msgstr "In xml-formaat exporteren"
 
-#: tools/kmmreport-export.cpp:129
+#: tools/kmmreport-export.cpp:127
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Referentie bestand uit uitvoer aanmaken"
 
-#: tools/kmmreport-export.cpp:132
+#: tools/kmmreport-export.cpp:130
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Informatietabel voor exporteren gebruiken"
 
-#: tools/kmmreport-export.cpp:135
+#: tools/kmmreport-export.cpp:133
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Pivottabel voor exporteren gebruiken"
 
-#: tools/kmmreport-export.cpp:138
+#: tools/kmmreport-export.cpp:136
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Opvraagtabel voor exporteren gebruiken (standaard)"
 
-#: tools/kmmreport-export.cpp:141
+#: tools/kmmreport-export.cpp:139
 #, kde-format
 msgid "List all custom reports"
 msgstr "Maak een lijst van alle aangepaste rapporten"
 
-#: tools/kmmreport-export.cpp:144
+#: tools/kmmreport-export.cpp:142
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Bestandsnaam voor gegenereerde uitvoer"
 
-#: tools/kmmreport-export.cpp:147
+#: tools/kmmreport-export.cpp:145
 #, kde-format
 msgid "Process a specific report"
 msgstr "Verwerk een specifiek rapport"
 
-#: tools/kmmreport-export.cpp:160
+#: tools/kmmreport-export.cpp:158
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Slechts een van --csv en --html wordt ondersteund"
 
-#: tools/kmmreport-export.cpp:196
-#, kde-format
-msgid "saving report '%1' into '%2'"
-msgstr "rapport '%1' wordt opgeslagen in '%2'"
+#~ msgid "saving report '%1' into '%2'"
+#~ msgstr "rapport '%1' wordt opgeslagen in '%2'"
 
 #~ msgctxt "@label Reconciliation progress dialog"
 #~ msgid "Reconciling transactions..."
