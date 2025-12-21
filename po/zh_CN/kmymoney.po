@@ -5131,11 +5131,10 @@ msgid "Skip next transaction..."
 msgstr "跳过下一笔交易..."
 
 #: kmymoney/kmymoney.cpp:1501
-#, fuzzy, kde-format
-#| msgid "Schedule Details"
+#, kde-format
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
-msgstr "定期交易明细"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1504
 #, kde-format
