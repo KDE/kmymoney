@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-21 03:32+0000\n"
+"POT-Creation-Date: 2025-12-23 03:32+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1722,6 +1722,7 @@ msgstr "状态："
 #. i18n: ectx: label, entry, group (Forecast Options)
 #. i18n: ectx: property (text), widget (QToolButton, m_prevButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_nextButton)
+#. i18n: ectx: property (text), widget (QToolButton, m_pinButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_numberColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_dateColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_payeeColClear)
@@ -1747,11 +1748,12 @@ msgstr "状态："
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
 #: kmymoney/plugins/views/reports/kreportsview.ui:80
-#: kmymoney/settings/kmymoney.kcfg:481 kmymoney/views/kinstitutionsview.ui:53
+#: kmymoney/settings/kmymoney.kcfg:485 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
 #: kmymoney/widgets/kmmsearchwidget.ui:35
+#: kmymoney/widgets/kmmsearchwidget.ui:48
 #: kmymoney/widgets/kmymoneybriefschedule.ui:82
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
@@ -2059,7 +2061,7 @@ msgid "Liability"
 msgstr "负债"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:447
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1846
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1846
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -2068,7 +2070,7 @@ msgid "Income"
 msgstr "收入"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:556 kmymoney/kmymoney.cpp:448
-#: kmymoney/models/ledgerfilterbase.cpp:98
+#: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:397
@@ -3072,7 +3074,7 @@ msgstr "个人字体设置"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:71
-#: kmymoney/settings/kmymoney.kcfg:322
+#: kmymoney/settings/kmymoney.kcfg:326
 #, kde-format
 msgid "Cell font"
 msgstr "表格字体"
@@ -3080,7 +3082,7 @@ msgstr "表格字体"
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:81
-#: kmymoney/settings/kmymoney.kcfg:325
+#: kmymoney/settings/kmymoney.kcfg:329
 #, kde-format
 msgid "Header font"
 msgstr "表头字体"
@@ -3452,7 +3454,7 @@ msgstr "在选择日志文件路径时，请注意日志中可能会含有敏感
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
 #. i18n: ectx: label, entry (logImportedStatements), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:634
-#: kmymoney/settings/kmymoney.kcfg:312
+#: kmymoney/settings/kmymoney.kcfg:316
 #, kde-format
 msgid "Log imported statements"
 msgstr "记录已导入的结算单"
@@ -3460,7 +3462,7 @@ msgstr "记录已导入的结算单"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logOfxTransactions)
 #. i18n: ectx: label, entry (logOfxTransactions), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:641
-#: kmymoney/settings/kmymoney.kcfg:315
+#: kmymoney/settings/kmymoney.kcfg:319
 #, kde-format
 msgid "Log OFX transactions"
 msgstr "记录 OFX 交易"
@@ -3594,7 +3596,7 @@ msgstr "个人字体设置"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (IconsTheme), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsicons.ui:52
-#: kmymoney/settings/kmymoney.kcfg:328
+#: kmymoney/settings/kmymoney.kcfg:332
 #, kde-format
 msgid "Icon theme"
 msgstr "图标主题"
@@ -4136,7 +4138,7 @@ msgstr "自动对账"
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_1)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:282
-#: kmymoney/settings/kmymoney.kcfg:344
+#: kmymoney/settings/kmymoney.kcfg:348
 #, kde-format
 msgid "Initial cursor position within the date field"
 msgstr "将日期字段设为初始光标位置"
@@ -6361,27 +6363,27 @@ msgctxt "Reconciliation state 'Cleared'"
 msgid "Cleared"
 msgstr "已结清"
 
-#: kmymoney/models/ledgerfilterbase.cpp:64
+#: kmymoney/models/ledgerfilterbase.cpp:63
 #, kde-format
 msgctxt "Payment made with credit card"
 msgid "Charge"
 msgstr "费用"
 
-#: kmymoney/models/ledgerfilterbase.cpp:68
-#: kmymoney/models/ledgerfilterbase.cpp:94
+#: kmymoney/models/ledgerfilterbase.cpp:67
+#: kmymoney/models/ledgerfilterbase.cpp:93
 #, kde-format
 msgctxt "Decrease of asset/liability value"
 msgid "Decrease"
 msgstr "降低"
 
-#: kmymoney/models/ledgerfilterbase.cpp:72
-#: kmymoney/models/ledgerfilterbase.cpp:90
+#: kmymoney/models/ledgerfilterbase.cpp:71
+#: kmymoney/models/ledgerfilterbase.cpp:89
 #, kde-format
 msgctxt "Increase of asset/liability value"
 msgid "Increase"
 msgstr "增加"
 
-#: kmymoney/models/ledgerfilterbase.cpp:86
+#: kmymoney/models/ledgerfilterbase.cpp:85
 #, kde-format
 msgctxt "Payment towards credit card"
 msgid "Payment"
@@ -15172,63 +15174,63 @@ msgstr "预测"
 
 #. i18n: ectx: label, entry (forecastMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:11
-#: kmymoney/settings/kmymoney.kcfg:433
+#: kmymoney/settings/kmymoney.kcfg:437
 #, kde-format
 msgid "Method to calculate forecast"
 msgstr "计算预测值的方法"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
-#: kmymoney/settings/kmymoney.kcfg:437
+#: kmymoney/settings/kmymoney.kcfg:441
 #, kde-format
 msgid "Days to forecast"
 msgstr "预测天数"
 
 #. i18n: ectx: label, entry (forecastAccountCycle), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:21
-#: kmymoney/settings/kmymoney.kcfg:443
+#: kmymoney/settings/kmymoney.kcfg:447
 #, kde-format
 msgid "Days of normal account cycle"
 msgstr "通常账户循环周期的天数"
 
 #. i18n: ectx: label, entry (forecastCycles), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:27
-#: kmymoney/settings/kmymoney.kcfg:449
+#: kmymoney/settings/kmymoney.kcfg:453
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
 msgstr "在预测中使用的历史周期数"
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
-#: kmymoney/settings/kmymoney.kcfg:455
+#: kmymoney/settings/kmymoney.kcfg:459
 #, kde-format
 msgid "Day of month to start forecast"
 msgstr "在每月的哪一天开始预测"
 
 #. i18n: ectx: label, entry (historyMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:39
-#: kmymoney/settings/kmymoney.kcfg:461
+#: kmymoney/settings/kmymoney.kcfg:465
 #, kde-format
 msgid "Method to calculate history-based forecast"
 msgstr "计算基于历史的预测的方法"
 
 #. i18n: ectx: label, entry (skipOpeningDate), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:43
-#: kmymoney/settings/kmymoney.kcfg:465
+#: kmymoney/settings/kmymoney.kcfg:469
 #, kde-format
 msgid "Skip opening date when fetching transactions"
 msgstr "在取回交易时跳过开盘日期"
 
 #. i18n: ectx: label, entry (includeFutureTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:47
-#: kmymoney/settings/kmymoney.kcfg:469
+#: kmymoney/settings/kmymoney.kcfg:473
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr "在使用交易计划预报时，包括未来的交易"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
-#: kmymoney/settings/kmymoney.kcfg:473
+#: kmymoney/settings/kmymoney.kcfg:477
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr "在使用交易计划预报时，包括计划的交易"
@@ -17197,7 +17199,7 @@ msgstr "线条宽度"
 #. i18n: ectx: label, entry (LineWidth), group (Chart Settings)
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_LineWidth)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:66
-#: kmymoney/settings/kmymoney.kcfg:414
+#: kmymoney/settings/kmymoney.kcfg:418
 #, kde-format
 msgid "Line width for diagrams, in pixels"
 msgstr ""
@@ -18752,152 +18754,159 @@ msgstr "显示带计划日期的时间表"
 msgid "Show a grid in the register"
 msgstr "在账簿中显示栅格"
 
-#. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
+#. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
+#, fuzzy, kde-format
+#| msgid "Show categories in the accounts list view"
+msgid "Show the filter widget when an account is opened"
+msgstr "在账户列表视图中显示分类"
+
+#. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:280
 #, kde-format
 msgid "Show fancy group markers"
 msgstr "显示精美组标记"
 
 #. i18n: ectx: label, entry (ShowFiscalMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:280
+#: kmymoney/settings/kmymoney.kcfg:284
 #, kde-format
 msgid "Show fancy markers for previous and current fiscal year"
 msgstr "为上一财年和本财年显示精美标记"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:284
+#: kmymoney/settings/kmymoney.kcfg:288
 #, fuzzy, kde-format
 #| msgid "Show reconciled balances"
 msgid "Show reconciliation entries with date and balance"
 msgstr "显示已核对的余额"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:293
+#: kmymoney/settings/kmymoney.kcfg:297
 #, kde-format
 msgid "Starting month of the fiscal year"
 msgstr "财年的起始月份"
 
 #. i18n: ectx: label, entry (FiscalYearBeginDay), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:299
+#: kmymoney/settings/kmymoney.kcfg:303
 #, kde-format
 msgid "Starting day of the fiscal year"
 msgstr "财年的起始日"
 
 #. i18n: ectx: label, entry (StartDate), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:305
+#: kmymoney/settings/kmymoney.kcfg:309
 #, kde-format
 msgid "Start date"
 msgstr "起始日期"
 
 #. i18n: ectx: label, entry (logPath), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:309
+#: kmymoney/settings/kmymoney.kcfg:313
 #, fuzzy, kde-format
 #| msgid "Log path"
 msgid "Log file path"
 msgstr "日志路径"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:318
+#: kmymoney/settings/kmymoney.kcfg:322
 #, kde-format
 msgid "Use system font"
 msgstr "使用系统字体"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:332 kmymoney/settings/kmymoney.kcfg:336
+#: kmymoney/settings/kmymoney.kcfg:336 kmymoney/settings/kmymoney.kcfg:340
 #, kde-format
 msgid "Sort order of register in normal view"
 msgstr "在标准视图中账簿的排序顺序"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:344
 #, kde-format
 msgid "Sort order of register in search dialog"
 msgstr "在搜索对话框中账簿的排序顺序"
 
 #. i18n: ectx: label, entry (defaultReconciliationState), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:353
+#: kmymoney/settings/kmymoney.kcfg:357
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
 msgstr "在对账时输入的交易信息的默认对账状态"
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:359
+#: kmymoney/settings/kmymoney.kcfg:363
 #, kde-format
 msgid "Number of days (plus/minus) to search for matching transactions"
 msgstr "查找匹配交易所用的天数（正/负）"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:363
+#: kmymoney/settings/kmymoney.kcfg:367
 #, fuzzy, kde-format
 #| msgid "Ask for a new payee's default category"
 msgid "During import, ask for a new payee's default category"
 msgstr "询问新收款人的默认分类"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
-#: kmymoney/settings/kmymoney.kcfg:370
+#: kmymoney/settings/kmymoney.kcfg:374
 #, kde-format
 msgid "Post date last entered by the user"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifCash), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:376
+#: kmymoney/settings/kmymoney.kcfg:380
 #, kde-format
 msgid "additional names for cash account"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifBank), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:380
+#: kmymoney/settings/kmymoney.kcfg:384
 #, kde-format
 msgid "additional names for checking account"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:384
+#: kmymoney/settings/kmymoney.kcfg:388
 #, kde-format
 msgid "additional names for credit card account"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifAsset), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:388
+#: kmymoney/settings/kmymoney.kcfg:392
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgid "additional names for asset account"
 msgstr "创建一个新资产账户"
 
 #. i18n: ectx: label, entry (qifOpeningBalance), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:392
+#: kmymoney/settings/kmymoney.kcfg:396
 #, kde-format
 msgid "additional names for opening balance payee"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifInvoice), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:396
+#: kmymoney/settings/kmymoney.kcfg:400
 #, kde-format
 msgid "additional names for invoice accounts"
 msgstr ""
 
 #. i18n: ectx: label, entry (showAccountsExpanded), group (Account View Settings)
-#: kmymoney/settings/kmymoney.kcfg:402
+#: kmymoney/settings/kmymoney.kcfg:406
 #, kde-format
 msgid "Show accounts view expanded when loaded"
 msgstr ""
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:408
+#: kmymoney/settings/kmymoney.kcfg:412
 #, kde-format
 msgid "Maximum quantity of legend items to display on charts"
 msgstr ""
 
 #. i18n: ectx: label, entry (ChartsPalette), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:420
+#: kmymoney/settings/kmymoney.kcfg:424
 #, kde-format
 msgid "The palette used to render charts"
 msgstr ""
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:426
+#: kmymoney/settings/kmymoney.kcfg:430
 #, fuzzy, kde-format
 #| msgid "The default QIF profile"
 msgid "Name of default CSS file"
@@ -21448,7 +21457,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "差额：%1"
 
-#: kmymoney/views/simpleledgerview.cpp:362
+#: kmymoney/views/simpleledgerview.cpp:364
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21456,7 +21465,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:471
+#: kmymoney/views/simpleledgerview.cpp:475
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21464,7 +21473,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:474
+#: kmymoney/views/simpleledgerview.cpp:478
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21472,19 +21481,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:753
+#: kmymoney/views/simpleledgerview.cpp:757
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:939
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:940
+#: kmymoney/views/simpleledgerview.cpp:950
 #, fuzzy, kde-format
 #| msgid "Closed tags cannot be used."
 msgctxt "@title:info In reconciliation"
@@ -21834,6 +21843,14 @@ msgstr "未找到账户."
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, m_pinButton)
+#: kmymoney/widgets/kmmsearchwidget.ui:45
+#, kde-format
+msgid ""
+"Used to keep the filter widget visible. If not visible, it can be shown "
+"using Ctrl+F"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
