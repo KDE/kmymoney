@@ -63,7 +63,17 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
           WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
           OUTPUT_VARIABLE VERSION_SUFFIX
           OUTPUT_STRIP_TRAILING_WHITESPACE)
-  set(VERSION_SUFFIX "-${VERSION_SUFFIX}")
+  execute_process(COMMAND git tag --contains ${VERSION_SUFFIX}
+          WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+          OUTPUT_VARIABLE TAG
+          OUTPUT_STRIP_TRAILING_WHITESPACE)
+  # for commits that don't have a tag add the commit hash
+  # don't add the hash if the commit is tagged
+  if("" STREQUAL "${TAG}")
+    set(VERSION_SUFFIX "-${VERSION_SUFFIX}")
+  else()
+    set(VERSION_SUFFIX "")
+  endif()
   # Add variables which are similar to the build in names of cmake
   set(PROJECT_VERSION_SUFFIX "${VERSION_SUFFIX}")
   set(${PROJECT_NAME}_VERSION_SUFFIX "${VERSION_SUFFIX}")
