@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-20 00:42+0000\n"
-"PO-Revision-Date: 2025-12-01 15:39+0100\n"
+"POT-Creation-Date: 2025-12-23 00:41+0000\n"
+"PO-Revision-Date: 2025-12-18 09:28+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2145,7 +2145,7 @@ msgid "Liability"
 msgstr "Passività"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:448
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1846
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1846
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -2154,7 +2154,7 @@ msgid "Income"
 msgstr "Entrate"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:556 kmymoney/kmymoney.cpp:449
-#: kmymoney/models/ledgerfilterbase.cpp:98
+#: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:397
@@ -5341,11 +5341,10 @@ msgid "Skip next transaction..."
 msgstr "Salta la prossima transazione..."
 
 #: kmymoney/kmymoney.cpp:1501
-#, fuzzy, kde-format
-#| msgid "Schedule Details"
+#, kde-format
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
-msgstr "Dettagli della pianificazione"
+msgstr "Mostra i dettagli della pianificazione"
 
 #: kmymoney/kmymoney.cpp:1504
 #, kde-format
@@ -6490,27 +6489,27 @@ msgctxt "Reconciliation state 'Cleared'"
 msgid "Cleared"
 msgstr "Compensate"
 
-#: kmymoney/models/ledgerfilterbase.cpp:64
+#: kmymoney/models/ledgerfilterbase.cpp:63
 #, kde-format
 msgctxt "Payment made with credit card"
 msgid "Charge"
 msgstr "Spesa"
 
-#: kmymoney/models/ledgerfilterbase.cpp:68
-#: kmymoney/models/ledgerfilterbase.cpp:94
+#: kmymoney/models/ledgerfilterbase.cpp:67
+#: kmymoney/models/ledgerfilterbase.cpp:93
 #, kde-format
 msgctxt "Decrease of asset/liability value"
 msgid "Decrease"
 msgstr "Riduci"
 
-#: kmymoney/models/ledgerfilterbase.cpp:72
-#: kmymoney/models/ledgerfilterbase.cpp:90
+#: kmymoney/models/ledgerfilterbase.cpp:71
+#: kmymoney/models/ledgerfilterbase.cpp:89
 #, kde-format
 msgctxt "Increase of asset/liability value"
 msgid "Increase"
 msgstr "Aumenta"
 
-#: kmymoney/models/ledgerfilterbase.cpp:86
+#: kmymoney/models/ledgerfilterbase.cpp:85
 #, kde-format
 msgctxt "Payment towards credit card"
 msgid "Payment"
