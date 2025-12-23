@@ -51,11 +51,8 @@ set(KMM_KCHART_MIN_VERSION 2.6.0)
 # version. Details can be found in the libofx source code
 set(KMM_LIBOFX_MIN_VERSION 0.10.0)
 set(KMM_LIBOFX_MIN_SOVERSION 7.0.0)
-set(KMM_AQBANKING_MIN_VERSION 6.5.0)
-set(KMM_GWENHYWFAR_MIN_VERSION 5.10.1)
-if(BUILD_WITH_QT6)
-  set(KMM_GWENHYWFAR_MIN_VERSION 5.12.1)
-endif()
+set(KMM_AQBANKING_MIN_VERSION 6.8.4)
+set(KMM_GWENHYWFAR_MIN_VERSION 5.14.1)
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
