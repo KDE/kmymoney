@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-23 03:32+0000\n"
-"PO-Revision-Date: 2025-09-23 10:09+0200\n"
+"PO-Revision-Date: 2025-12-23 08:47+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -4627,7 +4627,7 @@ msgstr "Desenvolupador, mantenidor, adaptació a Windows"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
-msgstr "Desenvolupador, adaptació a Windows i MacOS"
+msgstr "Desenvolupador, adaptació a Windows i macOS"
 
 #: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:59
 #: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:64
@@ -11842,7 +11842,7 @@ msgstr "Guarda l'informe"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2338
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
-msgstr "S'han trobat problemes en convertir la planificació «%1»."
+msgstr "S'han trobat problemes mentre es convertia la planificació «%1»."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
 #, kde-format
@@ -18967,10 +18967,9 @@ msgstr "Mostra una quadrícula als llibres"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Mostra les categories en la vista de la llista de comptes"
+msgstr "Mostra el giny de filtres quan s'obre el compte"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:280
@@ -22017,6 +22016,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"S'utilitza per a mantenir visible el giny de filtres. Si no és visible, es "
+"pot mostrar utilitzant Ctrl+F"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
@@ -26109,6 +26110,3 @@ msgstr "Processa un informe específic"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Només s'admet un d'entre --csv o --html"
-
-#~ msgid "saving report '%1' into '%2'"
-#~ msgstr "s'està guardant l'informe «%1» en «%2»"

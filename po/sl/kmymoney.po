@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-23 03:32+0000\n"
-"PO-Revision-Date: 2025-09-23 07:16+0200\n"
+"PO-Revision-Date: 2025-12-23 09:37+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -18891,10 +18891,9 @@ msgstr "Prikaži mrežo v registru"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Prikazuj kategorije v pogledu seznama računov"
+msgstr "Prikaži gradnik za filter, ko je račun odprt"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:280
@@ -21918,6 +21917,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"Uporablja se za ohranjanje vidnosti gradnika filtra. Če ni viden, ga lahko "
+"prikažete s Ctrl+F."
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format

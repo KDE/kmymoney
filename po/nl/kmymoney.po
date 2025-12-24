@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-23 03:32+0000\n"
-"PO-Revision-Date: 2025-09-23 10:30+0200\n"
+"PO-Revision-Date: 2025-12-23 17:27+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.0\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -18940,10 +18940,9 @@ msgstr "Toon een raster in het kasboek"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Toon categorieën in de weergave van de rekeningenlijst"
+msgstr "Toon het filterwidget wanneer een rekening is geopend"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:280
@@ -21987,6 +21986,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"Hield gewoonlijk het filterwidget zichtbaar. Indien niet zichtbaar, het kan "
+"getoond worden met gebruik van Ctrl+F"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
