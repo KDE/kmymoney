@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-23 00:41+0000\n"
-"PO-Revision-Date: 2025-12-18 15:55+0300\n"
-"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
+"PO-Revision-Date: 2025-12-23 11:55+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4662,7 +4662,7 @@ msgstr "Raporlama, OFX içe aktarma"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
-msgstr "Veritabanı arka ucu, kararlı dal bakımcısı"
+msgstr "Veri tabanı arka ucu, kararlı dal bakımcısı"
 
 #: kmymoney/kcreditswindow.cpp:67
 #, kde-format
@@ -4681,7 +4681,7 @@ msgstr "Geliştirici"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend"
-msgstr "Veritabanı arka ucu"
+msgstr "Veri tabanı arka ucu"
 
 #: kmymoney/kcreditswindow.cpp:74
 #, kde-format
@@ -4735,7 +4735,7 @@ msgstr "OFX bankacılık protokolü soyutlaştırma kitaplığı"
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format
 msgid "SQLite database encryption"
-msgstr "SQLite veritabanı şifrelemesi"
+msgstr "SQLite veri tabanı şifrelemesi"
 
 #: kmymoney/kcreditswindow.cpp:135
 #, kde-format
@@ -14616,7 +14616,7 @@ msgid ""
 "In order to use a database, you need to install some additional software. "
 "Click Help for more information"
 msgstr ""
-"Bir veritabanı kullanmak için bazı ek yazılımlar kurmanız gerekiyor. Daha "
+"Bir veri tabanı kullanmak için bazı ek yazılımlar kurmanız gerekiyor. Daha "
 "fazla bilgi için Yardım’a tıklayın"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:165
@@ -14631,7 +14631,7 @@ msgid ""
 "Unable to open database.\n"
 "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
 msgstr ""
-"Veritabanı açılamadı.\n"
+"Veri tabanı açılamadı.\n"
 "Tabloları oluşturmadan önce SQL CREATE DATABASE ifadesi kullanmalısınız.\n"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:205
@@ -14664,7 +14664,7 @@ msgid ""
 "Please report any problems to the developer mailing list at kmymoney-"
 "devel@kde.org"
 msgstr ""
-"%1 veritabanı türü K Param ortamında tam olarak sınanmamıştır.\n"
+"%1 veri tabanı türü K Param ortamında tam olarak sınanmamıştır.\n"
 "Lütfen verilerinizi yedeklediğinizden emin olun.\n"
 "Lütfen olası sorunları kmymoney-devel@kde.org geliştirici posta listesine "
 "bildirin"
@@ -14681,25 +14681,25 @@ msgstr "K Param — SQL Üret"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:178
 #, kde-format
 msgid "Database Type"
-msgstr "Veritabanı Türü"
+msgstr "Veri Tabanı Türü"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:59
 #, kde-format
 msgid "Database Details"
-msgstr "Veritabanı Ayrıntıları"
+msgstr "Veri Tabanı Ayrıntıları"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:67
 #, kde-format
 msgid "Database File (SQLite only)"
-msgstr "Veritabanı dosyası (yalnızca SQLite)"
+msgstr "Veri tabanı dosyası (yalnızca SQLite)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:77
 #, kde-format
 msgid "Database Name (Others)"
-msgstr "Veritabanı adı (diğerleri)"
+msgstr "Veri tabanı adı (diğerleri)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:87
@@ -14728,7 +14728,7 @@ msgstr "Qt SQL sürücüsü %1 artık sisteminizde kurulu değil"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:26
 #, kde-format
 msgid "KMyMoney - Select Database"
-msgstr "K Param — Veritabanı Seç"
+msgstr "K Param — Veri Tabanı Seç"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox6)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:75
@@ -14759,7 +14759,7 @@ msgstr "&Dosya"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:217
 #, kde-format
 msgid "Database &Name"
-msgstr "Veritabanı &adı"
+msgstr "Veri tabanı &adı"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:234
@@ -14791,7 +14791,7 @@ msgid ""
 "You're trying to open an encrypted database.\n"
 "Please provide a password in order to open it."
 msgstr ""
-"Şifrelenmiş bir veritabanını açmaya çalışıyorsunuz.\n"
+"Şifrelenmiş bir veri tabanını açmaya çalışıyorsunuz.\n"
 "Açmak için lütfen bir parola girin."
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:178
@@ -14801,9 +14801,9 @@ msgid ""
 "supported.\n"
 "Please save your database under a new name."
 msgstr ""
-"Var olan bir veritabanının şifreli bir veritabanıyla üzerine yazılması henüz "
-"desteklenmiyor.\n"
-"Lütfen veritabanınızı yeni bir adla kaydedin."
+"Var olan bir veri tabanının şifreli bir veri tabanıyla üzerine yazılması "
+"henüz desteklenmiyor.\n"
+"Lütfen veri tabanınızı yeni bir adla kaydedin."
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:210
 #, kde-format
@@ -14812,7 +14812,7 @@ msgid ""
 "Opened by %1 on %2 at %3.\n"
 "Open anyway?"
 msgstr ""
-"Görünüşe göre veritabanı kullanımda\n"
+"Görünüşe göre veri tabanı kullanımda\n"
 "%3 tarihinde %2 üzerinde %1 tarafından açılmış.\n"
 "Yine de açılsın mı?"
 
@@ -14832,29 +14832,29 @@ msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
 "Please create database %2 manually"
 msgstr ""
-"%1 türü için kendiliğinden veritabanı oluşturma şu anda uygulanmıyor.\n"
-"Lütfen %2 veritabanını elle oluşturun"
+"%1 türü için kendiliğinden veri tabanı oluşturma şu anda uygulanmıyor.\n"
+"Lütfen %2 veri tabanını elle oluşturun"
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2107
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
-msgstr "%1 veritabanını oluşturmada hata; oluşturma izniniz var mı?"
+msgstr "%1 veri tabanını oluşturmada hata; oluşturma izniniz var mı?"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:137
 #, kde-format
 msgid "Cannot open database %1\n"
-msgstr "%1 veritabanı açılamadı\n"
+msgstr "%1 veri tabanı açılamadı\n"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:170
 #, kde-format
 msgid "An unrecoverable error occurred while reading the database"
-msgstr "Veritabanı okunurken kurtarılamaz bir hata oluştu"
+msgstr "Veri tabanı okunurken kurtarılamaz bir hata oluştu"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:172
 #: kmymoney/plugins/sql/sqlstorage.cpp:204
 #, kde-format
 msgid "Database malfunction"
-msgstr "Veritabanı bozukluğu"
+msgstr "Veri tabanı bozukluğu"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:193
 #: kmymoney/plugins/xml/xmlstorage.cpp:518
@@ -14868,33 +14868,33 @@ msgid ""
 "An unrecoverable error occurred while writing to the database.\n"
 "It may well be corrupt."
 msgstr ""
-"Veritabanına yazılırken kurtarılamaz bir hata oluştu.\n"
+"Veri tabanına yazılırken kurtarılamaz bir hata oluştu.\n"
 "Hasar görmüş olabilir."
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:236
 #, kde-format
 msgid "Cannot save to current database."
-msgstr "Geçerli veritabanına kaydedilemiyor."
+msgstr "Geçerli veri tabanına kaydedilemiyor."
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:241
 #, kde-format
 msgid "Cannot save to current database: %1"
-msgstr "Geçerli veritabanına kaydedilemiyor: %1"
+msgstr "Geçerli veri tabanına kaydedilemiyor: %1"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:264
 #, kde-format
 msgid "Database files (*.db *.sql)"
-msgstr "Veritabanı dosyaları (*.db *.sql)"
+msgstr "Veri tabanı dosyaları (*.db *.sql)"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:270
 #, kde-format
 msgid "Open database..."
-msgstr "Veritabanı Aç…"
+msgstr "Veri Tabanı Aç…"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:275
 #, kde-format
 msgid "Generate Database SQL"
-msgstr "SQL Veritabanı Üret"
+msgstr "SQL Veri Tabanı Üret"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:334
 #, kde-format
@@ -14902,7 +14902,7 @@ msgid ""
 "Database contains data which must be removed before using Save As.\n"
 "Do you wish to continue?"
 msgstr ""
-"Veritabanı, Farklı Kaydet kullanılmadan önce kaldırılması gereken veriler "
+"Veri tabanı, Farklı Kaydet kullanılmadan önce kaldırılması gereken veriler "
 "içeriyor.\n"
 "Sürdürmek istiyor musunuz?"
 
@@ -14912,8 +14912,8 @@ msgid ""
 "Cannot open or create database %1.\n"
 "Retry Save As Database and click Help for further info."
 msgstr ""
-"%1 veritabanı açılamıyor veya oluşturulamıyor.\n"
-"Veritabanı Olarak Farklı Kaydet’i yeniden deneyin ve daha fazla bilgi için "
+"%1 veri tabanı açılamıyor veya oluşturulamıyor.\n"
+"Veri Tabanı Olarak Farklı Kaydet’i yeniden deneyin ve daha fazla bilgi için "
 "Yardım’a tıklayın."
 
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:240
@@ -21638,7 +21638,7 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Sık kullanılan olarak imlenmiş hesaplar, K Param "
-"dosyayı veya veritabanını açtığında kendiliğinden açılırlar. Bir hesap "
+"dosyayı veya veri tabanını açtığında kendiliğinden açılırlar. Bir hesap "
 "seçmek için sekme çubuğundaki + düğmesini kullanın.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:316
@@ -23426,7 +23426,7 @@ msgid ""
 msgstr ""
 "Borçlu olduğunuz veya size borcu olan kişinin veya bankanın adını girin.\n"
 "\n"
-"Ad K Param veritabanında yoksa onu oluşturmak isteyip istemediğiniz sorulur."
+"Ad K Param veri tabanında yoksa onu oluşturmak isteyip istemediğiniz sorulur."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:77
