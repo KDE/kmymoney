@@ -62,7 +62,6 @@ void BalanceChartView::addMarker()
     }
 
     // add another row for limit
-    bool needRow = false;
     bool haveMinBalance = false;
     bool haveMaxCredit = false;
     MyMoneyMoney minBalance, maxCredit;
@@ -71,43 +70,68 @@ void BalanceChartView::addMarker()
         factor = -factor;
 
     if (!m_account.value("maxCreditEarly").isEmpty()) {
-        needRow = true;
         haveMaxCredit = true;
         maxCredit = MyMoneyMoney(m_account.value("maxCreditEarly")) * -factor;
     }
     if (!m_account.value("maxCreditAbsolute").isEmpty()) {
-        needRow = true;
         haveMaxCredit = true;
         maxCredit = MyMoneyMoney(m_account.value("maxCreditAbsolute")) * -factor;
     }
 
     if (!m_account.value("minBalanceEarly").isEmpty()) {
-        needRow = true;
         haveMinBalance = true;
         minBalance = MyMoneyMoney(m_account.value("minBalanceEarly"));
     }
     if (!m_account.value("minBalanceAbsolute").isEmpty()) {
-        needRow = true;
         haveMinBalance = true;
         minBalance = MyMoneyMoney(m_account.value("minBalanceAbsolute"));
     }
 
     bool paintZeroLine(true);
-    if (needRow) {
-        if (haveMinBalance) {
-            paintZeroLine &= !minBalance.isZero();
-            drawLimitLine(minBalance.toDouble());
-        }
-        if (haveMaxCredit) {
-            paintZeroLine &= !maxCredit.isZero();
-            drawLimitLine(maxCredit.toDouble());
-        }
+    if (haveMinBalance) {
+        paintZeroLine &= !minBalance.isZero();
+        drawLimitLine(minBalance.toDouble());
+    }
+    if (haveMaxCredit) {
+        paintZeroLine &= !maxCredit.isZero();
+        drawLimitLine(maxCredit.toDouble());
     }
 
     // draw the zero value line if needed
     KChart::CartesianCoordinatePlane* cartesianPlane = qobject_cast<CartesianCoordinatePlane*>(coordinatePlane());
     if (cartesianPlane) {
-        const auto verticalRange = cartesianPlane->verticalRange();
+        auto verticalRange = cartesianPlane->verticalRange();
+
+        // check if we have a horizontal data line (see KReportChartView::adjustVerticalRange())
+        // and revert the adjustment performed
+        if ((verticalRange.second - verticalRange.first) == 4) {
+            verticalRange.first += 2;
+            verticalRange.second -= 2;
+        }
+
+        auto adjustToLimit = [&](const double value) {
+            if (verticalRange.first > value) {
+                verticalRange.first = value;
+            }
+            if (verticalRange.second < value) {
+                verticalRange.second = value;
+            }
+        };
+        if (haveMinBalance) {
+            adjustToLimit(minBalance.toDouble());
+        }
+        if (haveMaxCredit) {
+            adjustToLimit(maxCredit.toDouble());
+        }
+
+        // check if we still have a horizontal data line
+        // if so, we add the adjustment again (see KReportChartView::adjustVerticalRange())
+        if (verticalRange.second == verticalRange.first) {
+            verticalRange.first -= 2;
+            verticalRange.second += 2;
+        }
+        cartesianPlane->setVerticalRange(verticalRange);
+
         // check if vertical range does not cross the abscissa and reset the flag
         if ((verticalRange.first >= 0.0) || (verticalRange.second <= 0.0)) {
             paintZeroLine = false;
