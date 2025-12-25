@@ -237,6 +237,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
         ibanBicCompleter* completer = new ibanBicCompleter(this);
         completer->setModel(descendantsModel);
         completer->setCompletionRole(payeeIdentifierModel::payeeName);
+        completer->setFilterMode(Qt::MatchContains);
         completer->setCaseSensitivity(Qt::CaseInsensitive);
 
         connect(completer, &ibanBicCompleter::activatedIban, ui->beneficiaryIban, &KIbanLineEdit::setText);
