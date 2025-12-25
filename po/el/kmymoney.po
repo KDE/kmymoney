@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-23 03:32+0000\n"
+"POT-Creation-Date: 2025-12-25 03:27+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -5547,7 +5547,7 @@ msgid "Copy report"
 msgstr "Αντίγραφο του %1"
 
 #: kmymoney/kmymoney.cpp:1510
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:239
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
@@ -17226,27 +17226,27 @@ msgstr ""
 "Παρακαλώ αναφέρετε το σφάλμα στη λίστα ταχυδρομείου των προγραμματιστών: "
 "kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:174
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
 msgstr "%1 Ιστορικό υπολοίπου"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:180
 #, fuzzy, kde-format
 #| msgid "Balance of %1"
 msgid "Value of %1"
 msgstr "Υπόλοιπο του %1"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:183
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "%1 Ιστορικό υπολοίπου"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:191
 #, kde-format
 msgid "Balance of %1"
 msgstr "Υπόλοιπο του %1"
