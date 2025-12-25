@@ -337,9 +337,16 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
         editor->setShares(-(index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>()));
         editor->setCostCenterId(index.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
         editor->setNumber(index.data(eMyMoney::Model::SplitNumberRole).toString());
-        editor->setPayeeId(index.data(eMyMoney::Model::SplitPayeeIdRole).toString());
         editor->setTagIdList(index.data(eMyMoney::Model::SplitTagIdRole).toStringList());
         editor->setProtectClosedAccount(index.data(eMyMoney::Model::AccountIsClosedRole).toBool());
+
+        auto payeeId = index.data(eMyMoney::Model::SplitPayeeIdRole).toString();
+        // if no payee is assigned and we create a new split, then assign the transaciton's payeeId
+        if (payeeId.isEmpty() && index.data(eMyMoney::Model::SplitPayeeIdRole).toString().isEmpty()) {
+            payeeId = d->m_transactionPayeeId;
+        }
+        editor->setPayeeId(payeeId);
+
         editor->finishLoadingSplit();
     }
 }
