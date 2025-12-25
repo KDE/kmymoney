@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-23 00:41+0000\n"
+"POT-Creation-Date: 2025-12-25 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -5187,7 +5187,7 @@ msgid "Copy report"
 msgstr "复制报表"
 
 #: kmymoney/kmymoney.cpp:1516
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:239
 #, kde-format
 msgid "Configure report"
 msgstr "配置报表"
@@ -15933,24 +15933,24 @@ msgstr ""
 "请向Kmymoney2的开发者邮件列表kmymoney2-developer@lists.sourceforge.net报告此"
 "错误。"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:174
 #, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:180
 #, kde-format
 msgid "Value of %1"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:183
 #, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:191
 #, kde-format
 msgid "Balance of %1"
 msgstr "%1的余额"

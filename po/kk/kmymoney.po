@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-23 00:41+0000\n"
+"POT-Creation-Date: 2025-12-25 00:44+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -5503,7 +5503,7 @@ msgid "Copy report"
 msgstr "&Жаңа есеп-беру"
 
 #: kmymoney/kmymoney.cpp:1516
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:239
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
@@ -17033,27 +17033,27 @@ msgstr ""
 "Есеп-беруде қате пайда болды: \"%1\".\n"
 "Құрасырушыларына хабарлаңыз. Адресі: kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:174
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
 msgstr "%1 балансының тарихы"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:180
 #, fuzzy, kde-format
 #| msgid "Balance of %1"
 msgid "Value of %1"
 msgstr "%1 балансы"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:183
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "%1 балансының тарихы"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:191
 #, kde-format
 msgid "Balance of %1"
 msgstr "%1 балансы"

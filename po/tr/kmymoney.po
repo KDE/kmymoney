@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-23 00:41+0000\n"
+"POT-Creation-Date: 2025-12-25 00:44+0000\n"
 "PO-Revision-Date: 2025-12-23 11:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -5345,7 +5345,7 @@ msgid "Copy report"
 msgstr "Raporu Kopyala"
 
 #: kmymoney/kmymoney.cpp:1516
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:239
 #, kde-format
 msgid "Configure report"
 msgstr "Raporu Yapılandır"
@@ -16368,24 +16368,24 @@ msgstr ""
 "Raporunuz oluşturulurken hata: “%1”.\n"
 "Lütfen bu hatayı geliştirici listesine bildirin: kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:174
 #, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
 msgstr "%1 Değeri Geçmişi"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:180
 #, kde-format
 msgid "Value of %1"
 msgstr "%1 Değeri"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:183
 #, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "%1 Bakiyesi Geçmişi"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:191
 #, kde-format
 msgid "Balance of %1"
 msgstr "%1 Bakiyesi"
