@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-25 00:44+0000\n"
+"POT-Creation-Date: 2025-12-26 00:43+0000\n"
 "PO-Revision-Date: 2025-12-16 21:59+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -13657,12 +13657,12 @@ msgstr "Процес імпортування було несподівано п
 msgid "Failed to import all statements."
 msgstr "Не вдалося імпортувати всі виписки."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:441
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:442
 #, kde-format
 msgid "For this beneficiary's country the BIC is mandatory."
 msgstr "Для цієї країни отримувача BIC є обов'язковим."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:457
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:458
 #, kde-format
 msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
@@ -13671,12 +13671,12 @@ msgstr[1] "Назва отримувача має складатися з при
 msgstr[2] "Назва отримувача має складатися з принаймні %1 символів"
 msgstr[3] "Назва отримувача має складатися з принаймні одного символу"
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:468
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:469
 #, kde-format
 msgid "A positive amount to transfer is needed."
 msgstr "Слід вказати додатну суму переказу."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:479
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:480
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below your credit "
@@ -13685,7 +13685,7 @@ msgstr ""
 "Після виконання цього кредитного переказу на балансі рахунку залишиться "
 "менше грошей, ніж передбачено вашим обмеженням кредиту."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:481
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:482
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below the minimal "
@@ -13694,7 +13694,7 @@ msgstr ""
 "Після виконання цього кредитного переказу на балансі рахунку залишиться "
 "менше грошей, ніж передбачено мінімальними вимогами до балансу."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:491
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:492
 #, kde-format
 msgid "The end-to-end reference cannot contain more than one character."
 msgid_plural "The end-to-end reference cannot contain more than %1 characters."
@@ -13707,7 +13707,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Запис наскрізного посилання може складатися не більше ніж з %1 символу."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:507
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:508
 #, kde-format
 msgid "The maximal line length of %1 character per line is exceeded."
 msgid_plural "The maximal line length of %1 characters per line is exceeded."
@@ -13716,7 +13716,7 @@ msgstr[1] "Перевищено максимальну можливу довжи
 msgstr[2] "Перевищено максимальну можливу довжину рядка у %1 символів."
 msgstr[3] "Перевищено максимальну можливу довжину рядка у %1 символ."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:511
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:512
 #, kde-format
 msgid ""
 "The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /"
@@ -13724,7 +13724,7 @@ msgstr ""
 "У полі призначення можуть міститися літери A-Z, пробіли та символи ':?.,-"
 "()+/."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:513
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:514
 #, kde-format
 msgid "In the purpose only a single line is allowed."
 msgid_plural "The purpose cannot contain more than %1 lines."
@@ -13733,7 +13733,7 @@ msgstr[1] "Запис призначення може складатися не 
 msgstr[2] "Запис призначення може складатися не більше ніж з %1 рядків."
 msgstr[3] "Запис призначення може складатися не більше ніж з %1 рядка."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:517
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:518
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."

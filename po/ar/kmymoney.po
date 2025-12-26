@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-25 00:44+0000\n"
+"POT-Creation-Date: 2025-12-26 00:43+0000\n"
 "PO-Revision-Date: 2025-12-18 09:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -13479,12 +13479,12 @@ msgstr "عملية الاستيراد أُنهيت بشكل غير متوقع."
 msgid "Failed to import all statements."
 msgstr "فشل استيراد كلّ الإفادات."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:441
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:442
 #, kde-format
 msgid "For this beneficiary's country the BIC is mandatory."
 msgstr "رمز تعريف المصرف BIC إلزامي لبلد هذا المستفيد."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:457
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:458
 #, kde-format
 msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
@@ -13495,26 +13495,26 @@ msgstr[3] "يجب أن يكون اسم المستفيد على الأقل %1 ح�
 msgstr[4] "يجب أن يكون اسم المستفيد على الأقل %1 حرفًا"
 msgstr[5] "يجب أن يكون اسم المستفيد على الأقل %1 حرفًا"
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:468
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:469
 #, kde-format
 msgid "A positive amount to transfer is needed."
 msgstr "مبلغ إيجابي للتّحويل ضروري."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:479
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:480
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below your credit "
 "limit."
 msgstr "بعد تحويل الاعتماد هذا، سيصبح رصيد الحساب دون حدّ الاعتماد الخاصّ بك."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:481
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:482
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below the minimal "
 "balance."
 msgstr "بعد تحويل الاعتماد هذا، سيصبح رصيد الحساب دون الرّصيد الأدنى."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:491
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:492
 #, kde-format
 msgid "The end-to-end reference cannot contain more than one character."
 msgid_plural "The end-to-end reference cannot contain more than %1 characters."
@@ -13525,7 +13525,7 @@ msgstr[3] "مرجع من البداية إلى النّهاية لا يمكن أ
 msgstr[4] "مرجع من البداية إلى النّهاية لا يمكن أن يحتوي أكثر من %1 حرفًا."
 msgstr[5] "مرجع من البداية إلى النّهاية لا يمكن أن يحتوي أكثر من %1 حرفًا."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:507
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:508
 #, kde-format
 msgid "The maximal line length of %1 character per line is exceeded."
 msgid_plural "The maximal line length of %1 characters per line is exceeded."
@@ -13536,13 +13536,13 @@ msgstr[3] "طول السّطر الأقصى وهو %1 حرفًا لكلّ سطر
 msgstr[4] "طول السّطر الأقصى وهو %1 حرفًا لكلّ سطر قد تجاوز."
 msgstr[5] "طول السّطر الأقصى وهو %1 حرفًا لكلّ سطر قد تجاوز."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:511
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:512
 #, kde-format
 msgid ""
 "The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /"
 msgstr "الغرض يمكن أن يحتوي فقط على الأحرف A-Z، والمسافات و ':?.,-()+ و /"
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:513
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:514
 #, kde-format
 msgid "In the purpose only a single line is allowed."
 msgid_plural "The purpose cannot contain more than %1 lines."
@@ -13553,7 +13553,7 @@ msgstr[3] "الغرض لا يمكن أن يحتوي أكثر من %1 أسطر."
 msgstr[4] "الغرض لا يمكن أن يحتوي أكثر من %1 سطرًا."
 msgstr[5] "الغرض لا يمكن أن يحتوي أكثر من %1 سطرًا."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:517
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:518
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
