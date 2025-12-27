@@ -538,6 +538,11 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust) const
 
 QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate& _endDate) const
 {
+    typedef enum {
+        Days,
+        Weeks,
+    } DailyIncrementFactor;
+
     QDate paymentDate(nextDueDate());
     QList<QDate> theDates;
 
@@ -559,31 +564,99 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
 
     QDate date(adjustedDate(paymentDate, option));
 
-    switch (d->m_occurrence) {
-    case Schedule::Occurrence::Once:
-        if (start_date >= _startDate && start_date <= endDate)
-            theDates.append(start_date);
-        break;
-
-    case Schedule::Occurrence::Daily:
-        while (date.isValid() && (date <= endDate)) {
-            if (date >= _startDate)
-                theDates.append(date);
-            paymentDate = paymentDate.addDays(d->m_occurrenceMultiplier);
-            date = adjustedDate(paymentDate, option);
-        }
-        break;
-
-    case Schedule::Occurrence::Weekly: {
-        int step = 7 * d->m_occurrenceMultiplier;
+    auto progressWeekly = [&](int steps, DailyIncrementFactor incrementFactor) {
+        const int step = steps * (incrementFactor == Days ? 1 : 7);
         while (date.isValid() && (date <= endDate)) {
             if (date >= _startDate)
                 theDates.append(date);
             paymentDate = paymentDate.addDays(step);
             date = adjustedDate(paymentDate, option);
         }
-    }
-    break;
+    };
+
+    auto progressMonthly = [&](int stepInMonths) {
+        while (date.isValid() && (date <= endDate)) {
+            if (date >= _startDate)
+                theDates.append(date);
+            paymentDate = paymentDate.addMonths(stepInMonths);
+            fixDate(paymentDate);
+            date = adjustedDate(paymentDate, option);
+        }
+    };
+
+    auto progressYearly = [&](int stepInYears) {
+        while (date.isValid() && (date <= endDate)) {
+            if (date >= _startDate)
+                theDates.append(date);
+            paymentDate = paymentDate.addYears(stepInYears);
+            fixDate(paymentDate);
+            date = adjustedDate(paymentDate, option);
+        }
+    };
+
+    switch (d->m_occurrence) {
+    case Schedule::Occurrence::Daily:
+        progressWeekly(d->m_occurrenceMultiplier, Days);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::EveryThirtyDays:
+        progressWeekly(30, Days);
+        break;
+
+    case Schedule::Occurrence::Weekly:
+        progressWeekly(d->m_occurrenceMultiplier, Weeks);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::Fortnightly:
+    case eMyMoney::Schedule::Occurrence::EveryOtherWeek:
+        progressWeekly(2, Weeks);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::EveryThreeWeeks:
+        progressWeekly(3, Weeks);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::EveryFourWeeks:
+        progressWeekly(4, Weeks);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::EveryEightWeeks:
+        progressWeekly(8, Weeks);
+        break;
+
+    case Schedule::Occurrence::Monthly:
+        progressMonthly(d->m_occurrenceMultiplier);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::EveryOtherMonth:
+        progressMonthly(2);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::Quarterly:
+    case eMyMoney::Schedule::Occurrence::EveryThreeMonths:
+        progressMonthly(3);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::EveryFourMonths:
+        progressMonthly(4);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::TwiceYearly:
+        progressMonthly(6);
+        break;
+
+    case Schedule::Occurrence::Yearly:
+        progressYearly(d->m_occurrenceMultiplier);
+        break;
+
+    case eMyMoney::Schedule::Occurrence::EveryOtherYear:
+        progressYearly(2);
+        break;
+
+    case Schedule::Occurrence::Once:
+        if (start_date >= _startDate && start_date <= endDate)
+            theDates.append(start_date);
+        break;
 
     case Schedule::Occurrence::EveryHalfMonth:
         while (date.isValid() && (date <= endDate)) {
@@ -594,28 +667,7 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
         }
         break;
 
-    case Schedule::Occurrence::Monthly:
-        while (date.isValid() && (date <= endDate)) {
-            if (date >= _startDate)
-                theDates.append(date);
-            paymentDate = paymentDate.addMonths(d->m_occurrenceMultiplier);
-            fixDate(paymentDate);
-            date = adjustedDate(paymentDate, option);
-        }
-        break;
-
-    case Schedule::Occurrence::Yearly:
-        while (date.isValid() && (date <= endDate)) {
-            if (date >= _startDate)
-                theDates.append(date);
-            paymentDate = paymentDate.addYears(d->m_occurrenceMultiplier);
-            fixDate(paymentDate);
-            date = adjustedDate(paymentDate, option);
-        }
-        break;
-
     case Schedule::Occurrence::Any:
-    default:
         break;
     }
 

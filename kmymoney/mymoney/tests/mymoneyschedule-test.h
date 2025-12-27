@@ -37,6 +37,7 @@ private Q_SLOTS:
     void testAdjustedWhenItWillEnd();
     void testProcessLastDayInMonth();
     void testFixDate();
+    void testPaymentDates();
 };
 
 #endif
