@@ -2,11 +2,10 @@
 <chapter id="reference">
 <chapterinfo>
   <date
->30/08/2014</date>
+>01/12/2024</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Referência</title>
 
@@ -14,17 +13,18 @@
 <sect1info>
   <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title
 >Menus</title>
 
 <para
->Abaixo, encontra-se uma lista com as seleções do menu no &kappname;, com uma descrição resumida sobre o que cada uma delas faz. Lembre-se que muitas destas opções do menu estarão disponíveis ou em cinza, dependendo da visualização atual ou do estado da aplicação. Por exemplo, você não será capaz de editar uma conta, a menos que a tenha selecionado previamente ou apresentado na área atual. </para>
+>Abaixo, encontra-se uma lista com as seleções do menu no &kmymoney;, com uma descrição resumida sobre o que cada uma delas faz. Lembre-se que muitas destas opções do menu estarão disponíveis ou em cinza, dependendo da visualização atual ou do estado da aplicação. Além disso, alguns podem não estar presentes se estiverem relacionados a um recurso não incluído na sua versão específica. Por exemplo, você não será capaz de editar uma conta, a menos que a tenha selecionado previamente ou apresentado na vista atual. </para>
 
-<sect2 id="reference.menus.file">
-<title
+<sect2 id="reference.menus.file"
+><title
 >Menu Arquivo</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -38,14 +38,12 @@
 > <guimenu
 >Arquivo</guimenu
 ><guimenuitem
->Novo</guimenuitem
+>Novo livro</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Cria um novo arquivo vazio de dados do &kappname;. Só poderá estar aberto um arquivo do &kappname; de cada vez; por isso, isto irá primeiramente fechar o seu arquivo atual. </action
-></para>
+>Cria um novo arquivo de dados vazio do &kmymoney;. Só poderá estar aberto um arquivo do &kmymoney; de cada vez; por isso, isto irá primeiramente fechar o seu arquivo atual. </para>
     </listitem>
   </varlistentry>
 
@@ -66,9 +64,7 @@
 ></term>
     <listitem>
       <para
-><action
->Abre um arquivo existente do &kappname;.</action
-></para>
+>Abre um arquivo de dados do &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -85,9 +81,7 @@
 ></term>
     <listitem>
       <para
-><action
->Permite um acesso rápido aos arquivos abertos recentemente.</action
-></para>
+>Fornece um acesso rápido aos arquivos abertos recentemente.</para>
     </listitem>
   </varlistentry>
 
@@ -102,9 +96,7 @@
 ></term>
     <listitem>
       <para
-><action
->Abre um banco de dados existente.</action
-></para>
+>Abre um banco de dados existente.</para>
     </listitem>
   </varlistentry>
 
@@ -125,16 +117,21 @@
 ></term>
     <listitem>
       <para
-><action
->Salva o arquivo atualmente aberto.</action
-></para>
+>Salva o arquivo atualmente aberto. Só é ativado se houver alterações a serem salvas. </para>
     </listitem>
   </varlistentry>
+
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Arquivo</guimenu
 ><guimenuitem
 >Salvar como...</guimenuitem
@@ -142,9 +139,7 @@
 ></term>
     <listitem>
       <para
-><action
->Salva o arquivo atualmente aberto com outro nome.</action
-></para>
+>Salva o arquivo atualmente aberto com outro nome.</para>
     </listitem>
   </varlistentry>
 
@@ -153,36 +148,15 @@
 ><menuchoice
 ><guimenu
 >Arquivo</guimenu
-><guimenuitem
->Salvar como banco de dados...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Salva o arquivo atualmente aberto em um <link linkend="details.database"
->banco de dados</link
->.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Arquivo</guimenu
-> <guimenuitem
->Importar</guimenuitem
+> <guisubmenu
+>Importar</guisubmenu
 > <guimenuitem
 >...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Importa os dados financeiros de outros tipos de arquivos, como o QIF e o Gnucash, ou um arquivo de modelos de contas e categorias que poderá ser usado para configurar as contas novas.</action
-></para>
+>Importa os dados financeiros de outros tipos de arquivos, como QIF e &gnucash;, ou um arquivo de modelos de contas e categorias, que poderá ser usado para configurar as contas novas. </para>
     </listitem>
   </varlistentry>
 
@@ -199,9 +173,7 @@
 ></term>
     <listitem>
       <para
-><action
->Exporta o arquivo atual com um tipo diferente, como o QIF, ou exporta uma lista das suas contas e das categorias como um modelo. </action
-></para>
+>Exporta o arquivo atual com um tipo diferente, como QIF por exemplo, ou exporta uma lista das suas contas e categorias como um modelo. </para>
     </listitem>
   </varlistentry>
 
@@ -217,14 +189,12 @@
 > <guimenu
 >Arquivo</guimenu
 ><guimenuitem
->Imprimir</guimenuitem
+>Imprimir...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Imprime o arquivo atual.</action
-></para>
+>Imprime o arquivo atual.</para>
     </listitem>
   </varlistentry>
 
@@ -234,14 +204,12 @@
 ><guimenu
 >Arquivo</guimenu
 ><guimenuitem
->Cópia de segurança</guimenuitem
+>Backup...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Salva uma cópia de segurança do arquivo atual.</action
-></para>
+>Salva uma cópia de segurança do arquivo atual.</para>
     </listitem>
   </varlistentry>
 
@@ -251,14 +219,12 @@
 ><guimenu
 >Arquivo</guimenu
 ><guimenuitem
->Dados pessoais</guimenuitem
+>Dados pessoais...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Permite editar os dados pessoais.</action
-></para>
+>Permite editar os dados pessoais.</para>
     </listitem>
   </varlistentry>
 
@@ -268,14 +234,12 @@
 ><guimenu
 >Arquivo</guimenu
 ><guimenuitem
->Informações do arquivo</guimenuitem
+>Informações do arquivo...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Mostra informações sobre o arquivo do &kappname; atualmente aberto.</action
-></para>
+>Mostra informações sobre o arquivo do &kmymoney; atualmente aberto.</para>
     </listitem>
   </varlistentry>
 
@@ -296,9 +260,7 @@
 ></term>
     <listitem>
       <para
-><action
->Fecha o arquivo atual.</action
-></para>
+>Fecha o arquivo atualmente aberto.</para>
     </listitem>
   </varlistentry>
 
@@ -319,18 +281,15 @@
 ></term>
     <listitem>
       <para
-><action
->Sai do &kappname;</action
-></para>
+>Sai do &kmymoney;. Oferece a opção de salvar o arquivo de dados atualmente aberto, caso haja alguma alteração. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit">
-<title
->O menu Editar</title>
-
+<sect2 id="reference.menus.edit"
+><title
+>Menu Editar</title>
 <variablelist>
   <varlistentry>
     <term
@@ -338,6 +297,52 @@
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+><guimenuitem
+>Desfazer</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Reverte a ação mais recente.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+><guimenuitem
+>Refazer</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Reaplica a ação desfeita mais recentemente.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
 >F</keycap
 ></keycombo
 > </shortcut
@@ -349,18 +354,15 @@
 ></term>
     <listitem>
       <para
-><action
->Procura por transações.</action
-></para>
+>Procura por transações.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view">
-<title
->O menu Exibir</title>
-
+<sect2 id="reference.menus.view"
+><title
+>Menu Exibir</title>
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
     <term
@@ -379,14 +381,12 @@
 ></term>
     <listitem>
       <para
-><action
 >Mostra os detalhes da transação na área de <link linkend="details.ledgers"
->Livros de Registro</link
->. Com esta opção ativa, todas as linhas da transação serão apresentadas no livro de registros. Quando estiver desligada, só será apresentada uma linha. </action
-></para>
+>Livros de registro</link
+>. Com esta opção ativa, todas as linhas da transação serão apresentadas no livro de registros. Quando estiver desmarcada, será apresentada apenas uma linha. </para>
       <para
->Se você só quiser ver os detalhes da transação atual, mas só uma linha para as outras, poderá ativar a <link linkend="details.settings.register.lens"
->Lente do Livro de Registros</link
+>Se quiser ver apenas os detalhes da transação atual, mas só uma linha para as outras, poderá ativar a <link linkend="details.settings.register.lens"
+>Lentes do livro de registros</link
 >. </para>
     </listitem>
   </varlistentry>
@@ -408,9 +408,7 @@
 ></term>
     <listitem>
       <para
-><action
->Oculta as transações reconciliadas no livro de registros.</action
-></para>
+>Oculta as transações reconciliadas no livro de registros.</para>
     </listitem>
   </varlistentry>
 
@@ -431,9 +429,7 @@
 ></term>
     <listitem>
       <para
-><action
->Oculta as categorias não utilizadas nas áreas.</action
-></para>
+>Oculta as categorias não utilizadas nas áreas.</para>
     </listitem>
   </varlistentry>
 
@@ -442,7 +438,7 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Shift;<keycap
+>&Ctrl;&Shift;<keycap
 >A</keycap
 > </keycombo
 > </shortcut
@@ -454,18 +450,15 @@
 ></term>
     <listitem>
       <para
-><action
->Mostra todas as contas nas áreas.</action
-></para>
+>Exibe todas as contas nas visualizações, incluindo contas encerradas e contas com saldo zero. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution">
-<title
->O menu Instituição</title>
-
+<sect2 id="reference.menus.institution"
+><title
+>Menu Instituição</title>
 <variablelist>
   <varlistentry>
     <term
@@ -478,9 +471,7 @@
 ></term>
     <listitem>
       <para
-><action
->Adiciona uma nova instituição.</action
-></para>
+>Adiciona uma nova instituição.</para>
     </listitem>
   </varlistentry>
 
@@ -495,9 +486,7 @@
 ></term>
     <listitem>
       <para
-><action
->Edita uma instituição.</action
-></para>
+>Edita uma instituição.</para>
     </listitem>
   </varlistentry>
 
@@ -512,18 +501,15 @@
 ></term>
     <listitem>
       <para
-><action
->Exclui uma instituição.</action
-></para>
+>Exclui uma instituição.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account">
-<title
->O menu Conta</title>
-
+<sect2 id="reference.menus.account"
+><title
+>Menu Conta</title>
 <variablelist>
   <varlistentry>
     <term
@@ -536,9 +522,7 @@
 ></term>
     <listitem>
       <para
-><action
->Adiciona uma conta nova.</action
-></para>
+>Adiciona uma conta nova.</para>
     </listitem>
   </varlistentry>
 
@@ -553,9 +537,7 @@
 ></term>
     <listitem>
       <para
-><action
->Edita uma conta.</action
-></para>
+>Edita uma conta.</para>
     </listitem>
   </varlistentry>
 
@@ -570,9 +552,7 @@
 ></term>
     <listitem>
       <para
-><action
->Exclui uma conta.</action
-></para>
+>Exclui uma conta.</para>
     </listitem>
   </varlistentry>
 
@@ -587,9 +567,7 @@
 ></term>
     <listitem>
       <para
-><action
->Mostra a área de registros de uma conta.</action
-></para>
+>Exibe a vista do Livro de registro da conta selecionada.</para>
     </listitem>
   </varlistentry>
 
@@ -598,9 +576,9 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Shift;<keycap
+>&Ctrl;&Shift;<keycap
 >R</keycap
-> </keycombo
+></keycombo
 > </shortcut
 > <guimenu
 >Conta</guimenu
@@ -610,9 +588,7 @@
 ></term>
     <listitem>
       <para
-><action
->Faz a reconciliação ou consolidação de uma conta através do assistente de reconciliação.</action
-></para>
+>Faz a reconciliação ou consolidação de uma conta através do assistente de reconciliação.</para>
     </listitem>
   </varlistentry>
 
@@ -621,15 +597,13 @@
 ><menuchoice
 ><guimenu
 >Conta</guimenu
-> <guimenuitem
->Adiar reconciliação</guimenuitem
+><guimenuitem
+>Adiar</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Adia a reconciliação ou consolidação de uma conta.</action
-></para>
+>Adia a reconciliação ou consolidação de uma conta.</para>
     </listitem>
   </varlistentry>
 
@@ -644,9 +618,22 @@
 ></term>
     <listitem>
       <para
-><action
->Conclui a reconciliação de uma conta.</action
-></para>
+>Conclui a reconciliação de uma conta.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+><guimenuitem
+>Cancelar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Cancela a reconciliação de uma conta.</para>
     </listitem>
   </varlistentry>
 
@@ -661,9 +648,22 @@
 ></term>
     <listitem>
       <para
-><action
->Abre um relatório de transações de uma conta.</action
-></para>
+>Abre um relatório de transação da conta selecionada.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+><guimenuitem
+>Mostrar gráfico de saldo...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Abre um gráfico do saldo acumulado no ano (YTD - Year to Date) da conta selecionada.</para>
     </listitem>
   </varlistentry>
 
@@ -678,9 +678,7 @@
 ></term>
     <listitem>
       <para
-><action
->Fecha uma conta.</action
-></para>
+>Fecha uma conta.</para>
     </listitem>
   </varlistentry>
 
@@ -695,9 +693,7 @@
 ></term>
     <listitem>
       <para
-><action
->Reabre uma conta, caso esteja fechada.</action
-></para>
+>Reabre uma conta, caso esteja fechada.</para>
     </listitem>
   </varlistentry>
 
@@ -707,14 +703,12 @@
 ><guimenu
 >Conta</guimenu
 ><guimenuitem
->Dissociar a conta</guimenuitem
+>Desassociar conta...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Retira a associação a uma conta 'online'.</action
-></para>
+>Retira a associação a uma conta 'online'.</para>
     </listitem>
   </varlistentry>
 
@@ -724,14 +718,12 @@
 ><guimenu
 >Conta</guimenu
 ><guimenuitem
->Associar a uma conta online</guimenuitem
+>Associar conta...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Associa a conta a uma conta on-line.</action
-></para>
+>Associa a conta a uma conta on-line.</para>
     </listitem>
   </varlistentry>
 
@@ -746,9 +738,7 @@
 ></term>
     <listitem>
       <para
-><action
->Importa as transações do banco on-line para uma determinada conta</action
-></para>
+>Importa as transações do banco on-line para a conta selecionada.</para>
     </listitem>
   </varlistentry>
 
@@ -763,18 +753,15 @@
 ></term>
     <listitem>
       <para
-><action
->Importa as transações do banco on-line para todas as contas associadas.</action
-></para>
+>Importa as transações do banco on-line para todas as contas associadas.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category">
-<title
->O menu Categoria</title>
-
+<sect2 id="reference.menus.category"
+><title
+>Menu Categoria</title>
 <variablelist>
   <varlistentry>
     <term
@@ -787,9 +774,7 @@
 ></term>
     <listitem>
       <para
-><action
->Adiciona uma nova categoria.</action
-></para>
+>Adiciona uma nova categoria.</para>
     </listitem>
   </varlistentry>
 
@@ -804,9 +789,7 @@
 ></term>
     <listitem>
       <para
-><action
->Edita uma categoria.</action
-></para>
+>Edita uma categoria.</para>
     </listitem>
   </varlistentry>
 
@@ -821,9 +804,7 @@
 ></term>
     <listitem>
       <para
-><action
->Exclui uma categoria.</action
-></para>
+>Exclui uma categoria.</para>
     </listitem>
   </varlistentry>
 
@@ -838,46 +819,45 @@
 ></term>
     <listitem>
       <para
-><action
->Vai à área de registros de uma categoria.</action
-></para>
+>Vai à vista do livro de registro de uma categoria.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction">
-<title
->O menu Transação</title>
-
+<sect2 id="reference.menus.transaction"
+><title
+>Menu Transação</title>
 <variablelist>
   <varlistentry>
     <term
 ><menuchoice
 ><shortcut
 > <keycombo
->&Ctrl;<keycap
->Ins</keycap
-></keycombo
+>&Ctrl;&Ins;</keycombo
 > </shortcut
 > <guimenu
 >Transação</guimenu
 ><guimenuitem
->Nova</guimenuitem
+>Nova transação</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Adiciona uma nova transação.</action
-></para>
+>Adiciona uma nova transação.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transação</guimenu
 ><guimenuitem
 >Editar</guimenuitem
@@ -885,79 +865,7 @@
 ></term>
     <listitem>
       <para
-><action
->Edita uma transação.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Transação</guimenu
-><guimenuitem
->Editar parcelas</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Edita as parcelas de uma transação.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Transação</guimenu
-><guimenuitem
->Excluir</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Exclui uma transação.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Transação</guimenu
-><guimenuitem
->Duplicar</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Duplica uma transação.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Transação</guimenu
-> <guimenuitem
->Marcar transação como...</guimenuitem
-> <guimenuitem
->Não reconciliada</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Muda uma transação para o estado Não reconciliada.</action
-></para>
+>Edita uma transação.</para>
     </listitem>
   </varlistentry>
 
@@ -967,8 +875,88 @@
 ><shortcut
 > <keycombo
 >&Ctrl;&Shift;<keycap
->Espaço</keycap
-> </keycombo
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transação</guimenu
+><guimenuitem
+>Editar parcelas</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Edita as parcelas de uma transação.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Del;</keycombo
+> </shortcut
+> <guimenu
+>Transação</guimenu
+><guimenuitem
+>Excluir</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Exclui uma transação.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transação</guimenu
+><guimenuitem
+>Duplicar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Duplica uma transação.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+> &Ctrl;&Alt;&Shift;&Space; </keycombo
+> </shortcut
+> <guimenu
+>Transação</guimenu
+> <guimenuitem
+>Marcar transação como...</guimenuitem
+> <guimenuitem
+>Não reconciliada</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Altera o status da(s) transação(ões) selecionada(s) para "Não reconciliada(s)". </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+> &Ctrl;&Alt;&Space; </keycombo
 > </shortcut
 > <guimenu
 >Transação</guimenu
@@ -980,9 +968,7 @@
 ></term>
     <listitem>
       <para
-><action
->Muda uma transação para o estado Compensada.</action
-></para>
+>Altera o status da(s) transação(ões) selecionada(s) para "Compensada(s)".</para>
     </listitem>
   </varlistentry>
 
@@ -991,9 +977,7 @@
 ><menuchoice
 ><shortcut
 > <keycombo
->&Alt;&Ctrl;<keycap
->Espaço</keycap
-> </keycombo
+> &Ctrl;&Shift;&Space; </keycombo
 > </shortcut
 > <guimenu
 >Transação</guimenu
@@ -1005,9 +989,7 @@
 ></term>
     <listitem>
       <para
-><action
->Muda uma transação para o estado Reconciliada.</action
-></para>
+>Altera o status da(s) transação(ões) selecionada(s) para "Reconciliada(s)".</para>
     </listitem>
   </varlistentry>
 
@@ -1017,31 +999,33 @@
 ><guimenu
 >Transação</guimenu
 ><guimenuitem
->Ir para a conta</guimenuitem
+>Ir para "conta"</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Mostra a outra conta de uma transação.</action
-></para>
+>Mostra a outra conta de uma transação no Livro de registro.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transação</guimenu
-> <guimenuitem
+><guimenuitem
 >Ir para o beneficiário</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Vai para a área de Beneficiários e realça o beneficiário da transação selecionada.</action
-></para>
+>Vai para a vista de Beneficiários e realça o beneficiário da transação selecionada. </para>
     </listitem>
   </varlistentry>
 
@@ -1056,9 +1040,7 @@
 ></term>
     <listitem>
       <para
-><action
->Cria uma nova transação agendada.</action
-></para>
+>Cria uma nova transação agendada usando os detalhes da transação selecionada. </para>
     </listitem>
   </varlistentry>
 
@@ -1073,9 +1055,7 @@
 ></term>
     <listitem>
       <para
-><action
->Faz a correspondência das transações importadas.</action
-></para>
+>Corresponde a duas transações. Isso é mais comumente usado para corresponder a uma transação importada e a uma transação inserida manualmente, mas outras combinações também funcionam. </para>
     </listitem>
   </varlistentry>
 
@@ -1090,9 +1070,7 @@
 ></term>
     <listitem>
       <para
-><action
->Dissocia as transações que o &kappname; tenha proposto como correspondências às transações importadas.</action
-> Lembre-se que esta opção do menu só está disponível se existir uma transação correspondente. </para>
+>Dissocia as transações que o &kmymoney; tenha proposto como correspondências às transações importadas. Lembre-se que esta opção do menu só está disponível se existir uma transação correspondente e ela estiver selecionada. </para>
     </listitem>
   </varlistentry>
 
@@ -1107,9 +1085,7 @@
 ></term>
     <listitem>
       <para
-><action
->Aceita uma proposta de junção de transações importadas.</action
-></para>
+>Aceita uma proposta de junção de duas transações.</para>
     </listitem>
   </varlistentry>
 
@@ -1130,9 +1106,7 @@
 ></term>
     <listitem>
       <para
-><action
->Seleciona todas as transações no livro de registros.</action
-></para>
+>Seleciona todas as transações no Livro de registros.</para>
     </listitem>
   </varlistentry>
 
@@ -1147,38 +1121,18 @@
 ></term>
     <listitem>
       <para
-><action
->Imprime o conteúdo da transação selecionada no livro de registros visível, formatado de acordo com o modelo selecionado.</action
-> Lembre-se de que esta opção do menu só está presente se estiver selecionada uma transação no livro de registros. Consulte a seção e configuração do plugin de <link linkend="details.settings.plugins"
->Imprimir um cheque</link
-> para mais informações. </para>
+>Imprime o conteúdo da transação selecionada no livro de registro exibido, formatado  de acordo com o modelo selecionado. Consulte a seção sobre configuração do plugin <link linkend="details.settings.plugins"
+>Imprimir cheque</link
+> para obter mais informações. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools">
-<title
->O menu Ferramentas</title>
-
+<sect2 id="reference.menus.tools"
+><title
+>Menu Ferramentas</title>
 <variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Ferramentas</guimenu
-><guimenuitem
->Editor de perfil QIF...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Modifica o perfil QIF usado para importar os arquivos QIF.</action
-></para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term
 ><menuchoice
@@ -1190,9 +1144,7 @@
 ></term>
     <listitem>
       <para
-><action
->Apresenta as moedas conhecidas no &kappname;.</action
-></para>
+>Apresenta as moedas conhecidas no &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -1207,9 +1159,7 @@
 ></term>
     <listitem>
       <para
-><action
->Apresenta os preços das ações e das moedas.</action
-></para>
+>Apresenta os preços das ações e das moedas.</para>
     </listitem>
   </varlistentry>
 
@@ -1224,11 +1174,9 @@
 ></term>
     <listitem>
       <para
-><action
 >Atualiza os preços das ações e moedas diretamente das fontes 'online', usando a funcionalidade das <link linkend="details.investments.onlinequotes"
 >Cotações de Preços 'Online'</link
->.</action
-></para>
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -1243,9 +1191,7 @@
 ></term>
     <listitem>
       <para
-><action
->Executa uma verificação sobre o seu arquivo e tenta corrigir os problemas que encontrar, se possível.</action
-></para>
+>Executa uma verificação no seu arquivo, corrige quaisquer problemas que encontrar e exibe um relatório dos resultados. </para>
       <para
 >Faça uma cópia de segurança do seu arquivo, antes de executar esta opção.</para>
     </listitem>
@@ -1262,53 +1208,51 @@
 ></term>
     <listitem>
       <para
-><action
->Executa um teste de desempenho no seu arquivo e mostra os resultados.</action
-></para>
+>Executa um teste de desempenho no seu arquivo e mostra os resultados.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+><guimenuitem
+>Gerar SQL do banco de dados </guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Gera o SQL necessário para criar um banco de dados.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+><guimenuitem
+>Temporizadores de depuração</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Esta é uma ferramenta para desenvolvedores.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings">
-<title
->O menu Configurações</title>
+<sect2 id="reference.menus.settings.help"
+><title
+>Menus Configurações e Ajuda</title>
+<para
+>Os menus de Configurações e de Ajuda do &kmymoney; são baseados nos descritos nos <ulink url="help:/fundamentals/menus.html"
+>Fundamentos do &kde;</ulink
+> com alguns itens adicionais. </para>
 
 <variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Configurações</guimenu
-><guimenuitem
->Ocultar/Mostrar a barra de ferramentas</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Ativa ou desativa a barra de ferramentas.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Configurações</guimenu
-> <guimenuitem
->Ocultar/Mostrar a barra de status</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Ativa ou desativa a barra de status.</action
-></para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term
 ><menuchoice
@@ -1320,11 +1264,9 @@
 ></term>
     <listitem>
       <para
-><action
 >Reativa todas as mensagens que tenha desativado com a opção <guimenuitem
 >Não me perguntar de novo</guimenuitem
-> numa janela.</action
-></para>
+> numa janela.</para>
     </listitem>
   </varlistentry>
 
@@ -1333,76 +1275,101 @@
 ><menuchoice
 ><guimenu
 >Configurações</guimenu
-> <guimenuitem
->Configurações de idioma do &kde;...</guimenuitem
+><guimenuitem
+>Configurar idioma...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Permite alterar muitas opções de configuração regional.</action
-></para>
+>Por padrão, o idioma usado pelo &kmymoney; depende das configurações de localização ou localidade do sistema. Isso permite que você altere esse idioma e defina um idioma alternativo, que será usado para textos que não foram traduzidos para o idioma principal. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>,</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Configurações</guimenu
-> <guimenuitem
->Configurar atalhos...</guimenuitem
+><guimenuitem
+>Configurar atalhos de teclado...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Configura os atalhos de teclado personalizados.</action
-></para>
+>Permite adicionar ou modificar atalhos de teclado para diversas ações. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
+    <term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar Aqbanking</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Configure as definições de banco online, mas apenas se o módulo KBanking estiver habilitado. Mais informações podem ser encontradas na seção sobre a configuração do <link linkend="details.settings.plugins.kbanking"
+>plugin KBanking</link
+>, bem como na <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
+>documentação do &gnucash;</ulink
+>. </para>
+
+      <para
+>O processo de configuração do acesso online no AqBanking é descrito no <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
+>wiki do &gnucash; (somente em alemão)</ulink
+>. Esta entrada de menu leva você à caixa de diálogo mostrada na etapa nº 3. O processo até a etapa nº 18 é o mesmo para o KMyMoney. Depois de concluído, você pode associar a conta no &kmymoney; usando <guimenu
+>Conta</guimenu
+> <guisubmenu
+>Associar conta</guisubmenu
+> e selecionar a conta na lista fornecida. A partir daí, basta usar <guimenu
+>Conta</guimenu
+> <guisubmenu
+>Atualizar conta</guisubmenu
+> ou, caso tenha mais de uma conta online associada, <guimenu
+>Conta</guimenu
+> <guisubmenu
+>Atualizar todas as contas</guisubmenu
+>. </para>
+
+      <para
+>Veja <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>Como eu configuro banco online</ulink
+> para mais detalhes. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
->Configurações</guimenu
-> <guimenuitem
->Configurar barras de ferramentas...</guimenuitem
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ajuda</guimenu
+><guimenuitem
+>Encontrar ação...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Personaliza as barras de ferramentas do &kappname;.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Configurações</guimenu
-> <guimenuitem
->Configurar o &kappname;...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Configura as <link linkend="details.settings"
->opções do &kappname;</link
->.</action
-></para>
+>Exibe os nomes e atalhos de todas as ações em &kmymoney;. Clicar em uma delas irá invocar essa ação, se ela estiver habilitada no momento. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
-
-<sect2 id="reference.menus.help">
-<title
->O menu Ajuda</title>
-&help.menu.documentation; </sect2>
-</sect1>
-&details-widgets; </chapter>
+</sect1
+>&details-widgets; </chapter>

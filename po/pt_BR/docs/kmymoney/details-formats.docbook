@@ -4,164 +4,273 @@
   <authorgroup>
     <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->30/08/2014</date>
+>01/12/2024</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Formatos de arquivo</title>
 
 <para
->A menos que você opte por usar uma <link linkend="details.database"
->base de dados relacional</link
->, o &kappname; irá guardar todas as suas informações financeiras num arquivo que termina em '.kmy'. Do mesmo modo, a menos que use uma <link linkend="firsttime.launch"
->opção da linha de comando</link
-> que indique para não fazer isso, ao lançar o &kappname; ele irá abrir o último arquivo que tiver aberto. Contudo, é importante que saiba que existe mais de um tipo de arquivo que o &kappname; pode usar para guardar os seus dados financeiros. </para>
+>A menos que você opte por usar um <link linkend="details.database"
+>banco de dados relacional</link
+>, o &kmymoney; armazenará todas as suas informações financeiras em um arquivo. Normalmente, o nome do arquivo terminará em <filename class="extension"
+>.kmy</filename
+>. Além disso, ao iniciar o &kmymoney;, a menos que você use uma <link linkend="firsttime.launch"
+>opção de linha de comando</link
+> que o instrua a não fazer isso, ele abrirá o último arquivo que estava aberto. No entanto, é importante saber que, na verdade, existe mais de um tipo de arquivo que o &kmymoney; pode usar para armazenar seus dados financeiros. </para>
 
 <para
->Este capítulo descreve os formatos onde o &kappname; guarda os seus dados, de forma permanente, no dispositivos de armazenamento do usuário. De um modo geral, o &kappname; guarda a sua informação sob um documento em &XML;. Dependendo do formato atual, este documento em &XML; será escrito <itemizedlist>
-  <listitem
-><para
->como um <link linkend="details.formats.plain"
->arquivo de texto simples</link
->, codificado em UTF-8,</para
-></listitem>
+>Este capítulo descreve os formatos de arquivo nos quais o &kmymoney; pode armazenar seus dados de forma permanente. Também aborda o backup de seus dados. </para>
 
-  <listitem
+<sect1
+><title
+>Formatos de arquivo de dados</title>
+<para
+>Em geral, o &kmymoney; armazena suas informações na forma de um documento &XML;. Dependendo do formato específico, definido na configuração do &kmymoney;, este documento &XML; será gravado: <itemizedlist
+> <listitem
 ><para
->como um <link linkend="details.formats.compressed"
->arquivo comprimido</link
->, usando a compressão GZIP,</para
-></listitem>
-
-  <listitem
+>como um arquivo de texto simples, codificado em UTF-8,</para
+></listitem
+> <listitem
 ><para
->como um <link linkend="details.formats.encrypted"
->arquivo criptografado</link
->, usando a criptografia do GPG ou</para
-></listitem>
-
-  <listitem
+>como um arquivo compactado, usando compressão GZIP,</para
+></listitem
+> <listitem
 ><para
->como um <link linkend="details.formats.anonymous"
->arquivo de texto simples anônimo</link
->, codificado em UTF-8, mas com todos os seus dados pessoais embaralhados.</para
-></listitem>
-</itemizedlist>
-</para>
+>como um arquivo criptografado, usando criptografia GPG, ou</para
+></listitem
+> <listitem
+> <para
+>como um arquivo de texto simples anônimo, codificado em UTF-8, mas com todos os seus dados pessoais embaralhados.</para
+> </listitem
+> </itemizedlist
+> Cada um deles é descrito com mais detalhes nas seções a seguir. </para>
 
-<sect1 id="details.formats.plain">
-<title
+<sect2 id="details.formats.plain"
+><title
 >Arquivo de texto simples</title>
 <para
->Este é o formato que consome mais espaço, uma vez que não é efetuada nenhuma compressão. Não foi feito para um uso normal e é fornecido apenas para fins de depuração, e com a ideia de modificar manualmente o arquivo. Se terminar o nome do arquivo em <literal role="extension"
->.xml</literal
->, o arquivo será gravado nesse formato. <caution
+>Este é o formato que consome mais espaço, uma vez que não é efetuada nenhuma compressão. Não foi feito para um uso normal e é fornecido apenas para fins de depuração, e com a ideia de modificar manualmente o arquivo. Se o nome do arquivo tiver a extensão <filename class="extension"
+>.xml</filename
+>, o arquivo será gravado nesse formato. <note
 > <para
->A modificação manual do arquivo não é recomendada para o usuário normal, devendo apenas ser efetuada se o funcionamento interno do &kappname; estiver completamente compreendido ou tiver indicações dos programadores sobre o que fazer. Não culpe os programadores do &kappname; se perder os seus dados: Você foi avisado! </para>
-</caution>
+>A modificação manual do arquivo não é recomendada para o usuário normal, devendo apenas ser efetuada se o funcionamento interno do &kmymoney; estiver completamente compreendido ou tiver indicações dos programadores sobre o que fazer. Não culpe os programadores do &kmymoney; se você danificar ou destruir os seus dados: Você foi avisado! </para>
+</note>
 </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.formats.compressed">
-<title
+<sect2 id="details.formats.compressed"
+><title
 >Arquivo comprimido com o GZIP</title>
 <para
->Este é o formato normal, usado pelo &kappname;, quando salvar um arquivo com a extensão <literal role="extension"
->.kmy</literal
+>Este é o formato normal, usado pelo &kmymoney;, quando salvar um arquivo com a extensão <filename class="extension"
+>.kmy</filename
 >. </para>
 
 <note>
   <para
->Se tiver selecionado a <link linkend="details.formats.encrypted"
+>Se a opção <link linkend="details.formats.encrypted"
 >criptografia</link
->, o arquivo será gravado criptografado. </para>
+> tiver sido selecionada na configuração, o arquivo será armazenado criptografado, conforme descrito na próxima seção. </para>
 </note>
 
 <para
->Se você quiser ver um arquivo comprimido com o GZIP, mude o nome do arquivo para algo terminado em <literal role="extension"
->.gz</literal
+>Se você quiser ver um arquivo compactado com o GZIP, renomeie o arquivo para algo que termine em <filename class="extension"
+>.gz</filename
 > (&eg; <filename
 >financas.kmy</filename
 > para <filename
 >financas.kmy.gz</filename
 >, usando depois o <command
 >gunzip</command
-> para descomprimir o arquivo e olhar para ele. Você não terá de comprimi-lo antes de carregá-lo no &kappname; da próxima vez, porque o &kappname; também consegue ler os dados não-comprimidos. Em todo o caso, se salvá-lo posteriormente, ele será gravado comprimido novamente. Use a extensão <link linkend="details.formats.plain"
->.xml</link
-> para o salvar num formato não-comprimido. </para>
-</sect1>
+> para descompactar o arquivo e olhar para ele. Você não terá que compactar o arquivo antes de carregá-lo no &kmymoney; da próxima vez, porque o &kmymoney; também consegue ler os dados sem compactação. Em todo o caso, se salvá-lo posteriormente, ele será gravado compactado novamente. Use a extensão <link linkend="details.formats.plain"
+><filename class="extension"
+>.xml</filename
+></link
+> para o salvar num formato não-compactado. </para>
+</sect2>
 
-<sect1 id="details.formats.encrypted">
-<title
+<sect2 id="details.formats.encrypted"
+><title
 >Arquivo criptografado com o GPG</title>
 <para
->O uso do formato de arquivo criptografado com o GPG é um método muito seguro de guardar os seus dados financeiros pessoais no seu dispositivo de armazenamento. Quando o &kappname; for configurado na respectiva janela para guardar os seus dados criptografados, ele irá codificar os dados com o GPG e com a chave que indicar, antes de salvá-lo propriamente. Ao abrir um arquivo criptografado, você terá que indicar a frase-senha necessária para abrir o seu porta-chaves. O arquivo criptografado em si será guardado no formato <emphasis
->armado em ASCII</emphasis
+>O uso do formato de arquivo criptografado com o GPG é um método muito seguro de guardar seus dados financeiros pessoais no seu dispositivo de armazenamento. Quando o &kmymoney; for configurado na respectiva janela para guardar os seus dados criptografados, ele irá codificar os dados com o GPG e com a chave que indicar, antes de salvá-lo propriamente. Ao abrir um arquivo criptografado, você deverá indicar a senha necessária para abrir o seu porta-chaves. O arquivo criptografado em si será guardado no formato <emphasis
+>armado em &ASCII;</emphasis
 > do GPG. <note
 > <para
->Ao usar a criptografia do GPG, este irá também comprimir o arquivo, não sendo necessária nenhuma compressão extra. </para>
+>Ao usar a criptografia do GPG, ele irá também comprimir o arquivo usando o gzip, não sendo necessária nenhuma compressão extra. </para>
   </note>
 </para>
 
-<sect2 id="details.formats.encrypted.gpgkeys">
-<title
+<sect3 id="details.formats.encrypted.gpgkeys"
+><title
 >Chaves do GPG</title>
 <para
->Se você não a tiver já feito para a criptografia do correio, você terá que gerar um par de chaves para poder usar a funcionalidade de criptografia com GPG do &kappname;. Do mesmo modo, o <application
+>Se não as criou para a criptografia do correio, você terá que gerar um par de chaves para poder usar a funcionalidade de criptografia com GPG do &kmymoney;. Do mesmo modo, o <application
 >GPG</application
 > terá que estar instalado no seu sistema. </para>
 
 <para
->Os detalhes sobre a geração de um par de chaves, e como lidar com ele, está fora do escopo deste documento. Está disponível um Mini-Howto sobre o assunto em <ulink url="http://www.gnupg.org/documentation/howtos.en.html"
->http://www.gnupg.org/documentation/howtos.en.html</ulink
->. </para>
-</sect2>
+>Os detalhes sobre a geração de um par de chaves, e como lidar com ele, está fora do escopo deste documento. Está disponível um Mini-Howto sobre o assunto em <ulink url="https://www.gnupg.org/documentation/howtos.en.html"
+>https://www.gnupg.org/documentation/howtos.en.html</ulink
+>. Os sites da maioria das distribuições Linux também contêm instruções sobre como usar o GPG nessa distribuição. </para>
+</sect3>
 
-<sect2 id="details.formats.encrypted.keysettings">
-<title
->Configurar as chaves no &kappname;</title>
+<sect3 id="details.formats.encrypted.keysettings"
+><title
+>Configurar as chaves no &kmymoney;</title>
 <para
->Na página de criptografia da janela de configuração, existe um campo onde você poderá inserir a chave que deverá ser usada para criptografia e descriptografia. Além disso, você poderá encontrar um campo onde poderá usar o ID de uma chave que não conste na lista. Você tanto poderá usar o ID da chave, o endereço de e-mail associado a esta chave ou qualquer outra identificação de chaves do GPG válida como valor para este campo. Quando inserir o ID da chave, o &kappname; irá verificar a sua validade e ligar um LED verde na janela, caso seja encontrada uma chave. <caution
+>Na página de criptografia da janela de configuração, existe um campo onde você poderá inserir a chave que deverá ser usada para criptografia e descriptografia. Além disso, existe um campo onde poderá usar o ID de uma chave que não conste na lista. Você tanto poderá usar o ID da chave, o endereço de e-mail associado a esta chave ou qualquer outra identificação de chaves do GPG válida como valor para este campo. Quando inserir o ID da chave, o &kmymoney; irá verificar a sua validade e ligar um LED verde na janela, caso seja encontrada uma chave. <caution
 > <para
 >Certifique-se de que tem tanto a chave pública como a privada para este ID. Se você não possuir a chave privada do ID introduzido, não será capaz de acessar o arquivo de novo. </para>
   </caution>
 </para>
-</sect2>
+</sect3>
 
-<sect2 id="details.formats.encrypted.recoverkey">
-<title
->A chave de recuperação do &kappname;</title>
+<sect3 id="details.formats.encrypted.recoverkey"
+><title
+>Chave de recuperação do &kmymoney;</title>
 <para
->Do mesmo modo, nesta página da janela de configuração, você poderá selecionar uma criptografia suplementar com a chave de recuperação do &kappname;. Esta opção está disponível para você, se essa chave estiver no seu porta-chaves do <application
+>Do mesmo modo, nesta página da janela de configuração, você poderá selecionar uma criptografia complementar com a chave de recuperação do &kmymoney;. Esta opção está disponível para você, se essa chave estiver no seu porta-chaves do <application
 >GPG</application
->. Se selecionar esta opção, poderá recuperar os seus dados, mesmo no caso de perder a sua chave privada. Isto é possível, porque os dados não estão só encriptados para a sua chave, mas também para a chave de criptografia do &kappname;. Esta chave só está disponível para os programadores do &kappname; selecionados (no momento da escrita deste documento, somente o autor). Com o lançamento do &kappname; versão 4.7, a chave de recuperação está configurada para expirar dia 3 de janeiro de 2015. </para>
+>. Se selecionar esta opção, poderá recuperar os seus dados, mesmo no caso de perder a sua chave privada. Isso é possível porque os dados não são criptografados apenas para sua própria chave, mas também para a chave de recuperação do &kmymoney;. Essa chave está disponível apenas para desenvolvedores selecionados do &kmymoney; (na data desta publicação, apenas para o autor). A partir de maio de 2024, a chave de recuperação expirará em 7 de janeiro de 2025. </para>
 
 <para
->Em circunstâncias normais, você irá abrir/salvar/fechar o seu arquivo, como de costume. No caso anormal de perda da sua chave, você terá a chance de contactar um dos programadores que tiver acesso à chave de recuperação do &kappname;, pedindo para tal ajuda para recuperar os seus dados. Você poderá contactar os programadores por e-mail, na lista de correio do &kappname;, em &devlist;. </para>
-</sect2>
-</sect1>
+>Em circunstâncias normais, você irá abrir/salvar/fechar o seu arquivo, como de costume. No caso anormal de perda da sua chave, você terá a chance de contactar um dos programadores que tiver acesso à chave de recuperação do &kmymoney;, e pedir ajuda para recuperar os seus dados. Você poderá contactar os programadores por e-mail, na lista de correio do &kmymoney;, em &devlist;. </para>
 
-<sect1 id="details.formats.anonymous">
-<title
+<para
+>Para obter a chave de recuperação, acesse <ulink url="https://kmymoney.org/recovery.html"
+> A página da chave de recuperação do KMyMoney</ulink
+> no site do KMyMoney. Copie e salve o <quote
+>BLOCO DE CHAVE PÚBLICA PGP</quote
+> (incluindo as linhas <quote
+>BEGIN</quote
+> e <quote
+>END</quote
+>) em um arquivo de texto e, em seguida, importe-o com o gpg. </para>
+
+<para
+>Lembre-se de que o desenvolvedor só poderá ajudar a recuperar seu arquivo de dados se você o criptografar de fato com a chave de recuperação, além da sua própria chave. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.formats.anonymous"
+><title
 >Arquivo anônimo</title>
 <para
->Este formato não pretende ser usado para o armazenamento de dados normais. É suportado para que, em caso de ocorrer algum problema, possa fornecer à equipe de desenvolvimento do &kappname; o seu arquivo sem revelar nenhum dos seus detalhes confidenciais dos seus dados financeiros. Por exemplo, muda a instituição, a conta, o beneficiário e os nomes das categorias para coisas do tipo "I000001" e "A000001,", fazendo alterações semelhantes para todos os dados, como os números de conta, mudando também de forma aleatória os montantes das transações. </para>
+>Este formato não pretende ser usado para o armazenamento de dados normais. É suportado para que, em caso de ocorrer algum problema, possa fornecer à equipe de desenvolvimento do &kmymoney; o seu arquivo sem revelar nenhum dos detalhes confidenciais dos seus dados financeiros. Por exemplo, muda a instituição, a conta, o beneficiário e os nomes das categorias para coisas do tipo "I000001" e "A000001", fazendo alterações semelhantes para todos os dados, como os números de conta, mudando também de forma aleatória os montantes das transações. </para>
 
 <para
 >Se for indicado pelos programadores, use a opção do menu <guimenuitem
->Salvar Como...</guimenuitem
+>Salvar como...</guimenuitem
 > para salvar os seus dados num formato anônimo, selecionando os <literal role="filter"
 >Arquivos anônimos</literal
-> como filtro. Isto irá também mudar a extensão do arquivo para <literal role="extension"
->.anon.xml</literal
+> como filtro. Isto irá também mudar a extensão do arquivo para <filename class="extension"
+>.anon.xml</filename
 >. </para>
 
 <para
->Para verificar se o seu problema ainda existe, recarregue este arquivo anônimo e tente replicar o seu problema. Se ele continuar existindo, envie o arquivo à lista de correio dos programadores, em &devlist;, para mais informações. Se o problema não se manifestar... bem, não queremos pensar nesse cenário por agora. </para>
+>Para verificar se o seu problema ainda existe, recarregue este arquivo anônimo e tente reproduzir o seu problema. Se ele continuar existindo, envie o arquivo à lista de correio dos programadores, em &devlist;, para mais informações. Se o problema não se manifestar... bem, não queremos pensar nesse cenário por enquanto. </para>
+</sect2>
+
+<sect2
+><title
+>Localizações do arquivo de dados</title>
+<para
+>Todos os tipos de arquivo acima podem ser armazenados em um disco rígido local, um dispositivo removível, como um pen drive USB, ou em um local de rede. Dependendo do seu sistema operacional, pode ser necessário mapear ou montar um local remoto antes de usá-lo. </para>
+
+<note
+><title
+>Limitações no Windows</title>
+  <para
+>No &Windows;, para usar um local de arquivo de rede ou remoto, esse local mapeado deve ser mapeado para uma letra de unidade. </para>
+</note>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.backup"
+><title
+>Backup</title>
+<para
+>Não tentaremos aqui convencê-lo de que fazer cópias de segurança dos seus dados é uma excelente ideia; esperamos que você já esteja convencido disso. Esta seção descreve três maneiras de fazer isso, e você pode usar uma, duas ou até mesmo as três. Observe que trata-se de fazer backup de um arquivo de dados; se você usa um banco de dados SQL para armazenar seus dados, consulte a documentação desse sistema para obter instruções sobre como fazer backups. </para>
+
+<sect2
+><title
+>Localização do arquivo de backup</title>
+<para
+>Se você precisar de uma cópia de segurança dos seus dados para confirmar algum aspecto das suas finanças em um momento anterior, ou para reverter a um estado anterior, como desfazer a importação de muitos dados para a conta errada, não importa se a cópia de segurança está local ou armazenada em outro lugar, como em uma unidade de rede conectada. No entanto, se você precisar de um backup para se recuperar da perda de dados caso seu disco rígido falhe, por exemplo, é essencial que o backup não esteja na mesma unidade que seu arquivo de dados principal. Em caso de um desastre maior, como um incêndio em casa, você precisaria de uma cópia de segurança armazenada em um cofre à prova de fogo ou em um local fisicamente diferente. Lembre-se disso ao estabelecer sua estratégia de backup. </para>
+</sect2>
+
+<sect2
+><title
+>Salvar automaticamente</title>
+<para
+>O &kmymoney; tem a capacidade de salvar automaticamente uma cópia do seu arquivo de dados em intervalos regulares. Ele também pode fazer isso ao fechar o programa, se os dados tiverem sido alterados. Esse comportamento pode ser configurado na <link linkend="details.settings.general.global"
+>caixa de diálogo de configuração do &kmymoney;, na seção Geral, aba Global</link
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Copiar arquivo</title>
+<para
+>A menos que você esteja usando armazenamento SQL, seus dados podem estar compactados e criptografados, mas são mantidos em um arquivo comum. Sempre que você salva seus dados com o item de menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Salvar</guimenuitem
+></menuchoice
+>, todos os seus dados são gravados em um arquivo, substituindo a versão anterior. A maneira mais simples de fazer backup dos seus dados é criando uma cópia desse arquivo. Uma única cópia pode até ter o mesmo nome de arquivo se estiver em uma pasta diferente do arquivo original, mas se você for manter várias cópias, faz sentido incluir alguma versão da data e hora atuais em cada nome de arquivo. Você pode salvá-los em uma unidade de rede, em um dispositivo de armazenamento USB ou até mesmo em um dispositivo óptico. A principal desvantagem desse método é que você precisa controlar todos os backups, mas ele oferece a maior flexibilidade. </para>
+</sect2>
+
+<sect2
+><title
+>Comando de backup</title>
+<para
+>Para facilitar um pouco as coisas, você pode selecionar o item de menu <menuchoice
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Backup</guimenuitem
+> </menuchoice
+>. </para>
+
+<screenshot>
+  <screeninfo
+>backup de arquivo</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="file-backup.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>backup de arquivo</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Ao clicar em <guibutton
+>OK</guibutton
+>, o &kmymoney; criará uma cópia do seu arquivo de dados, com a data (formatada como AAAA-MM-DD) anexada ao nome. Observe que isso significa que apenas um backup por dia pode ser criado por este método. Se você já tiver criado um backup no mesmo dia, o &kmymoney; perguntará se você deseja substituir o backup anterior ou cancelar. </para>
+
+<para
+>O &kmymoney; salvará este arquivo no diretório especificado no campo <guilabel
+>Ponto de montagem</guilabel
+>. Você pode digitar manualmente o caminho completo para o diretório ou clicar em <guibutton
+>Escolher...</guibutton
+> e navegar até ele usando o navegador de arquivos. O diretório pode estar em um dispositivo de armazenamento local ou em uma pasta de rede. </para>
+
+<para
+>Se o diretório especificado for, na verdade, um ponto de montagem para um dispositivo de armazenamento que nem sempre está montado, você pode marcar a caixa de seleção <guilabel
+>Montar este diretório antes de fazer backup</guilabel
+>. Não use isso para um compartilhamento de arquivos de rede comum que está sempre montado. </para>
+</sect2>
 </sect1>
 </chapter>
-

@@ -6,159 +6,135 @@
 >&Roger.Lum; &Roger.Lum.mail; </author>
     <author
 >&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->25/07/2010</date>
+>01/12/2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Agendamentos</title>
 
-<sect1 id="details.schedules.intro">
-<title
+<sect1 id="details.schedules.intro"
+><title
 >Introdução</title>
-
-<para>
-  <quote
->Os agendamentos mantêm a informação sobre as transações que ocorrem uma ou mais vezes durante um período de tempo. </quote>
-</para>
+<para
+>Os agendamentos mantêm a informação sobre as transações que ocorrem uma ou mais vezes durante um período de tempo. </para>
 
 <para
->Algumas vezes chamadas de transações recorrentes, os agendamentos de eventos recorrentes oferecem uma forma de registrar informações sobre transações que ocorrem regularmente. Um evento recorrente comum é o seu salário. Uma vez por mês, ou mesmo semanalmente, a empresa na qual trabalha pagará pelos serviços prestados. Esse pagamento poderá ocorrer de diversas formas, mas em cada mês ou semana você receberá um pagamento que precisa ser registrado. </para>
+>Às vezes chamada de transação agendada ou transação recorrente, uma programação fornece um meio de registrar informações sobre uma transação que ocorre regularmente. Você pode agendar depósitos, transferências, saques e empréstimos. Há muita flexibilidade nas programações, incluindo transações que ocorrem uma única vez ou com base em um número de dias, semanas, quinzenas, meses ou anos. </para>
 
 <para
->Uma vez que você sabe que estes pagamentos são feitos regularmente, você poderá criar um Evento Recorrente para registrar a informação sobre o pagamento e até criar a transação para você, quando chegar o dia de pagamento. </para>
+>Como você sabe que essas transações acontecem regularmente, sejam pagamentos feitos a você ou pagamentos que você faz a outra pessoa, você pode criar um agendamento para registrar informações sobre os detalhes recorrentes para simplificar e lembrar facilmente quando o evento ocorrerá novamente. </para>
 
 <para
->Você poderá registrar outros tipos de eventos recorrentes para refletir o dinheiro que entra e sai da sua conta. As despesas comuns, como as contas de serviços ou as transferências de dinheiro poderão ser registradas com os eventos recorrentes, em conjunto com as prestações dos empréstimos. O agendamento de um pagamento também poderá fornecer um lembrete útil de que você precisa fazer um determinado pagamento. </para>
+>É possível criar agendamentos para refletir a entrada e saída de dinheiro em suas contas de forma consistente. Os usos comuns incluem salários, impostos, seguros, pagamentos de cartão de crédito, mensalidades, juros, empréstimos, hipotecas e aluguéis. Agendar um pagamento como esses fornece um lembrete útil para que você possa gerenciar as questões financeiras futuras de forma eficaz. </para>
 
 <para
->O evento recorrente consiste em duas partes principais: os dados de agendamento e a transação propriamente dita. Os dados de agendamento registram a ocorrência do evento, isto é, quando e onde a transação deverá ser inserida. Os dados da transação registram a informação normal da transação, sendo inserida no livro de registros como determinado. </para>
+>Um agendamento consiste em duas partes principais: os dados da transação e os dados de agendamento. Os dados de agendamento registram a ocorrência do agendamento, &ie;, quando a transação deve ser lançada no livro de registro e como. Os dados da transação registram os detalhes normais da transação, incluindo opções para método de pagamento, conta, pagar a/de, categoria, etiquetas, memorando, data de vencimento, valor e status. Além disso, você também pode selecionar opções adicionais com base em quando processar a transação. </para>
 </sect1>
 
-<sect1 id="details.schedules.type">
-<title
+<sect1 id="details.schedules.type"
+><title
 >Tipos de agendamentos</title>
-
 <para
->Existem quatro tipos diferentes de eventos recorrentes na versão atual do &kappname;: </para>
+>Existem quatro tipos diferentes de agendamentos no &kmymoney;: </para>
 
-<itemizedlist>
-  <listitem
-><para
->Contas</para
-></listitem>
-  <listitem
-><para
->Depósitos</para
-></listitem>
-  <listitem
-><para
->Empréstimos</para
-></listitem>
-  <listitem
-><para
->Transferências</para
-></listitem>
-</itemizedlist>
-
-<sect2>
-<title
->Contas</title>
-
-<para
->Um Evento de Conta é usado para criar um evento recorrente para o dinheiro que sai da sua conta para pagar um serviço, como a mensalidade da academia de ginástica ou conta de um serviço qualquer. </para>
-</sect2>
-
-<sect2>
-<title
+<formalpara
+><title
 >Depósitos</title>
-
 <para
->É usado um Evento de Depósito para criar um evento recorrente para o dinheiro que entra na sua conta, como o pagamento de um cheque. </para>
-</sect2>
+>Esses agendamentos são para dinheiro que entra em sua conta, como um salário, bônus ou rendimento de juros. </para>
+</formalpara>
 
-<sect2>
-<title
+<formalpara
+><title
+>Contas/Retiradas</title>
+<para
+>Esses valores são referentes a saídas da sua conta, como mensalidades, contas de serviços públicos, pagamento de impostos ou registro de veículos. </para>
+</formalpara>
+
+<formalpara
+><title
+>Transferência</title>
+<para
+>Essas transações são para dinheiro que sai de uma conta e entra em outra, como fazer um pagamento de cartão de crédito a partir da sua conta corrente. </para>
+</formalpara>
+
+<formalpara
+><title
 >Empréstimos</title>
-
 <para
->Um Evento de Empréstimo é um tipo de evento recorrente especial que é criado ao trabalhar com contas de <link linkend="details.loans"
->Empréstimo</link
+>Trata-se de um tipo especial de agendamento, criado quando você cria uma <link linkend="details.loans"
+>Conta de empréstimo</link
 >. </para>
-</sect2>
-
-<sect2>
-<title
->Transferências</title>
-
-<para
->Um Evento de Transferência é usado para criar um evento recorrente para o dinheiro que vem de uma conta e entra em outra. Um exemplo típico é o pagamento de um cartão de crédito a partir da sua conta corrente. </para>
-</sect2>
-
+</formalpara>
 </sect1>
 
-<sect1 id="details.schedules.view">
-<title
->A área de agendamentos</title>
-
+<sect1 id="details.schedules.view"
+><title
+>A vista de Agendamentos</title>
 <para
->Abra a área de agendamentos, clicando no ícone <guiicon
->Transações agendadas<inlinemediaobject
-><imageobject
-><imagedata fileref="schedule_view.png"/></imageobject
-></inlinemediaobject
-></guiicon
-> no seletor de áreas. </para>
+>Abra a vista de Agendamentos clicando no <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> </guiicon
+> ícone de transações agendadas no seletor de visualização. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="scheduleview.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Área de agendamentos</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>vista de agendamentos</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="scheduleview.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>vista de agendamentos</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 	
 <para
->A área de agendamentos consiste de uma área de visualização com duas abas, em conjunto com um botão <guibutton
->Novo agendamento</guibutton
-> acima delas. A primeira página, a <guibutton
->Lista</guibutton
->, mostra todos os agendamentos agrupados pelo tipo. A segunda aba, o <guibutton
->Calendário</guibutton
->, está descrita na sua própria seção abaixo. </para>
+>A vista de Agendamentos consiste em uma única área de exibição com um botão <guibutton
+>Novo agendamento...</guibutton
+> e uma caixa de texto <guilabel
+>Filtrar</guilabel
+> acima dele. </para>
 	
 <para
->Para criar um novo agendamento, clique no botão. Para agendar Pagamentos, Depósitos e Transferências, o &kappname; irá mostrar a janela de novos eventos recorrentes. Os agendamentos de empréstimos são tratados de forma diferente, sendo descrito na seção sobre Empréstimos. </para>
+>Para criar um novo agendamento, clique em <guibutton
+>Novo agendamento...</guibutton
+>. O &kmymoney; exibirá a caixa de diálogo de novo agendamento, que pode ser usada para criar um agendamento de Depósito, Transferência ou Conta/Saque. Os agendamentos de empréstimo são tratados de forma diferente, conforme descrito na seção <link linkend="details.loans"
+>Empréstimos</link
+> deste manual. </para>
 </sect1>
 
-<sect1 id="details.schedules.new">
-<title
+<sect1 id="details.schedules.new"
+><title
 >Janela de novo agendamento</title>
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="newsched_numbered.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Novo agendamento</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>janela de novo agendamento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newsched_numbered.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>janela de novo agendamento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 	
 <para
->Irá aparecer agora uma nova janela solicitando os dados do agendamento e da transação. Os dados do evento incluem os seguintes campos: </para>
+>Uma janela de novo agendamento é exibida, solicitando o agendamento e os detalhes da transação. Os dados solicitados incluem o seguinte: </para>
 
 <orderedlist numeration="upperalpha">
   <listitem
@@ -191,214 +167,181 @@
 ></listitem>
 </orderedlist>
 
-<sect2>
-<title
->Preenchimento dos campos</title>
+<sect2
+><title
+>Preenchimento do nome do agendamento, frequência e informações de pagamento.</title>
+<para
+>Insira o nome do agendamento e a data da próxima ocorrência nos respectivos campos. O nome é como o agendamento será identificado na vista de Agendamentos e em outras telas. Especifique a frequência com que o agendamento deve ocorrer, usando o campo Frequência e a lista suspensa. Se a lista suspensa estiver definida como <quote
+>Uma vez</quote
+>, o campo Frequência ficará desativado. Caso contrário, a lista suspensa indica um intervalo de tempo e a transação ocorrerá a cada <emphasis
+>Frequência</emphasis
+> ocorrências desse intervalo. Observe que alguns intervalos podem ser indicados de mais de uma maneira, como 6 x "semanalmente" ou 3 x "a cada duas semanas" ou 2 x "a cada três semanas". Você não pode indicar frações de um intervalo, como duas vezes por mês; você precisa usar um intervalo menor, como 1 x "a cada quinzena". </para>
 
 <para
->Insira o nome do agendamento e a próxima ocorrência do mesmo, nos seus campos respectivos. Selecione a frequência no campo e lista da Frequência. Por exemplo, "a cada 6 semanas" ou "a cada 3 meses". Se o montante variar entre transações, certifique-se de assinalar a opção <guilabel
->Estimativa</guilabel
->, para que lhe seja pedido o valor correto quando for inserido no livro de registros. Preencha todos os campos da transação, como normalmente faria no livro de registros. </para>
+>Se o valor variar de transação para transação, certifique-se de marcar a caixa de seleção <guilabel
+>O valor é uma estimativa porque varia para cada pagamento</guilabel
+> na área <guilabel
+>Opções</guilabel
+> abaixo, e você será solicitado a inserir o valor correto quando ele for lançado no livro de registro. O valor é inserido como um número positivo no campo <guilabel
+>Pagamento</guilabel
+> ou <guilabel
+>Depósito</guilabel
+>. Os outros campos obrigatórios nesta área são a Conta e a Categoria. O menu suspenso <guilabel
+>Status</guilabel
+> indica o estado da transação quando o &kmymoney; a lança no livro de registro. Os campos restantes nesta seção são opcionais. </para>
 </sect2>
 
-<sect2>
-<title
->Modificar o comportamento do agendamento</title>
+<sect2
+><title
+>Modificando a seção de opções do agendamento</title>
 <para
->Na parte inferior da janela, existem alguns campos opcionais que poderão modificar a forma como o agendamento se comporta. Se ele ocorrer em um fim de semana, você poderá escolher se quer inserir a transação na sexta-feira anterior ou na segunda-feira seguinte. Normalmente, essa opção é usada para replicar alguma operação do mundo real, como uma operação bancária. </para>
-</sect2>
-
-<sect2>
-<title
->Deixar o &kappname; inserir a transação no livro de registros</title>
-
-<para
->Para permitir que o &kappname; insira a transação para você, quando for necessário, verifique se a opção <guilabel
->Inserir este agendamento no registro automaticamente quando for devido</guilabel
-> está assinalada. Caso contrário, quando a transação tiver que ser inserida, o &kappname; irá abrir uma janela solicitando confirmação dos dados a inserir. Esse comportamento é configurável e você poderá indicar mais informações na seção de Configuração. </para>
-</sect2>
-
-<sect2>
-<title
->Deixar o &kappname; saber quando irá terminar a agendamento</title>
+>O menu suspenso <guilabel
+>Se este agendamento ocorrer em uma data sem processamento:</guilabel
+> permite que você escolha como lidar com dias sem processamento. Dias sem processamento incluem fins de semana e feriados conhecidos pelo &kmymoney; para a região especificada na <link linkend="details.settings.schedules.calendar"
+>opção de configuração apropriada</link
+>. Se o agendamento ocorrer em um dia sem processamento, você pode escolher entre <guilabel
+>Não alterar a data</guilabel
+>, <guilabel
+>Alterar a data para o dia de processamento anterior</guilabel
+> ou <guilabel
+>Alterar a data para o próximo dia de processamento</guilabel
+>. Esta opção está disponível para replicar alguns dos processos operacionais de negócios do mundo real. </para>
 
 <para
->Se souber quantas transações faltam ou quando supostamente elas terminam, poderá inserir esta informação, de modo que as transações não sejam inseridas indefinidamente. Assinale a opção apropriada e insira a informação que tiver. Só é necessária a data ou o número de transações restantes, uma vez que os outros valores poderão ser calculados. </para>
+>A caixa de seleção <guilabel
+>O valor é uma estimativa porque varia para cada pagamento</guilabel
+> permite que você escolha se o &kmymoney; insere automaticamente esse valor no livro de registro ou se solicita o valor real quando o pagamento estiver próximo do vencimento. </para>
+
+<para
+>A caixa de seleção <guilabel
+>Não alterar o valor da categoria, mas modificar a taxa de câmbio da transação</guilabel
+> pode ser usada quando o agendamento envolve uma conta e uma categoria com moedas diferentes. Se não estiver selecionada, o valor especificado será usado quando a transação for lançada no livro de registro. Marcar a caixa indica ao &kmymoney; que o valor está especificado na moeda da categoria. Você ainda precisará confirmar o outro valor ou a taxa de conversão quando a transação for lançada no livro de registro. </para>
+
+<para
+>A caixa de seleção <guilabel
+>Processar esta programação sempre no último dia do mês</guilabel
+> permite o agendamento para processamento em datas irregulares de fim de mês. </para>
+
+<para
+>A caixa de seleção <guilabel
+>Inserir esta programação no registro automaticamente quando estiver vencida</guilabel
+> instrui o &kmymoney; a inserir a transação no livro de registro na data correta, sem intervenção humana. Caso contrário, quando a transação estiver vencida, o &kmymoney; abrirá uma caixa de diálogo solicitando que você confirme se deseja que ela seja inserida. Esse comportamento é configurável e mais informações podem ser encontradas na seção <link linkend="details.settings.schedules"
+>Configurações</link
+>. </para>
+
+<para
+>Se você sabe que o agendamento não continuará indefinidamente, marque a opção <guilabel
+>Este agendamento terminará em algum momento</guilabel
+> e você poderá inserir o <guilabel
+>Número de transações restantes:</guilabel
+> ou a <guilabel
+>Data da última transação</guilabel
+>. </para>
 
 <para
 >Indique a informação necessária e clique em <guibutton
 >OK</guibutton
 > para continuar. </para>
 </sect2>
-
 </sect1>
 
-<sect1 id="details.schedules.edit">
-<title
+<sect1 id="details.schedules.edit"
+><title
 >Editar agendamentos</title>
-
 <para
->Para editar um agendamento, basta selecionar o item na lista e clicar com o botão direito do mouse, de modo a abrir o menu de contexto e depois selecionar a opção <guimenuitem
->Editar</guimenuitem
->. Isso irá abrir uma janela semelhante a de um novo agendamento, onde os dados necessários poderão ser alterados. </para>
+>Para editar um agendamento, basta selecionar a entrada na lista, clicar com o botão direito do mouse e selecionar <guimenuitem
+>Editar transação agendada</guimenuitem
+> no menu de contexto. Isso abrirá uma caixa de diálogo semelhante à caixa de diálogo <guilabel
+>Nova transação agendada</guilabel
+>, onde você poderá atualizar os dados necessários. </para>
 </sect1>
 
-<sect1 id="details.schedules.delete">
-<title
+<sect1 id="details.schedules.delete"
+><title
 >Excluir agendamentos</title>
-
 <para
->Para excluir um agendamento, basta selecionar o item na lista e clicar com o botão direito do mouse, de modo a abrir o menu de contexto e depois selecionar a opção <guimenuitem
->Excluir</guimenuitem
->. </para>
+>Para excluir um agendamento, basta selecionar a entrada na lista, clicar com o botão direito do mouse e selecionar <guimenuitem
+>Excluir transação agendada</guimenuitem
+> no menu de contexto. </para>
+<warning
+><para
+>Observe que, embora muitas ações no &kmymoney; possam ser desfeitas, isso não se aplica à exclusão de um agendamento. Se você excluir um agendamento e perceber que não queria fazer isso, terá que recriá-lo completamente do zero. </para
+></warning>
 </sect1>
 
-<sect1 id="details.schedules.calendar">
-<title
->Visão de calendário</title>
-
+<sect1 id="details.schedules.duplicate"
+><title
+>Duplicar agendamentos</title>
 <para
->A aba de calendário apresenta os agendamentos em formato de calendário, de modo a tornar mais fácil a visualização de quando ocorrem. Para mudar para a área do calendário, clique na aba <guibutton
->Visão de calendário</guibutton
->. </para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="calendarview.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Visão de calendário</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-	
-<para
->Você poderá alterar o tipo de calendário, usando o botão para <guibutton
->Selecionar o Estilo</guibutton
->. Atualmente, só existem dois tipos; Semana e Mês. A vista mensal é a padrão e, normalmente, é a mais útil. Percorra as datas, usando os controles, como faria no campo de inserção de datas. </para>
-
-<para
->Nos dias que possuem transações agendadas será apresentado o número de transações correspondentes naquele dia do calendário. </para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="schedmonthday.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<para
->Para visualizar os eventos que ocorrem nesse dia, passe o cursor do mouse sobre a área realçada para aparecer uma janela que lhe permite ver o resumo do evento recorrente. </para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="schedpopup.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<para
->Se tiver mais de um evento que ocorra nesse dia, você poderá circular entre eles, usando os botões de setas nos cantos superiores da janela. </para>
-
-<para
->Se achar que a janela está desorganizada com muitos eventos, e se só quiser ver um tipo de evento recorrente, então poderá fazer isso com o botão <guibutton
->Selecionar agendamentos</guibutton
->. Depois de clicar nesse botão, os diferentes tipos de eventos serão apresentados e todos estarão assinalados por padrão. </para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="schedcaltypes.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<para
->Para remover um tipo da área do calendário, basta desmarcá-lo na lista. </para>
-
+>Para duplicar um agendamento, basta selecionar a entrada na lista, clicar com o botão direito do mouse e selecionar <guimenuitem
+>Duplicar transação agendada</guimenuitem
+> no menu de contexto. </para>
 </sect1>
 
-<sect1 id="details.schedules.entering">
-<title
+<sect1 id="details.schedules.entering"
+><title
 >Inserir transações agendadas</title>
-
 <para
->A inserção de uma transação agendada significa de fato inserir uma transação no livro de registros apropriado, usando os detalhes definidos no agendamento. As transações agendadas poderão ser inseridas de uma de quatro formas diferentes: </para>
+>A inserção de uma transação agendada significa de fato criar uma transação no livro de registros apropriado, usando os detalhes definidos no agendamento. As transações agendadas poderão ser inseridas de uma de três formas diferentes: </para>
 
 <itemizedlist>
-  <listitem
-><para
->Manualmente, clicando com o botão direito no item da lista</para
-></listitem>
-  <listitem
-><para
->Manualmente, através da janela da área do calendário</para
-></listitem>
   <listitem>
     <para
->O &kappname; poderá inseri-las ao iniciar, com ou sem a sua participação </para>
+>Manualmente, clicando com o botão direito do mouse na entrada na vista de Agendamentos e selecionando <guilabel
+>Inserir próxima transação</guilabel
+> no menu de contexto. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>O &kmymoney; poderá inseri-las ao iniciar, com ou sem a sua participação. </para>
   </listitem>
   <listitem>
     <para
->O &kappname; poderá inseri-las durante o acesso ao banco online ou na importação de um extrato bancário, com ou sem a sua participação </para>
+>O &kmymoney; poderá inseri-las durante o acesso ao banco online ou quando você importar um extrato bancário, com ou sem a sua participação. </para>
   </listitem>
 </itemizedlist>
 
-<sect2>
-<title
->Inserir manualmente as transações agendadas</title>
-
-<para
->Você poderá inserir uma transação agendada manualmente, clicando com o botão direito no item da lista e selecionando a opção <guimenuitem
->Inserir</guimenuitem
-> no menu de contexto, ou clicando no botão <guibutton
->Inserir</guibutton
-> da janela que aparece no calendário. </para>
-</sect2>
-
-<sect2>
-<title
+<sect2
+><title
 >Confirmar a transação a inserir</title>
-
 <para
->Depois de selecionar qualquer um dos métodos, a janela para Inserir a Transação Agendada irá aparecer, pedindo-lhe a informação necessária, que é a inserida ao criar o agendamento. </para>
+>O primeiro e o terceiro métodos exibirão uma caixa de diálogo <guilabel
+>Inserir transação agendada</guilabel
+> (possivelmente após exibir uma janela informativa sobre o processo). Esta caixa de diálogo solicita que você confirme ou atualize as informações necessárias que foram inseridas ao criar o agendamento. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="enterschedule.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>inserir transação agendada</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="enterschedule.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>inserir transação agendada</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Esta informação poderá ser alterada e as alterações aplicadas a apenas uma instância do agendamento ou a todas as transações subsequentes. Depois de verificar que todos os dados estão corretos, clique em <guibutton
 >OK</guibutton
 > para adicionar a transação ao livro de registros e atualizar a data do próximo pagamento. Se você tiver mudado algum dos dados da transação, irá aparecer uma confirmação posterior para lhe dar uma última chance para aceitar ou rejeitar as alterações. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="confirmenter.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>confirmar alterações manuais da transação</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="confirm_enter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>confirmar alterações manuais da transação</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Selecione o que deseja fazer com a informação apresentada, clicando depois em <guibutton
@@ -408,18 +351,18 @@
 >. </para>
 </sect2>
 
-<sect2>
-<title
->Deixar o &kappname; inserir as transações agendadas para você</title>
+<sect2
+><title
+>Deixar o &kmymoney; inserir as transações agendadas para você</title>
+<para
+>Alternativamente, o &kmymoney; poderá verificar os agendamentos que estão prestes a vencer na inicialização e inseri-los automaticamente, caso a opção apropriada estiver assinalada ao configurar o agendamento. </para>
 
 <para
->Alternativamente, o &kappname; poderá verificar os agendamentos que estão prestes a vencer na inicialização e inseri-los automaticamente, caso a opção apropriada estiver assinalada ao configurar o agendamento. </para>
+>Se a opção não foi assinalada, então o &kmymoney; irá abrir a janela mencionada anteriormente e você poderá seguir os passos aí indicados. O &kmymoney; irá também abrir a janela, caso o montante seja uma estimativa, para que você possa então inserir o valor real. </para>
 
 <para
->Se a opção não foi assinalada, então o &kappname; irá abrir a janela mencionada anteriormente e você poderá seguir os passos aí indicados. O &kappname; irá também abrir a janela, caso o montante seja uma estimativa, para que você possa então inserir o valor real. </para>
-
-<para
->Você também poderá optar por ter o &kappname; não verificando quais as transações agendadas na inicialização, desligando a opção na janela de Configuração, para que todas as transações atrasadas ou que vençam 'hoje', sejam apresentadas na área inicial, para que você as insira manualmente. </para>
+>Você também poderá optar por ter o &kmymoney; não verificando quais as transações agendadas na inicialização, desligando a opção na janela de Configuração, para que todas as transações atrasadas ou que vençam 'hoje', sejam apresentadas na área inicial, para que você as insira manualmente. </para>
 </sect2>
 </sect1>
 </chapter>
+

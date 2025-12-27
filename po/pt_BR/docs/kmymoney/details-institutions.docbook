@@ -4,132 +4,184 @@
   <authorgroup>
     <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->25/07/2010</date>
+>01/12/2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Instituições</title>
 
 <para
->A janela Instituições oferece um resumo de todas as contas agrupadas nas suas respectivas instituições. As contas de ativos são simbolizadas com uma seta preta, enquanto as contas de passivos são simbolizadas com uma seta vermelha. </para>
+>As instituições no &kmymoney; servem como uma forma de agrupar contas. Elas são mais comumente instituições financeiras, como bancos e corretoras, mas podem ser qualquer coisa que você desejar, como <quote
+>Própria</quote
+>, para manter contas para o dinheiro em seu bolso e quaisquer outros ativos que não sejam mantidos por uma instituição financeira, ou <quote
+>Lojas</quote
+>, para agrupar todos os seus cartões de crédito e outras contas de lojas de varejo. </para>
+
+<sect1 id="details.institutions.view"
+><title
+>Vista de Instituições</title>
+<para
+>A vista de Instituições fornece um resumo de todas as contas agrupadas sob suas respectivas instituições. A lista de contas de qualquer instituição pode ser expandida ou recolhida clicando na seta à esquerda do nome da instituição. A última instituição listada é "Contas sem instituição atribuída". </para>
 
 <para
->A janela Instituições apresenta diversas colunas, incluindo o tipo e o valor de cada conta, bem como o valor total de todas as contas em cada instituição. </para>
+>A vista de Instituições exibe várias colunas, mostrando informações sobre a conta. Ela também mostra o valor total de todas as contas em cada instituição. Você pode selecionar quais colunas serão exibidas clicando com o botão direito do mouse em qualquer cabeçalho de coluna e marcando ou desmarcando a caixa de seleção ao lado do nome da coluna. </para>
 
-<para>
 <screenshot>
-    	<screeninfo
->área de instituições</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="institution_view.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->área de instituições</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>vista de instituição</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>vista de instituição</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
-<sect1 id="details.institutions.institution">
-<title
->Opções da Instituição</title>
+<variablelist>
+  <varlistentry>
+    <term
+>Nome</term>
+    <listitem>
+      <para
+>Nome da instituição ou da conta. Esta coluna é sempre exibida. </para>
+    </listitem>
+  </varlistentry>
 
-<para
->Ao clicar com o botão direito no nome de uma instituição, será mostrado um submenu de Opções da Instituição, oferecendo-lhe várias opções. Se selecionar a <guimenuitem
->Nova instituição...</guimenuitem
->, será conduzido pelos passos do processo de criação de uma nova conta, onde irá indicar a instituição, o tipo, a data, o nome e o saldo inicial. Na configuração da nova conta, poderá criar uma nova instituição. Se selecionar a opção <guimenuitem
->Editar instituição...</guimenuitem
->, irá abrir uma janela editável com os detalhes da instituição, como o nome e o endereço. Se selecionar a opção <guimenuitem
->Excluir instituição</guimenuitem
->, irá remover a instituição inteira, bem como as suas contas associadas. Lembre-se de que só será capaz de excluir as contas associadas, se estas não tiverem transações nem eventos agendados que façam referência às mesmas. Se selecionar <guimenuitem
->Nova conta...</guimenuitem
->, será conduzido pelo processo de criação de uma conta, o qual está descrito com mais detalhes na próxima seção. </para>
+  <varlistentry>
+    <term
+>Saldo</term>
+    <listitem>
+      <para
+>Saldo atual da conta. Nenhum valor é exibido para instituições. </para>
+    </listitem>
+  </varlistentry>
 
-<para>
-<screenshot>
-	<screeninfo
->Submenu de opções da instituição</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="institution_options.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Submenu de opções da instituição</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
+  <varlistentry>
+    <term
+>Valor total</term>
+    <listitem>
+      <para
+>Para contas, este valor é o mesmo que o saldo. Para instituições, este valor é o total dos saldos de todas as contas dessa instituição. </para>
+    </listitem>
+  </varlistentry>
 
-<sect2 id="details.institutions.new">
-<title
->Nova Instituição</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="newinst.png" format="PNG"/>
-      </imageobject>
-      <textobject>
-        <phrase
->Nova Instituição</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
-
-<para>
-  <emphasis
->NOTA: Você deverá ter um arquivo aberto antes de criar uma nova instituição. Se não tiver um arquivo existente, terá de criar um <link linkend="firsttime.3"
->arquivo novo</link
->. </emphasis>
-</para>
-
-<para
->Apenas o nome na Janela de Nova Instituição é obrigatório, sendo todos os outros campos opcionais. Como acontece na janela de informações pessoais, esses dados não são usados atualmente pelo &kappname;, mas serão necessários para certas funcionalidades das versões futuras. Em particular, o Número de Encaminhamento e o <acronym
-><ulink url="http://en.wikipedia.org/wiki/ISO_9362"
->BIC (Código Identificador do Banco)</ulink
+  <varlistentry>
+    <term
+>IBAN</term>
+    <listitem>
+      <para
+>O <acronym
+><ulink url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+>IBAN</ulink
 ></acronym
-> serão obrigatórios no banco online. </para>
-</sect2>
+> (Número Internacional de Conta Bancária) é exibido se houver um valor inserido no campo apropriado na caixa de diálogo de informações da conta. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Código do banco</term>
+    <listitem>
+      <para
+>O <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Código do Banco</ulink
+>. Este identificador é formatado e usado de maneira diferente em diferentes países. Nos EUA, é conhecido como número de roteamento ou número de trânsito de roteamento, e no Reino Unido, como código de classificação. Atualmente, não é usado pelo &kmymoney;. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>SWIFT/BIC</term>
+    <listitem>
+      <para
+>O <acronym
+><ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>SWIFT/BIC</ulink
+></acronym
+> (Society for Worldwide Interbank Financial Telecommunication/Business Identifier Code) (Sociedade para Telecomunicações em Finanças Interbancárias Mundiais/Código de Identificação de Negócios) </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
 </sect1>
 
-<sect1 id="details.institutions.account">
-<title
->Opções da Conta</title>
+<sect1 id="details.institutions.institution"
+><title
+>Opções da Instituição</title>
+<para
+>Clicar com o botão direito do mouse no nome de uma instituição abre um menu Opções da Instituição, oferecendo diversas opções. Selecionar <guimenuitem
+>Nova Instituição...</guimenuitem
+> abre a caixa de diálogo de nova Instituição, onde você pode inserir todas as informações necessárias para criar uma nova instituição. Selecionar <guimenuitem
+>Editar Instituição...</guimenuitem
+> abre uma janela editável onde você pode alterar os detalhes da instituição. Selecionar <guimenuitem
+>Excluir Instituição</guimenuitem
+> remove completamente a instituição do arquivo de dados. Quaisquer contas associadas a essa instituição permanecerão, mas sem estarem associadas a nenhuma instituição. Selecionar <guimenuitem
+>Nova conta...</guimenuitem
+> orienta você no processo de criação de nova conta, que é descrito com mais detalhes na próxima seção. </para>
+
+<screenshot>
+  <screeninfo
+>Submenu de opções da instituição</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_options.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Submenu de opções da instituição</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect2 id="details.institutions.new"
+><title
+>Nova instituição</title>
+<screenshot>
+  <screeninfo
+>nova instituição</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newinst.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>nova instituição</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<note
+><para
+>NOTA: Você deverá ter um arquivo aberto antes de criar uma nova instituição. Se não tiver um arquivo existente, terá de <link linkend="firsttime.newfile"
+>criar um</link
+>. </para
+></note>
 
 <para
->Se clicar no nome da conta com o botão direito, irá aparecer o submenu de Opções da Conta. Se selecionar a opção <guimenuitem
->Nova conta...</guimenuitem
->, será conduzido pelo processo de criação de uma nova conta. Se selecionar <guimenuitem
->Abrir o Livro de Registros</guimenuitem
->, será remetido para a área de Livro de Registros ou de Investimentos, dependendo do tipo de conta. Basta fazer duplo-clique sobre o nome de uma conta para conseguir abri-la. Se selecionar a opção <guimenuitem
->Reconciliar...</guimenuitem
->, irá abrir o Assistente de Reconciliação, que o conduz pelo processo de comparação dos extratos da sua conta e dos seus registros eletrônicos. Se clicar em <guimenuitem
->Editar a conta</guimenuitem
->, irá mostrar uma janela que lhe permite alterar o nome, a data inicial, a instituição bancária associada e a conta-mãe da conta selecionada. A remoção de uma conta só é possível se não existirem transações associadas à mesma. Mais detalhes, assim como informações sobre as outras opções, são apresentadas nas seções apropriadas deste manual. </para>
+>Apenas o nome na Janela de Nova Instituição é obrigatório, sendo todos os outros campos opcionais. Como acontece na janela de informações pessoais, esses dados não são usados atualmente pelo &kmymoney;, mas serão necessários para certas funcionalidades das versões futuras. Em particular, o <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Código do Banco</ulink
+> e o <acronym
+> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Código de Identificação Bancária)</ulink
+></acronym
+> serão necessários para o internet banking, embora isso possa depender do país em que seu banco está localizado. </para>
+</sect2>
 
-<para>
-<screenshot>
-	<screeninfo
->submenu de opções da conta</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="account_options.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->submenu de opções da conta</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
+<sect2
+><title
+>Opções da Conta</title>
+<para
+>As opções discutidas acima referem-se às instituições listadas na vista de Instituições. A maioria das linhas nesta visualização são contas. Clicar com o botão direito do mouse no nome de uma conta abre um menu Opções da Conta. As entradas e detalhes para este menu são discutidos no final do <link linkend="details.accounts.options"
+>Capítulo Contas</link
+>. </para>
+</sect2>
 </sect1>
 </chapter>

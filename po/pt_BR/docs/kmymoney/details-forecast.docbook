@@ -3,26 +3,27 @@
 <chapterinfo>
   <authorgroup>
     <author
->&Colin.Wright; &Colin.Wright.mail; </author>
+>&Colin.Wright; &Colin.Wright.mail; </author
+> 
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->25/07/2010</date>
+>01/12/2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
-<title id="details.forecast.title"
+<title
 >Previsão</title>
 
-<sect1 id="details.forecast.define">
-<title
+<sect1 id="details.forecast.define"
+><title
 >O que é uma previsão?</title>
+<para
+>No &kmymoney;, uma Previsão é a visualização dos saldos das contas, durante um determinado período de tempo no futuro. </para>
 
 <para
->No &kappname;, uma Previsão é a antevisão dos saldos das contas, durante um determinado período de tempo no futuro.</para>
-
-<para
->As previsões poderão ser determinadas com um de dois métodos. </para>
+>As previsões poderão ser determinadas usando um de dois métodos. </para>
 
 <variablelist>
   <varlistentry>
@@ -30,7 +31,7 @@
 >Transações Agendadas e Futuras</term>
     <listitem>
       <para
->O &kappname; usa uma combinação das transações futuras já inseridas nos livros de registros com os itens no Plano de Pagamentos ou nas agendas.</para>
+>O &kmymoney; usa uma combinação das transações futuras já inseridas nos livros de registros com os itens no Plano de Pagamentos ou nas agendas. </para>
     </listitem>
   </varlistentry>
 
@@ -39,50 +40,244 @@
 >Baseado no Histórico</term>
     <listitem>
       <para
->O &kappname; usa os valores das transações passadas nos livros de registros para prever as transações futuras.</para>
+>O &kmymoney; usa os valores das transações passadas. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->O método e o período de previsão poderão ser definidos na Configuração do &kappname;, na área de Previsão. </para>
+>A <guilabel
+>vista de Previsão</guilabel
+> mostra os saldos previstos nas datas do ciclo da conta e a diferença esperada entre os saldos inicial e final. O resumo também exibe mensagens sobre mudanças significativas previstas nas contas durante o período de previsão. Além do resumo, você também pode visualizar os saldos diários e os saldos mínimo e máximo para cada ciclo de previsão da conta. </para>
 
 <para
->A Previsão do &kappname; oferece um resumo que mostra os saldos previstos nas datas do ciclo de faturação, assim como a diferença esperada entre os saldos inicial e final. A duração do ciclo de faturação poderá ser definida pelo usuário. O resumo também mostra mensagens sobre as alterações previstas e significativas para as contas durante o período de previsão. </para>
-
-<para
->Assim como o resumo, a Previsão do &kappname; também lhe permite ver os saldos no dia a dia, bem como ver os saldos mínimo e máximo para cada ciclo de faturação da previsão. </para>
-
-<para
->Por padrão, a previsão é criada para 90 dias, com ciclos de faturação de 30 dias, usando as Transações Agendadas e Futuras. </para>
+>A próxima seção descreve como você pode configurar o método de previsão e outros parâmetros usados ​​para calcular uma previsão. Em seguida, há uma seção com mais detalhes sobre a visualização da previsão. </para>
 </sect1>
 
-<sect1 id="details.forecast.view">
-<title
->Ver as Previsões</title>
+<sect1 id="details.forecast.configure"
+><title
+>Configurar a Previsão</title>
 
 <para
->Você poderá ver uma Previsão se clicar no ícone apropriado na área de navegação, do lado esquerdo da sua janela do &kappname;. </para>
+>Os parâmetros usados ​​para calcular uma Previsão, incluindo o método de previsão, podem ser definidos na caixa de diálogo de configuração da <link linkend="details.settings.plugins.forecast"
+><guilabel
+>vista de Previsão</guilabel
+> </link
+>. Como a funcionalidade de previsão é implementada como um <link linkend="makingmostof.plugins"
+>plugin do &kmymoney;</link
+>, você pode acessar esta caixa de diálogo invocando o item de menu <menuchoice
+> <guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Configurar&kmymoney;...</guimenuitem
+> </menuchoice
+>, selecionando <guilabel
+>Plugins</guilabel
+> no painel esquerdo e clicando no ícone <guilabel
+>configurar</guilabel
+> ao lado de <guilabel
+>vista de Previsão</guilabel
+>. </para>
+
+<screenshot>
+  <screeninfo
+>configuração de previsão</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="plugin_config_forecast.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>configuração de previsão</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Número de dias para a previsão</term>
+    <listitem>
+      <para
+>A previsão será calculada até este ponto no futuro. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Número de dias do ciclo da conta</term>
+    <listitem>
+      <para
+>Uma previsão não se baseia em meses reais, mas em períodos repetidos do número de dias definido neste campo. Os valores mais comuns usados ​​são 30 ou 31. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Dia do mês onde começar a previsão</term>
+    <listitem>
+      <para
+>Isso define o dia do mês atual que é usado como ponto de partida para a contagem de ambos os ciclos e o número de dias para a previsão. Um valor de 0 significa usar o dia atual. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Método de previsão</term>
+    <listitem>
+      <para
+>Como mencionado na seção anterior, você pode escolher se o &kmymoney; usa transações agendadas e futuras ou transações históricas para calcular uma Previsão. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Configurações de baseado no histórico</term>
+    <listitem>
+      <para
+>As configurações nesta seção da caixa de diálogo só se aplicam se o método de previsão estiver definido como <quote
+>Baseado no histórico</quote
+> </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+>Número de ciclos a usar na previsão</term>
+          <listitem>
+            <para
+>Isso define o número de ciclos de dados históricos a serem usados ​​para prever valores futuros. </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+>Método de previsão baseado no histórico</term>
+          <listitem>
+            <para
+>Selecionar um dos três botões de opção, <guilabel
+>Média móvel simples</guilabel
+>, <guilabel
+>Média móvel ponderada</guilabel
+> (esta é a configuração padrão) e <guilabel
+>Regressão linear</guilabel
+>, define a fórmula matemática que o &kmymoney; usará para uma previsão baseada no histórico. </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
 
 <para
->A janela de Previsão está dividida em cinco páginas </para>
-
-<sect2>
-<title
->Página de Resumo</title>
+>O método de previsão definido aqui se aplica a todas as previsões. As outras configurações tornam-se valores padrão, que podem ser alterados ao calcular e visualizar uma previsão na vista de Previsão. </para>
 
 <para
->A página de Resumo está dividida na vertical em duas metades. </para>
+>Na parte inferior da caixa de diálogo, o botão <guibutton
+>Padrões</guibutton
+> redefine todos os valores para seus valores padrão. Os botões <guibutton
+>OK</guibutton
+> e <guibutton
+>Cancelar</guibutton
+> têm seus significados usuais. </para>
+</sect1>
 
-<sect3>
-<title
+<sect1 id="details.forecast.view"
+><title
+>Visualizar as Previsões</title>
+<para
+>Você poderá exibir a vista de Previsão se clicar no ícone apropriado no painel de navegação, do lado esquerdo da sua janela do &kmymoney;. </para>
+
+<screenshot>
+  <screeninfo
+>vista de previsão</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="forecast_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>vista de previsão</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>A área superior da vista de Previsão é a <guilabel
+>Configurações de previsão</guilabel
+>. À esquerda, encontram-se vários campos para controlar os cálculos da previsão. Os valores padrão para esses campos são definidos na caixa de diálogo de configuração da vista de Previsão, conforme descrito na seção anterior. Os valores (com o nome usado na caixa de diálogo de configuração entre parênteses, se diferente) são: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Dias para a previsão (Número de dias para a previsão)</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Dias do ciclo da conta (Número de dias do ciclo da conta)</para>
+  </listitem>
+
+  <listitem>
+        <para
+>Dia do mês onde começar a previsão</para>
+  </listitem>
+    
+  <listitem>
+        <para
+>Ciclos históricos (Número de ciclos a usar na previsão)</para>
+  </listitem>
+    
+  <listitem>
+    <para
+>Detalhes do gráfico: Este item não está definido na caixa de diálogo de configuração. Escolha um dos seguintes valores para controlar os resultados exibidos na aba do <guilabel
+>Gráfico</guilabel
+>. <itemizedlist>
+        <listitem>
+          <para
+>Todos</para>
+        </listitem>
+        <listitem>
+          <para
+>Nível de topo</para>
+        </listitem>
+        <listitem>
+          <para
+>Grupos</para>
+        </listitem>
+        <listitem>
+          <para
+>Total</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </listitem>
+</itemizedlist>
+    
+<para
+>À direita desses itens, o &kmymoney; exibe o <guilabel
+>Método de previsão atual</guilabel
+>. À direita deste, há um botão <guibutton
+>Previsão</guibutton
+>. Ao clicar neste botão, o &kmymoney; calcula a previsão com base nas configurações à esquerda e exibe os resultados na parte inferior da janela. Logo abaixo, encontra-se o <guilabel
+>Método de previsão histórica</guilabel
+>, que só é ativado se o método de previsão atual estiver definido como <quote
+>Histórico</quote
+>. </para>
+
+<para
+>A área inferior da vista de Previsão possui cinco abas. </para>
+
+<sect2 id="details.forecast.summary"
+><title
+>Aba Resumo</title>
+<para
+>A aba Resumo possui duas seções. </para>
+
+<sect3
+><title
 >Resumo da Conta</title>
-
 <para
->O Resumo da Conta contém uma grade que mostra uma linha de informação por cada Ativo e Passivo. </para>
-
-<para
->São apresentadas as seguintes colunas: </para>
+>À esquerda encontra-se o Resumo da Conta, exibindo uma linha de informações para cada Ativo e Passivo, com as colunas mostradas abaixo. Observe que, se a Previsão for baseada em Transações Programadas e Futuras, haverá apenas linhas para as contas referenciadas nessas transações. </para>
 
 <variablelist>
   <varlistentry>
@@ -96,28 +291,28 @@
 
   <varlistentry>
     <term
->Saldo Atual</term>
+>Atual</term>
     <listitem>
       <para
->É apresentado o saldo atual da conta.</para>
+>O saldo atual da conta</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
->Saldo do Ciclo de Faturação</term>
+>Saldo do Ciclo de Conta</term>
     <listitem>
       <para
->O período de previsão é dividido em ciclos de faturação. O ciclo de faturação por padrão é de 30 dias, mas ele poderá ser definido pelo usuário.</para>
+>O período de previsão é dividido em ciclos de conta. O ciclo de conta padrão é de 30 dias, mas ele poderá ser alterado pelo usuário. </para>
 
       <para
->A data do primeiro ciclo de faturação é a data da primeira previsão. Por padrão, esta é a data atual, mais um ciclo de faturação, mas você poderá alterá-la, dependendo da configuração do "Dia do Mês onde Iniciar a Previsão".</para>
+>A data do primeiro ciclo de conta é a data da primeira previsão. Por padrão, esta é a data atual, mais um ciclo de conta, mas você poderá alterá-la, dependendo da configuração do "Dia do Mês onde Iniciar a Previsão". </para>
 
       <para
->As datas dos restantes ciclos de faturação são determinadas, adicionando a duração do ciclo de faturação à data do ciclo anterior. Isto prossegue até que a data do ciclo calculada fique além do período de Previsão.</para>
+>As datas dos restantes ciclos de faturação são determinadas, adicionando a duração do ciclo de conta à data do ciclo anterior. Isto prossegue até que a data do ciclo calculada fique além do período de Previsão ou dias de Previsão.</para>
 
       <para
->Para cada data do ciclo de faturação, é apresentado o saldo previsto.</para>
+>Para cada data do ciclo de conta, é apresentado o saldo previsto.</para>
     </listitem>
   </varlistentry>
 
@@ -126,19 +321,17 @@
 >Variação Atual</term>
     <listitem>
       <para
->A coluna mais à direita mostra a diferença prevista no valor entre os saldos, para o início e o fim da previsão. Se o valor final previsto da conta (em termos de valor líquido) for menor que o valor inicial, a linha inteira será apresentada em vermelho.</para>
+>A coluna mais à direita mostra a diferença prevista no valor entre os saldos, para o início e o fim da previsão. Se o valor final previsto da conta (em termos de valor líquido) for menor que o valor inicial, a linha inteira será apresentada em vermelho. </para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Informação-Chave do Resumo</title>
-
 <para
->A parte inferior da área do Resumo mostra as informações importantes sobre das contas. Isto inclui: </para>
+>A porção esquerda da aba do Resumo mostra informações importantes sobre as contas. Isto inclui: </para>
 
 <variablelist>
   <varlistentry>
@@ -146,7 +339,7 @@
 >Ativos abaixo de zero</term>
     <listitem>
       <para
->Aparece uma mensagem por cada ativo, no caso de o valor começar ou descer abaixo de zero durante o período de previsão.</para>
+>Aparece uma mensagem (em vermelho) para cada ativo da conta, no caso de o valor começar ou descer abaixo de zero durante o período de previsão. </para>
     </listitem>
   </varlistentry>
 
@@ -155,19 +348,18 @@
 >Passivo acima de zero</term>
     <listitem>
       <para
->Aparece uma mensagem por cada passivo, no caso em que o valor começa ou sobe acima de zero durante o período de previsão. Lembre-se que o valor de um passivo é o negativo do seu saldo no registro, uma vez que um saldo positivo normalmente indica dinheiro em dívida.</para>
+>Aparece uma mensagem para cada passivo da conta, no caso em que o valor começa ou sobe acima de zero durante o período de previsão. Lembre-se de que o valor de um passivo é o negativo do seu saldo no registro, uma vez que um saldo positivo normalmente indica dinheiro em dívida. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect3>
 </sect2>
 
-<sect2>
-<title
->Página de Detalhes</title>
-
+<sect2
+><title
+>Aba Detalhes</title>
 <para
->A página de Detalhes contém uma grade que mostra um grupo de informações para cada Ativo e Passivo. </para>
+>A aba Detalhes também exibe uma linha para cada conta de Ativo e Passivo, mas as colunas exibidas são diferentes da aba Resumo. </para>
 
 <variablelist>
   <varlistentry>
@@ -184,7 +376,7 @@
 >Datas</term>
     <listitem>
       <para
->Para cada data no período de Previsão, aparece uma coluna que mostra o saldo previsto da conta nessa data. As colunas das datas estão em ordem ascendente, da esquerda para a direita.</para>
+>Para cada data no período de Previsão, aparece uma coluna que mostra o saldo previsto da conta nessa data. As colunas das datas estão em ordem crescente, da esquerda para a direita. </para>
     </listitem>
   </varlistentry>
 
@@ -193,18 +385,17 @@
 >Variação Atual</term>
     <listitem>
       <para
->A coluna mais à direita mostra a diferença prevista no valor entre os saldos, para o início e o fim da previsão. Se o valor final previsto da conta (em termos de valor líquido) for menor que o valor inicial, a linha inteira será apresentada em vermelho.</para>
+>A coluna mais à direita mostra a diferença prevista no valor entre os saldos, para o início e o fim da previsão. Se o valor final previsto da conta (em termos de valor líquido) for menor que o valor inicial, a linha inteira será apresentada em vermelho. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title
->Aba avançado</title>
-
+<sect2
+><title
+>Aba Avançado</title>
 <para
->A página Avançado contém uma grade que mostra um grupo de informações para cada Ativo e Passivo. A informação está dividida por colunas, da seguinte forma: </para>
+>A aba Avançado também exibe uma linha de informações para cada conta de Ativo e Passivo. As informações são divididas em colunas da seguinte forma: </para>
 
 <variablelist>
   <varlistentry>
@@ -218,91 +409,76 @@
 
   <varlistentry>
     <term
->Saldo Mínimo do Ciclo de Faturação</term>
+>Informações de saldo mínimo do ciclo de conta</term>
     <listitem>
       <para
->Para cada número do ciclo de faturação &lt;n&gt;, no período de Previsão, são apresentadas as seguintes colunas:</para>
+>Para cada número do ciclo de conta &lt;n&gt;, no período de Previsão, são apresentadas as seguintes colunas: </para>
 
       <variablelist>
 	<varlistentry>
 	  <term
->Saldo Mínimo (Saldo Mín &lt;n&gt;)</term>
+>Saldo Mín &lt;n&gt;</term>
 	  <listitem>
 	    <para
->O saldo mínimo previsto durante o ciclo de faturação</para>
+>O saldo mínimo previsto durante o ciclo de conta</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
 	  <term
->Data do Saldo Mínimo (Data do Mín &lt;n&gt;)</term>
+>Data Mín &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >A data em que o saldo atinge o seu valor mínimo previsto.</para>
 	  </listitem>
 	</varlistentry>
-      </variablelist>
-    </listitem>
-  </varlistentry>
 
-  <varlistentry>
-    <term
->Saldo Máximo do Ciclo de Faturação</term>
-
-    <listitem>
-      <para
->Para cada número do ciclo de faturação &lt;n&gt;, no período de Previsão, são apresentadas as seguintes colunas:</para>
-
-      <variablelist>
 	<varlistentry>
 	  <term
->Saldo Máximo (Saldo Máx &lt;n&gt;)</term>
+>Saldo Máx &lt;n&gt;</term>
 	  <listitem>
 	    <para
->O saldo máximo previsto durante o ciclo de faturação</para>
+>O saldo máximo previsto durante o ciclo de conta</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
 	  <term
->Data do Saldo Máximo (Data do Máx &lt;n&gt;)</term>
+>Data Máx &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >A data em que o saldo atinge o seu valor máximo previsto.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
+      <para
+>Observe que todos os saldos e datas mínimos são mostrados antes de todos os saldos e datas máximos. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 >Média</term>
-
     <listitem>
       <para
 >O saldo médio da conta durante o período de previsão</para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect2>
 
-<sect2>
-<title
->Página de Previsão do Orçamento</title>
-
+<sect2
+><title
+>Aba Previsão do Orçamento</title>
 <para
->A área do Orçamento mostra um cálculo de previsão das categorias de Receita e Despesa. As colunas são semelhantes às páginas de Resumo e Detalhada. </para>
-
+>A aba Orçamento exibe um cálculo de previsão para todas as categorias de Receita e Despesa. Ao contrário da aba Resumo, há uma coluna por mês, começando em janeiro do ano atual e terminando no mês que inclui o fim do período de previsão. A última coluna é um total, em vez de um valor previsto ou um valor calculado com base em qualquer valor previsto. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Aba Gráfico</title>
-
 <para
->Mostra um gráfico que apresenta a previsão. O nível de detalhe varia de acordo com o nível de detalhe selecionado na opção acima. </para>
-
+>Isso exibe a previsão em um gráfico ou forma gráfica. O nível de detalhe varia dependendo do nível de detalhe selecionado na opção acima. </para>
 </sect2>
-
 </sect1>
 </chapter>

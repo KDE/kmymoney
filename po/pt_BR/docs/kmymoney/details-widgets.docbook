@@ -6,58 +6,58 @@
 >&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
   </authorgroup>
   <date
->25/07/2010</date>
+>01/12/2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2</releaseinfo>
 </sect1info>
 
 <title
 >Widgets</title>
 
 <para
->O &kappname; possui alguns elementos específicos que não são encontrados nas outras aplicações. A utilização destes itens é explicada neste capítulo. </para>
+>O &kmymoney; possui alguns elementos específicos que não são encontrados nas outras aplicações. A utilização destes itens é explicada neste capítulo. </para>
 
 <sect2 id="reference.widgets.datepicker">
 <title
->Elemento de entrada de data</title>
+>Elemento de entrada de data e seletor de data</title>
 
 <para
->Sempre que o &kappname; precisa de informações sobre uma determinada data, &eg;a data de publicação de uma transação ou a data de abertura de uma conta, oferece ao usuário o <emphasis
->elemento ou item de inserção de datas</emphasis
->. Este item consiste em três campos e um botão. Os campos apresentam o <emphasis
+>Sempre que o &kmymoney; precisar de informações sobre uma data específica, &eg;, a data de lançamento de uma transação ou a data de abertura de uma conta, ele oferece ao usuário o <emphasis
+>widget de entrada de data</emphasis
+>. Este widget consiste em três campos, que apresentam o <emphasis
 >dia</emphasis
 >, o <emphasis
 >mês</emphasis
 > e o <emphasis
 >ano</emphasis
->, separados pelos devidos caracteres de separação de datas, dependendo da sua configuração regional. O botão - se clicado - irá abrir o <emphasis
->item de seleção de datas</emphasis
+>, separados pelos caracteres separadores de data especificados pelas suas configurações de localidade. Se você clicar na seta para baixo ao lado da data, o programa abrirá o widget de <emphasis
+>seleção de data</emphasis
 >. </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Dica do Dia</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="date_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <screeninfo
+>Widget de data</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="date_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Widget de data</phrase>
-	</textobject>
-	</mediaobject>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para
->No campo de inserção de datas, as teclas de cursores para a esquerda/direita poderão ser usadas para mudar entre os campos do <emphasis
+>No campo de inserção de datas, as teclas de cursores para a &Left;/&Right; poderão ser usadas para mudar entre os campos do <emphasis
 >dia</emphasis
 >, do <emphasis
 >mês</emphasis
 > e do <emphasis
 >ano</emphasis
->. Se usar as teclas de cursores para cima/baixo,o valor do campo selecionado poderá ser aumentado/diminuído. As teclas <keycap
+>. Se usar as teclas de cursores para &Up;/&Down;,o valor do campo selecionado poderá ser aumentado/diminuído. As teclas <keycap
 >+</keycap
 > e <keycap
 >-</keycap
@@ -66,16 +66,16 @@
 >, irá configurar o campo com a data de hoje. </para>
 
 <para
->A data também pode ser alterada com o mouse. Clicar no campo do <emphasis
+>A data também pode ser alterada usando o mouse. Clicar no campo <emphasis
 >dia</emphasis
 >, <emphasis
 >mês</emphasis
 > ou <emphasis
 >ano</emphasis
->, irá selecioná-lo. O valor poderá então ser incrementado/decrementado com as setas à direita do elemento. Elas funcionam exatamente como a tecla para cima/baixo. </para>
+> seleciona o campo. O valor pode então ser incrementado/decrementado usando as teclas de cursor &Up;/&Down;. Além disso, se você usar as teclas de cursor &Right;/&Left;, ao passar para um campo diferente, o campo inteiro será selecionado e você poderá simplesmente digitar o novo valor para esse campo. </para>
 
 <para
->O seletor de datas abre-se quando o botão à direita das setas for pressionado. Ele irá mostrar quatro botões de setas no topo, que definem o mês e ano selecionados de momento. Os botões mais à esquerda são usados para diminuir o ano e o mês, enquanto os botões à direita são usados para aumentar o mês e o ano. O botão mais à direita fecha o seletor de datas. </para>
+>O widget de seleção de data mostra o mês, o nome e o ano selecionados. Acima, há quatro botões de seta, dois de cada lado do mês e do ano exibidos. Os botões mais à esquerda são usados ​​para diminuir o ano e o mês; os botões à direita do ano são usados ​​para aumentar o mês e o ano. O botão mais à direita fecha o seletor de data. </para>
 
 <para
 >Abaixo dos botões, o item apresenta uma página de calendário para o mês respectivo. Clicar num dia do mês selecionado, irá selecionar essa data, fechar o seletor de datas e transferir a data selecionada para os campos do <emphasis
@@ -87,38 +87,54 @@
 >. </para>
 
 <para
->No fundo do item, os usuário poderão encontrar um botão, um campo de edição de texto e uma lista. Clicar no botão, irá selecionar a data de hoje no seletor, enquanto o campo de texto poderá ser usado para inserir uma data específica. Pressionar a tecla <keycap
->RETURN</keycap
->, irá mostrar essa data no item de seleção de datas. A lista permite ao usuário selecionar uma semana específica, podendo selecionar uma data a partir daí. </para>
+>No fundo do item, os usuário poderão encontrar um botão, um campo de edição de texto e uma lista. Clicar no botão, irá selecionar a data de hoje no seletor, enquanto o campo de texto poderá ser usado para inserir uma data específica. Pressionar a tecla &Enter;, irá mostrar essa data no item de seleção de datas. A lista permite ao usuário selecionar uma semana específica, podendo selecionar uma data a partir daí. </para>
+
+<para
+>Caso seja inserida uma data inválida, o seletor de datas exibirá uma moldura vermelha, e uma dica de ferramenta mostrará detalhes sobre o erro. </para>
 </sect2>
 
 <sect2 id="reference.widgets.value">
 <title
 >Inserção de valores</title>
+
 <para
->O item de inserção de valores consiste num campo de texto (que aceita números, separadores de milhares e separadores decimais), assim como um botão à direita. Use os números para inserir o valor. Separe a parte fracionária, inserindo para isso o separador decimal para a sua região. Ao clicar no botão à direita ou pressionar uma tecla que representa uma operação numérica (&eg;, +,-,/,* ou %), irá aparecer uma pequena calculadora que lhe permite calcular o valor final. </para>
+>O item de inserção de valores consiste num campo de texto (que aceita números, separadores de milhares e separadores decimais), assim como um botão à direita. Use os números para inserir o valor. Separe a parte fracionária, inserindo para isso o separador decimal para a sua região. Ao clicar no botão à direita ou pressionar uma tecla que representa uma operação numérica (&eg;, <keycap
+>+</keycap
+>, <keycap
+>-</keycap
+>, <keycap
+>/</keycap
+>, <keycap
+>*</keycap
+> ou <keycap
+>%</keycap
+>), irá aparecer uma pequena calculadora que lhe permite calcular o valor final. </para>
 
 <para
 >Você poderá inserir valores negativos, antecedendo o valor com um sinal '-' (menos). No caso de a sua configuração regional definir que os números negativos devem aparecer entre parênteses, o valor também poderá ser envolvido com parênteses no campo de inserção do valor. </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Dica do Dia</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="value_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Elemento de valor</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Widget de valor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="value_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Widget de valor</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para
->Use o item da calculadora como se fosse uma calculadora normal, assim que terminar, deixe-a ao clicar no botão '=' ou pressione a tecla '=' do seu teclado. </para>
+>Use o item da calculadora como se fosse uma calculadora normal, assim que terminar, deixe-a ao clicar no botão <guibutton
+>=</guibutton
+> ou pressione a tecla <keycap
+>=</keycap
+> do seu teclado. </para>
 </sect2>
 
 <sect2 id="reference.widgets.payee">
@@ -126,60 +142,58 @@
 >Item de Pagador/Beneficiário</title>
 
 <para
->Quando lhe for pedido para inserir um pagador/beneficiário para uma determinada transação, você poderá começar a inserir o nome, pressionando as teclas do seu teclado. Enquanto forem existindo itens na lista de pagadores/beneficiários mantidos pelo &kappname;, os mesmos são apresentados numa área abaixo ou acima do campo de texto. Usando o mouse ou as teclas para cima/baixo, poderá selecionar um nome dessa lista. Ao usar adicionalmente o teclado, será obrigado a selecionar o item com a tecla RETURN. </para>
+>O widget para inserir um Beneficiário/Pagador é muito semelhante a uma caixa de combinação típica - mas possui alguns recursos adicionais. </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Dica do Dia</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payee_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Elemento de pagador</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Widget do beneficiário</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Widget do beneficiário</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para
->Se for inserido um nome que não seja conhecido do &kappname;, será questionado se deseja criar ou não um registro novo de pagador/beneficiário. Se não quiser fazer isso, então o campo ficará em branco. Caso contrário, será criado o registro e adicionado à lista. </para>
+>Quando for solicitado que você insira um beneficiário/pagador para uma transação, você pode começar a digitar o nome pressionando as teclas do seu teclado. Contanto que haja entradas na lista de beneficiários/pagadores mantida pelo &kmymoney; que correspondam aos caracteres digitados, elas serão apresentadas em uma caixa abaixo ou acima da área de entrada de texto. Usando o mouse ou as teclas &Up;/&Down;, você pode selecionar um nome dessa lista. Usar o teclado também exige que você selecione a entrada pressionando a tecla &Enter;. Clicar no X à direita da área de entrada limpa o campo. Clicar na seta para baixo à direita do X exibe a lista completa de possíveis beneficiários/pagadores. </para>
 
 <para
->Assim que o campo de texto tiver caracteres, a lista irá apresentar os beneficiários que correspondam à sequência de caracteres inserida. Faça um duplo-clique sobre a seta da lista para mostrar todos os beneficiários na lista. </para>
-
+>Se for inserido um nome que não seja conhecido do &kmymoney; será questionado se deseja criar ou não um registro novo de pagador/beneficiário. Se não quiser fazer isso, então o campo ficará em branco. Caso contrário, será criado o registro e adicionado à lista. </para>
 </sect2>
 
 <sect2 id="reference.widgets.category">
 <title
->Item de categoria/conta</title>
+>Entrada de categoria/conta</title>
 
 <para
->Quando lhe for pedido para inserir uma categoria ou conta, você poderá começar a inserir o nome, pressionando as teclas do seu teclado. Enquanto forem existindo itens na lista de itens correspondentes mantidos pelo &kappname;, os mesmos são apresentados numa área abaixo ou acima do campo de texto. Se usar o mouse ou as teclas para cima/baixo, poderá selecionar um nome dessa lista. Se usar adicionalmente o teclado, será obrigado a selecionar o item com a tecla RETURN. </para>
+>O campo para inserir uma Categoria ou Conta é muito semelhante ao descrito acima para Beneficiários/Pagadores. </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Dica do Dia</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="category_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Elemento de categorias</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Widget de categoria</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="category_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Widget de categoria</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para
->Se for inserido um nome que não seja conhecido do &kappname;, será questionado se deseja criar ou não um registro novo de categoria. Se não quiser fazer isso, então o campo ficará em branco. Caso contrário, será criado o registro e adicionado à lista. </para>
-
-<para
->Assim que o campo de texto tiver caracteres, a lista irá apresentar as categorias/contas que correspondam à sequência de caracteres inserida. Faça um duplo-clique sobre a seta da lista para mostrar a lista completa. </para>
+>À direita do campo de entrada, entre o X para limpá-lo e a seta para baixo para exibir a lista completa, há um ícone de divisão que abre o <link linkend="details.ledgers.split"
+>Editor de divisão</link
+> </para>
 
 </sect2>
 </sect1>
