@@ -206,15 +206,6 @@ public:
         q->setMinimumHeight(height);
     }
 
-    void cut()
-    {
-        Q_Q(AmountEdit);
-        // only cut if parts of the text are selected
-        if (q->hasSelectedText() && (q->text() != q->selectedText())) {
-            cut();
-        }
-    }
-
     bool hasMultipleCurrencies() const
     {
         return m_sharesCommodity.id().compare(m_valueCommodity.id());
@@ -551,7 +542,6 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         switch (event->key()) {
         case Qt::Key_Plus:
         case Qt::Key_Minus:
-            d->cut();
             if (text().length() == 0) {
                 break;
             }
@@ -568,7 +558,6 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         case Qt::Key_Slash:
         case Qt::Key_Asterisk:
         case Qt::Key_Percent:
-            d->cut();
             d->calculatorOpen(event);
             return;
 
