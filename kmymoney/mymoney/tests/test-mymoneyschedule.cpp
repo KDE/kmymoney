@@ -1029,3 +1029,139 @@ void MyMoneyScheduleTest::testFixDate()
     s.fixDate(testDate);
     QCOMPARE(testDate, QDate(2022, 1, 31));
 }
+
+void MyMoneyScheduleTest::testPaymentDates()
+{
+    MyMoneySchedule s;
+    s.setStartDate(QDate(2025, 1, 2));
+    s.setOccurrencePeriod(Schedule::Occurrence::Daily);
+    s.setOccurrenceMultiplier(1);
+    s.setNextDueDate(s.startDate().addMonths(1));
+    s.setLastPayment(s.startDate());
+
+    QList<QDate> dates;
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 3, 2));
+    QCOMPARE(dates.count(), 29);
+    QCOMPARE(dates.at(27), QDate(2025, 3, 1));
+    QCOMPARE(dates.at(28), QDate(2025, 3, 2));
+
+    s.setOccurrenceMultiplier(2);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 3, 2));
+    QCOMPARE(dates.count(), 15);
+    QCOMPARE(dates.at(13), QDate(2025, 2, 28));
+    QCOMPARE(dates.at(14), QDate(2025, 3, 2));
+
+    s.setOccurrencePeriod(Schedule::Occurrence::Weekly);
+    s.setOccurrenceMultiplier(1);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 3, 2));
+    QCOMPARE(dates.count(), 5);
+    QCOMPARE(dates.at(3), QDate(2025, 2, 23));
+    QCOMPARE(dates.at(4), QDate(2025, 3, 2));
+
+    s.setOccurrenceMultiplier(2);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 3, 2));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 2, 16));
+    QCOMPARE(dates.at(2), QDate(2025, 3, 2));
+
+    s.setOccurrenceMultiplier(3);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 4, 26));
+    QCOMPARE(dates.count(), 4);
+    QCOMPARE(dates.at(1), QDate(2025, 2, 23));
+    QCOMPARE(dates.at(2), QDate(2025, 3, 16));
+    QCOMPARE(dates.at(3), QDate(2025, 4, 6));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryOtherWeek);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 3, 2));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 2, 16));
+    QCOMPARE(dates.at(2), QDate(2025, 3, 2));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryThreeWeeks);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 4, 26));
+    QCOMPARE(dates.count(), 4);
+    QCOMPARE(dates.at(1), QDate(2025, 2, 23));
+    QCOMPARE(dates.at(2), QDate(2025, 3, 16));
+    QCOMPARE(dates.at(3), QDate(2025, 4, 6));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryFourWeeks);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 4, 26));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 3, 2));
+    QCOMPARE(dates.at(2), QDate(2025, 3, 30));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryEightWeeks);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 5, 26));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 3, 30));
+    QCOMPARE(dates.at(2), QDate(2025, 5, 25));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryThirtyDays);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 4, 26));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 3, 4));
+    QCOMPARE(dates.at(2), QDate(2025, 4, 3));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::Monthly);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 5, 26));
+    QCOMPARE(dates.count(), 4);
+    QCOMPARE(dates.at(1), QDate(2025, 3, 2));
+    QCOMPARE(dates.at(2), QDate(2025, 4, 2));
+    QCOMPARE(dates.at(3), QDate(2025, 5, 2));
+
+    s.setOccurrenceMultiplier(2);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 5, 26));
+    QCOMPARE(dates.count(), 2);
+    QCOMPARE(dates.at(1), QDate(2025, 4, 2));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryOtherMonth);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 5, 26));
+    QCOMPARE(dates.count(), 2);
+    QCOMPARE(dates.at(1), QDate(2025, 4, 2));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryThreeMonths);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 8, 26));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 5, 2));
+    QCOMPARE(dates.at(2), QDate(2025, 8, 2));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::Quarterly);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 5, 26));
+    QCOMPARE(dates.count(), 2);
+    QCOMPARE(dates.at(1), QDate(2025, 5, 2));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryFourMonths);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2026, 2, 1));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 6, 2));
+    QCOMPARE(dates.at(2), QDate(2025, 10, 2));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::TwiceYearly);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2026, 2, 3));
+    QCOMPARE(dates.count(), 3);
+    QCOMPARE(dates.at(1), QDate(2025, 8, 2));
+    QCOMPARE(dates.at(2), QDate(2026, 2, 2));
+
+    s.setOccurrenceMultiplier(1);
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryHalfMonth);
+    dates = s.paymentDates(QDate(2025, 2, 2), QDate(2025, 5, 26));
+    QCOMPARE(dates.count(), 8);
+    QCOMPARE(dates.at(1), QDate(2025, 2, 17));
+    QCOMPARE(dates.at(2), QDate(2025, 3, 2));
+    QCOMPARE(dates.at(3), QDate(2025, 3, 17));
+    QCOMPARE(dates.at(4), QDate(2025, 4, 2));
+    QCOMPARE(dates.at(5), QDate(2025, 4, 17));
+    QCOMPARE(dates.at(6), QDate(2025, 5, 2));
+    QCOMPARE(dates.at(7), QDate(2025, 5, 17));
+}
