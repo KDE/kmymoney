@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-12-28 00:43+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -5301,8 +5301,8 @@ msgid "Unable to duplicate transaction(s)"
 msgstr "  سودا"
 
 #: kmymoney/kmymoney.cpp:2289 kmymoney/mymoney/splitmodel.cpp:200
-#: kmymoney/mymoney/splitmodel.cpp:205 kmymoney/widgets/amountedit.cpp:292
-#: kmymoney/widgets/amountedit.cpp:349 kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/mymoney/splitmodel.cpp:205 kmymoney/widgets/amountedit.cpp:283
+#: kmymoney/widgets/amountedit.cpp:340 kmymoney/widgets/creditdebitedit.cpp:128
 #: kmymoney/widgets/creditdebitedit.cpp:129
 #: kmymoney/widgets/creditdebitedit.cpp:160
 #: kmymoney/widgets/creditdebitedit.cpp:161
@@ -7893,137 +7893,137 @@ msgstr "كۈمۈشرەڭ"
 msgid "Opening Balances"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:880
+#: kmymoney/mymoney/mymoneyschedule.cpp:932
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Once"
 msgstr "بىر قېتىملىق"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:882
+#: kmymoney/mymoney/mymoneyschedule.cpp:934
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Daily"
 msgstr "كۈندە"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:884
+#: kmymoney/mymoney/mymoneyschedule.cpp:936
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Weekly"
 msgstr "ھەر ھەپتىدە"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:886
+#: kmymoney/mymoney/mymoneyschedule.cpp:938
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Fortnightly"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:888
-#: kmymoney/mymoney/mymoneyschedule.cpp:938
+#: kmymoney/mymoney/mymoneyschedule.cpp:940
+#: kmymoney/mymoney/mymoneyschedule.cpp:990
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:890
+#: kmymoney/mymoney/mymoneyschedule.cpp:942
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every half month"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:892
-#: kmymoney/mymoney/mymoneyschedule.cpp:941
+#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:993
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:894
-#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:946
+#: kmymoney/mymoney/mymoneyschedule.cpp:996
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:896
-#: kmymoney/mymoney/mymoneyschedule.cpp:929
+#: kmymoney/mymoney/mymoneyschedule.cpp:948
+#: kmymoney/mymoney/mymoneyschedule.cpp:981
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every thirty days"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:898
+#: kmymoney/mymoney/mymoneyschedule.cpp:950
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Monthly"
 msgstr "ھەر ئايدا"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:900
-#: kmymoney/mymoney/mymoneyschedule.cpp:947
+#: kmymoney/mymoney/mymoneyschedule.cpp:952
+#: kmymoney/mymoney/mymoneyschedule.cpp:999
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:902
-#: kmymoney/mymoney/mymoneyschedule.cpp:959
+#: kmymoney/mymoney/mymoneyschedule.cpp:954
+#: kmymoney/mymoney/mymoneyschedule.cpp:1011
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:904
-#: kmymoney/mymoney/mymoneyschedule.cpp:962
+#: kmymoney/mymoney/mymoneyschedule.cpp:956
+#: kmymoney/mymoney/mymoneyschedule.cpp:1014
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three months"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:906
+#: kmymoney/mymoney/mymoneyschedule.cpp:958
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
 msgstr "پەسىللىك"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:908
-#: kmymoney/mymoney/mymoneyschedule.cpp:965
+#: kmymoney/mymoney/mymoneyschedule.cpp:960
+#: kmymoney/mymoney/mymoneyschedule.cpp:1017
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four months"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:910
-#: kmymoney/mymoney/mymoneyschedule.cpp:968
+#: kmymoney/mymoney/mymoneyschedule.cpp:962
+#: kmymoney/mymoney/mymoneyschedule.cpp:1020
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Twice yearly"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:912
+#: kmymoney/mymoney/mymoneyschedule.cpp:964
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Yearly"
 msgstr "ھەر يىلى"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:914
-#: kmymoney/mymoney/mymoneyschedule.cpp:977
+#: kmymoney/mymoney/mymoneyschedule.cpp:966
+#: kmymoney/mymoney/mymoneyschedule.cpp:1029
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other year"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:915
+#: kmymoney/mymoney/mymoneyschedule.cpp:967
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Any"
 msgstr "خالىغان"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:924
+#: kmymoney/mymoney/mymoneyschedule.cpp:976
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:932
+#: kmymoney/mymoney/mymoneyschedule.cpp:984
 #, fuzzy, kde-format
 #| msgctxt "Forecast days"
 #| msgid "%1 day"
@@ -8032,146 +8032,146 @@ msgctxt "Frequency of schedule"
 msgid "Every %1 days"
 msgstr "%1 كۈن"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:950
+#: kmymoney/mymoney/mymoneyschedule.cpp:1002
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:954
+#: kmymoney/mymoney/mymoneyschedule.cpp:1006
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 half months"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:971
+#: kmymoney/mymoney/mymoneyschedule.cpp:1023
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 months"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:980
+#: kmymoney/mymoney/mymoneyschedule.cpp:1032
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 years"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:990
+#: kmymoney/mymoney/mymoneyschedule.cpp:1042
 msgctxt "Schedule occurrence period"
 msgid "Any"
 msgstr "خالىغان"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:993
+#: kmymoney/mymoney/mymoneyschedule.cpp:1045
 msgctxt "Schedule occurrence period"
 msgid "Once"
 msgstr "بىر قېتىملىق"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:995
+#: kmymoney/mymoney/mymoneyschedule.cpp:1047
 msgctxt "Schedule occurrence period"
 msgid "Day"
 msgstr "كۈن"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:997
+#: kmymoney/mymoney/mymoneyschedule.cpp:1049
 msgctxt "Schedule occurrence period"
 msgid "Week"
 msgstr "ھەپتە"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:999
+#: kmymoney/mymoney/mymoneyschedule.cpp:1051
 msgctxt "Schedule occurrence period"
 msgid "Half-month"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1001
+#: kmymoney/mymoney/mymoneyschedule.cpp:1053
 msgctxt "Schedule occurrence period"
 msgid "Month"
 msgstr "ئاي"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1003
+#: kmymoney/mymoney/mymoneyschedule.cpp:1055
 msgctxt "Schedule occurrence period"
 msgid "Year"
 msgstr "يىل"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1013
+#: kmymoney/mymoney/mymoneyschedule.cpp:1065
 msgctxt "Scheduled transaction type"
 msgid "Bill"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1016
+#: kmymoney/mymoney/mymoneyschedule.cpp:1068
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
 msgstr "ئامانەت پۇل"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1019
+#: kmymoney/mymoney/mymoneyschedule.cpp:1071
 msgctxt "Scheduled transaction type"
 msgid "Transfer"
 msgstr "يوللا"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1022
+#: kmymoney/mymoney/mymoneyschedule.cpp:1074
 msgctxt "Scheduled transaction type"
 msgid "Loan payment"
 msgstr "قەرز قايتۇرۇش"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1026
+#: kmymoney/mymoney/mymoneyschedule.cpp:1078
 msgctxt "Scheduled transaction type"
 msgid "Unknown"
 msgstr "نامەلۇم"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1035
+#: kmymoney/mymoney/mymoneyschedule.cpp:1087
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
 msgstr "بىۋاسىتە دېبېت"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1038
+#: kmymoney/mymoney/mymoneyschedule.cpp:1090
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
 msgstr "بىۋاسىتە پۇل ئامانەت"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1041
+#: kmymoney/mymoney/mymoneyschedule.cpp:1093
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1044
+#: kmymoney/mymoney/mymoneyschedule.cpp:1096
 msgctxt "Scheduled Transaction payment type"
 msgid "Other"
 msgstr "باشقا"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1047
+#: kmymoney/mymoney/mymoneyschedule.cpp:1099
 msgctxt "Scheduled Transaction payment type"
 msgid "Write check"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1050
+#: kmymoney/mymoney/mymoneyschedule.cpp:1102
 msgctxt "Scheduled Transaction payment type"
 msgid "Standing order"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1053
+#: kmymoney/mymoney/mymoneyschedule.cpp:1105
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1056
+#: kmymoney/mymoney/mymoneyschedule.cpp:1108
 msgctxt "Scheduled Transaction payment type"
 msgid "Any (Error)"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1068
+#: kmymoney/mymoney/mymoneyschedule.cpp:1120
 #: kmymoney/views/keditscheduledlg.ui:164
 #, kde-format
 msgid "Change the date to the previous processing day"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1071
+#: kmymoney/mymoney/mymoneyschedule.cpp:1123
 #: kmymoney/views/keditscheduledlg.ui:169
 #, kde-format
 msgid "Change the date to the next processing day"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1074
+#: kmymoney/mymoney/mymoneyschedule.cpp:1126
 #: kmymoney/views/keditscheduledlg.ui:159
 #, kde-format
 msgid "Do not change the date"
@@ -21528,14 +21528,14 @@ msgstr ""
 msgid "Tab Order Editor"
 msgstr ""
 
-#: kmymoney/widgets/amountedit.cpp:273
+#: kmymoney/widgets/amountedit.cpp:264
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr ""
 
-#: kmymoney/widgets/amountedit.cpp:280
+#: kmymoney/widgets/amountedit.cpp:271
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."

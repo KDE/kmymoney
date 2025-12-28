@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-12-28 00:43+0000\n"
 "PO-Revision-Date: 2025-10-26 20:52+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -5495,8 +5495,8 @@ msgid "Unable to duplicate transaction(s)"
 msgstr "Kan inte duplicera transaktion(er)"
 
 #: kmymoney/kmymoney.cpp:2289 kmymoney/mymoney/splitmodel.cpp:200
-#: kmymoney/mymoney/splitmodel.cpp:205 kmymoney/widgets/amountedit.cpp:292
-#: kmymoney/widgets/amountedit.cpp:349 kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/mymoney/splitmodel.cpp:205 kmymoney/widgets/amountedit.cpp:283
+#: kmymoney/widgets/amountedit.cpp:340 kmymoney/widgets/creditdebitedit.cpp:128
 #: kmymoney/widgets/creditdebitedit.cpp:129
 #: kmymoney/widgets/creditdebitedit.cpp:160
 #: kmymoney/widgets/creditdebitedit.cpp:161
@@ -8095,282 +8095,282 @@ msgstr "Silver"
 msgid "Opening Balances"
 msgstr "Ingående behållningar"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:880
+#: kmymoney/mymoney/mymoneyschedule.cpp:932
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Once"
 msgstr "En gång"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:882
+#: kmymoney/mymoney/mymoneyschedule.cpp:934
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Daily"
 msgstr "Dagligen"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:884
+#: kmymoney/mymoney/mymoneyschedule.cpp:936
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Weekly"
 msgstr "Veckovis"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:886
+#: kmymoney/mymoney/mymoneyschedule.cpp:938
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Fortnightly"
 msgstr "Var fjortonde dag"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:888
-#: kmymoney/mymoney/mymoneyschedule.cpp:938
+#: kmymoney/mymoney/mymoneyschedule.cpp:940
+#: kmymoney/mymoney/mymoneyschedule.cpp:990
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
 msgstr "Varannan vecka"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:890
+#: kmymoney/mymoney/mymoneyschedule.cpp:942
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every half month"
 msgstr "Två gånger i månaden"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:892
-#: kmymoney/mymoney/mymoneyschedule.cpp:941
+#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:993
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
 msgstr "Var tredje vecka"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:894
-#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:946
+#: kmymoney/mymoney/mymoneyschedule.cpp:996
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
 msgstr "Var fjärde vecka"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:896
-#: kmymoney/mymoney/mymoneyschedule.cpp:929
+#: kmymoney/mymoney/mymoneyschedule.cpp:948
+#: kmymoney/mymoney/mymoneyschedule.cpp:981
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every thirty days"
 msgstr "Var trettionde dag"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:898
+#: kmymoney/mymoney/mymoneyschedule.cpp:950
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Monthly"
 msgstr "Månadsvis"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:900
-#: kmymoney/mymoney/mymoneyschedule.cpp:947
+#: kmymoney/mymoney/mymoneyschedule.cpp:952
+#: kmymoney/mymoney/mymoneyschedule.cpp:999
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
 msgstr "Var åttonde vecka"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:902
-#: kmymoney/mymoney/mymoneyschedule.cpp:959
+#: kmymoney/mymoney/mymoneyschedule.cpp:954
+#: kmymoney/mymoney/mymoneyschedule.cpp:1011
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
 msgstr "Varannan månad"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:904
-#: kmymoney/mymoney/mymoneyschedule.cpp:962
+#: kmymoney/mymoney/mymoneyschedule.cpp:956
+#: kmymoney/mymoney/mymoneyschedule.cpp:1014
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three months"
 msgstr "Var tredje månad"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:906
+#: kmymoney/mymoney/mymoneyschedule.cpp:958
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
 msgstr "Kvartalsvis"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:908
-#: kmymoney/mymoney/mymoneyschedule.cpp:965
+#: kmymoney/mymoney/mymoneyschedule.cpp:960
+#: kmymoney/mymoney/mymoneyschedule.cpp:1017
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four months"
 msgstr "Var fjärde månad"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:910
-#: kmymoney/mymoney/mymoneyschedule.cpp:968
+#: kmymoney/mymoney/mymoneyschedule.cpp:962
+#: kmymoney/mymoney/mymoneyschedule.cpp:1020
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Twice yearly"
 msgstr "Två gånger om året"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:912
+#: kmymoney/mymoney/mymoneyschedule.cpp:964
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Yearly"
 msgstr "Årligen"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:914
-#: kmymoney/mymoney/mymoneyschedule.cpp:977
+#: kmymoney/mymoney/mymoneyschedule.cpp:966
+#: kmymoney/mymoney/mymoneyschedule.cpp:1029
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other year"
 msgstr "Vartannat år"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:915
+#: kmymoney/mymoney/mymoneyschedule.cpp:967
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Any"
 msgstr "Godtycklig"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:924
+#: kmymoney/mymoney/mymoneyschedule.cpp:976
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
 msgstr "%1 gånger"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:932
+#: kmymoney/mymoney/mymoneyschedule.cpp:984
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 days"
 msgstr "Med %1 dagars mellanrum"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:950
+#: kmymoney/mymoney/mymoneyschedule.cpp:1002
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
 msgstr "Med %1 veckors mellanrum"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:954
+#: kmymoney/mymoney/mymoneyschedule.cpp:1006
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 half months"
 msgstr "Med %1 halva månaders mellanrum"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:971
+#: kmymoney/mymoney/mymoneyschedule.cpp:1023
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 months"
 msgstr "Med %1 månaders mellanrum"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:980
+#: kmymoney/mymoney/mymoneyschedule.cpp:1032
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 years"
 msgstr "Med %1 års mellanrum"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:990
+#: kmymoney/mymoney/mymoneyschedule.cpp:1042
 msgctxt "Schedule occurrence period"
 msgid "Any"
 msgstr "Godtycklig"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:993
+#: kmymoney/mymoney/mymoneyschedule.cpp:1045
 msgctxt "Schedule occurrence period"
 msgid "Once"
 msgstr "En gång"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:995
+#: kmymoney/mymoney/mymoneyschedule.cpp:1047
 msgctxt "Schedule occurrence period"
 msgid "Day"
 msgstr "Dag"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:997
+#: kmymoney/mymoney/mymoneyschedule.cpp:1049
 msgctxt "Schedule occurrence period"
 msgid "Week"
 msgstr "Vecka"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:999
+#: kmymoney/mymoney/mymoneyschedule.cpp:1051
 msgctxt "Schedule occurrence period"
 msgid "Half-month"
 msgstr "Halv månad"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1001
+#: kmymoney/mymoney/mymoneyschedule.cpp:1053
 msgctxt "Schedule occurrence period"
 msgid "Month"
 msgstr "Månad"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1003
+#: kmymoney/mymoney/mymoneyschedule.cpp:1055
 msgctxt "Schedule occurrence period"
 msgid "Year"
 msgstr "År"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1013
+#: kmymoney/mymoney/mymoneyschedule.cpp:1065
 msgctxt "Scheduled transaction type"
 msgid "Bill"
 msgstr "Räkning"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1016
+#: kmymoney/mymoney/mymoneyschedule.cpp:1068
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
 msgstr "Insättning"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1019
+#: kmymoney/mymoney/mymoneyschedule.cpp:1071
 msgctxt "Scheduled transaction type"
 msgid "Transfer"
 msgstr "Överföring"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1022
+#: kmymoney/mymoney/mymoneyschedule.cpp:1074
 msgctxt "Scheduled transaction type"
 msgid "Loan payment"
 msgstr "Låneinbetalning"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1026
+#: kmymoney/mymoney/mymoneyschedule.cpp:1078
 msgctxt "Scheduled transaction type"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1035
+#: kmymoney/mymoney/mymoneyschedule.cpp:1087
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
 msgstr "Direkt debet"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1038
+#: kmymoney/mymoney/mymoneyschedule.cpp:1090
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
 msgstr "Direkt insättning"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1041
+#: kmymoney/mymoney/mymoneyschedule.cpp:1093
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
 msgstr "Manuell insättning"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1044
+#: kmymoney/mymoney/mymoneyschedule.cpp:1096
 msgctxt "Scheduled Transaction payment type"
 msgid "Other"
 msgstr "Annan"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1047
+#: kmymoney/mymoney/mymoneyschedule.cpp:1099
 msgctxt "Scheduled Transaction payment type"
 msgid "Write check"
 msgstr "Skriv check"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1050
+#: kmymoney/mymoney/mymoneyschedule.cpp:1102
 msgctxt "Scheduled Transaction payment type"
 msgid "Standing order"
 msgstr "Stående order"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1053
+#: kmymoney/mymoney/mymoneyschedule.cpp:1105
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
 msgstr "Banköverföring"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1056
+#: kmymoney/mymoney/mymoneyschedule.cpp:1108
 msgctxt "Scheduled Transaction payment type"
 msgid "Any (Error)"
 msgstr "Godtycklig (fel)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1068
+#: kmymoney/mymoney/mymoneyschedule.cpp:1120
 #: kmymoney/views/keditscheduledlg.ui:164
 #, kde-format
 msgid "Change the date to the previous processing day"
 msgstr "Ändra datumet till föregående behandlingsdag"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1071
+#: kmymoney/mymoney/mymoneyschedule.cpp:1123
 #: kmymoney/views/keditscheduledlg.ui:169
 #, kde-format
 msgid "Change the date to the next processing day"
 msgstr "Ändra datumet till nästa behandlingsdag"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1074
+#: kmymoney/mymoney/mymoneyschedule.cpp:1126
 #: kmymoney/views/keditscheduledlg.ui:159
 #, kde-format
 msgid "Do not change the date"
@@ -21880,7 +21880,7 @@ msgstr "Flikordningslista..."
 msgid "Tab Order Editor"
 msgstr "Flikordningseditor"
 
-#: kmymoney/widgets/amountedit.cpp:273
+#: kmymoney/widgets/amountedit.cpp:264
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21888,7 +21888,7 @@ msgid ""
 msgstr ""
 "Värdet presenteras i %1. Tryck på knappen för att ändra valuta till %2."
 
-#: kmymoney/widgets/amountedit.cpp:280
+#: kmymoney/widgets/amountedit.cpp:271
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
