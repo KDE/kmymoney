@@ -4,200 +4,266 @@
   <authorgroup>
     <author
 >&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->21/07/2011</date>
+>01/12/2024</date>
   <releaseinfo
->4.6</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
->Banco de Dados</title>
+>Banco de dados</title>
 
-<sect1 id="details.database.usage">
-<title
->Usar bases de dados relacionais</title>
+<sect1 id="details.database.usage"
+><title
+>Uso de banco de dados relacionais</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Introdução</title>
 <para
->Desde a versão 1.0, o &kappname; permite-lhe manter os seus dados em um banco de dados relacional. Uma das vantagens de usar este formato-padrão da indústria é que lhe permite ver os seus dados com uma das interfaces gráficas, como o OpenOffice.org<trademark class="copyright"
-></trademark
-> ou LibreOffice<trademark class="copyright"
-></trademark
->, talvez num formato que o &kappname; não forneça no momento. Do mesmo modo, um pouco de conhecimento de SQL (Structured Query Language, a linguagem usada em todo o mundo para acessar bancos de dados relacionais) deverá lhe permitir exportar dados mais facilmente para um programa externo, como uma aplicação de orçamentos. </para>
-<para/>
+>Desde a versão 1.0, o &kmymoney; permite-lhe manter os seus dados em um banco de dados relacional. Uma das vantagens de usar esse formato padrão da indústria é que lhe permite ver os seus dados usando interfaces gráficas, como o <trademark
+>OpenOffice.org</trademark
+> ou <trademark
+>LibreOffice</trademark
+>, talvez num formato que o &kmymoney; não forneça no momento. Do mesmo modo, um pouco de conhecimento de <acronym
+><ulink url="https://en.wikipedia.org/wiki/SQL"
+>SQL</ulink
+> </acronym
+> (<quote
+>Structured Query Language</quote
+>, a linguagem usada em todo o mundo para acessar bancos de dados relacionais) deverá lhe permitir exportar dados mais facilmente para um programa externo, como um aplicativo de orçamentos. </para>
+
+<note>
+  <para
+>Embora a maioria dos sistemas de banco de dados relacionais permita o acesso simultâneo a um banco de dados por mais de um usuário, isso não é possível com o &kmymoney;. Mesmo que o &kmymoney; possa armazenar seus dados em um banco de dados relacional, ele na verdade usa o banco de dados apenas como um tipo diferente de armazenamento de arquivos. Quando você abre seu arquivo, o programa lê todos os dados do banco de dados. Conforme você trabalha com seus dados, as alterações são feitas apenas no armazenamento interno; elas não são gravadas imediatamente de volta no banco de dados. Somente quando você salva seus dados, o &kmymoney; grava o arquivo inteiro de volta no banco de dados. </para>
+
+  <para
+>Tem havido solicitações para que a &kmymoney; atualize o banco de dados para cada alteração de dados, mas isso exigiria uma mudança significativa em toda a forma como o programa gerencia suas estruturas de dados internas, portanto, é extremamente improvável que isso aconteça em um futuro próximo. </para>
+</note>
 </sect2>
 
 <sect2
 ><title
 >Preparação</title>
-
 <para
->Para acessar bancos dados, o &kappname; usa o módulo de SQL fornecido pela &Qt; Software, como parte do seu sistema de programação &Qt;. Este módulo suporta um conjunto de diferentes bancos de dados, através de uma coleção de controladores. Entre os sistemas 'open-source' mais conhecidos, para os quais existem controladores disponíveis, está o MySQL<trademark class="registered"
-></trademark
->, o SQLite (versão 3 e superiores somente) e o PostgreSQL. O módulo também suporta bancos de dados mais 'pesados' e mais industriais, como o Oracle<trademark class="registered"
-></trademark
-> e o IBM DB2<trademark class="registered"
-></trademark
+>Para acessar o banco de dados, o &kmymoney; usa o módulo SQL fornecido pela &Qt; Software como parte de seu sistema de programação &Qt;. Este módulo suporta muitos sistemas de banco de dados por meio de uma coleção de drivers. O &Qt; possui drivers para um grande número de sistemas de banco de dados relacionais de código aberto e proprietários, incluindo <trademark
+>MySQL</trademark
+>, PostgreSQL e SQLCipher. O módulo também suporta alguns sistemas mais "pesados", mais industriais, como <trademark class="registered"
+>Oracle</trademark
+> e IBM <trademark class="registered"
+>DB2</trademark
 >. </para>
 
 <para
->Com a exceção do SQLite, estes sistemas usam um modelo cliente/servidor, onde o 'software' do cliente reside na 'sua' máquina, enquanto o servidor reside na mesma máquina que o banco de dados em si, podendo estar em outra máquina qualquer de uma rede. Obviamente, no cenário normal de uma aplicação de finanças pessoais como o &kappname;, a 'sua' máquina atua tanto como cliente como servidor. A sua primeira tarefa será, deste modo, decidir qual o sistema de banco de dados deseja usar, instalar as aplicações do cliente e, muito provavelmente, as de servidor. </para>
+>As versões anteriores do &kmymoney; suportavam <ulink url="https://www.sqlite.org"
+>SQLite</ulink
+>. Isso foi substituído pelo suporte ao <ulink url="https://www.zetetic.net/sqlcipher"
+>SQLCipher</ulink
+>, que é um fork independente da biblioteca de banco de dados SQLite que adiciona criptografia AES de 256 bits e outros recursos de segurança. O driver SQLCipher lerá arquivos SQLite existentes. Consulte a seção abaixo sobre <link linkend="details.database.sqlcipher"
+>SQLCipher</link
+> para obter mais detalhes. </para>
 
 <para
->Além da aplicação de banco de dados em si, você deverá também já ter instalado o módulo controlador respectivo do &Qt; A maioria das distribuições irão incluir módulos controladores para os bancos de dados mais conhecidos Caso contrário, verifique na <ulink url="http://qt-project.org"
->página Web da &Qt; Software</ulink
-> e procure por 'SQL drivers' (controladores de SQL) </para>
+>Com exceção do SQLCipher, estes sistemas usam um modelo cliente/servidor, onde o software do 'cliente' reside na 'sua' máquina, enquanto o servidor reside na mesma máquina que o banco de dados em si, podendo estar em outra máquina qualquer de uma rede. Obviamente, no cenário normal de um aplicativo de finanças pessoais como o &kmymoney;, a 'sua' máquina pode atuar tanto como cliente como servidor. A sua primeira tarefa será, deste modo, decidir qual o sistema de banco de dados deseja usar, instalar o software do cliente e, muito provavelmente, do servidor. </para>
+
+<para
+>Além do software de banco de dados em si, você deverá também instalar o módulo controlador respectivo do &Qt; A maioria das distribuições &Linux; irão incluir módulos controladores para os bancos de dados mais conhecidos. Caso contrário, verifique no <ulink url="https://www.qt.io/"
+>site da &Qt; Software</ulink
+> e procure por <quote
+>SQL drivers</quote
+> (controladores de SQL). </para>
 
 <note>
   <para
->O SQLite não funciona num modelo cliente/servidor; cada base de dados é guardada em um arquivo normal, local ou remoto, que é acessado com os métodos normais oferecidos pelo sistema operacional correspondente. Nesse caso, todavia, só existirá um pacote de aplicação e o driver para instalar. Do mesmo modo, algumas das informações a seguir, em particular as relacionadas com a administração, poderão não se aplicar ao SQLite. </para>
+>O SQLCipher e SQLite não funcionam num modelo cliente/servidor; cada banco de dados é guardado em um arquivo normal, local ou remoto, que é acessado com os métodos normais oferecidos pelo sistema operacional correspondente. Nesse caso, todavia, só existirá um pacote de aplicação e o driver para instalar. Do mesmo modo, algumas das informações a seguir, em particular as relacionadas com a administração, poderão não se aplicar. </para>
 </note>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Administração</title>
+<para
+>Consultar bancos de dados é um pouco mais complexo que lidar com arquivos normais Cada sistema possui diferentes métodos para efetuar essas tarefas administrativas necessárias que são a criação de bancos de dados, a atribuição de permissões a vários usuários ou a criação de cópias de segurança. A descrição destes métodos está fora do escopo deste manual, mas todos os produtos suportados oferecem documentação de referência extensa; além disso, uma pesquisa rápida na Web apontará vários tutoriais sobre o assunto. </para>
+
+<sect3
+><title
+>Criação do banco de dados</title>
+<para
+>O &kmymoney; inclui código SQL para criar um banco de dados inicial que guarda os seus dados, caso não exista nenhum. Contudo, é altamente recomendado que crie previamente um banco de dados, porque a maioria dos produtos oferecem um conjunto de opções que poderão ser relevantes. Uma que poderá ser de especial importância seria a designação da codificação de caracteres (&eg;, UTF-8) a usar nos campos de texto. </para>
 
 <para
->Consultar bancos de dados é um pouco mais complexo que lidar com arquivos normais Cada sistema possui diferentes métodos para efetuar essas tarefas administrativas necessárias que são a criação de bancos de dados, a atribuição de permissões a vários usuários, a criação de cópias de segurança, &etc; A descrição destes métodos está fora do escopo deste manual, mas todos os produtos suportados oferecem documentação de referência extensa; além disso, uma pesquisa rápida na Web apontará vários tutoriais sobre o assunto. </para>
-
-<sect3>
-<title
->Criar a base de dados</title>
+>Neste momento, também será necessário definir as permissões para os vários usuários efetuarem diferentes operações no banco de dados. Na maioria dos sistemas, o usuário que cria o banco de dados terá automaticamente todas as permissões, mas isto é uma área em que a respectiva documentação deverá ser consultada. </para>
 
 <para
->O código foi incluído para criar um banco de dados inicial que guarda os seus dados, caso não exista nenhum. Contudo, é altamente recomendado que crie previamente um banco de dados, porque a maioria dos produtos oferecem um conjunto de opções que poderão ser relevantes. Uma que poderá ser de especial importância seria a designação da codificação de caracteres (&eg;, UTF-8) a usar nos campos de texto. </para>
-
-<para
->Neste momento, você irá também precisar definir as permissões para os vários usuários efetuarem diferentes operações sobre a base de dados. Na maioria dos sistemas, o usuário que cria o banco de dados terá automaticamente todas as permissões, mas isto é uma área em que a respectiva documentação deverá ser consultada. </para>
-
-<para
->Para a sua primeira utilização do banco de dados e, ocasionalmente em outras situações em que a disposição do banco de dados mudar, você irá precisar de permissões (também chamadas de privilégios) para criar e alterar as tabelas e vistas (veja o próximo parágrafo). Poderão existir diferentes nomes para as permissões/privilégios nos vários sistemas, mas algo do tipo CREATE e ALTER deverão ser lugar comum. Para uma execução normal, você deverá ser capaz de ler e gravar registros, sendo normalmente denominados em SQL como permissões para SELECT, INSERT, UPDATE e DELETE. </para>
+>Para a sua primeira utilização do banco de dados e, ocasionalmente em outras situações em que o layout do banco de dados mudar, você irá precisar de permissões (também chamadas de privilégios) para criar e alterar as tabelas e vistas (veja o próximo parágrafo). Poderão existir diferentes nomes para as permissões/privilégios nos vários sistemas, mas algo do tipo <literal
+>CREATE</literal
+> e <literal
+>ALTER</literal
+> deverão ser lugar comum. Para uma execução normal, você deverá ser capaz de ler e gravar registros, sendo normalmente denominados em SQL como permissões para <literal
+>SELECT</literal
+>, <literal
+>INSERT</literal
+>, <literal
+>UPDATE</literal
+> e <literal
+>DELETE</literal
+>. </para>
 </sect3>
 
-<sect3>
-<title
->Criar as Tabelas</title>
-
+<sect3
+><title
+>Criação de tabelas</title>
 <para
->Na sua primeira utilização, o &kappname; irá tentar criar as estruturas de tabelas necessárias. Para obter o máximo de compatibilidade entre os vários tipos de bancos de dados, somente será usado um subconjunto dos tipos de dados mais comuns. Poderão existir situações em que não haja suporte a um determinado tipo e, nesse caso, foram tomadas as providências para gerar o código SQL necessário para criar as tabelas. Esse código poderá então ser modificado de acordo com as necessidades e ser usado para criar as tabelas fora do &kappname;. Caso se depare com essa situação, você poderá sempre obter ajuda na &devlist;. Veja a <link linkend="details.database.generatesql"
->Criação Manual da Base de Dados</link
+>Na sua primeira utilização, o &kmymoney; tentará criar as estruturas de tabelas necessárias. Para obter o máximo de compatibilidade entre os vários tipos de bancos de dados, somente será usado um subconjunto dos tipos de dados mais comuns. Poderão existir situações em que não haja suporte a um determinado tipo e, nesse caso, foram tomadas as providências para gerar o código SQL necessário para criar as tabelas. Esse código poderá então ser modificado de acordo com a necessidade e ser usado para criar as tabelas fora do &kmymoney;. Caso você se encontre nessa situação, geralmente é possível obter ajuda em um dos canais listados na seção <link linkend="firsttime.contact"
+>Obtendo Ajuda</link
+>. Consulte <link linkend="details.database.generatesql"
+>Criação Manual de Banco de Dados</link
 > para obter mais informações. </para>
 </sect3>
 </sect2>
 
-<sect2 id="details.database.selectdatabase">
-<title
->Criar uma base de dados</title>
-
+<sect2 id="details.database.selectdatabase"
+><title
+>Criação de um banco de dados</title>
 <para
->Ao usar o &kappname;, abra ou importe um arquivo de dados existente ou crie um novo. Depois, selecione a opção <guimenuitem
->Salvar como Banco de Dados</guimenuitem
-> no menu <guimenu
+>Usando o &kmymoney;, abra ou importe um arquivo de dados existente ou crie um novo. Em seguida, selecione <menuchoice
+><guimenu
 >Arquivo</guimenu
->. Essa operação irá apresentar a seguinte janela: </para>
+><guimenuitem
+>Salvar como</guimenuitem
+></menuchoice
+> no menu. Selecione <guilabel
+>SQL</guilabel
+> na lista suspensa <guilabel
+>Tipo de armazenamento a ser usado para seus dados</guilabel
+> e clique em <guibutton
+>OK</guibutton
+>. Você verá então a seguinte caixa de diálogo: </para>
 
 <screenshot>
+  <screeninfo
+>criar um banco de dados</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="select_database.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="select_database.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>criar um banco de dados</phrase>
+    </textobject>
   </mediaobject>
 </screenshot>
 
 <para
->Complete os campos apropriados para o tipo de base de dados selecionado (como de costume, os campos obrigatórios serão realçados) e clique em <guibutton
+>Complete os campos apropriados para o tipo de banco de dados selecionado (como de costume, os campos obrigatórios serão realçados) e clique em <guibutton
 >OK</guibutton
-> para criar a base de dados. </para>
+> para criar o banco de dados. </para>
 
-<sect3>
-<title
->Tipo de Banco de Dados</title>
-
+<sect3
+><title
+>Tipo de banco de dados</title>
 <para
->Esta opção mostra todos os controladores de SQL do &Qt; instalados no seu sistema Selecione o controlador para o seu tipo de banco de dados Se o que desejar não estiver na lista, você terá que instalar o controlador apropriado. Veja a documentação da sua distribuição ou vá à <ulink url="http://qt-project.org/" type=""
->página Web da Qt Software</ulink
+>Esta lista suspensa exibe todos os controladores de SQL do &Qt; instalados no seu sistema Selecione o controlador para o seu tipo de banco de dados. Se o que você precisar não estiver na lista, terá que instalar o driver apropriado. Veja a documentação da sua distribuição ou vá ao <ulink url="https://www.qt.io/"
+>site da Qt Software</ulink
 > e procure por 'SQL drivers' (controladores de SQL). </para>
 </sect3>
 
-<sect3>
-<title
->Arquivo (apenas para SQLite)</title>
+<sect3 id="details.database.sqlcipher"
+><title
+>Arquivo (apenas para SQLite/SQLCipher)</title>
 <para
->O SQLite possui uma base de dados por arquivo, por isso insira o nome do arquivo no qual deseja criar a base de dados. Para navegar pelo sistema de arquivos, clique no ícone à direita do nome do arquivo. Para as bases de dados SQLite, os campos do <guilabel
+>O SQCipher possui um banco de dados por arquivo, por isso insira o nome do arquivo no qual deseja criar o banco de dados. Para navegar pelo sistema de arquivos, clique no ícone à direita do nome do arquivo. Para os bancos de dados SQCipher, os campos <guilabel
+>Nome do banco de dados</guilabel
+>, <guilabel
 >Nome da máquina</guilabel
->, do <guilabel
+> e <guilabel
 >Usuário</guilabel
-> e da <guilabel
->Senha</guilabel
-> não são relevantes. O arquivo SQLite deverá ter as permissões de leitura/escrita adequadas para o sistema de arquivos subjacente, de modo a ativar o acesso apropriado ao usuário atualmente autenticado. </para>
+> não são relevantes. O arquivo SQCipher deverá ter as permissões de leitura/escrita adequadas para o sistema de arquivos subjacente, de modo a ativar o acesso apropriado ao usuário atualmente autenticado. </para>
+
+<para
+>Os criadores do <ulink url="https://www.zetetic.net/sqlcipher"
+>SQLCipher</ulink
+> lançaram a versão 4.0 em novembro de 2018. No entanto, muitos usuários, especialmente aqueles que não atualizam com frequência ou que usam distribuições Linux LTS (Suporte de Longo Prazo), ainda podem estar usando um banco de dados criado com a versão 3 do SQLCipher. Em algum momento, geralmente após uma atualização ou da distribuição, eles descobrem que não conseguem abrir o banco de dados, com um erro pouco informativo ou útil. O que é necessário nesse caso é atualizar o próprio banco de dados da versão 3 para a versão 4. As instruções para isso podem ser encontradas no site do <ulink url="https://discuss.zetetic.net/t/upgrading-to-sqlcipher-4/3283"
+>SQLCipher</ulink
+>. </para>
 </sect3>
 
 <sect3>
 <title
->Nome da base de dados (outros)</title>
+>Nome do banco de dados (outros)</title>
 <para
->O nome padrão da banco de dados é KMyMoney, mas você poderá escolher outro qualquer, se o desejar. Para alguns tipos de bancos de dados, o &kappname; poderá não ser capaz de criar a base de dados, por isso ela deverá ser criada previamente com o procedimento administrativo apropriado. Contudo, o &kappname; irá criar todas as estruturas de tabelas onde for necessário. Caso contrário, você poderá criá-las; veja a seção <link linkend="details.database.generatesql"
+>O nome padrão do banco de dados é <literal
+>KMyMoney</literal
+>, mas você poderá escolher outro qualquer, se assim desejar. Para alguns tipos de bancos de dados, o &kmymoney; poderá não ser capaz de criar o banco de dados, por isso ele deverá ser criado previamente com o procedimento administrativo apropriado. Contudo, o &kmymoney; irá criar todas as estruturas de tabelas onde for necessário. Caso contrário, você poderá criá-las; veja a seção <link linkend="details.database.generatesql"
 >Criação Manual do Banco de Dados</link
 > para obter mais informações. </para>
 </sect3>
 
 <sect3
 ><title
->Nome de máquina</title>
+>Nome da máquina</title>
 <para
->Para o usuário médio, o nome padrão <quote
+>Para o usuário médio, o correto é o nome padrão <quote
 >localhost</quote
->, correspondente à máquina que você está usando atualmente, é o correto. Para os bancos de dados em rede, insira o nome da máquina onde a base de dados se encontra. </para>
-
+>, correspondente à máquina que você estiver usando atualmente. Para bancos de dados em rede, insira o nome do host conectado do servidor de banco de dados. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Nome do usuário e senha</title>
 <para
->Verifique as permissões configuradas no seu banco de dados, ou contacte o administrador de sistemas, para saber os valores corretos a usar aqui. O usuário deverá ser capaz de selecionar, apagar, inserir e atualizar registros. Se o nome do usuário for igual ao da sua conta, não será normalmente necessária nenhuma senha. </para>
+>Verifique as permissões configuradas no seu banco de dados, ou contacte o administrador de sistemas, para saber quais são os valores corretos. O usuário deverá ser capaz de selecionar, excluir, inserir e atualizar registros. Se o nome do usuário for igual ao da sua conta, não será normalmente necessária nenhuma senha. </para>
 </sect3>
 </sect2>
 
-<sect2>
-<title
->Acessar seus dados</title>
+<sect2
+><title
+>Acessando seus dados</title>
 
-<sect3>
-<title
+<sect3
+><title
 >Desenho das tabelas</title>
-
 <para
->Para acessar seus dados no &kappname;, use o item <guimenuitem
->Abrir o Banco de Dados</guimenuitem
-> no menu <guimenu
+>Para acessar seus dados no &kmymoney;, use o item de menu <menuchoice
+> <guimenu
 >Arquivo</guimenu
+> <guimenuitem
+>Abrir banco de dados</guimenuitem
+> </menuchoice
 >. Isto irá abrir uma janela semelhante à apresentada acima. </para>
 
 <note>
-<para
->Se você criou seus bancos de dados inicialmente abrindo um arquivo e então fazendo o <guimenuitem
->Salvar como banco de dados</guimenuitem
->, como descrito acima, então qualquer alteração posterior aos seus dados serão salvos somente no banco de dados, não no arquivo. Isto significa que você pode usar o arquivo como cópia de segurança ou como uma versão dos seus dados em uma data específica. Para fazer novas cópias de segurança como esta, abra seu banco de dados, faça um <menuchoice
-><guimenu
+  <para
+>Se você criou seu banco de dados abrindo primeiro um arquivo e, em seguida, executando <guimenu
 >Arquivo</guimenu
-><guimenuitem
+> <guimenuitem
+>Salvar</guimenuitem
+> e escolhendo <guilabel
+>SQL</guilabel
+> conforme descrito acima, quaisquer alterações subsequentes em seus dados serão salvas apenas no banco de dados, não no arquivo. Isso significa que você pode usar o arquivo como um backup ou instantâneo de seus dados em um determinado momento. Para fazer um novo backup como este, abra seu banco de dados, escolha o item de menu <menuchoice
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
 >Salvar como...</guimenuitem
 ></menuchoice
->, fornecendo um nome de arquivo apropriado. Lembre-se de abrir novamente o seu banco de dados de modo que o &kappname; não continue a usar o arquivo. </para>
+>, escolha <guilabel
+>XML</guilabel
+> como o tipo de armazenamento e dê um nome de arquivo apropriado. Lembre-se de reabrir seu banco de dados para que o sistema não continue usando o arquivo. </para>
 </note>
 
 <para
->Para acessar seus dados em outros formatos, você terá que saber um pouco como são guardados nas bases de dados relacionais. De longe, a forma mais simples de ter uma ideia sobre o assunto é abrir a base de dados numa interface gráfica, como o OpenOffice.org. Este oferece uma lista das várias tabelas que compõem a base de dados, permitindo-lhe ver a disposição de cada uma delas. </para>
+>Para acessar seus dados em outros formatos, você terá que saber um pouco como são guardados nos bancos de dados relacionais. De longe, a forma mais simples de ter uma ideia sobre o assunto é abrir o banco de dados numa interface gráfica, como o <trademark
+>OpenOffice.org</trademark
+>. Este programa oferece uma lista das várias tabelas que compõem o banco de dados, permitindo-lhe ver o layout de cada uma delas. </para>
 
 <para
->Para extrair os dados, &eg;. para uma folha de cálculo ou arquivo externo, é quase sempre necessário selecionar dados ligados a uma ou mais tabelas. Isto é feito através da 'junção' das tabelas, usando um campo que seja comum a ambas. Você poderá obter mais informações sobre como isto é feito nos tutoriais 'online' descritos acima. A seguinte tabela enumera os campos que são usados para definir estas relações entre-tabelas. </para>
+>Para extrair os dados, &eg;, para uma planilha ou arquivo externo, é quase sempre necessário selecionar dados ligados a uma ou mais tabelas. Isso é feito através da <quote
+>junção</quote
+> das tabelas, usando um campo que seja comum a elas. Você poderá obter mais informações sobre como isto é feito nos tutoriais online descritos acima. A seguinte tabela enumera os campos que são usados para definir estas relações entre-tabelas. </para>
 
-<informaltable>
+<informaltable pgwide="1">
   <tgroup cols="3">
     <thead>
       <row>
@@ -223,11 +289,15 @@
         </entry>
         <entry valign="top">
           <para
->kmmInstitutions.id</para>
+><literal
+>kmmInstitutions.id</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmAccounts.institutionId</para>
+><literal
+>kmmAccounts.institutionId</literal
+></para>
         </entry>
       </row>
       <row>
@@ -237,11 +307,15 @@
         </entry>
         <entry valign="top">
           <para
->kmmAccounts.id</para>
+><literal
+>kmmAccounts.id</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmAccounts.parentId</para>
+><literal
+>kmmAccounts.parentId</literal
+></para>
         </entry>
       </row>
       <row>
@@ -251,11 +325,15 @@
         </entry>
         <entry valign="top">
           <para
->kmmTransactions.id</para>
+><literal
+>kmmTransactions.id</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmSplits.transactionId</para>
+><literal
+>kmmSplits.transactionId</literal
+></para>
         </entry>
       </row>
       <row>
@@ -265,11 +343,15 @@
         </entry>
         <entry valign="top">
           <para
->kmmAccounts.id</para>
+><literal
+>kmmAccounts.id</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmSplits.accountId</para>
+><literal
+>kmmSplits.accountId</literal
+></para>
         </entry>
       </row>
       <row>
@@ -279,11 +361,15 @@
         </entry>
         <entry valign="top">
           <para
->kmmPayees.id</para>
+><literal
+>kmmPayees.id</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmSplits.payeeId</para>
+><literal
+>kmmSplits.payeeId</literal
+></para>
         </entry>
       </row>
       <row>
@@ -293,11 +379,15 @@
         </entry>
         <entry valign="top">
           <para
->kmmSchedules.id</para>
+><literal
+>kmmSchedules.id</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmTransactions.id</para>
+><literal
+>kmmTransactions.id</literal
+></para>
         </entry>
       </row>
       <row>
@@ -307,25 +397,35 @@
         </entry>
         <entry valign="top">
           <para
->kmmTransactions.currencyId</para>
+><literal
+>kmmTransactions.currencyId</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmCurrencies.ISOCode</para>
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
         </entry>
       </row>
       <row>
         <entry valign="top">
           <para
->Contas e Títulos (ver a Nota 2)</para>
+><literal
+>Contas e Títulos (ver a Nota 2)</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmAccounts.currencyId</para>
+><literal
+>kmmAccounts.currencyId</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmSecurities.id</para>
+><literal
+>kmmSecurities.id</literal
+></para>
         </entry>
       </row>
       <row>
@@ -335,11 +435,17 @@
         </entry>
         <entry valign="top">
           <para
->kmmSecurities.id</para>
+><literal
+>kmmSecurities.id</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmPrices.fromId ou kmmPrices.toId</para>
+><literal
+>kmmPrices.fromId</literal
+> ou <literal
+>kmmPrices.toId</literal
+></para>
         </entry>
       </row>
       <row>
@@ -349,11 +455,17 @@
         </entry>
         <entry valign="top">
           <para
->kmmCurrencies.ISOCode</para>
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
         </entry>
         <entry valign="top">
           <para
->kmmPrices.fromId ou kmmPrices.toId</para>
+><literal
+>kmmPrices.fromId</literal
+> ou <literal
+>kmmPrices.toId</literal
+></para>
         </entry>
       </row>
     </tbody>
@@ -363,109 +475,133 @@
 <para
 >Notas: </para>
 
+<!-- For ndash and right and left double quotes I switched from Unicode &#x2013,
+     &#x201C, and &#x201D. to direct names, but couldn't find one for left double
+     quote.  JHO -->
 <para
->1 &#x2013; txType = &#x201C;N&#x201D; para transações normais, &#x201C;S&#x201D; para transações agendadas </para>
+>1 &ndash; txType = "N&rdquor; para transações normais, "S&rdquor; para transações agendadas </para>
 
 <para
->2 &#x2013; se kmmAccounts.isStockAccount = &#x201C;Y&#x201D; </para>
+>2 &ndash; if kmmAccounts.isStockAccount = "Y&rdquor; </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Formatos dos campos</title>
-
 <para
 >Muitos dos campos de dados são guardados num formato interno que poderá não ser imediatamente útil aos programas externos. Nesses casos, a informação foi duplicada tanto nos formatos internos como nos externos. </para>
 
 <para
->As quantias monetárias e os valores das ações são apresentados ambos no formato numerador/denominador e, com um nome de campo seguido de 'Formatted', será apresentado no formulário como aparece na sua tela. </para>
-  
+>As quantias monetárias e os valores das ações são apresentados ambos no formato numerador/denominador e, com um nome de campo seguido de <quote
+> <literal
+>Formatted</literal
+> </quote
+>, no formato como normalmente são exibidos. </para>
+
 <para
->Do mesmo modo, alguns campos, como o tipo de conta, aparecem como um código numérico e num campo com nome seguido de 'String' no formulário e língua da aplicação. </para>
+>Do mesmo modo, alguns campos, como o tipo de conta, aparecem como um código numérico e num campo com nome seguido de '<literal
+>String</literal
+>' no formulário e idioma do aplicativo. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Atualizar os seus dados</title>
-
 <para
->Ter os dados num formato-padrão da indústria fornece-lhe a possibilidade de alterar os dados de fato fora da aplicação &kappname;. NÃO O FAÇA a não ser que saiba mesmo o que está fazendo, e certifique-se sempre de que tem uma cópia de segurança dos seus dados em primeiro lugar. Se cometer algum erro, o &kappname; poderá não ser capaz de acessar seus dados, e você poderá, em consequência, acabar por perder todos os dados. Considere-se avisado! </para>
+>Ter os dados num formato padrão da indústria fornece-lhe a possibilidade de alterar os dados fora do aplicativo &kmymoney;. NÃO FAÇA ISSO a menos que saiba o que está fazendo, e certifique-se sempre de que tem uma cópia de segurança dos seus dados em primeiro lugar. Se cometer algum erro, o &kmymoney; poderá não ser capaz de acessar os seus dados, e você poderá, em consequência, acabar por perder todos os dados. Considere-se avisado! </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Consultas armazenadas</title>
-
 <para
->A maioria dos sistemas de bancos de dados permitem guardar as consultas e procedimentos mais usados e, em alguns casos, poderão ser guardados como tabelas dentro da sua própria base de dados. Como você já deve ter percebido acima, todas as tabelas usadas pelo &kappname; começam pelas letras minúsculas 'kmm'. Esta norma será mantida, e somente as tabelas que comecem por essas letras serão atualizadas. Como tal, desde que você evite estas na nomenclatura das suas consultas, &etc;, não deverá ter quaisquer problemas. </para>
+>A maioria dos sistemas de bancos de dados permitem guardar as consultas e procedimentos mais usados e, em alguns casos, poderão ser guardados como tabelas dentro de seu próprio banco de dados. Como você já deve ter percebido acima, todas as tabelas usadas pelo &kmymoney; começam pelas letras minúsculas ''<literal
+>kmm</literal
+>'. Esse padrão será mantido, e apenas as tabelas que comecem por essas letras serão atualizadas. Como tal, desde que você evite estas na nomenclatura das suas consultas, &etc;, não deverá ter nenhum problema. </para>
 </sect3>
 </sect2>
 
-<sect2 id="details.database.generatesql">
-<title
+<sect2 id="details.database.generatesql"
+><title
 >Criação manual do banco de dados</title>
 <note>
   <para
->Esta seção cobre uma utilização mais avançada do banco de dados e poderá ser ignorada pelo usuário geral. </para>
+>Esta seção cobre uma utilização mais avançada do banco de dados e poderá ser ignorada pelo usuário normal. </para>
 </note>
 
-<sect3>
-<title
+<sect3
+><title
 >Quando usar</title>
 <para
->Poderão existir ocasiões em que o &kappname; é incapaz de criar automaticamente o banco de dados ou o cria sem algumas das opções necessárias pelo usuário. Por exemplo, o sistema de base de dados usado poderá não ser completamente compatível com o SQL normal ou poderá ser inserido o suporte para sistemas novos que ainda não foram testados por completo no &kappname;. </para>
+>Pode existir ocasiões em que o &kmymoney; é incapaz de criar automaticamente o banco de dados ou o cria sem algumas das opções necessárias pelo usuário. Por exemplo, o sistema de banco de dados usado poderá não ser completamente compatível com o SQL normal ou poderá ser inserido o suporte para sistemas novos que ainda não foram testados por completo no &kmymoney;. </para>
+
 <para
->Antes de usar esta funcionalidade, você deverá tentar apenas criar a instância do banco de dados você mesmo (&ie;, com a instrução CREATE DATABASE). Desde que a base de dados exista, o &kappname; também será capaz de criar as tabelas, &etc; no procedimento normal de salvamento da base de dados, descrito acima. </para>
+>Antes de usar esta funcionalidade, você deverá tentar apenas criar a instância do banco de dados você mesmo (&ie;, com a instrução <literal
+>CREATE DATABASE</literal
+>). Desde que o banco de dados exista, o &kmymoney; também será capaz de criar as tabelas, &etc;, no procedimento normal de salvamento do banco de dados descrito acima. </para>
 </sect3>
 
-<sect3>
-<title
->Gerar o SQL</title>
+<sect3
+><title
+>Geração do SQL</title>
 <para
->Se isto não funcionar, é possível gerar os comandos básicos de SQL necessários para criar as várias tabelas, vistas e índices necessários pela aplicação. Selecione a opção <guimenuitem
->Gerar o SQL da Base de Dados</guimenuitem
-> do menu <guimenu
+>Se isto não funcionar, é possível gerar os comandos básicos de SQL necessários para criar as várias tabelas, vistas e índices necessários pelo aplicativo. Selecione o item de menu <menuchoice
+> <guimenu
 >Ferramentas</guimenu
+> <guimenuitem
+>Gerar SQL do banco de dados</guimenuitem
+> </menuchoice
 >. Isto irá apresentar a seguinte janela: </para>
+
 <screenshot>
+  <screeninfo
+>gerar sql para criar banco de dados</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="generate_sql.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="generate_sql.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>gerar sql para criar banco de dados</phrase>
+    </textobject>
   </mediaobject>
 </screenshot>
 
 <para
 >Ao selecionar o tipo de banco de dados, o SQL apropriado irá aparecer no campo <guilabel
->SQL de criação</guilabel
+>SQL para criação</guilabel
 >; ele poderá ser editado pelo usuário ou salvo num arquivo de texto com o botão <guibutton
->Salvar o SQL</guibutton
->. No último caso, o banco de dados deverá ser criado com as funções administrativas que o sistema de bases de dados oferece. </para>
+>Salvar SQL</guibutton
+>. No último caso, o banco de dados deverá ser criado com as funções administrativas que o sistema de banco de dados oferece. </para>
+
 <para
->Se, depois de editar o texto na janela, quiser que o &kappname; crie a base de dados, você terá que completar os outros campos na janela, como se encontra detalhado na seção <link linkend="details.database.selectdatabase"
->Criar um Banco de Dados</link
+>Se depois da edição do texto na janela você quiser que o &kmymoney; crie o banco de dados, terá que completar os outros campos na janela, como se encontra detalhado na seção <link linkend="details.database.selectdatabase"
+>Criar um banco de dados</link
 >, e clique em <guibutton
->Criar as Tabelas</guibutton
->. Lembre-se de que, excetuando o caso do SQLite, você terá que incluir uma instrução CREATE DATABASE adequada como primeiro comando ou ter enviado um comando deste tipo, de forma externa, para o &kappname; </para>
+>Criar tabelas</guibutton
+>. Lembre-se de que, com exceção do caso do SQLite, você terá que incluir uma instrução <literal
+>CREATE DATABASE</literal
+>adequada como primeiro comando ou ter enviado um comando deste tipo de forma externa para o &kmymoney;. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Aviso</title>
 <para
->Você deverá ter muito cuidado ao editar as definições de alguma das tabelas ou vistas básicas (as cujo nome começa por 'kmm'). Algumas alterações, como o aumento do tamanho de um campo numérico, poderão ter pouco impacto, mas você não deverá remover ou alterar a sequência de nenhum campo, caso contrário o &kappname; poderá recusar-se a funcionar ou poderá corromper os seus dados. </para>
-<para
->Embora a adição ou remoção de índices possa aumentar a performance, você deverá ter atenção que também poderá ocorrer o oposto. Poderá ajudar algum conhecimento do funcionamento interno do &kappname;, de modo a obter a melhor performance sob essas circunstâncias. </para>
-</sect3>
+>Você deverá ter muito cuidado ao editar as definições de alguma das tabelas ou visualizações básicas (cujo nome começa com '<literal
+>kmm</literal
+>'). Algumas alterações, como o aumento do tamanho de um campo numérico, poderão ter pouco impacto, mas você não deverá remover ou alterar a sequência de nenhum campo, caso contrário, o &kmymoney; poderá recusar-se a funcionar ou poderá danificar os seus dados. </para>
 
+<para
+>Embora a adição ou remoção de índices possa aumentar a performance, você deverá ter cuidado porque poderá ocorrer o oposto. Algum conhecimento sobre o funcionamento interno do &kmymoney; também poderá ajudar, de modo a obter a melhor performance sob essas circunstâncias. </para>
+</sect3>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Criptografia</title>
-
 <para
->A criptografia dos dados no seu banco de dados não é atualmente suportada. </para>
+>Ainda não há suporte para criptografia de dados no seu banco de dados. </para>
 </sect2>
 </sect1>
 </chapter>

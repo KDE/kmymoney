@@ -4,37 +4,47 @@
   <authorgroup>
     <author
 >&Darin.Strait; &Darin.Strait.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->25/07/2010</date>
+>01/12/2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Empréstimos</title>
 
-<sect1 id="details.loans.general">
-<title
->Compreender os Empréstimos</title>
+<sect1 id="details.loans.general"
+><title
+>Compreendendo o que são Empréstimos</title>
+<note
+><title
+>Solicitamos feedback.</title>
+  <para
+>O autor agradeceria comentários sobre a possibilidade de expandir esta seção para discutir a variação do principal e dos juros para atingir um pagamento recorrente fixo. Isso é mencionado na seção sobre como criar um empréstimo no &kmymoney;, mas parece que deveria ser mencionado antes. </para>
+</note>
 
 <para
->Esta seção pretende fornecer uma muito breve introdução sobre como o &kappname; lida com os empréstimos. As regras e costumes de empréstimos variam de localidade para localidade. Para explicações mais detalhadas sobre os empréstimos, assim como alguma informação sobre as regras e regimes locais, veja por favor outras fontes de consulta. </para>
+>Esta descreve como o &kmymoney; lida com empréstimos. As regras e costumes relacionados a empréstimos variam de país para país. Para explicações mais detalhadas sobre empréstimos, assim como alguma informação sobre a legislação e regras locais, consulte outras fontes. </para>
 
 <para
->Um empréstimo é um acordo no qual uma entidade requerente recebe dinheiro de outra entidade que empresta, na qual se concorda em pagar de volta o dinheiro numa data posterior. O &kappname; permite-lhe seguir os empréstimos nos quais você, como devedor, pede dinheiro emprestado ou, como beneficiário, empresta dinheiro a outros. A maioria das pessoas pedem mais do que emprestam. Por isso, normalmente você será tipicamente quem pedirá dinheiro emprestado e uma companhia financeira será normalmente quem empresta. Se emprestar dinheiro a um membro da família ou um amigo, poderá usar o &kappname; para manter um registro também deste empréstimo. </para>
+>Um empréstimo é um acordo pelo qual um mutuário recebe dinheiro de um credor e concorda em devolver o dinheiro em uma ou mais parcelas no futuro. O &kmymoney; permite que você acompanhe os empréstimos pelos quais você, como mutuário, recebe dinheiro ou, como credor, empresta dinheiro a outra pessoa. A maioria das pessoas toma emprestado mais do que empresta, então você geralmente será o mutuário e uma financeira geralmente será o credor. Se você emprestar dinheiro a um membro da família ou a um amigo, também poderá usar o &kmymoney; para acompanhar esse empréstimo. </para>
 
 <para
->Este guia irá assumir que você está pedindo dinheiro emprestado a alguma espécie de companhia financeira, mas os tópicos aqui discutidos aplicam-se de igual forma aos empréstimo que possa contrair com uma pessoa. A diferença entre pedir emprestado e emprestar é que é usada uma categoria de despesa para seguir os juros ao pedir dinheiro emprestado, e é usada uma categoria de receita quando se empresta dinheiro. </para>
+>Este guia irá assumir que você está pedindo dinheiro emprestado a alguma companhia financeira, mas os tópicos aqui discutidos aplicam-se de igual forma aos empréstimos contratados com uma pessoa física. A principal diferença entre pedir emprestado e emprestar é que será usada uma categoria de despesa para acompanhar os juros ao pedir dinheiro emprestado e, no caso de emprestar dinheiro, será usada uma categoria de receita. </para>
 
+<sect2
+><title
+>Alguns termos relevantes</title>
 <formalpara
 ><title
->Principal do Empréstimo</title>
+>Principal</title>
 <para
->A quantidade que é emprestada é chamada de <quote
->valor do empréstimo</quote
-> ou <quote
+>O valor emprestado é chamado de <quote
 >principal</quote
+> ou <quote
+>valor do empréstimo</quote
 >. </para>
 </formalpara>
 
@@ -42,9 +52,9 @@
 ><title
 >Prazo</title>
 <para
->O período de um empréstimo é chamado o seu <quote
+>O período ou duração de um empréstimo é chamado de <quote
 >prazo</quote
-> de empréstimo. No fim desse prazo, terá sido já devolvida a totalidade do montante à entidade que emprestou. Os prazos são indicados normalmente em semanas, meses ou anos. Um prazo também poderá ser definido com o número de pagamentos. Por exemplo, um empréstimo a um ano com prestações semanais poderá ser descrito como um empréstimo a um ano ou um empréstimo com 52 prestações. </para>
+> do empréstimo. No fim desse prazo, o valor do principal será pago à entidade que emprestou. Os prazos são normalmente indicados em semanas, meses ou anos. Um prazo também poderá ser definido com o número de pagamentos. Por exemplo, um empréstimo de um ano com prestações semanais pode ser descrito como um empréstimo de um ano ou empréstimo com 52 prestações. </para>
 </formalpara>
 
 <formalpara
@@ -53,7 +63,7 @@
 <para
 >A prestação do montante para quem emprestou não é normalmente uma soma irregular. Em vez disso, é feita uma série de prestações que representam uma parte do montante. Essas prestações são normalmente conhecidas por <quote
 >amortizações</quote
-> e, no &kappname;, a <quote
+> e, no &kmymoney;, a <quote
 >Amortização</quote
 > é definida como o ato de pagar um empréstimo a prestações regulares. </para>
 </formalpara>
@@ -62,19 +72,22 @@
 ><title
 >Frequência de Pagamento</title>
 <para
->A frequência das prestações é referida como sendo a <quote
->Frequência de Pagamento</quote
-> no &kappname;. Os exemplos de períodos poderão ser semanais, quinzenais, mensais, trimestrais ou anuais. Nos EUA, os pagamentos periódicos são feitos todos os meses; como tal, o período do empréstimo é de um mês. </para>
+>A frequência das parcelas é chamada de <quote
+>Frequência de pagamento</quote
+>. Exemplos disso podem ser semanal, quinzenal, mensal, trimestral ou anual. Isso também é chamado, às vezes, de período de pagamento. Nos EUA, os pagamentos periódicos são geralmente feitos mensalmente, portanto, o período do empréstimo é de um mês. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Taxa de juros</title>
 <para
->Para ter o privilégio de poder usar o dinheiro, o devedor irá pagar ao credor uma taxa que se chama normalmente de <quote
->juro</quote
->, que normalmente é expressa como uma percentagem do montante principal do empréstimo, ao longo de um período bem definido. As taxas de juro poderão ser fixas, onde a taxa não irá variar ao longo do empréstimo, ou variáveis, onde a taxa de juro poderá ir variando ao longo do tempo. Tipicamente, os pagamentos de juros estão incluídos em cada prestação periódica. </para>
+>Para ter o privilégio de dispor do dinheiro, o devedor irá pagar ao credor uma taxa denominada <quote
+>juros</quote
+>, que normalmente é expressa como uma porcentagem do montante principal do empréstimo, ao longo de um período definido. As taxas de juros poderão ser fixas, onde a taxa não muda ao longo do empréstimo, ou variáveis, onde a taxa de juros poderá variar ao longo do tempo. Normalmente, os pagamentos dos juros estão incluídos em cada prestação periódica. </para>
 </formalpara>
+
+<para
+>Observe que um empréstimo em &kmymoney; deve ter uma taxa de juros maior que 0. Dinheiro emprestado ou concedido sem juros deve ser lançado como uma conta de passivo ou ativo. </para>
 
 <formalpara
 ><title
@@ -82,94 +95,127 @@
 <para
 >Uma vez que estas prestações são feitas, de certa forma, numa base periódica, seja ela semanal, mensal, trimestral ou anual, são referidas normalmente como <quote
 >prestações periódicas</quote
->. O somatório de todas as prestações periódicas, mais a prestação final, somar-se-ão ao valor principal mais os juros. </para>
+>. O somatório de todas as prestações periódicas, mais a prestação final, serão somadas ao valor do principal mais os juros. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Taxas</title>
 <para
->Poderão existir outras taxas, além dos juros, que sejam necessárias pagar com cada prestação. Chamam-se as <quote
+>Poderão existir outras taxas, além dos juros, que sejam cobradas no pagamento de cada prestação. Elas são chamadas de <quote
 >taxas ou encargos recorrentes</quote
->. Alguns exemplos de encargos recorrentes incluem (mas não se limitam necessariamente a): <itemizedlist>
-  <listitem>
-    <para
+>. Alguns exemplos de encargos recorrentes incluem, mas não se limitam necessariamente a: <itemizedlist>
+    <listitem>
+      <para
 >Pagamentos de contas <quote
 >impostas</quote
 > ou <quote
 >acessórias</quote
 >. (Os pagamentos deste tipo são normalmente usados para manter fundos, para pagar taxas de propriedade anuais ou bienais.) </para>
-  </listitem>
+    </listitem>
 
-  <listitem
+    <listitem
 ><para
 >Seguros de empréstimo</para
 ></listitem>
 
-  <listitem
+    <listitem
 ><para
 >Seguros por incapacidade</para
 ></listitem>
 
-  <listitem
+    <listitem
 ><para
 >Taxas de manutenção da conta de empréstimo</para
 ></listitem>
-</itemizedlist>
+  </itemizedlist>
 </para>
 </formalpara>
+</sect2>
 
-<formalpara
+<sect2
 ><title
 >Resumo</title>
 <para
->Em resumo, o devedor recebe uma soma bruta do credor no início do empréstimo. O devedor fará então um pagamento periódico ao credor. O pagamento periódico é a soma do pagamento principal de amortização (que é usado para pagar o saldo do empréstimo) mais o pagamento dos juros (que recompensa o credor por permitir usar o dinheiro por parte do devedor), mais ainda algumas taxas recorrentes (que possam cobrir alguns incidentes). No fim do empréstimo, o devedor já terá pago de volta todo o montante emprestado. </para>
-</formalpara>
+>O devedor recebe uma soma bruta do credor no início do empréstimo. O devedor fará então um pagamento periódico ao credor. O montante do pagamento periódico é a soma do pagamento principal de amortização (que é usado para pagar o saldo ou o principal restante do empréstimo) mais o pagamento dos juros (que recompensa o credor por permitir usar o dinheiro por parte do devedor), mais ainda algumas taxas recorrentes (que possam cobrir alguns incidentes). No fim do empréstimo, o devedor já terá devolvido o montante emprestado. </para>
+</sect2>
 </sect1>
 
-<sect1 id="details.loans.example">
-<title
+<sect1 id="details.loans.example"
+><title
 >Exemplo</title>
 <para
->Por exemplo, você poderá pedir um empréstimo de R$ 25.000,00 por um novo automóvel e concordar em pagar ao banco uma prestação mensal durante 60 meses. A taxa de juro do empréstimo poderá ser de 5,5%. </para>
+>Por exemplo, você poderá pedir um empréstimo de R$ 25.000,00 para comprar um novo automóvel e concordar com o pagamento ao banco de uma prestação mensal durante 60 meses. A taxa de juros do empréstimo poderá ser de 5,5% por ano. </para>
 
 <para
->Neste cenário, o montante do empréstimo é de R$ 25.000,00. O prazo do empréstimo é de 60 meses ou 5 anos. O prazo também poderá ser descrito como de 60 pagamentos, uma vez que existirá um pagamento por mês durante 5 anos. A frequência da prestação será de um mês, uma vez que a prestação será cobrada mensalmente. A prestação periódica, que é calculada pelo &kappname;, seria de R$ 477,53. </para>
+>Neste cenário, o montante do empréstimo é de R$ 25.000,00. O prazo do empréstimo é de 60 meses ou 5 anos. O prazo também poderá ser descrito como de 60 pagamentos, uma vez que existirá um pagamento por mês durante 5 anos. A frequência da prestação será mensal, uma vez que a prestação será cobrada todos os meses. A prestação periódica, que é calculada pelo &kmymoney;, seria de R$ 477,53. </para>
 
 <para
 >Um <quote
 >plano de pagamentos</quote
-> é um gráfico ou tabela que mostra a data em que deverá ser paga uma prestação, bem como o montante de cada prestação periódica. Normalmente, estes planos dividem o pagamento periódico nas suas partes constituintes: o pagamento da amortização e o dos juros, acrescido dos encargos recorrentes. </para>
+> é um gráfico ou tabela que mostra a data em que uma prestação deverá ser paga, bem como o montante de cada prestação periódica. Normalmente, estes planos dividem o pagamento periódico nas suas partes constituintes: o pagamento da amortização e o dos juros, acrescido dos encargos recorrentes. </para>
 </sect1>
 
-<sect1 id="details.loans.creation">
-<title
->Criar um Novo Empréstimo</title>
-
+<!-- FIXME: this section needs expanding, screenshots of the new loan wizard, and more dtails on the various entry
+     fields.  In particular, it needs an explanation of how fixed payments are calculated by adjusting the amount of
+     principal and interest of each payment, sometimes resulting in a final payment different from the others.  -->
+<sect1 id="details.loans.creation"
+><title
+>Criação de novo empréstimo</title>
 <para
->No &kappname;, um empréstimo é um tipo de conta. Como tal, para criar um novo empréstimo, comece por selecionar a opção <menuchoice
+>No &kmymoney;, um empréstimo é um tipo de conta. Como tal, para criar um novo empréstimo, comece selecionando o item de menu <menuchoice
 ><guimenu
 >Conta</guimenu
 ><guimenuitem
->Nova Conta</guimenuitem
+>Nova conta</guimenuitem
 ></menuchoice
->. Continue a responder às perguntas que o assistente irá fazer. </para>
+>. Continue a responder às perguntas feitas pelo assistente. </para>
+
+<note>
+<para
+>O assistente de <guilabel
+>Configuração de nova conta</guilabel
+> não apenas configura uma conta de empréstimo, mas também cria uma <guilabel
+>Transação agendada</guilabel
+> para os pagamentos periódicos. Se você tentar editar a conta de empréstimo ou a transação agendada associada, será apresentado o <guilabel
+>Assistente de edição de conta de empréstimo</guilabel
+>. Isso permite ajustar muitos dos detalhes dos empréstimos, mas não todos. Infelizmente, alguns aspectos da conta de empréstimo não podem ser alterados no momento, como a conta principal. </para>
 
 <para
->Opcionalmente, um empréstimo poderá estar associado a uma instituição em particular. Se estiver pedindo o empréstimo a uma companhia de crédito ou a uma companhia de aluguel de carros, você poderá criar um item de instituição que descreva esta firma e associá-la ao seu empréstimo. Se estiver pedindo um empréstimo ao seu tio Alexandre, não será necessário configurar uma instituição. </para>
+>Se você exibir a <link linkend="details.schedules"
+>vista de Agendamentos</link
+>, clique com o botão direito em qualquer um dos agendamentos listados e selecione <guimenuitem
+>Editar transação agendada</guimenuitem
+> no menu que aparece. O &kmymoney; exibirá a caixa de diálogo <guilabel
+>Editar transação agendada</guilabel
+>. Por outro lado, se você fizer isso com um agendamento de empréstimo, será exibido o <guilabel
+>Assistente de edição de conta de empréstimo</guilabel
+>, mencionado anteriormente. No entanto, se você mantiver pressionada a tecla <keycap
+>&Shift;</keycap
+> ao clicar em <guimenuitem
+>Editar transação agendada</guimenuitem
+>, a caixa de diálogo <guilabel
+>Editar transação agendada</guilabel
+> do empréstimo será exibida, onde você poderá alterar alguns detalhes da transação recorrente. </para>
+
+<para
+>Observe também que, se você excluir o cronograma associado a um empréstimo, não poderá desfazer essa ação e terá que começar do zero, criando uma nova conta de empréstimo e um novo cronograma. </para>
+</note>
+
+<para
+>Opcionalmente, como em qualquer outra conta, um empréstimo pode ser associado a uma instituição específica. Se você estiver pegando um empréstimo de uma empresa de hipotecas ou de uma empresa de financiamento de veículos, você pode criar uma instituição que descreva essa empresa e associar seu empréstimo a ela. Se você estiver pegando um empréstimo do seu Tio ​​Ted, não há necessidade de criar uma instituição. </para>
 </sect1>
 
-<sect1 id="details.loans.extra-payments">
-<title
->Criar Prestações Extraordinárias nos Empréstimos</title>
-
+<sect1 id="details.loans.extra-payments"
+><title
+>Criação de prestações extraordinárias nos empréstimos</title>
 <para
->Se você quiser criar uma prestação extra, poderá fazê-lo. Basta <link linkend="details.ledger.transactions"
+>Se quiser criar uma prestação extra, poderá fazê-lo. Basta <link linkend="details.ledger.transactions"
 >inserir uma transação</link
->, usando os livros de registros. Esta prestação extra será levada em conta no cálculo dos juros que irão ocorrer no próximo pagamento periódico. </para>
+>, usando os livros de registros. Esta prestação extra será considerada no cálculo dos juros que irão ocorrer no próximo pagamento periódico. </para>
 
 <para
->Alguns exemplos de pagamentos extra incluem (mas não se limitam necessariamente): </para>
+>Alguns exemplos de pagamentos extras incluem, mas não se limitam a: </para>
 
 <itemizedlist>
   <listitem
@@ -188,8 +234,10 @@
   </listitem>
 </itemizedlist>
 
-<para
->Nota: Se você estiver duplicando o pagamento da amortização, você terá que calcular de novo o plano de pagamento de cada prestação. Isto permitirá que haja um valor adequado para a prestação de amortização necessária com cada prestação. </para>
+<note>
+  <para
+>Se estiver duplicando o pagamento da amortização, você terá que recalcular o plano de pagamento de cada prestação. Isso permitirá que haja um valor adequado para a prestação de amortização necessária com cada prestação. </para>
+</note>
 </sect1>
 </chapter>
 

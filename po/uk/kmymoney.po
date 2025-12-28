@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-25 03:27+0000\n"
+"POT-Creation-Date: 2025-12-28 03:21+0000\n"
 "PO-Revision-Date: 2025-10-09 19:37+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -8083,282 +8083,282 @@ msgstr "Срібло"
 msgid "Opening Balances"
 msgstr "Відкриття балансів"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:880
+#: kmymoney/mymoney/mymoneyschedule.cpp:932
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Once"
 msgstr "Один раз"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:882
+#: kmymoney/mymoney/mymoneyschedule.cpp:934
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Daily"
 msgstr "Щодня"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:884
+#: kmymoney/mymoney/mymoneyschedule.cpp:936
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Weekly"
 msgstr "Щотижня"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:886
+#: kmymoney/mymoney/mymoneyschedule.cpp:938
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Fortnightly"
 msgstr "Кожні два тижні"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:888
-#: kmymoney/mymoney/mymoneyschedule.cpp:938
+#: kmymoney/mymoney/mymoneyschedule.cpp:940
+#: kmymoney/mymoney/mymoneyschedule.cpp:990
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
 msgstr "Через тиждень"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:890
+#: kmymoney/mymoney/mymoneyschedule.cpp:942
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every half month"
 msgstr "Кожні півмісяця"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:892
-#: kmymoney/mymoney/mymoneyschedule.cpp:941
+#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:993
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
 msgstr "Кожні три місяці"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:894
-#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:946
+#: kmymoney/mymoney/mymoneyschedule.cpp:996
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
 msgstr "Кожні чотири тижні"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:896
-#: kmymoney/mymoney/mymoneyschedule.cpp:929
+#: kmymoney/mymoney/mymoneyschedule.cpp:948
+#: kmymoney/mymoney/mymoneyschedule.cpp:981
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every thirty days"
 msgstr "Кожні тридцять днів"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:898
+#: kmymoney/mymoney/mymoneyschedule.cpp:950
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Monthly"
 msgstr "Щомісяця"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:900
-#: kmymoney/mymoney/mymoneyschedule.cpp:947
+#: kmymoney/mymoney/mymoneyschedule.cpp:952
+#: kmymoney/mymoney/mymoneyschedule.cpp:999
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
 msgstr "Кожні вісім тижнів"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:902
-#: kmymoney/mymoney/mymoneyschedule.cpp:959
+#: kmymoney/mymoney/mymoneyschedule.cpp:954
+#: kmymoney/mymoney/mymoneyschedule.cpp:1011
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
 msgstr "Кожні два місяці"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:904
-#: kmymoney/mymoney/mymoneyschedule.cpp:962
+#: kmymoney/mymoney/mymoneyschedule.cpp:956
+#: kmymoney/mymoney/mymoneyschedule.cpp:1014
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three months"
 msgstr "Кожні три місяці"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:906
+#: kmymoney/mymoney/mymoneyschedule.cpp:958
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
 msgstr "Щоквартально"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:908
-#: kmymoney/mymoney/mymoneyschedule.cpp:965
+#: kmymoney/mymoney/mymoneyschedule.cpp:960
+#: kmymoney/mymoney/mymoneyschedule.cpp:1017
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four months"
 msgstr "Кожні чотири місяці"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:910
-#: kmymoney/mymoney/mymoneyschedule.cpp:968
+#: kmymoney/mymoney/mymoneyschedule.cpp:962
+#: kmymoney/mymoney/mymoneyschedule.cpp:1020
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Twice yearly"
 msgstr "Двічі на рік"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:912
+#: kmymoney/mymoney/mymoneyschedule.cpp:964
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Yearly"
 msgstr "Щорічно"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:914
-#: kmymoney/mymoney/mymoneyschedule.cpp:977
+#: kmymoney/mymoney/mymoneyschedule.cpp:966
+#: kmymoney/mymoney/mymoneyschedule.cpp:1029
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other year"
 msgstr "Через рік"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:915
+#: kmymoney/mymoney/mymoneyschedule.cpp:967
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Any"
 msgstr "Будь-яка"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:924
+#: kmymoney/mymoney/mymoneyschedule.cpp:976
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
 msgstr "%1 разів"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:932
+#: kmymoney/mymoney/mymoneyschedule.cpp:984
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 days"
 msgstr "Кожні %1 дні"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:950
+#: kmymoney/mymoney/mymoneyschedule.cpp:1002
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
 msgstr "Кожні %1 тижні"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:954
+#: kmymoney/mymoney/mymoneyschedule.cpp:1006
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 half months"
 msgstr "Кожні %1 пів місяці"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:971
+#: kmymoney/mymoney/mymoneyschedule.cpp:1023
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 months"
 msgstr "Кожні %1 місяці"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:980
+#: kmymoney/mymoney/mymoneyschedule.cpp:1032
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 years"
 msgstr "Кожні %1 роки"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:990
+#: kmymoney/mymoney/mymoneyschedule.cpp:1042
 msgctxt "Schedule occurrence period"
 msgid "Any"
 msgstr "Будь-який"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:993
+#: kmymoney/mymoney/mymoneyschedule.cpp:1045
 msgctxt "Schedule occurrence period"
 msgid "Once"
 msgstr "Один раз"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:995
+#: kmymoney/mymoney/mymoneyschedule.cpp:1047
 msgctxt "Schedule occurrence period"
 msgid "Day"
 msgstr "День"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:997
+#: kmymoney/mymoney/mymoneyschedule.cpp:1049
 msgctxt "Schedule occurrence period"
 msgid "Week"
 msgstr "Тиждень"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:999
+#: kmymoney/mymoney/mymoneyschedule.cpp:1051
 msgctxt "Schedule occurrence period"
 msgid "Half-month"
 msgstr "Раз на півмісяця"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1001
+#: kmymoney/mymoney/mymoneyschedule.cpp:1053
 msgctxt "Schedule occurrence period"
 msgid "Month"
 msgstr "Місяць"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1003
+#: kmymoney/mymoney/mymoneyschedule.cpp:1055
 msgctxt "Schedule occurrence period"
 msgid "Year"
 msgstr "Рік"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1013
+#: kmymoney/mymoney/mymoneyschedule.cpp:1065
 msgctxt "Scheduled transaction type"
 msgid "Bill"
 msgstr "Фактура"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1016
+#: kmymoney/mymoney/mymoneyschedule.cpp:1068
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
 msgstr "Депозит"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1019
+#: kmymoney/mymoney/mymoneyschedule.cpp:1071
 msgctxt "Scheduled transaction type"
 msgid "Transfer"
 msgstr "Трансферт"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1022
+#: kmymoney/mymoney/mymoneyschedule.cpp:1074
 msgctxt "Scheduled transaction type"
 msgid "Loan payment"
 msgstr "Сплата за кредитом"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1026
+#: kmymoney/mymoney/mymoneyschedule.cpp:1078
 msgctxt "Scheduled transaction type"
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1035
+#: kmymoney/mymoney/mymoneyschedule.cpp:1087
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
 msgstr "Прямий дебет"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1038
+#: kmymoney/mymoney/mymoneyschedule.cpp:1090
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
 msgstr "Прямий депозит"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1041
+#: kmymoney/mymoney/mymoneyschedule.cpp:1093
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
 msgstr "Ручний депозит"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1044
+#: kmymoney/mymoney/mymoneyschedule.cpp:1096
 msgctxt "Scheduled Transaction payment type"
 msgid "Other"
 msgstr "Інше"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1047
+#: kmymoney/mymoney/mymoneyschedule.cpp:1099
 msgctxt "Scheduled Transaction payment type"
 msgid "Write check"
 msgstr "Письмовий чек"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1050
+#: kmymoney/mymoney/mymoneyschedule.cpp:1102
 msgctxt "Scheduled Transaction payment type"
 msgid "Standing order"
 msgstr "Постійне доручення"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1053
+#: kmymoney/mymoney/mymoneyschedule.cpp:1105
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
 msgstr "Банківський трансферт"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1056
+#: kmymoney/mymoney/mymoneyschedule.cpp:1108
 msgctxt "Scheduled Transaction payment type"
 msgid "Any (Error)"
 msgstr "Будь-який (помилка)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1068
+#: kmymoney/mymoney/mymoneyschedule.cpp:1120
 #: kmymoney/views/keditscheduledlg.ui:164
 #, kde-format
 msgid "Change the date to the previous processing day"
 msgstr "Змінити дату на попередній робочий день"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1071
+#: kmymoney/mymoney/mymoneyschedule.cpp:1123
 #: kmymoney/views/keditscheduledlg.ui:169
 #, kde-format
 msgid "Change the date to the next processing day"
 msgstr "Змінити дату на наступний робочий день"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1074
+#: kmymoney/mymoney/mymoneyschedule.cpp:1126
 #: kmymoney/views/keditscheduledlg.ui:159
 #, kde-format
 msgid "Do not change the date"
@@ -8598,7 +8598,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** НЕ ПРИЗНАЧЕНО ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
-#: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
+#: kmymoney/widgets/amountedit.cpp:283 kmymoney/widgets/amountedit.cpp:340
 #: kmymoney/widgets/creditdebitedit.cpp:128
 #: kmymoney/widgets/creditdebitedit.cpp:129
 #: kmymoney/widgets/creditdebitedit.cpp:160
@@ -13573,12 +13573,12 @@ msgstr "Процес імпортування було несподівано п
 msgid "Failed to import all statements."
 msgstr "Не вдалося імпортувати всі виписки."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:441
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:442
 #, kde-format
 msgid "For this beneficiary's country the BIC is mandatory."
 msgstr "Для цієї країни отримувача BIC є обов'язковим."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:457
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:458
 #, kde-format
 msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
@@ -13587,12 +13587,12 @@ msgstr[1] "Назва отримувача має складатися з при
 msgstr[2] "Назва отримувача має складатися з принаймні %1 символів"
 msgstr[3] "Назва отримувача має складатися з принаймні одного символу"
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:468
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:469
 #, kde-format
 msgid "A positive amount to transfer is needed."
 msgstr "Слід вказати додатну суму переказу."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:479
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:480
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below your credit "
@@ -13601,7 +13601,7 @@ msgstr ""
 "Після виконання цього кредитного переказу на балансі рахунку залишиться "
 "менше грошей, ніж передбачено вашим обмеженням кредиту."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:481
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:482
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below the minimal "
@@ -13610,7 +13610,7 @@ msgstr ""
 "Після виконання цього кредитного переказу на балансі рахунку залишиться "
 "менше грошей, ніж передбачено мінімальними вимогами до балансу."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:491
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:492
 #, kde-format
 msgid "The end-to-end reference cannot contain more than one character."
 msgid_plural "The end-to-end reference cannot contain more than %1 characters."
@@ -13623,7 +13623,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Запис наскрізного посилання може складатися не більше ніж з %1 символу."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:507
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:508
 #, kde-format
 msgid "The maximal line length of %1 character per line is exceeded."
 msgid_plural "The maximal line length of %1 characters per line is exceeded."
@@ -13632,7 +13632,7 @@ msgstr[1] "Перевищено максимальну можливу довжи
 msgstr[2] "Перевищено максимальну можливу довжину рядка у %1 символів."
 msgstr[3] "Перевищено максимальну можливу довжину рядка у %1 символ."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:511
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:512
 #, kde-format
 msgid ""
 "The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /"
@@ -13640,7 +13640,7 @@ msgstr ""
 "У полі призначення можуть міститися літери A-Z, пробіли та символи ':?.,-"
 "()+/."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:513
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:514
 #, kde-format
 msgid "In the purpose only a single line is allowed."
 msgid_plural "The purpose cannot contain more than %1 lines."
@@ -13649,7 +13649,7 @@ msgstr[1] "Запис призначення може складатися не 
 msgstr[2] "Запис призначення може складатися не більше ніж з %1 рядків."
 msgstr[3] "Запис призначення може складатися не більше ніж з %1 рядка."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:517
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:518
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
@@ -21964,14 +21964,14 @@ msgstr "Список порядку вкладок…"
 msgid "Tab Order Editor"
 msgstr "Редактор порядку вкладок"
 
-#: kmymoney/widgets/amountedit.cpp:273
+#: kmymoney/widgets/amountedit.cpp:264
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr "Суму наведено у %1. Натисніть цю кнопку, щоб перемкнути валюту на %2."
 
-#: kmymoney/widgets/amountedit.cpp:280
+#: kmymoney/widgets/amountedit.cpp:271
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."

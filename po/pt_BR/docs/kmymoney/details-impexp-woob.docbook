@@ -1,0 +1,69 @@
+<sect1 id="details.impexp.woob">
+<sect1info>
+  <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+</sect1info>
+<title
+>Importador do Woob</title>
+
+<sect2
+><title
+>O que é o Woob?</title>
+<para
+><acronym
+><ulink url="https://woob.tech/"
+>Woob</ulink
+></acronym
+>, ou <quote
+>Web fora dos navegadores</quote
+> é <quote
+>uma coleção de aplicativos capazes de interagir com sites, sem exigir que o usuário os abra em um navegador.</quote
+> Um dos <ulink url="https://woob.tech/applications/"
+>tais aplicativos</ulink
+> permite especificamente interagir com <ulink url="https://woob.tech/applications/bank"
+>instituições financeiras</ulink
+>. O &kmymoney; fornece um plugin que o utiliza diretamente, permitindo, portanto, importar transações daqueles bancos e instituições que, de outra forma, não oferecem suporte a nenhum outro protocolo financeiro que o &kmymoney; processa. </para>
+</sect2>
+  
+<sect2
+><title
+>Instalar o Woob</title>
+<note>
+  <para
+>O &kmymoney; exige atualmente que você instale o Woob separadamente. Veja abaixo os detalhes. </para>
+</note>
+
+<para
+>Algumas distribuições &Linux; incluem um pacote do Woob, e esse é o método de instalação preferido, se disponível. Caso contrário, você precisará instalar uma versão recente do Python 3 antes de continuar. Todas as principais distribuições &Linux; incluem o Python, e você deve usar essa versão, se possível. Caso contrário, você pode baixar um pacote para o seu sistema no <ulink url="https://www.python.org/downloads/"
+>site oficial do Python</ulink
+>. A versão mínima exata do Python exigida pelo Woob pode ser encontrada no <ulink url="https://woob.tech/install/"
+>site do Woob</ulink
+>. </para>
+
+<para
+>Com o Python 3 instalado, você agora deve conseguir baixar e instalar facilmente os módulos Woob necessários. Consulte as instruções no site do Woob. Quando o &kmymoney; é executado, ele verifica a presença do Woob e carrega o plugin se o Woob for encontrado. Consulte a seção <link linkend="details.settings.plugins"
+>Plugins</link
+> no capítulo de <link linkend="details.settings"
+>Configurações</link
+> para obter mais informações sobre como confirmar se o plugin Woob está carregado. </para>
+</sect2>
+
+<sect2
+><title
+>Usar o Woob</title>
+<para
+>Se o Woob estiver instalado e o plugin woob do &kmymoney; estiver carregado, você poderá configurá-lo para uso com uma conta acessando o item de menu <menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Mapear para conta online...</guimenuitem
+> </menuchoice
+>. Feito isso, o item de menu <menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Atualizar conta...</guimenuitem
+> </menuchoice
+> fará o download das transações dessa conta usando o Woob. </para>
+</sect2>
+</sect1>

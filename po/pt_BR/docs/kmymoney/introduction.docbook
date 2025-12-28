@@ -2,20 +2,18 @@
 <chapter id="introduction">
 <chapterinfo>
   <date
->30/08/2014</date>
+>01/12/2024</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Introdução</title>
 
-<sect1 id="what-is-kmymoney">
-<title
->O que é o &kappname;?</title>
-
+<sect1 id="what-is-kmymoney"
+><title
+>O que é o &kmymoney;?</title>
 <para
->De um modo simples, o &kappname; é um gerenciador de finanças pessoais para o &kde;. Ele permite que usuários de sistemas operacionais e aplicativos de código aberto mantenham um registro cuidadoso das suas finanças pessoais, oferecendo uma grande lista de funcionalidades e ferramentas financeiras. </para>
+>O &kmymoney; é um gerenciador de finanças pessoais do &kde;. Ele permite que os usuários mantenham um registro cuidadoso das suas finanças pessoais, oferecendo uma grande lista de funcionalidades e ferramentas financeiras. </para>
 
 <para
 >Os principais objetivos do projeto são: </para>
@@ -26,40 +24,39 @@
 ><title
 >Paridade de recursos.</title>
       <para
->O &kappname; pretende oferecer todos os recursos existentes nos gerenciadores de finanças pessoais disponíveis comercialmente. Ainda que cada versão do &kappname; esteja mais próxima desse objetivo, ainda há muito trabalho pela frente. </para>
+>O &kmymoney; pretende oferecer todos os recursos existentes nos gerenciadores de finanças pessoais disponíveis comercialmente. Ainda que cada versão do &kmymoney; esteja mais próxima desse objetivo, ainda há muito trabalho pela frente. </para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara
 ><title
->Facilidade de uso.</title>
+>Fácil de usar</title>
       <para
->O &kappname; busca ser o gerenciador de finanças pessoais de código aberto mais simples de usar, especialmente para os usuários não-técnicos. </para>
+>O &kmymoney; busca ser o gerenciador de finanças pessoais de código aberto mais simples de usar, especialmente para os usuários não-técnicos. </para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara
 ><title
->Exatidão.</title>
+>Exatidão</title>
       <para
->Com base em princípios de contabilidade amplamente testados, o &kappname; garante que suas finanças serão mantidas em ordem. </para>
+>Com base em princípios de contabilidade amplamente testados, o &kmymoney;garante que suas finanças serão mantidas em ordem. </para>
     </formalpara>
   </listitem>
 </itemizedlist>
 
 </sect1>
 
-<sect1 id="what-kmymoney-is-not">
-<title
->O que o &kappname; não é</title>
+<sect1 id="what-kmymoney-is-not"
+><title
+>O que o &kmymoney; não é</title>
+<para
+>Como um gerenciador de finanças pessoais, o &kmymoney; não foi projetado para atender às necessidades de uma empresa. Uma pequena empresa pode achar as funcionalidades do &kmymoney; suficientes para usá-lo, mas recursos como contas a receber e contas a pagar não são suportados diretamente. Quanto maior a empresa, menor a probabilidade de o &kmymoney; atender às suas necessidades de gestão financeira. A maioria, senão todos, os dados necessários para uma pequena empresa, como para relatórios de auditoria e tributação, estão presentes, mas podem precisar ser extraídos usando vários relatórios e, em seguida, processados ​​e reunidos nos formatos exigidos. Além disso, seria possível criar recursos para clientes, fornecedores, documentos ou outros por meio de plugins. </para>
 
 <para
->Como um gerenciador de finanças pessoais, o &kappname; não pretende atender às necessidades de uma empresa de porte médio. Pequenas empresas podem encontrar funcionalidades suficientes para usar o &kappname;, mas recursos como contas de crédito e pagamento não são diretamente suportados. Mesmo assim, seria possível criar funcionalidades para controle de clientes, fornecedores, documentos, entre outros, com uso de plugins. </para>
-
-<para
->O &kappname; não é apenas uma cópia dos programas de finanças pessoais com fins comerciais. Ainda que muitas das funcionalidades presentes no &kappname; possam existir também em outros aplicativos do gênero, o &kappname; tenta apresentar uma visão individual e única das suas finanças. </para>
+>O &kmymoney; não é apenas uma cópia dos programas de finanças pessoais com fins comerciais. Ainda que muitas das funcionalidades presentes no &kmymoney; possam existir também em outros aplicativos do gênero, o &kmymoney; tenta apresentar uma visão individual e única das suas finanças. </para>
 
 </sect1>
 </chapter>

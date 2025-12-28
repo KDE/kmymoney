@@ -4,79 +4,116 @@
   <authorgroup>
     <author
 >&Roger.Lum; &Roger.Lum.mail;</author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->30/08/2014</date>
+>01/12/2024</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
 
-<title id="details.categories.title"
+<title
 >Categorias</title>
 
 <para
->A área Categorias apresenta um resumo de todas as categorias existentes, sob as quais são registradas as transações. As categorias são divididas em receita e despesa, sendo apresentado um saldo para cada categoria. </para>
+>Internamente, as Categorias são tratadas pela &kmymoney; como um tipo especial de conta, portanto, muitos dos recursos das Categorias são muito semelhantes aos de outras contas. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="categories.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<sect1 id="details.categories.create">
-<title
->Criando uma categoria</title>
+<sect1 id="details.categories.view"
+><title
+>Vista de Categorias</title>
+<screenshot>
+  <screeninfo
+>vista de categorias</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="categories.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>vista de categorias</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Para criar uma nova categoria, selecione a opção do menu <menuchoice
-><guimenu
+>A vista de Categorias fornece um resumo de todas as categorias existentes em seu arquivo de dados atual. Semelhante à vista de Contas, as categorias são agrupadas em Receitas e Despesas. Assim como nas vistas de Instituições e Contas, a lista de categorias pode ser expandida ou recolhida clicando na seta à esquerda do tipo ou nome. Assim como nas Contas de Ativo e Passivo, as categorias podem ser consideradas subcategorias, com uma categoria pai de outra categoria em vez da Receita ou Despesa de nível superior. </para>
+
+<para
+>Semelhante à vista de Contas, a vista de Categorias exibe várias colunas com informações descritivas e resumidas sobre cada categoria. Assim como na vista de Contas, você pode selecionar quais colunas serão exibidas clicando com o botão direito do mouse em qualquer título de coluna e marcando ou desmarcando a caixa de seleção ao lado do nome da coluna. </para>
+
+<para
+>As colunas disponíveis para Categorias são idênticas às de Contas para Nome, Tipo, Imposto, IVA, Saldo e Valor Total. Online, Número da Conta e IBAN não se aplicam a Categorias. Há uma coluna adicional disponível. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>CC</term>
+    <listitem>
+      <para
+>Indica que a atribuição de um centro de custos é necessária sob certas condições ao inserir uma transação para esta categoria. Este é um recurso adicionado recentemente, que ainda não está implementado, portanto, esta coluna não está sendo usada atualmente. Além disso, ela pode não aparecer, dependendo do valor de uma configuração de tempo de compilação. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.categories.create"
+><title
+>Criando uma categoria</title>
+<para
+>Existem 3 maneiras de criar uma nova categoria: selecionar o item de menu <menuchoice
+> <guimenu
 >Categoria</guimenu
 > <guimenuitem
 >Nova categoria</guimenuitem
 ></menuchoice
-> ou a respectiva na área de Categorias, selecionar uma categoria-mãe na árvore, clicar com o botão direito e selecionar a opção <guimenuitem
+>, clicar com o botão direito do mouse em um item pai na árvore na vista de Categorias e selecionar a opção <guimenuitem
 >Nova categoria</guimenuitem
->. Em qualquer um destes casos, irá aparecer o assistente para criar novas categorias. Insira o nome da nova categoria e selecione a moeda, caso a apresentada não esteja correta. Na aba Hierarquia, verifique se a conta-mãe necessária está selecionada. Finalmente, na aba Taxa, existe uma opção para ativar o suporte para o IVA, assim como outra opção para incluir esta categoria em determinados relatórios relacionados com impostos. </para>
+> ou digitar diretamente o nome da nova categoria ao adicionar ou editar uma transação no Livro de registro. Qualquer uma dessas etapas o direcionará para a caixa de diálogo <guilabel
+>Criar uma nova categoria</guilabel
+>. Esta caixa de diálogo contém três abas: <guilabel
+>Geral</guilabel
+>, <guilabel
+>Hierarquia</guilabel
+> e <guilabel
+>Impostos</guilabel
+>. A aba Geral inclui campos editáveis ​​para o nome da nova categoria, tipo e moeda (com a moeda padrão pré-selecionada), bem como opções para o número do último cheque, notas e uma caixa de seleção para a atribuição do centro de custo ser obrigatória. Na aba Hierarquia, você pode selecionar a categoria pai apropriada. Por fim, na aba Impostos, existem campos para habilitar e configurar o suporte ao IVA e uma caixa de seleção para incluir esta categoria em relatórios relacionados a impostos. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="categoryedit.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
- </para>
-
-<para
->Insira o nome da categoria, as notas que desejar e clique no botão <guibutton
->OK</guibutton
-> para salvar a nova categoria. Para criar uma hierarquia completa de contas, separe os nomes por dois pontos (:), como por exemplo, <emphasis
->Contas:Carro:Gasolina</emphasis
->. </para>
+<screenshot>
+  <screeninfo
+>criar nova categoria</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="categoryedit.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>criar nova categoria</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect1>
 
-<sect1 id="details.categories.edit">
-<title
+<sect1 id="details.categories.edit"
+><title
 >Editar uma Categoria</title>
+<para
+>Para editar uma categoria, clique com o botão direito do mouse no nome da categoria na vista de Categorias e escolha <guimenuitem
+>Editar categoria...</guimenuitem
+>. Uma janela será exibida com as mesmas três abas da caixa de diálogo <guilabel
+>Criar uma nova categoria</guilabel
+>: Geral, Hierarquia e Impostos. Cada aba permite editar determinados detalhes da categoria. </para>
 
 <para
->Para editar uma categoria, clique com o botão direito no nome de uma categoria e escolha a opção <guimenuitem
->Editar categoria</guimenuitem
->. Irá aparecer uma janela com três abas: Geral, Hierarquia e Taxa. </para>
+>A aba Geral permite-lhe editar o nome da categoria e quaisquer notas inseridas ao criar a categoria. O Tipo e a Moeda não podem ser alterados em relação aos seus valores iniciais. </para>
 
 <para
->A aba Geral permite-lhe editar o nome da categoria e quaisquer notas inseridas ao criar a categoria. </para>
+>A aba Hierarquia permite que você altere a categoria pai da categoria selecionada clicando em outra categoria que se tornará a pai. Além disso, você pode arrastar uma categoria e soltá-la sob sua nova categoria pai. </para>
 
 <para
->A aba Hierarquia permite-lhe alterar a categoria-mãe. Você pode alterar a categoria-mãe clicando em outra categoria desta área da hierarquia de categorias. Em uma versão anterior do &kappname; era possível alterar a categoria-mãe de outra categoria com a ação arrastar e soltar. Essa funcionalidade retornará no futuro, mas é provável que apenas após a conversão do &kappname; para o &kde; Frameworks. </para>
-
-<para
->A aba Taxa permite-lhe atribuir ou alterar a categoria do IVA ou a sua atribuição automática. Também lhe permite mudar se deseja incluir ou não a categoria em determinados relatórios relacionados com impostos. </para>
+>A aba Taxa permite-lhe atribuir ou alterar os detalhes do IVA ou a sua atribuição automática. Também lhe permite mudar se deseja incluir ou não a categoria em determinados relatórios relacionados com impostos. </para>
 </sect1>
 
 <sect1 id="details.categories.vat">
@@ -84,34 +121,49 @@
   <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
-
 <title
 >Suporte ao IVA</title>
 	
 <para
->Você poderá transformar uma categoria de despesa/receita numa categoria de IVA, o que significa que recebe todas as parcelas que compõem de fato o pagamento do IVA ao Estado. A taxa percentual poderá ser inserida. </para>
+>Você poderá transformar uma categoria de despesa/receita numa categoria de IVA, o que significa que recebe todas as parcelas que compõem de fato o pagamento do IVA ao Estado. A taxa porcentual poderá ser inserida. </para>
  
 <para
->As categorias poderão ter uma categoria de IVA atribuída, o que permite ao &kappname; dividir uma transação para uma determinada categoria em duas parcelas, uma para a categoria e outra para o IVA. Dependendo da definição do montante bruto/líquido, o montante que inserir para a transação será o valor bruto ou o líquido. </para>
+>As categorias poderão ter uma categoria de IVA atribuída, o que permite ao &kmymoney; dividir uma transação para uma determinada categoria em duas parcelas, uma para a categoria e outra para o IVA. Dependendo da definição do montante bruto/líquido, o montante que inserir para a transação será o valor bruto ou o líquido. </para>
  
 <para
->Exemplo: Na Alemanha, existem três porcentagens de IVA (0%, 7% e 19%). Como tal, foi criada uma categoria principal "IVA pago" e três subcategorias, uma para cada porcentagem do imposto. Foram criadas tanto no lado das despesas como das receitas, o que dá origem a oito categorias no total. Para os bens adquiridos é selecionada uma das categorias acima mencionadas como "Atribuição da categoria do IVA". </para>
+>Exemplo: Na Alemanha, existem três porcentagens de IVA (0%, 7% e 19%). Como tal, foi criada uma categoria principal "IVA pago" e três subcategorias, uma para cada porcentagem do imposto. Foram criadas tanto no lado das despesas como das receitas, o que dá origem a seis categorias no total. Para os bens adquiridos é selecionada uma das categorias acima mencionadas como "Atribuição da categoria do IVA". </para>
  
 <para
->Quando se adquirem bens, eles poderão ser inseridos numa transação. Assumir-se-á que foi selecionado o método de inserção dos valores brutos; assim que seja inserida a categoria e o montante, o &kappname; irá reconhecer que existe uma atribuição de IVA, calculando a parcela para o mesmo, criando essa parcela com a conta do IVA e o montante do mesmo IVA, reduzindo o montante da categoria. </para>
+>Quando se adquirem bens, eles poderão ser inseridos numa transação. Assumir-se-á que foi selecionado o método de inserção dos valores brutos; assim que seja inserida a categoria e o montante, o &kmymoney; irá reconhecer que existe uma atribuição de IVA, calculando a parcela para o mesmo, criando essa parcela com a conta do IVA e o montante do mesmo IVA, reduzindo o montante da categoria. </para>
  
 <para
 >O mesmo se aplica às categorias de receitas, se bem que funciona no sentido inverso. Esperamos que isto faça sentido. </para>
 
 </sect1>
 
-<sect1 id="details.categories.delete">
-<title
+<sect1 id="details.categories.delete"
+><title
 >Excluindo uma categoria</title>
+<para
+>Excluir uma categoria é semelhante a excluir uma conta. Para excluir uma categoria, clique com o botão direito do mouse no nome dela na vista de Categorias e selecione <guimenuitem
+>Excluir categoria...</guimenuitem
+>. Se a categoria não tiver transações, agendamentos ou orçamentos associados a ela, e não estiver definida como a categoria padrão para novas transações com qualquer beneficiário, ela será excluída. </para>
 
 <para
->Para excluir uma categoria, selecione-a na árvore e clique com o botão direito para exibir o menu de contexto e selecionar a opção <guimenuitem
->Excluir</guimenuitem
->. A exclusão só é possível se não existirem transações atribuídas a essa categoria. Se tentar excluir uma categoria-mãe, irá aparecer uma janela perguntando se deseja que todas as suas categorias-filhas subam um nível ou se deseja excluir todas ao mesmo tempo. </para>
+>Se a categoria contiver algum desses itens, uma janela pop-up será exibida, permitindo que você escolha outra categoria para a qual todos esses itens poderão ser reatribuídos antes que a categoria seja excluída. </para>
+
+<para
+>Se você excluir uma categoria que seja a categoria principal de outras categorias, uma caixa de diálogo será exibida para que você escolha se deseja excluir essa categoria e todas as suas subcategorias ou apenas a categoria principal. Se você optar por excluir apenas a categoria principal, todas as suas subcategorias serão movidas para a categoria principal. </para>
+
+<para
+>Observe que a exclusão de algumas categorias pode solicitar informações sobre onde reatribuir seus dados e também se as subcategorias devem ser excluídas ou não. </para>
+</sect1>
+
+<sect1 id="details.categories.open_ledger"
+><title
+>Abrir o livro de registro para uma categoria</title>
+<para
+>As opções de menu para categorias incluem a escolha de abrir um livro de registro para essa categoria. Quando essa opção é selecionada, o &kmymoney; exibirá essa categoria em uma aba na vista do Livro de registro, mostrando todas as transações da categoria selecionada. Isso permite que você revise rapidamente todas as transações em detalhes para a categoria selecionada. Você pode então clicar com o botão direito em qualquer transação para obter detalhes adicionais sobre a transação específica e até mesmo editá-la. </para>
 </sect1>
 </chapter>
+

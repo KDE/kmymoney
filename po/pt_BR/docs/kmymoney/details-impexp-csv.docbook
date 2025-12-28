@@ -1,232 +1,412 @@
 <sect1 id="details.impexp.csv">
 <sect1info>
-   <author
->&Allan.Anderson; &Allan.Anderson.mail; </author>
+  <author
+>&Allan.Anderson;</author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title
 >Plugin de Importação de CSV</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Motivos para importar arquivos CSV</title>
+<para
+>Em geral, é preferível importar de OFX. No entanto, nem todas as instituições fornecem dados nesse formato. Os arquivos CSV (do inglês, comma separated value, ou valores separados por vírgulas), às vezes também chamados de arquivos de planilha ou Excel, quase sempre estarão disponíveis. Além disso, eles podem ser criados com muita facilidade capturando os dados que deseja importar, como em um arquivo texto, e editando-os manualmente. </para>
 
 <para
->Em geral, é preferível importar do OFX No entanto, nem todas as instituições fornecem dados neste formato. Os arquivos CSV (do inglês, valores separados por vírgulas) quase sempre estão disponíveis, algumas vezes descritos como arquivos de planilha ou Excel. Além disso, frequentemente eles podem ser criados facilmente capturando os dados que deseja importar, como em um arquivo texto, e editando-os manualmente. </para>
-
-<para
->O objetivo primário do plugin é a importação de dados a partir de extratos bancários, mas existe também a capacidade de importar alguns extratos de investimentos. Esse plugin foi criado inicialmente, antes de se tornar um importador de arquivos CSV, para produzir arquivos QIF a partir de CSV, que poderiam então ser importados. Essa funcionalidade ainda está presente, mas provavelmente será removida, uma vez que o plugin se foca agora na importação direta de arquivos CSV. Da mesma forma, o &kappname; tem a capacidade nativa de <link linkend="details.impexp.qifexp"
->exportar arquivos para QIF</link
->, não existindo nenhuma razão concreta para criar um arquivo QIF a partir de um arquivo CSV. </para>
+>O foco inicial do importador de CSV era lidar com dados de extratos bancários, mas a capacidade de importar também alguns extratos de investimentos foi adicionada. Além disso, foi melhorado para importar cotações de moedas e preços das ações. O código original para isso foi criado inicialmente, antes de tornar-se um importador de CSV, para produzir arquivos QIF a partir de arquivos CSV, que poderia então ser importado. Esta capacidade ainda está presente, mas é provável que seja removida, já que o foco agora está na importação direta de arquivos CSV. Além disso, o &kmymoney; tem a capacidade nativa de <link linkend="details.impexp.qifexp"
+>exportar para arquivos QIF</link
+>, então não há mais uma razão real para produzir um arquivo QIF a partir de um arquivo CSV. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Obtendo o plugin</title>
-
 <para
->O &kappname; irá importar os arquivos CSV. Essa funcionalidade é fornecida sob a forma de um plugin, fazendo agora parte da base do programa, tanto nos pacotes das distribuições como no código-fonte. Assim que instalar o pacote fornecido pela distribuição ou compilado a partir do código-fonte, a opção do menu para importar arquivos CSV irá aparecer automaticamente sob o menu <menuchoice
-><guimenu
+>O importador CSV é um dos recursos mais recentes adicionados ao &kmymoney; na forma de um plugin. No entanto, como acontece com outros plugins, o importador CSV está incluído no código-fonte do &kmymoney;, então deve estar disponível em todos as versões das distribuições &Linux;, bem como nas versões para outras plataformas disponibilizadas através do site do &kmymoney;. A opção do menu para importar arquivos CSV deve aparecer automaticamente no submenu <menuchoice
+> <guimenu
 >Arquivo</guimenu
-><guimenuitem
->Importar</guimenuitem
-></menuchoice
+> <guisubmenu
+>Importar</guisubmenu
+> </menuchoice
 >. </para>
 
 <para
->O plugin de importação de CSV é muito mais recente que o plugin de OFX, mas a maioria das distribuições já trazem incluído o importador de CSV ou disponível como um pacote à parte. Certifique-se de que ele está ativo dentro do &kappname;, na opção do menu <menuchoice
-><guimenu
+>Para garantir que ele esteja ativado no &kmymoney;, verifique o item de menu <menuchoice
+> <guimenu 
 >Configurações</guimenu
-><guimenuitem
->Configurar o KMyMoney</guimenuitem
-><guimenuitem
->Plugins</guimenuitem
-></menuchoice
->. Se o importador de CSV aparenta não estar instalado na sua versão, o primeiro local a verificar é o mesmo onde obteve o seu pacote base do &kappname;. Verifique se já está disponível uma versão posterior ou se o importador está disponível em um pacote separado. </para>
+> <guimenuitem 
+>Configurar o &kmymoney;...</guimenuitem
+> </menuchoice
+>, selecione <guilabel
+>Plugins</guilabel
+> no no painel esquerdo e procure pelo <guilabel 
+>Importador CSV</guilabel 
+> na lista exibida de plugins. Se o importador CSV não parecer estar instalado na sua versão, o primeiro lugar a verificar é no mesmo lugar onde você obteve seu pacote base do &kmymoney;. Veja se uma versão mais recente está disponível ou se o importador está disponível como um pacote separado. </para>
 
 <para
->Se tiver instalado a partir de um pacote RPM ou DEB, o plugin de importação de CSV deverá integrar o pacote do &kappname;. Se tiver compilado a partir do código-fonte, não há nenhum requisito adicional. O processo de compilação do &kappname; deverá detectar e compilar o código do plugin. </para>
+>Se você compilou a partir do código-fonte, não deverá haver requisitos adicionais. O processo de compilação do &kmymoney; deve detectar a fonte do plugin e compilá-lo. Existem definições de configuração que podem ser usadas para excluir este ou outros plugins da compilação, mas estas definições raramente serão necessárias. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Importação de um arquivo CSV</title>
-
 <para
->Para importar um arquivo CSV, selecione o importador na barra de menus: <menuchoice
-><guimenu
+>Para importar um arquivo CSV, escolha o importador no menu principal: <menuchoice
+> <guimenu 
 >Arquivo</guimenu
-><guimenuitem
->Importar</guimenuitem
-> <guimenuitem
+> <guisubmenu 
+>Importar</guisubmenu
+> <guimenuitem 
 >CSV...</guimenuitem
-></menuchoice
->. Se a opção CSV não aparecer em Importar, você não possui o plugin de importação de CSV instalado corretamente. Nesse caso, consulte a seção anterior. </para>
+> </menuchoice
+>. Se o CSV não aparecer no menu Importar, o plugin do importador não está instalado corretamente ou não está habilitado. Por favor veja a seção anterior. </para>
 
 <para
->O importador de CSV tem a forma de um assistente, com uma página separada para cada passo do processo. Poderão existir pequenas diferenças entre o texto deste manual, as legendas nas imagens e os textos que você vê no assistente. Nesses casos, o manual descreve como será o assistente na próxima versão. </para>
+>O Importador CSV é apresentado na forma de um assistente, com uma página separada para cada etapa individual do processo. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Assistente de importação de CSV: Início</title>
-
 <para
->Ao ser iniciado, o Importador de CSV mostra a página de <guilabel
->Início</guilabel
->. A área superior, onde os dados serão apresentados, está inicialmente vazia. Abaixo dela, à esquerda, existe uma lista com os passos do processo de importação, com realce no atual. À direita da lista, existem algumas breves instruções e dois botões de opção, permitindo a escolha de <guilabel
->Banco</guilabel
-> ou <guilabel
+>Quando iniciado, o importador CSV exibe o botão <guilabel 
+>Iniciar</guilabel 
+> ou a página <guilabel 
+>Arquivo</guilabel 
+>. À esquerda está uma lista das etapas do processo de importação, com a atual em destaque. A área superior direita é onde serão exibidos os dados a serem importados; antes disso, ele mostra alguns breves instruções relevantes para o estágio atual do assistente. Abaixo disso há um conjunto de botões de opção para seleção do tipo de dados a serem importados. Esta lista inclui atualmente <guilabel 
+>Banco</guilabel 
+>, <guilabel 
 >Investimento</guilabel
->. Em seguida, existe um campo de seleção do perfil, que fica ativo assim que um dos botões de opção for selecionado. Na parte inferior da janela existem botões para avançar para o próximo passo do assistente, <guibutton
->Voltar</guibutton
-> para o passo anterior ou <guibutton
->Cancelar</guibutton
-> a importação. No passo inicial, existe também o botão <guilabel
->Selecionar arquivo</guilabel
-> para indicar o arquivo a importar. </para>
-<!-- want to use inlinemediaobject to avoid lines above and below. -->
-  <screenshot>
+>, <guilabel
+>Preços de moeda</guilabel
+> e <guilabel
+>Preços de ações</guilabel
+>. A seguir, há um menu suspenso do seletor de perfil, que é ativado uma vez que o botão de opção tenha sido selecionado para um dos tipos de arquivo de importação. </para>
+
+<screenshot>
+  <screeninfo
+>assistente de importação csv: início</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_1.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de importação csv: início</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
+</sect3>
+
+<sect3
+><title
+>Perfis de importação de CSV</title>
+<para
+>Cada tipo de arquivo CSV a ser importado requer a especificação de vários detalhes sobre a formatação esperada dos dados, conforme descrito nas seções a seguir. Os detalhes não diferem apenas para os diferentes tipos de arquivos de dados importados. É possível precisar de diferentes configurações para o mesmo tipo de dado de fontes diferentes. Então, você não precisa entrar todos esses detalhes cada vez que você importa um arquivo. O importador CSV permite que você especifique os detalhes uma vez e salve-os em um perfil nomeado. </para>
 
 <para
->Da mesma forma, repare na opção <guilabel
+>O nome de um perfil de importação CSV é completamente arbitrário, mas será mais fácil lembrar se refletir o tipo de dado que esté sendo importados (banco, cartão de crédito, investimento, ...) e a fonte dos dados. Não há necessidade de fazer referência à conta para a qual os dados são importados, e é possível usar o mesmo perfil para importar para mais de uma conta, como duas contas correntes no mesmo banco. </para>
+
+<para
+>O menu suspenso do seletor de perfil inclui os nomes de todos os perfis de importação de CSV perfis que você criou anteriormente e também permite digitar o nome de um novo perfil. Abaixo do menu suspenso do seletor de perfil, existem três botões. Ao clicar em <guilabel 
+>Adicionar</guilabel 
+>, que está sempre ativado, um novo o perfil será criado com o nome inserido no menu suspenso. Nada vai acontecer se esse campo estiver vazio ou se exibir o nome de um perfil existente. À medida que você avança no restante do assistente de importação de CSV, as várias definições de configuração que você insere ou modifica serão salvas no perfil selecionado. </para>
+
+<para
+>Se você já criou um ou mais perfis, os outros dois botões estarão habilitados. Se você clicar em <guilabel
+>Remover</guilabel
+>, o perfil com o nome exibido no menu suspenso será excluído. Se você clicar em <guilabel
+>Renomear</guilabel
+>, alterar o nome exibido no menu suspenso e clicar em <guilabel
+>Renomear</guilabel
+> novamente, o perfil será renomeado de acordo. </para>
+
+<para
+>Ao lado do seletor de perfil, há uma caixa de seleção <guilabel
 >Ignorar configuração</guilabel
-> ao lado do seletor de perfis. Inicialmente, você não deve assinalar essa opção. Assim que tiver configurado um perfil e terminado o assistente, esses parâmetros são salvos no arquivo do recurso. Na próxima vez que usar o mesmo perfil, os parâmetros serão carregados na interface do usuário. O assistente irá então assumir os parâmetros nas páginas seguintes, caso não tenha necessidade de alterá-los. Em vez disso, caso se sinta satisfeito com um determinado perfil, poderá ser útil assinalar essa opção. O assistente irá então passar diretamente para a página final e, assumindo que não foram encontrados problemas, você precisa apenas clicar no botão <guilabel
+>. Inicialmente, você não deve selecionar esta caixa de seleção. Depois de configurar um perfil e concluir o assistente, todos os parâmetros de configuração inseridos serão salvos no arquivo de recursos com o nome do perfil. Na próxima vez que você usar esse mesmo perfil, os parâmetros serão carregados na interface do usuário. O assistente então percorrerá as páginas seguintes de parâmetros que você não precisará alterar. Portanto, quando estiver satisfeito com um perfil, pode ser útil marcar esta caixa. O assistente irá então para a página final e, supondo que nenhum problema seja encontrado, você só precisa clicar em <guilabel
 >Importar</guilabel
 >. </para>
 
 <para
->Primeiro, selecione uma das opções <guilabel
->Banco</guilabel
-> ou <guilabel
->Investimento</guilabel
-> e depois clique no seletor que apresenta o texto "Adicionar novo perfil". Se você já criou algum perfil anteriormente, poderá selecioná-lo, caso contrário, indique um nome para o novo perfil, que provavelmente será o nome da conta que deseja importar. Após inserir o nome do novo perfil, pressione &Enter; para criá-lo. Depois, clique em <guilabel
+>Na parte inferior, há um botão <guilabel
 >Selecionar arquivo</guilabel
->, para abrir uma janela de seleção de arquivos, onde poderá escolher o arquivo CSV que deseja importar. </para>
+>. Clicar nele abrirá uma caixa de diálogo de seleção de arquivos para que você possa escolher o arquivo a ser importado. Na parte inferior das páginas restantes do assistente, há botões para ir <guibutton
+>&lt;Voltar</guibutton
+> para a etapa anterior do assistente, <guilabel
+>Avançar&gt;</guilabel
+> para a próxima etapa ou <guibutton
+>Cancelar</guibutton
+> a importação. </para>
+
+<para
+>Para revisar, na página inicial do assistente, primeiro selecione a caixa de seleção para o tipo de dados que você está importando. No menu suspenso do seletor de perfil, você pode selecionar o nome de um perfil do importador CSV criado anteriormente ou inserir um novo nome, possivelmente o nome da conta para a qual deseja importar, e clicar em <guilabel
+>Adicionar</guilabel
+>. Finalmente, clique em <guilabel
+>Selecionar arquivo</guilabel
+> e uma caixa de diálogo de seleção de arquivo será aberta, onde você selecionará o arquivo CSV que deseja importar. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Assistente de Importação de CSV: Separadores</title>
 <para
->O assistente avançou para a página <guilabel
+>Após abrir o arquivo de dados selecionado, o assistente avançará para a página <guilabel
 >Separadores</guilabel
->, e você deverá agora ver os seus dados. </para>
+>, e você poderá ver seus dados. </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo
+>assistente de importação csv: separadores</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_2.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de importação csv: separadores</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
-  <warning>
-    <para
->Pode parecer que os itens apresentados na seção superior da janela do plugin podem ser editados e, de fato, eles podem ser, mas as alterações não serão mantidas. A tabela serve apenas para apresentar os dados, não para editá-los. O arquivo de entrada nunca é alterado pelo plugin e os dados importados sempre são originados do arquivo, não dos dados apresentados. A única exceção está descrita na seção <link linkend="details.impexp.csv.secsym"
+<warning>
+  <para
+>Pode parecer que os dados apresentados na seção superior da janela do plugin podem ser editados e, de fato, eles podem ser, mas as alterações não serão mantidas. A tabela serve apenas para apresentar os dados, não para editá-los. O arquivo de entrada nunca é alterado pelo importador CSV e os dados importados sempre são originados do arquivo, não dos dados apresentados. A única exceção está descrita na seção <link linkend="details.impexp.csv.secsym"
 >Títulos e símbolos</link
 > abaixo. </para
 > 
-  </warning>
+</warning>
 
 <para
->O plugin já deve ter detectado o <guilabel
->Separador de campos</guilabel
-> apropriado que será usado e, normalmente, não é possível selecionar um diferente. De fato, se tentar fazer isso, irá limpar todas as escolhas de campo já feitas. Existe também um seletor para o <guilabel
+>O importador de CSV deve ter detectado a <guilabel
+>Codificação</guilabel
+>, o <guilabel
+>Delimitador de campo</guilabel
+> e o <guilabel
 >Delimitador de texto</guilabel
->, mas normalmente as aspas (") estão corretas. Agora, clique no botão <guilabel
->Próximo</guilabel
->. Dependendo da seleção anterior, você poderá estar na página de Banco ou de Investimento. </para>
+> apropriados. Você pode alterar a codificação se o programa não a tiver escolhido corretamente. Se precisar alterar o delimitador de campo, por exemplo, se seus dados estiverem delimitados por tabulação e não por vírgula, esteja ciente de que isso redefinirá todas as opções de campo que você já tenha feito. Geralmente, a aspa (&quot;) é o delimitador de texto correto, mas você pode alterá-la conforme necessário. Clique em <guibutton
+>Avançar</guibutton
+> para prosseguir. </para>
 </sect3>
 
-<sect3>
-<title
->Assistente de Importação de CSV: Banco</title>
+<sect3
+><title
+>Assistente de importação de CSV: Linhas</title>
 <para
->Nesta página, você poderá selecionar os números das colunas a partir dos quais serão importados os campos relevantes. </para>
+>Você estará agora na página <guilabel
+>Linhas</guilabel
+>. Aqui, você indica se alguma linha deve ser ignorada no início ou no final do arquivo. </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo
+>assistente de importação csv: linhas</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_3.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de importação csv: linhas</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
 <para
->Para a maioria dos campos, você apenas precisa usar a lista apropriada para selecionar a coluna. Contudo, existem algumas considerações especiais. </para>
+>Esta página permite ajustar a importação para ignorar as linhas de cabeçalho e rodapé no início ou no final do arquivo, que não contêm dados a serem importados. </para>
+
+<formalpara
+><title
+>Linha inicial</title>
+<para
+>Configure isso para que o importador ignore quaisquer linhas de cabeçalho no arquivo. Sua escolha será salva neste perfil para uso futuro. As linhas de início e fim interagem, e a linha de início não pode ser maior que a linha de fim, nem pode ser maior que o número real de linhas no arquivo. Se o seletor <guilabel
+>Linha de início</guilabel
+> não responder, verifique a configuração da linha de fim. </para>
+</formalpara>
+
+<formalpara
+><title
+>Linha final</title>
+<para
+>O importador irá configurar automaticamente este campo com a última linha do arquivo ou com o valor da última configuração salva. Você só precisa ajustá-lo se existirem linhas de rodapé no arquivo, que devam ser ignoradas pelo importador. Caso contrário, você provavelmente receberá um aviso de erro nos dados quando o plugin tentar processar dados incorretos. Novamente, se o seletor da <guilabel
+>Linha final</guilabel
+> não responder, assinale a opção <guilabel
+>Linha inicial</guilabel
+>. </para>
+</formalpara>
+
+<para
+>Acima desses dois campos, há uma caixa de seleção <guilabel
+>O cabeçalho contém o nome ou número da conta</guilabel
+>. Se marcada, o importador procurará nas linhas acima da linha inicial o nome ou número da conta a ser usada para a importação. Caso contrário, você será solicitado a fornecer essas informações. </para>
+
+<para
+>Quando estiver pronto, clique em <guilabel
+>Próximo</guilabel
+> para prosseguir para a próxima etapa. </para>
+</sect3>
+
+<sect3
+><title
+>Assistente de importação de CSV: Colunas</title>
+<para
+>Você agora deve estar na página <guilabel
+>Colunas</guilabel
+>. É aqui que você informa ao importador quais colunas do arquivo contêm os dados que correspondem aos campos específicos necessários para criar um registro ou transação significativa, dependendo do tipo de dados que está sendo importado. Há uma versão diferente desta página para cada tipo de dado, pois cada um requer uma combinação diferente de itens. </para>
+
+<sect4
+><title
+>Assistente de importação de CSV: Banco</title>
+<screenshot>
+  <screeninfo
+>assistente de importação csv: banco</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de importação csv: banco</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+  
+<para
+>Para a maioria dos campos, basta usar o menu suspenso para selecionar a coluna apropriada. Observe que muitos campos têm um botão <quote
+>x</quote
+> à direita. Clicar nele limpará qualquer valor que tenha sido inserido ou selecionado no campo à esquerda. Além disso, há algumas considerações especiais. </para>
 
 <itemizedlist>
 <listitem>
-<para
->No centro encontram-se dois botões de opção. Se o seu arquivo tiver uma única coluna para todos os valores, selecione a <guilabel
->coluna Montante</guilabel
->. Contudo, se existirem colunas separadas para débitos e créditos, selecione a opção <guilabel
->coluna Débito/Crédito</guilabel
->. Isso irá ativar o seletor da <guilabel
->coluna Montante</guilabel
-> ou os seletores da <guilabel
->coluna Débito</guilabel
-> e <guilabel
->coluna Crédito</guilabel
+  <para
+>À direita, há uma área com duas abas. Se o seu arquivo tiver uma única coluna para todos os valores, selecione a aba <guilabel
+>Valor</guilabel
+>. No entanto, se houver colunas separadas para débitos e créditos, selecione a aba <guilabel
+>Débito/Crédito</guilabel
 >. </para>
+
+  <para
+>Na aba Montante, comece selecionando a coluna que contém o montante da transação. Se houver uma coluna que contenha <quote
+>Crédito</quote
+> ou <quote
+>Débito</quote
+> para indicar qual montante é, selecione essa coluna como o <guilabel
+>Indicador de Débito/Crédito</guilabel
+>. Além disso, se houver uma string no campo de valor que indique se o valor é um crédito ou um débito, insira essa string no campo <guilabel
+>Indicador</guilabel
+> apropriado. Por fim, se, apesar de definir todos os valores acima corretamente, o valor importado estiver invertido, marque a caixa de seleção <guilabel
+>Sinais opostos</guilabel
+>. </para>
+
+  <para
+>Na aba Débito/Crédito, basta inserir os números das colunas com esses valores nos campos apropriados. </para>
 </listitem>
 
 <listitem>
 <para
->É possível selecionar mais que uma coluna para o campo Memorando, através de seleções sucessivas. As colunas de memorando já selecionadas são marcadas na lista com um asterisco (*). Se você selecionou várias colunas dessa forma, seu conteúdo será concatenado no campo Memorando. </para>
+>É possível selecionar mais de uma coluna para o campo "Memo", fazendo seleções consecutivas. As colunas "Memo" já selecionadas são indicadas no campo <guilabel
+>Colunas memo:</guilabel
+>. Se você selecionar várias colunas desta forma, o conteúdo delas será concatenado no campo "Memo". </para>
 </listitem>
 
 <listitem>
 <para
->Se tentar escolher o mesmo número de coluna para dois campos, o plugin irá alertá-lo e então limpar ambas as seleções. Contudo, você pode usar a mesma coluna nos campos <guilabel
+>Se tentar escolher o mesmo número de coluna para dois campos, o importador irá alertá-lo e então limpar ambas as seleções. Contudo, você pode usar a mesma coluna nos campos <guilabel
 >Beneficiário/Descrição</guilabel
 > e <guilabel
 >Memorando</guilabel
 >. Se selecionar uma coluna para o campo <guilabel
 >Beneficiário/Descrição</guilabel
-> e depois selecionar o mesmo campo para <guilabel
+> e depois selecionar a mesma coluna para <guilabel
 >Memorando</guilabel
 >, você receberá um aviso por ter selecionado colunas duplicadas, mas será questionado se deseja continuar. Se for isso mesmo que deseja fazer, clique em <guibutton
 >Sim</guibutton
->. </para>
+>, e a coluna será usada para ambos os campos. </para>
 </listitem>
 
 <listitem>
 <para
->Uma razão em particular para também capturar o campo Beneficiário/Descritor no campo Memorando é que o campo de Beneficiário/Descrição pode ficar completamente alterado na importação quando o &kappname; fizer a correspondência de transações. Se selecionar esse campo também como Memorando irá preservar esses dados, caso contrário, eles serão perdidos. </para>
+>Uma razão em particular para também capturar o campo Beneficiário/Descritor no campo Memorando é que o campo de Beneficiário/Descrição pode ficar completamente alterado na importação quando o &kmymoney; fizer a correspondência de transações. Se selecionar esse campo também como Memorando irá preservar esses dados, caso contrário, eles serão perdidos. </para>
 </listitem>
 </itemizedlist>
 
 <para
->Se perceber que fez uma escolha incorreta, basta alterar essa seleção. Se precisar fazer várias alterações, clique no botão <guilabel
->Limpar</guilabel
->. </para>
+>Se você perceber que fez uma escolha incorreta, basta alterá-la. Se várias alterações precisarem ser feitas, você pode clicar em <guilabel
+>Limpar tudo</guilabel
+> e começar de novo. </para>
 
 <para
 >Assim que selecionar as colunas de todos os campos necessários, o botão <guilabel
 >Próximo</guilabel
 > ficará ativo, permitindo-lhe avançar com o assistente. </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title
->Assistente de Importação de CSV: Investimento</title>
+<sect4
+><title
+>Assistente de importação de CSV: Formato</title>
+<para
+>A próxima página do assistente ainda mostra os dados a serem importados na parte superior, mas a seção inferior fornece três menus suspensos. Os valores iniciais são definidos pelo &kmymoney; com base na análise dos dados reais. </para>
+
+<screenshot>
+  <screeninfo
+>assistente de importação csv: investimento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de importação csv: investimento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>O <guilabel
+>Símbolo decimal</guilabel
+> tem como padrão <quote
+>auto</quote
+>, o que geralmente produz os resultados corretos. Caso contrário, você pode especificar explicitamente o <quote
+>ponto</quote
+> ou a <quote
+>vírgula.</quote
+> </para>
+
+<para
+>O <guilabel
+>Símbolo de milhar</guilabel
+> é definido automaticamente e o campo pode ser desativado se não afetar os resultados. </para>
+
+<para
+>Isto precisa de ser definido de acordo com a ordem do ano, mês e dia nas datas do arquivo. Se o plugin encontrar dados incompatíveis com esta configuração, irá alertá-lo durante a importação. Contudo, se a configuração estiver errada, mas produzir resultados inválidos não detectados (como datas em que o dia é menor que 12, poderá acontecer uma troca entre mês e dia), irá simplesmente obter dados incorretos, uma vez que o plugin não consegue perceber que cometeu um erro. Neste caso, o erro ficará óbvio no livro de registros após a importação. </para>
+
+<para
+>O <guilabel
+>Formato de data</guilabel
+> especifica a ordem do dia, mês e ano, e também é definido automaticamente. No entanto, em alguns casos, como dados sem nenhum dia maior que 12, você notará o problema após a importação. Nesses casos, você precisará repetir a importação e escolher a ordem correta dos componentes da data. </para>
+</sect4>
+
+<sect4
+><title
+>Assistente de importação de CSV: Investimento</title>
 <para
 >Esta página é semelhante a do <guilabel
 >Banco</guilabel
->, ainda que seja ligeiramente mais complexa. A maioria das seleções são relativamente óbvias, mas existem alguns itens que podem parecer confusos até que tenha terminado o processo uma ou duas vezes. <screenshot
-> <mediaobject
-> <imageobject>
-  <imagedata fileref="csvImporter_4.png" format="PNG"/>
-  </imageobject>
+>, ainda que seja ligeiramente mais complexa. A maioria das seleções são relativamente óbvias, mas existem alguns itens que podem parecer confusos até que tenha terminado o processo uma ou duas vezes. </para>
+
+<screenshot>
+  <screeninfo
+>assistente de importação csv: investimento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de importação csv: investimento</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
-</para>
+</screenshot>
 
 <para>
 <itemizedlist>
@@ -241,53 +421,67 @@
 <para
 >O seletor <guilabel
 >Tipo/Ação</guilabel
-> serve para identificar a coluna que contém o tipo de ação, como por exemplo, Comprar, Vender, Dividendo, etc. </para>
+> serve para identificar a coluna que contém o tipo de ação, como por exemplo, Comprar, Vender, Dividendo, &etc; </para>
 </listitem>
 
 <listitem>
 <para
 >O seletor da <guilabel
 >Fração do preço</guilabel
-> serve para indicar a fração/multiplicador para fins de compatibilidade entre os preços importados e armazenados. Por exemplo, se o preço do arquivo importado estiver em centavos mas sua conta no &kappname; estiver em reais, selecione o valor 0,01. Por outro lado, se os preços do seu arquivo de dados estiverem em reais, assim como o arquivo CSV a importar, configure a <guilabel
+> serve para indicar a fração/multiplicador para fins de compatibilidade entre os preços importados e armazenados. Por exemplo, se o preço do arquivo importado estiver em centavos mas sua conta no &kmymoney; estiver em reais, selecione o valor 0,01. Por outro lado, se os preços do seu arquivo de dados estiverem em reais, assim como o arquivo CSV a importar, configure a <guilabel
 >Fração do preço</guilabel
 > como 1,0. </para>
 </listitem>
 
 <listitem>
 <para
->Use o seletor da <guilabel
->Coluna da taxa</guilabel
-> se o seu arquivo tiver uma coluna específica para taxas. Lembre-se de que a taxa poderá ter sido incluída no preço. Se existir uma taxa e ela for uma porcentagem, em vez de um valor, assinale a opção <guilabel
->A taxa é uma percentagem</guilabel
->. Repare que, nessa página, este é o único campo que inclui "coluna" na legenda, para enfatizar que é para a coluna da taxa, não para uma taxa em especial. </para>
+>Existem duas maneiras de especificar taxas para transações. Se o seu arquivo tiver uma coluna distinta para taxas, use o seletor <guilabel
+>Coluna de taxas</guilabel
+>. Observe que, nesta página, este é o único campo que inclui explicitamente "coluna" no rótulo, para enfatizar que se trata da coluna de taxas, e não de qualquer taxa real. No entanto, esteja ciente de que a taxa pode já ter sido considerada no preço. </para>
+
+<para
+>Se houver uma taxa, mas ela for expressa em porcentagem, em vez de um valor fixo, marque a caixa de seleção <guilabel
+>Taxa em porcentagem</guilabel
+> e insira a porcentagem no campo <guilabel
+>Taxa</guilabel
+>. Além disso, se houver uma taxa mínima, especifique-a no campo <guilabel
+>Taxa mínima</guilabel
+>, que será habilitado ao inserir a Taxa (com um ponto decimal). Nesse ponto, clicar em <guibutton
+>Calcular taxas</guibutton
+> adicionará uma coluna à direita da tabela acima e indicará a taxa calculada para cada transação. </para>
+
+<para
+>Se você cometeu um erro ao inserir as informações da taxa, clicar em <guibutton
+>Limpar taxa</guibutton
+> redefinirá todos os campos relacionados à taxa para seus valores iniciais. </para>
 </listitem>
 
 <listitem>
 <para
 >Abaixo dos seletores das colunas existem duas áreas para a identidade do título. Dependendo da sua instituição financeira ou de corretagem, seu arquivo poderá conter elementos para apenas um ou vários títulos. <itemizedlist>
-  <listitem>
-  <para
+    <listitem>
+      <para
 >Se o arquivo possuir transações para um único título, possivelmente com o nome em uma linha do cabeçalho, o nome deverá ser introduzido no campo <guilabel
 >Nome do título</guilabel
 >. O nome que inserir será adicionado à lista para uso posterior. Logo após, você pode querer remover esse nome da lista. Se assim for, selecione-o, clicando depois no botão <guilabel
 >Ocultar o título</guilabel
->. Isso apenas removerá dessa lista, não produzindo nenhum efeito no seu arquivo principal do &kappname;. </para>
-  </listitem>
+>. Isso apenas removerá dessa lista, não produzindo nenhum efeito no seu arquivo principal do &kmymoney;. </para>
+    </listitem>
 
-  <listitem>
-  <para
+    <listitem>
+      <para
 >Se o arquivo inclui transações para diversos títulos, cada um será identificado pelo seu símbolo em uma coluna e com mais detalhes em outra. Selecione essas colunas nos seletores <guilabel
 >Símbolo</guilabel
 > e <guilabel
 >Detalhe</guilabel
 >. Pode acontecer que um título não tenha um símbolo oficial e, nesse caso, poderá ser inventado um pseudo-símbolo. Isso não é nenhum problema, desde que identifique de forma única esse título no arquivo de importação. Às vezes, o tipo de atividade atual está incorporado na coluna de detalhes, possivelmente iniciado com um texto padrão. Por exemplo, se o campo conter <quote
 >type: dividend</quote
->, indique no campo <guilabel
->Texto do filtro</guilabel
-> <quote
+>, vá para a caixa de texto <guilabel
+>Filtro</guilabel
+> e insira <quote
 >type: </quote
 >, incluindo o espaço final. </para>
-  </listitem>
+    </listitem>
   </itemizedlist>
 </para>
 </listitem>
@@ -298,75 +492,28 @@
 >Quando todos os campos necessários estiverem selecionados, o botão <guilabel
 >Próximo</guilabel
 > ficará ativo, permitindo-lhe avançar no assistente. </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title
->Assistente de Importação de CSV: Linhas</title>
-<para
->Nesta página, você poderá indicar se algumas das linhas deverão ser ignoradas no início ou no fim do arquivo. Você também poderá indicar o formato de qualquer coluna de datas. <screenshot
-> <mediaobject
-> <imageobject>
-  <imagedata fileref="csvImporter_5.png" format="PNG"/>
-  </imageobject>
-  </mediaobject>
-  </screenshot>
-</para>
-
-<formalpara
+<sect4 id="details.impexp.csv.secsym"
 ><title
->Linha inicial</title>
-<para
->Configure este campo para que o importador ignore as linhas de cabeçalho no arquivo. Sua escolha será salva neste perfil para utilização futura. As linhas iniciais e finais interagem, sendo que a linha inicial não poderá ser superior à linha final. Se o seletor da <guilabel
->Linha inicial</guilabel
-> não responder, verifique a configuração da linha final. </para>
-</formalpara>
-
-<formalpara
-><title
->Linha final</title>
-<para
->O importador irá configurar automaticamente este campo com a última linha do arquivo ou com o valor da última configuração salva. Você só precisa ajustá-lo se existirem linhas de rodapé no arquivo, que devam ser ignoradas pelo importador. Caso contrário, você provavelmente receberá um aviso de erro nos dados quando o plugin tentar processar dados incorretos. Novamente, se o seletor da <guilabel
->Linha final</guilabel
-> não responder, assinale a opção <guilabel
->Linha inicial</guilabel
->. </para>
-</formalpara>
-
-<formalpara
-><title
->Formato da data</title>
-<para
->Isto precisa de ser definido de acordo com a ordem do ano, mês e dia nas datas do arquivo. Se o plugin encontrar dados incompatíveis com esta configuração, irá alertá-lo durante a importação. Contudo, se a configuração estiver errada, mas não produzir resultados inválidos (como datas em que o dia é menor que 12, poderá acontecer uma troca entre mês e dia), irá simplesmente obter dados incorretos, uma vez que o plugin não consegue perceber que cometeu um erro. Neste caso, o erro ficará óbvio no livro de registros após a importação. </para>
-</formalpara>
-
-<para
->Assim que estiver pronto, o botão <guilabel
->Próximo</guilabel
-> ficará ativo, permitindo-lhe avançar no assistente. </para>
-</sect3>
-
-<sect3 id="details.impexp.csv.secsym">
-<title
 >Assistente de Importação de CSV: Títulos e Símbolos</title>
-
 <para
 >Para um arquivo de investimentos, depois de aceitar a página <guilabel
->Linhas</guilabel
->, você precisa ter certeza de que cada título no arquivo corresponde ao título correto no seu arquivo do &kappname;, antes de prosseguir com a importação. Nesse ponto, outra janela irá abrir, mostrando os títulos e símbolos existentes no arquivo de importação. Lembre-se de que, ao contrário da apresentação dos dados nas janelas principais do assistente, as alterações que fizer nesta página <emphasis
+>Colunas</guilabel
+>, você precisa ter certeza de que cada título no arquivo corresponde ao título correto no seu arquivo do &kmymoney;, antes de prosseguir com a importação. Nesse ponto, outra janela irá abrir, mostrando os títulos e símbolos existentes no arquivo de importação. Lembre-se de que, ao contrário da apresentação dos dados nas janelas principais do assistente, as alterações que fizer nesta página <emphasis
 >serão</emphasis
 > importadas. </para>
 
 <para
 >A finalização desta página será intuitiva, se considerar estes itens: <itemizedlist>
     <listitem>
-    <para
+      <para
 >Cada linha representa uma transação, podendo parecer que existem linhas duplicadas. Isso é normal. </para>
     </listitem>
 
     <listitem>
     <para
->Todos os nomes de títulos deverão corresponder exatamente ao título existente, tal como definido no &kappname;. Se não corresponder, será criado como um novo título, que provavelmente não será o que deseja, a menos que represente a compra de um novo título. </para>
+>Todos os nomes de títulos deverão corresponder exatamente ao título existente, tal como definido no &kmymoney;. Se não corresponder, será criado como um novo título, que provavelmente não será o que deseja, a menos que represente a compra de um novo título. </para>
     </listitem>
 
     <listitem>
@@ -384,35 +531,27 @@
 </para>
 
 <para
->Você pode editar o nome ou o símbolo de um título com um clique duplo em uma célula. Para cada título, se necessário, edite o nome em uma das suas linhas. Se o nome correto do título aparecer no arquivo importado, use o clique duplo para o selecionar e depois copie e cole/edite, tendo cuidado se tiver usado uma variante ou uma abreviatura dentro do &kappname;. Se editar o nome de um título, essa edição será aplicada a todas as linhas com o mesmo símbolo. </para>
+>Você pode editar o nome ou o símbolo de um título com um clique duplo em uma célula. Para cada título, se necessário, edite o nome em uma das suas linhas. Se o nome correto do título aparecer no arquivo importado, use o clique duplo para o selecionar e depois copie e cole/edite, tendo cuidado se tiver usado uma variante ou uma abreviatura dentro do &kmymoney;. Se editar o nome de um título, essa edição será aplicada a todas as linhas com o mesmo símbolo. </para>
 
 <para
->Qualquer linha sem um símbolo será tratada como um item de corretagem. Se qualquer transação envolver outra conta, &eg;, uma conta-corrente ou de corretagem para um dividendo recebido ou para fazer um pagamento, aparecerá uma caixa de mensagem para o nome da conta usada na transferência. Essa será normalmente a conta de corretagem selecionada ou criada durante a criação da conta de investimento. De forma semelhante, indique o número da coluna que contém o beneficiário, caso seja solicitado. Se cometer um erro ao digitar o nome da conta, a importação irá prosseguir, mas o &kappname; não o reconhecerá e irá marcar essas transações como sem categoria atribuída. Se o nome da conta desejado for muito longo, basta indicar alguns caracteres. A importação irá prosseguir, mas as transações serão marcadas pelo &kappname; como sem categoria atribuída, sendo necessário selecionar a conta de transferência correta após a importação. Clique em <guilabel
->OK</guilabel
-> quando terminar. O processo de importação prossegue então para o &kappname; </para>
+>Qualquer linha sem um símbolo será tratada como um item de corretagem. Se qualquer transação envolver outra conta, &eg;, uma conta-corrente ou de corretagem para um dividendo recebido ou para fazer um pagamento, aparecerá uma caixa de mensagem para o nome da conta usada na transferência. Essa será normalmente a conta de corretagem selecionada ou criada durante a criação da conta de investimento. De forma semelhante, indique o número da coluna que contém o beneficiário, caso seja solicitado. Se cometer um erro ao digitar o nome da conta, a importação irá prosseguir, mas o &kmymoney; não o reconhecerá e irá marcar essas transações como sem categoria atribuída. Se o nome da conta desejado for muito longo, basta indicar alguns caracteres. A importação irá prosseguir, mas as transações serão marcadas pelo &kmymoney; como sem categoria atribuída, sendo necessário selecionar a conta de transferência correta após a importação. Clique em <guibutton
+>OK</guibutton
+> quando terminar. O processo de importação prossegue então para o &kmymoney; </para>
 
 <para
->Se tiver mais de uma transação que se refira ao mesmo título, você poderá editar todas de uma vez, usando a seleção múltipla. Por exemplo, para adicionar um símbolo em várias linhas, pressione e mantenha pressionada a tecla <keysym
->CTRL</keysym
-> e, na coluna do símbolo, selecione cada uma das transações. Enquanto mantém a tecla <keysym
->CTRL</keysym
-> pressionada, todas essas células de símbolos ainda deverão estar selecionadas, sendo possível clicar em uma delas e introduzir o símbolo. Clique dentro da janela, mas fora dessa coluna, ou então pressione <keysym
->Enter</keysym
-> (não clique no botão <guilabel
->OK</guilabel
->). Agora que todas essas transações têm o mesmo símbolo, use o clique duplo sobre um item de detalhe e edite o nome do título como desejar. Clique em outro local da janela (ou pressione <keysym
->Enter</keysym
->) para aceitar a edição, fazendo com que todos esses elementos sejam alterados. Os itens restantes mostrarão os símbolos obtidos a partir das transações no arquivo de importação. </para>
+>Se tiver mais de uma transação que se refira ao mesmo título, você poderá editar todas de uma vez, usando a seleção múltipla. Por exemplo, para adicionar um símbolo em várias linhas, pressione e mantenha pressionada a tecla &Ctrl; e, na coluna do símbolo, selecione cada uma das transações. Enquanto mantém a tecla &Ctrl; pressionada, todas essas células de símbolos ainda deverão estar selecionadas, sendo possível clicar em uma delas e introduzir o símbolo. Clique dentro da janela, mas fora dessa coluna, ou então pressione &Enter; (não clique no botão <guibutton
+>OK</guibutton
+>). Agora que todas essas transações têm o mesmo símbolo, use o clique duplo sobre um item de detalhe e edite o nome do título como desejar. Clique em outro local da janela (ou pressione &Enter;) para aceitar a edição, fazendo com que todos esses elementos sejam alterados. Os itens restantes mostrarão os símbolos obtidos a partir das transações no arquivo de importação. </para>
 
 <para
->Agora clique no botão <guilabel
->OK</guilabel
-> e depois em <guilabel
->Importar</guilabel
+>Agora clique no botão <guibutton
+>OK</guibutton
+> e depois em <guibutton
+>Importar</guibutton
 >. No campo <guilabel
 >Indique a conta</guilabel
 >, informe o nome da conta de corretagem/conta-corrente para os fundos. Se indicar um nome válido, será usada essa conta. Se não quiser se incomodar em inserir um nome correto, mas extenso, indique apenas alguns caracteres. A importação irá aceitá-lo, mas depois será necessário selecionar uma conta válida para as transações no livro de registros. Para o campo <guilabel
->Item de corretagem</guilabel
+>Corretagem</guilabel
 >, indique o número da coluna que contém esse detalhe. Agora, no campo <guilabel
 >Transação inválida</guilabel
 >, você poderá obter alguns itens porque o tipo de atividade não corresponde à combinação da quantidade/preço/montante. Em cada mensagem, clique em <guilabel
@@ -420,26 +559,39 @@
 >, onde aparecerá uma lista que indica os tipos de atividade válidos para essa combinação de valores. </para>
 
 <para
->Agora a importação foi realizada e você está no KMyMoney para escolher qual a conta de investimento será usada. Depois deverá indicar a conta-corrente, caso existam algumas transações do tipo corretagem. </para>
+>Agora a importação foi realizada e você está no &kmymoney; para escolher qual a conta de investimento será usada. Depois deverá indicar a conta-corrente, caso existam algumas transações do tipo corretagem. </para>
+</sect4>
+
+<sect4
+><title
+>Assistente de importação de CSV: Preços de moedas</title>
+<para
+>algo sobre a importação de preços de moeda estrangeira </para>
+</sect4>
+
+<sect4
+><title
+>Assistente de importação de CSV: Preços de ações</title>
+<para
+>Algo sobre importar preços de ações </para>
+</sect4>
 </sect3>
 
-<sect3>
-<title
->Assistente de Importação de CSV: Concluir</title>
+<sect3
+><title
+>Assistente de importação de CSV: Concluir</title>
 <para
->Ao chegar à página Final, o plugin irá validar os valores automaticamente. Se as colunas dos valores numéricos estiverem realçadas em verde, então a validação foi concluída com sucesso, sendo necessário apenas clicar em <guilabel
->Importar CSV</guilabel
-> para passar o controle ao programa principal do &kappname;. Contudo, se as linhas iniciais e finais estiverem definidas incorretamente, ou se as colunas erradas estiverem selecionadas, o realce ficará em vermelho, aparecendo uma mensagem de erro indicando onde o problema está ocorrendo. O usuário precisa então clicar em <guilabel
->Voltar</guilabel
+>Ao chegar à página Final, o plugin irá validar os valores automaticamente. Se as colunas dos valores numéricos estiverem realçadas em verde, então a validação foi concluída com sucesso, sendo necessário apenas clicar em <guibutton
+>Importar CSV</guibutton
+> para passar o controle ao programa principal do &kmymoney;. Contudo, se as linhas iniciais e finais estiverem definidas incorretamente, ou se as colunas erradas estiverem selecionadas, o realce ficará em vermelho, aparecendo uma mensagem de erro indicando onde o problema está ocorrendo. O usuário precisa então clicar em <guibutton
+>Voltar</guibutton
 > para retornar à página relevante para corrigir o erro. </para>
 
 <para
->Também pode ser o caso de que as colunas de débito e crédito estão em uso, sendo que uma delas pode não conter nenhum item. Isso significa que a essa coluna não tem um símbolo decimal presente, resultando no aviso. Se for esse o caso, você poderá clicar em um dos botões <guilabel
->Aceitar</guilabel
-> (<guilabel
->Aceitar este</guilabel
-> ou <guilabel
->Aceitar todos</guilabel
+>Também pode ser o caso de que as colunas de débito e crédito estão em uso, sendo que uma delas pode não conter nenhum item. Isso significa que a essa coluna não tem um símbolo decimal presente, resultando no aviso. Se for esse o caso, você poderá clicar em um dos botões para aceitar (<guibutton
+>Aceitar este</guibutton
+> ou <guibutton
+>Aceitar todos</guibutton
 >.) </para>
  
 <formalpara
@@ -468,55 +620,194 @@
 ><title
 >Importar CSV</title>
 <para
->Clicar neste botão indica ao plugin para importar de fato os dados do arquivo, baseado nas opções feitas acima. O &kappname; perguntará para qual conta deve importar os dados. </para>
+>Clicar neste botão indica ao plugin para importar de fato os dados do arquivo, baseado nas opções feitas acima. O &kmymoney; perguntará para qual conta deve importar os dados. </para>
 </formalpara>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Criar um arquivo QIF</title>
 <para
->Este botão permite-lhe, após concluir a importação, salvar os dados do arquivo CSV como um arquivo QIF, caso precise por alguma razão. Aliás, esta era a funcionalidade original que levou à criação deste plugin. Contudo, como o próprio &kappname; agora é capaz de exportar um arquivo QIF, essa capacidade agora é pouco útil e provavelmente será removida. </para>
+>Este botão permite-lhe, após concluir a importação, salvar os dados do arquivo CSV como um arquivo QIF, caso precise por alguma razão. Aliás, esta era a funcionalidade original que levou à criação deste plugin. Contudo, como o próprio &kmymoney; agora é capaz de exportar um arquivo QIF, essa capacidade agora é pouco útil e provavelmente será removida. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Concluindo</title>
 <para
 >Para uma importação de <guilabel
 >Banco</guilabel
->, o plugin terminou e o &kappname; irá perguntar, como referido acima, a conta correta para onde importar os dados. Para uma importação de <guilabel
+>, o plugin terminou e o &kmymoney; irá perguntar, como referido acima, a conta correta para onde importar os dados. Para uma importação de <guilabel
 >Investimento</guilabel
->, contudo, ainda será necessária mais alguma informação. Se, durante a importação de uma transação, o plugin não encontrar nenhum tipo de transação válido, irá mostrar a transação afetada e o usuário poderá selecionar um tipo válido em substituição, dependendo da combinação dos valores da quantidade, preço e montante. Para cada transação, o plugin irá validar o conteúdo das colunas para garantir que correspondem ao tipo de ação. Por exemplo, se aparecer uma quantidade mas não o seu preço ou montante, assume-se que a transação só poderá ser para Adicionar ou Remover ações. Por outro lado, se existir um montante, mas não uma quantidade ou preço, então assume-se que é um Dividendo, etc. </para>
+>, contudo, ainda será necessária mais alguma informação. Se, durante a importação de uma transação, o plugin não encontrar nenhum tipo de transação válido, irá mostrar a transação afetada e o usuário poderá selecionar um tipo válido em substituição, dependendo da combinação dos valores da quantidade, preço e montante. Para cada transação, o plugin irá validar o conteúdo das colunas para garantir que correspondem ao tipo de ação. Por exemplo, se aparecer uma quantidade mas não o seu preço ou montante, assume-se que a transação só poderá ser para Adicionar ou Remover ações. Por outro lado, se existir um montante, mas não uma quantidade ou preço, então assume-se que é um Dividendo, &etc; </para>
 
 <para
->Se desejar salvar suas configurações, lembre-se de clicar no botão <guilabel
->Concluir</guilabel
+>Se desejar salvar suas configurações, lembre-se de clicar no botão <guibutton
+>Concluir</guibutton
 >, para que o plugin seja fechado. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Adicionar tipos de atividade de investimento</title>
 <para
->Se você achar que seus extratos de investimentos continuam incluindo tipos de atividade não reconhecidos, basta adicioná-los à seção correspondente no arquivo de recursos (Veja <link linkend="details.impexp.csv.config"
+>Se achar que seus extratos de investimentos continuam incluindo tipos de atividade não reconhecidos, basta adicioná-los à seção correspondente no arquivo de recursos (Veja <link linkend="details.impexp.csv.config"
 >abaixo</link
-> para mais detalhes sobre este arquivo. Por exemplo, na seção [InvestmentSettings] do arquivo, o campo BuyParam inclui entrada para Purchase, Buy, New Inv, e Switch In. Se você encontrar uma diferente, adicione-a à lista correta e reinicie o plugin. Você pode notar que existem semelhanças nas entradas em campos diferentes, e você pode achar que o tipo errado de atividade está sendo selecionado. O plugin verifica estas listas na seguinte ordem: Shrsin, DivX, Reinvdiv, Brokerage, Buy, Sell, Remove. Reordene as listas para adequar isto não funciona como o esperado, uma vez que as entradas no arquivo de recursos são ordenadas alfabeticamente. Se o parâmetro inválido é um que você não precisá, basta removê-lo do arquivo. Se isto não for possível, você precisa editar seu arquivo antes da entrada. </para>
+> para mais detalhes sobre este arquivo. Por exemplo, na seção <literal
+>[InvestmentSettings]</literal
+> do arquivo, o campo <literal
+>BuyParam</literal
+> inclui entrada para <literal
+>Purchase</literal
+>, <literal
+>Buy</literal
+>, <literal
+>New Inv</literal
+>, e <literal
+>Switch In</literal
+>. Se você encontrar uma diferente, adicione-a à lista correta e reinicie o plugin. Você pode notar que existem semelhanças nas entradas em campos diferentes, e você pode achar que o tipo errado de atividade está sendo selecionado. O plugin verifica estas listas na seguinte ordem: <literal
+>Shrsin</literal
+>, <literal
+>DivX</literal
+>, <literal
+>Reinvdiv</literal
+>, <literal
+>Brokerage</literal
+>, <literal
+>Buy</literal
+>, <literal
+>Sell</literal
+>, <literal
+>Remove</literal
+>. Reordenar as listas para adequar isso não funciona como o esperado, uma vez que as entradas no arquivo de recursos são ordenadas alfabeticamente. Se o parâmetro inválido não for interessante para você, basta removê-lo do arquivo. Se isso não for possível, você precisa editar seu arquivo antes da introdução. </para>
 </sect3>
 
-<sect3 id="details.impexp.csv.config">
-<title
+<sect3 id="details.impexp.csv.config"
+><title
 >Configuração do plugin de importação CSV</title>
+<para
+>Uma desvantagem conhecida do formato QIF é que ele é bastante despadronizado. Com arquivos CSV, existe o mesmo problema, só que em maior escala, pois não há nenhum padrão acordado. Com arquivos de investimento, em particular, há muito mais espaço para variação na especificação dos diferentes tipos deatividades representadas nos dados. O plugin lida com isso listando esses tipos de atividade em um arquivo de recursos, chamado <filename
+>csvimporterrc</filename
+>. A localização deste arquivo depende do seu sistema operacional ou distribuição. Em um sistema &Linux;, ele estará em <filename class="directory"
+>$KDEHOME/share/config</filename
+>, onde <envar
+>$KDEHOME</envar
+> geralmente é <filename class="directory"
+>.config</filename
+> dentro da sua pasta pessoal. Se você estiver migrando de uma versão do &kmymoney; anterior à versão 5.0, o antigo local de <envar
+>$KDEHOME</envar
+> era <filename class="directory"
+>.kde4</filename
+>, também dentro da sua pasta pessoal. O uso deste arquivo de recursos permite ao usuário adicionar um tipo de atividade que o desenvolvedor não havia encontrado. Se o arquivo não existir quando o importador for executado pela primeira vez, ele criará uma versão padrão, contendo algumas das descrições mais óbvias. </para>
 
 <para
->Uma bem conhecida desvantagem do formato QIF é que ele é um formato pouco rígido. Com arquivos CSV, existe o mesmo problema, um pouco mais agravado, uma vez que não existe nenhum padrão estabelecido para ele. Com arquivos de investimento, em particular, existe muito mais espaço para variação na especificação de tipos diferentes de atividades representadas nos dados. O plugin lida com isso listando estes tipos de atividades em um arquivo de recursos, chamado csvimporterrc. A localização deste arquivo depende da sua distribuição. Ele normalmente está localizado em ~/.kde4/share/config/ ou ~/.kde/.... O uso deste arquivo de recurso permite que o usuário adicione um tipo de atividade que o desenvolvedor não considerou. Se o arquivo não existir no momento da primeira execução do plugin, será criada uma versão padrão, contendo algumas das descrições mais óbvias. </para>
+>Alguns exemplos de arquivos CSV são disponibilizados (na pasta <filename class="directory"
+>kmymoney/contrib/csvimporter/</filename
+> da árvore do código-fonte) na esperança de que eles possam ajudar. Por exemplo, no exemplo de investimento, um tipo de atividade é <literal
+>ReInvestorContract Buy : ReInvested Units</literal
+>. No processo de validação, a primeira correspondência bem sucedida é no <literal
+>ReInv</literal
+> em <literal
+>ReInvestorContract Buy</literal
+>, assim a transação assume a partir daí a classe <literal
+>Reinvdiv</literal
+>, mesmo que o <literal
+>Buy</literal
+> também seja mencionado. Outro exemplo que tem sido observado é um tipo de atividade <literal
+>Reinvest</literal
+> mesmo quando a transação não inclui preço ou montante, somente uma quantidade, assim isto precisa ser tratado como <literal
+>Add Shares</literal
+> ou <literal
+>Shrsin</literal
+>. </para>
 
 <para
->Alguns exemplos de arquivos CSV são fornecidos (na pasta kmymoney/contrib/csvimporter/ na árvore do código-fonte) na esperança de que eles podem ajudar. Por exemplo, no exemplo de investimento, um tipo de atividade é "ReInvestorContract Buy : ReInvested Units". No processo de validação, a primeira correspondência bem sucedida é no 'ReInv' em 'ReInvestorContract Buy', assim a transação assume a partir daí a classe 'Reinvdiv', mesmo que o 'Buy' também seja mencionado. Outro exemplo que tem sido observado é um tipo de atividade 'Reinvest' mesmo quando a transação não inclui preço ou montante, somente uma quantidade, assim isto precisa ser tratado como 'Add Shares', ou 'Shrsin'. </para>
+>Quando esse plugin foi criado, apenas alguns poucos formatos de investimento foram utilizados como exemplo, e pode muito bem ocorrer que você tenha encontrado um que não é tratados corretamente. Se você encontrar um arquivo desse tipo, por favor, envie um exemplo adequado (editado para remover ou substituir informações pessoais) para a lista de usuários do &kmymoney; &userlist; ou lista de desenvolvedores &devlist;. Os desenvolvedores farão o melhor possível para modificar o plugin de modo que ele funcione corretamente com esse novo formato. </para>
 
+<sect4
+><title
+>Diálogo de configuração do plugin de importação de CSV</title>
 <para
->Quando este plugin foi criado, apenas alguns poucos formatos de investimento foram tomados como exemplo, e pode muito bem ocorrer que você tenha encontrado um que não é manuseado corretamente. Se você encontrar um arquivo deste tipo, por favor, envie um exemplo adequado (editado para remover ou substituir informações pessoais) para a lista de usuário do &kappname; &userlist; ou lista de desenvolvedores &devlist;. O desenvolvedor fará o melhor possível para modificar o plugin de modo a que ele lide corretamente com este novo formato. </para>
+>Por fim, existem alguns outros itens que podem ser configurados em uma caixa de diálogo acessada através da <link linkend="details.settings.plugins.csvimporter"
+>caixa de diálogo de configuração do importador CSV</link
+>, que pode ser acessada na página Plugins da caixa de diálogo de configuração principal do KMyMoney. Isso inclui quais itens serão detectados automaticamente pelo importador e qual perfil será usado se você optar por exportar um arquivo QIF pelo importador, como mencionado acima. </para>
+</sect4>
 </sect3>
 </sect2>
-</sect1>
 
+<sect2 id="details.impexp.csvexp">
+<sect2info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect2info>
+<title
+>Exportador CSV</title>
+
+<para
+>Para exportar dados para um arquivo CSV, escolha o item de menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guisubmenu
+>Exportar</guisubmenu
+> <guimenuitem
+>CSV...</guimenuitem
+> </menuchoice
+>. A caixa de diálogo que aparece oferece várias opções que controlam os dados a serem exportados. </para>
+
+<screenshot>
+  <screeninfo
+>exportador csv</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvexport.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>exportador csv</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Observe que um arquivo CSV exportado pode incluir dados de apenas uma conta. </para>
+
+<para
+>Especifique o nome do arquivo CSV exportado inserindo o caminho completo no campo <guilabel
+>Arquivo para exportar</guilabel
+> ou clicando em <guilabel
+>Procurar</guilabel
+> e navegando até ele na caixa de diálogo Salvar arquivo. Escolha qual conta exportar usando o menu suspenso <guilabel
+>Conta para exportar</guilabel
+>. </para>
+
+<para
+>O período de tempo dos dados exportados é controlado pelos campos de data <guilabel
+>Intervalo de datas</guilabel
+>, <guilabel
+>Início em</guilabel
+> e <guilabel
+>Fim em</guilabel
+>. Os valores padrão representam o intervalo de datas completo de todo o seu arquivo de dados e são ajustados quando você seleciona uma conta para exportar. </para>
+
+<para
+>Por padrão, o <guilabel
+>Separador de campo</guilabel
+> é uma vírgula, mas você também pode optar por usar uma tabulação ou ponto e vírgula. </para>
+
+<para
+>Se você selecionar a opção <guilabel
+>Conteúdo a exportar</guilabel
+> <guilabel
+>Conta</guilabel
+>, os dados exportados serão as transações da conta e do intervalo de datas especificados. No entanto, se você selecionar a opção <guilabel
+>Categorias</guilabel
+>, o arquivo exportado conterá uma linha para cada categoria definida. Para categorias de nível superior, o nome da categoria é exibido, juntamente com <quote
+>I</quote
+> ou <quote
+>E</quote
+> para indicar se a categoria é Receita ou Despesa. Para categorias que não são de nível superior, a categoria pai também é exibida. </para>
+
+<para
+>O exportador irá gerar um conjunto de colunas apropriado para o tipo de conta que está sendo exportada. </para>
+</sect2>
+</sect1>

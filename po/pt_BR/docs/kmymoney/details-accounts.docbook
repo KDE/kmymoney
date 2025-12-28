@@ -6,87 +6,213 @@
 >&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
     <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->21/07/2011</date>
+>01/12/2024</date>
   <releaseinfo
->4.6</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-  
+
 <title
 >Contas</title>
 
-<sect1 id="details.accounts.view">
-<title
->A Área de Contas</title>
+<para
+>Seu arquivo &kmymoney; contém uma ou mais contas. Todo o seu dinheiro está em uma dessas contas. Existem vários tipos diferentes de contas. Contas típicas de <quote
+>Ativos</quote
+> incluem contas bancárias, dinheiro em espécie e investimentos. Contas típicas de <quote
+>Passivos</quote
+> incluem cartões de crédito e empréstimos. </para>
 
 <para
->A Área de Contas oferece um resumo de todas as contas. Existem quatro categorias diferentes de contas: Ativo, Passivo, Receita e Despesa. As contas típicas de ativo incluem as contas bancárias, dinheiro em espécie e investimentos, enquanto as contas típicas de passivo incluem os cartões de crédito e empréstimos. </para>
-
-<para
->Existem duas formas de ver as contas: por Ícones ou por Lista, podendo ser selecionado com a página apropriada no topo da janela. </para>
-
-<para
->Na área de Listas, as contas são agrupadas sob quatro cabeçalhos: Ativo, Passivo, Receita e Despesa. A área da Lista mostra o nome e o saldo ou valor de cada conta. A Receita e a Despesa mostram as categorias em que cada transação está registrada, oferecendo uma funcionalidade semelhante à Página de Categorias. As opções e funcionalidades que envolvem as contas de Receita e Despesa estão descritas, em detalhe, no capítulo <link linkend="details.categories"
+>Existem dois outros tipos de conta: <quote
+>Receita</quote
+> e <quote
+>Despesa.</quote
+> Essas contas são <quote
+>Categorias</quote
+> e são uma forma de organizar suas transações. Elas são tratadas internamente pelo &kmymoney; como contas e são descritas com mais detalhes na seção sobre <link linkend="details.categories"
 >Categorias</link
->. O resto do capítulo será focado na funcionalidade de contas de Ativos e Passivos. </para>
+>. As contas de Receita e Despesa são sempre exibidas na vista de Categorias, mas é possível <link linkend="details.settings"
+>configurar o &kmymoney;</link
+> para também exibi-las na vista de Contas. </para>
 
 <para
->Na área de Ícones, as Contas de Ativos e Passivos são apresentadas com ícones que indicam o tipo de conta. O &kappname; coloca inicialmente os ícones por ordem alfabética, mas você poderá mover os ícones para qualquer posição que desejar, bastando para isso arrastar o ícone com o mouse. Lembre-se, contudo, que o fato de mover um ícone não faz com que o &kappname; pense que algum dado foi alterado. Isto significa que você terá que fazer alguma outra alteração, como editar uma conta ou uma transação, dizendo OK (mesmo sem alterar nenhum dado), para que o &kappname; lhe permita salvar o arquivo. O arquivo salvo irá incluir as novas posições dos ícones. </para>
+>Você também pode ver <quote
+>Patrimônio líquido</quote
+> como um tipo de conta. Qualquer conta deste tipo é uma conta especial no &kmymoney;, usada para manter as transações de saldo inicial de outras contas. </para>
+
+<para
+>O último tipo, embora seja exibido primeiro na lista, é <quote
+>Favorito.</quote
+> Essas são contas de qualquer outro tipo que você indicou como contas <quote
+>favoritas</quote
+> nos detalhes ao criar ou editar essa conta. </para>
+
+<sect1 id="details.accounts.view"
+><title
+>A vista de Contas</title>
+<screenshot>
+  <screeninfo
+>vista de contas</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>vista de contas</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>A vista de Contas fornece um resumo de todas as contas. É semelhante à vista de Instituições, exceto que as contas são agrupadas por tipo de conta. A lista de contas em qualquer tipo de conta (ou na conta principal para qualquer subconta) pode ser expandida ou recolhida clicando na seta à esquerda do tipo ou nome. </para>
+
+<para
+>Semelhante à vista de Instituições, a vista de Contas exibe várias colunas com informações descritivas e resumidas sobre cada conta. Assim como na vista de Instituições, você pode selecionar quais colunas serão exibidas clicando com o botão direito do mouse em qualquer cabeçalho de coluna e marcando ou desmarcando a caixa de seleção ao lado do nome da coluna. </para>
+
+<para
+>O restante deste capítulo terá foco na funcionalidade das contas de Ativos e Passivos. As contas de Receitas e Despesas, &ie;, Categorias, são descritas no capítulo <link linkend="details.categories"
+> Categorias</link
+>. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nome</term>
+    <listitem>
+      <para
+>O nome da conta. Esta coluna é sempre exibida. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipo</term>
+    <listitem>
+      <para
+>O tipo de conta, &eg;, Poupança, Conta Corrente, Cartão de Crédito, Ações, &etc; </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Online</term>
+    <listitem>
+      <para
+>Uma indicação se esta conta foi configurada para acesso online. O processo de configuração de contas para acesso online é descrito no <link linkend="details.impexp"
+>capítulo de importação e exportação</link
+>. Mas os detalhes sobre as configurações disponíveis estão abaixo na seção sobre <link linkend="details.accounts.edit"
+>Editar informações da conta</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Taxa</term>
+    <listitem>
+      <para
+>Uma indicação se esta conta foi configurada como importante para fins fiscais. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>IVA</term>
+    <listitem>
+      <para
+>Uma indicação se esta conta foi configurada para aplicar o IVA nas transações. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo</term>
+    <listitem>
+      <para
+>O saldo atual da conta, apresentado na moeda escolhida quando a conta foi criada. </para>
+    </listitem>
+  </varlistentry>
+  
+  <varlistentry>
+    <term
+>Valor total</term>
+    <listitem>
+      <para
+>Este é o mesmo valor que o saldo, mas sempre na moeda base escolhida quando o arquivo de dados foi criado. Esses valores são somados para a linha do tipo de conta geral. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Número</term>
+    <listitem>
+      <para
+>O número da conta, caso tenha sido informado. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>IBAN</term>
+    <listitem>
+      <para
+>O <acronym
+><ulink url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+>IBAN</ulink
+></acronym
+> (Número Internacional de Conta Bancária) é exibido se houver um valor inserido no campo apropriado na caixa de diálogo de informações da conta. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
-<sect1 id="details.accounts.create">
-<title
->Criar uma Conta</title>
-
-<para>
-  <emphasis
->NOTA: Você deverá ter um arquivo aberto antes de poder criar uma conta nova. Se não tiver um arquivo existente, terá que criar um <link linkend="firsttime.3"
->arquivo novo</link
->. </emphasis>
-</para>
+<sect1 id="details.accounts.create"
+><title
+>Criar uma conta</title>
+<note
+><para
+>Você deverá ter um arquivo aberto antes de poder criar uma conta nova. Se não tiver um arquivo existente, terá que <link linkend="firsttime.newfile"
+>criar um</link
+>. </para
+></note>
 
 <para
->Para criar uma conta nova, você poderá selecionar a opção <menuchoice
+>Para criar uma nova conta, você pode selecionar o item de menu <menuchoice
 ><guimenu
 >Conta</guimenu
 ><guimenuitem
 >Nova conta...</guimenuitem
 ></menuchoice
-> no menu ou clicar no ícone <guiicon
+> ou escolher o <guiicon
 ><inlinemediaobject
 ><imageobject
 ><imagedata fileref="newacct.png" format="PNG"/></imageobject
-><textobject
-><phrase
->Nova</phrase
-></textobject
 ></inlinemediaobject
-></guiicon
-> da barra de ferramentas. </para>
-
-<para
->Como alternativa, para criar uma conta com a área de contas, clique no ícone respectivo no seletor de áreas e clique depois, com o botão direito do mouse, no ícone de Ativos, na área à direita, selecionando depois a opção <guimenuitem
+> </guiicon
+> ícone de nova conta na barra de ferramentas. Você também pode criar uma conta na vista de Contas; clique no ícone Contas no seletor de visualização e, em seguida, clique com o botão direito do mouse no ícone da árvore de Ativo ou Passivo e selecione <guimenuitem
 >Nova conta...</guimenuitem
-> no menu que aparece. A árvore de Ativos mostra todas as suas contas referentes a ativos. Os ativos, assim como todos os outros tipos de contas, são descritos posteriormente neste manual. </para>
+> no menu pop-up. </para>
 
-<sect2 id="details.accounts.create.institution">
-<title
+<sect2 id="details.accounts.create.institution"
+><title
 >Nome da Instituição (Banco)</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz1.png" format="PNG"/>
-      </imageobject>
-      <textobject>
-        <phrase
->Assistente de Contas</phrase>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - instituição</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - instituição</phrase>
       </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+  </mediaobject>
+</screenshot>
 
 <para
 >A primeira etapa envolve a seleção de uma instituição para a conta. Se for uma conta para uma instituição que já tenha criado, você poderá selecionar a instituição na lista. Se quiser criar uma nova, clique no botão <guibutton
@@ -94,11 +220,15 @@
 >. Isto irá invocar a janela de Nova Instituição, como está descrita na seção anterior. Se não for uma conta bancária, ou caso não queira usar um banco online, você não precisa indicar nenhuma instituição. </para>
 
 <para
->O número da conta, bem como o <acronym
-><ulink url="http://pt.wikipedia.org/wiki/International_Bank_Account_Number"
->IBAN (International Bank Account Number)</ulink
-></acronym
-> ainda não são usados pelo &kappname;. Esses campos podem ser deixados em branco e preenchidos posteriormente, pois são necessários apenas para banco online. </para>
+>O número da conta e o <ulink url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+> <acronym
+>IBAN</acronym
+> (Número Internacional de Conta Bancária)</ulink
+> não são obrigatórios para o &kmymoney;. Esses campos podem ser deixados em branco e preenchidos posteriormente. O número da conta pode ser usado para <link linkend="details.impexp.ofxdirectconnect"
+>banco online</link
+> e para garantir que as importações de dados usem a conta correta. O <acronym
+>IBAN</acronym
+> pode ser usado pelo plugin KBanking. </para>
 
 <para
 >Para prosseguir na próxima etapa, clique em <guibutton
@@ -106,32 +236,28 @@
 >. </para>
 </sect2>
 
-<sect2 id="details.accounts.create.account">
-<title
+<sect2 id="details.accounts.create.account"
+><title
 >Conta</title>
-
-<para>
-  <screenshot>
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="accwiz2.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase
->Assistente de Contas</phrase>
-            </textobject>
-          </mediaobject>
-  </screenshot>
-</para>
-
-<para
->Esta página é usada para configurar o tipo de conta. </para>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - detalhes da conta</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - detalhes da conta</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Primeiro, insira um nome para a conta. Esse nome será usado para identificá-la. </para>
 
 <para
->Em seguida, selecione o tipo de conta num dos tipos disponíveis da lista: </para>
+>Em seguida, selecione o tipo de conta de um dos tipos disponíveis na lista. Os diferentes tipos de conta são tratados de forma diferente pelo &kmymoney;, sendo importante escolher o tipo correto ao criar a conta. Da mesma forma, diferentes tipos de contas necessitam de diferentes informações de configuração, podendo mostrar diferentes páginas no assistente de configuração de novas contas para coletar essa informação. </para>
 
 <variablelist>
   <varlistentry>
@@ -175,7 +301,9 @@
 >Empréstimo</term>
     <listitem>
       <para
->Uma conta para gerenciar um empréstimo de dinheiro, quer pedido quer cedido. Com uma conta de Empréstimo, o &kappname; calcula automaticamente as taxas de juros para ajudá-lo a acompanhar a amortização do empréstimo. Os empréstimos sem juros poderão usar o tipo Ativo ou Passivo abaixo, dependendo se o dinheiro é recebido ou pago. </para>
+>Uma conta para gerenciar um empréstimo de dinheiro, quer pedido quer cedido. Com uma conta de Empréstimo, o &kmymoney; calcula automaticamente as taxas de juros para ajudá-lo a acompanhar a amortização do empréstimo. Os empréstimos sem juros poderão usar o tipo Ativo ou Passivo abaixo, dependendo se o dinheiro é recebido ou pago. Um <link linkend="details.schedules"
+>agendamento</link
+> pode ser criado para gerenciar pagamentos contínuos. </para>
     </listitem>
   </varlistentry>
 
@@ -184,7 +312,7 @@
 >Investimento</term>
     <listitem>
       <para
->Uma conta para gerenciar um investimento, como os fundos de ações e de investimento. </para>
+>Uma conta para gerenciar um investimento, como ações, títulos ou fundos mútuos. </para>
     </listitem>
   </varlistentry>
 
@@ -193,7 +321,7 @@
 >Ativo</term>
     <listitem>
       <para
->Uma conta para gerenciar um ativo que não caiba em nenhum dos tipos acima. </para>
+>Uma conta para gerenciar um ativo que não caiba em nenhum dos tipos acima. Por exemplo, isso pode ser usado para rastrear o valor de um veículo. </para>
     </listitem>
   </varlistentry>
 
@@ -202,55 +330,68 @@
 >Passivo</term>
     <listitem>
       <para
->Uma conta para gerenciar um passivo, como o dinheiro que tenha emprestado ou uma despesa futura. Se tiver que calcular juros, pode ser melhor usar uma conta do tipo Empréstimo. </para>
+>Uma conta para gerenciar dinheiro que você deve ou uma despesa futura que não se encaixe em nenhum dos tipos acima. Este é o tipo usado normalmente para empréstimos sem juros. Se tiver que calcular juros, pode ser melhor usar uma conta do tipo Empréstimo. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ação ordinária</term>
+    <listitem>
+      <para
+>Contas desse tipo são usadas para transações de saldo inicial em outras contas. O &kmymoney; cria automaticamente uma conta desse tipo e raramente é necessário criar outra. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->Selecione na lista a moeda que será usada na conta. </para>
+>Selecione na lista a moeda que será usada na conta. O valor padrão é a moeda escolhida quando o arquivo de dados foi criado. </para>
 
 <para
->Insira a data em que a conta foi aberta ou selecione-a no calendário, usando o ícone à direita. </para>
+>Indique a data em que a conta foi aberta ou selecione-a no calendário usando o ícone à direita. Você não conseguirá inserir nenhuma transação com data anterior à data de abertura da conta, mas poderá alterar essa data posteriormente, se for necessário. </para>
 
 <para
 >Insira o saldo inicial da conta. Se for uma conta existente no banco, esta informação poderá ser encontrada no seu extrato. Se for uma conta nova, o saldo inicial poderá ser deixado como zero. </para>
 
 <para
->A seleção da opção <emphasis
->Conta Preferida</emphasis
-> irá permitir o acesso preferencial em algumas janelas e áreas do &kappname;. </para>
+>Selecionar a caixa de seleção <emphasis
+>Conta Favorita</emphasis
+> permitirá um acesso mais fácil em algumas caixas de diálogo e visualizações do &kmymoney;. Em alguns lugares, esta conta também é chamada de conta <emphasis
+>Preferencial</emphasis
+>. </para>
 
 <para
->Para prosseguir na próxima etapa, clique em Próximo. </para>
+>Para prosseguir na próxima etapa, clique em <guibutton
+>Próximo</guibutton
+>. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Contas do Cartão de Crédito</title>
-
 <para
->Ao criar uma conta de Cartão de Crédito, você poderá fazer com que o &kappname; crie opcionalmente uma <link linkend="details.schedules"
+>Ao criar uma conta de Cartão de crédito, após digitar as informações básicas e clicar em <guibutton
+>Próximo</guibutton
+>, você poderá fazer com que o &kmymoney; crie opcionalmente uma <link linkend="details.schedules"
 >transação agendada</link
 >. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz6.png" format="PNG"/>
-              </imageobject>
-
-              <textobject>
-                <phrase
->Assistente de Contas</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - cartão de crédito com agendamento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz6.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - cartão de crédito com agendamento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Se quiser gerar uma transação como esta, certifique-se de que a opção está assinalada e insira as informações necessárias. </para>
+>Se quiser gerar uma transação como esta, certifique-se de que a opção está selecionada e insira as informações necessárias. </para>
 
 <para
 >Clique em <guibutton
@@ -258,89 +399,100 @@
 > para continuar. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Contas de Investimento</title>
+<para
+>No &kmymoney;, as contas de Investimento só contêm participações societárias (ações, títulos de dívida, &etc;) mas não contêm dinheiro. (É por isso que não pode ser indicado um saldo de abertura para uma conta de Investimento). Se uma transação em uma conta de Investimento necessitar ou gerar dinheiro (como a compra ou venda de ações), será usada uma conta de Corretagem para o dinheiro. As contas de Corretagem serão descritas mais adiante no capítulo <link linkend="details.investments"
+>Investimentos</link
+>. Quando criar uma nova conta de Investimento, depois de inserir as informações básicas e clicar <guibutton
+>Próximo</guibutton
+>, você terá a opção de criar uma conta de Corretagem associada. </para>
 
 <para
->Para uma conta de Investimento, você tem a opção de criar uma conta de Corretagem associada. Para mais informações, consulte <link linkend="details.investments"
->Investimentos</link
-> </para>
+>Houve muitos pedidos para permitir que as contas de investimento também mantenham dinheiro em espécie, e isso provavelmente será possível em uma versão futura do &kmymoney;, juntamente com outras coisas que não são possíveis atualmente. No entanto, isso exigirá um esforço significativo e não é esperado em um futuro próximo. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz7.png" format="PNG"/>
-              </imageobject>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - investimento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz7.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - investimento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-              <textobject>
-                <phrase
->Assistente de Contas</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<para
+>Geralmente é melhor criar a conta de Corretagem aqui, a qual terá o mesmo nome da conta de investimento com o texto "(Corretagem)" adicionado. Por enquanto não será possível indicar a data de abertura ou o saldo da conta de Corretagem neste ponto, mas pode ser feito com a edição dos detalhes da conta após a sua criação. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Contas de Empréstimo</title>
-
 <para
->As contas de empréstimo são contas especiais usadas para ajudá-lo a gerenciar os empréstimos com juros e prestações agendadas. Ao fornecer as informações sobre o empréstimo, o &kappname; poderá ajudá-lo a acompanhar o pagamento dos juros e a amortização do empréstimo. </para>
+>As contas de empréstimo possui funcionalidades especiais para ajudá-lo a gerenciar os empréstimos com juros e prestações agendadas. Ao fornecer as informações sobre o empréstimo, o &kmymoney;  poderá ajudá-lo a acompanhar o pagamento dos juros e a amortização do empréstimo. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_1.png" format="PNG"/>
-              </imageobject>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - detalhes do empréstimo</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - detalhes do empréstimo</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-              <textobject>
-                <phrase
->Assistente de Contas</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-	
 <para
 >Na página Detalhes, você poderá inserir as informações gerais sobre o empréstimo. </para>
 
 <para
->Em primeiro lugar, selecione se você está emprestando o dinheiro ou pedindo emprestado. Se estiver pedindo emprestado, o empréstimo irá aparecer nas Contas como Passivo. Se estiver emprestando, aparece como Ativo. </para>
-	
-<para
->Em seguida, selecione o devedor ou credor do empréstimo. Como sempre, se o nome não existir na lista de Beneficiários, insira-o aqui para que o &kappname; o crie para você. </para>
+>Primeiro, selecione se você está pegando dinheiro emprestado ou emprestando dinheiro. Se você estiver pegando dinheiro emprestado, o empréstimo será uma conta de Passivo. Se você estiver emprestando dinheiro, o empréstimo será uma conta de Ativo. </para>
 
 <para
->Os três itens a seguir são para lidar com empréstimos em já foram feitos pagamentos. Se você selecionar Sim na opção "Já fez/recebeu algum pagamento?", poderá então selecionar se quer registrar todos os pagamentos ou apenas os que começaram no ano atual. Se quiser registrar desde o início do ano atual, será então necessário inserir o saldo atual. </para>
-	
-<para
->Depois, selecione a frequência com que os pagamentos serão feitos, assim como a frequência com que os juros são compostos. A composição acontece quando os juros são adicionados ao montante do empréstimo de modo que, quando os juros forem calculados novamente, já existirá mais juros pago sobre os juros. É interessante que seja composto com a mesma frequência com que são feitos os pagamentos. </para>
+>Em seguida, selecione o devedor ou credor do empréstimo. Como sempre, se o nome não existir na lista de Beneficiários, insira-o aqui para que o &kmymoney; o crie para você. </para>
 
 <para
->Em seguida, insira a data em que será feito o primeiro pagamento. </para>
-	
-<para
->Finalmente, insira as informações sobre a variação da taxa de juros. Se o empréstimo tiver uma taxa fixa, não há nada a fazer. Se a taxa variar, selecione 'Variável' na opção "Tipo de taxa de juros" e indique depois o intervalo entre as alterações da taxa de juros e a data em que vence a primeira alteração dessa taxa: O &kappname; pedirá para atualizar a taxa de juros quando chegar essa data. </para>
-	
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_2.png" format="PNG"/>
-              </imageobject>
+>Os três itens seguintes são para lidar com empréstimos que já foram pagos. Se você selecionar <guibutton
+>Sim</guibutton
+> no menu suspenso <guilabel
+>Você já fez/recebeu algum pagamento?</guilabel
+>, poderá selecionar se deseja registrar todos os pagamentos ou apenas aqueles do início do ano atual. Se desejar registrar desde o início do ano atual, você deverá inserir o saldo no início deste ano. </para>
 
-              <textobject>
-                <phrase
->Assistente de Contas</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-  
+<para
+>Em seguida, selecione a frequência com que os pagamentos serão feitos, assim como a frequência com que os juros são compostos. A composição acontece quando os juros são adicionados ao montante do empréstimo de modo que, quando os juros forem calculados novamente, já existirá mais juros pago sobre os juros. É interessante que seja composto com a mesma frequência com que são feitos os pagamentos. </para>
+
+<para
+>Em seguida, insira a data do primeiro pagamento a ser registrado. </para>
+
+<para
+>Finalmente, insira as informações sobre a variação da taxa de juros. Se o empréstimo tiver uma taxa fixa, não há nada a fazer. Se a taxa variar, selecione 'Variável' na opção <guilabel
+>"Tipo de taxa de juros"</guilabel
+> e indique depois o intervalo entre as alterações da taxa de juros e a data em que vence a primeira alteração dessa taxa: O &kmymoney; pedirá para atualizar a taxa de juros quando chegar essa data. Clique em <guibutton
+>Próximo</guibutton
+> para continuar. </para>
+
+<screenshot>
+  <screeninfo
+>assistente de nova conta - pagamentos de empréstimo</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - pagamentos de empréstimo</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para
 >A página Pagamentos você irá inserir os valores do montante e dos juros do empréstimo. </para>
 
@@ -365,7 +517,7 @@
 >Taxa de juros</term>
     <listitem>
       <para
->A taxa de juros anual do empréstimo.</para>
+>A taxa de juros percentual anual do empréstimo. Este deve ser um número positivo. Se não houver juros, o empréstimo deverá ser criado como uma conta de Ativo ou Passivo. </para>
     </listitem>
   </varlistentry>
 
@@ -383,7 +535,7 @@
 >Pagamento (principal e juros)</term>
     <listitem>
       <para
->O montante pago em cada prestação do empréstimo. Isto é o total da amortização e dos juros de cada pagamento. </para>
+>O montante de cada prestação do empréstimo. Isto é o total da amortização e dos juros de cada pagamento. </para>
     </listitem>
   </varlistentry>
 
@@ -400,306 +552,502 @@
 <para
 >Finalmente, use o botão <guibutton
 >Calcular</guibutton
-> para verificar os valores inseridos. Se omitir dois ou mais valores, o botão fica desativado, porque deixa de ser possível verificar se os valores inseridos são consistentes: nesse caso, você não será capaz de usar a funcionalidade de Financiamento no &kappname;, tendo então que utilizar uma conta de Ativo ou Passivo para seguir manualmente o financiamento. </para>
-	
+> para verificar os valores inseridos. Se omitir dois ou mais valores, o botão fica desativado, porque deixa de ser possível verificar se os valores inseridos são consistentes: nesse caso, você não será capaz de usar a funcionalidade de Financiamento no &kmymoney;, tendo então que utilizar uma conta de Ativo ou Passivo para seguir manualmente o financiamento. </para>
+
 <para
->Se omitir um valor, o &kappname; tentará calculá-lo para você. Se tiver inserido todos os valores, o &kappname; irá verificar se os valores são consistentes. O &kappname; não irá ajustar os valores inseridos, excetuando o "Pagamento-balão", que poderá ajustar ligeiramente para lidar com os arredondamentos. Se os valores forem inconsistentes ou se o &kappname; não conseguir calcular o valor omitido, o &kappname; irá avisá-lo, para que possa corrigir os erros e repetir o cálculo. </para>
-	
+>Se omitir um valor, o &kmymoney; tentará calculá-lo para você. Se tiver inserido todos os valores, o &kmymoney; irá verificar se os valores são consistentes. O &kmymoney; não irá ajustar os valores inseridos, excetuando o "Pagamento-balão", que poderá ajustar ligeiramente para lidar com os arredondamentos. Se os valores forem inconsistentes ou se o &kmymoney; não conseguir calcular o valor omitido, o &kmymoney; irá avisá-lo, para que possa corrigir os erros e repetir o cálculo. </para>
+
 <para
 >Assim que os valores estejam consistentes, o botão <guibutton
 >Próximo</guibutton
 > fica ativo e você poderá passar à página seguinte. </para>
-	
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_3.png" format="PNG"/>
-              </imageobject>
 
-              <textobject>
-                <phrase
->Assistente de Contas</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-	 
+<screenshot>
+  <screeninfo
+>assistente de nova conta - encargos do empréstimo</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - encargos do empréstimo</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para
 >A página Encargos é onde você poderá inserir quaisquer despesas ou encargos adicionais para os pagamentos dos empréstimos. </para>
-	
+
 <para
 >Se existir algum encargo, clique no botão <guibutton
 >Encargos adicionais</guibutton
 >. O editor de Parcelas da Transação será apresentado para inserir esses encargos. Todas as linhas que forem aqui adicionadas serão incluídas no agendamento do pagamento do empréstimo. Quando salvar as parcelas, a página Encargos irá mostrar o pagamento da amortização e dos juros, os encargos adicionais e o pagamento periódico total. </para>
-	
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_4.png" format="PNG"/>
-              </imageobject>
 
-              <textobject>
-                <phrase
->Assistente de Contas</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-	  
+<screenshot>
+  <screeninfo
+>assistente de nova conta - agendamento do empréstimo</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - agendamento do empréstimo</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para
->O &kappname; irá criar uma <link linkend="details.schedules"
+>O &kmymoney; irá criar uma <link linkend="details.schedules"
 >transação agendada</link
 > para o seu empréstimo. A página Agendamento é onde você poderá inserir os detalhes restantes para a criação do evento recorrente. </para>
-	
+
 <para
 >Primeiro, insira a categoria a ser associada com os juros do empréstimo. Depois, insira a conta de onde será feito o pagamento. </para>
-	
+
 <para
 >A página também mostra a data do primeiro pagamento, para a qual será criado o agendamento. </para>
-	
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_5.png" format="PNG"/>
-              </imageobject>
 
-              <textobject>
-                <phrase
->Assistente de Contas</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - pagamento do empréstimo</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - pagamento do empréstimo</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Opcionalmente, o &kappname; pode criar uma transação que representa o que foi recebido ou pago, quando foi criado o empréstimo. </para>
-	
+>Opcionalmente, o &kmymoney; pode criar uma transação que representa o que foi recebido ou pago, quando foi criado o empréstimo. </para>
+
 <para
 >Se você pediu emprestado ou emprestou dinheiro, selecione a conta de ou para onde foi pago o montante do empréstimo. </para>
-	
+
 <para
 >Se você pediu emprestado dinheiro para comprar um carro, poderá selecionar ou criar uma conta de Ativo para ajudá-lo a acompanhar o valor do carro novo. </para>
-	
+
 <para
->Se você refinanciou um empréstimo existente, assinale a opção "Refinanciar empréstimo existente" e selecione a conta Empréstimo, para que o &kappname; crie uma transação de transferência para quitar o empréstimo existente. </para>
-	
+>Se você refinanciou um empréstimo existente, assinale a opção <guilabel
+>"Refinanciar empréstimo existente"</guilabel
+> e selecione a conta Empréstimo, para que o &kmymoney; crie uma transação de transferência para quitar o empréstimo existente. </para>
+
 <para
->Se não quiser criar a transação para quitar o empréstimo, assinale a opção "Não criar a transação". </para>
+>Se não quiser criar a transação para quitar o empréstimo, assinale a opção <guilabel
+>Não criar transação de pagamento"</guilabel
+>. </para>
 </sect2>
 
-<sect2 id="details.accounts.create.parent">
-<title
->Conta-Mãe</title>
-
-<para>
-  <screenshot>
-	<screeninfo
->Conta-Mãe</screeninfo>
-	<mediaobject>
-	  <imageobject>
-            <imagedata fileref="accwiz10.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase
->Assistente de Contas</phrase>
-	  </textobject>
-	</mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.accounts.create.parent"
+><title
+>Contas Pai</title>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - conta pai</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz10.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - conta pai</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Esta é a penúltima etapa da criação de uma conta nova, na qual é apresentada uma árvore de contas. A árvore terá as suas contas de Ativo ou Passivo, dependendo do tipo de conta que está sendo criada. </para>
+>Este é o penúltimo passo na criação de qualquer nova conta, exceto um empréstimo. Dependendo do tipo de conta que está sendo criada, uma árvore de suas contas de Ativo ou Passivo será exibida. A maioria das contas são subcontas diretas do tipo Ativo ou Passivo. No entanto, a maioria das contas pode ser criada como subcontas, usando outra conta como principal. Não há impacto financeiro em tornar uma conta uma subconta; isso é usado apenas para organizar a exibição hierárquica de contas na vista de Instituições da vista de Contas. </para>
 
 <para
->Selecione a conta que deseja que contenha a conta nova. Se não selecionar uma conta-mãe, a conta nova será criada no nível de topo. </para>
+>A página da Conta-Pai não aparece atualmente para os Financiamentos, porque não podem ser criados como subcontas. Do mesmo modo, as contas de Investimento também não poderão conter outras contas, por isso também não aparecem na árvore. </para>
 
 <para
->A página da Conta-Mãe não aparece atualmente para os Financiamentos, porque não podem ser criados como subcontas. Do mesmo modo, as contas de Investimento também não poderão conter outras contas, por isso também não aparecem na árvore. </para>
+>Selecione a conta que deseja que contenha a conta nova. Se não selecionar uma conta-pai, a conta nova será criada no nível de topo. </para>
+
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Rever e salvar os detalhes da conta</title>
-
-<para>
-  <screenshot>
-          <screeninfo
->Revisão</screeninfo>
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="accwiz9.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase
->Assistente de Contas</phrase>
-            </textobject>
-          </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistente de nova conta - revisar e concluir</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz9.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistente de nova conta - revisar e concluir</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Esta é a etapa final da criação de uma conta nova, na qual é apresentado um resumo das informações inseridas. Confira essas informações e, se estiver tudo certo, clique no botão <guibutton
+>Esta é a etapa final da criação de uma conta nova, na qual é apresentado um resumo das informações inseridas. Confira essas informações e, se estiver tudo certo, clique em <guibutton
 >Concluir</guibutton
->. Caso contrário, clique no botão <guibutton
+>. Caso contrário, clique em <guibutton
 >Voltar</guibutton
-> para fazer as correções necessárias ou no botão <guibutton
+> para fazer as correções necessárias ou em <guibutton
 >Cancelar</guibutton
 > para abandonar a criação da nova conta. </para>
 
-<para
->NOTA: Por enquanto, o Tipo e a Moeda não podem ser alterados após a criação da conta. </para>
+<note>
+  <para
+>A moeda não pode ser alterada após a criação da conta. O tipo de conta pode ser alterado, mas apenas dentro de um conjunto limitado de tipos suficientemente semelhantes. </para>
+</note>
 </sect2>
 </sect1>
 
-<sect1 id="details.accounts.viewing">
-<title
+<sect1 id="details.accounts.viewing"
+><title
 >Abrir / visualizar as contas</title>
-
 <para
->Para abrir uma conta na área dos Livros de Registros, você poderá clicar na referência à conta na área Inicial, ou clicar no ícone do <guiicon
-><inlinemediaobject
+>Para exibir uma conta na <link linkend="details.ledgers.view"
+>vista do Livro de registro</link
+>, você pode clicar no link da conta na vista Inicial ou clicar no <guiicon
+> <inlinemediaobject
 > <imageobject
-> <imagedata fileref="ledgers_view.png"/> </imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
 > </inlinemediaobject
->Livros de Registros</guiicon
->, no seletor de áreas, selecionando depois a conta na lista que aparece no topo desta área. Alternativamente, na área da <guiicon
->Conta</guiicon
->, você poderá usar o clique duplo sobre o item de conta ou então clicar com o botão direito e selecionar o item <guimenuitem
->Abrir o livro de registros</guimenuitem
+> </guiicon
+> ícone de livro de registro no seletor de visualização. Se a conta ainda não estiver sendo exibida, clique em <quote
+>+</quote
+> na aba mais à direita e selecione a conta na caixa suspensa que aparece. Alternativamente, na vista de Contas ou na vista de Instituições, clique duas vezes no nome da conta ou clique com o botão direito e selecione <guimenuitem
+>Abrir livro de registro</guimenuitem
 >. </para>
 </sect1>
 
-<sect1 id="details.accounts.edit">
-<title
+<sect1 id="details.accounts.edit"
+><title
 >Editar as informações da conta</title>
-
 <para
->Para editar uma determinada conta, clique com o botão direito do mouse sobre a conta e selecione <menuchoice
-><guimenuitem
+>Para editar uma conta específica, clique com o botão direito do mouse no nome da conta na vista de Contas ou na vista de Instituições e escolha <guimenuitem
 >Editar conta...</guimenuitem
-></menuchoice
-> ou com a conta aberta no livro de registro, selecione <menuchoice
-><guimenu
+> ou, com essa conta aberta no livro de registro, selecione <guimenu
 >Conta</guimenu
-><guimenuitem
+> <guimenuitem
 >Editar conta...</guimenuitem
-></menuchoice
-> Uma janela aparecerá com diversas abas, permitindo-lhe verificar e alterar algumas informações da conta. Para obter mais informações sobre esses detalhes, leia a seção <link linkend="details.accounts.create"
+>. Uma janela será exibida com várias abas, cada uma permitindo que você visualize e altere determinadas informações sobre a conta. Para obter mais informações sobre qualquer um desses detalhes, consulte a seção sobre <link linkend="details.accounts.create"
 >criar uma nova conta</link
->. </para>
+>. Observe que alguns desses campos podem estar desabilitados, possivelmente dependendo do tipo de conta. Por exemplo, <guilabel
+>Moeda</guilabel
+> estará sempre desabilitado, pois pode ser definida quando a conta é criada, mas não alterada posteriormente. <guilabel
+>Lançamento de preço</guilabel
+> está habilitado apenas para contas de investimento. </para>
 
-<para>
-  <screenshot>
-        <screeninfo
->Editar uma conta</screeninfo>
+<screenshot>
+  <screeninfo
+>editar informações da conta</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_edit.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>editar informações da conta</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="account_edit.png" format="PNG"/>
-          </imageobject>
-
-          <textobject>
-            <phrase
->Editar as informações da conta</phrase>
-          </textobject>
-        </mediaobject>
-  </screenshot>
-</para>
-
-<formalpara
-><title
->Geral</title>
 <para
+>Esta caixa de diálogo possui várias abas para configurar diferentes aspectos de uma conta. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Geral</term>
+    <listitem>
+      <para
 >Exibe informações gerais sobre a conta e permite alterar o nome, data de abertura ou início, bem como algumas outras configurações básicas. </para>
-</formalpara>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Instituição</title>
-<para
+  <varlistentry>
+    <term
+>Instituição</term>
+    <listitem>
+      <para
 >Exibe e altera os números da conta e da instituição bancária associada. Nesta aba também é possível criar uma nova instituição. </para>
-</formalpara>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Hierarquia</title>
-<para
->Você pode alterar a conta-mãe se clicar em outra conta-mãe desta janela da hierarquia de contas. </para>
-</formalpara>
+  <varlistentry>
+    <term
+>Hierarquia</term>
+    <listitem>
+      <para
+>Isso mostra onde a conta está na hierarquia geral de contas. Você pode alterar a conta principal arrastando a conta e soltando-a em uma conta principal diferente nesta visualização da hierarquia de contas, ou na visualização de contas ou na visualização de instituições. Você também pode alterar a conta principal aqui clicando na nova conta principal e, em seguida, clicando em <guibutton
+>OK</guibutton
+>. </para>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Limites</title>
-<para
->Esta aba aparece apenas nas contas de ativos e passivos. Se inserir valores nos campos disponíveis, o &kappname; informará quando o saldo da conta atingir esses valores. </para>
-</formalpara>
+  <varlistentry>
+    <term
+>Limites</term>
+    <listitem>
+      <para
+>Esta aba aparece apenas nas contas de ativos e passivos. Se inserir valores nos campos disponíveis, o &kmymoney; informará quando o saldo da conta atingir ou exceder esses valores. </para>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Taxa</title>
-<para
->Permite-lhe indicar se esta é uma conta VAT, e se deseja incluir esta conta nos relatórios de taxas. </para>
-</formalpara>
+  <varlistentry>
+    <term
+>Taxa</term>
+    <listitem>
+      <para
+>Aqui você pode verificar se esta é uma conta de IVA e especificar a porcentagem do IVA. Além disso, você pode verificar se deseja incluir esta conta nos relatórios fiscais. </para>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Configurações online</title>
-<para
+  <varlistentry>
+    <term
+>Configurações online</term>
+    <listitem>
+      <para
 >Esta aba só estará presente se a conta foi mapeada para uma <link linkend="details.impexp.ofxdirectconnect"
 >conta online</link
 >. Ela possui três subabas. </para>
-</formalpara>
 
-<itemizedlist>
-<listitem>
-<para
-><emphasis
->Detalhes da conta</emphasis
-> Informa o estado da conexão, o banco/corretora e o número da conta, e permite-lhe armazenar ou alterar a senha da conta online. </para>
-</listitem>
+      <variablelist>
+        <varlistentry>
+          <term
+>Detalhes da conta</term>
+          <listitem>
+            <para
+>Isso mostra o status da conexão online, o banco/corretora e o número da conta. Também permite armazenar ou alterar a senha da conta online. Onde e como a senha é armazenada depende da sua instância específica, mas, na maioria das vezes, ela é armazenada pelo <ulink url="https://apps.kde.org/kwalletmanager5/"
+>Gerenciador de carteira do KDE</ulink
+>. </para>
+          </listitem>
+        </varlistentry>
 
-<listitem>
-<para
-><emphasis
->Detalhes do OFX</emphasis
-> Permite-lhe ajustar alguns detalhes utilizados pelo &kappname;, quando estabelece uma conexão OFX com a instituição. Isso será necessário apenas se estiver com problemas ao configurar a conta online pela primeira vez ou se a sua instituição mudar o programa servidor de OFX. </para>
-</listitem>
+        <varlistentry>
+          <term
+>Detalhes OFX</term>
+          <listitem>
+            <para
+>Permite-lhe ajustar alguns detalhes utilizados pelo &kmymoney;, quando estabelece uma conexão OFX com a instituição. Isso será necessário apenas se estiver com problemas ao configurar a conta online pela primeira vez ou se a sua instituição mudar o programa servidor de OFX. </para>
+          </listitem>
+        </varlistentry>
+        
+        <varlistentry>
+          <term
+>Detalhes da importação</term>
+          <listitem>
+            <para
+>Na caixa superior, você pode indicar ao &kmymoney; qual data usar como data inicial para a importação. A caixa inferior contém vários itens que o &kmymoney; usa ao criar transações a partir dos dados baixados. </para>
 
-<listitem>
-<para
-><emphasis
->Detalhes de importação</emphasis
-> Informa ao &kappname; o que deve ser usado como data inicial para importação. Além disso, a partir da versão 4.6, você pode selecionar se o nome do beneficiário tem como base o campo BENEFICIÁRIO, NOME ou MEMO da transação importada. </para>
-</listitem>
-</itemizedlist>
+            <itemizedlist>
+              <listitem>
+                <para
+>Você pode escolher se o nome do beneficiário será baseado no campo PAYEEID, NAME ou MEMO da transação importada. Diferentes instituições usam diferentes padrões, então talvez seja necessário tentar um valor diferente aqui se as suas transações importadas parecerem ter o beneficiário errado de forma consistente. Infelizmente, isso se aplica apenas ao Direct Connect, mas esperamos que também se aplique à importação de arquivos OFX em algum momento. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>Alguns bancos não seguem o padrão OFX de fornecer um FITID (Identificação de Transação da Instituição Financeira) único e repetível, o que pode causar transações duplicadas em downloads repetidos. Se isso acontecer, você pode alterar o método que o &kmymoney; usa para detectar duplicatas, substituindo o <guilabel
+>FITID da OFX</guilabel
+> pelo <guilabel
+>ID do KMyMoney</guilabel
+> calculado internamente. Isso não é frequentemente necessário. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>A importação de transações de uma instituição em um fuso horário diferente pode, às vezes, resultar em uma data incorreta em uma transação importada. Se isso acontecer, você pode definir um <guilabel
+>Deslocamento de fuso horário</guilabel
+> para ajustar a diferença. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>Muito raramente, uma instituição criará downloads OFX com o sinal de valor da transação estornado. Você pode clicar nesta caixa de seleção para corrigir este problema. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>Um problema semelhante ocorre às vezes, mas apenas para os valores em transações de investimento, como a compra e venda de ações. Clicar nesta caixa de seleção corrige isso. </para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
-<sect1 id="details.accounts.delete">
-<title
->Exclusão de contas</title>
-
+<sect1 id="details.accounts.delete"
+><title
+>Excluir e fechar contas</title>
 <para
->Para excluir uma conta, remova todas as transações que ela possui no livro de registros. Em seguida, localize a conta na área de contas e, após clicar com o botão direito no item, de modo a mostrar o menu de contexto, selecione a opção <guimenuitem
+>Uma conta só pode ser excluída se não tiver transações e não for referenciada por nenhum outro item no arquivo de dados. Em geral, isso significa que você precisa primeiro remover todas as transações dessa conta no livro de registro. Em seguida, você pode selecionar <menuchoice
+><guimenu
+>Conta</guimenu
+><guimenuitem
 >Excluir conta...</guimenuitem
-> desse menu. </para>
+></menuchoice
+> ou clicar com o botão direito do mouse no nome na vista de Contas e selecionar <guimenuitem
+>Excluir conta...</guimenuitem
+> no menu pop-up. </para>
 
 <para
->Se não conseguir excluir uma conta aparenta não ter transações, verifique o seu filtro em <menuchoice
+>Se você não conseguir excluir uma conta que parece não ter transações, pode haver transações que não são exibidas no livro-razão devido a uma configuração de filtro. Consulte <menuchoice
 > <guimenu
 >Configurações</guimenu
 > <guimenuitem
->Configurar o &kappname;</guimenuitem
+>Configurar &kmymoney;...</guimenuitem
 > <guimenuitem
 >Geral</guimenuitem
 > <guimenuitem
 >Filtro</guimenuitem
 > </menuchoice
->. Limpe todos os filtros e indique a data inicial como 01/01/1900 ou algo do gênero. </para>
+>. Limpe todos os filtros e defina a data de início para aproximadamente 01/01/1900. </para>
 
 <para
->Poderão existir algumas transações no seu livro de registros que não apareçam, por exemplo, se tiver escrito o ano errado ao fazer uma inserção, de forma inadvertida, ficando assim fora da data de abertura do &kappname;. Ela aparece abaixo da área de registro, como fundos restantes. </para>
+>Poderão existir também algumas transações no seu livro de registros que não apareçam, por exemplo, se tiver escrito o ano errado ao fazer uma inserção, de forma inadvertida, ficando assim fora da data de abertura do . Ela aparece abaixo da área de registro, como fundos restantes. </para>
+
+<para
+>Em alguns casos, você poderá selecionar <guimenuitem
+>Excluir conta...</guimenuitem
+>, mas receberá uma janela pop-up informando por que  &kmymoney; não pode excluir a conta. </para>
+
+<para
+>Excluir uma conta remove completamente todos os dados relacionados a essa conta do seu arquivo de dados. No entanto, pode haver casos em que você tenha fechado uma conta no banco e, embora não queira vê-la no seu uso diário do &kmymoney;, queira manter os dados para uso em relatórios históricos. Nesse caso, você pode selecionar <guimenu
+>Conta</guimenu
+><guimenuitem
+>Fechar conta</guimenuitem
+> ou clicar com o botão direito do mouse no nome na vista de Contas e selecionar <guimenuitem
+>Fechar conta...</guimenuitem
+> no menu pop-up. Isso marcará a conta como fechada e sua visibilidade dependerá da configuração de <link linkend="reference.menus.view"
+>Mostrar todas as contas</link
+>. Observe que, para fechar uma conta, ela deve ter saldo zero, mas ainda pode conter transações. </para>
+
+<para
+>Também é possível reabrir uma conta encerrada. Isso geralmente é necessário se você encerrou uma conta, mas percebeu que o fez antes de realmente registrar todas as transações da conta, como um pagamento final de juros ou dividendos de uma conta de investimento. Nesse caso, você pode selecionar <guimenu
+>Conta</guimenu
+> <guimenuitem
+>Reabrir conta</guimenuitem
+> ou clicar com o botão direito do mouse no nome na vista de Contas e selecionar <guimenuitem
+>Reabrir conta</guimenuitem
+> no menu pop-up. </para>
+</sect1>
+
+<sect1 id="details.accounts.options"
+><title
+>Opções da conta</title>
+<para
+>Clicar com o botão direito do mouse em uma Conta, seja na vista de Instituições ou na vista de Contas, abrirá as opções de contas. Você também pode simplesmente selecionar o menu <guimenu
+>Conta</guimenu
+>. </para>
+
+<screenshot>
+  <screeninfo
+>submenu de opções da conta</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_options.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>submenu de opções da conta</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Observe que cada uma das opções de menu listadas pode estar ativada ou desativada, dependendo da conta selecionada. </para>
+
+<para
+>Selecionar <guimenuitem
+>Nova conta...</guimenuitem
+> inicia o processo de criação da conta. <link linkend="details.accounts.create"
+>Processo de criação de conta</link
+>. </para>
+
+<para
+>Selecionar <guimenuitem
+>Nova categoria...</guimenuitem
+> orienta você pelo <link linkend="details.categories.create"
+>processo de criação de categoria</link
+>. </para>
+
+<para
+>Selecionar <guimenuitem
+>Abrir livro de registro</guimenuitem
+> leva você diretamente para a <link linkend="details.ledgers.view"
+>vista do Livro de registro</link
+> ou para a <link linkend="details.investments.view"
+>vista de Investimentos</link
+>, dependendo do tipo de conta. </para>
+
+<para
+>Selecionar <guimenuitem
+>Editar conta...</guimenuitem
+> abre uma janela permitindo que você <link linkend="details.accounts.edit"
+>edite vários aspectos da conta</link
+>. </para>
+
+<para
+>Selecionar <guimenuitem
+>Excluir conta...</guimenuitem
+> exclui a conta selecionada, mas somente se determinados critérios forem atendidos, conforme descrito <link linkend="details.accounts.delete"
+>aqui</link
+>. Caso contrário, este item fica desativado. </para>
+
+<para
+>Selecionar <guimenuitem
+>Reconciliar...</guimenuitem
+> abre o <link linkend="details.reconcile.wizard"
+>Assistente de Reconciliação</link
+>. <guimenuitem
+>Adiar</guimenuitem
+> e <guimenuitem
+>Concluir</guimenuitem
+> também são descritos na mesma seção. </para>
+
+<para
+>A seleção de <guimenuitem
+>Relatório de transações</guimenuitem
+> está habilitada apenas para uma seleção limitada de Contas, caso em que abre um <link linkend="details.reports.transaction"
+>Relatório de transações</link
+> para a conta selecionada, mostrando as transações acumuladas no ano. </para>
+
+<para
+>Selecionar <guimenuitem
+>Fechar conta</guimenuitem
+> fecha a conta selecionada, desde que certos critérios sejam atendidos, conforme descrito <link linkend="details.accounts.delete"
+>aqui</link
+>. <guimenuitem
+>Reabrir conta</guimenuitem
+> é descrito na mesma seção. </para>
+
+<para
+>Selecionar <guimenuitem
+>Mapear conta...</guimenuitem
+> e <guimenuitem
+>Desmapear conta...</guimenuitem
+> permite associar uma conta a uma conta online e remover essa associação. Selecionar <guimenuitem
+>Atualizar conta...</guimenuitem
+> busca os dados de transação da fonte online para uma conta que já foi mapeada. Além disso, selecionar <guimenuitem
+>Atualizar todas as contas...</guimenuitem
+>, que aparece apenas no menu principal <guimenu
+>Conta</guimenu
+>, atualiza todas as contas mapeadas. Todas essas opções são descritas no <link linkend="details.impexp"
+>capítulo sobre importação e exportação</link
+>. </para>
+
+<para
+>Selecionar <guimenuitem
+>Novo investimento...</guimenuitem
+>, que só aparece no menu de contexto quando você clica com o botão direito em uma conta na vista de Investimentos ou na vista de Contas, abre o <link linkend="details.investments.newinvestmentwizard"
+>Assistente de novo investimento</link
+>. </para>
 </sect1>
 </chapter>

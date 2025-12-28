@@ -4,110 +4,291 @@
   <authorgroup>
     <author
 >&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->30/08/2014</date>
+>01/12/2024</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Investimentos</title>
 
-<sect1 id="details.investments.overview">
-<title
->Investimentos no &kappname;</title>
-
-<sect2>
-<title
->Investimentos</title>
-
+<sect1 id="details.investments.overview"
+><title
+>Investimentos no &kmymoney;</title>
 <para
->Investimentos são instrumentos para aplicar dinheiro e são comercializados em um mercado. As ações, fundos de investimento e fundos mútuos são os investimentos mais comuns; como tal, são os que possuem suporte mais direto. As prospecções, mercadorias, opções de compra e derivações mais complexas são algumas vezes usadas, mas o &kappname; não tem nenhuma funcionalidade especial para elas. Desde que se comportem como uma ação ou fundo, poderão ser acompanhadas facilmente. </para>
-</sect2>
+>Em termos gerais, um <emphasis
+>investimento</emphasis
+> é qualquer alocação de dinheiro com a expectativa de um benefício futuro. As contas de investimento do &kmymoney; são projetadas para um tipo específico de investimento: títulos de ações. Um investimento em ações (ou simplesmente uma ação) é um instrumento para investir dinheiro que é negociado em um mercado com a intenção de obter um retorno lucrativo na forma de valorização, renda como juros ou dividendos, ou uma combinação de ambos. Ações e fundos mútuos são os títulos mais comuns e são os que são especificamente suportados pelo &kmymoney;. Os títulos de renda fixa têm uma estrutura financeira diferente, mas geralmente podem ser gerenciados pelo &kmymoney;. Futuros, commodities, opções e instrumentos de investimento mais complexos, como derivativos, são outros tipos de investimentos, mas o &kmymoney; não possui funcionalidades especiais para eles. Contanto que um investimento tenha características semelhantes a uma ação ou fundo mútuo, ele pode ser rastreado. </para>
 
-<sect2>
-<title
->Moeda Base</title>
-<para
->Cada investimento possui uma Moeda Base. Esta é a moeda em que ele é comercializado. Quando o preço de uma ação é inserido para um determinado investimento, a moeda do valor é sempre a sua moeda base. Uma ação na NYSE seria em dólares dos EUA, enquanto um investimento nos mercados australianos seria em dólares australianos. </para>
-</sect2>
-
-<sect2>
-<title
+<sect2
+><title
 >Contas de Investimento</title>
 <para
->As Contas de Investimento mantêm uma coleção dos investimentos. As transações, como as compras e vendas, destes investimentos estão contidas numa Conta de Investimento. Todas as transações numa conta de Investimento deverão estar relacionadas a um determinado investimento. Não existe nenhum <quote
->saldo monetário</quote
-> separado numa conta de investimento. Para isso, você precisa de uma Conta de Corretagem. </para>
+>Uma conta de investimento do &kmymoney; detém uma coleção de títulos, também conhecidos como ações. Uma conta de investimento contém transações, registrando atividades como compras, vendas, dividendos, reinvestimentos, rendimentos, desdobramentos e ganhos desses investimentos. Cada transação em uma conta de investimento deve estar relacionada a um título específico. </para>
+
+<para
+>É comum que uma conta em uma corretora contenha tanto títulos quanto dinheiro. No &kmymoney;, uma conta de investimento detém apenas títulos. Ela não pode conter nenhum saldo em dinheiro. Essa foi uma decisão de projeto tomada quando as contas de investimento foram incluídas pela primeira vez no &kmymoney;. Isso pode ser alterado no futuro, mas provavelmente será feito como parte de uma revisão significativa em toda a gestão de investimentos do &kmymoney;. Por enquanto, qualquer dinheiro necessário para comprar um título ou obtido com uma transação de venda ou dividendo exige o uso de uma conta de corretagem. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2 id="details.investments.brokerage"
+><title
 >Contas de Corretagem</title>
 <para
->Normalmente, uma conta de investimento possui uma conta de corretagem associada. Esta é também normalmente referida como uma <quote
->Conta em Dinheiro</quote
->. As contas de investimento não poderão conter transações de dinheiro, como uma transferência do seu banco. Quando uma ação é vendida, os resultados são normalmente colocados na Conta de Corretagem. </para>
+>Quando uma transação de investimento utiliza (para comprar um título) ou gera retorno, como em uma venda ou dividendo, essa transação deve se referir a outra conta que possa conter o dinheiro, geralmente uma conta corrente. Você pode especificar qualquer conta adequada para qualquer transação de investimento que exija uma. No entanto, o &kmymoney; possui o conceito de uma <emphasis
+>Conta de corretagem</emphasis
+>, também chamada de <quote
+>Conta caixa</quote
+>, que é a conta padrão para essas transações. </para>
 
 <para
->Quando criar uma Conta de Investimento, você terá a opção de criar uma Conta de Corretagem associada a ela. </para>
-
+>Ao criar uma conta de investimento, você tem a opção de criar uma conta de corretagem associada a ela. O nome padrão da conta de corretagem será o nome da conta de investimento com "(Corretagem)" adicionado. O &kmymoney; assume essa convenção de nomenclatura em diversas ações relacionadas a investimentos. Seguir a convenção não é absolutamente obrigatório, mas, sem ela, você frequentemente terá que realizar etapas adicionais para concluir o lançamento de transações. </para>
 </sect2>
 
+<sect2
+><title
+>Moeda Base</title>
+<para
+>Seu arquivo de dados do &kmymoney; tem uma moeda base, especificada quando o arquivo foi criado. Além disso, uma conta de investimento tem uma moeda base, especificada quando é criada. Separadamente, cada título tem sua própria moeda base. Esta é a moeda na qual ele é negociado. Quando uma cotação de preço é inserida para um investimento, a moeda do valor fornecido é sempre sua moeda base. Uma ação na NYSE (Bolsa de Valores de Nova York) seria em dólares americanos (USD), e uma no mercado australiano seria em dólares australianos (AUD). A moeda base de um título não precisa ser a mesma que a moeda base da conta de investimento que detém esse título. </para>
+</sect2>
 </sect1>
 
-<sect1 id="details.investments.investment">
-<title
->Criar uma Conta de Investimento</title>
+<sect1 id="details.investments.view"
+><title
+>A vista de Investimentos</title>
+<para
+>A vista de Investimentos fornece um resumo de todos os seus investimentos, semelhante a várias outras visões principais. Ela possui uma única área de exibição, com duas abas. A primeira aba, <guilabel
+>Ações</guilabel
+>, fornece uma visão geral dos títulos mantidos em uma única conta de investimento, conforme especificado no menu suspenso <guilabel
+>Selecionar conta:</guilabel
+>. A segunda aba, <guilabel
+>Títulos</guilabel
+>, é semelhante, mas fornece informações ligeiramente diferentes sobre todas as ações, fundos mútuos, títulos, &etc;, que você acompanha no &kmymoney;. </para>
+
+<sect2 id="details.investments.view.equities"
+><title
+>A aba Ações</title>
+<screenshot>
+  <screeninfo
+>aba Ações da vista de Investimentos</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_view_equities.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>aba Ações da vista de Investimentos</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->O primeiro passo no caminho da utilização dos investimentos é criar uma conta para guardar os seus investimentos. Escolha a opção <menuchoice
-> <guimenu
+>A distinção entre ações e títulos nessas duas abas pode parecer um tanto arbitrária e sabidamente causa confusão. Talvez a terminologia possa ser alterada no futuro, caso alguém proponha um conjunto diferente de termos que não apresente os mesmos ou outros problemas. No entanto, como mencionado acima, na terminologia atual, uma ação, conforme exibida na aba Ações, refere-se aos detalhes de um investimento dentro de uma conta de investimento. Dentro do &kmymoney;, trata-se de uma subconta de uma conta de investimento, denominada em um título. Um título, conforme exibido na aba Títulos, fornece acesso às informações do título não relacionadas a nenhuma conta. Um título pode ser referenciado em múltiplas ações, o que também pode ser dito como diferentes ações podendo ser denominadas no mesmo título. </para>
+
+<para
+>No topo da lista de ações está o menu suspenso <guilabel
+>Selecionar conta:</guilabel
+>, onde você pode selecionar a conta de investimento para a qual deseja visualizar os investimentos específicos. Se você tiver marcado a opção <link linkend="details.settings.general.views"
+>Sincronizar a seleção de conta entre a vista do Livro de registro e a de Investimentos</link
+> na caixa de diálogo de configuração, então, se você estiver visualizando uma conta de investimento na vista do Livro de registro e, em seguida, alternar para a vista de Investimentos, essa conta já estará selecionada. </para>
+
+<para
+>Semelhante à vista de Instituições e a várias outras, a aba Ações exibe diversas colunas com informações descritivas e resumidas sobre cada ação. Assim como na vista de Instituições, você pode selecionar quais colunas serão exibidas clicando com o botão direito do mouse em qualquer cabeçalho de coluna e marcando ou desmarcando a caixa de seleção ao lado do nome da coluna. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nome</term>
+    <listitem>
+      <para
+>O nome da participação acionária. Esta coluna é sempre exibida. Todas as outras colunas são exibidas opcionalmente, conforme descrito acima. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Símbolo</term>
+    <listitem>
+      <para
+>Este é o símbolo de negociação utilizado no mercado onde a ação é negociada. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Quantidade</term>
+    <listitem>
+      <para
+>Este é o número de ações que você possui nesta conta de investimento. A precisão desta e das outras colunas de valores pode ser ajustada, conforme descrito posteriormente nesta seção. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Preço</term>
+    <listitem>
+      <para
+>Este é o preço mais recente desta ação conhecido pelo &kmymoney;. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valor</term>
+    <listitem>
+      <para
+>Este é o valor total deste investimento nesta conta de investimento. Ele deve ser o mesmo que o produto da Quantidade e do Preço. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Última atualização de preço</term>
+    <listitem>
+      <para
+>Esta é a data do preço mais recente. Os preços podem ser atualizados de diversas maneiras, todas descritas posteriormente nesta seção. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>A ordem de qualquer uma das colunas, exceto Nome, pode ser alterada clicando com o botão esquerdo do mouse no cabeçalho da coluna e arrastando-o para a esquerda ou para a direita. </para>
+</sect2>
+
+<sect2 id="details.investments.view.securities"
+><title
+>A aba Títulos</title>
+<screenshot>
+  <screeninfo
+>aba Títulos da vista de Investimentos</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_view_securities.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>aba Títulos da vista de Investimentos</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>No topo da lista de títulos, há uma caixa de pesquisa. Como esta aba lista todos os investimentos que você possui em todas as suas contas de investimento, ela pode ficar extensa, e você pode usar a caixa de pesquisa para encontrar uma entrada específica na lista, digitando qualquer parte do nome dela. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Título</term>
+    <listitem>
+      <para
+>O nome do título. Esta coluna é sempre exibida. Todas as outras colunas são exibidas opcionalmente, conforme descrito acima. Os nomes devem ser os mesmos nomes exibidos na coluna Nome da aba Ações. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Símbolo</term>
+    <listitem>
+      <para
+>Este é o símbolo de negociação usado no mercado onde a ação é negociada. Ele também é o mesmo que a coluna correspondente na aba Ações. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipo</term>
+    <listitem>
+      <para
+>Este é o tipo específico de investimento que está sendo monitorado. Atualmente, apenas ações, títulos e fundos mútuos são possivelmente valores. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Mercado</term>
+    <listitem>
+      <para
+>Este é o mercado onde este investimento é negociado. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Moeda</term>
+    <listitem>
+      <para
+>Este ícone exibe o símbolo da moeda na qual este investimento é negociado. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Fração</term>
+    <listitem>
+      <para
+>Esta é a menor fração usada ao inserir o valor deste investimento em qualquer transação. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Assim como na aba Ações, a ordem de qualquer uma das colunas, exceto Títulos, pode ser alterada clicando com o botão esquerdo do mouse no cabeçalho da coluna e arrastando-o para a esquerda ou para a direita. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.investment"
+><title
+>Criar uma Conta de Investimento</title>
+<para
+>O primeiro passo para trabalhar com investimentos é criar uma conta de investimento para manter seus títulos definidos. Escolha o item de menu <guimenu
 >Conta</guimenu
 > <guimenuitem
 >Nova conta...</guimenuitem
-> </menuchoice
-> para iniciar o processo de adição de uma nova conta. Crie uma conta como de costume, certificando-se de escolher o <quote
+> para iniciar o processo. Crie uma conta conforme descrito anteriormente na seção <link linkend="details.accounts.create.account"
+><guilabel
+>Conta</guilabel
+></link
+>, certificando-se de escolher <quote
 >Investimento</quote
-> como tipo de conta. </para>
+> como o tipo de conta. </para>
 
 <para
->Para trabalhar com a nova conta de investimento, vá para a área de <guibutton
->Investimentos</guibutton
-> e escolha a conta que acabou de criar na lista <guilabel
->Selecionar a Conta</guilabel
+>Para trabalhar com a nova conta de investimento, abra essa conta na vista do Livro de registro, como descrito anteriormente. </para>
+
+<sect2
+><title
+>Preço inicial</title>
+<para
+>Sempre que você inserir ou editar uma transação de compra, venda ou reinvestimento, você precisa especificar o número de ações, o preço por ação e o valor total da transação. Conforme descrito <link linkend="details.investments.priceentry"
+>aqui</link
+>, você especifica apenas dois desses valores, e o &kmymoney; calcula o terceiro. A configuração padrão de preço de entrada para novas contas de Investimento é <quote
+>Preço por ação</quote
+>, mas isso pode ser alterado para <quote
+>Valor total</quote
+> quando você <link linkend="details.accounts.edit"
+>editar a conta</link
 >. </para>
+</sect2>
 </sect1>
-            
-<sect1 id="details.investments.securities">
-<title
->Adicionar Investimentos à sua Conta</title>
 
+<sect1 id="details.investments.securities"
+><title
+>Adicionar Investimentos à sua Conta</title>
 <para
->Para adicionar investimentos adicionais à sua conta de investimento, vá para a área <guibutton
+>Para adicionar títulos adicionais à sua conta de investimento, vá para a vista de <guibutton
 >Investimentos</guibutton
 >, selecione <guibutton
->Ações Ordinárias</guibutton
-> e escolha a conta onde o investimento é mantido, na lista <guilabel
+>Ações </guibutton
+> e escolha a conta de Investimento onde o investimento é mantido, na lista <guilabel
 >Selecionar conta</guilabel
->. <screenshot>
-  <screeninfo
->Área de Investimentos, aba Ações Ordinárias</screeninfo>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="investments_summarytab.png" format="PNG"/>
-  </imageobject>
-  <textobject>
-  <phrase
->Área de Investimentos, aba Ações Ordinárias</phrase>
-  </textobject>
-  </mediaobject>
-  </screenshot>
-</para>
+>. </para>
 
 <para
->Clique com o botão direito do mouse no espaço em branco da área. Isto irá invocar o menu de contexto das <guimenu
+>Clique com o botão direito do mouse no espaço em branco da vista. Isto irá invocar o menu de contexto das <guimenu
 >Opções do Investimento</guimenu
 >. Escolha a opção <guimenuitem
 >Novo investimento...</guimenuitem
@@ -115,74 +296,120 @@
 >Assistente de Novos Investimentos</guilabel
 >, que você poderá usar para criar o seu novo investimento. </para>
 
-<sect2 id="details.investments.newinvestmentwizard">
-<title
+<sect2 id="details.investments.newinvestmentwizard"
+><title
 >Assistente de Novos Investimentos</title>
 
 <para
->A primeira coisa que lhe será questionada é o tipo de investimento, se é um grupo de ações, títulos, ou fundos, etc. </para>
+>A primeira coisa que você deverá inserir é o nome do investimento. Este é o nome que será usado na aba Ações. Você também deverá especificar o tipo de investimento. Os valores disponíveis atualmente são Ações, Títulos e Fundos Mútuos. Se o seu investimento não se enquadrar estritamente em estes tipos, não há problema em usar uma classificação diferente, pois o tipo não é usado atualmente para restringir ou controlar o que você pode fazer com o investimento. </para>
+
+<screenshot>
+  <screeninfo
+>tipo do assistente de novo investimento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_new_type.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>tipo do assistente de novo investimento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Em seguida, é apresentada a página de detalhes do investimento. É inserida a seguinte informação nesta página: </para>
 
-<itemizedlist>
-  <listitem
-><para
->Símbolo Comercial. O símbolo usado no expositor que identifica o investimento no mercado em que é comercializado. O &kappname; necessita de um símbolo comercial para todos os investimentos; contudo, alguns investimentos não possuem símbolos. Nesse caso, você terá que criar um símbolo para eles. </para
-></listitem>
-
-  <listitem
-><para
->Nome completo. O nome amigável e legível do investimento que está criando, &eg;, <quote
->Companhia de Seguros Ltda.</quote
-> Este nome também é referido como título. </para
-></listitem>
-
-  <listitem
-><para
->Fração. O grau de precisão com que são medidas as suas posses em carteira. Por exemplo, nos fundos mútuos dos EUA, as posses são medidas com três casas decimais, assim você iria indicar 1000 neste campo. As ações normalmente são medidas como ações inteiras; por isso, você poderia indicar 1 como uma ação para este efeito. </para
-></listitem>
-  
-  <listitem
-><para
->Mercado de câmbio. Onde as ações são negociadas. Este é um campo opcional que é oferecido para sua conveniência. Esta informação não é usada em nenhum outro local do &kappname;. </para
-></listitem>
-
-  <listitem
-><para
->Identificação. Um campo opcional para inserir a informação de identificação adicional que você gostaria de manter. Mais uma vez, esta informação não é usada em nenhum outro lugar. </para
-></listitem>
-
-  <listitem
-><para
->Moeda de câmbio. A moeda subjacente em que este investimento é comercializado no seu mercado. </para
-></listitem>
-
-  <listitem
-><para
->Entrada do preço. Escolha se o preço será inserido como um preço individual ou como o total para todas as ações. </para
-></listitem>
-</itemizedlist>
-
-<para
->Se estiver usando cotações online, certifique-se de que o símbolo corresponde exatamente àquele usado pela sua fonte de cotações. O Yahoo cobre a maior parte dos mercados mundiais, e necessita de um sufixo no fim dos símbolos fora dos EUA. Por exemplo, a Rubicon Limited, no mercado da Nova Zelândia, deveria ser inserido como <quote
->RBC.NZ</quote
->. </para>
-
-<para
->Finalmente, será apresentada a página para atualização online. Este é o local onde é informado ao &kappname; como os preços do seu investimento devem ser atualizados. Estão definidos os seguintes itens aqui: </para>
+<screenshot>
+  <screeninfo
+>detalhes do assistente de novo investimento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_new_details.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>detalhes do assistente de novo investimento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <itemizedlist>
   <listitem>
     <para
->Usar o Finance::Quote. Esta é uma opção para os usuários do GnuCash que estão habituados a este estilo de ações. A maioria dos usuários poderão desligar esta opção. </para>
+>Símbolo de negociação. Um símbolo de negociação ou código de negociação é uma abreviação usada para identificar um título negociado publicamente de um determinado instrumento em um mercado ou bolsa específica. O &kmymoney; exige um símbolo de negociação para todos os títulos; no entanto, alguns investimentos não possuem símbolos. Nesse caso, você precisará criar um símbolo para ele. </para>
+
+    <para
+>O menu suspenso inclui todos os símbolos de negociação que existem atualmente no seu arquivo de dados. Se você selecionar um deles, o &kmymoney; reutilizará o título referenciado para o novo patrimônio, a menos que você marque a opção "Criar duplicatas do símbolo", caso em que um novo título será criado com o mesmo símbolo. </para>
+
+    <para
+>Se você planeja usar <link linkend="details.investments.onlinequotes"
+>Cotações online</link
+> para obter preços para este investimento, certifique-se de que o símbolo corresponda exatamente ao símbolo usado pela sua fonte de cotação. O Yahoo cobre a maioria dos mercados do mundo e exige um sufixo no final dos símbolos fora dos EUA para especificar o país ou mercado. Por exemplo, Rubicon Limited no mercado da Nova Zelândia deve ser inserido como <quote
+>RBC.NZ</quote
+>. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Nome completo do investimento, embora possa ser um nome amigável e legível, &eg;, <quote
+>Advanced Micro Devices, Inc.</quote
+> Este nome também é referido como o título. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Fração. Isso indica o grau de precisão com que seus investimentos são medidos. Por exemplo, nos EUA, a maioria dos fundos mútuos mede os investimentos com três casas decimais, então você inseriria 1000 neste campo. As ações geralmente são medidas apenas com unidades inteiras, então você poderia inserir 1 para uma ação como esta, mas usaria 10000 para uma ação medida com quatro casas decimais. Você vai querer espelhar as mesmas casas decimais que sua corretora usa para registrar seus títulos, para que os valores das transações correspondam dentro do &kmymoney;. Usar precisão extra não causará problemas, mas usar pouca precisão pode causar erros de arredondamento, o que pode impedir que o &kmymoney; corresponda exatamente as informações exibidas pela sua corretora. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Mercado de câmbio. Onde os investimentos são negociados. Este é um campo opcional que é oferecido para sua conveniência. Esta informação não é usada em nenhum outro local do &kmymoney;. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Número de identificação. Um campo opcional para inserir informações adicionais de identificação que você queira acompanhar. As ações geralmente têm esse número, que às vezes pode ser usado, bem como o símbolo, para obter informações sobre ela. Novamente, essas informações não são usadas em nenhum outro lugar. </para>
+  </listitem>
+  
+  <listitem>
+    <para
+>Moeda de negociação. A moeda de mercado na qual este investimento é negociado. Normalmente, é a moeda do país onde o título é negociado. Geralmente, mas não necessariamente, é a mesma moeda padrão da conta de investimento que detém esse título. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Preço inicial. Ao inserir ou editar uma transação de compra, venda ou reinvestimento para este investimento, este menu suspenso indica se você deseja inserir o preço por ação, o total para todas as ações ou seguir o padrão da conta, que foi especificado quando a conta de Investimento foi criada. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Precisão do preço. Este é um pequeno número inteiro que especifica a quantidade de casas decimais usadas para indicar o preço deste investimento na moeda especificada. Isso é usado tanto para o preço de compra quanto para o preço de venda, o preço atual e também para o valor total do investimento. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Restante. Este é um menu suspenso com os valores Arredondar, Teto, Piso e Truncar, que especifica o que o &kmymoney; deve fazer na última casa decimal dos valores. Por exemplo, isso pode ser relevante quando você especifica o preço total de uma compra em vez de um preço exato por ação. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Finalmente, será apresentada a página para atualização online. Este é o local onde é informado ao &kmymoney; como os preços do seu investimento devem ser atualizados, se você deseja usar uma fonte online. Estão definidos os seguintes itens aqui: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Usar o Finance::Quote. Esta é uma opção para usuários do &gnucash; que estão acostumados com este estilo de cotações. A maioria dos usuários pode deixar esta opção desmarcada. Finance::Quote é um módulo Perl, portanto, para usá-lo, você precisa ter o Perl e o módulo Finance::Quote instalados. </para>
   </listitem>
 
   <listitem>
     <para
 >Fonte online. A fonte online a ser usada para este investimento em particular. A escolha mais comum é a <quote
->Yahoo</quote
+>Yahoo Finance</quote
 >. Tente essa primeiro e, se o investimento não for encontrado com essa fonte, experimente então com as outras. </para>
+
+    <para
+>Note que, embora o &kmymoney; saiba como extrair preços de títulos de páginas da web obtidas do Yahoo e de muitas outras fontes, sabe-se que essas fontes alteram o formato das páginas, o que pode impedir o &kmymoney; de extrair as informações desejadas com sucesso. Infelizmente, esse é um tópico de discussão muito frequente nos diversos canais de suporte. No entanto, se a obtenção de preços funcionar por um longo período e, de repente, você começar a receber erros, considere essa possibilidade. </para>
   </listitem>
 
   <listitem>
@@ -191,77 +418,78 @@
   </listitem>
 </itemizedlist>
 </sect2>
+
+<sect2
+><title
+>Usar um título em mais de uma conta de investimento</title>
+<note
+><title
+>Cuidado</title>
+  <para
+>É possível possuir ações do mesmo título em mais de uma conta de investimento, como uma conta de investimento comum e também uma conta de aposentadoria. Em versões anteriores do &kmymoney; era fácil, sem querer, fazer com que o &kmymoney; as tratasse como se cada um dos títulos fosse um investimento subjacente diferente. Isso frequentemente causava confusão, bem como armazenamento duplicado, como ter duas cópias de todo o histórico de preços da ação. Atualmente, é muito mais fácil evitar essa situação, mas é importante prestar atenção ao criar novas ações em uma conta de investimento. </para>
+</note>
+
+<para
+>Ao adicionar um título a uma conta de investimento, e esse investimento já existir em outra conta de investimento, você precisa ter cuidado se quiser reutilizá-lo em vez de criar uma nova entrada duplicada. No <guilabel
+>Assistente de Novo Investimento</guilabel
+>, após selecionar o nome e o tipo de investimento e clicar em <guibutton
+>Avançar</guibutton
+>, ao selecionar um <guilabel
+>Símbolo de negociação</guilabel
+> existente, alguns dos outros campos do formulário serão preenchidos com as informações relevantes do título existente, e o título existente será usado, a menos que você selecione a caixa de seleção "Criar duplicata do símbolo". </para>
+</sect2>
 </sect1>
 
-<sect1 id="details.investments.edit">
-<title
+<sect1 id="details.investments.edit"
+><title
 >Editar um Investimento</title>
-
 <para
 >A aba <guilabel
->Ações Ordinárias</guilabel
-> da área de Investimentos apresenta as posses atuais nessa conta, em conjunto com o seu símbolo, valor, quantidade e preço. Clique com o botão direito do mouse em qualquer dos investimentos, de modo a apresentar o menu de contexto <guimenu
->Opções do Investimento</guimenu
->, onde você terá a opção de adicionar, editar ou excluir investimentos individuais dessa conta. Do mesmo modo, você poderá atualizar aqui o valor dos seus investimentos, de forma manual ou através da sua fonte online. Além disso, é possível fechar uma conta vazia ou reabrir uma conta fechada. </para>
+>Ações</guilabel
+> da vista de Investimentos lista suas participações atuais nesta conta de investimento. Clique com o botão direito em qualquer um dos investimentos para abrir o menu de contexto <guimenu
+>Opções de Investimento</guimenu
+>, onde você pode adicionar, editar ou excluir um investimento individual desta conta. Além disso, você pode atualizar o preço de um investimento aqui, seja manualmente ou por meio de sua fonte online. Também é possível fechar uma conta vazia ou reabrir uma conta fechada. </para>
+
+<para
+>Se você optar por Editar um Investimento, você usará o <guilabel
+>Assistente de detalhes do Investimento</guilabel
+>, que tem a mesma aparência e funciona exatamente como o <guilabel
+>Assistente de novo Investimento</guilabel
+>, conforme descrito na seção anterior. </para>
+
+<para
+>Clicar com o botão direito do mouse em uma entrada na aba de Títulos abre um menu de contexto <guilabel
+>Opções de títulos</guilabel
+>, onde você pode editar ou excluir um título. A criação de um título ocorre quando você cria uma participação em uma conta de Investimento e não opta por reutilizar um título existente, conforme explicado acima. </para>
 </sect1>
 
-<sect1 id="details.investments.ledger">
-<title
+<sect1 id="details.investments.ledger"
+><title
 >Transações de Investimento</title>
-
-<para>
-	<screenshot>
-	<screeninfo
->Formulário da Transação de Investimento</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-transactionform.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Formulário da Transação de Investimento</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>formulário da transação de investimento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-transactionform.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>formulário da transação de investimento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->O registro de investimentos é quase igual ao <link linkend="details.ledgers"
->livro de registros</link
-> dos outros tipos de contas. Contudo, os campos são diferentes, e irão variar de acordo com o tipo ou atividade da transação. As transações de investimento possuem alguns elementos adicionais: </para>
+>As transações de investimento são inseridas e editadas na vista do <link linkend="details.ledgers"
+>Livro de registro</link
+>, assim como as transações em outros tipos de contas. No entanto, os campos exibidos serão diferentes e variam dependendo da atividade ou do tipo de transação. As transações de investimento têm alguns elementos adicionais, descritos abaixo. </para>
 
-<itemizedlist>
-	<listitem
-><para
->Atividade</para
-></listitem>
-	<listitem
-><para
->Título</para
-></listitem>
-	<listitem
-><para
->Conta</para
-></listitem>
-	<listitem
-><para
->Ações, Preço e Montante</para
-></listitem>
-	<listitem
-><para
->Encargos</para
-></listitem>
-	<listitem
-><para
->Categoria de juros</para
-></listitem>
-</itemizedlist>
-
-<sect2>
-<title
+<sect2
+><title
 >Atividade</title>
 <para
->A Atividade de uma transação de investimento descreve a ação que está acontecendo com a carteira de ações. Há suporte para as seguintes atividades: </para>
+>A Atividade de uma transação de investimento descreve o tipo de ação que está acontecendo com o título. Há suporte para as seguintes atividades: </para>
 
 <variablelist>
   <varlistentry>
@@ -269,156 +497,158 @@
 >Comprar/Vender</term>
   <listitem>
     <para
->Usado para registrar compras ou vendas de investimentos individuais. Esta ação precisa de uma conta de/para onde transferir os fundos. </para>
+>Utilizado para registrar a compra ou venda de um título individual. Esta ação requer uma conta para transferir os fundos, que por padrão é a conta de corretagem, se uma tiver sido definida para esta conta de investimento. </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
   <term
->Dividendos/Receita</term>
+>Entrada de Dividendos/Receita/Juros</term>
   <listitem>
     <para
->Também conhecido como um <quote
->Dividendo Monetário</quote
->, esta ação é usada quando você recebe os juros ou deduções dos dividendos do seu investimento. Esta ação necessita de uma conta de/para onde transferir os fundos. </para>
+>Também conhecido como <quote
+>Dividendo em dinheiro</quote
+>, esta ação é utilizada quando você recebe um pagamento em dinheiro referente a juros ou dividendos do seu investimento. Esta ação também requer uma conta para a qual os fundos serão transferidos. Os três termos são usados ​​como sinônimos. </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
   <term
->Reinvestir o Dividendo</term>
+>Reinvestir dividendo</term>
   <listitem>
     <para
->Reinvestir o Dividendo. Este é um dividendo onde os resultados são investidos de volta no investimento. </para>
+>Trata-se de um dividendo em que os recursos são utilizados para a compra de ações adicionais do título. </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
   <term
->Adicionar/Remover Ações</term>
+>Adicionar/Remover ações</term>
   <listitem>
     <para
->Um simples aumento ou diminuição no seu saldo. Isto deverá ser usado muito raramente, porque é muito raro as ações simplesmente aparecerem ou desaparecerem na sua conta, a menos que seja uma compra ou uma venda. </para>
+>Um simples aumento ou diminuição no número de ações que você possui. Isso deve ser usado muito raramente, pois é incomum que as ações simplesmente apareçam em sua conta (ou desapareçam), a menos que seja uma compra, venda ou reinvestimento de dividendos. Um uso dessas atividades é para algumas situações que o &kmymoney; não lida nativamente, como a troca de um certo número de ações de um título por um número diferente de ações de um título diferente ou por uma classe diferente do mesmo título. </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
   <term
->Dividir as Ações</term>
+>Dividir as ações</term>
   <listitem>
     <para
->Usado quando o grupo de ações é dividido. Indique a relação da divisão no campo <quote
->Proporção da Divisão</quote
->. Por exemplo, numa divisão 3:2, indique 1,5 </para>
+>Isso é usado quando as ações são divididas. Insira a proporção da divisão no campo <quote
+>Proporção da divisão</quote
+>. Por exemplo, em uma divisão de 3:2, insira 1,5. Divisões inversas, onde a proporção é menor que um, como 2:3, embora incomuns, também são permitidos. </para>
   </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title
->Segurança</title>
+<sect2
+><title
+>Título</title>
 <para
->Cada transação do investimento deverá estar associada a um título individual, que é apenas outro nome para um investimento. Escolha o nome do investimento ao adicionar ou editar uma transação. O símbolo será apresentado ao visualizá-la. </para>
+>Cada transação de investimento deve estar associada a um título individual. O menu suspenso mostra todos os títulos que você possui na conta de investimento atual. - selecione um para esta transação. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Conta</title>
 <para
->Para as transações que geram ou necessitam de dinheiro, você deve indicar a conta de/para onde o dinheiro é transferido. Se a sua conta de investimento tiver uma conta de corretagem associada, normalmente é melhor transferir para aí os fundos. Isto aplica-se aos fundos para a compra ou venda do investimento, assim como para os encargos pagos ou juros/dividendos auferidos. </para>
+>Para qualquer transação que gera ou necessita de dinheiro, você deve indicar a conta de/para onde o dinheiro é transferido. Se a sua conta de investimento tiver uma conta de corretagem associada, normalmente é melhor transferir para aí os fundos. Isso se aplica a fundos para compra ou venda do título, bem como a taxas pagas ou juros ou dividendos recebidos. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2 id="details.investments.priceentry"
+><title
 >Ações, Preço e Montante</title>
 <para
->Para as transações de compra, venda e recolhimento de dividendos, o número de ações, o preço e o montante da transação deverão estar estabelecidos. Você poderá indicar dois destes valores, para que o &kappname; calcule o terceiro. Normalmente é melhor indicar apenas o montante e as ações, porque são os dados conhecidos na transação. O preço poderá ser calculado a partir destes. </para>
+>Para transações de compra, venda e reinvestimento, o número de ações, o preço por ação e o valor total da transação devem ser definidos. Você pode inserir quaisquer dois desses valores, e o &kmymoney; calculará o terceiro. Geralmente, é melhor inserir apenas o valor total e o número de ações, pois esses são os dados conhecidos da transação. O &kmymoney; calculará automaticamente o preço por ação. Observe que há apenas um campo para o preço, e ele será rotulado como <quote
+>Valor da transação</quote
+> ou <quote
+>Preço/ação</quote
+>, dependendo da configuração da opção <guilabel
+>Entrada de preço</guilabel
+> quando o investimento foi <link linkend="details.investments.newinvestmentwizard"
+>configurado</link
+>. </para>
 </sect2>
 
-<sect2>
-<title
->Encargos</title>
+<sect2
+><title
+>Taxas</title>
 <para
 >Com muitas transações de investimentos, você poderá incluir os encargos (ou comissões) que pagou ao corretor. Se você indicar uma categoria para o encargo, então irá aparecer um campo à direita para introduzir o montante do encargo. Se você precisar inserir mais de um encargo para a transação, poderá usar a funcionalidade de <link linkend="details.ledgers.split"
 >Transações Divididas</link
 >. Nesse caso, quando acabar de inserir todas as parcelas, o montante dos encargos será apresentado à direita. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Juros</title>
 <para
->Essa é a forma como o pagamento de juros ou dividendos deve ser inserido a partir de um investimento. Como acontece nos encargos, se indicar uma categoria, então aparecerá um campo à direita para inserir o montante. Você poderá também usar a funcionalidade de transações divididas, caso seja necessário. </para>
+>Essa é a forma como o pagamento de juros ou dividendos deve ser inserido a partir de um título. Como acontece nos encargos, se indicar uma categoria, então aparecerá um campo à direita para inserir o montante. Você poderá também usar a funcionalidade de transações divididas, caso seja necessário. </para>
 </sect2>
-
 </sect1>
 
-<sect1 id="details.investments.foreign">
-<title
+<sect1 id="details.investments.foreign"
+><title
 >Trabalhar com investimentos estrangeiros</title>
+<para
+>O &kmymoney; suporta múltiplas moedas, e há situações em que isso pode ser muito útil, senão essencial. No entanto, fazer isso requer cuidado extra para garantir registros precisos. Como mencionado acima, ao adicionar um título, você deve especificar sua moeda de negociação. Esta pode não ser a mesma que a moeda base do seu arquivo &kmymoney;, e também pode não ser a mesma que a moeda base da conta de investimento na qual você mantém o título ou da conta para a qual você transfere seus fundos para compras/vendas/dividendos. </para>
 
 <para
->Agora que o &kappname; tem suporte a várias moedas e investimentos, provavelmente você gostaria de combinar os dois. Fazer isso exige bastante cuidado. Como foi indicado acima, quando você adicionou um investimento, você teve de indicar a sua moeda de câmbio. Esta moeda poderá não ser a mesma que a sua moeda base, e poderá também não ser a mesma da conta em que guarda a carteira de ações ou a conta de/para onde transfere os fundos das compras/vendas. </para>
-
-<para
->Considere um caso hipotético. Sua moeda base é USD. Você possui uma conta de investimento em EUR e uma conta de corretagem também em EUR. Nessa conta, você possui ações da TietoEnator, que é vendida em SEK. </para>
+>Considere um caso hipotético, onde sua moeda base é USD. Você possui uma conta de investimento em EUR e uma conta de corretagem também em EUR. Nessa conta de investimento, você possui ações da TietoEnator, que é vendida em SEK. </para>
 
 <para
 >Quando inserir uma transação de compra nesse investimento, use o SEK como moeda. Por isso, se comprar 100 ações a um preço de SEK 248,00, totalizando SEK 24.800,00, indique esses valores na transação. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Aviso da moeda</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Aviso da moeda</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
 <para
 >Quando escolher a conta de corretagem onde colocar a transferência como fundo, você será avisado que esta é uma moeda diferente. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Editor da taxa de câmbio</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Editor da taxa de câmbio</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>alerta de moeda da transação de investimento</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-currencywarning.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>alerta de moeda da transação de investimento</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Quando terminar a transação, você será avisado de uma atualização do preço da moeda da conta de investimento, neste caso SEK -> EUR. Reveja a documentação sobre como <link linkend="details.currencies.prices"
+>Quando terminar de inserir a transação, você será avisado de uma atualização do preço da moeda da conta de investimento, neste caso SEK -> EUR. Reveja a documentação sobre como <link linkend="details.currencies.prices"
 >Inserir os preços manualmente</link
 > para obter mais informações sobre a janela de preços. </para>
+
+<screenshot>
+  <screeninfo
+>editor da taxa de câmbio</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>editor da taxa de câmbio</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Se retornar para a conta de corretagem verá a transação com EUR 2.254,54, assumindo uma taxa de câmbio de 11,0000 SEK / EUR. </para>
 </sect1>
 
-<sect1 id="details.investments.prices">
-<title
->Atualizar os preços</title>
+<sect1 id="details.investments.prices"
+><title
+>Atualizar os preços dos títulos</title>
 <para
->Existem duas formas de atualizar os preços dos seus investimentos. Você poderá inserir manualmente o preço novo ou poderá fazer com que o &kappname; busque-o na Web. </para>
+>Existem duas formas de atualizar os preços dos seus investimentos. Você poderá inserir manualmente o preço ou poderá fazer com que o &kmymoney; busque-o na Web. </para>
 
-<sect2>
-<title
+<sect2
+><title
 >Atualização de preços manual</title>
 <para
 >Você poderá inserir os preços dos seus investimentos, usando o mesmo <link linkend="details.currencies.prices"
@@ -426,59 +656,57 @@
 > que é usado para as moedas. </para>
 </sect2>
 
-<sect2 id="details.investments.onlinequotes">
-<title
+<sect2 id="details.investments.onlinequotes"
+><title
 >Cotações de preços online</title>
 <para
->O &kappname; pode obter os últimos preços dos seus investimentos e taxas de câmbio a partir da Web. </para>
+>O &kmymoney; pode obter os últimos preços dos seus títulos e taxas de câmbio a partir da Web. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Como funcionam as cotações online</title>
 <para
->Por sua solicitação, o &kappname; irá obter uma página da Web que contém o último preço para cada item. Por padrão, os preços são obtidos de <ulink url="http://finance.yahoo.com"
+>Por sua solicitação, o &kmymoney; irá obter um site que contém o último preço para cada segurança. Por padrão, os preços são obtidos de <ulink url="http://finance.yahoo.com"
 >finance.yahoo.com</ulink
 >, estando sujeitos aos termos e condições desse serviço. </para>
 
 <para
->A pesquisa de cotações online usa o símbolo comercial do investimento para descobrir o preço. Como tal, é importante definir o símbolo corretamente. O Yahoo suporta as cotações da maioria dos mercados mundiais, como tal é apenas uma questão de encontrar o símbolo correto. Por exemplo, a TietoEnator comercializa no mercado da Bolsa de Valores de Estocolmo, sendo que o seu símbolo na Yahoo é TIEN.ST. </para>
+>A pesquisa de cotações online usa o símbolo comercial do título para descobrir o preço. Como tal, é importante definir o símbolo corretamente. O Yahoo suporta as cotações da maioria dos mercados mundiais, como tal é apenas uma questão de encontrar o símbolo correto. Por exemplo, a TietoEnator comercializa no mercado da Bolsa de Valores de Estocolmo, sendo que o seu símbolo na Yahoo é TIEN.ST. </para>
 
 <para
 >Para descobrir o símbolo comercial de um título suportado pela Yahoo, use a funcionalidade de <quote
 >Pesquisa do Símbolo</quote
-> em <ulink url="http://finance.yahoo.com"
+> em <ulink url="https://finance.yahoo.com"
 >finance.yahoo.com</ulink
->. </para>
+>. Você deveria ter definido o símbolo de negociação ao inserir inicialmente o título no &kmymoney;. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Atribuir uma fonte de cotações</title>
-
 <para
->Para obter as cotações de preços online, você primeiro precisa ativá-las para cada investimento ou moeda que deseje atualizar, definindo para tal, uma <quote
+>Para obter as cotações de preços online, você primeiro precisa ativar a funcionalidade para cada título ou moeda que deseje atualizar, definindo para tal, uma <quote
 >Fonte de cotações online</quote
->. Esse é o nome do serviço de onde a cotação deverá ser obtida. O &kappname; vem com várias fontes para escolher. O Yahoo é a fonte recomendada e deverá funcionar para a maioria dos investimentos, em todas as moedas. </para>
+>. Esse é o nome do serviço de onde a cotação deverá ser obtida. O &kmymoney; vem com várias fontes para escolher. O Yahoo é a fonte recomendada e deverá funcionar para a maioria dos investimentos, em todas as moedas. </para>
 
 <para
 >Para atribuir uma fonte a um investimento, vá para a área de resumo dos investimentos para a conta em que está guardado o título. Edite o título, clicando com o botão direito nele e selecionando a opção <guimenuitem
 >Editar investimento...</guimenuitem
 >. No Assistente de Detalhes do Investimento, clique em <guibutton
 >Próximo</guibutton
-> duas vezes, para obter a seção de atualização online. Nessa lista, escolha a fonte de atualização. </para>
+> duas vezes, para obter a seção de atualização online. Nessa lista, escolha a fonte de atualização para as suas necessidades. </para>
 
 <para
->As versões posteriores do &kappname; contêm suporte para o pacote Finance::Quote para obter as cotações online. Isso é principalmente uma conveniência para os usuários que fizeram conversões do pacote de finanças GnuCash, que o usa como método nativo. Se selecionar de fato esta opção, deverá ver uma lista de fontes diferente, as que são suportadas pelo Finance::Quote. Se a lista estiver vazia, poderá ser pelo fato do pacote não estar devidamente instalado. Veja a sua página Web em <ulink url="http://finance-quote.sourceforge.net"
+>As versões posteriores do &kmymoney; contêm suporte para o pacote Finance::Quote do Perl para obter as cotações online. Isso é principalmente uma conveniência para os usuários que fizeram conversões do pacote de finanças &gnucash;, que o usa como método nativo. Se selecionar de fato esta opção, deverá ver uma lista de fontes diferente, as que são suportadas pelo Finance::Quote. Se a lista estiver vazia, poderá ser pelo fato do pacote não estar devidamente instalado. Veja o seu site em <ulink url="http://finance-quote.sourceforge.net"
 > http://finance-quote.sourceforge.net</ulink
 > para mais informações. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Ajustar uma cotação</title>
-
 <para
->Algumas fontes online não comunicam o preço em uma quantidade de base (&eg;, EUR), mas sim, em uma fração (&eg;, Cêntimos). Se usar essa informação como preço, irá produzir valores errados para seus investimentos. </para>
+>Algumas fontes online não comunicam o preço em uma quantidade de base (&eg;, EUR), mas sim, em uma fração (&eg;, Cêntimos). Usar essa informação para um preço irá produzir valores errados para seus investimentos. </para>
 
 <para
 >Se for esse o caso da sua fonte online, poderá usar o campo <guilabel
@@ -493,51 +721,49 @@
 > estiver selecionada. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Obter as cotações</title>
-
 <para
->Tipicamente, você irá atualizar os preços de todos os seus investimentos e moedas de uma vez. Escolha a opção do menu <menuchoice
-> <guimenu
+>Normalmente, você atualizará os preços de todos os seus títulos e moedas em uma única operação. Selecione o item de menu <menuchoice
+><guimenu
 >Ferramentas</guimenu
-> <guimenuitem
->Atualizar o preço das moedas e ações...</guimenuitem
-> </menuchoice
-> para invocar a janela de cotações de preços online. Clique em <guibutton
+><guimenuitem
+>Atualizar preços de ações e moedas...</guimenuitem
+></menuchoice
+> para abrir a caixa de diálogo de cotações de preços online. Pressione <guibutton
 >Atualizar tudo</guibutton
-> para obter as cotações de todos os investimentos e moedas no seu arquivo do &kappname;. </para>
+> para obter cotações de todos os títulos e moedas em seu arquivo &kmymoney;. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Atualizar o preço das moedas e ações</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Atualização online das cotações e preços das moedas</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>atualização online de preços de ações e moedas</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>atualização online de preço de ação e moeda</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Editar ou adicionar fontes de cotações</title>
+<para
+>Adicionar ou editar fontes de cotação não é recomendado para ninguém além dos usuários mais técnicos. Você deve se sentir confortável lendo HTML e escrevendo expressões regulares complexas. Se este não for o seu caso, use um dos <link linkend="firsttime.contact"
+>canais de suporte sugeridos</link
+> caso esteja com problemas com uma fonte específica ou se nenhuma das fontes de cotação funcionar para você. Se estiver procurando uma fonte de preços para um título que não foi encontrado em nenhuma das fontes existentes, o ideal é que você nos indique uma página da web onde esses preços possam ser obtidos. Além disso, você pode consultar os membros do Fórum da Comunidade KDE perguntando pelo &kmymoney;, pois eles podem já ter uma solução disponível para suas necessidades. </para>
 
 <para
->A edição ou adição de fontes de cotações não é recomendada a ninguém, a não ser para o usuário mais técnico. Sinta-se à vontade para ler o HTML e escrever expressões regulares complexas. Se isso não lhe soa muito agradável, recomendamos que contate a lista de programadores, no caso de nenhuma das fontes de cotações funcionar para você. De preferência, indique-nos uma página Web onde essas cotações poderão ser obtidas. </para>
-
-<para
->Se estiver à vontade com esse desafio, aqui está como elas funcionam. As fontes de cotações estão contidas na caixa de diálogo de configuração. Escolha a opção <menuchoice
+>Se estiver à vontade com esse desafio, aqui está como elas funcionam. As fontes de cotações estão contidas na caixa de diálogo de configuração. Escolha o item de menu <menuchoice
 ><guimenu
 >Configurações</guimenu
 ><guimenuitem
->Configurar o &kappname;</guimenuitem
+>Configurar o &kmymoney;</guimenuitem
 ></menuchoice
 >. Na caixa de diálogo que abrir, escolha a seção <guilabel
 >Cotações online</guilabel
@@ -546,17 +772,17 @@
 > antes de sair da caixa de diálogo. Suas alterações não serão salvas por padrão. </para>
 
 <para
->A primeira informação com que deverá se preocupar sobre uma fonte de cotações online é a URL, que é a página Web onde será obtida. Você verá um %1 em todas as fontes, bem como um %2 nas fontes de moedas. Para investimentos, o %1 é substituído pelo símbolo comercial. Para moedas, o %1 é substituído pela moeda de Origem, enquanto o %2 é substituído pela de Destino. Esta URL é então obtida, todas as marcas de HTML serão removidas e o texto reduzido é então enviado para o processador de páginas. </para>
+>A primeira coisa a considerar sobre uma fonte de cotações online é a URL, que é o site de onde será obtida. Você verá um %1 em todas as fontes, bem como um %2 nas fontes de moedas. Para investimentos, o %1 é substituído pelo símbolo comercial. Para moedas, o %1 é substituído pela moeda de Origem, enquanto o %2 é substituído pela de Destino. Esta URL é então obtida, todas as marcas de HTML serão (opcionalmente) removidas e o texto reduzido é então enviado para o processador de páginas. </para>
 
 <para
->Lembre-se de que a URL também poderá ser uma URL do tipo 'file:', onde o módulo de extração de cotações irá assumir como um programa executável. O módulo irá passar todos os argumentos da linha de comando indicados por você, alimentando o 'stdout' ao processador da página. Por exemplo, você poderá ter um programa chamado 'cotacoes.sh' que contém a lógica de cotações personalizada, usando o símbolo como um único parâmetro. Sua URL seria algo do gênero <quote
+>Lembre-se de que a URL também poderá ser uma URL do tipo 'file:', onde o módulo de extração de cotações irá assumir como um programa executável. O módulo irá passar todos os argumentos da linha de comando indicados por você, enviando o 'stdout' deste script ao processador da página. Por exemplo, você poderá ter um programa chamado 'cotacoes.sh' que contém a lógica de cotações personalizada, usando o símbolo como um único parâmetro. Sua URL seria algo do gênero <quote
 >file:/local/das/cotacoes.sh %1</quote
 >. </para>
 
 <para
->O processador de páginas procura por um símbolo, uma data e um preço. As expressões regulares indicam como extrair esses itens da página. Reveja a documentação da <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1"
->classe QRegExp</ulink
->, para saber a formatação correta das expressões regulares. Deverá existir apenas uma expressão de captura entre parênteses, em cada expressão regular. O formato da data indica posteriormente ao processador a ordem do ano, mês e dia. Este formato de datas deverá ser sempre no formato "%x %x %x". em que o 'x' pode ser 'y', 'm' ou 'd'. O processador de datas é bastante inteligente. O <quote
+>O processador de páginas procura por um símbolo, uma data e um preço. As expressões regulares indicam como extrair esses itens da página. Reveja a documentação da <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>classe QRegularExpression</ulink
+>, para saber a sintaxe exata das expressões regulares usadas pelo &kmymoney;. Deverá existir apenas uma expressão de captura entre parênteses, em cada campo de expressão regular. O formato da data indica posteriormente ao processador a ordem do ano, mês e dia. Este formato de datas deverá ser sempre no formato "%x %x %x". em que o 'x' pode ser 'y', 'm' ou 'd'. O processador de datas é bastante inteligente. O <quote
 >%m %d %y</quote
 > irá processar o <quote
 >Dezembro 31, 2005</quote
@@ -567,10 +793,13 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.unimplemented">
-<title
+<sect1 id="details.investments.unimplemented"
+><title
 >Funcionalidades não implementadas</title>
 <para
->Algumas funcionalidades comuns que normalmente são encontradas em investimentos, não estão implementadas no &kappname;. Entre elas incluem-se: Derivações (opções, futuros, etc.), ganhos de capital e declaração para impostos de investimentos. </para>
+>Existem algumas funcionalidades normalmente associadas a investimentos que ainda não foram implementadas no &kmymoney;. Estas incluem, entre outras, derivativos, opções e futuros. Além disso, quando você vende um título, o &kmymoney; não sabe quais ações específicas você está vendendo, ou seja, as mais antigas ou as mais recentemente adquiridas, portanto, não pode calcular o retorno do investimento. Por fim, não tem conhecimento direto sobre os requisitos específicos de declaração de impostos de nenhum país, embora estes geralmente possam ser tratados marcando como "Relacionadas a impostos" todas as categorias que você usa para transações que possam ter consequências fiscais. </para>
+
+<para
+>A equipe de desenvolvimento do &kmymoney; está ciente desses e de outros problemas e tem coletado requisitos e observações para uma futura grande reformulação de como o programa lida com investimentos. Quando esse processo começar (não há um cronograma definido no momento), os usuários terão a oportunidade de contribuir com sugestões sobre quaisquer necessidades e desejos adicionais nessa área. </para>
 </sect1>
 </chapter>
