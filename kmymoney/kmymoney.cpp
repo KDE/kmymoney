@@ -2252,8 +2252,13 @@ void KMyMoneyApp::slotDuplicateTransactions()
         // select the new transaction in the ledger
         auto selections = d->m_selections;
         const auto indeces = file->journalModel()->indexesByTransactionId(lastAddedTransactionId);
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+        const auto isInvestmentAccount = account.accountType() == eMyMoney::Account::Type::Investment;
         for (const auto& idx : indeces) {
-            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
+            const auto splitAccountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
+            if (splitAccountId == accountId) {
+                selections.setSelection(SelectedObjects::JournalEntry, idx.data(eMyMoney::Model::IdRole).toString());
+            } else if (isInvestmentAccount && account.accountList().contains(splitAccountId)) {
                 selections.setSelection(SelectedObjects::JournalEntry, idx.data(eMyMoney::Model::IdRole).toString());
             }
         }
