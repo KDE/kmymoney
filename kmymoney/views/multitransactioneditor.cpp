@@ -24,6 +24,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -33,6 +34,7 @@
 #include "icons.h"
 #include "idfilter.h"
 #include "journalmodel.h"
+#include "kmmyesno.h"
 #include "kmymoneysettings.h"
 #include "knewaccountdlg.h"
 #include "mymoneyaccount.h"
@@ -557,6 +559,35 @@ QStringList MultiTransactionEditor::saveTransaction(const QStringList& selectedJ
                     }
                 }
 
+                // we take care of the category first because it
+                // may create a split which is needed in the
+                // next steps
+                if (!d->ui->categoryCombo->getSelected().isEmpty()) {
+                    if (!counterSplit.id().isEmpty()) {
+                        counterSplit.setAccountId(d->ui->categoryCombo->getSelected());
+                        transaction.modifySplit(counterSplit);
+
+                    } else {
+                        counterSplit = selectedSplit;
+                        counterSplit.clearId();
+                        counterSplit.setValue(-counterSplit.value());
+                        /// @todo make assignment multi currency safe. For now, we
+                        /// just dump out a debug message in case both securities are
+                        /// not the same
+                        counterSplit.setShares(-counterSplit.shares());
+                        counterSplit.setAccountId(d->ui->categoryCombo->getSelected());
+                        if (!splitsUseSameCurrency(selectedSplit, counterSplit)) {
+                            qDebug() << "MultiTransactionEditor does not support multiple currencies yet";
+                        }
+                        counterSplit.setReconcileDate(QDate());
+                        counterSplit.setReconcileFlag(eMyMoney::Split::State::Unknown);
+                        counterSplit.setBankID(QString());
+                        counterSplit.setAction(QString());
+                        counterSplit.setNumber(QString());
+                        transaction.addSplit(counterSplit);
+                    }
+                }
+
                 if (!d->ui->dateEdit->isNull()) {
                     transaction.setPostDate(d->ui->dateEdit->date());
                 }
@@ -589,31 +620,19 @@ QStringList MultiTransactionEditor::saveTransaction(const QStringList& selectedJ
                         transaction.modifySplit(counterSplit);
                     }
                 }
-                if (!d->ui->categoryCombo->getSelected().isEmpty()) {
-                    if (!counterSplit.id().isEmpty()) {
-                        counterSplit.setAccountId(d->ui->categoryCombo->getSelected());
-                        transaction.modifySplit(counterSplit);
-                    } else {
-                        counterSplit = selectedSplit;
-                        counterSplit.clearId();
-                        counterSplit.setValue(-counterSplit.value());
-                        /// @todo make assignment multi currency safe. For now, we
-                        /// just dump out a debug message in case both securities are
-                        /// not the same
-                        counterSplit.setShares(-counterSplit.shares());
-                        counterSplit.setAccountId(d->ui->categoryCombo->getSelected());
-                        if (!splitsUseSameCurrency(selectedSplit, counterSplit)) {
-                            qDebug() << "MultiTransactionEditor does not support multiple currencies yet";
-                        }
-                        counterSplit.setReconcileDate(QDate());
-                        counterSplit.setReconcileFlag(eMyMoney::Split::State::Unknown);
-                        counterSplit.setBankID(QString());
-                        counterSplit.setAction(QString());
-                        counterSplit.setNumber(QString());
-                        transaction.addSplit(counterSplit);
-                    }
-                }
 
+                if (!d->ui->memoEdit->toPlainText().isEmpty()) {
+                    const auto memo = d->ui->memoEdit->toPlainText().trimmed();
+                    selectedSplit.setMemo(memo);
+                    if (!counterSplit.id().isEmpty()) {
+                        const auto counterAccountIdx = file->accountsModel()->indexById(counterSplit.accountId());
+                        if (MyMoneyAccount::isIncomeExpense(counterAccountIdx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>())) {
+                            counterSplit.setMemo(memo);
+                            transaction.modifySplit(counterSplit);
+                        }
+                    }
+                    transaction.modifySplit(selectedSplit);
+                }
                 file->modifyTransaction(transaction);
             }
             ft.commit();
@@ -775,6 +794,18 @@ QString MultiTransactionEditor::errorMessage() const
 
 bool MultiTransactionEditor::isTransactionDataValid() const
 {
+    if (!d->ui->memoEdit->toPlainText().isEmpty()) {
+        if (d->ui->memoEdit->toPlainText().trimmed().isEmpty()) {
+            const auto rc = KMessageBox::questionTwoActions(
+                parentWidget(),
+                i18n("You have entered only spaces in the memo field which will clear the existing memo content. Do you really want to do this?"),
+                i18n("Clear memo"),
+                KMMYesNo::yes(),
+                KMMYesNo::no(),
+                QLatin1String("ClearMemo"));
+            return rc == KMessageBox::PrimaryAction;
+        }
+    }
     return true;
 }
 
