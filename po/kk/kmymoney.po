@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-28 03:21+0000\n"
+"POT-Creation-Date: 2025-12-30 03:59+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -574,10 +574,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3474
-#: kmymoney/kmymoney.cpp:3545 kmymoney/kmymoney.cpp:3561
-#: kmymoney/kmymoney.cpp:3567 kmymoney/kmymoney.cpp:3581
-#: kmymoney/kmymoney.cpp:3583
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3479
+#: kmymoney/kmymoney.cpp:3550 kmymoney/kmymoney.cpp:3566
+#: kmymoney/kmymoney.cpp:3572 kmymoney/kmymoney.cpp:3586
+#: kmymoney/kmymoney.cpp:3588
 #, kde-format
 msgid "Backup"
 msgstr "Сақтық көшірме"
@@ -5574,26 +5574,26 @@ msgstr[0] "Бүкіл таңдалған %1 транзакцияны өшірг�
 msgid "Delete transaction"
 msgstr "Транзакцияны өшіру"
 
-#: kmymoney/kmymoney.cpp:2263
+#: kmymoney/kmymoney.cpp:2268
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Транзакциялар қосылмады"
 
-#: kmymoney/kmymoney.cpp:2375
+#: kmymoney/kmymoney.cpp:2380
 #, fuzzy, kde-format
 #| msgid "Close"
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Жабу"
 
-#: kmymoney/kmymoney.cpp:2554
+#: kmymoney/kmymoney.cpp:2559
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "Транзакциялар қосылмады"
 
-#: kmymoney/kmymoney.cpp:2698
+#: kmymoney/kmymoney.cpp:2703
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5605,14 +5605,14 @@ msgstr ""
 "Таңдалған транзакциялардағы кемінде бір бөлігінің салыстырып тексерілген "
 "белгісі бар. Сонда да өшірілсін бе?"
 
-#: kmymoney/kmymoney.cpp:2700
+#: kmymoney/kmymoney.cpp:2705
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Транзакция салыстырып тексерілген ғой"
 
-#: kmymoney/kmymoney.cpp:2705
+#: kmymoney/kmymoney.cpp:2710
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5620,20 +5620,20 @@ msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Бүкіл таңдалған %1 транзакцияны өшіргіңіз келе ме?"
 
-#: kmymoney/kmymoney.cpp:2709
+#: kmymoney/kmymoney.cpp:2714
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Кез-келген транзакция"
 
-#: kmymoney/kmymoney.cpp:2794
+#: kmymoney/kmymoney.cpp:2799
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Транзакциялар қосылмады"
 
-#: kmymoney/kmymoney.cpp:2834
+#: kmymoney/kmymoney.cpp:2839
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5645,12 +5645,12 @@ msgstr ""
 "KMyMoney бұл есепшоттың мерзімі өткен жоспарлаған транзакцияларды тапты. "
 "Бұлар енді енгізілсін бе?"
 
-#: kmymoney/kmymoney.cpp:2837
+#: kmymoney/kmymoney.cpp:2842
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Жоспарланған транзакциялар бар"
 
-#: kmymoney/kmymoney.cpp:2912
+#: kmymoney/kmymoney.cpp:2917
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5670,17 +5670,17 @@ msgstr ""
 "параметрлердегі <b>Жабылған есепшоттар көрсетілмесін</b> дегеннен белгісін "
 "алып тастау керек."
 
-#: kmymoney/kmymoney.cpp:2914
+#: kmymoney/kmymoney.cpp:2919
 #, kde-format
 msgid "Information"
 msgstr "Ақпарат"
 
-#: kmymoney/kmymoney.cpp:3018 kmymoney/kmymoney.cpp:3117
+#: kmymoney/kmymoney.cpp:3023 kmymoney/kmymoney.cpp:3122
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "KMyMoneyFile ашылмаған"
 
-#: kmymoney/kmymoney.cpp:3054 kmymoney/kmymoney.cpp:3056
+#: kmymoney/kmymoney.cpp:3059 kmymoney/kmymoney.cpp:3061
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
@@ -5688,43 +5688,43 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Дайын."
 
-#: kmymoney/kmymoney.cpp:3121
+#: kmymoney/kmymoney.cpp:3126
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Дербес деректерді қарау..."
 
-#: kmymoney/kmymoney.cpp:3128
+#: kmymoney/kmymoney.cpp:3133
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Дербес деректерді өзгерту"
 
-#: kmymoney/kmymoney.cpp:3143
+#: kmymoney/kmymoney.cpp:3148
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Пайдаланушы дерегі сақталмады: %1"
 
-#: kmymoney/kmymoney.cpp:3151
+#: kmymoney/kmymoney.cpp:3156
 #, kde-format
 msgid "Importing account templates."
 msgstr "Есепшоттың үлгілерін импорттау."
 
-#: kmymoney/kmymoney.cpp:3165
+#: kmymoney/kmymoney.cpp:3170
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "Импортталмаған үлгі(лер) %1, жаңылыс мынада: %2:%3"
 
-#: kmymoney/kmymoney.cpp:3173
+#: kmymoney/kmymoney.cpp:3178
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Есепшоттың үлгілерін экспорттау."
 
-#: kmymoney/kmymoney.cpp:3179
+#: kmymoney/kmymoney.cpp:3184
 #, kde-format
 msgid "Save as..."
 msgstr "Былай сақтау..."
 
-#: kmymoney/kmymoney.cpp:3180
+#: kmymoney/kmymoney.cpp:3185
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5734,35 +5734,35 @@ msgstr ""
 "*.kmt|KMyMoney үлгі файлдары\n"
 "*|Бүкіл файлдар"
 
-#: kmymoney/kmymoney.cpp:3211
+#: kmymoney/kmymoney.cpp:3216
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Үлгі қатесі"
 
-#: kmymoney/kmymoney.cpp:3229
+#: kmymoney/kmymoney.cpp:3234
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "<b>%1</b> деп аталған файл бар екен. Үстінен жаза берейік пе?"
 
-#: kmymoney/kmymoney.cpp:3231 kmymoney/plugins/csv/export/csvexporter.cpp:106
+#: kmymoney/kmymoney.cpp:3236 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "Файл бар екен"
 
-#: kmymoney/kmymoney.cpp:3269
+#: kmymoney/kmymoney.cpp:3274
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3270
+#: kmymoney/kmymoney.cpp:3275
 #, kde-format
 msgid "Hide menu bar"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3380
+#: kmymoney/kmymoney.cpp:3385
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5770,13 +5770,13 @@ msgid ""
 msgstr ""
 "Файлды сақтық көшірмелеу үшін алдында сақтау керек. Жалғастырмақсыз ба?"
 
-#: kmymoney/kmymoney.cpp:3382
+#: kmymoney/kmymoney.cpp:3387
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3399
+#: kmymoney/kmymoney.cpp:3404
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5785,70 +5785,70 @@ msgstr ""
 "Сақтық көшірмелеу әзірше жергілікті файлдар үшін ғана іске асырылған. "
 "Файлыңыз '%1' деп сақталады."
 
-#: kmymoney/kmymoney.cpp:3401
+#: kmymoney/kmymoney.cpp:3406
 #, kde-format
 msgid "Local files only"
 msgstr "Жергілікті файлдар ғана"
 
-#: kmymoney/kmymoney.cpp:3440
+#: kmymoney/kmymoney.cpp:3445
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 жалғауы"
 
-#: kmymoney/kmymoney.cpp:3474
+#: kmymoney/kmymoney.cpp:3479
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Бұл құрылғыда бүгінгі сақтық көшірме бар. Ауыстырмақсыз ба?"
 
-#: kmymoney/kmymoney.cpp:3474
+#: kmymoney/kmymoney.cpp:3479
 #, kde-format
 msgid "&Replace"
 msgstr "&Ауыстыру"
 
-#: kmymoney/kmymoney.cpp:3482
+#: kmymoney/kmymoney.cpp:3487
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Есепшот құрылмады: %1"
 
-#: kmymoney/kmymoney.cpp:3487
+#: kmymoney/kmymoney.cpp:3492
 #, kde-format
 msgid "Writing %1"
 msgstr "%1 жазуы"
 
-#: kmymoney/kmymoney.cpp:3508
+#: kmymoney/kmymoney.cpp:3513
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1 дегенді айыру"
 
-#: kmymoney/kmymoney.cpp:3545
+#: kmymoney/kmymoney.cpp:3550
 #, kde-format
 msgid "Error mounting device"
 msgstr "Құрылғыны жалғау қатесі"
 
-#: kmymoney/kmymoney.cpp:3560 kmymoney/kmymoney.cpp:3579
+#: kmymoney/kmymoney.cpp:3565 kmymoney/kmymoney.cpp:3584
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Дайын"
 
-#: kmymoney/kmymoney.cpp:3561 kmymoney/kmymoney.cpp:3581
+#: kmymoney/kmymoney.cpp:3566 kmymoney/kmymoney.cpp:3586
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Файл сақтық көшірмесі жасалды"
 
-#: kmymoney/kmymoney.cpp:3567
+#: kmymoney/kmymoney.cpp:3572
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Файды құрылғыға көшірмелеу қатесі"
 
-#: kmymoney/kmymoney.cpp:3583
+#: kmymoney/kmymoney.cpp:3588
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Құрылғыны айыру қатесі"
 
-#: kmymoney/kmymoney.cpp:3630
+#: kmymoney/kmymoney.cpp:3635
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5865,30 +5865,30 @@ msgstr ""
 "%2 дегенді қалдыру үшін Жоқ деңіз.\n"
 "Есепшоты құруды доғару үшін Айну деңіз. "
 
-#: kmymoney/kmymoney.cpp:3640
+#: kmymoney/kmymoney.cpp:3645
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Бастапқы баланс мәселесі"
 
-#: kmymoney/kmymoney.cpp:3651
+#: kmymoney/kmymoney.cpp:3656
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Есепшот қосылмады: %1"
 
-#: kmymoney/kmymoney.cpp:3721
+#: kmymoney/kmymoney.cpp:3726
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Дұрыстығын тексеру орындауда..."
 
-#: kmymoney/kmymoney.cpp:3728
+#: kmymoney/kmymoney.cpp:3733
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Дұрыстығын тексеру жаңылысы: %1"
 
-#: kmymoney/kmymoney.cpp:3738
+#: kmymoney/kmymoney.cpp:3743
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5897,7 +5897,7 @@ msgstr ""
 "Дұрыстығын тексерген кезде деректеріңіз мәсселелер туғызды. Егжей-тегжейі "
 "төменде."
 
-#: kmymoney/kmymoney.cpp:3740
+#: kmymoney/kmymoney.cpp:3745
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5907,28 +5907,28 @@ msgstr ""
 "Дұрыстығын тексерген кезде деректеріңіз мәсселелер туғызды. Егжей-тегжейі "
 "төменде. Автоматты шешілмейтін мәселелерді қолмен шешу керек."
 
-#: kmymoney/kmymoney.cpp:3743
+#: kmymoney/kmymoney.cpp:3748
 #, kde-format
 msgid "Consistency check result"
 msgstr "Дұрыстығын тексеру нәтижесі"
 
-#: kmymoney/kmymoney.cpp:3809
+#: kmymoney/kmymoney.cpp:3814
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Жоспарланған транзакцияларда мерзімі өткендерді іздеу..."
 
-#: kmymoney/kmymoney.cpp:3973
+#: kmymoney/kmymoney.cpp:3978
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Үзінді көшірмені импорттау алдында KMyMoney файлын таңдап алыңыз."
 
-#: kmymoney/kmymoney.cpp:3978
+#: kmymoney/kmymoney.cpp:3983
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Үзінді көшірмені Web Connect арқылы импорттау"
 
-#: kmymoney/kmymoney.cpp:3990
+#: kmymoney/kmymoney.cpp:3995
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5939,60 +5939,60 @@ msgid ""
 "error: %3"
 msgstr "%2 плагиннің көмегімен %1 импортталмады. Плагин қайтарған қатесі: %3"
 
-#: kmymoney/kmymoney.cpp:3990 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:3995 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "Импорттау қатесі"
 
-#: kmymoney/kmymoney.cpp:4017
+#: kmymoney/kmymoney.cpp:4022
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Бүкіл хабарламалар рұқсат етілген."
 
-#: kmymoney/kmymoney.cpp:4017
+#: kmymoney/kmymoney.cpp:4022
 #, kde-format
 msgid "All messages"
 msgstr "Бүкіл хабарламалар"
 
-#: kmymoney/kmymoney.cpp:4053
+#: kmymoney/kmymoney.cpp:4058
 #, kde-format
 msgid "Auto saving..."
 msgstr "Автосақтау..."
 
-#: kmymoney/kmymoney.cpp:4173
+#: kmymoney/kmymoney.cpp:4178
 #, kde-format
 msgid "Creating new document..."
 msgstr "Жаңа құжатты құру..."
 
-#: kmymoney/kmymoney.cpp:4233
+#: kmymoney/kmymoney.cpp:4238
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Жаңа іс-әлпетін құру"
 
-#: kmymoney/kmymoney.cpp:4244
+#: kmymoney/kmymoney.cpp:4249
 #, kde-format
 msgid "Open a file."
 msgstr "Файлды ашу."
 
-#: kmymoney/kmymoney.cpp:4258
+#: kmymoney/kmymoney.cpp:4263
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4262
+#: kmymoney/kmymoney.cpp:4267
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Бүкіл файлдар"
 
-#: kmymoney/kmymoney.cpp:4275
+#: kmymoney/kmymoney.cpp:4280
 #, kde-format
 msgid "Loading file..."
 msgstr "Файлды жүктеу...."
 
-#: kmymoney/kmymoney.cpp:4283
+#: kmymoney/kmymoney.cpp:4288
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6001,58 +6001,58 @@ msgstr ""
 "<p><b>%1</b> файл атауы дұрыс емес не ондайы жоқ. Басқасын ашыңыз, не "
 "жаңасын құрыңыз.</p>"
 
-#: kmymoney/kmymoney.cpp:4283
+#: kmymoney/kmymoney.cpp:4288
 #, kde-format
 msgid "File not found"
 msgstr "Файл табылмады"
 
-#: kmymoney/kmymoney.cpp:4315
+#: kmymoney/kmymoney.cpp:4320
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4321
+#: kmymoney/kmymoney.cpp:4326
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "%1 деген файл жазу үшін ашылмады"
 
-#: kmymoney/kmymoney.cpp:4328
+#: kmymoney/kmymoney.cpp:4333
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4339
+#: kmymoney/kmymoney.cpp:4344
 #, kde-format
 msgid "Saving file..."
 msgstr "Файлды сақтау..."
 
-#: kmymoney/kmymoney.cpp:4351
+#: kmymoney/kmymoney.cpp:4356
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Сақтау жаңылысы: %1"
 
-#: kmymoney/kmymoney.cpp:4357
+#: kmymoney/kmymoney.cpp:4362
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4363
+#: kmymoney/kmymoney.cpp:4368
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Файлды сақтау..."
 
-#: kmymoney/kmymoney.cpp:4379
+#: kmymoney/kmymoney.cpp:4384
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4408
+#: kmymoney/kmymoney.cpp:4413
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -19888,7 +19888,7 @@ msgid "Interest Income"
 msgstr "Өсім кірісі"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:230
+#: kmymoney/views/multitransactioneditor.cpp:232
 #: kmymoney/views/newtransactioneditor.cpp:319
 #, fuzzy, kde-format
 #| msgid ""
@@ -22046,14 +22046,14 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Балансы: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:208
+#: kmymoney/views/multitransactioneditor.cpp:210
 #: kmymoney/views/newtransactioneditor.cpp:302
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Транзакцияларсыз үзінді көшірмесін импорттау"
 
-#: kmymoney/views/multitransactioneditor.cpp:244
+#: kmymoney/views/multitransactioneditor.cpp:246
 #: kmymoney/views/newtransactioneditor.cpp:346
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
@@ -22062,7 +22062,7 @@ msgid ""
 "category."
 msgstr "Санат контекстінде транзакциялар құрылмайды."
 
-#: kmymoney/views/multitransactioneditor.cpp:277
+#: kmymoney/views/multitransactioneditor.cpp:279
 #, fuzzy, kde-format
 #| msgid ""
 #| "Cannot enter transaction with postdate prior to account's opening date."
@@ -22072,14 +22072,14 @@ msgid ""
 "selected account (%2)."
 msgstr "Күні есепшот ашылған күннен алдындағы транзакцияны енгізуге болмайды."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:754
 #, fuzzy, kde-format
 #| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Бірнешеге бөлінген транзакциялар бірге өзгертілмейді."
 
-#: kmymoney/views/multitransactioneditor.cpp:744
+#: kmymoney/views/multitransactioneditor.cpp:763
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -22087,7 +22087,7 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:748
+#: kmymoney/views/multitransactioneditor.cpp:767
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -22095,13 +22095,26 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:752
+#: kmymoney/views/multitransactioneditor.cpp:771
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:802
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "&Нөлдітерді тазалау"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, fuzzy, kde-format
@@ -26999,9 +27012,6 @@ msgstr ""
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "Осы транзакцияның бүкіл бөліктерін тексеру"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "&Нөлдітерді тазалау"
 
 #, fuzzy
 #~| msgid ""
