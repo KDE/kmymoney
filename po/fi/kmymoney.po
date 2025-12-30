@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -19282,7 +19282,7 @@ msgid "Interest Income"
 msgstr "Korkotulot"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -21362,13 +21362,13 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Kirjauspäivä on virheellinen."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -21376,7 +21376,7 @@ msgid ""
 "category."
 msgstr "Valitussa luokassa tapahtumalle vaaditaan kustannuspaikkatoimeksianto."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * Transaction '%1' has a post date '%2' before one of the referenced "
@@ -21389,13 +21389,13 @@ msgstr ""
 "  * Tapahtumalla '%1' on kirjauspäivä '%2' ennen viitatun tilin "
 "avaamispäivää."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Montaa aikatauluja ei voi muokata kerralla."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21405,7 +21405,7 @@ msgstr ""
 "Luokan tai tilin valinta ei ole mahdollista, kun valinnan osana on jaettuja "
 "tapahtumia."
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21413,13 +21413,26 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "Poista &nollat"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, fuzzy, kde-format
@@ -26974,9 +26987,6 @@ msgstr "Vain joko --csv tai --html voidaan antaa"
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "Käytä tätä poistaaksesi tämän tapahtuman kaikki jaottelut"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "Poista &nollat"
 
 #~ msgid ""
 #~ "In case you have multiple split entries to the same category and you like "

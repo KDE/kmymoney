@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -19608,7 +19608,7 @@ msgid "Interest Income"
 msgstr "Receitas dos Juros"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -21699,13 +21699,13 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "A data de publicação é inválida."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -21715,7 +21715,7 @@ msgstr ""
 "É necessária a atribuição de um centro de custo numa transacção da categoria "
 "seleccionada."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * Transaction '%1' has a post date '%2' before one of the referenced "
@@ -21728,14 +21728,14 @@ msgstr ""
 "  * A transacção '%1' tem uma data de publicação '%2' anterior à data de "
 "abertura da conta respectiva."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Não é possível aceder ao ficheiro pedido."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21743,7 +21743,7 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21751,13 +21751,26 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear Fee"
+msgid "Clear memo"
+msgstr "Limpar a Taxa"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format

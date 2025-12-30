@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -19152,7 +19152,7 @@ msgid "Interest Income"
 msgstr "이자 수입"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -21200,14 +21200,14 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "잔액: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, fuzzy, kde-format
 #| msgid "The posting date of the transaction."
 msgid "The posting date is invalid."
 msgstr "거래 전기 일입니다."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -21215,7 +21215,7 @@ msgid ""
 "category."
 msgstr "선택한 분류의 거래에는 원가 중심점 할당이 필요합니다."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * Transaction '%1' has a post date '%2' before one of the referenced "
@@ -21228,14 +21228,14 @@ msgstr ""
 "  * '%1' 거래에서 참조하는 계좌의 개설일보다 이전인 '%2' 후일부가 설정되었습"
 "니다."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, fuzzy, kde-format
 #| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "한 번에 여러 분할 거래를 편집할 수 없습니다."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21243,7 +21243,7 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21251,13 +21251,26 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "영 지우기(&Z)"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -26697,9 +26710,6 @@ msgstr ""
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "이 거래의 모든 분할을 지우려면 사용하십시오"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "영 지우기(&Z)"
 
 #~ msgid ""
 #~ "In case you have multiple split entries to the same category and you like "

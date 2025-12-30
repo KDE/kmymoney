@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2024-11-30 09:29+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -19370,7 +19370,7 @@ msgid "Interest Income"
 msgstr "Przychód z oprocentowania"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -21464,13 +21464,13 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Data wysłania jest nieprawidłowa."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -21480,7 +21480,7 @@ msgstr ""
 "Przypisanie ośrodka kosztów jest wymagane dla transakcji w wybranej "
 "kategorii."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -21490,13 +21490,13 @@ msgstr ""
 "Zaznaczona transakcja ma datę wykonania (%1) przed datą otwarcia "
 "zaznaczonego konta (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Nie może edytować wielu harmonogramów na raz."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21506,7 +21506,7 @@ msgstr ""
 "Zaznaczenie kategorii lub konta jest niemożliwe, gdy transakcje podzielone "
 "są częścią zaznaczenia."
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21516,7 +21516,7 @@ msgstr ""
 "Zaznaczenie znaczników jest niemożliwe, gdy transakcje podzielone są częścią "
 "zaznaczenia."
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21525,6 +21525,19 @@ msgid ""
 msgstr ""
 "Zaznaczenie centrum kosztów jest niemożliwe, gdy transakcje podzielone są "
 "częścią zaznaczenia."
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "Wyczyść &zerowe"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -27104,9 +27117,6 @@ msgstr "Tylko jedno z --csv lub --html jest obsługiwane"
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "Użyj, żeby rozliczyć wszystkie części tej transakcji"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "Wyczyść &zerowe"
 
 #~ msgid ""
 #~ "In case you have multiple split entries to the same category and you like "

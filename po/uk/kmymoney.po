@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2025-12-16 21:59+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -19465,7 +19465,7 @@ msgid "Interest Income"
 msgstr "Дохід за відсотками"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -21536,13 +21536,13 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Баланс: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Дата проведення операції є некоректною."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -21550,7 +21550,7 @@ msgid ""
 "category."
 msgstr "Для операції у позначеній категорії слід призначити обліковий відділ."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -21560,13 +21560,13 @@ msgstr ""
 "Дата переказу вибраної операції (%1) передує даті відкриття вибраного "
 "рахунку (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Не можна одночасно редагувати декілька розкладів."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21576,7 +21576,7 @@ msgstr ""
 "Вибір категорії або рахунку є неможливим, якщо частиною позначення є "
 "розділені операції."
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21585,7 +21585,7 @@ msgid ""
 msgstr ""
 "Вибір міток є неможливим, якщо частиною позначення є розділені операції."
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21594,6 +21594,19 @@ msgid ""
 msgstr ""
 "Вибір облікового відділу є неможливим, якщо частиною позначення є розділені "
 "операції."
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "Вилучити &нулі"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -27206,9 +27219,6 @@ msgstr "Передбачено підтримку лише одного з ва�
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "Натисніть, щоб позначити як перевірені всі дроблення цієї операції"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "Вилучити &нулі"
 
 #~ msgid ""
 #~ "In case you have multiple split entries to the same category and you like "

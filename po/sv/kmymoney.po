@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2025-10-26 20:52+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -19253,7 +19253,7 @@ msgid "Interest Income"
 msgstr "Ränteinkomst"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -21305,13 +21305,13 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Behållning: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Inlämningsdatum är ogiltigt."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -21320,7 +21320,7 @@ msgid ""
 msgstr ""
 "En tilldelning av kostnadsställe krävs för en transaktion i vald kategori."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -21330,13 +21330,13 @@ msgstr ""
 "En markerad transaktion har registreringsdatum (%1) innan det markerade "
 "kontots öppningsdatum (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Kan inte redigera flera scheman samtidigt."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21346,7 +21346,7 @@ msgstr ""
 "Markering av kategori eller konto är inte möjlig när delade transaktioner "
 "ingår i markeringen."
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21356,7 +21356,7 @@ msgstr ""
 "Markering av etiketter är inte möjlig när delade transaktioner ingår i "
 "markeringen."
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21365,6 +21365,19 @@ msgid ""
 msgstr ""
 "Markering av kostnadsställe är inte möjlig när delade transaktioner ingår i "
 "markeringen."
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "Rensa &noll"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -26273,9 +26286,6 @@ msgstr "Bara en av --csv och --html stöds"
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "Använd det här för att rensa transaktionens alla delningar"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "Rensa &noll"
 
 #~ msgid ""
 #~ "In case you have multiple split entries to the same category and you like "

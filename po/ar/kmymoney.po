@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2025-12-18 09:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -19217,7 +19217,7 @@ msgid "Interest Income"
 msgstr "دخل الفائدة"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -21249,13 +21249,13 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "الرصيد: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "تاريخ النشر غير صحيح."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -21263,7 +21263,7 @@ msgid ""
 "category."
 msgstr "يتطلب تعيين مركز تكلفة للمعاملة في الفئة المحددة."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -21272,13 +21272,13 @@ msgid ""
 msgstr ""
 "المعاملة المحددة لها تاريخ نشر (%1) قبل تاريخ افتتاح الحساب المحدد (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "لا يمكن تعديل جداول متعددة في وقت واحد."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21287,7 +21287,7 @@ msgid ""
 msgstr ""
 "لا يمكن تحديد الفئة أو الحساب عندما تكون المعاملات المجزأة جزءًا من التحديد."
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21295,7 +21295,7 @@ msgid ""
 "selection."
 msgstr "لا يمكن تحديد الوسوم عندما تكون المعاملات المجزأة جزءًا من التحديد."
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21303,6 +21303,19 @@ msgid ""
 "the selection."
 msgstr ""
 "لا يمكن تحديد مركز التكلفة عندما تكون المعاملات المجزأة جزءًا من التحديد."
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "امسح الأ&صفار"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -26533,9 +26546,6 @@ msgstr "واحد فقط من --csv و --html مدعوم"
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "استخدم هذا لمسح كلّ تجزئات المعاملة"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "امسح الأ&صفار"
 
 #, fuzzy
 #~ msgid ""

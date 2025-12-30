@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
-"PO-Revision-Date: 2025-12-16 10:34+0100\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
+"PO-Revision-Date: 2025-12-29 06:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5545,6 +5545,8 @@ msgid ""
 "The consistency check has found no issues in your data. Details are "
 "presented below."
 msgstr ""
+"მთლიანობის შემოწმებამ მონაცემებთან პრობლემები ვერ აღმოაჩინა. დეტალები იხილეთ "
+"ქვემოთ."
 
 #: kmymoney/kmymoney.cpp:3799
 #, kde-format
@@ -5553,6 +5555,9 @@ msgid ""
 "presented below. Those issues that could not be corrected automatically need "
 "to be solved by the user."
 msgstr ""
+"მთლიანობის შემოწმებამ თქვენს მონაცემებში რამდენიმე პრობლემა აღმოაჩინა. "
+"დეტალები ქვემოთაა მოყვანილი. ეს პრობლემები ავტომატურად ვერ გადაიჭრა და ხელით "
+"ჩარევას საჭიროებს."
 
 #: kmymoney/kmymoney.cpp:3802
 #, kde-format
@@ -5568,7 +5573,7 @@ msgstr "გადაცილებული დაგეგმილი ტრ�
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
-msgstr ""
+msgstr "ამონაწერის შემოტანამდე საჭიროა, KMyMoney-ის ფაილი აირჩიოთ."
 
 #: kmymoney/kmymoney.cpp:4037
 #, kde-format
@@ -5641,6 +5646,8 @@ msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
 "can open another file or create a new one.</p>"
 msgstr ""
+"<p><b>%1</b> ეს ან არასწორი ფაილის სახელია, ან ფაილი არ არსებობს. შეგიძლიათ, "
+"გახსნათ სხვა ფაილი, ან ახალი შექმნათ.</p>"
 
 #: kmymoney/kmymoney.cpp:4342
 #, kde-format
@@ -5664,6 +5671,8 @@ msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
+"თქვენი მონაცემთა წყაროს წაკითხვა შეუძლებელია. შეამოწმეთ KMyMoney-ის "
+"პარამეტრები და დარწმუნდით, რომ საჭირო მოდული ჩართულია."
 
 #: kmymoney/kmymoney.cpp:4398
 #, kde-format
@@ -5927,7 +5936,7 @@ msgstr "ფასების შემომტანი"
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
-msgstr ""
+msgstr "<p>მართლა გნებავთ, წაშალოთ ვალუტა <b>%1</b> ფაილიდან?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:426
 #, kde-format
@@ -5935,11 +5944,13 @@ msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
 "still want to continue?</p>"
 msgstr ""
+"<p>ყველა გაცვლის კურსი ვალუტისთვის <b>%1</b> დაიკარგება.</p><p>მაინც გნებავთ "
+"გაგრძელება?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:430
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
-msgstr ""
+msgstr "<p>მართლა გნებავთ, წაშალოთ %1 <b>%2</b> ფაილიდან?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:431
 #, kde-format
@@ -5947,6 +5958,8 @@ msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
 "to continue?</p>"
 msgstr ""
+"<p>ყველა ფასის კვოტა %1-ისთვის <b>%2</b> დაიკარგება.</p><p>მაინც გნებავთ "
+"გაგრძელება?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:435
 #, kde-format
@@ -6521,27 +6534,27 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3102
 #, kde-format
 msgid "  * Parent account '%1' belongs to a different group."
-msgstr ""
+msgstr "  * მშობელია ანგარიში '%1' სხვა ჯგუფს ეკუთვნის."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3103 kmymoney/mymoney/mymoneyfile.cpp:3133
 #, kde-format
 msgid "    New parent account is the top level account '%1'."
-msgstr ""
+msgstr "    ახალი მშობელია ანგარიშია უმაღლესი დონის ანგარიში '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3119
 #, kde-format
 msgid "  * Parent account '%1' does not contain '%2' as sub-account."
-msgstr ""
+msgstr "  * მშობელი ანგარიში '%1' არ შეიცავს '%2'-ს ქვეანგარიშის სახით."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3132
 #, kde-format
 msgid "  * The parent with id %1 does not exist anymore."
-msgstr ""
+msgstr "  * მშობელი id-ით %1 აღარ არსებობს."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3156
 #, kde-format
 msgid "  * Child account with id %1 does not exist anymore."
-msgstr ""
+msgstr "  * შვილი ანგარიში id-ით %1 აღარ არსებობს."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3157
 #, kde-format
@@ -6551,7 +6564,7 @@ msgstr "    შვილი ანგარიშების სია თა�
 #: kmymoney/mymoney/mymoneyfile.cpp:3177
 #, kde-format
 msgid "  * The payee with id %1 referenced by the loan does not exist anymore."
-msgstr ""
+msgstr "  * გადამხდელი id-ით %1, რომელსაც სესხი მიმართავს, აღარ არსებობს."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3178
 #, kde-format
@@ -6597,6 +6610,7 @@ msgstr "* შვილი სიების გადალაგება"
 #, kde-format
 msgid "  * Unable to update account data for account %1 in engine"
 msgstr ""
+"  * ანგარიშის მონაცემების განახლება შეუძლებელია ანგარიშისთვის %1 ძრავაში"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3268
 #, kde-format
@@ -6604,6 +6618,8 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"  * გადამხდელს %1 აქვს BIC არასწორი სიგრძით '%2'.\n"
+"    უნდა იყოს 11 სიმბოლო და არის %3"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3285
 #, kde-format
@@ -18575,7 +18591,7 @@ msgid "Interest Income"
 msgstr "საპროცენტო განაკვეთის შემოსავალი"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -20548,13 +20564,13 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "ბალანსი: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "გამოქვეყნების თარიღი არასწორია."
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, kde-format
 msgid ""
@@ -20563,7 +20579,7 @@ msgid ""
 msgstr ""
 "მონიშნულ კატეგორიაში ტრანზაქციისთვის ფასის ცენტრის მინიჭება აუცილებელია."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20571,13 +20587,13 @@ msgid ""
 "selected account (%2)."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "ერთზე მეტ გეგმას ერთდროულად ვერ ჩაასწორებთ."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20587,7 +20603,7 @@ msgstr ""
 "კატეგორიის, ან ანგარიშის არჩევა შეუძლებელია, როცა გაყოფილი ტრანზაქციები "
 "მონიშნულის ნაწილია."
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20596,7 +20612,7 @@ msgid ""
 msgstr ""
 "ჭდეების არჩევა შეუძლებელია, როცა გაყოფილი ტრანზაქციები მონიშნულის ნაწილია."
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20605,6 +20621,19 @@ msgid ""
 msgstr ""
 "ფასის ცენტრის არჩევა შეუძლებელია, როცა გაყოფილი ტრანზაქციები მონიშნულის "
 "ნაწილია."
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear Fee"
+msgid "Clear memo"
+msgstr "საკომისიოს გასუფთავება"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format

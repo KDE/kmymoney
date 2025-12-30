@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:43+0000\n"
+"POT-Creation-Date: 2025-12-30 00:41+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -19984,7 +19984,7 @@ msgid "Interest Income"
 msgstr "Өсім кірісі"
 
 #: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:231
 #: kmymoney/views/newtransactioneditor.cpp:337
 #, fuzzy, kde-format
 #| msgid ""
@@ -22168,14 +22168,14 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Балансы: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/multitransactioneditor.cpp:209
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Транзакцияларсыз үзінді көшірмесін импорттау"
 
-#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/multitransactioneditor.cpp:245
 #: kmymoney/views/newtransactioneditor.cpp:364
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
@@ -22184,7 +22184,7 @@ msgid ""
 "category."
 msgstr "Санат контекстінде транзакциялар құрылмайды."
 
-#: kmymoney/views/multitransactioneditor.cpp:276
+#: kmymoney/views/multitransactioneditor.cpp:278
 #, fuzzy, kde-format
 #| msgid ""
 #| "Cannot enter transaction with postdate prior to account's opening date."
@@ -22194,14 +22194,14 @@ msgid ""
 "selected account (%2)."
 msgstr "Күні есепшот ашылған күннен алдындағы транзакцияны енгізуге болмайды."
 
-#: kmymoney/views/multitransactioneditor.cpp:734
+#: kmymoney/views/multitransactioneditor.cpp:753
 #, fuzzy, kde-format
 #| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Бірнешеге бөлінген транзакциялар бірге өзгертілмейді."
 
-#: kmymoney/views/multitransactioneditor.cpp:743
+#: kmymoney/views/multitransactioneditor.cpp:762
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -22209,7 +22209,7 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:747
+#: kmymoney/views/multitransactioneditor.cpp:766
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -22217,13 +22217,26 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:751
+#: kmymoney/views/multitransactioneditor.cpp:770
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:800
+#, kde-format
+msgid ""
+"You have entered only spaces in the memo field which will clear the existing "
+"memo content. Do you really want to do this?"
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:801
+#, fuzzy, kde-format
+#| msgid "Clear &Zero"
+msgid "Clear memo"
+msgstr "&Нөлдітерді тазалау"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, fuzzy, kde-format
@@ -27798,9 +27811,6 @@ msgstr ""
 
 #~ msgid "Use this to clear all splits of this transaction"
 #~ msgstr "Осы транзакцияның бүкіл бөліктерін тексеру"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "&Нөлдітерді тазалау"
 
 #, fuzzy
 #~| msgid ""
