@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 00:41+0000\n"
-"PO-Revision-Date: 2025-12-16 18:34+0100\n"
+"PO-Revision-Date: 2025-12-30 16:38+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Ronald Stroethoff - 2018,Nisse Lommerde - 2023,Freek de Kruijf - t/m 2025"
+"Ronald Stroethoff - 2018,Nisse Lommerde - 2023,Freek de Kruijf - t/m 2026"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -21514,12 +21514,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"U hebt alleen spaties ingevoerd in het memoveld, waardoor de bestaande memo-"
+"inhoud wordt gewist. Wilt u dit echt doen?"
 
 #: kmymoney/views/multitransactioneditor.cpp:801
-#, fuzzy, kde-format
-#| msgid "Clear &Zero"
+#, kde-format
 msgid "Clear memo"
-msgstr "Wis &nul"
+msgstr "Wis memo"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format

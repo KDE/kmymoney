@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 00:41+0000\n"
-"PO-Revision-Date: 2025-12-29 06:59+0100\n"
+"PO-Revision-Date: 2025-12-30 06:01+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -20630,10 +20630,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:801
-#, fuzzy, kde-format
-#| msgid "Clear Fee"
+#, kde-format
 msgid "Clear memo"
-msgstr "საკომისიოს გასუფთავება"
+msgstr "შენიშვნის გასუფთავება"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
