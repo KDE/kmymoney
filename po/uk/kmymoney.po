@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 03:59+0000\n"
-"PO-Revision-Date: 2025-10-09 19:37+0300\n"
+"PO-Revision-Date: 2025-12-30 09:56+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -19027,10 +19027,9 @@ msgstr "Показати сітку у списку"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Показувати категорії у списку рахунків"
+msgstr "Показувати віджет фільтрування, якщо відкрито рахунок"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:280
@@ -21479,12 +21478,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"У поле нотатки вами введено лише пробіли. Це призведе до вилучення наявного "
+"вмісту нотатки. Ви справді цього хочете?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear &Zero"
+#, kde-format
 msgid "Clear memo"
-msgstr "Вилучити &нулі"
+msgstr "Вилучити нотатку"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -22078,6 +22078,9 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"Використовують для збереження видимості віджета фільтрування. Якщо віджет є "
+"невидимим, його можна переглянути у відповідь на натискання комбінації "
+"клавіш Ctrl+F"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format

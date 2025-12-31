@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 03:59+0000\n"
-"PO-Revision-Date: 2025-12-27 12:03+0100\n"
+"PO-Revision-Date: 2025-12-30 10:51+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -21394,12 +21394,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"Ha introducido solo espacios en el campo del memorando, lo que borrará el "
+"contenido existente de dicho campo. ¿Realmente quiere hacer esto?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear Fee"
+#, kde-format
 msgid "Clear memo"
-msgstr "Borrar comisión"
+msgstr "Borrar memorando"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format

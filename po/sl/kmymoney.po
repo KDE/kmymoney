@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 03:59+0000\n"
-"PO-Revision-Date: 2025-12-23 09:37+0100\n"
+"PO-Revision-Date: 2025-12-30 07:28+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -21332,12 +21332,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"V polje za beležko ste vnesli samo presledke, kar bo izbrisalo obstoječo "
+"vsebino beležke. Ali res želite to storiti?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear &Zero"
+#, kde-format
 msgid "Clear memo"
-msgstr "Počisti ničlo"
+msgstr "Počisti zabeležko"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format

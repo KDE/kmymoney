@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 03:59+0000\n"
-"PO-Revision-Date: 2025-12-23 17:27+0100\n"
+"PO-Revision-Date: 2025-12-30 16:14+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -21390,12 +21390,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"U hebt alleen spaties ingevoerd in het memoveld, waardoor de bestaande memo-"
+"inhoud wordt gewist. Wilt u dit echt doen?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear &Zero"
+#, kde-format
 msgid "Clear memo"
-msgstr "Wis &nul"
+msgstr "Wis memo"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format

@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 03:59+0000\n"
-"PO-Revision-Date: 2025-12-23 08:47+0100\n"
+"PO-Revision-Date: 2025-12-30 08:41+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -18969,7 +18969,7 @@ msgstr "Mostra una quadrícula als llibres"
 #: kmymoney/settings/kmymoney.kcfg:276
 #, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Mostra el giny de filtres quan s'obre el compte"
+msgstr "Mostra el giny de filtres quan s'obri el compte"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:280
@@ -21422,12 +21422,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"Heu introduït només espais en el camp de recordatori que netejarà el "
+"contingut del recordatori existent. De veres voleu fer açò?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear Fee"
+#, kde-format
 msgid "Clear memo"
-msgstr "Neteja la comissió"
+msgstr "Neteja el recordatori"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -22029,8 +22030,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
-"S'utilitza per a mantenir visible el giny de filtres. Si no és visible, es "
-"pot mostrar utilitzant Ctrl+F"
+"S'utilitza per a mantindre visible el giny de filtres. Si no és visible, es "
+"pot mostrar utilitzant «Ctrl+F»"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
