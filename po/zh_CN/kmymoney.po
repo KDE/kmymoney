@@ -20706,10 +20706,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:801
-#, fuzzy, kde-format
-#| msgid "Clear Fee"
+#, kde-format
 msgid "Clear memo"
-msgstr "清空费用"
+msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
