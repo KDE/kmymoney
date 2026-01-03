@@ -1,7 +1,7 @@
 # translation of fr.po to
 # This file is put in the public domain.
 #
-# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Xavier Besnard <xavier.besnard@kde.org>
 # SPDX-FileCopyrightText: 2023 Xavier Besnard <xavier.besnard@kde.org>
 # Stéphane Deraco <stephane@deraco.fr>, 2006.
 # Patrick PETIT <patrick.petit17@orange.fr>, 2006,2007, 2008, 2009.
@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 03:59+0000\n"
-"PO-Revision-Date: 2025-12-23 12:24+0100\n"
-"Last-Translator: Monsieur Toulemonde <nepasrepondre@monadresse.fr>\n"
+"PO-Revision-Date: 2026-01-01 20:10+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -21561,12 +21561,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"Vous n'avez saisi que des espaces dans le champ de note, ce qui effacera le "
+"contenu existant de la note. Voulez-vous vraiment faire cela ?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear &Zero"
+#, kde-format
 msgid "Clear memo"
-msgstr "Effacer les &Zéros"
+msgstr "Effacer la note"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
