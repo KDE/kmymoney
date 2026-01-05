@@ -26039,6 +26039,3 @@ msgstr "Prosesser en spesifikk rapport"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Kun en av --csv og --html er støttet"
-
-#~ msgid "saving report '%1' into '%2'"
-#~ msgstr "lagrer rapport «%1» til «%2»"
