@@ -23,12 +23,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
+#include "imymoneyprocessingcalendar.h"
+#include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "mymoneysplit.h"
-#include "imymoneyprocessingcalendar.h"
+#include "mymoneyutils.h"
 
 using namespace eMyMoney;
 
@@ -154,10 +154,9 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
             return;
     }
 
-    // make sure to clear out some unused information in scheduled transactions
-    // we need to do this for the case that the transaction passed as argument
+    // clear out some unused information in scheduled transactions
+    // this for the case that the transaction passed as argument
     // is a matched or imported transaction.
-    auto firstSplit = true;
     const auto splits = t.splits();
     for (const auto& split : splits) {
         MyMoneySplit s = split;
@@ -165,28 +164,6 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
         if (!split.bankID().isEmpty()) {
             s.setBankID(QString());
             t.modifySplit(s);
-        }
-
-        // only clear payees from second split onwards
-        if (firstSplit) {
-            firstSplit = false;
-            continue;
-        }
-
-        if (!split.payeeId().isEmpty()) {
-            // but only if the split references an income/expense category
-            auto file = MyMoneyFile::instance();
-            // some unit tests don't have a storage attached, so we
-            // simply skip the test
-            // Don't check for accounts with an id of 'Phony-ID' which is used
-            // internally for non-existing accounts (during creation of accounts)
-            if (s.accountId() != QString("Phony-ID")) {
-                auto acc = file->account(s.accountId());
-                if (acc.isIncomeExpense()) {
-                    s.setPayeeId(QString());
-                    t.modifySplit(s);
-                }
-            }
         }
     }
 
@@ -230,10 +207,10 @@ eMyMoney::Schedule::PaymentType MyMoneySchedule::paymentType() const
 }
 
 /**
-  * Simple get method that returns true if the schedule is fixed.
-  *
-  * @return bool To indicate whether the instance is fixed.
-  */
+ * Simple get method that returns true if the schedule is fixed.
+ *
+ * @return bool To indicate whether the instance is fixed.
+ */
 bool MyMoneySchedule::isFixed() const
 {
     Q_D(const MyMoneySchedule);
@@ -241,17 +218,16 @@ bool MyMoneySchedule::isFixed() const
 }
 
 /**
-  * Simple get method that returns true if the schedule will end
-  * at some time.
-  *
-  * @return bool Indicates whether the instance will end.
-  */
+ * Simple get method that returns true if the schedule will end
+ * at some time.
+ *
+ * @return bool Indicates whether the instance will end.
+ */
 bool MyMoneySchedule::willEnd() const
 {
     Q_D(const MyMoneySchedule);
     return d->m_endDate.isValid();
 }
-
 
 QDate MyMoneySchedule::nextDueDate() const
 {
@@ -412,8 +388,8 @@ void MyMoneySchedule::validate(bool id_check) const
         break;
 
     case Schedule::Type::Transfer:
-//        if (m_paymentType == DirectDeposit || m_paymentType == ManualDeposit)
-//          return false;
+        //        if (m_paymentType == DirectDeposit || m_paymentType == ManualDeposit)
+        //          return false;
         break;
 
     case Schedule::Type::LoanPayment:
@@ -443,8 +419,7 @@ QDate MyMoneySchedule::nextPayment() const
 
 QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate) const
 {
-    Schedule::WeekendOption option(adjust ? weekendOption() :
-                                   Schedule::WeekendOption::MoveNothing);
+    Schedule::WeekendOption option(adjust ? weekendOption() : Schedule::WeekendOption::MoveNothing);
 
     Q_D(const MyMoneySchedule);
     QDate adjEndDate(adjustedDate(d->m_endDate, option));
@@ -458,8 +433,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
     QDate dueDate(nextDueDate());
     QDate paymentDate(adjustedDate(dueDate, option));
 
-    if (paymentDate.isValid() &&
-            (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate))) {
+    if (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate))) {
         switch (d->m_occurrence) {
         case Schedule::Occurrence::Once:
             // If the lastPayment is already set or the payment should have been
@@ -473,30 +447,22 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
             do {
                 dueDate = dueDate.addDays(step);
                 paymentDate = adjustedDate(dueDate, option);
-            } while (paymentDate.isValid() &&
-                     (paymentDate <= refDate ||
-                      d->m_recordedPayments.contains(dueDate)));
-        }
-        break;
+            } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
+        } break;
 
         case Schedule::Occurrence::Weekly: {
             int step = 7 * d->m_occurrenceMultiplier;
             do {
                 dueDate = dueDate.addDays(step);
                 paymentDate = adjustedDate(dueDate, option);
-            } while (paymentDate.isValid() &&
-                     (paymentDate <= refDate ||
-                      d->m_recordedPayments.contains(dueDate)));
-        }
-        break;
+            } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
+        } break;
 
         case Schedule::Occurrence::EveryHalfMonth:
             do {
                 dueDate = addHalfMonths(dueDate, d->m_occurrenceMultiplier);
                 paymentDate = adjustedDate(dueDate, option);
-            } while (paymentDate.isValid() &&
-                     (paymentDate <= refDate ||
-                      d->m_recordedPayments.contains(dueDate)));
+            } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
             break;
 
         case Schedule::Occurrence::Monthly:
@@ -504,9 +470,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
                 dueDate = dueDate.addMonths(d->m_occurrenceMultiplier);
                 fixDate(dueDate);
                 paymentDate = adjustedDate(dueDate, option);
-            } while (paymentDate.isValid() &&
-                     (paymentDate <= refDate ||
-                      d->m_recordedPayments.contains(dueDate)));
+            } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
             break;
 
         case Schedule::Occurrence::Yearly:
@@ -514,9 +478,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
                 dueDate = dueDate.addYears(d->m_occurrenceMultiplier);
                 fixDate(dueDate);
                 paymentDate = adjustedDate(dueDate, option);
-            } while (paymentDate.isValid() &&
-                     (paymentDate <= refDate ||
-                      d->m_recordedPayments.contains(dueDate)));
+            } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
             break;
 
         case Schedule::Occurrence::Any:
@@ -558,8 +520,7 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
     QDate start_date(adjustedDate(startDate(), option));
     // if the period specified by the parameters and the adjusted period
     // defined for this schedule don't overlap, then the list remains empty
-    if ((willEnd() && adjustedDate(d->m_endDate, option) < _startDate)
-            || start_date > endDate)
+    if ((willEnd() && adjustedDate(d->m_endDate, option) < _startDate) || start_date > endDate)
         return theDates;
 
     QDate date(adjustedDate(paymentDate, option));
@@ -674,15 +635,15 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
     return theDates;
 }
 
-bool MyMoneySchedule::operator <(const MyMoneySchedule& right) const
+bool MyMoneySchedule::operator<(const MyMoneySchedule& right) const
 {
     return adjustedNextDueDate() < right.adjustedNextDueDate();
 }
 
-bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
+bool MyMoneySchedule::operator==(const MyMoneySchedule& right) const
 {
     Q_D(const MyMoneySchedule);
-    auto d2 = static_cast<const MyMoneySchedulePrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneySchedulePrivate*>(right.d_func());
     // clang-format off
     if (MyMoneyObject::operator==(right)
         && d->m_occurrence == d2->m_occurrence
@@ -702,9 +663,9 @@ bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
     return false;
 }
 
-bool MyMoneySchedule::operator !=(const MyMoneySchedule& right) const
+bool MyMoneySchedule::operator!=(const MyMoneySchedule& right) const
 {
-    return ! operator==(right);
+    return !operator==(right);
 }
 
 int MyMoneySchedule::transactionsRemaining() const
@@ -773,8 +734,8 @@ MyMoneyAccount MyMoneySchedule::account(int cnt) const
 
             if (!cnt)
                 return acc;
-        } catch (const MyMoneyException &) {
-            qWarning("Schedule '%s' references unknown account '%s'", qPrintable(id()),   qPrintable((*it).accountId()));
+        } catch (const MyMoneyException&) {
+            qWarning("Schedule '%s' references unknown account '%s'", qPrintable(id()), qPrintable((*it).accountId()));
             return MyMoneyAccount();
         }
     }
@@ -782,7 +743,8 @@ MyMoneyAccount MyMoneySchedule::account(int cnt) const
     return MyMoneyAccount();
 }
 
-MyMoneyAccount MyMoneySchedule::transferAccount() const {
+MyMoneyAccount MyMoneySchedule::transferAccount() const
+{
     return account(2);
 }
 
@@ -808,8 +770,7 @@ QDate MyMoneySchedule::dateAfter(int transactions) const
         int step = 7 * d->m_occurrenceMultiplier;
         while (counter++ < transactions)
             paymentDate = paymentDate.addDays(step);
-    }
-    break;
+    } break;
 
     case Schedule::Occurrence::EveryHalfMonth:
         paymentDate = addHalfMonths(paymentDate, d->m_occurrenceMultiplier * (transactions - 1));
@@ -851,9 +812,7 @@ bool MyMoneySchedule::isFinished() const
         return false;
 
     if (d->m_endDate.isValid()) {
-        if (d->m_lastPayment >= d->m_endDate
-                || !nextDueDate().isValid()
-                || nextDueDate() > d->m_endDate)
+        if (d->m_lastPayment >= d->m_endDate || !nextDueDate().isValid() || nextDueDate() > d->m_endDate)
             return true;
     }
 
@@ -914,9 +873,7 @@ void MyMoneySchedule::fixDate(QDate& date) const
         fixDate = QDate(fixDate.year(), fixDate.month(), fixDate.daysInMonth());
     }
 
-    if (fixDate.isValid()
-            && date.day() != fixDate.day()
-            && QDate::isValid(date.year(), date.month(), fixDate.day())) {
+    if (fixDate.isValid() && date.day() != fixDate.day() && QDate::isValid(date.year(), date.month(), fixDate.day())) {
         date = QDate(date.year(), date.month(), fixDate.day());
     }
 }
@@ -1301,7 +1258,7 @@ QDate MyMoneySchedule::addHalfMonths(QDate date, int mult) const
                 }
                 d = newdate.day();
             }
-    } else if (mult < 0)  // Go backwards
+    } else if (mult < 0) // Go backwards
         for (int i = 0; i > mult; i--) {
             d = newdate.day();
             if (d > 15) {
@@ -1321,11 +1278,11 @@ QDate MyMoneySchedule::addHalfMonths(QDate date, int mult) const
 }
 
 /**
-  * Helper method to convert simple occurrence to compound occurrence + multiplier
-  *
-  * @param multiplier Returned by reference.  Adjusted multiplier
-  * @param occurrence Returned by reference.  Occurrence type
-  */
+ * Helper method to convert simple occurrence to compound occurrence + multiplier
+ *
+ * @param multiplier Returned by reference.  Adjusted multiplier
+ * @param occurrence Returned by reference.  Occurrence type
+ */
 void MyMoneySchedule::simpleToCompoundOccurrence(int& multiplier, Schedule::Occurrence& occurrence)
 {
     Schedule::Occurrence newOcc = occurrence;
@@ -1336,54 +1293,53 @@ void MyMoneySchedule::simpleToCompoundOccurrence(int& multiplier, Schedule::Occu
         || occurrence == Schedule::Occurrence::EveryHalfMonth //
         || occurrence == Schedule::Occurrence::Monthly //
         || occurrence == Schedule::Occurrence::Yearly) { // Already a base occurrence and multiplier
-    } else if (occurrence == Schedule::Occurrence::Fortnightly ||
-               occurrence == Schedule::Occurrence::EveryOtherWeek) {
-        newOcc    = Schedule::Occurrence::Weekly;
-        newMulti  = 2;
+    } else if (occurrence == Schedule::Occurrence::Fortnightly || occurrence == Schedule::Occurrence::EveryOtherWeek) {
+        newOcc = Schedule::Occurrence::Weekly;
+        newMulti = 2;
     } else if (occurrence == Schedule::Occurrence::EveryThreeWeeks) {
-        newOcc    = Schedule::Occurrence::Weekly;
-        newMulti  = 3;
+        newOcc = Schedule::Occurrence::Weekly;
+        newMulti = 3;
     } else if (occurrence == Schedule::Occurrence::EveryFourWeeks) {
-        newOcc    = Schedule::Occurrence::Weekly;
-        newMulti  = 4;
+        newOcc = Schedule::Occurrence::Weekly;
+        newMulti = 4;
     } else if (occurrence == Schedule::Occurrence::EveryThirtyDays) {
-        newOcc    = Schedule::Occurrence::Daily;
-        newMulti  = 30;
+        newOcc = Schedule::Occurrence::Daily;
+        newMulti = 30;
     } else if (occurrence == Schedule::Occurrence::EveryEightWeeks) {
-        newOcc    = Schedule::Occurrence::Weekly;
-        newMulti  = 8;
+        newOcc = Schedule::Occurrence::Weekly;
+        newMulti = 8;
     } else if (occurrence == Schedule::Occurrence::EveryOtherMonth) {
-        newOcc    = Schedule::Occurrence::Monthly;
-        newMulti  = 2;
+        newOcc = Schedule::Occurrence::Monthly;
+        newMulti = 2;
     } else if (occurrence == Schedule::Occurrence::EveryThreeMonths //
-            || occurrence == Schedule::Occurrence::Quarterly) {
-        newOcc    = Schedule::Occurrence::Monthly;
-        newMulti  = 3;
+               || occurrence == Schedule::Occurrence::Quarterly) {
+        newOcc = Schedule::Occurrence::Monthly;
+        newMulti = 3;
     } else if (occurrence == Schedule::Occurrence::EveryFourMonths) {
-        newOcc    = Schedule::Occurrence::Monthly;
-        newMulti  = 4;
+        newOcc = Schedule::Occurrence::Monthly;
+        newMulti = 4;
     } else if (occurrence == Schedule::Occurrence::TwiceYearly) {
-        newOcc    = Schedule::Occurrence::Monthly;
-        newMulti  = 6;
+        newOcc = Schedule::Occurrence::Monthly;
+        newMulti = 6;
     } else if (occurrence == Schedule::Occurrence::EveryOtherYear) {
-        newOcc    = Schedule::Occurrence::Yearly;
-        newMulti  = 2;
+        newOcc = Schedule::Occurrence::Yearly;
+        newMulti = 2;
     } else { // Unknown
-        newOcc    = Schedule::Occurrence::Any;
-        newMulti  = 1;
+        newOcc = Schedule::Occurrence::Any;
+        newMulti = 1;
     }
     if (newOcc != occurrence) {
-        occurrence   = newOcc;
-        multiplier  = newMulti == 1 ? multiplier : newMulti * multiplier;
+        occurrence = newOcc;
+        multiplier = newMulti == 1 ? multiplier : newMulti * multiplier;
     }
 }
 
 /**
-  * Helper method to convert compound occurrence + multiplier to simple occurrence
-  *
-  * @param multiplier Returned by reference.  Adjusted multiplier
-  * @param occurrence Returned by reference.  Occurrence type
-  */
+ * Helper method to convert compound occurrence + multiplier to simple occurrence
+ *
+ * @param multiplier Returned by reference.  Adjusted multiplier
+ * @param occurrence Returned by reference.  Occurrence type
+ */
 void MyMoneySchedule::compoundToSimpleOccurrence(int& multiplier, Schedule::Occurrence& occurrence)
 {
     Schedule::Occurrence newOcc = occurrence;
