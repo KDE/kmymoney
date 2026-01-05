@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 03:59+0000\n"
-"PO-Revision-Date: 2025-09-20 16:47+0200\n"
+"PO-Revision-Date: 2025-12-30 09:14+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18954,10 +18954,9 @@ msgstr "Mostra una griglia nel registro"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts list view"
+#, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr "Mostra le categorie nella vista con l'elenco dei conti"
+msgstr "Mostra l'oggetto del filtro quando viene aperto un conto"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:280
@@ -21409,12 +21408,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"Hai digitato solo spazi nel campo promemoria, il che cancellerà il contenuto "
+"del promemoria esistente. Vuoi farlo davvero?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear &Zero"
+#, kde-format
 msgid "Clear memo"
-msgstr "Cancella gli &zero"
+msgstr "Cancella il promemoria"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -22019,6 +22019,8 @@ msgid ""
 "Used to keep the filter widget visible. If not visible, it can be shown "
 "using Ctrl+F"
 msgstr ""
+"Utilizzato per mantenere visibile l'oggetto del filtro. Se non è visibile, "
+"può essere visualizzato utilizzando Ctrl+F"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
