@@ -448,6 +448,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
                 });
 
         connect(d->ui->m_equitiesTree, &QTreeView::doubleClicked, this, &KInvestmentView::slotEditInvestment);
+        connect(d->ui->m_securitiesTree, &QTreeView::doubleClicked, this, &KInvestmentView::slotEditSecurity);
 
         // use a QueuedConnection here to suppress duplicate call (at least on Qt 5.12.7)
         connect(
