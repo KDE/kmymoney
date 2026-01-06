@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:43+0000\n"
+"POT-Creation-Date: 2026-01-06 00:43+0000\n"
 "PO-Revision-Date: 2025-12-30 08:48+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -20514,17 +20514,17 @@ msgstr "Supressió d'institució"
 msgid "Unable to delete institution: %1"
 msgstr "No s'ha pogut suprimir la institució: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:602
+#: kmymoney/views/kinvestmentview.cpp:603
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Esteu segur que voleu suprimir la inversió <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:603
+#: kmymoney/views/kinvestmentview.cpp:604
 #, kde-format
 msgid "Delete investment"
 msgstr "Elimina la inversió"
 
-#: kmymoney/views/kinvestmentview.cpp:614
+#: kmymoney/views/kinvestmentview.cpp:615
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "No s'ha pogut suprimir la inversió: %1"

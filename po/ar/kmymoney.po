@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:43+0000\n"
+"POT-Creation-Date: 2026-01-06 00:43+0000\n"
 "PO-Revision-Date: 2025-12-18 09:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -20282,17 +20282,17 @@ msgstr "احذف المؤسّسة"
 msgid "Unable to delete institution: %1"
 msgstr "تعذّر حذف المؤسسة: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:602
+#: kmymoney/views/kinvestmentview.cpp:603
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>هل تود حقًّا حذف الاستثمار <b>%1</b>؟</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:603
+#: kmymoney/views/kinvestmentview.cpp:604
 #, kde-format
 msgid "Delete investment"
 msgstr "احذف الاستثمار"
 
-#: kmymoney/views/kinvestmentview.cpp:614
+#: kmymoney/views/kinvestmentview.cpp:615
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "تعذّر حذف الاستثمار: %1"
