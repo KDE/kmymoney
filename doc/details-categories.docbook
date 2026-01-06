@@ -161,7 +161,12 @@
   part, create a second split with the VAT account and VAT amount and reduce the
   category amount.
 </para>
- 
+<para>
+  In contrast, if you have selected the net amount entry method, the amount you
+  enter is treated as excluding VAT. &kmymoney; will calculate the VAT portion,
+  create a separate split for the VAT account, and leave the category amount as
+  entered.
+</para>
 <para>
   The same applies to income categories but the other way around. Hope that
   makes sense.
