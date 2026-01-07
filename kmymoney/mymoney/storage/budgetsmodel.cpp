@@ -121,30 +121,7 @@ bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int 
 
     MyMoneyBudget& budget = static_cast<TreeItem<MyMoneyBudget>*>(index.internalPointer())->dataRef();
 
-    switch(role) {
-    case Qt::DisplayRole:
-    case Qt::EditRole:
-        switch(index.column()) {
-        case Columns::Name:
-            budget.setName(value.toString());
-            break;
-
-        case Columns::Year:
-        {
-            QDate date(value.toInt(), d->fiscalYearStartMonth, d->fiscalYearStartDay);
-            if (date.isValid()) {
-                budget.setBudgetStart(QDate(value.toInt(), d->fiscalYearStartMonth, d->fiscalYearStartDay));
-            } else {
-                return false;
-            }
-        }
-        break;
-
-        default:
-            return false;
-        }
-        break;
-
+    switch (role) {
     case eMyMoney::Model::Roles::BudgetNameRole:
         budget.setName(value.toString());
         break;

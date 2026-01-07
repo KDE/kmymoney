@@ -12,6 +12,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAbstractItemDelegate>
+#include <QLineEdit>
+#include <QSpinBox>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -75,6 +79,44 @@ void KBudgetView::showEvent(QShowEvent * event)
         });
 
         slotSelectBudget();
+
+        connect(d->ui->m_budgetList->itemDelegate(), &QAbstractItemDelegate::closeEditor, this, [&](QWidget* editor) {
+            Q_D(KBudgetView);
+            const auto idx = d->ui->m_budgetList->currentIndex();
+            const auto file = MyMoneyFile::instance();
+            const QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editor);
+            const QSpinBox* spinBox = qobject_cast<QSpinBox*>(editor);
+            auto budget = file->budgetsModel()->itemByIndex(idx);
+            bool needSave = false;
+
+            switch (idx.column()) {
+            case BudgetsModel::Columns::Name:
+                if (lineEdit) {
+                    budget.setName(lineEdit->text());
+                    needSave = true;
+                }
+                break;
+
+            case BudgetsModel::Columns::Year:
+                if (spinBox) {
+                    const QDate date(spinBox->value(), KMyMoneySettings::fiscalYearBegin(), KMyMoneySettings::fiscalYearBeginDay());
+                    if (date.isValid()) {
+                        budget.setBudgetStart(date);
+                        needSave = true;
+                    }
+                }
+                break;
+            }
+            if (needSave) {
+                MyMoneyFileTransaction ft;
+                try {
+                    file->modifyBudget(budget);
+                    ft.commit();
+                } catch (MyMoneyException& e) {
+                    qDebug() << e.what();
+                }
+            }
+        });
     }
 
     // don't forget base class implementation
