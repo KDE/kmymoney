@@ -146,7 +146,6 @@ public:
     MyMoneySplit prepareSplit(const MyMoneySplit& sp);
     bool needClearSplitAction(const QString& action) const;
     void updateMemoLink();
-    void syncAmountFromTransaction(const MyMoneyTransaction& t);
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -459,7 +458,6 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                 splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->shares()), eMyMoney::Model::SplitSharesRole);
 
                 updateVAT(ValueUnchanged);
-                syncAmountFromTransaction(q->transaction());
 
                 keepCategoryAmount = false;
 
@@ -518,7 +516,6 @@ bool NewTransactionEditor::Private::amountChanged()
         /// of all splits, otherwise we could ask if the user wants to start the split editor or anything else.
     }
     updateVAT(ValueChanged);
-    syncAmountFromTransaction(q->transaction());
     checkForValidAmount();
     return rc;
 }
@@ -1007,12 +1004,22 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
     MyMoneyFile::instance()->updateVAT(t);
 
     // keep the split model in sync with the new data
+    MyMoneySplit accountSplit;
     splitModel.unload();
     for (const auto& split : t.splits()) {
         if ((split.accountId() == taxId) || split.accountId() == categoryId) {
             splitModel.appendSplit(split);
+        } else {
+            accountSplit = split;
         }
     }
+
+    // In case the category is based on the net amount entry, we need to update
+    // the widgets to show the gross amount for the account.  In case
+    // the category is based on gross amount entry setting the same value
+    // does not hurt.
+    ui->creditDebitEdit->setValue(accountSplit.value(), true);
+    ui->creditDebitEdit->setShares(accountSplit.shares());
 }
 
 void NewTransactionEditor::Private::defaultCategoryAssignment()
@@ -1147,23 +1154,6 @@ void NewTransactionEditor::Private::updateMemoLink()
     } catch (MyMoneyException&) {
         ui->linkLabel->setText("");
     }
-}
-
-void NewTransactionEditor::Private::syncAmountFromTransaction(const MyMoneyTransaction& t)
-{
-    if (t.splits().isEmpty())
-        return;
-
-    const auto categoryId = ui->categoryCombo->getSelected();
-    if (categoryId.isEmpty())
-        return;
-
-    const auto category = MyMoneyFile::instance()->account(categoryId);
-    if (category.value("VatAmount").toLower() != QLatin1String("net"))
-        return;
-
-    ui->creditDebitEdit->setValue(t.splits().at(0).value(), true);
-    ui->creditDebitEdit->setShares(t.splits().at(0).shares());
 }
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
