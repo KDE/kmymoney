@@ -27,6 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "config-kmymoney-version.h"
 #include "kmymoneyplugin.h"
 #include "onlinepluginextended.h"
 
@@ -95,11 +96,12 @@ void pluginHandling(Action action, Container& ctnPlugins, QWidget* parent, KXMLG
 
     if (action == Action::Load ||
             action == Action::Reorganize) {
-
+        QString appVersion{VERSION};
         auto& refPlugins = referencePluginDatas;
         for (auto it = refPlugins.cbegin(); it != refPlugins.cend(); ++it) {
             if (!ctnPlugins.standard.contains(it.key())) {
-                qDebug() << "Loading" << (*it).fileName();
+                bool versionMatch = (*it).version() == appVersion;
+                qDebug() << "Loading" << (*it).fileName() << "version" << (*it).version() << (!versionMatch ? "does not match the app version" : "");
                 auto factoryResult = KPluginFactory::loadFactory(*it);
                 if (!factoryResult) {
                     qWarning("Could not load plugin '%s', error: %s", qPrintable((*it).fileName()), qPrintable(factoryResult.errorText));
@@ -111,7 +113,7 @@ void pluginHandling(Action action, Container& ctnPlugins, QWidget* parent, KXMLG
                 args.append(QVariant::fromValue(parent));
                 Plugin* plugin = factory->create<Plugin>(parent, parent, args);
                 if (!plugin) {
-                    qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
+                    qWarning("This is not a KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
                     continue;
                 }
 
