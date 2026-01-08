@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-06 03:57+0000\n"
+"POT-Creation-Date: 2026-01-08 03:32+0000\n"
 "PO-Revision-Date: 2024-11-10 18:13+0100\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -15360,55 +15360,55 @@ msgctxt "@action timeframe of the budget. month-by-month budget"
 msgid "Individual"
 msgstr "Individuálne"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:89
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
 #, fuzzy, kde-format
 #| msgid "Budget %1"
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
 msgstr "Rozpočet %1"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:98
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:140
 #, fuzzy, kde-format
 #| msgid "Budget %1 %2"
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
 msgstr "Rozpočet %1 %2"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:114
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:174
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:156
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:216
 #, kde-format
 msgid "Unable to add budget"
 msgstr "Nepodarilo sa pridať rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:173
 #, kde-format
 msgid "<p>Do you really want to remove the budget <b>%1</b>?</p>"
 msgstr "<p>Naozaj chcete odstrániť rozpočet <b>%1</b>?</p>"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:133
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:175
 #, kde-format
 msgid "Do you really want to remove all selected budgets?"
 msgstr "Naozaj chcete odstrániť všetky vybrané rozpočty?"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:135
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:177
 #, fuzzy, kde-format
 #| msgid "Remove Budget"
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "Odstrániť rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:154
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:196
 #, kde-format
 msgid "Unable to remove budget."
 msgstr "Nepodarilo sa odstrániť rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:169
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:211
 #: kmymoney/plugins/views/reports/kreportsview.cpp:471
 #, kde-format
 msgid "Copy of %1"
 msgstr "Kópia %1"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:194
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
 #, kde-format
 msgid ""
 "The current budget already contains data. Continuing will replace all "
@@ -15417,67 +15417,67 @@ msgstr ""
 "Súčasný rozpočet už obsahuje dáta. Pokračovanie nahradí všetky súčasné "
 "hodnoty tohto rozpočtu."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:195
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:237
 #, kde-format
 msgctxt "Warning message box"
 msgid "Warning"
 msgstr "Upozornenie"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:221
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:263
 #, kde-format
 msgid "Unable to modify budget."
 msgstr "Nepodarilo sa upraviť rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:278
 #, kde-format
 msgid "Unable to reset budget"
 msgstr "Nemožno vynulovať rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:251
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:293
 #, kde-format
 msgid "Unable to modify budget"
 msgstr "Nemožno zmeniť rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:369
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:411
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
 msgstr "Strata:"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:370
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:412
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Profit/Loss"
 msgid "Profit: %1"
 msgstr "Zisk: "
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:446
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:488
 #, kde-format
 msgid "New budget"
 msgstr "Nový rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:447
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:489
 #, kde-format
 msgid "Rename budget"
 msgstr "Premenovať rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:448
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:490
 #, kde-format
 msgid "Delete budget"
 msgstr "Vymazať rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:449
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:491
 #, kde-format
 msgid "Copy budget"
 msgstr "Kopírovať rozpočet"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:452
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
 #, kde-format
 msgid "Budget based on forecast"
 msgstr "Rozpočet založený na prognóze"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:460
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:502
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Miscellaneous income"
@@ -15485,7 +15485,7 @@ msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
 msgstr "Rozličné príjmy"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:465
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:507
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Miscellaneous expense"
@@ -15493,7 +15493,7 @@ msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
 msgstr "Rozličné výdavky"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:536
 #, fuzzy, kde-format
 #| msgctxt "Menu header"
 #| msgid "Budget options"
@@ -15501,21 +15501,21 @@ msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "Voľby rozpočtu"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:505
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:547
 #, fuzzy, kde-format
 #| msgid "Account options"
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "Nastavenia účtu"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:548
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:590
 #, fuzzy, kde-format
 #| msgid "Select the currency in which this account is denominated."
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
 msgstr "Vybrať menu, v ktorej je tento účet vedený."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:552
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:594
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
@@ -15624,14 +15624,14 @@ msgstr "Celkom"
 msgid "Include subaccounts"
 msgstr "Zahrnúť podúčty"
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:145
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
 #: kmymoney/views/kpayeesview_p.h:809
 #, fuzzy, kde-format
 #| msgid "Do you want to save the changes for <b>%1</b>?"
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "Chcete uložiť zmeny pre <b>%1</b>?"
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:147
 #: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
@@ -22016,7 +22016,7 @@ msgid "Select autofill transaction"
 msgstr "Vybrať automatické vypĺňanie transakcie"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1127
+#: kmymoney/views/newtransactioneditor.cpp:1137
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -22024,7 +22024,7 @@ msgstr "Vybrať automatické vypĺňanie transakcie"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1639
+#: kmymoney/views/newtransactioneditor.cpp:1649
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -22033,7 +22033,7 @@ msgstr ""
 "Chcete nahradiť poznámku<p><i>%1</i></p>poznámkou<p><i>%2</i></p>v inom "
 "rozdelení?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1640
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopírovať poznámku"

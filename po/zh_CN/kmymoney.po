@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-06 03:57+0000\n"
+"POT-Creation-Date: 2026-01-08 03:32+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14877,135 +14877,135 @@ msgctxt "@action timeframe of the budget. month-by-month budget"
 msgid "Individual"
 msgstr "个人"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:89
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
 #, fuzzy, kde-format
 #| msgid "Budget %1"
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
 msgstr "预算%1"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:98
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:140
 #, fuzzy, kde-format
 #| msgid "Budget %1 %2"
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
 msgstr "预算 %1 %2"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:114
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:174
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:156
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:216
 #, kde-format
 msgid "Unable to add budget"
 msgstr ""
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:173
 #, kde-format
 msgid "<p>Do you really want to remove the budget <b>%1</b>?</p>"
 msgstr ""
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:133
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:175
 #, kde-format
 msgid "Do you really want to remove all selected budgets?"
 msgstr "您真的要删除所有选中的预算吗？"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:135
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:177
 #, fuzzy, kde-format
 #| msgid "Remove Budget"
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "删除预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:154
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:196
 #, kde-format
 msgid "Unable to remove budget."
 msgstr ""
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:169
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:211
 #: kmymoney/plugins/views/reports/kreportsview.cpp:471
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1的副本"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:194
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
 #, kde-format
 msgid ""
 "The current budget already contains data. Continuing will replace all "
 "current values of this budget."
 msgstr "当前预算中已经包含数据。继续的话，将会替换该预算的所有现有值。"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:195
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:237
 #, kde-format
 msgctxt "Warning message box"
 msgid "Warning"
 msgstr "警告"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:221
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:263
 #, kde-format
 msgid "Unable to modify budget."
 msgstr "无法修改预算."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:278
 #, kde-format
 msgid "Unable to reset budget"
 msgstr "无法重置预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:251
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:293
 #, kde-format
 msgid "Unable to modify budget"
 msgstr "无法修改预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:369
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:411
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
 msgstr "损失："
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:370
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:412
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Profit/Loss"
 msgid "Profit: %1"
 msgstr "利润："
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:446
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:488
 #, kde-format
 msgid "New budget"
 msgstr "新建预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:447
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:489
 #, kde-format
 msgid "Rename budget"
 msgstr "重命名预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:448
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:490
 #, kde-format
 msgid "Delete budget"
 msgstr "删除预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:449
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:491
 #, kde-format
 msgid "Copy budget"
 msgstr "拷贝预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:452
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
 #, kde-format
 msgid "Budget based on forecast"
 msgstr "预测出的预算"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:460
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:502
 #, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
 msgstr ""
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:465
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:507
 #, fuzzy, kde-format
 #| msgid "language to be used"
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
 msgstr "要使用的语言"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:536
 #, fuzzy, kde-format
 #| msgctxt "Menu header"
 #| msgid "Budget options"
@@ -15013,21 +15013,21 @@ msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "预算选项"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:505
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:547
 #, fuzzy, kde-format
 #| msgid "Account options"
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "账户选项"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:548
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:590
 #, fuzzy, kde-format
 #| msgid "Select the currency in which this account is denominated."
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
 msgstr "选择此账户使用的货币类型"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:552
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:594
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
@@ -15134,13 +15134,13 @@ msgstr "总计"
 msgid "Include subaccounts"
 msgstr "包括子账户"
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:145
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
 #: kmymoney/views/kpayeesview_p.h:809
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr ""
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:147
 #: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
@@ -21331,7 +21331,7 @@ msgid "Select autofill transaction"
 msgstr "选择自动填充交易"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1127
+#: kmymoney/views/newtransactioneditor.cpp:1137
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21339,7 +21339,7 @@ msgstr "选择自动填充交易"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1639
+#: kmymoney/views/newtransactioneditor.cpp:1649
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21348,7 +21348,7 @@ msgstr ""
 "您要在其他交易拆分中，将备忘 <p><i>%1</i></p> 替换为备忘 <p><i>%2</i></p> "
 "吗？"
 
-#: kmymoney/views/newtransactioneditor.cpp:1640
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, kde-format
 msgid "Copy memo"
 msgstr "复制备忘"

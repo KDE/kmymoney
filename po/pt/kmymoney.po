@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-06 03:57+0000\n"
+"POT-Creation-Date: 2026-01-08 03:32+0000\n"
 "PO-Revision-Date: 2020-09-15 12:07+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -15516,55 +15516,55 @@ msgctxt "@action timeframe of the budget. month-by-month budget"
 msgid "Individual"
 msgstr "Individual"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:89
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
 #, fuzzy, kde-format
 #| msgid "Budget %1"
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
 msgstr "Orçamento %1"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:98
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:140
 #, fuzzy, kde-format
 #| msgid "Budget %1 %2"
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
 msgstr "Orçamento %1 %2"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:114
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:174
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:156
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:216
 #, kde-format
 msgid "Unable to add budget"
 msgstr "Não foi possível adicionar o orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:173
 #, kde-format
 msgid "<p>Do you really want to remove the budget <b>%1</b>?</p>"
 msgstr "<p>Deseja realmente remover o orçamento <b>%1</b>?</p>"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:133
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:175
 #, kde-format
 msgid "Do you really want to remove all selected budgets?"
 msgstr "Deseja realmente remover todos os orçamentos seleccionados?"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:135
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:177
 #, fuzzy, kde-format
 #| msgid "Remove Budget"
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "Remover o Orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:154
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:196
 #, kde-format
 msgid "Unable to remove budget."
 msgstr "Não foi possível remover o orçamento."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:169
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:211
 #: kmymoney/plugins/views/reports/kreportsview.cpp:471
 #, kde-format
 msgid "Copy of %1"
 msgstr "Cópia de %1"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:194
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
 #, kde-format
 msgid ""
 "The current budget already contains data. Continuing will replace all "
@@ -15573,67 +15573,67 @@ msgstr ""
 "O orçamento actual já contém dados. Se continuar, irá substituir todos os "
 "valores actuais deste orçamento."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:195
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:237
 #, kde-format
 msgctxt "Warning message box"
 msgid "Warning"
 msgstr "Aviso"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:221
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:263
 #, kde-format
 msgid "Unable to modify budget."
 msgstr "Não foi possível modificar o orçamento."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:278
 #, kde-format
 msgid "Unable to reset budget"
 msgstr "Não foi possível reiniciar o orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:251
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:293
 #, kde-format
 msgid "Unable to modify budget"
 msgstr "Não foi possível modificar o orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:369
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:411
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
 msgstr "Prejuízo: "
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:370
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:412
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Profit/Loss"
 msgid "Profit: %1"
 msgstr "Lucro: "
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:446
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:488
 #, kde-format
 msgid "New budget"
 msgstr "Novo orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:447
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:489
 #, kde-format
 msgid "Rename budget"
 msgstr "Mudar o nome do orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:448
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:490
 #, kde-format
 msgid "Delete budget"
 msgstr "Apagar o orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:449
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:491
 #, kde-format
 msgid "Copy budget"
 msgstr "Copiar o orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:452
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
 #, kde-format
 msgid "Budget based on forecast"
 msgstr "Orçamento com base na previsão"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:460
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:502
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Miscellaneous income"
@@ -15641,7 +15641,7 @@ msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
 msgstr "Receita diversa"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:465
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:507
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Miscellaneous expense"
@@ -15649,7 +15649,7 @@ msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
 msgstr "Despesa diversa"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:536
 #, fuzzy, kde-format
 #| msgctxt "Menu header"
 #| msgid "Budget options"
@@ -15657,21 +15657,21 @@ msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "Opções do orçamento"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:505
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:547
 #, fuzzy, kde-format
 #| msgid "Account options"
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "Opções da conta"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:548
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:590
 #, fuzzy, kde-format
 #| msgid "Select the currency in which this account is denominated."
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
 msgstr "Seleccione a moeda na qual esta conta será denominada."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:552
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:594
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
@@ -15778,13 +15778,13 @@ msgstr "Total"
 msgid "Include subaccounts"
 msgstr "Incluir as sub-contas"
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:145
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
 #: kmymoney/views/kpayeesview_p.h:809
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Deseja gravar as alterações para <b>%1</b>?</qt>"
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:147
 #: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
@@ -22169,7 +22169,7 @@ msgid "Select autofill transaction"
 msgstr "Seleccionar a transacção auto-preenchida"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1127
+#: kmymoney/views/newtransactioneditor.cpp:1137
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -22177,7 +22177,7 @@ msgstr "Seleccionar a transacção auto-preenchida"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1639
+#: kmymoney/views/newtransactioneditor.cpp:1649
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -22186,7 +22186,7 @@ msgstr ""
 "Deseja substituir o memorando<p><i>%1</i></p>pelo memorando<p><i>%2</i></"
 "p>na outra parcela?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1640
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, kde-format
 msgid "Copy memo"
 msgstr "Copiar o memorando"

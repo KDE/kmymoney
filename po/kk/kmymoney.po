@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-06 03:57+0000\n"
+"POT-Creation-Date: 2026-01-08 03:32+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -15514,126 +15514,126 @@ msgctxt "@action timeframe of the budget. month-by-month budget"
 msgid "Individual"
 msgstr "Жеке"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:89
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
 msgstr "Бюджет"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:98
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:140
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
 msgstr "Бюджет"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:114
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:174
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:156
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:216
 #, fuzzy, kde-format
 #| msgid "Unable to modify budget"
 msgid "Unable to add budget"
 msgstr "Бюджет өзгертілмеді"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:131
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:173
 #, kde-format
 msgid "<p>Do you really want to remove the budget <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> бюджетін өшіргіңіз келгені рас па?</p>"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:133
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:175
 #, fuzzy, kde-format
 #| msgid "Do you really want to remove all selected tags?"
 msgid "Do you really want to remove all selected budgets?"
 msgstr "Шынымен таңдаған белгілерді өшірмексіз бе?"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:135
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:177
 #, fuzzy, kde-format
 #| msgid "Remove Budget"
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "Бюджетті өшіру"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:154
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:196
 #, fuzzy, kde-format
 #| msgid "Unable to reset budget"
 msgid "Unable to remove budget."
 msgstr "Бюджет ысырып тасталмады"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:169
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:211
 #: kmymoney/plugins/views/reports/kreportsview.cpp:471
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 дегеннің көшірмесі "
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:194
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
 #, kde-format
 msgid ""
 "The current budget already contains data. Continuing will replace all "
 "current values of this budget."
 msgstr "Назардағы бюджетте деректері бар. Жалғастырсаңыз бүкілі ауыстырылады."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:195
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:237
 #, kde-format
 msgctxt "Warning message box"
 msgid "Warning"
 msgstr "Ескерту"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:221
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:263
 #, fuzzy, kde-format
 #| msgid "Unable to modify budget"
 msgid "Unable to modify budget."
 msgstr "Бюджет өзгертілмеді"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:236
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:278
 #, kde-format
 msgid "Unable to reset budget"
 msgstr "Бюджет ысырып тасталмады"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:251
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:293
 #, kde-format
 msgid "Unable to modify budget"
 msgstr "Бюджет өзгертілмеді"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:369
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:411
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
 msgstr "Шығын: "
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:370
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:412
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Profit/Loss"
 msgid "Profit: %1"
 msgstr "Пайда: "
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:446
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:488
 #, kde-format
 msgid "New budget"
 msgstr "Жаңа бюджет"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:447
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:489
 #, kde-format
 msgid "Rename budget"
 msgstr "Бюджет атауын өзгерту"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:448
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:490
 #, kde-format
 msgid "Delete budget"
 msgstr "Бюджетті өшіру"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:449
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:491
 #, kde-format
 msgid "Copy budget"
 msgstr "Бюджетті көшірмелеу"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:452
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
 #, kde-format
 msgid "Budget based on forecast"
 msgstr "Болжам негізіндегі бюджет"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:460
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:502
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Miscellaneous income"
@@ -15641,7 +15641,7 @@ msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
 msgstr "Түрлі басқа кіріс"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:465
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:507
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Miscellaneous expense"
@@ -15649,28 +15649,28 @@ msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
 msgstr "Түрлі басқа шығыс"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:494
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:536
 #, fuzzy, kde-format
 #| msgid "Budget options"
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "Бюджет параметрлері"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:505
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:547
 #, fuzzy, kde-format
 #| msgid "Account options"
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "Есепшот параметрлері"
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:548
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:590
 #, fuzzy, kde-format
 #| msgid "Select the currency in which this account is denominated."
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
 msgstr "Бұл есепшотты қай ақша түрінде келтіретінің таңдаңыз."
 
-#: kmymoney/plugins/views/budget/kbudgetview.cpp:552
+#: kmymoney/plugins/views/budget/kbudgetview.cpp:594
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
@@ -15782,14 +15782,14 @@ msgstr "Қорытынды"
 msgid "Include subaccounts"
 msgstr "Есепшот тармақтарын қоса"
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:145
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
 #: kmymoney/views/kpayeesview_p.h:809
 #, fuzzy, kde-format
 #| msgid "Do you want to save the changes for <b>%1</b>?"
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<b>%1</b> өзгерістерін сақтауды қалайсыз ба?"
 
-#: kmymoney/plugins/views/budget/kbudgetview_p.h:146
+#: kmymoney/plugins/views/budget/kbudgetview_p.h:147
 #: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
@@ -22209,7 +22209,7 @@ msgid "Select autofill transaction"
 msgstr "Автотолтыруға транзакцияны таңдау"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1127
+#: kmymoney/views/newtransactioneditor.cpp:1137
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -22217,14 +22217,14 @@ msgstr "Автотолтыруға транзакцияны таңдау"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1639
+#: kmymoney/views/newtransactioneditor.cpp:1649
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1640
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"
