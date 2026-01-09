@@ -145,7 +145,8 @@
  
 <para
 >Quan compro productes, els introdueixo en una operació. Suposem que he seleccionat el mètode d'introducció import brut, un cop introdueixi la categoria i l'import, el &kmymoney; reconeixerà que hi ha una assignació per a l'IVA i calcularà la part de l'IVA, crearà un segon desglossament amb el compte per a l'IVA i l'import de l'IVA, i reduirà l'import de la categoria. </para>
- 
+<para
+>En canvi, si heu seleccionat el mètode d'entrada d'import net, l'import que introduïu es tracta com a excloent l'IVA. El &kmymoney; calcularà la part d'IVA, crearà un desglossament separat per al compte d'IVA i deixarà l'import de la categoria tal com s'ha introduït. </para>
 <para
 >El mateix s'aplica a les categories d'ingressos, però a l'inrevés. Espero que tingui sentit. </para>
 

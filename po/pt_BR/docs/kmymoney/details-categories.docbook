@@ -135,7 +135,8 @@
  
 <para
 >Quando se adquirem bens, eles poderão ser inseridos numa transação. Assumir-se-á que foi selecionado o método de inserção dos valores brutos; assim que seja inserida a categoria e o montante, o &kmymoney; irá reconhecer que existe uma atribuição de IVA, calculando a parcela para o mesmo, criando essa parcela com a conta do IVA e o montante do mesmo IVA, reduzindo o montante da categoria. </para>
- 
+<para
+>Em contrapartida, se você selecionou o método de entrada de valor líquido, o valor que você inserir será tratado como excluindo o IVA. O &kmymoney; calculará a parcela do IVA, criará uma divisão separada para a conta do IVA e manterá o valor da categoria como inserido. </para>
 <para
 >O mesmo se aplica às categorias de receitas, se bem que funciona no sentido inverso. Esperamos que isto faça sentido. </para>
 

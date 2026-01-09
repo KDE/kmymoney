@@ -1321,7 +1321,7 @@
       <para
 >Configura els paràmetres de la banca en línia, però només si el mòdul KBanking està activat. Es pot trobar més informació a la secció sobre la configuració del <link linkend="details.settings.plugins.kbanking"
 >connector del KBanking</link
-> així com a la <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
+> així com a la <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
 >documentació del &gnucash;</ulink
 >. </para>
 

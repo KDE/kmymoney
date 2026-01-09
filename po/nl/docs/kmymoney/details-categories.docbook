@@ -135,7 +135,8 @@
  
 <para
 >Wanneer ik goederen koop, voer ik ze in in een transactie. Laten we aannemen dat ik de bruto invoermethode heb gekozen, nadat ik de categorie en invoer heb ingevoerd, zal &kmymoney; herkennen dat er een BTW toekenning is en de hoeveelheid BTW berekenen, een tweede splitsing met het BTW account en BTW hoeveelheid en de hoeveelheid in de categorie verminderen. </para>
- 
+<para
+>In tegenstelling, als u de methode netto hoeveelheid invoeren hebt geselecteerd, wordt de hoeveelheid die u invoert behandeld als zonder BTW. &kmymoney; zal het BTW-gedeelte berekenen, een aparte splitsing voor het BTW-account en de hoeveelheid voor de categorie zoals ingevoerd laten. </para>
 <para
 >Hetzelfde is van toepassing op categorieën inkomsten echter andersom. Hopelijk is dat duidelijk. </para>
 
