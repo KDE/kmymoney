@@ -1353,8 +1353,8 @@ MyMoneyGncReader::~MyMoneyGncReader() {}
 #ifndef _GNCFILEANON
 void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyFile* file)
 {
-    Q_CHECK_PTR(pDevice);
-    Q_CHECK_PTR(file);
+    Q_ASSERT(pDevice);
+    Q_ASSERT(file);
 
     qDebug("Entering gnucash importer");
     setOptions();
@@ -1450,7 +1450,7 @@ void MyMoneyGncReader::setFileHideFactor()
 //********************************* convertCommodity *******************************************
 void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
 {
-    Q_CHECK_PTR(gcm);
+    Q_ASSERT(gcm);
     MyMoneySecurity equ;
     if (m_commodityCount == 0) signalProgress(0, m_gncCommodityCount, i18n("Loading commodities..."));
     if (!gcm->isCurrency()) { // currencies should not be present here but...
@@ -1502,7 +1502,7 @@ void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
 //******************************* convertPrice ************************************************
 void MyMoneyGncReader::convertPrice(const GncPrice *gpr)
 {
-    Q_CHECK_PTR(gpr);
+    Q_ASSERT(gpr);
     // add this to our price history
     if (m_priceCount == 0) signalProgress(0, 1, i18n("Loading prices..."));
     MyMoneyMoney rate(convBadValue(gpr->value()));
@@ -1528,7 +1528,7 @@ void MyMoneyGncReader::convertPrice(const GncPrice *gpr)
 //*********************************convertAccount ****************************************
 void MyMoneyGncReader::convertAccount(const GncAccount* gac)
 {
-    Q_CHECK_PTR(gac);
+    Q_ASSERT(gac);
     TRY {
         // we don't care about the GNC root account
         if ("ROOT" == gac->type()) {
@@ -1677,7 +1677,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
 //***************************** convertTransaction *****************************
 void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
 {
-    Q_CHECK_PTR(gtx);
+    Q_ASSERT(gtx);
     MyMoneyTransaction tx;
     MyMoneySplit split;
     unsigned int i;
@@ -1741,7 +1741,7 @@ void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
 //******************************************convertSplit********************************
 void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
 {
-    Q_CHECK_PTR(gsp);
+    Q_ASSERT(gsp);
     MyMoneySplit split;
     MyMoneyAccount splitAccount;
     // find the kmm account id corresponding to the gnc id
@@ -1872,7 +1872,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
 MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction(const QString& schedName, const GncTransaction *gtx)
 {
 
-    Q_CHECK_PTR(gtx);
+    Q_ASSERT(gtx);
     MyMoneyTransaction tx;
     MyMoneySplit split;
     unsigned int i;
@@ -1940,7 +1940,7 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction(const QString& s
 //********************************* convertTemplateSplit ****************************************************
 void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncTemplateSplit *gsp)
 {
-    Q_CHECK_PTR(gsp);
+    Q_ASSERT(gsp);
     // convertTemplateSplit
     MyMoneySplit split;
     MyMoneyAccount splitAccount;
@@ -2079,7 +2079,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
 void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
 {
     TRY {
-        Q_CHECK_PTR(gsc);
+        Q_ASSERT(gsc);
         MyMoneySchedule sc;
         MyMoneyTransaction tx;
         m_suspectSchedule = false;

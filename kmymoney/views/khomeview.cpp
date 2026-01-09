@@ -184,7 +184,7 @@ void KHomeView::slotOpenUrl(const QUrl &url)
             return;
 
         KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
-        Q_CHECK_PTR(mw);
+        Q_ASSERT(mw);
         if (view == VIEW_LEDGER) {
             pActions[eMenu::Action::GoToAccount]->setData(id);
             Q_EMIT requestActionTrigger(eMenu::Action::GoToAccount);

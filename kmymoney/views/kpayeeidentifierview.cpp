@@ -47,7 +47,7 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
         delegate = defaultDelegate;
     }
     connectSignals(delegate, Qt::UniqueConnection);
-    Q_CHECK_PTR(delegate);
+    Q_ASSERT(delegate);
     return delegate;
 }
 
@@ -75,7 +75,7 @@ void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
         ui->view->setModel(model);
     }
 
-    Q_CHECK_PTR(qobject_cast<payeeIdentifierContainerModel*>(ui->view->model()));    // this should never fail but may help during debugging
+    Q_ASSERT(qobject_cast<payeeIdentifierContainerModel*>(ui->view->model()));    // this should never fail but may help during debugging
     static_cast<payeeIdentifierContainerModel*>(ui->view->model())->setSource(container);
 
     // Open persistent editor for last row
@@ -117,7 +117,7 @@ void KPayeeIdentifierView::removeSelected()
     std::sort(selectedRows.begin(), selectedRows.end(), QModelIndexRowComparison);
 
     QAbstractItemModel* model = ui->view->model();
-    Q_CHECK_PTR(model);
+    Q_ASSERT(model);
 
     QModelIndexList::const_iterator end = selectedRows.cend();
     for (QModelIndexList::const_iterator iter = selectedRows.cbegin(); iter != end; ++iter)

@@ -60,7 +60,7 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifierTyped& other)
     : payeeIdentifier(other)
 {
     m_payeeIdentifierTyped = dynamic_cast<T*>(payeeIdentifier::data());
-    Q_CHECK_PTR(m_payeeIdentifierTyped);
+    Q_ASSERT(m_payeeIdentifierTyped);
 }
 
 template< class T >

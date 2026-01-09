@@ -111,19 +111,19 @@ void ibanBicItemDelegate::setEditorData(QWidget* editor, const QModelIndex& inde
 {
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = ibanBicByIndex(index);
     ibanBicItemEdit* ibanEditor = qobject_cast< ibanBicItemEdit* >(editor);
-    Q_CHECK_PTR(ibanEditor);
+    Q_ASSERT(ibanEditor);
 
     ibanEditor->setIdentifier(ibanBic);
 }
 
 void ibanBicItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-    Q_CHECK_PTR(editor);
-    Q_CHECK_PTR(model);
+    Q_ASSERT(editor);
+    Q_ASSERT(model);
     Q_ASSERT(index.isValid());
 
     ibanBicItemEdit* ibanEditor = qobject_cast< ibanBicItemEdit* >(editor);
-    Q_CHECK_PTR(ibanEditor);
+    Q_ASSERT(ibanEditor);
 
     model->setData(index, QVariant::fromValue<payeeIdentifier>(ibanEditor->identifier()), payeeIdentifierContainerModel::payeeIdentifier);
 }

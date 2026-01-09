@@ -80,7 +80,7 @@ onlineJobTyped<T>::onlineJobTyped()
     m_taskTyped = static_cast<T*>(onlineJob::task());   // this can throw emptyTask
 
     // Just be safe: an onlineTask developer could have done something wrong
-    Q_CHECK_PTR(dynamic_cast<T*>(onlineJob::task()));
+    Q_ASSERT(dynamic_cast<T*>(onlineJob::task()));
 }
 
 template<class T>
@@ -97,7 +97,7 @@ onlineJobTyped<T>::onlineJobTyped(onlineJobTyped<T> const& other)
     : onlineJob(other)
 {
     m_taskTyped = dynamic_cast<T*>(onlineJob::task());
-    Q_CHECK_PTR(m_taskTyped);
+    Q_ASSERT(m_taskTyped);
 }
 
 template<class T>
@@ -105,7 +105,7 @@ onlineJobTyped<T> onlineJobTyped<T>::operator =(onlineJobTyped<T> const & other)
 {
     onlineJob::operator =(other);
     m_taskTyped = dynamic_cast<T*>(onlineJob::task());
-    Q_CHECK_PTR(m_taskTyped);
+    Q_ASSERT(m_taskTyped);
     return (*this);
 }
 
@@ -121,14 +121,14 @@ onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
 template<class T>
 T* onlineJobTyped<T>::task()
 {
-    Q_CHECK_PTR(m_taskTyped);
+    Q_ASSERT(m_taskTyped);
     return m_taskTyped;
 }
 
 template<class T>
 const T* onlineJobTyped<T>::task() const
 {
-    Q_CHECK_PTR(m_taskTyped);
+    Q_ASSERT(m_taskTyped);
     return m_taskTyped;
 }
 

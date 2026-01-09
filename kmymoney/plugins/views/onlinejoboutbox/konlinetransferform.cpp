@@ -312,7 +312,7 @@ bool kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
 
 void kOnlineTransferForm::showEditWidget(IonlineJobEdit* widget)
 {
-    Q_CHECK_PTR(widget);
+    Q_ASSERT(widget);
 
     QWidget* oldWidget = ui->creditTransferEdit->takeWidget();
     if (oldWidget != nullptr) { // This is true at the first call of showEditWidget() and if there are no widgets.
