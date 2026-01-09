@@ -110,19 +110,19 @@ QWidget* nationalAccountDelegate::createEditor(QWidget* parent, const QStyleOpti
 void nationalAccountDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
     nationalAccountEdit* nationalEditor = qobject_cast< nationalAccountEdit* >(editor);
-    Q_CHECK_PTR(nationalEditor);
+    Q_ASSERT(nationalEditor);
 
     nationalEditor->setIdentifier(identByIndex(index));
 }
 
 void nationalAccountDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-    Q_CHECK_PTR(editor);
-    Q_CHECK_PTR(model);
+    Q_ASSERT(editor);
+    Q_ASSERT(model);
     Q_ASSERT(index.isValid());
 
     nationalAccountEdit* nationalEditor = qobject_cast< nationalAccountEdit* >(editor);
-    Q_CHECK_PTR(nationalEditor);
+    Q_ASSERT(nationalEditor);
 
     payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex(index);
     ident->setAccountNumber(nationalEditor->accountNumber());

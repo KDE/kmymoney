@@ -58,7 +58,7 @@ protected:
             }
             connectSignals(delegate, Qt::UniqueConnection);
         }
-        Q_CHECK_PTR(delegate);
+        Q_ASSERT(delegate);
         return delegate;
     }
 };

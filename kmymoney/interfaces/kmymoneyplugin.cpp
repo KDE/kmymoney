@@ -89,25 +89,25 @@ KMyMoneyPlugin::OnlinePlugin::~OnlinePlugin()
 
 KMyMoneyPlugin::AppInterface* KMyMoneyPlugin::Plugin::appInterface() const
 {
-    Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().appInterface);
+    Q_ASSERT(KMyMoneyPlugin::pluginInterfaces().appInterface);
     return KMyMoneyPlugin::pluginInterfaces().appInterface;
 }
 
 KMyMoneyPlugin::ViewInterface* KMyMoneyPlugin::Plugin::viewInterface() const
 {
-    Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().viewInterface);
+    Q_ASSERT(KMyMoneyPlugin::pluginInterfaces().viewInterface);
     return KMyMoneyPlugin::pluginInterfaces().viewInterface;
 }
 
 KMyMoneyPlugin::StatementInterface* KMyMoneyPlugin::Plugin::statementInterface() const
 {
-    Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().statementInterface);
+    Q_ASSERT(KMyMoneyPlugin::pluginInterfaces().statementInterface);
     return KMyMoneyPlugin::pluginInterfaces().statementInterface;
 }
 
 KMyMoneyPlugin::ImportInterface* KMyMoneyPlugin::Plugin::importInterface() const
 {
-    Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().importInterface);
+    Q_ASSERT(KMyMoneyPlugin::pluginInterfaces().importInterface);
     return KMyMoneyPlugin::pluginInterfaces().importInterface;
 }
 

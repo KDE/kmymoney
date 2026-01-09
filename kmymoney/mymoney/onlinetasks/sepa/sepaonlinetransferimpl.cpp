@@ -207,7 +207,7 @@ QSharedPointer<const sepaOnlineTransfer::settings> sepaOnlineTransferImpl::getSe
         if (_settings.isNull())
             _settings = QSharedPointer< const sepaOnlineTransfer::settings >(new sepaOnlineTransferSettingsFallback);
     }
-    Q_CHECK_PTR(_settings);
+    Q_ASSERT(_settings);
     return _settings;
 }
 
