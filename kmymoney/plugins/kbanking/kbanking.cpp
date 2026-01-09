@@ -344,7 +344,7 @@ void KBanking::createActions()
     connect(file_import_aqbanking, &QAction::triggered, this, &KBanking::slotImport);
     d->actions.insert(file_import_aqbanking);
 
-    Q_CHECK_PTR(viewInterface());
+    Q_ASSERT(viewInterface());
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action("file_import_aqbanking"), &QAction::setEnabled);
 
 #ifdef KMM_DEBUG
@@ -661,7 +661,7 @@ void KBanking::executeQueue()
  */
 void KBanking::sendOnlineJob(QList<onlineJob>& jobs)
 {
-    Q_CHECK_PTR(m_kbanking);
+    Q_ASSERT(m_kbanking);
 
     m_onlineJobQueue.clear();
     QList<onlineJob> unhandledJobs;

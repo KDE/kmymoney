@@ -31,7 +31,7 @@ static QString sepaChars()
 /** @todo Check if AB_TransactionLimits_GetMaxLenCustomerReference really is the limit for the sepa reference */
 QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings(const AB_TRANSACTION_LIMITS* aqlimits)
 {
-    Q_CHECK_PTR(aqlimits);
+    Q_ASSERT(aqlimits);
 
     QSharedPointer<creditTransferSettingsBase> settings(new creditTransferSettingsBase);
 
@@ -65,7 +65,7 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
 
 void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident)
 {
-    Q_CHECK_PTR(transaction);
+    Q_ASSERT(transaction);
 
     AB_Transaction_SetRemoteAccountNumber(transaction, ident.accountNumber().toUtf8().constData());
     AB_Transaction_SetRemoteBankCode(transaction, ident.bankCode().toUtf8().constData());
@@ -74,7 +74,7 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
 
 void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident)
 {
-    Q_CHECK_PTR(transaction);
+    Q_ASSERT(transaction);
 
     AB_Transaction_SetRemoteAccountNumber(transaction, ident.electronicIban().toUtf8().constData());
     AB_Transaction_SetRemoteBankCode(transaction, ident.fullStoredBic().toUtf8().constData());
@@ -83,8 +83,8 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
 
 void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT_SPEC* account)
 {
-    Q_CHECK_PTR(transaction);
-    Q_CHECK_PTR(account);
+    Q_ASSERT(transaction);
+    Q_ASSERT(account);
 
     AB_Transaction_SetLocalName(transaction, AB_AccountSpec_GetOwnerName(account));
     AB_Transaction_SetLocalAccountNumber(transaction, AB_AccountSpec_GetAccountNumber(account));
@@ -96,7 +96,7 @@ void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUN
 
 void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident)
 {
-    Q_CHECK_PTR(transaction);
+    Q_ASSERT(transaction);
 
     AB_Transaction_SetLocalName(transaction, ident.ownerName().toUtf8().constData());
     AB_Transaction_SetLocalAccountNumber(transaction, ident.accountNumber().toUtf8().constData());
@@ -105,7 +105,7 @@ void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const payeeIden
 
 bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList<payeeIdentifier>& accountNumbers)
 {
-    Q_CHECK_PTR(transaction);
+    Q_ASSERT(transaction);
 
     bool validOriginAccountSet = false;
     for (const payeeIdentifier& accountNumber : accountNumbers) {

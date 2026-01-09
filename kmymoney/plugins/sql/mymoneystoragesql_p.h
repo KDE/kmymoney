@@ -3379,7 +3379,7 @@ public:
     template<ulong MyMoneyStorageSqlPrivate::* cache>
     ulong getNextId(const QString& table, const QString& id, const int prefixLength) const
     {
-        Q_CHECK_PTR(cache);
+        Q_ASSERT(cache);
         if (this->*cache == 0) {
             MyMoneyStorageSqlPrivate* nonConstThis = const_cast<MyMoneyStorageSqlPrivate*>(this);
             nonConstThis->*cache = 1 + nonConstThis->highestNumberFromIdString(table, id, prefixLength);
