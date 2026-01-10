@@ -260,8 +260,8 @@
                 {
                     "type": "git",
                     "url": "https://git.aquamaniac.de/git/aqbanking",
-                    "commit": "656d93c50261019285a24c017c1f5e98991387bf",
-                    "tag": "6.8.5",
+                    "commit": "79e79ddf943fe5c23334aa9c2cbcc6cd98178b8b",
+                    "tag": "6.9.0",
                     "x-checker-data": {
                         "type": "git"
                     }
