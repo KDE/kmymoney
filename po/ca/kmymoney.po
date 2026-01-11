@@ -26141,6 +26141,3 @@ msgstr "Processa un informe específic"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Només s'admet un d'entre --csv o --html"
-
-#~ msgid "saving report '%1' into '%2'"
-#~ msgstr "s'està desant l'informe «%1» en «%2»"
