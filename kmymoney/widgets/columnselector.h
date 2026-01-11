@@ -110,7 +110,6 @@ public:
 
 protected Q_SLOTS:
     void slotColumnsMenu(const QPoint);
-    void slotUpdateHeaderState();
 
 Q_SIGNALS:
     void columnsChanged();
