@@ -80,6 +80,9 @@ void KCategoriesView::slotSettingsChanged()
     d->m_proxyModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideFavoriteAccounts(true);
 
+    d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
+    d->ui->m_hiddenCategories->setVisible(KMyMoneySettings::hideUnusedCategory());
+
     MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
     MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
