@@ -19,10 +19,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-08 03:32+0000\n"
-"PO-Revision-Date: 2026-01-01 20:10+0100\n"
+"POT-Creation-Date: 2026-01-12 04:05+0000\n"
+"PO-Revision-Date: 2026-01-10 20:59+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -6447,7 +6447,7 @@ msgid "Last Price Update"
 msgstr "Dernière mise à jour du cours"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:226
+#: kmymoney/widgets/columnselector.cpp:230
 #, kde-format
 msgid "Displayed columns"
 msgstr "Colonnes affichées"
@@ -17800,7 +17800,7 @@ msgstr ""
 "Mars)\n"
 "              </ul>\n"
 "              </p>\n"
-"            "
+"         "
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipZero)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:116
@@ -19828,45 +19828,45 @@ msgstr "Ce compte est toujours inclus dans une opération récurrente active"
 msgid "This account is still mapped to an online account"
 msgstr "Ce compte est toujours associé à un compte en ligne"
 
-#: kmymoney/views/kcategoriesview.cpp:153
+#: kmymoney/views/kcategoriesview.cpp:156
 #, kde-format
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "Perte : ~%1"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:157
 #, kde-format
 msgid "Loss: %1"
 msgstr "Perte : %1"
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:160
 #, kde-format
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "Profit : ~%1"
 
-#: kmymoney/views/kcategoriesview.cpp:158
+#: kmymoney/views/kcategoriesview.cpp:161
 #, kde-format
 msgid "Profit: %1"
 msgstr "Profit : %1"
 
-#: kmymoney/views/kcategoriesview.cpp:197
+#: kmymoney/views/kcategoriesview.cpp:200
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Éditer la catégorie « %1 »"
 
-#: kmymoney/views/kcategoriesview.cpp:205
+#: kmymoney/views/kcategoriesview.cpp:208
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Modifier la catégorie…"
 
-#: kmymoney/views/kcategoriesview.cpp:219
+#: kmymoney/views/kcategoriesview.cpp:222
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Impossible de modifier la catégorie « %1 ». Raison : %2"
 
-#: kmymoney/views/kcategoriesview.cpp:316
+#: kmymoney/views/kcategoriesview.cpp:319
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
@@ -19874,24 +19874,24 @@ msgstr ""
 "Impossibilité d'échanger la catégorie <b>%1</b> avec la catégorie <b>%2</b>. "
 "Raison : %3"
 
-#: kmymoney/views/kcategoriesview.cpp:337
+#: kmymoney/views/kcategoriesview.cpp:340
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>Voulez-vous vraiment supprimer la catégorie <b>%1</b> ?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:338
-#: kmymoney/views/kcategoriesview.cpp:399
+#: kmymoney/views/kcategoriesview.cpp:341
+#: kmymoney/views/kcategoriesview.cpp:402
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Supprimer une catégorie"
 
-#: kmymoney/views/kcategoriesview.cpp:347
+#: kmymoney/views/kcategoriesview.cpp:350
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>Impossible de supprimer la catégorie <b>%1</b>. Raison : %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:358
+#: kmymoney/views/kcategoriesview.cpp:361
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -19903,17 +19903,17 @@ msgstr ""
 "catégorie, toutes ses sous-catégories deviendront des sous-catégories de <b>"
 "%2</b>.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:364
+#: kmymoney/views/kcategoriesview.cpp:367
 #, kde-format
 msgid "Delete all"
 msgstr "Tout supprimer"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:368
 #, kde-format
 msgid "Just the category"
 msgstr "Juste la catégorie"
 
-#: kmymoney/views/kcategoriesview.cpp:395
+#: kmymoney/views/kcategoriesview.cpp:398
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -19923,7 +19923,7 @@ msgstr ""
 "supprimées, parce qu'elles sont encore utilisées. Elles deviendront des sous-"
 "catégories de <b>%2</b>. Continuer ?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:421
+#: kmymoney/views/kcategoriesview.cpp:424
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
@@ -19931,7 +19931,7 @@ msgstr ""
 "<qt>Impossible de supprimer une sous-catégorie de la catégorie <b>%1</b>. "
 "Raison : %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:431
+#: kmymoney/views/kcategoriesview.cpp:434
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Impossible de supprimer la catégorie <b>%1</b>. Raison : %2"
@@ -22178,7 +22178,7 @@ msgid ""
 "using Ctrl+F"
 msgstr ""
 "Utilisé pour maintenir visible le composant graphique de filtre . S'il est "
-"invisible, il peut être affiché grâce au raccourci «CTRL » + « F »."
+"invisible, il peut être affiché grâce au raccourci « CTRL » + « F »."
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format

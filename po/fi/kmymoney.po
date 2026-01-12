@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-08 03:32+0000\n"
+"POT-Creation-Date: 2026-01-12 04:05+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -6332,7 +6332,7 @@ msgid "Last Price Update"
 msgstr "Viimeisin hintapäivitys"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:226
+#: kmymoney/widgets/columnselector.cpp:230
 #, kde-format
 msgid "Displayed columns"
 msgstr "Näytettävät sarakkeet"
@@ -19552,68 +19552,68 @@ msgstr "Tämä tili on yhä mukana käytössä olevassa ajoitetussa tapahtumassa
 msgid "This account is still mapped to an online account"
 msgstr "Tämä tili on hyvä liitettynä online-tiliin"
 
-#: kmymoney/views/kcategoriesview.cpp:153
+#: kmymoney/views/kcategoriesview.cpp:156
 #, kde-format
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "Tappio: n. %1"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:157
 #, kde-format
 msgid "Loss: %1"
 msgstr "Tappio: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:160
 #, kde-format
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "Tuotto: n. %1"
 
-#: kmymoney/views/kcategoriesview.cpp:158
+#: kmymoney/views/kcategoriesview.cpp:161
 #, kde-format
 msgid "Profit: %1"
 msgstr "Tuotto: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:197
+#: kmymoney/views/kcategoriesview.cpp:200
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Muokkaa luokkaa ”%1”"
 
-#: kmymoney/views/kcategoriesview.cpp:205
+#: kmymoney/views/kcategoriesview.cpp:208
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Muokkaa luokkaa"
 
-#: kmymoney/views/kcategoriesview.cpp:219
+#: kmymoney/views/kcategoriesview.cpp:222
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Luokkaa ”%1” ei voitu muuttaa. Syy: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:316
+#: kmymoney/views/kcategoriesview.cpp:319
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr "Luokkaa <b>%1</b> ei voida vaihtaa luokaksi <b>%2</b>. Syy: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:337
+#: kmymoney/views/kcategoriesview.cpp:340
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>Haluatko varmasti poistaa luokan <b>%1</b>?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:338
-#: kmymoney/views/kcategoriesview.cpp:399
+#: kmymoney/views/kcategoriesview.cpp:341
+#: kmymoney/views/kcategoriesview.cpp:402
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Poista luokka"
 
-#: kmymoney/views/kcategoriesview.cpp:347
+#: kmymoney/views/kcategoriesview.cpp:350
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>Luokkaa <b>%1</b>  ei voi poistaa. Syy: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:358
+#: kmymoney/views/kcategoriesview.cpp:361
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -19624,17 +19624,17 @@ msgstr ""
 "luokan? Jos poistat vain luokan, sen aliluokista tehdään luokan <b>%2</b> "
 "aliluokkia.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:364
+#: kmymoney/views/kcategoriesview.cpp:367
 #, kde-format
 msgid "Delete all"
 msgstr "Poista kaikki"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:368
 #, kde-format
 msgid "Just the category"
 msgstr "Vain luokka"
 
-#: kmymoney/views/kcategoriesview.cpp:395
+#: kmymoney/views/kcategoriesview.cpp:398
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -19643,13 +19643,13 @@ msgstr ""
 "<p>Joitakin luokan <b>%1</b> aliluokkia ei voi poistaa, koska ne ovat "
 "käytössä. Niistä tehdään luokan <b>%2</b> aliluokkia. Jatketaanko?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:421
+#: kmymoney/views/kcategoriesview.cpp:424
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "<qt>Luokan <b>%1</b> aliluokkaa ei voi poistaa. Syy: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:431
+#: kmymoney/views/kcategoriesview.cpp:434
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Luokkaa ”%1” ei voi poistaa. Syy: %2"

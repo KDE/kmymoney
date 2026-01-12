@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-08 03:32+0000\n"
+"POT-Creation-Date: 2026-01-12 04:05+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -6414,7 +6414,7 @@ msgid "Last Price Update"
 msgstr "Tolest opfrischt"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:226
+#: kmymoney/widgets/columnselector.cpp:230
 #, fuzzy, kde-format
 #| msgid "Date Column"
 msgid "Displayed columns"
@@ -20140,51 +20140,51 @@ msgstr ""
 msgid "This account is still mapped to an online account"
 msgstr "<qt>Dat angeven Konto <b>%1</b> wöör keen Nettkonto towiest.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:153
+#: kmymoney/views/kcategoriesview.cpp:156
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "Verlust: "
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:157
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgid "Loss: %1"
 msgstr "Verlust: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:160
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "Winnst: "
 
-#: kmymoney/views/kcategoriesview.cpp:158
+#: kmymoney/views/kcategoriesview.cpp:161
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgid "Profit: %1"
 msgstr "Winnst: "
 
-#: kmymoney/views/kcategoriesview.cpp:197
+#: kmymoney/views/kcategoriesview.cpp:200
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Kategorie \"%1\" bewerken"
 
-#: kmymoney/views/kcategoriesview.cpp:205
+#: kmymoney/views/kcategoriesview.cpp:208
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Kategorie bewerken..."
 
-#: kmymoney/views/kcategoriesview.cpp:219
+#: kmymoney/views/kcategoriesview.cpp:222
 #, fuzzy, kde-format
 #| msgid "Unable to modify account '%1'. Cause: %2"
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Konto \"%1\" lett sik nich ännern. Oorsaak: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:316
+#: kmymoney/views/kcategoriesview.cpp:319
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
@@ -20192,27 +20192,27 @@ msgstr ""
 "Kategorie <b>%1</b> lett sik nich mit Kategorie <b>%2</b> utwesseln. "
 "Oorsaak: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:337
+#: kmymoney/views/kcategoriesview.cpp:340
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete category <b>%1</b>?"
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "Wullt Du Kategorie <b>%1</b> redig wegdoon?"
 
-#: kmymoney/views/kcategoriesview.cpp:338
-#: kmymoney/views/kcategoriesview.cpp:399
+#: kmymoney/views/kcategoriesview.cpp:341
+#: kmymoney/views/kcategoriesview.cpp:402
 #, fuzzy, kde-format
 #| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Kategorie wegdoon..."
 
-#: kmymoney/views/kcategoriesview.cpp:347
+#: kmymoney/views/kcategoriesview.cpp:350
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "Kategorie <b>%1</b> lett sik nich wegmaken Oorsaak: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:358
+#: kmymoney/views/kcategoriesview.cpp:361
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -20227,17 +20227,17 @@ msgstr ""
 "bloots de Kategorie alleen? Deist Du bloots de Kategorie alleen weg, denn "
 "warrt all ehr Ünnerkategorien to Ünnerkategorien vun <b>%2</b> maakt."
 
-#: kmymoney/views/kcategoriesview.cpp:364
+#: kmymoney/views/kcategoriesview.cpp:367
 #, kde-format
 msgid "Delete all"
 msgstr "All wegdoon"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:368
 #, kde-format
 msgid "Just the category"
 msgstr "Bloots de Kategorie"
 
-#: kmymoney/views/kcategoriesview.cpp:395
+#: kmymoney/views/kcategoriesview.cpp:398
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -20247,14 +20247,14 @@ msgstr ""
 "wegmaken, wiel se noch bruukt warrt. Se warrt to Ünnerkategorien vun <b>%2</"
 "b> maakt. Wiedermaken?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:421
+#: kmymoney/views/kcategoriesview.cpp:424
 #, fuzzy, kde-format
 #| msgid "Unable to delete a sub-category of category <b>%1</b>. Reason: %2"
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "Ut Kategorie \"%1\" lett sik keen Ünnerkategorie wegmaken. Oorsaak: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:431
+#: kmymoney/views/kcategoriesview.cpp:434
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "Unable to delete category '%1'. Cause: %2"
