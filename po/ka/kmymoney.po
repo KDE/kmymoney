@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-12 00:44+0000\n"
-"PO-Revision-Date: 2026-01-10 12:56+0100\n"
+"PO-Revision-Date: 2026-01-12 04:01+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -6575,7 +6575,7 @@ msgstr "  * აღმოჩენილია მარყუჟი ამ დ�
 #: kmymoney/mymoney/mymoneyfile.cpp:3070
 #, kde-format
 msgid "    Reparenting account '%2' to top level account '%1'."
-msgstr ""
+msgstr "     ახალიმ მშობელი ანგარიში '%2' ზედა დონის ანგარიშისთვის '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3102
 #, kde-format
@@ -6685,7 +6685,7 @@ msgstr "  * წაიშალა გამოუყენებელი და
 #: kmymoney/mymoney/mymoneyfile.cpp:3332
 #, kde-format
 msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
-msgstr ""
+msgstr "  *გაყოფების რაოდენობა ტრანზაქციაში '%1', გამოტანილი %2-ზე, ნული არაა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3338
 #, kde-format
@@ -6699,11 +6699,13 @@ msgid ""
 "  * Split %2 in transaction '%1' referenced standard account %3 and has been "
 "removed."
 msgstr ""
+"  *გაყოფილი %2 ტრანზაქციაში '%1', მიმართავდა სტანდარტულ ანგარიშს %3 და "
+"წაიშალა"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3370
 #, kde-format
 msgid "  * Payee id updated in split of transaction '%1'."
-msgstr ""
+msgstr "  მიმღების id განახლდა გაყოფილ ტრანზაქციაში '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3392
 #, kde-format
@@ -6711,6 +6713,8 @@ msgid ""
 "  * Opening date of Account '%1' cannot be changed to support transaction "
 "'%2' post date."
 msgstr ""
+"  *გახსნის თარიღს ანგარიშისთვის '%1' ვერ შეცვლით ტრანზაქციის '%2' გამოტანის "
+"თარიღის მხარდასაჭერად."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3400
 #, kde-format
@@ -6718,6 +6722,8 @@ msgid ""
 "  * Transaction '%1' post date '%2' is older than opening date '%4' of "
 "account '%3'."
 msgstr ""
+"  * ტრანზაქციის '%1' გამოტანის თარიღი '%2' უფრო ძველია, ვიდრე გახსნის თარიღი "
+"'%4' ანგარიშისთვის '%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3406
 #, kde-format
@@ -6728,11 +6734,15 @@ msgstr "    ანგარიშის გახსნის თარიღი
 #, kde-format
 msgid "  * shares set to value in split of transaction '%1'."
 msgstr ""
+"  * აქციების რაოდენობა დაყენებულია იგივე მნიშვნელობაზე, რაც არის გაყოფაში "
+"ტრანზაქციისთვის '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3423
 #, kde-format
 msgid "  * value set to shares in split of transaction '%1'."
 msgstr ""
+"  * მნიშვნელობები დაყენებულია იგივეზე, რაც არის გაყოფაში ტრანზაქციისთვის "
+"'%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3432
 #, kde-format
@@ -6740,11 +6750,13 @@ msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
+"  * გაყოფა %2 ტრანზაქციაში '%1' შეიცავს სხვადასხვა ნიშნებს აქციებისთვის და "
+"მნიშვნელობისთვის."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3449
 #, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr ""
+msgstr "    რეინვესტიციის ტრანზაქცია '%1' გასწორდა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3453
 #, kde-format
@@ -6757,11 +6769,13 @@ msgid ""
 "  * Split %2 in transaction '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
+"  * გაყოფა %2 ტრანზაქციაში '%1' შეიცავს მიმართვას არასწორ ანგარიშზე %3. "
+"გაასწორეთ ხელით."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3475
 #, kde-format
 msgid "  * action marked as interest in split of transaction '%1'."
-msgstr ""
+msgstr "  * ქმედება მოინიშნა, როგორც გაყოფის პროცენტი ტრანზაქციისთვის '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3489
 #, kde-format
@@ -6779,6 +6793,8 @@ msgid ""
 "  * Transaction '%1' has a post date '%2' before one of the referenced "
 "account's opening date."
 msgstr ""
+"  * ტრანზაქციას '%1' აქვს გამოტანის თარიღი '%2', რომელიც ერთ-ერთი მიმართული "
+"ანგარიშის გახსნის თარიღზე ადრეა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3527
 #, kde-format
@@ -6800,6 +6816,8 @@ msgstr "  * მიმღების id განახლდა გეგმი
 msgid ""
 "  * Split in scheduled transaction '%1' contained value != 0 and shares == 0."
 msgstr ""
+"  * გაყოფა დაგეგმილ ტრანზაქციაში '%1' შეიცავდა მნიშვნელობას != 0 და აქციებს, "
+"რომლებიც == 0."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3561
 #, kde-format
@@ -6809,17 +6827,17 @@ msgstr "    აქციები დადგენილი ღირებუ
 #: kmymoney/mymoney/mymoneyfile.cpp:3569
 #, kde-format
 msgid "  * Removed bankid from split in scheduled transaction '%1'."
-msgstr ""
+msgstr "  * წაიშალა bankid გაყოფიდან დაგეგმილი ტრანზაქციისთვის '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3582
 #, kde-format
 msgid "  * shares set to value in split in schedule '%1'."
-msgstr ""
+msgstr "  * აქციები დაყენებულია მნიშვნელობაზე გაყოფილ ტრანზაქციაში '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3585
 #, kde-format
 msgid "  * value set to shares in split in schedule '%1'."
-msgstr ""
+msgstr "  * მნიშვნელობები დაყენებულია აქციებზე გაყოფილ ტრანზაქციაში '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3591
 #, kde-format
@@ -6827,6 +6845,8 @@ msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
+"  * გაყოფა %2 გეგმაში '%1' შეიცავს მიმართვას არასწორ ანგარიშზე %3. გაასწორეთ "
+"ხელით."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3600
 #, kde-format
@@ -6856,18 +6876,22 @@ msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
 "first usage on '%3'."
 msgstr ""
+"  * ანგარიშს '%1' ვალუტასი '%2' არ აქვს ფასი დაყენებული თავისი პირველი "
+"გამოყენების თარიღზე '%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3721
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
-msgstr ""
+msgstr "    შეიყვანეთ ვალუტის ფასი თარიღზე, ან '%1'-ზე ადრე."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3726
 #, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
 msgstr ""
+"  * ფასიან ქაღალდს '%1' არ აქვს ფასი დაყენებული თავის პირველ გამოყენებაზე. "
+"თარიღი '%2'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3737
 #, kde-format
@@ -6876,12 +6900,14 @@ msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
 msgstr ""
+"   ფასი ფასიანი ქაღალდისთვის ამოღებულია ტრანზაქციიდან და დაემატა ფასების "
+"ისტორიას."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3740
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
-msgstr ""
+msgstr "    შეიყვანეთ ფასი ფასიანი ქაღალდისთვის ამ თარიღზე, ან მანამდე."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3762
 #, kde-format
@@ -12236,6 +12262,7 @@ msgstr "აჩქარება"
 #, kde-format
 msgid "To confirm this order enter the tan displayed by your generator"
 msgstr ""
+"ამ შეკვეთის დასადასტურებლად შეიყვანეთ TAN, რომელიც თქვენს გენერატორზე ჩანს"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:71
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:80
@@ -12445,6 +12472,7 @@ msgstr "ანგარიში"
 #, kde-format
 msgid "To confirm this order enter the tan displayed by your &generator"
 msgstr ""
+"ამ შეკვეთის დასადასტურებლად შეიყვანეთ TAN, რომელიც თქვენს &გენერატორზე ჩანს"
 
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:218
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:415
@@ -16924,7 +16952,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:52
 #, kde-format
 msgid "Show short-term and long-term capital gains"
-msgstr ""
+msgstr "კაპიტალის მოკლევადიანი და გრძელვადიანი ზრდის ჩვენება"
 
 #. i18n: ectx: property (text), widget (QLabel, lblinvestmentSum)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:59
@@ -16937,7 +16965,7 @@ msgstr "ჯამური ინვესტიციები"
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:66
 #, kde-format
 msgid "Time in days between the settlement date and the transaction date."
-msgstr ""
+msgstr "დრო დღეებში გადახდის თარიღსა და ტრანზაქციის თარიღს შორის."
 
 #. i18n: ectx: property (text), widget (QLabel, lblHideTotals)
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -17510,6 +17538,8 @@ msgstr "მხოლოდ საინვესტიციო ანგარ�
 msgid ""
 "Do not display the individual transactions that make up a split transaction"
 msgstr ""
+"გაყოფილი ტრანზაქციის შემადგენელი ინდივიდუალური ტრანზაქციები ნაჩვენები არ "
+"იქნება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkHideSplitDetails)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:366
@@ -21372,7 +21402,11 @@ msgid "Payment on %2 for %3 with %1 transaction remaining occurring %4."
 msgid_plural ""
 "Payment on %2 for %3 with %1 transactions remaining occurring %4."
 msgstr[0] ""
+"გადახდა %2-ზე %3-ისთვის დარჩენილი %1 ტრანზაქციით, რომლის გამეორების თარიღია "
+"%4."
 msgstr[1] ""
+"გადახდა %2-ზე %3-ისთვის დარჩენილი %1 ტრანზაქციით, რომლის გამეორების თარიღია "
+"%4."
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:82
 #, kde-format
