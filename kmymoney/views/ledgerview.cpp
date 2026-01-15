@@ -110,6 +110,11 @@ public:
         q->setItemDelegate(delegateProxy);
     }
 
+    ~Private()
+    {
+        delete columnSelector;
+    }
+
     void setSingleLineDetailRole(eMyMoney::Model::Roles role)
     {
         journalDelegate->setSingleLineRole(role);
