@@ -392,7 +392,6 @@ public:
 
         if (ui->m_scheduleTree->selectionModel()) {
             const auto selection = ui->m_scheduleTree->selectionModel()->selectedRows();
-            selection.first();
             if (!selection.isEmpty()) {
                 const auto baseIndex = MyMoneyModelBase::mapToBaseSource(selection.first());
                 return MyMoneyFile::instance()->schedulesModel()->itemByIndex(baseIndex);
@@ -405,10 +404,12 @@ public:
     {
         Q_Q(KScheduledView);
         const auto schedule = selectedSchedule(action);
-        try {
-            KEditScheduleDlg::editSchedule(schedule, forceEdit);
-        } catch (const MyMoneyException& e) {
-            KMessageBox::detailedError(q, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
+        if (!schedule.id().isEmpty()) {
+            try {
+                KEditScheduleDlg::editSchedule(schedule, forceEdit);
+            } catch (const MyMoneyException& e) {
+                KMessageBox::detailedError(q, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
+            }
         }
     }
 
