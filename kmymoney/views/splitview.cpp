@@ -57,6 +57,11 @@ public:
     {
     }
 
+    ~Private()
+    {
+        delete columnSelector;
+    }
+
     void setSingleLineDetailRole(eMyMoney::Model::Roles role)
     {
         Q_UNUSED(role)
