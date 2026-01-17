@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-17 00:44+0000\n"
 "PO-Revision-Date: 2025-12-30 09:47+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -21343,31 +21343,31 @@ msgstr "Відкрити наявний файл даних"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Відкрити підручник і прочитати довідку щодо користування KMyMoney"
 
-#: kmymoney/views/ledgerview.cpp:212
+#: kmymoney/views/ledgerview.cpp:217
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Перейти до рахунку"
 
-#: kmymoney/views/ledgerview.cpp:214
+#: kmymoney/views/ledgerview.cpp:219
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Перейти до отримувача"
 
-#: kmymoney/views/ledgerview.cpp:259
+#: kmymoney/views/ledgerview.cpp:264
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Перейти до «%1»"
 
-#: kmymoney/views/ledgerview.cpp:269
+#: kmymoney/views/ledgerview.cpp:274
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Перейти до «%1»"
 
-#: kmymoney/views/ledgerview.cpp:771
+#: kmymoney/views/ledgerview.cpp:776
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21378,33 +21378,33 @@ msgstr ""
 "підтримки паралельного редагування двох операцій. <a href=\"jumpToEditor"
 "\">Перейти до поточного редактора</a>"
 
-#: kmymoney/views/ledgerview.cpp:898
+#: kmymoney/views/ledgerview.cpp:903
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Операцію не пов'язано з категорією."
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "У даних операції не вказано прив'язки <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:914
+#: kmymoney/views/ledgerview.cpp:919
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Цей розклад прострочено з %1. Натисніть на піктограмі, щоб ввести його."
 
-#: kmymoney/views/ledgerview.cpp:920
+#: kmymoney/views/ledgerview.cpp:925
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "Цей запис операції імпортовано. Натисніть на піктограмі, щоб прийняти його."
 
-#: kmymoney/views/ledgerview.cpp:926
+#: kmymoney/views/ledgerview.cpp:931
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21413,38 +21413,38 @@ msgstr ""
 "Для цієї операції встановлено відповідність. Натисніть на піктограмі, щоб "
 "прийняти встановлений варіант, або скасуйте встановлення відповідності."
 
-#: kmymoney/views/ledgerview.cpp:972
+#: kmymoney/views/ledgerview.cpp:977
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr "Різниця між балансом рахунку та інтернет-балансом складає %1."
 
-#: kmymoney/views/ledgerview.cpp:1034
+#: kmymoney/views/ledgerview.cpp:1039
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Не вводити прострочену заплановану операцію."
 
-#: kmymoney/views/ledgerview.cpp:1035
+#: kmymoney/views/ledgerview.cpp:1040
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Ввести прострочену заплановану операцію."
 
-#: kmymoney/views/ledgerview.cpp:1038
+#: kmymoney/views/ledgerview.cpp:1043
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Хочете ввести розклад прострочення зараз?"
 
-#: kmymoney/views/ledgerview.cpp:1039
+#: kmymoney/views/ledgerview.cpp:1044
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Ввести розклад прострочення"
 
-#: kmymoney/views/ledgerview.cpp:1059
+#: kmymoney/views/ledgerview.cpp:1064
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21454,7 +21454,7 @@ msgstr ""
 "Від'єднати приховану (відповідну) операцію від показаної і ввести її до "
 "книги знову."
 
-#: kmymoney/views/ledgerview.cpp:1061
+#: kmymoney/views/ledgerview.cpp:1066
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21464,14 +21464,14 @@ msgstr ""
 "Прийняти відповідність так, як її показано, і вилучити дані прихованої "
 "(відповідної) операції."
 
-#: kmymoney/views/ledgerview.cpp:1065
+#: kmymoney/views/ledgerview.cpp:1070
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr ""
 "Хочете прийняти чи скасувати встановлення відповідності запису операції?"
 
-#: kmymoney/views/ledgerview.cpp:1066
+#: kmymoney/views/ledgerview.cpp:1071
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -22046,31 +22046,31 @@ msgstr "&Гаразд"
 msgid "&Cancel"
 msgstr "&Скасувати"
 
-#: kmymoney/views/splitview.cpp:112
+#: kmymoney/views/splitview.cpp:117
 #, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "Параметри дроблення"
 
-#: kmymoney/views/splitview.cpp:114
+#: kmymoney/views/splitview.cpp:119
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Створити…"
 
-#: kmymoney/views/splitview.cpp:129
+#: kmymoney/views/splitview.cpp:134
 #, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Змінити…"
 
-#: kmymoney/views/splitview.cpp:134
+#: kmymoney/views/splitview.cpp:139
 #, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Здублювати"
 
-#: kmymoney/views/splitview.cpp:176
+#: kmymoney/views/splitview.cpp:181
 #, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"

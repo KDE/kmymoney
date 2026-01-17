@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-17 00:44+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -21785,35 +21785,35 @@ msgstr "En vörhannen KMyMoney-Datendatei opmaken"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Mehr över denBruuk vun KMyMoney"
 
-#: kmymoney/views/ledgerview.cpp:212
+#: kmymoney/views/ledgerview.cpp:217
 #, fuzzy, kde-format
 #| msgid "Goto account"
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Na Konto gahn"
 
-#: kmymoney/views/ledgerview.cpp:214
+#: kmymoney/views/ledgerview.cpp:219
 #, fuzzy, kde-format
 #| msgid "Goto payee"
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Na Adressaat gahn"
 
-#: kmymoney/views/ledgerview.cpp:259
+#: kmymoney/views/ledgerview.cpp:264
 #, fuzzy, kde-format
 #| msgid "Goto '%1'"
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Na \"%1\" gahn"
 
-#: kmymoney/views/ledgerview.cpp:269
+#: kmymoney/views/ledgerview.cpp:274
 #, fuzzy, kde-format
 #| msgid "Goto '%1'"
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Na \"%1\" gahn"
 
-#: kmymoney/views/ledgerview.cpp:771
+#: kmymoney/views/ledgerview.cpp:776
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21821,48 +21821,48 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:898
+#: kmymoney/views/ledgerview.cpp:903
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Boken fehlt en Kategorietowiesen"
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:910
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "De Boken fehlt en Towiesen vun <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:914
+#: kmymoney/views/ledgerview.cpp:919
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Disse plaant Boken endt na en wiss Tiet"
 
-#: kmymoney/views/ledgerview.cpp:920
+#: kmymoney/views/ledgerview.cpp:925
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:926
+#: kmymoney/views/ledgerview.cpp:931
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:972
+#: kmymoney/views/ledgerview.cpp:977
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1034
+#: kmymoney/views/ledgerview.cpp:1039
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21870,14 +21870,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Wullt Du den utsöchten Priesindrag redig wegdoon?"
 
-#: kmymoney/views/ledgerview.cpp:1035
+#: kmymoney/views/ledgerview.cpp:1040
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Plaant Boken ingeven"
 
-#: kmymoney/views/ledgerview.cpp:1038
+#: kmymoney/views/ledgerview.cpp:1043
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21885,7 +21885,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Wullt Du den utsöchten Priesindrag redig wegdoon?"
 
-#: kmymoney/views/ledgerview.cpp:1039
+#: kmymoney/views/ledgerview.cpp:1044
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21893,7 +21893,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Ingeven oder planen?"
 
-#: kmymoney/views/ledgerview.cpp:1059
+#: kmymoney/views/ledgerview.cpp:1064
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21901,7 +21901,7 @@ msgid ""
 "the ledger again."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1061
+#: kmymoney/views/ledgerview.cpp:1066
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21909,7 +21909,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1065
+#: kmymoney/views/ledgerview.cpp:1070
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21917,7 +21917,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Wullt Du de utsöcht Boken redig wegdoon?"
 
-#: kmymoney/views/ledgerview.cpp:1066
+#: kmymoney/views/ledgerview.cpp:1071
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
@@ -22498,14 +22498,14 @@ msgstr "&OK"
 msgid "&Cancel"
 msgstr "&Afbreken"
 
-#: kmymoney/views/splitview.cpp:112
+#: kmymoney/views/splitview.cpp:117
 #, fuzzy, kde-format
 #| msgid "Split Options"
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "Opdelen-Optschonen"
 
-#: kmymoney/views/splitview.cpp:114
+#: kmymoney/views/splitview.cpp:119
 #, fuzzy, kde-format
 #| msgctxt "create new institution"
 #| msgid "New..."
@@ -22513,14 +22513,14 @@ msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Nieg..."
 
-#: kmymoney/views/splitview.cpp:129
+#: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
 #| msgid "Edit..."
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Bewerken..."
 
-#: kmymoney/views/splitview.cpp:134
+#: kmymoney/views/splitview.cpp:139
 #, fuzzy, kde-format
 #| msgctxt "Duplicate transaction"
 #| msgid "Duplicate"
@@ -22528,7 +22528,7 @@ msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Verdubbeln"
 
-#: kmymoney/views/splitview.cpp:176
+#: kmymoney/views/splitview.cpp:181
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@item:inmenu Delete selected split(s)"
