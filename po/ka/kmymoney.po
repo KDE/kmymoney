@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-17 00:44+0000\n"
-"PO-Revision-Date: 2026-01-12 04:01+0100\n"
+"PO-Revision-Date: 2026-01-17 03:35+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -6700,7 +6700,7 @@ msgid ""
 "removed."
 msgstr ""
 "  *გაყოფილი %2 ტრანზაქციაში '%1', მიმართავდა სტანდარტულ ანგარიშს %3 და "
-"წაიშალა"
+"წაიშალა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3370
 #, kde-format
