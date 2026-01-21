@@ -74,15 +74,25 @@ public:
 
         configGroupName = _configGroupName;
 
-        if ((treeView || tableView) && model) {
+        if ((treeView || tableView) && model && headerView) {
             const auto maxColumn = model->columnCount();
             QList<int> visibleColumns;
 
             if (!configGroupName.isEmpty()) {
                 // restore the headers when we have a group name
                 const auto grp = KSharedConfig::openConfig()->group(configGroupName);
-                const auto columnNames = grp.readEntry("HeaderState", QByteArray());
-                headerView->restoreState(columnNames);
+
+                // NOTE: Temporarily disabled restoreState() due to crashes when the saved
+                // state is incompatible with the current model structure (e.g., different
+                // number of columns). This happens when editing splits from loan transactions.
+                // TODO: Find a way to validate compatibility before restoring, or use different
+                // config group names for different contexts.
+                // if (!isInit) {
+                //     const auto columnNames = grp.readEntry("HeaderState", QByteArray());
+                //     if (!columnNames.isEmpty() && headerView->model()) {
+                //         headerView->restoreState(columnNames);
+                //     }
+                // }
 
                 visibleColumns = grp.readEntry<int>("ColumnsSelection", QList<int>());
                 // add the storage offset during loading operation
