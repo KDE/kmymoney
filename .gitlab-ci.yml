@@ -15,7 +15,7 @@ include:
       - /gitlab-templates/flatpak.yml
       - /gitlab-templates/documentation.yml
 
-windows_qt69:
+windows_qt610:
   variables:
     # Fix error "fatal: Unable to persist credentials with the 'wincredman' credential store"
     GCM_CREDENTIAL_STORE: "none"
