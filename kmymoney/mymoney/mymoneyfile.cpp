@@ -2607,6 +2607,7 @@ void MyMoneyFile::setUser(const MyMoneyPayee& user)
     } else {
         d->userModel.modifyItem(payee);
     }
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Payee, payee.id());
 }
 
 bool MyMoneyFile::dirty() const
