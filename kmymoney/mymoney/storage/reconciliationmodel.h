@@ -33,6 +33,7 @@ public:
         , m_accountId(other.m_accountId)
         , m_amount(other.m_amount)
         , m_date(other.m_date)
+        , m_reconciliationInProgress(other.m_reconciliationInProgress)
         , m_filterHint(other.m_filterHint)
     {
     }
@@ -41,11 +42,13 @@ public:
                         const QString& accountId,
                         const QDate& date,
                         const MyMoneyMoney& amount,
-                        eMyMoney::Model::ReconciliationFilterHint filterHint)
+                        eMyMoney::Model::ReconciliationFilterHint filterHint,
+                        bool inProgress = false)
         : m_id(id)
         , m_accountId(accountId)
         , m_amount(amount)
         , m_date(date)
+        , m_reconciliationInProgress(inProgress)
         , m_filterHint(filterHint)
     {
     }
@@ -74,6 +77,10 @@ public:
     {
         return m_filterHint;
     }
+    inline bool isReconciliationInProgress() const
+    {
+        return m_reconciliationInProgress;
+    }
 
     /**
      * @copydoc MyMoneyObject::referencedObjects
@@ -88,6 +95,7 @@ private:
     QString m_accountId;
     MyMoneyMoney m_amount;
     QDate m_date;
+    bool m_reconciliationInProgress;
     eMyMoney::Model::ReconciliationFilterHint m_filterHint;
 };
 
