@@ -1000,6 +1000,21 @@ QModelIndexList AccountsModel::indexListByName(const QString& name, const QModel
     return match(assetIndex(), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive);
 }
 
+MyMoneyAccount AccountsModel::itemByName(const QString& name, const QModelIndex& start) const
+{
+    if (start.isValid()) {
+        return d->itemByName(name, start);
+    }
+    const auto topLevelIndexes = match(assetIndex(), eMyMoney::Model::IdRole, QLatin1String("*"), -1, Qt::MatchWildcard);
+    for (const auto& topLevelIndex : topLevelIndexes) {
+        const auto item = itemByName(name, topLevelIndex);
+        if (!item.id().isEmpty()) {
+            return item;
+        }
+    }
+    return {};
+}
+
 void AccountsModel::addFavorite(const QString& id)
 {
     // no need to do anything if it is already listed

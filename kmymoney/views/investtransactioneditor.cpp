@@ -1095,7 +1095,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
         // select the associated brokerage account if it exists
-        const auto brokerageAccount = file->accountsModel()->itemByName(d->parentAccount.brokerageName());
+        const auto brokerageAccount = file->accountsModel()->itemByName(d->parentAccount.brokerageName(), QModelIndex());
         d->ui->assetAccountCombo->setSelected(brokerageAccount.id());
         d->loadFeeAndInterestAmountEdits();
 

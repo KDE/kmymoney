@@ -151,6 +151,17 @@ public:
      */
     QModelIndex equityIndex() const;
 
+    /**
+     * Return the account identified by @a name in the hierarchy
+     * identified by @a start. @a name may contain a sub-hierarchy
+     * where the parts are separated with the AccountSeparator. If
+     * no matching account is found, the return object has an
+     * empty id().
+     *
+     * @sa AccountSeparator()
+     */
+    MyMoneyAccount itemByName(const QString& name, const QModelIndex& start) const;
+
     void setColorScheme(ColorScheme scheme, const QColor& color);
 
     QModelIndexList accountsWithoutInstitutions() const;
