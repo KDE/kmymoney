@@ -135,7 +135,8 @@ void ReconciliationModel::doLoad()
                                       account.id(),
                                       QDate::fromString(account.value("statementDate"), Qt::ISODate),
                                       MyMoneyMoney(account.value("statementBalance")),
-                                      eMyMoney::Model::DontFilter);
+                                      eMyMoney::Model::DontFilter,
+                                      true);
             insertRows(0, 1);
             static_cast<TreeItem<ReconciliationEntry>*>(index(0, 0).internalPointer())->dataRef() = entry;
         }
@@ -227,6 +228,9 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::ReconciliationFilterHintRole:
         return QVariant::fromValue<eMyMoney::Model::ReconciliationFilterHint>(reconciliationEntry.filterHint());
+
+    case eMyMoney::Model::ReconciliationCurrentRole:
+        return reconciliationEntry.isReconciliationInProgress();
 
     default:
         break;

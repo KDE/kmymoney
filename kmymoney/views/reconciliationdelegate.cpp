@@ -104,7 +104,11 @@ void ReconciliationDelegate::paint(QPainter* painter, const QStyleOptionViewItem
             opt.rect.setWidth(view->viewport()->width());
         }
         painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-        painter->drawText(opt.rect, Qt::AlignCenter, i18nc("Ledger marker showing a reconciliation entry", "Reconciliation"));
+        if (index.data(eMyMoney::Model::ReconciliationCurrentRole).toBool()) {
+            painter->drawText(opt.rect, Qt::AlignCenter, i18nc("Ledger marker showing current reconciliation entry", "Current reconciliation"));
+        } else {
+            painter->drawText(opt.rect, Qt::AlignCenter, i18nc("Ledger marker showing a reconciliation entry", "Reconciliation"));
+        }
         break;
     case JournalModel::Column::Date:
         painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));

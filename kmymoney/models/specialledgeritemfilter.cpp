@@ -54,7 +54,7 @@ public:
         , lastWasReconciliationEntry(false)
     {
         updateDelayTimer.setSingleShot(true);
-        updateDelayTimer.setInterval(20);
+        updateDelayTimer.setInterval(100);
     }
 
     bool isSortingByDateFirst() const
@@ -285,14 +285,15 @@ public:
             }
 
             // in case the source model is not sorting, we
-            // can assume that the item is visible. Once it
+            // can assume that the last item is visible. Once it
             // is sorted, it is early enough to perform the
             // other checks for reconciliation entries.
             // Not suppressing this this on an unsorted model
-            // may cause a hug performance penalty (looks like
+            // may cause a huge performance penalty (looks like
             // the application hung up in certain scenarios)
             if (!sourceModel->inSorting()) {
-                return true;
+                const auto filterMode = idx.data(eMyMoney::Model::ReconciliationFilterHintRole).value<eMyMoney::Model::ReconciliationFilterHint>();
+                return (filterMode == eMyMoney::Model::DontFilterLast) || (filterMode == eMyMoney::Model::DontFilter);
             }
 
             // in case we get here recursively, we simply assume
