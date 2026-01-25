@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Account Mapping</string>
   </property>
+  <property name="wizardStyle">
+   <enum>QWizard::ModernStyle</enum>
+  </property>
   <widget class="QWizardPage" name="pageBackends">
    <property name="title">
     <string>Select Backend</string>
