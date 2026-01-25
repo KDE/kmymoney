@@ -22,6 +22,9 @@
     <property name="windowTitle">
       <string>New Loan Wizard</string>
     </property>
+    <property name="wizardStyle">
+    <enum>QWizard::ModernStyle</enum>
+    </property>
     <property name="sizeGripEnabled">
       <bool>true</bool>
     </property>
@@ -245,7 +248,7 @@
     <extends>QWizardPage</extends>
     <header>editintrowizardpage.h</header>
    </customwidget>
- 
+
     <customwidget>
       <class>KMyMoneyLineEdit</class>
       <extends>QWidget</extends>
