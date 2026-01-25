@@ -13,11 +13,13 @@
 // KDE Headers
 
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "accountcreator.h"
+#include "accountsmodel.h"
 #include "kmymoneyaccountcombo.h"
 #include "knewaccountdlg.h"
 #include "mymoneyaccount.h"
@@ -56,11 +58,8 @@ void AccountCreator::createAccount()
             return;
         }
 
+        // determine the top parent account
         MyMoneyAccount parent;
-        MyMoneyAccount account;
-
-        account.setName(m_comboBox->currentText());
-
         if (m_accountType == eMyMoney::Account::Type::Asset) {
             parent = MyMoneyFile::instance()->asset();
         } else if (m_accountType == eMyMoney::Account::Type::Liability) {
@@ -71,22 +70,62 @@ void AccountCreator::createAccount()
             parent = MyMoneyFile::instance()->income();
         }
 
-        const bool isAccount = (m_accountType == eMyMoney::Account::Type::Asset) || (m_accountType == eMyMoney::Account::Type::Liability);
-        const auto creator = isAccount ? &KNewAccountDlg::newAccount : &KNewAccountDlg::newCategory;
-        const QString undoAction = isAccount ? i18nc("Create undo action", "Create account") : i18nc("Create undo action", "Create category");
+        MyMoneyAccount account;
 
-        MyMoneyFileTransaction ft(undoAction, false);
-        creator(account, parent);
+        const auto fullName = m_comboBox->currentText();
+        QString newAccountName;
+        if (fullName.contains(MyMoneyAccount::accountSeparator())) {
+            const auto file = MyMoneyFile::instance();
+            const auto lastSeparatorPos = fullName.lastIndexOf(MyMoneyAccount::accountSeparator());
+            newAccountName = fullName.mid(lastSeparatorPos + 1);
+            const auto newParentName = fullName.left(lastSeparatorPos);
+            const auto topLevelAccountName = parent.name();
+            const auto idx = file->accountsModel()->indexById(parent.id());
 
+            // search in the preferred sub-tree based on amount entered
+            parent = file->accountsModel()->itemByName(newParentName, idx);
+            // if not found in the preferred sub-tree, we search all
+            if (parent.id().isEmpty()) {
+                parent = file->accountsModel()->itemByName(newParentName, QModelIndex());
+            }
+            // if still not found, we inform the user
+            if (parent.id().isEmpty()) {
+                KMessageBox::error(m_comboBox,
+                                   i18nc("@info %1 selected parent, %2 top level account",
+                                         "The selected parent account <b>%1</b> does not exist in the <b>%2</b> hierarchy.",
+                                         newParentName,
+                                         topLevelAccountName),
+                                   i18n("Account/category creation problem"));
+            }
+        } else {
+            newAccountName = m_comboBox->currentText();
+        }
+
+        if (!parent.id().isEmpty()) {
+            account.setName(newAccountName);
+
+            const bool isAccount = (m_accountType == eMyMoney::Account::Type::Asset) || (m_accountType == eMyMoney::Account::Type::Liability);
+            const auto creator = isAccount ? &KNewAccountDlg::newAccount : &KNewAccountDlg::newCategory;
+            const QString undoAction = isAccount ? i18nc("Create undo action", "Create account") : i18nc("Create undo action", "Create category");
+
+            MyMoneyFileTransaction ft(undoAction, false);
+            creator(account, parent);
+
+            // if the creation worked, we move on
+            if (!account.id().isEmpty()) {
+                ft.commit();
+                m_comboBox->setSelected(account.id());
+                auto widget = m_comboBox->nextInFocusChain();
+                widget->setFocus();
+            }
+        }
+
+        // in case the account/category was not created
+        // we set the focus back on the widget we came from
         if (account.id().isEmpty()) {
             m_comboBox->setSelected(QString());
             m_comboBox->clearSelection();
             m_comboBox->setFocus();
-        } else {
-            ft.commit();
-            m_comboBox->setSelected(account.id());
-            auto widget = m_comboBox->nextInFocusChain();
-            widget->setFocus();
         }
 
         // suicide, we're done
