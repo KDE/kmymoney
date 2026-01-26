@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-24 00:43+0000\n"
+"POT-Creation-Date: 2026-01-26 00:43+0000\n"
 "PO-Revision-Date: 2025-12-31 18:16+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -319,13 +319,27 @@ msgstr[1] ""
 msgid "Schedule found"
 msgstr "Planificación encontrada"
 
-#: kmymoney/dialogs/accountcreator.cpp:76
+#: kmymoney/dialogs/accountcreator.cpp:95
+#, kde-format
+msgctxt "@info %1 selected parent, %2 top level account"
+msgid ""
+"The selected parent account <b>%1</b> does not exist in the <b>%2</b> "
+"hierarchy."
+msgstr ""
+
+#: kmymoney/dialogs/accountcreator.cpp:98
+#, fuzzy, kde-format
+#| msgid "Category creation"
+msgid "Account/category creation problem"
+msgstr "Creación de categoría"
+
+#: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
 msgstr "Crear cuenta"
 
-#: kmymoney/dialogs/accountcreator.cpp:76
+#: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
@@ -564,7 +578,7 @@ msgstr "Nombre"
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:47
 #: kmymoney/plugins/woob/dialogs/accountsettings.ui:26
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:63
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:66
 #, kde-format
 msgid "ID"
 msgstr "ID"
@@ -1329,8 +1343,8 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:61
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:332
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:82
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:28
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:68
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:31
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:52
 #, kde-format
 msgid "Name"
@@ -1962,7 +1976,7 @@ msgstr "Precios"
 #: kmymoney/dialogs/knewaccountdlg.ui:531
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:384
 #: kmymoney/plugins/views/reports/core/listtable.cpp:767
 #: kmymoney/widgets/ktransactionfilter.ui:584
 #: kmymoney/widgets/transactionsortoption.cpp:42
@@ -3869,7 +3883,7 @@ msgstr "Expresión regular para extraer la fecha de los datos descargados"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_4)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:102
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:136
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:139
 #, kde-format
 msgid "URL"
 msgstr "URL"
@@ -10259,7 +10273,7 @@ msgstr "Borrar la selección del campo de memorando."
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:165
 #: kmymoney/plugins/views/reports/core/listtable.cpp:765
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:76
 #: kmymoney/views/khomeview_p.h:1067
 #, kde-format
 msgid "Balance"
@@ -13040,57 +13054,57 @@ msgid "Online Banking Account Setup"
 msgstr "Configuración de cuenta de banca electrónica"
 
 #. i18n: ectx: property (title), widget (QWizardPage, FIPage)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:18
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:21
 #, kde-format
 msgid "Select Financial Institution"
 msgstr "Seleccionar una institución financiera"
 
 #. i18n: ectx: property (text), widget (QLabel, m_instructionLabel)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:41
 #, kde-format
 msgid "Please select your financial institution from the list below..."
 msgstr "Seleccione su institución financiera de la siguiente lista…"
 
 #. i18n: ectx: attribute (title), widget (QWidget, autoTab)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:55
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:58
 #, kde-format
 msgctxt "@title type of online banking connection"
 msgid "Automatic"
 msgstr "Automática"
 
 #. i18n: ectx: attribute (title), widget (QWidget, manualTab)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:77
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:80
 #, kde-format
 msgctxt "@title type of online banking connection"
 msgid "Manual"
 msgstr "Manual"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:97
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:100
 #, kde-format
 msgid "FID"
 msgstr "FID"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:107
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:110
 #, kde-format
 msgid "Org"
 msgstr "Org"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:123
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:126
 #, kde-format
 msgid "UserAgent"
 msgstr "Agente de usuario"
 
 #. i18n: ectx: property (title), widget (QWizardPage, LoginPage)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:171
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:174
 #, kde-format
 msgid "Enter Login Details"
 msgstr "Introduzca los detalles de entrada"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:192
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:195
 #, kde-format
 msgid ""
 "Please enter the username and password you use to log into this bank for "
@@ -13103,7 +13117,7 @@ msgstr ""
 "para usar banca electrónica desde el hogar."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:202
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:205
 #, kde-format
 msgctxt "@label account username"
 msgid "Username"
@@ -13111,7 +13125,7 @@ msgstr "Nombre de usuario"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_3)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:215
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:218
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:107
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:134
 #, kde-format
@@ -13119,7 +13133,7 @@ msgid "Password"
 msgstr "Contraseña"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_storePassword)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:228
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:231
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:146
 #, kde-format
 msgid "Store password"
@@ -13127,14 +13141,14 @@ msgstr "Almacenar contraseña"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:235
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:238
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:190
 #, kde-format
 msgid "Identify as"
 msgstr "Identificar como"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_applicationEdit)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:250
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:253
 #, kde-format
 msgid ""
 "Expert option to enter the four digit version information of the application"
@@ -13144,35 +13158,35 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_6)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:275
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:278
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:219
 #, kde-format
 msgid "Header Version"
 msgstr "Versión de la cabecera"
 
 #. i18n: ectx: property (text), widget (QLabel, m_clientUidLabel)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:318
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:321
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:235
 #, kde-format
 msgid "Client UID"
 msgstr "UID del cliente"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:328
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:331
 #, kde-format
 msgid "Connection Details"
 msgstr "Detalles de la conexión"
 
 #. i18n: ectx: property (title), widget (QWizardPage, pageAccounts)
 #. i18n: ectx: property (title), widget (QWizardPage, AccountPage)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:342
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:53
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:345
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:56
 #, kde-format
 msgid "Select Account"
 msgstr "Seleccionar cuenta"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:362
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:365
 #, kde-format
 msgid ""
 "Please select the account from your financial institution from the list "
@@ -13184,7 +13198,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, numberLabel)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:379
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
 #: kmymoney/views/newspliteditor.ui:130
@@ -13196,25 +13210,25 @@ msgid "Number"
 msgstr "Número"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:386
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:389
 #, kde-format
 msgid "Bank"
 msgstr "Banco"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:391
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:394
 #, kde-format
 msgid "Branch"
 msgstr "Sucursal"
 
 #. i18n: ectx: property (title), widget (QWizardPage, WizardPage)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:402
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:405
 #, kde-format
 msgid "Finish"
 msgstr "Finalizar"
 
 #. i18n: ectx: property (text), widget (QLabel, m_labelFinal)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:410
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:413
 #, kde-format
 msgid ""
 "Congratulations: you have successfully set up your bank for online banking "
@@ -18233,31 +18247,31 @@ msgid "Incorrect password."
 msgstr "Contraseña incorrecta."
 
 #. i18n: ectx: property (title), widget (QWizardPage, pageBackends)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:18
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:21
 #, kde-format
 msgid "Select Backend"
 msgstr "Seleccione motor"
 
 #. i18n: ectx: property (subTitle), widget (QWizardPage, pageBackends)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:21
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:24
 #, kde-format
 msgid "Please select a backend from the list below..."
 msgstr "Seleccione un motor de la siguiente lista…"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, backendsList)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:33
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:36
 #, kde-format
 msgid "Module"
 msgstr "Módulo"
 
 #. i18n: ectx: property (text), widget (QPushButton, addBackendButton)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:43
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:46
 #, kde-format
 msgid "Select a backend"
 msgstr "Seleccione un motor"
 
 #. i18n: ectx: property (subTitle), widget (QWizardPage, pageAccounts)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:56
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:59
 #, kde-format
 msgid ""
 "Select what <b>online</b> account you want to map to the <b>application</b> "
@@ -21724,7 +21738,15 @@ msgstr "IBAN y BIC"
 msgid "National Account Number"
 msgstr "Número de cuenta nacional"
 
-#: kmymoney/views/reconciliationdelegate.cpp:107
+#: kmymoney/views/reconciliationdelegate.cpp:108
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Cancel the current reconciliation"
+msgctxt "Ledger marker showing current reconciliation entry"
+msgid "Current reconciliation"
+msgstr "Cancelar la conciliación actual"
+
+#: kmymoney/views/reconciliationdelegate.cpp:110
 #, kde-format
 msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
