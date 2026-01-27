@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-26 03:28+0000\n"
-"PO-Revision-Date: 2026-01-21 11:44+0100\n"
+"PO-Revision-Date: 2026-01-26 15:25+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Ronald Stroethoff - 2018,Nisse Lommerde - 2023,Freek de Kruijf - t/m 2025"
+"Ronald Stroethoff - 2018,Nisse Lommerde - 2023,Freek de Kruijf - t/m 2026"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -321,12 +321,13 @@ msgid ""
 "The selected parent account <b>%1</b> does not exist in the <b>%2</b> "
 "hierarchy."
 msgstr ""
+"De geselecteerde ouderrekening <b>%1</b> bestaat niet in de hiërarchie <b>"
+"%2</b>."
 
 #: kmymoney/dialogs/accountcreator.cpp:98
-#, fuzzy, kde-format
-#| msgid "Category creation"
+#, kde-format
 msgid "Account/category creation problem"
-msgstr "Categorie aanmaken"
+msgstr "Probleem met aanmaken van rekening/categorie"
 
 #: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
@@ -21592,12 +21593,10 @@ msgid "National Account Number"
 msgstr "Nationaal rekeningnummer"
 
 #: kmymoney/views/reconciliationdelegate.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Cancel the current reconciliation"
+#, kde-format
 msgctxt "Ledger marker showing current reconciliation entry"
 msgid "Current reconciliation"
-msgstr "De huidige verificatie annuleren"
+msgstr "Huidige verificatie"
 
 #: kmymoney/views/reconciliationdelegate.cpp:110
 #, kde-format
