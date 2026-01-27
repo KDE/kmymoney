@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-26 00:43+0000\n"
-"PO-Revision-Date: 2026-01-20 16:05+0100\n"
+"PO-Revision-Date: 2026-01-26 14:26+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -282,10 +282,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/accountcreator.cpp:98
-#, fuzzy, kde-format
-#| msgid "Accounts/Categories"
+#, kde-format
 msgid "Account/category creation problem"
-msgstr "Contos/Categorias"
+msgstr "Problema de creation de ContosCategoria"
 
 #: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
@@ -5184,7 +5183,7 @@ msgstr "Termina le reconciliation currente"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
-msgstr "Cncella le reconciliation currente"
+msgstr "Cancella le reconciliation currente"
 
 #: kmymoney/kmymoney.cpp:1788
 #, kde-format
@@ -20653,12 +20652,10 @@ msgid "National Account Number"
 msgstr "Numero de conto national"
 
 #: kmymoney/views/reconciliationdelegate.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Cancel the current reconciliation"
+#, kde-format
 msgctxt "Ledger marker showing current reconciliation entry"
 msgid "Current reconciliation"
-msgstr "Cncella le reconciliation currente"
+msgstr "Reconciliation currente"
 
 #: kmymoney/views/reconciliationdelegate.cpp:110
 #, kde-format

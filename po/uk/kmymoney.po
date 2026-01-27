@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-26 00:43+0000\n"
-"PO-Revision-Date: 2025-12-30 09:47+0200\n"
+"PO-Revision-Date: 2026-01-26 13:21+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -335,12 +335,12 @@ msgid ""
 "The selected parent account <b>%1</b> does not exist in the <b>%2</b> "
 "hierarchy."
 msgstr ""
+"Вибраного батьківського рахунку <b>%1</b> не існує в ієрархії <b>%2</b>."
 
 #: kmymoney/dialogs/accountcreator.cpp:98
-#, fuzzy, kde-format
-#| msgid "Category creation"
+#, kde-format
 msgid "Account/category creation problem"
-msgstr "Створення категорії"
+msgstr "Проблема у створенні рахунку/категорії"
 
 #: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
@@ -21818,12 +21818,10 @@ msgid "National Account Number"
 msgstr "Внутрішньодержавний номер рахунку"
 
 #: kmymoney/views/reconciliationdelegate.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Cancel the current reconciliation"
+#, kde-format
 msgctxt "Ledger marker showing current reconciliation entry"
 msgid "Current reconciliation"
-msgstr "Скасувати поточне узгодження"
+msgstr "Поточне узгодження"
 
 #: kmymoney/views/reconciliationdelegate.cpp:110
 #, kde-format
