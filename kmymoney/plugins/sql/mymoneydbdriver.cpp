@@ -224,7 +224,7 @@ bool MyMoneyPostgresqlDriver::canAutocreate() const
 // By default, there is no default name
 QString MyMoneyDbDriver::defaultDbName() const
 {
-    return "";
+    return QString();
 }
 
 // The default db for Mysql is "mysql"
@@ -289,7 +289,7 @@ bool MyMoneySqlite3Driver::requiresCreation() const
 QString MyMoneyDbDriver::dropPrimaryKeyString(const QString& name) const
 {
     Q_UNUSED(name);
-    return "";
+    return QString();
 }
 
 QString MyMoneyMysqlDriver::dropPrimaryKeyString(const QString& name) const
@@ -331,7 +331,7 @@ QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, const QStr
     Q_UNUSED(columnName);
     Q_UNUSED(newDef);
 
-    return "";
+    return QString();
 }
 
 QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
@@ -604,7 +604,7 @@ QString MyMoneyDbDriver::forUpdateString() const
 
 QString MyMoneySqlite3Driver::forUpdateString() const
 {
-    return "";
+    return QString();
 }
 
 //***********************************************
@@ -617,7 +617,7 @@ QString MyMoneyMysqlDriver::tableOptionString() const
 
 QString MyMoneyDbDriver::tableOptionString() const
 {
-    return "";
+    return QString();
 }
 
 //***********************************************

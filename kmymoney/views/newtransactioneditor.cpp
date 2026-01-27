@@ -1142,7 +1142,7 @@ void NewTransactionEditor::Private::updateMemoLink()
         const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payeeByName(ui->payeeEdit->currentText());
         QUrl url = payeeObj.payeeLink(ui->memoEdit->toPlainText());
         if (url.isEmpty()) {
-            ui->linkLabel->setText("");
+            ui->linkLabel->setText(QString());
             return;
         }
         ui->linkLabel->setTextFormat(Qt::RichText);
@@ -1152,7 +1152,7 @@ void NewTransactionEditor::Private::updateMemoLink()
         ui->linkLabel->setToolTip(url.toString());
         qDebug() << url;
     } catch (MyMoneyException&) {
-        ui->linkLabel->setText("");
+        ui->linkLabel->setText(QString());
     }
 }
 

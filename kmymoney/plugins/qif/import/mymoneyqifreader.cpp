@@ -1248,7 +1248,9 @@ void MyMoneyQifReader::processTransactionEntry()
                     // FIXME: check that the type matches and ask if not
 
                     if (account.accountType() == eMyMoney::Account::Type::Investment) {
-                        qDebug() << "Line " << m_linenumber << ": Cannot convert a split transfer to/from an investment account. Split removed. Total amount adjusted from " << tr.m_amount.formatMoney("", 2) << " to " << (tr.m_amount + s2.m_amount).formatMoney("", 2) << "\n";
+                        qDebug() << "Line " << m_linenumber
+                                 << ": Cannot convert a split transfer to/from an investment account. Split removed. Total amount adjusted from "
+                                 << tr.m_amount.formatMoney(QString(), 2) << " to " << (tr.m_amount + s2.m_amount).formatMoney(QString(), 2) << "\n";
                         tr.m_amount += s2.m_amount;
                         continue;
                     }

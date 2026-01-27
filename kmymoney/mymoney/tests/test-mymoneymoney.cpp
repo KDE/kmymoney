@@ -392,12 +392,12 @@ void MyMoneyMoneyTest::testSetDecimalSeparator()
     MyMoneyMoney m1(100000, 100);
     MyMoneyMoney m2(200000, 100);
 
-    QVERIFY(m1.formatMoney("", 2) == QString("1,000.00"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("1,000.00"));
     QVERIFY(MyMoneyMoney::decimalSeparator() == '.');
 
     MyMoneyMoney::setDecimalSeparator(':');
-    QVERIFY(m1.formatMoney("", 2) == QString("1,000:00"));
-    QVERIFY(m2.formatMoney("", 2) == QString("2,000:00"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("1,000:00"));
+    QVERIFY(m2.formatMoney(QString(), 2) == QString("2,000:00"));
 
     QVERIFY(MyMoneyMoney::decimalSeparator() == ':');
 }
@@ -407,12 +407,12 @@ void MyMoneyMoneyTest::testSetThousandSeparator()
     MyMoneyMoney m1(100000, 100);
     MyMoneyMoney m2(200000, 100);
 
-    QVERIFY(m1.formatMoney("", 2) == QString("1,000.00"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("1,000.00"));
     QVERIFY(MyMoneyMoney::thousandSeparator() == ',');
 
     MyMoneyMoney::setThousandSeparator(':');
-    QVERIFY(m1.formatMoney("", 2) == QString("1:000.00"));
-    QVERIFY(m2.formatMoney("", 2) == QString("2:000.00"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("1:000.00"));
+    QVERIFY(m2.formatMoney(QString(), 2) == QString("2:000.00"));
 
     QVERIFY(MyMoneyMoney::thousandSeparator() == ':');
 }
@@ -421,23 +421,23 @@ void MyMoneyMoneyTest::testFormatMoney()
 {
     qDebug() << "Value:" << qPrintable(m_0->toString());
     qDebug() << "Converted: " << qPrintable(m_0->convert(100).toString());
-    qDebug() << " Formatted: " << qPrintable(m_0->formatMoney("", 2));
+    qDebug() << " Formatted: " << qPrintable(m_0->formatMoney(QString(), 2));
 
-    QVERIFY(m_0->formatMoney("", 2) == QString("0.12"));
-    QVERIFY(m_1->formatMoney("", 2) == QString("-0.10"));
+    QVERIFY(m_0->formatMoney(QString(), 2) == QString("0.12"));
+    QVERIFY(m_1->formatMoney(QString(), 2) == QString("-0.10"));
 
     MyMoneyMoney m1(10099, 100);
     qDebug() << "Value:" << qPrintable(m1.toString());
     qDebug() << "Converted: " << qPrintable(m1.convert(100).toString());
-    qDebug() << " Formatted: " << qPrintable(m1.formatMoney("", 2));
-    QVERIFY(m1.formatMoney("", 2) == QString("100.99"));
+    qDebug() << " Formatted: " << qPrintable(m1.formatMoney(QString(), 2));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("100.99"));
 
     m1 = MyMoneyMoney(100, 1);
     qDebug() << "Value:" << qPrintable(m1.toString());
     qDebug() << "Converted: " << qPrintable(m1.convert(100).toString());
-    qDebug() << " Formatted: " << qPrintable(m1.formatMoney("", 2));
-    QVERIFY(m1.formatMoney("", 2) == QString("100.00"));
-    QVERIFY(m1.formatMoney("", -1) == QString("100"));
+    qDebug() << " Formatted: " << qPrintable(m1.formatMoney(QString(), 2));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("100.00"));
+    QVERIFY(m1.formatMoney(QString(), -1) == QString("100"));
 
     MyMoneyMoney mTemp(100099, 100);
 
@@ -445,42 +445,42 @@ void MyMoneyMoneyTest::testFormatMoney()
 
     QVERIFY(m1 == MyMoneyMoney(1000, 1));
 
-    QVERIFY(m1.formatMoney("", 2) == QString("1,000.00"));
-    QVERIFY(m1.formatMoney("", -1) == QString("1,000"));
-    QVERIFY(m1.formatMoney("", -1, false) == QString("1000"));
-    QVERIFY(m1.formatMoney("", 3, false) == QString("1000.000"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("1,000.00"));
+    QVERIFY(m1.formatMoney(QString(), -1) == QString("1,000"));
+    QVERIFY(m1.formatMoney(QString(), -1, false) == QString("1000"));
+    QVERIFY(m1.formatMoney(QString(), 3, false) == QString("1000.000"));
 
     m1 = MyMoneyMoney(std::numeric_limits<std::int64_t>::max(), 100);
 
-    QVERIFY(m1.formatMoney("", 2) == QString("92,233,720,368,547,758.07"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("92,233,720,368,547,758.07"));
     QVERIFY(m1.formatMoney(100) == QString("92,233,720,368,547,758.07"));
-    QVERIFY(m1.formatMoney("", 2, false) == QString("92233720368547758.07"));
+    QVERIFY(m1.formatMoney(QString(), 2, false) == QString("92233720368547758.07"));
     QVERIFY(m1.formatMoney(100, false) == QString("92233720368547758.07"));
 
     m1 = MyMoneyMoney(std::numeric_limits<std::int64_t>::min(), 100);
-    QVERIFY(m1.formatMoney("", 2) == QString("-92,233,720,368,547,758.08"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("-92,233,720,368,547,758.08"));
     QVERIFY(m1.formatMoney(100) == QString("-92,233,720,368,547,758.08"));
-    QVERIFY(m1.formatMoney("", 2, false) == QString("-92233720368547758.08"));
+    QVERIFY(m1.formatMoney(QString(), 2, false) == QString("-92233720368547758.08"));
     QVERIFY(m1.formatMoney(100, false) == QString("-92233720368547758.08"));
 
     // make sure we support numbers that need more than 64 bit
     m1 = MyMoneyMoney(321, 100) * MyMoneyMoney(std::numeric_limits<std::int64_t>::max(), 100);
-    QVERIFY(m1.formatMoney("", 2) == QString("296,070,242,383,038,303.40"));
-    QVERIFY(m1.formatMoney("", 4) == QString("296,070,242,383,038,303.4047"));
-    QVERIFY(m1.formatMoney("", 6) == QString("296,070,242,383,038,303.404700"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("296,070,242,383,038,303.40"));
+    QVERIFY(m1.formatMoney(QString(), 4) == QString("296,070,242,383,038,303.4047"));
+    QVERIFY(m1.formatMoney(QString(), 6) == QString("296,070,242,383,038,303.404700"));
 
     m1 = MyMoneyMoney(1, 5);
-    QVERIFY(m1.formatMoney("", 2) == QString("0.20"));
+    QVERIFY(m1.formatMoney(QString(), 2) == QString("0.20"));
     QVERIFY(m1.formatMoney(1000) == QString("0.200"));
     QVERIFY(m1.formatMoney(100) == QString("0.20"));
     QVERIFY(m1.formatMoney(10) == QString("0.2"));
 
     m1 = MyMoneyMoney(13333, 5000);
 
-    QVERIFY(m1.formatMoney("", 10) == QString("2.6666000000"));
+    QVERIFY(m1.formatMoney(QString(), 10) == QString("2.6666000000"));
 
     m1 = MyMoneyMoney(-1404, 100);
-    QCOMPARE(m1.formatMoney("", -1), QStringLiteral("-14.04"));
+    QCOMPARE(m1.formatMoney(QString(), -1), QStringLiteral("-14.04"));
 }
 
 void MyMoneyMoneyTest::testBug491828()
@@ -745,7 +745,7 @@ void MyMoneyMoneyTest::testMaxPrecision()
 {
     auto m1 = MyMoneyMoney("1.12345678921234567893123");
     QCOMPARE(m1.toString(), QStringLiteral("112345678921234567893123/100000000000000000000000"));
-    QCOMPARE(m1.formatMoney("", -1), QStringLiteral("1.12345678921234567893"));
+    QCOMPARE(m1.formatMoney(QString(), -1), QStringLiteral("1.12345678921234567893"));
 }
 
 void MyMoneyMoneyTest::testZeroIsMinusZero()

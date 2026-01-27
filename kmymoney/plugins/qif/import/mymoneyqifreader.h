@@ -131,7 +131,7 @@ private:
       *
       * For a parameter description see KMyMoneyView::progressCallback().
       */
-    void signalProgress(qint64 current, qint64 total, const QString& = "");
+    void signalProgress(qint64 current, qint64 total, const QString& = QString());
 
     /**
       * This method scans a transaction contained in

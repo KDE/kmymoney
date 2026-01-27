@@ -42,7 +42,7 @@ void KMMKeychain::readKey(const QString& key)
 
 QString KMMKeychain::readKeySynchronous(const QString& key)
 {
-    QString value = QString("");
+    QString value;
 
     QEventLoop loop;
     connect(this, &KMMKeychain::keyRestored, this, [&](const QString, const QString textData) {

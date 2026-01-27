@@ -29,7 +29,7 @@ KMMTextBrowser::KMMTextBrowser(QWidget* parent)
 void KMMTextBrowser::print(QPagedPaintDevice* printer)
 {
     QTextDocument documentCopy;
-    documentCopy.setDefaultStyleSheet("");
+    documentCopy.setDefaultStyleSheet(QString());
     documentCopy.setHtml(m_html);
     // Add space in front of a column
     for (QTextBlock it = documentCopy.begin(); it != documentCopy.end(); it = it.next()) {

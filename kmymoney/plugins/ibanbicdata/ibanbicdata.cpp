@@ -88,7 +88,7 @@ QString ibanBicData::iban2Bic(const QString& iban)
     Q_ASSERT(iban == payeeIdentifiers::ibanBic::ibanToElectronic(iban));
 
     if (iban.length() <= 4)   // This iban is to short to extract a BIC
-        return QString("");
+        return QString();
 
     // Get bank identifier
     const QString bankCode = extractBankIdentifier(iban);
@@ -124,7 +124,7 @@ QString ibanBicData::iban2Bic(const QString& iban)
         return query.value(0).toString();
     }
 
-    return QString("");
+    return QString();
 }
 
 QString ibanBicData::bankNameByBic(QString bic)
@@ -161,7 +161,7 @@ QString ibanBicData::bankNameByBic(QString bic)
         return query.value(0).toString();
     }
 
-    return QString("");
+    return QString();
 }
 
 QPair< QString, QString > ibanBicData::bankNameAndBic(const QString& iban)
@@ -207,7 +207,7 @@ QPair< QString, QString > ibanBicData::bankNameAndBic(const QString& iban)
         return QPair<QString, QString>(query.value(0).toString(), query.value(1).toString());
     }
 
-    return QPair<QString, QString>(QString(""), QString(""));
+    return QPair<QString, QString>(QString(), QString());
 }
 
 eIBANBIC::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
@@ -267,7 +267,7 @@ QString ibanBicData::extractBankIdentifier(const QString& iban)
     // Extract bank code
     const int start = bankIdentifierPosition(countryCode);
     if (start == -1)
-        return QString("");
+        return QString();
 
     return iban.mid(start + 4, bankIdentifierLength(countryCode));
 }

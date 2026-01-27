@@ -146,15 +146,17 @@ public:
                                                "The value is calculated on the basis of the last available prices, "
                                                "may therefore not be up-to-date and may differ from the account balance."));
         } else {
-            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", (clearedBalance * balanceFactor).formatMoney("", precision)));
+            ui->m_centerLabel->setText(
+                i18nc("@label:textbox Cleared balance", "Cleared: %1", (clearedBalance * balanceFactor).formatMoney(QString(), precision)));
             if (selections.count(SelectedObjects::JournalEntry) > 1) {
                 ui->m_rightLabel->setText(i18nc("@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx",
                                                 "%1 of %2: %3",
                                                 QChar(0x2211),
                                                 selections.count(SelectedObjects::JournalEntry),
-                                                (selectedTotal * balanceFactor).formatMoney("", precision)));
+                                                (selectedTotal * balanceFactor).formatMoney(QString(), precision)));
             } else {
-                ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", (totalBalance * balanceFactor).formatMoney("", precision)));
+                ui->m_rightLabel->setText(
+                    i18nc("@label:textbox Total balance", "Balance: %1", (totalBalance * balanceFactor).formatMoney(QString(), precision)));
             }
         }
     }

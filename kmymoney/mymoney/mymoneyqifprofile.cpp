@@ -670,7 +670,7 @@ QString MyMoneyQifProfile::value(const QChar& def, const MyMoneyMoney& valuein) 
     MyMoneyMoney::setDecimalSeparator(amountDecimal(def).toLatin1());
     MyMoneyMoney::setThousandSeparator(amountThousands(def).toLatin1());
     MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
-    res = valuein.formatMoney("", 2);
+    res = valuein.formatMoney(QString(), 2);
 
     MyMoneyMoney::setDecimalSeparator(_decimalSeparator);
     MyMoneyMoney::setThousandSeparator(_thousandsSeparator);

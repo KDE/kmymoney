@@ -108,11 +108,10 @@ private:
 class MyMoneyDbDatetimeColumn : public MyMoneyDbColumn
 {
 public:
-    explicit MyMoneyDbDatetimeColumn(const QString& iname,
-                                     const bool iprimary = false,
-                                     const bool inotnull = false,
-                                     const int initVersion = 0):
-        MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion) {}
+    explicit MyMoneyDbDatetimeColumn(const QString& iname, const bool iprimary = false, const bool inotnull = false, const int initVersion = 0)
+        : MyMoneyDbColumn(iname, QString(), iprimary, inotnull, initVersion)
+    {
+    }
     virtual ~MyMoneyDbDatetimeColumn() {}
     const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const final override;
     MyMoneyDbDatetimeColumn* clone() const final override;
@@ -134,11 +133,12 @@ public:
                                 const bool inotnull = false,
                                 const int initVersion = 0,
                                 const int lastVersion = std::numeric_limits<int>::max(),
-                                const QString& defaultValue = QString()
-                               ):
-        MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion, lastVersion, defaultValue),
-        m_type(type),
-        m_isSigned(isigned) {}
+                                const QString& defaultValue = QString())
+        : MyMoneyDbColumn(iname, QString(), iprimary, inotnull, initVersion, lastVersion, defaultValue)
+        , m_type(type)
+        , m_isSigned(isigned)
+    {
+    }
     virtual ~MyMoneyDbIntColumn() {}
     const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const final override;
     MyMoneyDbIntColumn* clone() const final override;
@@ -166,9 +166,11 @@ public:
                                  const size type = MEDIUM,
                                  const bool iprimary = false,
                                  const bool inotnull = false,
-                                 const int initVersion = 0):
-        MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
-        m_type(type) {}
+                                 const int initVersion = 0)
+        : MyMoneyDbColumn(iname, QString(), iprimary, inotnull, initVersion)
+        , m_type(type)
+    {
+    }
     virtual ~MyMoneyDbTextColumn() {}
     const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const final override;
     MyMoneyDbTextColumn* clone() const final override;

@@ -157,7 +157,7 @@ void CsvWriter::writeCategoryEntries(QTextStream &s)
     QStringList::Iterator it_catList;
     int count = 0;
     for (it_catList = list.begin(); it_catList != list.end(); ++it_catList) {
-        writeCategoryEntry(s, *it_catList, "");
+        writeCategoryEntry(s, *it_catList, QString());
         Q_EMIT signalProgress(++count, 0);
     }
 }
@@ -486,7 +486,7 @@ QString CsvWriter::format(const QString& s, bool withSeparator) const
  */
 QString CsvWriter::format(const MyMoneyMoney& value, int prec, bool withSeparator) const
 {
-    return QString("\"%1\"%2").arg(value.formatMoney("", prec, false), withSeparator ? m_separator : QString());
+    return QString("\"%1\"%2").arg(value.formatMoney(QString(), prec, false), withSeparator ? m_separator : QString());
 }
 
 QString CsvWriter::format(const MyMoneyMoney& value, const QString& accountId, bool withSeparator) const

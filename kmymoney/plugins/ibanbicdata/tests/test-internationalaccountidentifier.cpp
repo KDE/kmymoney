@@ -374,7 +374,7 @@ void internationalAccountIdentifierTest::qStringNullAndEmpty()
     QVERIFY(nullStr2.isEmpty());
     QVERIFY(nullStr2.isNull());
 
-    const QString empty = QString("");
+    const QString empty = QString();
     QVERIFY(empty.isEmpty());
     QVERIFY(!empty.isNull());
 }

@@ -108,15 +108,15 @@ public:
 };
 
 sepaOnlineTransferImpl::sepaOnlineTransferImpl()
-    : sepaOnlineTransfer(),
-      _settings(QSharedPointer<const settings>()),
-      _originAccount(QString()),
-      _value(0),
-      _purpose(QString("")),
-      _endToEndReference(QString("")),
-      _beneficiaryAccount(payeeIdentifiers::ibanBic()),
-      _textKey(defaultTextKey),
-      _subTextKey(defaultSubTextKey)
+    : sepaOnlineTransfer()
+    , _settings(QSharedPointer<const settings>())
+    , _originAccount(QString())
+    , _value(0)
+    , _purpose(QString())
+    , _endToEndReference(QString())
+    , _beneficiaryAccount(payeeIdentifiers::ibanBic())
+    , _textKey(defaultTextKey)
+    , _subTextKey(defaultSubTextKey)
 {
 
 }

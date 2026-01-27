@@ -70,45 +70,45 @@ void PivotGridTest::testCellAddValue()
     QVERIFY(a == MyMoneyMoney());
     QVERIFY(a.m_stockSplit == MyMoneyMoney::ONE);
     QVERIFY(a.m_postSplit == MyMoneyMoney());
-    QVERIFY(a.formatMoney("", 2) == MyMoneyMoney().formatMoney("", 2));
+    QVERIFY(a.formatMoney(QString(), 2) == MyMoneyMoney().formatMoney(QString(), 2));
 
     PivotCell b(MyMoneyMoney(13, 10));
     QVERIFY(b == MyMoneyMoney(13, 10));
     QVERIFY(b.m_stockSplit == MyMoneyMoney::ONE);
     QVERIFY(b.m_postSplit == MyMoneyMoney());
-    QVERIFY(b.formatMoney("", 2) == MyMoneyMoney(13, 10).formatMoney("", 2));
+    QVERIFY(b.formatMoney(QString(), 2) == MyMoneyMoney(13, 10).formatMoney(QString(), 2));
 
     PivotCell s(b);
     QVERIFY(s == MyMoneyMoney(13, 10));
     QVERIFY(s.m_stockSplit == MyMoneyMoney::ONE);
     QVERIFY(s.m_postSplit == MyMoneyMoney());
-    QVERIFY(s.formatMoney("", 2) == MyMoneyMoney(13, 10).formatMoney("", 2));
+    QVERIFY(s.formatMoney(QString(), 2) == MyMoneyMoney(13, 10).formatMoney(QString(), 2));
 
     s = PivotCell::stockSplit(MyMoneyMoney(1, 2));
     QVERIFY(s == MyMoneyMoney());
     QVERIFY(s.m_stockSplit == MyMoneyMoney(1, 2));
     QVERIFY(s.m_postSplit == MyMoneyMoney());
-    QVERIFY(s.formatMoney("", 2) == MyMoneyMoney().formatMoney("", 2));
+    QVERIFY(s.formatMoney(QString(), 2) == MyMoneyMoney().formatMoney(QString(), 2));
 
     a += MyMoneyMoney::ONE;
     a += MyMoneyMoney(2, 1);
     QVERIFY(a == MyMoneyMoney(3, 1));
     QVERIFY(a.m_stockSplit == MyMoneyMoney::ONE);
     QVERIFY(a.m_postSplit == MyMoneyMoney());
-    QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(3, 1).formatMoney("", 2));
+    QVERIFY(a.formatMoney(QString(), 2) == MyMoneyMoney(3, 1).formatMoney(QString(), 2));
 
     a += s;
     QVERIFY(a == MyMoneyMoney(3, 1));
     QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 2));
     QVERIFY(a.m_postSplit == MyMoneyMoney());
-    QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(15, 10).formatMoney("", 2));
+    QVERIFY(a.formatMoney(QString(), 2) == MyMoneyMoney(15, 10).formatMoney(QString(), 2));
 
     a += MyMoneyMoney(3, 1);
     a += MyMoneyMoney(3, 1);
     QVERIFY(a == MyMoneyMoney(3, 1));
     QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 2));
     QVERIFY(a.m_postSplit == MyMoneyMoney(6, 1));
-    QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(75, 10).formatMoney("", 2));
+    QVERIFY(a.formatMoney(QString(), 2) == MyMoneyMoney(75, 10).formatMoney(QString(), 2));
 }
 
 void PivotGridTest::testCellAddCell()
@@ -122,7 +122,7 @@ void PivotGridTest::testCellAddCell()
     QVERIFY(a == MyMoneyMoney(3, 1));
     QVERIFY(a.m_stockSplit == MyMoneyMoney(2, 1));
     QVERIFY(a.m_postSplit == MyMoneyMoney(4, 1));
-    QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(10, 1).formatMoney("", 2));
+    QVERIFY(a.formatMoney(QString(), 2) == MyMoneyMoney(10, 1).formatMoney(QString(), 2));
 
     b += MyMoneyMoney(4, 1);
     b += PivotCell::stockSplit(MyMoneyMoney(4, 1));
@@ -131,14 +131,14 @@ void PivotGridTest::testCellAddCell()
     QVERIFY(b == MyMoneyMoney(4, 1));
     QVERIFY(b.m_stockSplit == MyMoneyMoney(4, 1));
     QVERIFY(b.m_postSplit == MyMoneyMoney(16, 1));
-    QVERIFY(b.formatMoney("", 2) == MyMoneyMoney(32, 1).formatMoney("", 2));
+    QVERIFY(b.formatMoney(QString(), 2) == MyMoneyMoney(32, 1).formatMoney(QString(), 2));
 
     a += b;
 
     QVERIFY(a == MyMoneyMoney(3, 1));
     QVERIFY(a.m_stockSplit == MyMoneyMoney(8, 1));
     QVERIFY(a.m_postSplit == MyMoneyMoney(48, 1));
-    QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(72, 1).formatMoney("", 2));
+    QVERIFY(a.formatMoney(QString(), 2) == MyMoneyMoney(72, 1).formatMoney(QString(), 2));
 }
 
 void PivotGridTest::testCellRunningSum()
@@ -156,7 +156,7 @@ void PivotGridTest::testCellRunningSum()
     runningSum = a.calculateRunningSum(runningSum);
 
     QVERIFY(runningSum == MyMoneyMoney(1865, 100));
-    QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(1865, 100).formatMoney("", 2));
+    QVERIFY(a.formatMoney(QString(), 2) == MyMoneyMoney(1865, 100).formatMoney(QString(), 2));
     QVERIFY(a.m_stockSplit == MyMoneyMoney::ONE);
     QVERIFY(a.m_postSplit == MyMoneyMoney());
 }

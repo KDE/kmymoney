@@ -400,9 +400,10 @@ public:
         if (endingBalanceDlg) {
             const auto endingBalance = endingBalanceDlg->endingBalance();
             const auto balance = MyMoneyFile::instance()->journalModel()->clearedBalance(accountId, endingBalanceDlg->statementDate());
-            ui->m_leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney("", precision)));
-            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", balance.formatMoney("", precision)));
-            ui->m_rightLabel->setText(i18nc("@label:textbox Difference to statement", "Difference: %1", (balance - endingBalance).formatMoney("", precision)));
+            ui->m_leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney(QString(), precision)));
+            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", balance.formatMoney(QString(), precision)));
+            ui->m_rightLabel->setText(
+                i18nc("@label:textbox Difference to statement", "Difference: %1", (balance - endingBalance).formatMoney(QString(), precision)));
             stateFilter->setEndDate(endingBalanceDlg->startDate());
         }
     }

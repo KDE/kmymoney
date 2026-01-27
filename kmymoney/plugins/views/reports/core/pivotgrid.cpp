@@ -64,7 +64,7 @@ PivotCell PivotCell::stockSplit(const MyMoneyMoney& factor)
 
 const QString PivotCell::formatMoney(int fraction, bool showThousandSeparator) const
 {
-    return formatMoney("", MyMoneyMoney::denomToPrec(fraction), showThousandSeparator);
+    return formatMoney(QString(), MyMoneyMoney::denomToPrec(fraction), showThousandSeparator);
 }
 
 const QString PivotCell::formatMoney(const QString& currency, const int prec, bool showThousandSeparator) const

@@ -206,7 +206,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         s << "  Opening date = " << (*it_a).openingDate().toString(Qt::ISODate) << "\n";
         s << "  Last modified = " << (*it_a).lastModified().toString(Qt::ISODate) << "\n";
         s << "  Last reconciled = " << (*it_a).lastReconciliationDate().toString(Qt::ISODate) << "\n";
-        s << "  Balance = " << (*it_a).balance().formatMoney("", 2) << "\n";
+        s << "  Balance = " << (*it_a).balance().formatMoney(QString(), 2) << "\n";
 
         dumpKVP("  KVP: ", s, *it_a);
         dumpKVP("  OnlineBankingSettings: ", s, (*it_a).onlineBankingSettings());
@@ -290,7 +290,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         MyMoneyPriceEntries::const_iterator it_pre;
         for (it_pre = (*it_pr).cbegin(); it_pre != (*it_pr).cend(); ++it_pre) {
             s << "      Date = " << (*it_pre).date().toString() << "\n";
-            s << "        Price = " << (*it_pre).rate().formatMoney("", 8) << "\n";
+            s << "        Price = " << (*it_pre).rate().formatMoney(QString(), 8) << "\n";
             s << "        Source = " << (*it_pre).source() << "\n";
             s << "        From = " << (*it_pre).from() << "\n";
             s << "        To   = " << (*it_pre).to() << "\n";
@@ -432,10 +432,8 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyFile* file, cons
         if (split.value() == MyMoneyMoney::autoCalc)
             s << "    Value = will be calculated" << "\n";
         else
-            s << "    Value = " << split.value().formatMoney("", 2)
-              << " (" << split.value().toString() << ")\n";
-        s << "    Shares = " << split.shares().formatMoney("", 2)
-          << " (" << split.shares().toString() << ")\n";
+            s << "    Value = " << split.value().formatMoney(QString(), 2) << " (" << split.value().toString() << ")\n";
+        s << "    Shares = " << split.shares().formatMoney(QString(), 2) << " (" << split.shares().toString() << ")\n";
         s << "    Action = '" << split.action() << "'\n";
         s << "    Nr = '" << split.number() << "'\n";
         s << "    ReconcileFlag = '" << reconcileToString(split.reconcileFlag()) << "'\n";

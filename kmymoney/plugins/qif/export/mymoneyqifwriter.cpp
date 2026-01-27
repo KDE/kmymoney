@@ -149,7 +149,7 @@ void MyMoneyQifWriter::writeCategoryEntries(QTextStream &s)
     QStringList::Iterator it;
     int count = 0;
     for (it = list.begin(); it != list.end(); ++it) {
-        writeCategoryEntry(s, *it, "");
+        writeCategoryEntry(s, *it, QString());
         Q_EMIT signalProgress(++count, 0);
     }
 }
@@ -348,7 +348,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
                     return;
                 }
                 MyMoneySplit sp = t.splitByAccount(map.value(eMyMoney::Account::Type::Checkings), true);
-                QString txt = sp.value().formatMoney("", 2);
+                QString txt = sp.value().formatMoney(QString(), 2);
                 s += 'T' + txt + '\n';
             } else if ((*it).action() == "Buy") {
 
@@ -379,16 +379,16 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
                 //
                 //  Add total.
                 //
-                txt = value.formatMoney("", 2);
+                txt = value.formatMoney(QString(), 2);
                 if (action == "Sell") {
                     value = -value;
-                    txt = value.formatMoney("", 2);
+                    txt = value.formatMoney(QString(), 2);
                 }
                 s += 'T' + txt + '\n';
                 //
                 //  Add price.
                 //
-                txt = (*it).possiblyCalculatedPrice().formatMoney("", 6);
+                txt = (*it).possiblyCalculatedPrice().formatMoney(QString(), 6);
                 s += 'I' + txt + '\n';
                 if (!qty.isZero()) {
                     //

@@ -215,7 +215,7 @@ void kOnlineTransferForm::accountChanged()
         ui->orderAccountBalance->setValue(MyMoneyFile::instance()->balance(accountId));
     } catch (const MyMoneyException &) {
         // @todo this can happen until the selection allows to select correct accounts only
-        ui->orderAccountBalance->setText("");
+        ui->orderAccountBalance->setText(QString());
     }
 
     for (IonlineJobEdit* widget : qAsConst(m_onlineJobEditWidgets))

@@ -269,7 +269,7 @@ void KGenerateSqlDlg::slotdriverSelected()
                                                          "Please report any problems to the developer mailing list at "
                                                          "kmymoney-devel@kde.org",
                                                          driverName),
-                                                    "");
+                                                    QString());
         if (rc == KMessageBox::Cancel) {
             d->ui->listDrivers->clearSelection();
             d->initializeForm();
@@ -299,9 +299,9 @@ void KGenerateSqlDlg::slotdriverSelected()
         d->m_requiredFields->add(d->ui->textUserName);
         d->ui->textDbName->setText("KMyMoney");
         d->ui->textHostName->setText("localhost");
-        d->ui->textUserName->setText("");
+        d->ui->textUserName->setText(QString());
         d->ui->textUserName->setText(platformTools::osUsername());
-        d->ui->textPassword->setText("");
+        d->ui->textPassword->setText(QString());
     }
 
     d->ui->textPassword->setEnabled(d->m_dbDriver->isPasswordSupported());

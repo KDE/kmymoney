@@ -82,7 +82,7 @@ void KNewEquityEntryDlg::onOKClicked()
     Q_D(KNewEquityEntryDlg);
     d->m_strSymbolName = d->ui->edtMarketSymbol->text();
     d->m_strName = d->ui->edtEquityName->text();
-    d->m_fraction = d->ui->edtFraction->value().abs().formatMoney("", 0, false).toUInt();
+    d->m_fraction = d->ui->edtFraction->value().abs().formatMoney(QString(), 0, false).toUInt();
     accept();
 }
 

@@ -82,7 +82,7 @@ void KBAccountListViewItem::_populate()
 
     tmp = QString::fromUtf8(AB_AccountSpec_GetOwnerName(_account));
     if (tmp.isEmpty())
-        tmp = "";
+        tmp.clear();
     setText(column++, tmp);
 
     tmp = QString::fromUtf8(AB_AccountSpec_GetBackendName(_account));

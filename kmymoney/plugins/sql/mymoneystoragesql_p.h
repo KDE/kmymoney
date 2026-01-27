@@ -1109,10 +1109,10 @@ public:
             try {
                 MyMoneyMoney bal = m_file->balance(a.id(), QDate());
                 balanceList << bal.toString();
-                balanceFormattedList << bal.formatMoney("", -1, false);
+                balanceFormattedList << bal.formatMoney(QString(), -1, false);
             } catch (const MyMoneyException &) {
                 balanceList << a.balance().toString();
-                balanceFormattedList << a.balance().formatMoney("", -1, false);
+                balanceFormattedList << a.balance().formatMoney(QString(), -1, false);
             }
             transactionCountList << quint64(m_transactionCountMap[a.id()]);
 
@@ -1302,7 +1302,7 @@ public:
             actionList << s.action();
             reconcileFlagList << (int)s.reconcileFlag();
             valueList << s.value().toString();
-            valueFormattedList << s.value().formatMoney("", -1, false).replace(QChar(','), QChar('.'));
+            valueFormattedList << s.value().formatMoney(QString(), -1, false).replace(QChar(','), QChar('.'));
             sharesList << s.shares().toString();
             MyMoneyAccount acc = m_file->account(s.accountId());
             MyMoneySecurity sec = m_file->security(acc.currencyId());
@@ -1467,7 +1467,7 @@ public:
         query.bindValue(":toId", p.to());
         query.bindValue(":priceDate", p.date().toString(Qt::ISODate));
         query.bindValue(":price", p.rate(QString()).toString());
-        query.bindValue(":priceFormatted", p.rate(QString()).formatMoney("", 2));
+        query.bindValue(":priceFormatted", p.rate(QString()).formatMoney(QString(), 2));
         query.bindValue(":priceSource", p.source());
         if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Prices"); // krazy:exclude=crashy
     }
@@ -1668,7 +1668,7 @@ public:
         m_logonAt = GETDATETIME(rec.indexOf("logonAt"));
 
         signalProgress(1, 0);
-        const auto params = readKeyValuePairs("STORAGE", QString("")).pairs();
+        const auto params = readKeyValuePairs("STORAGE", QString()).pairs();
         for (auto it = params.cbegin(); it != params.cend(); ++it) {
             m_file->parametersModel()->addItem(it.key(), it.value());
         }

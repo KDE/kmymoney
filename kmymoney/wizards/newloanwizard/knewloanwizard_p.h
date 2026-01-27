@@ -235,7 +235,7 @@ public:
 
         int fraction = m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()));
         q->setField("loanAmount6", q->field("loanAmountEdit").value<MyMoneyMoney>().formatMoney(fraction));
-        q->setField("interestRate6", QString(q->field("interestRateEdit").value<MyMoneyMoney>().formatMoney("", 3) + QString("%")));
+        q->setField("interestRate6", QString(q->field("interestRateEdit").value<MyMoneyMoney>().formatMoney(QString(), 3) + QString("%")));
         txt = QStringLiteral("%1 %2").arg(q->field("durationValueEdit").toInt()).arg(q->field("durationUnitEdit").toString());
         q->setField("duration6", txt);
         q->setField("payment6", q->field("paymentEdit").value<MyMoneyMoney>().formatMoney(fraction));
@@ -307,7 +307,7 @@ public:
                 // calculate the interest rate out of the other information
                 val = calc.interestRate();
 
-                ui->m_interestPage->ui->m_interestRateEdit->setText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
+                ui->m_interestPage->ui->m_interestRateEdit->setText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(QString(), 3));
                 result = i18n("KMyMoney has calculated the interest rate to %1%.", ui->m_interestPage->ui->m_interestRateEdit->text());
 
             } else if (!q->field("paymentEditValid").toBool()) {

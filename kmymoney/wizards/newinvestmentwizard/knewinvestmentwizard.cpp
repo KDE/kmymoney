@@ -113,7 +113,7 @@ public:
             newSecurity.setName(q->field("investmentName").toString());
             newSecurity.setTradingSymbol(q->field("investmentSymbol").toString());
             newSecurity.setTradingMarket(q->field("tradingMarket").toString());
-            newSecurity.setSmallestAccountFraction(q->field("fraction").value<MyMoneyMoney>().formatMoney("", 0, false).toUInt());
+            newSecurity.setSmallestAccountFraction(q->field("fraction").value<MyMoneyMoney>().formatMoney(QString(), 0, false).toUInt());
             newSecurity.setPricePrecision(q->field("pricePrecision").toUInt());
             newSecurity.setTradingCurrency(q->field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
             newSecurity.setSecurityType(type);

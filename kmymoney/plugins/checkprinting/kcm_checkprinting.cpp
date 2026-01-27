@@ -85,7 +85,7 @@ void CheckPrintingSettingsWidget::textChanged(const QString& text)
 {
     // conceal the default "qrc:/" value to avoid confusing regular users
     if (text == CheckPrintingSettings::defaultCheckTemplateFileValue()) {
-        kcfg_checkTemplateFile->setText("");
+        kcfg_checkTemplateFile->setText(QString());
     }
 }
 

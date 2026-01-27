@@ -282,7 +282,7 @@ QString GncObject::hide(QString data, unsigned int anonClass)
             mresult  = MyMoneyMoney(m_moneyHideFactor) * in;
             mresult.convert(10000);
             mresult.setThousandSeparator(' ');
-            result = mresult.formatMoney("", 2);
+            result = mresult.formatMoney(QString(), 2);
             break;
         }
         return (result);
