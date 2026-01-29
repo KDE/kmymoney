@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-26 03:28+0000\n"
-"PO-Revision-Date: 2026-01-07 18:49+0400\n"
+"PO-Revision-Date: 2026-01-28 20:08+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -314,13 +314,12 @@ msgctxt "@info %1 selected parent, %2 top level account"
 msgid ""
 "The selected parent account <b>%1</b> does not exist in the <b>%2</b> "
 "hierarchy."
-msgstr ""
+msgstr "الحساب الأصلي المحدد <b>%1</b> غير موجود في التسلسل الهرمي <b>%2</b>."
 
 #: kmymoney/dialogs/accountcreator.cpp:98
-#, fuzzy, kde-format
-#| msgid "Category creation"
+#, kde-format
 msgid "Account/category creation problem"
-msgstr "إنشاء فئة"
+msgstr "مشكلة في إنشاء الحساب/الفئة"
 
 #: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
@@ -21389,12 +21388,10 @@ msgid "National Account Number"
 msgstr "رقم الحساب الوطنيّ"
 
 #: kmymoney/views/reconciliationdelegate.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Cancel the current reconciliation"
+#, kde-format
 msgctxt "Ledger marker showing current reconciliation entry"
 msgid "Current reconciliation"
-msgstr "ألغِ التسوية الحالية"
+msgstr "التسوية الحالية"
 
 #: kmymoney/views/reconciliationdelegate.cpp:110
 #, kde-format
