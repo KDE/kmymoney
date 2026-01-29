@@ -13,7 +13,6 @@ include:
 #      - /gitlab-templates/craft-macos-arm64.yml
 #      - /gitlab-templates/craft-macos-x86-64.yml
       - /gitlab-templates/flatpak.yml
-      - /gitlab-templates/documentation.yml
 
 # custom builds
 
