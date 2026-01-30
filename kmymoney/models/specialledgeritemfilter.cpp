@@ -350,6 +350,7 @@ SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
         // sort afresh in case some rows need to be resorted
         // doSort() inherits a call to invalidateFilter().
         doSort();
+        Q_EMIT sortFinished();
     });
 
     connect(MyMoneyFile::instance()->journalModel(), &JournalModel::balanceChanged, this, [&](const QString& accountId) {

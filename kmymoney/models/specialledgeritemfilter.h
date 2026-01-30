@@ -96,6 +96,9 @@ protected:
      */
     void doSortOnIdle() override;
 
+Q_SIGNALS:
+    void sortFinished();
+
 private:
     // make sure that only LedgerSortProxyModel models can be used as sources
     void setSourceModel(QAbstractItemModel* model) override;
