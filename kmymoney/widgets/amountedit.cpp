@@ -616,7 +616,16 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
     }
     // in case we have not processed anything, we
     // need to call the base class implementation
+    // we keep the current content so we can check
+    // if the key pressure did change and was consumed
+    const auto oldContent = text();
     QLineEdit::keyPressEvent(event);
+
+    // if no change, we assume no consumption and
+    // propagate the event to parent widgets. This
+    // allows shortcuts to be handled in upstream
+    // widgets.
+    event->setAccepted(text() != oldContent);
 }
 
 void AmountEdit::setPrecision(const int prec, bool forceUpdate)

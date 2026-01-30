@@ -417,6 +417,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->memoEdit->installEventFilter(this);
     d->ui->tagContainer->tagCombo()->installEventFilter(this);
     d->ui->accountCombo->installEventFilter(this);
+    d->ui->creditDebitEdit->installEventFilter(this);
 
     // setup the tab order
     d->m_tabOrder.setWidget(this);
