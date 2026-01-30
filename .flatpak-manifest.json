@@ -36,28 +36,21 @@
     "modules": [
         {
             "name": "qgpgme",
-            "buildsystem": "autotools",
+            "buildsystem": "cmake-ninja",
             "config-opts": [
-                "--enable-languages=cpp,qt6",
-                "--disable-glibtest",
-                "--disable-gpgconf-test",
-                "--disable-gpg-test",
-                "--disable-gpgsm-test",
-                "--disable-g13-test"
+                "-DBUILD_WITH_QT5=OFF",
+                "-DBUILD_TESTING=OFF"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.3.tar.bz2",
-                    "sha256": "bfc17f5bd1b178c8649fdd918956d277080f33df006a2dc40acdecdce68c50dd",
+                    "url": "https://gnupg.org/ftp/gcrypt/qgpgme/qgpgme-2.0.0.tar.xz",
+                    "sha256": "15645b2475cca6118eb2ed331b3a8d9442c9d4019c3846ba3f6d25321b4a61ad",
                     "x-checker-data": {
                         "type": "anitya",
-                        "project-id": 1239,
+                        "project-id": 378538,
                         "stable-only": true,
-                        "url-template": "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-$version.tar.bz2",
-                        "versions": {
-                            "<": "2.0.0"
-                        }
+                        "url-template": "https://gnupg.org/ftp/gcrypt/qgpgme/qgpgme-$version.tar.xz"
                     }
                 }
             ],
