@@ -61,6 +61,7 @@
 #include "selectedobjects.h"
 #include "specialdatedelegate.h"
 #include "specialdatesmodel.h"
+#include "specialledgeritemfilter.h"
 #include "transactioneditorbase.h"
 
 struct GlobalEditData {
@@ -693,6 +694,11 @@ void LedgerView::setModel(QAbstractItemModel* model)
     horizontalHeader()->setSortIndicator(-1, Qt::AscendingOrder);
 
     horizontalHeader()->setSectionsClickable(true);
+
+    SpecialLedgerItemFilter* sortModel = qobject_cast<SpecialLedgerItemFilter*>(model);
+    if (sortModel) {
+        connect(sortModel, &SpecialLedgerItemFilter::sortFinished, this, &LedgerView::ensureCurrentItemIsVisible);
+    }
 }
 
 void LedgerView::reset()
