@@ -776,19 +776,6 @@ void QueryTableTest::testInvestment()
 
         QVERIFY(MyMoneyMoney(rows[4][ListTable::ctEndingMarketValue]) == MyMoneyMoney(280000.00));
 
-#if 0
-        // Dump file & reports
-        QFile g("investmentkmy.xml");
-        g.open(QIODevice::WriteOnly);
-        MyMoneyStorageXML xml;
-        IMyMoneyOperationsFormat& interface = xml;
-        interface.writeFile(&g, dynamic_cast<IMyMoneySerialization*>(MyMoneyFile::instance()->storage()));
-        g.close();
-
-        invtran.dump("invtran.html", "<html><head></head><body>%1</body></html>");
-        invhold.dump("invhold.html", "<html><head></head><body>%1</body></html>");
-#endif
-
     } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }

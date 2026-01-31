@@ -39,7 +39,6 @@ set(kmm_mymoney_LIB_SRCS
   # because, while building kmm_storage, linker reports many undefined symbols
   # which are in fact available in kmm_mymoney
   set(storage_a_SOURCES
-    ./storage/imymoneystorageformat.cpp
     ./storage/mymoneymodelbase.cpp
     ./storage/payeesmodel.cpp
     ./storage/costcentermodel.cpp

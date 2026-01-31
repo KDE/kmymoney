@@ -50,7 +50,6 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class WebConnect;
 class creditTransfer;
-class IMyMoneyOperationsFormat;
 class SelectedObjects;
 
 template <class T> class onlineJobTyped;

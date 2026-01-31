@@ -13,7 +13,6 @@
 #include <QSharedPointer>
 #include <QSqlDatabase>
 
-#include "imymoneystorageformat.h"
 #include "mymoneyunittestable.h"
 
 // This is a convenience functor to make it easier to use STL algorithms
@@ -67,7 +66,7 @@ enum class State;
   */
 
 class MyMoneyStorageSqlPrivate;
-class MyMoneyStorageSql : public IMyMoneyOperationsFormat, public QSqlDatabase, public QSharedData
+class MyMoneyStorageSql : public QSqlDatabase, public QSharedData
 {
     Q_DISABLE_COPY(MyMoneyStorageSql)
     friend class MyMoneyDbDef;
@@ -75,7 +74,7 @@ class MyMoneyStorageSql : public IMyMoneyOperationsFormat, public QSqlDatabase, 
 
 public:
     explicit MyMoneyStorageSql(MyMoneyFile* file, const QUrl&);
-    ~MyMoneyStorageSql() override;
+    ~MyMoneyStorageSql();
 
     uint currentVersion() const;
 
@@ -248,10 +247,10 @@ public:
     void readTags();
 
     void readTransactions(const MyMoneyTransactionFilter& filter);
-    void setProgressCallback(void(*callback)(int, int, const QString&)) override;
+    void setProgressCallback(void (*callback)(int, int, const QString&));
 
-    void readFile(QIODevice* s, MyMoneyFile* file) override;
-    void writeFile(QIODevice* s, MyMoneyFile* file) override;
+    void readFile(QIODevice* s, MyMoneyFile* file);
+    void writeFile(QIODevice* s, MyMoneyFile* file);
 
     void startCommitUnit(const QString& callingFunction);
     bool endCommitUnit(const QString& callingFunction);

@@ -175,8 +175,6 @@
 
 #include "misc/webconnect.h"
 
-#include "imymoneystorageformat.h"
-
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
 

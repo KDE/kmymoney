@@ -21,7 +21,6 @@
 
 class QTimer;
 
-class IMyMoneyOperationsFormat;
 typedef void (*KMyMoneyAppCallback)(int, int, const QString&);
 
 namespace KMyMoneyPlugin {

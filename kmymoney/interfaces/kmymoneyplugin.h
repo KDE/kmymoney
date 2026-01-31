@@ -34,7 +34,6 @@ class KPluginMetaData;
 class MyMoneyStorageMgr;
 class MyMoneyAccount;
 class KMyMoneySettings;
-class IMyMoneyOperationsFormat;
 class SelectedObjects;
 
 namespace KMyMoneyPlugin {

@@ -60,7 +60,6 @@ class KTagsView;
 class KBudgetView;
 class KScheduledView;
 class KGlobalLedgerView;
-class IMyMoneyOperationsFormat;
 class MyMoneyTransaction;
 class KInvestmentView;
 class KReportsView;

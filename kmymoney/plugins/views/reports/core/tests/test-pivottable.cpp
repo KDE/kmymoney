@@ -554,15 +554,6 @@ void PivotTableTest::testMultipleCurrencies()
                          canCash,
                          "CAD");
 
-#if 0
-    QFile g("multicurrencykmy.xml");
-    g.open(QIODevice::WriteOnly);
-    MyMoneyStorageXML xml;
-    IMyMoneyOperationsFormat& interface = xml;
-    interface.writeFile(&g, dynamic_cast<IMyMoneySerialization*>(MyMoneyFile::instance()->storage()));
-    g.close();
-#endif
-
     MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
@@ -1119,19 +1110,6 @@ void PivotTableTest::testInvestment()
         QVERIFY(networth.m_grid["Asset"]["Investment"].m_total[eActual][9] == MyMoneyMoney(204000.0));
         // 1700 shares @ $100.00
         QVERIFY(networth.m_grid["Asset"]["Investment"].m_total[eActual][10] == MyMoneyMoney(170000.0));
-
-#if 0
-        // Dump file & reports
-        QFile g("investmentkmy.xml");
-        g.open(QIODevice::WriteOnly);
-        MyMoneyStorageXML xml;
-        IMyMoneyOperationsFormat& interface = xml;
-        interface.writeFile(&g, dynamic_cast<IMyMoneySerialization*>(MyMoneyFile::instance()->storage()));
-        g.close();
-
-        invtran.dump("invtran.html", "<html><head></head><body>%1</body></html>");
-        invhold.dump("invhold.html", "<html><head></head><body>%1</body></html>");
-#endif
 
     } catch (const MyMoneyException& e) {
         QFAIL(e.what());

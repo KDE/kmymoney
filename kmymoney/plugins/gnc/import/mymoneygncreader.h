@@ -144,9 +144,7 @@ allow us to test the structure, if not the data content, of the file.
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#ifndef _GNCFILEANON
-#include "storage/imymoneystorageformat.h"
-#endif // _GNCFILEANON
+#include "mymoneyfile.h"
 
 // not sure what these are for, but leave them in
 #define VERSION_0_60_XML  0x10000010    // Version 0.5 file version info
@@ -822,7 +820,7 @@ private:
   */
 
 #ifndef _GNCFILEANON
-class MyMoneyGncReader : public IMyMoneyOperationsFormat
+class MyMoneyGncReader
 {
 #else
 class MyMoneyGncReader
@@ -830,7 +828,7 @@ class MyMoneyGncReader
 #endif // _GNCFILEANON
 public:
     MyMoneyGncReader();
-    ~MyMoneyGncReader() override;
+    ~MyMoneyGncReader();
     /**
       * Import a GnuCash XML file
       *
@@ -842,11 +840,13 @@ public:
       */
 #ifndef _GNCFILEANON
     /// @todo port to new model code
-    void readFile(QIODevice* pDevice, MyMoneyFile* file) final override;  // main entry point, IODevice is gnucash file
+    void readFile(QIODevice* pDevice, MyMoneyFile* file); // main entry point, IODevice is gnucash file
     // dummy entry needed by kmymoneywiew. we will not be writing
-    void writeFile(QIODevice*, MyMoneyFile*) final override {}
+    void writeFile(QIODevice*, MyMoneyFile*)
+    {
+    }
 
-    void setProgressCallback(void(*callback)(int, int, const QString&)) final override;
+    void setProgressCallback(void (*callback)(int, int, const QString&));
 #else
     void readFile(QString, QString);
 #endif // _GNCFILEANON

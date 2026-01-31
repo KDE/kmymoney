@@ -3,7 +3,6 @@ if(BUILD_TESTING)
 endif()
 
 set(storage_HEADERS
-  imymoneystorageformat.h
   mymoneymodelbase.h
   mymoneymodel.h
   payeesmodel.h
