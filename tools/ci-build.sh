@@ -112,7 +112,7 @@ if test "$ci_build" = "yes"; then
             else
                 cmake_options+=-Werror=dev
             fi
-            cmake $cmake_options -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 -DWARNINGS_AS_ERRORS=on ..
+            cmake $cmake_options -DBUILD_WITH_QT6=1 -DWARNINGS_AS_ERRORS=on ..
             ;;
         (*)
             cmake $cmake_options ..

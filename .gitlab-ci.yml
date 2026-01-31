@@ -50,12 +50,12 @@ distro_kf5_leap:
   script:
     - ./tools/ci-build.sh
 
-distro_kf6_tumbleweed:
+distro_kf6_leap_16:
   stage: build
   # don't stop pipeline if this job fails
   allow_failure: true
   #when: manual
-  image: rhabacker/suse_tumbleweed_kf6_qt68
+  image: rhabacker/suse_leap_16_kf6_qt6
   variables:
     ci_parallel: "16"
     ci_sudo: "yes"
