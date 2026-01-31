@@ -138,6 +138,7 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(selections.firstSelection(SelectedObjects::Account));
         if (!account.id().isEmpty()) {
             QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(account, this);
+            connect(dlg.data(), &KBalanceChartDlg::openReport, this, QOverload<const QString&>::of(&KReportsView::slotOpenReport));
             dlg->exec();
             delete dlg;
         }

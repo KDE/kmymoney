@@ -1392,6 +1392,10 @@ public:
             list.back().setConvertCurrency(false);
             groups.push_back(list);
         }
+        {
+            ReportGroup list("Value/Balance History", i18n("Value/Balance History"));
+            groups.push_back(list);
+        }
     }
 
     bool columnsAlreadyAdjusted() const
