@@ -111,13 +111,14 @@ void TransactionEditorBase::keyPressEvent(QKeyEvent* e)
     if (d->cancelButton && d->enterButton) {
         if (!e->modifiers() || ((e->modifiers() & Qt::KeypadModifier) && (e->key() == Qt::Key_Enter))) {
             if (d->enterButton->isVisible()) {
+                const auto widgetIsButton = (focusWidget() == d->enterButton) || (focusWidget() == d->cancelButton);
                 switch (e->key()) {
                 case Qt::Key_Enter:
                 case Qt::Key_Return:
-                    if (d->enterMovesBetweenFields) {
-                        focusNextPrevChild(true);
-                    } else {
+                    if (!d->enterMovesBetweenFields || widgetIsButton) {
                         processReturnKey();
+                    } else {
+                        focusNextPrevChild(true);
                     }
                     break;
 
@@ -131,6 +132,18 @@ void TransactionEditorBase::keyPressEvent(QKeyEvent* e)
                 }
             } else {
                 e->ignore();
+            }
+
+        } else if (e->modifiers() == Qt::ShiftModifier) {
+            // Shift+Enter stores the transaction
+            switch (e->key()) {
+            case Qt::Key_Enter:
+            case Qt::Key_Return:
+                processReturnKey();
+                break;
+            default:
+                e->ignore();
+                break;
             }
         } else {
             e->ignore();
@@ -301,7 +314,7 @@ void TransactionEditorBase::processReturnKey()
     if (focusWidget() == d->cancelButton) {
         QMetaObject::invokeMethod(this, &TransactionEditorBase::reject, Qt::QueuedConnection);
     } else {
-        if (d->enterButton->isEnabled() && !d->readOnly) {
+        if (d->enterButton && d->enterButton->isEnabled() && !d->readOnly) {
             // move focus to enter button which
             // triggers update of widgets
             QMetaObject::invokeMethod(d->enterButton, "setFocus", Qt::QueuedConnection);

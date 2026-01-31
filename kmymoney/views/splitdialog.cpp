@@ -10,6 +10,7 @@
 
 #include <QDebug>
 #include <QHeaderView>
+#include <QKeyEvent>
 #include <QPointer>
 
 // ----------------------------------------------------------------------------
@@ -522,4 +523,15 @@ void SplitDialog::setReadOnly(bool readOnly)
     d->ui->newSplitButton->setDisabled(readOnly);
     d->ui->splitView->setReadOnlyMode(readOnly);
     updateButtonState();
+}
+
+void SplitDialog::keyPressEvent(QKeyEvent* event)
+{
+    const auto keyIsReturn = ((event->modifiers() & Qt::KeypadModifier) && (event->key() == Qt::Key_Enter)) || (event->key() == Qt::Key_Return);
+    if ((event->modifiers() == Qt::ShiftModifier) && keyIsReturn) {
+        // Shift+Enter causes the dialog to be accepted
+        accept();
+        return;
+    }
+    QDialog::keyPressEvent(event);
 }

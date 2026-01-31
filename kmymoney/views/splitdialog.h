@@ -75,6 +75,7 @@ protected Q_SLOTS:
     void adjustUnassigned();
 
 protected:
+    void keyPressEvent(QKeyEvent* event) final override;
     void resizeEvent(QResizeEvent* ev) final override;
     void adjustSummaryWidth();
     // QBrush m_unassigned_over;
