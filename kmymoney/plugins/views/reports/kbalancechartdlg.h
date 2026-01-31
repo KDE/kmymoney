@@ -38,6 +38,10 @@ public:
 
 public Q_SLOTS:
     void configureReport();
+    void newReport();
+
+Q_SIGNALS:
+    void openReport(const QString& id);
 
 protected:
     MyMoneyReport* m_reportCfg;

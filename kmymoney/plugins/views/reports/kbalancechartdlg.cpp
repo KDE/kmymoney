@@ -18,19 +18,25 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KActionCollection>
 #include <KChartCartesianCoordinatePlane.h>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KWindowConfig>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "icons.h"
+#include "kmymoneyutils.h"
 #include "kreportchartview.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneyreport.h"
+#include "mymoneyutils.h"
 #include "pivottable.h"
 #include "reporttabimpl.h"
 
@@ -236,12 +242,15 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     }
 
     // add the buttons
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close | QDialogButtonBox::Reset);
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close | QDialogButtonBox::Reset | QDialogButtonBox::Retry);
     buttonBox->button(QDialogButtonBox::Reset)->setText(i18n("Configure report"));
     buttonBox->button(QDialogButtonBox::Reset)->setIcon(Icons::get(Icons::Icon::DocumentProperties));
+    buttonBox->button(QDialogButtonBox::Retry)->setText(i18n("New report"));
+    buttonBox->button(QDialogButtonBox::Retry)->setIcon(Icons::get(Icons::Icon::DocumentNew));
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
     connect(buttonBox->button(QDialogButtonBox::Reset), &QPushButton::pressed, this, &KBalanceChartDlg::configureReport);
+    connect(buttonBox->button(QDialogButtonBox::Retry), &QPushButton::pressed, this, &KBalanceChartDlg::newReport);
     mainLayout->addWidget(buttonBox);
 
     if (!showLegend) {
@@ -277,5 +286,34 @@ void KBalanceChartDlg::configureReport()
     if (dialog.exec() == QDialog::Accepted) {
         chartWidget->apply(m_reportCfg);
         reports::PivotTable(*m_reportCfg).drawChart(*m_chartView);
+    }
+}
+
+void KBalanceChartDlg::newReport()
+{
+    MyMoneyReport& newReport = *m_reportCfg;
+    newReport.setGroup("Value/Balance History");
+    QDate today = QDate::currentDate();
+    newReport.setName(newReport.name() + QString(" (%1)").arg(MyMoneyUtils::formatDate(today)));
+    newReport.setDateFilter(eMyMoney::TransactionFilter::Date::UserDefined);
+    newReport.setEvaluationDate(today);
+    newReport.setIsGenerated();
+
+    MyMoneyFileTransaction ft;
+    try {
+        if (!newReport.id().isEmpty()) {
+            MyMoneyFile::instance()->modifyReport(newReport);
+            ft.commit();
+        } else {
+            MyMoneyFile::instance()->addReport(newReport);
+            ft.commit();
+        }
+
+        // open report
+        KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
+        QAction* action = mw->actionCollection()->action("report_open");
+        MyMoneyUtils::triggerAction(action);
+        Q_EMIT openReport(newReport.id());
+    } catch (const MyMoneyException&) {
     }
 }
