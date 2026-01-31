@@ -446,15 +446,16 @@ QModelIndex SplitView::moveCursor(QAbstractItemView::CursorAction cursorAction, 
     return {};
 }
 
-void SplitView::keyPressEvent(QKeyEvent* kev)
+void SplitView::keyPressEvent(QKeyEvent* event)
 {
+    const auto keyIsReturn = ((event->modifiers() & Qt::KeypadModifier) && (event->key() == Qt::Key_Enter)) || (event->key() == Qt::Key_Return);
 #ifndef Q_OS_OSX
     if (d->readOnly) {
         // suppress starting the editor
-        if (kev->key() == Qt::Key_F2) {
+        if (event->key() == Qt::Key_F2) {
             return;
         }
-    } else {
+    } else if (keyIsReturn && !event->modifiers()) {
         // on non OSX operating systems, we turn a return or enter
         // key press into an F2 to start editing the transaction.
         // This is otherwise suppressed. Comment from QAbstractItemView:
@@ -463,20 +464,21 @@ void SplitView::keyPressEvent(QKeyEvent* kev)
         // some widgets will forward the enter event back
         // to the viewport, starting an endless loop
 
-        QKeyEvent evt(kev->type(), Qt::Key_F2, kev->modifiers(), QString(), kev->isAutoRepeat(), kev->count());
-        switch (kev->key()) {
-        case Qt::Key_Return:
-        case Qt::Key_Enter:
-            // send out the modified key event
-            // and don't process this one any further
-            QApplication::sendEvent(this, &evt);
-            return;
-        default:
-            break;
-        }
+        // send out the modified key event
+        // and don't process this one any further
+        QKeyEvent evt(event->type(), Qt::Key_F2, event->modifiers(), QString(), event->isAutoRepeat(), event->count());
+        QApplication::sendEvent(this, &evt);
+        return;
     }
 #endif
-    QTableView::keyPressEvent(kev);
+
+    if (keyIsReturn && (event->modifiers() == Qt::ShiftModifier)) {
+        // Shift+Enter is directly routed to the enclosing widget
+        event->ignore();
+        return;
+    }
+
+    QTableView::keyPressEvent(event);
 }
 
 void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& previous)

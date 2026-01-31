@@ -491,23 +491,29 @@ void NewSplitEditor::reject()
 
 void NewSplitEditor::keyPressEvent(QKeyEvent* event)
 {
+    auto processReturnKey = [&]() {
+        if (d->ui->enterButton->isEnabled() && !d->readOnly) {
+            d->ui->enterButton->setFocus();
+            QMetaObject::invokeMethod(d->ui->enterButton, &QAbstractButton::click, Qt::QueuedConnection);
+        } else {
+            event->ignore();
+        }
+    };
+
     if (!event->modifiers() || (event->modifiers() & Qt::KeypadModifier && event->key() == Qt::Key_Enter)) {
+        const auto widgetIsButton = (focusWidget() == d->ui->enterButton) || (focusWidget() == d->ui->cancelButton);
         switch (event->key()) {
         case Qt::Key_Enter:
         case Qt::Key_Return:
-            if (d->baseEditor->enterMovesBetweenFields()) {
-                focusNextPrevChild(true);
-            } else {
+            if (!d->baseEditor->enterMovesBetweenFields() || widgetIsButton) {
                 if (focusWidget() == d->ui->cancelButton) {
                     reject();
                 } else {
-                    if (d->ui->enterButton->isEnabled() && !d->readOnly) {
-                        d->ui->enterButton->setFocus();
-                        QMetaObject::invokeMethod(d->ui->enterButton, &QAbstractButton::click, Qt::QueuedConnection);
-                    } else {
-                        event->ignore();
-                    }
+                    processReturnKey();
+                    return;
                 }
+            } else {
+                focusNextPrevChild(true);
             }
             break;
 
@@ -521,20 +527,17 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
             event->ignore();
             return;
         }
-    } else {
-        const auto keySeq = QKeySequence(event->modifiers() | event->key());
-
-        if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
-            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
-            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
-            if (tabOrderWidget) {
-                tabOrderDialog->setTarget(tabOrderWidget);
-                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
-                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
-                }
-            }
-            tabOrderDialog->deleteLater();
+    } else if (event->modifiers() == Qt::ShiftModifier) {
+        // Shift+Enter stores the split
+        switch (event->key()) {
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+            processReturnKey();
             return;
+
+        default:
+            event->ignore();
+            break;
         }
     }
     QWidget::keyPressEvent(event);
@@ -759,6 +762,25 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
             }
         }
     }
+
+    if (e->type() == QEvent::KeyPress) {
+        auto kev = static_cast<QKeyEvent*>(e);
+        const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
+
+        if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
+            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
+            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
+            if (tabOrderWidget) {
+                tabOrderDialog->setTarget(tabOrderWidget);
+                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+                }
+            }
+            tabOrderDialog->deleteLater();
+            return true;
+        }
+    }
+
     return QWidget::eventFilter(o, e);
 }
 
