@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-28 00:45+0000\n"
+"POT-Creation-Date: 2026-01-31 00:43+0000\n"
 "PO-Revision-Date: 2026-01-04 11:05+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -21182,31 +21182,31 @@ msgstr "Ireki lehendik dagoen datu-fitxategi bat"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Zabaldu esku-liburua eta Ikasi KMyMoney erabiltzen"
 
-#: kmymoney/views/ledgerview.cpp:217
+#: kmymoney/views/ledgerview.cpp:218
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Joan kontura"
 
-#: kmymoney/views/ledgerview.cpp:219
+#: kmymoney/views/ledgerview.cpp:220
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Joan onuradunera"
 
-#: kmymoney/views/ledgerview.cpp:264
+#: kmymoney/views/ledgerview.cpp:265
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Joan hona: '%1'"
 
-#: kmymoney/views/ledgerview.cpp:274
+#: kmymoney/views/ledgerview.cpp:275
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Joan hona: '%1'"
 
-#: kmymoney/views/ledgerview.cpp:776
+#: kmymoney/views/ledgerview.cpp:782
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21217,32 +21217,32 @@ msgstr ""
 "onartzen bi transakzio paraleloan editatzea. <a href=\"jumpToEditor"
 "\">Oraingo editorera joan</a>"
 
-#: kmymoney/views/ledgerview.cpp:903
+#: kmymoney/views/ledgerview.cpp:909
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Kategoria bat esleitzea falta zaio transakzioari."
 
-#: kmymoney/views/ledgerview.cpp:910
+#: kmymoney/views/ledgerview.cpp:916
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "<b>%1</b> esleitzea falta zaio transakzioari."
 
-#: kmymoney/views/ledgerview.cpp:919
+#: kmymoney/views/ledgerview.cpp:925
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Programazio hau %1(e)tik atzeratuta dago. Egin klik ikonoan hura sartzeko."
 
-#: kmymoney/views/ledgerview.cpp:925
+#: kmymoney/views/ledgerview.cpp:931
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Transakzio hau inportatu da. Egin klik ikonoan onartzeko."
 
-#: kmymoney/views/ledgerview.cpp:931
+#: kmymoney/views/ledgerview.cpp:937
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21250,38 +21250,38 @@ msgid ""
 msgstr ""
 "Transakzio hau parekatu da. Egin klik ikonoan onartzeko edo hura desparekatu."
 
-#: kmymoney/views/ledgerview.cpp:977
+#: kmymoney/views/ledgerview.cpp:983
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr "Kontuaren saldoaren eta lerroko saldoaren arteko aldea %1 da."
 
-#: kmymoney/views/ledgerview.cpp:1039
+#: kmymoney/views/ledgerview.cpp:1045
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Ez sartu atzeratutako transakzio programatua."
 
-#: kmymoney/views/ledgerview.cpp:1040
+#: kmymoney/views/ledgerview.cpp:1046
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Sartu atzeratutako transakzio programatua."
 
-#: kmymoney/views/ledgerview.cpp:1043
+#: kmymoney/views/ledgerview.cpp:1049
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Atzeratutako programazioa orain sartu nahi duzu?"
 
-#: kmymoney/views/ledgerview.cpp:1044
+#: kmymoney/views/ledgerview.cpp:1050
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Sartu atzeratutako programazioa"
 
-#: kmymoney/views/ledgerview.cpp:1064
+#: kmymoney/views/ledgerview.cpp:1070
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21291,7 +21291,7 @@ msgstr ""
 "Deslotu ezkutuko (parekatutako) transakzioa erakutsitakotik eta berriro "
 "sartu liburu nagusian."
 
-#: kmymoney/views/ledgerview.cpp:1066
+#: kmymoney/views/ledgerview.cpp:1072
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21301,13 +21301,13 @@ msgstr ""
 "Onartu parekatzea erakusten den moduan eta kendu ezkutuko (bat datozen) "
 "transakzioaren datuak."
 
-#: kmymoney/views/ledgerview.cpp:1070
+#: kmymoney/views/ledgerview.cpp:1076
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Onartu edo desparekatu nahi duzu parekatuta transakzioa orain?"
 
-#: kmymoney/views/ledgerview.cpp:1071
+#: kmymoney/views/ledgerview.cpp:1077
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -21485,7 +21485,7 @@ msgstr "Transakzio honetan erabilitako txeke-zenbakia."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "<b>%1</b> txeke-zenbakia dagoeneko erabili da kontu honetan."
 
-#: kmymoney/views/newspliteditor.cpp:776
+#: kmymoney/views/newspliteditor.cpp:777
 #: kmymoney/views/newtransactioneditor.cpp:208
 #, kde-format
 msgctxt "@info:tooltip Protected"
