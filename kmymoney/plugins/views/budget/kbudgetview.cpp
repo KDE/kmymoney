@@ -99,7 +99,7 @@ void KBudgetView::showEvent(QShowEvent * event)
 
             case BudgetsModel::Columns::Year:
                 if (spinBox) {
-                    const QDate date(spinBox->value(), KMyMoneySettings::fiscalYearBegin(), KMyMoneySettings::fiscalYearBeginDay());
+                    const QDate date(spinBox->value(), KMyMoneySettings::fiscalYearBegin() + 1, KMyMoneySettings::fiscalYearBeginDay());
                     if (date.isValid()) {
                         budget.setBudgetStart(date);
                         needSave = true;
