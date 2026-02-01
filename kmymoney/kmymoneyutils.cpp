@@ -276,7 +276,7 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
 void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTransaction& transaction, const QMap<QString, MyMoneyMoney>& balances)
 {
     try {
-        MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances);
+        MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances, QDate::currentDate());
     } catch (const MyMoneyException &e) {
         KMessageBox::detailedError(nullptr, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
     }

@@ -80,6 +80,8 @@ public:
         , m_mixedTime(false)
         , m_currentDateColumn(0)
         , m_settlementPeriod(3)
+        , m_evaluationDate(QDate::currentDate())
+        , m_isStaticEvaluation(false)
         , m_showSTLTCapitalGains(false)
         , m_tseparator(QDate::currentDate().addYears(-1))
         , m_skipZero(false)
@@ -352,6 +354,17 @@ public:
      * Time in days between the settlement date and the transaction date.
      */
     uint m_settlementPeriod;
+
+    /**
+     * Date where a balance/forecast report is based on
+     */
+    QDate m_evaluationDate;
+
+    /**
+     * State if static evaluation is used for balance/forecast reports
+     */
+    bool m_isStaticEvaluation;
+
     /**
      * Controls showing short-term and long-term capital gains.
      */

@@ -49,6 +49,8 @@ private Q_SLOTS:
     void testInvestment();
     void testBudget();
     void testHtmlEncoding();
+    void testCurrentDateColumnUsesEvaluationDate();
+    void testCurrentDateColumnUsesEvaluationDateMonthly();
 };
 
 }

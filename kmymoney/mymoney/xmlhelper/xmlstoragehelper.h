@@ -120,6 +120,7 @@ enum class Report {
     NegExpenses,
     Validity,
     ChartPalette,
+    EvaluationDate,
     // insert new entries above this line
     LastAttribute,
 };

@@ -47,6 +47,7 @@ enum class InvestmentSum;
 enum class ChartType;
 enum class DataLock;
 enum class ChartPalette;
+enum class EvaluationMode;
 }
 }
 
@@ -311,6 +312,28 @@ public:
 
     uint settlementPeriod() const;
     void setSettlementPeriod(uint days);
+
+    /**
+     * Return the date where a balance/forecast report is based on
+     * See setEvaluationDate() for more details.
+     * @return date
+     */
+    QDate evaluationDate() const;
+
+    /**
+     * Set the evaluation date for balance/forecast reports
+     *
+     * @param date the date to set, if empty or null, switch to dynamic evaluation
+     */
+    void setEvaluationDate(const QDate& date);
+
+    /**
+     * Return state if static evaluation is used for balance/forecast reports
+     * See setEvaluationDate() for more details.
+     *
+     * @return state
+     */
+    bool isStaticEvaluation() const;
 
     bool isShowingSTLTCapitalGains() const;
     void setShowSTLTCapitalGains(bool f);

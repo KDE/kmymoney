@@ -2111,20 +2111,22 @@ void PivotTable::calculateForecast()
     forecast.setIncludeUnusedAccounts(true);
 
     //setup forecast dates
-    if (m_endDate > QDate::currentDate()) {
+    QDate evaluationDate = m_config.evaluationDate();
+    forecast.setEvaluationDate(evaluationDate);
+    if (m_endDate > evaluationDate) {
+        forecast.setForecastStartDate(evaluationDate);
         forecast.setForecastEndDate(m_endDate);
-        forecast.setForecastStartDate(QDate::currentDate());
-        forecast.setForecastDays(QDate::currentDate().daysTo(m_endDate));
+        forecast.setForecastDays(evaluationDate.daysTo(m_endDate));
     } else {
         forecast.setForecastStartDate(m_beginDate);
-        forecast.setForecastEndDate(m_endDate);
+        forecast.setForecastEndDate(evaluationDate);
         forecast.setForecastDays(m_beginDate.daysTo(m_endDate) + 1);
     }
 
-    //adjust history dates if beginning date is before today
-    if (m_beginDate < QDate::currentDate()) {
+    // adjust history dates if beginning date is before today
+    if (m_beginDate < evaluationDate) {
         forecast.setHistoryEndDate(m_beginDate.addDays(-1));
-        forecast.setHistoryStartDate(forecast.historyEndDate().addDays(-forecast.accountsCycle()*forecast.forecastCycles()));
+        forecast.setHistoryStartDate(forecast.historyEndDate().addDays(-forecast.accountsCycle() * forecast.forecastCycles()));
     }
 
     //run forecast
@@ -2444,9 +2446,9 @@ void PivotTable::includeInvestmentSubAccounts()
 
 int PivotTable::currentDateColumn()
 {
-
+    QDate evaluationDate = m_config.evaluationDate();
     //return -1 if the columns do not include the current date
-    if (m_beginDate > QDate::currentDate() || m_endDate < QDate::currentDate()) {
+    if (m_beginDate > evaluationDate || m_endDate < evaluationDate) {
         return -1;
     }
 
@@ -2455,7 +2457,7 @@ int PivotTable::currentDateColumn()
     int column = m_startColumn;
 
     while (column < m_numColumns) {
-        if (columnDate(column) >= QDate::currentDate()) {
+        if (columnDate(column) >= evaluationDate) {
             break;
         }
         column++;

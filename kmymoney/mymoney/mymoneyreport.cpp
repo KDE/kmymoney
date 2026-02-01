@@ -874,6 +874,30 @@ void MyMoneyReport::setSettlementPeriod(uint days)
     d->m_settlementPeriod = days;
 }
 
+QDate MyMoneyReport::evaluationDate() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_evaluationDate;
+}
+
+void MyMoneyReport::setEvaluationDate(const QDate& date)
+{
+    Q_D(MyMoneyReport);
+    if (date.isValid()) {
+        d->m_evaluationDate = date;
+        d->m_isStaticEvaluation = true;
+    } else {
+        d->m_evaluationDate = QDate::currentDate();
+        d->m_isStaticEvaluation = false;
+    }
+}
+
+bool MyMoneyReport::isStaticEvaluation() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_isStaticEvaluation;
+}
+
 bool MyMoneyReport::isShowingSTLTCapitalGains() const
 {
     Q_D(const MyMoneyReport);

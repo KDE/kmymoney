@@ -1219,3 +1219,53 @@ void PivotTableTest::testHtmlEncoding()
                                        QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption);
     QVERIFY(rx.match(html).hasMatch());
 }
+
+void PivotTableTest::testCurrentDateColumnUsesEvaluationDate()
+{
+    MyMoneyReport report;
+
+    // Report range
+    report.setDateFilter(QDate(2025, 8, 29), QDate(2026, 2, 28));
+
+    // Mixed-time settings
+    report.setEvaluationDate(QDate(2025, 11, 29));
+    report.setColumnType(eMyMoney::Report::ColumnType::Days);
+
+    PivotTable pivot(report);
+
+    pivot.calculateColumnHeadings();
+
+    const int splitColumn = pivot.currentDateColumn();
+    QVERIFY(splitColumn >= 0);
+
+    const QDate splitDate = pivot.columnDate(splitColumn);
+
+    QCOMPARE(splitDate, QDate(2025, 11, 29));
+}
+
+void PivotTableTest::testCurrentDateColumnUsesEvaluationDateMonthly()
+{
+    MyMoneyReport report;
+
+    report.setDateFilter(QDate(2025, 8, 1), QDate(2026, 2, 28));
+    report.setEvaluationDate(QDate(2025, 11, 29));
+    report.setColumnType(eMyMoney::Report::ColumnType::Months);
+
+    PivotTable pivot(report);
+    pivot.calculateColumnHeadings();
+
+    const int splitColumn = pivot.currentDateColumn();
+    QVERIFY(splitColumn >= 0);
+
+    const QDate splitBoundary = pivot.columnDate(splitColumn);
+    const QDate evalDate = report.evaluationDate();
+
+    // Evaluation date must fall before the boundary
+    QVERIFY(evalDate < splitBoundary);
+
+    // And after the previous boundary (if it exists)
+    if (splitColumn > 0) {
+        const QDate prevBoundary = pivot.columnDate(splitColumn - 1);
+        QVERIFY(evalDate >= prevBoundary);
+    }
+}
