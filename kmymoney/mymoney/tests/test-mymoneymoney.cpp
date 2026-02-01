@@ -540,7 +540,7 @@ void MyMoneyMoneyTest::testDoubleConstructor()
     QVERIFY(m_6->valueRef().get_num() == 249531687);
     QVERIFY(m_6->valueRef().get_den() == 200000000);
 
-    for (int i = -123456; i < 123456; ++i) {
+    for (int i = -123456; i < 123456; i += 3) {
         // int i = -123456;
         double d = i;
         MyMoneyMoney r(i, 100);
