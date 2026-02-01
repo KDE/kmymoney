@@ -477,6 +477,12 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
             }
         },
         Qt::QueuedConnection);
+
+    // intercept the events of all my children
+    const auto widgets = findChildren<QWidget*>();
+    for (const auto& widget : widgets) {
+        widget->installEventFilter(this);
+    }
 }
 
 KEditScheduleDlg::~KEditScheduleDlg()
@@ -694,25 +700,6 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule, bool a
     }
 }
 
-void KEditScheduleDlg::keyPressEvent(QKeyEvent* event)
-{
-    const auto keySeq = QKeySequence(event->modifiers() | event->key());
-
-    if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
-        QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
-        auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
-        if (tabOrderWidget) {
-            tabOrderDialog->setTarget(tabOrderWidget);
-            if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
-                tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
-            }
-        }
-        tabOrderDialog->deleteLater();
-        return;
-    }
-    QDialog::keyPressEvent(event);
-}
-
 QWidget* KEditScheduleDlg::setupUi(QWidget* parent)
 {
     Q_D(KEditScheduleDlg);
@@ -774,4 +761,25 @@ bool KEditScheduleDlg::focusNextPrevChild(bool next)
     return QWidget::focusNextPrevChild(next);
 }
 
+bool KEditScheduleDlg::eventFilter(QObject* o, QEvent* e)
+{
+    if (e->type() == QEvent::KeyPress) {
+        auto kev = static_cast<QKeyEvent*>(e);
+        const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
+
+        if (pActions[eMenu::Action::EditTabOrder]->shortcuts().contains(keySeq)) {
+            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
+            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
+            if (tabOrderWidget) {
+                tabOrderDialog->setTarget(tabOrderWidget);
+                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+                }
+            }
+            tabOrderDialog->deleteLater();
+            return true;
+        }
+    }
+    return QDialog::eventFilter(o, e);
+}
 #include "keditscheduledlg.moc"

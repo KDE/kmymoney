@@ -56,7 +56,7 @@ public:
     void storeTabOrder(const QStringList& tabOrder) override;
 
 protected:
-    void keyPressEvent(QKeyEvent* event) override;
+    bool eventFilter(QObject* o, QEvent* e) override;
     bool focusNextPrevChild(bool next) override;
 
 private Q_SLOTS:
