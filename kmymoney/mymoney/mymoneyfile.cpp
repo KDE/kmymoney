@@ -2977,7 +2977,7 @@ MyMoneyTransaction MyMoneyFile::scheduledTransaction(const MyMoneySchedule& sche
 
     if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
         try {
-            MyMoneyForecast::calculateAutoLoan(schedule, t, balances);
+            MyMoneyForecast::calculateAutoLoan(schedule, t, balances, QDate::currentDate());
         } catch (const MyMoneyException& e) {
             qDebug() << "Unable to load schedule details" << QString::fromLatin1(e.what());
         }
