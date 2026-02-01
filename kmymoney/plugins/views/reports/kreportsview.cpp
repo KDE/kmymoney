@@ -232,8 +232,7 @@ bool KReportsView::eventFilter(QObject* watched, QEvent* event)
         for (const auto& button : qAsConst(buttons)) {
             const auto action = button->defaultAction();
             if (action) {
-                const auto actionSeq = action->shortcut();
-                if (keySeq == actionSeq) {
+                if (action->shortcuts().contains(keySeq)) {
                     action->trigger();
                     event->accept();
                     return true;

@@ -580,7 +580,7 @@ bool SimpleLedgerView::eventFilter(QObject* o, QEvent* e)
                 return true;
             }
         } else {
-            if (QKeySequence(kev->modifiers() | kev->key()).matches(pActions[eMenu::Action::LedgerQuickOpen]->shortcut())) {
+            if (pActions[eMenu::Action::LedgerQuickOpen]->shortcuts().contains(QKeySequence(kev->modifiers() | kev->key()))) {
                 d->showAccountSelector(this);
                 return true;
             }

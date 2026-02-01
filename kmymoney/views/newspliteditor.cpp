@@ -767,7 +767,7 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
         auto kev = static_cast<QKeyEvent*>(e);
         const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
 
-        if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
+        if (pActions[eMenu::Action::EditTabOrder]->shortcuts().contains(keySeq)) {
             QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
             auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
             if (tabOrderWidget) {
