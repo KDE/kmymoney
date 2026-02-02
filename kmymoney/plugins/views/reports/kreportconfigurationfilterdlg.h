@@ -40,10 +40,18 @@ class KReportConfigurationFilterDlg : public QDialog
     Q_DISABLE_COPY(KReportConfigurationFilterDlg)
 
 public:
-    explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = nullptr);
+    enum class Type {
+        Default,
+        StaticEvaluationSafe, ///< actual chart page only
+    };
+
+    explicit KReportConfigurationFilterDlg(MyMoneyReport report, Type type = Type::Default, QWidget* parent = nullptr);
     ~KReportConfigurationFilterDlg();
 
     MyMoneyReport getConfig() const;
+
+    Type type() const;
+    void setType(Type newType);
 
 protected Q_SLOTS:
     void slotRowTypeChanged(int);
