@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-01 00:43+0000\n"
+"POT-Creation-Date: 2026-02-02 00:44+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -12354,7 +12354,7 @@ msgid "iCalendar files"
 msgstr "iCalendari failid"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:348
+#: kmymoney/plugins/views/reports/kreportsview.cpp:347
 #, kde-format
 msgid "Export as"
 msgstr "Eksport"
@@ -12822,9 +12822,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Tõrge pangaväljavõtte importimisel. Kas jätkata?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1565
-#: kmymoney/plugins/views/reports/kreportsview.cpp:436
-#: kmymoney/plugins/views/reports/kreportsview.cpp:495
-#: kmymoney/plugins/views/reports/kreportsview.cpp:514
+#: kmymoney/plugins/views/reports/kreportsview.cpp:435
+#: kmymoney/plugins/views/reports/kreportsview.cpp:494
+#: kmymoney/plugins/views/reports/kreportsview.cpp:513
 #, kde-format
 msgid "Critical Error"
 msgstr "Kriitiline tõrge"
@@ -15359,7 +15359,7 @@ msgid "Unable to remove budget."
 msgstr "Eelarve eemaldamine nurjus."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:211
-#: kmymoney/plugins/views/reports/kreportsview.cpp:471
+#: kmymoney/plugins/views/reports/kreportsview.cpp:470
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 koopia"
@@ -16989,22 +16989,22 @@ msgstr "Tehingute otsimine"
 msgid "Configure your report"
 msgstr "Aruande seadistamine"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:306
+#: kmymoney/plugins/views/reports/kreportsview.cpp:305
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl() sisaldab tundmatut käsku '%1'"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:326
+#: kmymoney/plugins/views/reports/kreportsview.cpp:325
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl() sisaldab tundmatut vaadet '%1'"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:376
+#: kmymoney/plugins/views/reports/kreportsview.cpp:375
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "Salvestamine nurjus: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:401
+#: kmymoney/plugins/views/reports/kreportsview.cpp:400
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1499
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
@@ -17013,8 +17013,8 @@ msgstr "Salvestamine nurjus: %1"
 msgid "Generated Report"
 msgstr "Genereeritud aruanne"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:401
-#: kmymoney/plugins/views/reports/kreportsview.cpp:472
+#: kmymoney/plugins/views/reports/kreportsview.cpp:400
+#: kmymoney/plugins/views/reports/kreportsview.cpp:471
 #: kmymoney/plugins/views/reports/kreportsview_p.h:830
 #: kmymoney/plugins/views/reports/kreportsview_p.h:838
 #: kmymoney/plugins/views/reports/kreportsview_p.h:846
@@ -17073,19 +17073,19 @@ msgstr "Genereeritud aruanne"
 msgid "Default Report"
 msgstr "Vaikimisi aruanne"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
-#: kmymoney/plugins/views/reports/kreportsview.cpp:473
+#: kmymoney/plugins/views/reports/kreportsview.cpp:401
+#: kmymoney/plugins/views/reports/kreportsview.cpp:472
 #, kde-format
 msgid "Custom Report"
 msgstr "Kohandatud aruanne"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:403
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
 #, kde-format
 msgid "%1 (Customized)"
 msgstr "%1 (kohandatud)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:430
-#: kmymoney/plugins/views/reports/kreportsview.cpp:489
+#: kmymoney/plugins/views/reports/kreportsview.cpp:429
+#: kmymoney/plugins/views/reports/kreportsview.cpp:488
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -17094,76 +17094,76 @@ msgstr ""
 "Aruandele \"%2\" ei leitud aruanderühma \"%1\".\n"
 "Palun anna tõrkest teada arendajate postiloendis kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:450
+#: kmymoney/plugins/views/reports/kreportsview.cpp:449
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "Aruande seadistamine nurjus: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:508
+#: kmymoney/plugins/views/reports/kreportsview.cpp:507
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Aruande lisamine nurjus, põhjus: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:542
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> on vaikimisi aruanne, seda ei saa kustutada."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:544
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "Kas kustutada aruanne?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:741
+#: kmymoney/plugins/views/reports/kreportsview.cpp:740
 #, fuzzy, kde-format
 #| msgid "Import options"
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Impordi valikud"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:742
+#: kmymoney/plugins/views/reports/kreportsview.cpp:741
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "&Ava"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:745
+#: kmymoney/plugins/views/reports/kreportsview.cpp:744
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr "&Trüki"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:749
+#: kmymoney/plugins/views/reports/kreportsview.cpp:748
 #, fuzzy, kde-format
 #| msgid "Exporting file..."
 msgctxt "To export a report"
 msgid "&Export to PDF file"
 msgstr "Faili eksport..."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:751
+#: kmymoney/plugins/views/reports/kreportsview.cpp:750
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "&Seadista"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:754
+#: kmymoney/plugins/views/reports/kreportsview.cpp:753
 #, kde-format
 msgid "&New report"
 msgstr "&Uus aruanne"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:764
+#: kmymoney/plugins/views/reports/kreportsview.cpp:763
 #, kde-format
 msgid "&Delete"
 msgstr "&Kustuta"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:769
+#: kmymoney/plugins/views/reports/kreportsview.cpp:768
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:822
+#: kmymoney/plugins/views/reports/kreportsview.cpp:821
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export into directory"
@@ -20190,24 +20190,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Leiti ajaplaan"
 
-#: kmymoney/views/keditscheduledlg.cpp:610
+#: kmymoney/views/keditscheduledlg.cpp:616
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Planeeritud tehingu lisamine nurjus: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:610
+#: kmymoney/views/keditscheduledlg.cpp:616
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Planeeritud tehingu lisamine"
 
-#: kmymoney/views/keditscheduledlg.cpp:640
-#: kmymoney/views/keditscheduledlg.cpp:683
-#: kmymoney/views/keditscheduledlg.cpp:693
+#: kmymoney/views/keditscheduledlg.cpp:646
+#: kmymoney/views/keditscheduledlg.cpp:689
+#: kmymoney/views/keditscheduledlg.cpp:699
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Planeeritud tehingu \"%1\" muutmine nurjus"
 
-#: kmymoney/views/keditscheduledlg.cpp:669
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -20221,7 +20221,7 @@ msgstr ""
 "planeeritud tehingu kuupäeva järgmisele, kui just viimase makse kuupäeva ei "
 "lähtestata. Kas lähtestada viimase makse kuupäev?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:674
+#: kmymoney/views/keditscheduledlg.cpp:680
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Viimase maksekuupäeva lähtestamine"
