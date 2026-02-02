@@ -1,5 +1,5 @@
 # translation of kmymoney to Italian
-# SPDX-FileCopyrightText: 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Vincenzo Reale <smart2128vr@gmail.com>
 # Samuel Algisi <woodhouse@member.fsf.org>, 2005.
 # Sandro Bonazzola <sandrobonazzola@users.sourceforge.net>, 2008.
 # SPDX-FileCopyrightText: 2025 Paolo Zamponi <feus73@gmail.com>
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-01 03:31+0000\n"
-"PO-Revision-Date: 2025-12-30 09:14+0100\n"
+"PO-Revision-Date: 2026-01-27 09:11+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -315,12 +315,12 @@ msgid ""
 "The selected parent account <b>%1</b> does not exist in the <b>%2</b> "
 "hierarchy."
 msgstr ""
+"Il conto padre selezionato <b>%1</b> non esiste nella gerarchia <b>%2</b>."
 
 #: kmymoney/dialogs/accountcreator.cpp:98
-#, fuzzy, kde-format
-#| msgid "Category creation"
+#, kde-format
 msgid "Account/category creation problem"
-msgstr "Creazione categoria"
+msgstr "Problema di creazione conto/categoria"
 
 #: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
@@ -21612,12 +21612,10 @@ msgid "National Account Number"
 msgstr "Numero di conto nazionale"
 
 #: kmymoney/views/reconciliationdelegate.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Cancel the current reconciliation"
+#, kde-format
 msgctxt "Ledger marker showing current reconciliation entry"
 msgid "Current reconciliation"
-msgstr "Annulla la riconciliazione attuale"
+msgstr "Riconciliazione attuale"
 
 #: kmymoney/views/reconciliationdelegate.cpp:110
 #, kde-format
