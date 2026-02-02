@@ -52,14 +52,16 @@ class KReportConfigurationFilterDlgPrivate
     Q_DISABLE_COPY(KReportConfigurationFilterDlgPrivate)
 
 public:
-    KReportConfigurationFilterDlgPrivate(KReportConfigurationFilterDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KReportConfigurationFilterDlg),
-        m_tabRowColPivot(nullptr),
-        m_tabRowColQuery(nullptr),
-        m_tabChart(nullptr),
-        m_tabRange(nullptr),
-        m_dateRange(nullptr)
+    KReportConfigurationFilterDlgPrivate(KReportConfigurationFilterDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KReportConfigurationFilterDlg)
+        , m_tabRowColPivot(nullptr)
+        , m_tabRowColQuery(nullptr)
+        , m_tabChart(nullptr)
+        , m_tabRange(nullptr)
+        , m_dateRange(nullptr)
+        , m_type(KReportConfigurationFilterDlg::Type::Default)
+
     {
     }
 
@@ -84,15 +86,17 @@ public:
     MyMoneyReport m_currentState;
     QVector<MyMoneyBudget> m_budgets;
     DateRangeDlg                    *m_dateRange;
+    KReportConfigurationFilterDlg::Type m_type;
 };
 
-KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KReportConfigurationFilterDlgPrivate(this))
+KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport report, Type type, QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KReportConfigurationFilterDlgPrivate(this))
 {
     Q_D(KReportConfigurationFilterDlg);
 
     d->ui->setupUi(this);
+    d->m_type = type;
     d->m_initialState = report;
     d->m_currentState = report;
 
@@ -118,7 +122,12 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
     //
     // Add new tabs
     //
-    if (d->m_initialState.reportType() == eMyMoney::Report::ReportType::PivotTable) {
+    if (d->m_type == KReportConfigurationFilterDlg::Type::StaticEvaluationSafe) {
+        d->m_tabChart = new ReportTabChart(d->ui->m_criteriaTab);
+        d->ui->m_criteriaTab->insertTab(1, d->m_tabChart, i18n("Chart"));
+        slotReset();
+        return;
+    } else if (d->m_initialState.reportType() == eMyMoney::Report::ReportType::PivotTable) {
         // we will use date range together with data range
         d->m_tabFilters = new KTransactionFilter(this, (report.rowType() == eMyMoney::Report::RowType::Account), true, false);
     } else {
@@ -200,6 +209,18 @@ MyMoneyReport KReportConfigurationFilterDlg::getConfig() const
     return d->m_currentState;
 }
 
+void KReportConfigurationFilterDlg::setType(Type newType)
+{
+    Q_D(KReportConfigurationFilterDlg);
+    d->m_type = newType;
+}
+
+KReportConfigurationFilterDlg::Type KReportConfigurationFilterDlg::type() const
+{
+    Q_D(const KReportConfigurationFilterDlg);
+    return d->m_type;
+}
+
 void KReportConfigurationFilterDlg::slotConvertCurrencyChanged(int state)
 {
     Q_D(KReportConfigurationFilterDlg);
@@ -228,6 +249,15 @@ void KReportConfigurationFilterDlg::slotConvertCurrencyChanged(int state)
 void KReportConfigurationFilterDlg::slotSearch()
 {
     Q_D(KReportConfigurationFilterDlg);
+
+    if (d->m_type == KReportConfigurationFilterDlg::Type::StaticEvaluationSafe) {
+        if (d->m_tabChart) {
+            d->m_tabChart->apply(&d->m_currentState);
+        }
+        done(true);
+        return;
+    }
+
     // setup the filter from the dialog widgets
     auto filter = d->m_tabFilters->setupFilter();
 
@@ -413,6 +443,13 @@ void KReportConfigurationFilterDlg::slotReset()
     // Set up the widget from the initial filter
     //
     d->m_currentState = d->m_initialState;
+
+    if (d->m_type == KReportConfigurationFilterDlg::Type::StaticEvaluationSafe) {
+        if (d->m_tabChart) {
+            d->m_tabChart->load(&d->m_initialState);
+        }
+        return;
+    }
 
     //
     // Report Properties

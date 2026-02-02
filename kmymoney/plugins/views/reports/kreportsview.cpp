@@ -406,7 +406,9 @@ void KReportsView::doConfigure(ConfigureOption configureOption)
         report.setComment(i18n("Custom Report"));
     }
 
-    QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(report);
+    KReportConfigurationFilterDlg::Type dlgType =
+        report.isStaticEvaluation() ? KReportConfigurationFilterDlg::Type::StaticEvaluationSafe : KReportConfigurationFilterDlg::Type::Default;
+    QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(report, dlgType);
 
     if (dlg->exec()) {
         MyMoneyReport newreport = dlg->getConfig();
