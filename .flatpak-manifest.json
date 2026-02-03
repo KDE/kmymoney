@@ -194,7 +194,8 @@
                         }
                     ],
                     "cleanup": [
-                        "/bin"
+                        "/bin",
+                        "/lib/libxml++-2.6"
                     ],
                     "modules": [
                         {
@@ -217,6 +218,11 @@
                                     }
                                 }
                             ],
+                            "cleanup": [
+                                "/lib/glibmm-2.4",
+                                "/lib/giomm-2.4",
+                                "/lib/libglibmm_generate_extra_defs*"
+                            ],
                             "modules": [
                                 {
                                     "name": "sigc++",
@@ -238,6 +244,9 @@
                                                 }
                                             }
                                         }
+                                    ],
+                                    "cleanup": [
+                                        "/lib/sigc++-2.0"
                                     ]
                                 }
                             ]
@@ -321,7 +330,9 @@
                         }
                     ],
                     "cleanup": [
-                        "/bin"
+                        "/bin",
+                        "/share/gwenbuild",
+                        "/share/gwenhywfar/gwenbuild"
                     ]
                 }
             ]
