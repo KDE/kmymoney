@@ -940,7 +940,7 @@ bool MyMoneyTransactionFilter::translateDateRange(eMyMoney::TransactionFilter::D
         break;
     case eMyMoney::TransactionFilter::Date::AsOfToday:
         start = QDate();
-        end =  QDate::currentDate();
+        end = QDate::currentDate();
         break;
     case eMyMoney::TransactionFilter::Date::CurrentMonth:
         start = QDate(yr, mon, 1);
@@ -1053,7 +1053,7 @@ bool MyMoneyTransactionFilter::translateDateRange(eMyMoney::TransactionFilter::D
         break;
     case eMyMoney::TransactionFilter::Date::Today:
         start = QDate::currentDate();
-        end =  QDate::currentDate();
+        end = QDate::currentDate();
         break;
     case eMyMoney::TransactionFilter::Date::FiscalYearToDate:
         start = QDate(yr, fiscalYearStartMonth, fiscalYearStartDay);

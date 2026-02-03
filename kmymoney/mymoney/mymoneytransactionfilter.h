@@ -547,14 +547,14 @@ public:
     bool treatTransfersAsIncomeExpense() const;
 
     /**
-      * This method translates a plain-language date range into QDate
-      * start & end
-      *
-      * @param range Plain-language range of dates, e.g. 'CurrentYear'
-      * @param start QDate will be set to corresponding to the first date in @p range
-      * @param end QDate will be set to corresponding to the last date in @p range
-      * @return return true if a range was successfully set, or false if @p range was invalid
-      */
+     * This method translates a plain-language date range into QDate
+     * start & end
+     *
+     * @param range Plain-language range of dates, e.g. 'CurrentYear'
+     * @param start QDate will be set to corresponding to the first date in @p range
+     * @param end QDate will be set to corresponding to the last date in @p range
+     * @return return true if a range was successfully set, or false if @p range was invalid
+     */
     static bool translateDateRange(eMyMoney::TransactionFilter::Date range, QDate& start, QDate& end);
 
     static void setFiscalYearStart(int firstMonth, int firstDay);
