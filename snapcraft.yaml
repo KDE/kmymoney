@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024, 2025 Scarlett Moore <sgmoore@kde.org>
+# SPDX-FileCopyrightText: 2024-2026 Scarlett Moore <sgmoore@kde.org>
 #
 # SPDX-License-Identifier: CC0-1.0
 ---
@@ -33,6 +33,9 @@ parts:
     stage-packages:
       - libassuan0
       - libgpg-error0
+    build-snaps:
+      - kde-qt6-core24-sdk/latest/beta
+      - kf6-core24-sdk/latest/beta
     source: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2
     source-checksum: sha256/9499e8b1f33cccb6815527a1bc16049d35a6198a6c5fae0185f2bd561bce5224
     plugin: autotools
@@ -41,7 +44,7 @@ parts:
       - --enable-languages=cpp,qt6
       - --prefix=/usr
       - --enable-fixed-path=/snap/kde-qt6-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
-    build-environment: &buildenvironment
+    build-environment:
       - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:/snap/kde-qt6-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kde-qt6-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:/snap/kf6-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/usr
       - PKG_CONFIG_PATH: /snap/kde-qt6-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
     override-build: |
@@ -53,22 +56,32 @@ parts:
     source: https://github.com/aqbanking/gwenhywfar.git
     source-tag: 5.12.0
     plugin: autotools
+    build-snaps:
+      - kde-qt6-core24-sdk/latest/beta
+      - kf6-core24-sdk/latest/beta
     build-packages:
       - gettext
       - libgcrypt20-dev
       - libgnutls28-dev
+      - rsync
     stage-packages:
       - libgcrypt20
       - libgnutls30t64
     autotools-configure-parameters:
       - --prefix=/usr
       - --with-guis=none
+    override-build: |
+      craftctl default
+      rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
   mpir:
     source: https://github.com/wbhart/mpir.git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/usr
       - --enable-cxx=yes
+    build-snaps:
+      - kde-qt6-core24-sdk/latest/beta
+      - kf6-core24-sdk/latest/beta
     build-packages:
       - yasm
       - texinfo
@@ -78,16 +91,15 @@ parts:
       rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
   libplasma:
     plugin: cmake
-    source: https://invent.kde.org/plasma/libplasma/-/archive/v6.4.0/libplasma-v6.4.0.tar.gz
+    source: https://invent.kde.org/plasma/libplasma.git
+    build-snaps:
+      - kde-qt6-core24-sdk/latest/beta
+      - kf6-core24-sdk/latest/beta
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_DESKTOPTHEMES=OFF
       - -DBUILD_TESTING=OFF
-    build-environment:
-      - CMAKE_PREFIX_PATH: $CRAFT_STAGE/usr:/snap/kde-qt6--sdk/current/usr:/snap/kf6-core24-sdk/current/usr${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}
-      - LD_LIBRARY_PATH: >
-         "/snap/mesa-2404/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kde-qt6-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:$LD_LIBRARY_PATH"
     build-packages:
       - libxcb-composite0-dev
       - libxcb-damage0-dev
@@ -117,6 +129,9 @@ parts:
     source: https://invent.kde.org/office/alkimia.git
     source-branch: 8.2
     plugin: cmake
+    build-snaps:
+      - kde-qt6-core24-sdk/latest/beta
+      - kf6-core24-sdk/latest/beta
     build-packages:
       - libpulse0
     cmake-parameters:
@@ -125,9 +140,6 @@ parts:
       - -DQT_MAJOR_VERSION=6
       - -DBUILD_WITH_QT6=ON
       - -DBUILD_TESTING=OFF
-      - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kde-qt6-core24-sdk/current\\;/snap/kf6-core24-sdk/current/usr"
-      - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kde-qt6-core24-sdk/current\\;/snap/kf6-core24-sdk/current/usr"
-    build-environment: *buildenvironment
   kmymoney:
     after:
       - libgpgmepp-qt6
@@ -136,8 +148,19 @@ parts:
     parse-info:
       - usr/share/metainfo/org.kde.kmymoney.appdata.xml
     plugin: cmake
-    source: https://download.kde.org/stable/kmymoney/5.2.0/kmymoney-5.2.0.tar.xz
+    source: .
+    source-type: local
+    build-snaps:
+      - kde-qt6-core24-sdk/latest/beta
+      - kf6-core24-sdk/latest/beta
     build-packages:
+      - libxml2-dev
+      - gettext
+      - doxygen
+      - graphviz
+      - libxml2-utils
+      - docbook-xml
+      - docbook-xsl
       - libofx-dev
       - libsqlcipher-dev
       - libaqbanking-dev
@@ -152,9 +175,6 @@ parts:
       - -DQT_MAJOR_VERSION=6
       - -DBUILD_WITH_QT6=ON
       - -DBUILD_TESTING=OFF
-      - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kde-qt6-core24-sdk/current\\;/snap/kf6-core24-sdk/current/usr"
-      - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kde-qt6-core24-sdk/current\\;/snap/kf6-core24-sdk/current/usr"
-    build-environment: *buildenvironment
     stage:
       - -usr/share/gwenhywfar/gwenbuild/builders/posix/sharedlib.gwb
       - -usr/share/gwenhywfar/typemaker2/c/char_array.tm2
@@ -169,6 +189,15 @@ parts:
       - -usr/lib/gcc/$CRAFT_ARCH_TRIPLET_BUILD_FOR/6.0.0
       - -usr/lib/aspell/*
       - -usr/share/lintian
+  gpu-2404:
+    after: [kmymoney]
+    source: https://github.com/canonical/gpu-snap.git
+    plugin: dump
+    override-prime: |
+      craftctl default
+      ${CRAFT_PART_SRC}/bin/gpu-2404-cleanup mesa-2404
+    prime:
+      - bin/gpu-2404-wrapper
   cleanup:
     after:
       - kmymoney
