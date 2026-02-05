@@ -169,12 +169,10 @@
 
     table.report td.left1 {
         text-align: left;
-        text-indent: 16px;
     }
 
     table.report td.left2 {
         text-align: left;
-        text-indent: 32px;
     }
 
     table.report tr#subtotal td { /*line separating row groups*/
@@ -341,7 +339,6 @@
 
     table.report td { /*styles table cells- but not background color*/
         text-align: right;
-
     }
 
     table.report td.left { /*far left column*/
@@ -354,12 +351,10 @@
 
     table.report td.left1 { /*does not appear to be in use*/
         text-align: left;
-        text-indent: 16px;
     }
 
     table.report td.left2 { /*does not appear to be in use*/
         text-align: left;
-        text-indent: 32px;
     }
 
     table.report tr#subtotal td { /*line separating row groups*/
