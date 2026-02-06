@@ -17,6 +17,7 @@ set(querytable_test_files
 )
 
 set(pivottable_test_files
+  test-balance-forecast-report.xml
   test-income-and-expenses.xml
   test-net-worth.xml
   test-pivottable.xml
