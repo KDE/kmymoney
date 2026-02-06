@@ -128,6 +128,9 @@ public:
     QString group() const;
     void setGroup(const QString& group);
 
+    bool isModified() const;
+    void setModified(bool f);
+
     bool isFavorite() const;
     void setFavorite(bool f);
 

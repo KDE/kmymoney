@@ -406,6 +406,7 @@ void KReportsView::doConfigure(ConfigureOption configureOption)
 
     if (dlg->exec()) {
         MyMoneyReport newreport = dlg->getConfig();
+        newreport.setModified(true);
 
         // If this report has an ID, then MODIFY it, otherwise ADD it
         MyMoneyFileTransaction ft;

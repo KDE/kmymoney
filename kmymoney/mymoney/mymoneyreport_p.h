@@ -83,6 +83,7 @@ public:
         , m_showSTLTCapitalGains(false)
         , m_tseparator(QDate::currentDate().addYears(-1))
         , m_skipZero(false)
+        , m_modified(false)
     {
     }
 
@@ -385,6 +386,11 @@ public:
       * </p>
       */
     bool m_skipZero;
+
+    /**
+     * Flag that a report is not saved
+     */
+    bool m_modified;
 };
 
 #endif

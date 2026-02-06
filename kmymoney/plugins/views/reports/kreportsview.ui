@@ -54,6 +54,11 @@
            <string>Comment</string>
           </property>
          </column>
+         <column>
+          <property name="text">
+           <string>Modified</string>
+          </property>
+         </column>
         </widget>
        </item>
        <item>
