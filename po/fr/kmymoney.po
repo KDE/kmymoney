@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-02 00:44+0000\n"
-"PO-Revision-Date: 2026-01-27 18:41+0100\n"
+"PO-Revision-Date: 2026-02-03 18:48+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -4884,7 +4884,7 @@ msgstr "Développeur et artiste"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
-msgstr "Icônes et écran d'accueil"
+msgstr "Icônes et écran d'ouverture de session"
 
 #: kmymoney/kcreditswindow.cpp:145
 #, kde-format
