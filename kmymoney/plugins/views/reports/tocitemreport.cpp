@@ -14,8 +14,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-TocItemReport::TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report):
-    TocItem(parent, QStringList() << report.name() << report.comment())
+TocItemReport::TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report)
+    : TocItem(parent, QStringList() << report.name() << report.comment() << (report.isModified() ? QStringLiteral("\u2605") : QString()))
 {
     m_report = report;
 

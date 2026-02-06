@@ -295,6 +295,18 @@ void MyMoneyReport::setGroup(const QString& group)
     d->m_group = group;
 }
 
+bool MyMoneyReport::isModified() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_modified;
+}
+
+void MyMoneyReport::setModified(bool f)
+{
+    Q_D(MyMoneyReport);
+    d->m_modified = f;
+}
+
 bool MyMoneyReport::isFavorite() const
 {
     Q_D(const MyMoneyReport);

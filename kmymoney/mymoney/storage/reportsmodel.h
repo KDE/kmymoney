@@ -46,6 +46,8 @@ public:
 
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
+    int processItems(Worker* worker) override;
+
 public Q_SLOTS:
 
 private:
