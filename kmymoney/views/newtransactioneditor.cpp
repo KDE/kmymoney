@@ -100,6 +100,7 @@ public:
                          QLatin1String("enterButton"),
                          QLatin1String("cancelButton"),
                      })
+        , m_previousReconciliationState(eMyMoney::Split::State::NotReconciled)
     {
         accountsModel->setObjectName(QLatin1String("NewTransactionEditor::accountsModel"));
         categoriesModel->setObjectName(QLatin1String("NewTransactionEditor::categoriesModel"));
@@ -168,6 +169,7 @@ public:
     TabOrder* m_externalTabOrder;
     TabOrder m_tabOrder;
     QString m_initialCheckNumber;
+    eMyMoney::Split::State m_previousReconciliationState;
 };
 
 void NewTransactionEditor::Private::enableTagContainer(bool enable) const
@@ -1098,7 +1100,13 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
             ui->memoEdit->ensureCursorVisible();
 
             ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
-            ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
+
+            m_previousReconciliationState = splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
+            // prevent asking when loading a transaction
+            QSignalBlocker statusComboBlocker(ui->statusCombo);
+            ui->statusCombo->setCurrentIndex(static_cast<int>(m_previousReconciliationState));
+            statusComboBlocker.unblock();
+
             updateMemoLink();
         } else {
             splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
@@ -1339,6 +1347,26 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         d->tagsChanged(tagIds);
     });
 
+    connect(d->ui->statusCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int reconcileIndex) {
+        const auto newState = static_cast<eMyMoney::Split::State>(reconcileIndex);
+        if (newState == eMyMoney::Split::State::Frozen) {
+            const auto message = i18nc("@info Question for confirmation of operation",
+                                       "<p>You are about to set the reconcilation status to Frozen.<br/>Once stored in the ledger, this cannot be "
+                                       "reverted.</p><p>Are you sure you want to continue?</p>");
+
+            const auto result = KMessageBox::warningContinueCancel(this,
+                                                                   message,
+                                                                   QString(),
+                                                                   KStandardGuiItem::cont(),
+                                                                   KStandardGuiItem::cancel(),
+                                                                   QLatin1String("WarningAboutFrozenState"));
+            if (result == KMessageBox::Cancel) {
+                d->ui->statusCombo->setCurrentIndex(static_cast<int>(d->m_previousReconciliationState));
+                return;
+            }
+        }
+        d->m_previousReconciliationState = newState;
+    });
     connect(d->ui->cancelButton, &QToolButton::clicked, this, &NewTransactionEditor::reject);
     connect(d->ui->enterButton, &QToolButton::clicked, this, &NewTransactionEditor::acceptEdit);
 
@@ -1447,7 +1475,13 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule, Schedul
                 d->ui->memoEdit->ensureCursorVisible();
 
                 d->ui->numberEdit->setText(split.number());
-                d->ui->statusCombo->setCurrentIndex(static_cast<int>(split.reconcileFlag()));
+
+                d->m_previousReconciliationState = split.reconcileFlag();
+                // prevent asking when loading a transaction
+                QSignalBlocker statusComboBlocker(d->ui->statusCombo);
+                d->ui->statusCombo->setCurrentIndex(static_cast<int>(d->m_previousReconciliationState));
+                statusComboBlocker.unblock();
+
                 d->ui->tagContainer->loadTags(split.tagIdList());
                 d->updateMemoLink();
             } else {
@@ -1766,6 +1800,11 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                 // the completion box. We need to do that because the CaseSensitive
                 // mode is set when the focus leaves the widget (see above).
                 d->ui->payeeEdit->completer()->setCaseSensitivity(Qt::CaseInsensitive);
+            }
+        } else if (e->type() == QEvent::Wheel) {
+            // don't process the wheel event on the statusCombo
+            if (o == d->ui->statusCombo) {
+                return true;
             }
         }
     }

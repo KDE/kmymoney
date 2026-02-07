@@ -1022,9 +1022,12 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
             switch (column) {
             case JournalModel::Column::Reconciliation:
                 // a click on the reconciliation column triggers the Mark transaction action
-                // but only if it is received in a selected row
-                if (selectionModel()->isSelected(indexAt(pos))) {
-                    pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
+                // but only if it is received in a selected row and not turned off
+
+                if (LedgerViewSettings::instance()->reconciliaionChangeByClick() == LedgerViewSettings::AllowReconciliationChangeByClick) {
+                    if (selectionModel()->isSelected(indexAt(pos))) {
+                        pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
+                    }
                 }
                 break;
 

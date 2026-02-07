@@ -42,6 +42,11 @@ public:
         ShowAllReconciliationHeader,
     } ReconciliationHeader;
 
+    typedef enum {
+        AllowReconciliationChangeByClick,
+        PreventReconciliationChangeByClick,
+    } ReconciliationChangeByClick;
+
     static LedgerViewSettings* instance();
     ~LedgerViewSettings();
 
@@ -49,6 +54,7 @@ public:
     bool showTransactionDetails() const;
     bool showAllSplits() const;
     ReconciliationHeader showReconciliationEntries() const;
+    ReconciliationChangeByClick reconciliaionChangeByClick();
     bool hideReconciledTransactions() const;
     QDate hideTransactionsBefore() const;
     LedgerSortOrder sortOrder(SortOrderType type) const;
@@ -79,6 +85,8 @@ public Q_SLOTS:
      * Controls visibility of the reconciliation entries in the ledgers
      */
     void setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader showHeader);
+
+    void setReconciliationChangeByClick(ReconciliationChangeByClick reconciliaionChangeByClick);
 
     void setSortOrder(LedgerViewSettings::SortOrderType type, const QString& sortOrder);
 

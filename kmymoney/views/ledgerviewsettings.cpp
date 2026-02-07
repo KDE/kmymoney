@@ -29,6 +29,7 @@ public:
         , m_showAllSplits(false)
         , m_hideReconciledTransactions(false)
         , m_showReconciliationEntries(LedgerViewSettings::DontShowReconciliationHeader)
+        , m_reconciliaionChangeByClick(LedgerViewSettings::AllowReconciliationChangeByClick)
     {
         m_settingsChangedTimer.setSingleShot(true);
         m_settingsChangedTimer.setInterval(20);
@@ -47,6 +48,7 @@ public:
     bool m_showAllSplits;
     bool m_hideReconciledTransactions;
     LedgerViewSettings::ReconciliationHeader m_showReconciliationEntries;
+    LedgerViewSettings::ReconciliationChangeByClick m_reconciliaionChangeByClick;
 };
 
 LedgerViewSettings* LedgerViewSettings::instance()
@@ -172,4 +174,14 @@ void LedgerViewSettings::flushChanges()
         d->m_settingsChangedTimer.stop();
         Q_EMIT settingsChanged();
     }
+}
+
+void LedgerViewSettings::setReconciliationChangeByClick(ReconciliationChangeByClick reconciliaionChangeByClick)
+{
+    d->m_reconciliaionChangeByClick = reconciliaionChangeByClick;
+}
+
+LedgerViewSettings::ReconciliationChangeByClick LedgerViewSettings::reconciliaionChangeByClick()
+{
+    return d->m_reconciliaionChangeByClick;
 }

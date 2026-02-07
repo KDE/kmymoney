@@ -29,6 +29,10 @@
    <label>Automatically find which transactions match the given reconciliation data</label>
    <default>false</default>
   </entry>
+  <entry name="PreventClickOnReconciliation" type="Bool">
+   <label>Prevent changing reconciliation status by click on column C</label>
+   <default>false</default>
+  </entry>
   <entry name="AutoBackupCopies" type="Int">
    <label>Number of backup files to keep</label>
    <default>10</default>

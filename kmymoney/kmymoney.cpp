@@ -3411,6 +3411,8 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     const auto ledgerViewSettings = LedgerViewSettings::instance();
     ledgerViewSettings->setHideReconciledTransactions(KMyMoneySettings::hideReconciledTransactions());
     ledgerViewSettings->setHideTransactionsBefore(KMyMoneySettings::startDate().date());
+    ledgerViewSettings->setReconciliationChangeByClick(KMyMoneySettings::preventClickOnReconciliation() ? LedgerViewSettings::PreventReconciliationChangeByClick
+                                                                                                        : LedgerViewSettings::AllowReconciliationChangeByClick);
 
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
     MyMoneyFile::instance()->budgetsModel()->setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
