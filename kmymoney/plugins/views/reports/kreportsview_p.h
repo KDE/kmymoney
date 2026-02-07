@@ -75,6 +75,7 @@
 #include "pivottable.h"
 #include "querytable.h"
 #include "reportcontrolimpl.h"
+#include "reportgroup.h"
 #include "reporttable.h"
 #include "tocitem.h"
 #include "tocitemgroup.h"
@@ -172,30 +173,6 @@ public:
 protected:
     void wheelEvent(QWheelEvent *event) override;
 
-};
-
-/**
-  * Helper class for KReportView.
-  *
-  * This is a named list of reports, which will be one section
-  * in the list of default reports
-  *
-  * @author Ace Jones
-  */
-class ReportGroup: public QList<MyMoneyReport>
-{
-private:
-    QString m_name;     ///< the title of the group in non-translated form
-    QString m_title;    ///< the title of the group in i18n-ed form
-public:
-    ReportGroup() {}
-    ReportGroup(const QString& name, const QString& title): m_name(name), m_title(title) {}
-    const QString& name() const {
-        return m_name;
-    }
-    const QString& title() const {
-        return m_title;
-    }
 };
 
 /**
