@@ -31,6 +31,7 @@
 #include <QMimeData>
 #include <QPointer>
 #include <QPrintPreviewDialog>
+#include <QSortFilterProxyModel>
 #include <QTimer>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -72,8 +73,7 @@
 #include "pivottable.h"
 #include "querytable.h"
 #include "reportgroup.h"
-#include "tocitemgroup.h"
-#include "tocitemreport.h"
+#include "reportsviewproxymodel.h"
 
 using namespace reports;
 using namespace eMyMoney;
@@ -100,6 +100,99 @@ public:
 
     ~KReportsViewPrivate()
     {
+        saveState();
+    }
+
+    void setupView(QTreeView* view, ReportsModel* model)
+    {
+        Q_Q(KReportsView);
+        auto proxyModel = new ReportsViewProxyModel(view);
+        proxyModel->setSourceModel(model);
+        proxyModel->setDynamicSortFilter(true);
+        view->setModel(proxyModel);
+
+        view->setAllColumnsShowFocus(true);
+        view->setAlternatingRowColors(true);
+        view->setContextMenuPolicy(Qt::CustomContextMenu);
+        view->setSelectionBehavior(QAbstractItemView::SelectRows);
+        view->setSelectionMode(QAbstractItemView::ExtendedSelection);
+        view->setUniformRowHeights(true);
+
+        // sorting
+        view->setSortingEnabled(true);
+        view->sortByColumn(0, Qt::AscendingOrder);
+        view->header()->setSectionsClickable(true);
+        view->header()->setSortIndicatorShown(true);
+        view->header()->setSectionResizeMode(ReportsModel::Columns::ReportName, QHeaderView::ResizeToContents);
+        view->header()->setStretchLastSection(true);
+
+        q->connect(view, &QTreeView::doubleClicked, q, &KReportsView::slotDoubleClicked);
+        q->connect(view, &QWidget::customContextMenuRequested, q, &KReportsView::slotContextMenu);
+
+        view->installEventFilter(q);
+        view->viewport()->installEventFilter(q);
+    }
+
+    QModelIndexList selectedSourceIndexes(const QTreeView* view) const
+    {
+        QModelIndexList viewIndexes = view->selectionModel()->selectedRows();
+
+        QAbstractItemModel* viewModel = view->model();
+
+        if (auto* proxy = qobject_cast<QSortFilterProxyModel*>(viewModel)) {
+            QModelIndexList sourceIndexes;
+            sourceIndexes.reserve(viewIndexes.size());
+
+            for (const QModelIndex& idx : viewIndexes) {
+                QModelIndex src = proxy->mapToSource(idx);
+                if (src.isValid())
+                    sourceIndexes << src;
+            }
+            return sourceIndexes;
+        }
+
+        return viewIndexes; // already source indexes
+    }
+
+    void selectReportInViewById(QTreeView* view, const QString& id)
+    {
+        if (!view)
+            return;
+
+        auto* proxyModel = qobject_cast<QSortFilterProxyModel*>(view->model());
+        if (!proxyModel)
+            return;
+
+        auto* sourceModel = qobject_cast<ReportsModel*>(proxyModel->sourceModel());
+        if (!sourceModel)
+            return;
+
+        // 1. Obtain source index
+        const QModelIndex sourceIndex = sourceModel->indexById(id);
+        if (!sourceIndex.isValid())
+            return;
+
+        // 2. Map to proxy index
+        const QModelIndex proxyIndex = proxyModel->mapFromSource(sourceIndex);
+        if (!proxyIndex.isValid())
+            return; // filtered out by proxy
+
+        // 3. Expand all parents
+        QModelIndex parent = proxyIndex.parent();
+        while (parent.isValid()) {
+            view->expand(parent);
+            parent = parent.parent();
+        }
+
+        // 4. Select + activate
+        auto* selectionModel = view->selectionModel();
+        if (!selectionModel)
+            return;
+
+        selectionModel->select(proxyIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
+
+        view->setCurrentIndex(proxyIndex);
+        view->scrollTo(proxyIndex);
     }
 
     void init()
@@ -108,59 +201,80 @@ public:
         m_needLoad = false;
         m_needsRefresh = true;
 
-        // build reports toc
-
         setColumnsAlreadyAdjusted(false);
         ui.setupUi(q);
-        ui.m_tocTreeWidget->sortByColumn(0, Qt::AscendingOrder);
-        ui.m_tocTreeWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
+        restoreState();
+
+        setupView(ui.m_tocTreeViewCustom, MyMoneyFile::instance()->reportsModel());
+
+        QList<ReportGroup> defaultGroups;
+        defaultReports(defaultGroups);
+        m_builtInReports = new ReportsModel();
+        m_builtInReports->load(defaultGroups);
+        setupView(ui.m_tocTreeViewDefault, m_builtInReports);
+
         ui.m_closeButton->setIcon(Icons::get(Icon::DialogClose));
         ui.m_filterContainer->hide();
         ui.m_searchWidget->installEventFilter(q);
-        ui.m_tocTreeWidget->installEventFilter(q);
 
         q->connect(ui.m_reportTabWidget, &QTabWidget::tabCloseRequested, q, &KReportsView::slotClose);
-        q->connect(ui.m_tocTreeWidget, &QTreeWidget::itemDoubleClicked, q, &KReportsView::slotItemDoubleClicked);
-        q->connect(ui.m_tocTreeWidget, &QWidget::customContextMenuRequested, q, &KReportsView::slotListContextMenu);
-        q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KReportsView::refresh);
 
-        m_focusWidget = ui.m_tocTreeWidget;
+        m_focusWidget = ui.m_tocTreeViewDefault;
     }
 
-    QMap<QString, bool> saveTocExpandState()
+    QMap<QString, bool> saveTocExpandState(QTreeView* view) const
     {
         QMap<QString, bool> expandStates;
-        for (int i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
-            const auto item = ui.m_tocTreeWidget->topLevelItem(i);
 
-            if (item) {
-                QString itemLabel = item->text(0);
+        auto* model = view->model();
+        if (!model)
+            return expandStates;
 
-                if (item->isExpanded()) {
-                    expandStates.insert(itemLabel, true);
-                } else {
-                    expandStates.insert(itemLabel, false);
-                }
-            }
+        const int rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const QModelIndex idx = model->index(row, 0);
+            const QString label = model->data(idx, Qt::DisplayRole).toString();
+            expandStates.insert(label, view->isExpanded(idx));
         }
+
         return expandStates;
     }
 
-    void restoreTocExpandState(QMap<QString, bool>& expandStates)
+    void restoreTocExpandState(const QMap<QString, bool>& expandStates, QTreeView* view)
     {
-        for (auto i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
-            QTreeWidgetItem* item = ui.m_tocTreeWidget->topLevelItem(i);
+        auto* model = view->model();
+        if (!model)
+            return;
 
-            if (item) {
-                QString itemLabel = item->text(0);
+        const int rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const QModelIndex idx = model->index(row, 0);
+            const QString label = model->data(idx, Qt::DisplayRole).toString();
 
-                if (expandStates.contains(itemLabel)) {
-                    item->setExpanded(expandStates[itemLabel]);
-                } else {
-                    item->setExpanded(false);
-                }
-            }
+            const bool expanded = expandStates.value(label, false);
+            view->setExpanded(idx, expanded);
         }
+    }
+
+    void saveState()
+    {
+        KSharedConfigPtr config = KSharedConfig::openConfig();
+        KConfigGroup grp = config->group("Last Use Settings");
+
+        grp.writeEntry("KReportsViewSplitterSize", ui.m_splitter->saveState());
+        grp.sync();
+    }
+
+    void restoreState()
+    {
+        KSharedConfigPtr config = KSharedConfig::openConfig();
+        KConfigGroup grp = config->group("Last Use Settings");
+
+        QByteArray state = grp.readEntry("KReportsViewSplitterSize", QByteArray());
+        if (!state.isEmpty())
+            ui.m_splitter->restoreState(state);
+        else
+            ui.m_splitter->setSizes({300, 700}); // fallback
     }
 
     /**
@@ -179,236 +293,6 @@ public:
         Q_Q(KReportsView);
         auto reportTab = new KReportTab(ui.m_reportTabWidget, report, q, openOption);
         reportTab->installEventFilter(q);
-    }
-
-    void loadView()
-    {
-        // remember the id of the current selected item
-        QTreeWidgetItem* item = ui.m_tocTreeWidget->currentItem();
-        QString selectedItem = (item) ? item->text(0) : QString();
-
-        // save expand states of all top-level items
-        QMap<QString, bool> expandStates = saveTocExpandState();
-
-        // find the item visible on top
-        QTreeWidgetItem* visibleTopItem = ui.m_tocTreeWidget->itemAt(0, 0);
-
-        // text of column 0 identifies the item visible on top
-        QString visibleTopItemText;
-
-        bool visibleTopItemFound = true;
-        if (visibleTopItem == nullptr) {
-            visibleTopItemFound = false;
-        } else {
-            // this assumes, that all item-texts in column 0 are unique,
-            // no matter, whether the item is a report- or a group-item
-            visibleTopItemText = visibleTopItem->text(0);
-        }
-
-        // turn off updates to avoid flickering during reload
-        //m_reportListView->setUpdatesEnabled(false);
-
-        //
-        // Rebuild the list page
-        //
-        ui.m_tocTreeWidget->clear();
-
-        // Default Reports
-        QList<ReportGroup> defaultreports;
-        defaultReports(defaultreports);
-
-        QList<ReportGroup>::const_iterator it_group = defaultreports.cbegin();
-
-        // the item to be set as current item
-        QTreeWidgetItem* currentItem = nullptr;
-
-        // group number, this will be used as sort key for reportgroup items
-        // we have:
-        // 1st some default groups
-        // 2nd a chart group
-        // 3rd maybe a favorite group
-        // 4th maybe an orphan group (for old reports)
-        int defaultGroupNo = 1;
-        int chartGroupNo = defaultreports.size() + 1;
-
-        // group for diagrams
-        QString groupName = kli18n("Charts").untranslatedText();
-
-        TocItemGroup* chartTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, chartGroupNo, i18n(groupName.toLatin1().data()));
-
-        m_allTocItemGroups.insert(groupName, chartTocItemGroup);
-
-        while (it_group != defaultreports.cend()) {
-            groupName = (*it_group).name();
-
-            TocItemGroup* defaultTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, defaultGroupNo++, (*it_group).title());
-
-            m_allTocItemGroups.insert(groupName, defaultTocItemGroup);
-
-            if (groupName == selectedItem) {
-                currentItem = defaultTocItemGroup;
-            }
-
-            QList<MyMoneyReport>::const_iterator it_report = (*it_group).begin();
-            while (it_report != (*it_group).end()) {
-                MyMoneyReport report = *it_report;
-                report.setGroup(groupName);
-
-                TocItemReport* reportTocItemReport =
-                    new TocItemReport(defaultTocItemGroup, report);
-
-                if (report.name() == selectedItem) {
-                    currentItem = reportTocItemReport;
-                }
-
-                // ALSO place it into the Charts list if it's displayed as a chart by default
-                if (report.isChartByDefault()) {
-                    new TocItemReport(chartTocItemGroup, report);
-                }
-
-                ++it_report;
-            }
-
-            ++it_group;
-        }
-
-        // group for custom (favorite) reports
-        int favoriteGroupNo = chartGroupNo + 1;
-
-        groupName = kli18n("Favorite Reports").untranslatedText();
-
-        TocItemGroup* favoriteTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, favoriteGroupNo, i18n(groupName.toLatin1().data()));
-
-        m_allTocItemGroups.insert(groupName, favoriteTocItemGroup);
-
-        TocItemGroup* orphanTocItemGroup = nullptr;
-
-        QList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
-        QList<MyMoneyReport>::const_iterator it_report = customreports.cbegin();
-        while (it_report != customreports.cend()) {
-            MyMoneyReport report = *it_report;
-
-            groupName = (*it_report).group();
-
-            // If this report is in a known group, place it there
-            // KReportGroupListItem* groupnode = groupitems[(*it_report).group()];
-            TocItemGroup* groupNode = m_allTocItemGroups[groupName];
-
-            if (groupNode) {
-                new TocItemReport(groupNode, report);
-            } else {
-                // otherwise, place it in the orphanage
-                if (!orphanTocItemGroup) {
-
-                    // group for orphaned reports
-                    int orphanGroupNo = favoriteGroupNo + 1;
-
-                    groupName = kli18n("Old Customized Reports").untranslatedText();
-
-                    orphanTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, orphanGroupNo, i18n(groupName.toLatin1().data()));
-                    m_allTocItemGroups.insert(groupName, orphanTocItemGroup);
-                }
-                new TocItemReport(orphanTocItemGroup, report);
-            }
-
-            // ALSO place it into the Favorites list if it's a favorite
-            if ((*it_report).isFavorite()) {
-                new TocItemReport(favoriteTocItemGroup, report);
-            }
-
-            // ALSO place it into the Charts list if it's displayed as a chart by default
-            if ((*it_report).isChartByDefault()) {
-                new TocItemReport(chartTocItemGroup, report);
-            }
-
-            ++it_report;
-        }
-
-        //
-        // Go through the tabs to set their update flag or delete them if needed
-        //
-
-        int index = 1;
-        while (index < ui.m_reportTabWidget->count()) {
-            // TODO: Find some way of detecting the file is closed and kill these tabs!!
-            if (auto tab = dynamic_cast<KReportTab*>(ui.m_reportTabWidget->widget(index))) {
-                if (tab->isReadyToDelete() /* || ! reports.count() */) {
-                    delete tab;
-                    --index;
-                } else {
-                    tab->loadTab();
-                }
-            }
-            ++index;
-        }
-
-        if (visibleTopItemFound) {
-            // try to find the visibleTopItem that we had at the start of this method
-
-            // intentionally not using 'Qt::MatchCaseSensitive' here
-            // to avoid 'item not found' if someone corrected a typo only
-            QList<QTreeWidgetItem*> visibleTopItemList = ui.m_tocTreeWidget->findItems(visibleTopItemText, Qt::MatchFixedString | Qt::MatchRecursive);
-
-            if (visibleTopItemList.isEmpty()) {
-                // the item could not be found, it was deleted or renamed
-                visibleTopItemFound = false;
-            } else {
-                visibleTopItem = visibleTopItemList.at(0);
-                if (visibleTopItem == nullptr) {
-                    visibleTopItemFound = false;
-                }
-            }
-        }
-
-        // adjust column widths,
-        // but only the first time when the view is loaded,
-        // maybe the user sets other column widths later,
-        // so don't disturb him
-        if (columnsAlreadyAdjusted()) {
-
-            // restore expand states of all top-level items
-            restoreTocExpandState(expandStates);
-
-            // restore current item
-            ui.m_tocTreeWidget->setCurrentItem(currentItem);
-
-            // try to scroll to the item visible on top
-            // when this method started
-            if (visibleTopItemFound) {
-                ui.m_tocTreeWidget->scrollToItem(visibleTopItem);
-            } else {
-                ui.m_tocTreeWidget->scrollToTop();
-            }
-            return;
-        }
-
-        // avoid flickering
-        ui.m_tocTreeWidget->setUpdatesEnabled(false);
-
-        // expand all top-level items
-        ui.m_tocTreeWidget->expandAll();
-
-        // resize columns
-        ui.m_tocTreeWidget->resizeColumnToContents(0);
-        ui.m_tocTreeWidget->resizeColumnToContents(1);
-
-        // restore expand states of all top-level items
-        restoreTocExpandState(expandStates);
-
-        // restore current item
-        ui.m_tocTreeWidget->setCurrentItem(currentItem);
-
-        // try to scroll to the item visible on top
-        // when this method started
-        if (visibleTopItemFound) {
-            ui.m_tocTreeWidget->scrollToItem(visibleTopItem);
-        } else {
-            ui.m_tocTreeWidget->scrollToTop();
-        }
-
-        setColumnsAlreadyAdjusted(true);
-
-        ui.m_tocTreeWidget->setUpdatesEnabled(true);
     }
 
     void defaultReports(QList<ReportGroup>& groups)
@@ -988,8 +872,22 @@ public:
             groups.push_back(list);
         }
         {
-            ReportGroup list("Value/Balance History", i18n("Value/Balance History"));
+            ReportGroup list("Charts", i18n("Charts"));
+            for (const auto& group : groups) {
+                for (const auto& report : group) {
+                    if (report.isChartByDefault()) {
+                        list.append(report);
+                    }
+                }
+            }
             groups.push_back(list);
+        }
+
+        // In each report setup associated group, which is used in report configuration post steps
+        for (auto& group : groups) {
+            for (auto& report : group) {
+                report.setGroup(group.name());
+            }
         }
     }
 
@@ -1003,46 +901,30 @@ public:
         m_columnsAlreadyAdjusted = adjusted;
     }
 
+    void setFilter(const QString& text, QTreeView* view)
+    {
+        auto* proxy = qobject_cast<QSortFilterProxyModel*>(view->model());
+        if (text.isEmpty()) {
+            proxy->setFilterRegularExpression(QRegularExpression());
+            restoreTocExpandState(expandStatesBeforeSearch, view);
+            expandStatesBeforeSearch.clear();
+        } else {
+            if (expandStatesBeforeSearch.isEmpty())
+                expandStatesBeforeSearch = saveTocExpandState(view);
+
+            proxy->setFilterRegularExpression(QRegularExpression(text, QRegularExpression::CaseInsensitiveOption));
+
+            // Expand visible parents (like your old code)
+            for (int row = 0; row < proxy->rowCount(); ++row) {
+                view->setExpanded(proxy->index(row, 0), true);
+            }
+        }
+    }
+
     void setFilter(const QString& text)
     {
-        const auto columns = ui.m_tocTreeWidget->columnCount();
-        for (auto i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
-            const auto toplevelItem = ui.m_tocTreeWidget->topLevelItem(i);
-            bool hideTopLevel = true;
-            for (auto j = 0; j < toplevelItem->childCount(); ++j) {
-                const auto reportItem = toplevelItem->child(j);
-                if (text.isEmpty()) {
-                    reportItem->setHidden(false);
-                    hideTopLevel = false;
-                } else {
-                    reportItem->setHidden(true);
-                    for (auto column = 0; column < columns; ++column) {
-                        if (reportItem->text(column).contains(text, Qt::CaseInsensitive)) {
-                            reportItem->setHidden(false);
-                            hideTopLevel = false;
-                            break;
-                        }
-                    }
-                }
-            }
-            toplevelItem->setHidden(hideTopLevel);
-        }
-
-        if (text.isEmpty()) {
-            if (!expandStatesBeforeSearch.isEmpty()) {
-                restoreTocExpandState(expandStatesBeforeSearch);
-                expandStatesBeforeSearch.clear();
-            }
-        } else {
-            if (expandStatesBeforeSearch.isEmpty()) {
-                expandStatesBeforeSearch = saveTocExpandState();
-            }
-            // show groups with matching reports as expanded
-            for (auto i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
-                const auto toplevelItem = ui.m_tocTreeWidget->topLevelItem(i);
-                toplevelItem->setExpanded(!toplevelItem->isHidden());
-            }
-        }
+        setFilter(text, ui.m_tocTreeViewDefault);
+        setFilter(text, ui.m_tocTreeViewCustom);
     }
 
     // Generate a transaction report that contains transactions for only the
@@ -1071,12 +953,12 @@ public:
 
     Ui::KReportsView ui;
     QListWidget* m_reportListView;
-    QMap<QString, TocItemGroup*> m_allTocItemGroups;
     QString m_selectedExportFilter;
 
     bool m_columnsAlreadyAdjusted;
     MyMoneyAccount m_currentAccount;
     QMap<QString, bool> expandStatesBeforeSearch;
+    ReportsModel* m_builtInReports;
 };
 
 #endif

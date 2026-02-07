@@ -21,7 +21,11 @@ set(libmodels_a_SOURCES
     statementmodel.cpp
 )
 
-add_library(kmm_models ${libmodels_a_SOURCES})
+set(libmodels_a_HEADER
+    reportsviewproxymodel.h
+)
+
+add_library(kmm_models ${libmodels_a_SOURCES} ${libmodels_a_HEADER})
 
 generate_export_header(kmm_models BASE_NAME kmm_models)
 

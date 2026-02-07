@@ -61,7 +61,7 @@ public:
         return childItems.count();
     }
 
-    void appendChild(const TreeItem<T>* const item)
+    void appendChild(TreeItem<T>* item)
     {
         childItems.append(item);
     }
