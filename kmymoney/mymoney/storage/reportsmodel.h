@@ -15,13 +15,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymodel.h"
-#include "mymoneyenums.h"
 #include "kmm_mymoney_export.h"
+#include "mymoneymodel.h"
 
 #include "mymoneyreport.h"
+#include "reportgroup.h"
 
 class QUndoStack;
+
 /**
   */
 class KMM_MYMONEY_EXPORT ReportsModel : public MyMoneyModel<MyMoneyReport>
@@ -31,6 +32,10 @@ class KMM_MYMONEY_EXPORT ReportsModel : public MyMoneyModel<MyMoneyReport>
 public:
     enum Columns {
         ReportName,
+        Comment,
+        Favorite,
+        Modified,
+        Group,
         // insert new columns above this line
         MaxColumns,
     };
@@ -45,13 +50,16 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+    Qt::ItemFlags flags(const QModelIndex& index) const override;
 
     int processItems(Worker* worker) override;
 
-Q_SIGNALS:
-    void modelChanged();
+    bool useGroups() const;
+    void setUseGroups(bool state);
 
 public Q_SLOTS:
+    void load(const QMap<QString, MyMoneyReport>& reports) override;
+    void load(const QList<ReportGroup>& reportGroups);
 
 private:
     struct Private;

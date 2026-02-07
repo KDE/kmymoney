@@ -10,9 +10,6 @@ set(reportsview_SOURCES
   reportcontrolimpl.cpp
   reportsview.cpp
   reporttabimpl.cpp
-  tocitem.cpp
-  tocitemgroup.cpp
-  tocitemreport.cpp
   )
 
 ki18n_wrap_ui(reportsview_SOURCES

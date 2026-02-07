@@ -39,10 +39,10 @@ namespace reports {
 class ReportTable;
 }
 
+class QTreeView;
 class QTreeWidget;
 class QTreeWidgetItem;
 class QListWidget;
-class TocItemGroup;
 class ReportControl;
 class ReportGroup;
 class SelectedObjects;
@@ -127,21 +127,20 @@ public Q_SLOTS:
     void slotConfigure();
     void slotDuplicate();
     void slotToggleChart();
-    void slotItemDoubleClicked(QTreeWidgetItem* item, int column);
+    void slotDoubleClicked(const QModelIndex& index);
     void slotOpenReport(const QString&);
     void slotOpenReport(const MyMoneyReport&);
     void slotCloseCurrent();
     void slotClose(int index);
     void slotCloseAll();
+    void slotContextMenu(const QPoint& p);
     void slotDelete();
-    void slotListContextMenu(const QPoint &);
-    void slotOpenFromList();
-    void slotPrintFromList();
-    void slotExportFromList();
-    void slotConfigureFromList();
-    void slotNewFromList();
-    void slotDeleteFromList();
-    void slotRefresh();
+    void slotOpenFromView(QTreeView* view);
+    void slotPrintFromView(QTreeView* view);
+    void slotExportFromView(QTreeView* view);
+    void slotConfigureFromView(QTreeView* view);
+    void slotNewFromView(QTreeView* view);
+    void slotDeleteFromView(QTreeView* view);
 
     void updateActions(const SelectedObjects& selections) override;
 

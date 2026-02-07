@@ -357,6 +357,18 @@ void MyMoneyReport::setIsGenerated()
     d->m_origin = eMyMoney::Report::Origin::Generated;
 }
 
+bool MyMoneyReport::isGroup() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_origin == eMyMoney::Report::Origin::Group;
+}
+
+void MyMoneyReport::setIsGroup()
+{
+    Q_D(MyMoneyReport);
+    d->m_origin = eMyMoney::Report::Origin::Group;
+}
+
 bool MyMoneyReport::isFavorite() const
 {
     Q_D(const MyMoneyReport);

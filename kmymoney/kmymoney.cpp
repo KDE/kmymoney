@@ -1517,7 +1517,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ReportNew,                     QStringLiteral("report_new"),                     i18n("New report"),                                 Icon::DocumentNew},
             {Action::ReportCopy,                    QStringLiteral("report_copy"),                    i18n("Copy report"),                                Icon::EditCopy},
             {Action::ReportConfigure,               QStringLiteral("report_configure"),               i18n("Configure report"),                           Icon::DocumentProperties},
-            {Action::ReportExport,                  QStringLiteral("report_export"),                  i18n("Export report"),                              Icon::Empty},
+            {Action::ReportExport,                  QStringLiteral("report_export"),                  i18n("Export report"),                              Icon::DocumentExport},
             {Action::ReportDelete,                  QStringLiteral("report_delete"),                  i18n("Delete report"),                              Icon::EditRemove},
             {Action::ReportClose,                   QStringLiteral("report_close"),                   i18n("Close report"),                               Icon::Close},
             {Action::ReportToggleChart,             QStringLiteral("report_toggle"),                  i18n("Toggle chart"),                               Icon::Close},

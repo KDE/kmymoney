@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>KReportsView</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="m_reportTabWidget">
      <property name="currentIndex">
@@ -26,46 +26,56 @@
       <attribute name="title">
        <string comment=" ">Reports</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_1" stretch="1,0">
        <item>
-        <widget class="QTreeWidget" name="m_tocTreeWidget">
-         <property name="contextMenuPolicy">
-          <enum>Qt::CustomContextMenu</enum>
+        <widget class="QSplitter" name="m_splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="alternatingRowColors">
-          <bool>true</bool>
-         </property>
-         <property name="sortingEnabled">
-          <bool>true</bool>
-         </property>
-         <property name="allColumnsShowFocus">
-          <bool>true</bool>
-         </property>
-         <column>
-          <property name="text">
-           <string>Reports</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Comment</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Modified</string>
-          </property>
-         </column>
+         <widget class="QWidget" name="m_defaultReportsPane">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Default reports</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTreeView" name="m_tocTreeViewDefault"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="m_customReportsPane">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Custom reports</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTreeView" name="m_tocTreeViewCustom"/>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
        <item>
         <widget class="QWidget" name="m_filterContainer" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,2">
           <property name="spacing">
            <number>2</number>
+          </property>
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
           </property>
           <property name="leftMargin">
            <number>0</number>

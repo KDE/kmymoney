@@ -146,6 +146,9 @@ public:
     bool isGenerated() const;
     void setIsGenerated();
 
+    bool isGroup() const;
+    void setIsGroup();
+
     bool isFavorite() const;
     void setFavorite(bool f);
 
