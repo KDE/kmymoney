@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-01 03:31+0000\n"
-"PO-Revision-Date: 2026-01-28 16:47+0100\n"
+"PO-Revision-Date: 2026-02-07 17:01+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -309,11 +309,12 @@ msgid ""
 "The selected parent account <b>%1</b> does not exist in the <b>%2</b> "
 "hierarchy."
 msgstr ""
+"Den valgte overordnede kontoen <b>%1</b> finnes ikke i hierarkiet <b>%2</b>."
 
 #: kmymoney/dialogs/accountcreator.cpp:98
 #, kde-format
 msgid "Account/category creation problem"
-msgstr ""
+msgstr "Problem med å lage konto/kategori"
 
 #: kmymoney/dialogs/accountcreator.cpp:109
 #, kde-format
@@ -3193,7 +3194,7 @@ msgstr "Lagre automatisk ved lukking når en fil er endret"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
 #, kde-format
 msgid "Backup options"
-msgstr "Instillinger for sikkerhetskopi"
+msgstr "Innstillinger for sikkerhetskopi"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
@@ -15278,7 +15279,7 @@ msgstr "Inkluder planlagte transaksjoner ved bruk av tidsplanprognose"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:29
 #, kde-format
 msgid "Forecast Settings"
-msgstr "Instillinger for prognose"
+msgstr "Innstillinger for prognose"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:44
@@ -21249,11 +21250,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"Du har kun skrevet inn mellomrom i notatfeltet. Detet vil fjerne det "
+"eksisterende innholdet. Er du sikker på at du vil gjøre dette?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
 #, kde-format
 msgid "Clear memo"
-msgstr ""
+msgstr "Rens notatfeltet"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -21437,7 +21440,7 @@ msgstr "Nasjonalt kontonummer"
 #, kde-format
 msgctxt "Ledger marker showing current reconciliation entry"
 msgid "Current reconciliation"
-msgstr ""
+msgstr "Gjeldende avstemming"
 
 #: kmymoney/views/reconciliationdelegate.cpp:110
 #, kde-format
@@ -25782,7 +25785,7 @@ msgstr ""
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
 #, kde-format
 msgid "Configure preferences after finishing the wizard."
-msgstr "Sett opp instillinger etter at veiviseren er fullført."
+msgstr "Sett opp innstillinger etter at veiviseren er fullført."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:60
