@@ -257,6 +257,7 @@
   <url type="homepage">https://kmymoney.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=kmymoney&amp;format=guided</url>
   <url type="help">https://docs.kde.org/?application=kmymoney</url>
+  <url type="vcs-browser">https://invent.kde.org/office/kmymoney</url>
   <project_group>KDE</project_group>
   <provides>
     <binary>kmymoney</binary>
@@ -278,7 +279,7 @@
                to determine the last release, so this entry must always reflect the
                last actual release -->
     <release date="2025-08-04" version="5.2.1">
-      <url>https://kmymoney.org/2025/08/04/kmymoney-5-2-1-released.htmll</url>
+      <url>https://kmymoney.org/2025/08/04/kmymoney-5-2-1-released.html</url>
       <artifacts>
         <artifact type="source">
           <location>https://download.kde.org/stable/kmymoney/5.2.1/kmymoney-5.2.1.tar.xz.mirrorlist</location>
