@@ -23,9 +23,11 @@ loanattributeswizardpage  -  description
 #include "ui_loanattributeswizardpage.h"
 
 #include "knewinstitutiondlg.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
-#include "mymoneyexception.h"
 
 LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
     : QWizardPage(parent),
@@ -38,6 +40,8 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
     registerField("institution", ui->m_qcomboboxInstitutions);
     connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &QWizardPage::completeChanged);
     connect(ui->m_qbuttonNew, &QAbstractButton::clicked, this, &LoanAttributesWizardPage::slotNewClicked);
+
+    registerField("budgetoption", ui->m_budgetTreatmentAsCategory);
 
     ui->m_qcomboboxInstitutions->clear();
 
@@ -103,4 +107,14 @@ void LoanAttributesWizardPage::slotNewClicked()
         }
     }
     delete dlg;
+}
+
+void LoanAttributesWizardPage::setAccount(const MyMoneyAccount& loanAccount)
+{
+    ui->m_accountNameEdit->setText(loanAccount.name());
+    if (loanAccount.accountGroup() == eMyMoney::Account::Type::Asset) {
+        ui->m_budgetTreatmentLabel->setText(i18nc("@option:check Budget option", "Treat as income"));
+    } else {
+        ui->m_budgetTreatmentLabel->setText(i18nc("@option:check Budget option", "Treat as expense"));
+    }
 }

@@ -33,7 +33,13 @@ public:
     explicit EditSelectionWizardPage(QWidget *parent = nullptr);
     ~EditSelectionWizardPage();
 
+    QString selectedOptionText(int option) const;
+    int selectedOption() const;
+
     Ui::EditSelectionWizardPage *ui;
+
+private:
+    QVector<QString> m_buttonText;
 };
 
 #endif

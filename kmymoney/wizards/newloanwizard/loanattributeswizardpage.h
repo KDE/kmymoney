@@ -20,6 +20,7 @@
 namespace Ui {
 class LoanAttributesWizardPage;
 }
+class MyMoneyAccount;
 
 /**
  * This class implements the Loan Attributes page of the
@@ -48,6 +49,11 @@ public:
      * Set the institution combobox to the name given
      */
     void setInstitution(const QString &institutionName);
+
+    /**
+     * Set the widgets with the data of the selected loan account
+     */
+    void setAccount(const MyMoneyAccount& loanAccount);
 
     Ui::LoanAttributesWizardPage *ui;
 

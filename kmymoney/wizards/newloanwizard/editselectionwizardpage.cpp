@@ -23,6 +23,13 @@ EditSelectionWizardPage::EditSelectionWizardPage(QWidget *parent)
       ui(new Ui::EditSelectionWizardPage)
 {
     ui->setupUi(this);
+
+    // keep button text without alteration by wizard page logic
+    m_buttonText.append(ui->m_editInterestRateButton->text());
+    m_buttonText.append(ui->m_editOtherCostButton->text());
+    m_buttonText.append(ui->m_editOtherInfoButton->text());
+    m_buttonText.append(ui->m_editAttributesButton->text());
+
     ui->m_selectionButtonGroup->setId(ui->m_editInterestRateButton, 0);
     ui->m_selectionButtonGroup->setId(ui->m_editOtherCostButton, 1);
     ui->m_selectionButtonGroup->setId(ui->m_editOtherInfoButton, 2);
@@ -41,4 +48,17 @@ EditSelectionWizardPage::EditSelectionWizardPage(QWidget *parent)
 EditSelectionWizardPage::~EditSelectionWizardPage()
 {
     delete ui;
+}
+
+int EditSelectionWizardPage::selectedOption() const
+{
+    return ui->m_selectionButtonGroup->checkedId();
+}
+
+QString EditSelectionWizardPage::selectedOptionText(int option) const
+{
+    if ((option >= 0) && (option < m_buttonText.count())) {
+        return m_buttonText.at(option);
+    }
+    return {};
 }

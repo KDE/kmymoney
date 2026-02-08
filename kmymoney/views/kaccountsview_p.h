@@ -144,11 +144,11 @@ public:
             } catch (const MyMoneyException &) {
                 qDebug() << "schedule" << m_currentAccount.value("schedule").toLatin1() << "not found";
             }
-            if (!(m_currentAccount == wizard->account())
-                    || !(sch == wizard->schedule())) {
+            const auto account = wizard->account();
+            if (!(m_currentAccount == account) || !(sch == wizard->schedule())) {
                 MyMoneyFileTransaction ft;
                 try {
-                    file->modifyAccount(wizard->account());
+                    file->modifyAccount(account);
                     if (!sch.id().isEmpty()) {
                         sch = wizard->schedule();
                     }

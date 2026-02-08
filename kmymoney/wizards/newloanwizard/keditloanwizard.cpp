@@ -56,10 +56,10 @@ class KEditLoanWizardPrivate : public KNewLoanWizardPrivate
     Q_DISABLE_COPY(KEditLoanWizardPrivate)
 
 public:
-    KEditLoanWizardPrivate(KEditLoanWizard *qq) :
-        KNewLoanWizardPrivate(qq),
-        m_lastSelection(0),
-        m_fullyRepayLoan(false)
+    KEditLoanWizardPrivate(KEditLoanWizard* qq)
+        : KNewLoanWizardPrivate(qq)
+        , m_lastSelection(-1)
+        , m_fullyRepayLoan(false)
     {
     }
 
@@ -82,7 +82,6 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
         d->m_schedule = file->schedule(id);
     } catch (const MyMoneyException &) {
     }
-    d->m_lastSelection = -1;
 
     loadWidgets(d->m_account);
 
@@ -150,7 +149,8 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
     } catch (const MyMoneyException &) {
     }
     d->ui->m_loanAttributesPage->setInstitution(institutionName);
-    d->ui->m_loanAttributesPage->ui->m_accountNameEdit->setText(d->m_account.name());
+    d->ui->m_loanAttributesPage->setAccount(d->m_account);
+    setField("budgetoption", d->m_account.hasDifferentBudgetAccountType());
 
     MyMoneyMoney ir;
     if (d->m_schedule.startDate() > QDate::currentDate()) {
@@ -271,15 +271,15 @@ bool KEditLoanWizard::validateCurrentPage()
 {
     Q_D(KEditLoanWizard);
     auto dontLeavePage = false;
-    //FIXME: port m_lastSelection
-    QAbstractButton* button = d->ui->m_editSelectionPage->ui->m_selectionButtonGroup->button(d->m_lastSelection);
+    // FIXME: port m_lastSelection
 
     if (currentPage() == d->ui->m_editSelectionPage) {
-        if (button != nullptr && d->m_lastSelection != d->ui->m_editSelectionPage->ui->m_selectionButtonGroup->checkedId()) {
+        if ((d->m_lastSelection != -1) && (d->m_lastSelection != d->ui->m_editSelectionPage->selectedOption())) {
             QString errMsg = i18n(
-                                 "Your previous selection was \"%1\". If you select another option, "
-                                 "KMyMoney will dismiss the changes you have just entered. "
-                                 "Do you wish to proceed?", button->text());
+                "Your previous selection was \"%1\". If you select another option, "
+                "KMyMoney will dismiss the changes you have just entered. "
+                "Do you wish to proceed?",
+                d->ui->m_editSelectionPage->selectedOptionText(d->m_lastSelection));
 
             if (KMessageBox::questionTwoActions(this, errMsg, i18nc("@title:window", "Confirmation"), KMMYesNo::yes(), KMMYesNo::no())
                 == KMessageBox::SecondaryAction) {
@@ -368,7 +368,7 @@ bool KEditLoanWizard::validateCurrentPage()
                 qWarning("%s,%d: This should never happen", __FILE__, __LINE__);
             }
 
-            d->m_lastSelection = d->ui->m_editSelectionPage->ui->m_selectionButtonGroup->checkedId();
+            d->m_lastSelection = d->ui->m_editSelectionPage->selectedOption();
         } // if(!dontLeavePage)
 
     } else if (currentPage() == d->ui->m_additionalFeesPage) {
@@ -539,6 +539,10 @@ const MyMoneyAccount KEditLoanWizard::account() const
                                        field("interestFrequencyUnitEdit").toInt());
     }
 
+    acc.setBudgetAccountType(eMyMoney::Account::Type::Unknown);
+    if (field(QLatin1String("budgetoption")).toBool()) {
+        acc.setBudgetAccountType((acc.accountGroup() == eMyMoney::Account::Type::Asset) ? eMyMoney::Account::Type::Income : eMyMoney::Account::Type::Expense);
+    }
     return acc;
 }
 
