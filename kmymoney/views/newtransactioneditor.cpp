@@ -1351,7 +1351,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         const auto newState = static_cast<eMyMoney::Split::State>(reconcileIndex);
         if (newState == eMyMoney::Split::State::Frozen) {
             const auto message = i18nc("@info Question for confirmation of operation",
-                                       "<p>You are about to set the reconcilation status to Frozen.<br/>Once stored in the ledger, this cannot be "
+                                       "<p>You are about to set the reconciliation status to Frozen.<br/>Once stored in the ledger, this cannot be "
                                        "reverted.</p><p>Are you sure you want to continue?</p>");
 
             const auto result = KMessageBox::warningContinueCancel(this,
