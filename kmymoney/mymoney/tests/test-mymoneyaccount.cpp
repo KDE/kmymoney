@@ -405,18 +405,22 @@ void MyMoneyAccountTest::testBudgetOptions()
     a.setAccountType(eMyMoney::Account::Type::Asset);
     QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
     QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.hasDifferentBudgetAccountType(), false);
 
     a.setBudgetAccountType(eMyMoney::Account::Type::Income);
     QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
     QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Income);
+    QCOMPARE(a.hasDifferentBudgetAccountType(), true);
 
     a.setBudgetAccountType(eMyMoney::Account::Type::Expense);
     QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
     QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Expense);
+    QCOMPARE(a.hasDifferentBudgetAccountType(), true);
 
     a.setBudgetAccountType(eMyMoney::Account::Type::Investment);
     QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
     QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.hasDifferentBudgetAccountType(), false);
 }
 
 void MyMoneyAccountTest::testBalanceFactor_data()

@@ -708,6 +708,11 @@ void MyMoneyAccount::setBudgetAccountType(eMyMoney::Account::Type type)
     setValue(QLatin1String("budgetAccountType"), type, eMyMoney::Account::Type::Unknown);
 }
 
+bool MyMoneyAccount::hasDifferentBudgetAccountType() const
+{
+    return value<eMyMoney::Account::Type>(QLatin1String("budgetAccountType"), accountType()) != accountType();
+}
+
 eMyMoney::Account::Type MyMoneyAccount::budgetAccountType() const
 {
     return value<eMyMoney::Account::Type>(QLatin1String("budgetAccountType"), accountType());

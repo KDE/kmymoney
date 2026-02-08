@@ -678,8 +678,36 @@ public:
       */
     bool hasOnlineMapping() const;
 
+    /**
+     * Returns the budgetAccountType for this account. It is either the
+     * original account type or if overridden the one to be used within
+     * budgets.
+     *
+     * @sa hasDifferentBudgetAccountType(), setBudgetAccountType()
+     */
     eMyMoney::Account::Type budgetAccountType() const;
+
+    /**
+     * Set the type that should be used in budgeting. The supported
+     * values are
+     *
+     * - Unknown (don't override)
+     * - Income
+     * - Expense
+     *
+     * All others are treated as Unknown.
+     *
+     * @param type One of Unknown (don't use), Income or Expense
+     *
+     * @sa hasDifferentBudgetAccountType(), budgetAccountType()
+     */
     void setBudgetAccountType(eMyMoney::Account::Type type);
+
+    /**
+     * Returns if the account type for budgets differs from the
+     * original account type
+     */
+    bool hasDifferentBudgetAccountType() const;
 
     static QString stdAccName(eMyMoney::Account::Standard stdAccID);
     static QString stdAccName(eMyMoney::Account::Type type);
