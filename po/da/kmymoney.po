@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-08 00:43+0000\n"
+"POT-Creation-Date: 2026-02-09 00:43+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1387,7 +1387,7 @@ msgstr "    Angiv venligst en pris for valutaen på eller før åbningsdatoen."
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:82
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:31
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:52
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
 #, fuzzy, kde-format
 #| msgctxt "@title header of the currency name column"
 #| msgid "Name"
@@ -2241,8 +2241,8 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:1000
 #: kmymoney/dialogs/knewaccountdlg.cpp:1015
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:49
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:84
 #, kde-format
 msgid "(No Institution)"
 msgstr "(Ingen institution)"
@@ -2321,7 +2321,7 @@ msgid "Hidden categories"
 msgstr "Skjulte kategorier"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1040
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:106
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Kan ikke tilføje institution"
@@ -2525,14 +2525,14 @@ msgstr "Tekst til startsaldo"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:49
 #, kde-format
 msgid "Institution"
 msgstr "Institution"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/dialogs/knewaccountdlg.ui:348
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:45
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:42
 #, kde-format
 msgctxt "create new institution"
 msgid "New..."
@@ -22484,7 +22484,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info Question for confirmation of operation"
 msgid ""
-"<p>You are about to set the reconcilation status to Frozen.<br/>Once stored "
+"<p>You are about to set the reconciliation status to Frozen.<br/>Once stored "
 "in the ledger, this cannot be reverted.</p><p>Are you sure you want to "
 "continue?</p>"
 msgstr ""
@@ -22690,21 +22690,21 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:317
+#: kmymoney/views/splitdialog.cpp:319
 #, fuzzy, kde-format
 #| msgid "Sum of splits"
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Sum af opdelinger"
 
-#: kmymoney/views/splitdialog.cpp:335
+#: kmymoney/views/splitdialog.cpp:337
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Ikke tildelt"
 
-#: kmymoney/views/splitdialog.cpp:338
+#: kmymoney/views/splitdialog.cpp:340
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
@@ -26138,7 +26138,7 @@ msgstr "Variabel rente"
 msgid "Edit loan wizard"
 msgstr "Redigér långuide"
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:93
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:92
 #, kde-format
 msgid ""
 "Note: you will not be able to modify this account today, because the opening "
@@ -26149,7 +26149,7 @@ msgstr ""
 "\"%1\" er i fremtiden. Vend venligst tilbage til denne dialog når tidspunkt "
 "er oprindet."
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:280
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:279
 #, kde-format
 msgid ""
 "Your previous selection was \"%1\". If you select another option, KMyMoney "
@@ -26281,6 +26281,21 @@ msgid ""
 msgstr ""
 "Angiv det tilbageværende lånebeløb fra sidste års sidste opgørelse i feltet "
 "nedenfor. Du bør ikke lade dette felt være tomt."
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
+#, fuzzy, kde-format
+#| msgid "Interest Income"
+msgctxt "@option:check Budget option"
+msgid "Treat as income"
+msgstr "Renteindtægt"
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
+#, fuzzy, kde-format
+#| msgctxt "Category name"
+#| msgid "Miscellaneous expense"
+msgctxt "@option:check Budget option"
+msgid "Treat as expense"
+msgstr "Diverse udgifter"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format

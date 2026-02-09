@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-08 00:43+0000\n"
-"PO-Revision-Date: 2026-01-27 00:46+0100\n"
+"POT-Creation-Date: 2026-02-09 00:43+0000\n"
+"PO-Revision-Date: 2026-02-08 12:06+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1345,7 +1345,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:82
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:31
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:52
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
 #, kde-format
 msgid "Name"
 msgstr "Nombre"
@@ -2219,8 +2219,8 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:1000
 #: kmymoney/dialogs/knewaccountdlg.cpp:1015
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:49
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:84
 #, kde-format
 msgid "(No Institution)"
 msgstr "(No hay ninguna institución)"
@@ -2289,7 +2289,7 @@ msgid "Hidden categories"
 msgstr "Categorías ocultas"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1040
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:106
 #, kde-format
 msgid "Cannot add institution"
 msgstr "No se puede añadir la institución"
@@ -2486,14 +2486,14 @@ msgstr "Cuenta de saldo de apertura"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:49
 #, kde-format
 msgid "Institution"
 msgstr "Institución"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/dialogs/knewaccountdlg.ui:348
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:45
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:42
 #, kde-format
 msgctxt "create new institution"
 msgid "New..."
@@ -4297,6 +4297,9 @@ msgid ""
 "the reconciliation states. One has to edit the transaction to modify the "
 "reconciliation state."
 msgstr ""
+"Si está activo, al pulsar en la columna C del registro no se recorren los "
+"estados de conciliación. Es necesario editar la transacción para modificar "
+"el estado de conciliación."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventClickOnReconciliation)
 #. i18n: ectx: label, entry (PreventClickOnReconciliation), group (General Options)
@@ -4304,7 +4307,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:33
 #, kde-format
 msgid "Prevent changing reconciliation status by click on column C"
-msgstr ""
+msgstr "Evitar el cambio del estado de conciliación al pulsar en la columna C"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
@@ -21673,13 +21676,21 @@ msgid "Link"
 msgstr "Enlace"
 
 #: kmymoney/views/newtransactioneditor.cpp:1354
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info Question for confirmation of operation"
+#| msgid ""
+#| "<p>You are about to set the reconcilation status to Frozen.<br/>Once "
+#| "stored in the ledger, this cannot be reverted.</p><p>Are you sure you "
+#| "want to continue?</p>"
 msgctxt "@info Question for confirmation of operation"
 msgid ""
-"<p>You are about to set the reconcilation status to Frozen.<br/>Once stored "
+"<p>You are about to set the reconciliation status to Frozen.<br/>Once stored "
 "in the ledger, this cannot be reverted.</p><p>Are you sure you want to "
 "continue?</p>"
 msgstr ""
+"<p>Está a punto de establecer el estado de conciliación a «Congelado».<br/"
+">Una vez guardado en el libro mayor, no se puede revertir.</p><p>¿Seguro que "
+"desea continuar?</p>"
 
 #: kmymoney/views/newtransactioneditor.cpp:1702
 #, kde-format
@@ -21886,19 +21897,19 @@ msgstr ""
 "botón + de la barra de pestañas superior para seleccionar una cuenta.</p></"
 "body></html>"
 
-#: kmymoney/views/splitdialog.cpp:317
+#: kmymoney/views/splitdialog.cpp:319
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Suma de las partidas"
 
-#: kmymoney/views/splitdialog.cpp:335
+#: kmymoney/views/splitdialog.cpp:337
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Sobreasignado"
 
-#: kmymoney/views/splitdialog.cpp:338
+#: kmymoney/views/splitdialog.cpp:340
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -25259,7 +25270,7 @@ msgstr "Interés de tipo variable"
 msgid "Edit loan wizard"
 msgstr "Asistente para la edición de préstamos"
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:93
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:92
 #, kde-format
 msgid ""
 "Note: you will not be able to modify this account today, because the opening "
@@ -25269,7 +25280,7 @@ msgstr ""
 "Nota: no podrá modificar esta cuenta hoy, debido a que la fecha de apertura "
 "«%1» está en el futuro. Vuelva a este diálogo cuando llegue el momento."
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:280
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:279
 #, kde-format
 msgid ""
 "Your previous selection was \"%1\". If you select another option, KMyMoney "
@@ -25398,6 +25409,22 @@ msgid ""
 msgstr ""
 "Introduzca el importe que tras el último pago del año pasado faltaba por "
 "devolver. No debería dejar ese campo en blanco."
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
+#, fuzzy, kde-format
+#| msgctxt "Investment action"
+#| msgid "Interest income"
+msgctxt "@option:check Budget option"
+msgid "Treat as income"
+msgstr "Interés a favor"
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu To make it expense"
+#| msgid "Change to expense"
+msgctxt "@option:check Budget option"
+msgid "Treat as expense"
+msgstr "Cambiar a gasto"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format

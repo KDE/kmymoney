@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-08 00:43+0000\n"
+"POT-Creation-Date: 2026-02-09 00:43+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1323,7 +1323,7 @@ msgstr "이 통화 환율의 소수점 아래 가격 자릿수를 입력하십�
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:82
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:31
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:52
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
 #, kde-format
 msgid "Name"
 msgstr "이름"
@@ -2188,8 +2188,8 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:1000
 #: kmymoney/dialogs/knewaccountdlg.cpp:1015
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:49
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:84
 #, kde-format
 msgid "(No Institution)"
 msgstr "(금융기관 없음)"
@@ -2268,7 +2268,7 @@ msgid "Hidden categories"
 msgstr "숨겨진 분류"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1040
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:106
 #, kde-format
 msgid "Cannot add institution"
 msgstr "금융기관을 추가할 수 없음"
@@ -2464,14 +2464,14 @@ msgstr "기초 잔액 계좌"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:49
 #, kde-format
 msgid "Institution"
 msgstr "금융기관"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/dialogs/knewaccountdlg.ui:348
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:45
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:42
 #, kde-format
 msgctxt "create new institution"
 msgid "New..."
@@ -21419,7 +21419,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info Question for confirmation of operation"
 msgid ""
-"<p>You are about to set the reconcilation status to Frozen.<br/>Once stored "
+"<p>You are about to set the reconciliation status to Frozen.<br/>Once stored "
 "in the ledger, this cannot be reverted.</p><p>Are you sure you want to "
 "continue?</p>"
 msgstr ""
@@ -21631,20 +21631,20 @@ msgstr ""
 "록된 계좌를 자동으로 엽니다. 탭 표시줄의 + 단추를 사용하여 계좌를 선택하십시"
 "오.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:317
+#: kmymoney/views/splitdialog.cpp:319
 #, fuzzy, kde-format
 #| msgid "Sum of splits"
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "분할 액수"
 
-#: kmymoney/views/splitdialog.cpp:335
+#: kmymoney/views/splitdialog.cpp:337
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "과다 할당됨"
 
-#: kmymoney/views/splitdialog.cpp:338
+#: kmymoney/views/splitdialog.cpp:340
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -24954,7 +24954,7 @@ msgstr "변동금리"
 msgid "Edit loan wizard"
 msgstr "대출 편집 마법사"
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:93
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:92
 #, kde-format
 msgid ""
 "Note: you will not be able to modify this account today, because the opening "
@@ -24964,7 +24964,7 @@ msgstr ""
 "참고: 개설일 \"%1\"이(가) 미래에 있으므로 오늘 이 계좌를 수정할 수 없습니다. "
 "시간이 오면 이 대화 상자를 다시 실행하십시오."
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:280
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:279
 #, kde-format
 msgid ""
 "Your previous selection was \"%1\". If you select another option, KMyMoney "
@@ -25089,6 +25089,21 @@ msgid ""
 msgstr ""
 "아래 필드에 지난 해 최종 명세서 상의 잔액을 입력하십시오. 이 필드를 비워 두"
 "지 마십시오."
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
+#, fuzzy, kde-format
+#| msgid "Interest Income"
+msgctxt "@option:check Budget option"
+msgid "Treat as income"
+msgstr "이자 수입"
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu To make it expense"
+#| msgid "Change to expense"
+msgctxt "@option:check Budget option"
+msgid "Treat as expense"
+msgstr "지출로 변경"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format

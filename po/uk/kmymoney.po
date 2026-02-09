@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-08 00:43+0000\n"
-"PO-Revision-Date: 2026-01-26 13:21+0200\n"
+"POT-Creation-Date: 2026-02-09 00:43+0000\n"
+"PO-Revision-Date: 2026-02-08 08:10+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1362,7 +1362,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:82
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:31
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:52
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
 #, kde-format
 msgid "Name"
 msgstr "Назва"
@@ -2232,8 +2232,8 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:1000
 #: kmymoney/dialogs/knewaccountdlg.cpp:1015
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:49
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:84
 #, kde-format
 msgid "(No Institution)"
 msgstr "(Без установи)"
@@ -2302,7 +2302,7 @@ msgid "Hidden categories"
 msgstr "Приховані категорії"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1040
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:106
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Не вдалося додати установу"
@@ -2500,14 +2500,14 @@ msgstr "Рахунок початкового балансу"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:49
 #, kde-format
 msgid "Institution"
 msgstr "Установа"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/dialogs/knewaccountdlg.ui:348
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:45
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:42
 #, kde-format
 msgctxt "create new institution"
 msgid "New..."
@@ -4305,6 +4305,9 @@ msgid ""
 "the reconciliation states. One has to edit the transaction to modify the "
 "reconciliation state."
 msgstr ""
+"Якщо увімкнено, клацання у стовпчику C облікової книги не призводить до "
+"циклічного перемикання станів узгодження. Для зміни стану узгодження слід "
+"редагувати операцію."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventClickOnReconciliation)
 #. i18n: ectx: label, entry (PreventClickOnReconciliation), group (General Options)
@@ -4312,7 +4315,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:33
 #, kde-format
 msgid "Prevent changing reconciliation status by click on column C"
-msgstr ""
+msgstr "Запобігати зміні стану узгодження клацанням на стовпчику C"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
@@ -21752,13 +21755,21 @@ msgid "Link"
 msgstr "Посилання"
 
 #: kmymoney/views/newtransactioneditor.cpp:1354
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info Question for confirmation of operation"
+#| msgid ""
+#| "<p>You are about to set the reconcilation status to Frozen.<br/>Once "
+#| "stored in the ledger, this cannot be reverted.</p><p>Are you sure you "
+#| "want to continue?</p>"
 msgctxt "@info Question for confirmation of operation"
 msgid ""
-"<p>You are about to set the reconcilation status to Frozen.<br/>Once stored "
+"<p>You are about to set the reconciliation status to Frozen.<br/>Once stored "
 "in the ledger, this cannot be reverted.</p><p>Are you sure you want to "
 "continue?</p>"
 msgstr ""
+"<p>Ви намагаєтеся встановити статус узгодження у «Заморожено».<br/>Після "
+"збереження в обліковій книзі його не можна буде скасувати.</p><p>Ви "
+"впевнені, що хочете продовжити?</p>"
 
 #: kmymoney/views/newtransactioneditor.cpp:1702
 #, kde-format
@@ -21966,19 +21977,19 @@ msgstr ""
 "Скористайтеся кнопкою «+» на панелі вкладок вище, щоб вибрати рахунок.</p></"
 "body></html>"
 
-#: kmymoney/views/splitdialog.cpp:317
+#: kmymoney/views/splitdialog.cpp:319
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Сума дроблень"
 
-#: kmymoney/views/splitdialog.cpp:335
+#: kmymoney/views/splitdialog.cpp:337
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Перепризначено"
 
-#: kmymoney/views/splitdialog.cpp:338
+#: kmymoney/views/splitdialog.cpp:340
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -25364,7 +25375,7 @@ msgstr "Змінна відсоткова ставка"
 msgid "Edit loan wizard"
 msgstr "Майстер редагування кредитів"
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:93
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:92
 #, kde-format
 msgid ""
 "Note: you will not be able to modify this account today, because the opening "
@@ -25375,7 +25386,7 @@ msgstr ""
 "вказано майбутню дату відкриття «%1». Будь ласка, ще раз відкрийте це "
 "діалогове вікно, коли настане час."
 
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:280
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:279
 #, kde-format
 msgid ""
 "Your previous selection was \"%1\". If you select another option, KMyMoney "
@@ -25505,6 +25516,22 @@ msgid ""
 msgstr ""
 "Будь ласка, введіть залишкову суму кредиту з остаточної виписки за попередні "
 "роки у наведене нижче поле. Це поле не можна залишати порожнім."
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
+#, fuzzy, kde-format
+#| msgctxt "Investment action"
+#| msgid "Interest income"
+msgctxt "@option:check Budget option"
+msgid "Treat as income"
+msgstr "Дохід за відсотками"
+
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu To make it expense"
+#| msgid "Change to expense"
+msgctxt "@option:check Budget option"
+msgid "Treat as expense"
+msgstr "Змінити на витрати"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format
