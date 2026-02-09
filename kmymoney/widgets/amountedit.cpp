@@ -537,13 +537,13 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
 
 void AmountEdit::keyPressEvent(QKeyEvent* event)
 {
-    auto suppressVerticalMovement = [&](QKeyEvent* event) {
-        switch (event->key()) {
+    auto suppressVerticalMovement = [&](QKeyEvent* ev) {
+        switch (ev->key()) {
         case Qt::Key_Up:
         case Qt::Key_Down:
         case Qt::Key_PageUp:
         case Qt::Key_PageDown:
-            event->accept();
+            ev->accept();
             break;
         default:
             break;
