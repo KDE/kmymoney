@@ -537,6 +537,19 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
 
 void AmountEdit::keyPressEvent(QKeyEvent* event)
 {
+    auto suppressVerticalMovement = [&](QKeyEvent* event) {
+        switch (event->key()) {
+        case Qt::Key_Up:
+        case Qt::Key_Down:
+        case Qt::Key_PageUp:
+        case Qt::Key_PageDown:
+            event->accept();
+            break;
+        default:
+            break;
+        }
+    };
+
     Q_D(AmountEdit);
     if (!isReadOnly()) {
         switch (event->key()) {
@@ -602,7 +615,15 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
                     QLineEdit::setText(QLatin1String("0"));
                 }
                 QLineEdit::keyPressEvent(&newEvent);
-                event->ignore();
+
+                // in case the key was not handled by the base class
+                // we have to make sure that we do not report any
+                // vertical movement to upper layers
+                suppressVerticalMovement(&newEvent);
+
+                // propagate acceptance state to the event that
+                // is visible to the caller
+                event->setAccepted(newEvent.isAccepted());
                 return;
             }
             break;
@@ -616,11 +637,16 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
     const auto oldContent = text();
     QLineEdit::keyPressEvent(event);
 
+    // in case the key was not handled by the base class
+    // we have to make sure that we do not report any
+    // vertical movement to upper layers
+    suppressVerticalMovement(event);
+
     // if no change, we assume no consumption and
     // propagate the event to parent widgets. This
     // allows shortcuts to be handled in upstream
     // widgets.
-    event->setAccepted(text() != oldContent);
+    event->setAccepted(event->isAccepted() || (text() != oldContent));
 }
 
 void AmountEdit::setPrecision(const int prec, bool forceUpdate)
