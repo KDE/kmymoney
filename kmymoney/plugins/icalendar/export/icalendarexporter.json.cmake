@@ -52,7 +52,7 @@
         "Description[it]": "Esporta le pianificazioni a file iCalendar",
         "Description[ka]": "განრიგის iCalendar-ის ფაილებში გატანა",
         "Description[ko]": "iCalendar 파일로 일정 내보내기",
-        "Description[nb]": "Eksporterer tidsplaner til iCalander-filer",
+        "Description[nb]": "Eksporterer tidsplaner til iCalendar-filer",
         "Description[nl]": "Exporteert planningen naar iCalender bestanden",
         "Description[pl]": "Eksportuje harmonogramy do plików iCalendar",
         "Description[pt]": "Exporta os agendamentos para ficheiros do iCalendar",
