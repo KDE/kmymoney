@@ -24398,11 +24398,10 @@ msgid ""
 msgstr "请在下面输入去年最后一期对账单中的剩余贷款金额。此项不可以为空。"
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as income"
-msgstr "利息收入"
+msgstr ""
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
 #, kde-format

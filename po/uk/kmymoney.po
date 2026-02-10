@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:43+0000\n"
-"PO-Revision-Date: 2026-02-08 08:10+0200\n"
+"PO-Revision-Date: 2026-02-09 08:01+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -21755,12 +21755,7 @@ msgid "Link"
 msgstr "Посилання"
 
 #: kmymoney/views/newtransactioneditor.cpp:1354
-#, fuzzy, kde-format
-#| msgctxt "@info Question for confirmation of operation"
-#| msgid ""
-#| "<p>You are about to set the reconcilation status to Frozen.<br/>Once "
-#| "stored in the ledger, this cannot be reverted.</p><p>Are you sure you "
-#| "want to continue?</p>"
+#, kde-format
 msgctxt "@info Question for confirmation of operation"
 msgid ""
 "<p>You are about to set the reconciliation status to Frozen.<br/>Once stored "
@@ -25518,20 +25513,16 @@ msgstr ""
 "роки у наведене нижче поле. Це поле не можна залишати порожнім."
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
-#, fuzzy, kde-format
-#| msgctxt "Investment action"
-#| msgid "Interest income"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as income"
-msgstr "Дохід за відсотками"
+msgstr "Вважати доходом"
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu To make it expense"
-#| msgid "Change to expense"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as expense"
-msgstr "Змінити на витрати"
+msgstr "Вважати витратами"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format

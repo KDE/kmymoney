@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:43+0000\n"
-"PO-Revision-Date: 2026-02-08 08:29+0100\n"
+"PO-Revision-Date: 2026-02-09 07:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21599,12 +21599,7 @@ msgid "Link"
 msgstr "Povezava"
 
 #: kmymoney/views/newtransactioneditor.cpp:1354
-#, fuzzy, kde-format
-#| msgctxt "@info Question for confirmation of operation"
-#| msgid ""
-#| "<p>You are about to set the reconcilation status to Frozen.<br/>Once "
-#| "stored in the ledger, this cannot be reverted.</p><p>Are you sure you "
-#| "want to continue?</p>"
+#, kde-format
 msgctxt "@info Question for confirmation of operation"
 msgid ""
 "<p>You are about to set the reconciliation status to Frozen.<br/>Once stored "
@@ -21612,8 +21607,8 @@ msgid ""
 "continue?</p>"
 msgstr ""
 "<p>Status usklajevanja boste nastavili na Zamrznjeno.<br/>Ko je shranjeno v "
-"knjigi, tega ni mogoče razveljaviti.</p><p>Ali ste prepričani, da želite "
-"nadaljevati?</p>"
+"glavni knjigi, tega ni mogoče razveljaviti.</p><p>Ali ste prepričani, da "
+"želite nadaljevati?</p>"
 
 #: kmymoney/views/newtransactioneditor.cpp:1702
 #, kde-format
@@ -25335,20 +25330,16 @@ msgstr ""
 "spodaj. Tega polja ne smete pustiti praznega."
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
-#, fuzzy, kde-format
-#| msgctxt "Investment action"
-#| msgid "Interest income"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as income"
-msgstr "Dohodek iz obresti"
+msgstr "Obravnavaj kot dohodek"
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu To make it expense"
-#| msgid "Change to expense"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as expense"
-msgstr "Spremeni v izdatek"
+msgstr "Obravnavaj kot izdatek"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format

@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-09 00:43+0000\n"
-"PO-Revision-Date: 2026-02-08 11:12+0100\n"
+"PO-Revision-Date: 2026-02-09 11:05+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -21719,12 +21719,7 @@ msgid "Link"
 msgstr "Enllaç"
 
 #: kmymoney/views/newtransactioneditor.cpp:1354
-#, fuzzy, kde-format
-#| msgctxt "@info Question for confirmation of operation"
-#| msgid ""
-#| "<p>You are about to set the reconcilation status to Frozen.<br/>Once "
-#| "stored in the ledger, this cannot be reverted.</p><p>Are you sure you "
-#| "want to continue?</p>"
+#, kde-format
 msgctxt "@info Question for confirmation of operation"
 msgid ""
 "<p>You are about to set the reconciliation status to Frozen.<br/>Once stored "
@@ -25475,20 +25470,16 @@ msgstr ""
 "rebut de l'any anterior. No hauríeu de deixar este camp en blanc."
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
-#, fuzzy, kde-format
-#| msgctxt "Investment action"
-#| msgid "Interest income"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as income"
-msgstr "Interessos rebuts"
+msgstr "Tracta com a ingrés"
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu To make it expense"
-#| msgid "Change to expense"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as expense"
-msgstr "Canvia a despesa"
+msgstr "Tracta com a despesa"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format
