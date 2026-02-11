@@ -74,13 +74,12 @@ QVariant ReportsView::requestData(const QString &arg, uint type)
 
 QWidget *ReportsView::netWorthForecast() const
 {
-    MyMoneyReport reportCfg = MyMoneyReport(
-                                  eMyMoney::Report::RowType::AssetLiability,
-                                  static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                  eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
-                                  eMyMoney::Report::DetailLevel::Total,
-                                  i18n("Net Worth Forecast"),
-                                  i18n("Generated Report"));
+    MyMoneyReport reportCfg = MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
+                                            static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                            eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
+                                            eMyMoney::Report::DetailLevel::Total,
+                                            i18n("Net Worth Forecast"),
+                                            i18n("Generated Report"));
 
     reportCfg.setChartByDefault(true);
     reportCfg.setChartCHGridLines(false);
@@ -110,13 +109,12 @@ QWidget *ReportsView::netWorthForecast(const QString &arg) const
 
     eMyMoney::Report::DetailLevel detailLevel[4] = { eMyMoney::Report::DetailLevel::All, eMyMoney::Report::DetailLevel::Top, eMyMoney::Report::DetailLevel::Group, eMyMoney::Report::DetailLevel::Total, };
 
-    MyMoneyReport reportCfg = MyMoneyReport(
-                                  eMyMoney::Report::RowType::AssetLiability,
-                                  static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                  eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
-                                  detailLevel[liArgs.at(0).toInt()],
-                                  i18n("Net Worth Forecast"),
-                                  i18n("Generated Report"));
+    MyMoneyReport reportCfg = MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
+                                            static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                            eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
+                                            detailLevel[liArgs.at(0).toInt()],
+                                            i18n("Net Worth Forecast"),
+                                            i18n("Generated Report"));
 
     reportCfg.setChartByDefault(true);
     reportCfg.setChartCHGridLines(false);
@@ -167,14 +165,13 @@ QString ReportsView::budget() const
     bool isOverrun = false;
     int i = 0;
 
-    //config report just like "Monthly Budgeted vs Actual
-    MyMoneyReport reportCfg = MyMoneyReport(
-                                  eMyMoney::Report::RowType::BudgetActual,
-                                  static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                  eMyMoney::TransactionFilter::Date::CurrentMonth,
-                                  eMyMoney::Report::DetailLevel::All,
-                                  i18n("Monthly Budgeted vs. Actual"),
-                                  i18n("Generated Report"));
+    // config report just like "Monthly Budgeted vs Actual
+    MyMoneyReport reportCfg = MyMoneyReport(eMyMoney::Report::RowType::BudgetActual,
+                                            static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                            eMyMoney::TransactionFilter::Date::CurrentMonth,
+                                            eMyMoney::Report::DetailLevel::All,
+                                            i18n("Monthly Budgeted vs. Actual"),
+                                            i18n("Generated Report"));
 
     reportCfg.setBudget("Any", true);
 
