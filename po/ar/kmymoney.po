@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-11 00:45+0000\n"
-"PO-Revision-Date: 2026-01-28 20:08+0400\n"
+"PO-Revision-Date: 2026-02-11 20:49+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -4222,6 +4222,8 @@ msgid ""
 "the reconciliation states. One has to edit the transaction to modify the "
 "reconciliation state."
 msgstr ""
+"إذا كان نشطًا، فإن النقر على العمود C من السجل لا يؤدي إلى التنقل بين حالات "
+"التسوية. يجب تعديل المعاملة لتغيير حالة التسوية."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventClickOnReconciliation)
 #. i18n: ectx: label, entry (PreventClickOnReconciliation), group (General Options)
@@ -4229,7 +4231,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:33
 #, kde-format
 msgid "Prevent changing reconciliation status by click on column C"
-msgstr ""
+msgstr "امنع تغيير حالة التسوية بالنقر على العمود C"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
@@ -21465,6 +21467,8 @@ msgid ""
 "in the ledger, this cannot be reverted.</p><p>Are you sure you want to "
 "continue?</p>"
 msgstr ""
+"<p>أنت على وشك تعيين حالة التسوية إلى ”مجمدة“<br/>بمجرد تخزينها في دفتر "
+"الأستاذ، لا يمكن التراجع عن ذلك.</p><p>هل تريد المتابعة؟</p>"
 
 #: kmymoney/views/newtransactioneditor.cpp:1702
 #, kde-format
@@ -25142,20 +25146,16 @@ msgstr ""
 "أدناه. لا ينبغي لك ترك هذا الحقل فارغًا."
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
-#, fuzzy, kde-format
-#| msgctxt "Investment action"
-#| msgid "Interest income"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as income"
-msgstr "دخل الفائدة"
+msgstr "يعامل كدخل"
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu To make it expense"
-#| msgid "Change to expense"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as expense"
-msgstr "غيّر إلى مصروف"
+msgstr "يعامل كنفقة"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-11 00:45+0000\n"
-"PO-Revision-Date: 2026-02-09 07:21+0100\n"
+"PO-Revision-Date: 2026-02-10 12:05+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -41,7 +41,7 @@ msgstr "Dividende"
 #: kmymoney/converter/mymoneystatementreader.cpp:373
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
-msgstr "Napaka pri uvozu %1: ta datoteka ni veljavna datoteka izjave KMM."
+msgstr "Napaka pri uvozu %1: ta datoteka ni veljavna datoteka izpiska KMM."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:373
 #, kde-format
@@ -22752,10 +22752,10 @@ msgstr ""
 "vsakič, ko prejmete izpisek od svoje institucije.\n"
 "\n"
 "Vse ustrezne informacije, potrebne za ta postopek, so običajno natisnjene na "
-"vaši izjavi.\n"
+"vašem izpisku.\n"
 "\n"
 "Na naslednji strani boste preverili, ali se končno stanje ujema s tistimi v "
-"svoji izjavi. V nasprotnem primeru ga spremenite.\n"
+"svojem izpisku. V nasprotnem primeru ga spremenite.\n"
 "\n"
 "Začetno stanje je vsota obračunanih in usklajenih transakcij."
 

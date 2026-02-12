@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2009, 2010, 2012, 2013, 2014, 2020, 2021, 2022, 2024, 2025, 2026 Sergiu Bivol <sergiu@cip.md>
 # Cristian Oneț <onet.cristian@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2013.
 # Daniela Oneţ <daniela.madarasan@gmail.com>, 2010.
+# SPDX-FileCopyrightText: 2026 Viorel-Cătălin Răpițeanu <rapiteanu.catalin@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
@@ -149,9 +150,9 @@ msgid ""
 "payee information for all following transactions referencing \"%1\" will be "
 "removed."
 msgstr ""
-"Alegînd „Da” se va crea un nou beneficiar, „Nu” va omite crearea "
+"Alegând „Da” se va crea un nou beneficiar, „Nu” va omite crearea "
 "beneficiarului și va șterge informațiile legate de beneficiar din "
-"tranzacție. Alegînd „Renunță” se anulează operația de import.\n"
+"tranzacție. Alegând „Renunță” se anulează operația de import.\n"
 "\n"
 "Dacă alegeți „Nu” aici și bifați „Nu mă mai întreba în viitor” atunci toate "
 "informațiile despre beneficiar ale tuturor tranzacțiilor următoare ce se "
@@ -385,7 +386,7 @@ msgstr ""
 "Folosiți acest dialog pentru a introduce informații personale despre "
 "dumneavoastră.\n"
 "\n"
-"Toate informațiile sînt opționale și sînt date doar pentru a vă personaliza "
+"Toate informațiile sunt opționale și sunt date doar pentru a vă personaliza "
 "fișierul KMyMoney."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
@@ -683,7 +684,7 @@ msgstr "Alegeți punctul de montare"
 #: kmymoney/dialogs/kbackupdlg.ui:115
 #, kde-format
 msgid "Use this to browse to the mount point."
-msgstr "Folosiți acest buton pentru a naviga pînă la punctul de montare"
+msgstr "Folosiți acest buton pentru a naviga până la punctul de montare"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseButton)
 #: kmymoney/dialogs/kbackupdlg.ui:118
@@ -706,7 +707,7 @@ msgid ""
 msgstr ""
 "Cel puțin o tranzacție/programare se referă încă la categoria <b>%1</b>. "
 "Oricum, cel puțin o categorie cu aceeași valută trebuie să existe astfel "
-"încît tranzacțiile/programările să poată fi reatribuite."
+"încât tranzacțiile/programările să poată fi reatribuite."
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:94
 #, kde-format
@@ -758,7 +759,7 @@ msgid ""
 msgstr ""
 "Alegeți tipul importului pe care doriți să-l efectuați. O explicație simplă "
 "a tipului de import este disponibilă în partea de jos a ecranului și este "
-"actualizată cînd alegeți o opțiune din lista de opțiuni.\n"
+"actualizată când alegeți o opțiune din lista de opțiuni.\n"
 "\n"
 "Odată ce ați ales un tip de import, Apăsați pe butonul OK."
 
@@ -787,7 +788,7 @@ msgid ""
 "Once you have chosen an export type please press the OK button."
 msgstr ""
 "Alegeți tipul de export pe care-l preferați. O explicație simplă\n"
-" a tipului de export este valabilă la baza ecranului și e actualizată cînd "
+" a tipului de export este valabilă la baza ecranului și e actualizată când "
 "selectați \n"
 " o variantă din caseta cu alegeri.\n"
 "\n"
@@ -825,7 +826,7 @@ msgid ""
 "Another dialog will appear, if you choose this type, asking for further\n"
 "information relevant to the Quicken format."
 msgstr ""
-"Fișierele QIF sînt create cu răspînditul program financiar Quicken.\n"
+"Fișierele QIF sunt create cu răspânditul program financiar Quicken.\n"
 " Dacă alegeți acest tip, va apărea o altă casetă de dialog unde veți fi "
 "întrebat de\n"
 " viitoarele informații relevante pentru formatul Quicken."
@@ -857,7 +858,7 @@ msgid ""
 msgstr ""
 "Vă rog să alegeți tipul importului pe care doriți să-l efectuați. O "
 "explicație simplă a tipului de import este disponibilă în partea de jos a "
-"ecranului și este actualizată cînd alegeți o opțiune din lista de opțiuni.\n"
+"ecranului și este actualizată când alegeți o opțiune din lista de opțiuni.\n"
 "\n"
 "Odată ce ați ales un tip de import vă rog să acționați butonul OK."
 
@@ -2279,7 +2280,7 @@ msgid ""
 "Please fill in this field."
 msgstr ""
 "Nu ați specificat un nume.\n"
-"Vă rog să completați acest cîmp."
+"Vă rog să completați acest câmp."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:831
 #, kde-format
@@ -2745,7 +2746,7 @@ msgstr "Cont aplicație"
 #, fuzzy, kde-format
 #| msgid "Never reconciled"
 msgid "Never create"
-msgstr "Nu s-a făcut nicio reconciliere pînă acum"
+msgstr "Nu s-a făcut nicio reconciliere până acum"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -3153,7 +3154,7 @@ msgstr "Culoarea listei"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:64
 #, kde-format
 msgid "Required field"
-msgstr "Cîmp cerut"
+msgstr "Câmp cerut"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:113
@@ -3311,7 +3312,7 @@ msgid ""
 "\n"
 "Set it to 0 to turn the feature off."
 msgstr ""
-"De fiecare dată cînd datele curente sunt salvate într-un fișier local, "
+"De fiecare dată când datele curente sunt salvate într-un fișier local, "
 "KMyMoney va păstra numărul ales de stări anterioare ale fișierului.\n"
 "\n"
 "Alegeți 0 pentru a dezactiva această funcționalitate."
@@ -3534,7 +3535,7 @@ msgid ""
 "selection lists."
 msgstr ""
 "Această opțiune ascunde toate categoriile, în modul de vizualizare a "
-"categoriilor, care nu sînt folosite măcar într-o tranzacție. Aceste "
+"categoriilor, care nu sunt folosite măcar într-o tranzacție. Aceste "
 "categorii vor apărea totuși în listele de alegere a categoriilor."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
@@ -3716,7 +3717,7 @@ msgid ""
 "Selected entries are shown on the home page of the application.<p>\n"
 "Use the buttons and checkboxes to customize the layout of the home page."
 msgstr ""
-"Alegeți intrările care sînt afișate în pagina de start a aplicației.<p>\n"
+"Alegeți intrările care sunt afișate în pagina de start a aplicației.<p>\n"
 "Folosiți acest buton și căsuțele de bifat pentru a personaliza modul de "
 "așezare a paginii de start a dumneavoastră."
 
@@ -4204,8 +4205,8 @@ msgid ""
 msgstr ""
 "Folosirea lupei pentru registru va afișa detaliile tranzacției curente din "
 "registru. De obicei la folosirea formularului de tranzacție doar o linie "
-"conținînd sumarul tranzacției este afișat pentru tranzacția curentă deoarece "
-"detaliile tranzacției sînt afișate în formularul tranzacției."
+"conținând sumarul tranzacției este afișat pentru tranzacția curentă deoarece "
+"detaliile tranzacției sunt afișate în formularul tranzacției."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
@@ -4305,7 +4306,7 @@ msgid ""
 "Click a selected entry to toggle the sort order between <i>ascending</i> and "
 "<i>descending</i>."
 msgstr ""
-"Folosiți butoanele <i>stînga</i> și <i>dreapta</i> pentru a adăuga și a "
+"Folosiți butoanele <i>stânga</i> și <i>dreapta</i> pentru a adăuga și a "
 "retrage opțiuni de sortare. Folosiți butoanele <i>sus</i> și <i>jos</i> "
 "pentru a modifica ordinea de sortare. Faceți dublu click pe intrarea "
 "selectată pentru a schimba ordinea de sortare între <i>crescătoare</i> și "
@@ -4332,14 +4333,14 @@ msgstr "Incrementează automat numărul de cec."
 #, kde-format
 msgid "Keep changes when selecting a different transaction/split"
 msgstr ""
-"Păstrează modificările cînd se alege o altă tranzacție sau o parte de "
+"Păstrează modificările când se alege o altă tranzacție sau o parte de "
 "tranzacție diferită."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnterMovesBetweenFields)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:247
 #, kde-format
 msgid "Use Enter to move between fields"
-msgstr "Folosiți Enter pentru a muta între cîmpuri"
+msgstr "Folosiți Enter pentru a muta între câmpuri"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMovesBetweenDateParts)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:257
@@ -4510,7 +4511,7 @@ msgstr ""
 "identice. Dacă mai mult de o tranzacție este găsită conform acestor criterii "
 "o listă a acestor tranzacții este prezentată utilizatorului.\n"
 "\n"
-"Alegînd 0% se vor afișa toate tranzacțiile."
+"Alegând 0% se vor afișa toate tranzacțiile."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:415
@@ -4529,7 +4530,7 @@ msgid ""
 "for this payee is autofilled into the transaction editor."
 msgstr ""
 "Datele ultime tranzacții asignate categoriei folosite cel mai des pentru "
-"acest beneficiar/plătitor sînt introduse automat în editorul de tranzacții."
+"acest beneficiar/plătitor sunt introduse automat în editorul de tranzacții."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton3)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:431
@@ -4552,9 +4553,9 @@ msgid ""
 "the same accounts. They are treated as different transactions though, when "
 "their amount varies by more than the percentage given here."
 msgstr ""
-"Două tranzacții sînt de obicei considerate identice la autocompletare dacă "
-"se referă la aceleași conturi. Ele sînt totuși tratate ca tranzacții "
-"diferite cînd suma lor diferă cu procentul dat aici."
+"Două tranzacții sunt de obicei considerate identice la autocompletare dacă "
+"se referă la aceleași conturi. Ele sunt totuși tratate ca tranzacții "
+"diferite când suma lor diferă cu procentul dat aici."
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_AutoFillDifference)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:460
@@ -4572,13 +4573,13 @@ msgid ""
 msgstr ""
 "Dacă această opțiune este bifată detaliile de la tranzacția precedentă vor "
 "fi folosite altfel detaliile nu vor fi luate în considerare la introducerea "
-"automată a cîmpurilor unei tranzacții."
+"automată a câmpurilor unei tranzacții."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFillUseMemos)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:492
 #, kde-format
 msgid "Use memos from previous transaction"
-msgstr "Utilizează cîmpul detaliu al tranzacției precedente"
+msgstr "Utilizează câmpul detaliu al tranzacției precedente"
 
 #. i18n: ectx: attribute (title), widget (QWidget, import)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:519
@@ -4634,7 +4635,7 @@ msgid ""
 "be asked to assign a default category for this user when this option is "
 "selected."
 msgstr ""
-"De fiecare dată cînd un beneficiar/plătitor nou va fi găsit în timpul "
+"De fiecare dată când un beneficiar/plătitor nou va fi găsit în timpul "
 "operației de import utilizatorul va fi rugat să aleagă o categorie implicită "
 "pentru acel beneficiar/plătitor dacă această opțiune este activă."
 
@@ -5668,7 +5669,7 @@ msgstr "Creează duplicate pentru tranzacțiile marcate"
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
-msgstr "Amînă reconcilierea"
+msgstr "Amână reconcilierea"
 
 #: kmymoney/kmymoney.cpp:1676
 #, fuzzy, kde-format
@@ -5700,7 +5701,7 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to delete the transactions anyway?"
 msgstr ""
-"Cel puțin o parte de tranzacție aparținînd tranzacțiilor marcate a fost "
+"Cel puțin o parte de tranzacție aparținând tranzacțiilor marcate a fost "
 "reconciliată. Doriți totuși să ștergeți aceste tranzacții?"
 
 #: kmymoney/kmymoney.cpp:2183
@@ -5761,7 +5762,7 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to change the transactions anyway?"
 msgstr ""
-"Cel puțin o parte de tranzacție aparținînd tranzacțiilor marcate a fost "
+"Cel puțin o parte de tranzacție aparținând tranzacțiilor marcate a fost "
 "reconciliată. Doriți totuși să ștergeți aceste tranzacții?"
 
 #: kmymoney/kmymoney.cpp:2757
@@ -5803,7 +5804,7 @@ msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
-"KMyMoney a detectat existența unor tranzacții programate întîrziate pentru "
+"KMyMoney a detectat existența unor tranzacții programate întârziate pentru "
 "acest cont. Doriți să introduceți acele tranzacții acum?"
 
 #: kmymoney/kmymoney.cpp:2940
@@ -6058,8 +6059,8 @@ msgid ""
 "The consistency check has found no issues in your data. Details are "
 "presented below."
 msgstr ""
-"Verificarea consitenței a găsit cîteva probleme cu datele dumneavoastră. "
-"Detaliile sînt prezentate mai jos."
+"Verificarea consitenței a găsit câteva probleme cu datele dumneavoastră. "
+"Detaliile sunt prezentate mai jos."
 
 #: kmymoney/kmymoney.cpp:3846
 #, kde-format
@@ -6068,8 +6069,8 @@ msgid ""
 "presented below. Those issues that could not be corrected automatically need "
 "to be solved by the user."
 msgstr ""
-"Verificarea consitenței a găsit cîteva probleme cu datele dumneavoastră. "
-"Detaliile sînt prezentate mai jos. Acele probleme care nu au putut fi "
+"Verificarea consitenței a găsit câteva probleme cu datele dumneavoastră. "
+"Detaliile sunt prezentate mai jos. Acele probleme care nu au putut fi "
 "rezolvate automat trebuiesc rezolvate de către utilizator."
 
 #: kmymoney/kmymoney.cpp:3849
@@ -6937,7 +6938,7 @@ msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr ""
 "Introduceți un număr de cont IBAN (număr de cont bancar internațional) în "
-"acest cîmp"
+"acest câmp"
 
 #: kmymoney/models/statementmodel.cpp:142
 #: kmymoney/mymoney/storage/accountsmodel.cpp:528
@@ -7325,7 +7326,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3476
 #, kde-format
 msgid "  * action marked as interest in split of transaction '%1'."
-msgstr "  * acțiune marcată ca dobîndă în partea de tranzacție '%1'."
+msgstr "  * acțiune marcată ca dobândă în partea de tranzacție '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3490
 #, kde-format
@@ -7494,7 +7495,7 @@ msgstr "  * Referința la cont va fi ștearsă."
 #: kmymoney/mymoney/mymoneyfile.cpp:3780
 #, kde-format
 msgid "Finished: data is consistent."
-msgstr "Datele sînt consistente."
+msgstr "Datele sunt consistente."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3782
 #, kde-format
@@ -8079,7 +8080,7 @@ msgstr "Dinar kuweitian"
 #: kmymoney/mymoney/mymoneyfile.cpp:4161
 #, kde-format
 msgid "Kyrgyzstan Som"
-msgstr "Som Kîrgîzstan"
+msgstr "Som Kârgâzstan"
 
 # |, no-check-spell
 #: kmymoney/mymoney/mymoneyfile.cpp:4162
@@ -8361,7 +8362,7 @@ msgstr "Rupia Sri Lanka"
 #: kmymoney/mymoney/mymoneyfile.cpp:4214
 #, kde-format
 msgid "St. Helena Pound"
-msgstr "Liră Sfînta Elena"
+msgstr "Liră Sfânta Elena"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4215
 #, kde-format
@@ -8566,7 +8567,7 @@ msgstr "La fiecare paisprezece zile"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
-msgstr "La fiecare două săptămîni"
+msgstr "La fiecare două săptămâni"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:899
 #, kde-format
@@ -8579,14 +8580,14 @@ msgstr "La fiecare jumătate de lună"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
-msgstr "La fiecare trei săptămîni"
+msgstr "La fiecare trei săptămâni"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:903
 #: kmymoney/mymoney/mymoneyschedule.cpp:953
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
-msgstr "La fiecare patru săptămîni"
+msgstr "La fiecare patru săptămâni"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:905
 #: kmymoney/mymoney/mymoneyschedule.cpp:938
@@ -8606,7 +8607,7 @@ msgstr "Lunar"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
-msgstr "La fiecare opt săptămîni"
+msgstr "La fiecare opt săptămâni"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:911
 #: kmymoney/mymoney/mymoneyschedule.cpp:968
@@ -8681,7 +8682,7 @@ msgstr "La fiecare treizeci de zile"
 #| msgid "Every four weeks"
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
-msgstr "La fiecare patru săptămîni"
+msgstr "La fiecare patru săptămâni"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:963
 #, fuzzy, kde-format
@@ -8725,7 +8726,7 @@ msgstr "Zi"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1006
 msgctxt "Schedule occurrence period"
 msgid "Week"
-msgstr "Săptămînă"
+msgstr "Săptămână"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1008
 msgctxt "Schedule occurrence period"
@@ -8939,14 +8940,14 @@ msgstr "Dividend"
 #| msgid "Interest"
 msgctxt "Investment action"
 msgid "Interest"
-msgstr "Dobîndă"
+msgstr "Dobândă"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:514
 #, fuzzy, kde-format
 #| msgid "Interest Income"
 msgctxt "Investment action"
 msgid "Interest income"
-msgstr "Venit din dobîndă"
+msgstr "Venit din dobândă"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:518
 #, fuzzy, kde-format
@@ -9526,7 +9527,7 @@ msgstr "Împarte acțiunile"
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
-msgstr "Venit din dobîndă"
+msgstr "Venit din dobândă"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:141
 #, kde-format
@@ -9846,12 +9847,12 @@ msgstr "Luna aceasta"
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:85
 #, kde-format
 msgid "Last week"
-msgstr "Săptămîna trecută"
+msgstr "Săptămâna trecută"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:86
 #, kde-format
 msgid "This week"
-msgstr "Săptămîna aceasta"
+msgstr "Săptămâna aceasta"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:87
 #, kde-format
@@ -9877,7 +9878,7 @@ msgstr "Tranzacții viitoare"
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:91
 #, kde-format
 msgid "Next week"
-msgstr "Săptămîna viitoare"
+msgstr "Săptămâna viitoare"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:92
 #, kde-format
@@ -10387,7 +10388,7 @@ msgstr "Începe în:"
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:302
 #, kde-format
 msgid "End on:"
-msgstr "Sfîrșește în"
+msgstr "Sfârșește în"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxSeparator)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:262
@@ -10508,7 +10509,7 @@ msgstr "Preț"
 #| msgid "Interest"
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
-msgstr "Dobîndă"
+msgstr "Dobândă"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, fuzzy, kde-format
@@ -10651,7 +10652,7 @@ msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
 "Please re-enter your column selections."
 msgstr ""
-"<center>Numele cîmpului nu este recunoscut.</center><center>'<b>%1</b>'</"
+"<center>Numele câmpului nu este recunoscut.</center><center>'<b>%1</b>'</"
 "center> Reselectați coloanele."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
@@ -10741,7 +10742,7 @@ msgstr "Șterge selecțiile"
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:160
 #, kde-format
 msgid "Select column containing date field."
-msgstr "Alegeți coloana care conține cîmpul dată."
+msgstr "Alegeți coloana care conține câmpul dată."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_dateColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:167
@@ -10859,7 +10860,7 @@ msgstr "Sold"
 #, fuzzy, kde-format
 #| msgid "Select column containing date field."
 msgid "Select column containing balance field."
-msgstr "Alegeți coloana care conține cîmpul dată."
+msgstr "Alegeți coloana care conține câmpul dată."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_balanceColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:351
@@ -10881,7 +10882,7 @@ msgstr "Sumă"
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:118
 #, kde-format
 msgid "Select column containing amount field."
-msgstr "Selectați coloana care conține cîmpul sumă."
+msgstr "Selectați coloana care conține câmpul sumă."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
@@ -11503,7 +11504,7 @@ msgid ""
 "The '<b>%1</b>' field already has this column selected. <center>Please "
 "reselect both entries as necessary.</center>"
 msgstr ""
-"Cîmpul '<b>%1</b>' are deja această coloană selectată. <center>Selectați din "
+"Câmpul '<b>%1</b>' are deja această coloană selectată. <center>Selectați din "
 "nou ambele intrări.</center>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, InvestmentPage)
@@ -11548,7 +11549,7 @@ msgstr ""
 #, kde-format
 msgctxt "verb, Select column containing date field"
 msgid "Select column containing date field"
-msgstr "Selectați coloana care conține cîmpul dată."
+msgstr "Selectați coloana care conține câmpul dată."
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_amount)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:203
@@ -11561,14 +11562,14 @@ msgstr "Sumă"
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:219
 #, kde-format
 msgid "Select column containing quantity field."
-msgstr "Alegeți coloana care conține cîmpul cantitate."
+msgstr "Alegeți coloana care conține câmpul cantitate."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_priceCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:235
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:176
 #, kde-format
 msgid "Select column containing price field."
-msgstr "Alegeți coloana care conține cîmpul preț."
+msgstr "Alegeți coloana care conține câmpul preț."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_symbolCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:253
@@ -11658,7 +11659,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:390
 #, kde-format
 msgid "Select column containing investment type field."
-msgstr "Alegeți coloana care conține cîmpul cu tipul investiției."
+msgstr "Alegeți coloana care conține câmpul cu tipul investiției."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_feeCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:408
@@ -12168,7 +12169,7 @@ msgstr "Retrage acțiuni"
 #: kmymoney/wizards/newloanwizard/interestwizardpage.ui:6
 #, kde-format
 msgid "Interest"
-msgstr "Dobîndă"
+msgstr "Dobândă"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:60
 #, kde-format
@@ -12287,7 +12288,7 @@ msgstr "Opțiuni note de tranzacție"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:182
 #, kde-format
 msgid "Use transaction notes on non-split transactions"
-msgstr "Folosește note de tranzacție pentru tranzacții care nu sînt compuse"
+msgstr "Folosește note de tranzacție pentru tranzacții care nu sunt compuse"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox3)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:205
@@ -12505,7 +12506,7 @@ msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
 "convertible"
 msgstr ""
-"Programul %1 pare să conțină o formulă. Formulele GnuCash nu sînt "
+"Programul %1 pare să conțină o formulă. Formulele GnuCash nu sunt "
 "convertibile."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2090
@@ -12534,7 +12535,7 @@ msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
 "correct operation"
 msgstr ""
-"Programul %1 conține o specificație de interval amînat; verificați pentru "
+"Programul %1 conține o specificație de interval amânat; verificați pentru "
 "funcționarea corectă"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2246
@@ -12676,7 +12677,7 @@ msgstr "Cantitate"
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
-"Următoarele caracteristici găsite în fișierul dumneavoastră nu sînt "
+"Următoarele caracteristici găsite în fișierul dumneavoastră nu sunt "
 "suportate deocamdată:"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
@@ -12968,7 +12969,7 @@ msgid ""
 "regular expression for payee and memo extraction. The option will not be "
 "activated."
 msgstr ""
-"Ați ales extragerea numelui beneficiarului/plătitorului din cîmpul de "
+"Ați ales extragerea numelui beneficiarului/plătitorului din câmpul de "
 "detalii dar nu ați dat o expresie regulată pentru a efectua această "
 "extragere. Opțiunea nu va fi activată."
 
@@ -12982,14 +12983,14 @@ msgstr "Informații lipsă"
 #, kde-format
 msgid "Use payee field as provided by institution"
 msgstr ""
-"Folosește cîmpul beneficiar/plătitor cum a fost obținut de la instituție"
+"Folosește câmpul beneficiar/plătitor cum a fost obținut de la instituție"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_extractPayeeButton)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:43
 #, kde-format
 msgid "Extract payee from memo field using regular expressions"
 msgstr ""
-"Extrage beneficiarul/plătitorul din cîmpul de detalii folosind o expresie "
+"Extrage beneficiarul/plătitorul din câmpul de detalii folosind o expresie "
 "regulată"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
@@ -13664,7 +13665,7 @@ msgstr "Vă rog, alegeți o bancă."
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:284
 #, kde-format
 msgid "Please fill all fields with values."
-msgstr "Introduceți valori în toate cîmpurile"
+msgstr "Introduceți valori în toate câmpurile"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:288
 #, kde-format
@@ -14529,7 +14530,7 @@ msgstr "Text pentru soldul de deschidere"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:102
 #, kde-format
 msgid "Type field text"
-msgstr "Text pentru tipuri cîmp"
+msgstr "Text pentru tipuri câmp"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2_2)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:124
@@ -14620,7 +14621,7 @@ msgstr "Sume"
 #, kde-format
 msgctxt "@title header of the QIF field name column"
 msgid "Field"
-msgstr "Cîmp"
+msgstr "Câmp"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:394
@@ -14884,8 +14885,8 @@ msgstr ""
 "Puteți să alegeți calea fișierului, contul și formatul fișierului QIF "
 "(profil). Alegeți contul pentru a exporta toate tranzacțiile din perioada "
 "specificată sau doar categoriile. Aveți posibilitatea, de asemenea, să "
-"filtrați tranzacțiile exportate specificînd o dată de început și o dată de "
-"sfîrșit. Odată ce ați apăsat butonul Exportă un mesaj vă va notifica la "
+"filtrați tranzacțiile exportate specificând o dată de început și o dată de "
+"sfârșit. Odată ce ați apăsat butonul Exportă un mesaj vă va notifica la "
 "terminarea operației de export detaliind numărul de tranzacții, categoriile "
 "și beneficiarii/plătitorii exportați."
 
@@ -14975,9 +14976,9 @@ msgstr ""
 "aplicația Quicken<b>&trade;</b> (cunoscut ca fișier QIF din cauza "
 "extensiei)</p>\n"
 "\n"
-"<p>Vă rog să introduceți calea către fișierul QIF sau localizați-l făcînd "
+"<p>Vă rog să introduceți calea către fișierul QIF sau localizați-l făcând "
 "click pe butonul Răsfoiește. Odată ce ați introdus calea fișierului "
-"acționînd butonul Importă KMyMoney vă va importa toate tranzacțiile, "
+"acționând butonul Importă KMyMoney vă va importa toate tranzacțiile, "
 "categoriile și beneficiarii/plătitorii pe care îi găsește.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblImportFile)
@@ -15053,25 +15054,25 @@ msgstr "Dividend"
 #, kde-format
 msgctxt "Category name"
 msgid "Interest"
-msgstr "Dobîndă"
+msgstr "Dobândă"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:190
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (short term)"
-msgstr "Cîștig din capital (termen scurt)"
+msgstr "Câștig din capital (termen scurt)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:193
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (mid term)"
-msgstr "Cîștig din capital (termen mediu)"
+msgstr "Câștig din capital (termen mediu)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:196
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (long term)"
-msgstr "Cîștig din capital (termen lung)"
+msgstr "Câștig din capital (termen lung)"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:199
 #, kde-format
@@ -15242,7 +15243,7 @@ msgstr ""
 "Data „%1” citită din fișier nu poate fi interpretată cu ajutorul profilului "
 "de dată curent „%2”.\n"
 "\n"
-"Alegînd „Continuă” se va atribui tranzacției data de astăzi. Alegînd "
+"Alegând „Continuă” se va atribui tranzacției data de astăzi. Alegând "
 "„Renunță” se va anula operația de import. Puteți să reporniți importul și să "
 "alegeți un alt profil QIF sau să creați unul nou."
 
@@ -15299,7 +15300,7 @@ msgstr "Raport de reconciliere al contului %1"
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:111
 #, kde-format
 msgid "All values shown in %1"
-msgstr "Toate valorile sînt afișate în %1"
+msgstr "Toate valorile sunt afișate în %1"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryEditWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
@@ -15898,7 +15899,7 @@ msgid ""
 "The current budget already contains data. Continuing will replace all "
 "current values of this budget."
 msgstr ""
-"Bugetul curent conține deja date. Continuînd veți înlocui toate valorile din "
+"Bugetul curent conține deja date. Continuând veți înlocui toate valorile din "
 "acest moment al bugetului."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:237
@@ -16204,7 +16205,7 @@ msgstr "Ignoră data deschiderii la preluarea tranzacțiilor"
 #: kmymoney/settings/kmymoney.kcfg:494
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
-msgstr "Include tranzacții viitoare cînd se folosește estimarea programării"
+msgstr "Include tranzacții viitoare când se folosește estimarea programării"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
@@ -16212,7 +16213,7 @@ msgstr "Include tranzacții viitoare cînd se folosește estimarea programării"
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr ""
-"Include tranzacțiile programate cînd se folosește estimarea programării"
+"Include tranzacțiile programate când se folosește estimarea programării"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ForecastViewSettings)
@@ -16330,7 +16331,7 @@ msgstr "Detaliile graficului:"
 #, kde-format
 msgid "<p>Choose what level of detail to show on the chart.</p>"
 msgstr ""
-"<p>Alegeți ce fel de conturi să fie afișate ca rînduri ale acestui raport.</"
+"<p>Alegeți ce fel de conturi să fie afișate ca rânduri ale acestui raport.</"
 "p>"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
@@ -16837,7 +16838,7 @@ msgstr "Tip de categorie"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
 msgid "Week"
-msgstr "Săptămînă"
+msgstr "Săptămână"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAction)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:717
@@ -17041,12 +17042,12 @@ msgstr "Suma împrumutată"
 #: kmymoney/wizards/newloanwizard/interesteditwizardpage.ui:6
 #, kde-format
 msgid "Interest Rate"
-msgstr "Rata dobînzii"
+msgstr "Rata dobânzii"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:801
 #, kde-format
 msgid "Next Interest Change"
-msgstr "Variația netă a dobînzii"
+msgstr "Variația netă a dobânzii"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:803
 #, kde-format
@@ -17219,7 +17220,7 @@ msgstr "Luna din %1"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1893
 #, kde-format
 msgid "Week of %1"
-msgstr "Săptămîna din %1"
+msgstr "Săptămâna din %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
@@ -17281,7 +17282,7 @@ msgstr "Toate monedele au fost convertite la %1"
 #, kde-format
 msgid "All values shown in %1 unless otherwise noted"
 msgstr ""
-"Toate valorile sînt afișate în %1 excepție cazurile în care se specifică "
+"Toate valorile sunt afișate în %1 excepție cazurile în care se specifică "
 "altceva"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:117
@@ -17349,8 +17350,8 @@ msgstr "este gol"
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
 msgstr[0] "Este o problemă cu fișierul %1"
-msgstr[1] "sînt probleme cu fișierul %1"
-msgstr[2] "sînt probleme cu fișierul %1"
+msgstr[1] "sunt probleme cu fișierul %1"
+msgstr[2] "sunt probleme cu fișierul %1"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
@@ -17398,7 +17399,7 @@ msgstr "General"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:164
 #, kde-format
 msgid "Rows/Columns"
-msgstr "Rînduri/Coloane"
+msgstr "Rânduri/Coloane"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -17487,7 +17488,7 @@ msgstr "Zilnic"
 #, kde-format
 msgctxt "@item the columns will display weekly data"
 msgid "Weekly"
-msgstr "Săptămînal"
+msgstr "Săptămânal"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:604
@@ -17907,7 +17908,7 @@ msgstr "Tranzacții ordonate după lună"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1008
 #, kde-format
 msgid "Transactions by Week"
-msgstr "Tranzacții ordonate după săptămînă"
+msgstr "Tranzacții ordonate după săptămână"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1016
 #, kde-format
@@ -18492,7 +18493,7 @@ msgid ""
 msgstr ""
 "<p>Alegeți această opțiune pentru a converti toate valorile din raport la "
 "moneda de bază.</p><p>Lăsați opțiunea debifată dacă doriți să vedeți "
-"valorile în valuta originală.</p><p>Dacă valorile nu sînt convertite atunci "
+"valorile în valuta originală.</p><p>Dacă valorile nu sunt convertite atunci "
 "nu se vor afișa sub-totaluri.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCurrency)
@@ -18510,7 +18511,7 @@ msgid ""
 "for easy access.</p>"
 msgstr ""
 "<p>Alegeți această opțiune pentru a declara acest raport un raport favorit.</"
-"p><p>Toate rapoartele favorite ale dumneavoastră sînt grupate la un loc în "
+"p><p>Toate rapoartele favorite ale dumneavoastră sunt grupate la un loc în "
 "lista de raporturi favorite pentru a facilita accesul la ele.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkFavorite)
@@ -18766,7 +18767,7 @@ msgstr "Precizie preț"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:20
 #, kde-format
 msgid "Rows/Columns Tab"
-msgstr "Fila rîndurilor/coloanelor"
+msgstr "Fila rândurilor/coloanelor"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColQuery)
@@ -18810,7 +18811,7 @@ msgstr "Afișează coloana totaluri"
 msgid ""
 "<p>Choose what kind of accounts to display as the rows of this report.</p>"
 msgstr ""
-"<p>Alegeți ce fel de conturi să fie afișate ca rînduri ale acestui raport.</"
+"<p>Alegeți ce fel de conturi să fie afișate ca rânduri ale acestui raport.</"
 "p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTotalColumn)
@@ -18879,7 +18880,7 @@ msgid ""
 "transaction amount are always shown.</p>"
 msgstr ""
 "<p>Alege care coloane ar trebui să fie afișate în raport.</p><p>Data și suma "
-"tranzacției sînt întotdeauna afișate.</p>"
+"tranzacției sunt întotdeauna afișate.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:141
@@ -19183,8 +19184,8 @@ msgstr ""
 "salvare criptate. Fișierele existente nu vor fi criptate în mod automat.</"
 "p><p>Pentru a obține criptarea fișierelor existente folosiți meniul "
 "<b>Fișier/Salvează ca...</b> și salvați fișierul sub alt nume.<br/> Odată ce "
-"ați salvat fișierul sub alt nume și sînteți mulțumit de rezultat puteți "
-"șterge fișierul vechi și puteți redenumi fișierul criptat astfel încît "
+"ați salvat fișierul sub alt nume și sunteți mulțumit de rezultat puteți "
+"șterge fișierul vechi și puteți redenumi fișierul criptat astfel încât "
 "acesta să aibă numele vechiului fișier.</p>"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
@@ -19338,7 +19339,7 @@ msgid ""
 msgstr ""
 "<p>Ați configurat salvarea datelor dumneavoastră în formă criptată, folosind "
 "GPG. Fiți sigur că ați înțeles că ați putea pierde toate datele dacă le "
-"salvați criptate și nu le-ați mai putea decripta mai tîrziu! Dacă nu sînteți "
+"salvați criptate și nu le-ați mai putea decripta mai târziu! Dacă nu sunteți "
 "sigur, răspundeți <b>Nu</b>.</p>"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:151
@@ -19382,7 +19383,7 @@ msgstr[2] ""
 #: kmymoney/plugins/xml/xmlstorage.cpp:283
 #, kde-format
 msgid "Recover key expires soon"
-msgstr "Criptare de recuperare va expira în curînd"
+msgstr "Criptare de recuperare va expira în curând"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:358
 #, fuzzy, kde-format
@@ -19571,10 +19572,10 @@ msgstr ""
 "respective necesară pentru a reciti datele criptate. <p>\n"
 "\n"
 "Acest mecanism este pus la dispozitia utilizatorului pentru cazul în care "
-"acesta îsi pierde cheia și nu își mai poate accesa datele. Cu aceasta "
+"acesta își pierde cheia și nu își mai poate accesa datele. Cu aceasta "
 "opțiune activată, dezvoltatorii KMyMoney pot decripta datele și le pot pune "
 "la dispoziția utilizatorului. Utilizatorul trebuie să fie pregătit să "
-"răspundă la unele înrebări detaliate despre conținutul datelor înainte să "
+"răspundă la unele întrebări detaliate despre conținutul datelor înainte să "
 "poată intra în posesia acestora."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EncryptRecover)
@@ -19602,13 +19603,13 @@ msgstr ""
 #, kde-format
 msgid "When auto fill with previous transaction data use the memos"
 msgstr ""
-"Cînd se umple automat cu datele tranzacției precedente folosește detaliile"
+"Când se umple automat cu datele tranzacției precedente folosește detaliile"
 
 #. i18n: ectx: label, entry (AutoSaveFile), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:25
 #, kde-format
 msgid "Autosave file periodically"
-msgstr "Salvează fișierul automat din cînd în cînd."
+msgstr "Salvează fișierul automat din când în când."
 
 #. i18n: ectx: label, entry (AutoReconciliation), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:29
@@ -19666,14 +19667,14 @@ msgstr "Numele regiunii folosită pentru a determina zilele nelucrătoare"
 #: kmymoney/settings/kmymoney.kcfg:84
 #, kde-format
 msgid "Using the Enter key moves between the fields"
-msgstr "Deplasarea între cîmpuri se realizează cu ajutorul tastei Enter"
+msgstr "Deplasarea între câmpuri se realizează cu ajutorul tastei Enter"
 
 #. i18n: ectx: label, entry (TabMovesBetweenDateParts), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:88
 #, fuzzy, kde-format
 #| msgid "Using the Enter key moves between the fields"
 msgid "Using the TAB key moves between the date parts"
-msgstr "Deplasarea între cîmpuri se realizează cu ajutorul tastei Enter"
+msgstr "Deplasarea între câmpuri se realizează cu ajutorul tastei Enter"
 
 #. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:104
@@ -19752,20 +19753,20 @@ msgid ""
 "Match strings in auto-completion only from the first letter on. A substring "
 "behind the first letter is not found."
 msgstr ""
-"Potrivește șiruri de caractere la completarea automată începînd cu primul "
+"Potrivește șiruri de caractere la completarea automată începând cu primul "
 "caracter. Un subșir după primul caracter nu este potrivit."
 
 #. i18n: ectx: label, entry (stdTransactionFormTabOrder), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:150
 #, kde-format
 msgid "Tab order of edit widgets in transaction form"
-msgstr "Ordinea de parcurgere a cîmpurilor în formularul tranzacției"
+msgstr "Ordinea de parcurgere a câmpurilor în formularul tranzacției"
 
 #. i18n: ectx: label, entry (stdTransactionRegisterTabOrder), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:154
 #, kde-format
 msgid "Tab order of edit widgets in register"
-msgstr "Ordinea de parcurgere a cîmpurilor în registru"
+msgstr "Ordinea de parcurgere a câmpurilor în registru"
 
 #. i18n: ectx: label, entry (ItemList), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:160
@@ -19898,7 +19899,7 @@ msgstr "Culoarea de fundal pentru delimitatorii de grup"
 #: kmymoney/settings/kmymoney.kcfg:234
 #, kde-format
 msgid "Background color for required fields"
-msgstr "Culoarea de fundal pentru cîmpuri obligatorii"
+msgstr "Culoarea de fundal pentru câmpuri obligatorii"
 
 #. i18n: ectx: label, entry (ShowCategoriesInAccountsView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
@@ -20681,7 +20682,7 @@ msgstr "Nu s-a putut asocia contul cu contul online: %1"
 #: kmymoney/views/kaccountsview.ui:58 kmymoney/views/kcategoriesview.ui:44
 #, kde-format
 msgid "Collapse all accounts in the list"
-msgstr "Restrînge toate conturile din listă"
+msgstr "Restrânge toate conturile din listă"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/views/kaccountsview.ui:68 kmymoney/views/kcategoriesview.ui:54
@@ -20694,7 +20695,7 @@ msgstr "Extinde toate conturile din listă"
 #, kde-format
 msgid "Note: Unused categories are not shown as selected by settings."
 msgstr ""
-"Notă: Categoriile nefolosite nu sînt afișate ca selectate în configurări."
+"Notă: Categoriile nefolosite nu sunt afișate ca selectate în configurări."
 
 #. i18n: ectx: property (text), widget (QLabel, m_totalProfitsLabel)
 #: kmymoney/views/kaccountsview.ui:116 kmymoney/views/kcategoriesview.ui:100
@@ -20851,7 +20852,7 @@ msgid ""
 "are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>"
 msgstr ""
 "<p>Unele sub-categorii al categoriei <b>%1</b> nu se pot șterge deoarece "
-"sînt încă folosite. Ele vor deveni sub-categorii al categoriei <b>%2</b>. "
+"sunt încă folosite. Ele vor deveni sub-categorii al categoriei <b>%2</b>. "
 "Continuați?</p>"
 
 #: kmymoney/views/kcategoriesview.cpp:424
@@ -21031,7 +21032,7 @@ msgstr "Introdu această plată programată automat în registru în data scaden
 #: kmymoney/views/keditscheduledlg.ui:265
 #, kde-format
 msgid "This schedule will end at some time"
-msgstr "Această plată programată se va termina cîndva în viitor"
+msgstr "Această plată programată se va termina cândva în viitor"
 
 #. i18n: ectx: property (text), widget (QLabel, endLabel1)
 #: kmymoney/views/keditscheduledlg.ui:312
@@ -21055,7 +21056,7 @@ msgid ""
 "dialog)</p>"
 msgstr ""
 "<p>Vă rog să verificați dacă toate detaliile din următoarea casetă de dialog "
-"sînt corecte și să apăsați OK.</p><p>Datele editabile pot fi schimbate și "
+"sunt corecte și să apăsați OK.</p><p>Datele editabile pot fi schimbate și "
 "aplicate fie pentru această ocurență, fie pentru toate ocurențele acestei "
 "programări. (După ce veți apăsa OK, veți fi întrebat, în următoarea casetă "
 "de dialog, care e alegerea dumneavoastră.)</p>"
@@ -21134,7 +21135,7 @@ msgid ""
 "the welcome page instead."
 msgstr ""
 "Înainte ca KMyMoney să vă poată da informații detaliate despre starea "
-"dumneavoastră financiară, trebuie să creați cel puțin un cont. Pînă atunci, "
+"dumneavoastră financiară, trebuie să creați cel puțin un cont. Până atunci, "
 "KMyMoney vă arată pagina de bun venit."
 
 #: kmymoney/views/khomeview_p.h:159
@@ -21628,7 +21629,7 @@ msgid ""
 "like to rename the payee?"
 msgstr ""
 "Există deja un beneficiar cu numele „%1”. Nu este indicat să existe mai "
-"mulți beneficiari cu același nume de identificare. Sînteți siguri că doriți "
+"mulți beneficiari cu același nume de identificare. Sunteți siguri că doriți "
 "să redenumiți beneficiarul?"
 
 #: kmymoney/views/kpayeesview.cpp:162
@@ -22007,8 +22008,8 @@ msgid ""
 "loan account can be reassigned."
 msgstr ""
 "Cel puțin o tranzacție programată sau cont de credit este referit de către "
-"un beneficiar. În acest moment toți beneficiarii sînt marcați. Dar cel puțin "
-"un beneficiar trebuie să rămînă astfel încît tranzacțiile programate să "
+"un beneficiar. În acest moment toți beneficiarii sunt marcați. Dar cel puțin "
+"un beneficiar trebuie să rămână astfel încât tranzacțiile programate să "
 "poate fi reasignate."
 
 #: kmymoney/views/kpayeesview_p.h:581
@@ -22031,7 +22032,7 @@ msgstr "Nu s-a putut șterge beneficiarul(ii)"
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
-"<p>Sînteți siguri că doriți să ștergeți tranzacția programată <b>%1</b>?</p>"
+"<p>Sunteți siguri că doriți să ștergeți tranzacția programată <b>%1</b>?</p>"
 
 #: kmymoney/views/kscheduledview.cpp:202
 #, kde-format
@@ -22101,11 +22102,11 @@ msgid ""
 "KMyMoney will prompt you again next time it starts unless you manually enter "
 "it later."
 msgstr ""
-"Sînteți siguri că doriți să opriți înregistrarea acestei tranzacții "
+"Sunteți siguri că doriți să opriți înregistrarea acestei tranzacții "
 "programate în registru?\n"
 "\n"
 "KMyMoney vă va întreba din nou la următoarea pornire în cazul în care nu o "
-"veți introduce manual mai tîrziu."
+"veți introduce manual mai târziu."
 
 #: kmymoney/views/kscheduledview_p.h:256
 #, fuzzy, kde-format
@@ -22225,7 +22226,7 @@ msgid ""
 "to rename the tag?"
 msgstr ""
 "Există deja un marcaj cu numele „%1”. Nu este indicat să existe mai multe "
-"marcaje cu același nume de identificare. Sînteți siguri că doriți să "
+"marcaje cu același nume de identificare. Sunteți siguri că doriți să "
 "redenumiți marcajul?"
 
 #: kmymoney/views/ktagsview.cpp:381
@@ -22393,7 +22394,7 @@ msgstr "Tranzacția are lipsă o asignare de <b>%1</b>."
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Această plată programată se va termina cîndva în viitor"
+msgstr "Această plată programată se va termina cândva în viitor"
 
 #: kmymoney/views/ledgerview.cpp:931
 #, fuzzy, kde-format
@@ -22423,7 +22424,7 @@ msgstr ""
 #| msgid_plural "Do you really want to delete the selected price entries?"
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Doriți într-adevăr să ștergeți întrarea de preț marcată?"
+msgstr "Doriți într-adevăr să ștergeți intrarea de preț marcată?"
 
 #: kmymoney/views/ledgerview.cpp:1049
 #, fuzzy, kde-format
@@ -22438,7 +22439,7 @@ msgstr "Introduceți tranzacția programată"
 #| msgid_plural "Do you really want to delete the selected price entries?"
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
-msgstr "Doriți într-adevăr să ștergeți întrarea de preț marcată?"
+msgstr "Doriți într-adevăr să ștergeți intrarea de preț marcată?"
 
 #: kmymoney/views/ledgerview.cpp:1053
 #, fuzzy, kde-format
@@ -22511,7 +22512,7 @@ msgstr "Ultima reconciliere"
 #| msgid "Never reconciled"
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
-msgstr "Nu s-a făcut nicio reconciliere pînă acum"
+msgstr "Nu s-a făcut nicio reconciliere până acum"
 
 #: kmymoney/views/ledgerviewpage_p.h:142
 #, fuzzy, kde-format
@@ -22875,14 +22876,14 @@ msgid ""
 "between your bank statement and the transactions marked as cleared.\n"
 "Are you sure you want to finish the reconciliation?"
 msgstr ""
-"Sînteți pe punctul de a termina procesul de reconciliere pentru acest cont "
+"Sunteți pe punctul de a termina procesul de reconciliere pentru acest cont "
 "cu o diferență între extrasul bancar și tranzacțiile marcate ca verificate.\n"
-"Sînteți siguri că doriți să terminați procesul de reconciliere?"
+"Sunteți siguri că doriți să terminați procesul de reconciliere?"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:259
 #, kde-format
 msgid "Confirm end of reconciliation"
-msgstr "Confirmați sfîrșitul reconcilierii"
+msgstr "Confirmați sfârșitul reconcilierii"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, fuzzy, kde-format
@@ -23444,29 +23445,29 @@ msgstr "Anul curent"
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:39
 #, kde-format
 msgid "Month to date"
-msgstr "De la începutul lunii pînă azi"
+msgstr "De la începutul lunii până azi"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:40
 #, kde-format
 msgid "Year to date"
-msgstr "De la începutul anului pînă azi"
+msgstr "De la începutul anului până azi"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
 #, fuzzy, kde-format
 #| msgid "Month to date"
 msgid "Fiscal month to date"
-msgstr "De la începutul lunii pînă azi"
+msgstr "De la începutul lunii până azi"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
 #, fuzzy, kde-format
 #| msgid "Year to date"
 msgid "Fiscal year to date"
-msgstr "De la începutul anului pînă azi"
+msgstr "De la începutul anului până azi"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format
 msgid "Year to month"
-msgstr "De la începutul anului pînă la începutul lunii"
+msgstr "De la începutul anului până la începutul lunii"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:45
 #, kde-format
@@ -23910,8 +23911,8 @@ msgid ""
 msgstr ""
 "Reconcilierea conturilor dumneavoastră asigură faptul că înregistrările "
 "dumneavoastră corespund cu înregistrările instituției dumneavoastră "
-"eliminînd astfel greșelile de ambele părți. Ar trebui să efectuați o "
-"reconciliere de fiecare dată cînd primiți un extras de cont de la instituția "
+"eliminând astfel greșelile de ambele părți. Ar trebui să efectuați o "
+"reconciliere de fiecare dată când primiți un extras de cont de la instituția "
 "dumneavoastră.\n"
 "\n"
 "Toate informațiile relevante necesare pentru acest proces se pot găsi de "
@@ -23958,7 +23959,7 @@ msgstr "Soldul final al acestui extras:"
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:6
 #, kde-format
 msgid "Interest / Charges"
-msgstr "Dobînda / Comisioane"
+msgstr "Dobânda / Comisioane"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:12
@@ -23970,7 +23971,7 @@ msgid ""
 "If necessary, enter information about interest or charges here. KMyMoney "
 "will create transactions and mark them as cleared."
 msgstr ""
-"Dacă este cazul introduceți informații despre dobînzi și comisioane aici. "
+"Dacă este cazul introduceți informații despre dobânzi și comisioane aici. "
 "KMyMoney va crea tranzacții și le va marca ca verificate automat pentru "
 "dumneavoastră."
 
@@ -23986,7 +23987,7 @@ msgid ""
 "Please enter the following fields with the information as you find them on "
 "your statement. Make sure to enter all values in <b>%1</b>."
 msgstr ""
-"Vă rog să introduceți în următoarele cîmpuri informațiile de pe extrasul "
+"Vă rog să introduceți în următoarele câmpuri informațiile de pe extrasul "
 "dumneavoastră de cont. Aveți grijă să introduceți toate valorile în <b>%1</"
 "b>."
 
@@ -24010,7 +24011,7 @@ msgstr "Expertul de reconciliere"
 #: kmymoney/wizards/endingbalancedlg/previouspostponewizardpage.ui:14
 #, kde-format
 msgid "Restarting postponed reconciliation"
-msgstr "Repornește reconcilierea amînată"
+msgstr "Repornește reconcilierea amânată"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel8)
 #: kmymoney/wizards/endingbalancedlg/previouspostponewizardpage.ui:30
@@ -24026,9 +24027,9 @@ msgid ""
 "All information you have entered into this wizard will be shown and all "
 "transactions that you already cleared are marked with a 'C'."
 msgstr ""
-"Anterior ați amînat reconcilierea acestui cont. Dacă ați introdus comisioane "
-"sau dobînzi ultima dată cînd ați început reconcilierea acestui cont puteți "
-"să le modificați în registru mai tîrziu.\n"
+"Anterior ați amânat reconcilierea acestui cont. Dacă ați introdus comisioane "
+"sau dobânzi ultima dată când ați început reconcilierea acestui cont puteți "
+"să le modificați în registru mai târziu.\n"
 "\n"
 "Este important să continuați să utilizați același extras de cont pe care l-"
 "ați folosit în momentul în care ați anulat reconcilierea.\n"
@@ -24163,17 +24164,17 @@ msgstr "Suma dată cu împrumut: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:157
 #, kde-format
 msgid "Interest rate: %1 %"
-msgstr "Rata dobînzii: %1 %"
+msgstr "Rata dobânzii: %1 %"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:158
 #, kde-format
 msgid "Interest rate is %1"
-msgstr "Rata dobînzii este %1"
+msgstr "Rata dobânzii este %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:159
 #, kde-format
 msgid "Principal and interest: %1"
-msgstr "Împrumutul și dobînda: %1"
+msgstr "Împrumutul și dobânda: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:160
 #, kde-format
@@ -24472,9 +24473,9 @@ msgstr ""
 "<p>Data deschiderii contului ar trebui să fie data ultimei declarații. În "
 "cazul în care doriți să gestionați tranzacții care au avut loc înainte de "
 "această dată introduceți soldul și data unei declarații precedente și "
-"adăugați toate tranzacțiile începînd cu acea dată.</p>\n"
+"adăugați toate tranzacțiile începând cu acea dată.</p>\n"
 "<p><i>Observație</i>: Dacă nu cunoașteți soldul la deschiderea contului "
-"introduceți o sumă estimată. Puteți modifica această valoare mai tîrziu cînd "
+"introduceți o sumă estimată. Puteți modifica această valoare mai târziu când "
 "veți reconcilia acest cont cu ajutorul extraselor de cont bancare.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
@@ -24506,7 +24507,7 @@ msgstr ""
 "valute.</p>\n"
 "<p><i>Observație</i>Dacă nu știți valoarea exactă a soldului inițial, "
 "introduceți o valoare estimativă. Veți putea schimba aceasta valoare mai "
-"tîrziu înainte de a reconcilia acest cont pentru prima dată.</p>"
+"târziu înainte de a reconcilia acest cont pentru prima dată.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionLabel)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:203
@@ -24553,8 +24554,8 @@ msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
-"Bifînd căsuță <b>Cont preferat</b> va permite accesul mai ușor la acest cont "
-"din cîteva ecrane ale aplicației KMyMoney."
+"Bifând căsuță <b>Cont preferat</b> va permite accesul mai ușor la acest cont "
+"din câteva ecrane ale aplicației KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
@@ -24579,7 +24580,7 @@ msgstr ""
 "Acest cont de investiții are atașat un cont de brokeraj?<p>\n"
 "\n"
 "<b>Bifați</b> dacă acest cont de investiții are asociat un cont pentru bani "
-"care nu sînt investiți .<br>\n"
+"care nu sunt investiți .<br>\n"
 "\n"
 "<b>Debifați</b> dacă nu folosiți acest cont pentru activități de brokeraj. "
 "De asemenea debifați dacă acest cont nu este întreținut de o bancă sau de "
@@ -24697,7 +24698,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:33
 #, kde-format
 msgid "Yes, remind me when the payment is due"
-msgstr "Da, amintește-mi cînd plata e scadentă"
+msgstr "Da, amintește-mi când plata e scadentă"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:66
@@ -24740,7 +24741,7 @@ msgstr "Nu a fost dat soldul inițial"
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.cpp:141
 #, kde-format
 msgid "An interest change can only happen after the first payment"
-msgstr "Rata dobînzii se poate schimba doar după ce prima plată a avut loc"
+msgstr "Rata dobânzii se poate schimba doar după ce prima plată a avut loc"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:20
@@ -24814,7 +24815,7 @@ msgstr ""
 "Au fost efectuate plăți introduse în KMyMoney pentru acest împrumut?\n"
 "\n"
 "Observație: Plățile efectuate pentru obținerea acestui împrumut (de exemplu "
-"comisioane pentru schimb valutar) nu sînt considerate plăți în acest context."
+"comisioane pentru schimb valutar) nu sunt considerate plăți în acest context."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_anyPayments)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:93
@@ -24854,7 +24855,7 @@ msgstr ""
 "<b>Toate plățile</b> vă permite să introduceți toate plățile efectuate "
 "pentru acest împrumut.\n"
 "\n"
-"Alegînd <b>plățile începînd cu anul acesta</b> puteți să evitați necesitatea "
+"Alegând <b>plățile începând cu anul acesta</b> puteți să evitați necesitatea "
 "introducerii tuturor tranzacțiilor unui împrumut care se derulează deja de o "
 "perioadă de timp mai lungă.\n"
 "</qt>"
@@ -24869,7 +24870,7 @@ msgstr "Toate plățile"
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:130
 #, kde-format
 msgid "Start with this year's payments"
-msgstr "Plățile începînd cu anul acesta"
+msgstr "Plățile începând cu anul acesta"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, textLabel1_3)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:138
@@ -24911,7 +24912,7 @@ msgstr "Frecvența plății"
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:175
 #, kde-format
 msgid "Interest Compounding frequency"
-msgstr "Frecvența de capitalizare a dobînzii"
+msgstr "Frecvența de capitalizare a dobânzii"
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyFrequencyCombo, m_compoundFrequency)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:185
@@ -24921,7 +24922,7 @@ msgid ""
 "select the same as the payment frequency. Consult your loan contract for "
 "details."
 msgstr ""
-"Alegeți frecvența cu care dobînda este capitalizată. Dacă nu sînteți siguri "
+"Alegeți frecvența cu care dobânda este capitalizată. Dacă nu sunteți siguri "
 "alegeți aceeași frecvență ca cea a plăților. Consultați contractul de "
 "împrumut pentru detalii."
 
@@ -24944,20 +24945,20 @@ msgid ""
 "<b>Start with this year's payments</b><br>\n"
 "Enter the due date of the first payment in the current year"
 msgstr ""
-"Depinzînd de răspunsul la întrebarea <b>Care dintre plăți doriți să le "
-"înregistrați?</b> acest cîmp are următoarele semnificații:<p>\n"
+"Depinzând de răspunsul la întrebarea <b>Care dintre plăți doriți să le "
+"înregistrați?</b> acest câmp are următoarele semnificații:<p>\n"
 "\n"
 "<b>Toate plățile</b><br>\n"
 "Data de scadență a primei plăți<p>\n"
 "\n"
-"<b>Plățile începînd cu anul acesta</b><br>\n"
+"<b>Plățile începând cu anul acesta</b><br>\n"
 "Data de scadență a primei plăți din anul acesta"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:218
 #, kde-format
 msgid "Type of interest rate"
-msgstr "Tipul ratei dobînzii"
+msgstr "Tipul ratei dobânzii"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_interestType)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:229
@@ -24978,7 +24979,7 @@ msgstr "Variabilă"
 #, kde-format
 msgid "Time between interest changes"
 msgstr ""
-"Intervalul de timp dintre momentele în care se recalculează rata dobînzii"
+"Intervalul de timp dintre momentele în care se recalculează rata dobânzii"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_interestFrequencyUnitEdit)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:268
@@ -24992,7 +24993,7 @@ msgstr "zile"
 #, kde-format
 msgctxt "@item frequency of interest calculation"
 msgid "Weeks"
-msgstr "Săptămîni"
+msgstr "Săptămâni"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_interestFrequencyUnitEdit)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:278
@@ -25012,7 +25013,7 @@ msgstr "Ani"
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:293
 #, kde-format
 msgid "Next interest change is due"
-msgstr "Următoare recalculare a ratei dobînzii va avea loc"
+msgstr "Următoare recalculare a ratei dobânzii va avea loc"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:156
 #, fuzzy, kde-format
@@ -25045,7 +25046,7 @@ msgid ""
 msgstr ""
 "Dacă acest cont este gestionat de către o instituție vă rog să o alegeți din "
 "listă. Dacă instituția nu există încă, vă rog să folosiți butonul "
-"<b>Instituție nouă</b> pentru a o crea, altfel lăsați acest cîmp gol.\n"
+"<b>Instituție nouă</b> pentru a o crea, altfel lăsați acest câmp gol.\n"
 "Introduceți numărul folosit de către instituție pentru a identifica contul."
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_institutionComboBox)
@@ -25069,11 +25070,11 @@ msgid ""
 "\n"
 "KMyMoney currently uses this number only for some online banking functions."
 msgstr ""
-"Conturile gestionate de către o instituție sînt de obicei identificabile cu "
+"Conturile gestionate de către o instituție sunt de obicei identificabile cu "
 "ajutorul unui număr unic care se mai numește și numărul (codul) contului. "
 "Introduceți acest număr aici.\n"
 "\n"
-"KMyMoney folosește acest număr în acest moment doar în cîteva dintre "
+"KMyMoney folosește acest număr în acest moment doar în câteva dintre "
 "funcțiile de online banking."
 
 # well-spelled: IBAN
@@ -25083,7 +25084,7 @@ msgstr ""
 msgid "Enter the International Bank Account Number into this field"
 msgstr ""
 "Introduceți un număr de cont IBAN (număr de cont bancar internațional) în "
-"acest cîmp"
+"acest câmp"
 
 # well-spelled: IBAN, International, Bank, Account, Number
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_iban)
@@ -25145,7 +25146,7 @@ msgstr "KMyMoney a calculat cuantumul împrumutului ca fiind %1."
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:311
 #, kde-format
 msgid "KMyMoney has calculated the interest rate to %1%."
-msgstr "KMyMoney a calculat rata dobînzii la %1%."
+msgstr "KMyMoney a calculat rata dobânzii la %1%."
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:199
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:323
@@ -25155,7 +25156,7 @@ msgid ""
 "interest."
 msgstr ""
 "KMyMoney a calculat o suma%1, plătită periodic, pentru a rambursa împrumutul "
-"și dobînda aferentă."
+"și dobânda aferentă."
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:210
 #, kde-format
@@ -25279,7 +25280,7 @@ msgid ""
 "values you have supplied."
 msgstr ""
 "Acum introduceți detaliile împrumutului dumneavoastră. Puteți lăsa unul "
-"dintre cîmpuri necompletat iar KMyMoney va calcula valoarea respectivă în "
+"dintre câmpuri necompletat iar KMyMoney va calcula valoarea respectivă în "
 "momentul în care veți folosi butonul <b>Calculează</b>. Înainte de a "
 "continua cu pagina următoare va fi necesar, de asemenea, să folosiți butonul "
 "<b>Calculează</b> ca KMyMoney să poată verifica corectitudinea logică a "
@@ -25289,7 +25290,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:53
 #, kde-format
 msgid "The interest rate gets calculated"
-msgstr "Se calculează rata dobînzii"
+msgstr "Se calculează rata dobânzii"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_paymentDue)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:64
@@ -25323,9 +25324,9 @@ msgid ""
 "fact that there were already some payments towards the loan. In this case, "
 "please enter the ending balance of your last statement."
 msgstr ""
-"Introduceți în acest cîmp suma împrumutată. Dacă doriți calcularea acestui "
-"cîmp cu ajutorul celorlalți parametrii va rugăm sa-l lăsați necompletat. "
-"Dacă cîmpul este marcat ca obligatoriu (fundal colorat) ați informat "
+"Introduceți în acest câmp suma împrumutată. Dacă doriți calcularea acestui "
+"câmp cu ajutorul celorlalți parametrii va rugăm sa-l lăsați necompletat. "
+"Dacă câmpul este marcat ca obligatoriu (fundal colorat) ați informat "
 "KMyMoney despre faptul că există deja plăti efectuate pentru acest împrumut. "
 "În acest caz, vă rog introduceți soldul final al ultimului extras al "
 "împrumutului."
@@ -25338,7 +25339,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/interestwizardpage.ui:56
 #, kde-format
 msgid "Interest rate"
-msgstr "Rata dobînzii"
+msgstr "Rata dobânzii"
 
 #. i18n: ectx: property (whatsThis), widget (AmountEdit, m_interestRate)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:107
@@ -25347,7 +25348,7 @@ msgid ""
 "Please enter the interest rate (as a percentage) or leave the field empty to "
 "calculate it."
 msgstr ""
-"Vă rog să introduceți rata dobînzii sau lăsați cîmpul necompletat pentru a-l "
+"Vă rog să introduceți rata dobânzii sau lăsați câmpul necompletat pentru a-l "
 "calcula."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_3)
@@ -25375,7 +25376,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:141
 #, kde-format
 msgid "Payment (principal and interest)"
-msgstr "Suma de plată (parte din împrumut și dobînda)"
+msgstr "Suma de plată (parte din împrumut și dobânda)"
 
 #. i18n: ectx: property (whatsThis), widget (AmountEdit, m_paymentAmount)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:151
@@ -25385,7 +25386,7 @@ msgid ""
 "field empty to calculate it."
 msgstr ""
 "Vă rog să introduceți suma pe care o plătiți pentru restituirea împrumutului "
-"împreună cu dobînda sau lăsați valoarea necompletată pentru a fi calculată."
+"împreună cu dobânda sau lăsați valoarea necompletată pentru a fi calculată."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel12)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:158
@@ -25400,7 +25401,7 @@ msgid ""
 "Please enter the amount of a final amortization payment or leave the field "
 "empty to calculate it."
 msgstr ""
-"Vă rog să introduceți suma finală de plată a amortizării sau lăsați cîmpul "
+"Vă rog să introduceți suma finală de plată a amortizării sau lăsați câmpul "
 "necompletat pentru a fi calculat."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_calculateButton)
@@ -25427,7 +25428,7 @@ msgid ""
 msgstr ""
 "Folosirea acestui buton determină calcularea unui parametru lăsat "
 "necompletat a împrumutului dumneavoastră sau verifică faptul că valorile "
-"introduse sînt coerente. Dacă ceva nu este corect veți primi informații "
+"introduse sunt coerente. Dacă ceva nu este corect veți primi informații "
 "clarificatoare."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
@@ -25446,7 +25447,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:53
 #, kde-format
 msgid "Principal + Interest"
-msgstr "Împrumutul + dobînda"
+msgstr "Împrumutul + dobânda"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, AdditionalFeesWizardPage)
 #. i18n: ectx: property (text), widget (QPushButton, m_additionalFeesButton)
@@ -25553,9 +25554,9 @@ msgstr ""
 "KMyMoney va crea un transfer programat pentru această plată și vă va aduce "
 "la cunoștință fiecare dată la care va trebui efectuată plata. Vă rog să "
 "selectați contul din/în care se vor efectua plățile și categoria din care va "
-"face parte dobînda.<p>\n"
+"face parte dobânda.<p>\n"
 "Dacă ați ales să înregistrați toate plățile această dată a fost deja dată. "
-"Dacă ați ales să înregistrați doar plățile începînd cu acest an atunci <b> "
+"Dacă ați ales să înregistrați doar plățile începând cu acest an atunci <b> "
 "Data primei plăți</b> va deveni data primei plăți din acest an."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestCategoryWizardPage)
@@ -25564,7 +25565,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.ui:6
 #, kde-format
 msgid "Interest category"
-msgstr "Categoria dobînzii"
+msgstr "Categoria dobânzii"
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyCategory, m_interestCategory)
 #: kmymoney/wizards/newaccountwizard/kloanschedulepage.ui:45
@@ -25575,10 +25576,10 @@ msgid ""
 "category. If you lend the money, you receive the interest. In this case, "
 "select an income category here."
 msgstr ""
-"Categoria din care va face parte partea de dobîndă a plăților pentru "
-"împrumut. Dacă împrumutați bani de obicei trebuie să plătiți dobîndă, deci "
+"Categoria din care va face parte partea de dobândă a plăților pentru "
+"împrumut. Dacă împrumutați bani de obicei trebuie să plătiți dobândă, deci "
 "ar trebui să facă parte dintr-o categorie de cheltuieli. Dacă ați dat bani "
-"împrumut veți primi dobîndă. În acest caz alegeți o categorie de venituri."
+"împrumut veți primi dobândă. În acest caz alegeți o categorie de venituri."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel8)
 #: kmymoney/wizards/newaccountwizard/kloanschedulepage.ui:52
@@ -25985,8 +25986,8 @@ msgid ""
 "Use this to add any additional fees other than principal and interest "
 "contained in your periodical payments."
 msgstr ""
-"Folosește această funcție pentru a adăuga comisioane, alte sume decît "
-"împrumutul și dobînda conținute în plățile dumneavoastră periodice."
+"Folosește această funcție pentru a adăuga comisioane, alte sume decât "
+"împrumutul și dobânda conținute în plățile dumneavoastră periodice."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_2)
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:19
@@ -26026,7 +26027,7 @@ msgstr "= plată periodică:"
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:526
 #, kde-format
 msgid "Principal + Interest:"
-msgstr "Împrumut + Dobîndă:"
+msgstr "Împrumut + Dobândă:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_2_2)
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:233
@@ -26069,8 +26070,8 @@ msgid ""
 msgstr ""
 "\n"
 "KMyMoney a calculat împrumutul după cum este afișat în prezentarea de "
-"ansamblu de mai jos. Puteți să acceptați aceste valori alegînd \"Următor\" "
-"sau schimbați valorile alegînd \"Înapoi\" pentru a vă întoarce în ecranul de "
+"ansamblu de mai jos. Puteți să acceptați aceste valori alegând \"Următor\" "
+"sau schimbați valorile alegând \"Înapoi\" pentru a vă întoarce în ecranul de "
 "introducere a datelor pe care doriți să le modificați."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6_3_2_2_2)
@@ -26109,7 +26110,7 @@ msgstr "Suma împrumutată:"
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:433
 #, kde-format
 msgid "Interest rate:"
-msgstr "Rata dobînzii:"
+msgstr "Rata dobânzii:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel9_2_2_2_2)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel9)
@@ -26165,7 +26166,7 @@ msgid ""
 "might be different from the time your loan contract is signed for."
 msgstr ""
 "\n"
-"Vă rog să dați termenul acestui împrumut sau lăsați acest cîmp gol pentru a-"
+"Vă rog să dați termenul acestui împrumut sau lăsați acest câmp gol pentru a-"
 "l calcula. Termenul împrumutului este perioada necesară pentru plata "
 "integrală a împrumutului. Acestă perioadă poate fi diferită de cea din "
 "contractul dumneavoastră de împrumut."
@@ -26192,7 +26193,7 @@ msgstr ""
 "folosiți acest expert pentru a modifica informațiile legate de contul "
 "dumneavoastră de împrumut.\n"
 "\n"
-"Vă rog să vă asigurați că aveți toate informațiile necesare la îndemînă. În "
+"Vă rog să vă asigurați că aveți toate informațiile necesare la îndemână. În "
 "cele mai multe cazuri puteți obține toate informațiile necesare din "
 "contractul de credit și din ultimul extras de cont."
 
@@ -26216,7 +26217,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/editselectionwizardpage.ui:95
 #, kde-format
 msgid "Modify the interest rate"
-msgstr "Modifică rata dobînzii"
+msgstr "Modifică rata dobânzii"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_editOtherCostButton)
 #: kmymoney/wizards/newloanwizard/editselectionwizardpage.ui:105
@@ -26257,7 +26258,7 @@ msgstr "Data efectivă"
 #: kmymoney/wizards/newloanwizard/effectivedatewizardpage.ui:94
 #, kde-format
 msgid "When should the changes become active?"
-msgstr "De cînd ar trebui să între în vigoare schimbările efectuate?"
+msgstr "De când ar trebui să între în vigoare schimbările efectuate?"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel17_2)
 #: kmymoney/wizards/newloanwizard/finalpaymentwizardpage.ui:19
@@ -26268,7 +26269,7 @@ msgid ""
 "empty to calculate it."
 msgstr ""
 "\n"
-"Vă rog să introduceți suma plătii de amortizare finale sau lăsați cîmpul gol "
+"Vă rog să introduceți suma plătii de amortizare finale sau lăsați câmpul gol "
 "pentru a-l calcula."
 
 #: kmymoney/wizards/newloanwizard/firstpaymentwizardpage.cpp:52
@@ -26316,7 +26317,7 @@ msgstr "Data primei plăți"
 #: kmymoney/wizards/newloanwizard/interestcalculationwizardpage.ui:6
 #, kde-format
 msgid "Interest calculation"
-msgstr "Calculul dobînzii"
+msgstr "Calculul dobânzii"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel12_2)
 #: kmymoney/wizards/newloanwizard/interestcalculationwizardpage.ui:19
@@ -26326,19 +26327,19 @@ msgid ""
 "When does the actual interest rate get calculated?"
 msgstr ""
 "\n"
-"Cînd va fi calculată rata actuală a dobînzii?"
+"Când va fi calculată rata actuală a dobânzii?"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_interestOnReceptionButton)
 #: kmymoney/wizards/newloanwizard/interestcalculationwizardpage.ui:68
 #, kde-format
 msgid "When the payment is received."
-msgstr "Cînd plata este recepționată."
+msgstr "Când plata este recepționată."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_interestOnPaymentButton)
 #: kmymoney/wizards/newloanwizard/interestcalculationwizardpage.ui:78
 #, kde-format
 msgid "When the payment is due."
-msgstr "Cînd plata este scadentă."
+msgstr "Când plata este scadentă."
 
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:49
 #, kde-format
@@ -26360,7 +26361,7 @@ msgid ""
 "create a new category."
 msgstr ""
 "\n"
-"Vă rog să alegeți categoria pe care doriți să o asignați plăților dobînzii "
+"Vă rog să alegeți categoria pe care doriți să o asignați plăților dobânzii "
 "sau creați o categorie nouă."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_4)
@@ -26373,7 +26374,7 @@ msgid ""
 "Please enter the interest rate or leave the field empty to calculate it."
 msgstr ""
 "\n"
-"Vă rog să dați rata dobînzii sau lăsați cîmpul gol pentru a fi calculat "
+"Vă rog să dați rata dobânzii sau lăsați câmpul gol pentru a fi calculat "
 "pentru dumneavoastră."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7_3)
@@ -26391,17 +26392,17 @@ msgid ""
 "\n"
 "If KMyMoney should calculate this value for you, then leave the field blank."
 msgstr ""
-"KMyMoney calculează fie o nouă rată a dobînzii fie suma împrumutului și "
-"dobînda. Dacă cunoașteți rata dobînzii introduceți-o aici.\n"
+"KMyMoney calculează fie o nouă rată a dobânzii fie suma împrumutului și "
+"dobânda. Dacă cunoașteți rata dobânzii introduceți-o aici.\n"
 "\n"
 "Dacă KMyMoney ar trebui să calculeze această valoare pentru dumneavoastră, "
-"lăsați acest cîmp gol."
+"lăsați acest câmp gol."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestTypeWizardPage)
 #: kmymoney/wizards/newloanwizard/interesttypewizardpage.ui:6
 #, kde-format
 msgid "Type of interest"
-msgstr "Tipul de dobîndă"
+msgstr "Tipul de dobândă"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_2)
 #: kmymoney/wizards/newloanwizard/interesttypewizardpage.ui:19
@@ -26413,8 +26414,8 @@ msgid ""
 "phase of the loan you should choose the option 'variable interest rate'."
 msgstr ""
 "\n"
-"Rata dobînzii este fixă pe durata împrumutului sau este modificată din cînd "
-"în cînd? Dacă rata dobînzii se schimbă în faza amortizării împrumutului ar "
+"Rata dobânzii este fixă pe durata împrumutului sau este modificată din când "
+"în când? Dacă rata dobânzii se schimbă în faza amortizării împrumutului ar "
 "trebui să alegeți varianta 'Rată variabilă'"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_fixedInterestButton)
@@ -26443,7 +26444,7 @@ msgid ""
 msgstr ""
 "Notă: nu veți putea modifica acest cont astăzi, pentru că data deschiderii "
 "\"%1\" este în viitor. Vă rog să revedeți această casetă de dialog atunci "
-"cînd timpul va corespunde."
+"când timpul va corespunde."
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:279
 #, kde-format
@@ -26488,7 +26489,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:119
 #, kde-format
 msgid "interest rate"
-msgstr "rata dobînzii"
+msgstr "rata dobânzii"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:128
 #, kde-format
@@ -26498,7 +26499,7 @@ msgstr "termen"
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:138
 #, kde-format
 msgid "principal and interest"
-msgstr "împrumutul și dobînda"
+msgstr "împrumutul și dobânda"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewLoanWizard)
 #: kmymoney/wizards/newloanwizard/knewloanwizard.ui:23
@@ -26542,7 +26543,7 @@ msgid ""
 "calculate it for you"
 msgstr ""
 "Ați introdus informații care nu se potrivesc. Vă rog să reveniți la pagina "
-"corespunzătoare pentru a actualiza valorile sau lăsați un cîmp gol pentru a "
+"corespunzătoare pentru a actualiza valorile sau lăsați un câmp gol pentru a "
 "permite KMyMoney calcularea ei pentru dumneavoastră."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, LendBorrowWizardPage)
@@ -26567,8 +26568,8 @@ msgid ""
 "Please enter the original loan amount in the field below or leave it empty "
 "to be calculated."
 msgstr ""
-"Vă rog să introduceți valoare inițială a împrumutului în cîmpul de mai jos "
-"sau lăsați cîmpul gol pentru a fi calculat."
+"Vă rog să introduceți valoare inițială a împrumutului în câmpul de mai jos "
+"sau lăsați câmpul gol pentru a fi calculat."
 
 #: kmymoney/wizards/newloanwizard/loanamountwizardpage.cpp:65
 #, kde-format
@@ -26577,14 +26578,14 @@ msgid ""
 "field below. You should not leave this field empty."
 msgstr ""
 "Vă rog să introduceți suma rămasă din împrumut de pe ultimul extras al "
-"anului trecut în cîmpul de mai jos. Nu ar trebui să lăsați acest cîmp gol.s"
+"anului trecut în câmpul de mai jos. Nu ar trebui să lăsați acest câmp gol."
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
 #, fuzzy, kde-format
 #| msgid "Interest Income"
 msgctxt "@option:check Budget option"
 msgid "Treat as income"
-msgstr "Venit din dobîndă"
+msgstr "Venit din dobândă"
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
 #, fuzzy, kde-format
@@ -26701,7 +26702,7 @@ msgid ""
 "loan account to be created."
 msgstr ""
 "\n"
-"În acest prim pas KMyMoney vă va cere cîteva informații generale despre "
+"În acest prim pas KMyMoney vă va cere câteva informații generale despre "
 "contul de împrumut care va fi creat."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
@@ -26741,7 +26742,7 @@ msgstr ""
 "procesul de creere a unui împrumut nou ca de exemplu a unui împrumut pentru "
 "o locuință, pentru un automobil sau orice alt tip de împrumut dat sau luat.\n"
 "\n"
-"Vă rog să vă asigurați că aveți toate informațiile necesare la îndemînă. În "
+"Vă rog să vă asigurați că aveți toate informațiile necesare la îndemână. În "
 "cele mai multe cazuri puteți obține toate informațiile necesare din "
 "contractul de credit și din ultimul extras de cont."
 
@@ -26768,8 +26769,8 @@ msgid ""
 "field empty to calculate it."
 msgstr ""
 "\n"
-"Vă rog să introduceți suma plătită pentru împrumut și dobînda aferentă sau "
-"lăsați cîmpul gol pentru a fi calculat."
+"Vă rog să introduceți suma plătită pentru împrumut și dobânda aferentă sau "
+"lăsați câmpul gol pentru a fi calculat."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_4)
 #: kmymoney/wizards/newloanwizard/paymenteditwizardpage.ui:83
@@ -26783,7 +26784,7 @@ msgstr "Suma curentă"
 #: kmymoney/wizards/newloanwizard/paymentwizardpage.ui:56
 #, kde-format
 msgid "Principal and interest"
-msgstr "Împrumutul și dobînda"
+msgstr "Împrumutul și dobânda"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4_5)
 #: kmymoney/wizards/newloanwizard/paymenteditwizardpage.ui:151
@@ -26795,11 +26796,11 @@ msgid ""
 "\n"
 "If KMyMoney should calculate this value for you, then leave the field blank."
 msgstr ""
-"KMyMoney calculează fie o nouă rată a dobînzii fie suma împrumutului și "
-"dobînda. Dacă cunoașteți suma împrumutului și dobînda introduceți-le aici.\n"
+"KMyMoney calculează fie o nouă rată a dobânzii fie suma împrumutului și "
+"dobânda. Dacă cunoașteți suma împrumutului și dobânda introduceți-le aici.\n"
 "\n"
 "Dacă KMyMoney ar trebui să calculeze această valoare pentru dumneavoastră, "
-"lăsați acest cîmp gol."
+"lăsați acest câmp gol."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel11_2)
 #: kmymoney/wizards/newloanwizard/paymentfrequencywizardpage.ui:19
@@ -26809,7 +26810,7 @@ msgid ""
 "How often will there be payments made to this loan?"
 msgstr ""
 "\n"
-"Cît de dese vor fi plățile pentru acest împrumut?"
+"Cât de dese vor fi plățile pentru acest împrumut?"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, PreviousPaymentsWizardPage)
 #: kmymoney/wizards/newloanwizard/previouspaymentswizardpage.ui:6
@@ -26849,7 +26850,7 @@ msgid ""
 "payments in this context."
 msgstr ""
 "Notă: Plățile efectuate pentru obținerea împrumutului (de exemplu comisionul "
-"de acordare) nu sînt considerate plăți în acest context."
+"de acordare) nu sunt considerate plăți în acest context."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, RecordPaymentWizardPage)
 #: kmymoney/wizards/newloanwizard/recordpaymentwizardpage.ui:6
@@ -26877,7 +26878,7 @@ msgstr "Da, înregistrează toate plățile."
 #: kmymoney/wizards/newloanwizard/recordpaymentwizardpage.ui:78
 #, kde-format
 msgid "No, only record payments since the beginning of this year."
-msgstr "Nu, înregistrează numai plățile efectuate începînd cu acest an."
+msgstr "Nu, înregistrează numai plățile efectuate începând cu acest an."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel22_2)
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:19
@@ -26890,9 +26891,9 @@ msgid ""
 "payment due date</b> is the date of the first payment made in this year."
 msgstr ""
 "KMyMoney va crea o plată programată pentru această plată și vă va reaminti "
-"de fiecare dată cînd o plată va trebui efectuată.<p>\n"
+"de fiecare dată când o plată va trebui efectuată.<p>\n"
 "Dacă ați ales să înregistrați toate plățile această dată a fost deja dată. "
-"Dacă ați ales să înregistrați doar plățile începînd cu acest an, atunci data "
+"Dacă ați ales să înregistrați doar plățile începând cu acest an, atunci data "
 "<b>Data primei plăți</b> va fi data primei plăți efectuate în acest an."
 
 #. i18n: ectx: property (text), widget (QLabel, m_dueLabel)
@@ -27052,7 +27053,7 @@ msgstr "Plată finală:"
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:495
 #, kde-format
 msgid "Interest is due:"
-msgstr "Dobînda este scadentă la:"
+msgstr "Dobânda este scadentă la:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7)
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:570
@@ -27069,13 +27070,13 @@ msgstr "Zile"
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.cpp:29
 #, kde-format
 msgid "Weeks"
-msgstr "Săptămîni"
+msgstr "Săptămâni"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, VariableInterestDateWizardPage)
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:6
 #, kde-format
 msgid "Date of next interest change"
-msgstr "Data următoarei recalculări a ratei dobînzii"
+msgstr "Data următoarei recalculări a ratei dobânzii"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel8_2)
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:13
@@ -27086,20 +27087,20 @@ msgid ""
 "the frequency of the future changes."
 msgstr ""
 "\n"
-"Alegeți data în care rata dobînzii va fi modificată și frecvența "
+"Alegeți data în care rata dobânzii va fi modificată și frecvența "
 "modificărilor viitoare."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:44
 #, kde-format
 msgid "Next interest change on"
-msgstr "Următoarea schimbare a ratei dobînzii va avea loc la"
+msgstr "Următoarea schimbare a ratei dobânzii va avea loc la"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:81
 #, kde-format
 msgid "Time until next change"
-msgstr "Durata pînă la următoarea recalculare"
+msgstr "Durata până la următoarea recalculare"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:20
@@ -27139,7 +27140,7 @@ msgid ""
 "can modify it later."
 msgstr ""
 "Fiecare instituție are un număr de identificare. Dați acest număr aici. Dacă "
-"nu sînteți siguri lăsați-l necompletat deoarece îl puteți schimba ulterior."
+"nu sunteți siguri lăsați-l necompletat deoarece îl puteți schimba ulterior."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:72
@@ -27155,7 +27156,7 @@ msgid ""
 "it. Enter it here. If uncertain, you can modify this entry later."
 msgstr ""
 "În general instituția care a creat contul i-a asociat și un număr de "
-"identificare. Da-ți acest număr aici. Dacă nu sînteți siguri lăsați cîmpul "
+"identificare. Da-ți acest număr aici. Dacă nu sunteți siguri lăsați câmpul "
 "necompletat deoarece îl puteți modifica ulterior."
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_accountNameEdit)
@@ -27178,7 +27179,7 @@ msgid ""
 msgstr ""
 "Introduceți data din care intenționați să gestionați tranzacțiile din acel "
 "cont. Această dată este de obicei data ultimului extras de cont. Dacă nu "
-"sînteți siguri lăsați cîmpul neschimbat."
+"sunteți siguri lăsați câmpul neschimbat."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:143
@@ -27200,7 +27201,7 @@ msgid ""
 "of the last statement. If uncertain, leave as is."
 msgstr ""
 "Introduceți soldul de deschidere al contului. Acesta este, de obicei, soldul "
-"de pe ultimul extras de cont. Dacă nu sînteți siguri lăsați cîmpul "
+"de pe ultimul extras de cont. Dacă nu sunteți siguri lăsați câmpul "
 "neschimbat."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
@@ -27211,7 +27212,7 @@ msgid ""
 "account. Once this wizard finishes, the account will be created for you "
 "within KMyMoney."
 msgstr ""
-"Cîmpurile de mai jos vă permit introducerea unor informații despre contul "
+"Câmpurile de mai jos vă permit introducerea unor informații despre contul "
 "dumneavoastră curent. Odată cu terminarea acestui formular contul curent va "
 "fi creat în KMyMoney."
 
@@ -27236,7 +27237,7 @@ msgid ""
 "This information will be seen and used only by you. The information is used "
 "to personalize KMyMoney, to encrypt your file, etc."
 msgstr ""
-"Vă rog să introduceți cîteva informații despre dumneavoastră.<br><br>\n"
+"Vă rog să introduceți câteva informații despre dumneavoastră.<br><br>\n"
 "\n"
 "Aceste informații vor fi văzute și folosite doar de către dumneavoastră. "
 "Informație este folosită pentru a personaliza KMyMoney, pentru a vă codifica "
@@ -27277,7 +27278,7 @@ msgstr ""
 "această aplicație să vă poată ajuta să vă gestionați finanțele "
 "dumneavoastră, are nevoie să colecteze anumite date de la dumneavoastră.<p>\n"
 "\n"
-"În următoarele cîteva pagini veți fi îndrumat prin pașii necesari pentru a "
+"În următoarele câteva pagini veți fi îndrumat prin pașii necesari pentru a "
 "inițializa aplicația. Această operație va trebui efectuată doar odată."
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:54
@@ -27318,7 +27319,7 @@ msgstr ""
 "<p>KMyMoney poate să codifice fișierul dumneavoastră de date folosind "
 "criptarea GPG. Codificarea GPG este una dintre cele mai sigure metode care "
 "există pentru a vă proteja datele. Toate informațiile dumneavoastră legate "
-"de conturi cît și celelalte informații financiare vor fi în siguranță.</p>"
+"de conturi cât și celelalte informații financiare vor fi în siguranță.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
@@ -27346,7 +27347,7 @@ msgid ""
 "dialog. Just select the <b>Configure KMyMoney...</b> option in the "
 "<b>Settings</b> menu."
 msgstr ""
-"Puteți să schimbați opțiunile de configurare oricînd cu ajutorul dialogului "
+"Puteți să schimbați opțiunile de configurare oricând cu ajutorul dialogului "
 "de configurare. Alegeți acțiunea <b>Personalizează KMyMoney...</b> din "
 "meniul de <b>Configurări</b>."
 
@@ -27401,10 +27402,10 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
-"<p>Folosiți cîmpurile de mai jos pentru a introduce informații despre "
+"<p>Folosiți câmpurile de mai jos pentru a introduce informații despre "
 "dumneavoastră.</p>\n"
 "\n"
-"<p>Toate informațiile sînt opționale și sînt folosite doar pentru a vă "
+"<p>Toate informațiile sunt opționale și sunt folosite doar pentru a vă "
 "personaliza fișierul KMyMoney.</p>"
 
 #: tools/kmmreport-export.cpp:114
@@ -27575,7 +27576,7 @@ msgstr ""
 #~ "KMyMoney has detected some overdue scheduled transactions for this "
 #~ "account. Do you want to enter those scheduled transactions now?"
 #~ msgstr ""
-#~ "KMyMoney a detectat existența unor tranzacții programate întîrziate "
+#~ "KMyMoney a detectat existența unor tranzacții programate întârziate "
 #~ "pentru acest cont. Doriți să introduceți acele tranzacții acum?"
 
 #~ msgid "Remove this price item from the file"
@@ -27850,10 +27851,10 @@ msgstr ""
 #~ msgstr "V"
 
 #~ msgid "Always show a No. field"
-#~ msgstr "Întotdeauna afișează un cîmp pentru nr."
+#~ msgstr "Întotdeauna afișează un câmp pentru nr."
 
 #~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Afișează întotdeauna un cîmp Nr. în formularul tranzacției"
+#~ msgstr "Afișează întotdeauna un câmp Nr. în formularul tranzacției"
 
 #~ msgid "Loading securities..."
 #~ msgstr "Se încarcă titlurile de valoare..."
@@ -27962,7 +27963,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Vă rugăm să ne aduceți la cunoștință orice comportament anormal folosind "
 #~ "<a href=\"/action?id=help_report_bug\">„Raportează o eroare...”</a> din "
-#~ "meniul de ajutor sau trimițînd o scrisoare electronică la lista "
+#~ "meniul de ajutor sau trimițând o scrisoare electronică la lista "
 #~ "dezvoltatorilor aplicației."
 
 #~ msgid "The KMyMoney Development Team"
@@ -28061,8 +28062,8 @@ msgstr ""
 #~ "remain so that the transaction/scheduled transaction can be reassigned."
 #~ msgstr ""
 #~ "Cel puțin o tranzacție programată sau cont de credit este referit de "
-#~ "către un marcaj. În acest moment toate marcajele sînt marcate. Dar cel "
-#~ "puțin un marcaj trebuie să rămînă astfel încît tranzacțiile programate să "
+#~ "către un marcaj. În acest moment toate marcajele sunt marcate. Dar cel "
+#~ "puțin un marcaj trebuie să rămână astfel încât tranzacțiile programate să "
 #~ "poate fi reasignate."
 
 #~ msgid "Pay to"
@@ -28095,7 +28096,7 @@ msgstr ""
 #~ "<p>...that you can start editing a transaction by double-clicking on the\n"
 #~ "transaction in the register?\n"
 #~ msgstr ""
-#~ "<p>...puteți începe să editați o tranzacție făcînd dublu clic pe \n"
+#~ "<p>...puteți începe să editați o tranzacție făcând dublu clic pe \n"
 #~ " tranzacție în registru?\n"
 
 #~ msgid ""
@@ -28104,7 +28105,7 @@ msgstr ""
 #~ msgstr ""
 #~ "<p>...puteți vedea mai multe detalii ale tranzacției selectate în "
 #~ "registru\n"
-#~ " selectînd facilitatea 'lupă pentru registru' în caseta de dialog pentru "
+#~ " selectând facilitatea 'lupă pentru registru' în caseta de dialog pentru "
 #~ "configurări?\n"
 
 #~ msgid ""
@@ -28113,7 +28114,7 @@ msgstr ""
 #~ "on a yellow triangle in the register?\n"
 #~ msgstr ""
 #~ "<p>...tranzacțiile cărora nu li s-au atribuit categorii sau tranzacțiile\n"
-#~ "necompuse cu valori neatribuite sînt marcate în registru cu un semn \n"
+#~ "necompuse cu valori neatribuite sunt marcate în registru cu un semn \n"
 #~ "de exclamare pe un triunghi galben?\n"
 
 #~ msgid ""
@@ -28122,8 +28123,8 @@ msgstr ""
 #~ "Detail'\n"
 #~ "menu entry? You can turn this feature off the same way.\n"
 #~ msgstr ""
-#~ "<p>...puteți vedea toate detaliile tranzacțiilor în registru tastînd\n"
-#~ "&lt;Ctrl-T&gt; sau selectînd din meniu 'Vizualizare/Afișează detaliile "
+#~ "<p>...puteți vedea toate detaliile tranzacțiilor în registru tastând\n"
+#~ "&lt;Ctrl-T&gt; sau selectând din meniu 'Vizualizare/Afișează detaliile "
 #~ "tranzacției'?\n"
 #~ "Puteți anula această facilitate în aceeași manieră.\n"
 
@@ -28157,7 +28158,7 @@ msgstr ""
 #~ "or the \"More...\"-menu in the transaction form?\n"
 #~ msgstr ""
 #~ "<p>...puteți crea o tranzacție programată din una existentă,\n"
-#~ "selectînd meniul contextual al tranzacției în registru\n"
+#~ "selectând meniul contextual al tranzacției în registru\n"
 #~ "sau meniul „Mai mult...” în formularul tranzacției?\n"
 
 #~ msgid ""
@@ -28166,7 +28167,7 @@ msgstr ""
 #~ "or in the transaction menu?\n"
 #~ msgstr ""
 #~ "<p>...puteți ajunge la beneficiarul tranzacției\n"
-#~ "selectînd meniul contextual al tranzacției în registru\n"
+#~ "selectând meniul contextual al tranzacției în registru\n"
 #~ "sau în meniul tranzacției?\n"
 
 #~ msgid ""
@@ -28180,7 +28181,7 @@ msgstr ""
 #~ "<p>...that you can hide transactions prior to a specific date?\n"
 #~ "The date can be modified via <i>Configure/General/Filter</i>.\n"
 #~ msgstr ""
-#~ "<p>...puteți ascunde tranzacțiile pînă la o dată anterioară specificată?\n"
+#~ "<p>...puteți ascunde tranzacțiile până la o dată anterioară specificată?\n"
 #~ "Data poate fi modificată via <i>Configurare/General/Filtru</i>.\n"
 
 #~ msgid ""
@@ -28224,7 +28225,7 @@ msgstr ""
 #~ "<b>Fișier/Salvează ca...</b>. În dialogul <b>Salvează ca...</b>, \n"
 #~ "alegeți filtrul <b>Fișiere anonime</b> și asigurați-vă că fișierul\n"
 #~ "dumneavoastră primește extensia <b>.anon.xml</b>.<p>\n"
-#~ "Pentru a verifica modul în care arată datele pe care sînteți \n"
+#~ "Pentru a verifica modul în care arată datele pe care sunteți \n"
 #~ "pe cale să le trimiteți, puteți deschide acest fișier în KMyMoney și \n"
 #~ "să vedeți cum vor vedea dezvoltatorii datele dumneavoastră.\n"
 
@@ -28307,7 +28308,7 @@ msgstr ""
 #~ msgid ""
 #~ "Cannot enter transaction with postdate prior to account's opening date."
 #~ msgstr ""
-#~ "Nu poate fi creată o tranzacție avînd data înaintea datei de deschidere a "
+#~ "Nu poate fi creată o tranzacție având data înaintea datei de deschidere a "
 #~ "contului."
 
 #~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
@@ -28370,7 +28371,7 @@ msgstr ""
 #~ "You are about to delete all splits of this transaction. Do you really "
 #~ "want to continue?"
 #~ msgstr ""
-#~ "Sînteți pe cale de a șterge toate părțile acestei tranzacții. Doriți într-"
+#~ "Sunteți pe cale de a șterge toate părțile acestei tranzacții. Doriți într-"
 #~ "adevăr să continuați?"
 
 #~ msgid "<b>11,00<b>"
@@ -28459,7 +28460,7 @@ msgstr ""
 #~ "modify the transactions may result in rounding errors. Do you want to "
 #~ "continue?"
 #~ msgstr ""
-#~ "Cel puțin una dintre tranzacțiile selectate are mai multe decît două "
+#~ "Cel puțin una dintre tranzacțiile selectate are mai multe decât două "
 #~ "părți și se bazează pe o monedă diferită (%1). Folosirea acestui cont "
 #~ "pentru modificarea tranzacțiilor poate avea ca rezultat diferite erori. "
 #~ "Vreți să continuați?"
@@ -28509,7 +28510,7 @@ msgstr ""
 #~ "The transaction you are about to enter has a post date in the future.<br/"
 #~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
 #~ msgstr ""
-#~ "Tranzacția pe care sînteți pe cale să o introduceți are o amînare în "
+#~ "Tranzacția pe care sunteți pe cale să o introduceți are o amânare în "
 #~ "viitor.<br/><br/>Doriți s-o introduceți în registru sau să o adăugați "
 #~ "printre programări?"
 
@@ -28565,7 +28566,7 @@ msgstr ""
 
 #~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
 #~ msgstr ""
-#~ "Reconcilierea - dezactivată deoarece în acest moment sînteți în procesul "
+#~ "Reconcilierea - dezactivată deoarece în acest moment sunteți în procesul "
 #~ "de reconciliere al <b>%1</b>"
 
 #~ msgctxt "Button text for match transaction"
@@ -28612,7 +28613,7 @@ msgstr ""
 #~ msgstr "Cont închis"
 
 #~ msgid "Cannot create transactions when no account is selected."
-#~ msgstr "Nu pot fi create tranzacții cînd nu e selectat niciun cont."
+#~ msgstr "Nu pot fi create tranzacții când nu e selectat niciun cont."
 
 #~ msgid "Cannot create transactions in the context of a category."
 #~ msgstr "Nu pot fi create tranzacții în contextul unei categorii."
@@ -28652,7 +28653,7 @@ msgstr ""
 #~ msgstr ""
 #~ "<p>Alegeți o opțiune: renunțați la schimbări, salvați schimbările sau "
 #~ "continuați editarea tranzacției.</p><p> Puteți alege opțiunea de a salva "
-#~ "automat o tranzacție în curs de modificare cînd, de exemplu, se alege o "
+#~ "automat o tranzacție în curs de modificare când, de exemplu, se alege o "
 #~ "altă tranzacție.</p>"
 
 #~ msgid "End transaction edit"
@@ -29201,7 +29202,7 @@ msgstr ""
 #~ msgstr "Număr de identificare"
 
 #~ msgid "Insert transaction type into No. field for new transactions"
-#~ msgstr "Inserează tipul tranzacției în cîmpul Nr. pentru tranzacții noi."
+#~ msgstr "Inserează tipul tranzacției în câmpul Nr. pentru tranzacții noi."
 
 #~ msgid "Enter ISO 4217 code for the new currency"
 #~ msgstr "Introduceți codul  ISO 4217 pentru moneda nouă"
@@ -32138,7 +32139,7 @@ msgstr ""
 #, fuzzy
 #~| msgid "%1 days overdue (%2 occurences)."
 #~ msgid "%1 days overdue (%2 occurrences)."
-#~ msgstr "%1 zile întărziere (%2 scadențe)."
+#~ msgstr "%1 zile întârziere (%2 scadențe)."
 
 #~ msgid "Do you really want to delete all %1 selected transactions?"
 #~ msgstr "Doriți într-adevăr să ștergeți toate cele %1 tranzacții marcate?"
