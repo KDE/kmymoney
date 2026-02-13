@@ -767,6 +767,9 @@ MyMoneyReport readReport(QXmlStreamReader* reader)
 
     MyMoneyReport report(readId(reader));
 
+    // Reports load from file are custom reports
+    report.setOrigin(eMyMoney::Report::Origin::Custom);
+
     // The goal of this reading method is 100% backward AND 100% forward
     // compatibility.  Any report ever created with any version of KMyMoney
     // should be able to be loaded by this method (as long as it's one of the

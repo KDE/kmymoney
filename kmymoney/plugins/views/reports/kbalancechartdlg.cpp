@@ -149,6 +149,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
                                                   static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                                   eMyMoney::TransactionFilter::Date::Last3ToNext3Months,
                                                   eMyMoney::Report::DetailLevel::Total,
+                                                  eMyMoney::Report::Origin::Generated,
                                                   QString(),
                                                   QString())))
 {

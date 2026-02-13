@@ -391,6 +391,11 @@ public:
      * Flag that a report is not saved
      */
     bool m_modified;
+
+    /**
+     * The origin of this report
+     */
+    eMyMoney::Report::Origin m_origin;
 };
 
 #endif

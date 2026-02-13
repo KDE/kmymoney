@@ -78,6 +78,7 @@ QWidget *ReportsView::netWorthForecast() const
                                             static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                             eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
                                             eMyMoney::Report::DetailLevel::Total,
+                                            eMyMoney::Report::Origin::Generated,
                                             i18n("Net Worth Forecast"),
                                             i18n("Generated Report"));
 
@@ -113,6 +114,7 @@ QWidget *ReportsView::netWorthForecast(const QString &arg) const
                                             static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                             eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
                                             detailLevel[liArgs.at(0).toInt()],
+                                            eMyMoney::Report::Origin::Generated,
                                             i18n("Net Worth Forecast"),
                                             i18n("Generated Report"));
 
@@ -170,6 +172,7 @@ QString ReportsView::budget() const
                                             static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                             eMyMoney::TransactionFilter::Date::CurrentMonth,
                                             eMyMoney::Report::DetailLevel::All,
+                                            eMyMoney::Report::Origin::Generated,
                                             i18n("Monthly Budgeted vs. Actual"),
                                             i18n("Generated Report"));
 

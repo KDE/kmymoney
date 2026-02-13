@@ -825,18 +825,21 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::CurrentMonth,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Income and Expenses This Month"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::ExpenseIncome,
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Income and Expenses This Year"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::ExpenseIncome,
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Years),
                                          TransactionFilter::Date::All,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Income and Expenses By Year"),
                                          i18n("Default Report")));
 
@@ -844,6 +847,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last12Months,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Income and Expenses Graph"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -854,6 +858,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last12Months,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Income and Expenses Bar Graph"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -865,6 +870,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::Group,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Income and Expenses Pie Chart"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -880,24 +886,28 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Net Worth By Month"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Today,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Net Worth Today"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Years),
                                          TransactionFilter::Date::All,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Net Worth By Year"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Next7Days,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("7-day Cash Flow Forecast"),
                                          i18n("Default Report")));
             list.back().setIncludingSchedules(true);
@@ -907,6 +917,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last12Months,
                                          eMyMoney::Report::DetailLevel::Total,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Net Worth Graph"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -918,6 +929,7 @@ public:
                                          eMyMoney::Report::QueryColumn::None,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Account Balances by Institution"),
                                          i18n("Default Report")));
 
@@ -925,6 +937,7 @@ public:
                                          eMyMoney::Report::QueryColumn::None,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Account Balances by Type"),
                                          i18n("Default Report")));
 
@@ -938,6 +951,7 @@ public:
                                              | eMyMoney::Report::QueryColumn::Tag | eMyMoney::Report::QueryColumn::Balance,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Transactions by Account"),
                                          i18n("Default Report")));
             // list.back().setConvertCurrency(false);
@@ -946,18 +960,21 @@ public:
                                              | eMyMoney::Report::QueryColumn::Tag,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Transactions by Category"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::Payee,
                                          eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Tag,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Transactions by Payee"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::Tag,
                                          eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Transactions by Tag"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::Month,
@@ -965,6 +982,7 @@ public:
                                              | eMyMoney::Report::QueryColumn::Tag,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Transactions by Month"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::Week,
@@ -972,12 +990,14 @@ public:
                                              | eMyMoney::Report::QueryColumn::Tag,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Transactions by Week"),
                                          i18n("Default Report")));
             list.push_back(MyMoneyReport(eMyMoney::Report::RowType::Account,
                                          eMyMoney::Report::QueryColumn::Loan,
                                          TransactionFilter::Date::All,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Loan Transactions"),
                                          i18n("Default Report")));
             list.back().setLoansOnly(true);
@@ -986,6 +1006,7 @@ public:
                                              | eMyMoney::Report::QueryColumn::Balance,
                                          TransactionFilter::Date::Last3Months,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Transactions by Reconciliation Status"),
                                          i18n("Default Report")));
             groups.push_back(list);
@@ -996,6 +1017,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
                                          TransactionFilter::Date::CurrentMonth,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Cash Flow Transactions This Month"),
                                          i18n("Default Report")));
             groups.push_back(list);
@@ -1007,6 +1029,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Action | eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Transactions"),
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
@@ -1015,6 +1038,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Holdings by Account"),
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
@@ -1023,6 +1047,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Holdings by Type"),
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
@@ -1031,6 +1056,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Performance,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Performance by Account"),
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
@@ -1039,6 +1065,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Performance,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Performance by Type"),
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
@@ -1047,6 +1074,7 @@ public:
                                          eMyMoney::Report::QueryColumn::CapitalGain,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Capital Gains by Account"),
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
@@ -1055,6 +1083,7 @@ public:
                                          eMyMoney::Report::QueryColumn::CapitalGain,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Capital Gains by Type"),
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
@@ -1063,6 +1092,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Today,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Holdings Pie"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -1075,6 +1105,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last12Months,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Worth Graph"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -1088,6 +1119,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last12Months,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Price Graph"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -1108,6 +1140,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last12Months,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Moving Average Price Graph"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -1128,6 +1161,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last30Days,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Moving Average"),
                                          i18n("Default Report")));
             list.back().setChartCHGridLines(false);
@@ -1143,6 +1177,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Last30Days,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Investment Moving Average vs Actual"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -1163,6 +1198,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Tax Transactions by Category"),
                                          i18n("Default Report")));
             list.back().setTax(true);
@@ -1171,6 +1207,7 @@ public:
                               eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Account,
                               TransactionFilter::Date::YearToDate,
                               eMyMoney::Report::DetailLevel::All,
+                              eMyMoney::Report::Origin::BuiltIn,
                               i18n("Tax Transactions by Payee"),
                               i18n("Default Report")));
             list.back().setTax(true);
@@ -1178,6 +1215,7 @@ public:
                                          eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
                                          TransactionFilter::Date::LastFiscalYear,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Tax Transactions by Category Last Fiscal Year"),
                                          i18n("Default Report")));
             list.back().setTax(true);
@@ -1186,6 +1224,7 @@ public:
                               eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Account,
                               TransactionFilter::Date::LastFiscalYear,
                               eMyMoney::Report::DetailLevel::All,
+                              eMyMoney::Report::Origin::BuiltIn,
                               i18n("Tax Transactions by Payee Last Fiscal Year"),
                               i18n("Default Report")));
             list.back().setTax(true);
@@ -1198,6 +1237,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Budgeted vs. Actual This Year"),
                                          i18n("Default Report")));
             list.back().setShowingRowTotals(true);
@@ -1207,6 +1247,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::YearToMonth,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Budgeted vs. Actual This Year (YTM)"),
                                          i18n("Default Report")));
             list.back().setShowingRowTotals(true);
@@ -1220,6 +1261,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::CurrentMonth,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Monthly Budgeted vs. Actual"),
                                          i18n("Default Report")));
             list.back().setBudget("Any", true);
@@ -1228,6 +1270,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::CurrentFiscalYear,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Yearly Budgeted vs. Actual"),
                                          i18n("Default Report")));
             list.back().setBudget("Any", true);
@@ -1237,6 +1280,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::CurrentMonth,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Monthly Budget"),
                                          i18n("Default Report")));
             list.back().setBudget("Any", false);
@@ -1245,6 +1289,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::CurrentFiscalYear,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Yearly Budget"),
                                          i18n("Default Report")));
             list.back().setBudget("Any", false);
@@ -1253,6 +1298,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::CurrentFiscalYear,
                                          eMyMoney::Report::DetailLevel::Group,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Yearly Budgeted vs Actual Graph"),
                                          i18n("Default Report")));
             list.back().setChartByDefault(true);
@@ -1270,6 +1316,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Next12Months,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Forecast By Month"),
                                          i18n("Default Report")));
             list.back().setIncludingForecast(true);
@@ -1278,6 +1325,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::NextQuarter,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Forecast Next Quarter"),
                                          i18n("Default Report")));
             list.back().setColumnsAreDays(true);
@@ -1287,6 +1335,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::CurrentYear,
                                          eMyMoney::Report::DetailLevel::Top,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Income and Expenses Forecast This Year"),
                                          i18n("Default Report")));
             list.back().setIncludingForecast(true);
@@ -1295,6 +1344,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Next3Months,
                                          eMyMoney::Report::DetailLevel::Total,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Net Worth Forecast Graph"),
                                          i18n("Default Report")));
             list.back().setColumnsAreDays(true);
@@ -1312,6 +1362,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Next12Months,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Schedule Information"),
                                          i18n("Default Report")));
             list.back().setDetailLevel(eMyMoney::Report::DetailLevel::All);
@@ -1319,6 +1370,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Next12Months,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Schedule Summary Information"),
                                          i18n("Default Report")));
             list.back().setDetailLevel(eMyMoney::Report::DetailLevel::Top);
@@ -1326,6 +1378,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Today,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Account Information"),
                                          i18n("Default Report")));
             list.back().setConvertCurrency(false);
@@ -1333,6 +1386,7 @@ public:
                                          static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                          TransactionFilter::Date::Today,
                                          eMyMoney::Report::DetailLevel::All,
+                                         eMyMoney::Report::Origin::BuiltIn,
                                          i18n("Loan Information"),
                                          i18n("Default Report")));
             list.back().setConvertCurrency(false);
@@ -1402,6 +1456,7 @@ public:
                                  eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category,
                                  eMyMoney::TransactionFilter::Date::YearToDate,
                                  eMyMoney::Report::DetailLevel::All,
+                                 eMyMoney::Report::Origin::Generated,
                                  i18n("%1 YTD Account Transactions", m_currentAccount.name()),
                                  i18n("Generated Report"));
             report.setGroup(i18n("Transactions"));

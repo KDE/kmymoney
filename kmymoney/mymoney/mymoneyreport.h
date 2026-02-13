@@ -38,6 +38,7 @@ enum class Date;
 namespace eMyMoney {
 namespace Report {
 enum class RowType;
+enum class Origin;
 enum class ReportType;
 enum class ColumnType;
 enum QueryColumn : int;
@@ -83,6 +84,7 @@ public:
                            unsigned ct,
                            eMyMoney::TransactionFilter::Date dl,
                            eMyMoney::Report::DetailLevel ss,
+                           eMyMoney::Report::Origin origin,
                            const QString& name,
                            const QString& comment);
 
@@ -130,6 +132,18 @@ public:
 
     bool isModified() const;
     void setModified(bool f);
+
+    eMyMoney::Report::Origin origin() const;
+    void setOrigin(eMyMoney::Report::Origin origin);
+
+    bool isBuiltIn() const;
+    void setIsBuiltIn();
+
+    bool isCustom() const;
+    void setIsCustom();
+
+    bool isGenerated() const;
+    void setIsGenerated();
 
     bool isFavorite() const;
     void setFavorite(bool f);

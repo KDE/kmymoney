@@ -648,6 +648,7 @@ void QueryTableTest::testInvestment()
                           eMyMoney::Report::QueryColumn::Action | eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                           eMyMoney::TransactionFilter::Date::UserDefined,
                           eMyMoney::Report::DetailLevel::All,
+                          eMyMoney::Report::Origin::Test,
                           "Investment Transactions",
                           "Test Report"));
         invtran_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 12, 31));
@@ -741,6 +742,7 @@ void QueryTableTest::testInvestment()
                                               eMyMoney::Report::QueryColumn::Performance,
                                               eMyMoney::TransactionFilter::Date::UserDefined,
                                               eMyMoney::Report::DetailLevel::All,
+                                              eMyMoney::Report::Origin::Test,
                                               "Investment Performance by Account",
                                               "Test Report"));
         invhold_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 10, 1));
@@ -832,6 +834,7 @@ void QueryTableTest::testSplitShares()
                                               eMyMoney::Report::QueryColumn::Performance,
                                               eMyMoney::TransactionFilter::Date::UserDefined,
                                               eMyMoney::Report::DetailLevel::All,
+                                              eMyMoney::Report::Origin::Test,
                                               "Investment Performance by Account (with stock split)",
                                               "Test Report"));
         invhold_r.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 3));
@@ -1171,6 +1174,7 @@ public:
                                    static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                    eMyMoney::TransactionFilter::Date::YearToDate,
                                    eMyMoney::Report::DetailLevel::Top,
+                                   eMyMoney::Report::Origin::BuiltIn,
                                    "Yearly Budgeted vs. Actual",
                                    "Default Report"))
     {
