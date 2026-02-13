@@ -767,6 +767,7 @@ void KReportsView::slotListContextMenu(const QPoint & p)
         }
     } else {
         contextmenu->addAction(i18nc("To export reports", "&Export to PDF files"), this, SLOT(slotExportFromList()));
+        contextmenu->addAction(i18n("&Delete"), this, SLOT(slotDeleteFromList()));
     }
 
     contextmenu->popup(d->ui.m_tocTreeWidget->viewport()->mapToGlobal(p));
@@ -861,7 +862,15 @@ void KReportsView::slotNewFromList()
 void KReportsView::slotDeleteFromList()
 {
     Q_D(KReportsView);
-    if (auto tocItem = dynamic_cast<TocItem*>(d->ui.m_tocTreeWidget->currentItem())) {
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
+
+    if (items.isEmpty()) {
+        return;
+    }
+
+    QList<MyMoneyReport*> reportList;
+    for (const auto item : qAsConst(items)) {
+        const auto tocItem = dynamic_cast<TocItem*>(item);
         if (auto reportTocItem = dynamic_cast<TocItemReport*>(tocItem)) {
             MyMoneyReport& report = reportTocItem->getReport();
 
@@ -876,11 +885,17 @@ void KReportsView::slotDeleteFromList()
                         break;
                     }
                 }
-                MyMoneyFileTransaction ft;
-                MyMoneyFile::instance()->removeReport(report);
-                ft.commit();
+                reportList.append(&report);
             }
         }
+    }
+
+    if (reportList.size() > 0) {
+        MyMoneyFileTransaction ft;
+        for (auto& report : reportList) {
+            MyMoneyFile::instance()->removeReport(*report);
+        }
+        ft.commit();
     }
 }
 
