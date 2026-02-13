@@ -1092,7 +1092,9 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             eMyMoney::Report::Origin::BuiltIn,
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1104,7 +1106,9 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             eMyMoney::Report::Origin::BuiltIn,
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1120,7 +1124,9 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             eMyMoney::Report::Origin::BuiltIn,
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1137,7 +1143,9 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             eMyMoney::Report::Origin::BuiltIn,
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 
@@ -1154,7 +1162,9 @@ void PivotTableTest::testBudget()
                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                              eMyMoney::TransactionFilter::Date::YearToDate,
                              eMyMoney::Report::DetailLevel::Top,
-                             "Yearly Budgeted vs. Actual", "Default Report");
+                             eMyMoney::Report::Origin::BuiltIn,
+                             "Yearly Budgeted vs. Actual",
+                             "Default Report");
         PivotTable table(report);
     }
 }

@@ -15,6 +15,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -41,6 +42,7 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
                              unsigned ct,
                              eMyMoney::TransactionFilter::Date dl,
                              eMyMoney::Report::DetailLevel ss,
+                             eMyMoney::Report::Origin origin,
                              const QString& name,
                              const QString& comment)
     : MyMoneyObject(*new MyMoneyReportPrivate(this))
@@ -53,6 +55,7 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
     d->m_reportType = d->rowTypeToReportType(rt);
     d->m_rowType = rt;
     d->m_dateLock = dl;
+    d->m_origin = origin;
 
     //set report type
     if (d->m_reportType == eMyMoney::Report::ReportType::PivotTable)
@@ -305,6 +308,54 @@ void MyMoneyReport::setModified(bool f)
 {
     Q_D(MyMoneyReport);
     d->m_modified = f;
+}
+
+eMyMoney::Report::Origin MyMoneyReport::origin() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_origin;
+}
+
+void MyMoneyReport::setOrigin(eMyMoney::Report::Origin origin)
+{
+    Q_D(MyMoneyReport);
+    d->m_origin = origin;
+}
+
+bool MyMoneyReport::isBuiltIn() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_origin == eMyMoney::Report::Origin::BuiltIn;
+}
+
+void MyMoneyReport::setIsBuiltIn()
+{
+    Q_D(MyMoneyReport);
+    d->m_origin = eMyMoney::Report::Origin::BuiltIn;
+}
+
+bool MyMoneyReport::isCustom() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_origin == eMyMoney::Report::Origin::Custom;
+}
+
+void MyMoneyReport::setIsCustom()
+{
+    Q_D(MyMoneyReport);
+    d->m_origin = eMyMoney::Report::Origin::Custom;
+}
+
+bool MyMoneyReport::isGenerated() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_origin == eMyMoney::Report::Origin::Generated;
+}
+
+void MyMoneyReport::setIsGenerated()
+{
+    Q_D(MyMoneyReport);
+    d->m_origin = eMyMoney::Report::Origin::Generated;
 }
 
 bool MyMoneyReport::isFavorite() const
