@@ -48,6 +48,9 @@ public:
 
     int processItems(Worker* worker) override;
 
+Q_SIGNALS:
+    void modelChanged();
+
 public Q_SLOTS:
 
 private:

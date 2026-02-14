@@ -51,6 +51,7 @@
 #include "pivottable.h"
 #include "querytable.h"
 #include "reportcontrolimpl.h"
+#include "reportsmodel.h"
 #include "reporttable.h"
 #include "tocitem.h"
 #include "tocitemgroup.h"
@@ -101,6 +102,7 @@ KReportsView::KReportsView(QWidget *parent) :
     connect(pActions[eMenu::Action::ReportExport], &QAction::triggered, this, &KReportsView::slotExportView);
     connect(pActions[eMenu::Action::ReportDelete], &QAction::triggered, this, &KReportsView::slotDelete);
     connect(pActions[eMenu::Action::ReportClose], &QAction::triggered, this, &KReportsView::slotCloseCurrent);
+    connect(MyMoneyFile::instance()->reportsModel(), &ReportsModel::modelChanged, this, &KReportsView::slotRefresh);
 
     pActions[eMenu::Action::ReportNew]->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Plus));
     pActions[eMenu::Action::ReportConfigure]->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_P));
@@ -897,6 +899,11 @@ void KReportsView::slotDeleteFromList()
         }
         ft.commit();
     }
+}
+
+void KReportsView::slotRefresh()
+{
+    refresh();
 }
 
 // Make sure, that these definitions are only used within this file

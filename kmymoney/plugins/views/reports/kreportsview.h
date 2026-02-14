@@ -141,6 +141,7 @@ public Q_SLOTS:
     void slotConfigureFromList();
     void slotNewFromList();
     void slotDeleteFromList();
+    void slotRefresh();
 
     void updateActions(const SelectedObjects& selections) override;
 
