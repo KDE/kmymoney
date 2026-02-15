@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-14 00:43+0000\n"
+"POT-Creation-Date: 2026-02-15 00:44+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -12647,7 +12647,7 @@ msgid "iCalendar files"
 msgstr "iCalendar файлдары"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:347
+#: kmymoney/plugins/views/reports/kreportsview.cpp:349
 #, kde-format
 msgid "Export as"
 msgstr "Былай экспорттау"
@@ -13111,9 +13111,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Үзінді көшірмені импорттау қатесі. Жалғаса берсін бе?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1565
-#: kmymoney/plugins/views/reports/kreportsview.cpp:436
-#: kmymoney/plugins/views/reports/kreportsview.cpp:495
-#: kmymoney/plugins/views/reports/kreportsview.cpp:514
+#: kmymoney/plugins/views/reports/kreportsview.cpp:438
+#: kmymoney/plugins/views/reports/kreportsview.cpp:497
+#: kmymoney/plugins/views/reports/kreportsview.cpp:516
 #, kde-format
 msgid "Critical Error"
 msgstr "Дағдарысты қате"
@@ -15671,7 +15671,7 @@ msgid "Unable to remove budget."
 msgstr "Бюджет ысырып тасталмады"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:211
-#: kmymoney/plugins/views/reports/kreportsview.cpp:471
+#: kmymoney/plugins/views/reports/kreportsview.cpp:473
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 дегеннің көшірмесі "
@@ -17315,22 +17315,22 @@ msgstr "Транзакцияларды іздеу"
 msgid "Configure your report"
 msgstr "Есеп-беруді баптау"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:305
+#: kmymoney/plugins/views/reports/kreportsview.cpp:307
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl() функцияда '%1' деген команда беймәлім"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:325
+#: kmymoney/plugins/views/reports/kreportsview.cpp:327
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl() функцияда '%1' деген көрініс беймәлім"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:375
+#: kmymoney/plugins/views/reports/kreportsview.cpp:377
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "Сақтау жаңылысы: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1499
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
@@ -17339,8 +17339,8 @@ msgstr "Сақтау жаңылысы: %1"
 msgid "Generated Report"
 msgstr "Есеп беру"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
-#: kmymoney/plugins/views/reports/kreportsview.cpp:472
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:474
 #: kmymoney/plugins/views/reports/kreportsview_p.h:830
 #: kmymoney/plugins/views/reports/kreportsview_p.h:838
 #: kmymoney/plugins/views/reports/kreportsview_p.h:846
@@ -17399,19 +17399,19 @@ msgstr "Есеп беру"
 msgid "Default Report"
 msgstr "Әдетті есеп-беру"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:401
-#: kmymoney/plugins/views/reports/kreportsview.cpp:473
+#: kmymoney/plugins/views/reports/kreportsview.cpp:403
+#: kmymoney/plugins/views/reports/kreportsview.cpp:475
 #, kde-format
 msgid "Custom Report"
 msgstr "Өзгертілген есеп-беру"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:404
 #, kde-format
 msgid "%1 (Customized)"
 msgstr "%1 (Өзгертілген)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:430
-#: kmymoney/plugins/views/reports/kreportsview.cpp:489
+#: kmymoney/plugins/views/reports/kreportsview.cpp:432
+#: kmymoney/plugins/views/reports/kreportsview.cpp:491
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -17420,77 +17420,77 @@ msgstr ""
 "\"%2\" жататын \"%1\" есеп-беру тобы табылмады\n"
 "Мына құрастырушылар адресіне хабарлаңыз: kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:450
+#: kmymoney/plugins/views/reports/kreportsview.cpp:452
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "Есеп-беруді баптау жаңылысы: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:508
+#: kmymoney/plugins/views/reports/kreportsview.cpp:510
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Есеп-беру косылмайды, себебі: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:545
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> - әдетті есеп-беру, ол өшірілмейді."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:544
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "Есеп-беру өшірілсін бе?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:741
+#: kmymoney/plugins/views/reports/kreportsview.cpp:743
 #, fuzzy, kde-format
 #| msgid "Import options"
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Импорттау параметрлері"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:742
+#: kmymoney/plugins/views/reports/kreportsview.cpp:744
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "&Ашу"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:745
+#: kmymoney/plugins/views/reports/kreportsview.cpp:747
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:749
+#: kmymoney/plugins/views/reports/kreportsview.cpp:751
 #, fuzzy, kde-format
 #| msgid "Exporting file..."
 msgctxt "To export a report"
 msgid "&Export to PDF file"
 msgstr "Файлды экспорттау..."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:751
+#: kmymoney/plugins/views/reports/kreportsview.cpp:753
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "&Баптау"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:754
+#: kmymoney/plugins/views/reports/kreportsview.cpp:756
 #, kde-format
 msgid "&New report"
 msgstr "&Жаңа есеп-беру"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:764
-#: kmymoney/plugins/views/reports/kreportsview.cpp:770
+#: kmymoney/plugins/views/reports/kreportsview.cpp:766
+#: kmymoney/plugins/views/reports/kreportsview.cpp:772
 #, kde-format
 msgid "&Delete"
 msgstr "Ө&шіру"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:769
+#: kmymoney/plugins/views/reports/kreportsview.cpp:771
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:823
+#: kmymoney/plugins/views/reports/kreportsview.cpp:825
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export into directory"

@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-14 00:43+0000\n"
+"POT-Creation-Date: 2026-02-15 00:44+0000\n"
 "PO-Revision-Date: 2025-11-28 18:56+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -12175,7 +12175,7 @@ msgid "iCalendar files"
 msgstr "iCalendar-Dateien"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:347
+#: kmymoney/plugins/views/reports/kreportsview.cpp:349
 #, kde-format
 msgid "Export as"
 msgstr "Exportieren als"
@@ -12649,9 +12649,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Fehler beim Importieren des Kontoauszugs. Möchten Sie fortfahren?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1565
-#: kmymoney/plugins/views/reports/kreportsview.cpp:436
-#: kmymoney/plugins/views/reports/kreportsview.cpp:495
-#: kmymoney/plugins/views/reports/kreportsview.cpp:514
+#: kmymoney/plugins/views/reports/kreportsview.cpp:438
+#: kmymoney/plugins/views/reports/kreportsview.cpp:497
+#: kmymoney/plugins/views/reports/kreportsview.cpp:516
 #, kde-format
 msgid "Critical Error"
 msgstr "Kritischer Fehler"
@@ -15203,7 +15203,7 @@ msgid "Unable to remove budget."
 msgstr "Das Budget kann nicht entfernt werden."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:211
-#: kmymoney/plugins/views/reports/kreportsview.cpp:471
+#: kmymoney/plugins/views/reports/kreportsview.cpp:473
 #, kde-format
 msgid "Copy of %1"
 msgstr "Kopie von %1"
@@ -16813,22 +16813,22 @@ msgstr "Buchungen suchen"
 msgid "Configure your report"
 msgstr "Diesen Bericht konfigurieren"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:305
+#: kmymoney/plugins/views/reports/kreportsview.cpp:307
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "Unbekannter Befehl '%1' in KReportsView::slotOpenUrl()"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:325
+#: kmymoney/plugins/views/reports/kreportsview.cpp:327
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "Unbekannte Ansicht '%1' in KReportsView::slotOpenUrl()"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:375
+#: kmymoney/plugins/views/reports/kreportsview.cpp:377
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "„%1“ kann nicht gespeichert werden"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1499
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
@@ -16837,8 +16837,8 @@ msgstr "„%1“ kann nicht gespeichert werden"
 msgid "Generated Report"
 msgstr "Erzeugter Bericht"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
-#: kmymoney/plugins/views/reports/kreportsview.cpp:472
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:474
 #: kmymoney/plugins/views/reports/kreportsview_p.h:830
 #: kmymoney/plugins/views/reports/kreportsview_p.h:838
 #: kmymoney/plugins/views/reports/kreportsview_p.h:846
@@ -16897,19 +16897,19 @@ msgstr "Erzeugter Bericht"
 msgid "Default Report"
 msgstr "Standardbericht"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:401
-#: kmymoney/plugins/views/reports/kreportsview.cpp:473
+#: kmymoney/plugins/views/reports/kreportsview.cpp:403
+#: kmymoney/plugins/views/reports/kreportsview.cpp:475
 #, kde-format
 msgid "Custom Report"
 msgstr "Benutzerdefinierter Bericht"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:404
 #, kde-format
 msgid "%1 (Customized)"
 msgstr "%1 (angepasst)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:430
-#: kmymoney/plugins/views/reports/kreportsview.cpp:489
+#: kmymoney/plugins/views/reports/kreportsview.cpp:432
+#: kmymoney/plugins/views/reports/kreportsview.cpp:491
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -16919,76 +16919,76 @@ msgstr ""
 "Bitte melden Sie diesen Fehler an die Mailingliste der Entwickler: kmymoney-"
 "devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:450
+#: kmymoney/plugins/views/reports/kreportsview.cpp:452
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "Die Konfiguration des Berichts ist fehlgeschlagen: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:508
+#: kmymoney/plugins/views/reports/kreportsview.cpp:510
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Der Bericht kann nicht hinzugefügt werden. Grund: „%1“"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:545
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> ist ein Standardbericht, der nicht gelöscht werden kann."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:544
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "Bericht löschen?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:741
+#: kmymoney/plugins/views/reports/kreportsview.cpp:743
 #, fuzzy, kde-format
 #| msgid "Import options"
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Import-Optionen"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:742
+#: kmymoney/plugins/views/reports/kreportsview.cpp:744
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "Öff&nen"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:745
+#: kmymoney/plugins/views/reports/kreportsview.cpp:747
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr "&Drucken"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:749
+#: kmymoney/plugins/views/reports/kreportsview.cpp:751
 #, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
 msgstr "&Als PDF-Datei exportieren"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:751
+#: kmymoney/plugins/views/reports/kreportsview.cpp:753
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "Ein&richten "
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:754
+#: kmymoney/plugins/views/reports/kreportsview.cpp:756
 #, kde-format
 msgid "&New report"
 msgstr "&Neuer Bericht"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:764
-#: kmymoney/plugins/views/reports/kreportsview.cpp:770
+#: kmymoney/plugins/views/reports/kreportsview.cpp:766
+#: kmymoney/plugins/views/reports/kreportsview.cpp:772
 #, kde-format
 msgid "&Delete"
 msgstr "&Löschen"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:769
+#: kmymoney/plugins/views/reports/kreportsview.cpp:771
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:823
+#: kmymoney/plugins/views/reports/kreportsview.cpp:825
 #, kde-format
 msgid "Export into directory"
 msgstr "In Ordner exportieren"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-14 00:43+0000\n"
+"POT-Creation-Date: 2026-02-15 00:44+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -12039,7 +12039,7 @@ msgid "iCalendar files"
 msgstr "iCalendar 파일"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:347
+#: kmymoney/plugins/views/reports/kreportsview.cpp:349
 #, kde-format
 msgid "Export as"
 msgstr "다른 이름으로 내보내기"
@@ -12509,9 +12509,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "거래 내역을 가져오는 중 오류가 발생했습니다. 계속 진행하시겠습니까?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1565
-#: kmymoney/plugins/views/reports/kreportsview.cpp:436
-#: kmymoney/plugins/views/reports/kreportsview.cpp:495
-#: kmymoney/plugins/views/reports/kreportsview.cpp:514
+#: kmymoney/plugins/views/reports/kreportsview.cpp:438
+#: kmymoney/plugins/views/reports/kreportsview.cpp:497
+#: kmymoney/plugins/views/reports/kreportsview.cpp:516
 #, kde-format
 msgid "Critical Error"
 msgstr "치명적 오류"
@@ -15016,7 +15016,7 @@ msgid "Unable to remove budget."
 msgstr "예산을 삭제할 수 없습니다."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:211
-#: kmymoney/plugins/views/reports/kreportsview.cpp:471
+#: kmymoney/plugins/views/reports/kreportsview.cpp:473
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1의 사본"
@@ -16601,22 +16601,22 @@ msgstr "거래 검색"
 msgid "Configure your report"
 msgstr "보고서 설정"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:305
+#: kmymoney/plugins/views/reports/kreportsview.cpp:307
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl()에서 알 수 없는 명령 '%1'"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:325
+#: kmymoney/plugins/views/reports/kreportsview.cpp:327
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl()에서 알 수 없는 보기 '%1'"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:375
+#: kmymoney/plugins/views/reports/kreportsview.cpp:377
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "저장 실패: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1499
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
@@ -16625,8 +16625,8 @@ msgstr "저장 실패: %1"
 msgid "Generated Report"
 msgstr "생성된 보고서"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
-#: kmymoney/plugins/views/reports/kreportsview.cpp:472
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:474
 #: kmymoney/plugins/views/reports/kreportsview_p.h:830
 #: kmymoney/plugins/views/reports/kreportsview_p.h:838
 #: kmymoney/plugins/views/reports/kreportsview_p.h:846
@@ -16685,19 +16685,19 @@ msgstr "생성된 보고서"
 msgid "Default Report"
 msgstr "기본 보고서"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:401
-#: kmymoney/plugins/views/reports/kreportsview.cpp:473
+#: kmymoney/plugins/views/reports/kreportsview.cpp:403
+#: kmymoney/plugins/views/reports/kreportsview.cpp:475
 #, kde-format
 msgid "Custom Report"
 msgstr "사용자 정의 보고서"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:404
 #, kde-format
 msgid "%1 (Customized)"
 msgstr "%1(사용자 정의)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:430
-#: kmymoney/plugins/views/reports/kreportsview.cpp:489
+#: kmymoney/plugins/views/reports/kreportsview.cpp:432
+#: kmymoney/plugins/views/reports/kreportsview.cpp:491
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -16706,75 +16706,75 @@ msgstr ""
 "보고서 \"%2\"의 reportgroup \"%1\"을(를) 찾을 수 없습니다.\n"
 "개발자 메일링 리스트에 오류를 보고해 주십시오: kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:450
+#: kmymoney/plugins/views/reports/kreportsview.cpp:452
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "보고서를 설정하지 못했습니다: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:508
+#: kmymoney/plugins/views/reports/kreportsview.cpp:510
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "보고서를 추가할 수 없음, 이유: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:545
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b>은(는) 기본 보고서이므로 삭제할 수 없습니다."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:544
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "보고서를 삭제하시겠습니까?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:741
+#: kmymoney/plugins/views/reports/kreportsview.cpp:743
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "보고서 옵션"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:742
+#: kmymoney/plugins/views/reports/kreportsview.cpp:744
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "열기(&O)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:745
+#: kmymoney/plugins/views/reports/kreportsview.cpp:747
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr "인쇄(&P)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:749
+#: kmymoney/plugins/views/reports/kreportsview.cpp:751
 #, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:751
+#: kmymoney/plugins/views/reports/kreportsview.cpp:753
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "설정(&C)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:754
+#: kmymoney/plugins/views/reports/kreportsview.cpp:756
 #, kde-format
 msgid "&New report"
 msgstr "새 보고서(&N)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:764
-#: kmymoney/plugins/views/reports/kreportsview.cpp:770
+#: kmymoney/plugins/views/reports/kreportsview.cpp:766
+#: kmymoney/plugins/views/reports/kreportsview.cpp:772
 #, kde-format
 msgid "&Delete"
 msgstr "삭제(&D)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:769
+#: kmymoney/plugins/views/reports/kreportsview.cpp:771
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:823
+#: kmymoney/plugins/views/reports/kreportsview.cpp:825
 #, fuzzy, kde-format
 #| msgid "Export report"
 msgid "Export into directory"
