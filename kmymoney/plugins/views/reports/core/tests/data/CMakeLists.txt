@@ -12,8 +12,8 @@ set(querytable_test_files
   test-cash-flow.xml
   test-investment.xml
   test-net-worth.xml
+  test-refinance-loan.xml
   test-transactions.xml
-  refinance-loan.xml
 )
 
 set(pivottable_test_files
