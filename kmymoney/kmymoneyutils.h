@@ -14,10 +14,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStandardPaths>
-#include <QMap>
-#include <QUrl>
 #include <QDebug>
+#include <QMap>
+#include <QStandardPaths>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

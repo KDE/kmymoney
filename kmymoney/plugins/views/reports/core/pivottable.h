@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "reporttable.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
+#include "reporttable.h"
 
 class MyMoneyReport;
 
