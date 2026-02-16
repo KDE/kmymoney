@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-15 00:44+0000\n"
-"PO-Revision-Date: 2026-02-09 12:39+0100\n"
+"PO-Revision-Date: 2026-02-15 12:28+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -16200,10 +16200,9 @@ msgstr "Commento"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:59
-#, fuzzy, kde-format
-#| msgid "Modify"
+#, kde-format
 msgid "Modified"
-msgstr "Modifica"
+msgstr "Modificate"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:438
