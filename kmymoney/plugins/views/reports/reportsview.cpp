@@ -13,22 +13,23 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "viewinterface.h"
-#include "kreportsview.h"
-#include "kreportchartview.h"
 #include "kmymoneysettings.h"
-#include "pivottable.h"
-#include "pivotgrid.h"
+#include "kmymoneyutils.h"
+#include "kreportchartview.h"
+#include "kreportsview.h"
+#include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
-#include "mymoneyenums.h"
+#include "pivotgrid.h"
+#include "pivottable.h"
 #include "reportsviewenums.h"
+#include "viewinterface.h"
 
 #define VIEW_LEDGER         "ledger"
 
