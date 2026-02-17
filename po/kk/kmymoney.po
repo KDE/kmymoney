@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-15 00:44+0000\n"
+"POT-Creation-Date: 2026-02-17 00:45+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -1920,7 +1920,7 @@ msgstr "Негізгі ақша"
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:88
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:528
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:565
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:81
 #: kmymoney/views/kmymoneyview.cpp:192
 #: kmymoney/widgets/ktransactionfilter.cpp:141
@@ -1948,8 +1948,8 @@ msgstr "Есепшот/Санат"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:516
-#: kmymoney/plugins/views/reports/kreportsview_p.h:960
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1500
+#: kmymoney/plugins/views/reports/kreportsview_p.h:947
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1466
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
 #: kmymoney/views/ktagsview.ui:127
 #, kde-format
@@ -4373,7 +4373,7 @@ msgstr "Күн"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:312
 #: kmymoney/plugins/views/reports/core/listtable.cpp:711
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:537
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:574
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
 msgid "Month"
@@ -5522,6 +5522,7 @@ msgid "Open report"
 msgstr "&Жаңа есеп-беру"
 
 #: kmymoney/kmymoney.cpp:1513
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:248
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
@@ -5534,7 +5535,7 @@ msgid "Copy report"
 msgstr "&Жаңа есеп-беру"
 
 #: kmymoney/kmymoney.cpp:1515
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:239
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:246
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
@@ -6374,7 +6375,7 @@ msgid "Budget"
 msgstr "Бюджет"
 
 #: kmymoney/kmymoneyutils.cpp:128
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1031
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
 #, kde-format
 msgid "Cash Flow"
 msgstr "Қаржы ағымы"
@@ -9760,13 +9761,13 @@ msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "Сипаттамасы"
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:657
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:658
 #, kde-format
 msgctxt "Missing attribute %1 in xml file"
 msgid "Missing attribute %1 in line %2"
 msgstr ""
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:660
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:661
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
@@ -12647,7 +12648,7 @@ msgid "iCalendar files"
 msgstr "iCalendar файлдары"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:349
+#: kmymoney/plugins/views/reports/kreportsview.cpp:350
 #, kde-format
 msgid "Export as"
 msgstr "Былай экспорттау"
@@ -13111,9 +13112,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Үзінді көшірмені импорттау қатесі. Жалғаса берсін бе?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1565
-#: kmymoney/plugins/views/reports/kreportsview.cpp:438
-#: kmymoney/plugins/views/reports/kreportsview.cpp:497
-#: kmymoney/plugins/views/reports/kreportsview.cpp:516
+#: kmymoney/plugins/views/reports/kreportsview.cpp:443
+#: kmymoney/plugins/views/reports/kreportsview.cpp:504
+#: kmymoney/plugins/views/reports/kreportsview.cpp:523
 #, kde-format
 msgid "Critical Error"
 msgstr "Дағдарысты қате"
@@ -14729,7 +14730,7 @@ msgstr "QIF іс-әлпеті"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:254
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:519
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:556
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:66
 #: kmymoney/views/kmymoneyview.cpp:190
 #, kde-format
@@ -15671,7 +15672,7 @@ msgid "Unable to remove budget."
 msgstr "Бюджет ысырып тасталмады"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:211
-#: kmymoney/plugins/views/reports/kreportsview.cpp:473
+#: kmymoney/plugins/views/reports/kreportsview.cpp:478
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 дегеннің көшірмесі "
@@ -15926,7 +15927,7 @@ msgstr "Атауы"
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:53
 #: kmymoney/plugins/views/forecast/kforecastview.ui:272
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1344
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1313
 #, kde-format
 msgid "Forecast"
 msgstr "Болжам"
@@ -16120,7 +16121,7 @@ msgstr "Бүкіл"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:441
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:478
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
@@ -16128,7 +16129,7 @@ msgstr "Жоғарғы деңгейі"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:444
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:481
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -16136,7 +16137,7 @@ msgstr "Топтар"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:447
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:484
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -16178,7 +16179,8 @@ msgstr "Бюджет болжамы"
 #. i18n: ectx: attribute (title), widget (QWidget, m_tabChart)
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:146
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:127
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:155
 #: kmymoney/plugins/views/reports/kreportsview_p.h:437
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
@@ -16579,7 +16581,7 @@ msgstr "№"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:699
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:525
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:562
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
 #: kmymoney/views/newtransactioneditor.ui:214
@@ -16601,7 +16603,7 @@ msgstr "Санат түрі"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:540
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:577
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
 msgid "Week"
@@ -16922,49 +16924,49 @@ msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Есепшот"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2210
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2212
 #, fuzzy, kde-format
 #| msgid "Actual"
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Шын"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2215
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2217
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Бюджет"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2220
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2222
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Айырмашылық"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2225
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2227
 #, fuzzy, kde-format
 #| msgid "Forecast"
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Болжам"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2230
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2232
 #, fuzzy, kde-format
 #| msgid "Moving Average"
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Жылжымалы орташасы"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2235
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2237
 #, fuzzy, kde-format
 #| msgid "Moving Average Price"
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Жылжымалы орта бағасы"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2240
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2242
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"
@@ -17064,27 +17066,27 @@ msgstr ""
 "Есеп-беруде қате пайда болды: \"%1\".\n"
 "Құрасырушыларына хабарлаңыз. Адресі: kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:174
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:181
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
 msgstr "%1 балансының тарихы"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:180
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:187
 #, fuzzy, kde-format
 #| msgid "Balance of %1"
 msgid "Value of %1"
 msgstr "%1 балансы"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:183
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:190
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "%1 балансының тарихы"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:191
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:198
 #, kde-format
 msgid "Balance of %1"
 msgstr "%1 балансы"
@@ -17131,25 +17133,25 @@ msgstr "CSV файлдар"
 msgid "All files"
 msgstr "Бүкіл файлдар"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:103
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:107
 #, kde-format
 msgid "Report Configuration"
 msgstr "Есеп-беру мазмұны"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:110
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:114
 #, kde-format
 msgctxt "@info:tooltip for report configuration apply button"
 msgid "Apply the configuration changes to the report"
 msgstr "Беретін есепте өзгерістерді іске асыру"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:129
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:138
 #, fuzzy, kde-format
 #| msgid "Filter"
 msgctxt "Filters tab"
 msgid "Filters"
 msgstr "Сүзгі"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:132
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:141
 #, fuzzy, kde-format
 #| msgctxt "Account general settings"
 #| msgid "General"
@@ -17157,15 +17159,15 @@ msgctxt "General tab"
 msgid "General"
 msgstr "Жалпы"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:138
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:164
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:147
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:173
 #, kde-format
 msgid "Rows/Columns"
 msgstr "Жолдар/Бағандар"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:149
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:158
 #: kmymoney/plugins/views/reports/reporttabrange.ui:171
 #: kmymoney/widgets/daterangedlg.ui:9
 #, kde-format
@@ -17173,8 +17175,8 @@ msgid "Range"
 msgstr "Ауқым"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_reportPage)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:168
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:177
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:181
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:447
 #: kmymoney/views/khomeview_p.h:1122
@@ -17183,37 +17185,37 @@ msgid "Report"
 msgstr "Есеп-беру"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:374
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:385
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:601
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:404
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:415
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
 msgid "Monthly"
 msgstr "Ай сайын"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:438
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:475
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
 msgstr "Бүкілі"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:456
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:493
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "Кіріс пен шығыс"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:459
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:496
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "Актив пен пассив"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:559
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:71
 #, kde-format
 msgid "Top Categories"
@@ -17221,7 +17223,7 @@ msgstr "Жоғарғы санаттар"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:531
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:568
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:86
 #: kmymoney/views/kmymoneyview.cpp:188
 #: kmymoney/widgets/kaccounttemplateselector.ui:87
@@ -17230,14 +17232,14 @@ msgid "Accounts"
 msgstr "Есепшоттар"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:534
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:571
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:91
 #, kde-format
 msgid "Top Accounts"
 msgstr "Жоғарғы есепшоттар"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:589
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:626
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -17245,7 +17247,7 @@ msgid "Daily"
 msgstr "Күн сайын"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:592
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:629
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -17253,7 +17255,7 @@ msgid "Weekly"
 msgstr "Апта сайын"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:604
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:641
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -17261,7 +17263,7 @@ msgid "Bi-Monthly"
 msgstr "Екі ай сайын"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:607
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:644
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -17269,31 +17271,31 @@ msgid "Quarterly"
 msgstr "Тоқсан сайын"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:610
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:647
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "Жыл сайын"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:625
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:637
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:662
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:674
 #, kde-format
 msgid "Only owned"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:626
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:663
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:675
 #, kde-format
 msgid "Only sold"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:635
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:672
 #, kde-format
 msgid "From period"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:636
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:673
 #, kde-format
 msgid "Owned and sold"
 msgstr ""
@@ -17315,103 +17317,34 @@ msgstr "Транзакцияларды іздеу"
 msgid "Configure your report"
 msgstr "Есеп-беруді баптау"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:307
+#: kmymoney/plugins/views/reports/kreportsview.cpp:308
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl() функцияда '%1' деген команда беймәлім"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:327
+#: kmymoney/plugins/views/reports/kreportsview.cpp:328
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "KReportsView::slotOpenUrl() функцияда '%1' деген көрініс беймәлім"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:377
+#: kmymoney/plugins/views/reports/kreportsview.cpp:378
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "Сақтау жаңылысы: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1499
-#: kmymoney/plugins/views/reports/reportsview.cpp:83
-#: kmymoney/plugins/views/reports/reportsview.cpp:119
-#: kmymoney/plugins/views/reports/reportsview.cpp:177
-#, kde-format
-msgid "Generated Report"
-msgstr "Есеп беру"
-
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
-#: kmymoney/plugins/views/reports/kreportsview.cpp:474
-#: kmymoney/plugins/views/reports/kreportsview_p.h:830
-#: kmymoney/plugins/views/reports/kreportsview_p.h:838
-#: kmymoney/plugins/views/reports/kreportsview_p.h:846
-#: kmymoney/plugins/views/reports/kreportsview_p.h:855
-#: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/plugins/views/reports/kreportsview_p.h:880
-#: kmymoney/plugins/views/reports/kreportsview_p.h:897
-#: kmymoney/plugins/views/reports/kreportsview_p.h:905
-#: kmymoney/plugins/views/reports/kreportsview_p.h:913
-#: kmymoney/plugins/views/reports/kreportsview_p.h:921
-#: kmymoney/plugins/views/reports/kreportsview_p.h:932
-#: kmymoney/plugins/views/reports/kreportsview_p.h:945
-#: kmymoney/plugins/views/reports/kreportsview_p.h:954
-#: kmymoney/plugins/views/reports/kreportsview_p.h:968
-#: kmymoney/plugins/views/reports/kreportsview_p.h:977
-#: kmymoney/plugins/views/reports/kreportsview_p.h:985
-#: kmymoney/plugins/views/reports/kreportsview_p.h:993
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1001
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1009
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1017
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1026
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1037
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1049
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1059
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1069
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1079
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1089
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1099
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1109
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1119
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1133
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1148
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1170
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1192
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1209
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1231
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1240
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1249
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1258
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1272
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1283
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1298
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1307
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1317
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1326
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1334
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1352
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1362
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1373
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1383
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1402
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1411
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1420
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1429
-#, kde-format
-msgid "Default Report"
-msgstr "Әдетті есеп-беру"
-
-#: kmymoney/plugins/views/reports/kreportsview.cpp:403
-#: kmymoney/plugins/views/reports/kreportsview.cpp:475
-#, kde-format
-msgid "Custom Report"
-msgstr "Өзгертілген есеп-беру"
-
-#: kmymoney/plugins/views/reports/kreportsview.cpp:404
+#: kmymoney/plugins/views/reports/kreportsview.cpp:406
 #, kde-format
 msgid "%1 (Customized)"
 msgstr "%1 (Өзгертілген)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:432
-#: kmymoney/plugins/views/reports/kreportsview.cpp:491
+#: kmymoney/plugins/views/reports/kreportsview.cpp:407
+#: kmymoney/plugins/views/reports/kreportsview.cpp:481
+#, kde-format
+msgid "Custom Report"
+msgstr "Өзгертілген есеп-беру"
+
+#: kmymoney/plugins/views/reports/kreportsview.cpp:437
+#: kmymoney/plugins/views/reports/kreportsview.cpp:498
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -17420,77 +17353,77 @@ msgstr ""
 "\"%2\" жататын \"%1\" есеп-беру тобы табылмады\n"
 "Мына құрастырушылар адресіне хабарлаңыз: kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:452
+#: kmymoney/plugins/views/reports/kreportsview.cpp:457
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "Есеп-беруді баптау жаңылысы: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:510
+#: kmymoney/plugins/views/reports/kreportsview.cpp:517
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Есеп-беру косылмайды, себебі: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:545
+#: kmymoney/plugins/views/reports/kreportsview.cpp:552
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> - әдетті есеп-беру, ол өшірілмейді."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:546
+#: kmymoney/plugins/views/reports/kreportsview.cpp:553
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "Есеп-беру өшірілсін бе?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:743
+#: kmymoney/plugins/views/reports/kreportsview.cpp:750
 #, fuzzy, kde-format
 #| msgid "Import options"
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Импорттау параметрлері"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:744
+#: kmymoney/plugins/views/reports/kreportsview.cpp:751
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "&Ашу"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:747
+#: kmymoney/plugins/views/reports/kreportsview.cpp:754
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:751
+#: kmymoney/plugins/views/reports/kreportsview.cpp:758
 #, fuzzy, kde-format
 #| msgid "Exporting file..."
 msgctxt "To export a report"
 msgid "&Export to PDF file"
 msgstr "Файлды экспорттау..."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:753
+#: kmymoney/plugins/views/reports/kreportsview.cpp:760
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "&Баптау"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:756
+#: kmymoney/plugins/views/reports/kreportsview.cpp:763
 #, kde-format
 msgid "&New report"
 msgstr "&Жаңа есеп-беру"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:766
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:773
+#: kmymoney/plugins/views/reports/kreportsview.cpp:779
 #, kde-format
 msgid "&Delete"
 msgstr "Ө&шіру"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:771
+#: kmymoney/plugins/views/reports/kreportsview.cpp:778
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:825
+#: kmymoney/plugins/views/reports/kreportsview.cpp:832
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export into directory"
@@ -17580,310 +17513,382 @@ msgstr "Кіріс пен шығыс"
 msgid "Income and Expenses This Month"
 msgstr "Осы айдың кіріс пен шығысы"
 
+#: kmymoney/plugins/views/reports/kreportsview_p.h:830
 #: kmymoney/plugins/views/reports/kreportsview_p.h:837
+#: kmymoney/plugins/views/reports/kreportsview_p.h:844
+#: kmymoney/plugins/views/reports/kreportsview_p.h:852
+#: kmymoney/plugins/views/reports/kreportsview_p.h:863
+#: kmymoney/plugins/views/reports/kreportsview_p.h:875
+#: kmymoney/plugins/views/reports/kreportsview_p.h:891
+#: kmymoney/plugins/views/reports/kreportsview_p.h:898
+#: kmymoney/plugins/views/reports/kreportsview_p.h:905
+#: kmymoney/plugins/views/reports/kreportsview_p.h:912
+#: kmymoney/plugins/views/reports/kreportsview_p.h:922
+#: kmymoney/plugins/views/reports/kreportsview_p.h:934
+#: kmymoney/plugins/views/reports/kreportsview_p.h:942
+#: kmymoney/plugins/views/reports/kreportsview_p.h:956
+#: kmymoney/plugins/views/reports/kreportsview_p.h:965
+#: kmymoney/plugins/views/reports/kreportsview_p.h:972
+#: kmymoney/plugins/views/reports/kreportsview_p.h:979
+#: kmymoney/plugins/views/reports/kreportsview_p.h:987
+#: kmymoney/plugins/views/reports/kreportsview_p.h:995
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1002
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1011
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1022
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1034
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1043
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1052
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1061
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1070
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1079
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1088
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1097
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1110
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1124
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1145
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1166
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1182
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1203
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1212
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1220
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1229
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1242
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1252
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1266
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1275
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1285
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1294
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1303
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1321
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1330
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1340
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1349
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1367
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1375
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1383
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1391
+#, kde-format
+msgid "Default Report"
+msgstr "Әдетті есеп-беру"
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:836
 #, kde-format
 msgid "Income and Expenses This Year"
 msgstr "Биылғы кіріс пен шығыс"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:845
+#: kmymoney/plugins/views/reports/kreportsview_p.h:843
 #, kde-format
 msgid "Income and Expenses By Year"
 msgstr "Кіріс пен шығыс жылдар бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:854
+#: kmymoney/plugins/views/reports/kreportsview_p.h:851
 #, kde-format
 msgid "Income and Expenses Graph"
 msgstr "Кіріс пен шығыс графигі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:866
+#: kmymoney/plugins/views/reports/kreportsview_p.h:862
 #, fuzzy, kde-format
 #| msgid "Income and Expenses Graph"
 msgid "Income and Expenses Bar Graph"
 msgstr "Кіріс пен шығыс графигі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:879
+#: kmymoney/plugins/views/reports/kreportsview_p.h:874
 #, kde-format
 msgid "Income and Expenses Pie Chart"
 msgstr "Кіріс пен шығыс үлес диаграммасы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:889
+#: kmymoney/plugins/views/reports/kreportsview_p.h:883
 #: kmymoney/views/khomeview_p.h:1559
 #, kde-format
 msgid "Net Worth"
 msgstr "Таза табыстығы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:896
+#: kmymoney/plugins/views/reports/kreportsview_p.h:890
 #, kde-format
 msgid "Net Worth By Month"
 msgstr "Таза табыстылығы айлар бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:904
+#: kmymoney/plugins/views/reports/kreportsview_p.h:897
 #, kde-format
 msgid "Net Worth Today"
 msgstr "Бүгінгі таза табыстылығы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:912
+#: kmymoney/plugins/views/reports/kreportsview_p.h:904
 #, kde-format
 msgid "Net Worth By Year"
 msgstr "Таза табыстылығы жалдар бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:920
+#: kmymoney/plugins/views/reports/kreportsview_p.h:911
 #, kde-format
 msgid "7-day Cash Flow Forecast"
 msgstr "7 күндік қаржы ағым болжамы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:931
+#: kmymoney/plugins/views/reports/kreportsview_p.h:921
 #, kde-format
 msgid "Net Worth Graph"
 msgstr "Таза табыстылық графигі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:944
+#: kmymoney/plugins/views/reports/kreportsview_p.h:933
 #, kde-format
 msgid "Account Balances by Institution"
 msgstr "Есепшот баланстары мекемесі бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:953
+#: kmymoney/plugins/views/reports/kreportsview_p.h:941
 #, kde-format
 msgid "Account Balances by Type"
 msgstr "Есепшот баланстары түрі бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:967
+#: kmymoney/plugins/views/reports/kreportsview_p.h:955
 #, kde-format
 msgid "Transactions by Account"
 msgstr "Есепшот бойынша транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:976
+#: kmymoney/plugins/views/reports/kreportsview_p.h:964
 #, kde-format
 msgid "Transactions by Category"
 msgstr "Санаттар бойынша транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:984
+#: kmymoney/plugins/views/reports/kreportsview_p.h:971
 #, kde-format
 msgid "Transactions by Payee"
 msgstr "Алушылар бойынша транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:992
+#: kmymoney/plugins/views/reports/kreportsview_p.h:978
 #, kde-format
 msgid "Transactions by Tag"
 msgstr "Белгілер бойынша транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1000
+#: kmymoney/plugins/views/reports/kreportsview_p.h:986
 #, kde-format
 msgid "Transactions by Month"
 msgstr "Ай бойынша транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1008
+#: kmymoney/plugins/views/reports/kreportsview_p.h:994
 #, kde-format
 msgid "Transactions by Week"
 msgstr "Апта бойынша транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1016
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1001
 #, kde-format
 msgid "Loan Transactions"
 msgstr "Қарыз транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1025
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1010
 #, kde-format
 msgid "Transactions by Reconciliation Status"
 msgstr "Транзакциялар салыстырып тексерілген күйі бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1036
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1021
 #, kde-format
 msgid "Cash Flow Transactions This Month"
 msgstr "Осы айдағы қаржы ағым транзакциялары"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1041
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1026
 #: kmymoney/views/kmymoneyview.cpp:194
 #, kde-format
 msgid "Investments"
 msgstr "Инвестициялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1048
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1033
 #, kde-format
 msgid "Investment Transactions"
 msgstr "Инвестициялық транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1058
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1042
 #, kde-format
 msgid "Investment Holdings by Account"
 msgstr "Инвестиция салым есепшоты бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1068
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1051
 #, kde-format
 msgid "Investment Holdings by Type"
 msgstr "Инвестиция салым түрлері бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1078
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1060
 #, kde-format
 msgid "Investment Performance by Account"
 msgstr "Есепшот бойынша инвестиция тиімділігі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1088
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1069
 #, kde-format
 msgid "Investment Performance by Type"
 msgstr "Инвестиция түрлерінің тиімділігі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1098
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1078
 #, fuzzy, kde-format
 #| msgid "Investment Holdings by Account"
 msgid "Investment Capital Gains by Account"
 msgstr "Инвестиция салым есепшоты бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1108
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1087
 #, fuzzy, kde-format
 #| msgid "Investment Holdings by Type"
 msgid "Investment Capital Gains by Type"
 msgstr "Инвестиция салым түрлері бойынша"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1118
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1096
 #, kde-format
 msgid "Investment Holdings Pie"
 msgstr "Инвестиция салым үлестері"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1132
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1109
 #, kde-format
 msgid "Investment Worth Graph"
 msgstr "Инвестиция табыстылығының графигі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1147
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1123
 #, kde-format
 msgid "Investment Price Graph"
 msgstr "Инвестиция бағасының графигі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1169
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1144
 #, kde-format
 msgid "Investment Moving Average Price Graph"
 msgstr "Инвестицияның жылжымалы орта бағасының графигі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1191
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1165
 #, kde-format
 msgid "Investment Moving Average"
 msgstr "Инвестицияның жылжымалы орташасы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1208
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1181
 #, kde-format
 msgid "Investment Moving Average vs Actual"
 msgstr "Инвестицияның жылжымалы орташасы/Ағымды бағасы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1223
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1195
 #, kde-format
 msgid "Taxes"
 msgstr "Салықтар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1230
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1202
 #, kde-format
 msgid "Tax Transactions by Category"
 msgstr "Санаттар бойынша салық транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1239
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1211
 #, kde-format
 msgid "Tax Transactions by Payee"
 msgstr "Алушылар бойынша салық транзакциялар"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1248
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1219
 #, kde-format
 msgid "Tax Transactions by Category Last Fiscal Year"
 msgstr "Соңғы қазыналық жылдың салық транзакциялар (санаттар бойынша)"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1257
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1228
 #, kde-format
 msgid "Tax Transactions by Payee Last Fiscal Year"
 msgstr "Соңғы қазыналық жылдың салық транзакциялар (алушылар бойынша)"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1264
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1234
 #, kde-format
 msgid "Budgeting"
 msgstr "Бюджетті орындау"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1271
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1241
 #, kde-format
 msgid "Budgeted vs. Actual This Year"
 msgstr "Биылғы бюджеттің орындауы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1282
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1251
 #, kde-format
 msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr "Биылғы бюджеттің орындауы (YTM)"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1297
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1265
 #: kmymoney/plugins/views/reports/reportsview.cpp:176
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr "Айлар бойынша бюджет және оны орындауы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1306
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1274
 #, kde-format
 msgid "Yearly Budgeted vs. Actual"
 msgstr "Жылдық бюджеттер орындауы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1316
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1284
 #, kde-format
 msgid "Monthly Budget"
 msgstr "Ай бюджеттері"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1325
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1293
 #, kde-format
 msgid "Yearly Budget"
 msgstr "Жыл бюджеттері"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1333
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1302
 #, kde-format
 msgid "Yearly Budgeted vs Actual Graph"
 msgstr "Жылдық бюджеттерді орындау графигі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1351
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1320
 #, kde-format
 msgid "Forecast By Month"
 msgstr "Ай болжамы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1361
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1329
 #, kde-format
 msgid "Forecast Next Quarter"
 msgstr "Келесі тоқсан болжамы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1372
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1339
 #, kde-format
 msgid "Income and Expenses Forecast This Year"
 msgstr "Биылғы кіріс пен шығыс болжамы"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1382
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1348
 #, kde-format
 msgid "Net Worth Forecast Graph"
 msgstr "Таза табыстылық болжам графигі"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
 #. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1394
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1359
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
 #, kde-format
 msgid "General Information"
 msgstr "Жалпы мәлімет"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1401
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1366
 #, kde-format
 msgid "Schedule Information"
 msgstr "Жоспар мәліметі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1410
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1374
 #, kde-format
 msgid "Schedule Summary Information"
 msgstr "Жооспардың қортынды мәліметі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1419
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1382
 #, kde-format
 msgid "Account Information"
 msgstr "Есепшот мәліметі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1428
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1390
 #, kde-format
 msgid "Loan Information"
 msgstr "Қарыз мәліметі"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1498
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1396
+#, fuzzy, kde-format
+#| msgid "%1 Balance History"
+msgid "Value/Balance History"
+msgstr "%1 балансының тарихы"
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1464
 #, kde-format
 msgid "%1 YTD Account Transactions"
 msgstr "%1 жыл басынан басталған есепшот транзакциялары"
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1465
+#: kmymoney/plugins/views/reports/reportsview.cpp:83
+#: kmymoney/plugins/views/reports/reportsview.cpp:119
+#: kmymoney/plugins/views/reports/reportsview.cpp:177
+#, kde-format
+msgid "Generated Report"
+msgstr "Есеп беру"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonConfigure)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:54

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-15 00:44+0000\n"
+"POT-Creation-Date: 2026-02-17 00:45+0000\n"
 "PO-Revision-Date: 2025-10-01 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1856,7 +1856,7 @@ msgstr "基本貨幣"
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:88
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:528
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:565
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:81
 #: kmymoney/views/kmymoneyview.cpp:192
 #: kmymoney/widgets/ktransactionfilter.cpp:141
@@ -1884,8 +1884,8 @@ msgstr "帳戶/類別"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:516
-#: kmymoney/plugins/views/reports/kreportsview_p.h:960
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1500
+#: kmymoney/plugins/views/reports/kreportsview_p.h:947
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1466
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
 #: kmymoney/views/ktagsview.ui:127
 #, kde-format
@@ -4243,7 +4243,7 @@ msgstr "日"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:312
 #: kmymoney/plugins/views/reports/core/listtable.cpp:711
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:537
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:574
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
 msgid "Month"
@@ -5376,6 +5376,7 @@ msgid "Open report"
 msgstr "新增報告(&N)"
 
 #: kmymoney/kmymoney.cpp:1513
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:248
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
@@ -5388,7 +5389,7 @@ msgid "Copy report"
 msgstr "新增報告(&N)"
 
 #: kmymoney/kmymoney.cpp:1515
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:239
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:246
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
@@ -6218,7 +6219,7 @@ msgid "Budget"
 msgstr "預算"
 
 #: kmymoney/kmymoneyutils.cpp:128
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1031
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
 #, kde-format
 msgid "Cash Flow"
 msgstr "現金流"
@@ -9538,13 +9539,13 @@ msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "描述"
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:657
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:658
 #, kde-format
 msgctxt "Missing attribute %1 in xml file"
 msgid "Missing attribute %1 in line %2"
 msgstr ""
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:660
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:661
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
@@ -12272,7 +12273,7 @@ msgid "iCalendar files"
 msgstr "iCalendar 檔案"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:349
+#: kmymoney/plugins/views/reports/kreportsview.cpp:350
 #, kde-format
 msgid "Export as"
 msgstr "匯出為"
@@ -12729,9 +12730,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "匯入報表錯誤。您要繼續嗎？"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1565
-#: kmymoney/plugins/views/reports/kreportsview.cpp:438
-#: kmymoney/plugins/views/reports/kreportsview.cpp:497
-#: kmymoney/plugins/views/reports/kreportsview.cpp:516
+#: kmymoney/plugins/views/reports/kreportsview.cpp:443
+#: kmymoney/plugins/views/reports/kreportsview.cpp:504
+#: kmymoney/plugins/views/reports/kreportsview.cpp:523
 #, kde-format
 msgid "Critical Error"
 msgstr "嚴重錯誤"
@@ -14321,7 +14322,7 @@ msgstr "QIF 設定檔"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:254
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:519
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:556
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:66
 #: kmymoney/views/kmymoneyview.cpp:190
 #, kde-format
@@ -15252,7 +15253,7 @@ msgid "Unable to remove budget."
 msgstr "無法重置預算"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:211
-#: kmymoney/plugins/views/reports/kreportsview.cpp:473
+#: kmymoney/plugins/views/reports/kreportsview.cpp:478
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 的複本"
@@ -15505,7 +15506,7 @@ msgstr "名稱"
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:53
 #: kmymoney/plugins/views/forecast/kforecastview.ui:272
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1344
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1313
 #, kde-format
 msgid "Forecast"
 msgstr "預測"
@@ -15699,7 +15700,7 @@ msgstr "全部"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:441
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:478
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
@@ -15707,7 +15708,7 @@ msgstr "頂層"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:444
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:481
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -15715,7 +15716,7 @@ msgstr "群組"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:447
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:484
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -15757,7 +15758,8 @@ msgstr "預算預測"
 #. i18n: ectx: attribute (title), widget (QWidget, m_tabChart)
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:146
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:127
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:155
 #: kmymoney/plugins/views/reports/kreportsview_p.h:437
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
@@ -16156,7 +16158,7 @@ msgstr "編號"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:699
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:525
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:562
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
 #: kmymoney/views/newtransactioneditor.ui:214
@@ -16178,7 +16180,7 @@ msgstr "類別型態"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:540
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:577
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
 msgid "Week"
@@ -16487,43 +16489,43 @@ msgctxt "@title:column report header"
 msgid "Account"
 msgstr "帳戶"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2210
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2212
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "實際"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2215
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2217
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "預算"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2220
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2222
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "差異"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2225
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2227
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "預測"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2230
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2232
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "移動平均"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2235
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2237
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "移動平均價格"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2240
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2242
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -16622,27 +16624,27 @@ msgstr ""
 "建立您的報告時發生錯誤：%1\n"
 "請回報此錯誤到開發者郵件論壇：kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:174
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:181
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
 msgstr "%1 餘額歷史"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:180
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:187
 #, fuzzy, kde-format
 #| msgid "Balance of %1"
 msgid "Value of %1"
 msgstr "%1 的餘額"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:183
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:190
 #, fuzzy, kde-format
 #| msgid "%1 Balance History"
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "%1 餘額歷史"
 
-#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:191
+#: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:198
 #, kde-format
 msgid "Balance of %1"
 msgstr "%1 的餘額"
@@ -16689,38 +16691,38 @@ msgstr "CSV 檔"
 msgid "All files"
 msgstr "所有檔案"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:103
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:107
 #, kde-format
 msgid "Report Configuration"
 msgstr "報告設定"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:110
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:114
 #, kde-format
 msgctxt "@info:tooltip for report configuration apply button"
 msgid "Apply the configuration changes to the report"
 msgstr "套用報告設定的變更"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:129
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:138
 #, kde-format
 msgctxt "Filters tab"
 msgid "Filters"
 msgstr "過濾器"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:132
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:141
 #, kde-format
 msgctxt "General tab"
 msgid "General"
 msgstr "一般"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:138
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:164
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:147
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:173
 #, kde-format
 msgid "Rows/Columns"
 msgstr "列/欄"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:149
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:158
 #: kmymoney/plugins/views/reports/reporttabrange.ui:171
 #: kmymoney/widgets/daterangedlg.ui:9
 #, kde-format
@@ -16728,8 +16730,8 @@ msgid "Range"
 msgstr "範圍"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_reportPage)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:168
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:177
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:181
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:447
 #: kmymoney/views/khomeview_p.h:1122
@@ -16738,37 +16740,37 @@ msgid "Report"
 msgstr "報告"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:374
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:385
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:601
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:404
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:415
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
 msgid "Monthly"
 msgstr "每月"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:438
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:475
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
 msgstr "全部"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:456
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:493
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "收入與支出"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:459
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:496
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "資產與負債"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:559
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:71
 #, kde-format
 msgid "Top Categories"
@@ -16776,7 +16778,7 @@ msgstr "頂層分類"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:531
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:568
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:86
 #: kmymoney/views/kmymoneyview.cpp:188
 #: kmymoney/widgets/kaccounttemplateselector.ui:87
@@ -16785,14 +16787,14 @@ msgid "Accounts"
 msgstr "帳戶"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:534
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:571
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:91
 #, kde-format
 msgid "Top Accounts"
 msgstr "頂層帳戶"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:589
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:626
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -16800,7 +16802,7 @@ msgid "Daily"
 msgstr "每天"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:592
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:629
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -16808,7 +16810,7 @@ msgid "Weekly"
 msgstr "每週"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:604
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:641
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -16816,7 +16818,7 @@ msgid "Bi-Monthly"
 msgstr "每 2 個月"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:607
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:644
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -16824,31 +16826,31 @@ msgid "Quarterly"
 msgstr "每季"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:610
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:647
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "每年"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:625
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:637
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:662
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:674
 #, kde-format
 msgid "Only owned"
 msgstr "僅擁有的"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:626
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:663
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:675
 #, kde-format
 msgid "Only sold"
 msgstr "僅已售出的"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:635
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:672
 #, kde-format
 msgid "From period"
 msgstr "從時間範圍"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:636
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:673
 #, kde-format
 msgid "Owned and sold"
 msgstr "擁有的與已售出的"
@@ -16869,104 +16871,35 @@ msgstr "搜尋交易"
 msgid "Configure your report"
 msgstr "設定您的報告"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:307
+#: kmymoney/plugins/views/reports/kreportsview.cpp:308
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "在 KReportsView::slotOpenUrl() 中有未知的指令 '%1'"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:327
+#: kmymoney/plugins/views/reports/kreportsview.cpp:328
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "在 KReportsView::slotOpenUrl() 中有未知的檢視 '%1'"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:377
+#: kmymoney/plugins/views/reports/kreportsview.cpp:378
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "儲存失敗：%1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1499
-#: kmymoney/plugins/views/reports/reportsview.cpp:83
-#: kmymoney/plugins/views/reports/reportsview.cpp:119
-#: kmymoney/plugins/views/reports/reportsview.cpp:177
-#, kde-format
-msgid "Generated Report"
-msgstr "產生的報告"
-
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
-#: kmymoney/plugins/views/reports/kreportsview.cpp:474
-#: kmymoney/plugins/views/reports/kreportsview_p.h:830
-#: kmymoney/plugins/views/reports/kreportsview_p.h:838
-#: kmymoney/plugins/views/reports/kreportsview_p.h:846
-#: kmymoney/plugins/views/reports/kreportsview_p.h:855
-#: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/plugins/views/reports/kreportsview_p.h:880
-#: kmymoney/plugins/views/reports/kreportsview_p.h:897
-#: kmymoney/plugins/views/reports/kreportsview_p.h:905
-#: kmymoney/plugins/views/reports/kreportsview_p.h:913
-#: kmymoney/plugins/views/reports/kreportsview_p.h:921
-#: kmymoney/plugins/views/reports/kreportsview_p.h:932
-#: kmymoney/plugins/views/reports/kreportsview_p.h:945
-#: kmymoney/plugins/views/reports/kreportsview_p.h:954
-#: kmymoney/plugins/views/reports/kreportsview_p.h:968
-#: kmymoney/plugins/views/reports/kreportsview_p.h:977
-#: kmymoney/plugins/views/reports/kreportsview_p.h:985
-#: kmymoney/plugins/views/reports/kreportsview_p.h:993
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1001
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1009
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1017
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1026
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1037
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1049
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1059
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1069
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1079
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1089
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1099
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1109
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1119
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1133
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1148
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1170
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1192
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1209
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1231
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1240
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1249
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1258
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1272
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1283
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1298
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1307
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1317
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1326
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1334
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1352
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1362
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1373
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1383
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1402
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1411
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1420
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1429
-#, kde-format
-msgid "Default Report"
-msgstr "預設報告"
-
-#: kmymoney/plugins/views/reports/kreportsview.cpp:403
-#: kmymoney/plugins/views/reports/kreportsview.cpp:475
-#, kde-format
-msgid "Custom Report"
-msgstr "自訂報告"
-
-#: kmymoney/plugins/views/reports/kreportsview.cpp:404
+#: kmymoney/plugins/views/reports/kreportsview.cpp:406
 #, fuzzy, kde-format
 #| msgid " (Customized)"
 msgid "%1 (Customized)"
 msgstr "（自訂）"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:432
-#: kmymoney/plugins/views/reports/kreportsview.cpp:491
+#: kmymoney/plugins/views/reports/kreportsview.cpp:407
+#: kmymoney/plugins/views/reports/kreportsview.cpp:481
+#, kde-format
+msgid "Custom Report"
+msgstr "自訂報告"
+
+#: kmymoney/plugins/views/reports/kreportsview.cpp:437
+#: kmymoney/plugins/views/reports/kreportsview.cpp:498
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -16975,76 +16908,76 @@ msgstr ""
 "找不到報告 \"%2\" 的報告群組 \"%1\"。\n"
 "請回報此錯誤給開發者郵件論壇：kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:452
+#: kmymoney/plugins/views/reports/kreportsview.cpp:457
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "設定報告失敗：%1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:510
+#: kmymoney/plugins/views/reports/kreportsview.cpp:517
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "無法新增報告，理由：%1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:545
+#: kmymoney/plugins/views/reports/kreportsview.cpp:552
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> 是預設的報告，無法被刪除。"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:546
+#: kmymoney/plugins/views/reports/kreportsview.cpp:553
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "要刪除報告？"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:743
+#: kmymoney/plugins/views/reports/kreportsview.cpp:750
 #, fuzzy, kde-format
 #| msgid "Import options"
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "匯入選項"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:744
+#: kmymoney/plugins/views/reports/kreportsview.cpp:751
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "開啟(&O)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:747
+#: kmymoney/plugins/views/reports/kreportsview.cpp:754
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:751
+#: kmymoney/plugins/views/reports/kreportsview.cpp:758
 #, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:753
+#: kmymoney/plugins/views/reports/kreportsview.cpp:760
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "設定(&C)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:756
+#: kmymoney/plugins/views/reports/kreportsview.cpp:763
 #, kde-format
 msgid "&New report"
 msgstr "新增報告(&N)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:766
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:773
+#: kmymoney/plugins/views/reports/kreportsview.cpp:779
 #, kde-format
 msgid "&Delete"
 msgstr "刪除(&D)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:771
+#: kmymoney/plugins/views/reports/kreportsview.cpp:778
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:825
+#: kmymoney/plugins/views/reports/kreportsview.cpp:832
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export into directory"
@@ -17132,311 +17065,383 @@ msgstr "收入與支出"
 msgid "Income and Expenses This Month"
 msgstr "本月份收入與支出"
 
+#: kmymoney/plugins/views/reports/kreportsview_p.h:830
 #: kmymoney/plugins/views/reports/kreportsview_p.h:837
+#: kmymoney/plugins/views/reports/kreportsview_p.h:844
+#: kmymoney/plugins/views/reports/kreportsview_p.h:852
+#: kmymoney/plugins/views/reports/kreportsview_p.h:863
+#: kmymoney/plugins/views/reports/kreportsview_p.h:875
+#: kmymoney/plugins/views/reports/kreportsview_p.h:891
+#: kmymoney/plugins/views/reports/kreportsview_p.h:898
+#: kmymoney/plugins/views/reports/kreportsview_p.h:905
+#: kmymoney/plugins/views/reports/kreportsview_p.h:912
+#: kmymoney/plugins/views/reports/kreportsview_p.h:922
+#: kmymoney/plugins/views/reports/kreportsview_p.h:934
+#: kmymoney/plugins/views/reports/kreportsview_p.h:942
+#: kmymoney/plugins/views/reports/kreportsview_p.h:956
+#: kmymoney/plugins/views/reports/kreportsview_p.h:965
+#: kmymoney/plugins/views/reports/kreportsview_p.h:972
+#: kmymoney/plugins/views/reports/kreportsview_p.h:979
+#: kmymoney/plugins/views/reports/kreportsview_p.h:987
+#: kmymoney/plugins/views/reports/kreportsview_p.h:995
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1002
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1011
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1022
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1034
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1043
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1052
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1061
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1070
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1079
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1088
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1097
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1110
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1124
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1145
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1166
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1182
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1203
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1212
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1220
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1229
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1242
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1252
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1266
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1275
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1285
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1294
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1303
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1321
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1330
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1340
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1349
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1367
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1375
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1383
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1391
+#, kde-format
+msgid "Default Report"
+msgstr "預設報告"
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:836
 #, kde-format
 msgid "Income and Expenses This Year"
 msgstr "本年份收入與支出"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:845
+#: kmymoney/plugins/views/reports/kreportsview_p.h:843
 #, kde-format
 msgid "Income and Expenses By Year"
 msgstr "各年份的收入與支出"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:854
+#: kmymoney/plugins/views/reports/kreportsview_p.h:851
 #, kde-format
 msgid "Income and Expenses Graph"
 msgstr "收入與支出圖形"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:866
+#: kmymoney/plugins/views/reports/kreportsview_p.h:862
 #, fuzzy, kde-format
 #| msgid "Income and Expenses Graph"
 msgid "Income and Expenses Bar Graph"
 msgstr "收入與支出圖形"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:879
+#: kmymoney/plugins/views/reports/kreportsview_p.h:874
 #, kde-format
 msgid "Income and Expenses Pie Chart"
 msgstr "收入與支出圓餅圖"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:889
+#: kmymoney/plugins/views/reports/kreportsview_p.h:883
 #: kmymoney/views/khomeview_p.h:1559
 #, kde-format
 msgid "Net Worth"
 msgstr "淨值"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:896
+#: kmymoney/plugins/views/reports/kreportsview_p.h:890
 #, kde-format
 msgid "Net Worth By Month"
 msgstr "各月份淨值"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:904
+#: kmymoney/plugins/views/reports/kreportsview_p.h:897
 #, kde-format
 msgid "Net Worth Today"
 msgstr "今天的淨值"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:912
+#: kmymoney/plugins/views/reports/kreportsview_p.h:904
 #, kde-format
 msgid "Net Worth By Year"
 msgstr "各年份淨值"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:920
+#: kmymoney/plugins/views/reports/kreportsview_p.h:911
 #, kde-format
 msgid "7-day Cash Flow Forecast"
 msgstr "七天現金流預測"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:931
+#: kmymoney/plugins/views/reports/kreportsview_p.h:921
 #, kde-format
 msgid "Net Worth Graph"
 msgstr "淨值圖形"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:944
+#: kmymoney/plugins/views/reports/kreportsview_p.h:933
 #, kde-format
 msgid "Account Balances by Institution"
 msgstr "各機構的帳戶餘額"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:953
+#: kmymoney/plugins/views/reports/kreportsview_p.h:941
 #, kde-format
 msgid "Account Balances by Type"
 msgstr "各型態的帳戶餘額"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:967
+#: kmymoney/plugins/views/reports/kreportsview_p.h:955
 #, kde-format
 msgid "Transactions by Account"
 msgstr "各帳戶交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:976
+#: kmymoney/plugins/views/reports/kreportsview_p.h:964
 #, kde-format
 msgid "Transactions by Category"
 msgstr "各類別交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:984
+#: kmymoney/plugins/views/reports/kreportsview_p.h:971
 #, kde-format
 msgid "Transactions by Payee"
 msgstr "各收款人交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:992
+#: kmymoney/plugins/views/reports/kreportsview_p.h:978
 #, fuzzy, kde-format
 #| msgid "Transactions by Payee"
 msgid "Transactions by Tag"
 msgstr "各收款人交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1000
+#: kmymoney/plugins/views/reports/kreportsview_p.h:986
 #, kde-format
 msgid "Transactions by Month"
 msgstr "各月份交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1008
+#: kmymoney/plugins/views/reports/kreportsview_p.h:994
 #, kde-format
 msgid "Transactions by Week"
 msgstr "各週交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1016
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1001
 #, kde-format
 msgid "Loan Transactions"
 msgstr "借貸交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1025
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1010
 #, kde-format
 msgid "Transactions by Reconciliation Status"
 msgstr "依對帳狀態的交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1036
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1021
 #, kde-format
 msgid "Cash Flow Transactions This Month"
 msgstr "本月份現金流交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1041
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1026
 #: kmymoney/views/kmymoneyview.cpp:194
 #, kde-format
 msgid "Investments"
 msgstr "投資"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1048
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1033
 #, kde-format
 msgid "Investment Transactions"
 msgstr "投資交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1058
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1042
 #, kde-format
 msgid "Investment Holdings by Account"
 msgstr "各帳戶的投資持有"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1068
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1051
 #, kde-format
 msgid "Investment Holdings by Type"
 msgstr "各型態的投資持有"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1078
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1060
 #, kde-format
 msgid "Investment Performance by Account"
 msgstr "投資報酬率（依帳戶）"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1088
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1069
 #, kde-format
 msgid "Investment Performance by Type"
 msgstr "各型態的投資效益"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1098
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1078
 #, fuzzy, kde-format
 #| msgid "Investment Holdings by Account"
 msgid "Investment Capital Gains by Account"
 msgstr "各帳戶的投資持有"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1108
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1087
 #, fuzzy, kde-format
 #| msgid "Investment Holdings by Type"
 msgid "Investment Capital Gains by Type"
 msgstr "各型態的投資持有"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1118
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1096
 #, kde-format
 msgid "Investment Holdings Pie"
 msgstr "投資持有圓餅圖"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1132
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1109
 #, kde-format
 msgid "Investment Worth Graph"
 msgstr "投資價值圖形"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1147
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1123
 #, kde-format
 msgid "Investment Price Graph"
 msgstr "投資價格圖形"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1169
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1144
 #, kde-format
 msgid "Investment Moving Average Price Graph"
 msgstr "投資移動平均價格圖形"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1191
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1165
 #, kde-format
 msgid "Investment Moving Average"
 msgstr "投資移動平均"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1208
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1181
 #, kde-format
 msgid "Investment Moving Average vs Actual"
 msgstr "投資移動平均 vs 實際"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1223
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1195
 #, kde-format
 msgid "Taxes"
 msgstr "稅務"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1230
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1202
 #, kde-format
 msgid "Tax Transactions by Category"
 msgstr "各類別稅務交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1239
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1211
 #, kde-format
 msgid "Tax Transactions by Payee"
 msgstr "各收款人稅務交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1248
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1219
 #, kde-format
 msgid "Tax Transactions by Category Last Fiscal Year"
 msgstr "上個會計年度各類別的稅務交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1257
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1228
 #, kde-format
 msgid "Tax Transactions by Payee Last Fiscal Year"
 msgstr "上個會計年度各收款人的稅務交易"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1264
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1234
 #, kde-format
 msgid "Budgeting"
 msgstr "預算"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1271
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1241
 #, kde-format
 msgid "Budgeted vs. Actual This Year"
 msgstr "本年度的預算 vs 實際"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1282
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1251
 #, kde-format
 msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr "本年度的預算 vs 實際（YTM）"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1297
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1265
 #: kmymoney/plugins/views/reports/reportsview.cpp:176
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr "每月預算與實際支出"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1306
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1274
 #, kde-format
 msgid "Yearly Budgeted vs. Actual"
 msgstr "年度預算 vs 實際"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1316
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1284
 #, kde-format
 msgid "Monthly Budget"
 msgstr "月份預算"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1325
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1293
 #, kde-format
 msgid "Yearly Budget"
 msgstr "年度預算"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1333
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1302
 #, kde-format
 msgid "Yearly Budgeted vs Actual Graph"
 msgstr "年度預算 vs 實際圖形"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1351
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1320
 #, kde-format
 msgid "Forecast By Month"
 msgstr "各月份預測"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1361
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1329
 #, kde-format
 msgid "Forecast Next Quarter"
 msgstr "下一季預測"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1372
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1339
 #, kde-format
 msgid "Income and Expenses Forecast This Year"
 msgstr "本年度收入與支出預測"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1382
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1348
 #, kde-format
 msgid "Net Worth Forecast Graph"
 msgstr "淨值預測圖形"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
 #. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1394
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1359
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
 #, kde-format
 msgid "General Information"
 msgstr "一般資訊"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1401
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1366
 #, kde-format
 msgid "Schedule Information"
 msgstr "排程資訊"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1410
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1374
 #, kde-format
 msgid "Schedule Summary Information"
 msgstr "排程摘要資訊"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1419
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1382
 #, kde-format
 msgid "Account Information"
 msgstr "帳戶資訊"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1428
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1390
 #, kde-format
 msgid "Loan Information"
 msgstr "借貸資訊"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1498
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1396
+#, fuzzy, kde-format
+#| msgid "%1 Balance History"
+msgid "Value/Balance History"
+msgstr "%1 餘額歷史"
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1464
 #, kde-format
 msgid "%1 YTD Account Transactions"
 msgstr "%1 YTD 帳戶交易"
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1465
+#: kmymoney/plugins/views/reports/reportsview.cpp:83
+#: kmymoney/plugins/views/reports/reportsview.cpp:119
+#: kmymoney/plugins/views/reports/reportsview.cpp:177
+#, kde-format
+msgid "Generated Report"
+msgstr "產生的報告"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonConfigure)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:54
