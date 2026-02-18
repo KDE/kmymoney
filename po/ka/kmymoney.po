@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-17 00:45+0000\n"
-"PO-Revision-Date: 2026-02-14 05:48+0100\n"
+"PO-Revision-Date: 2026-02-17 04:17+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16806,11 +16806,9 @@ msgid "Loan Information"
 msgstr "სესხის ინფორმაცია"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1396
-#, fuzzy, kde-format
-#| msgctxt "@title:window Balance chart for account"
-#| msgid "%1 Balance History"
+#, kde-format
 msgid "Value/Balance History"
-msgstr "%1-ის ბალანსის ისტორია"
+msgstr "ღირებულების/ბალანსის ისტორია"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1464
 #, kde-format

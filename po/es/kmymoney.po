@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-17 00:45+0000\n"
-"PO-Revision-Date: 2026-02-16 01:29+0100\n"
+"PO-Revision-Date: 2026-02-17 13:34+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17328,11 +17328,9 @@ msgid "Loan Information"
 msgstr "Información de préstamos"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1396
-#, fuzzy, kde-format
-#| msgctxt "@title:window Balance chart for account"
-#| msgid "%1 Balance History"
+#, kde-format
 msgid "Value/Balance History"
-msgstr "Historial de saldo de %1"
+msgstr "Historial de valor/saldo"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1464
 #, kde-format
