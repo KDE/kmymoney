@@ -4115,7 +4115,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
     currencyList.append(MyMoneySecurity("CAD", i18n("Canadian Dollar"),        "$"));
     currencyList.append(MyMoneySecurity("CVE", i18n("Cape Verde Escudo")));
     currencyList.append(MyMoneySecurity("KYD", i18n("Cayman Islands Dollar"),  "$"));
-    currencyList.append(MyMoneySecurity("CLP", i18n("Chilean Peso")));
+    currencyList.append(MyMoneySecurity("CLP", i18n("Chilean Peso"),          "CLP", 1, 1));
     currencyList.append(MyMoneySecurity("CNY", i18n("Chinese Yuan Renminbi")));
     currencyList.append(MyMoneySecurity("COP", i18n("Colombian Peso")));
     currencyList.append(MyMoneySecurity("KMF", i18n("Comoros Franc")));
