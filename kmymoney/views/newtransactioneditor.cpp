@@ -1329,6 +1329,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     // handle some events in certain conditions different from default
     d->ui->payeeEdit->installEventFilter(this);
+    d->ui->payeeEdit->completer()->popup()->installEventFilter(this);
     d->ui->costCenterCombo->installEventFilter(this);
     d->ui->tagContainer->tagCombo()->installEventFilter(this);
     d->ui->categoryCombo->installEventFilter(this);
@@ -1747,6 +1748,21 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                 // the completion box. We need to do that because the CaseSensitive
                 // mode is set when the focus leaves the widget (see above).
                 d->ui->payeeEdit->completer()->setCaseSensitivity(Qt::CaseInsensitive);
+            }
+        }
+    }
+    if (o == d->ui->payeeEdit->completer()->popup()) {
+        if (e->type() == QEvent::KeyPress) {
+            auto kev = static_cast<QKeyEvent*>(e);
+            if (kev->key() == Qt::Key_Enter || kev->key() == Qt::Key_Return) {
+                const auto view = d->ui->payeeEdit->completer()->popup();
+                // get the current index and toggle it once to
+                // an invalid one so that the signal is
+                // emitted to fill the full name into
+                // the payee edit widget
+                const auto idx = view->currentIndex();
+                view->setCurrentIndex(QModelIndex());
+                view->setCurrentIndex(idx);
             }
         }
     }

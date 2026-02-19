@@ -121,6 +121,9 @@ struct NewSplitEditor::Private
     void createTag();
     void setInitialFocus();
 
+    bool needCreatePayee(QComboBox* comboBox) const;
+    void createPayee(QComboBox* comboBox);
+
     NewSplitEditor* q;
     Ui_NewSplitEditor* ui;
     Ui_NewSplitEditor* tabOrderUi;
@@ -327,6 +330,32 @@ void NewSplitEditor::Private::setInitialFocus()
     }
 }
 
+bool NewSplitEditor::Private::needCreatePayee(QComboBox* comboBox) const
+{
+    if (comboBox != nullptr) {
+        // set case sensitivity so that a payee with the same spelling
+        // but different case can be created and is not found by accident
+        // inside the Qt logic (see QComboBoxPrivate::_q_editingFinished())
+        comboBox->completer()->setCaseSensitivity(Qt::CaseSensitive);
+        if (!comboBox->currentText().isEmpty()) {
+            const auto index(comboBox->findText(comboBox->currentText()));
+            if (index == -1) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void NewSplitEditor::Private::createPayee(QComboBox* comboBox)
+{
+    auto creator = new PayeeCreator(q);
+    creator->setComboBox(comboBox);
+    creator->addButton(ui->cancelButton);
+    creator->addButton(ui->enterButton);
+    creator->createPayee();
+}
+
 NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
     : QWidget(parent)
     , MyMoneyFactory(this)
@@ -334,9 +363,9 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 {
     d->commodity = commodity;
     auto const file = MyMoneyFile::instance();
-    auto view = qobject_cast<SplitView*>(parent->parentWidget());
-    Q_ASSERT(view != nullptr);
-    d->splitModel = qobject_cast<SplitModel*>(view->model());
+    auto ledgerView = qobject_cast<SplitView*>(parent->parentWidget());
+    Q_ASSERT(ledgerView != nullptr);
+    d->splitModel = qobject_cast<SplitModel*>(ledgerView->model());
 
     auto const model = MyMoneyFile::instance()->accountsModel();
     d->counterAccount = model->itemById(counterAccountId);
@@ -399,6 +428,32 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     connect(d->ui->numberEdit, &QLineEdit::textChanged, this, [&](const QString& txt) {
         d->numberChanged(txt);
     });
+
+    // make sure that there is no selection left in the background
+    // in case there is no text in the edit field
+    connect(d->ui->payeeEdit->lineEdit(), &QLineEdit::textEdited, this, [&](const QString& txt) {
+        if (txt.isEmpty()) {
+            d->ui->payeeEdit->setCurrentIndex(-1);
+        }
+    });
+
+    connect(
+        d->ui->payeeEdit->lineEdit(),
+        &QLineEdit::textEdited,
+        this,
+        [&](const QString& txt) {
+            if (!txt.isEmpty()) {
+                // when the user types something, select the first entry in the popup
+                const auto view = d->ui->payeeEdit->completer()->popup();
+                const auto viewsModel = view->model();
+                // prevent that setting the current index propagates the full
+                // name into the edit widget
+                QSignalBlocker blocker(view->selectionModel());
+                view->setCurrentIndex(viewsModel->index(0, 0));
+            }
+        },
+        Qt::QueuedConnection);
+
     connect(d->ui->costCenterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int costCenterIndex) {
         d->costCenterChanged(costCenterIndex);
     });
@@ -414,6 +469,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 
     d->ui->accountCombo->installEventFilter(this);
     d->ui->payeeEdit->installEventFilter(this);
+    d->ui->payeeEdit->completer()->popup()->installEventFilter(this);
     d->ui->memoEdit->installEventFilter(this);
     d->ui->tagContainer->tagCombo()->installEventFilter(this);
     d->ui->accountCombo->installEventFilter(this);
@@ -696,7 +752,8 @@ bool NewSplitEditor::focusNextPrevChild(bool next)
 bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
 {
     auto cb = qobject_cast<QComboBox*>(o);
-    if (o) {
+
+    if (cb) {
         // filter out wheel events for combo boxes if the popup view is not visible
         if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
             return true;
@@ -713,7 +770,22 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                 }
 
             } else if (o == d->ui->payeeEdit) {
-                if (!cb->currentText().isEmpty()) {
+                // in case the popup for the payee is visible we need to copy the
+                // selected text into the combobox widget so that the payee can
+                // be found in the list
+                if (cb->lineEdit()->completer()->popup()->isVisible()) {
+                    const auto view = cb->lineEdit()->completer()->popup();
+                    const auto model = view->selectionModel();
+                    const auto selectedRows = model->selectedRows();
+                    if (!selectedRows.isEmpty()) {
+                        cb->setCurrentText(selectedRows.at(0).data(eMyMoney::Model::PayeeNameRole).toString());
+                    }
+                }
+
+                if (d->needCreatePayee(cb)) {
+                    d->createPayee(cb);
+
+                } else if (!cb->currentText().isEmpty()) {
                     const auto index(cb->findText(cb->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive));
                     if (index != -1) {
                         cb->setCurrentIndex(index);
@@ -723,6 +795,7 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                 } else {
                     cb->setCurrentIndex(-1);
                 }
+
             } else if (o == d->ui->tagContainer->tagCombo()) {
                 if (!cb->currentText().isEmpty()) {
                     const auto index(cb->findText(cb->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive));
@@ -733,7 +806,16 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                     }
                 }
             }
-        } else if ((e->type() == QEvent::KeyPress) && (cb != nullptr)) {
+        } else if (e->type() == QEvent::FocusIn) {
+            if (o == d->ui->payeeEdit) {
+                // set case sensitivity so that a payee with the same spelling
+                // but different case will be presented in the popup view of
+                // the completion box. We need to do that because the CaseSensitive
+                // mode is set when the focus leaves the widget (see above).
+                d->ui->payeeEdit->completer()->setCaseSensitivity(Qt::CaseInsensitive);
+            }
+
+        } else if (e->type() == QEvent::KeyPress) {
             // if it is a key press on a combobox
             const auto kev = static_cast<QKeyEvent*>(e);
             if (kev->modifiers() == Qt::NoModifier) {
@@ -744,20 +826,6 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                         focusNextChild();
                         return true;
                     }
-                }
-            }
-        } else if ((e->type() == QEvent::KeyPress) && (o == d->ui->memoEdit)) {
-            auto kev = static_cast<QKeyEvent*>(e);
-            if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
-                // and the return key and we use it to move between fields
-                if (d->baseEditor->enterMovesBetweenFields()) {
-                    if (kev->modifiers() == Qt::AltModifier) {
-                        d->ui->memoEdit->insertPlainText(QLatin1String("\n"));
-                        d->ui->memoEdit->textCursor().movePosition(QTextCursor::Right);
-                    } else {
-                        focusNextChild();
-                    }
-                    return true;
                 }
             }
         }
@@ -778,6 +846,35 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
             }
             tabOrderDialog->deleteLater();
             return true;
+        }
+
+        if (o == d->ui->payeeEdit->completer()->popup()) {
+            if (e->type() == QEvent::KeyPress) {
+                if (kev->key() == Qt::Key_Enter || kev->key() == Qt::Key_Return) {
+                    const auto view = d->ui->payeeEdit->completer()->popup();
+                    // get the current index and toggle it once to
+                    // an invalid one so that the signal is
+                    // emitted to fill the full name into
+                    // the payee edit widget
+                    const auto idx = view->currentIndex();
+                    view->setCurrentIndex(QModelIndex());
+                    view->setCurrentIndex(idx);
+                }
+            }
+
+        } else if (o == d->ui->memoEdit) {
+            if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
+                // and the return key and we use it to move between fields
+                if (d->baseEditor->enterMovesBetweenFields()) {
+                    if (kev->modifiers() == Qt::AltModifier) {
+                        d->ui->memoEdit->insertPlainText(QLatin1String("\n"));
+                        d->ui->memoEdit->textCursor().movePosition(QTextCursor::Right);
+                    } else {
+                        focusNextChild();
+                    }
+                    return true;
+                }
+            }
         }
     }
 
