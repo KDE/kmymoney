@@ -363,9 +363,9 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 {
     d->commodity = commodity;
     auto const file = MyMoneyFile::instance();
-    auto view = qobject_cast<SplitView*>(parent->parentWidget());
-    Q_ASSERT(view != nullptr);
-    d->splitModel = qobject_cast<SplitModel*>(view->model());
+    auto ledgerView = qobject_cast<SplitView*>(parent->parentWidget());
+    Q_ASSERT(ledgerView != nullptr);
+    d->splitModel = qobject_cast<SplitModel*>(ledgerView->model());
 
     auto const model = MyMoneyFile::instance()->accountsModel();
     d->counterAccount = model->itemById(counterAccountId);
