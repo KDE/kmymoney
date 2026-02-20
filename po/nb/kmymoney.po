@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-09 03:25+0000\n"
-"PO-Revision-Date: 2026-02-07 17:01+0100\n"
+"POT-Creation-Date: 2026-02-16 03:33+0000\n"
+"PO-Revision-Date: 2026-02-19 08:49+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -615,8 +615,8 @@ msgid ""
 "If your system does not use an automounter, make sure you mark the checkbox "
 "below to \"mount this directory before backing up.\""
 msgstr ""
-"Hvis systemet ditt ikke bruker en «automonterer», sørg for at du merker av i "
-"avmerkingsboksen nedenfor for å «montere denne katalogen før "
+"Hvis systemet ditt ikke bruker en «automonterer», sørg for at du krysser av "
+"i avkryssingsboksen nedenfor for å «montere denne katalogen før "
 "sikkerhetskopiering»."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
@@ -2981,8 +2981,8 @@ msgid ""
 msgstr ""
 "For å fullføre slettingen, velg enten et merke fra de tilgjengelige merkene "
 "som vil erstatte de valgte merkene før de slettes eller markere "
-"avkrysningsboksen nedenfor avhengig av ditt valg. OK-knappen blir "
-"tilgjengelig når du har valgt et merke eller merket av i avmerkingsboksen."
+"avkryssingsboksen nedenfor avhengig av ditt valg. OK-knappen blir "
+"tilgjengelig når du har valgt et merke eller krysset av i avkryssingsboksen."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/ktagreassigndlg.ui:79
@@ -7069,15 +7069,15 @@ msgstr "Fullført: data stemmer overens."
 #, kde-format
 msgid "%1 problem corrected."
 msgid_plural "%1 problems corrected."
-msgstr[0] "%1 problemet er rettet."
-msgstr[1] "%1 problemene er rettet."
+msgstr[0] "%1 problem er rettet."
+msgstr[1] "%1 problemer er rettet."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3783
 #, kde-format
 msgid "%1 problem still present."
 msgid_plural "%1 problems still present."
-msgstr[0] "%1 problemet er der ennå."
-msgstr[1] "%1 problemene er der ennå."
+msgstr[0] "%1 problem er der ennå."
+msgstr[1] "%1 problemer er der ennå."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3786
 #, kde-format
@@ -8027,282 +8027,282 @@ msgstr "Sølv"
 msgid "Opening Balances"
 msgstr "Åpningssaldo"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:932
+#: kmymoney/mymoney/mymoneyschedule.cpp:889
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Once"
 msgstr "En gang"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:934
+#: kmymoney/mymoney/mymoneyschedule.cpp:891
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Daily"
 msgstr "Daglig"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:936
+#: kmymoney/mymoney/mymoneyschedule.cpp:893
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Weekly"
 msgstr "Ukentlig"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:938
+#: kmymoney/mymoney/mymoneyschedule.cpp:895
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Fortnightly"
 msgstr "Hver 14. dag"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:940
-#: kmymoney/mymoney/mymoneyschedule.cpp:990
+#: kmymoney/mymoney/mymoneyschedule.cpp:897
+#: kmymoney/mymoney/mymoneyschedule.cpp:947
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
 msgstr "Annenhver uke"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:942
+#: kmymoney/mymoney/mymoneyschedule.cpp:899
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every half month"
 msgstr "Hver halve måned"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:944
-#: kmymoney/mymoney/mymoneyschedule.cpp:993
+#: kmymoney/mymoney/mymoneyschedule.cpp:901
+#: kmymoney/mymoney/mymoneyschedule.cpp:950
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
 msgstr "Hver 3. uke"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:946
-#: kmymoney/mymoney/mymoneyschedule.cpp:996
+#: kmymoney/mymoney/mymoneyschedule.cpp:903
+#: kmymoney/mymoney/mymoneyschedule.cpp:953
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
 msgstr "Hver 4. uke"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:948
-#: kmymoney/mymoney/mymoneyschedule.cpp:981
+#: kmymoney/mymoney/mymoneyschedule.cpp:905
+#: kmymoney/mymoney/mymoneyschedule.cpp:938
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every thirty days"
 msgstr "Hver 30. dag"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:950
+#: kmymoney/mymoney/mymoneyschedule.cpp:907
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Monthly"
 msgstr "Månedlig"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:952
-#: kmymoney/mymoney/mymoneyschedule.cpp:999
+#: kmymoney/mymoney/mymoneyschedule.cpp:909
+#: kmymoney/mymoney/mymoneyschedule.cpp:956
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
 msgstr "Hver 8. uke"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:954
-#: kmymoney/mymoney/mymoneyschedule.cpp:1011
+#: kmymoney/mymoney/mymoneyschedule.cpp:911
+#: kmymoney/mymoney/mymoneyschedule.cpp:968
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
 msgstr "Annenhver måned"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:956
-#: kmymoney/mymoney/mymoneyschedule.cpp:1014
+#: kmymoney/mymoney/mymoneyschedule.cpp:913
+#: kmymoney/mymoney/mymoneyschedule.cpp:971
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three months"
 msgstr "Hver 3. måned"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:958
+#: kmymoney/mymoney/mymoneyschedule.cpp:915
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
 msgstr "Kvartalsvis"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:960
-#: kmymoney/mymoney/mymoneyschedule.cpp:1017
+#: kmymoney/mymoney/mymoneyschedule.cpp:917
+#: kmymoney/mymoney/mymoneyschedule.cpp:974
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four months"
 msgstr "Hver 4. måned"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:962
-#: kmymoney/mymoney/mymoneyschedule.cpp:1020
+#: kmymoney/mymoney/mymoneyschedule.cpp:919
+#: kmymoney/mymoney/mymoneyschedule.cpp:977
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Twice yearly"
 msgstr "To ganger årlig"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:964
+#: kmymoney/mymoney/mymoneyschedule.cpp:921
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Yearly"
 msgstr "Årlig"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:966
-#: kmymoney/mymoney/mymoneyschedule.cpp:1029
+#: kmymoney/mymoney/mymoneyschedule.cpp:923
+#: kmymoney/mymoney/mymoneyschedule.cpp:986
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other year"
 msgstr "Annethvert år"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:967
+#: kmymoney/mymoney/mymoneyschedule.cpp:924
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Any"
 msgstr "Alle"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:976
+#: kmymoney/mymoney/mymoneyschedule.cpp:933
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
 msgstr "%1 ganger"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:984
+#: kmymoney/mymoney/mymoneyschedule.cpp:941
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 days"
 msgstr "%1 dager"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1002
+#: kmymoney/mymoney/mymoneyschedule.cpp:959
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
 msgstr "%1 uker"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1006
+#: kmymoney/mymoney/mymoneyschedule.cpp:963
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 half months"
 msgstr "Hver %1 halvmåneder"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1023
+#: kmymoney/mymoney/mymoneyschedule.cpp:980
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 months"
 msgstr "Hver %1 måned"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1032
+#: kmymoney/mymoney/mymoneyschedule.cpp:989
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 years"
 msgstr "Hvert %1 år"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1042
+#: kmymoney/mymoney/mymoneyschedule.cpp:999
 msgctxt "Schedule occurrence period"
 msgid "Any"
 msgstr "Alle"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1045
+#: kmymoney/mymoney/mymoneyschedule.cpp:1002
 msgctxt "Schedule occurrence period"
 msgid "Once"
 msgstr "En gang"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1047
+#: kmymoney/mymoney/mymoneyschedule.cpp:1004
 msgctxt "Schedule occurrence period"
 msgid "Day"
 msgstr "Dag"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1049
+#: kmymoney/mymoney/mymoneyschedule.cpp:1006
 msgctxt "Schedule occurrence period"
 msgid "Week"
 msgstr "Uke"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1051
+#: kmymoney/mymoney/mymoneyschedule.cpp:1008
 msgctxt "Schedule occurrence period"
 msgid "Half-month"
 msgstr "Halvmåned"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1053
+#: kmymoney/mymoney/mymoneyschedule.cpp:1010
 msgctxt "Schedule occurrence period"
 msgid "Month"
 msgstr "Måned"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1055
+#: kmymoney/mymoney/mymoneyschedule.cpp:1012
 msgctxt "Schedule occurrence period"
 msgid "Year"
 msgstr "År"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1065
+#: kmymoney/mymoney/mymoneyschedule.cpp:1022
 msgctxt "Scheduled transaction type"
 msgid "Bill"
 msgstr "Regning"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1068
+#: kmymoney/mymoney/mymoneyschedule.cpp:1025
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
 msgstr "Innskudd"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1071
+#: kmymoney/mymoney/mymoneyschedule.cpp:1028
 msgctxt "Scheduled transaction type"
 msgid "Transfer"
 msgstr "Overføring"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1074
+#: kmymoney/mymoney/mymoneyschedule.cpp:1031
 msgctxt "Scheduled transaction type"
 msgid "Loan payment"
 msgstr "Avdrag"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1078
+#: kmymoney/mymoney/mymoneyschedule.cpp:1035
 msgctxt "Scheduled transaction type"
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1087
+#: kmymoney/mymoney/mymoneyschedule.cpp:1044
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
 msgstr "Direkte trekk"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1090
+#: kmymoney/mymoney/mymoneyschedule.cpp:1047
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
 msgstr "Direkte innskudd"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1093
+#: kmymoney/mymoney/mymoneyschedule.cpp:1050
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
 msgstr "Manuelt innskudd"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1096
+#: kmymoney/mymoney/mymoneyschedule.cpp:1053
 msgctxt "Scheduled Transaction payment type"
 msgid "Other"
 msgstr "Andre"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1099
+#: kmymoney/mymoney/mymoneyschedule.cpp:1056
 msgctxt "Scheduled Transaction payment type"
 msgid "Write check"
 msgstr "Skriv sjekk"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1102
+#: kmymoney/mymoney/mymoneyschedule.cpp:1059
 msgctxt "Scheduled Transaction payment type"
 msgid "Standing order"
 msgstr "Stående ordre"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1105
+#: kmymoney/mymoney/mymoneyschedule.cpp:1062
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
 msgstr "Bankoverføring"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1108
+#: kmymoney/mymoney/mymoneyschedule.cpp:1065
 msgctxt "Scheduled Transaction payment type"
 msgid "Any (Error)"
 msgstr "Alle (Feil)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1120
+#: kmymoney/mymoney/mymoneyschedule.cpp:1077
 #: kmymoney/views/keditscheduledlg.ui:164
 #, kde-format
 msgid "Change the date to the previous processing day"
 msgstr "Endre datoen til forrige bankdag"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1123
+#: kmymoney/mymoney/mymoneyschedule.cpp:1080
 #: kmymoney/views/keditscheduledlg.ui:169
 #, kde-format
 msgid "Change the date to the next processing day"
 msgstr "Endre datoen til neste bankdag"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1126
+#: kmymoney/mymoney/mymoneyschedule.cpp:1083
 #: kmymoney/views/keditscheduledlg.ui:159
 #, kde-format
 msgid "Do not change the date"
@@ -10036,7 +10036,7 @@ msgstr "Velg kolonnen som inneholder nummerfeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:119
 #, kde-format
 msgid "Clear number field selection."
-msgstr "Rens valg av nummerfelt."
+msgstr "Tøm valg av nummerfelt."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_dateCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:157
@@ -10050,7 +10050,7 @@ msgstr "Velg kolonnen som inneholder datofeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:167
 #, kde-format
 msgid "Clear date field selection."
-msgstr "Rens valg av datofelt."
+msgstr "Tøm valg av datofelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_payee)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:180
@@ -10069,7 +10069,7 @@ msgstr "Velg kolonnen som inneholder felt for mottaker eller beskrivelse."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:209
 #, kde-format
 msgid "Clear payee field selection."
-msgstr "Rens valg av mottakerfelt."
+msgstr "Tøm valg av mottakerfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_category)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:228
@@ -10088,7 +10088,7 @@ msgstr "Velg kolonnen som inneholder kategorifeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:257
 #, kde-format
 msgid "Clear category field selection."
-msgstr "Rens valg av kategorifelt."
+msgstr "Tøm valg av kategorifelt."
 
 #. i18n: ectx: property (text), widget (QLabel, memoLabel)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkMemo)
@@ -10128,7 +10128,7 @@ msgstr "Valg"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:315
 #, kde-format
 msgid "Clear memo field selection."
-msgstr "Rens valg av notatfelt."
+msgstr "Tøm valg av notatfelt."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkBalance)
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
@@ -10153,7 +10153,7 @@ msgstr "Velg kolonnen som inneholder saldofeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:351
 #, kde-format
 msgid "Clear balance field selection."
-msgstr "Rens valg av saldofelt."
+msgstr "Tøm valg av saldofelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:409
@@ -10173,7 +10173,7 @@ msgstr "Velg kolonnen som inneholder beløpfeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, kde-format
 msgid "Clear amount field selection."
-msgstr "Rens valg av notatfelt."
+msgstr "Tøm valg av notatfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
@@ -10191,7 +10191,7 @@ msgstr "Velg kolonnen som inneholder indikatorfeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, kde-format
 msgid "Clear indicator field selection."
-msgstr "Rens valgt indikatorfelt."
+msgstr "Tøm valgt indikatorfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -10252,7 +10252,7 @@ msgstr "Velg kolonnen som inneholder debetfeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:609
 #, kde-format
 msgid "Clear debit field selection."
-msgstr "Rens valgt debetfelt."
+msgstr "Tøm valgt debetfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credits)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:625
@@ -10271,20 +10271,20 @@ msgstr "Velg kolonnen som inneholder kreditfeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:654
 #, kde-format
 msgid "Clear credit field selection."
-msgstr "Rens valgt kreditfelt."
+msgstr "Tøm valgt kreditfelt."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:719
 #, kde-format
 msgid "Clear all selected column and indicator entries"
-msgstr "Rens alle valgte kolonne- og indikatoroppføringer"
+msgstr "Tøm alle valgte kolonne- og indikatoroppføringer"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:722
 #, kde-format
 msgctxt "Clear all column assignments"
 msgid "Clear all"
-msgstr "Rens alt"
+msgstr "Tøm alt"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:221
 #, kde-format
@@ -10527,7 +10527,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:124
 #, kde-format
 msgid "comma (,)"
-msgstr "komme (,)"
+msgstr "komma (,)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_thousandsDelimiter)
 #. i18n: ectx: property (text), item, widget (QComboBox, m_decimalSymbol)
@@ -10834,7 +10834,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:211
 #, kde-format
 msgid "Clear selected column entries."
-msgstr "Rens valgte kolonneoppføringer."
+msgstr "Tøm valgte kolonneoppføringer."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #. i18n: ectx: property (text), widget (QPushButton, button_clear)
@@ -10843,7 +10843,7 @@ msgstr "Rens valgte kolonneoppføringer."
 #, kde-format
 msgctxt "verb, to clear selected columns"
 msgid "Clear"
-msgstr "Rens"
+msgstr "Tøm"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_priceFraction)
 #. i18n: ectx: property (text), widget (QLabel, lblpriceFraction)
@@ -10947,7 +10947,7 @@ msgstr "Minimumsgebyr"
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:508
 #, kde-format
 msgid "Clear Fee"
-msgstr "Rens gebyr"
+msgstr "Tøm gebyr"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_calculateFee)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:521
@@ -15535,7 +15535,7 @@ msgstr "Kontoen %1 synker %2 per syklus."
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:492
 #, kde-format
 msgid "Min Bal %1"
-msgstr "Min.sald. %1"
+msgstr "Min.saldo %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:493
 #, kde-format
@@ -20385,7 +20385,7 @@ msgstr "Fjern mottaker"
 #: kmymoney/views/kpayeesview.cpp:609
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
-msgstr "<å>Er du sikker på at du vil slå sammen de valgte mottakerene?"
+msgstr "<p>Er du sikker på at du vil slå sammen de valgte mottakerene?"
 
 #: kmymoney/views/kpayeesview.cpp:610 kmymoney/views/kpayeesview_p.h:585
 #, kde-format
@@ -21256,7 +21256,7 @@ msgstr ""
 #: kmymoney/views/multitransactioneditor.cpp:802
 #, kde-format
 msgid "Clear memo"
-msgstr "Rens notatfeltet"
+msgstr "Tøm notatfeltet"
 
 #: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
@@ -23108,7 +23108,7 @@ msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
-"Ved å velge avkrysningsboksen <b>Favorittkonto</b> får du lettere tilgang "
+"Ved å velge avkryssingsboksen <b>Favorittkonto</b> får du lettere tilgang "
 "til kontoen i enkelte vinduer og visninger i KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
@@ -23374,7 +23374,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item no payments were entered for a loan"
 msgid "No"
-msgstr "Nr"
+msgstr "Nei"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_anyPayments)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:98
@@ -25568,7 +25568,7 @@ msgid ""
 msgstr ""
 "En typisk bruker av KMyMoney har en brukskonto i en institusjon og bruker "
 "denne til å få inn penger og betale regninger. Hvis det ikke er tilfelle for "
-"deg må du ta bort krysset i avkrysningsboksen og fortsette til neste side."
+"deg må du ta bort krysset i avkryssingsboksen og fortsette til neste side."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_haveCheckingAccountButton)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:30
