@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-17 00:45+0000\n"
+"POT-Creation-Date: 2026-02-20 00:45+0000\n"
 "PO-Revision-Date: 2026-02-17 07:58+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -21654,13 +21654,13 @@ msgstr ""
 msgid "Clear memo"
 msgstr "Вилучити нотатку"
 
-#: kmymoney/views/newspliteditor.cpp:174
+#: kmymoney/views/newspliteditor.cpp:177
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Обліковий відділ, із яким слід пов'язати цю операцію."
 
-#: kmymoney/views/newspliteditor.cpp:187
+#: kmymoney/views/newspliteditor.cpp:190
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -21668,30 +21668,30 @@ msgid ""
 "category."
 msgstr "Для операції у позначеній категорії слід призначити обліковий відділ."
 
-#: kmymoney/views/newspliteditor.cpp:198
+#: kmymoney/views/newspliteditor.cpp:201
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Категорія, з якою слід пов'язати цей поділ."
 
-#: kmymoney/views/newspliteditor.cpp:243
+#: kmymoney/views/newspliteditor.cpp:246
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Поділ має бути пов'язано із категорією."
 
-#: kmymoney/views/newspliteditor.cpp:252
+#: kmymoney/views/newspliteditor.cpp:255
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Номер чека, використаного для цієї операції."
 
-#: kmymoney/views/newspliteditor.cpp:261
+#: kmymoney/views/newspliteditor.cpp:264
 #: kmymoney/views/newtransactioneditor.cpp:484
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Чек із номером <b>%1</b> вже було використано у цьому рахунку."
 
-#: kmymoney/views/newspliteditor.cpp:795
+#: kmymoney/views/newspliteditor.cpp:892
 #: kmymoney/views/newtransactioneditor.cpp:210
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21777,7 +21777,7 @@ msgstr ""
 "збереження в обліковій книзі його не можна буде скасувати.</p><p>Ви "
 "впевнені, що хочете продовжити?</p>"
 
-#: kmymoney/views/newtransactioneditor.cpp:1702
+#: kmymoney/views/newtransactioneditor.cpp:1703
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21786,7 +21786,7 @@ msgstr ""
 "Хочете замінити нотатку<p><i>%1</i></p>нотаткою<p><i>%2</i></p>у іншому "
 "дробленні?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1703
+#: kmymoney/views/newtransactioneditor.cpp:1704
 #, kde-format
 msgid "Copy memo"
 msgstr "Копіювати нотатку"
