@@ -9,6 +9,7 @@ set(querytable_test_files
   test-448788.xml
   test-453033.xml
   test-469195.xml
+  test-511104.xml
   test-cash-flow.xml
   test-investment.xml
   test-net-worth.xml

@@ -538,6 +538,7 @@ void QueryTable::constructTransactionTable()
     MyMoneyReport report(m_config);
     report.setReportAllSplits(false);
     report.setConsiderCategory(true);
+    report.setConsiderCategorySplits(true);
 
     bool use_transfers;
     bool use_summary;
