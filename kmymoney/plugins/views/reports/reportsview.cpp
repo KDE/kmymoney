@@ -95,7 +95,7 @@ QWidget *ReportsView::netWorthForecast() const
     reportCfg.setConvertCurrency(true);
     reportCfg.setIncludingForecast(true);
     reportCfg.setDateFilter(QDate::currentDate(), QDate::currentDate().addDays(+ 90));
-    reports::PivotTable table(reportCfg);
+    reports::PivotTable table(reportCfg, KMyMoneyUtils::forecastConfig());
 
     auto chartWidget = new reports::KReportChartView(nullptr);
 
@@ -129,7 +129,7 @@ QWidget *ReportsView::netWorthForecast(const QString &arg) const
     reportCfg.setConvertCurrency(true);
     reportCfg.setIncludingForecast(true);
     reportCfg.setDateFilter(QDate::currentDate(), QDate::currentDate().addDays(liArgs.at(2).toLongLong()));
-    reports::PivotTable table(reportCfg);
+    reports::PivotTable table(reportCfg, KMyMoneyUtils::forecastConfig());
 
     auto forecastChart = new reports::KReportChartView(nullptr);
     forecastChart->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -179,7 +179,7 @@ QString ReportsView::budget() const
 
     reportCfg.setBudget("Any", true);
 
-    reports::PivotTable table(reportCfg);
+    reports::PivotTable table(reportCfg, KMyMoneyUtils::forecastConfig());
 
     reports::PivotGrid grid = table.grid();
 

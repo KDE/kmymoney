@@ -250,7 +250,7 @@ void KBudgetView::slotBudgetForecast()
                     historyStart = budgetStart.addYears(-1);
                     historyEnd = budgetEnd.addYears(-1);
 
-                    MyMoneyForecast forecast = KMyMoneyUtils::forecast();
+                    MyMoneyForecast forecast = MyMoneyForecast::fromConfig(KMyMoneyUtils::forecastConfig());
                     forecast.createBudget(budget, historyStart, historyEnd, budgetStart, budgetEnd, true);
 
                     MyMoneyFile::instance()->modifyBudget(budget);

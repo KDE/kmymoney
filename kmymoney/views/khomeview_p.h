@@ -381,7 +381,7 @@ public:
         m_accountList.clear();
 
         //reinitialize the object
-        m_forecast = KMyMoneyUtils::forecast();
+        m_forecast = MyMoneyForecast::fromConfig(KMyMoneyUtils::forecastConfig());
 
         //If forecastDays lower than accountsCycle, adjust to the first cycle
         if (m_forecast.accountsCycle() > m_forecast.forecastDays())
