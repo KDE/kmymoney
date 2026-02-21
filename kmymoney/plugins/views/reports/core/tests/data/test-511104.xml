@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date="2020-11-01"/>
+    <LAST_MODIFIED_DATE date="2026-02-02T11:03:24+00:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION id="10"/>
+    <APPVERSION id="5.2.1"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES/>
+  <COSTCENTERS/>
+  <TAGS>
+    <TAG id="G000001" name="My Tag" closed="0" tagcolor="#000000"/>
+    <TAG id="G000002" name="My Other Tag" closed="0" tagcolor="#000000"/>
+  </TAGS>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="GBP">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="GBP"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="GBP">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000003"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="GBP"/>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="GBP">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2026-02-02" institution="" opened="2025-04-06" number="" type="9" name="My GBP Assets" description="" currency="GBP"/>
+    <ACCOUNT id="A000002" parentaccount="AStd::Equity" lastreconciled="" lastmodified="2026-02-02" institution="" opened="2025-04-06" number="" type="16" name="Opening Balances" description="" currency="GBP">
+      <KEYVALUEPAIRS>
+        <PAIR key="OpeningBalanceAccount" value="Yes"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000003" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2026-02-02" institution="" opened="1900-01-01" number="" type="13" name="My Category" description="" currency="GBP"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000001" postdate="2025-04-06" memo="" entrydate="2026-02-02" commodity="GBP">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="1000/1" shares="1000/1" price="0/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-1000/1" shares="-1000/1" price="0/1" memo="" account="A000002" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000002" postdate="2026-02-02" memo="" entrydate="2026-02-02" commodity="GBP">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-200/1" shares="-200/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="200/1" shares="200/1" price="1/1" memo="" account="A000003" number="" bankid="">
+          <TAG id="G000001"/>
+        </SPLIT>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000003" postdate="2026-02-02" memo="" entrydate="2026-02-02" commodity="GBP">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-10/1" shares="-10/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="10/1" shares="10/1" price="1/1" memo="" account="A000003" number="" bankid="">
+          <TAG id="G000002"/>
+        </SPLIT>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2026-02-02T11:03:24+00:00"/>
+    <PAIR key="kmm-baseCurrency" value="GBP"/>
+    <PAIR key="kmm-id" value="{80dff6a0-9d2b-4d7f-8230-e512aac8edba}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="GBP" name="British Pound" symbol="£" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES/>
+  <REPORTS>
+    <REPORT id="R000001" type="querytable 1.15" group="Transactions" name="Transaction by payee (Customised)" comment="Demonstrates bug 511104" convertcurrency="1" favorite="1" skipZero="0" datelock="yeartodate" rowtype="payee" querycolumns="number,category,tag" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <TAG id="G000001"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>
