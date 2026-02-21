@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 03:33+0000\n"
+"POT-Creation-Date: 2026-02-21 03:42+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -22504,14 +22504,14 @@ msgstr ""
 msgid "Clear memo"
 msgstr "Καθαρισμός των &μηδενικών"
 
-#: kmymoney/views/newspliteditor.cpp:174
+#: kmymoney/views/newspliteditor.cpp:177
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Χρησιμοποιήστε το για την εισαγωγή της συναλλαγής στο καθολικό."
 
-#: kmymoney/views/newspliteditor.cpp:187
+#: kmymoney/views/newspliteditor.cpp:190
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -22520,33 +22520,33 @@ msgid ""
 "category."
 msgstr "Αδυναμία δημιουργίας συναλλαγών στο περιεχόμενο μιας κατηγορίας."
 
-#: kmymoney/views/newspliteditor.cpp:198
+#: kmymoney/views/newspliteditor.cpp:201
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Χρησιμοποιήστε το για την εισαγωγή της συναλλαγής στο καθολικό."
 
-#: kmymoney/views/newspliteditor.cpp:243
+#: kmymoney/views/newspliteditor.cpp:246
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Αδυναμία δημιουργίας συναλλαγών στο περιεχόμενο μιας κατηγορίας."
 
-#: kmymoney/views/newspliteditor.cpp:252
+#: kmymoney/views/newspliteditor.cpp:255
 #, fuzzy, kde-format
 #| msgid "Enter the number of the first transaction line."
 msgid "The check number used for this transaction."
 msgstr "Εισάγετε τον αριθμό της γραμμής της πρώτης συναλλαγής."
 
-#: kmymoney/views/newspliteditor.cpp:261
+#: kmymoney/views/newspliteditor.cpp:264
 #: kmymoney/views/newtransactioneditor.cpp:464
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:795
+#: kmymoney/views/newspliteditor.cpp:892
 #: kmymoney/views/newtransactioneditor.cpp:190
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
@@ -22606,14 +22606,14 @@ msgstr "Επιλέξτε την αυτόματη συμπλήρωση των σ�
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1649
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1650
+#: kmymoney/views/newtransactioneditor.cpp:1651
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"

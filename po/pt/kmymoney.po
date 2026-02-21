@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 03:33+0000\n"
+"POT-Creation-Date: 2026-02-21 03:42+0000\n"
 "PO-Revision-Date: 2020-09-15 12:07+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -22085,14 +22085,14 @@ msgstr ""
 msgid "Clear memo"
 msgstr "Apagar os &Zeros"
 
-#: kmymoney/views/newspliteditor.cpp:174
+#: kmymoney/views/newspliteditor.cpp:177
 #, fuzzy, kde-format
 #| msgid "The cost center this transaction should be assigned to."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "O centro de custo que deve ser atribuído a esta transacção."
 
-#: kmymoney/views/newspliteditor.cpp:187
+#: kmymoney/views/newspliteditor.cpp:190
 #, fuzzy, kde-format
 #| msgid ""
 #| "A cost center assignment is required for a transaction in the selected "
@@ -22105,14 +22105,14 @@ msgstr ""
 "É necessária a atribuição de um centro de custo numa transacção da categoria "
 "seleccionada."
 
-#: kmymoney/views/newspliteditor.cpp:198
+#: kmymoney/views/newspliteditor.cpp:201
 #, fuzzy, kde-format
 #| msgid "The cost center this transaction should be assigned to."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "O centro de custo que deve ser atribuído a esta transacção."
 
-#: kmymoney/views/newspliteditor.cpp:243
+#: kmymoney/views/newspliteditor.cpp:246
 #, fuzzy, kde-format
 #| msgid ""
 #| "A cost center assignment is required for a transaction in the selected "
@@ -22123,18 +22123,18 @@ msgstr ""
 "É necessária a atribuição de um centro de custo numa transacção da categoria "
 "seleccionada."
 
-#: kmymoney/views/newspliteditor.cpp:252
+#: kmymoney/views/newspliteditor.cpp:255
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "O número de cheque usado para esta transacção."
 
-#: kmymoney/views/newspliteditor.cpp:261
+#: kmymoney/views/newspliteditor.cpp:264
 #: kmymoney/views/newtransactioneditor.cpp:464
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "O número de cheque <b>%1</b> já foi usado nesta conta."
 
-#: kmymoney/views/newspliteditor.cpp:795
+#: kmymoney/views/newspliteditor.cpp:892
 #: kmymoney/views/newtransactioneditor.cpp:190
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -22191,7 +22191,7 @@ msgstr "Seleccionar a transacção auto-preenchida"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1649
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -22200,7 +22200,7 @@ msgstr ""
 "Deseja substituir o memorando<p><i>%1</i></p>pelo memorando<p><i>%2</i></"
 "p>na outra parcela?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1650
+#: kmymoney/views/newtransactioneditor.cpp:1651
 #, kde-format
 msgid "Copy memo"
 msgstr "Copiar o memorando"

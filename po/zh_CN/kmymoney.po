@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 03:33+0000\n"
+"POT-Creation-Date: 2026-02-21 03:42+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -21256,14 +21256,14 @@ msgstr ""
 msgid "Clear memo"
 msgstr "归零(&Z)"
 
-#: kmymoney/views/newspliteditor.cpp:174
+#: kmymoney/views/newspliteditor.cpp:177
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "用这个来将交易记录到账簿中"
 
-#: kmymoney/views/newspliteditor.cpp:187
+#: kmymoney/views/newspliteditor.cpp:190
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -21272,30 +21272,30 @@ msgid ""
 "category."
 msgstr "无法在交易类别上下文里创建交易。"
 
-#: kmymoney/views/newspliteditor.cpp:198
+#: kmymoney/views/newspliteditor.cpp:201
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:243
+#: kmymoney/views/newspliteditor.cpp:246
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:252
+#: kmymoney/views/newspliteditor.cpp:255
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:261
+#: kmymoney/views/newspliteditor.cpp:264
 #: kmymoney/views/newtransactioneditor.cpp:464
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:795
+#: kmymoney/views/newspliteditor.cpp:892
 #: kmymoney/views/newtransactioneditor.cpp:190
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21353,7 +21353,7 @@ msgstr "选择自动填充交易"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1649
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21362,7 +21362,7 @@ msgstr ""
 "您要在其他交易拆分中，将备忘 <p><i>%1</i></p> 替换为备忘 <p><i>%2</i></p> "
 "吗？"
 
-#: kmymoney/views/newtransactioneditor.cpp:1650
+#: kmymoney/views/newtransactioneditor.cpp:1651
 #, kde-format
 msgid "Copy memo"
 msgstr "复制备忘"
