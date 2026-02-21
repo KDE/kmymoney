@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyforecast.h"
 #include "pivotgrid.h"
 #include "reportaccount.h"
 #include "reporttable.h"
@@ -59,11 +60,12 @@ class PivotTable : public ReportTable
 
 public:
     /**
-      * Create a Pivot table style report
-      *
-      * @param _report The configuration parameters for this report
-      */
-    explicit PivotTable(const MyMoneyReport& _report);
+     * Create a Pivot table style report
+     *
+     * @param _report The configuration parameters for this report
+     * @param cfg optional forecast configuration
+     */
+    explicit PivotTable(const MyMoneyReport& _report, const ForecastConfig& cfg = ForecastConfig());
 
     /**
       * virtual Destructor
@@ -122,6 +124,8 @@ private:
     QDate m_endDate;
     bool m_runningSumsCalculated;
     int m_startColumn;
+    ForecastConfig m_forecastConfig;
+
     /**
       * For budget-vs-actual reports only, maps each account to the account which holds
       * the budget for it.  If an account is not contained in this map, it is not included
@@ -252,7 +256,7 @@ protected:
     /**
       * This method calculates forecast for a report
       */
-    void calculateForecast();
+    void calculateForecast(const ForecastConfig& cfg);
 
     /**
      * This method inserts units to be used to display prices

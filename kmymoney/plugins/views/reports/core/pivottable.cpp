@@ -82,9 +82,10 @@ void Debug::output(const QString& _text)
         qDebug("%s%s(): %s", qPrintable(m_sTabs), qPrintable(m_methodName), qPrintable(_text));
 }
 
-PivotTable::PivotTable(const MyMoneyReport& _report):
-    ReportTable(_report),
-    m_runningSumsCalculated(false)
+PivotTable::PivotTable(const MyMoneyReport& _report, const ForecastConfig& cfg)
+    : ReportTable(_report)
+    , m_runningSumsCalculated(false)
+    , m_forecastConfig(cfg)
 {
     init();
 }
@@ -373,7 +374,7 @@ void PivotTable::init()
     // Get forecast data
     //
     if (m_config.isIncludingForecast())
-        calculateForecast();
+        calculateForecast(m_forecastConfig);
 
     //
     //Insert Price data
@@ -2102,17 +2103,16 @@ void PivotTable::calculateBudgetDiff()
 
 }
 
-void PivotTable::calculateForecast()
+void PivotTable::calculateForecast(const ForecastConfig& cfg)
 {
     //setup forecast
-    MyMoneyForecast forecast = KMyMoneyUtils::forecast();
+    QDate evaluationDate = m_config.evaluationDate();
+    MyMoneyForecast forecast = MyMoneyForecast::fromConfig(cfg, evaluationDate);
 
     //since this is a net worth forecast we want to include all account even those that are not in use
     forecast.setIncludeUnusedAccounts(true);
 
     //setup forecast dates
-    QDate evaluationDate = m_config.evaluationDate();
-    forecast.setEvaluationDate(evaluationDate);
     if (m_endDate > evaluationDate) {
         forecast.setForecastStartDate(evaluationDate);
         forecast.setForecastEndDate(m_endDate);

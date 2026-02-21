@@ -12,11 +12,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QMetaType>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "forecastconfig.h"
 #include "mymoneyunittestable.h"
 
 class QDate;
@@ -217,6 +219,14 @@ public:
      * Returns the list of accounts to be forecast. Only Asset and Liability are returned.
      */
     static QList<MyMoneyAccount> forecastAccountList();
+
+    /**
+     * Creates a forecast instance from configuration
+     * @param cfg forecast configuration
+     * @param evaluationDate optional date the report is based on
+     * @return MyMoneyForecast instance
+     */
+    static MyMoneyForecast fromConfig(const ForecastConfig& cfg, const QDate& evaluationDate = QDate::currentDate());
 };
 
 /**

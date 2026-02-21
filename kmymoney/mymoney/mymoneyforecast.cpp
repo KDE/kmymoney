@@ -1743,3 +1743,22 @@ QList<MyMoneyAccount> MyMoneyForecast::forecastAccountList()
     }
     return accList;
 }
+
+MyMoneyForecast MyMoneyForecast::fromConfig(const ForecastConfig& cfg, const QDate& evaluationDate)
+{
+    MyMoneyForecast forecast;
+
+    forecast.setEvaluationDate(evaluationDate);
+    forecast.setForecastCycles(cfg.forecastCycles);
+    forecast.setAccountsCycle(cfg.accountsCycle);
+    forecast.setHistoryStartDate(evaluationDate.addDays(-cfg.forecastCycles * cfg.accountsCycle));
+    forecast.setHistoryEndDate(evaluationDate.addDays(-1));
+    forecast.setForecastDays(cfg.forecastDays);
+    forecast.setBeginForecastDay(cfg.beginForecastDay);
+    forecast.setForecastMethod(cfg.forecastMethod);
+    forecast.setHistoryMethod(cfg.historyMethod);
+    forecast.setIncludeFutureTransactions(cfg.includeFutureTransactions);
+    forecast.setIncludeScheduledTransactions(cfg.includeScheduledTransactions);
+
+    return forecast;
+}

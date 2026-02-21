@@ -169,7 +169,7 @@ public:
 
     void loadListView()
     {
-        MyMoneyForecast forecast = KMyMoneyUtils::forecast();
+        MyMoneyForecast forecast = MyMoneyForecast::fromConfig(KMyMoneyUtils::forecastConfig());
         const auto file = MyMoneyFile::instance();
 
         //get the settings from current page
@@ -179,6 +179,8 @@ public:
         forecast.setForecastCycles(ui->m_forecastCycles->value());
         forecast.setHistoryMethod(ui->m_historyMethod->checkedId());
         forecast.doForecast();
+
+        // TODO: settings changed in ui are not persistent
 
         ui->m_forecastList->clear();
         ui->m_forecastList->setIconSize(QSize(22, 22));
@@ -276,7 +278,7 @@ public:
 
     void loadSummaryView()
     {
-        MyMoneyForecast forecast = KMyMoneyUtils::forecast();
+        MyMoneyForecast forecast = MyMoneyForecast::fromConfig(KMyMoneyUtils::forecastConfig());
         QList<MyMoneyAccount> accList;
 
         const auto file = MyMoneyFile::instance();
@@ -451,7 +453,7 @@ public:
         const auto file = MyMoneyFile::instance();
         QList<MyMoneyAccount> accList;
         MyMoneySecurity baseCurrency = file->baseCurrency();
-        MyMoneyForecast forecast = KMyMoneyUtils::forecast();
+        MyMoneyForecast forecast = MyMoneyForecast::fromConfig(KMyMoneyUtils::forecastConfig());
         qint64 daysToBeginDay;
 
         //get the settings from current page
@@ -592,7 +594,7 @@ public:
     void loadBudgetView()
     {
         const auto file = MyMoneyFile::instance();
-        MyMoneyForecast forecast = KMyMoneyUtils::forecast();
+        MyMoneyForecast forecast = MyMoneyForecast::fromConfig(KMyMoneyUtils::forecastConfig());
 
         //get the settings from current page and calculate this year based on last year
         QDate historyEndDate = QDate(QDate::currentDate().year() - 1, 12, 31);
@@ -673,14 +675,15 @@ public:
     void loadForecastSettings()
     {
         //fill the settings controls
-        ui->m_forecastDays->setValue(KMyMoneySettings::forecastDays());
-        ui->m_accountsCycle->setValue(KMyMoneySettings::forecastAccountCycle());
-        ui->m_beginDay->setValue(KMyMoneySettings::beginForecastDay());
-        ui->m_forecastCycles->setValue(KMyMoneySettings::forecastCycles());
+        ForecastConfig config = KMyMoneyUtils::forecastConfig();
+        ui->m_forecastDays->setValue(config.forecastDays);
+        ui->m_accountsCycle->setValue(config.forecastCycles);
+        ui->m_beginDay->setValue(config.beginForecastDay);
+        ui->m_forecastCycles->setValue(config.forecastCycles);
         ui->m_historyMethod->setId(ui->radioButton11, 0); // simple moving avg
         ui->m_historyMethod->setId(ui->radioButton12, 1); // weighted moving avg
         ui->m_historyMethod->setId(ui->radioButton13, 2); // linear regression
-        ui->m_historyMethod->button(KMyMoneySettings::historyMethod())->setChecked(true);
+        ui->m_historyMethod->button(config.historyMethod)->setChecked(true);
 
         updateForecastMethod();
     }

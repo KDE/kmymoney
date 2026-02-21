@@ -230,7 +230,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     mainLayout->addWidget(m_chartView);
 
     // draw the chart
-    reports::PivotTable(*m_reportCfg).drawChart(*m_chartView);
+    reports::PivotTable(*m_reportCfg, KMyMoneyUtils::forecastConfig()).drawChart(*m_chartView);
 
     // add the min/max marker lines but only, if we don't show
     // a legend because the markers create too many entries in

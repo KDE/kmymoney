@@ -25,6 +25,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "forecastconfig.h"
+
 #ifndef KMYMONEY_DEPRECATED
 #  define KMYMONEY_DEPRECATED Q_DECL_DEPRECATED
 #endif
@@ -316,7 +318,10 @@ public:
 
     static QDebug debug();
 
-    static MyMoneyForecast forecast();
+    /**
+     * returns the user specific configuration for forecasts
+     */
+    static ForecastConfig forecastConfig();
 
     static bool canUpdateAllAccounts();
 

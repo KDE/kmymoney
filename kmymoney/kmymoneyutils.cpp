@@ -641,23 +641,19 @@ QDebug KMyMoneyUtils::debug()
     return qDebug() << QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss.zzz"));
 }
 
-MyMoneyForecast KMyMoneyUtils::forecast()
+ForecastConfig KMyMoneyUtils::forecastConfig()
 {
-    MyMoneyForecast forecast;
+    ForecastConfig config;
+    config.forecastCycles = KMyMoneySettings::forecastCycles();
+    config.accountsCycle = KMyMoneySettings::forecastAccountCycle();
+    config.forecastDays = KMyMoneySettings::forecastDays();
+    config.beginForecastDay = KMyMoneySettings::beginForecastDay();
+    config.forecastMethod = KMyMoneySettings::forecastMethod();
+    config.historyMethod = KMyMoneySettings::historyMethod();
+    config.includeFutureTransactions = KMyMoneySettings::includeFutureTransactions();
+    config.includeScheduledTransactions = KMyMoneySettings::includeScheduledTransactions();
 
-    // override object defaults with those of the application
-    forecast.setForecastCycles(KMyMoneySettings::forecastCycles());
-    forecast.setAccountsCycle(KMyMoneySettings::forecastAccountCycle());
-    forecast.setHistoryStartDate(QDate::currentDate().addDays(-forecast.forecastCycles()*forecast.accountsCycle()));
-    forecast.setHistoryEndDate(QDate::currentDate().addDays(-1));
-    forecast.setForecastDays(KMyMoneySettings::forecastDays());
-    forecast.setBeginForecastDay(KMyMoneySettings::beginForecastDay());
-    forecast.setForecastMethod(KMyMoneySettings::forecastMethod());
-    forecast.setHistoryMethod(KMyMoneySettings::historyMethod());
-    forecast.setIncludeFutureTransactions(KMyMoneySettings::includeFutureTransactions());
-    forecast.setIncludeScheduledTransactions(KMyMoneySettings::includeScheduledTransactions());
-
-    return forecast;
+    return config;
 }
 
 bool KMyMoneyUtils::canUpdateAllAccounts()

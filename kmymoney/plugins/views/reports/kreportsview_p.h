@@ -63,7 +63,7 @@
 #include "kmm_codec.h"
 #include "kmm_printer.h"
 #include "kmmtextbrowser.h"
-#include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
 #include "kmymoneyviewbase_p.h"
 #include "kreportchartview.h"
 #include "kreportconfigurationfilterdlg.h"
@@ -406,7 +406,7 @@ void KReportTab::updateReport()
     m_table = nullptr;
 
     if (m_report.reportType() == eMyMoney::Report::ReportType::PivotTable) {
-        m_table = new PivotTable(m_report);
+        m_table = new PivotTable(m_report, KMyMoneyUtils::forecastConfig());
         m_chartEnabled = true;
     } else if (m_report.reportType() == eMyMoney::Report::ReportType::QueryTable) {
         m_table = new QueryTable(m_report);
