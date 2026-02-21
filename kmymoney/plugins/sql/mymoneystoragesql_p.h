@@ -1668,7 +1668,7 @@ public:
         m_logonAt = GETDATETIME(rec.indexOf("logonAt"));
 
         signalProgress(1, 0);
-        const auto params = readKeyValuePairs("STORAGE", QString()).pairs();
+        const auto params = readKeyValuePairs("STORAGE", QLatin1String("")).pairs();
         for (auto it = params.cbegin(); it != params.cend(); ++it) {
             m_file->parametersModel()->addItem(it.key(), it.value());
         }
