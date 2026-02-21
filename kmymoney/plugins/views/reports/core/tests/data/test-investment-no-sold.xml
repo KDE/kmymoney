@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date=""/>
+    <LAST_MODIFIED_DATE date="2026-02-21T11:39:56+01:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION id="10"/>
+    <APPVERSION id="5.2.70-6c521d80d"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES/>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="AUD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+        <SUBACCOUNT id="A000002"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="AUD"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="AUD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000004"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="AUD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000005"/>
+        <SUBACCOUNT id="A000006"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="AUD"/>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="" institution="" opened="2022-01-01" number="" type="7" name="Shares" description="" currency="AUD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000003"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000002" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2024-12-27" institution="" opened="2022-01-01" number="" type="1" name="Shares (Brokerage)" description="" currency="AUD"/>
+    <ACCOUNT id="A000003" parentaccount="A000001" lastreconciled="" lastmodified="2024-12-27" institution="" opened="2022-01-10" number="" type="15" name="BHP" description="" currency="E000001">
+      <KEYVALUEPAIRS>
+        <PAIR key="priceMode" value="1"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000004" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2022-04-24" institution="" opened="1900-01-01" number="" type="13" name="Brokerage" description="" currency="AUD"/>
+    <ACCOUNT id="A000005" parentaccount="AStd::Income" lastreconciled="" lastmodified="2022-04-24" institution="" opened="1900-01-01" number="" type="12" name="Dividend" description="" currency="AUD"/>
+    <ACCOUNT id="A000006" parentaccount="AStd::Income" lastreconciled="" lastmodified="2024-12-27" institution="" opened="1900-01-01" number="" type="12" name="Interest" description="" currency="AUD"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T1" postdate="2025-01-10" memo="" entrydate="2025-01-10" commodity="AUD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-12500/1" shares="-12500/1" price="1/1" memo="" account="A000002" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="Buy" reconcileflag="0" value="12500/1" shares="100/1" price="125/1" memo="" account="A000003" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T2" postdate="2025-01-15" memo="" entrydate="2025-01-15" commodity="AUD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-12500/1" shares="-12500/1" price="1/1" memo="" account="A000002" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="Buy" reconcileflag="0" value="12500/1" shares="100/1" price="125/1" memo="" account="A000003" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T3" postdate="2025-03-01" memo="" entrydate="2025-03-01" commodity="AUD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="Reinvest" reconcileflag="0" value="25/1" shares="21/100" price="125/1" memo="" account="A000003" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="0/1" shares="0/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+        <SPLIT id="S0003" payee="" reconciledate="" action="" reconcileflag="0" value="-25/1" shares="-25/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T4" postdate="2025-06-01" memo="" entrydate="2025-06-01" commodity="AUD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="Reinvest" reconcileflag="0" value="25/1" shares="21/100" price="125/1" memo="" account="A000003" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="0/1" shares="0/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+        <SPLIT id="S0003" payee="" reconciledate="" action="" reconcileflag="0" value="-25/1" shares="-25/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T5" postdate="2025-09-01" memo="" entrydate="2025-09-01" commodity="AUD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="Reinvest" reconcileflag="0" value="25/1" shares="21/100" price="125/1" memo="" account="A000003" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="0/1" shares="0/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+        <SPLIT id="S0003" payee="" reconciledate="" action="" reconcileflag="0" value="-25/1" shares="-25/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T6" postdate="2025-12-01" memo="" entrydate="2025-12-01" commodity="AUD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="Reinvest" reconcileflag="0" value="25/1" shares="21/100" price="125/1" memo="" account="A000003" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="0/1" shares="0/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+        <SPLIT id="S0003" payee="" reconciledate="" action="" reconcileflag="0" value="-25/1" shares="-25/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2026-02-21T11:39:56+01:00"/>
+    <PAIR key="kmm-baseCurrency" value="AUD"/>
+    <PAIR key="kmm-id" value="{03147f88-51aa-4582-bde7-1b3a065cefa9}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES>
+    <SECURITY id="E000001" name="BHP Group Limited" symbol="BHPLF" type="0" rounding-method="7" saf="100" pp="2" trading-currency="AUD" trading-market="FRA">
+      <KEYVALUEPAIRS>
+        <PAIR key="kmm-online-source" value="Yahoo.com [Stock]"/>
+      </KEYVALUEPAIRS>
+    </SECURITY>
+  </SECURITIES>
+  <CURRENCIES>
+    <CURRENCY id="AUD" name="Australian Dollar" symbol="$" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES>
+    <PRICEPAIR from="E000001" to="AUD">
+      <PRICE date="2022-01-10" price="449/10" source="Transaction"/>
+      <PRICE date="2025-01-10" price="125/1" source="Transaction"/>
+      <PRICE date="2025-01-15" price="125/1" source="Transaction"/>
+    </PRICEPAIR>
+  </PRICES>
+  <REPORTS>
+    <REPORT id="R000019" type="querytable 1.15" group="Investments" name="Investment Capital Gains by Account (Customized - no-sold)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="topaccount-account" querycolumns="capitalgain" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0" investmentsum="3" settlementperiod="0" showSTLTCapitalGains="0" tseparator="2025-02-20"/>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>
