@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-20 00:45+0000\n"
-"PO-Revision-Date: 2026-02-03 18:48+0100\n"
+"POT-Creation-Date: 2026-02-21 00:45+0000\n"
+"PO-Revision-Date: 2026-02-20 16:17+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -4347,6 +4347,9 @@ msgid ""
 "the reconciliation states. One has to edit the transaction to modify the "
 "reconciliation state."
 msgstr ""
+"Si cette option est active, alors, un clic dans la colonne C du registre ne "
+"fait pas défiler les états de rapprochement. Il faut modifier la transaction "
+"pour changer l'état de rapprochement."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventClickOnReconciliation)
 #. i18n: ectx: label, entry (PreventClickOnReconciliation), group (General Options)
@@ -4355,6 +4358,8 @@ msgstr ""
 #, kde-format
 msgid "Prevent changing reconciliation status by click on column C"
 msgstr ""
+"Empêcher la modification du statut de réconciliation lors d'un clic sur la "
+"colonne C"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
@@ -8771,7 +8776,7 @@ msgstr "Opération répartie"
 
 #: kmymoney/mymoney/splitmodel.cpp:119
 #: kmymoney/mymoney/storage/journalmodel.cpp:203
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1037
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1038
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** NON ASSIGNÉ ***"
@@ -12880,8 +12885,8 @@ msgid "Get Transactions"
 msgstr "Obtenir les opérations"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:72
-#: kmymoney/plugins/views/reports/core/querytable.cpp:835
-#: kmymoney/plugins/views/reports/core/querytable.cpp:977
+#: kmymoney/plugins/views/reports/core/querytable.cpp:836
+#: kmymoney/plugins/views/reports/core/querytable.cpp:978
 #, kde-format
 msgid "Transfer"
 msgstr "Virement"
@@ -16467,19 +16472,19 @@ msgid "Starting Market Value"
 msgstr "Valeur de marché de départ"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:974
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1035
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2060
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2079
+#: kmymoney/plugins/views/reports/core/querytable.cpp:975
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1036
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2061
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2080
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Virement depuis %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:975
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1034
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2059
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2078
+#: kmymoney/plugins/views/reports/core/querytable.cpp:976
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1035
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2060
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2079
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Virement vers %1"
@@ -16565,60 +16570,60 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Cours"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:596
-#: kmymoney/plugins/views/reports/core/querytable.cpp:609
+#: kmymoney/plugins/views/reports/core/querytable.cpp:597
+#: kmymoney/plugins/views/reports/core/querytable.cpp:610
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Aucune étiquette]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:622
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1892
+#: kmymoney/plugins/views/reports/core/querytable.cpp:623
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1893
 #, kde-format
 msgid "Month of %1"
 msgstr "Mois de %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:623
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1893
+#: kmymoney/plugins/views/reports/core/querytable.cpp:624
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1894
 #, kde-format
 msgid "Week of %1"
 msgstr "Semaine de %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:795
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#: kmymoney/plugins/views/reports/core/querytable.cpp:796
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2000
 #, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
 msgstr "Vendre des titres"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:814
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1040
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1183
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2021
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2193
+#: kmymoney/plugins/views/reports/core/querytable.cpp:815
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1041
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1184
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2022
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2194
 #, kde-format
 msgid "No Institution"
 msgstr "Pas d'établissement"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:818
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2032
+#: kmymoney/plugins/views/reports/core/querytable.cpp:819
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2033
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Bénéficiaire vide]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:852
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2065
+#: kmymoney/plugins/views/reports/core/querytable.cpp:853
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2066
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Opération Répartie]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:853
 #: kmymoney/plugins/views/reports/core/querytable.cpp:854
+#: kmymoney/plugins/views/reports/core/querytable.cpp:855
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Répartition"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1805
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1806
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -17039,10 +17044,9 @@ msgstr "Commentaire"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:59
-#, fuzzy, kde-format
-#| msgid "Modify"
+#, kde-format
 msgid "Modified"
-msgstr "Modifier"
+msgstr "Modifié"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:438
@@ -17445,11 +17449,9 @@ msgid "Loan Information"
 msgstr "Informations sur les prêts"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1396
-#, fuzzy, kde-format
-#| msgctxt "@title:window Balance chart for account"
-#| msgid "%1 Balance History"
+#, kde-format
 msgid "Value/Balance History"
-msgstr "Historique du solde %1 "
+msgstr "Historique des valeurs et du solde"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1464
 #, kde-format
@@ -21868,6 +21870,9 @@ msgid ""
 "in the ledger, this cannot be reverted.</p><p>Are you sure you want to "
 "continue?</p>"
 msgstr ""
+"<p>Vous êtes sur le point de définir le statut de rapprochement à « Gelé »."
+"<br/>Une fois enregistré dans le grand livre, cela ne pourra pas être annulé."
+"</p><p>Voulez-vous vraiment continuer ?</p>"
 
 #: kmymoney/views/newtransactioneditor.cpp:1703
 #, kde-format
@@ -25634,20 +25639,16 @@ msgstr ""
 "dernière. Vous ne devez pas laisser ce champ vide."
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:116
-#, fuzzy, kde-format
-#| msgctxt "Investment action"
-#| msgid "Interest income"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as income"
-msgstr "Revenu d'intérêt"
+msgstr "Traiter comme un revenu"
 
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:118
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu To make it expense"
-#| msgid "Change to expense"
+#, kde-format
 msgctxt "@option:check Budget option"
 msgid "Treat as expense"
-msgstr "Modifier en dépense"
+msgstr "Traiter comme une dépense"
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format
