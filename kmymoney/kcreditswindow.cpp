@@ -42,7 +42,7 @@ KAboutData initializeCreditsData()
 
     aboutData.setShortDescription(i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."));
     aboutData.setLicense(KAboutLicense::GPL);
-    aboutData.setCopyrightStatement(i18n("(c) 2000-2025 The KMyMoney development team"));
+    aboutData.setCopyrightStatement(i18n("(c) 2000-2026 The KMyMoney development team"));
     aboutData.setHomepage(QStringLiteral("https://kmymoney.org/"));
     if (!features.empty()) {
         std::sort(features.begin(), features.end());
