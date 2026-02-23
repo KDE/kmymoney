@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-22 03:36+0000\n"
+"POT-Creation-Date: 2026-02-23 03:33+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -4673,7 +4673,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:45
 #, fuzzy, kde-format
 #| msgid "(c) 2000-2014 The KMyMoney development team"
-msgid "(c) 2000-2025 The KMyMoney development team"
+msgid "(c) 2000-2026 The KMyMoney development team"
 msgstr "(c) 2000-2014 KMyMoney razvojni tim"
 
 #: kmymoney/kcreditswindow.cpp:49

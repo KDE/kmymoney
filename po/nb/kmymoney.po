@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 03:33+0000\n"
+"POT-Creation-Date: 2026-02-22 03:36+0000\n"
 "PO-Revision-Date: 2026-02-19 08:49+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -8535,7 +8535,7 @@ msgstr "Fordel transaksjon"
 
 #: kmymoney/mymoney/splitmodel.cpp:119
 #: kmymoney/mymoney/storage/journalmodel.cpp:203
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1037
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1038
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** IKKE TILDELT ***"
@@ -12582,8 +12582,8 @@ msgid "Get Transactions"
 msgstr "Hent transaksjoner"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
-#: kmymoney/plugins/views/reports/core/querytable.cpp:835
-#: kmymoney/plugins/views/reports/core/querytable.cpp:977
+#: kmymoney/plugins/views/reports/core/querytable.cpp:836
+#: kmymoney/plugins/views/reports/core/querytable.cpp:978
 #, kde-format
 msgid "Transfer"
 msgstr "Overfør"
@@ -16127,19 +16127,19 @@ msgid "Starting Market Value"
 msgstr "Inngående markedsverdi"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:974
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1035
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2060
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2079
+#: kmymoney/plugins/views/reports/core/querytable.cpp:975
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1036
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2061
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2080
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Overfør fra %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:975
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1034
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2059
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2078
+#: kmymoney/plugins/views/reports/core/querytable.cpp:976
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1035
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2060
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2079
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Overfør til %1"
@@ -16225,60 +16225,60 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Kurs"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:596
-#: kmymoney/plugins/views/reports/core/querytable.cpp:609
+#: kmymoney/plugins/views/reports/core/querytable.cpp:597
+#: kmymoney/plugins/views/reports/core/querytable.cpp:610
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Ingen merker]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:622
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1892
+#: kmymoney/plugins/views/reports/core/querytable.cpp:623
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1893
 #, kde-format
 msgid "Month of %1"
 msgstr "Måneden som starter med %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:623
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1893
+#: kmymoney/plugins/views/reports/core/querytable.cpp:624
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1894
 #, kde-format
 msgid "Week of %1"
 msgstr "Uken som starter med %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:795
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#: kmymoney/plugins/views/reports/core/querytable.cpp:796
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2000
 #, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
 msgstr "Selg aksjer"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:814
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1040
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1183
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2021
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2193
+#: kmymoney/plugins/views/reports/core/querytable.cpp:815
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1041
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1184
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2022
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2194
 #, kde-format
 msgid "No Institution"
 msgstr "(Ingen institusjon)"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:818
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2032
+#: kmymoney/plugins/views/reports/core/querytable.cpp:819
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2033
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Tom mottaker]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:852
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2065
+#: kmymoney/plugins/views/reports/core/querytable.cpp:853
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2066
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Fordelt transaksjon]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:853
 #: kmymoney/plugins/views/reports/core/querytable.cpp:854
+#: kmymoney/plugins/views/reports/core/querytable.cpp:855
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Del"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1805
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1806
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -21258,13 +21258,13 @@ msgstr ""
 msgid "Clear memo"
 msgstr "Tøm notatfeltet"
 
-#: kmymoney/views/newspliteditor.cpp:174
+#: kmymoney/views/newspliteditor.cpp:177
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Velg kostnadssenteret denne transaksjonen skal tilordnes."
 
-#: kmymoney/views/newspliteditor.cpp:187
+#: kmymoney/views/newspliteditor.cpp:190
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -21274,30 +21274,30 @@ msgstr ""
 "En tilordning til et kostnadssenter er påkrevd for transaksjoner i den valgt "
 "kategorien."
 
-#: kmymoney/views/newspliteditor.cpp:198
+#: kmymoney/views/newspliteditor.cpp:201
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Kategorien denne oppdelingen skal tilordnes."
 
-#: kmymoney/views/newspliteditor.cpp:243
+#: kmymoney/views/newspliteditor.cpp:246
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Tilordning til kategori er påkrevd for denne oppdelingen."
 
-#: kmymoney/views/newspliteditor.cpp:252
+#: kmymoney/views/newspliteditor.cpp:255
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Sjekknummerer brukt i denne transaksjonen."
 
-#: kmymoney/views/newspliteditor.cpp:261
+#: kmymoney/views/newspliteditor.cpp:264
 #: kmymoney/views/newtransactioneditor.cpp:464
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Sjekknummeret <b>%1</b> er allerede brukt på denne kontoen."
 
-#: kmymoney/views/newspliteditor.cpp:795
+#: kmymoney/views/newspliteditor.cpp:892
 #: kmymoney/views/newtransactioneditor.cpp:190
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21353,7 +21353,7 @@ msgstr "Velg transaksjon for automatisk utfylling"
 msgid "Link"
 msgstr "Lenke"
 
-#: kmymoney/views/newtransactioneditor.cpp:1649
+#: kmymoney/views/newtransactioneditor.cpp:1650
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21362,7 +21362,7 @@ msgstr ""
 "Vil du erstatte notatet<p><i>%1</i></p>med notatet<p><i>%2</i></p>fra den "
 "andre oppdelingen?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1650
+#: kmymoney/views/newtransactioneditor.cpp:1651
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopier notat"

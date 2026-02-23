@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-22 03:36+0000\n"
+"POT-Creation-Date: 2026-02-23 03:33+0000\n"
 "PO-Revision-Date: 2026-02-03 18:48+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -4662,8 +4662,9 @@ msgstr ""
 "suggestions."
 
 #: kmymoney/kcreditswindow.cpp:45
-#, kde-format
-msgid "(c) 2000-2025 The KMyMoney development team"
+#, fuzzy, kde-format
+#| msgid "(c) 2000-2025 The KMyMoney development team"
+msgid "(c) 2000-2026 The KMyMoney development team"
 msgstr "(c) 2000 - 2025 L'équipe de développement de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:49

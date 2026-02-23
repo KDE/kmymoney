@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-22 03:36+0000\n"
+"POT-Creation-Date: 2026-02-23 03:33+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -4257,7 +4257,7 @@ msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:45
 #, kde-format
-msgid "(c) 2000-2025 The KMyMoney development team"
+msgid "(c) 2000-2026 The KMyMoney development team"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:49

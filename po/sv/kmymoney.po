@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-22 03:36+0000\n"
+"POT-Creation-Date: 2026-02-23 03:33+0000\n"
 "PO-Revision-Date: 2026-01-27 17:54+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -4572,8 +4572,9 @@ msgstr ""
 "Fundera på att bidra till projektet med kod och/eller förslag."
 
 #: kmymoney/kcreditswindow.cpp:45
-#, kde-format
-msgid "(c) 2000-2025 The KMyMoney development team"
+#, fuzzy, kde-format
+#| msgid "(c) 2000-2025 The KMyMoney development team"
+msgid "(c) 2000-2026 The KMyMoney development team"
 msgstr "© 2000-2025 KMyMoney-utvecklingsgruppen"
 
 #: kmymoney/kcreditswindow.cpp:49
