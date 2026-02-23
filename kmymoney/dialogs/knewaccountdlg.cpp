@@ -897,10 +897,7 @@ void KNewAccountDlg::okClicked()
 
     d->m_account.setOpeningDate(d->ui->m_openingDateEdit->date());
 
-    // in case we edit a stock account, the currency is
-    // not visible and we should not override it. Same
-    // if the currency widget is not enabled
-    if (d->ui->m_currency->isVisible() && d->ui->m_currency->isEnabled()) {
+    if (!d->m_account.isInvest()) {
         d->m_account.setCurrencyId(d->ui->m_currency->security().id());
     }
 
