@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-21 00:45+0000\n"
+"POT-Creation-Date: 2026-02-23 00:45+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -440,7 +440,7 @@ msgstr "우편 번호:"
 msgid "Load from Addressbook"
 msgstr "주소록에서 불러오기"
 
-#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:692
+#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:688
 #, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
@@ -6301,13 +6301,13 @@ msgstr "태그를 추가할 수 없음"
 msgid "Cannot add institution: %1"
 msgstr "금융기관을 추가할 수 없음: %1"
 
-#: kmymoney/kmymoneyutils.cpp:697
+#: kmymoney/kmymoneyutils.cpp:693
 #, kde-format
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] "가져온 새 거래가 없습니다."
 
-#: kmymoney/kmymoneyutils.cpp:698
+#: kmymoney/kmymoneyutils.cpp:694
 #, kde-format
 msgid "Statement import statistics"
 msgstr "명세서 가져오기 통계"
@@ -12788,12 +12788,12 @@ msgstr "금융기관"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:190
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:482
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:614
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:192
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:296
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:484
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:616
 #: kmymoney/plugins/views/reports/core/listtable.cpp:703
-#: kmymoney/plugins/views/reports/reportsview.cpp:227
+#: kmymoney/plugins/views/reports/reportsview.cpp:228
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
 #: kmymoney/views/khomeview_p.h:624 kmymoney/views/khomeview_p.h:1050
@@ -15516,32 +15516,32 @@ msgstr "예산 예측"
 msgid "Chart"
 msgstr "차트"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:295
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:195
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:297
 #, kde-format
 msgctxt "Today's forecast"
 msgid "Current"
 msgstr "현재"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:201
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:310
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:203
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:312
 #, kde-format
 msgid "Total variation"
 msgstr "편차총액"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:306
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:308
 #, kde-format
 msgid "1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1일"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:380
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:382
 #: kmymoney/views/khomeview_p.h:1248
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "%1의 잔액이 오늘 최소 잔액 %2보다 낮습니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:385
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:387
 #: kmymoney/views/khomeview_p.h:1252
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
@@ -15549,113 +15549,113 @@ msgid_plural ""
 "The balance of %2 will drop below the minimum balance %3 in %1 days."
 msgstr[0] "%2의 잔액이 %1일 후 최소 잔액 %3 아래로 떨어집니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:404
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:406
 #: kmymoney/views/khomeview_p.h:1270
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "%1의 잔액이 오늘 %2 미만입니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:409
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:411
 #: kmymoney/views/khomeview_p.h:1275
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "%1의 잔액이 오늘 %2 초과입니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:416
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:418
 #: kmymoney/views/khomeview_p.h:1281
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
 msgstr[0] "%2의 잔액이 %1일 후 %3 아래로 떨어집니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:423
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:425
 #: kmymoney/views/khomeview_p.h:1288
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
 msgstr[0] "%2의 잔액이 %1일 후 %3보다 높아집니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:438
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:440
 #, kde-format
 msgid "The account %1 is decreasing %2 per cycle."
 msgstr "%1 계좌가 주기 당 %2 줄어들고 있습니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:495
 #, kde-format
 msgid "Min Bal %1"
 msgstr "최소 잔액 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:494
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:496
 #, kde-format
 msgid "Min Date %1"
 msgstr "최소 날짜 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:499
 #, kde-format
 msgid "Max Bal %1"
 msgstr "최대 잔액 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:498
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
 #, kde-format
 msgid "Max Date %1"
 msgstr "최대 날짜 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:502
 #, kde-format
 msgctxt "Average balance"
 msgid "Average"
 msgstr "평균"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:627
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:753
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:629
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:756
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1433
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1573
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1623
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1700
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1880
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
 msgstr "합계"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:645
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:647
 #, kde-format
 msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
 #, kde-format
 msgid "No data provided by reports plugin for this chart."
 msgstr "보고서 플러그인에서 이 차트 데이터를 제공하지 않았습니다."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:670
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "이 차트를 보려면 보고서 플러그인을 사용하십시오."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:692
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:695
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "예정됨"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:697
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:700
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "내역"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:702
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:705
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -15875,8 +15875,8 @@ msgstr "결산 금액"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1647
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1988
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
 #, kde-format
 msgid "Grand Total"
 msgstr "총액"
@@ -16206,20 +16206,20 @@ msgid "Yes"
 msgstr "예"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:358
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:359
 #: kmymoney/widgets/ktransactionfilter.ui:634
 #, kde-format
 msgid "Transfers"
 msgstr "이체"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:554
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:555
 #, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "개설일"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1419
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1687
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
@@ -16728,7 +16728,7 @@ msgstr "보고서"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:49
-#: kmymoney/plugins/views/reports/reportsview.cpp:52
+#: kmymoney/plugins/views/reports/reportsview.cpp:53
 #, kde-format
 msgid "Reports"
 msgstr "보고서"
@@ -17071,7 +17071,7 @@ msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr "예산 대비 올해 실제(YTM)"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1265
-#: kmymoney/plugins/views/reports/reportsview.cpp:176
+#: kmymoney/plugins/views/reports/reportsview.cpp:177
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr "월별 예산 대비 실제"
@@ -17157,9 +17157,9 @@ msgid "%1 YTD Account Transactions"
 msgstr "%1 YTD 계좌 거래"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1465
-#: kmymoney/plugins/views/reports/reportsview.cpp:83
-#: kmymoney/plugins/views/reports/reportsview.cpp:119
-#: kmymoney/plugins/views/reports/reportsview.cpp:177
+#: kmymoney/plugins/views/reports/reportsview.cpp:84
+#: kmymoney/plugins/views/reports/reportsview.cpp:120
+#: kmymoney/plugins/views/reports/reportsview.cpp:178
 #, kde-format
 msgid "Generated Report"
 msgstr "생성된 보고서"
@@ -17201,13 +17201,13 @@ msgstr "이 보고서를 HTML 또는 CSV 파일로 내보내기"
 msgid "Permanently delete this report"
 msgstr "이 보고서를 완전히 삭제"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:82
-#: kmymoney/plugins/views/reports/reportsview.cpp:118
+#: kmymoney/plugins/views/reports/reportsview.cpp:83
+#: kmymoney/plugins/views/reports/reportsview.cpp:119
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "순자산 예측"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/plugins/views/reports/reportsview.cpp:155
 #: kmymoney/views/khomeview_p.h:1581
 #, fuzzy, kde-format
 #| msgid "Budget"
@@ -17215,40 +17215,40 @@ msgctxt "@title Home page section"
 msgid "Budget"
 msgstr "예산"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:159
+#: kmymoney/plugins/views/reports/reportsview.cpp:160
 #, kde-format
 msgid "You have no budgets to display."
 msgstr "표시할 예산이 없습니다."
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:189
+#: kmymoney/plugins/views/reports/reportsview.cpp:190
 #, kde-format
 msgid "Current Month Summary"
 msgstr "이번 달 요약"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:193
-#: kmymoney/plugins/views/reports/reportsview.cpp:230
+#: kmymoney/plugins/views/reports/reportsview.cpp:194
+#: kmymoney/plugins/views/reports/reportsview.cpp:231
 #, kde-format
 msgid "Budgeted"
 msgstr "예산"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:196
-#: kmymoney/plugins/views/reports/reportsview.cpp:233
+#: kmymoney/plugins/views/reports/reportsview.cpp:197
+#: kmymoney/plugins/views/reports/reportsview.cpp:234
 #, kde-format
 msgid "Actual"
 msgstr "실제"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:199
-#: kmymoney/plugins/views/reports/reportsview.cpp:236
+#: kmymoney/plugins/views/reports/reportsview.cpp:200
+#: kmymoney/plugins/views/reports/reportsview.cpp:237
 #, kde-format
 msgid "Difference"
 msgstr "차액"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:223
+#: kmymoney/plugins/views/reports/reportsview.cpp:224
 #, kde-format
 msgid "Budget Overruns"
 msgstr "예산 초과"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:292
+#: kmymoney/plugins/views/reports/reportsview.cpp:293
 #, kde-format
 msgid "No Budget Categories have been overrun"
 msgstr "예산 분류가 초과되지 않았습니다"

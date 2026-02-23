@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-21 00:45+0000\n"
-"PO-Revision-Date: 2026-02-10 11:55+0100\n"
+"POT-Creation-Date: 2026-02-23 00:45+0000\n"
+"PO-Revision-Date: 2026-02-17 11:05+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -447,7 +447,7 @@ msgstr "CAP:"
 msgid "Load from Addressbook"
 msgstr "Carica dalla rubrica"
 
-#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:692
+#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:688
 #, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
@@ -6346,14 +6346,14 @@ msgstr "Impossibile aggiungere l'etichetta"
 msgid "Cannot add institution: %1"
 msgstr "Impossibile aggiungere l'istituto: %1"
 
-#: kmymoney/kmymoneyutils.cpp:697
+#: kmymoney/kmymoneyutils.cpp:693
 #, kde-format
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] "Nessuna nuova transazione è stata importata."
 msgstr[1] "Non sono state importate nuove transazioni."
 
-#: kmymoney/kmymoneyutils.cpp:698
+#: kmymoney/kmymoneyutils.cpp:694
 #, kde-format
 msgid "Statement import statistics"
 msgstr "Statistiche di importazione degli estratti conto"
@@ -12903,12 +12903,12 @@ msgstr "Istituto"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:190
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:482
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:614
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:192
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:296
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:484
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:616
 #: kmymoney/plugins/views/reports/core/listtable.cpp:703
-#: kmymoney/plugins/views/reports/reportsview.cpp:227
+#: kmymoney/plugins/views/reports/reportsview.cpp:228
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
 #: kmymoney/views/khomeview_p.h:624 kmymoney/views/khomeview_p.h:1050
@@ -15676,33 +15676,33 @@ msgstr "Previsione di budget"
 msgid "Chart"
 msgstr "Grafico"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:295
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:195
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:297
 #, kde-format
 msgctxt "Today's forecast"
 msgid "Current"
 msgstr "Attuale"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:201
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:310
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:203
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:312
 #, kde-format
 msgid "Total variation"
 msgstr "Variazione totale"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:306
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:308
 #, kde-format
 msgid "1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 giorno"
 msgstr[1] "%1 giorni"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:380
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:382
 #: kmymoney/views/khomeview_p.h:1248
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Il bilancio di %1 oggi è sotto il bilancio minimo %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:385
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:387
 #: kmymoney/views/khomeview_p.h:1252
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
@@ -15713,19 +15713,19 @@ msgstr[0] ""
 msgstr[1] ""
 "Il bilancio di %2 scenderà al di sotto del bilancio minimo %3 in %1 giorni."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:404
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:406
 #: kmymoney/views/khomeview_p.h:1270
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Il bilancio di %1 oggi è inferiore a %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:409
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:411
 #: kmymoney/views/khomeview_p.h:1275
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Il bilancio di %1 oggi è superiore a %2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:416
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:418
 #: kmymoney/views/khomeview_p.h:1281
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
@@ -15733,7 +15733,7 @@ msgid_plural "The balance of %2 will drop below %3 in %1 days."
 msgstr[0] "Il bilancio di %2 scenderà al di sotto di %3 in %1 giorno."
 msgstr[1] "Il bilancio di %2 scenderà al di sotto di %3 in %1 giorni."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:423
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:425
 #: kmymoney/views/khomeview_p.h:1288
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
@@ -15741,57 +15741,57 @@ msgid_plural "The balance of %2 will raise above %3 in %1 days."
 msgstr[0] "Il bilancio di %2 salirà al di sopra di %3 in %1 giorno."
 msgstr[1] "Il bilancio di %2 salirà al di sopra di %3 in %1 giorni."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:438
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:440
 #, kde-format
 msgid "The account %1 is decreasing %2 per cycle."
 msgstr "Il conto %1 sta diminuendo di %2 per ciclo."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:495
 #, kde-format
 msgid "Min Bal %1"
 msgstr "Bil min %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:494
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:496
 #, kde-format
 msgid "Min Date %1"
 msgstr "Data min %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:499
 #, kde-format
 msgid "Max Bal %1"
 msgstr "Bil max %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:498
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
 #, kde-format
 msgid "Max Date %1"
 msgstr "Data max %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:502
 #, kde-format
 msgctxt "Average balance"
 msgid "Average"
 msgstr "Media"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:627
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:753
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:629
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:756
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1433
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1573
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1623
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1700
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1880
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
 msgstr "Totale"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:645
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:647
 #, kde-format
 msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
@@ -15800,30 +15800,30 @@ msgstr ""
 "La previsione del budget si basa sulle transazioni storiche trovate tra %1 e "
 "%2."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
 #, kde-format
 msgid "No data provided by reports plugin for this chart."
 msgstr "Nessun dato fornito dall'estensione dei report per questo grafico."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:670
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Abilita l'estensione dei report per vedere questo grafico."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:692
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:695
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "Pianificato"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:697
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:700
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "Cronologia"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:702
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:705
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -16048,8 +16048,8 @@ msgstr "Bilancio di chiusura"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1647
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1988
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
 #, kde-format
 msgid "Grand Total"
 msgstr "Totale complessivo"
@@ -16378,20 +16378,20 @@ msgid "Yes"
 msgstr "Sì"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:358
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:359
 #: kmymoney/widgets/ktransactionfilter.ui:634
 #, kde-format
 msgid "Transfers"
 msgstr "Trasferimenti"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:554
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:555
 #, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Apertura"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1419
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1687
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
@@ -16896,7 +16896,7 @@ msgstr "Report"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:49
-#: kmymoney/plugins/views/reports/reportsview.cpp:52
+#: kmymoney/plugins/views/reports/reportsview.cpp:53
 #, kde-format
 msgid "Reports"
 msgstr "Report"
@@ -16912,10 +16912,9 @@ msgstr "Commento"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:59
-#, fuzzy, kde-format
-#| msgid "Modify"
+#, kde-format
 msgid "Modified"
-msgstr "Modifica"
+msgstr "Modificati"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:438
@@ -17241,7 +17240,7 @@ msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr "Preventivato contro Attuale di quest'anno (YTM)"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1265
-#: kmymoney/plugins/views/reports/reportsview.cpp:176
+#: kmymoney/plugins/views/reports/reportsview.cpp:177
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr "Preventivato Mensile contro Attuale"
@@ -17316,11 +17315,9 @@ msgid "Loan Information"
 msgstr "Informazioni sul prestito"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1396
-#, fuzzy, kde-format
-#| msgctxt "@title:window Balance chart for account"
-#| msgid "%1 Balance History"
+#, kde-format
 msgid "Value/Balance History"
-msgstr "Storico del saldo per %1"
+msgstr "Cronologia valore/saldo"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1464
 #, kde-format
@@ -17328,9 +17325,9 @@ msgid "%1 YTD Account Transactions"
 msgstr "%1 transazioni di conto di quest'anno"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1465
-#: kmymoney/plugins/views/reports/reportsview.cpp:83
-#: kmymoney/plugins/views/reports/reportsview.cpp:119
-#: kmymoney/plugins/views/reports/reportsview.cpp:177
+#: kmymoney/plugins/views/reports/reportsview.cpp:84
+#: kmymoney/plugins/views/reports/reportsview.cpp:120
+#: kmymoney/plugins/views/reports/reportsview.cpp:178
 #, kde-format
 msgid "Generated Report"
 msgstr "Report generato"
@@ -17372,53 +17369,53 @@ msgstr "Esporta questo report come HTML o CSV"
 msgid "Permanently delete this report"
 msgstr "Elimina definitivamente questo report"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:82
-#: kmymoney/plugins/views/reports/reportsview.cpp:118
+#: kmymoney/plugins/views/reports/reportsview.cpp:83
+#: kmymoney/plugins/views/reports/reportsview.cpp:119
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Previsione di patrimonio netto"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/plugins/views/reports/reportsview.cpp:155
 #: kmymoney/views/khomeview_p.h:1581
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
 msgstr "Budget"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:159
+#: kmymoney/plugins/views/reports/reportsview.cpp:160
 #, kde-format
 msgid "You have no budgets to display."
 msgstr "Non hai budget da visualizzare."
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:189
+#: kmymoney/plugins/views/reports/reportsview.cpp:190
 #, kde-format
 msgid "Current Month Summary"
 msgstr "Riepilogo mese corrente"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:193
-#: kmymoney/plugins/views/reports/reportsview.cpp:230
+#: kmymoney/plugins/views/reports/reportsview.cpp:194
+#: kmymoney/plugins/views/reports/reportsview.cpp:231
 #, kde-format
 msgid "Budgeted"
 msgstr "Preventivato"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:196
-#: kmymoney/plugins/views/reports/reportsview.cpp:233
+#: kmymoney/plugins/views/reports/reportsview.cpp:197
+#: kmymoney/plugins/views/reports/reportsview.cpp:234
 #, kde-format
 msgid "Actual"
 msgstr "Attuale"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:199
-#: kmymoney/plugins/views/reports/reportsview.cpp:236
+#: kmymoney/plugins/views/reports/reportsview.cpp:200
+#: kmymoney/plugins/views/reports/reportsview.cpp:237
 #, kde-format
 msgid "Difference"
 msgstr "Differenza"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:223
+#: kmymoney/plugins/views/reports/reportsview.cpp:224
 #, kde-format
 msgid "Budget Overruns"
 msgstr "Sforamenti di budget"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:292
+#: kmymoney/plugins/views/reports/reportsview.cpp:293
 #, kde-format
 msgid "No Budget Categories have been overrun"
 msgstr "Non è stata superata alcuna categoria di budget"

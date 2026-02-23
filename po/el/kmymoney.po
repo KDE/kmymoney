@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-21 00:45+0000\n"
+"POT-Creation-Date: 2026-02-23 00:45+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -463,7 +463,7 @@ msgstr "Ταχυδρομικός κώδικας:"
 msgid "Load from Addressbook"
 msgstr "Φόρτωση από βιβλίο διευθύνσεων"
 
-#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:692
+#: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:688
 #, fuzzy, kde-format
 #| msgid "The statement has been processed with the following results:"
 msgid "One statement has been processed with the following results:"
@@ -6614,7 +6614,7 @@ msgstr "Αδυναμία προσθήκης ετικέτας"
 msgid "Cannot add institution: %1"
 msgstr "Αδυναμία προσθήκης του ιδρύματος: %1"
 
-#: kmymoney/kmymoneyutils.cpp:697
+#: kmymoney/kmymoneyutils.cpp:693
 #, fuzzy, kde-format
 #| msgid "Documentation and translations have been improved"
 msgid "No new transaction has been imported."
@@ -6622,7 +6622,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "Βελτίωση της τεκμηρίωσης και των μεταφράσεων"
 msgstr[1] "Βελτίωση της τεκμηρίωσης και των μεταφράσεων"
 
-#: kmymoney/kmymoneyutils.cpp:698
+#: kmymoney/kmymoneyutils.cpp:694
 #, fuzzy, kde-format
 #| msgid "Statement stats"
 msgid "Statement import statistics"
@@ -13605,12 +13605,12 @@ msgstr "Ίδρυμα"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:154
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:190
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:482
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:614
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:192
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:296
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:484
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:616
 #: kmymoney/plugins/views/reports/core/listtable.cpp:703
-#: kmymoney/plugins/views/reports/reportsview.cpp:227
+#: kmymoney/plugins/views/reports/reportsview.cpp:228
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
 #: kmymoney/views/khomeview_p.h:624 kmymoney/views/khomeview_p.h:1050
@@ -16447,33 +16447,33 @@ msgstr "Πρόβλεψη προϋπολογισμού"
 msgid "Chart"
 msgstr "Διάγραμμα"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:295
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:195
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:297
 #, kde-format
 msgctxt "Today's forecast"
 msgid "Current"
 msgstr "Τρέχον"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:201
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:310
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:203
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:312
 #, kde-format
 msgid "Total variation"
 msgstr "Συνολική διακύμανση"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:306
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:308
 #, kde-format
 msgid "1 day"
 msgid_plural "%1 days"
 msgstr[0] "1 ημέρα"
 msgstr[1] "%1 ημέρες"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:380
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:382
 #: kmymoney/views/khomeview_p.h:1248
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Το υπόλοιπο του %1 είναι κάτω από το ελάχιστο υπόλοιπο %2 σήμερα."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:385
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:387
 #: kmymoney/views/khomeview_p.h:1252
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
@@ -16484,19 +16484,19 @@ msgstr[0] ""
 msgstr[1] ""
 "Το υπόλοιπο του %2 θα πέσει κάτω από το ελάχιστο υπόλοιπο %3 σε %1 ημέρες."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:404
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:406
 #: kmymoney/views/khomeview_p.h:1270
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Το υπόλοιπο του %1 είναι κάτω από %2 σήμερα."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:409
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:411
 #: kmymoney/views/khomeview_p.h:1275
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Το υπόλοιπο του %1 είναι πάνω από %2 σήμερα."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:416
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:418
 #: kmymoney/views/khomeview_p.h:1281
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
@@ -16504,7 +16504,7 @@ msgid_plural "The balance of %2 will drop below %3 in %1 days."
 msgstr[0] "Το υπόλοιπο του %2 θα μειωθεί κάτω του %3 σε %1 ημέρα."
 msgstr[1] "Το υπόλοιπο του %2 θα μειωθεί κάτω του %3 σε %1 ημέρες."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:423
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:425
 #: kmymoney/views/khomeview_p.h:1288
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
@@ -16512,89 +16512,89 @@ msgid_plural "The balance of %2 will raise above %3 in %1 days."
 msgstr[0] "Το υπόλοιπο του %2 θα ανέβει πάνω από %3 σε %1 ημέρα."
 msgstr[1] "Το υπόλοιπο του %2 θα ανέβει πάνω από %3 σε %1 ημέρες."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:438
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:440
 #, kde-format
 msgid "The account %1 is decreasing %2 per cycle."
 msgstr "Ο λογαριασμός %1 μειώνεται κατά %2 ανά κύκλο."
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:495
 #, kde-format
 msgid "Min Bal %1"
 msgstr "Ελάχ. υπόλ. %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:494
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:496
 #, kde-format
 msgid "Min Date %1"
 msgstr "Ελάχ. ημερ. %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:499
 #, kde-format
 msgid "Max Bal %1"
 msgstr "Μέγ. υπόλ. %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:498
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
 #, kde-format
 msgid "Max Date %1"
 msgstr "Μέγιστη ημερομηνία %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:500
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:502
 #, kde-format
 msgctxt "Average balance"
 msgid "Average"
 msgstr "Μέσος όρος"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:627
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:753
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:629
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:756
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1433
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1573
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1623
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1700
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1880
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1434
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1574
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1624
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1701
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1881
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
 msgstr "Σύνολο"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:645
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:647
 #, kde-format
 msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "No data provided by reports plugin for this chart."
 msgstr "Εμφάνιση της έκδοσης αναφοράς του διαγράμματος"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:670
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
 msgstr "Εμφάνιση της έκδοσης αναφοράς του διαγράμματος"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:692
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:695
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "Προγραμματισμένη"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:697
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:700
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "Ιστορικό"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:702
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:705
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -16827,8 +16827,8 @@ msgstr "Υπόλοιπο κλεισίματος"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1647
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1988
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1648
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1989
 #, kde-format
 msgid "Grand Total"
 msgstr "Ολικό σύνολο"
@@ -17169,21 +17169,21 @@ msgid "Yes"
 msgstr "Ναι"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:358
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:359
 #: kmymoney/widgets/ktransactionfilter.ui:634
 #, kde-format
 msgid "Transfers"
 msgstr "Μεταφορές"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:554
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:555
 #, fuzzy, kde-format
 #| msgid "Opening Date"
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Ημερομηνία έναρξης"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1419
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1687
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column report header"
@@ -17716,7 +17716,7 @@ msgstr "Αναφορές"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:49
-#: kmymoney/plugins/views/reports/reportsview.cpp:52
+#: kmymoney/plugins/views/reports/reportsview.cpp:53
 #, kde-format
 msgid "Reports"
 msgstr "Αναφορές"
@@ -18069,7 +18069,7 @@ msgstr ""
 "λήξη)"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1265
-#: kmymoney/plugins/views/reports/reportsview.cpp:176
+#: kmymoney/plugins/views/reports/reportsview.cpp:177
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr "Σύγκριση προϋπολογισθέντων και πραγματικών ανά μήνα"
@@ -18155,9 +18155,9 @@ msgid "%1 YTD Account Transactions"
 msgstr "%1 συναλλαγές λογαριασμού YTD"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1465
-#: kmymoney/plugins/views/reports/reportsview.cpp:83
-#: kmymoney/plugins/views/reports/reportsview.cpp:119
-#: kmymoney/plugins/views/reports/reportsview.cpp:177
+#: kmymoney/plugins/views/reports/reportsview.cpp:84
+#: kmymoney/plugins/views/reports/reportsview.cpp:120
+#: kmymoney/plugins/views/reports/reportsview.cpp:178
 #, kde-format
 msgid "Generated Report"
 msgstr "Δημιουργημένη αναφορά"
@@ -18199,13 +18199,13 @@ msgstr "Εξαγωγή αυτής της αναφοράς ως HTML ή CSV αρ�
 msgid "Permanently delete this report"
 msgstr "Μόνιμη διαγραφή αυτής της αναφοράς"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:82
-#: kmymoney/plugins/views/reports/reportsview.cpp:118
+#: kmymoney/plugins/views/reports/reportsview.cpp:83
+#: kmymoney/plugins/views/reports/reportsview.cpp:119
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Πρόβλεψη καθαρής αξίας"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/plugins/views/reports/reportsview.cpp:155
 #: kmymoney/views/khomeview_p.h:1581
 #, fuzzy, kde-format
 #| msgid "Budget"
@@ -18213,40 +18213,40 @@ msgctxt "@title Home page section"
 msgid "Budget"
 msgstr "Προϋπολογισμός"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:159
+#: kmymoney/plugins/views/reports/reportsview.cpp:160
 #, kde-format
 msgid "You have no budgets to display."
 msgstr ""
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:189
+#: kmymoney/plugins/views/reports/reportsview.cpp:190
 #, kde-format
 msgid "Current Month Summary"
 msgstr "Σύνοψη του τρέχοντος μήνα"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:193
-#: kmymoney/plugins/views/reports/reportsview.cpp:230
+#: kmymoney/plugins/views/reports/reportsview.cpp:194
+#: kmymoney/plugins/views/reports/reportsview.cpp:231
 #, kde-format
 msgid "Budgeted"
 msgstr "Προϋπολογισθέν"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:196
-#: kmymoney/plugins/views/reports/reportsview.cpp:233
+#: kmymoney/plugins/views/reports/reportsview.cpp:197
+#: kmymoney/plugins/views/reports/reportsview.cpp:234
 #, kde-format
 msgid "Actual"
 msgstr "Πραγματικό"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:199
-#: kmymoney/plugins/views/reports/reportsview.cpp:236
+#: kmymoney/plugins/views/reports/reportsview.cpp:200
+#: kmymoney/plugins/views/reports/reportsview.cpp:237
 #, kde-format
 msgid "Difference"
 msgstr "Διαφορά"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:223
+#: kmymoney/plugins/views/reports/reportsview.cpp:224
 #, kde-format
 msgid "Budget Overruns"
 msgstr "Υπέρβαση προϋπολογισμού"
 
-#: kmymoney/plugins/views/reports/reportsview.cpp:292
+#: kmymoney/plugins/views/reports/reportsview.cpp:293
 #, kde-format
 msgid "No Budget Categories have been overrun"
 msgstr "Σε καμιά κατηγορία δεν υπήρξε υπέρβαση του προϋπολογισμού"
