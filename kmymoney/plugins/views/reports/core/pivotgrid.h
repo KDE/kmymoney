@@ -10,6 +10,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QList>
 #include <QMap>
 #include <QMetaObject>
@@ -65,8 +66,10 @@ class PivotCell: public MyMoneyMoney
 public:
     PivotCell() : m_stockSplit(MyMoneyMoney::ONE), m_cellUsed(false) {}
     explicit PivotCell(const MyMoneyMoney& value);
+    explicit PivotCell(const MyMoneyMoney& value, const QDate& date);
     virtual ~PivotCell();
     static PivotCell stockSplit(const MyMoneyMoney& factor);
+    static PivotCell stockSplit(const MyMoneyMoney& factor, const QDate& date);
     PivotCell operator += (const PivotCell& right);
     PivotCell operator += (const MyMoneyMoney& value);
     const QString formatMoney(int fraction, bool showThousandSeparator = true) const;
@@ -82,6 +85,7 @@ private:
     MyMoneyMoney m_stockSplit;
     MyMoneyMoney m_postSplit;
     bool m_cellUsed;
+    QDate m_valueDate;
 };
 class PivotGridRow: public QList<PivotCell>
 {

@@ -23,10 +23,18 @@ namespace reports {
 
 const unsigned PivotOuterGroup::m_kDefaultSortOrder = 100;
 
-PivotCell::PivotCell(const MyMoneyMoney& value) :
-    MyMoneyMoney(value),
-    m_stockSplit(MyMoneyMoney::ONE),
-    m_cellUsed(!value.isZero())
+PivotCell::PivotCell(const MyMoneyMoney& value)
+    : MyMoneyMoney(value)
+    , m_stockSplit(MyMoneyMoney::ONE)
+    , m_cellUsed(!value.isZero())
+{
+}
+
+PivotCell::PivotCell(const MyMoneyMoney& value, const QDate& date)
+    : MyMoneyMoney(value)
+    , m_stockSplit(MyMoneyMoney::ONE)
+    , m_cellUsed(!value.isZero())
+    , m_valueDate(date)
 {
 }
 
@@ -59,6 +67,14 @@ PivotCell PivotCell::stockSplit(const MyMoneyMoney& factor)
 {
     PivotCell s;
     s.m_stockSplit = factor;
+    return s;
+}
+
+PivotCell PivotCell::stockSplit(const MyMoneyMoney& factor, const QDate& date)
+{
+    PivotCell s;
+    s.m_stockSplit = factor;
+    s.m_valueDate = date;
     return s;
 }
 
@@ -98,6 +114,7 @@ bool PivotCell::saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const
     el.setAttribute("isUsed", isUsed());
     el.setAttribute("stockSplit", m_stockSplit.toString());
     el.setAttribute("postSplit", m_postSplit.toString());
+    el.setAttribute("date", m_valueDate.toString(Qt::ISODate));
     parent.appendChild(el);
     return true;
 }
