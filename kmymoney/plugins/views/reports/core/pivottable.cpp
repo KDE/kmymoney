@@ -863,6 +863,15 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
     return balance;
 }
 
+static inline bool beforeMonth(const QDate& a, const QDate& b)
+{
+    return (a.year() < b.year()) || (a.year() == b.year() && a.month() < b.month());
+}
+
+static inline bool afterMonth(const QDate& a, const QDate& b)
+{
+    return (a.year() > b.year()) || (a.year() == b.year() && a.month() > b.month());
+}
 
 void PivotTable::calculateBudgetMapping()
 {
@@ -998,19 +1007,28 @@ void PivotTable::calculateBudgetMapping()
                             || m_config.columnType() == eMyMoney::Report::ColumnType::Years
                             || m_config.columnType() == eMyMoney::Report::ColumnType::Quarters) {
                         QDate budgetDate = budget.budgetStart();
+                        QDate beginDate = m_beginDate.addDays(-m_beginDate.day() + 1);
+                        QDate endDate = m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day());
+
                         while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
-                            //only show budget values if the budget year and the column date match
-                            //no currency conversion is done here because that is done for all columns later
-                            if (budgetDate >= columnDate(column+1)) {
+                            const QDate colDate = columnDate(column);
+
+                            if (afterMonth(budgetDate, colDate)) {
                                 ++column;
-                            } else {
-                                if (budgetDate >= m_beginDate.addDays(-m_beginDate.day() + 1)
-                                        && budgetDate <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
-                                        && budgetDate > (columnDate(column).addMonths(-static_cast<int>(m_config.columnType())))) {
-                                    assignCell(outergroup, splitAccount, column, value, true /*budget*/);
-                                }
-                                budgetDate = budgetDate.addMonths(1);
+                                continue;
                             }
+
+                            if (beforeMonth(budgetDate, colDate)) {
+                                budgetDate = budgetDate.addMonths(1);
+                                continue;
+                            }
+
+                            if (budgetDate >= beginDate && budgetDate <= endDate) {
+                                assignCell(outergroup, splitAccount, column, value, true /*budget*/);
+                            }
+
+                            ++column;
+                            budgetDate = budgetDate.addMonths(1);
                         }
                     }
                     break;
@@ -1019,29 +1037,33 @@ void PivotTable::calculateBudgetMapping()
                     // budget periods are supposed to come in order just like columns
                 {
                     QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_period = periods.begin();
+                    QDate beginDate = m_beginDate.addDays(-m_beginDate.day() + 1);
+                    QDate endDate = m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day());
+
                     while (it_period != periods.end() && column < m_numColumns) {
-                        if ((*it_period).startDate() >= columnDate(column + 1 - m_startColumn)) {
-                            ++column;
-                        } else {
-                            switch (m_config.columnType()) {
-                            case eMyMoney::Report::ColumnType::Years:
-                            case eMyMoney::Report::ColumnType::BiMonths:
-                            case eMyMoney::Report::ColumnType::Quarters:
-                            case eMyMoney::Report::ColumnType::Months: {
-                                if ((*it_period).startDate() >= m_beginDate.addDays(-m_beginDate.day() + 1)
-                                        && (*it_period).startDate() <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
-                                        && (*it_period).startDate() > (columnDate(column).addMonths(-static_cast<int>(m_config.columnType())))) {
-                                    //no currency conversion is done here because that is done for all columns later
-                                    value = (*it_period).amount() * reverse;
-                                    assignCell(outergroup, splitAccount, column, value, true /*budget*/);
+                            const QDate periodStart = (*it_period).startDate();
+                            const QDate colDate = columnDate(column);
+                            if (afterMonth(periodStart, colDate)) {
+                                ++column;
+                            } else {
+                                switch (m_config.columnType()) {
+                                case eMyMoney::Report::ColumnType::Years:
+                                case eMyMoney::Report::ColumnType::BiMonths:
+                                case eMyMoney::Report::ColumnType::Quarters:
+                                case eMyMoney::Report::ColumnType::Months: {
+                                    if (periodStart >= beginDate && periodStart <= endDate
+                                        && periodStart > (colDate.addMonths(-static_cast<int>(m_config.columnType())))) {
+                                        // no currency conversion is done here because that is done for all columns later
+                                        value = (*it_period).amount() * reverse;
+                                        assignCell(outergroup, splitAccount, column, value, true /*budget*/);
+                                    }
+                                    ++it_period;
+                                    break;
                                 }
-                                ++it_period;
-                                break;
+                                default:
+                                    break;
+                                }
                             }
-                            default:
-                                break;
-                            }
-                        }
                     }
                     break;
                 }
