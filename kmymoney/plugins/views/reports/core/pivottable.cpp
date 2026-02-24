@@ -1094,9 +1094,9 @@ void PivotTable::convertToBaseCurrency()
 
                         //convert to lowest fraction
                         if (rowType == ePrice)
-                            it_row.value()[rowType][column] = PivotCell(MyMoneyMoney(value.convertPrecision(pricePrecision)));
+                            it_row.value()[rowType][column] = PivotCell(MyMoneyMoney(value.convertPrecision(pricePrecision)), valuedate);
                         else
-                            it_row.value()[rowType][column] = PivotCell(value.convert(fraction));
+                            it_row.value()[rowType][column] = PivotCell(value.convert(fraction), valuedate);
 
                         DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE, QString("Factor of %1, value was %2, now %3").arg(conversionfactor.toDouble()).arg(DEBUG_SENSITIVE(oldval.toDouble())).arg(DEBUG_SENSITIVE(it_row.value()[rowType][column].toDouble())));
                     }
@@ -1142,13 +1142,13 @@ void PivotTable::convertToDeepCurrency()
                     MyMoneyMoney oldval = it_row.value()[eActual][column];
                     MyMoneyMoney value = (oldval * conversionfactor).reduce();
                     //reduce to lowest fraction
-                    it_row.value()[eActual][column] = PivotCell(value.convert(fraction));
+                    it_row.value()[eActual][column] = PivotCell(value.convert(fraction), valuedate);
 
                     //convert price data
                     if (m_config.isIncludingPrice()) {
                         MyMoneyMoney oldPriceVal = it_row.value()[ePrice][column];
                         MyMoneyMoney priceValue = (oldPriceVal * conversionfactor).reduce();
-                        it_row.value()[ePrice][column] = PivotCell(priceValue.convert(10000));
+                        it_row.value()[ePrice][column] = PivotCell(priceValue.convert(10000), valuedate);
                     }
 
                     DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE, QString("Factor of %1, value was %2, now %3").arg(conversionfactor.toDouble()).arg(DEBUG_SENSITIVE(oldval.toDouble())).arg(DEBUG_SENSITIVE(it_row.value()[eActual][column].toDouble())));
@@ -1349,7 +1349,7 @@ void PivotTable::assignCell(const QString& outergroup, const ReportAccount& _row
             }
         }
     } else {
-        m_grid[outergroup][innergroup][row][eActual][column] += PivotCell::stockSplit(value);
+        m_grid[outergroup][innergroup][row][eActual][column] += PivotCell::stockSplit(value, columnDate(column));
     }
 
 }
@@ -2074,7 +2074,7 @@ void PivotTable::calculateBudgetDiff()
                 case eMyMoney::Account::Type::Income:
                 case eMyMoney::Account::Type::Asset:
                     while (column < m_numColumns) {
-                        it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eActual][column] - it_row.value()[eBudget][column]);
+                        it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eActual][column] - it_row.value()[eBudget][column], columnDate(column));
                         ++column;
                         if (propagateBudgetDifference && (column < m_numColumns)) {
                             it_row.value()[eBudget][column] -= it_row.value()[eBudgetDiff][column - 1];
@@ -2084,7 +2084,7 @@ void PivotTable::calculateBudgetDiff()
                 case eMyMoney::Account::Type::Expense:
                 case eMyMoney::Account::Type::Liability:
                     while (column < m_numColumns) {
-                        it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eBudget][column] - it_row.value()[eActual][column]);
+                        it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eBudget][column] - it_row.value()[eActual][column], columnDate(column));
                         ++column;
                         if (propagateBudgetDifference && (column < m_numColumns)) {
                             it_row.value()[eBudget][column] += it_row.value()[eBudgetDiff][column - 1];
@@ -2170,7 +2170,7 @@ void PivotTable::calculateForecast(const ForecastConfig& cfg)
                 //check whether columns are days or months
                 if (m_config.isColumnsAreDays()) {
                     while (column < m_numColumns) {
-                        it_row.value()[eForecast][column] = PivotCell(forecast.forecastBalance(it_row.key(), forecastDate));
+                        it_row.value()[eForecast][column] = PivotCell(forecast.forecastBalance(it_row.key(), forecastDate), forecastDate);
 
                         forecastDate = forecastDate.addDays(1);
                         ++column;
@@ -2185,7 +2185,7 @@ void PivotTable::calculateForecast(const ForecastConfig& cfg)
                             forecastDate = m_endDate;
 
                         //get forecast balance and set the corresponding column
-                        it_row.value()[eForecast][column] = PivotCell(forecast.forecastBalance(it_row.key(), forecastDate));
+                        it_row.value()[eForecast][column] = PivotCell(forecast.forecastBalance(it_row.key(), forecastDate), forecastDate);
 
                         forecastDate = forecastDate.addMonths(1);
                         ++column;
@@ -2278,7 +2278,7 @@ void PivotTable::calculateMovingAverage()
 
                         //get the actual value, multiply by the average price and save that value
                         MyMoneyMoney averageValue = it_row.value()[eActual][column] * averagePrice;
-                        it_row.value()[eAverage][column] = PivotCell(averageValue.convert(10000));
+                        it_row.value()[eAverage][column] = PivotCell(averageValue.convert(10000), columnDate(column));
 
                         ++column;
                     }
@@ -2329,7 +2329,7 @@ void PivotTable::calculateMovingAverage()
                         MyMoneyMoney averageValue = it_row.value()[eActual][column] * averagePrice;
 
                         //fill in the average
-                        it_row.value()[eAverage][column] = PivotCell(averageValue.convert(10000));
+                        it_row.value()[eAverage][column] = PivotCell(averageValue.convert(10000), columnDate(column));
 
                         ++column;
                     }
@@ -2376,7 +2376,7 @@ void PivotTable::fillBasePriceUnit(ERowType rowType)
                     //only add the dummy value if there is a price for that date
                     if (firstPriceExists) {
                         //insert a unit of currency for each account
-                        it_row.value()[rowType][column] = PivotCell(MyMoneyMoney::ONE);
+                        it_row.value()[rowType][column] = PivotCell(MyMoneyMoney::ONE, columnDate(column));
                     }
                     ++column;
                 }
