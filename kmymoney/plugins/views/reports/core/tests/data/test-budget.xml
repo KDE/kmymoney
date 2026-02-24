@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date=""/>
+    <LAST_MODIFIED_DATE date="2026-02-24T20:43:32+01:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION id="10"/>
+    <APPVERSION id="5.2.70-f45263f4f"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES/>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="GBP"/>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="GBP"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="GBP">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="GBP"/>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="GBP"/>
+    <ACCOUNT id="A000001" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="My GBP Expenses" description="" currency="GBP"/>
+  </ACCOUNTS>
+  <TRANSACTIONS/>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2026-02-24T20:43:32+01:00"/>
+    <PAIR key="kmm-baseCurrency" value="GBP"/>
+    <PAIR key="kmm-id" value="{6e5ce436-70db-4068-b704-a3351cab560f}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="GBP" name="British Pound" symbol="£" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES/>
+  <REPORTS>
+    <REPORT id="R000003" type="pivottable 1.16" group="Budgeting" name="Yearly Budget - constant - monthly" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2024-01-01" to="2024-12-31"/>
+    </REPORT>
+    <REPORT id="R000004" type="pivottable 1.16" group="Budgeting" name="Yearly Budget - constant - yearly" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000003" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2024-01-01" to="2024-12-31"/>
+    </REPORT>
+    <REPORT id="R000005" type="pivottable 1.16" group="Budgeting" name="Yearly Budget - increasing-full-year" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000003" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2027-01-01" to="2027-12-31"/>
+    </REPORT>
+    <REPORT id="R000006" type="pivottable 1.16" group="Budgeting" name="Yearly Budget - increasing-partial-year" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000004" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000007" type="pivottable 1.16" group="Budgeting" name="Yearly Budget - increasing-full-year-partial-month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000003" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2027-01-02" to="2027-12-31"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS>
+    <BUDGET id="B000001" name="constant-monthly" start="2025-01-01" version="2">
+      <ACCOUNT id="A000001" budgetlevel="monthly" budgetsubaccounts="0">
+        <PERIOD amount="5/1" start="2025-01-01"/>
+      </ACCOUNT>
+    </BUDGET>
+    <BUDGET id="B000002" name="constant-yearly" start="2024-01-01" version="2">
+      <ACCOUNT id="A000001" budgetlevel="yearly" budgetsubaccounts="0">
+        <PERIOD amount="120/1" start="2024-01-01"/>
+      </ACCOUNT>
+    </BUDGET>
+    <BUDGET id="B000003" name="increasing-full-year" start="2027-01-01" version="2">
+      <ACCOUNT id="A000001" budgetlevel="monthbymonth" budgetsubaccounts="0">
+        <PERIOD amount="1/1" start="2027-01-01"/>
+        <PERIOD amount="2/1" start="2027-02-01"/>
+        <PERIOD amount="3/1" start="2027-03-01"/>
+        <PERIOD amount="4/1" start="2027-04-01"/>
+        <PERIOD amount="5/1" start="2027-05-01"/>
+        <PERIOD amount="6/1" start="2027-06-01"/>
+        <PERIOD amount="7/1" start="2027-07-01"/>
+        <PERIOD amount="8/1" start="2027-08-01"/>
+        <PERIOD amount="9/1" start="2027-09-01"/>
+        <PERIOD amount="10/1" start="2027-10-01"/>
+        <PERIOD amount="11/1" start="2027-11-01"/>
+        <PERIOD amount="12/1" start="2027-12-01"/>
+      </ACCOUNT>
+    </BUDGET>
+    <BUDGET id="B000004" name="increasing-partial-year" start="2026-04-01" version="2">
+      <ACCOUNT id="A000001" budgetlevel="monthbymonth" budgetsubaccounts="0">
+        <PERIOD amount="1/1" start="2026-04-01"/>
+        <PERIOD amount="2/1" start="2026-05-01"/>
+        <PERIOD amount="3/1" start="2026-06-01"/>
+        <PERIOD amount="4/1" start="2026-07-01"/>
+        <PERIOD amount="5/1" start="2026-08-01"/>
+        <PERIOD amount="6/1" start="2026-09-01"/>
+        <PERIOD amount="7/1" start="2026-10-01"/>
+        <PERIOD amount="8/1" start="2026-11-01"/>
+        <PERIOD amount="9/1" start="2026-12-01"/>
+        <PERIOD amount="10/1" start="2027-01-01"/>
+        <PERIOD amount="11/1" start="2027-02-01"/>
+        <PERIOD amount="12/1" start="2027-03-01"/>
+      </ACCOUNT>
+    </BUDGET>
+  </BUDGETS>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>
