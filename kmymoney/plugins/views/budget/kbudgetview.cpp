@@ -600,3 +600,23 @@ void KBudgetView::slotOpenAccountContextMenu(eMenu::Menu type, const QPoint& p)
         d->m_accountContextMenu->popup(p);
     }
 }
+
+void KBudgetView::executeAction(eMenu::Action action, const SelectedObjects& selections)
+{
+    Q_D(KBudgetView);
+    // check if we are even initialized
+    if (d->m_budgetProxyModel) {
+        switch (action) {
+        case eMenu::Action::FileAboutToClose:
+            d->askSave();
+            break;
+        case eMenu::Action::FileClose:
+            d->ui->m_budgetList->selectionModel()->clearSelection();
+            d->m_budget = MyMoneyBudget();
+            d->loadBudgetAccountsView();
+            break;
+        default:
+            break;
+        }
+    }
+}

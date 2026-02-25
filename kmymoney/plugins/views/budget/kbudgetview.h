@@ -66,6 +66,8 @@ public:
     void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
     void removeActions();
 
+    void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
+
 public Q_SLOTS:
     void slotSettingsChanged() override;
     void updateActions(const SelectedObjects& selections) override;

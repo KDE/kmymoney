@@ -18,6 +18,7 @@ enum class FileAction {
     Closing,
     Closed,
     Changed,
+    AboutToClose,
 };
 
 enum class StorageType {
