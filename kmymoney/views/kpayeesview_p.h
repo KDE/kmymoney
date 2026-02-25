@@ -813,6 +813,7 @@ public:
                 == KMessageBox::PrimaryAction) {
                 q->slotUpdatePayee();
             }
+            setDirty(false);
         }
     }
 

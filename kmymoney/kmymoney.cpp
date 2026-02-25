@@ -740,6 +740,10 @@ public:
             QMetaObject::invokeMethod(q, "slotCheckSchedules", Qt::QueuedConnection);
             break;
 
+        case eKMyMoney::FileAction::AboutToClose:
+            m_myMoneyView->executeAction(Action::FileAboutToClose, m_selections);
+            break;
+
         case eKMyMoney::FileAction::Saved:
             // clear the dirty flag
             MyMoneyFile::instance()->setDirty(false);
@@ -4481,6 +4485,8 @@ bool KMyMoneyApp::slotFileClose()
 {
     if (!d->m_storageInfo.isOpened)
         return true;
+
+    d->fileAction(eKMyMoney::FileAction::AboutToClose);
 
     if (!d->askAboutSaving())
         return false;

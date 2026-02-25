@@ -152,6 +152,7 @@ public:
                 q->slotUpdateBudget();
                 // m_inSelection = false;
             }
+            ui->m_updateButton->setEnabled(false);
         }
     }
 
