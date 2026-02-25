@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-23 00:45+0000\n"
+"POT-Creation-Date: 2026-02-25 00:47+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -2229,8 +2229,8 @@ msgstr ""
 "используется «https»."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:702
-#: kmymoney/dialogs/knewaccountdlg.cpp:1000
-#: kmymoney/dialogs/knewaccountdlg.cpp:1015
+#: kmymoney/dialogs/knewaccountdlg.cpp:997
+#: kmymoney/dialogs/knewaccountdlg.cpp:1012
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:49
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:84
@@ -2261,7 +2261,7 @@ msgstr ""
 "Статья с именем <b>%1</b> уже существует. Невозможно создать две статьи "
 "бюджета с одним и тем же именем."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:921
+#: kmymoney/dialogs/knewaccountdlg.cpp:918
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2279,14 +2279,14 @@ msgstr ""
 "Созданная статья будет показана в списках, только если она будет "
 "использована хотя бы в одной операции."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:923
+#: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, fuzzy, kde-format
 #| msgid "Hide closed accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Скрыть закрытые счета"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:931
+#: kmymoney/dialogs/knewaccountdlg.cpp:928
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2299,44 +2299,44 @@ msgstr ""
 "Созданная статья будет показана в списках, только если она будет "
 "использована хотя бы в одной операции."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:933
+#: kmymoney/dialogs/knewaccountdlg.cpp:930
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Скрытые статьи"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1040
+#: kmymoney/dialogs/knewaccountdlg.cpp:1037
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:106
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Невозможно добавить учреждение"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1076
+#: kmymoney/dialogs/knewaccountdlg.cpp:1073
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr "Укажите название новой статьи или счёта."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1081
+#: kmymoney/dialogs/knewaccountdlg.cpp:1078
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr "Невозможно создать счёт или статью с содержащим %1 именем."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1088
+#: kmymoney/dialogs/knewaccountdlg.cpp:1085
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "Укажите процент, который будет больше нуля и меньше 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1092
+#: kmymoney/dialogs/knewaccountdlg.cpp:1089
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Выберите статью бюджета для НДС."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1157
+#: kmymoney/dialogs/knewaccountdlg.cpp:1154
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2347,13 +2347,13 @@ msgstr ""
 "родительского счёта будет использован <b>%2</b>, но его можно изменить в "
 "диалоговом окне, которое откроется следующим.</i></p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1161
-#: kmymoney/dialogs/knewaccountdlg.cpp:1186
+#: kmymoney/dialogs/knewaccountdlg.cpp:1158
+#: kmymoney/dialogs/knewaccountdlg.cpp:1183
 #, kde-format
 msgid "Create category"
 msgstr "Создать статью бюджета"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1182
+#: kmymoney/dialogs/knewaccountdlg.cpp:1179
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2364,13 +2364,13 @@ msgstr ""
 "родительского счёта будет использован <b>%2</b>, но его можно изменить в "
 "диалоговом окне, которое откроется следующим.</i></p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1204
+#: kmymoney/dialogs/knewaccountdlg.cpp:1201
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Создание новой статьи"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1209
+#: kmymoney/dialogs/knewaccountdlg.cpp:1206
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"

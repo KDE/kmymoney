@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-23 00:45+0000\n"
+"POT-Creation-Date: 2026-02-25 00:47+0000\n"
 "PO-Revision-Date: 2026-02-18 17:46+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2189,8 +2189,8 @@ msgstr ""
 "الجزء الخاص بالميفاق أزيل بواسطة «أموالك» لأنه مثبت على https لأسباب أمنية."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:702
-#: kmymoney/dialogs/knewaccountdlg.cpp:1000
-#: kmymoney/dialogs/knewaccountdlg.cpp:1015
+#: kmymoney/dialogs/knewaccountdlg.cpp:997
+#: kmymoney/dialogs/knewaccountdlg.cpp:1012
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:49
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:84
@@ -2219,7 +2219,7 @@ msgid ""
 "category with the same name."
 msgstr "هناك فئة لها الاسم <b>%1</b>فعلًا. لا يمكن إنشاء فئة أخرى بنفس الاسم."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:921
+#: kmymoney/dialogs/knewaccountdlg.cpp:918
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2232,13 +2232,13 @@ msgstr ""
 "لن يظهر الحساب الذي أنشأته للتو إلا إذا استُخدم. وإلا، سيخفى في جميع عروض "
 "الحسابات."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:923
+#: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "الحسابات المخفية"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:931
+#: kmymoney/dialogs/knewaccountdlg.cpp:928
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2251,44 +2251,44 @@ msgstr ""
 "ستظهر الفئة التي أنشأتها للتّو فقط إن كانت مستخدمة. بينما ستُخفى في منظور "
 "الحسابات/الفئات."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:933
+#: kmymoney/dialogs/knewaccountdlg.cpp:930
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "الفئات المخفيّة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1040
+#: kmymoney/dialogs/knewaccountdlg.cpp:1037
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:106
 #, kde-format
 msgid "Cannot add institution"
 msgstr "تعذّرت إضافة المؤسّسة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1076
+#: kmymoney/dialogs/knewaccountdlg.cpp:1073
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr "قدم اسما للتصنيف أو الحساب الجديد."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1081
+#: kmymoney/dialogs/knewaccountdlg.cpp:1078
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr "لا يمكنك إنشاء حساب أو تصنيف يحتوي على %1 في الاسم."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1088
+#: kmymoney/dialogs/knewaccountdlg.cpp:1085
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "قدم نسبة مئوية أكبر من صفر وأقل من 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1092
+#: kmymoney/dialogs/knewaccountdlg.cpp:1089
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "اختر تصنيفا لضريبة القيمة المضافة."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1157
+#: kmymoney/dialogs/knewaccountdlg.cpp:1154
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2298,13 +2298,13 @@ msgstr ""
 "<p>الفئة <b>%1</b> غير موجودة حاليًّا. هل تريد إنشاءها؟</p><p><i>الحساب الأب "
 "سيكون مبدئيًّا <b>%2</b> لكن يمكن تغييره في مربع الحوار التالي</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1161
-#: kmymoney/dialogs/knewaccountdlg.cpp:1186
+#: kmymoney/dialogs/knewaccountdlg.cpp:1158
+#: kmymoney/dialogs/knewaccountdlg.cpp:1183
 #, kde-format
 msgid "Create category"
 msgstr "أنشئ فئة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1182
+#: kmymoney/dialogs/knewaccountdlg.cpp:1179
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2314,13 +2314,13 @@ msgstr ""
 "<p>الحساب <b>%1</b> لا يوجد حاليا. أتريد إنشاءه؟</p><p><i>الحساب الأب سيكون "
 "مبدئيا <b>%2</b> ولكن يمكن تغييره في الحوار التالي</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1204
+#: kmymoney/dialogs/knewaccountdlg.cpp:1201
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "أنشئ فئة جديدة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1209
+#: kmymoney/dialogs/knewaccountdlg.cpp:1206
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"

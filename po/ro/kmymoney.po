@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-23 00:45+0000\n"
+"POT-Creation-Date: 2026-02-25 00:47+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2264,8 +2264,8 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:702
-#: kmymoney/dialogs/knewaccountdlg.cpp:1000
-#: kmymoney/dialogs/knewaccountdlg.cpp:1015
+#: kmymoney/dialogs/knewaccountdlg.cpp:997
+#: kmymoney/dialogs/knewaccountdlg.cpp:1012
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:49
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:84
@@ -2296,7 +2296,7 @@ msgstr ""
 "O categorie numită <b>%1</b> există deja. Nu puteți crea o a doua categorie "
 "cu același nume."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:921
+#: kmymoney/dialogs/knewaccountdlg.cpp:918
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2315,14 +2315,14 @@ msgstr ""
 "după ce va fi folosită. Altfel ea va fi ascunsă în modul de vizualizare a "
 "conturilor/categoriilor."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:923
+#: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, fuzzy, kde-format
 #| msgid "Payment accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Conturi de plată"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:931
+#: kmymoney/dialogs/knewaccountdlg.cpp:928
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2341,46 +2341,46 @@ msgstr ""
 "după ce va fi folosită. Altfel ea va fi ascunsă în modul de vizualizare a "
 "conturilor/categoriilor."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:933
+#: kmymoney/dialogs/knewaccountdlg.cpp:930
 #, fuzzy, kde-format
 #| msgid "Hidden categories"
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Categorii ascunse"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1040
+#: kmymoney/dialogs/knewaccountdlg.cpp:1037
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:106
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Nu s-a putut adăuga instituția"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1076
+#: kmymoney/dialogs/knewaccountdlg.cpp:1073
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1081
+#: kmymoney/dialogs/knewaccountdlg.cpp:1078
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1088
+#: kmymoney/dialogs/knewaccountdlg.cpp:1085
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1092
+#: kmymoney/dialogs/knewaccountdlg.cpp:1089
 #, fuzzy, kde-format
 #| msgid "Please select a default category for payee '%1'"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Alegeți categoria implicită pentru beneficiarul „%1”"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1157
+#: kmymoney/dialogs/knewaccountdlg.cpp:1154
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2391,13 +2391,13 @@ msgstr ""
 "părinte va lua valoare implicită <b>%2</b> dar se poate schimba în dialogul "
 "următor</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1161
-#: kmymoney/dialogs/knewaccountdlg.cpp:1186
+#: kmymoney/dialogs/knewaccountdlg.cpp:1158
+#: kmymoney/dialogs/knewaccountdlg.cpp:1183
 #, kde-format
 msgid "Create category"
 msgstr "Creează o categorie"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1182
+#: kmymoney/dialogs/knewaccountdlg.cpp:1179
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
@@ -2412,14 +2412,14 @@ msgstr ""
 "părinte va lua valoare implicită <b>%2</b> dar se poate schimba în dialogul "
 "următor</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1204
+#: kmymoney/dialogs/knewaccountdlg.cpp:1201
 #, fuzzy, kde-format
 #| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Creează o categorie nouă"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1209
+#: kmymoney/dialogs/knewaccountdlg.cpp:1206
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgctxt "@title:window"
