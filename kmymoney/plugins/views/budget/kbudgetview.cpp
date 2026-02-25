@@ -603,6 +603,7 @@ void KBudgetView::slotOpenAccountContextMenu(eMenu::Menu type, const QPoint& p)
 
 void KBudgetView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
+    Q_UNUSED(selections);
     Q_D(KBudgetView);
     // check if we are even initialized
     if (d->m_budgetProxyModel) {
