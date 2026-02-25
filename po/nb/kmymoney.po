@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-22 03:36+0000\n"
-"PO-Revision-Date: 2026-02-19 08:49+0100\n"
+"POT-Creation-Date: 2026-02-23 03:33+0000\n"
+"PO-Revision-Date: 2026-02-23 23:08+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -42,7 +42,7 @@ msgstr "_Utbytte"
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr ""
-"Feil ved import av %1: Denne filen er ikke en gyldig KMM-kontoutdragsfil."
+"Feil ved import av %1: Denne fila er ikke en gyldig KMM-kontoutdragsfil."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:373
 #, kde-format
@@ -238,7 +238,7 @@ msgid ""
 "select an account using the selection box in the dialog or create a new "
 "account by pressing the <b>Create</b> button."
 msgstr ""
-"Ingen kontoinformasjon er funnet i den valgte kontoutdragsfilen. Velg en "
+"Ingen kontoinformasjon er funnet i den valgte kontoutdragsfila. Velg en "
 "konto ved å bruke valgboksen i dialogvindu eller legg til en ny konto ved å "
 "trykke på <b>Legg til</b>."
 
@@ -362,7 +362,7 @@ msgstr ""
 "Bruk dette vinduet for å skrive inn personlig informasjon om deg selv.\n"
 "\n"
 "All informasjon er valgfri er oppgis kun for å tilpasse\n"
-"KMyMoney-filen din."
+"KMyMoney-fila din."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/dialogs/editpersonaldatadlg.ui:91
@@ -487,7 +487,7 @@ msgstr "Legg til en ny konto/kategori"
 #: kmymoney/dialogs/kaccountselectdlg.cpp:89
 #, kde-format
 msgid "Use this to add a new account/category to the file"
-msgstr "Bruk denne for å legge til en ny konto/kategori til filen"
+msgstr "Bruk denne for å legge til en ny konto/kategori til fila"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_kButtonAbort)
 #: kmymoney/dialogs/kaccountselectdlg.cpp:93
@@ -654,7 +654,7 @@ msgstr "&Velg…"
 #: kmymoney/dialogs/kbackupdlg.ui:127
 #, kde-format
 msgid "Mount this directory before backing up."
-msgstr "Monter denne mappen før sikkerhetskopiering."
+msgstr "Monter denne mappa før sikkerhetskopiering."
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:75
 #, kde-format
@@ -3151,7 +3151,7 @@ msgstr "Skrifttype på topptekst"
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:96
 #, kde-format
 msgid "Choose file path"
-msgstr "Velg filsti"
+msgstr "Velg filadresse"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsGeneral)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:14
@@ -3202,7 +3202,7 @@ msgstr "Innstillinger for sikkerhetskopi"
 msgid ""
 "Enter a character or string that will be added to backup files. Default is ~"
 msgstr ""
-"Skriv inn et tegn eller en streng som vil bli lagt til sikkerhetskopifilen. "
+"Skriv inn et tegn eller en streng som vil bli lagt til sikkerhetskopifila. "
 "Standard er ~"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
@@ -3221,7 +3221,7 @@ msgid ""
 "Set it to 0 to turn the feature off."
 msgstr ""
 "Hver gang gjeldende data lagres i en lokal fil, beholder KMyMoney et valgt "
-"antall tidligere versjoner av filen.\n"
+"antall tidligere versjoner av fila.\n"
 "\n"
 "Sett den til 0 for å slå av funksjonen."
 
@@ -3502,7 +3502,7 @@ msgstr "Logging"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:576
 #, kde-format
 msgid "Log path"
-msgstr "Loggsti"
+msgstr "Loggadresse"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:624
@@ -3511,7 +3511,7 @@ msgid ""
 "On choosing a log file path please keep in mind that log files may contain "
 "sensitive data (e.g. passwords in clear-text etc)."
 msgstr ""
-"Husk at ved å velge loggsti vil loggfilen kunne inneholde sensitive data "
+"Husk at ved å velge loggadresse vil loggfila kunne inneholde sensitive data "
 "(f.eks. passord i klartekst osv)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
@@ -4568,8 +4568,8 @@ msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:45
 #, kde-format
-msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "(c) 2000-2025 KMyMoney utviklerteam"
+msgid "(c) 2000-2026 The KMyMoney development team"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -4766,7 +4766,7 @@ msgstr "Aksjepost"
 #: kmymoney/kmymoney.cpp:496
 #, kde-format
 msgid "The file has been changed, save it?"
-msgstr "Filen er endret. Vil du lagre?"
+msgstr "Fila er endret. Vil du lagre?"
 
 #: kmymoney/kmymoney.cpp:497
 #, kde-format
@@ -5575,12 +5575,12 @@ msgstr "Eksport av mal"
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr ""
-"Filen <b>%1</b> finnes fra før. Er du sikker på at du vil skrive over den?"
+"Fila <b>%1</b> finnes fra før. Er du sikker på at du vil skrive over den?"
 
 #: kmymoney/kmymoney.cpp:3283 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
-msgstr "Filen finnes fra før"
+msgstr "Fila finnes fra før"
 
 #: kmymoney/kmymoney.cpp:3321
 #, kde-format
@@ -5600,7 +5600,7 @@ msgstr "Gjem menylinje"
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
-msgstr "Filen må lagres før den kan sikkerhetskopieres.  Vil du fortsette?"
+msgstr "Fila må lagres før den kan sikkerhetskopieres.  Vil du fortsette?"
 
 #: kmymoney/kmymoney.cpp:3434
 #, kde-format
@@ -5643,7 +5643,7 @@ msgstr "&Erstatt"
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Klarte ikke å opprette sikkerhetskopimappen «%1»."
+msgstr "Klarte ikke å opprette sikkerhetskopimappa «%1»."
 
 #: kmymoney/kmymoney.cpp:3539
 #, kde-format
@@ -5669,7 +5669,7 @@ msgstr "Ferdig"
 #: kmymoney/kmymoney.cpp:3613 kmymoney/kmymoney.cpp:3633
 #, kde-format
 msgid "File successfully backed up"
-msgstr "Sikkerhetskopiering av filen var vellykket"
+msgstr "Sikkerhetskopiering av fila var vellykket"
 
 #: kmymoney/kmymoney.cpp:3619
 #, kde-format
@@ -5827,13 +5827,13 @@ msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
 "can open another file or create a new one.</p>"
 msgstr ""
-"<p><b>%1</b> er enten et ugyldig filnavn eller så finnes ikke filen. Du kan "
+"<p><b>%1</b> er enten et ugyldig filnavn eller så finnes ikke fila. Du kan "
 "enten åpne en annen fil eller opprette en ny.</p>"
 
 #: kmymoney/kmymoney.cpp:4335
 #, kde-format
 msgid "File not found"
-msgstr "Fant ikke filen"
+msgstr "Fant ikke fila"
 
 #: kmymoney/kmymoney.cpp:4367
 #, kde-format
@@ -5844,7 +5844,7 @@ msgstr "Problem med å åpne lagring"
 #: kmymoney/kmymoney.cpp:4373
 #, kde-format
 msgid "Cannot open file as requested."
-msgstr "Kan ikke åpne filen som forespurt."
+msgstr "Kan ikke åpne fila som forespurt."
 
 #: kmymoney/kmymoney.cpp:4380
 #, kde-format
@@ -6117,7 +6117,7 @@ msgstr "Kursimportør"
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
-msgstr "<p>Vil du virkelig fjerne valutaen <b>%1</b> fra filen?</p>"
+msgstr "<p>Vil du virkelig fjerne valutaen <b>%1</b> fra fila?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:425
 #, kde-format
@@ -6131,7 +6131,7 @@ msgstr ""
 #: kmymoney/kmymoneyutils.cpp:429
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
-msgstr "<p>Vil du virkelig fjerne %1 <b>%2</b> fra filen?</p>"
+msgstr "<p>Vil du virkelig fjerne %1 <b>%2</b> fra fila?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:430
 #, kde-format
@@ -6158,7 +6158,7 @@ msgstr "Slett kurser"
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
-msgstr "Feil ved lasting av filen %1."
+msgstr "Feil ved lasting av fila %1."
 
 #: kmymoney/kmymoneyutils.cpp:505
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:145
@@ -6234,7 +6234,7 @@ msgstr "språk som skal brukes"
 #: kmymoney/main.cpp:160
 #, kde-format
 msgid "do not open last used file"
-msgstr "ikke åpne den sist brukte filen"
+msgstr "ikke åpne den sist brukte fila"
 
 #: kmymoney/main.cpp:164
 #, kde-format
@@ -8442,7 +8442,7 @@ msgstr "Avkastning"
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p>Ugyldig merke <b>%1</b> i malfilen <b>%2</b></p>"
+msgstr "<p>Ugyldig merke <b>%1</b> i malfila <b>%2</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:106
 #: kmymoney/mymoney/mymoneytemplate.cpp:108
@@ -8450,12 +8450,12 @@ msgstr "<p>Ugyldig merke <b>%1</b> i malfilen <b>%2</b></p>"
 #: kmymoney/mymoney/mymoneytemplate.cpp:112
 #, kde-format
 msgid "<p>Missing tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p>Merket <b>%1</b> mangler i malfilen <b>%2</b></p>"
+msgstr "<p>Merket <b>%1</b> mangler i malfila <b>%2</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:116
 #, kde-format
 msgid "<p>Invalid root element in template file <b>%1</b></p>"
-msgstr "<p>Rotelementet i malfilen <b>%1</b> er ugyldig</p>"
+msgstr "<p>Rotelementet i malfila <b>%1</b> er ugyldig</p>"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
 #, kde-format
@@ -9314,7 +9314,7 @@ msgstr "Bruk den egendefinerte sjekkmalen"
 msgid ""
 "The check template file which defines the way the printed check will look."
 msgstr ""
-"Filen med sjekkmal som definerer hvordan den utskrevne sjekken skal se ut."
+"Fila med sjekkmal som definerer hvordan den utskrevne sjekken skal se ut."
 
 #. i18n: ectx: label, entry (printedChecks), group (General)
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:18
@@ -9665,10 +9665,10 @@ msgid ""
 msgstr ""
 "Fra dette vinduet kan du eksportere transaksjoner til en kommaseparert fil "
 "(kjent som en CSV-fil pga filendelsen).  Du kan likevel velge en skilletegn "
-"under.  Skriv inn en sti til CSV-filen eller velg den ved å trykke på «Bla "
+"under.  Skriv inn en sti til CSV-fila eller velg den ved å trykke på «Bla "
 "gjennom».\n"
 "\n"
-"Du kan velge filens sti og kontoen. Velg konto for å eksportere alle "
+"Du kan velge filens adresse og kontoen. Velg konto for å eksportere alle "
 "transaksjonene mellom de angitte datoene, eller velg å bare eksportere "
 "kategorier."
 
@@ -9750,7 +9750,7 @@ msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
 "qt>"
 msgstr ""
-"<qt>Filen <b>%1</b> finnes fra før. Er du sikker på at du vil skrive over "
+"<qt>Fila <b>%1</b> finnes fra før. Er du sikker på at du vil skrive over "
 "den?</qt>"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:78
@@ -10292,7 +10292,7 @@ msgid ""
 "Version of your CSV config file is %1.%2.%3 and is newer than supported "
 "version %4.%5.%6. Expect troubles."
 msgstr ""
-"Versjonen i CSV-oppsettfilen din er %1.%2.%3. Den er nyere enn støttet "
+"Versjonen i CSV-oppsettfila din er %1.%2.%3. Den er nyere enn støttet "
 "versjon %4.%5.%6. Forvent trøbbel."
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:303
@@ -10514,7 +10514,7 @@ msgid ""
 "If all is OK, you will be able to click 'Import'.\n"
 "If required, a QIF file may then be produced."
 msgstr ""
-"Velg desimalsymbolet i filen din.\n"
+"Velg desimalsymbolet i fila din.\n"
 "Tusenskilletegnet endrer seg automatisk.\n"
 "Hvis alt er ok får du anledning til å klikke på «Importer».\n"
 "Hvis det er påkrevd kan en QIF-fil bli laget."
@@ -10617,7 +10617,7 @@ msgstr ""
 "Velg enten banktjeneste, investering eller kurser.\n"
 "Velg deretter en eksisterende profil eller legg til en ny\n"
 "ved å skrive inn navnet og velge «Legg til».\n"
-"Når det er gjort velger du filen du vil importere."
+"Når det er gjort velger du fila du vil importere."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesBank)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:96
@@ -10771,7 +10771,7 @@ msgid ""
 "Otherwise, select the column for the symbol, and for the description or name."
 msgstr ""
 "Velg de kolonnene som passer med dine data.\n"
-"Skriv inn navnet under vis det er kun et eneste verdipapir i filen.\n"
+"Skriv inn navnet under vis det er kun et eneste verdipapir i fila.\n"
 "Velg ellers kolonnen for symbolet og for beskrivelsen eller navnet."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_priceFraction)
@@ -10785,7 +10785,7 @@ msgid ""
 msgstr ""
 "Velg, om nødvendig, en brøk eller multiplikator for samsvar\n"
 "mellom importerte og lagrede kurser. For eksempel hvis\n"
-"den importerte kursen er øre mens filen er priset i kroner velger du 0.01."
+"den importerte kursen er øre mens fila er priset i kroner velger du 0.01."
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelInv_date)
 #. i18n: ectx: property (toolTip), widget (QLabel, lbldateCol)
@@ -10825,7 +10825,7 @@ msgid ""
 "select it here."
 msgstr ""
 "Velg her hvis det er mer enn en aksje\n"
-"i filen og aksjesymbolet er vist en av\n"
+"i fila og aksjesymbolet er vist en av\n"
 "kolonnene."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
@@ -11394,13 +11394,13 @@ msgstr "Rente"
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:60
 #, kde-format
 msgid "The size of the file is too small to be a valid GnuCash format: %1"
-msgstr "Størrelsen av filen er for liten til å være gyldig GnuCash-format: %1"
+msgstr "Størrelsen av fila er for liten til å være gyldig GnuCash-format: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:64
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:75
 #, kde-format
 msgid "Cannot read the file: %1"
-msgstr "Kan ikke lese filen: %1"
+msgstr "Kan ikke lese fila: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:80
 #, kde-format
@@ -11629,12 +11629,12 @@ msgid ""
 "all values.\n"
 "These numbers will not be stored in the file."
 msgstr ""
-"En hver monetær verdi i filen din blir multiplisert med et vilkårlig tall "
+"En hver monetær verdi i fila din blir multiplisert med et vilkårlig tall "
 "mellom 0,01 og 0,99\n"
 "men en ulik verdi brukt for hver transaksjon. For å ytterligere skjule de "
 "virkelige verdiene,\n"
 "kan du i tillegg angi et tall mellom %1 og %2 som legges til alle verdier.\n"
-"Disse tallene blir ikke lagret i filen."
+"Disse tallene blir ikke lagret i fila."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1455
 #, kde-format
@@ -11864,8 +11864,7 @@ msgstr "Parti"
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
-"De følgende funksjonene ble funnet i filen din, men de støttes for tiden "
-"ikke:"
+"De følgende funksjonene ble funnet i fila din, men de støttes for tiden ikke:"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
 #, kde-format
@@ -12025,7 +12024,7 @@ msgstr "Antall påminnelser som skal lages for tidsplanen "
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:41
 #, kde-format
 msgid "The icalendar file in which to export the schedules."
-msgstr "iCalendar-filen tidsplanene skal eksporteres til."
+msgstr "iCalendar-fila tidsplanene skal eksporteres til."
 
 #. i18n: ectx: label, entry (writeEventsVsTodos), group (General)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_writeEventsVsTodos)
@@ -12048,7 +12047,7 @@ msgid ""
 "Write the iCalendar file so that the entries are recognized by Google "
 "Calendar."
 msgstr ""
-"Skriv iCalendar-filen sånn at oppføringen blir gjenkjent av Google kalender."
+"Skriv iCalendar-fila sånn at oppføringen blir gjenkjent av Google kalender."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_writeEventsVsTodos)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:37
@@ -12061,10 +12060,10 @@ msgid ""
 "href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-"
 "component.html\">VEVENT</a> are needed.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Skriv iCalendar-filen sånn at oppføringen blir "
+"<html><head/><body><p>Skriv iCalendar-fila sånn at oppføringen blir "
 "gjenkjent av Google kalender. Standard er å skrive <a href=\"https://"
 "icalendar.org/iCalendar-RFC-5545/3-6-2-to-do-component.html\">VTODO</a>-"
-"oppføringer i iCalendar-filen men for oppføringer til Google Kalender trengs "
+"oppføringer i iCalendar-fila men for oppføringer til Google Kalender trengs "
 "typen <a href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-"
 "component.html\">VEVENT</a>.</p></body></html>"
 
@@ -13435,8 +13434,8 @@ msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
 "correct format."
 msgstr ""
-"Kan ikke importere %1 ved å bruke programtillegget for OFX-import.  Filen "
-"har ikke rett format."
+"Kan ikke importere %1 ved å bruke programtillegget for OFX-import.  Fila har "
+"ikke rett format."
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:197
 #, kde-format
@@ -13446,7 +13445,7 @@ msgstr "Feil format"
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:243
 #, kde-format
 msgid "Unable to parse file"
-msgstr "Kan ikke analysere filen"
+msgstr "Kan ikke analysere fila"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:846
 #, kde-format
@@ -13713,7 +13712,7 @@ msgstr "Plassering av inndatafilter"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:297
 #, kde-format
 msgid "The format of the dates in the QIF file."
-msgstr "Datoformatene i GIF-filen."
+msgstr "Datoformatene i GIF-fila."
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_editApostrophe)
 #. i18n: ectx: property (whatsThis), widget (QLabel, TextLabel4)
@@ -14008,10 +14007,10 @@ msgid ""
 "detailing how many transactions, categories and payees were exported."
 msgstr ""
 "Fra dette vinduet kan du eksportere transaksjoner til fil som passer til "
-"Quicken (kjent som en QIF-fil på grunn av filendelsen).  Skriv inn stien til "
-"QIF-filen eller velg den ved klikke på Søk.\n"
+"Quicken (kjent som en QIF-fil på grunn av filendelsen).  Skriv inn adressen "
+"til QIF-fila eller velg den ved klikke på Søk.\n"
 "\n"
-"Du kan velge filsti, kontoen og formatet på QIF-filen (profil).  Velg "
+"Du kan velge filadresse, kontoen og formatet på QIF-fila (profil).  Velg "
 "«Konto» for å eksportere alle transaksjonene mellom de spesifiserte datoene "
 "eller kun kategorier.  Du kan også begrense hvilke transaksjoner som skal "
 "eksporteres med en start- og en sluttdato.  Når du har trykket «Eksporter»-"
@@ -14098,8 +14097,8 @@ msgid ""
 msgstr ""
 "<p>Fra dette vinduet kan du importere transaksjoner fra en Quicken<b>&trade;"
 "</b>-kompatibel fil, kjent som en QIF-fil basert på filendelsen).</p>\n"
-"<p>Skriv inn stien til QIF-filen eller velg med å klikke på «Bla gjennom». "
-"Når du har funnet filens sti trykk på «Importer». Da importerer KMyMoney "
+"<p>Skriv inn adressen til QIF-fila eller velg med å klikke på «Bla gjennom». "
+"Når du har funnet filens adresse trykk på «Importer». Da importerer KMyMoney "
 "alle transaksjoner, kategorier og mottakere den finner.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblImportFile)
@@ -14229,7 +14228,7 @@ msgstr "Velg datoformat"
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:370
 #, kde-format
 msgid "Pick the date format that suits your input file"
-msgstr "Velg det datoformatet som passer inndatafilen"
+msgstr "Velg det datoformatet som passer inndatafila"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:385
 #, kde-format
@@ -14294,9 +14293,9 @@ msgid ""
 "an opening balance of %3. Would you like to overwrite the current balance "
 "with the one from the QIF file?"
 msgstr ""
-"Kontoen %1 har en gjeldende åpningssaldo på %2. Denne QIF-filen melder om en "
+"Kontoen %1 har en gjeldende åpningssaldo på %2. Denne QIF-fila melder om en "
 "åpningssaldo på %3. Vil du overskrive den gjeldende saldoen med den fra QIF-"
-"filen?"
+"fila?"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:740
 #, kde-format
@@ -14328,7 +14327,7 @@ msgid ""
 "this manually once the import is done."
 msgstr ""
 "KMyMoney har importert en annen åpningssaldotransaksjon til kontoen <b>%1</"
-"b> som avviker fra den som allerede er i filen. Korriger dette manuelt så "
+"b> som avviker fra den som allerede er i fila. Korriger dette manuelt så "
 "snart importen er ferdig."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:987
@@ -14352,7 +14351,7 @@ msgid ""
 "\"Cancel\" will abort the import operation. You can then restart the import "
 "and select a different QIF profile or create a new one."
 msgstr ""
-"Datoen «%1» som ble lest fra filen kan ikke tolkes ved bruk av gjeldende "
+"Datoen «%1» som ble lest fra fila kan ikke tolkes ved bruk av gjeldende "
 "innstilt datoformat i «%2»\n"
 "\n"
 "Ved å trykke «Fortsett» vil tilordne dagens dato til transaksjonen. Ved å "
@@ -14770,7 +14769,7 @@ msgstr "Legger til nettjobber."
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2035
 #, kde-format
 msgid "SQLite file %1 does not exist"
-msgstr "SQLite-filen «%1» finnes ikke."
+msgstr "SQLite-fila «%1» finnes ikke."
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2088
 #, kde-format
@@ -16342,7 +16341,7 @@ msgstr "Saldo for %1"
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
 msgid "File %1 does not exist"
-msgstr "Filen %1 finnes ikke"
+msgstr "Fila %1 finnes ikke"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
@@ -16363,8 +16362,8 @@ msgstr "den er tom"
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
-msgstr[0] "Det er et problem med filen %1"
-msgstr[1] "Det er problemer med filen %1"
+msgstr[0] "Det er et problem med fila %1"
+msgstr[1] "Det er problemer med fila %1"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
@@ -18125,8 +18124,8 @@ msgstr ""
 "<p>Du har skrudd på støtte for GPG kryptering. Dette betyr at nye filer blir "
 "lagret kryptert.</p><p>Eksisterende filer blir ikke kryptert automatisk.  "
 "For å kryptere eksisterende filer, bruk <b>Fil → Lagre som…</b>-funksjonen "
-"og lagre filen under et annet navn.<br/>Når du er fornøyd med resultatet kan "
-"du slette den gamle filen og endre navn på den krypterte filen til det gamle "
+"og lagre fila under et annet navn.<br/>Når du er fornøyd med resultatet kan "
+"du slette den gamle fila og endre navn på den krypterte fila til det gamle "
 "navnet.</p>"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
@@ -18279,7 +18278,7 @@ msgstr "Lagre kryptert med GPG"
 #: kmymoney/plugins/xml/xmlstorage.cpp:177
 #, kde-format
 msgid "Unable to open file '%1' for writing."
-msgstr "Klarte ikke åpne filen «%1» for skriving."
+msgstr "Klarte ikke åpne fila «%1» for skriving."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:278
 #, kde-format
@@ -18313,13 +18312,13 @@ msgstr "Gjenopprettingsnøkkel løper ut snart"
 #, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr "Filen <b>%1</b> er allerede åpen i en annen instans av KMyMoney"
+msgstr "Fila <b>%1</b> er allerede åpen i en annen instans av KMyMoney"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "Filen <b>%1</b> er ikke en datafil for KMyMoney."
+msgstr "Fila <b>%1</b> er ikke en datafil for KMyMoney."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:634
 #, kde-format
@@ -18577,7 +18576,7 @@ msgstr "Sist valgte visning"
 #: kmymoney/settings/kmymoney.kcfg:104
 #, kde-format
 msgid "Use GPG to encrypt data file"
-msgstr "Bruk GPG for å kryptere datafilen"
+msgstr "Bruk GPG for å kryptere datafila"
 
 #. i18n: ectx: label, entry (EncryptRecover), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:108
@@ -18867,7 +18866,7 @@ msgstr "Startdato"
 #: kmymoney/settings/kmymoney.kcfg:313
 #, kde-format
 msgid "Log file path"
-msgstr "Sti til loggfil"
+msgstr "Adresse til loggfil"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:322
@@ -19021,7 +19020,7 @@ msgstr "Feil i filtype"
 #, kde-format
 msgid ""
 "<p>Error while reading template file <b>%1</b> in line %2, column %3</p>"
-msgstr "<p>Feil ved lesing av malfilen <b>%1</b> i linje %2 og kolonne %3</p>"
+msgstr "<p>Feil ved lesing av malfila <b>%1</b> i linje %2 og kolonne %3</p>"
 
 #: kmymoney/templates/templateloader.cpp:108
 #, kde-format
@@ -19032,7 +19031,7 @@ msgstr "Feil ved lasting av mal"
 #: kmymoney/templates/templateloader.cpp:113
 #, kde-format
 msgid "File '%1' not found."
-msgstr "Filen «%1» ble ikke funnet."
+msgstr "Fila «%1» ble ikke funnet."
 
 #: kmymoney/templates/templateloader.cpp:189
 #, kde-format
@@ -19040,14 +19039,13 @@ msgid ""
 "<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</"
 "b></p>"
 msgstr ""
-"<p>Ugyldig markørtype <b>%1</b> for kontoen <b>%3</b> i malfilen <b>%2</b></"
-"p>"
+"<p>Ugyldig markørtype <b>%1</b> for kontoen <b>%3</b> i malfila <b>%2</b></p>"
 
 #: kmymoney/templates/templateloader.cpp:361
 #, kde-format
 msgid ""
 "<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p>Ugyldig type toppnivåkonto <b>%1</b> i malfilen <b>%2</b></p>"
+msgstr "<p>Ugyldig type toppnivåkonto <b>%1</b> i malfila <b>%2</b></p>"
 
 #: kmymoney/templates/templatewriter.cpp:178
 #, kde-format
@@ -19064,7 +19062,7 @@ msgstr "Kan ikke å skrive endringer til «%1»."
 #: kmymoney/templates/templatewriter.cpp:206
 #, kde-format
 msgid "Unable to open template file '%1'"
-msgstr "Kan ikke åpne malfilen «%1»."
+msgstr "Kan ikke åpne malfila «%1»."
 
 #: kmymoney/templates/templatewriter.cpp:215
 #, kde-format
@@ -21554,8 +21552,8 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Konti som er merket som favoritt vil åpnes automatisk "
-"etter at KMyMoney har åpnet filen eller databasen Bruk +-knappen på "
-"faneraden over for å velge en konto.</p></body></html>"
+"etter at KMyMoney har åpnet fila eller databasen Bruk +-knappen på faneraden "
+"over for å velge en konto.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:319
 #, kde-format
@@ -25689,7 +25687,7 @@ msgstr ""
 "Skriv inn informasjon om deg selv.<br><br> \n"
 "\n"
 "Denne informasjonen vil kun ses og brukes av deg. Informasjonen blir brukt "
-"til å personliggjøre KMyMoney, til å kryptere filen din osv."
+"til å personliggjøre KMyMoney, til å kryptere fila din osv."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7)
 #: kmymoney/wizards/newuserwizard/kgeneralpage.ui:104
@@ -25764,7 +25762,7 @@ msgid ""
 "your account numbers and other important financial information will be very "
 "secure.</p>"
 msgstr ""
-"<p>KMyMoney kan kryptere datafilen din ved hjelp av GPG-kryptering. GPG-"
+"<p>KMyMoney kan kryptere datafila din ved hjelp av GPG-kryptering. GPG-"
 "kryptering er en av de sikreste metodene i verden for å beskytte data. Alle "
 "kontonumrene dine og annen viktig finansiell informasjon vil være veldig "
 "sikre.</p>"
@@ -25851,7 +25849,7 @@ msgstr ""
 "<p>Bruk disse feltene for å legge inn personlig informasjon om deg selv.</"
 "p>\n"
 "\n"
-"<p>All informasjon er valgfri er oppgis kun for å tilpasse KMyMoney-filen "
+"<p>All informasjon er valgfri er oppgis kun for å tilpasse KMyMoney-fila "
 "din</p>"
 
 #: tools/kmmreport-export.cpp:114
