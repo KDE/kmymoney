@@ -3,10 +3,10 @@
 <KMYMONEY-FILE>
   <FILEINFO>
     <CREATION_DATE date=""/>
-    <LAST_MODIFIED_DATE date="2024-12-29T20:53:22+01:00"/>
+    <LAST_MODIFIED_DATE date="2026-02-22T13:31:01+01:00"/>
     <VERSION id="1"/>
-    <FIXVERSION date=""/>
-    <APPVERSION id="5.1.90-12fa993df"/>
+    <FIXVERSION id="10"/>
+    <APPVERSION id="5.2.70-fe65277d6"/>
   </FILEINFO>
   <USER name="" email="">
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
@@ -36,6 +36,7 @@
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000001"/>
         <SUBACCOUNT id="A000002"/>
+        <SUBACCOUNT id="A000007"/>
       </SUBACCOUNTS>
     </ACCOUNT>
     <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="EUR">
@@ -83,6 +84,12 @@
         <PAIR key="term" value="11"/>
       </KEYVALUEPAIRS>
     </ACCOUNT>
+    <ACCOUNT id="A000007" parentaccount="AStd::Asset" lastreconciled="" lastmodified="" institution="" opened="2024-01-01" number="" type="1" name="closed checking " description="" currency="EUR">
+      <KEYVALUEPAIRS>
+        <PAIR key="mm-closed" value="yes"/>
+        <PAIR key="mm-closed-date" value="2026-02-22"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
   </ACCOUNTS>
   <TRANSACTIONS>
     <TRANSACTION id="T000000000000000001" postdate="2024-01-01" memo="" entrydate="2024-09-06" commodity="EUR">
@@ -99,7 +106,7 @@
     </TRANSACTION>
   </TRANSACTIONS>
   <KEYVALUEPAIRS>
-    <PAIR key="LastModificationDate" value="2024-12-29T20:53:22+01:00"/>
+    <PAIR key="LastModificationDate" value="2026-02-22T13:31:01+01:00"/>
     <PAIR key="kmm-baseCurrency" value="EUR"/>
     <PAIR key="kmm-id" value="{994f9512-1fe0-48da-9ffc-43c575339c0d}"/>
   </KEYVALUEPAIRS>

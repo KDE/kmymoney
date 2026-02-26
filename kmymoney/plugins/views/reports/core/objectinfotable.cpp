@@ -122,16 +122,12 @@ void ObjectInfoTable::init()
         }
         break;
     case eMyMoney::Report::RowType::AccountInfo:
-        m_columns << ctNumber << ctDescription
-                  << ctOpeningDate << ctCurrencyName << ctBalanceWarning
-                  << ctCreditWarning << ctMaxCreditLimit
-                  << ctTax << ctFavorite;
+        m_columns << ctState << ctNumber << ctDescription << ctOpeningDate << ctClosingDate << ctCurrencyName << ctBalanceWarning << ctCreditWarning
+                  << ctMaxCreditLimit << ctTax << ctFavorite;
         break;
     case eMyMoney::Report::RowType::AccountLoanInfo:
-        m_columns << ctNumber << ctDescription
-                  << ctOpeningDate << ctCurrencyName << ctPayee
-                  << ctLoanAmount << ctInterestRate << ctNextInterestChange
-                  << ctPeriodicPayment << ctFinalPayment << ctFavorite;
+        m_columns << ctState << ctNumber << ctDescription << ctOpeningDate << ctCurrencyName << ctPayee << ctLoanAmount << ctInterestRate
+                  << ctNextInterestChange << ctPeriodicPayment << ctFinalPayment << ctFavorite;
         break;
     default:
         m_columns.clear();
@@ -256,9 +252,7 @@ void ObjectInfoTable::constructAccountTable()
         TableRow accountRow;
         ReportAccount account(*it_account);
 
-        if (m_config.includes(account)
-                && account.accountType() != eMyMoney::Account::Type::Stock
-                && !account.isClosed()) {
+        if (m_config.includes(account) && account.accountType() != eMyMoney::Account::Type::Stock) {
             MyMoneyMoney value;
             accountRow[ctRank] = FIRST_SPLIT_RANK;
             accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
@@ -271,6 +265,8 @@ void ObjectInfoTable::constructAccountTable()
             accountRow[ctName] = account.name();
             accountRow[ctNumber] = account.number();
             accountRow[ctDescription] = account.description();
+            accountRow[ctState] = account.isClosed() ? i18n("Closed") : i18n("Open");
+            accountRow[ctClosingDate] = account.closingDate().toString(Qt::ISODate);
             accountRow[ctOpeningDate] = account.openingDate().toString(Qt::ISODate);
             accountRow[ctCurrencyName] = file->currency(account.currencyId()).name();
             accountRow[ctBalanceWarning] = account.value("minBalanceEarly");
@@ -331,6 +327,8 @@ void ObjectInfoTable::constructAccountLoanTable()
             accountRow[ctName] = account.name();
             accountRow[ctNumber] = account.number();
             accountRow[ctDescription] = account.description();
+            accountRow[ctState] = account.isClosed() ? i18n("Closed") : i18n("Open");
+            accountRow[ctClosingDate] = account.closingDate().toString(Qt::ISODate);
             accountRow[ctOpeningDate] = account.openingDate().toString(Qt::ISODate);
             accountRow[ctCurrencyName] = file->currency(account.currencyId()).name();
             accountRow[ctPayee] = file->payee(loan.payee()).name();

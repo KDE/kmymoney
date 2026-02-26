@@ -670,6 +670,7 @@ ListTable::cellGroupE ListTable::cellGroup(const cellTypeE cellType)
     case ctPostDate:
     case ctEntryDate:
     case ctNextDueDate:
+    case ctClosingDate:
     case ctOpeningDate:
     case ctNextInterestChange:
         return cgDate;
@@ -772,6 +773,10 @@ QString ListTable::tableHeader(const cellTypeE cellType)
         return i18n("Institution");
     case ctDescription:
         return i18n("Description");
+    case ctState:
+        return i18n("State");
+    case ctClosingDate:
+        return i18n("Closing Date");
     case ctOpeningDate:
         return i18n("Opening Date");
     case ctCurrencyName:

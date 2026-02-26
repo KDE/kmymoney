@@ -103,6 +103,7 @@ public:
         ctInterestRate,
         ctPercentageGain,
         /*Date*/
+        ctClosingDate,
         ctPostDate,
         ctEntryDate,
         ctNextDueDate,
@@ -146,6 +147,7 @@ public:
         ctStartingMarketValue,
         ctEndingMarketValue,
         csID,
+        ctState,
     };
     Q_ENUM(cellTypeE)
 
