@@ -396,11 +396,23 @@ MyMoneyKeyValueContainer MyMoneyAccount::onlineBankingSettings() const
 void MyMoneyAccount::setClosed(bool closed)
 {
     setValue(QLatin1String("mm-closed"), closed, false);
+    if (closed)
+        setValue(QLatin1String("mm-closed-date"), QDate::currentDate().toString(Qt::ISODate));
+    else
+        deletePair(QLatin1String("mm-closed-date"));
 }
 
 bool MyMoneyAccount::isClosed() const
 {
     return value(QLatin1String("mm-closed"), false);
+}
+
+QDate MyMoneyAccount::closingDate() const
+{
+    if (isClosed())
+        return QDate::fromString(value(QLatin1String("mm-closed-date")), Qt::ISODate);
+    else
+        return QDate();
 }
 
 int MyMoneyAccount::fraction(const MyMoneySecurity& sec) const

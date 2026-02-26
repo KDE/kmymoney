@@ -477,6 +477,13 @@ public:
     bool isClosed() const;
 
     /**
+     * This method returns the closing date of this account
+     * @return date of closing of this account as const QDate value
+     * @see setClosed() which sets the closing date
+     */
+    QDate closingDate() const;
+
+    /**
       * returns the applicable smallest fraction for this account
       * for the given security based on the account type. At the same
       * time, m_fraction is updated to the value returned.
