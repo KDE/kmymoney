@@ -263,7 +263,7 @@ void ObjectInfoTable::constructAccountTable()
             accountRow[ctRank] = FIRST_SPLIT_RANK;
             accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
             if (!account.institutionId().isEmpty()) {
-                accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+                accountRow[ctInstitution] = file->institution(account.institutionId()).name();
             } else {
                 accountRow[ctInstitution] = QStringLiteral("Accounts with no institution assigned");
             }
@@ -272,8 +272,7 @@ void ObjectInfoTable::constructAccountTable()
             accountRow[ctNumber] = account.number();
             accountRow[ctDescription] = account.description();
             accountRow[ctOpeningDate] = account.openingDate().toString(Qt::ISODate);
-            //accountRow["currency"] = (file->currency(account.currencyId())).tradingSymbol();
-            accountRow[ctCurrencyName] = (file->currency(account.currencyId())).name();
+            accountRow[ctCurrencyName] = file->currency(account.currencyId()).name();
             accountRow[ctBalanceWarning] = account.value("minBalanceEarly");
             accountRow[ctMaxBalanceLimit] = account.value("minBalanceAbsolute");
             accountRow[ctCreditWarning] = account.value("maxCreditEarly");
@@ -324,7 +323,7 @@ void ObjectInfoTable::constructAccountLoanTable()
             accountRow[ctRank] = FIRST_SPLIT_RANK;
             accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
             if (!account.institutionId().isEmpty()) {
-                accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+                accountRow[ctInstitution] = file->institution(account.institutionId()).name();
             } else {
                 accountRow[ctInstitution] = QStringLiteral("Accounts with no institution assigned");
             }
@@ -333,8 +332,7 @@ void ObjectInfoTable::constructAccountLoanTable()
             accountRow[ctNumber] = account.number();
             accountRow[ctDescription] = account.description();
             accountRow[ctOpeningDate] = account.openingDate().toString(Qt::ISODate);
-            //accountRow["currency"] = (file->currency(account.currencyId())).tradingSymbol();
-            accountRow[ctCurrencyName] = (file->currency(account.currencyId())).name();
+            accountRow[ctCurrencyName] = file->currency(account.currencyId()).name();
             accountRow[ctPayee] = file->payee(loan.payee()).name();
             accountRow[ctLoanAmount] = (loan.loanAmount() * xr).toString();
             accountRow[ctInterestRate] = (loan.interestRate(QDate::currentDate()) / MyMoneyMoney(100, 1) * xr).toString();
