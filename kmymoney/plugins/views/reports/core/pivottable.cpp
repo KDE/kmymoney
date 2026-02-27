@@ -82,6 +82,35 @@ void Debug::output(const QString& _text)
         qDebug("%s%s(): %s", qPrintable(m_sTabs), qPrintable(m_methodName), qPrintable(_text));
 }
 
+class BudgetMonth : public QDate
+{
+public:
+    BudgetMonth(const QDate date)
+        : QDate(date)
+    {
+    }
+
+    /**
+     * Returns @c true if this date is found in a previous month
+     * when compared to date @a b and @c false otherwise. The
+     * day of dates are not taken into account.
+     */
+    inline bool operator<(const QDate& b) const
+    {
+        return (year() < b.year()) || (year() == b.year() && month() < b.month());
+    }
+
+    /**
+     * Returns @c true if this date is found in a following month
+     * when compared to date @a b and @c false otherwise. The
+     * day of dates are not taken into account.
+     */
+    inline bool operator>(const QDate& b) const
+    {
+        return (year() > b.year()) || (year() == b.year() && month() > b.month());
+    }
+};
+
 PivotTable::PivotTable(const MyMoneyReport& _report, const ForecastConfig& cfg)
     : ReportTable(_report)
     , m_runningSumsCalculated(false)
@@ -863,16 +892,6 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
     return balance;
 }
 
-static inline bool beforeMonth(const QDate& a, const QDate& b)
-{
-    return (a.year() < b.year()) || (a.year() == b.year() && a.month() < b.month());
-}
-
-static inline bool afterMonth(const QDate& a, const QDate& b)
-{
-    return (a.year() > b.year()) || (a.year() == b.year() && a.month() > b.month());
-}
-
 void PivotTable::calculateBudgetMapping()
 {
     DEBUG_ENTER(Q_FUNC_INFO);
@@ -1013,12 +1032,13 @@ void PivotTable::calculateBudgetMapping()
                         while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
                             const QDate colDate = columnDate(column);
 
-                            if (afterMonth(budgetDate, colDate)) {
+                            const BudgetMonth budgetMonth(budgetDate);
+                            if (budgetMonth > colDate) {
                                 ++column;
                                 continue;
                             }
 
-                            if (beforeMonth(budgetDate, colDate)) {
+                            if (budgetMonth < colDate) {
                                 budgetDate = budgetDate.addMonths(1);
                                 continue;
                             }
@@ -1043,7 +1063,8 @@ void PivotTable::calculateBudgetMapping()
                     while (it_period != periods.end() && column < m_numColumns) {
                             const QDate periodStart = (*it_period).startDate();
                             const QDate colDate = columnDate(column);
-                            if (afterMonth(periodStart, colDate)) {
+                            const BudgetMonth periodStartMonth(periodStart);
+                            if (periodStartMonth > colDate) {
                                 ++column;
                             } else {
                                 switch (m_config.columnType()) {
