@@ -207,6 +207,7 @@ KMM_ICONS_EXPORT QIcon get(Icon icon)
         {Icon::Unlink, QStringLiteral("remove-link")},
         {Icon::Vault, QStringLiteral("plasmavault")},
         {Icon::FilterPin, QStringLiteral("pin")},
+        {Icon::ExchangeRate, QStringLiteral("view-financial-account-investment-security")},
     };
 
     initIconResources();

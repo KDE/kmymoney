@@ -92,6 +92,7 @@ enum class Icon { OpenDatabase, Link, Unlink, Reconcile, Split, Tip, Performance
                   InvestmentRemove, OnlinePriceUpdate,
                   Reverse, Visibility, NoVisibility,
                   SelectAll, Backup, Vault, FilterPin,
+                  ExchangeRate,
                 };
 // clang-format on
 
