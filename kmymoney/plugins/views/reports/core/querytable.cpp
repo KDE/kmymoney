@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iterator>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,12 +39,82 @@
 #include "mymoneytag.h"
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
-#include "pricemodel.h"
 #include "reportaccount.h"
 
 constexpr QChar tagSeparator = QChar(QChar::ParagraphSeparator);
 
 namespace reports {
+
+class ReportState
+{
+public:
+    bool hide_details;
+    bool use_summary;
+    bool use_transfers;
+    MyMoneyReport report;
+    // support for opening and closing balances
+    QMap<QString, MyMoneyAccount> accts;
+
+    // transaction processing state shared by the smaller processTransaction() helpers
+    ListTable::TableRow referenceRow;
+    ListTable::TableRow splitRow;
+    QList<ListTable::TableRow> pendingRows;
+    QString baseCurrency;
+    QString referenceCurrency;
+    QString referenceAccountFullName;
+    QString referenceMemo;
+    bool includeReferenceAccount = true;
+    bool transactionTextMatches = false;
+    bool loanSpecialCase = false;
+
+    ReportState(const MyMoneyReport& config)
+    {
+        report = MyMoneyReport(config);
+        report.setReportAllSplits(false);
+        report.setConsiderCategory(true);
+        report.setConsiderCategorySplits(true);
+
+        switch (config.rowType()) {
+        case eMyMoney::Report::RowType::Category:
+        case eMyMoney::Report::RowType::TopCategory:
+            use_summary = false;
+            use_transfers = report.isIncludingTransfers();
+            report.setTreatTransfersAsIncomeExpense(use_transfers);
+            hide_details = false;
+            break;
+        case eMyMoney::Report::RowType::Payee:
+            use_summary = false;
+            use_transfers = report.isIncludingTransfers();
+            report.setTreatTransfersAsIncomeExpense(use_transfers);
+            hide_details = (config.detailLevel() == eMyMoney::Report::DetailLevel::None);
+            break;
+        case eMyMoney::Report::RowType::Tag:
+            use_summary = false;
+            use_transfers = report.isIncludingTransfers();
+            report.setTreatTransfersAsIncomeExpense(use_transfers);
+            hide_details = (config.detailLevel() == eMyMoney::Report::DetailLevel::None);
+            break;
+        default:
+            use_summary = true;
+            use_transfers = true;
+            hide_details = (config.detailLevel() == eMyMoney::Report::DetailLevel::None);
+            break;
+        }
+    }
+
+    void reset()
+    {
+        referenceRow.clear();
+        splitRow.clear();
+        pendingRows.clear();
+        includeReferenceAccount = true;
+        transactionTextMatches = false;
+        loanSpecialCase = false;
+        referenceAccountFullName.clear();
+        referenceMemo.clear();
+        referenceCurrency.clear();
+    }
+};
 
 // ****************************************************************************
 //
@@ -540,584 +611,670 @@ void QueryTable::constructTotalRows()
 
 void QueryTable::constructTransactionTable()
 {
-    MyMoneyFile* file = MyMoneyFile::instance();
-
     // make sure we have all subaccounts of investment accounts
     includeInvestmentSubAccounts();
 
-    MyMoneyReport report(m_config);
-    report.setReportAllSplits(false);
-    report.setConsiderCategory(true);
-    report.setConsiderCategorySplits(true);
-
-    bool use_transfers;
-    bool use_summary;
-    bool hide_details;
-
-    switch (m_config.rowType()) {
-    case eMyMoney::Report::RowType::Category:
-    case eMyMoney::Report::RowType::TopCategory:
-        use_summary = false;
-        use_transfers = report.isIncludingTransfers();
-        report.setTreatTransfersAsIncomeExpense(use_transfers);
-        hide_details = false;
-        break;
-    case eMyMoney::Report::RowType::Payee:
-        use_summary = false;
-        use_transfers = report.isIncludingTransfers();
-        report.setTreatTransfersAsIncomeExpense(use_transfers);
-        hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
-        break;
-    case eMyMoney::Report::RowType::Tag:
-        use_summary = false;
-        use_transfers = report.isIncludingTransfers();
-        report.setTreatTransfersAsIncomeExpense(use_transfers);
-        hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
-        break;
-    default:
-        use_summary = true;
-        use_transfers = true;
-        hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
-        break;
-    }
-
-    // support for opening and closing balances
-    QMap<QString, MyMoneyAccount> accts;
+    ReportState state(m_config);
 
     // get all transactions for this report
     QList<MyMoneyTransaction> transactions;
-    file->transactionList(transactions, report);
+    MyMoneyFile::instance()->transactionList(transactions, state.report);
 
-    for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.cbegin(); it_transaction != transactions.cend(); ++it_transaction) {
-        TableRow qA, qS;
-        QList<TableRow> qStack;
-        QDate pd;
+    for (const auto& t : transactions) {
+        processTransaction(t, state);
+    }
 
-        auto addRow = [&](const TableRow& row) {
-            const auto tagIds = row[ctTag].split(tagSeparator, Qt::SkipEmptyParts);
-            auto qT = row;
-            if (m_config.rowType() == eMyMoney::Report::RowType::Tag) {
-                // if group by tags, we add the row for each tag we found
-                if (!tagIds.isEmpty()) {
-                    for (const auto& tagId : std::as_const(tagIds)) {
-                        qT[ctTag] = file->tag(tagId).name().simplified();
-                        m_rows += qT;
-                    }
-                } else {
-                    qT[ctTag] = i18n("[No Tag]");
-                    m_rows += qT;
-                }
-            } else {
-                // otherwise, we combine the tags into one list
-                QString tags;
-                for (const auto& tagId : std::as_const(tagIds)) {
-                    if (!tags.isEmpty()) {
-                        tags.append(QLatin1Char(','));
-                    }
-                    tags.append(file->tag(tagId).name().simplified());
-                }
-                if (tags.isEmpty()) {
-                    tags = i18n("[No Tag]");
-                }
-                qT[ctTag] = tags;
-                m_rows += qT;
-            }
-        };
+    addOpeningClosingBalances(state);
+}
 
-        qA[ctID] = qS[ctID] = (*it_transaction).id();
-        qA[ctEntryDate] = qS[ctEntryDate] = (*it_transaction).entryDate().toString(Qt::ISODate);
-        qA[ctPostDate] = qS[ctPostDate] = (*it_transaction).postDate().toString(Qt::ISODate);
-        qA[ctCommodity] = qS[ctCommodity] = (*it_transaction).commodity();
+QString QueryTable::splitCurrencyId(const MyMoneySplit& split)
+{
+    const auto file = MyMoneyFile::instance();
+    const ReportAccount splitAcc(split.accountId());
+    if (splitAcc.isInvest())
+        return file->account(file->account(split.accountId()).parentAccountId()).currencyId();
+    return file->account(split.accountId()).currencyId();
+}
 
-        pd = (*it_transaction).postDate();
-        qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
-        qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
+bool QueryTable::findTaxAccount(const QList<MyMoneySplit>& splits)
+{
+    QList<MyMoneySplit>::const_iterator it_split;
 
-        if (report.isConvertCurrency())
-            qA[ctCurrency] = qS[ctCurrency] = file->baseCurrency().id();
-        else
-            qA[ctCurrency] = qS[ctCurrency] = (*it_transaction).commodity();
+    bool foundTaxAccount = false;
+    for (it_split = splits.cbegin(); it_split != splits.cend(); ++it_split) {
+        ReportAccount splitAcc((*it_split).accountId());
+        // always put split with a "stock" account if it exists
+        if (splitAcc.isInvest())
+            break;
 
-        // to handle splits, we decide on which account to base the split
-        // (a reference point or point of view so to speak). here we take the
-        // first account that is a stock account or loan account (or the first account
-        // that is not an income or expense account if there is no stock or loan account)
-        // to be the account (qA) that will have the sub-item "split" entries. we add
-        // one transaction entry (qS) for each subsequent entry in the split.
+        // remember if we have found a tax related account
+        foundTaxAccount |= splitAcc.isInTaxReports();
+    }
+    return foundTaxAccount;
+}
 
-        const QList<MyMoneySplit>& splits = (*it_transaction).splits();
-        QList<MyMoneySplit>::const_iterator myBegin, it_split;
+// To handle splits, we decide on which account to base the split
+// (a reference point or point of view so to speak). here we take the
+// first account that is a stock account or loan account (or the first account
+// that is not an income or expense account if there is no stock or loan account)
+// to be the account (qA) that will have the sub-item "split" entries. we add
+// one transaction entry (qS) for each subsequent entry in the split.
+QList<MyMoneySplit>::const_iterator QueryTable::selectReferenceSplit(const QList<MyMoneySplit>& splits, const MyMoneyReport& report)
+{
+    QList<MyMoneySplit>::const_iterator myBegin = splits.cend();
+    QList<MyMoneySplit>::const_iterator it_split;
 
-        bool foundTaxAccount = false;
-        for (it_split = splits.cbegin(), myBegin = splits.cend(); it_split != splits.cend(); ++it_split) {
-            ReportAccount splitAcc((*it_split).accountId());
-            // always put split with a "stock" account if it exists
-            if (splitAcc.isInvest())
-                break;
+    // iterate to pick the best split
+    for (it_split = splits.cbegin(); it_split != splits.cend(); ++it_split) {
+        ReportAccount splitAcc((*it_split).accountId());
 
-            // remember if we have found a tax related account
-            foundTaxAccount |= splitAcc.isInTaxReports();
+        // highest priority: stock account
+        if (splitAcc.isInvest())
+            break;
 
-            // prefer to put splits with a "loan" account if it exists
-            if (splitAcc.isLoan())
-                myBegin = it_split;
-
-            if ((myBegin == splits.end()) && !splitAcc.isIncomeExpense()) {
-                // continue if split references an unselected account
-                if (report.includesAccount(splitAcc.id())) {
-                    myBegin = it_split;
-                }
-            }
-        }
-
-        // we can skip the transaction in case it is a tax report
-        // and the transaction does not reference any tax related
-        // account
-        if (report.isTax() && !foundTaxAccount) {
-            continue;
-        }
-
-        // select our "reference" split
-        if (it_split == splits.end()) {
-            it_split = myBegin;
-        } else {
+        // next: loan account
+        if (splitAcc.isLoan())
             myBegin = it_split;
-        }
 
-        // skip this transaction if we didn't find a valid base account - see the above description
-        // for the base account's description - if we don't find it avoid a crash by skipping the transaction
-        if (myBegin == splits.end())
-            continue;
-
-        // if the split is still unknown, use the first one. I have seen this
-        // happen with a transaction that has only a single split referencing an income or expense
-        // account and has an amount and value of 0. Such a transaction will fall through
-        // the above logic and leave 'it_split' pointing to splits.end() which causes the remainder
-        // of this to end in an infinite loop.
-        if (it_split == splits.end()) {
-            it_split = splits.begin();
-        }
-
-        // for "loan" reports, the loan transaction gets special treatment.
-        // the splits of a loan transaction are placed on one line in the
-        // reference (loan) account (qA). however, we process the matching
-        // split entries (qS) normally.
-
-        bool loan_special_case = false;
-        if (m_config.queryColumns() & eMyMoney::Report::QueryColumn::Loan) {
-            ReportAccount splitAcc((*it_split).accountId());
-            loan_special_case = splitAcc.isLoan();
-        }
-
-        bool include_me = true;
-        bool transaction_text = false; // indicates whether a text should be considered as a match for the transaction or for a split only
-        QString a_fullname;
-        QString a_memo;
-        int pass = 1;
-
-        QString myBeginCurrency;
-        QString baseCurrency = file->baseCurrency().id();
-
-        QMap<QString, MyMoneyMoney> xrMap; // container for conversion rates from given currency to myBeginCurrency
-
-        do {
-            MyMoneyMoney xr;
-            ReportAccount splitAcc((*it_split).accountId());
-            qA[csID] = qS[csID] = (*it_split).id();
-
-            QString splitCurrency;
-            if (splitAcc.isInvest())
-                splitCurrency = file->account(file->account((*it_split).accountId()).parentAccountId()).currencyId();
-            else
-                splitCurrency = file->account((*it_split).accountId()).currencyId();
-            if (it_split == myBegin)
-                myBeginCurrency = splitCurrency;
-
-            // get fraction for account
-            int fraction = splitAcc.currency().smallestAccountFraction();
-
-            // use base currency fraction if not initialized
-            if (fraction == -1)
-                fraction = file->baseCurrency().smallestAccountFraction();
-
-            QString institution = splitAcc.institutionId();
-            QString payee = (*it_split).payeeId();
-
-            const QList<QString> tagIdList = (*it_split).tagIdList();
-
-            // convert to base currency
-            if (m_config.isConvertCurrency()) {
-                xr = xrMap.value(splitCurrency, xr); // check if there is conversion rate to myBeginCurrency already stored...
-                if (xr == MyMoneyMoney()) // ...if not...
-                    xr = (*it_split).possiblyCalculatedPrice(); // ...take conversion rate to myBeginCurrency from split
-                else if (splitAcc.isInvest()) // if it's stock split...
-                    xr *= (*it_split).possiblyCalculatedPrice(); // ...multiply it by stock price stored in split
-
-                if (myBeginCurrency != baseCurrency) { // myBeginCurrency can differ from baseCurrency...
-                    MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency,
-                                                     (*it_transaction).postDate()); // ...so check conversion rate...
-                    if (price.isValid()) {
-                        xr *= price.rate(baseCurrency); // ...and multiply it by current price...
-                        qA[ctCurrency] = qS[ctCurrency] = baseCurrency;
-                    } else
-                        qA[ctCurrency] = qS[ctCurrency] = myBeginCurrency; // ...and set information about non-baseCurrency
-                }
-            } else if (splitAcc.isInvest())
-                xr = (*it_split).possiblyCalculatedPrice();
-            else {
-                // for the very first split we adjust the currency to the
-                // currency used for the split to make sure the right one
-                // is used in case it should differ from the transaction
-                // commodity. see bug #469195
-                if (myBegin == it_split) {
-                    qA[ctCurrency] = qS[ctCurrency] = splitCurrency;
-                }
-                xr = MyMoneyMoney::ONE;
-            }
-
-            qA[ctTag] = (*it_split).tagIdList().join(tagSeparator);
-
-            if (it_split == myBegin && splits.count() > 1) {
-                include_me = m_config.includes(splitAcc);
-                // in case the account is not part of the selection, it is an invest account
-                // and the investment only flag is off, we need to check if the parent account
-                // is part of the selection.
-                if (!include_me && splitAcc.isInvest() && !m_config.isInvestmentsOnly()) {
-                    const auto parentAccount = MyMoneyFile::instance()->account(splitAcc.parentAccountId());
-                    include_me = m_config.includes(parentAccount);
-                }
-                if (include_me)
-                    // track accts that will need opening and closing balances
-                    // FIXME in some cases it will show the opening and closing
-                    // balances but no transactions if the splits are all filtered out -- asoliverez
-                    accts.insert(splitAcc.id(), splitAcc);
-
-                qA[ctAccount] = splitAcc.name();
-                qA[ctAccountID] = splitAcc.id();
-                qA[ctTopAccount] = splitAcc.topParentName();
-
-                if (splitAcc.isInvest()) {
-                    // use the institution of the parent for stock accounts
-                    institution = splitAcc.parent().institutionId();
-                    const auto shares = (*it_split).shares();
-                    const auto stockPrice = (*it_split).possiblyCalculatedPrice();
-                    const auto rate = stockPrice.isZero() ? MyMoneyMoney::ONE : (xr / stockPrice).reduce();
-
-                    const int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
-                    if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && shares.isNegative())
-                        qA[ctAction] = i18nc("Investment action", "Sell shares");
-                    else
-                        qA[ctAction] = MyMoneySplit::actionI18nName((*it_split).action());
-                    qA[ctShares] = shares.isZero() ? QString() : shares.toString();
-                    qA[ctPrice] = shares.isZero() ? QString() : stockPrice.convertPrecision(pricePrecision).toString();
-                    qA.addSourceLine(ctPrice, __LINE__);
-                    qA[ctRate] = rate.convertPrecision(pricePrecision).toString();
-                    qA.addSourceLine(ctRate, __LINE__);
-
-                    qA[ctInvestAccount] = splitAcc.parent().name();
-                } else {
-                    qA[ctPrice].clear();
-                    qA[ctRate] = xr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
-                    qA.addSourceLine(ctRate, __LINE__);
-                }
-
-                a_fullname = splitAcc.fullName();
-                a_memo = (*it_split).memo();
-
-                transaction_text = m_config.match((*it_split));
-
-                qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-
-                qA[ctPayee] = payee.isEmpty() ? i18n("[Empty Payee]") : file->payee(payee).name().simplified();
-
-                qA[ctReconcileDate] = (*it_split).reconcileDate().toString(Qt::ISODate);
-                qA[ctReconcileFlag] = KMyMoneyUtils::reconcileStateToString((*it_split).reconcileFlag(), true);
-                qA[ctNumber] = (*it_split).number();
-
-                qA[ctMemo] = a_memo;
-
-                qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
-                qA.addSourceLine(ctValue, __LINE__);
-
-                qS[ctReconcileDate] = qA[ctReconcileDate];
-                qS[ctReconcileFlag] = qA[ctReconcileFlag];
-                qS[ctNumber] = qA[ctNumber];
-
-                qS[ctTopCategory] = splitAcc.topParentName();
-                qS[ctCategoryType] = i18n("Transfer");
-
-                // only include the configured accounts
-                if (include_me) {
-                    if (loan_special_case) {
-                        // put the principal amount in the "value" column and convert to lowest fraction
-                        qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
-                        qA.addSourceLine(ctValue, __LINE__);
-                        qA[ctRank] = FIRST_SPLIT_RANK;
-                        qA[ctSplit].clear();
-
-                    } else {
-                        if ((splits.count() > 2) && use_summary) {
-                            // add the "summarized" split transaction
-                            // this is the sub-total of the split detail
-                            // convert to lowest fraction
-                            qA[ctRank] = FIRST_SPLIT_RANK;
-                            qA[ctCategory] = i18n("[Split Transaction]");
-                            qA[ctTopCategory] = i18nc("Split transaction", "Split");
-                            qA[ctCategoryType] = i18nc("Split transaction", "Split");
-                            addRow(qA);
-                            if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
-                                m_containsNonBaseCurrency = true;
-                            }
-                        } else if (splits.count() > 2) {
-                            // this applies when the transaction has more than 2 splits
-                            // and each is shown separately
-                            switch (m_config.rowType()) {
-                            case eMyMoney::Report::RowType::Category:
-                            case eMyMoney::Report::RowType::TopCategory:
-                            case eMyMoney::Report::RowType::Tag:
-                            case eMyMoney::Report::RowType::Payee:
-                                if (splitAcc.isAssetLiability()) {
-                                    qA[ctValue] = ((*it_split).shares() * xr)
-                                                      .convert(fraction)
-                                                      .toString(); // needed for category reports, in case of multicurrency transaction it breaks it
-                                    qA.addSourceLine(ctValue, __LINE__);
-                                    // make sure we use the right currency of the category
-                                    // (will be ignored when converting to base currency)
-                                    qA[ctCurrency] = splitAcc.currencyId();
-                                }
-                                break;
-                            default:
-                                break;
-                            }
-                            qA[ctSplit].clear();
-                            qA[ctRank] = FIRST_SPLIT_RANK;
-                            // keep it for now and don't add the data immediately
-                            // as we may find a better match in one of the other splits
-                            qStack += qA;
-                        }
-                    }
-                }
-
-            } else {
-                if (include_me) {
-                    if (loan_special_case) {
-                        MyMoneyMoney value = -(((*it_split).shares() * xr).convert(fraction));
-
-                        if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)) {
-                            // put the amortization in the "payment" column. Since the split for
-                            // the loan account is processed as the first split, this is the opposite
-                            // side of the transfer and is treated as payment
-                            MyMoneyMoney n0 = MyMoneyMoney(qA[ctPayment]);
-                            qA[ctPayment] = (n0 + value).toString();
-                        } else if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
-                            // put the interest in the "interest" column and convert to lowest fraction
-                            qA[ctInterest] = value.toString();
-                        } else {
-                            // accumulate everything else in the "fees" column if
-                            // the split references an income or expense account
-                            if (splitAcc.isIncomeExpense()) {
-                                MyMoneyMoney n0 = MyMoneyMoney(qA[ctFees]);
-                                qA[ctFees] = (n0 + value).toString();
-                            } else {
-                                MyMoneyMoney n0 = MyMoneyMoney(qA[ctPayment]);
-                                qA[ctPayment] = (n0 + value).toString();
-                            }
-                        }
-                        // we don't add qA here for a loan transaction. we'll add one
-                        // qA after all of the split components have been processed.
-                        // (see below)
-
-                    }
-
-                    //--- special case to hide split transaction details
-                    else if (hide_details && (splits.count() > 2)) {
-                        // essentially, don't add any qA entries
-                    }
-                    //--- default case includes all transaction details
-                    else {
-                        // this is when the splits are going to be shown as children of the main split
-                        if ((splits.count() > 2) && use_summary) {
-                            qA[ctValue].clear();
-                            qA.addSourceLine(ctValue, __LINE__);
-
-                            // convert to lowest fraction
-                            qA[ctSplit] = (-(*it_split).shares() * xr).convert(fraction).toString();
-                            qA[ctRank] = SECONDARY_SPLIT_RANK;
-                        } else {
-                            // this applies when the transaction has only 2 splits, or each split is going to be
-                            // shown separately, eg. transactions by category
-                            switch (m_config.rowType()) {
-                            case eMyMoney::Report::RowType::Category:
-                            case eMyMoney::Report::RowType::TopCategory:
-                            case eMyMoney::Report::RowType::Tag:
-                            case eMyMoney::Report::RowType::Payee:
-                                if (splitAcc.isIncomeExpense()) {
-                                    // if the currency of the split is different from the currency of the main split,
-                                    // then convert to the currency of the main split
-                                    MyMoneyMoney ieXr(xr);
-                                    if (m_config.isConvertCurrency() && splitAcc.currency().id() != baseCurrency) {
-                                        ieXr = (xr * splitAcc.foreignCurrencyPrice(baseCurrency, (*it_transaction).postDate())).reduce();
-                                        qA[ctCurrency] = file->account((*myBegin).accountId()).currencyId();
-                                    } else {
-                                        // make sure we use the right currency of the category
-                                        // (will be ignored when converting to base currency)
-                                        qA[ctCurrency] = splitAcc.currencyId();
-                                    }
-                                    qA[ctValue] = ((-(*it_split).shares()) * ieXr).convert(fraction).toString();
-                                    qA.addSourceLine(ctValue, __LINE__);
-                                }
-                                break;
-                            default:
-                                break;
-                            }
-                            qA[ctSplit].clear();
-                            qA[ctRank] = FIRST_SPLIT_RANK;
-                        }
-
-                        qA[ctMemo] = (*it_split).memo();
-
-                        if (report.isConvertCurrency())
-                            qS[ctCurrency] = file->baseCurrency().id();
-                        else
-                            qS[ctCurrency] = splitAcc.currency().id();
-
-                        if (!splitAcc.isIncomeExpense()) {
-                            qA[ctCategory] = ((*it_split).shares().isNegative()) ? i18n("Transfer from %1", splitAcc.fullName())
-                                                                                 : i18n("Transfer to %1", splitAcc.fullName());
-                            qA[ctTopCategory] = splitAcc.topParentName();
-                            qA[ctCategoryType] = i18n("Transfer");
-                        } else {
-                            qA[ctCategory] = splitAcc.fullName();
-                            qA[ctTopCategory] = splitAcc.topParentName();
-                            qA[ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
-                        }
-
-                        if (splits.count() > 1) {
-                            if (use_transfers || (splitAcc.isIncomeExpense() && m_config.includes(splitAcc))) {
-                                // if it matches the text of the main split of the transaction or
-                                // it matches this particular split, include it
-                                // otherwise, skip it
-                                // if the filter is "does not contain" exclude the split if it does not match
-                                // even it matches the whole split
-                                if ((m_config.isInvertingText() && m_config.match((*it_split)))
-                                    || (!m_config.isInvertingText() && (transaction_text || m_config.match((*it_split))))) {
-                                    addRow(qA);
-                                    if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
-                                        m_containsNonBaseCurrency = true;
-                                    }
-
-                                    // we don't need the stacked data
-                                    qStack.clear();
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if ((m_config.includes(splitAcc) && use_transfers && !(splitAcc.isInvest() && include_me))
-                    || splits.count() == 1) { // otherwise stock split is displayed twice in report
-                    if (!splitAcc.isIncomeExpense()) {
-                        // Add/Remove shares
-                        if (splitAcc.isInvest()) {
-                            qS[ctShares] = (*it_split).shares().convert(fraction).toString();
-                        }
-                        if (splitAcc.isInvest()) {
-                            const auto stockPrice = (*it_split).possiblyCalculatedPrice();
-                            const auto rate = stockPrice.isZero() ? MyMoneyMoney::ONE : (xr / stockPrice).reduce();
-                            qS[ctPrice] = stockPrice.convertPrecision(splitAcc.currency().pricePrecision()).toString();
-                            qS.addSourceLine(ctPrice, __LINE__);
-                            qS[ctRate] = rate.convertPrecision(splitAcc.currency().pricePrecision()).toString();
-                        } else {
-                            qS[ctPrice].clear();
-                            qS[ctRate] = xr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
-                        }
-                        qS.addSourceLine(ctRate, __LINE__);
-
-                        // multiply by currency and convert to lowest fraction
-                        qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
-                        qS.addSourceLine(ctValue, __LINE__);
-
-                        // also keep the value in the "payment" column for loan payment reports
-                        qS[ctPayment] = qS[ctValue];
-
-                        qS[ctRank] = FIRST_SPLIT_RANK;
-
-                        qS[ctAccount] = splitAcc.name();
-                        qS[ctAccountID] = splitAcc.id();
-                        qS[ctTopAccount] = splitAcc.topParentName();
-
-                        if (splits.count() > 1) {
-                            qS[ctCategory] = ((*it_split).shares().isNegative()) ? i18n("Transfer to %1", a_fullname) : i18n("Transfer from %1", a_fullname);
-                        } else if ((*it_split).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
-                            qS[ctCategory] = i18n("*** UNASSIGNED ***");
-                        }
-                        qS[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-
-                        qS[ctMemo] = (*it_split).memo().isEmpty() ? a_memo : (*it_split).memo();
-
-                        qS[ctTag] = tagIdList.join(tagSeparator);
-
-                        qS[ctPayee] = payee.isEmpty() ? qA[ctPayee] : file->payee(payee).name().simplified();
-
-                        // check the specific split against the filter for text and amount
-                        // TODO this should be done at the engine, but I have no clear idea how -- asoliverez
-                        // if the filter is "does not contain" exclude the split if it does not match
-                        // even it matches the whole split
-                        if ((m_config.isInvertingText() && m_config.match((*it_split)))
-                            || (!m_config.isInvertingText() && (transaction_text || m_config.match((*it_split))))) {
-                            addRow(qS);
-                            qStack.clear();
-                            if (!m_containsNonBaseCurrency && qS[ctCurrency] != file->baseCurrency().id()) {
-                                m_containsNonBaseCurrency = true;
-                            }
-
-                            // track accts that will need opening and closing balances
-                            accts.insert(splitAcc.id(), splitAcc);
-                        }
-                    }
-                }
-            }
-
-            ++it_split;
-
-            // look for wrap-around
-            if (it_split == splits.end())
-                it_split = splits.begin();
-
-            // but terminate if this transaction has only a single split
-            if (splits.count() < 2)
-                break;
-
-            // check if there have been more passes than there are splits
-            // this is to prevent infinite loops in cases of data inconsistency -- asoliverez
-            ++pass;
-            if (pass > splits.count())
-                break;
-
-        } while (it_split != myBegin);
-
-        if (loan_special_case) {
-            addRow(qA);
-            if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
-                m_containsNonBaseCurrency = true;
-            }
-            qStack.clear();
-        }
-        // check if the stack contains a foreign currency
-        for (const auto& row : std::as_const(qStack)) {
-            if (!m_containsNonBaseCurrency && row[ctCurrency] != file->baseCurrency().id()) {
-                m_containsNonBaseCurrency = true;
-                break;
-            }
-        }
-
-        // add any pending rows
-        for (const auto& row : std::as_const(qStack)) {
-            addRow(row);
+        // fallback: any non-income/expense account included in report
+        if ((myBegin == splits.end()) && !splitAcc.isIncomeExpense()) {
+            if (report.includesAccount(splitAcc.id()))
+                myBegin = it_split;
         }
     }
 
-    // now run through our accts list and add opening and closing balances
+    // finalize reference split
+    if (it_split == splits.end()) {
+        it_split = myBegin;
+    } else {
+        myBegin = it_split;
+    }
+
+    // no valid base account found
+    if (myBegin == splits.end())
+        return splits.end();
+
+    // edge case: single split with zero amount/value
+    if (it_split == splits.end()) {
+        it_split = splits.begin();
+    }
+
+    return it_split;
+}
+
+void QueryTable::addRow(const ListTable::TableRow& row)
+{
+    const MyMoneyFile* file = MyMoneyFile::instance();
+    const auto tagIds = row[ctTag].split(tagSeparator, Qt::SkipEmptyParts);
+    auto qT = row;
+    if (m_config.rowType() == eMyMoney::Report::RowType::Tag) {
+        // if group by tags, we add the row for each tag we found
+        if (!tagIds.isEmpty()) {
+            for (const auto& tagId : qAsConst(tagIds)) {
+                qT[ctTag] = file->tag(tagId).name().simplified();
+                m_rows += qT;
+            }
+        } else {
+            qT[ctTag] = i18n("[No Tag]");
+            m_rows += qT;
+        }
+    } else {
+        // otherwise, we combine the tags into one list
+        QString tags;
+        for (const auto& tagId : qAsConst(tagIds)) {
+            if (!tags.isEmpty()) {
+                tags.append(QLatin1Char(','));
+            }
+            tags.append(file->tag(tagId).name().simplified());
+        }
+        if (tags.isEmpty()) {
+            tags = i18n("[No Tag]");
+        }
+        qT[ctTag] = tags;
+        m_rows += qT;
+    }
+}
+
+bool QueryTable::includeReferenceSplitAccount(const ReportAccount& splitAcc) const
+{
+    bool include = m_config.includes(splitAcc);
+
+    // In case the account is not part of the selection, it is an invest account
+    // and the investment only flag is off, we need to check if the parent account
+    // is part of the selection.
+    if (!include && splitAcc.isInvest() && !m_config.isInvestmentsOnly()) {
+        const auto parentAccount = MyMoneyFile::instance()->account(splitAcc.parentAccountId());
+        include = m_config.includes(parentAccount);
+    }
+
+    return include;
+}
+
+bool QueryTable::splitMatchesTransactionFilter(const MyMoneySplit& split, bool transactionTextMatches) const
+{
+    // Check the specific split against the filter for text and amount.
+    // TODO this should be done at the engine, but I have no clear idea how -- asoliverez
+    // If the filter is "does not contain" exclude the split if it does not match
+    // even it matches the whole split.
+    return (m_config.isInvertingText() && m_config.match(split)) || (!m_config.isInvertingText() && (transactionTextMatches || m_config.match(split)));
+}
+
+void QueryTable::updateNonBaseCurrencyStatus(const TableRow& row)
+{
+    const MyMoneyFile* file = MyMoneyFile::instance();
+
+    if (!m_containsNonBaseCurrency && row[ctCurrency] != file->baseCurrency().id()) {
+        m_containsNonBaseCurrency = true;
+    }
+}
+
+void QueryTable::addTransactionRow(const TableRow& row)
+{
+    addRow(row);
+    updateNonBaseCurrencyStatus(row);
+}
+
+void QueryTable::setupReferenceSplitRow(const MyMoneySplit& split,
+                                        const ReportAccount& splitAcc,
+                                        const MyMoneyMoney& xr,
+                                        const MyMoneyMoney& rateXr,
+                                        const MyMoneyMoney& valueXr,
+                                        int fraction,
+                                        ReportState& state)
+{
+    MyMoneyFile* file = MyMoneyFile::instance();
+    TableRow& qA = state.referenceRow;
+    TableRow& qS = state.splitRow;
+    QString institution = splitAcc.institutionId();
+    const QString payee = split.payeeId();
+
+    state.includeReferenceAccount = includeReferenceSplitAccount(splitAcc);
+    if (state.includeReferenceAccount) {
+        // track accts that will need opening and closing balances
+        // FIXME in some cases it will show the opening and closing
+        // balances but no transactions if the splits are all filtered out -- asoliverez
+        state.accts.insert(splitAcc.id(), splitAcc);
+    }
+
+    qA[ctAccount] = splitAcc.name();
+    qA[ctAccountID] = splitAcc.id();
+    qA[ctTopAccount] = splitAcc.topParentName();
+
+    if (splitAcc.isInvest()) {
+        // use the institution of the parent for stock accounts
+        institution = splitAcc.parent().institutionId();
+        const auto shares = split.shares();
+        const auto stockPrice = split.possiblyCalculatedPrice();
+        const auto rate = stockPrice.isZero() ? MyMoneyMoney::ONE : (xr / stockPrice).reduce();
+
+        const int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
+        if ((split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && shares.isNegative())
+            qA[ctAction] = i18nc("Investment action", "Sell shares");
+        else
+            qA[ctAction] = MyMoneySplit::actionI18nName(split.action());
+        qA[ctShares] = shares.isZero() ? QString() : shares.toString();
+        qA[ctPrice] = shares.isZero() ? QString() : stockPrice.convertPrecision(pricePrecision).toString();
+        qA.addSourceLine(ctPrice, __LINE__);
+        qA[ctRate] = rate.convertPrecision(pricePrecision).toString();
+        qA.addSourceLine(ctRate, __LINE__);
+
+        qA[ctInvestAccount] = splitAcc.parent().name();
+    } else {
+        qA[ctPrice].clear();
+        qA[ctRate] = rateXr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+        qA.addSourceLine(ctRate, __LINE__);
+    }
+
+    state.referenceAccountFullName = splitAcc.fullName();
+    state.referenceMemo = split.memo();
+    state.transactionTextMatches = m_config.match(split);
+
+    qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
+
+    qA[ctPayee] = payee.isEmpty() ? i18n("[Empty Payee]") : file->payee(payee).name().simplified();
+
+    qA[ctReconcileDate] = split.reconcileDate().toString(Qt::ISODate);
+    qA[ctReconcileFlag] = KMyMoneyUtils::reconcileStateToString(split.reconcileFlag(), true);
+    qA[ctNumber] = split.number();
+
+    qA[ctMemo] = state.referenceMemo;
+
+    qA[ctValue] = (split.shares() * valueXr).convert(fraction).toString();
+    qA.addSourceLine(ctValue, __LINE__);
+
+    qS[ctReconcileDate] = qA[ctReconcileDate];
+    qS[ctReconcileFlag] = qA[ctReconcileFlag];
+    qS[ctNumber] = qA[ctNumber];
+
+    qS[ctTopCategory] = splitAcc.topParentName();
+    qS[ctCategoryType] = i18n("Transfer");
+}
+
+void QueryTable::processIncludedReferenceSplit(const MyMoneySplit& split,
+                                               const ReportAccount& splitAcc,
+                                               const MyMoneyMoney& valueXr,
+                                               int fraction,
+                                               int splitCount,
+                                               ReportState& state)
+{
+    TableRow& qA = state.referenceRow;
+
+    if (!state.includeReferenceAccount) {
+        return;
+    }
+
+    if (state.loanSpecialCase) {
+        // put the principal amount in the "value" column and convert to lowest fraction
+        qA[ctValue] = (split.shares() * valueXr).convert(fraction).toString();
+        qA.addSourceLine(ctValue, __LINE__);
+        qA[ctRank] = FIRST_SPLIT_RANK;
+        qA[ctSplit].clear();
+        return;
+    }
+
+    if ((splitCount > 2) && state.use_summary) {
+        // add the "summarized" split transaction
+        // this is the sub-total of the split detail
+        qA[ctRank] = FIRST_SPLIT_RANK;
+        qA[ctCategory] = i18n("[Split Transaction]");
+        qA[ctTopCategory] = i18nc("Split transaction", "Split");
+        qA[ctCategoryType] = i18nc("Split transaction", "Split");
+        addTransactionRow(qA);
+    } else if (splitCount > 2) {
+        // this applies when the transaction has more than 2 splits
+        // and each is shown separately
+        switch (m_config.rowType()) {
+        case eMyMoney::Report::RowType::Category:
+        case eMyMoney::Report::RowType::TopCategory:
+        case eMyMoney::Report::RowType::Tag:
+        case eMyMoney::Report::RowType::Payee:
+            if (splitAcc.isAssetLiability()) {
+                qA[ctValue] =
+                    (split.shares() * valueXr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
+                qA.addSourceLine(ctValue, __LINE__);
+                // make sure we use the right currency of the category
+                // (will be ignored when converting to base currency)
+                qA[ctCurrency] = splitAcc.currencyId();
+            }
+            break;
+        default:
+            break;
+        }
+        qA[ctSplit].clear();
+        qA[ctRank] = FIRST_SPLIT_RANK;
+        // keep it for now and don't add the data immediately
+        // as we may find a better match in one of the other splits
+        state.pendingRows += qA;
+    }
+}
+
+void QueryTable::processFurtherSplit(const MyMoneyTransaction& t,
+                                     const MyMoneySplit& referenceSplit,
+                                     const MyMoneySplit& split,
+                                     const ReportAccount& splitAcc,
+                                     const MyMoneyMoney& xr,
+                                     const MyMoneyMoney& valueXr,
+                                     int fraction,
+                                     int splitCount,
+                                     ReportState& state)
+{
+    MyMoneyFile* file = MyMoneyFile::instance();
+    TableRow& qA = state.referenceRow;
+    TableRow& qS = state.splitRow;
+
+    if (!state.includeReferenceAccount) {
+        return;
+    }
+
+    if (state.loanSpecialCase) {
+        MyMoneyMoney value = -((split.shares() * valueXr).convert(fraction));
+
+        if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)) {
+            // put the amortization in the "payment" column. Since the split for
+            // the loan account is processed as the first split, this is the opposite
+            // side of the transfer and is treated as payment
+            MyMoneyMoney n0 = MyMoneyMoney(qA[ctPayment]);
+            qA[ctPayment] = (n0 + value).toString();
+        } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
+            // put the interest in the "interest" column and convert to lowest fraction
+            qA[ctInterest] = value.toString();
+        } else {
+            // accumulate everything else in the "fees" column if
+            // the split references an income or expense account
+            if (splitAcc.isIncomeExpense()) {
+                MyMoneyMoney n0 = MyMoneyMoney(qA[ctFees]);
+                qA[ctFees] = (n0 + value).toString();
+            } else {
+                MyMoneyMoney n0 = MyMoneyMoney(qA[ctPayment]);
+                qA[ctPayment] = (n0 + value).toString();
+            }
+        }
+        // we don't add qA here for a loan transaction. we'll add one
+        // qA after all of the split components have been processed.
+        return;
+    }
+
+    // special case to hide split transaction details
+    if (state.hide_details && (splitCount > 2)) {
+        // essentially, don't add any qA entries
+        return;
+    }
+
+    // default case includes all transaction details
+    // this is when the splits are going to be shown as children of the main split
+    if ((splitCount > 2) && state.use_summary) {
+        qA[ctValue].clear();
+        qA.addSourceLine(ctValue, __LINE__);
+
+        // convert to lowest fraction
+        qA[ctSplit] = (-split.shares() * valueXr).convert(fraction).toString();
+        qA[ctRank] = SECONDARY_SPLIT_RANK;
+    } else {
+        // this applies when the transaction has only 2 splits, or each split is going to be
+        // shown separately, eg. transactions by category
+        switch (m_config.rowType()) {
+        case eMyMoney::Report::RowType::Category:
+        case eMyMoney::Report::RowType::TopCategory:
+        case eMyMoney::Report::RowType::Tag:
+        case eMyMoney::Report::RowType::Payee:
+            if (splitAcc.isIncomeExpense()) {
+                // if the currency of the split is different from the currency of the main split,
+                // then convert to the currency of the main split
+                MyMoneyMoney ieXr(valueXr);
+                if (m_config.isConvertCurrency() && splitAcc.currency().id() != state.baseCurrency) {
+                    ieXr = (xr * splitAcc.foreignCurrencyPrice(state.baseCurrency, t.postDate())).reduce();
+                    qA[ctCurrency] = file->account(referenceSplit.accountId()).currencyId();
+                } else {
+                    // make sure we use the right currency of the category
+                    // (will be ignored when converting to base currency)
+                    qA[ctCurrency] = splitAcc.currencyId();
+                }
+                qA[ctValue] = ((-split.shares()) * ieXr).convert(fraction).toString();
+                qA.addSourceLine(ctValue, __LINE__);
+            }
+            break;
+        default:
+            break;
+        }
+        qA[ctSplit].clear();
+        qA[ctRank] = FIRST_SPLIT_RANK;
+    }
+
+    qA[ctMemo] = split.memo();
+
+    if (state.report.isConvertCurrency())
+        qS[ctCurrency] = file->baseCurrency().id();
+    else
+        qS[ctCurrency] = splitAcc.currency().id();
+
+    if (!splitAcc.isIncomeExpense()) {
+        qA[ctCategory] = split.shares().isNegative() ? i18n("Transfer from %1", splitAcc.fullName()) : i18n("Transfer to %1", splitAcc.fullName());
+        qA[ctTopCategory] = splitAcc.topParentName();
+        qA[ctCategoryType] = i18n("Transfer");
+    } else {
+        qA[ctCategory] = splitAcc.fullName();
+        qA[ctTopCategory] = splitAcc.topParentName();
+        qA[ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
+    }
+
+    if (splitCount > 1) {
+        if (state.use_transfers || (splitAcc.isIncomeExpense() && m_config.includes(splitAcc))) {
+            // if it matches the text of the main split of the transaction or
+            // it matches this particular split, include it; otherwise, skip it
+            if (splitMatchesTransactionFilter(split, state.transactionTextMatches)) {
+                addTransactionRow(qA);
+
+                // we don't need the stacked data
+                state.pendingRows.clear();
+            }
+        }
+    }
+}
+
+void QueryTable::processTransferSplit(const MyMoneySplit& split,
+                                      const ReportAccount& splitAcc,
+                                      const MyMoneyMoney& xr,
+                                      const MyMoneyMoney& rateXr,
+                                      const MyMoneyMoney& valueXr,
+                                      int fraction,
+                                      int splitCount,
+                                      const QString& institution,
+                                      const QString& payee,
+                                      const QList<QString>& tagIdList,
+                                      ReportState& state)
+{
+    MyMoneyFile* file = MyMoneyFile::instance();
+    TableRow& qS = state.splitRow;
+
+    if (!((m_config.includes(splitAcc) && state.use_transfers && !(splitAcc.isInvest() && state.includeReferenceAccount)) || splitCount == 1)) {
+        return;
+    }
+
+    // otherwise stock split is displayed twice in report
+    if (splitAcc.isIncomeExpense()) {
+        return;
+    }
+
+    // Add/Remove shares
+    if (splitAcc.isInvest()) {
+        qS[ctShares] = split.shares().convert(fraction).toString();
+    }
+    if (splitAcc.isInvest()) {
+        const auto stockPrice = split.possiblyCalculatedPrice();
+        const auto rate = stockPrice.isZero() ? MyMoneyMoney::ONE : (xr / stockPrice).reduce();
+        qS[ctPrice] = stockPrice.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+        qS.addSourceLine(ctPrice, __LINE__);
+        qS[ctRate] = rate.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+    } else {
+        qS[ctPrice].clear();
+        qS[ctRate] = rateXr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+    }
+    qS.addSourceLine(ctRate, __LINE__);
+
+    // multiply by currency and convert to lowest fraction
+    qS[ctValue] = (split.shares() * valueXr).convert(fraction).toString();
+    qS.addSourceLine(ctValue, __LINE__);
+
+    // also keep the value in the "payment" column for loan payment reports
+    qS[ctPayment] = qS[ctValue];
+
+    qS[ctRank] = FIRST_SPLIT_RANK;
+
+    qS[ctAccount] = splitAcc.name();
+    qS[ctAccountID] = splitAcc.id();
+    qS[ctTopAccount] = splitAcc.topParentName();
+
+    if (splitCount > 1) {
+        qS[ctCategory] = split.shares().isNegative() ? i18n("Transfer to %1", state.referenceAccountFullName)
+                                                     : i18n("Transfer from %1", state.referenceAccountFullName);
+    } else if (split.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
+        qS[ctCategory] = i18n("*** UNASSIGNED ***");
+    }
+    qS[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
+
+    qS[ctMemo] = split.memo().isEmpty() ? state.referenceMemo : split.memo();
+
+    qS[ctTag] = tagIdList.join(tagSeparator);
+
+    qS[ctPayee] = payee.isEmpty() ? state.referenceRow[ctPayee] : file->payee(payee).name().simplified();
+
+    if (splitMatchesTransactionFilter(split, state.transactionTextMatches)) {
+        addTransactionRow(qS);
+        state.pendingRows.clear();
+
+        // track accts that will need opening and closing balances
+        state.accts.insert(splitAcc.id(), splitAcc);
+    }
+}
+
+void QueryTable::addPendingTransactionRows(ReportState& state)
+{
+    if (state.loanSpecialCase) {
+        addTransactionRow(state.referenceRow);
+        state.pendingRows.clear();
+    }
+
+    // check if the stack contains a foreign currency
+    for (const auto& row : std::as_const(state.pendingRows)) {
+        updateNonBaseCurrencyStatus(row);
+    }
+
+    // add any pending rows
+    for (const auto& row : std::as_const(state.pendingRows)) {
+        addRow(row);
+    }
+}
+
+void QueryTable::processTransaction(const MyMoneyTransaction& t, ReportState& state)
+{
+    const MyMoneyFile* file = MyMoneyFile::instance();
+    const MyMoneyReport& report = state.report;
+    state.reset();
+
+    TableRow& qA = state.referenceRow;
+    TableRow& qS = state.splitRow;
+
+    qA[ctID] = qS[ctID] = t.id();
+    qA[ctEntryDate] = qS[ctEntryDate] = t.entryDate().toString(Qt::ISODate);
+    qA[ctPostDate] = qS[ctPostDate] = t.postDate().toString(Qt::ISODate);
+    qA[ctCommodity] = qS[ctCommodity] = t.commodity();
+
+    const auto postDate = t.postDate();
+    qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(postDate.year(), postDate.month(), 1).toString(Qt::ISODate));
+    qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", postDate.addDays(1 - postDate.dayOfWeek()).toString(Qt::ISODate));
+
+    state.baseCurrency = report.isConvertCurrency() ? file->baseCurrency().id() : t.commodity();
+    qA[ctCurrency] = qS[ctCurrency] = state.baseCurrency;
+
+    const QList<MyMoneySplit>& splits = t.splits();
+
+    // we can skip the transaction in case it is a tax report
+    // and the transaction does not reference any tax related
+    // account
+    if (report.isTax() && !findTaxAccount(splits)) {
+        return;
+    }
+
+    auto refSplitIt = selectReferenceSplit(splits, report);
+
+    // skip this transaction if we didn't find a valid base account - see the above description
+    // for the base account's description - if we don't find it avoid a crash by skipping the transaction
+    if (refSplitIt == splits.end()) {
+        return;
+    }
+
+    const auto referenceSplitIndex = std::distance(splits.cbegin(), refSplitIt);
+    const auto splitCount = splits.count();
+    const auto& referenceSplit = splits.at(referenceSplitIndex);
+
+    // for "loan" reports, the loan transaction gets special treatment.
+    // the splits of a loan transaction are placed on one line in the
+    // reference (loan) account (qA). however, we process the matching
+    // split entries (qS) normally.
+    if (m_config.queryColumns() & eMyMoney::Report::QueryColumn::Loan) {
+        ReportAccount splitAcc(referenceSplit.accountId());
+        state.loanSpecialCase = splitAcc.isLoan();
+    }
+
+    auto transactionToBaseRate = MyMoneyMoney::ONE;
+    auto haveTransactionToBaseRate = true;
+    if (m_config.isConvertCurrency() && t.commodity() != file->baseCurrency().id()) {
+        haveTransactionToBaseRate = false;
+        for (const auto& rateSplit : splits) {
+            if (splitCurrencyId(rateSplit) == file->baseCurrency().id() && !rateSplit.value().isZero() && !rateSplit.shares().isZero()) {
+                transactionToBaseRate = (rateSplit.shares() / rateSplit.value()).reduce();
+                haveTransactionToBaseRate = true;
+                break;
+            }
+        }
+        if (!haveTransactionToBaseRate) {
+            const auto price = file->price(t.commodity(), file->baseCurrency().id(), t.postDate());
+            if (price.isValid()) {
+                transactionToBaseRate = price.rate(file->baseCurrency().id()).reduce();
+                haveTransactionToBaseRate = true;
+            }
+        }
+    }
+
+    for (int splitOffset = 0; splitOffset < splitCount; ++splitOffset) {
+        MyMoneyMoney xr;
+        const auto splitIndex = (referenceSplitIndex + splitOffset) % splitCount;
+        const MyMoneySplit& split = splits.at(splitIndex);
+        const bool isReferenceSplit = (splitOffset == 0);
+        ReportAccount splitAcc(split.accountId());
+        qA[csID] = qS[csID] = split.id();
+
+        QString splitCurrency = splitCurrencyId(split);
+        if (isReferenceSplit)
+            state.referenceCurrency = splitCurrency;
+
+        // get fraction for account
+        int fraction = splitAcc.currency().smallestAccountFraction();
+
+        // use base currency fraction if not initialized
+        if (fraction == -1)
+            fraction = file->baseCurrency().smallestAccountFraction();
+
+        QString institution = splitAcc.institutionId();
+        QString payee = split.payeeId();
+
+        const QList<QString> tagIdList = split.tagIdList();
+
+        // convert to base currency
+        if (m_config.isConvertCurrency()) {
+            xr = split.possiblyCalculatedPrice();
+
+            if (state.referenceCurrency != state.baseCurrency) { // referenceCurrency can differ from baseCurrency...
+                MyMoneyPrice price = file->price(state.referenceCurrency, state.baseCurrency,
+                                                 t.postDate()); // ...so check conversion rate...
+                if (price.isValid()) {
+                    xr *= price.rate(state.baseCurrency); // ...and multiply it by current price...
+                    qA[ctCurrency] = qS[ctCurrency] = state.baseCurrency;
+                } else
+                    qA[ctCurrency] = qS[ctCurrency] = state.referenceCurrency; // ...and set information about non-baseCurrency
+            }
+        } else if (splitAcc.isInvest())
+            xr = split.possiblyCalculatedPrice();
+        else {
+            // for the very first split we adjust the currency to the
+            // currency used for the split to make sure the right one
+            // is used in case it should differ from the transaction
+            // commodity. see bug #469195
+            if (isReferenceSplit) {
+                qA[ctCurrency] = qS[ctCurrency] = splitCurrency;
+            }
+            xr = MyMoneyMoney::ONE;
+        }
+
+        auto rateXr = xr;
+        auto valueXr = xr;
+        if (m_config.isConvertCurrency() && haveTransactionToBaseRate && !split.value().isZero()) {
+            if (t.commodity() != file->baseCurrency().id()) {
+                rateXr = transactionToBaseRate;
+            }
+            if (!split.shares().isZero()) {
+                valueXr = (split.value() * transactionToBaseRate / split.shares()).reduce();
+            }
+        }
+
+        qA[ctTag] = split.tagIdList().join(tagSeparator);
+
+        if (isReferenceSplit && splitCount > 1) {
+            setupReferenceSplitRow(split, splitAcc, xr, rateXr, valueXr, fraction, state);
+            processIncludedReferenceSplit(split, splitAcc, valueXr, fraction, splitCount, state);
+        } else {
+            processFurtherSplit(t, referenceSplit, split, splitAcc, xr, valueXr, fraction, splitCount, state);
+            processTransferSplit(split, splitAcc, xr, rateXr, valueXr, fraction, splitCount, institution, payee, tagIdList, state);
+        }
+    }
+
+    addPendingTransactionRows(state);
+}
+
+// Run through our accts list and add opening and closing balances
+void QueryTable::addOpeningClosingBalances(ReportState& state)
+{
+    MyMoneyFile* file = MyMoneyFile::instance();
 
     switch (m_config.rowType()) {
     case eMyMoney::Report::RowType::Account:
@@ -1135,12 +1292,12 @@ void QueryTable::constructTransactionTable()
 
     QDate startDate, endDate;
 
-    report.validDateRange(startDate, endDate);
+    state.report.validDateRange(startDate, endDate);
     QString strStartDate = startDate.toString(Qt::ISODate);
     QString strEndDate = endDate.toString(Qt::ISODate);
     startDate = startDate.addDays(-1);
 
-    for (auto it_account = accts.cbegin(); it_account != accts.cend(); ++it_account) {
+    for (auto it_account = state.accts.cbegin(); it_account != state.accts.cend(); ++it_account) {
         TableRow qA;
 
         ReportAccount account(*it_account);
