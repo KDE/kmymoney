@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-23 03:33+0000\n"
+"POT-Creation-Date: 2026-02-27 03:45+0000\n"
 "PO-Revision-Date: 2023-08-15 06:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -539,10 +539,10 @@ msgid "Backup location:"
 msgstr "მარქაფის მდებარეობა:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3526
-#: kmymoney/kmymoney.cpp:3597 kmymoney/kmymoney.cpp:3613
-#: kmymoney/kmymoney.cpp:3619 kmymoney/kmymoney.cpp:3633
-#: kmymoney/kmymoney.cpp:3635
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3530
+#: kmymoney/kmymoney.cpp:3601 kmymoney/kmymoney.cpp:3617
+#: kmymoney/kmymoney.cpp:3623 kmymoney/kmymoney.cpp:3637
+#: kmymoney/kmymoney.cpp:3639
 #, kde-format
 msgid "Backup"
 msgstr "მარქაფი"
@@ -4591,274 +4591,274 @@ msgstr "ფაილში შენახვა"
 msgid "Untitled"
 msgstr "უსათაურო"
 
-#: kmymoney/kmymoney.cpp:763
+#: kmymoney/kmymoney.cpp:767
 #, kde-format
 msgid "Plugin responded with error during close."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:871
+#: kmymoney/kmymoney.cpp:875
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:898
+#: kmymoney/kmymoney.cpp:902
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1068
+#: kmymoney/kmymoney.cpp:1072
 #, fuzzy, kde-format
 #| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "ახალი ანგარიში..."
 
-#: kmymoney/kmymoney.cpp:1238
+#: kmymoney/kmymoney.cpp:1242
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1251
+#: kmymoney/kmymoney.cpp:1255
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "ბუფერში კოპირება"
 
-#: kmymoney/kmymoney.cpp:1252
+#: kmymoney/kmymoney.cpp:1256
 #, kde-format
 msgid "Save to file"
 msgstr "ფაილში შენახვა"
 
-#: kmymoney/kmymoney.cpp:1380
+#: kmymoney/kmymoney.cpp:1384
 #, kde-format
 msgid "Backup..."
 msgstr "მარქაფი..."
 
-#: kmymoney/kmymoney.cpp:1381
+#: kmymoney/kmymoney.cpp:1385
 #, kde-format
 msgid "Statement file..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1382 kmymoney/kmymoney.cpp:1383
+#: kmymoney/kmymoney.cpp:1386 kmymoney/kmymoney.cpp:1387
 #, kde-format
 msgid "Account Template..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1384
+#: kmymoney/kmymoney.cpp:1388
 #, kde-format
 msgid "Personal Data..."
 msgstr "პირადი მონაცემები..."
 
-#: kmymoney/kmymoney.cpp:1386
+#: kmymoney/kmymoney.cpp:1390
 #, kde-format
 msgid "Dump Memory"
 msgstr "მეხსერების დამპი"
 
-#: kmymoney/kmymoney.cpp:1388
+#: kmymoney/kmymoney.cpp:1392
 #, kde-format
 msgid "File-Information..."
 msgstr "ინფორმაცია ფაილზე..."
 
-#: kmymoney/kmymoney.cpp:1392
+#: kmymoney/kmymoney.cpp:1396
 #, kde-format
 msgid "Find transaction..."
 msgstr "ოპერაციის პოვნა..."
 
-#: kmymoney/kmymoney.cpp:1396
+#: kmymoney/kmymoney.cpp:1400
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "ტრანზაქციის დეტალების ჩვენება"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1397 kmymoney/settings/kmymoney.kcfg:256
+#: kmymoney/kmymoney.cpp:1401 kmymoney/settings/kmymoney.kcfg:256
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr ""
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1398 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1402 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Hide unused categories"
 msgstr "გამოუყენებელი კატეგორიების დამალვა"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1399 kmymoney/settings/kmymoney.kcfg:232
+#: kmymoney/kmymoney.cpp:1403 kmymoney/settings/kmymoney.kcfg:232
 #, kde-format
 msgid "Show all accounts"
 msgstr "ყველა ანგარიშის ჩვენება"
 
-#: kmymoney/kmymoney.cpp:1403
+#: kmymoney/kmymoney.cpp:1407
 #, kde-format
 msgid "New institution..."
 msgstr "ახალი დაწესებულება..."
 
-#: kmymoney/kmymoney.cpp:1404
+#: kmymoney/kmymoney.cpp:1408
 #, kde-format
 msgid "Edit institution..."
 msgstr "დაწესებულების ჩასწორება..."
 
-#: kmymoney/kmymoney.cpp:1405
+#: kmymoney/kmymoney.cpp:1409
 #, kde-format
 msgid "Delete institution..."
 msgstr "დაწესებულების წაშლა..."
 
-#: kmymoney/kmymoney.cpp:1409
+#: kmymoney/kmymoney.cpp:1413
 #, kde-format
 msgid "New account..."
 msgstr "ახალი ანგარიში..."
 
-#: kmymoney/kmymoney.cpp:1410
+#: kmymoney/kmymoney.cpp:1414
 #, kde-format
 msgid "Open ledger"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1411
+#: kmymoney/kmymoney.cpp:1415
 #, kde-format
 msgid "Reconcile..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1412
+#: kmymoney/kmymoney.cpp:1416
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "დასრულება"
 
-#: kmymoney/kmymoney.cpp:1413
+#: kmymoney/kmymoney.cpp:1417
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "საფოსტო კოდი:"
 
-#: kmymoney/kmymoney.cpp:1414
+#: kmymoney/kmymoney.cpp:1418
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "შეწყვეტა"
 
-#: kmymoney/kmymoney.cpp:1415
+#: kmymoney/kmymoney.cpp:1419
 #, fuzzy, kde-format
 #| msgid "Reconciliation report"
 msgid "Report reconciliation"
 msgstr "შეთანხმების ანგარიში"
 
-#: kmymoney/kmymoney.cpp:1416
+#: kmymoney/kmymoney.cpp:1420
 #, kde-format
 msgid "Edit account..."
 msgstr "ანგარიშის ჩასწორება..."
 
-#: kmymoney/kmymoney.cpp:1417
+#: kmymoney/kmymoney.cpp:1421
 #, kde-format
 msgid "Delete account..."
 msgstr "ანგარიშის წაშლა..."
 
-#: kmymoney/kmymoney.cpp:1418
+#: kmymoney/kmymoney.cpp:1422
 #, kde-format
 msgid "Close account"
 msgstr "ანგარიშის დახურვა"
 
-#: kmymoney/kmymoney.cpp:1419
+#: kmymoney/kmymoney.cpp:1423
 #, kde-format
 msgid "Reopen account"
 msgstr "ანგარიშის თავიდან გახსნა"
 
-#: kmymoney/kmymoney.cpp:1420
+#: kmymoney/kmymoney.cpp:1424
 #, kde-format
 msgid "Transaction report"
 msgstr "ტრანზაქციის ანგარიში"
 
-#: kmymoney/kmymoney.cpp:1421
+#: kmymoney/kmymoney.cpp:1425
 #, kde-format
 msgid "Show balance chart..."
 msgstr "ბალანსის გრაფიკის ჩვენება..."
 
-#: kmymoney/kmymoney.cpp:1422
+#: kmymoney/kmymoney.cpp:1426
 #, kde-format
 msgid "Map account..."
 msgstr "ანგარიშის მიბმა..."
 
-#: kmymoney/kmymoney.cpp:1423
+#: kmymoney/kmymoney.cpp:1427
 #, kde-format
 msgid "Unmap account..."
 msgstr "ანგარიშის მიბმის მოხსნა..."
 
-#: kmymoney/kmymoney.cpp:1424
+#: kmymoney/kmymoney.cpp:1428
 #, kde-format
 msgid "Update account..."
 msgstr "ანგარიშის განახლება..."
 
-#: kmymoney/kmymoney.cpp:1425
+#: kmymoney/kmymoney.cpp:1429
 #, kde-format
 msgid "Update all accounts..."
 msgstr "ყველა ანგარიშის განახლება..."
 
-#: kmymoney/kmymoney.cpp:1429
+#: kmymoney/kmymoney.cpp:1433
 #, kde-format
 msgid "New category..."
 msgstr "ახალი კატეგორია..."
 
-#: kmymoney/kmymoney.cpp:1430
+#: kmymoney/kmymoney.cpp:1434
 #, kde-format
 msgid "Edit category..."
 msgstr "კატეგორიის ჩასწორება..."
 
-#: kmymoney/kmymoney.cpp:1431
+#: kmymoney/kmymoney.cpp:1435
 #, kde-format
 msgid "Delete category..."
 msgstr "კატეგორიის წაშლა..."
 
-#: kmymoney/kmymoney.cpp:1435
+#: kmymoney/kmymoney.cpp:1439
 #, kde-format
 msgid "Currencies..."
 msgstr "ვალუტები..."
 
-#: kmymoney/kmymoney.cpp:1436
+#: kmymoney/kmymoney.cpp:1440
 #, kde-format
 msgid "Prices..."
 msgstr "ფასები..."
 
-#: kmymoney/kmymoney.cpp:1437
+#: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1438
+#: kmymoney/kmymoney.cpp:1442
 #, kde-format
 msgid "Consistency Check"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1439
+#: kmymoney/kmymoney.cpp:1443
 #, kde-format
 msgid "Performance-Test"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1440
+#: kmymoney/kmymoney.cpp:1444
 #, kde-format
 msgid "Calculator..."
 msgstr "კალკულატორი..."
 
-#: kmymoney/kmymoney.cpp:1444
+#: kmymoney/kmymoney.cpp:1448
 #, kde-format
 msgid "Enable all messages"
 msgstr "ყველა შეტყობინების ჩართვა"
 
-#: kmymoney/kmymoney.cpp:1448 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1452 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1449 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1453 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1450 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1454 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "ეწვიეთ ჩვენს ვებგვერდს"
 
-#: kmymoney/kmymoney.cpp:1454
+#: kmymoney/kmymoney.cpp:1458
 #, fuzzy, kde-format
 #| msgid "%1 transaction\n"
 #| msgid_plural "%1 transactions\n"
@@ -4866,100 +4866,100 @@ msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "%1 ტრანზაქცია\n"
 
-#: kmymoney/kmymoney.cpp:1455
+#: kmymoney/kmymoney.cpp:1459
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "ჩასწორება"
 
-#: kmymoney/kmymoney.cpp:1456
+#: kmymoney/kmymoney.cpp:1460
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Enter"
 
-#: kmymoney/kmymoney.cpp:1457
+#: kmymoney/kmymoney.cpp:1461
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "გაყოფების ჩასწორება"
 
-#: kmymoney/kmymoney.cpp:1458
+#: kmymoney/kmymoney.cpp:1462
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "შეწყვეტა"
 
-#: kmymoney/kmymoney.cpp:1459
+#: kmymoney/kmymoney.cpp:1463
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "წაშლა"
 
-#: kmymoney/kmymoney.cpp:1460
+#: kmymoney/kmymoney.cpp:1464
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "დუბლიკაცია"
 
-#: kmymoney/kmymoney.cpp:1461
+#: kmymoney/kmymoney.cpp:1465
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1462
+#: kmymoney/kmymoney.cpp:1466
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "დასტური"
 
-#: kmymoney/kmymoney.cpp:1463
+#: kmymoney/kmymoney.cpp:1467
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "გადართვა"
 
-#: kmymoney/kmymoney.cpp:1464
+#: kmymoney/kmymoney.cpp:1468
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "გასუფთავებულია"
 
-#: kmymoney/kmymoney.cpp:1465
+#: kmymoney/kmymoney.cpp:1469
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1466
+#: kmymoney/kmymoney.cpp:1470
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1467
+#: kmymoney/kmymoney.cpp:1471
 #, fuzzy, kde-format
 #| msgid "Imported transaction"
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "შემოტანილი ტრანზაქცია"
 
-#: kmymoney/kmymoney.cpp:1468
+#: kmymoney/kmymoney.cpp:1472
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "ტრანზაქციის გაყოფა"
 
-#: kmymoney/kmymoney.cpp:1469
+#: kmymoney/kmymoney.cpp:1473
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "ტრანზაქციის დეტალების ჩვენება"
 
-#: kmymoney/kmymoney.cpp:1471
+#: kmymoney/kmymoney.cpp:1475
 #, fuzzy, kde-format
 #| msgctxt "To open a new report"
 #| msgid "&Open"
@@ -4967,234 +4967,234 @@ msgctxt "Open URL"
 msgid "Open URL"
 msgstr "&გახსნა"
 
-#: kmymoney/kmymoney.cpp:1472
+#: kmymoney/kmymoney.cpp:1476
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "ყველაფრის მონიშვნა"
 
-#: kmymoney/kmymoney.cpp:1473
+#: kmymoney/kmymoney.cpp:1477
 #, kde-format
 msgid "Go to account"
 msgstr "ანგარიშზე გადასვლა"
 
-#: kmymoney/kmymoney.cpp:1474
+#: kmymoney/kmymoney.cpp:1478
 #, kde-format
 msgid "Go to payee"
 msgstr "გადამხდელზე გადასვლა"
 
-#: kmymoney/kmymoney.cpp:1475
+#: kmymoney/kmymoney.cpp:1479
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1476
+#: kmymoney/kmymoney.cpp:1480
 #, kde-format
 msgid "Assign next number"
 msgstr "შემდეგი ნომრის მინიჭება"
 
-#: kmymoney/kmymoney.cpp:1477
+#: kmymoney/kmymoney.cpp:1481
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "კომბინირება"
 
-#: kmymoney/kmymoney.cpp:1478
+#: kmymoney/kmymoney.cpp:1482
 #, kde-format
 msgid "Move to today"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1479
+#: kmymoney/kmymoney.cpp:1483
 #, kde-format
 msgid "Copy splits"
 msgstr "გაყოფების კოპირება"
 
-#: kmymoney/kmymoney.cpp:1480
+#: kmymoney/kmymoney.cpp:1484
 #, kde-format
 msgid "Show filter widget"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1482
+#: kmymoney/kmymoney.cpp:1486
 #, kde-format
 msgid "New investment..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1483
+#: kmymoney/kmymoney.cpp:1487
 #, kde-format
 msgid "Edit investment..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1484
+#: kmymoney/kmymoney.cpp:1488
 #, kde-format
 msgid "Delete investment..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1485
+#: kmymoney/kmymoney.cpp:1489
 #, kde-format
 msgid "Online price update..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1486
+#: kmymoney/kmymoney.cpp:1490
 #, kde-format
 msgid "Manual price update..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1487
+#: kmymoney/kmymoney.cpp:1491
 #, fuzzy, kde-format
 #| msgid "Existing security"
 msgid "Edit security..."
 msgstr "არსებული უსაფრთხოება"
 
-#: kmymoney/kmymoney.cpp:1488
+#: kmymoney/kmymoney.cpp:1492
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "უსაფრთხოების წაშლა"
 
-#: kmymoney/kmymoney.cpp:1491
+#: kmymoney/kmymoney.cpp:1495
 #, fuzzy, kde-format
 #| msgid "&New Schedule..."
 msgid "New schedule..."
 msgstr "&ახალი განრიგი..."
 
-#: kmymoney/kmymoney.cpp:1492 kmymoney/kmymoney.cpp:1493
+#: kmymoney/kmymoney.cpp:1496 kmymoney/kmymoney.cpp:1497
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1494
+#: kmymoney/kmymoney.cpp:1498
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1495
+#: kmymoney/kmymoney.cpp:1499
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1496
+#: kmymoney/kmymoney.cpp:1500
 #, kde-format
 msgid "Enter next transaction..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1497
+#: kmymoney/kmymoney.cpp:1501
 #, kde-format
 msgid "Skip next transaction..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1499
+#: kmymoney/kmymoney.cpp:1503
 #, fuzzy, kde-format
 #| msgid "New price..."
 msgid "New payee..."
 msgstr "ახალი ფასი..."
 
-#: kmymoney/kmymoney.cpp:1500
+#: kmymoney/kmymoney.cpp:1504
 #, kde-format
 msgid "Rename payee"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1501
+#: kmymoney/kmymoney.cpp:1505
 #, kde-format
 msgid "Delete payee"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1502
+#: kmymoney/kmymoney.cpp:1506
 #, kde-format
 msgid "Merge payees"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1504
+#: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "ახალი ჭდე"
 
-#: kmymoney/kmymoney.cpp:1505
+#: kmymoney/kmymoney.cpp:1509
 #, kde-format
 msgid "Rename tag"
 msgstr "ჭდის გადარქმევა"
 
-#: kmymoney/kmymoney.cpp:1506
+#: kmymoney/kmymoney.cpp:1510
 #, kde-format
 msgid "Delete tag"
 msgstr "ჭდის წაშლა"
 
-#: kmymoney/kmymoney.cpp:1508
+#: kmymoney/kmymoney.cpp:1512
 #, fuzzy, kde-format
 #| msgid "Save Report"
 msgid "Open report"
 msgstr "ანგარიშის შენახვა"
 
-#: kmymoney/kmymoney.cpp:1509
+#: kmymoney/kmymoney.cpp:1513
 #, fuzzy, kde-format
 #| msgid "Save Report"
 msgid "New report"
 msgstr "ანგარიშის შენახვა"
 
-#: kmymoney/kmymoney.cpp:1510
+#: kmymoney/kmymoney.cpp:1514
 #, fuzzy, kde-format
 #| msgid "Copy splits"
 msgid "Copy report"
 msgstr "გაყოფების კოპირება"
 
-#: kmymoney/kmymoney.cpp:1511
+#: kmymoney/kmymoney.cpp:1515
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:239
 #, fuzzy, kde-format
 #| msgid "Configure"
 msgid "Configure report"
 msgstr "მორგება"
 
-#: kmymoney/kmymoney.cpp:1512
+#: kmymoney/kmymoney.cpp:1516
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "რჩეული ანგარიშები"
 
-#: kmymoney/kmymoney.cpp:1513
+#: kmymoney/kmymoney.cpp:1517
 #, fuzzy, kde-format
 #| msgid "Delete &Zero"
 msgid "Delete report"
 msgstr "&ნულების წაშლა"
 
-#: kmymoney/kmymoney.cpp:1514
+#: kmymoney/kmymoney.cpp:1518
 #, fuzzy, kde-format
 #| msgid "Choose export type:"
 msgid "Close report"
 msgstr "აირჩიეთ გატანის ტიპი:"
 
-#: kmymoney/kmymoney.cpp:1515
+#: kmymoney/kmymoney.cpp:1519
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
 msgid "Toggle chart"
 msgstr "გადართვა"
 
-#: kmymoney/kmymoney.cpp:1516
+#: kmymoney/kmymoney.cpp:1520
 #, kde-format
 msgid "Edit tab order"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1518
+#: kmymoney/kmymoney.cpp:1522
 #, kde-format
 msgid "Ledger Quick Open"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1520
+#: kmymoney/kmymoney.cpp:1524
 #, kde-format
 msgid "Test new feature"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1521
+#: kmymoney/kmymoney.cpp:1525
 #, kde-format
 msgid "Debug Traces"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1523
+#: kmymoney/kmymoney.cpp:1527
 #, kde-format
 msgid "Debug Timers"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1542
+#: kmymoney/kmymoney.cpp:1546
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5202,7 +5202,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "დამთხვევა"
 
-#: kmymoney/kmymoney.cpp:1543
+#: kmymoney/kmymoney.cpp:1547
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5210,103 +5210,103 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "დამთხვევა"
 
-#: kmymoney/kmymoney.cpp:1669
+#: kmymoney/kmymoney.cpp:1673
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1670
+#: kmymoney/kmymoney.cpp:1674
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1671
+#: kmymoney/kmymoney.cpp:1675
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1672
+#: kmymoney/kmymoney.cpp:1676
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1781
+#: kmymoney/kmymoney.cpp:1785
 #, kde-format
 msgid "View back"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1782
+#: kmymoney/kmymoney.cpp:1786
 #, kde-format
 msgid "View forward"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2176
+#: kmymoney/kmymoney.cpp:2180
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to delete the transactions anyway?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2178
+#: kmymoney/kmymoney.cpp:2182
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2183
+#: kmymoney/kmymoney.cpp:2187
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/kmymoney.cpp:2187
+#: kmymoney/kmymoney.cpp:2191
 #, kde-format
 msgid "Delete transaction"
 msgstr "ტრანზაქციის წაშლა"
 
-#: kmymoney/kmymoney.cpp:2269
+#: kmymoney/kmymoney.cpp:2273
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2381
+#: kmymoney/kmymoney.cpp:2385
 #, fuzzy, kde-format
 #| msgid "Close"
 msgctxt "@action:button"
 msgid "Close"
 msgstr "დახურვა"
 
-#: kmymoney/kmymoney.cpp:2560
+#: kmymoney/kmymoney.cpp:2564
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2704
+#: kmymoney/kmymoney.cpp:2708
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to change the transactions anyway?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2706
+#: kmymoney/kmymoney.cpp:2710
 #, fuzzy, kde-format
 #| msgid "Transaction report"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "ტრანზაქციის ანგარიში"
 
-#: kmymoney/kmymoney.cpp:2711
+#: kmymoney/kmymoney.cpp:2715
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/kmymoney.cpp:2715
+#: kmymoney/kmymoney.cpp:2719
 #, fuzzy, kde-format
 #| msgid "%1 transaction\n"
 #| msgid_plural "%1 transactions\n"
@@ -5314,24 +5314,24 @@ msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "%1 ტრანზაქცია\n"
 
-#: kmymoney/kmymoney.cpp:2846
+#: kmymoney/kmymoney.cpp:2850
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2886
+#: kmymoney/kmymoney.cpp:2890
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2889
+#: kmymoney/kmymoney.cpp:2893
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2964
+#: kmymoney/kmymoney.cpp:2968
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5340,17 +5340,17 @@ msgid ""
 "all accounts</b>.</qt>"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2966
+#: kmymoney/kmymoney.cpp:2970
 #, kde-format
 msgid "Information"
 msgstr "ინფორმაცია"
 
-#: kmymoney/kmymoney.cpp:3070 kmymoney/kmymoney.cpp:3169
+#: kmymoney/kmymoney.cpp:3074 kmymoney/kmymoney.cpp:3173
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "KMyMoneyFile ღია არაა"
 
-#: kmymoney/kmymoney.cpp:3106 kmymoney/kmymoney.cpp:3108
+#: kmymoney/kmymoney.cpp:3110 kmymoney/kmymoney.cpp:3112
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
@@ -5358,157 +5358,157 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "მზადაა."
 
-#: kmymoney/kmymoney.cpp:3173
+#: kmymoney/kmymoney.cpp:3177
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "პირადი მონაცემების დათვალიერება..."
 
-#: kmymoney/kmymoney.cpp:3180
+#: kmymoney/kmymoney.cpp:3184
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "პერსონალური მონაცემების ჩასწორება"
 
-#: kmymoney/kmymoney.cpp:3195
+#: kmymoney/kmymoney.cpp:3199
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3203
+#: kmymoney/kmymoney.cpp:3207
 #, kde-format
 msgid "Importing account templates."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3217
+#: kmymoney/kmymoney.cpp:3221
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3225
+#: kmymoney/kmymoney.cpp:3229
 #, kde-format
 msgid "Exporting account templates."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3231
+#: kmymoney/kmymoney.cpp:3235
 #, kde-format
 msgid "Save as..."
 msgstr "შენახვა როგორც..."
 
-#: kmymoney/kmymoney.cpp:3232
+#: kmymoney/kmymoney.cpp:3236
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3263
+#: kmymoney/kmymoney.cpp:3267
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "შაბლონის შეცდომა"
 
-#: kmymoney/kmymoney.cpp:3281
+#: kmymoney/kmymoney.cpp:3285
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "ფაილი <b>%1</b> უკვე არსებობს. გნებავთ, გადააწეროთ?"
 
-#: kmymoney/kmymoney.cpp:3283 kmymoney/plugins/csv/export/csvexporter.cpp:106
+#: kmymoney/kmymoney.cpp:3287 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "ფაილი უკვე არსებობს"
 
-#: kmymoney/kmymoney.cpp:3321
+#: kmymoney/kmymoney.cpp:3325
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3322
+#: kmymoney/kmymoney.cpp:3326
 #, kde-format
 msgid "Hide menu bar"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3432
+#: kmymoney/kmymoney.cpp:3436
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3434
+#: kmymoney/kmymoney.cpp:3438
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3451
+#: kmymoney/kmymoney.cpp:3455
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
 "files as source files. Your current source file is '%1'."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3453
+#: kmymoney/kmymoney.cpp:3457
 #, kde-format
 msgid "Local files only"
 msgstr "მხოლოდ ლოკალური ფაილები"
 
-#: kmymoney/kmymoney.cpp:3492
+#: kmymoney/kmymoney.cpp:3496
 #, kde-format
 msgid "Mounting %1"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3526
+#: kmymoney/kmymoney.cpp:3530
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3526
+#: kmymoney/kmymoney.cpp:3530
 #, kde-format
 msgid "&Replace"
 msgstr "&ჩანაცვლება"
 
-#: kmymoney/kmymoney.cpp:3534
+#: kmymoney/kmymoney.cpp:3538
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3539
+#: kmymoney/kmymoney.cpp:3543
 #, kde-format
 msgid "Writing %1"
 msgstr "%1-ის ჩაწერა"
 
-#: kmymoney/kmymoney.cpp:3560
+#: kmymoney/kmymoney.cpp:3564
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1-ის მოხსნა"
 
-#: kmymoney/kmymoney.cpp:3597
+#: kmymoney/kmymoney.cpp:3601
 #, kde-format
 msgid "Error mounting device"
 msgstr "მოწყობილობის მიმაგრების შეცდომა"
 
-#: kmymoney/kmymoney.cpp:3612 kmymoney/kmymoney.cpp:3631
+#: kmymoney/kmymoney.cpp:3616 kmymoney/kmymoney.cpp:3635
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "დასრულებულია"
 
-#: kmymoney/kmymoney.cpp:3613 kmymoney/kmymoney.cpp:3633
+#: kmymoney/kmymoney.cpp:3617 kmymoney/kmymoney.cpp:3637
 #, kde-format
 msgid "File successfully backed up"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3619
+#: kmymoney/kmymoney.cpp:3623
 #, kde-format
 msgid "Error copying file to device"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3635
+#: kmymoney/kmymoney.cpp:3639
 #, kde-format
 msgid "Error unmounting device"
 msgstr "მოწყობილობის მოხსნის შეცდომა"
 
-#: kmymoney/kmymoney.cpp:3682
+#: kmymoney/kmymoney.cpp:3686
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5519,37 +5519,37 @@ msgid ""
 "Please click Cancel to abort the account creation."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3692
+#: kmymoney/kmymoney.cpp:3696
 #, fuzzy, kde-format
 #| msgid "Opening Balance Account"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "საწყისი ბალანსის ანგარიში"
 
-#: kmymoney/kmymoney.cpp:3703
+#: kmymoney/kmymoney.cpp:3707
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3773
+#: kmymoney/kmymoney.cpp:3777
 #, kde-format
 msgid "Running consistency check..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3780
+#: kmymoney/kmymoney.cpp:3784
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3790
+#: kmymoney/kmymoney.cpp:3794
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
 "presented below."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3792
+#: kmymoney/kmymoney.cpp:3796
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5557,28 +5557,28 @@ msgid ""
 "to be solved by the user."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3795
+#: kmymoney/kmymoney.cpp:3799
 #, kde-format
 msgid "Consistency check result"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3861
+#: kmymoney/kmymoney.cpp:3865
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4025
+#: kmymoney/kmymoney.cpp:4029
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4030
+#: kmymoney/kmymoney.cpp:4034
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4042
+#: kmymoney/kmymoney.cpp:4046
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5586,112 +5586,112 @@ msgid ""
 "error: %3"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4042 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:4046 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "შემოტანის შეცდომა"
 
-#: kmymoney/kmymoney.cpp:4069
+#: kmymoney/kmymoney.cpp:4073
 #, kde-format
 msgid "All messages have been enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4069
+#: kmymoney/kmymoney.cpp:4073
 #, kde-format
 msgid "All messages"
 msgstr "ყველა შეტყობინება"
 
-#: kmymoney/kmymoney.cpp:4105
+#: kmymoney/kmymoney.cpp:4109
 #, kde-format
 msgid "Auto saving..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4225
+#: kmymoney/kmymoney.cpp:4229
 #, kde-format
 msgid "Creating new document..."
 msgstr "ახალი დოკუმენტის შექმნა..."
 
-#: kmymoney/kmymoney.cpp:4285
+#: kmymoney/kmymoney.cpp:4289
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "ახალი ფაილის შექმნის შეცდომა."
 
-#: kmymoney/kmymoney.cpp:4296
+#: kmymoney/kmymoney.cpp:4300
 #, kde-format
 msgid "Open a file."
 msgstr "ფაილის გახსნა."
 
-#: kmymoney/kmymoney.cpp:4310
+#: kmymoney/kmymoney.cpp:4314
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4314
+#: kmymoney/kmymoney.cpp:4318
 #, kde-format
 msgid "All files (*)"
 msgstr "ყველა ფაილი (*)"
 
-#: kmymoney/kmymoney.cpp:4327
+#: kmymoney/kmymoney.cpp:4331
 #, kde-format
 msgid "Loading file..."
 msgstr "ფაილის ჩატვირთვა..."
 
-#: kmymoney/kmymoney.cpp:4335
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
 "can open another file or create a new one.</p>"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4335
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "File not found"
 msgstr "ფაილი ვერ მოიძებნა"
 
-#: kmymoney/kmymoney.cpp:4367
+#: kmymoney/kmymoney.cpp:4371
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4373
+#: kmymoney/kmymoney.cpp:4377
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4380
+#: kmymoney/kmymoney.cpp:4384
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4391
+#: kmymoney/kmymoney.cpp:4395
 #, kde-format
 msgid "Saving file..."
 msgstr "ფაილის შენახვა..."
 
-#: kmymoney/kmymoney.cpp:4403
+#: kmymoney/kmymoney.cpp:4407
 #, kde-format
 msgid "Failed to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4409
+#: kmymoney/kmymoney.cpp:4413
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4415
+#: kmymoney/kmymoney.cpp:4419
 #, kde-format
 msgid "Saving file as...."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4431
+#: kmymoney/kmymoney.cpp:4435
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4460
+#: kmymoney/kmymoney.cpp:4464
 #, kde-format
 msgid "Failed to save your storage."
 msgstr ""
@@ -5991,7 +5991,7 @@ msgstr "შეცდომა ფაილის '%1' ჩატვირთვ�
 msgid "File access error"
 msgstr "ფაილის წვდომის შეცდომა"
 
-#: kmymoney/kmymoneyutils.cpp:526 kmymoney/views/kpayeesview.cpp:568
+#: kmymoney/kmymoneyutils.cpp:526 kmymoney/views/kpayeesview.cpp:572
 #, kde-format
 msgid "New Payee"
 msgstr ""
@@ -20047,27 +20047,27 @@ msgstr "დუბლიკაცია"
 msgid "Unable to modify payee"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:591
+#: kmymoney/views/kpayeesview.cpp:595
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:593
+#: kmymoney/views/kpayeesview.cpp:597
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:595
+#: kmymoney/views/kpayeesview.cpp:599
 #, kde-format
 msgid "Remove Payee"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:609
+#: kmymoney/views/kpayeesview.cpp:613
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:610 kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview.cpp:614 kmymoney/views/kpayeesview_p.h:585
 #, kde-format
 msgid "Merge Payees"
 msgstr ""
