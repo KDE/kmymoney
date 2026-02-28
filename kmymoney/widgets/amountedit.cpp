@@ -550,6 +550,17 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         }
     };
 
+    auto makeSureToHaveLeadingZero = [&](QKeyEvent* ev) {
+        // in case all text is selected and the user presses the decimal point
+        // we fill the widget with the leading "0". The outcome of this will be
+        // that the widget then contains "0.".
+        if (ev->key() == MyMoneyMoney::decimalSeparator().unicode()) {
+            if (selectedText() == text()) {
+                QLineEdit::setText(QLatin1String("0"));
+            }
+        }
+    };
+
     Q_D(AmountEdit);
     if (!isReadOnly()) {
         switch (event->key()) {
@@ -608,12 +619,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
                                    event->isAutoRepeat(),
                                    event->count());
 
-                // in case all text is selected and the user presses the decimal point
-                // we fill the widget with the leading "0". The outcome of this will be
-                // that the widget then contains "0.".
-                if ((newEvent.key() == MyMoneyMoney::decimalSeparator().unicode()) && (selectedText() == text())) {
-                    QLineEdit::setText(QLatin1String("0"));
-                }
+                makeSureToHaveLeadingZero(&newEvent);
                 QLineEdit::keyPressEvent(&newEvent);
 
                 // in case the key was not handled by the base class
@@ -626,6 +632,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
                 event->setAccepted(newEvent.isAccepted());
                 return;
             }
+            makeSureToHaveLeadingZero(event);
             break;
         }
     }
