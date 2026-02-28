@@ -15,7 +15,7 @@
 # SPDX-FileCopyrightText: 2012 Rolf Eike Beer <kde@opensource.sf-tec.de>
 # SPDX-FileCopyrightText: 2014 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2018, 2019 Stefan Vater <st.vater@web.de>
-# SPDX-FileCopyrightText: 2021, 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2021-2022, 2025-2026 Alois Spitzbart <spitz234@hotmail.com>
 # SPDX-FileCopyrightText: 2025 lipor <collect.aqua019@passinbox.com>
 # SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
@@ -23,15 +23,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 03:45+0000\n"
-"PO-Revision-Date: 2025-11-28 18:56+0100\n"
-"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
+"PO-Revision-Date: 2026-02-24 22:25+0100\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 26.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -131,7 +131,7 @@ msgid ""
 "Original payee: %1\n"
 "%2"
 msgstr ""
-"Ursprünglicher Zahler: %1\n"
+"Ursprünglicher Zahlungsempfänger: %1\n"
 "%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1061
@@ -1331,14 +1331,13 @@ msgstr "Preisgenauigkeit:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, spbPricePrecision)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Enter the price precision for this currency to be used for exchange rates."
 msgstr ""
-"    Bitte geben Sie einen Preis für die Währung am Eröffnungsdatum ein."
+"Bitte geben Sie die Preisgenauigkeit für die Währung ein, die für den "
+"Umtauschkurs verwendet wird."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, lblName)
@@ -1447,6 +1446,28 @@ msgid ""
 "RoundHalfDown in case the resulting numerator is even. E.g. 0.5 -&gt; 0.0 "
 "and 1.5 -&gt; 2.0</p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-weight:600;\">Niemals runden</"
+"span></p><p>Keine Rundung vornehmen, sondern einfach abschneiden und im "
+"Falle eines Rests eine Warnung ausgeben. Ansonsten wie „Dezimalstellen "
+"entfernen“.</p><p><span style=\" font-weight:600;\">Abrunden</span></"
+"p><p>Auf den größten ganzzahligen Wert runden, der nicht größer als der Wert "
+"ist. Z. B. 0,5 → 0,0 und -0,5 → −1,0</p><p><span style=\" font-weight:600;"
+"\">Aufrunden</span></p><p>Auf den kleinsten ganzzahligen Wert runden, der "
+"nicht kleiner als der Wert ist. Z. B. 0,5 → 1,0 und -0,5 → −0,0</p><p><span "
+"style=\" font-weight:600;\">Dezimalstellen entfernen</span></p><p>Keine "
+"Rundung, einfach alle Dezimalstellen abschneiden</p><p><span style=\" font-"
+"weight:600;\">Von Null weg runden</span></p><p>Verwendet Aufrunden für "
+"positive und Abrunden für negative Werte. Z. B. 0,5 → 1,0 und −0,5 → −1,0</"
+"p><p><span style=\" font-weight:600;\">Ab der Hälfte abrunden</span></"
+"p><p>Auf- oder abrunden mit den folgenden Einschränkungen: 0,1 .. 0,5 → 0,0 "
+"und 0,6 .. 0,9 → 1,0</p><p><span style=\" font-weight:600;\">Ab der Hälfte "
+"aufrunden (Kaufmännisch Runden)</span></p><p>Auf- oder abrunden mit den "
+"folgenden Einschränkungen: 0,1 .. 0,4 → 0,0 und 0,5 .. 0,9 → 1,0</p><p><span "
+"style=\" font-weight:600;\">Symmetrisch runden</span></p><p>Verwendet „Ab "
+"der Hälfte abrunden“ für 0,1 .. 0,4 und „Ab der Hälfte aufrunden“ für 0,6 .. "
+"0,9. Verwendet „Ab der Hälfte aufrunden“ für 0,5, wenn der resultierende "
+"Zähler ungerade ist und „Ab der Hälfte abrunden“, wenn der resultierende "
+"Zähler gerade ist. Z. B. 0,5 → 0,0 und 1,5 → 2,0</p></body></html>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:135
@@ -1481,30 +1502,26 @@ msgstr "Dezimalstellen entfernen"
 #: kmymoney/mymoney/mymoneysecurity.cpp:257
 #, kde-format
 msgid "Promote"
-msgstr ""
+msgstr "Von Null weg runden"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:160
-#, fuzzy, kde-format
-#| msgctxt "@action move item down"
-#| msgid "Down"
+#, kde-format
 msgid "Half Down"
-msgstr "Ab"
+msgstr "Ab der Hälfte abrunden"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:165
-#, fuzzy, kde-format
-#| msgctxt "@action move item down"
-#| msgid "Down"
+#, kde-format
 msgid "Half Up"
-msgstr "Ab"
+msgstr "Ab der Hälfte aufrunden"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:170
 #: kmymoney/mymoney/mymoneysecurity.cpp:263
 #, kde-format
 msgid "Round"
-msgstr "Runden"
+msgstr "Symmetrisch runden"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEditEquityEntry)
 #: kmymoney/dialogs/keditequityentry.ui:17
@@ -1688,11 +1705,10 @@ msgid "No security selected."
 msgstr "Kein Wertpapier ausgewählt."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:510
-#, fuzzy, kde-format
-#| msgid "Name of security to import."
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "Geben Sie den Namen des zu importierenden Wertpapiers ein."
+msgstr "Kein zu aktualisierendes Wertpapier."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:534
 #, kde-format
@@ -3006,6 +3022,8 @@ msgid ""
 "Remove selected tags from all transactions, schedules and reports before "
 "deleting them."
 msgstr ""
+"Ausgewählte Stichwörter von allen Buchungen, geplanten Buchungen und "
+"Berichten entfernen, bevor sie gelöscht werden."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSortOptionsDlg)
 #. i18n: ectx: property (text), widget (QListWidget, m_availableList)
@@ -10061,7 +10079,7 @@ msgstr "Kein"
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
-msgstr ""
+msgstr "<i>Notizspalten:</i> %1"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
 #, kde-format
@@ -12385,22 +12403,19 @@ msgstr "Zeilenumbrüche aus Notizfeld entfernen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
 "to the memo.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Dieses Konto als Eröffnungssaldo-Konto markieren</p></"
-"body></html>"
+"<html><head/><body><p>Zusätzliche Details zum Zahlungsempfänger, die in der "
+"Buchung gefunden wurden, zur Notiz hinzufügen.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
 #, kde-format
 msgid "Include the payee details in memo"
-msgstr ""
+msgstr "Die Zahlungsempfängerdetails in Notiz einfügen"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, MapAccountWizard)
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBMapAccount)
@@ -19524,11 +19539,10 @@ msgstr "Preis/Anteil"
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
 #: kmymoney/views/newtransactioneditor.ui:256
-#, fuzzy, kde-format
-#| msgid "Importing statement without transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
-msgstr "Kontoauszug ohne Buchungen wird importiert"
+msgstr "Das Durchführungsdatum der Buchung"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, feesCombo)
 #: kmymoney/views/investtransactioneditor.ui:126
@@ -19601,11 +19615,10 @@ msgid "Amount of fees"
 msgstr "Betrag ist:"
 
 #: kmymoney/views/journaldelegate.cpp:90
-#, fuzzy, kde-format
-#| msgid "Copy memo"
+#, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "Notiz kopieren"
+msgstr "Leere Notiz"
 
 #: kmymoney/views/journaldelegate.cpp:363
 #, kde-format
@@ -21045,11 +21058,10 @@ msgid "Filter"
 msgstr "Filter"
 
 #: kmymoney/views/kscheduledview_p.h:103
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Geplante Buchung gefunden"
+msgstr "Keine geplanten Buchungen gefunden"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -21066,11 +21078,10 @@ msgstr ""
 "hinweisen, es sei denn, Sie tragen sie zuvor manuell ein."
 
 #: kmymoney/views/kscheduledview_p.h:256
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Buchung planen"
+msgstr "Buchung planen beenden"
 
 #: kmymoney/views/kscheduledview_p.h:348
 #, kde-format
@@ -21082,11 +21093,10 @@ msgstr ""
 "wirklich überspringen?</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:351
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Geplante Buchung bearbeiten"
+msgstr "Geplante Buchung überspringen"
 
 #: kmymoney/views/kscheduledview_p.h:364
 #, kde-format
@@ -21107,13 +21117,11 @@ msgid "Search transactions"
 msgstr "Buchungen suchen"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:111
-#, fuzzy, kde-format
-#| msgid "Found %1 matching transaction"
-#| msgid_plural "Found %1 matching transactions"
+#, kde-format
 msgid "Found %1 matching splits"
 msgid_plural "Found %1 matching splits"
-msgstr[0] "%1 passende Buchung gefunden"
-msgstr[1] "%1 passende Buchungen gefunden"
+msgstr[0] "%1 passende Split-Buchung gefunden"
+msgstr[1] "%1 passende Split-Buchungen gefunden"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_resultPage)
 #: kmymoney/views/ksearchtransactiondlg.ui:24
@@ -21219,11 +21227,10 @@ msgid "Tag color:"
 msgstr "Stichwort-Farbe:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Buchungen ohne Empfänger auswählen"
+msgstr "Wählen Sie die Buchung aus, die als Vorlage verwendet werden soll."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:148
 #, kde-format
@@ -21332,6 +21339,8 @@ msgstr "Die Buchung hat eine fehlende Zuordnung von <b>%1</b>."
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
+"Die geplante Buchung ist seit dem %1 überfällig. Klicken Sie auf das Symbol, "
+"um sie einzugeben."
 
 #: kmymoney/views/ledgerview.cpp:923
 #, kde-format
@@ -21347,34 +21356,28 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:1008
-#, fuzzy, kde-format
-#| msgid "Checking for overdue scheduled transactions..."
+#, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Fällige geplante Zahlungen werden gesucht ..."
+msgstr "Die überfällige geplante Buchung nicht eingeben."
 
 #: kmymoney/views/ledgerview.cpp:1009
-#, fuzzy, kde-format
-#| msgid "Enter scheduled transaction"
+#, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
-msgstr "Geplante Buchung eintragen"
+msgstr "Die überfällige geplante Buchung eingeben."
 
 #: kmymoney/views/ledgerview.cpp:1012
-#, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
-msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
+msgstr "Möchten Sie jetzt die überfällige Planung eingeben?"
 
 #: kmymoney/views/ledgerview.cpp:1013
-#, fuzzy, kde-format
-#| msgctxt "Dialog caption for 'Enter or schedule' dialog"
-#| msgid "Enter or schedule?"
+#, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
-msgstr "Eintragen oder planen?"
+msgstr "Überfällige Planung eingeben"
 
 #: kmymoney/views/ledgerview.cpp:1033
 #, fuzzy, kde-format
@@ -21397,19 +21400,18 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:1039
-#, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected transaction?"
-#| msgid_plural "Do you really want to delete all %1 selected transactions?"
+#, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
-msgstr "Sind Sie sicher, dass Sie die ausgewählte Buchung löschen möchten?"
+msgstr ""
+"Möchten Sie jetzt annehmen oder die Zuordnung der zugeordneten Buchung "
+"rückgängig machen?"
 
 #: kmymoney/views/ledgerview.cpp:1040
-#, fuzzy, kde-format
-#| msgid "Attempt to match similar transactions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
-msgstr "Zuordnung ähnlicher Buchungen versuchen"
+msgstr "Annehmen oder Zuordnung zu Buchung rückgängig machen"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
@@ -21458,39 +21460,35 @@ msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:210
 #: kmymoney/views/newtransactioneditor.cpp:302
-#, fuzzy, kde-format
-#| msgid "Importing statement without transactions"
+#, kde-format
 msgid "The posting date is invalid."
-msgstr "Kontoauszug ohne Buchungen wird importiert"
+msgstr "Das Buchungsdatum ist ungültig."
 
 #: kmymoney/views/multitransactioneditor.cpp:246
 #: kmymoney/views/newtransactioneditor.cpp:346
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
-msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
+msgstr ""
+"Für eine Buchung in der ausgewählten Kategorie ist die Zuordnung zu einer "
+"Kostenstelle notwendig."
 
 #: kmymoney/views/multitransactioneditor.cpp:279
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
 msgstr ""
-"* Buchung '%1' hat ein Buchungsdatum '%2' vor dem Eröffnungsdatum eines der "
-"referenzierten Konten."
+"Das Buchungsdatum einer ausgewählten Buchung (%1) liegt vor dem "
+"Eröffnungsdatum des ausgewählten Kontos (%2)."
 
 #: kmymoney/views/multitransactioneditor.cpp:754
-#, fuzzy, kde-format
-#| msgid "Cannot edit multiple split transactions at once."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "Mehrere Split-Buchungen können nicht auf einmal editiert werden."
+msgstr "Mehrere geplante Buchungen können nicht auf einmal bearbeitet werden."
 
 #: kmymoney/views/multitransactioneditor.cpp:763
 #, kde-format
@@ -21499,6 +21497,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"Auswahl von Kategorien oder Konten ist nicht möglich, wenn Split-Buchungen "
+"mit ausgewählt sind."
 
 #: kmymoney/views/multitransactioneditor.cpp:767
 #, kde-format
@@ -21507,6 +21507,8 @@ msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
+"Auswahl von Stichwörtern ist nicht möglich, wenn Split-Buchungen mit "
+"ausgewählt sind."
 
 #: kmymoney/views/multitransactioneditor.cpp:771
 #, kde-format
@@ -21515,6 +21517,8 @@ msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
+"Auswahl von Kostenstellen ist nicht möglich, wenn Split-Buchungen mit "
+"ausgewählt sind."
 
 #: kmymoney/views/multitransactioneditor.cpp:801
 #, kde-format
@@ -21522,42 +21526,41 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
+"Sie haben nur Leerzeichen in das Notizfeld eingegeben, das wird den "
+"bestehenden Inhalt der Notiz leeren. Möchten Sie das wirklich tun?"
 
 #: kmymoney/views/multitransactioneditor.cpp:802
-#, fuzzy, kde-format
-#| msgid "Clear &Zero"
+#, kde-format
 msgid "Clear memo"
-msgstr "&Nullbeträge löschen"
+msgstr "Notiz leeren"
 
 #: kmymoney/views/newspliteditor.cpp:177
-#, fuzzy, kde-format
-#| msgid "Use this to enter the transaction into the ledger."
+#, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
-msgstr "Nehmen Sie hiermit die Buchung in das Kontenbuch auf."
+msgstr "Die Kostenstelle, der diese Buchung zugeordnet werden soll."
 
 #: kmymoney/views/newspliteditor.cpp:190
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
-msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
+msgstr ""
+"Für eine Buchung in der ausgewählten Kategorie ist die Zuordnung zu einer "
+"Kostenstelle notwendig."
 
 #: kmymoney/views/newspliteditor.cpp:201
-#, fuzzy, kde-format
-#| msgid "Use this to enter the transaction into the ledger."
+#, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
-msgstr "Nehmen Sie hiermit die Buchung in das Kontenbuch auf."
+msgstr "Die Kategorie, der diese Split-Buchung zugeordnet werden soll."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
-msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
+msgstr "Für eine Split-Buchung muss eine Kategorie zugeordnet werden."
 
 #: kmymoney/views/newspliteditor.cpp:255
 #, kde-format
@@ -21572,13 +21575,14 @@ msgstr "Die Schecknummer <b>%1</b> wird bereits in diesem Konto benutzt."
 
 #: kmymoney/views/newspliteditor.cpp:892
 #: kmymoney/views/newtransactioneditor.cpp:190
-#, fuzzy, kde-format
-#| msgid "Cannot remove transaction that references a closed account."
+#, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
 "This widget is currently protected because the transaction references a "
 "closed account."
-msgstr "Buchungen für ein geschlossenes Konto können nicht gelöscht werden."
+msgstr ""
+"Dieses Bedienelement ist aktuell geschützt, da die Buchung auf ein "
+"geschlossenes Konto verweist."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -21609,6 +21613,8 @@ msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
+"Der eingegebene Betrag unterscheidet sich von der Summe aller Split-"
+"Buchungen um %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:618
 #, kde-format
@@ -21648,27 +21654,24 @@ msgstr "Die Schecknummer für diese Buchung."
 
 #. i18n: ectx: property (toolTip), widget (CreditDebitEdit, creditDebitEdit)
 #: kmymoney/views/newtransactioneditor.ui:72
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Verwenden Sie dies, um die Buchung aufzunehmen"
+msgstr "Geben Sie den Betrag der Buchung ein."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, costCenterCombo)
 #: kmymoney/views/newtransactioneditor.ui:194
-#, fuzzy, kde-format
-#| msgid "Use this to enter the transaction into the ledger."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The cost center this transaction should be assigned to."
-msgstr "Nehmen Sie hiermit die Buchung in das Kontenbuch auf."
+msgstr "Die Kostenstelle, der diese Buchung zugeordnet werden soll."
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, categoryCombo)
 #: kmymoney/views/newtransactioneditor.ui:281
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "Verwenden Sie dies, um die Buchung aufzunehmen"
+msgstr "Geben Sie die Kategorie oder das Gegenkonto der Buchung ein."
 
 #: kmymoney/views/newtransactionform.cpp:135
 #, kde-format
@@ -21691,11 +21694,10 @@ msgid "n/a"
 msgstr "n/v"
 
 #: kmymoney/views/onlinebalancedelegate.cpp:176
-#, fuzzy, kde-format
-#| msgid "Opening Balance"
+#, kde-format
 msgctxt "Label in ledger for online balance row"
 msgid "Online Balance"
-msgstr "Eröffnungssaldo"
+msgstr "Online-Saldo"
 
 #: kmymoney/views/payeeidentifierselectiondelegate.cpp:42
 #, kde-format
@@ -21801,24 +21803,20 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/simpleledgerview.cpp:950
-#, fuzzy, kde-format
-#| msgid "Closed tags cannot be used."
+#, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
-msgstr "Geschlossene Stichwörter können nicht verwendet werden."
+msgstr "Ansicht kann nicht geschlossen werden"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #: kmymoney/views/simpleledgerview.ui:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Once an account or category is selected its "
 "transactions will be presented here.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Dieses Konto als Eröffnungssaldo-Konto markieren</p></"
-"body></html>"
+"<html><head/><body><p>Sobald ein Konto oder eine Kategorie ausgewählt ist, "
+"werden dessen/ihre Buchungen hier angezeigt.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, l3)
 #: kmymoney/views/simpleledgerview.ui:85
@@ -21836,11 +21834,10 @@ msgid "Sum of splits"
 msgstr "Summe der Split-Buchungen"
 
 #: kmymoney/views/splitdialog.cpp:337
-#, fuzzy, kde-format
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Nicht zugewiesen"
+msgstr "Zu viel zugewiesen"
 
 #: kmymoney/views/splitdialog.cpp:340
 #, kde-format
@@ -21850,10 +21847,9 @@ msgstr "Nicht zugewiesen"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
-#, fuzzy, kde-format
-#| msgid "Split transaction"
+#, kde-format
 msgid "Split editor"
-msgstr "Split-Buchung"
+msgstr "Editor für Split-Buchungen"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:553
@@ -22134,11 +22130,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Verwenden Sie dies, um den Profileditor zu öffnen"
+msgstr ""
+"Klicken Sie auf dieses Symbol, um den Editor für Split-Buchungen zu öffnen"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format
@@ -22777,6 +22773,8 @@ msgstr ""
 #, kde-format
 msgid "Don't show this page again when starting the reconciliation next time."
 msgstr ""
+"Diese Seite nicht mehr anzeigen, wenn der Kontenabgleich das nächste Mal "
+"gestartet wird."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
@@ -23376,35 +23374,28 @@ msgstr "Online-Kursnotizen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
-#, fuzzy, kde-format
-#| msgid ""
-#| "Mark this checkbox if the account should be maintained as preferred "
-#| "account"
+#, kde-format
 msgid ""
 "Mark this checkbox to include the account in the group of favorite accounts"
 msgstr ""
-"Aktivieren Sie das Kästchen, um dieses Konto als bevorzugtes Konto zu "
-"markieren"
+"Aktivieren Sie das Ankreuzfeld, um das Konto der Gruppe der favorisierten "
+"Konten hinzuzufügen."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selecting the <b>Preferred Account</b> checkbox will allow preferred "
-#| "access in some dialogs and views of KMyMoney."
+#, kde-format
 msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
-"Die Anwahl von „Bevorzugtes Konto“ erlaubt eine vorrangige Anzeige dieses "
-"Kontos in einigen Dialogen von KMyMoney."
+"Die Anwahl von „Favorisiertes Konto“ erlaubt eine vorrangige Anzeige dieses "
+"Kontos in einigen Dialogen und Ansichten von KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgid "Filter Accounts"
+#, kde-format
 msgid "Favorite account"
-msgstr "Konten filtern"
+msgstr "Favorisiertes Konto"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -23499,10 +23490,9 @@ msgid "Next due date is prior to opening date"
 msgstr "Nächster Zahlungstermin liegt vor Eröffnungsdatum"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:117
-#, fuzzy, kde-format
-#| msgid "Next due date"
+#, kde-format
 msgid "Next due date is invalid"
-msgstr "Nächste Fälligkeit am"
+msgstr "Nächste Fälligkeit ist ungültig"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:121
 #, kde-format
@@ -24492,21 +24482,19 @@ msgstr "Kann Konto nicht anlegen: %1"
 #, kde-format
 msgctxt "Rounding method"
 msgid "HalfUp"
-msgstr ""
+msgstr "Ab der Hälfte aufrunden"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, fuzzy, kde-format
-#| msgctxt "@action move item down"
-#| msgid "Down"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfDown"
-msgstr "Ab"
+msgstr "Ab der Hälfte abrunden"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
-msgstr "Runden"
+msgstr "Symmetrisch runden"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
@@ -24530,7 +24518,7 @@ msgstr "Dezimalstellen entfernen"
 #, kde-format
 msgctxt "Rounding method"
 msgid "Promote"
-msgstr ""
+msgstr "Von Null wegrunden"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
@@ -24654,7 +24642,7 @@ msgstr "Bankleitzahl"
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:259
 #, kde-format
 msgid "Create duplicate of the symbol"
-msgstr ""
+msgstr "Duplikat des Symbols erstellen"
 
 #. i18n: ectx: property (title), widget (KInvestmentTypeWizardPage, KInvestmentTypeWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:14
@@ -24670,17 +24658,15 @@ msgstr "Dieser Assistent unterstützt das Erstellen einer neuen Anlage."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:49
-#, fuzzy, kde-format
-#| msgid ""
-#| "The first step in this process requires to select the type of investment. "
-#| "The following steps collect more details about the investment from you."
+#, kde-format
 msgid ""
 "The first step in this process requires to provide an account name for the "
 "investment and select the type of investment. The following steps collect "
 "further details about the investment from you."
 msgstr ""
-"Im ersten Schritt dieses Prozesses wird die Art der Investition ausgewählt. "
-"Die folgenden Schritte werden dann weitere Details abfragen."
+"Im ersten Schritt dieses Prozesses wird der Kontoname für die Investition "
+"und die Art der Investition ausgewählt. Die folgenden Schritte werden dann "
+"weitere Details abfragen."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:99
@@ -24694,10 +24680,10 @@ msgid "This wizard allows you to modify the selected investment."
 msgstr "Dieser Assistent unterstützt das Ändern der angewählten Investition."
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:170
-#, fuzzy, kde-format
-#| msgid "An unrecoverable error occurred while reading the database"
+#, kde-format
 msgid "Unexpected error occurred while adding new investment"
-msgstr "Ein fataler Fehler trat beim Lesen der Datenbank auf"
+msgstr ""
+"Ein unerwarteter Fehler trat beim Hinzufügen einer neuen Investition auf"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:198
 #, kde-format
