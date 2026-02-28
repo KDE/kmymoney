@@ -25,6 +25,7 @@
 #include <QBoxLayout>
 #include <QByteArray>
 #include <QClipboard>
+#include <QCoreApplication>
 #include <QDateTime> // only for performance tests
 #include <QDesktopServices>
 #include <QDir>
@@ -1022,7 +1023,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
     new KmymoneyAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/KMymoney", this);
     QDBusConnection::sessionBus().interface()->registerService(
-        QStringLiteral("org.kde.kmymoney-%1").arg(QString::number(platformTools::processId()), QDBusConnectionInterface::DontQueueService));
+        QStringLiteral("org.kde.kmymoney-%1").arg(QString::number(QCoreApplication::applicationPid()), QDBusConnectionInterface::DontQueueService));
 #endif
     // Register the main engine types used as meta-objects
     qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
