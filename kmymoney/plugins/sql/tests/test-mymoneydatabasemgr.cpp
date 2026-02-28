@@ -28,7 +28,6 @@
 #include "mymoneytestutils.h"
 #include "mymoneytransaction.h"
 
-#include "misc/platformtools.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
 #include "mymoneyenums.h"

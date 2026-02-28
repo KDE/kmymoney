@@ -185,7 +185,6 @@
 #include "menuenums.h"
 #include "kmymoneyenums.h"
 
-#include "platformtools.h"
 #include "kmm_printer.h"
 
 #ifdef ENABLE_SQLCIPHER

@@ -77,7 +77,6 @@ target_link_libraries(kmymoney_common
     Alkimia::alkimia
     kmm_mymoney
     kmm_webconnect
-    kmm_utils_platformtools
     kmm_url
     kmm_yesno
     kmm_menuactionexchanger

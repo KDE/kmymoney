@@ -12,6 +12,5 @@ kmm_add_tests(${tests_sources}
     Qt::Gui
     kmm_mymoney
     kmm_testutils
-    kmm_utils_platformtools
     onlinetask_interfaces
 )

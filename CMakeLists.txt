@@ -330,11 +330,6 @@ add_feature_info("Doxygen" DOXYGEN_FOUND "Generate API documentation with Doxyge
 # check some include files exists
 set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
 include (CheckIncludeFileCXX)
-check_include_file_cxx("unistd.h" HAVE_UNISTD_H)
-check_include_file_cxx("pwd.h" HAVE_PWD_H)
-check_include_file_cxx("windows.h" HAVE_WINDOWS_H)
-check_include_file_cxx("lmcons.h" HAVE_LMCONS_H)
-check_include_file_cxx("process.h" HAVE_PROCESS_H)
 
 # include check for members in structs
 include (CheckStructHasMember)

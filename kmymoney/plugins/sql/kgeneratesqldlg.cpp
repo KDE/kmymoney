@@ -41,7 +41,6 @@
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "kguiutils.h"
-#include "misc/platformtools.h"
 #include "mymoneydbdriver.h"
 #include "mymoneydbdef.h"
 

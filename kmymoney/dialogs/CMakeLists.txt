@@ -79,7 +79,6 @@ target_link_libraries(kmm_base_dialogs
     kmm_mymoney
     onlinetask_interfaces
     kmm_base_widgets
-    kmm_utils_platformtools
     kmm_yesno
   PRIVATE
     KF${QT_MAJOR_VERSION}::KIOGui
@@ -128,7 +127,6 @@ target_link_libraries(kmm_extended_dialogs
     kmm_mymoney
     onlinetask_interfaces
     kmm_base_widgets
-    kmm_utils_platformtools
     kmm_webconnect
     kmm_widgets
   PRIVATE

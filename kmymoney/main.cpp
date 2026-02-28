@@ -54,7 +54,6 @@
 #include "misc/webconnect.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyexception.h"
-#include "platformtools.h"
 
 #ifdef Q_OS_WIN
 #include <windows.h>

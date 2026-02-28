@@ -23,18 +23,6 @@ set ( kmm_yesno_SRCS
   kmmyesno.cpp
 )
 
-if( "${HAVE_UNISTD_H}" AND "${HAVE_PWD_H}" )
-  set( kmm_utils_platformtools_SRCS
-    platformtools_gnu.cpp
-  )
-elseif( "${HAVE_WINDOWS_H}" AND "${HAVE_LMCONS_H}" AND "${HAVE_PROCESS_H}" )
-  set( kmm_utils_platformtools_SRCS
-    platformtools_nognu.cpp
-  )
-else()
-  message(FATAL_ERROR "make sure either windows.h and lmcons.h (on msvc platforms) or unistd.h and pwd.h (on other platforms) are present.")
-endif()
-
 set( kmm_utils_validators_HEADER
   charvalidator.h
   validators.h
@@ -47,10 +35,6 @@ set( kmm_webconnect_HEADER
 
 set ( kmm_keychain_HEADER
   kmmkeychain.h
-)
-
-set( kmm_utils_platformtools_HEADER
-  platformtools.h
 )
 
 set( kmm_url_HEADER
@@ -82,7 +66,6 @@ set( kmm_codec_SRCS
 )
 
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
-add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 add_library(kmm_url STATIC ${kmm_url_SRCS})
 add_library(kmm_textbrowser STATIC ${kmm_textbrowser_SRCS})
 add_library(kmm_webconnect ${kmm_webconnect_SRCS})
@@ -120,11 +103,6 @@ target_link_libraries( kmm_keychain
   PUBLIC
   Qt::Core
   qt${QT_MAJOR_VERSION}keychain
-)
-
-target_link_libraries( kmm_utils_platformtools
-  PUBLIC
-  Qt::Core
 )
 
 target_link_libraries( kmm_url

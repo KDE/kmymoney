@@ -26,7 +26,6 @@
 #include "kguiutils.h"
 #include "mymoneystoragesql.h"
 #include "mymoneydbdriver.h"
-#include "misc/platformtools.h"
 #include "passwordtoggle.h"
 
 KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)

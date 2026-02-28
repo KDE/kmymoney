@@ -12,7 +12,6 @@ PUBLIC
   KF${QT_MAJOR_VERSION}::CoreAddons
   kmm_plugin
   kmm_widgets
-  kmm_utils_platformtools
   onlinetask_interfaces
   xmlstoragehelper
 )
@@ -30,7 +29,6 @@ kmm_add_tests(${tests_sources}
     kmm_testutils
     kmm_plugin
     kmm_widgets
-    kmm_utils_platformtools
     kmm_mymoney
     xmlstoragehelper
 )
