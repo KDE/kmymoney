@@ -6,6 +6,7 @@
 #include "mymoneydatabasemgr-test.h"
 #include <iostream>
 
+#include <KUser>
 #include <QTest>
 
 #include "../mymoneystoragesql.h"
@@ -121,7 +122,7 @@ void MyMoneyStorageMgrTest::testEmptyConstructor()
 
 void MyMoneyStorageMgrTest::setupUrl(const QString& fname)
 {
-    QString m_userName = platformTools::osUsername();
+    QString m_userName = KUser().loginName();
 
     QString m_mode =
         //"QPSQL&mode=single";

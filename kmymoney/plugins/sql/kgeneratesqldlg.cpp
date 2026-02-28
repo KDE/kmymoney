@@ -29,6 +29,7 @@
 #include <KMessageBox>
 #include <KUrlRequester>
 #include <KHelpClient>
+#include <KUser>
 #include <QDialogButtonBox>
 #include <QPushButton>
 
@@ -300,7 +301,7 @@ void KGenerateSqlDlg::slotdriverSelected()
         d->ui->textDbName->setText("KMyMoney");
         d->ui->textHostName->setText("localhost");
         d->ui->textUserName->setText(QString());
-        d->ui->textUserName->setText(platformTools::osUsername());
+        d->ui->textUserName->setText(KUser().loginName());
         d->ui->textPassword->setText(QString());
     }
 

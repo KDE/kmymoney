@@ -17,6 +17,7 @@
 
 #include <KMessageBox>
 #include <KHelpClient>
+#include <KUser>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -109,7 +110,7 @@ int KSelectDatabaseDlg::exec()
         m_widget->textDbName->setText(QLatin1String("KMyMoney"));
         m_widget->textHostName->setText(QLatin1String("localhost"));
         m_widget->textUserName->setText(QString());
-        m_widget->textUserName->setText(platformTools::osUsername());
+        m_widget->textUserName->setText(KUser().loginName());
         m_widget->textPassword->setText(QString());
         connect(m_widget->databaseTypeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KSelectDatabaseDlg::slotDriverSelected);
         m_widget->checkPreLoad->setChecked(false);

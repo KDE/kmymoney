@@ -27,6 +27,7 @@ target_link_libraries(sqlstorage
     kmm_widgets
   PRIVATE
     Qt::Sql
+    KF${QT_MAJOR_VERSION}::CoreAddons
     kmm_utils_platformtools
     xmlstoragehelper
 )
