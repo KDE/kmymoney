@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
-"PO-Revision-Date: 2026-02-17 04:17+0100\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
+"PO-Revision-Date: 2026-02-28 07:47+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -15745,17 +15745,14 @@ msgid "Payment Method"
 msgstr "გადახდის მეთოდი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:782
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "მდგომარეობა"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:784
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "საბოლოო ბალანსი"
+msgstr "დახურვის თარიღი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, kde-format
@@ -15869,11 +15866,9 @@ msgstr "%1-ზე ტრანსფერი"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&გახსნა"
+msgstr "გახსნა"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -17161,7 +17156,7 @@ msgstr "ნაკვეთის ხარჯები ქვემოთ"
 #: kmymoney/plugins/views/reports/reporttabchart.ui:173
 #, kde-format
 msgid "<p>Select what width should be used to draw the line on the chart</p>"
-msgstr ""
+msgstr "<p>აირჩიეთ სიგანე, რომლითაც გრაფიკზე ხაზი იქნება დახატული</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:176
@@ -20715,13 +20710,13 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "ტრანზაქციის მიღება ან დამთხვევის გაუქმება"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "ტექსტის გაფილტვრა"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"

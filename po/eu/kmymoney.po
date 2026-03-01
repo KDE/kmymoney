@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
 "PO-Revision-Date: 2026-01-04 11:05+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -21368,13 +21368,13 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Onartu edo desparekatu transakzioa"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Iragazi beharreko testua"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"

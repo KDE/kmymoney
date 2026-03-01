@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
 "PO-Revision-Date: 2025-06-22 06:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -21422,14 +21422,14 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Aceptar ou desemparellar o asento"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, fuzzy, kde-format
 #| msgid "Filter text"
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Filtrar o texto"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"

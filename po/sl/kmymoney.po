@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
-"PO-Revision-Date: 2026-02-17 05:43+0100\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
+"PO-Revision-Date: 2026-02-28 08:56+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16199,17 +16199,14 @@ msgid "Payment Method"
 msgstr "Način plačila"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:782
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "Stanje"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:784
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Zaključna bilanca"
+msgstr "Datum zaključka"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, kde-format
@@ -16323,11 +16320,9 @@ msgstr "Prenos na %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&Odpri"
+msgstr "Odpri"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -21391,13 +21386,13 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Sprejmi transakcijo ali jo proglasi za neujemajočo"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Besedilo filtra"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"

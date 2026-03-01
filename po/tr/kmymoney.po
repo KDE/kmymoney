@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
-"PO-Revision-Date: 2026-02-18 15:49+0300\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
+"PO-Revision-Date: 2026-02-28 10:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16124,17 +16124,14 @@ msgid "Payment Method"
 msgstr "Ödeme Yöntemi"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:782
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "Durum"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:784
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Kapanış Bakiyesi"
+msgstr "Kapanış Tarihi"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, kde-format
@@ -16248,11 +16245,9 @@ msgstr "Şuraya havale et %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&Aç"
+msgstr "Aç"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -21279,13 +21274,13 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "İşlemi Kabul Et veya Eşleşmesini Kaldır"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Metni süz"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"

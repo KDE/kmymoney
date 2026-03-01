@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
-"PO-Revision-Date: 2026-02-17 09:43+0100\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
+"PO-Revision-Date: 2026-02-28 08:09+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -16280,17 +16280,14 @@ msgid "Payment Method"
 msgstr "Mètode de pagament"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:782
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "Estat"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:784
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Saldo final"
+msgstr "Data de tancament"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, kde-format
@@ -16404,11 +16401,9 @@ msgstr "Transferix cap a %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "O&bri"
+msgstr "Obri"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -21504,13 +21499,13 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Acceptació o desaparellament de l'operació"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Text del filtre"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Only show transactions matching the entered text"

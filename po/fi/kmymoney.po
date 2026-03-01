@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -21368,14 +21368,14 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Hyväksy tai poista sovitus tapahtumalta"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, fuzzy, kde-format
 #| msgid "Filter text"
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Suodatinteksti"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, fuzzy, kde-format
 #| msgid "Search transactions containing the following text"
 msgctxt "@info:tooltip"
