@@ -132,9 +132,9 @@ enum class Action {
     // *************
     EditTabOrder,
 #ifdef KMM_DEBUG
-    NewFeature, DebugTraces,
+    NewFeature,
 #endif
-    DebugTimers,
+    DebugTraces, DebugTimers,
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
     ReportOpen, ReportNew, ReportCopy, ReportConfigure,
     ReportExport, ReportDelete, ReportClose, ReportToggleChart,

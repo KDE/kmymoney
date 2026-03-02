@@ -158,12 +158,12 @@ protected Q_SLOTS:
       * Called when the user asks for file information.
       */
     void slotFileFileInfo();
+#endif
 
     /**
-      * Debugging only: turn on/off traces
-      */
+     * Debugging only: turn on/off traces
+     */
     void slotToggleTraces();
-#endif
 
     /**
       * Debugging only: turn on/off timers

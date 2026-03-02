@@ -193,8 +193,8 @@
 
 #ifdef KMM_DEBUG
 #include "mymoney/storage/mymoneystoragedump.h"
-#include "mymoneytracer.h"
 #endif
+#include "mymoneytracer.h"
 
 #include "selectedobjects.h"
 
@@ -1526,8 +1526,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::LedgerQuickOpen,               QStringLiteral("ledger_quick_open"),              i18n("Ledger Quick Open"),                          Icon::Empty},
 #ifdef KMM_DEBUG
             {Action::NewFeature,                    QStringLiteral("new feature"),                    i18n("Test new feature"),                           Icon::Empty},
-            {Action::DebugTraces,                   QStringLiteral("debug_traces"),                   i18n("Debug Traces"),                               Icon::Empty},
 #endif
+            {Action::DebugTraces,                   QStringLiteral("debug_traces"),                   i18n("Debug Traces"),                               Icon::Empty},
             {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
             // onlineJob actions
         };
@@ -1618,8 +1618,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             //debug actions
 #ifdef KMM_DEBUG
             {Action::NewFeature,                    &KMyMoneyApp::slotNewFeature},
-            {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
 #endif
+            {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
             {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
 
             {Action::OpenAccount,                   &KMyMoneyApp::slotExecuteAction},
@@ -1693,16 +1693,14 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     {
         // Some actions are checkable,
         // so set them here
-        const QVector<Action> checkableActions {
-            Action::ViewTransactionDetail,
-            Action::ViewHideReconciled,
-            Action::ViewHideCategories,
+        const QVector<Action> checkableActions{Action::ViewTransactionDetail,
+                                               Action::ViewHideReconciled,
+                                               Action::ViewHideCategories,
+                                               Action::DebugTraces,
 #ifdef KMM_DEBUG
-            Action::DebugTraces,
-            Action::DebugTimers,
+                                               Action::DebugTimers,
 #endif
-            Action::ViewShowAll
-        };
+                                               Action::ViewShowAll};
 
         for (const auto& it : checkableActions) {
             lutActions[it]->setCheckable(true);
@@ -3136,12 +3134,12 @@ void KMyMoneyApp::slotFileFileInfo()
         qDebug() << "Cannot write kmymoney.dump";
     }
 }
+#endif
 
 void KMyMoneyApp::slotToggleTraces()
 {
     MyMoneyTracer::onOff(pActions[Action::DebugTraces]->isChecked() ? 1 : 0);
 }
-#endif
 
 void KMyMoneyApp::slotToggleTimers()
 {
