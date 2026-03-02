@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 03:45+0000\n"
-"PO-Revision-Date: 2026-02-23 23:08+0100\n"
+"PO-Revision-Date: 2026-03-01 12:31+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -4569,7 +4569,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:45
 #, kde-format
 msgid "(c) 2000-2026 The KMyMoney development team"
-msgstr ""
+msgstr "(c) 2000-2026 KMyMoney utviklerteam"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -15138,7 +15138,7 @@ msgstr "Bruk denne for å forkaste de endrede data."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
 #, kde-format
 msgid "Collapse the items of the account tree"
-msgstr "Skjul alle oppføringene i kontotreet"
+msgstr "Legg sammen alle oppføringene i kontotreet"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
@@ -19477,13 +19477,13 @@ msgstr "Kan ikke koble kontoen til nettbank: %1"
 #: kmymoney/views/kaccountsview.ui:58 kmymoney/views/kcategoriesview.ui:44
 #, kde-format
 msgid "Collapse all accounts in the list"
-msgstr "Skjul alle konti i listen"
+msgstr "Legg sammen alle konti i listen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/views/kaccountsview.ui:68 kmymoney/views/kcategoriesview.ui:54
 #, kde-format
 msgid "Expand all accounts in the list"
-msgstr "Vis alle konti i listen"
+msgstr "Utvid alle konti i listen"
 
 #. i18n: ectx: property (text), widget (QLabel, m_hiddenCategories)
 #: kmymoney/views/kaccountsview.ui:82 kmymoney/views/kcategoriesview.ui:66
