@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-28 00:44+0000\n"
+"POT-Creation-Date: 2026-03-01 00:46+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -22523,14 +22523,14 @@ msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Acceptă"
 
-#: kmymoney/views/ledgerviewpage.cpp:96
+#: kmymoney/views/ledgerviewpage.cpp:97
 #, fuzzy, kde-format
 #| msgid "Filter"
 msgctxt "@info:placeholder Description of filter"
 msgid "Filter text"
 msgstr "Filtru"
 
-#: kmymoney/views/ledgerviewpage.cpp:97
+#: kmymoney/views/ledgerviewpage.cpp:98
 #, fuzzy, kde-format
 #| msgid "Search transactions containing the following text"
 msgctxt "@info:tooltip"

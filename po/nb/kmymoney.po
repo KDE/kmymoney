@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-01 00:46+0000\n"
-"PO-Revision-Date: 2026-02-23 23:08+0100\n"
+"PO-Revision-Date: 2026-03-01 12:31+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -15246,7 +15246,7 @@ msgstr "Bruk denne for å forkaste de endrede data."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
 #, kde-format
 msgid "Collapse the items of the account tree"
-msgstr "Skjul alle oppføringene i kontotreet"
+msgstr "Legg sammen alle oppføringene i kontotreet"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
@@ -16143,17 +16143,14 @@ msgid "Payment Method"
 msgstr "Betalingsmetode"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:782
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "Tilstand"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:784
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Sluttsaldo"
+msgstr "Avslutnigsdato"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, kde-format
@@ -16267,11 +16264,9 @@ msgstr "Overfør til %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&Åpne"
+msgstr "Åpne"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -19634,13 +19629,13 @@ msgstr "Kan ikke koble kontoen til nettbank: %1"
 #: kmymoney/views/kaccountsview.ui:58 kmymoney/views/kcategoriesview.ui:44
 #, kde-format
 msgid "Collapse all accounts in the list"
-msgstr "Skjul alle konti i listen"
+msgstr "Legg sammen alle konti i listen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/views/kaccountsview.ui:68 kmymoney/views/kcategoriesview.ui:54
 #, kde-format
 msgid "Expand all accounts in the list"
-msgstr "Vis alle konti i listen"
+msgstr "Utvid alle konti i listen"
 
 #. i18n: ectx: property (text), widget (QLabel, m_hiddenCategories)
 #: kmymoney/views/kaccountsview.ui:82 kmymoney/views/kcategoriesview.ui:66
