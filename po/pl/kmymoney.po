@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 00:46+0000\n"
+"POT-Creation-Date: 2026-03-04 00:45+0000\n"
 "PO-Revision-Date: 2024-11-30 09:29+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -6343,49 +6343,49 @@ msgstr[2] "Nie zostały zaimportowane żadne nowe transakcje."
 msgid "Statement import statistics"
 msgstr "Statystyki importowania wyciągu"
 
-#: kmymoney/main.cpp:137
+#: kmymoney/main.cpp:136
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:159
+#: kmymoney/main.cpp:158
 #, kde-format
 msgid "language to be used"
 msgstr "użyty język"
 
-#: kmymoney/main.cpp:163
+#: kmymoney/main.cpp:162
 #, kde-format
 msgid "do not open last used file"
 msgstr "nie otwieraj ostatnio używanego pliku"
 
-#: kmymoney/main.cpp:167
+#: kmymoney/main.cpp:166
 #, kde-format
 msgid "enable performance timers"
 msgstr "włączyć liczniki wydajności"
 
-#: kmymoney/main.cpp:171
+#: kmymoney/main.cpp:170
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "nie przechwytuj globalnie wyjątków nieprzechwyconych"
 
-#: kmymoney/main.cpp:177
+#: kmymoney/main.cpp:176
 #, kde-format
 msgid "turn on program traces"
 msgstr "włącz wiadomości diagnostyczne"
 
-#: kmymoney/main.cpp:181
+#: kmymoney/main.cpp:180
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "wyświetl nazwy wszystkich zdefiniowanych obiektów QAction na standardowym "
 "wyjściu i zakończ"
 
-#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:148
 #, kde-format
 msgid "file to open"
 msgstr "plik do otwarcia"
 
-#: kmymoney/main.cpp:294
+#: kmymoney/main.cpp:293
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Nieznany błąd. Zgłoś szczegóły programistom"
@@ -15765,12 +15765,12 @@ msgstr "Średnio"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1456
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1596
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1646
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1723
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1903
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1974
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1498
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1638
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1765
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1945
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2016
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16032,8 +16032,8 @@ msgstr "Saldo zamknięcia"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1670
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2011
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1712
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2053
 #, kde-format
 msgid "Grand Total"
 msgstr "Suma całkowita"
@@ -16384,62 +16384,62 @@ msgid "Yes"
 msgstr "Tak"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:359
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:409
 #: kmymoney/widgets/ktransactionfilter.ui:634
 #, kde-format
 msgid "Transfers"
 msgstr "Przelewy"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:555
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:605
 #, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Data otwarcia"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1442
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1710
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1484
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1752
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Konto"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2234
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2276
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Rzeczywisty"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2239
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2281
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Budżet"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2244
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2286
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Różnica"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2249
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2291
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Prognoza"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2254
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2296
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Średnia ruchoma"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2259
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2301
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Średnia ruchoma cena"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2264
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2306
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
