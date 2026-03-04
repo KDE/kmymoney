@@ -749,6 +749,9 @@ enum Roles {
     SpecialDatesEntryRole, // true if entry is a special dates record
     ReconciliationEntryRole, // true if entry is a reconciliation record
     SchedulesJournalEntryRole, // true if entry is a scheduled journal record
+
+    // Other
+    SortRole,
 };
 
 typedef enum {

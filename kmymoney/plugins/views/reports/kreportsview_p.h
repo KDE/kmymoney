@@ -60,6 +60,7 @@
 #include "ui_kreportsview.h"
 #include "ui_reportcontrol.h"
 
+#include "columnselector.h"
 #include "icons.h"
 #include "kmmtextbrowser.h"
 #include "kmymoneyutils.h"
@@ -110,6 +111,11 @@ public:
         proxyModel->setSourceModel(model);
         proxyModel->setDynamicSortFilter(true);
         view->setModel(proxyModel);
+
+        // add column selector
+        auto columnSelector = new ColumnSelector(view, view->objectName());
+        columnSelector->setAlwaysVisible(QVector<int>({ReportsModel::Columns::ReportName}));
+        columnSelector->setModel(proxyModel);
 
         view->setAllColumnsShowFocus(true);
         view->setAlternatingRowColors(true);

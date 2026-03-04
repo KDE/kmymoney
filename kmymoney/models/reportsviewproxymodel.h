@@ -29,6 +29,15 @@ public:
 protected:
     bool lessThan(const QModelIndex& left, const QModelIndex& right) const override
     {
+        if (left.column() == ReportsModel::Columns::StartDate || left.column() == ReportsModel::Columns::EndDate) {
+            QDate l = sourceModel()->data(left, eMyMoney::Model::Roles::SortRole).toDate();
+            QDate r = sourceModel()->data(right, eMyMoney::Model::Roles::SortRole).toDate();
+            if (!l.isValid())
+                return true;
+            if (!r.isValid())
+                return false;
+            return l < r;
+        }
         QString l = sourceModel()->data(left, Qt::DisplayRole).toString();
         QString r = sourceModel()->data(right, Qt::DisplayRole).toString();
 
