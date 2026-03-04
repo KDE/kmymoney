@@ -9,6 +9,7 @@
 // QT Includes
 
 #include <QColor>
+#include <QDate>
 #include <QDebug>
 #include <QFont>
 #include <QString>
@@ -21,6 +22,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyutils.h"
+#include "reportgroup.h"
 
 struct ReportsModel::Private
 {
@@ -45,7 +48,7 @@ ReportsModel::~ReportsModel()
 int ReportsModel::columnCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent);
-    return useGroups() ? 2 : 5;
+    return useGroups() ? 4 : 7;
 }
 
 QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -57,6 +60,12 @@ QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int 
             break;
         case Comment:
             return i18nc("Report comment", "Comment");
+            break;
+        case StartDate:
+            return i18nc("Report date range", "Start Date");
+            break;
+        case EndDate:
+            return i18nc("Report date range", "End Date");
             break;
         case Favorite:
             return i18nc("Report favorite", "Favorite");
@@ -82,12 +91,15 @@ QVariant ReportsModel::data(const QModelIndex& index, int role) const
     const MyMoneyReport& report = static_cast<TreeItem<MyMoneyReport>*>(index.internalPointer())->constDataRef();
     switch(role) {
     case Qt::DisplayRole:
-    case Qt::EditRole:
         switch(index.column()) {
         case ReportName:
             return report.name();
         case Comment:
             return report.comment();
+        case EndDate:
+            return !report.isGroup() ? MyMoneyUtils::formatDate(report.toDate()) : QString();
+        case StartDate:
+            return !report.isGroup() ? MyMoneyUtils::formatDate(report.fromDate()) : QString();
         case Favorite:
             return report.isFavorite() ? QStringLiteral("\u2605") : QString();
         case Group:
@@ -96,6 +108,15 @@ QVariant ReportsModel::data(const QModelIndex& index, int role) const
             return report.isModified() ? QStringLiteral("\u2605") : QString();
         default:
             return QStringLiteral("not yet implemented");
+        }
+        break;
+
+    case eMyMoney::Model::Roles::SortRole:
+        switch (index.column()) {
+        case StartDate:
+            return !report.isGroup() ? report.fromDate() : QDate();
+        case EndDate:
+            return !report.isGroup() ? report.toDate() : QDate();
         }
         break;
 
@@ -109,9 +130,12 @@ QVariant ReportsModel::data(const QModelIndex& index, int role) const
 
     case Qt::TextAlignmentRole:
         switch (index.column()) {
+        case StartDate:
+        case EndDate:
+            return QVariant(Qt::AlignRight | Qt::AlignVCenter);
         case Favorite:
         case Modified:
-            return Qt::AlignCenter;
+            return QVariant(Qt::AlignCenter | Qt::AlignVCenter);
         default:
             return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
         }

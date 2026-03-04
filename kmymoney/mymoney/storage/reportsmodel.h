@@ -33,6 +33,8 @@ public:
     enum Columns {
         ReportName,
         Comment,
+        StartDate,
+        EndDate,
         Favorite,
         Modified,
         Group,
