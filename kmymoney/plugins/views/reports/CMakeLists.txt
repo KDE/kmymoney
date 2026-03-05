@@ -6,6 +6,7 @@ set(reportsview_SOURCES
   kbalancechartdlg.cpp
   kreportconfigurationfilterdlg.cpp
   kreportsview.cpp
+  kreporttab.cpp
   reportcontrolimpl.cpp
   reportsview.cpp
   reporttabimpl.cpp
