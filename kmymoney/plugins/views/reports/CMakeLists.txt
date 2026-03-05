@@ -3,28 +3,28 @@ add_subdirectory(core)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/reportsview.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/reportsview.json @ONLY)
 
 set(reportsview_SOURCES
-  reportsview.cpp
+  kbalancechartdlg.cpp
+  kreportconfigurationfilterdlg.cpp
   kreportsview.cpp
+  reportcontrolimpl.cpp
+  reportsview.cpp
+  reporttabimpl.cpp
   tocitem.cpp
   tocitemgroup.cpp
   tocitemreport.cpp
-  kreportconfigurationfilterdlg.cpp
-  reporttabimpl.cpp
-  reportcontrolimpl.cpp
-  kbalancechartdlg.cpp
   )
 
 ki18n_wrap_ui(reportsview_SOURCES
   kreportconfigurationfilterdlg.ui
   kreportsview.ui
   reportcontrol.ui
-  reporttabgeneral.ui
-  reporttabrowcolquery.ui
-  reporttabrowcolpivot.ui
-  reporttabrange.ui
-  reporttabchart.ui
   reporttabcapitalgain.ui
+  reporttabchart.ui
+  reporttabgeneral.ui
   reporttabperformance.ui
+  reporttabrange.ui
+  reporttabrowcolpivot.ui
+  reporttabrowcolquery.ui
   )
 # kconfig_add_kcfg_files(reportsview_SOURCES reportsviewsettings.kcfgc)
 
