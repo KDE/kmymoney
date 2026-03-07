@@ -516,11 +516,19 @@ endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
-  # DebugKMM, Debugfull, Profile
+  # DebugKMM
   set(CMAKE_CXX_FLAGS_DEBUGKMM
-      "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline")
+      "-g3 -O2 -fno-inline")
+  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    set(CMAKE_CXX_FLAGS_DEBUGKMM
+      "${CMAKE_CXX_FLAGS_DEBUGKMM} -fno-reorder-blocks -fno-schedule-insns")
+  endif()
+
+  # Debugfull
   set(CMAKE_CXX_FLAGS_DEBUGFULL
       "-g3 -fno-inline")
+
+  # Profile
   set(CMAKE_CXX_FLAGS_PROFILE
       "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
 
