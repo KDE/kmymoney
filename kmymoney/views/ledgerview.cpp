@@ -1510,6 +1510,12 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
     // call base class implementation
     QTableView::selectionChanged(selected, deselected);
 
+    // this method may get called with selected and deselected being empty
+    // when run on Qt6. in this case, we suppress forwarding the request.
+    if (selected.isEmpty() && deselected.isEmpty()) {
+        return;
+    }
+
     KMMSet<int> allSelectedRows;
     KMMSet<int> selectedRows;
 

@@ -167,30 +167,33 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)
 
 void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
-    SelectedObjects selections;
-
     QTreeView::selectionChanged(selected, deselected);
-    if (!selected.isEmpty()) {
-        QModelIndexList idxList = selected.indexes();
-        if (!idxList.isEmpty()) {
-            auto objId = selected.indexes().front().data(eMyMoney::Model::IdRole).toString();
-            const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
-            if (!account.id().isEmpty()) {
-                selections.addSelection(SelectedObjects::Account, account.id());
-                if (!account.institutionId().isEmpty()) {
-                    selections.addSelection(SelectedObjects::Institution, account.institutionId());
-                }
-            } else {
 
-                const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
-                if (!institution.id().isEmpty()) {
-                    selections.addSelection(SelectedObjects::Institution, institution.id());
+    // this method may get called with selected and deselected being empty
+    // when run on Qt6. in this case, we suppress forwarding the request.
+    if (!selected.isEmpty() || !deselected.isEmpty()) {
+        SelectedObjects selections;
+        if (!selected.isEmpty()) {
+            QModelIndexList idxList = selected.indexes();
+            if (!idxList.isEmpty()) {
+                auto objId = selected.indexes().front().data(eMyMoney::Model::IdRole).toString();
+                const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
+                if (!account.id().isEmpty()) {
+                    selections.addSelection(SelectedObjects::Account, account.id());
+                    if (!account.institutionId().isEmpty()) {
+                        selections.addSelection(SelectedObjects::Institution, account.institutionId());
+                    }
+                } else {
+                    const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
+                    if (!institution.id().isEmpty()) {
+                        selections.addSelection(SelectedObjects::Institution, institution.id());
+                    }
                 }
             }
         }
+        // since no object was selected reset the object selection
+        Q_EMIT requestSelectionChange(selections);
     }
-    // since no object was selected reset the object selection
-    Q_EMIT requestSelectionChange(selections);
 }
 
 void KMyMoneyAccountTreeView::resizeEvent(QResizeEvent* event)
