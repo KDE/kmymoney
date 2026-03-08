@@ -17063,7 +17063,7 @@ msgid ""
 "<p>Select this option to cause the report to be shown as a chart when you "
 "first open the report.  Otherwise, it will come up as a text report.</p>"
 msgstr ""
-"<p>选中此项后，当第一次打开报表时，报表显示为图形。否则，报表将以文字报表形式"
+"<p>选中此项后，当第一次打开报表时，报表显示为图形。否则，报表将以文本报表形式"
 "显示。</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShowChart)

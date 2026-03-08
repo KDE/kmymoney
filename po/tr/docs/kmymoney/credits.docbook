@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="credits">
+<chapterinfo>
+  <date
+>2024‒12‒01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Emeği Geçenler</title>
+
+<para
+>Program telif hakkı &copy; 2000–2024 &kmymoney; Geliştirme Takımı </para>
+
+<para
+>&underGPL; </para>
+
+<para
+>Belgelendirme telif hakkı &copy; 2000–2024 &kmymoney; Geliştirme Takımı </para>
+
+<para
+>Çeviri: Emir SARI <email
+>emir_sari@icloud.com</email
+></para
+> 
+<para
+>&underFDL; </para>
+
+<sect1 id="credits.active"
+><title
+>Etkin Geliştiriciler</title>
+<itemizedlist>
+  <listitem>
+    <para
+><emphasis
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</emphasis
+>: Yayım müdürü ve bakımcı, çekirdek işletke, proje yönetimi. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Ralf.Habacker; &Ralf.Habacker.mail;</emphasis
+>: Geliştirici. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.special"
+><title
+>Özel Teşekkürler</title>
+<itemizedlist>
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Allan.Anderson;</emphasis
+>: Yamalar, CSV içe/dışa aktarma. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Marko Käning <email
+>mk-lists@email.de</email
+></emphasis
+>: Yamalar, paketleme ve macOS için KF5 CI. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Laurent Montel <email
+>montel@kde.org</email
+></emphasis
+>: Yamalar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></emphasis
+>: Geliştirici ve sanatçı. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</emphasis
+>: Belgelendirme ve kullanıcı desteği. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Wolfgang Rohdewald <email
+>woro@users.sourceforge.net</email
+></emphasis
+>: Yamalar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Kevin Tambascio <email
+>tambascio@users.sourceforge.net</email
+></emphasis
+>: İlk yatırımlar desteği. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Robert.Wadley; &Robert.Wadley.mail;</emphasis
+>: Sanatçı; simgeler, açılış ekranı, ana görünüm, ekran görüntüleri. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.past"
+><title
+>Etkin Olmayan Geliştiriciler ve Önceki Sürümlere Olan Katkılar</title>
+<itemizedlist>
+  <listitem>
+    <para
+><emphasis
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</emphasis
+>: &gnucash; içe aktarımı, veri tabanı desteği. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>John C <email
+>tacoturtle@users.sourceforge.net</email
+></emphasis
+>: Geliştirici. </para>
+  </listitem>
+ 
+  <listitem>
+    <para
+><emphasis
+>&Christian.David; &Christian.David.mail;</emphasis
+>: Geliştirici. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail;</emphasis
+>: Özgün konsept, ilk kaynak kodları, proje yönetimi. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>Bernd Gonsior <email
+>bernd.gonsior@googlemail.com</email
+></emphasis
+>: Raporlar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Ace.Jones; &Ace.Jones.mail;</emphasis
+>: Raporlama mantığı, OFX içe aktarma, çevrimiçi kurlar, belgelendirme. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Roger.Lum; &Roger.Lum.mail;</emphasis
+>: Belgelendirme. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>Ian Neal <email
+>iann_bugzilla@blueyonder.co.uk</email
+></emphasis
+>: İşlem planlama ve takvimler. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Cristian.Onet; &Cristian.Onet.mail;</emphasis
+>: Yamalar ve eklentiler. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></emphasis
+>: Proje yönetimi, önceki sürümler. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Alvaro.Soliverez; &Alvaro.Soliverez.mail;</emphasis
+>: Öngörü, raporlar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Darin.Strait; &Darin.Strait.mail;</emphasis
+>: Belgelendirme. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Fernando.Vilas; &Fernando.Vilas.mail;</emphasis
+>: Veri tabanı desteği. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Lukasz.Wojnilowicz; &Lukasz.Wojnilowicz.mail;</emphasis
+>: Geliştirici. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Colin.Wright; &Colin.Wright.mail;</emphasis
+>: Yamalar ve belgelendirme. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</emphasis
+>: Yamalar ve Woob tümleşimi. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+</chapter>
