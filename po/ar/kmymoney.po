@@ -2213,7 +2213,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:831
 #, kde-format
 msgid "Please select a parent account."
-msgstr "رجاء اختر حساب أبّ."
+msgstr "رجاء اختر حساب أب."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:890
 #, kde-format
@@ -11983,7 +11983,7 @@ msgstr "استثماراتي"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2599
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
-msgstr "اختر حساب استثمار أبّ أو أدخل اسمًا جديدًا. المخزون %1"
+msgstr "اختر حساب استثمار أب أو أدخل اسمًا جديدًا. المخزون %1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2626
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2643
