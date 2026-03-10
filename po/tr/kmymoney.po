@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-06 00:44+0000\n"
-"PO-Revision-Date: 2026-02-28 10:56+0300\n"
+"PO-Revision-Date: 2026-03-09 21:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1703,7 +1703,7 @@ msgid ""
 "updating this security during future price updates or <b>Cancel</b> to stop "
 "the current update operation."
 msgstr ""
-"%2 konumundan %1 için döviz kuru alınamadı. Çevrimiçi fiyat kaynağını bu "
+"%2 konumundan %1 için döviz kuru alınamadı. Çevrim içi fiyat kaynağını bu "
 "menkul kıymetten kalıcı olarak kaldırmak için <b>Hayır</b>’a basın, "
 "gelecekteki fiyat güncellemeleri sırasında bu menkul kıymeti güncellemeyi "
 "sürdürmek için <b>Evet</b>’e basın veya geçerli güncelleme işlemini "
@@ -2002,7 +2002,7 @@ msgstr "Fiyatı Düzenle…"
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Online Price Update..."
-msgstr "Çevrimiçi Fiyatı Güncelle…"
+msgstr "Çevrim İçi Fiyatı Güncelle…"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:346
 #, kde-format
@@ -2078,7 +2078,7 @@ msgstr "Değiştir"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
-msgstr "Çevrimiçi Kurlar"
+msgstr "Çevrim İçi Kurlar"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:96
@@ -3655,7 +3655,7 @@ msgstr "Son mutabık kalma tarihini göster"
 #: kmymoney/dialogs/settings/ksettingshome.ui:210
 #, kde-format
 msgid "Show balance-status of mapped online accounts"
-msgstr "Eşlenmiş çevrimiçi hesapların bakiye durumunu göster"
+msgstr "Eşlenmiş çevrim içi hesapların bakiye durumunu göster"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCountOfClearedTransactions)
 #: kmymoney/dialogs/settings/ksettingshome.ui:217
@@ -3895,7 +3895,7 @@ msgid ""
 "</ul>\n"
 "</p>"
 msgstr ""
-"<p>Çevrimiçi kaynak tarafından döndürülen verinin daha kolay işlenmesi için "
+"<p>Çevrim içi kaynak tarafından döndürülen verinin daha kolay işlenmesi için "
 "K Param, düzenli ifadelerle ayrıştırılmadan önce genellikle kullanılmayan "
 "parçaları soyar. Alanların eşleşmesi bu ögelere bağlıysa soymayı kapatmak "
 "için bu seçeneği kullanın.</p>\n"
@@ -3925,13 +3925,13 @@ msgstr "Şuna göre tanımla"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:177
 #, kde-format
 msgid "Create a new source entry for online quotes"
-msgstr "Çevrimiçi kurlar için yeni bir kaynak girdisi oluştur"
+msgstr "Çevrim içi kurlar için yeni bir kaynak girdisi oluştur"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:180
 #, kde-format
 msgid "Use this to create a new entry for online quotes"
-msgstr "Çevrimiçi kurlar için yeni bir girdi oluşturmak için bunu kullanın."
+msgstr "Çevrim içi kurlar için yeni bir girdi oluşturmak için bunu kullanın."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:183
@@ -3950,7 +3950,7 @@ msgstr "Seçili kaynak girdisini sil"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:193
 #, kde-format
 msgid "Use this to delete the selected online source entry"
-msgstr "Seçili çevrimiçi kaynak girdisini silmek için bunu kullanın."
+msgstr "Seçili çevrim içi kaynak girdisini silmek için bunu kullanın."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_dumpCSVProfile)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:219
@@ -4002,7 +4002,7 @@ msgstr "Alacaklı Tanımlayıcı"
 #: kmymoney/dialogs/settings/ksettingsplugins.cpp:67
 #, kde-format
 msgid "Online Banking Operations"
-msgstr "Çevrimiçi Bankacılık İşlemleri"
+msgstr "Çevrim İçi Bankacılık İşlemleri"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsRegister)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:14
@@ -4617,7 +4617,7 @@ msgstr "Tatil bölgeleri tümleştirmesi"
 #: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:91
 #, kde-format
 msgid "Online banking"
-msgstr "Çevrimiçi bankacılık"
+msgstr "Çevrim İçi bankacılık"
 
 #: kmymoney/kcreditswindow.cpp:43
 #, kde-format
@@ -4751,7 +4751,7 @@ msgstr "Finansal çatı"
 #: kmymoney/kcreditswindow.cpp:105
 #, kde-format
 msgid "Online banking framework"
-msgstr "Çevrimiçi bankacılık çatısı"
+msgstr "Çevrim içi bankacılık çatısı"
 
 #: kmymoney/kcreditswindow.cpp:111
 #, kde-format
@@ -5277,7 +5277,7 @@ msgstr "Yatırımı Sil…"
 #: kmymoney/kmymoney.cpp:1491
 #, kde-format
 msgid "Online price update..."
-msgstr "Çevrimiçi Fiyatı Güncelle…"
+msgstr "Çevrim İçi Fiyatı Güncelle…"
 
 #: kmymoney/kmymoney.cpp:1492
 #, kde-format
@@ -6367,7 +6367,7 @@ msgstr "Eksik veya çalışmayan Finance::Quote kurulumu."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Online quote source with name '%1' unknown."
-msgstr "Bilinmeyen “%1” adındaki çevrimiçi kur kaynağı."
+msgstr "Bilinmeyen “%1” adındaki çevrim içi kur kaynağı."
 
 #: kmymoney/misc/kmmyesno.cpp:21
 #, kde-format
@@ -6580,7 +6580,7 @@ msgstr "Tür"
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
-msgstr "Hesapta çevrimiçi eşleme kurulu olup olmadığı"
+msgstr "Hesapta çevrim içi eşleme kurulu olup olmadığı"
 
 #: kmymoney/models/statementmodel.cpp:123
 #: kmymoney/mymoney/storage/accountsmodel.cpp:509
@@ -8716,7 +8716,7 @@ msgstr "Tür"
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
-msgstr "Çevrimiçi"
+msgstr "Çevrim İçi"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:473
 #, kde-format
@@ -11524,7 +11524,7 @@ msgstr "Her hisse senedine bir yatırım hesabı için &uyar"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:81
 #, kde-format
 msgid "Online price quotes"
-msgstr "Çevrimiçi Kurlar"
+msgstr "Çevrim İçi Kurlar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkFinanceQuote)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:87
@@ -11606,7 +11606,7 @@ msgstr "Kur kaynağı: %1"
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:20
 #, kde-format
 msgid "Online Quotes - Select price source"
-msgstr "Çevrimiçi Kurlar — Fiyat Kaynağı Seç"
+msgstr "Çevrim İçi Kurlar — Fiyat Kaynağı Seç"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:46
@@ -11621,7 +11621,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:62
 #, kde-format
 msgid "Do &not perform online quotes for this investment"
-msgstr "Bu yatırım için çevrimiçi kurları &alma"
+msgstr "Bu yatırım için çevrim içi kurları &alma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, buttonSelectSource)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:72
@@ -12376,7 +12376,7 @@ msgid ""
 msgstr ""
 "<qt>\n"
 "Lütfen aşağıdaki listeden <b>uygulama</b> hesabının \n"
-"eşlenmesini istediğiniz <b>çevrimiçi</b> hesabı seçin.\n"
+"eşlenmesini istediğiniz <b>çevrim içi</b> hesabı seçin.\n"
 "</qt>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
@@ -12403,7 +12403,7 @@ msgstr "Hesap numarası"
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:88
 #, kde-format
 msgid "Online Accounts"
-msgstr "Çevrimiçi Hesaplar"
+msgstr "Çevrim İçi Hesaplar"
 
 #. i18n: ectx: property (text), widget (QPushButton, assignButton)
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:125
@@ -12461,7 +12461,7 @@ msgstr "Tarih &seç"
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
-msgstr "Çevrimiçi ayarlar"
+msgstr "Çevrim İçi Ayarlar"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:318
 #, kde-format
@@ -12866,7 +12866,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:304
 #, kde-format
 msgid "Supports online statements<br/>"
-msgstr "Çevrimiçi hesaplar desteklenir<br/>"
+msgstr "Çevrim içi hesaplar desteklenir<br/>"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:252
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:306
@@ -12897,7 +12897,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:268
 #, kde-format
 msgid "Does not support online banking"
-msgstr "Çevrimiçi bankacılığı desteklemiyor"
+msgstr "Çevrim içi bankacılığı desteklemiyor"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:278
 #, kde-format
@@ -12954,7 +12954,7 @@ msgstr "HATA: %1"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:14
 #, kde-format
 msgid "Online Banking Account Setup"
-msgstr "Çevrimiçi Bankacılık Hesap Ayarları"
+msgstr "Çevrim içi Bankacılık Hesap Ayarları"
 
 #. i18n: ectx: property (title), widget (QWizardPage, FIPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:21
@@ -13016,8 +13016,8 @@ msgid ""
 msgstr ""
 "Lütfen internet bankacılığı için bu bankaya oturum açmak için kullandığınız "
 "kullanıcı adı ve parolayı girin. Lütfen birçok bankanın ayrı bir kayıt "
-"gerektirdiğini ve yalnızca evden çevrimiçi bankacılık için ayrı bir PIN veya "
-"parola atadığını unutmayın."
+"gerektirdiğini ve yalnızca evden çevrim içi bankacılık için ayrı bir PIN "
+"veya parola atadığını unutmayın."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:205
@@ -13135,7 +13135,7 @@ msgid ""
 "Congratulations: you have successfully set up your bank for online banking "
 "via OFX."
 msgstr ""
-"Tebrikler: OFX üzerinden bankanızı, çevrimiçi bankacılık için "
+"Tebrikler: OFX üzerinden bankanızı, çevrim içi bankacılık için "
 "yapılandırdınız."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatus.cpp:52
@@ -14856,7 +14856,7 @@ msgstr ""
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:935
 #, kde-format
 msgid "Inserting online jobs."
-msgstr "Çevrimiçi işler ekleniyor."
+msgstr "Çevrim içi işler ekleniyor."
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2035
 #, kde-format
@@ -15841,10 +15841,10 @@ msgid ""
 "credit transfer and your online banking plugins are available.</p></body></"
 "html>"
 msgstr ""
-"<html><head/><body><p>Bu hesap çevrimiçi bankacılığı desteklemiyor.</"
+"<html><head/><body><p>Bu hesap çevrim içi bankacılığı desteklemiyor.</"
 "p><p>Bunun bir hata olduğunu düşünüyorsanız lütfen eklentinin bu tür bir "
-"kredi havalesi için olup olmadığını ve çevrimiçi bankacılık eklentilerin var "
-"olup olmadığını denetleyin.</p></body></html>"
+"kredi havalesi için olup olmadığını ve çevrim içi bankacılık eklentilerin "
+"var olup olmadığını denetleyin.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonEnque)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:230
@@ -18177,7 +18177,7 @@ msgid ""
 "Select what <b>online</b> account you want to map to the <b>application</b> "
 "account..."
 msgstr ""
-"<b>Uygulama</b> hesabı ile eşleştireceğiniz <b>çevrimiçi</b> hesabı seçin…"
+"<b>Uygulama</b> hesabı ile eşleştireceğiniz <b>çevrim içi</b> hesabı seçin…"
 
 #: kmymoney/plugins/woob/woob.cpp:60
 #, kde-format
@@ -19563,19 +19563,19 @@ msgid ""
 "account? Depending on the details of the online banking method used, this "
 "action cannot be reverted."
 msgstr ""
-"<b>%1</b> hesabının bir çevrimiçi hesapla eşlemesini gerçekten kaldırmak "
-"istiyor musunuz? Kullanılan çevrimiçi bankacılık yönteminin ayrıntılarına "
+"<b>%1</b> hesabının bir çevrim içi hesapla eşlemesini gerçekten kaldırmak "
+"istiyor musunuz? Kullanılan çevrim içi bankacılık yönteminin ayrıntılarına "
 "bağlı olarak, bu işlem geri alınamaz."
 
 #: kmymoney/views/kaccountsview.cpp:276
 #, kde-format
 msgid "Remove mapping to online account"
-msgstr "Çevrimiçi hesaba eşlemeyi kaldır"
+msgstr "Çevrim içi hesaba eşlemeyi kaldır"
 
 #: kmymoney/views/kaccountsview.cpp:294
 #, kde-format
 msgid "Unable to unmap account from online account: %1"
-msgstr "Çevrimiçi hesabı eşleme kaldıramıyor: %1"
+msgstr "Çevrim içi hesabı eşleme kaldıramıyor: %1"
 
 #: kmymoney/views/kaccountsview.cpp:313
 #, kde-format
@@ -19585,8 +19585,8 @@ msgid ""
 "account. Please cancel if you intended to map the investment account, "
 "continue otherwise"
 msgstr ""
-"Bir komisyon hesabını çevrimiçi bir hesapla eşleştirmeye çalışıyorsunuz. Bu "
-"genellikle önerilmez. Genel olarak, yatırım hesabının çevrimiçi hesapla "
+"Bir komisyon hesabını çevrim içi bir hesapla eşleştirmeye çalışıyorsunuz. Bu "
+"genellikle önerilmez. Genel olarak, yatırım hesabının çevrim içi hesapla "
 "eşleştirilmesi gerekir. Yatırım hesabını eşleştirmek istiyorsanız lütfen "
 "iptal edin, aksi takdirde sürdürün"
 
@@ -19599,12 +19599,12 @@ msgstr "Komisyon hesabı eşleştiriliyor"
 #, kde-format
 msgctxt "@title:menu Online provider selection"
 msgid "Online provider"
-msgstr "Çevrimiçi Sağlayıcı"
+msgstr "Çevrim İçi Sağlayıcı"
 
 #: kmymoney/views/kaccountsview.cpp:373
 #, kde-format
 msgid "Unable to map account to online account: %1"
-msgstr "Hesap, çevrimiçi hesapla eşleştirilemiyor: %1"
+msgstr "Hesap, çevrim içi hesapla eşleştirilemiyor: %1"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/views/kaccountsview.ui:58 kmymoney/views/kcategoriesview.ui:44
@@ -19668,7 +19668,7 @@ msgstr "Bu hesap etkin bir planın içinde"
 #: kmymoney/views/kaccountsview_p.h:369
 #, kde-format
 msgid "This account is still mapped to an online account"
-msgstr "Bu hesap hâlâ çevrimiçi bir hesapla eşleniyor"
+msgstr "Bu hesap hâlâ çevrim içi bir hesapla eşleniyor"
 
 #: kmymoney/views/kcategoriesview.cpp:156
 #, kde-format
@@ -21215,7 +21215,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
-msgstr "Hesap bakiyesi ve çevrimiçi bakiye arasındaki fark %1."
+msgstr "Hesap bakiyesi ve çevrim içi bakiye arasındaki fark %1."
 
 #: kmymoney/views/ledgerview.cpp:1048
 #, kde-format
@@ -21598,7 +21598,7 @@ msgstr "yok"
 #, kde-format
 msgctxt "Label in ledger for online balance row"
 msgid "Online Balance"
-msgstr "Çevrimiçi Bakiye"
+msgstr "Çevrim İçi Bakiye"
 
 #: kmymoney/views/payeeidentifierselectiondelegate.cpp:42
 #, kde-format
@@ -23053,7 +23053,7 @@ msgid ""
 "date."
 msgstr ""
 "Lütfen seçili açılış tarihi için doğru dönüştürmeyi girdiğinizden emin olun. "
-"Çevrimiçi bir kur talep ettiyseniz farklı bir tarih için sağlanmış olabilir."
+"Çevrim içi bir kur talep ettiyseniz farklı bir tarih için sağlanmış olabilir."
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
@@ -23268,7 +23268,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:226
 #, kde-format
 msgid "Online quote"
-msgstr "Çevrimiçi kurlar"
+msgstr "Çevrim İçi Kurlar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
@@ -23796,7 +23796,7 @@ msgstr ""
 "Bir kurum tarafından yönetilen hesaplara genellikle hesap numarası adı "
 "verilen benzersiz bir numara verilir. Numarayı buraya girin.\n"
 "\n"
-"K Param şu anda bu numarayı yalnızca bazı çevrimiçi bankacılık işlevleri "
+"K Param şu anda bu numarayı yalnızca bazı çevrim içi bankacılık işlevleri "
 "için kullanır."
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_iban)
@@ -24416,7 +24416,7 @@ msgid ""
 "Enter the details below and click <b>Next</b> to continue entering the "
 "online update details."
 msgstr ""
-"Ayrıntıları aşağıya girin ve çevrimiçi güncelleme ayrıntılarını girmeyi "
+"Ayrıntıları aşağıya girin ve çevrim içi güncelleme ayrıntılarını girmeyi "
 "sürdürmek için <b>Sonraki</b>’ye tıklayın."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
@@ -24607,7 +24607,7 @@ msgstr "Yeni Yatırım Sihirbazı"
 #: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:14
 #, kde-format
 msgid "Online Update"
-msgstr "Çevrimiçi Güncelleme"
+msgstr "Çevrim İçi Güncelleme"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
 #: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:20
@@ -24616,8 +24616,8 @@ msgid ""
 "Select an online source and click <b>Finish</b> to store the investment "
 "data. If you do not want to use online updates, just leave the data as is."
 msgstr ""
-"Bir çevrimiçi kaynak seçin ve yatırım verisini saklamak için <b>Bitir</b>’e "
-"tıklayın. Çevrimiçi güncellemeleri kullanmak istemiyorsanız veriyi olduğu "
+"Bir çevrim içi kaynak seçin ve yatırım verisini saklamak için <b>Bitir</b>’e "
+"tıklayın. Çevrim içi güncellemeleri kullanmak istemiyorsanız veriyi olduğu "
 "gibi bırakın."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_4)
@@ -24630,7 +24630,7 @@ msgstr "Finance::Quote kullan"
 #: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:75
 #, kde-format
 msgid "Online Source"
-msgstr "Çevrimiçi kaynak"
+msgstr "Çevrim içi kaynak"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_6)
 #: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:104
