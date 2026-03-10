@@ -61,6 +61,8 @@ class KMM_MYMONEY_EXPORT ParametersModel : public MyMoneyModel<ParameterItem>
     Q_OBJECT
 
 public:
+    using MyMoneyModel<ParameterItem>::load;
+
     enum Column {
         ParameterKey = 0,
         ParameterValue,

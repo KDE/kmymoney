@@ -126,7 +126,7 @@ private Q_SLOTS:
      * override the MyMoneyModel::load() method here so that it cannot
      * be called, as it is useless in the context of this class
      */
-    void load(const QMap<QString, ReconciliationEntry>& list);
+    void load(const QMap<QString, ReconciliationEntry>& list) override;
     void doLoad();
 
 private:

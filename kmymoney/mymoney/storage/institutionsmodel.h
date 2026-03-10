@@ -43,7 +43,7 @@ public:
 
     bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) final override;
 
-    void load(const QMap<QString, MyMoneyInstitution>& list);
+    void load(const QMap<QString, MyMoneyInstitution>& list) override;
     void addAccount(const QString& institutionId, const QString& accountId);
     void removeAccount(const QString& institutionId, const QString& accountId);
 

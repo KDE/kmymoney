@@ -169,6 +169,8 @@ public:
         QDate lastTransaction;
     };
 
+    using MyMoneyModel<JournalEntry>::load;
+
     explicit JournalModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     virtual ~JournalModel();
 
@@ -318,6 +320,8 @@ class KMM_MYMONEY_EXPORT JournalModelNewTransaction : public JournalModel
     Q_OBJECT
 
 public:
+    using MyMoneyModel<JournalEntry>::load;
+
     explicit JournalModelNewTransaction(QObject* parent = nullptr);
     virtual ~JournalModelNewTransaction();
 
@@ -342,7 +346,8 @@ protected:
         return false;
     }
 
-    void load(const QMap<QString, MyMoneyTransaction>& list) {
+    void load(const QMap<QString, QSharedPointer<MyMoneyTransaction>>& list)
+    {
         Q_UNUSED(list);
     };
 };

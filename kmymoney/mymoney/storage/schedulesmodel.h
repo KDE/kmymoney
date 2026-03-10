@@ -81,8 +81,7 @@ public:
                                           QDate date,
                                           const QStringList& accounts) const;
 
-
-    void load(const QMap<QString, MyMoneySchedule>& list);
+    void load(const QMap<QString, MyMoneySchedule>& list) override;
     void setColorScheme(ColorScheme scheme, const QColor& color);
 
 protected:
