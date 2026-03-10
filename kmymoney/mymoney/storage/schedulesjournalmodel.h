@@ -36,6 +36,8 @@ public:
         } Columns;
     };
 
+    using MyMoneyModel<JournalEntry>::load;
+
     explicit SchedulesJournalModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     ~SchedulesJournalModel();
 

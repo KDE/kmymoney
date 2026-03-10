@@ -72,6 +72,8 @@ class KMM_MYMONEY_EXPORT SpecialDatesModel : public MyMoneyModel<SpecialDateEntr
     Q_OBJECT
 
 public:
+    using MyMoneyModel<SpecialDateEntry>::load;
+
     explicit SpecialDatesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     ~SpecialDatesModel();
 

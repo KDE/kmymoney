@@ -77,7 +77,7 @@ public:
 
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
-    void load(const QMap<QString, MyMoneyAccount>& list);
+    void load(const QMap<QString, MyMoneyAccount>& list) override;
 
     void addItem(MyMoneyAccount& account);
 

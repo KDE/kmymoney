@@ -536,7 +536,7 @@ public:
         endResetModel();
     }
 
-    void load(const QMap<QString, T>& list)
+    virtual void load(const QMap<QString, T>& list)
     {
         QElapsedTimer t;
 

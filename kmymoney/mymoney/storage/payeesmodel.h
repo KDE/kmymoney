@@ -86,7 +86,8 @@ protected:
         return false;
     }
 
-    void load(const QMap<QString, MyMoneyPayee>& list) {
+    void load(const QMap<QString, MyMoneyPayee>& list) override
+    {
         Q_UNUSED(list);
     };
 };

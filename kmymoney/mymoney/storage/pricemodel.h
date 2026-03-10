@@ -85,6 +85,8 @@ public:
         MaxColumns,
     };
 
+    using MyMoneyModel<PriceEntry>::load;
+
     explicit PriceModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     virtual ~PriceModel();
 
