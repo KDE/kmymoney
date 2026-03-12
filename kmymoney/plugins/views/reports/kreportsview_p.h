@@ -258,11 +258,13 @@ public:
 
     void saveState()
     {
-        KSharedConfigPtr config = KSharedConfig::openConfig();
-        KConfigGroup grp = config->group("Last Use Settings");
+        if (!m_needLoad) {
+            KSharedConfigPtr config = KSharedConfig::openConfig();
+            KConfigGroup grp = config->group("Last Use Settings");
 
-        grp.writeEntry("KReportsViewSplitterSize", ui.m_splitter->saveState());
-        grp.sync();
+            grp.writeEntry("KReportsViewSplitterSize", ui.m_splitter->saveState());
+            grp.sync();
+        }
     }
 
     void restoreState()
