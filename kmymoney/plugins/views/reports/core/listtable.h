@@ -187,6 +187,8 @@ public:
     }
 
 protected:
+    QString toXml(const QString& tagName) const;
+
     void render(QString&, QString&) const;
 
     /**

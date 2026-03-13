@@ -47,6 +47,7 @@ class QueryTable : public ListTable
 {
 public:
     explicit QueryTable(const MyMoneyReport&);
+    QString toXml() const override;
     void init();
 
 protected:

@@ -511,8 +511,13 @@ bool ListTable::saveToXml(const QString& file)
 
 QString ListTable::toXml() const
 {
+    return toXml(QLatin1String("ListTable"));
+}
+
+QString ListTable::toXml(const QString& tagName) const
+{
     AlkDomDocument doc;
-    AlkDomElement el = doc.createElement("ListTable");
+    AlkDomElement el = doc.createElement(tagName);
     QString name = m_config.name();
     el.setAttribute("name", name);
 

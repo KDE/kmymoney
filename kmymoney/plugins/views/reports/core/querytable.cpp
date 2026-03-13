@@ -69,6 +69,11 @@ QueryTable::QueryTable(const MyMoneyReport& _report): ListTable(_report)
     init();
 }
 
+QString QueryTable::toXml() const
+{
+    return ListTable::toXml(QLatin1String("QueryTable"));
+}
+
 void QueryTable::init()
 {
     m_columns.clear();
