@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-13 00:44+0000\n"
-"PO-Revision-Date: 2026-02-28 12:37+0100\n"
+"PO-Revision-Date: 2026-03-13 10:09+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -9269,29 +9269,25 @@ msgid "Name"
 msgstr "Naam"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:59
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Commentaar"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
 msgstr "Favoriet"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Groepen"
+msgstr "Groep"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Modified"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
 msgstr "Gewijzigd"
@@ -16885,17 +16881,15 @@ msgstr "Rapporten"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "Standaard Rapport"
+msgstr "Standaard rapporten"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Eigen rapport"
+msgstr "Aangepaste rapporten"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:289
 #, kde-format

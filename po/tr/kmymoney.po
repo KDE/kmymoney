@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-13 00:44+0000\n"
-"PO-Revision-Date: 2026-03-09 21:41+0300\n"
+"PO-Revision-Date: 2026-03-13 14:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -9193,32 +9193,28 @@ msgid "Name"
 msgstr "Ad"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:59
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Açıklama"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
-msgstr "Sık Kullanılanlar"
+msgstr "Sık Kullanılan"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Gruplar"
+msgstr "Grup"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Modified"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
-msgstr "Değiştirilmiş"
+msgstr "Değiştirilme"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:153
 #, kde-format
@@ -16762,17 +16758,15 @@ msgstr "Raporlar"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "Öntanımlı Rapor"
+msgstr "Öntanımlı raporlar"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Özel Rapor"
+msgstr "Özel raporlar"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:289
 #, kde-format

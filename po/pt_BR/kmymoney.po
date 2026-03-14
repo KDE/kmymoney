@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-13 00:44+0000\n"
-"PO-Revision-Date: 2026-02-28 06:44-0300\n"
+"PO-Revision-Date: 2026-03-13 08:33-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -9252,29 +9252,25 @@ msgid "Name"
 msgstr "Nome"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:59
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Comentário"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
-msgstr "Favoritos"
+msgstr "Favorito"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Grupos"
+msgstr "Grupo"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Modified"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
 msgstr "Modificado"
@@ -16858,17 +16854,15 @@ msgstr "Relatórios"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "Relatório predefinido"
+msgstr "Relatórios predefinidos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Relatório personalizado"
+msgstr "Relatórios personalizados"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:289
 #, kde-format

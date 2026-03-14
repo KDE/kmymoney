@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-13 00:44+0000\n"
-"PO-Revision-Date: 2026-03-01 01:24+0100\n"
+"PO-Revision-Date: 2026-03-13 12:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -9278,29 +9278,25 @@ msgid "Name"
 msgstr "Nombre"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:59
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Comentario"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
 msgstr "Favorito"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Grupos"
+msgstr "Grupo"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Modified"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
 msgstr "Modificado"
@@ -16903,17 +16899,15 @@ msgstr "Informes"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "Informe predeterminado"
+msgstr "Informes predeterminados"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Informe personalizado"
+msgstr "Informes personalizados"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:289
 #, kde-format
@@ -26277,47 +26271,3 @@ msgstr "Procesar un informe específico"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Solo se permite una de las opciones --csv y --html"
-
-#~ msgid ""
-#~ "Could not find reportgroup \"%1\" for report \"%2\".\n"
-#~ "Please report this error to the developer's list: kmymoney-devel@kde.org"
-#~ msgstr ""
-#~ "No se ha podido encontrar el grupo de informes «%1» para el informe "
-#~ "«%2».\n"
-#~ "Informe de este error a la lista de desarrolladores: kmymoney-devel@kde."
-#~ "org"
-
-#~ msgctxt "To open a new report"
-#~ msgid "&Open"
-#~ msgstr "&Abrir"
-
-#~ msgctxt "To print a report"
-#~ msgid "&Print"
-#~ msgstr "&Imprimir"
-
-#~ msgctxt "To export a report"
-#~ msgid "&Export to PDF file"
-#~ msgstr "&Exportar a archivo PDF"
-
-#~ msgctxt "Configure a report"
-#~ msgid "&Configure"
-#~ msgstr "&Configurar"
-
-#~ msgid "&New report"
-#~ msgstr "&Nuevo informe"
-
-#~ msgid "&Delete"
-#~ msgstr "&Borrar"
-
-#~ msgctxt "To export reports"
-#~ msgid "&Export to PDF files"
-#~ msgstr "&Exportar a archivos PDF"
-
-#~ msgid "Favorite Reports"
-#~ msgstr "Informes favoritos"
-
-#~ msgid "Old Customized Reports"
-#~ msgstr "Informes personalizados antiguos"
-
-#~ msgid "Value/Balance History"
-#~ msgstr "Historial de valor/saldo"

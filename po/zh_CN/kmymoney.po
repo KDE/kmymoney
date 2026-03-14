@@ -8970,32 +8970,28 @@ msgid "Name"
 msgstr "名称"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:59
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
-msgstr "说明"
+msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
-msgstr "收藏"
+msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "组"
+msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Modify"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
-msgstr "修改"
+msgstr ""
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:153
 #, kde-format
@@ -16323,17 +16319,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "默认报表"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "自定义报表"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:289
 #, kde-format
@@ -25233,27 +25227,3 @@ msgstr ""
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr ""
-
-#~ msgctxt "To open a new report"
-#~ msgid "&Open"
-#~ msgstr "打开(&O)"
-
-#~ msgctxt "To print a report"
-#~ msgid "&Print"
-#~ msgstr "打印(&P)"
-
-#~ msgctxt "Configure a report"
-#~ msgid "&Configure"
-#~ msgstr "配置(&C)"
-
-#~ msgid "&New report"
-#~ msgstr "新建报表(&N)"
-
-#~ msgid "&Delete"
-#~ msgstr "删除(&D)"
-
-#~ msgid "Favorite Reports"
-#~ msgstr "常用报表"
-
-#~ msgid "Old Customized Reports"
-#~ msgstr "旧的自定义报表"
