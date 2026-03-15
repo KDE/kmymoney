@@ -521,9 +521,13 @@ void NewTransactionEditor::Private::payeeChanged(int payeeIndex)
 
     } else {
         // copy payee information to second split if there are only two splits
+        // and it does not differ from the current one
         if (splitModel.rowCount() == 1) {
             const auto idx = splitModel.index(0, 0);
-            splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
+            const auto id = idx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
+            if (id.isEmpty() || (id == payeeId)) {
+                splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
+            }
         }
     }
 }
