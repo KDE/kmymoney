@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 03:45+0000\n"
+"POT-Creation-Date: 2026-03-16 03:31+0000\n"
 "PO-Revision-Date: 2026-03-01 08:10+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -21512,14 +21512,14 @@ msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 "L'importo digitato è diverso dalla somma di tutte le suddivisioni di %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:618
+#: kmymoney/views/newtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Seleziona completamento automatico transazione"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1137
+#: kmymoney/views/newtransactioneditor.cpp:1141
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21527,7 +21527,7 @@ msgstr "Seleziona completamento automatico transazione"
 msgid "Link"
 msgstr "Collegamento"
 
-#: kmymoney/views/newtransactioneditor.cpp:1650
+#: kmymoney/views/newtransactioneditor.cpp:1654
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21536,7 +21536,7 @@ msgstr ""
 "Vuoi sostituire la nota <p><i>%1</i></p>con la nota<p><i>%2</i></"
 "p>nell'altra suddivisione?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1651
+#: kmymoney/views/newtransactioneditor.cpp:1655
 #, kde-format
 msgid "Copy memo"
 msgstr "Copia nota"

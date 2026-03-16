@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 03:45+0000\n"
+"POT-Creation-Date: 2026-03-16 03:31+0000\n"
 "PO-Revision-Date: 2026-02-23 08:02+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -21533,14 +21533,14 @@ msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 "L'import introduït és diferent de la suma de tots els desglossaments en %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:618
+#: kmymoney/views/newtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Seleccioneu autocompleció d'operació"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1137
+#: kmymoney/views/newtransactioneditor.cpp:1141
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21548,7 +21548,7 @@ msgstr "Seleccioneu autocompleció d'operació"
 msgid "Link"
 msgstr "Enllaç"
 
-#: kmymoney/views/newtransactioneditor.cpp:1650
+#: kmymoney/views/newtransactioneditor.cpp:1654
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21557,7 +21557,7 @@ msgstr ""
 "Voleu substituir el recordatori<p><i>%1</i></p>per al recordatori<p><i>%2</"
 "i></p>a l'altre desglossament?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1651
+#: kmymoney/views/newtransactioneditor.cpp:1655
 #, kde-format
 msgid "Copy memo"
 msgstr "Copia el recordatori"

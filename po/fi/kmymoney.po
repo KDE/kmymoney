@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 03:45+0000\n"
+"POT-Creation-Date: 2026-03-16 03:31+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -21393,7 +21393,7 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:618
+#: kmymoney/views/newtransactioneditor.cpp:622
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21401,7 +21401,7 @@ msgid "Select autofill transaction"
 msgstr "Valitse täytä automaattisesti -tapahtuma"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1137
+#: kmymoney/views/newtransactioneditor.cpp:1141
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
@@ -21409,7 +21409,7 @@ msgstr "Valitse täytä automaattisesti -tapahtuma"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1650
+#: kmymoney/views/newtransactioneditor.cpp:1654
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21418,7 +21418,7 @@ msgstr ""
 "Korvataanko muistiinpano<p><i>%1</i></p>muistiinpanolla<p><i>%2</i></"
 "p>toisessa jaottelussa?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1651
+#: kmymoney/views/newtransactioneditor.cpp:1655
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopioi muistiinpano"
