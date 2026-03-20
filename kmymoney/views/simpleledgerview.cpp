@@ -107,8 +107,7 @@ public:
 
         webSiteButton = new QToolButton;
         ui->ledgerTab->setCornerWidget(webSiteButton);
-        q->connect(webSiteButton, &QToolButton::pressed, q,
-        [=] {
+        q->connect(webSiteButton, &QToolButton::pressed, q, [this]() {
             QDesktopServices::openUrl(webSiteUrl);
         });
 
