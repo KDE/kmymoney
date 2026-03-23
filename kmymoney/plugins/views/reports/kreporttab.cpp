@@ -4,6 +4,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QApplication>
+#include <QClipboard>
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <kmm_codec.h>
@@ -53,9 +55,15 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
 
     // and actions
     m_control->ui->buttonConfigure->setDefaultAction(pActions[eMenu::Action::ReportConfigure]);
+    m_control->ui->buttonCopy->setDefaultAction(pActions[eMenu::Action::ReportCopy]);
     m_control->ui->buttonDelete->setDefaultAction(pActions[eMenu::Action::ReportDelete]);
     m_control->ui->buttonExport->setDefaultAction(pActions[eMenu::Action::ReportExport]);
     m_control->ui->buttonNew->setDefaultAction(pActions[eMenu::Action::ReportNew]);
+    m_control->ui->comboCopyFormat->clear();
+    m_control->ui->comboCopyFormat->addItem(i18nc("@item:inlistbox Report clipboard format", "CSV"), QStringLiteral("csv"));
+    m_control->ui->comboCopyFormat->addItem(i18nc("@item:inlistbox Report clipboard format", "HTML"), QStringLiteral("html"));
+    m_control->ui->comboCopyFormat->addItem(i18nc("@item:inlistbox Report clipboard format", "XML"), QStringLiteral("xml"));
+    m_control->ui->comboCopyFormat->setToolTip(i18nc("@info:tooltip", "Format used when copying the report to the clipboard"));
 
     m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_chartView->hide();
@@ -190,6 +198,27 @@ void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType
     }
 }
 
+void KReportTab::copyToClipboard()
+{
+    QString copyData;
+    const auto format = m_control->ui->comboCopyFormat->currentData().toString();
+    if (m_table) {
+        if (format == QLatin1String("html")) {
+            copyData = m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name());
+        } else if (format == QLatin1String("xml")) {
+            copyData = m_table->toXml();
+        } else {
+            copyData = m_table->renderReport(QLatin1String("csv"), m_encoding, QString());
+        }
+    }
+    if (copyData.isEmpty() && m_tableView) {
+        copyData = m_tableView->toPlainText();
+    }
+    if (!copyData.isEmpty()) {
+        QApplication::clipboard()->setText(copyData);
+    }
+}
+
 void KReportTab::loadTab()
 {
     m_needReload = true;
@@ -247,6 +276,7 @@ void KReportTab::enableAllReportActions()
     pActions[eMenu::Action::ReportNew]->setEnabled(true);
     pActions[eMenu::Action::ReportConfigure]->setEnabled(true);
     pActions[eMenu::Action::ReportExport]->setEnabled(true);
+    pActions[eMenu::Action::ReportCopy]->setEnabled(true);
     pActions[eMenu::Action::ReportDelete]->setEnabled(true);
     pActions[eMenu::Action::ReportClose]->setEnabled(true);
 }

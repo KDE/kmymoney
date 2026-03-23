@@ -125,6 +125,7 @@ public Q_SLOTS:
     void slotPrintPreviewView();
     void slotExportView();
     void slotConfigure();
+    void slotCopyView();
     void slotDuplicate();
     void slotToggleChart();
     void slotDoubleClicked(const QModelIndex& index);

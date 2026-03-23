@@ -90,11 +90,13 @@ KReportsView::KReportsView(QWidget *parent) :
     KMyMoneyViewBase(*new KReportsViewPrivate(this), parent)
 {
     connect(pActions[eMenu::Action::ReportNew], &QAction::triggered, this, &KReportsView::slotDuplicate);
+    connect(pActions[eMenu::Action::ReportCopy], &QAction::triggered, this, &KReportsView::slotCopyView);
     connect(pActions[eMenu::Action::ReportConfigure], &QAction::triggered, this, &KReportsView::slotConfigure);
     connect(pActions[eMenu::Action::ReportExport], &QAction::triggered, this, &KReportsView::slotExportView);
     connect(pActions[eMenu::Action::ReportDelete], &QAction::triggered, this, &KReportsView::slotDelete);
     connect(pActions[eMenu::Action::ReportClose], &QAction::triggered, this, &KReportsView::slotCloseCurrent);
 
+    pActions[eMenu::Action::ReportCopy]->setShortcut(QKeySequence::Copy);
     pActions[eMenu::Action::ReportNew]->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Plus));
     pActions[eMenu::Action::ReportConfigure]->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_P));
     pActions[eMenu::Action::ReportDelete]->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Delete));
@@ -122,6 +124,12 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
     case eMenu::Action::PrintPreview:
         if (d->isActiveView()) {
             slotPrintPreviewView();
+        }
+        break;
+
+    case eMenu::Action::ReportCopy:
+        if (d->isActiveView()) {
+            slotCopyView();
         }
         break;
 
@@ -296,6 +304,8 @@ void KReportsView::slotOpenUrl(const QUrl &url)
             // slotRefreshView();
         } else if (command == QLatin1String("print"))
             slotPrintView();
+        else if (command == QLatin1String("copy"))
+            slotCopyView();
         else if (command == QLatin1String("save"))
             slotExportView();
         else if (command == QLatin1String("configure"))
@@ -343,6 +353,13 @@ void KReportsView::slotPrintPreviewView()
     Q_D(const KReportsView);
     if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         tab->printPreview();
+}
+
+void KReportsView::slotCopyView()
+{
+    Q_D(KReportsView);
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
+        tab->copyToClipboard();
 }
 
 void KReportsView::slotExportView()
