@@ -397,6 +397,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::DuplicateTransaction]->setDisabled(true);
     pActions[eMenu::Action::AddReversingTransaction]->setDisabled(true);
     pActions[eMenu::Action::DisplayTransactionDetails]->setDisabled(true);
+    pActions[eMenu::Action::CopyTransactionsToClipboard]->setDisabled(true);
     pActions[eMenu::Action::CopySplits]->setDisabled(true);
     pActions[eMenu::Action::MarkNotReconciled]->setDisabled(true);
     pActions[eMenu::Action::MarkCleared]->setDisabled(true);
@@ -450,6 +451,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::DeleteTransaction]->setDisabled(true);
             pActions[eMenu::Action::DuplicateTransaction]->setDisabled(true);
             pActions[eMenu::Action::AddReversingTransaction]->setDisabled(true);
+            pActions[eMenu::Action::CopyTransactionsToClipboard]->setDisabled(true);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
             pActions[eMenu::Action::MoveToToday]->setDisabled(true);
             pActions[eMenu::Action::TransactionOpenURL]->setDisabled(true);
@@ -462,6 +464,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::DuplicateTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::AddReversingTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::DisplayTransactionDetails]->setEnabled(true);
+            pActions[eMenu::Action::CopyTransactionsToClipboard]->setEnabled(true);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
             pActions[eMenu::Action::MoveToToday]->setEnabled(warnLevel <= OneSplitFrozen);
             // TODO: limit to transactions with a related payee

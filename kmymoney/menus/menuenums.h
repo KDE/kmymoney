@@ -85,6 +85,7 @@ enum class Action {
     MoveTransactionTo,
     MoveToToday,
     TransactionOpenURL,
+    CopyTransactionsToClipboard,
     // *************
     // The tools menu
     // *************

@@ -33,6 +33,7 @@
 #include <QFlags>
 #include <QGridLayout>
 #include <QHBoxLayout>
+#include <QHeaderView>
 #include <QIcon>
 #include <QInputDialog>
 #include <QKeyEvent>
@@ -1481,6 +1482,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::CombineTransactions,           QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),           Icon::Empty},
             {Action::MoveToToday,                   QStringLiteral("transaction_move_to_today"),      i18n("Move to today"),                              Icon::Empty},
             {Action::CopySplits,                    QStringLiteral("transaction_copy_splits"),        i18n("Copy splits"),                                Icon::Empty},
+            {Action::CopyTransactionsToClipboard,   QStringLiteral("transaction_copy_clipboard"),     i18n("Copy selected transactions"),                 Icon::EditCopy},
             {Action::ShowFilterWidget,              QStringLiteral("filter_show_widget"),             i18n("Show filter widget"),                         Icon::Empty},
             //Investment
             {Action::NewInvestment,                 QStringLiteral("investment_new"),                 i18n("New investment..."),                          Icon::InvestmentNew},
@@ -1627,6 +1629,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DuplicateTransaction,          &KMyMoneyApp::slotDuplicateTransactions},
             {Action::AddReversingTransaction,       &KMyMoneyApp::slotDuplicateTransactions},
             {Action::DisplayTransactionDetails,     &KMyMoneyApp::slotDisplayTransactionDetails},
+            {Action::CopyTransactionsToClipboard,   &KMyMoneyApp::slotCopyTransactionsToClipboard},
             {Action::CopySplits,                    &KMyMoneyApp::slotCopySplits},
             {Action::MarkCleared,                   &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkReconciled,                &KMyMoneyApp::slotMarkTransactions},
@@ -1738,6 +1741,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {qMakePair(Action::DeleteTransaction,           Qt::CTRL | Qt::Key_Delete)},
             {qMakePair(Action::EditTransaction,             Qt::CTRL | Qt::Key_E)},
             {qMakePair(Action::EditSplits,                  Qt::CTRL | Qt::SHIFT | Qt::Key_E)},
+            {qMakePair(Action::CopyTransactionsToClipboard, Qt::CTRL | Qt::Key_C)},
             {qMakePair(Action::CopySplits,                  Qt::CTRL | Qt::SHIFT | Qt::Key_C)},
             {qMakePair(Action::AddReversingTransaction,     Qt::CTRL | Qt::SHIFT | Qt::Key_R)},
             {qMakePair(Action::AddReversingTransaction,     Qt::CTRL | Qt::SHIFT | Qt::Key_Backspace)},
@@ -2480,6 +2484,103 @@ void KMyMoneyApp::slotCopySplits()
                 qDebug() << "transactionCopySplits() failed";
             }
         }
+    }
+}
+
+void KMyMoneyApp::slotCopyTransactionsToClipboard()
+{
+    const auto journalEntryIds = d->m_selections.selection(SelectedObjects::JournalEntry);
+    if (journalEntryIds.isEmpty()) {
+        d->executeAction(eMenu::Action::CopyTransactionsToClipboard);
+        return;
+    }
+
+    // Try to use the currently visible ledger to preserve
+    // displayed column visibility/order and sort order.
+    const auto ledgers = d->m_myMoneyView->findChildren<LedgerView*>();
+    for (auto* ledgerView : ledgers) {
+        if (!ledgerView || !ledgerView->isVisible() || !ledgerView->selectionModel() || !ledgerView->model()) {
+            continue;
+        }
+
+        const auto selectedRows = ledgerView->selectionModel()->selectedRows();
+        if (selectedRows.isEmpty()) {
+            continue;
+        }
+
+        const auto header = ledgerView->horizontalHeader();
+        if (!header) {
+            continue;
+        }
+
+        QVector<int> columns;
+        for (int visualColumn = 0; visualColumn < header->count(); ++visualColumn) {
+            const auto logicalColumn = header->logicalIndex(visualColumn);
+            if (!ledgerView->isColumnHidden(logicalColumn) && logicalColumn != JournalModel::Column::Invisible) {
+                columns.append(logicalColumn);
+            }
+        }
+        if (columns.isEmpty()) {
+            continue;
+        }
+
+        QStringList lines;
+        QStringList headerLabels;
+        for (const auto column : qAsConst(columns)) {
+            headerLabels << ledgerView->model()->headerData(column, Qt::Horizontal, Qt::DisplayRole).toString().simplified();
+        }
+        lines << headerLabels.join(QLatin1Char('\t'));
+
+        for (const auto& rowIndex : selectedRows) {
+            QStringList fields;
+            for (const auto column : qAsConst(columns)) {
+                fields << ledgerView->model()->index(rowIndex.row(), column).data(Qt::DisplayRole).toString().simplified();
+            }
+            lines << fields.join(QLatin1Char('\t'));
+        }
+        QApplication::clipboard()->setText(lines.join(QLatin1Char('\n')));
+        return;
+    }
+
+    // Fallback in case no visible ledger view could be identified
+    const auto file = MyMoneyFile::instance();
+    const QVector<JournalModel::Column> fallbackColumns{
+        JournalModel::Column::Number,
+        JournalModel::Column::Date,
+        JournalModel::Column::Account,
+        JournalModel::Column::Payee,
+        JournalModel::Column::Detail,
+        JournalModel::Column::Payment,
+        JournalModel::Column::Deposit,
+        JournalModel::Column::Balance,
+    };
+    QStringList lines;
+    QStringList fallbackHeaderLabels;
+    for (const auto column : fallbackColumns) {
+        fallbackHeaderLabels << file->journalModel()->headerData(column, Qt::Horizontal, Qt::DisplayRole).toString().simplified();
+    }
+    lines << fallbackHeaderLabels.join(QLatin1Char('\t'));
+
+    for (const auto& journalEntryId : journalEntryIds) {
+        auto idx = file->journalModel()->indexById(journalEntryId);
+        const auto model = idx.model();
+        if (!idx.isValid() || model == nullptr) {
+            continue;
+        }
+
+        const auto textFor = [model, &idx](const JournalModel::Column column) {
+            return model->index(idx.row(), column).data(Qt::DisplayRole).toString().simplified();
+        };
+
+        QStringList fields;
+        for (const auto column : fallbackColumns) {
+            fields << textFor(column);
+        }
+        lines.append(fields.join(QLatin1Char('\t')));
+    }
+
+    if (lines.count() > 1) {
+        QApplication::clipboard()->setText(lines.join(QLatin1Char('\n')));
     }
 }
 
