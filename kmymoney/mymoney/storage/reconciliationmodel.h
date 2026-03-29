@@ -15,6 +15,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KColorScheme>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -35,6 +37,7 @@ public:
         , m_date(other.m_date)
         , m_reconciliationInProgress(other.m_reconciliationInProgress)
         , m_filterHint(other.m_filterHint)
+        , m_backgroundRole(other.m_backgroundRole)
     {
     }
 
@@ -49,7 +52,9 @@ public:
         , m_amount(amount)
         , m_date(date)
         , m_reconciliationInProgress(inProgress)
+        , m_lastReconciliation(false)
         , m_filterHint(filterHint)
+        , m_backgroundRole(KColorScheme::PositiveBackground)
     {
     }
 
@@ -81,6 +86,22 @@ public:
     {
         return m_reconciliationInProgress;
     }
+    inline KColorScheme::BackgroundRole backgroundColorRole() const
+    {
+        return m_backgroundRole;
+    }
+    inline void setBackgroundColorRole(KColorScheme::BackgroundRole colorRole)
+    {
+        m_backgroundRole = colorRole;
+    }
+    inline void setLastReconciliation(bool isLast)
+    {
+        m_lastReconciliation = isLast;
+    }
+    inline bool isLastReconciliation() const
+    {
+        return m_lastReconciliation;
+    }
 
     /**
      * @copydoc MyMoneyObject::referencedObjects
@@ -91,12 +112,14 @@ public:
     }
 
 private:
-    QString m_id;
-    QString m_accountId;
-    MyMoneyMoney m_amount;
-    QDate m_date;
-    bool m_reconciliationInProgress;
-    eMyMoney::Model::ReconciliationFilterHint m_filterHint;
+    QString m_id; ///< the record's ID'
+    QString m_accountId; ///< the account's ID
+    MyMoneyMoney m_amount; ///< the reconciliation amount
+    QDate m_date; ///< the reconciliation date
+    bool m_reconciliationInProgress; ///< set to true for the current reconciliation record
+    bool m_lastReconciliation; ///< set to true for the last record in history
+    eMyMoney::Model::ReconciliationFilterHint m_filterHint; ///< hint for filtering records
+    KColorScheme::BackgroundRole m_backgroundRole; ///< background color control
 };
 
 class QUndoStack;
@@ -115,8 +138,15 @@ public:
     int columnCount(const QModelIndex& parent) const override;
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
     Qt::ItemFlags flags(const QModelIndex& index) const override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
 
     void setOptions(bool showDateHeaders);
+
+    /**
+     * Return the index to the record for the current reconciliation
+     * in account @a accountId.
+     */
+    QModelIndex currentReconciliationIndex(const QString& accountId) const;
 
 public Q_SLOTS:
     void updateData();

@@ -85,6 +85,13 @@ public:
      */
     virtual void doSortOnIdle();
 
+    /**
+     * If set @a reconciliationSorting is true turns on special
+     * reconciliation filtering which shows the last reconciliation
+     * marker in front of all non-reconciled transactions
+     */
+    void setReconcilitionSorting(bool reconciliationSorting);
+
 protected:
     explicit LedgerSortProxyModel(LedgerSortProxyModelPrivate* dd, QObject* parent);
 

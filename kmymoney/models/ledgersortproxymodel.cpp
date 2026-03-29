@@ -101,6 +101,9 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
                     } else if (d->isSpecialDatesModel(right)) {
                         return falseValue;
                     } else if (d->isReconciliationModel(left)) {
+                        if (d->reconciliationSorting && left.data(eMyMoney::Model::LastReconciliationRole).toBool()) {
+                            return trueValue;
+                        }
                         return falseValue;
                     } else if (d->isReconciliationModel(right)) {
                         return trueValue;
@@ -113,19 +116,46 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
                 break;
 
             } else if (sortOrderItem.sortRole == eMyMoney::Model::SplitReconcileDateRole) {
-                // special handling for reconciliation date because it
-                // might be invalid and has to be sorted to the end in
-                // this case
-                if (leftDate.isValid() && !rightDate.isValid()) {
-                    return trueValue;
-                }
-                if (!leftDate.isValid() && rightDate.isValid()) {
-                    return falseValue;
-                }
-                if (leftDate.isValid()) {
-                    // actually, both dates are valid here but testing
-                    // one for validity is enough
-                    return sortOrderItem.lessThanIs(leftDate < rightDate);
+                if (d->reconciliationSorting) {
+                    // In reconciliation mode sorting is different:
+                    // the last reconciliation is shown at the top and
+                    // the one for the current is sorted by post date.
+                    if (leftDate.isValid() && !rightDate.isValid()) {
+                        if (left.data(eMyMoney::Model::LastReconciliationRole).toBool()) {
+                            return trueValue;
+                        }
+                    }
+                    if (!leftDate.isValid() && rightDate.isValid()) {
+                        if (right.data(eMyMoney::Model::LastReconciliationRole).toBool()) {
+                            return falseValue;
+                        }
+                    }
+                    if (leftDate.isValid() && rightDate.isValid()) {
+                        // both dates are valid here, but in reconciliation we always
+                        // want the last reconciliation to show up at the top
+                        if (left.data(eMyMoney::Model::LastReconciliationRole).toBool()) {
+                            return trueValue;
+                        } else if (right.data(eMyMoney::Model::LastReconciliationRole).toBool()) {
+                            return falseValue;
+                        }
+
+                        return sortOrderItem.lessThanIs(leftDate < rightDate);
+                    }
+                } else {
+                    // special handling for reconciliation date because it
+                    // might be invalid and has to be sorted to the end in
+                    // this case.
+                    if (leftDate.isValid() && !rightDate.isValid()) {
+                        return trueValue;
+                    }
+                    if (!leftDate.isValid() && rightDate.isValid()) {
+                        return falseValue;
+                    }
+                    if (leftDate.isValid()) {
+                        // actually, both dates are valid here but testing
+                        // one for validity is enough
+                        return sortOrderItem.lessThanIs(leftDate < rightDate);
+                    }
                 }
 
                 // in case both are invalid, we continue with the
@@ -346,6 +376,12 @@ LedgerSortOrder LedgerSortProxyModel::ledgerSortOrder() const
 {
     Q_D(const LedgerSortProxyModel);
     return d->ledgerSortOrder;
+}
+
+void LedgerSortProxyModel::setReconcilitionSorting(bool reconciliationSorting)
+{
+    Q_D(LedgerSortProxyModel);
+    d->reconciliationSorting = reconciliationSorting;
 }
 
 void LedgerSortProxyModel::dumpSourceModel() const

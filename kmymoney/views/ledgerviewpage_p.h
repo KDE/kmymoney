@@ -166,12 +166,16 @@ public:
         QMetaObject::invokeMethod(ui->m_ledgerView, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
     }
 
-    virtual void updateAccountData(const MyMoneyAccount& account)
+    void setLedgerSortOrder(LedgerSortOrder newSortOrder)
     {
-        reconciliationDate = account.lastReconciliationDate();
-        precision = MyMoneyMoney::denomToPrec(account.fraction());
-        accountName = account.name();
+        if (sortOrder != newSortOrder) {
+            specialItemFilter->setLedgerSortOrder(newSortOrder);
+            specialItemFilter->forceReload();
+        }
+    }
 
+    virtual QString setSortOrder(const MyMoneyAccount& account)
+    {
         sortOptionKey = QLatin1String("kmm-sort-std");
         const auto sortOption = account.value(sortOptionKey);
 
@@ -180,20 +184,24 @@ public:
         } else {
             sortOrderType = LedgerViewSettings::SortOrderStd;
         }
+        return sortOption;
+    }
 
-        const LedgerSortOrder previousSortOrder = sortOrder;
+    void updateAccountData(const MyMoneyAccount& account)
+    {
+        reconciliationDate = account.lastReconciliationDate();
+        precision = MyMoneyMoney::denomToPrec(account.fraction());
+        accountName = account.name();
+
+        const auto sortOption = this->setSortOrder(account);
 
         // check if we have a specific sort order or rely on the default
-        if (!sortOption.isEmpty()) {
-            sortOrder = LedgerSortOrder(sortOption);
-        } else {
-            sortOrder = LedgerViewSettings::instance()->sortOrder(sortOrderType);
-        }
+        setLedgerSortOrder((!sortOption.isEmpty()) ? LedgerSortOrder(sortOption) : LedgerViewSettings::instance()->sortOrder(sortOrderType));
+    }
 
-        if (previousSortOrder != sortOrder) {
-            specialItemFilter->setLedgerSortOrder(sortOrder);
-            specialItemFilter->forceReload();
-        }
+    virtual QString defaultSortOption() const
+    {
+        return KMyMoneySettings::sortNormalView();
     }
 
     void selectSortOrder()
@@ -201,9 +209,8 @@ public:
         auto file = MyMoneyFile::instance();
         QPointer<KTransactionSortOptionsDlg> dlg = new KTransactionSortOptionsDlg(q);
         auto account = file->accountsModel()->itemById(accountId);
-        const auto defaultSortOption =
-            (sortOrderType == LedgerViewSettings::SortOrderStd) ? KMyMoneySettings::sortNormalView() : KMyMoneySettings::sortNormalView();
-        dlg->setSortOption(account.value(sortOptionKey), defaultSortOption);
+
+        dlg->setSortOption(account.value(sortOptionKey), this->defaultSortOption());
         if ((dlg->exec() == QDialog::Accepted) && dlg) {
             const auto newSortOption = dlg->sortOption();
             if (newSortOption != account.value(sortOptionKey)) {

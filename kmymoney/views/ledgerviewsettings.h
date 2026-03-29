@@ -30,8 +30,8 @@ class LedgerViewSettings : public QObject
 public:
     typedef enum {
         SortOrderStd,
-        SortOrderSearch,
         SortOrderInvest = SortOrderStd, // in future use separate sort order
+        SortOrderSearch,
         SortOrderReconcileStd,
         SortOrderReconcileInvest,
     } SortOrderType;

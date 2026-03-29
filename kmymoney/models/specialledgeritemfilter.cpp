@@ -52,6 +52,7 @@ public:
         , showReconciliationEntries(LedgerViewSettings::DontShowReconciliationHeader)
         , filterBalanceMode(SpecialLedgerItemFilter::FilterBalanceNormal)
         , lastWasReconciliationEntry(false)
+        , reconciliationFilterMode(false)
     {
         updateDelayTimer.setSingleShot(true);
         updateDelayTimer.setInterval(100);
@@ -263,6 +264,13 @@ public:
             if (!isSortingByDate()) {
                 return false;
             }
+            // during reconciliation we only show the very last
+            // reconciliation marker in the account and the one
+            // for the current reconciliation
+            if (reconciliationFilterMode) {
+                return idx.data(eMyMoney::Model::LastReconciliationRole).toBool() || idx.data(eMyMoney::Model::ReconciliationCurrentRole).toBool();
+            }
+
             // Depending on the setting we only show a subset
             if (showReconciliationEntries != LedgerViewSettings::ShowAllReconciliationHeader) {
                 const auto filterHint = idx.data(eMyMoney::Model::ReconciliationFilterHintRole).value<eMyMoney::Model::ReconciliationFilterHint>();
@@ -296,28 +304,6 @@ public:
                 return (filterMode == eMyMoney::Model::DontFilterLast) || (filterMode == eMyMoney::Model::DontFilter);
             }
 
-            // in case we get here recursively, we simply assume
-            // that this entry will be shown, so the actual one
-            // that is checked will be hidden
-            if (lastWasReconciliationEntry) {
-                return true;
-            }
-
-            // make sure we only show reconciliation entries that are not followed by
-            // another reconciliation entry. Only inspect visible items
-            lastWasReconciliationEntry = true;
-            int row = idx.row() + 1;
-            while (row < rowCount) {
-                const auto testIdx = q->sourceModel()->index(row, 0, source_parent);
-                if (filterAcceptsRow(testIdx, source_parent, rowCount)) {
-                    lastWasReconciliationEntry = false;
-                    if (isReconciliationModel(testIdx)) {
-                        return false;
-                    }
-                    return true;
-                }
-                ++row;
-            }
             return true;
         }
 
@@ -339,6 +325,7 @@ public:
     LedgerViewSettings::ReconciliationHeader showReconciliationEntries;
     SpecialLedgerItemFilter::FilterBalanceMode filterBalanceMode;
     bool lastWasReconciliationEntry;
+    bool reconciliationFilterMode;
 };
 
 SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
@@ -400,6 +387,7 @@ void SpecialLedgerItemFilter::setSourceModel(LedgerSortProxyModel* model)
         connect(model, &QAbstractItemModel::modelReset, this, &SpecialLedgerItemFilter::forceReload);
     }
     d->sourceModel = model;
+    d->sourceModel->setLedgerSortOrder(d->ledgerSortOrder);
 }
 
 void SpecialLedgerItemFilter::setLedgerSortOrder(LedgerSortOrder sortOrder)
@@ -543,4 +531,12 @@ QVariant SpecialLedgerItemFilter::data(const QModelIndex& index, int role) const
         }
     }
     return LedgerSortProxyModel::data(index, role);
+}
+
+void SpecialLedgerItemFilter::setReconciliationFilter(bool reconciliationFilter)
+{
+    Q_D(SpecialLedgerItemFilter);
+    setFilterBalanceMode(SpecialLedgerItemFilter::FilterBalanceMode::FilterBalanceReconciliation);
+    d->reconciliationFilterMode = reconciliationFilter;
+    d->sourceModel->setReconcilitionSorting(reconciliationFilter);
 }

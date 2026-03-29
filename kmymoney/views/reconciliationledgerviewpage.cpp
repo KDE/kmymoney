@@ -376,22 +376,22 @@ public:
         }
     }
 
-    void updateAccountData(const MyMoneyAccount& account) override
+    QString setSortOrder(const MyMoneyAccount& account) override
     {
-        LedgerViewPage::Private::updateAccountData(account);
+        sortOptionKey = QLatin1String("kmm-sort-reconcile");
+        const auto sortOption = account.value(sortOptionKey);
 
         if (account.accountType() == eMyMoney::Account::Type::Investment) {
             sortOrderType = LedgerViewSettings::SortOrderReconcileInvest;
         } else {
             sortOrderType = LedgerViewSettings::SortOrderReconcileStd;
         }
+        return sortOption;
+    }
 
-        // check if we have a specific sort order or rely on the default
-        if (!account.value("kmm-sort-reconcile").isEmpty()) {
-            sortOrder = LedgerSortOrder(account.value("kmm-sort-reconcile"));
-        } else {
-            sortOrder = LedgerViewSettings::instance()->sortOrder(sortOrderType);
-        }
+    QString defaultSortOption() const override
+    {
+        return KMyMoneySettings::sortReconcileView();
     }
 
     void updateSummaryInformation() const override
@@ -399,11 +399,19 @@ public:
         ui->m_reconciliationContainer->setVisible(endingBalanceDlg != nullptr);
         if (endingBalanceDlg) {
             const auto endingBalance = endingBalanceDlg->endingBalance();
-            const auto balance = MyMoneyFile::instance()->journalModel()->clearedBalance(accountId, endingBalanceDlg->statementDate());
-            ui->m_leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney("", precision)));
-            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", balance.formatMoney("", precision)));
-            ui->m_rightLabel->setText(i18nc("@label:textbox Difference to statement", "Difference: %1", (balance - endingBalance).formatMoney("", precision)));
+            ui->m_leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney(QString(), precision)));
+            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney(QString(), precision)));
+            ui->m_rightLabel->setText(
+                i18nc("@label:textbox Difference to statement", "Difference: %1", (clearedBalance - endingBalance).formatMoney(QString(), precision)));
             stateFilter->setEndDate(endingBalanceDlg->startDate());
+
+            // now update the background of the current reconciliation entry
+            const auto idx = MyMoneyFile::instance()->reconciliationModel()->currentReconciliationIndex(accountId);
+            if (idx.isValid()) {
+                KColorScheme::BackgroundRole role =
+                    (clearedBalance - endingBalance).isZero() ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground;
+                const_cast<QAbstractItemModel*>(idx.model())->setData(idx, role, eMyMoney::Model::ReconciliationBackgroundRole);
+            }
         }
     }
 
@@ -438,7 +446,8 @@ void ReconciliationLedgerViewPage::setAccount(const MyMoneyAccount& account)
 
     d->selections.setSelection(SelectedObjects::ReconciliationAccount, account.id());
     d->stateFilter->setStateFilter(LedgerFilter::State::NotReconciled);
-    d->specialItemFilter->setFilterBalanceMode(SpecialLedgerItemFilter::FilterBalanceMode::FilterBalanceReconciliation);
+    d->specialItemFilter->setReconciliationFilter(true);
+    d->specialItemFilter->setHideReconciledTransactions(true);
 }
 
 bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& selections)
@@ -469,8 +478,11 @@ bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const Sel
 
 void ReconciliationLedgerViewPage::updateSummaryInformation(const QHash<QString, AccountBalances>& balances)
 {
-    Q_UNUSED(balances)
-
     auto dd = static_cast<ReconciliationLedgerViewPage::Private*>(d);
-    dd->updateSummaryInformation();
+    const auto it = balances.find(d->accountId);
+    if (it != balances.cend()) {
+        dd->totalBalance = (*it).m_totalBalance;
+        dd->clearedBalance = (*it).m_clearedBalance;
+        dd->updateSummaryInformation();
+    }
 }

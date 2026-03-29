@@ -120,6 +120,13 @@ public:
      * The sorting currently happens when this is set to @c true.
      */
     bool sorting;
+
+    /**
+     * If set to @c true then the last reconciliation marker of
+     * the account will be shown as the first entry when sort order
+     * is based on a date.
+     */
+    bool reconciliationSorting;
 };
 
 #endif // LEDGERSORTPROXYMODEL_P_H

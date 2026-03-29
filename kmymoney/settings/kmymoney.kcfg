@@ -337,8 +337,8 @@
    <default>1,-9,-4</default>
   </entry>
   <entry name="sortReconcileView" type="String">
-   <label>Sort order of register in normal view</label>
-   <default>1,-4</default>
+   <label>Sort order of register in reconcile view</label>
+   <default>11,1,-4</default>
   </entry>
   <entry name="sortSearchView" type="String">
    <label>Sort order of register in search dialog</label>

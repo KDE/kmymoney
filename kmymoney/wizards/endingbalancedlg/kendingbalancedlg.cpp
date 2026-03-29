@@ -47,6 +47,8 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneyutils.h"
 
+#include "journalmodel.h"
+
 class KEndingBalanceDlgPrivate
 {
     Q_DISABLE_COPY(KEndingBalanceDlgPrivate)
@@ -194,123 +196,55 @@ KEndingBalanceDlg::~KEndingBalanceDlg()
 void KEndingBalanceDlg::slotUpdateBalances()
 {
     Q_D(KEndingBalanceDlg);
-    MYMONEYTRACER(tracer);
-
-    // determine the beginning balance and ending balance based on the following
-    // formulas:
-    //
-    // end balance   = current balance - sum(all non cleared transactions)
-    //                                 - sum(all cleared transactions posted
-    //                                        after statement date)
-    // start balance = end balance - sum(all cleared transactions
-    //                                        up to statement date)
-    MyMoneyTransactionFilter filter(d->m_account.id());
-    filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
-    filter.setReportAllSplits(true);
-
-    QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
-    QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
-
-    // retrieve the list from the engine
-    MyMoneyFile::instance()->transactionList(transactionList, filter);
-
-    //first retrieve the oldest not reconciled transaction
-    QDate oldestTransactionDate;
-    it = transactionList.cbegin();
-    if (it != transactionList.cend()) {
-        oldestTransactionDate = (*it).first.postDate();
-        d->ui->m_statementInfoPageCheckings->ui->m_oldestTransactionDate->setText(
-            i18n("Oldest unmarked transaction: %1", MyMoneyUtils::formatDate(oldestTransactionDate)));
-    }
-
-    filter.clear();
-    filter.addAccount(d->m_account.id());
-
-    // retrieve the list from the engine to calculate the starting and ending balance
-    MyMoneyFile::instance()->transactionList(transactionList, filter);
-
-    // set the balance to the value of the account at the end of the ledger
-    // This includes all transactions even those past the statement date.
-    MyMoneyMoney balance = MyMoneyFile::instance()->balance(d->m_account.id());
-    MyMoneyMoney factor(1, 1);
-    if (d->m_account.accountGroup() == eMyMoney::Account::Type::Liability)
-        factor = -factor;
 
     MyMoneyMoney endBalance, startBalance;
-    balance = balance * factor;
-    endBalance = startBalance = balance;
-
-    tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney(QString(), 2)));
+    const auto file = MyMoneyFile::instance();
+    const auto journalModel = file->journalModel();
+    const auto accountId = d->m_account.id();
+    const auto statementDate = field("statementDate").toDate();
 
     d->m_startDate = d->m_account.lastReconciliationDate();
 
-    // now adjust the balances by reading all transactions referencing the account
-    // from beginning to the end of the ledger
-    for (it = transactionList.cbegin(); it != transactionList.cend(); ++it) {
-        const MyMoneySplit& split = (*it).second;
-        balance -= split.shares() * factor;
-        if ((*it).first.postDate() > field("statementDate").toDate()) {
-            // in case the transaction's post date is younger than the statement date
-            // we need to subtract the value from the balances.
+    // calculate the start- and endBalance as we see it.
+    // startBalance is the sum of all splits in the
+    // account to be reconciled marked reconciled until
+    // and including the statement date. The endBalance
+    // is calculated as the sum of all splits in the
+    // account to be reconciled until and including
+    // the statement date (no matter how it is marked).
 
-            tracer.printf("Reducing balances by %s because postdate of %s/%s(%s) is past statement date", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
-            endBalance -= split.shares() * factor;
-            startBalance -= split.shares() * factor;
+    const int rows = journalModel->rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = journalModel->index(row, 0);
+        const auto postDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+        if (postDate <= statementDate) {
+            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
+                const auto state = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
+                const auto amount = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
 
-        } else {
-            // in case the transaction's post date is older or equal to
-            // the statement date we need to check what to do
-            switch (split.reconcileFlag()) {
-            case eMyMoney::Split::State::NotReconciled:
-                // in case it is not marked at all we need to check if
-                // it is necessary to adjust the start date of the
-                // display.
-                if ((*it).first.postDate() < d->m_startDate) {
-                    d->m_startDate = (*it).first.postDate();
+                endBalance += amount;
+                switch (state) {
+                case eMyMoney::Split::State::Reconciled:
+                    startBalance += amount;
+                    break;
+                case eMyMoney::Split::State::NotReconciled:
+                case eMyMoney::Split::State::Cleared:
+                    if (postDate < d->m_startDate) {
+                        d->m_startDate = postDate;
+                    }
+                    break;
+                default:
+                    break;
                 }
-
-                // subtract it from the balances
-                tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
-                endBalance -= split.shares() * factor;
-                startBalance -= split.shares() * factor;
-                break;
-
-            case eMyMoney::Split::State::Cleared:
-                // in case it is marked as cleared we need to check if
-                // it is necessary to adjust the start date of the
-                // display. It could be, that this transaction is
-                // older than the statement date.
-                if ((*it).first.postDate() < d->m_startDate) {
-                    d->m_startDate = (*it).first.postDate();
-                }
-                Q_FALLTHROUGH();
-
-            case eMyMoney::Split::State::Reconciled:
-            case eMyMoney::Split::State::Frozen:
-                // in case it is marked as cleared, reconciled or frozen
-                // we need to check if the transaction is found after
-                // the current start date. If so, we need to adjust the
-                // startBalance but don't touch the endBalance
-                if ((*it).first.postDate() > d->m_startDate) {
-                    tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared/reconciled",
-                                  qPrintable((split.shares() * factor).formatMoney(QString(), 2)),
-                                  qPrintable((*it).first.id()),
-                                  qPrintable(split.id()),
-                                  qPrintable((*it).first.postDate().toString(Qt::ISODate)));
-                    startBalance -= split.shares() * factor;
-                }
-                break;
-
-            default:
-                break;
             }
+        } else {
+            // if the loop is past the statement date we can quit
+            break;
         }
     }
-    //FIXME: port
+
     d->ui->m_statementInfoPageCheckings->ui->m_previousBalance->setValue(startBalance);
     d->ui->m_statementInfoPageCheckings->ui->m_endingBalance->setValue(endBalance);
-    tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney(QString(), 2)));
-    tracer.printf("start balance = %s", qPrintable(startBalance.formatMoney(QString(), 2)));
 
     setField("interestDateEdit", field("statementDate").toDate());
     setField("chargesDateEdit", field("statementDate").toDate());

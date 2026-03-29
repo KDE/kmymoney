@@ -103,9 +103,14 @@ void ReconciliationModel::doLoad()
     clearModelItems();
 
     QList<MyMoneyAccount> accountList;
-    MyMoneyFile::instance()->accountList(accountList);
+    const auto file = MyMoneyFile::instance();
+    const auto journalModel = file->journalModel();
+
+    file->accountList(accountList);
 
     m_nextId = 0;
+    const int maxJournalRows = file->journalModel()->rowCount();
+
     for (auto& account : accountList) {
         const auto history = account.reconciliationHistory();
         if (!history.isEmpty()) {
@@ -113,16 +118,63 @@ void ReconciliationModel::doLoad()
             const auto rows = history.count();
             insertRows(0, rows);
 
-            int row = 0;
+            int reconciliationRow = 0;
+            int nextReconciliationStartRow = 0;
+            MyMoneyMoney nextReconciliationStartAmount;
+
             QMap<QDate, MyMoneyMoney>::const_iterator it;
             for (it = history.cbegin(); it != history.cend(); ++it) {
+                MyMoneyMoney reconciledBalance = nextReconciliationStartAmount;
+                const auto reconciliationReferenceDate = it.key();
+                auto journalRow = nextReconciliationStartRow;
+                nextReconciliationStartRow = -1;
+
+                for (; journalRow < maxJournalRows; ++journalRow) {
+                    const auto idx = journalModel->index(journalRow, 0);
+                    const auto postDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+
+                    // the scan went beyond the reconciliation records date
+                    // means the loop can be quit this time
+                    if (postDate > reconciliationReferenceDate) {
+                        if (nextReconciliationStartRow == -1) {
+                            nextReconciliationStartRow = journalRow;
+                            nextReconciliationStartAmount = reconciledBalance;
+                        }
+                        break;
+                    }
+
+                    if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == accountId) {
+                        const auto reconciliationDate = idx.data(eMyMoney::Model::SplitReconcileDateRole).toDate();
+                        if (reconciliationDate.isValid()) {
+                            if (reconciliationDate > reconciliationReferenceDate && (nextReconciliationStartRow == -1)) {
+                                // the reconciliation for this split happened
+                                // during a later reconciliation process. Keep
+                                // that row so that we can start here again if
+                                // it is the first of such transactions for this
+                                // reconciliation period.
+                                nextReconciliationStartRow = journalRow;
+                                nextReconciliationStartAmount = reconciledBalance;
+                            } else if (reconciliationDate <= reconciliationReferenceDate) {
+                                // this is a transaction that was reconciled in the current period
+                                const auto state = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
+                                if ((state == eMyMoney::Split::State::Reconciled) || (state == eMyMoney::Split::State::Frozen)) {
+                                    reconciledBalance += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                                }
+                            }
+                        }
+                    }
+                }
+
                 ReconciliationEntry entry(nextId(),
                                           accountId,
-                                          it.key(),
+                                          reconciliationReferenceDate,
                                           *it,
-                                          ((row + 1) < rows) ? eMyMoney::Model::StdFilter : eMyMoney::Model::DontFilterLast);
-                static_cast<TreeItem<ReconciliationEntry>*>(index(row, 0).internalPointer())->dataRef() = entry;
-                ++row;
+                                          ((reconciliationRow + 1) < rows) ? eMyMoney::Model::StdFilter : eMyMoney::Model::DontFilterLast);
+                entry.setBackgroundColorRole((reconciledBalance == *it) ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground);
+                entry.setLastReconciliation((it + 1) == history.cend());
+
+                static_cast<TreeItem<ReconciliationEntry>*>(index(reconciliationRow, 0).internalPointer())->dataRef() = entry;
+                ++reconciliationRow;
             }
         }
         // in active reconciliation, the lastReconciledBalance is empty,
@@ -201,6 +253,9 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
         }
         return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
 
+    case eMyMoney::Model::ReconciliationBackgroundRole:
+        return reconciliationEntry.backgroundColorRole();
+
     case eMyMoney::Model::IdRole:
         return reconciliationEntry.id();
 
@@ -232,10 +287,36 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::ReconciliationCurrentRole:
         return reconciliationEntry.isReconciliationInProgress();
 
+    case eMyMoney::Model::LastReconciliationRole:
+        return reconciliationEntry.isLastReconciliation();
+
     default:
         break;
     }
     return {};
+}
+
+bool ReconciliationModel::setData(const QModelIndex& idx, const QVariant& value, int role)
+{
+    if (!idx.isValid())
+        return false;
+
+    // we report to have the same number of columns as the
+    // journal model but we only react on the first column
+    if (idx.column() < 0 || idx.column() >= JournalModel::Column::MaxColumns)
+        return false;
+
+    ReconciliationEntry& reconciliationEntry = static_cast<TreeItem<ReconciliationEntry>*>(idx.internalPointer())->dataRef();
+
+    switch (role) {
+    case eMyMoney::Model::ReconciliationBackgroundRole:
+        reconciliationEntry.setBackgroundColorRole(static_cast<KColorScheme::BackgroundRole>(value.toInt()));
+        return true;
+
+    default:
+        break;
+    }
+    return false;
 }
 
 void ReconciliationModel::setOptions(bool showDateHeaders)
@@ -244,4 +325,18 @@ void ReconciliationModel::setOptions(bool showDateHeaders)
         d->showDateHeaders = showDateHeaders;
         updateData();
     }
+}
+
+QModelIndex ReconciliationModel::currentReconciliationIndex(const QString& accountId) const
+{
+    const auto rows = rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = index(row, 0);
+        if (idx.data(eMyMoney::Model::ReconciliationCurrentRole).toBool()) {
+            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
+                return idx;
+            }
+        }
+    }
+    return {};
 }
