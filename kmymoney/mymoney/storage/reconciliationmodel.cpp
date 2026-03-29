@@ -171,7 +171,8 @@ void ReconciliationModel::doLoad()
                                           *it,
                                           ((reconciliationRow + 1) < rows) ? eMyMoney::Model::StdFilter : eMyMoney::Model::DontFilterLast);
                 entry.setBackgroundColorRole((reconciledBalance == *it) ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground);
-                entry.setLastReconciliation((it + 1) == history.cend());
+                auto nextIt = it;
+                entry.setLastReconciliation(++nextIt == history.cend());
 
                 static_cast<TreeItem<ReconciliationEntry>*>(index(reconciliationRow, 0).internalPointer())->dataRef() = entry;
                 ++reconciliationRow;
