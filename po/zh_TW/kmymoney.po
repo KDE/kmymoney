@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-16 03:31+0000\n"
+"POT-Creation-Date: 2026-03-30 03:33+0000\n"
 "PO-Revision-Date: 2024-05-09 17:32+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -19112,10 +19112,16 @@ msgid "Use system font"
 msgstr "使用系統字型"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
-#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:336 kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in normal view"
+msgstr "一般檢視中登記表的排序依據"
+
+#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:340
+#, fuzzy, kde-format
+#| msgid "Sort order of register in normal view"
+msgid "Sort order of register in reconcile view"
 msgstr "一般檢視中登記表的排序依據"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
@@ -21526,7 +21532,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:404
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -21843,7 +21849,7 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "對帳結束時確認"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:402
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
@@ -21857,7 +21863,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "差異：%1"
 
-#: kmymoney/views/simpleledgerview.cpp:364
+#: kmymoney/views/simpleledgerview.cpp:363
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21865,7 +21871,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:475
+#: kmymoney/views/simpleledgerview.cpp:474
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21873,7 +21879,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:477
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21881,19 +21887,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:757
+#: kmymoney/views/simpleledgerview.cpp:756
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:949
+#: kmymoney/views/simpleledgerview.cpp:948
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:950
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -22898,7 +22904,7 @@ msgstr ""
 msgid "Charges"
 msgstr "收費"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:94
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:96
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -22906,15 +22912,10 @@ msgid ""
 msgstr ""
 "請在底下的欄位輸入您的報表裡的資訊。請確定以 <b>%1</b> 輸入所有的數值。"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:155
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:157
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "上次對帳報表：%1"
-
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:223
-#, kde-format
-msgid "Oldest unmarked transaction: %1"
-msgstr "最舊的未標記交易：%1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KEndingBalanceDlg)
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.ui:14
@@ -26053,6 +26054,9 @@ msgstr ""
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr ""
+
+#~ msgid "Oldest unmarked transaction: %1"
+#~ msgstr "最舊的未標記交易：%1"
 
 #, fuzzy
 #~| msgid "Saving transactions..."

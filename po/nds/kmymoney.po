@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-16 03:31+0000\n"
+"POT-Creation-Date: 2026-03-30 03:33+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -19444,10 +19444,16 @@ msgid "Use system font"
 msgstr "Systeemschriftoort bruken"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
-#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:336 kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in normal view"
+msgstr "Sorteerreeg vun't Bankbook in Normaalansicht"
+
+#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:340
+#, fuzzy, kde-format
+#| msgid "Sort order of register in normal view"
+msgid "Sort order of register in reconcile view"
 msgstr "Sorteerreeg vun't Bankbook in Normaalansicht"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
@@ -21874,7 +21880,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:404
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -22191,7 +22197,7 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Afglieken-Enn beglöven"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:402
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
@@ -22205,7 +22211,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Verscheel: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:364
+#: kmymoney/views/simpleledgerview.cpp:363
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -22213,7 +22219,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:475
+#: kmymoney/views/simpleledgerview.cpp:474
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22221,7 +22227,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:477
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22229,19 +22235,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:757
+#: kmymoney/views/simpleledgerview.cpp:756
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:949
+#: kmymoney/views/simpleledgerview.cpp:948
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:950
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -23292,7 +23298,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Geböhren"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:94
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:96
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -23301,15 +23307,10 @@ msgstr ""
 "Bitte giff in de nakamen Feller all Informatschonen ut Dien Kontouttog in. "
 "Prööv na na, dat all Weerten in <b>%1</b> ingeven warrt."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:155
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:157
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Lest afgleken Kontouttog: %1"
-
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:223
-#, kde-format
-msgid "Oldest unmarked transaction: %1"
-msgstr "Öllst nich-markeert Boken: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KEndingBalanceDlg)
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.ui:14
@@ -26484,6 +26485,9 @@ msgstr ""
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr ""
+
+#~ msgid "Oldest unmarked transaction: %1"
+#~ msgstr "Öllst nich-markeert Boken: %1"
 
 #, fuzzy
 #~| msgid "Saving transactions..."

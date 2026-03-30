@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-16 03:31+0000\n"
+"POT-Creation-Date: 2026-03-30 03:33+0000\n"
 "PO-Revision-Date: 2026-03-24 11:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18853,10 +18853,16 @@ msgid "Use system font"
 msgstr "استخدم خط النظام"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
-#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:336 kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in normal view"
+msgstr "ترتيب فرز السّجلّ في العرض العادي"
+
+#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:340
+#, fuzzy, kde-format
+#| msgid "Sort order of register in normal view"
+msgid "Sort order of register in reconcile view"
 msgstr "ترتيب فرز السّجلّ في العرض العادي"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
@@ -21126,7 +21132,7 @@ msgstr ""
 "رصيد الحساب."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:404
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21424,7 +21430,7 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "أكّد إنهاء التّسوية"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:402
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
@@ -21436,7 +21442,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "الفرق: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:364
+#: kmymoney/views/simpleledgerview.cpp:363
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21445,7 +21451,7 @@ msgid ""
 msgstr ""
 "أزيل زر الإغلاق لهذا الحساب لأنك تسويه. أنهِ، الغِ أو أجل التسوية لاستعادته."
 
-#: kmymoney/views/simpleledgerview.cpp:475
+#: kmymoney/views/simpleledgerview.cpp:474
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21455,7 +21461,7 @@ msgstr ""
 "هذه الصفحة تظهر دفتر حسابات الحسابات. حاليًا، لا توجد حسابات لذا يظهر هذا "
 "النص بدلاً من ذلك."
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:477
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21465,12 +21471,12 @@ msgstr ""
 "هذه الصفحة تظهر دفتر حسابات الحسابات. حاليًا، لم يحدد أي حساب، لذا يظهر هذا "
 "النص بدلاً من ذلك."
 
-#: kmymoney/views/simpleledgerview.cpp:757
+#: kmymoney/views/simpleledgerview.cpp:756
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "افتح موقع <b>%1</b> في متصفحك."
 
-#: kmymoney/views/simpleledgerview.cpp:949
+#: kmymoney/views/simpleledgerview.cpp:948
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21478,7 +21484,7 @@ msgid ""
 msgstr ""
 "لا يمكنك إغلاق هذا العرض لأنك تسوي الحساب. أنهِ، ألغِ أو أجل التسوية أولاً."
 
-#: kmymoney/views/simpleledgerview.cpp:950
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -22506,7 +22512,7 @@ msgstr ""
 msgid "Charges"
 msgstr "رسوم"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:94
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:96
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -22515,15 +22521,10 @@ msgstr ""
 "الرجاء إدخال الحقول التالية بالمعلومات التي تجدها على كشف حسابك. تأكد من "
 "إدخال كل القيم بـ <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:155
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:157
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "آخر كشف حساب تمت تسويته: %1"
-
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:223
-#, kde-format
-msgid "Oldest unmarked transaction: %1"
-msgstr "أقدم معاملة غير معلمة: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KEndingBalanceDlg)
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.ui:14
@@ -25822,6 +25823,9 @@ msgstr "عالِج تقرير معين"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "واحد فقط من --csv و --html مدعوم"
+
+#~ msgid "Oldest unmarked transaction: %1"
+#~ msgstr "أقدم معاملة غير معلمة: %1"
 
 #~ msgid "saving report '%1' into '%2'"
 #~ msgstr "حفظ التقرير '%1' إلى '%2'"

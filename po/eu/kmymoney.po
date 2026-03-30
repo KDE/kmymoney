@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-16 03:31+0000\n"
+"POT-Creation-Date: 2026-03-30 03:33+0000\n"
 "PO-Revision-Date: 2025-09-23 19:01+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -18942,10 +18942,16 @@ msgid "Use system font"
 msgstr "Erabili sistemaren letra-tipoa"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
-#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:336 kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in normal view"
+msgstr "Ikuspegi normalean erregistroa ordenatzeko irizpidea"
+
+#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:340
+#, fuzzy, kde-format
+#| msgid "Sort order of register in normal view"
+msgid "Sort order of register in reconcile view"
 msgstr "Ikuspegi normalean erregistroa ordenatzeko irizpidea"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
@@ -21233,7 +21239,7 @@ msgstr ""
 "izan liteke eguneratuta ez egotea, eta kontu-saldoren ezberdina izatea."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:404
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21542,7 +21548,7 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Baieztatu berdinkatzea amaitzea"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:402
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
@@ -21554,7 +21560,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Aldea: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:364
+#: kmymoney/views/simpleledgerview.cpp:363
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21564,7 +21570,7 @@ msgstr ""
 "Kontu honentzako itxi botoia kendu da kontua adosten ari zarelako. Bukatu, "
 "bertan behera utzi edo atzeratu adostea berreskuratzeko."
 
-#: kmymoney/views/simpleledgerview.cpp:475
+#: kmymoney/views/simpleledgerview.cpp:474
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21574,7 +21580,7 @@ msgstr ""
 "Orrialde honek kontuen liburu nagusia erakusten du. Momentuz, ez dago "
 "konturik, beraz, testu hau erakusten da."
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:477
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21584,12 +21590,12 @@ msgstr ""
 "Orrialde honek kontuen liburu nagusia erakusten du. Momentuz, ez da konturik "
 "hautatu, beraz, testu hau erakusten da."
 
-#: kmymoney/views/simpleledgerview.cpp:757
+#: kmymoney/views/simpleledgerview.cpp:756
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "<b>%1</b>-(e)n webgunea ireki zure nabigatzailean."
 
-#: kmymoney/views/simpleledgerview.cpp:949
+#: kmymoney/views/simpleledgerview.cpp:948
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21598,7 +21604,7 @@ msgstr ""
 "Ezin duzu ikuspegi hau itxi kontua adosten ari zarelako. Bukatu, bertan "
 "behera utzi edo atzeratu adostea lehenago."
 
-#: kmymoney/views/simpleledgerview.cpp:950
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -22617,7 +22623,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Karguak"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:94
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:96
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -22626,15 +22632,10 @@ msgstr ""
 "Bete eremu hauek kontu-laburpenean azaltzen zaizun informazioarekin. "
 "Ziurtatu balio guztiak <b>%1</b>(e)(a)n sartu dituzula."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:155
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:157
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Azkenekoz berdinkatutako kontu-laburpena: %1"
-
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:223
-#, kde-format
-msgid "Oldest unmarked transaction: %1"
-msgstr "Markatu gabeko transakzio zaharrena: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KEndingBalanceDlg)
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.ui:14
@@ -25996,6 +25997,9 @@ msgstr "Txosten jakin bat prozesatu"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "--csv eta --html arteko bakarra onartzen da"
+
+#~ msgid "Oldest unmarked transaction: %1"
+#~ msgstr "Markatu gabeko transakzio zaharrena: %1"
 
 #~ msgid "saving report '%1' into '%2'"
 #~ msgstr "'%1' txostena '%2'(e)an gordetzea"

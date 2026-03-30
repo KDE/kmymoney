@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-16 03:31+0000\n"
-"PO-Revision-Date: 2026-02-23 08:02+0100\n"
+"POT-Creation-Date: 2026-03-30 03:33+0000\n"
+"PO-Revision-Date: 2026-03-29 16:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -13370,7 +13370,7 @@ msgstr "La cotització és derivada de"
 #: kmymoney/plugins/ofx/import/importoption.ui:49
 #, kde-format
 msgid "Timezone offset"
-msgstr "Decalatge de la zona horària"
+msgstr "Decalatge del fus horari"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:542
@@ -19045,10 +19045,16 @@ msgid "Use system font"
 msgstr "Usa el tipus de lletra del sistema"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
-#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:336 kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in normal view"
+msgstr "Sentit d'ordenació del registre a la vista normal"
+
+#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:340
+#, fuzzy, kde-format
+#| msgid "Sort order of register in normal view"
+msgid "Sort order of register in reconcile view"
 msgstr "Sentit d'ordenació del registre a la vista normal"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
@@ -21358,7 +21364,7 @@ msgstr ""
 "podria no estar actualitzat i podria diferir del saldo del compte."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:404
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21670,7 +21676,7 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Confirmeu el final de la conciliació"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:402
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
@@ -21682,7 +21688,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Diferència: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:364
+#: kmymoney/views/simpleledgerview.cpp:363
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21693,7 +21699,7 @@ msgstr ""
 "conciliant. Per a recuperar-lo, podeu finalitzar, cancel·lar o posposar la "
 "conciliació."
 
-#: kmymoney/views/simpleledgerview.cpp:475
+#: kmymoney/views/simpleledgerview.cpp:474
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21703,7 +21709,7 @@ msgstr ""
 "Aquesta pàgina mostra el llibre major dels comptes. Actualment, no existeix "
 "cap compte i, per tant, es mostra aquest text."
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:477
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21713,12 +21719,12 @@ msgstr ""
 "Aquesta pàgina mostra el llibre major dels comptes. Actualment, no hi ha cap "
 "compte seleccionat i, per tant, es mostra aquest text."
 
-#: kmymoney/views/simpleledgerview.cpp:757
+#: kmymoney/views/simpleledgerview.cpp:756
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Obre el lloc web de <b>%1</b> al navegador."
 
-#: kmymoney/views/simpleledgerview.cpp:949
+#: kmymoney/views/simpleledgerview.cpp:948
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21727,7 +21733,7 @@ msgstr ""
 "No es pot tancar aquesta vista perquè esteu conciliant el compte. Primer cal "
 "finalitzar, cancel·lar o posposar la conciliació."
 
-#: kmymoney/views/simpleledgerview.cpp:950
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -22757,7 +22763,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Càrrecs"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:94
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:96
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -22766,15 +22772,10 @@ msgstr ""
 "Si us plau, ompliu els camps següents amb la informació que figura en el "
 "vostre extracte. Assegureu-vos d'introduir tots els valors en <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:155
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:157
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Darrer extracte conciliat: %1"
-
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:223
-#, kde-format
-msgid "Oldest unmarked transaction: %1"
-msgstr "Operació sense marcar més antiga: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KEndingBalanceDlg)
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.ui:14
@@ -26161,3 +26162,6 @@ msgstr "Processa un informe específic"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Només s'admet un d'entre --csv o --html"
+
+#~ msgid "Oldest unmarked transaction: %1"
+#~ msgstr "Operació sense marcar més antiga: %1"
