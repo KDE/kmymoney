@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-16 03:31+0000\n"
+"POT-Creation-Date: 2026-03-30 03:33+0000\n"
 "PO-Revision-Date: 2026-03-01 12:31+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -18875,11 +18875,16 @@ msgid "Use system font"
 msgstr "Bruk systemskrift"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
-#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:336 kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in normal view"
 msgstr "Sorteringsrekkefølge for hovedboken i normalvisning"
+
+#. i18n: ectx: label, entry (sortReconcileView), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:340
+#, kde-format
+msgid "Sort order of register in reconcile view"
+msgstr ""
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:344
@@ -21163,7 +21168,7 @@ msgstr ""
 "derfor ikke sikkert at den er oppdatert og kan avvike fra kontosaldo."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
-#: kmymoney/views/reconciliationledgerviewpage.cpp:404
+#: kmymoney/views/reconciliationledgerviewpage.cpp:403
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21471,7 +21476,7 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Bekreft avstemming"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:402
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
@@ -21483,7 +21488,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Forskjell: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:364
+#: kmymoney/views/simpleledgerview.cpp:363
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21493,7 +21498,7 @@ msgstr ""
 "Lukk-knappen for denne kontoen er fjernet fordi du avstemmer den. Fullfør, "
 "avbryt eller utsett avstemmingen for å få den tilbake."
 
-#: kmymoney/views/simpleledgerview.cpp:475
+#: kmymoney/views/simpleledgerview.cpp:474
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21503,7 +21508,7 @@ msgstr ""
 "Denne siden viser kontobøkene. For øyeblikket finnes det ingen konti så "
 "denne teksten vises i stedet."
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:477
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21513,12 +21518,12 @@ msgstr ""
 "Denne siden viser kontobøkene. For øyeblikket er ingen konti valgt så denne "
 "teksten vises i stedet."
 
-#: kmymoney/views/simpleledgerview.cpp:757
+#: kmymoney/views/simpleledgerview.cpp:756
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Åpne nettsiden til <b>%1</b> i nettleseren din."
 
-#: kmymoney/views/simpleledgerview.cpp:949
+#: kmymoney/views/simpleledgerview.cpp:948
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21527,7 +21532,7 @@ msgstr ""
 "Du kan ikke lukke denne visningen fordi du avstemmer kontoen. Fullfør, "
 "avbryt eller utsett avstemmingen først."
 
-#: kmymoney/views/simpleledgerview.cpp:950
+#: kmymoney/views/simpleledgerview.cpp:949
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -22547,7 +22552,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Avgifter"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:94
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:96
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -22556,15 +22561,10 @@ msgstr ""
 "Skriv inn i følgende felt med informasjonen slik du finner den på "
 "kontoutdraget. Sørg for å skrive alle verdier i <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:155
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:157
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Sist avstemte kontoutdrag: %1"
-
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:223
-#, kde-format
-msgid "Oldest unmarked transaction: %1"
-msgstr "Eldste umerkede transaksjon: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KEndingBalanceDlg)
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.ui:14
