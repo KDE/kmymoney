@@ -243,6 +243,12 @@ void KEndingBalanceDlg::slotUpdateBalances()
         }
     }
 
+    // in case of a Liability account the sign needs to be reverted for display purposes
+    if (d->m_account.accountGroup() == eMyMoney::Account::Type::Liability) {
+        startBalance = -startBalance;
+        endBalance = -endBalance;
+    }
+
     d->ui->m_statementInfoPageCheckings->ui->m_previousBalance->setValue(startBalance);
     d->ui->m_statementInfoPageCheckings->ui->m_endingBalance->setValue(endBalance);
 
