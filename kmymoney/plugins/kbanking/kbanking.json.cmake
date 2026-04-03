@@ -54,6 +54,7 @@
         "Description[pl]": "Dodaje obsługę bankowości sieciowej HBCI/FinTs, OFX oraz PayPal do KMyMoney",
         "Description[pt_BR]": "Adiciona correspondente bancário do tipo HBCI/FinTs, OFX e PayPal no KMyMoney",
         "Description[ru]": "Добавляет в KMyMoney возможность сетевой работы с банками (HBCI/FinTs, OFX и PayPal)",
+        "Description[sk]": "Pridať HBCI/FinTs online banking do KMyMoney",
         "Description[sl]": "Doda spletno bančništvo HBCI/FinTs, OFX in PayPal v KMyMoney",
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank och PayPal till KMyMoney",
         "Description[tr]": "K Param’a HBCI/FinTs, OFX ve PayPal çevrimiçi bankacılığını ekleyin",
