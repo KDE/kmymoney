@@ -12,13 +12,26 @@ execute_process(
 
 if(NOT EXISTS ${reffilename})
   message(ERROR "could not compare files - reference file '${reffilename}' is missing")
-  if(WIN32)
-      set(msg_prefix "set LANG=C\n")
+  if(createmissingfiles)
+    if(WIN32)
+        set(ENV{"LANG"} "C")
+    else()
+        set(ENV{"LANG"} "C.UTF-8")
+    endif()
+    execute_process(
+      COMMAND ${launcher} --reference --${format} --${type} --report "${report}" --output "${reffilename}" ${testfile}
+      COMMAND_ECHO STDERR
+      RESULT_VARIABLE create_result
+    )
   else()
-      set(msg_prefix "LANG=C.UTF-8 ")
+    if(WIN32)
+        set(msg_prefix "set LANG=C\n")
+    else()
+        set(msg_prefix "LANG=C.UTF-8 ")
+    endif()
+    message(STATUS "run '${msg_prefix}${launcher} --reference --${format} --${type} --report \"${report}\" --output \"${reffilename}\" ${testfile}' to generate it")
+    return()
   endif()
-  message(STATUS "run '${msg_prefix}${launcher} --reference --${format} --${type} --report \"${report}\" --output \"${reffilename}\" ${testfile}' to generate it")
-  return()
 endif()
 execute_process(
   COMMAND ${CMAKE_COMMAND} -E compare_files --ignore-eol ${reffilename} ${outfilename}

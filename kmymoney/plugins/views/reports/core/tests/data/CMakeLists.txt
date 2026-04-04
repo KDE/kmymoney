@@ -106,6 +106,7 @@ macro(add_report_tests)
             -Doutfilename=${CMAKE_CURRENT_BINARY_DIR}/${format}/${file_name}.${format}
             -Dreffilename=${CMAKE_CURRENT_SOURCE_DIR}/${format}/${file_name}.${format}
             -Dworkingdir=${working_dir}
+            -Dcreatemissingfiles=1
             -P ${CMAKE_CURRENT_SOURCE_DIR}/compare.cmake
         )
         set_tests_properties(${test_name}-${format}
