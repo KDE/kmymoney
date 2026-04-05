@@ -38,6 +38,7 @@
 #include "icons.h"
 #include "investmentwizardpage.h"
 #include "kmm_codec.h"
+#include "kmymoneysettings.h"
 #include "mymoneyqifprofile.h"
 #include "pluginsettings.h"
 #include "priceswizardpage.h"
@@ -100,6 +101,20 @@ CSVWizard::CSVWizard(QWidget* parentWidget, CSVImporter* plugin)
     connect(m_wiz, &QWizard::currentIdChanged, this, &CSVWizard::slotIdChanged);
 
     ui->tableView->setWordWrap(false);
+
+    // setup header font
+    ui->tableView->horizontalHeader()->setMinimumSectionSize(20);
+
+    QFont font = KMyMoneySettings::listHeaderFontEx();
+    QFontMetrics fm(font);
+    int height = fm.lineSpacing() + 6;
+    ui->tableView->horizontalHeader()->setMinimumHeight(height);
+    ui->tableView->horizontalHeader()->setMaximumHeight(height);
+    ui->tableView->horizontalHeader()->setFont(font);
+
+    // setup cell font
+    font = KMyMoneySettings::listCellFontEx();
+    ui->tableView->setFont(font);
 
     m_vScrollBar = ui->tableView->verticalScrollBar();
     m_vScrollBar->setTracking(false);
