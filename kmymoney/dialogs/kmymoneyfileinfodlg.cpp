@@ -74,6 +74,8 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
     ui->m_splitCount->setText(QString::fromLatin1("%1").arg(file->journalModel()->rowCount()));
     ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(file->scheduleList().count()));
     ui->m_priceCount->setText(QString::fromLatin1("%1").arg(file->priceModel()->rowCount()));
+    ui->m_securitiesCount->setText(QString::fromLatin1("%1").arg(file->securityList().count()));
+    ui->m_currenciesCount->setText(QString::fromLatin1("%1").arg(file->currencyList().count()));
 }
 
 KMyMoneyFileInfoDlg::~KMyMoneyFileInfoDlg()

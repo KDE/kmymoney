@@ -222,6 +222,34 @@
        </property>
       </widget>
      </item>
+     <item row="12" column="0">
+      <widget class="QLabel" name="textLabel11">
+       <property name="text">
+        <string>Securities</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="1">
+      <widget class="QLabel" name="m_securitiesCount">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="0">
+      <widget class="QLabel" name="textLabel12">
+       <property name="text">
+        <string>Currencies</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="1">
+      <widget class="QLabel" name="m_currenciesCount">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
      <item row="6" column="0" colspan="2">
       <widget class="QTreeWidget" name="m_accountView">
        <property name="rootIsDecorated">
