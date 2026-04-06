@@ -73,7 +73,18 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
     ui->m_transactionCount->setText(QString::fromLatin1("%1").arg(file->journalModel()->transactionCount(QString())));
     ui->m_splitCount->setText(QString::fromLatin1("%1").arg(file->journalModel()->rowCount()));
     ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(file->scheduleList().count()));
-    ui->m_priceCount->setText(QString::fromLatin1("%1").arg(file->priceModel()->rowCount()));
+    int stockPriceCount = 0;
+    int exchangeRateCount = 0;
+    const auto prices = file->priceList();
+    for (auto it_p = prices.cbegin(); it_p != prices.cend(); ++it_p) {
+        if (file->security(it_p.key().first).isCurrency()) {
+            exchangeRateCount += it_p.value().count();
+        } else {
+            stockPriceCount += it_p.value().count();
+        }
+    }
+    ui->m_stockPriceCount->setText(QString::fromLatin1("%1").arg(stockPriceCount));
+    ui->m_exchangeRateCount->setText(QString::fromLatin1("%1").arg(exchangeRateCount));
     ui->m_securitiesCount->setText(QString::fromLatin1("%1").arg(file->securityList().count()));
     ui->m_currenciesCount->setText(QString::fromLatin1("%1").arg(file->currencyList().count()));
 }
