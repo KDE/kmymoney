@@ -5,6 +5,7 @@ set(libviews_a_SOURCES
   accountdelegate.cpp
   kwelcomepage.cpp
   khomeview.cpp
+  homemodel.cpp
   kqmlview.cpp
   kinstitutionsview.cpp
   kinvestmentview.cpp

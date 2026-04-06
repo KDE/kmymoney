@@ -249,6 +249,10 @@ KMyMoneyView::KMyMoneyView()
     connect(accountsView, &KAccountsView::beginImportingStatements, homeView, &KHomeView::slotDisableRefresh);
     connect(accountsView, &KAccountsView::endImportingStatements, homeView, &KHomeView::slotEnableRefresh);
 
+    const auto homeQmlView = static_cast<KQmlView*>(d->viewBases[View::HomeQML]);
+    connect(accountsView, &KAccountsView::beginImportingStatements, homeQmlView, &KQmlView::slotDisableRefresh);
+    connect(accountsView, &KAccountsView::endImportingStatements, homeQmlView, &KQmlView::slotEnableRefresh);
+
     updateViewType();
 }
 

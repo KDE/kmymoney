@@ -1,72 +1,163 @@
-
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15 as QQC2
-import QtQml.Models 2.15
-
-import org.kde.kirigami 2.15 as Kirigami
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import org.kde.kirigami as Kirigami
 
 Kirigami.ScrollablePage {
     id: root
-
-    titleDelegate: Rectangle {
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.Window
-        color: Kirigami.Theme.backgroundColor
-        implicitHeight: titleHeading.implicitHeight
-        Kirigami.Heading {
-            id: titleHeading
-            level: 1
-            anchors.fill: parent
-            text: "Your Financial Summary"
-        }
-    }
-
-    background: Rectangle {
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.Window
-        color: Kirigami.Theme.backgroundColor
-    }
+    title: i18n("Financial Summary")
 
     Kirigami.CardsListView {
-        model: sectionsModel
+        id: cardsView
+        anchors.fill: parent
+        model: homeModel
+        visible: homeModel.isReady && homeModel.rowCount() > 0
+        delegate: Kirigami.AbstractCard {
+            id: sectionCard
+            implicitWidth: parent.width
 
-        delegate: SectionCard {
-            title: model.title
-            summary: model.summary ?? ""
-            contentItem: QQC2.Label {
-                text: "Here is where the section item goes"
+            header: Kirigami.Heading {
+                text: model.title
+                level: 2
+            }
+
+            contentItem: Item {
+                implicitHeight: contentLoader.item ? contentLoader.item.implicitHeight : 0
+                Loader {
+                    id: contentLoader
+                    anchors.fill: parent
+                    sourceComponent: {
+                        switch(model.type) {
+                            case 0: return accountsComponent; // HomeModel::Accounts
+                            case 1: return schedulesComponent; // HomeModel::Schedules
+                            case 4: return assetsLiabilitiesComponent; // HomeModel::AssetsLiabilities
+                            default: return null;
+                        }
+                    }
+                    Binding {
+                        target: contentLoader
+                        property: "section"
+                        value: model.sectionObject
+                    }
+                }
+            }
+
+            footer: (model.type === 4) ? netWorthFooter : null
+            
+            Component {
+                id: netWorthFooter
+                Kirigami.Heading {
+                    level: 3
+                    text: i18n("Net Worth: %1", model.sectionObject.netWorth)
+                    color: model.sectionObject.netWorthColor
+                    horizontalAlignment: Text.AlignRight
+                }
             }
         }
     }
 
-    component SectionCard : Kirigami.AbstractCard {
-        property alias title: sectionTitle.text
-        property alias summary: sectionSummary.text
+    Kirigami.PlaceholderMessage {
+        anchors.centerIn: parent
+        width: parent.width - (Kirigami.Units.gridUnit * 4)
+        visible: !homeModel.isReady || homeModel.rowCount() === 0
+        text: !homeModel.isReady ? i18n("Loading financial data...") : i18n("No data to display. Please check your Home view settings.")
+        icon.name: !homeModel.isReady ? "view-refresh" : "view-list-icons"
+    }
 
-        header: Kirigami.Heading {
-            id: sectionTitle
-            level: 1
-        }
-
-        footer: Kirigami.Heading {
-            id: sectionSummary
-            level: 4
-            visible: text.length > 0
-            horizontalAlignment: Text.AlignRight
+    Component {
+        id: accountsComponent
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+            Repeater {
+                model: section.accounts
+                delegate: QQC2.ItemDelegate {
+                    width: parent ? parent.width : 0
+                    contentItem: RowLayout {
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 0
+                            QQC2.Label {
+                                text: modelData.name
+                                font.bold: true
+                            }
+                            QQC2.Label {
+                                text: modelData.institution || ""
+                                font.pointSize: Kirigami.Theme.smallFont.pointSize
+                                visible: text !== ""
+                                opacity: 0.7
+                            }
+                        }
+                        ColumnLayout {
+                            spacing: 0
+                            QQC2.Label {
+                                text: modelData.balance
+                                color: modelData.color
+                                font.bold: true
+                                horizontalAlignment: Text.AlignRight
+                            }
+                            QQC2.Label {
+                                text: modelData.totalBalance || ""
+                                color: modelData.totalColor || Kirigami.Theme.textColor
+                                font.pointSize: Kirigami.Theme.smallFont.pointSize
+                                visible: section.showTotalBalance
+                                horizontalAlignment: Text.AlignRight
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
-    ListModel {
-        id: sectionsModel
-        ListElement { title: "Assets and Liabilites"; summary: "Example Section Summary: 45€"}
-        ListElement { title: "Payments" }
-        ListElement { title: "Preferred accounts" }
-        ListElement { title: "Payment accounts" }
-        ListElement { title: "Favorite reports" }
-        ListElement { title: "Forecast (schedule)" }
-        ListElement { title: "Net worth forecast" }
-        ListElement { title: "Budget" }
-        ListElement { title: "Cash Flow" }
+    Component {
+        id: schedulesComponent
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+            Repeater {
+                model: section.schedules
+                delegate: QQC2.ItemDelegate {
+                    width: parent ? parent.width : 0
+                    contentItem: RowLayout {
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 0
+                            QQC2.Label {
+                                text: modelData.name
+                                font.bold: true
+                            }
+                            QQC2.Label {
+                                text: modelData.occurrence
+                                font.pointSize: Kirigami.Theme.smallFont.pointSize
+                                opacity: 0.7
+                            }
+                        }
+                        ColumnLayout {
+                            spacing: 0
+                            QQC2.Label {
+                                text: modelData.amount
+                                font.bold: true
+                                horizontalAlignment: Text.AlignRight
+                            }
+                            QQC2.Label {
+                                text: modelData.nextDueDate
+                                font.pointSize: Kirigami.Theme.smallFont.pointSize
+                                horizontalAlignment: Text.AlignRight
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: assetsLiabilitiesComponent
+        ColumnLayout {
+            QQC2.Label {
+                text: i18n("Summary of assets and liabilities")
+                font.italic: true
+                opacity: 0.7
+            }
+        }
     }
 }
