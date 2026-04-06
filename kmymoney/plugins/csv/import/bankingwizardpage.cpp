@@ -210,8 +210,7 @@ int BankingPage::nextId() const
 
 bool BankingPage::isComplete() const
 {
-    bool rc = (ui->m_dateCol->currentIndex() > -1) &&
-              (ui->m_payeeCol->currentIndex() > -1);
+    bool rc = ui->m_dateCol->currentIndex() > -1;
 
     if (ui->m_amountTabWidget->currentIndex() == 0) { // amountTab selected
         rc &= (ui->m_amountCol->currentIndex() > -1);
