@@ -428,8 +428,8 @@ public:
 ReconciliationLedgerViewPage::ReconciliationLedgerViewPage(QWidget* parent, const QString& configGroupName)
     : LedgerViewPage(*new Private(this), parent, configGroupName)
 {
-    // in reconciliation mode we use a fixed state filter
-    d->ui->m_searchWidget->comboBox()->setCurrentIndex(static_cast<int>(LedgerFilter::State::NotReconciled));
+    // in reconciliation mode initial the "Not Reconciled" state filter is used
+    d->stateFilter->setStateFilter(LedgerFilter::State::NotReconciled);
     d->ui->m_searchWidget->comboBox()->setDisabled(true);
 }
 

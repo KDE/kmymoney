@@ -43,6 +43,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
 {
     d->initWidgets(configGroupName);
     d->ui->m_ledgerView->setModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+    d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
 
     connect(d->ui->m_ledgerView, &LedgerView::modifySortOrder, this, [&]() {
         d->selectSortOrder();
@@ -58,6 +59,7 @@ LedgerViewPage::LedgerViewPage(LedgerViewPage::Private& dd, QWidget* parent, con
 {
     d->initWidgets(configGroupName);
     d->ui->m_ledgerView->setModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+    d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
 
     connect(d->ui->m_ledgerView, &LedgerView::modifySortOrder, this, [&]() {
         d->selectSortOrder();
@@ -90,7 +92,6 @@ void LedgerViewPage::initModel()
     d->accountFilter->setHideReconciledTransactions(viewSettings->hideReconciledTransactions());
     d->accountFilter->setHideTransactionsBefore(viewSettings->hideTransactionsBefore());
 
-    d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
     d->stateFilter->setSourceModel(d->accountFilter);
     d->stateFilter->setComboBox(d->ui->m_searchWidget->comboBox());
     d->stateFilter->setLineEdit(d->ui->m_searchWidget->lineEdit());
