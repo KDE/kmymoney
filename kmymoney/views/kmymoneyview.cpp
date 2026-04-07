@@ -227,6 +227,7 @@ KMyMoneyView::KMyMoneyView()
     const auto accountsView = new KAccountsView;
     d->viewBases[View::Home] = homeView;
     d->viewBases[View::HomeQML] = new KQmlView((QUrl(QStringLiteral("qrc:/qml/HomeView.qml"))), this);
+    d->viewBases[View::HomeQML]->setObjectName("HomeQMLView");
     d->viewBases[View::Institutions] = new KInstitutionsView;
     d->viewBases[View::Accounts] = accountsView;
     d->viewBases[View::Schedules] = new KScheduledView;

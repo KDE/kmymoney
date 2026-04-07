@@ -10,6 +10,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneymoney.h"
+#include "mymoneypayee.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
@@ -18,6 +19,7 @@
 #include <KColorScheme>
 #include <KLocalizedString>
 #include <QDate>
+#include <QDebug>
 
 QString MoneyFormatter::format(const QString& amount, const QString& accountId) const
 {
@@ -124,14 +126,17 @@ AccountsSection::AccountsSection(const QString& title, AccountFilter filter, QOb
     : HomeSection(title, HomeModel::Accounts, parent)
     , m_filter(filter)
 {
+    qWarning() << "AccountsSection created with title:" << title << "Filter:" << filter;
 }
 
 QVariantList AccountsSection::accounts() const
 {
-    QVariantList list;
     auto file = MyMoneyFile::instance();
+    qWarning() << "AccountsSection::accounts() called. File instance:" << file << "Title:" << title();
+    QVariantList list;
     QList<MyMoneyAccount> allAccounts;
     file->accountList(allAccounts);
+    qWarning() << "  Total accounts in file:" << allAccounts.size();
 
     const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
     const bool hideZeroBalanceAccounts = KMyMoneySettings::hideZeroBalanceAccountsHome() && !showAllAccounts;
@@ -141,6 +146,13 @@ QVariantList AccountsSection::accounts() const
 
         if (acc.isClosed() && !showAllAccounts)
             continue;
+
+        // Log everything for first few accounts
+        static int diagCount = 0;
+        if (diagCount < 5) {
+            qWarning() << "  Account:" << acc.name() << "ID:" << acc.id() << "Type:" << (int)acc.accountType() << "Pairs:" << acc.pairs().size();
+            diagCount++;
+        }
 
         switch (m_filter) {
         case PreferredAccounts:
@@ -184,6 +196,7 @@ QVariantList AccountsSection::accounts() const
         }
 
         if (include) {
+            qWarning() << "  Including account:" << acc.name() << "ID:" << acc.id();
             try {
                 MyMoneySecurity currency = file->currency(acc.currencyId());
 
@@ -223,57 +236,134 @@ QVariantList AccountsSection::accounts() const
         }
     }
 
+    qWarning() << "  AccountsSection::accounts() returning" << list.size() << "items";
     return list;
 }
 
 SchedulesSection::SchedulesSection(const QString& title, QObject* parent)
     : HomeSection(title, HomeModel::Schedules, parent)
 {
+    qWarning() << "SchedulesSection created with title:" << title;
 }
 
 QVariantList SchedulesSection::schedules() const
 {
-    QVariantList list;
     auto file = MyMoneyFile::instance();
-    auto schedules = file->scheduleList();
+    qWarning() << "SchedulesSection::schedules() called. File instance:" << file;
+    QVariantList list;
 
-    for (const auto& sched : schedules) {
-        if (sched.isFinished())
-            continue;
+    QList<MyMoneySchedule> allSchedules = file->scheduleList();
+    qWarning() << "  Total raw schedules in file:" << allSchedules.size();
 
-        QVariantMap map;
-        map["id"] = sched.id();
-        map["name"] = sched.name();
-        map["nextDueDate"] = MyMoneyUtils::formatDate(sched.nextDueDate());
-        map["occurrence"] = sched.occurrenceToString();
+    // Get overdue and upcoming schedules like KHomeView does
+    auto overdues = file->scheduleList(QString(),
+                                       eMyMoney::Schedule::Type::Any,
+                                       eMyMoney::Schedule::Occurrence::Any,
+                                       eMyMoney::Schedule::PaymentType::Any,
+                                       QDate(),
+                                       QDate(),
+                                       true);
+    auto upcoming = file->scheduleList(QString(),
+                                       eMyMoney::Schedule::Type::Any,
+                                       eMyMoney::Schedule::Occurrence::Any,
+                                       eMyMoney::Schedule::PaymentType::Any,
+                                       QDate::currentDate(),
+                                       QDate::currentDate().addMonths(3),
+                                       false);
 
-        try {
-            auto acc = file->account(sched.account().id());
-            auto currency = file->currency(acc.currencyId());
-            map["amount"] = MyMoneyUtils::formatMoney(sched.transaction().splitByAccount(acc.id()).value(), acc, currency);
-        } catch (...) {
+    qWarning() << "  Overdue found:" << overdues.size() << "Upcoming (3mo) found:" << upcoming.size();
+
+    auto processSchedules = [&](const QList<MyMoneySchedule>& schedules) {
+        for (const auto& sched : schedules) {
+            if (sched.isFinished())
+                continue;
+
+            QVariantMap map;
+            map["id"] = sched.id();
+            map["name"] = sched.name();
+            map["nextDueDate"] = MyMoneyUtils::formatDate(sched.nextDueDate());
+            map["occurrence"] = sched.occurrenceToString();
+
+            try {
+                auto acc = file->account(sched.account().id());
+                auto currency = file->currency(acc.currencyId());
+                map["amount"] = MyMoneyUtils::formatMoney(sched.transaction().splitByAccount(acc.id()).value(), acc, currency);
+            } catch (...) {
+                map["amount"] = "";
+            }
+
+            list.append(map);
         }
+    };
 
-        list.append(map);
-    }
+    processSchedules(overdues);
+    processSchedules(upcoming);
+
+    qWarning() << "  SchedulesSection::schedules() returning" << list.size() << "items";
     return list;
 }
 
 AssetsLiabilitiesSection::AssetsLiabilitiesSection(const QString& title, QObject* parent)
     : HomeSection(title, HomeModel::AssetsLiabilities, parent)
 {
+    qWarning() << "AssetsLiabilitiesSection created with title:" << title;
 }
 
 QVariantList AssetsLiabilitiesSection::assets() const
 {
     QVariantList list;
-    // Simplified: in reality this should sum up all asset accounts
+    auto file = MyMoneyFile::instance();
+    qWarning() << "AssetsLiabilitiesSection::assets() called. File instance:" << file;
+
+    QList<MyMoneyAccount> accountList;
+    file->accountList(accountList); // Get all accounts
+
+    for (const auto& acc : accountList) {
+        if (acc.isClosed())
+            continue;
+        if (acc.accountType() != eMyMoney::Account::Type::Asset && acc.accountType() != eMyMoney::Account::Type::Checkings
+            && acc.accountType() != eMyMoney::Account::Type::Savings && acc.accountType() != eMyMoney::Account::Type::Cash
+            && acc.accountType() != eMyMoney::Account::Type::Investment)
+            continue;
+
+        MyMoneyMoney balance = file->balance(acc.id());
+        if (balance.isZero())
+            continue;
+
+        QVariantMap map;
+        map["name"] = acc.name();
+        map["balance"] = MyMoneyUtils::formatMoney(balance, acc, file->currency(acc.currencyId()));
+        list.append(map);
+    }
+    qWarning() << "  AssetsLiabilitiesSection::assets() returning" << list.size() << "items";
     return list;
 }
 
 QVariantList AssetsLiabilitiesSection::liabilities() const
 {
     QVariantList list;
+    auto file = MyMoneyFile::instance();
+    qWarning() << "AssetsLiabilitiesSection::liabilities() called";
+
+    QList<MyMoneyAccount> accountList;
+    file->accountList(accountList); // Get all accounts
+
+    for (const auto& acc : accountList) {
+        if (acc.isClosed())
+            continue;
+        if (acc.accountType() != eMyMoney::Account::Type::Liability && acc.accountType() != eMyMoney::Account::Type::CreditCard)
+            continue;
+
+        MyMoneyMoney balance = file->balance(acc.id());
+        if (balance.isZero())
+            continue;
+
+        QVariantMap map;
+        map["name"] = acc.name();
+        map["balance"] = MyMoneyUtils::formatMoney(balance, acc, file->currency(acc.currencyId()));
+        list.append(map);
+    }
+    qWarning() << "  AssetsLiabilitiesSection::liabilities() returning" << list.size() << "items";
     return list;
 }
 

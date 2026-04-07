@@ -41,6 +41,7 @@ public:
 
 protected:
     void showEvent(QShowEvent* event) override;
+    void resizeEvent(QResizeEvent* event) override;
 
 public Q_SLOTS:
     void slotSettingsChanged() override;

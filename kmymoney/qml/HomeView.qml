@@ -1,174 +1,181 @@
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
 
-Kirigami.ScrollablePage {
+Rectangle {
     id: root
-    title: i18n("Financial Summary")
+    color: "#f0f0f0"
+    border.color: "red"
+    border.width: 5
 
-    Kirigami.CardsListView {
-        id: cardsView
+    Component.onCompleted: {
+        console.log("Minimalist HomeView Component.onCompleted")
+        console.log("homeModel ready:", homeModel.isReady)
+        console.log("homeModel rows:", homeModel.rowCount())
+    }
+
+    Text {
+        id: placeholderText
+        anchors.centerIn: parent
+        text: (homeModel && !homeModel.isReady) ? "Loading financial data..." : "No data to display. Please check your Home view settings."
+        visible: (homeModel && (!homeModel.isReady || homeModel.rowCount() === 0))
+        font.pointSize: 18
+        color: "black"
+    }
+
+    ListView {
+        id: sectionsList
         anchors.fill: parent
+        anchors.margins: 10
         model: homeModel
-        visible: homeModel.isReady && homeModel.rowCount() > 0
-        delegate: Kirigami.AbstractCard {
-            id: sectionCard
-            implicitWidth: parent.width
+        visible: homeModel && homeModel.isReady && homeModel.rowCount() > 0
+        spacing: 20
+        clip: true
 
-            header: Kirigami.Heading {
-                text: model.title
-                level: 2
-            }
+        delegate: Rectangle {
+            id: sectionBox
+            width: sectionsList.width - 20
+            height: (model && model.title) ? (sectionColumn.height + 40) : 0
+            color: "white"
+            border.color: "#cccccc"
+            border.width: 1
+            radius: 5
+            visible: !!model
 
-            contentItem: Item {
-                implicitHeight: contentLoader.item ? contentLoader.item.implicitHeight : 0
+            Column {
+                id: sectionColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: 10
+                spacing: 10
+
+                Text {
+                    text: (model && model.title) ? model.title : ""
+                    font.bold: true
+                    font.pointSize: 16
+                }
+
                 Loader {
-                    id: contentLoader
-                    anchors.fill: parent
+                    id: sectionLoader
+                    width: parent.width
+                    property var sectionData: (model && model.sectionObject) ? model.sectionObject : null
                     sourceComponent: {
+                        if (!model) return null;
                         switch(model.type) {
-                            case 0: return accountsComponent; // HomeModel::Accounts
-                            case 1: return schedulesComponent; // HomeModel::Schedules
-                            case 4: return assetsLiabilitiesComponent; // HomeModel::AssetsLiabilities
+                            case 0: return accountsComp; // HomeModel::Accounts
+                            case 1: return schedulesComp; // HomeModel::Schedules
+                            case 4: return assetsComp;    // HomeModel::AssetsLiabilities
                             default: return null;
                         }
                     }
+                }
+            }
+        }
+    }
 
-                    onLoaded: {
-                        if (item) {
-                            item.section = model.sectionObject
-                        }
+    Component {
+        id: accountsComp
+        Column {
+            width: parent.width
+            spacing: 5
+            Repeater {
+                model: sectionData ? sectionData.accounts : []
+                delegate: Row {
+                    width: parent.width
+                    Text {
+                        text: modelData.name || ""
+                        width: parent.width * 0.6
+                        font.bold: true
                     }
-
-                    Binding {
-                        target: contentLoader.item
-                        property: "section"
-                        value: model.sectionObject
-                        when: contentLoader.item !== null
+                    Text {
+                        text: modelData.balance || ""
+                        width: parent.width * 0.4
+                        horizontalAlignment: Text.AlignRight
+                        color: modelData.color || "black"
                     }
                 }
             }
+        }
+    }
 
-            footer: (model.type === 4) ? netWorthFooter.createObject(sectionCard, {"section": model.sectionObject}) : null
+    Component {
+        id: schedulesComp
+        Column {
+            width: parent.width
+            spacing: 5
+            Repeater {
+                model: sectionData ? sectionData.schedules : []
+                delegate: Row {
+                    width: parent.width
+                    Text {
+                        text: modelData.name || ""
+                        width: parent.width * 0.6
+                    }
+                    Text {
+                        text: modelData.amount || ""
+                        width: parent.width * 0.4
+                        horizontalAlignment: Text.AlignRight
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: assetsComp
+        Column {
+            width: parent.width
+            spacing: 5
+            property var section: sectionData
+
+            Repeater {
+                model: section ? section.assets : []
+                delegate: Row {
+                    width: parent.width
+                    Text {
+                        text: modelData.name || ""
+                        width: parent.width * 0.6
+                        font.bold: true
+                    }
+                    Text {
+                        text: modelData.balance || ""
+                        width: parent.width * 0.4
+                        horizontalAlignment: Text.AlignRight
+                        color: modelData.color || "black"
+                    }
+                }
+            }
             
-            Component {
-                id: netWorthFooter
-                Kirigami.Heading {
-                    property var section: null
-                    level: 3
-                    text: i18n("Net Worth: %1", section.netWorth)
-                    color: section.netWorthColor
-                    horizontalAlignment: Text.AlignRight
-                }
+            Rectangle {
+                width: parent.width
+                height: 1
+                color: "#eeeeee"
+                visible: section && section.liabilities.length > 0
             }
-        }
-    }
 
-    Kirigami.PlaceholderMessage {
-        anchors.centerIn: parent
-        width: parent.width - (Kirigami.Units.gridUnit * 4)
-        visible: !homeModel.isReady || homeModel.rowCount() === 0
-        text: !homeModel.isReady ? i18n("Loading financial data...") : i18n("No data to display. Please check your Home view settings.")
-        icon.name: !homeModel.isReady ? "view-refresh" : "view-list-icons"
-    }
-
-    Component {
-        id: accountsComponent
-        ColumnLayout {
-            property var section: null
-            spacing: Kirigami.Units.smallSpacing
             Repeater {
-                model: section ? section.accounts : []
-                delegate: QQC2.ItemDelegate {
-                    width: parent ? parent.width : 0
-                    contentItem: RowLayout {
-                        ColumnLayout {
-                            Layout.fillWidth: true
-                            spacing: 0
-                            QQC2.Label {
-                                text: modelData.name
-                                font.bold: true
-                            }
-                            QQC2.Label {
-                                text: modelData.institution || ""
-                                font.pointSize: Kirigami.Theme.smallFont.pointSize
-                                visible: text !== ""
-                                opacity: 0.7
-                            }
-                        }
-                        ColumnLayout {
-                            spacing: 0
-                            QQC2.Label {
-                                text: modelData.balance
-                                color: modelData.color
-                                font.bold: true
-                                horizontalAlignment: Text.AlignRight
-                            }
-                            QQC2.Label {
-                                text: modelData.totalBalance || ""
-                                color: modelData.totalColor || Kirigami.Theme.textColor
-                                font.pointSize: Kirigami.Theme.smallFont.pointSize
-                                visible: section && section.showTotalBalance
-                                horizontalAlignment: Text.AlignRight
-                            }
-                        }
+                model: section ? section.liabilities : []
+                delegate: Row {
+                    width: parent.width
+                    Text {
+                        text: modelData.name || ""
+                        width: parent.width * 0.6
+                    }
+                    Text {
+                        text: modelData.balance || ""
+                        width: parent.width * 0.4
+                        horizontalAlignment: Text.AlignRight
+                        color: modelData.color || "red"
                     }
                 }
             }
-        }
-    }
 
-    Component {
-        id: schedulesComponent
-        ColumnLayout {
-            property var section: null
-            spacing: Kirigami.Units.smallSpacing
-            Repeater {
-                model: section ? section.schedules : []
-                delegate: QQC2.ItemDelegate {
-                    width: parent ? parent.width : 0
-                    contentItem: RowLayout {
-                        ColumnLayout {
-                            Layout.fillWidth: true
-                            spacing: 0
-                            QQC2.Label {
-                                text: modelData.name
-                                font.bold: true
-                            }
-                            QQC2.Label {
-                                text: modelData.occurrence
-                                font.pointSize: Kirigami.Theme.smallFont.pointSize
-                                opacity: 0.7
-                            }
-                        }
-                        ColumnLayout {
-                            spacing: 0
-                            QQC2.Label {
-                                text: modelData.amount
-                                font.bold: true
-                                horizontalAlignment: Text.AlignRight
-                            }
-                            QQC2.Label {
-                                text: modelData.nextDueDate
-                                font.pointSize: Kirigami.Theme.smallFont.pointSize
-                                horizontalAlignment: Text.AlignRight
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    Component {
-        id: assetsLiabilitiesComponent
-        ColumnLayout {
-            property var section: null
-            QQC2.Label {
-                text: i18n("Summary of assets and liabilities")
-                font.italic: true
-                opacity: 0.7
+            Text {
+                width: parent.width
+                text: section ? ("Net Worth: " + section.netWorth) : ""
+                font.bold: true
+                font.pointSize: 14
+                horizontalAlignment: Text.AlignRight
+                color: (section && section.netWorthColor) ? section.netWorthColor : "black"
             }
         }
     }

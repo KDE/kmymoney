@@ -12,11 +12,14 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
+#include <QtQml>
 #include <memory>
 
 class MoneyFormatter : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 public:
     explicit MoneyFormatter(QObject* parent = nullptr)
         : QObject(parent)
@@ -28,6 +31,8 @@ public:
 class HomeSection : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
     Q_PROPERTY(QString title READ title CONSTANT)
     Q_PROPERTY(int type READ type CONSTANT)
     Q_PROPERTY(bool visible READ isVisible NOTIFY visibilityChanged)
@@ -91,6 +96,7 @@ public:
     {
         if (m_isReady != ready) {
             m_isReady = ready;
+            qWarning() << "HomeModel::setReady(" << ready << ")";
             Q_EMIT isReadyChanged();
         }
     }
@@ -116,6 +122,8 @@ private:
 class AccountsSection : public HomeSection
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
     Q_PROPERTY(QVariantList accounts READ accounts NOTIFY dataChanged)
     Q_PROPERTY(bool showCurrentBalance READ showCurrentBalance CONSTANT)
     Q_PROPERTY(bool showTotalBalance READ showTotalBalance CONSTANT)
@@ -168,6 +176,8 @@ private:
 class SchedulesSection : public HomeSection
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
     Q_PROPERTY(QVariantList schedules READ schedules NOTIFY dataChanged)
 
 public:
@@ -178,6 +188,8 @@ public:
 class AssetsLiabilitiesSection : public HomeSection
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
     Q_PROPERTY(QVariantList assets READ assets NOTIFY dataChanged)
     Q_PROPERTY(QVariantList liabilities READ liabilities NOTIFY dataChanged)
     Q_PROPERTY(QString netWorth READ netWorth NOTIFY dataChanged)
