@@ -192,6 +192,8 @@ class AssetsLiabilitiesSection : public HomeSection
     QML_UNCREATABLE("")
     Q_PROPERTY(QVariantList assets READ assets NOTIFY dataChanged)
     Q_PROPERTY(QVariantList liabilities READ liabilities NOTIFY dataChanged)
+    Q_PROPERTY(QString totalAssets READ totalAssets NOTIFY dataChanged)
+    Q_PROPERTY(QString totalLiabilities READ totalLiabilities NOTIFY dataChanged)
     Q_PROPERTY(QString netWorth READ netWorth NOTIFY dataChanged)
     Q_PROPERTY(QString netWorthColor READ netWorthColor NOTIFY dataChanged)
 
@@ -199,6 +201,8 @@ public:
     AssetsLiabilitiesSection(const QString& title, QObject* parent = nullptr);
     QVariantList assets() const;
     QVariantList liabilities() const;
+    QString totalAssets() const;
+    QString totalLiabilities() const;
     QString netWorth() const;
     QString netWorthColor() const;
 };

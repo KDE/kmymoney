@@ -333,6 +333,10 @@ QVariantList AssetsLiabilitiesSection::assets() const
         QVariantMap map;
         map["name"] = acc.name();
         map["balance"] = MyMoneyUtils::formatMoney(balance, acc, file->currency(acc.currencyId()));
+        map["color"] = (balance.isNegative() ? KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText)
+                                             : KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NormalText))
+                           .color()
+                           .name();
         list.append(map);
     }
     qWarning() << "  AssetsLiabilitiesSection::assets() returning" << list.size() << "items";
@@ -361,10 +365,28 @@ QVariantList AssetsLiabilitiesSection::liabilities() const
         QVariantMap map;
         map["name"] = acc.name();
         map["balance"] = MyMoneyUtils::formatMoney(balance, acc, file->currency(acc.currencyId()));
+        map["color"] = (balance.isNegative() ? KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText)
+                                             : KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NormalText))
+                           .color()
+                           .name();
         list.append(map);
     }
     qWarning() << "  AssetsLiabilitiesSection::liabilities() returning" << list.size() << "items";
     return list;
+}
+
+QString AssetsLiabilitiesSection::totalAssets() const
+{
+    auto file = MyMoneyFile::instance();
+    MyMoneyMoney total = file->balance(file->asset().id());
+    return MyMoneyUtils::formatMoney(total, MyMoneyAccount(), file->baseCurrency());
+}
+
+QString AssetsLiabilitiesSection::totalLiabilities() const
+{
+    auto file = MyMoneyFile::instance();
+    MyMoneyMoney total = file->balance(file->liability().id());
+    return MyMoneyUtils::formatMoney(total, MyMoneyAccount(), file->baseCurrency());
 }
 
 QString AssetsLiabilitiesSection::netWorth() const
@@ -381,7 +403,7 @@ QString AssetsLiabilitiesSection::netWorthColor() const
     auto file = MyMoneyFile::instance();
     MyMoneyMoney netWorth = file->balance(file->asset().id()) + file->balance(file->liability().id());
     return (netWorth.isNegative() ? KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText)
-                                  : KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NormalText))
+                                  : KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::PositiveText))
         .color()
         .name();
 }

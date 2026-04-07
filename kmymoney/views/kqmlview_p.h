@@ -73,7 +73,7 @@ public:
 
         m_quickWidget = new QQuickWidget(q);
         m_quickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-        m_quickWidget->setClearColor(Qt::green); // Change to green for contrast
+        m_quickWidget->setClearColor(Qt::green); // Keep green for diagnostic purposes
         m_quickWidget->setAttribute(Qt::WA_AlwaysStackOnTop);
         m_quickWidget->engine()->setOutputWarningsToStandardError(true);
         m_quickWidget->setFocusPolicy(Qt::StrongFocus);
