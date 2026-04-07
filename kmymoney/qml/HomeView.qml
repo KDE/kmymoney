@@ -266,7 +266,7 @@ Rectangle {
                 // Middle: Vertical Separator
                 Rectangle {
                     Layout.fillHeight: true
-                    width: 1
+                    width: 5
                     color: Kirigami.Theme.alternateBackgroundColor
                     opacity: 0.5
                 }
@@ -296,6 +296,8 @@ Rectangle {
                 }
             }
 
+            //TODO: Total Assets
+            //TODO: Total Liabilities
             // Net Worth Summary Bar
             Rectangle {
                 Layout.fillWidth: true
@@ -317,6 +319,7 @@ Rectangle {
                         font.bold: true
                     }
                     QQC2.Label {
+                        // TODO: ectionData.netWorth to return actual value
                         text: sectionData ? sectionData.netWorth : ""
                         font.bold: true
                         font.pointSize: Kirigami.Theme.headerFont.pointSize

@@ -20,6 +20,7 @@
 #include <KLocalizedString>
 #include <QDate>
 #include <QDebug>
+#include <algorithm>
 
 QString MoneyFormatter::format(const QString& amount, const QString& accountId) const
 {
@@ -236,6 +237,10 @@ QVariantList AccountsSection::accounts() const
         }
     }
 
+    std::sort(list.begin(), list.end(), [](const QVariant& a, const QVariant& b) {
+        return a.toMap()["name"].toString().toLower() < b.toMap()["name"].toString().toLower();
+    });
+
     qWarning() << "  AccountsSection::accounts() returning" << list.size() << "items";
     return list;
 }
@@ -339,6 +344,11 @@ QVariantList AssetsLiabilitiesSection::assets() const
                            .name();
         list.append(map);
     }
+
+    std::sort(list.begin(), list.end(), [](const QVariant& a, const QVariant& b) {
+        return a.toMap()["name"].toString().toLower() < b.toMap()["name"].toString().toLower();
+    });
+
     qWarning() << "  AssetsLiabilitiesSection::assets() returning" << list.size() << "items";
     return list;
 }
@@ -371,6 +381,11 @@ QVariantList AssetsLiabilitiesSection::liabilities() const
                            .name();
         list.append(map);
     }
+
+    std::sort(list.begin(), list.end(), [](const QVariant& a, const QVariant& b) {
+        return a.toMap()["name"].toString().toLower() < b.toMap()["name"].toString().toLower();
+    });
+
     qWarning() << "  AssetsLiabilitiesSection::liabilities() returning" << list.size() << "items";
     return list;
 }

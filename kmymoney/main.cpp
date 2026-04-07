@@ -23,6 +23,9 @@
 #include <QDBusConnectionInterface>
 #include <QDBusInterface>
 #endif
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+#include <QQuickStyle>
+#endif
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -119,6 +122,11 @@ int main(int argc, char *argv[])
      * Of all tested styles that works the best for us
      */
     QApplication::setStyle(QStringLiteral("Fusion"));
+    // For QML, default to org.kde.desktop style unless the user forces another style
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
+        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+    }
+
 #endif
 #endif
 
