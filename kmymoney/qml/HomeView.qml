@@ -1,62 +1,41 @@
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import org.kde.kirigami as Kirigami
 
-Rectangle {
+Kirigami.ScrollablePage {
     id: root
-    color: "#f0f0f0"
-    border.color: "red"
-    border.width: 5
+    title: i18n("Financial Summary")
 
     Component.onCompleted: {
-        console.log("Minimalist HomeView Component.onCompleted")
+        console.log("Kirigami HomeView Component.onCompleted")
         console.log("homeModel ready:", homeModel.isReady)
         console.log("homeModel rows:", homeModel.rowCount())
     }
 
-    Text {
-        id: placeholderText
-        anchors.centerIn: parent
-        text: (homeModel && !homeModel.isReady) ? "Loading financial data..." : "No data to display. Please check your Home view settings."
-        visible: (homeModel && (!homeModel.isReady || homeModel.rowCount() === 0))
-        font.pointSize: 18
-        color: "black"
-    }
-
-    ListView {
+    Kirigami.CardsListView {
         id: sectionsList
         anchors.fill: parent
-        anchors.margins: 10
         model: homeModel
         visible: homeModel && homeModel.isReady && homeModel.rowCount() > 0
-        spacing: 20
-        clip: true
+        spacing: Kirigami.Units.largeSpacing
 
-        delegate: Rectangle {
-            id: sectionBox
-            width: sectionsList.width - 20
-            height: (model && model.title) ? (sectionColumn.height + 40) : 0
-            color: "white"
-            border.color: "#cccccc"
-            border.width: 1
-            radius: 5
-            visible: !!model
-
-            Column {
-                id: sectionColumn
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.margins: 10
-                spacing: 10
-
-                Text {
-                    text: (model && model.title) ? model.title : ""
-                    font.bold: true
-                    font.pointSize: 16
+        delegate: Kirigami.AbstractCard {
+            id: sectionCard
+            implicitWidth: sectionsList.width - Kirigami.Units.gridUnit * 2
+            
+            contentItem: ColumnLayout {
+                spacing: Kirigami.Units.smallSpacing
+                
+                Kirigami.Heading {
+                    text: model.title
+                    level: 2
+                    Layout.fillWidth: true
                 }
 
                 Loader {
                     id: sectionLoader
-                    width: parent.width
+                    Layout.fillWidth: true
                     property var sectionData: (model && model.sectionObject) ? model.sectionObject : null
                     sourceComponent: {
                         if (!model) return null;
@@ -72,25 +51,33 @@ Rectangle {
         }
     }
 
+    Kirigami.PlaceholderMessage {
+        anchors.centerIn: parent
+        width: parent.width - (Kirigami.Units.gridUnit * 4)
+        visible: homeModel && (!homeModel.isReady || homeModel.rowCount() === 0)
+        text: (homeModel && !homeModel.isReady) ? i18n("Loading financial data...") : i18n("No data to display. Please check your Home view settings.")
+        icon.name: (homeModel && !homeModel.isReady) ? "view-refresh" : "view-list-icons"
+    }
+
     Component {
         id: accountsComp
-        Column {
-            width: parent.width
-            spacing: 5
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
             Repeater {
                 model: sectionData ? sectionData.accounts : []
-                delegate: Row {
-                    width: parent.width
-                    Text {
-                        text: modelData.name || ""
-                        width: parent.width * 0.6
-                        font.bold: true
-                    }
-                    Text {
-                        text: modelData.balance || ""
-                        width: parent.width * 0.4
-                        horizontalAlignment: Text.AlignRight
-                        color: modelData.color || "black"
+                delegate: QQC2.ItemDelegate {
+                    Layout.fillWidth: true
+                    contentItem: RowLayout {
+                        QQC2.Label {
+                            text: modelData.name || ""
+                            Layout.fillWidth: true
+                            font.bold: true
+                        }
+                        QQC2.Label {
+                            text: modelData.balance || ""
+                            horizontalAlignment: Text.AlignRight
+                            color: modelData.color || Kirigami.Theme.textColor
+                        }
                     }
                 }
             }
@@ -99,21 +86,38 @@ Rectangle {
 
     Component {
         id: schedulesComp
-        Column {
-            width: parent.width
-            spacing: 5
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
             Repeater {
                 model: sectionData ? sectionData.schedules : []
-                delegate: Row {
-                    width: parent.width
-                    Text {
-                        text: modelData.name || ""
-                        width: parent.width * 0.6
-                    }
-                    Text {
-                        text: modelData.amount || ""
-                        width: parent.width * 0.4
-                        horizontalAlignment: Text.AlignRight
+                delegate: QQC2.ItemDelegate {
+                    Layout.fillWidth: true
+                    contentItem: RowLayout {
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 0
+                            QQC2.Label {
+                                text: modelData.name || ""
+                                font.bold: true
+                            }
+                            QQC2.Label {
+                                text: modelData.occurrence || ""
+                                font.pointSize: Kirigami.Theme.smallFont.pointSize
+                                opacity: 0.7
+                            }
+                        }
+                        ColumnLayout {
+                            QQC2.Label {
+                                text: modelData.amount || ""
+                                font.bold: true
+                                horizontalAlignment: Text.AlignRight
+                            }
+                            QQC2.Label {
+                                text: modelData.nextDueDate || ""
+                                font.pointSize: Kirigami.Theme.smallFont.pointSize
+                                horizontalAlignment: Text.AlignRight
+                            }
+                        }
                     }
                 }
             }
@@ -122,60 +126,57 @@ Rectangle {
 
     Component {
         id: assetsComp
-        Column {
-            width: parent.width
-            spacing: 5
-            property var section: sectionData
-
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+            
             Repeater {
-                model: section ? section.assets : []
-                delegate: Row {
-                    width: parent.width
-                    Text {
-                        text: modelData.name || ""
-                        width: parent.width * 0.6
-                        font.bold: true
-                    }
-                    Text {
-                        text: modelData.balance || ""
-                        width: parent.width * 0.4
-                        horizontalAlignment: Text.AlignRight
-                        color: modelData.color || "black"
+                model: sectionData ? sectionData.assets : []
+                delegate: QQC2.ItemDelegate {
+                    Layout.fillWidth: true
+                    contentItem: RowLayout {
+                        QQC2.Label {
+                            text: modelData.name || ""
+                            Layout.fillWidth: true
+                            font.bold: true
+                        }
+                        QQC2.Label {
+                            text: modelData.balance || ""
+                            horizontalAlignment: Text.AlignRight
+                        }
                     }
                 }
             }
             
-            Rectangle {
-                width: parent.width
-                height: 1
-                color: "#eeeeee"
-                visible: section && section.liabilities.length > 0
+            Kirigami.Separator {
+                Layout.fillWidth: true
+                visible: sectionData && sectionData.liabilities.length > 0
             }
 
             Repeater {
-                model: section ? section.liabilities : []
-                delegate: Row {
-                    width: parent.width
-                    Text {
-                        text: modelData.name || ""
-                        width: parent.width * 0.6
-                    }
-                    Text {
-                        text: modelData.balance || ""
-                        width: parent.width * 0.4
-                        horizontalAlignment: Text.AlignRight
-                        color: modelData.color || "red"
+                model: sectionData ? sectionData.liabilities : []
+                delegate: QQC2.ItemDelegate {
+                    Layout.fillWidth: true
+                    contentItem: RowLayout {
+                        QQC2.Label {
+                            text: modelData.name || ""
+                            Layout.fillWidth: true
+                        }
+                        QQC2.Label {
+                            text: modelData.balance || ""
+                            horizontalAlignment: Text.AlignRight
+                            color: modelData.color || "red"
+                        }
                     }
                 }
             }
 
-            Text {
-                width: parent.width
-                text: section ? ("Net Worth: " + section.netWorth) : ""
+            QQC2.Label {
+                Layout.fillWidth: true
+                text: sectionData ? (i18n("Net Worth: %1", sectionData.netWorth)) : ""
                 font.bold: true
-                font.pointSize: 14
+                font.pointSize: Kirigami.Theme.headerFont.pointSize
                 horizontalAlignment: Text.AlignRight
-                color: (section && section.netWorthColor) ? section.netWorthColor : "black"
+                color: (sectionData && sectionData.netWorthColor) ? sectionData.netWorthColor : Kirigami.Theme.textColor
             }
         }
     }

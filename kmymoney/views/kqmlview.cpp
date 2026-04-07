@@ -146,15 +146,8 @@ void KQmlView::showEvent(QShowEvent* event)
 
 void KQmlView::resizeEvent(QResizeEvent* event)
 {
-    Q_D(KQmlView);
     KMyMoneyViewBase::resizeEvent(event);
     qWarning() << "KQmlView::resizeEvent() - oldSize:" << event->oldSize() << "newSize:" << event->size();
-
-    if (d->m_quickWidget && d->m_quickWidget->rootObject()) {
-        d->m_quickWidget->rootObject()->setWidth(event->size().width());
-        d->m_quickWidget->rootObject()->setHeight(event->size().height());
-        qWarning() << "  Manually set rootObject size to:" << event->size();
-    }
 }
 void KQmlView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {

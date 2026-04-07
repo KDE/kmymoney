@@ -60,8 +60,8 @@ public:
         qputenv("QT_LOGGING_RULES", "qt.qml.import.debug=true;qt.quick.dirty=true;qt.quick.renderloop=true");
 
         // Force software rendering as a diagnostic to rule out OpenGL/context issues
-        qWarning() << "Forcing software rendering for QML";
-        QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
+        // qWarning() << "Forcing software rendering for QML";
+        // QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
 
         QFile qmlFile(":/qml/HomeView.qml");
         qWarning() << "Checking file :/qml/HomeView.qml - exists:" << qmlFile.exists() << "size:" << qmlFile.size();
