@@ -82,7 +82,10 @@ add_library(views STATIC ${libviews_a_SOURCES})
 target_link_libraries(views PUBLIC
   newaccountwizard
   KF${QT_MAJOR_VERSION}::TextWidgets
+  KF${QT_MAJOR_VERSION}::I18n
+  KF${QT_MAJOR_VERSION}::I18nQml
   Qt::PrintSupport
+  Qt::Qml
   Qt::Quick
   Qt::QuickWidgets
   kmm_mymoney # needed to load payeeIdentifier

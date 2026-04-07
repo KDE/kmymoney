@@ -34,22 +34,31 @@ Kirigami.ScrollablePage {
                             default: return null;
                         }
                     }
+
+                    onLoaded: {
+                        if (item) {
+                            item.section = model.sectionObject
+                        }
+                    }
+
                     Binding {
-                        target: contentLoader
+                        target: contentLoader.item
                         property: "section"
                         value: model.sectionObject
+                        when: contentLoader.item !== null
                     }
                 }
             }
 
-            footer: (model.type === 4) ? netWorthFooter : null
+            footer: (model.type === 4) ? netWorthFooter.createObject(sectionCard, {"section": model.sectionObject}) : null
             
             Component {
                 id: netWorthFooter
                 Kirigami.Heading {
+                    property var section: null
                     level: 3
-                    text: i18n("Net Worth: %1", model.sectionObject.netWorth)
-                    color: model.sectionObject.netWorthColor
+                    text: i18n("Net Worth: %1", section.netWorth)
+                    color: section.netWorthColor
                     horizontalAlignment: Text.AlignRight
                 }
             }
@@ -67,9 +76,10 @@ Kirigami.ScrollablePage {
     Component {
         id: accountsComponent
         ColumnLayout {
+            property var section: null
             spacing: Kirigami.Units.smallSpacing
             Repeater {
-                model: section.accounts
+                model: section ? section.accounts : []
                 delegate: QQC2.ItemDelegate {
                     width: parent ? parent.width : 0
                     contentItem: RowLayout {
@@ -99,7 +109,7 @@ Kirigami.ScrollablePage {
                                 text: modelData.totalBalance || ""
                                 color: modelData.totalColor || Kirigami.Theme.textColor
                                 font.pointSize: Kirigami.Theme.smallFont.pointSize
-                                visible: section.showTotalBalance
+                                visible: section && section.showTotalBalance
                                 horizontalAlignment: Text.AlignRight
                             }
                         }
@@ -112,9 +122,10 @@ Kirigami.ScrollablePage {
     Component {
         id: schedulesComponent
         ColumnLayout {
+            property var section: null
             spacing: Kirigami.Units.smallSpacing
             Repeater {
-                model: section.schedules
+                model: section ? section.schedules : []
                 delegate: QQC2.ItemDelegate {
                     width: parent ? parent.width : 0
                     contentItem: RowLayout {
@@ -153,6 +164,7 @@ Kirigami.ScrollablePage {
     Component {
         id: assetsLiabilitiesComponent
         ColumnLayout {
+            property var section: null
             QQC2.Label {
                 text: i18n("Summary of assets and liabilities")
                 font.italic: true

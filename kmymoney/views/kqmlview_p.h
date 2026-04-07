@@ -8,6 +8,12 @@
 #include "kmymoneyviewbase_p.h"
 #include "kqmlview.h"
 
+#include <ki18n_version.h>
+#if KI18N_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+#include <KLocalizedQmlContext>
+#else
+#include <KLocalizedContext>
+#endif
 #include <QLabel>
 #include <QQmlContext>
 #include <QQuickWidget>
@@ -55,6 +61,11 @@ public:
 
         // TODO: anchor handling
         // q->connect(m_view, &QTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
+#if KI18N_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+        m_quickWidget->rootContext()->setContextObject(KLocalization::setupLocalizedContext(m_quickWidget->engine()));
+#else
+        m_quickWidget->rootContext()->setContextObject(new KLocalizedContext(m_quickWidget->engine()));
+#endif
         m_quickWidget->rootContext()->setContextProperty("homeModel", m_homeModel);
         m_quickWidget->rootContext()->setContextProperty("moneyFormatter", m_moneyFormatter);
 
@@ -66,13 +77,13 @@ public:
         m_needsRefresh = false;
     }
 
+    bool m_skipRefresh;
     bool m_fileOpen;
+    bool m_needLoad;
 
     QQuickWidget* m_quickWidget;
     HomeModel* m_homeModel;
     MoneyFormatter* m_moneyFormatter;
 
     QTimer m_refreshDelayTimer;
-    bool m_skipRefresh;
-    bool m_needLoad;
 };

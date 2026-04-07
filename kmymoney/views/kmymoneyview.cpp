@@ -540,6 +540,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
         break;
 
     case View::Home:
+    case View::HomeQML:
     case View::Reports:
         pActions[eMenu::Action::Print]->setEnabled(true);
         pActions[eMenu::Action::PrintPreview]->setEnabled(true);
@@ -724,6 +725,7 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
         disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
         // block home view from unnecessary updates
         d->viewBases[View::Home]->executeAction(action, selections);
+        d->viewBases[View::HomeQML]->executeAction(action, selections);
         break;
 
     default:

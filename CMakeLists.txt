@@ -206,7 +206,11 @@ if(BUILD_TESTING)
   find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} REQUIRED)
 endif()
 
-find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets Crash I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets Crash I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO Kirigami QQC2DesktopStyle)
+
+include(ECMFindQmlModule)
+include(ECMQmlModule)
+ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
 
 # For KF < 5.100 we need to fix a few method names that
 # have been deprecated but are not available before that version.
