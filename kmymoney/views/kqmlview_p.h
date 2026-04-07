@@ -53,18 +53,14 @@ public:
         if (!m_needLoad)
             return;
         m_needLoad = false;
-        qWarning() << "KQmlViewPrivate::init() - initializing QQuickWidget";
-
-        // Enable verbose QML import tracing and debugging
-        qputenv("QML_IMPORT_TRACE", "1");
-        qputenv("QT_LOGGING_RULES", "qt.qml.import.debug=true;qt.quick.dirty=true;qt.quick.renderloop=true");
+        qDebug() << "KQmlViewPrivate::init() - initializing QQuickWidget";
 
         // Force software rendering as a diagnostic to rule out OpenGL/context issues
-        // qWarning() << "Forcing software rendering for QML";
+        // qDebug() << "Forcing software rendering for QML";
         // QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
 
         QFile qmlFile(":/qml/HomeView.qml");
-        qWarning() << "Checking file :/qml/HomeView.qml - exists:" << qmlFile.exists() << "size:" << qmlFile.size();
+        qDebug() << "Checking file :/qml/HomeView.qml - exists:" << qmlFile.exists() << "size:" << qmlFile.size();
 
         auto layout = new QVBoxLayout(q);
         q->setLayout(layout);
@@ -87,7 +83,7 @@ public:
         m_homeModel = new HomeModel(q);
         m_moneyFormatter = new MoneyFormatter(q);
 
-        qWarning() << "QQmlEngine import paths:" << m_quickWidget->engine()->importPathList();
+        qDebug() << "QQmlEngine import paths:" << m_quickWidget->engine()->importPathList();
 
         // TODO: anchor handling
         // q->connect(m_view, &QTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);

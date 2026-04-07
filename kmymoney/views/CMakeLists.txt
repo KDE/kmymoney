@@ -86,7 +86,6 @@ target_link_libraries(views PUBLIC
   KF${QT_MAJOR_VERSION}::I18nQml
   Qt::PrintSupport
   Qt::Qml
-  Qt::Quick
   Qt::QuickWidgets
   kmm_mymoney # needed to load payeeIdentifier
   kmm_widgets
