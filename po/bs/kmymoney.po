@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-30 03:33+0000\n"
+"POT-Creation-Date: 2026-04-08 04:06+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -1639,7 +1639,7 @@ msgstr "Ukloni"
 #: kmymoney/dialogs/keditequityentry.ui:217
 #: kmymoney/dialogs/kimportverifydlg.ui:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:330
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:402
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:333
 #: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
@@ -10242,7 +10242,7 @@ msgid "Export completed.\n"
 msgstr "Izvoz završen.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:468
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:467
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #: kmymoney/plugins/xml/xmlstorage.cpp:213
 #, kde-format
@@ -10422,7 +10422,7 @@ msgstr ""
 "Datum '%2', Iznos '%3'.\n"
 "Transakcija nije uspjela.\n"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:255
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:254
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -10433,27 +10433,27 @@ msgstr ""
 "želite kopirati podatke o Primalacu u polje zabilješke, kliknite 'Da'.</"
 "center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:258
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:298
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:297
 #, fuzzy, kde-format
 #| msgid "None"
 msgctxt "@item:intext No field selection"
 msgid "None"
 msgstr "Nijednom"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:306
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:305
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:348
 #, kde-format
 msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
@@ -10462,7 +10462,7 @@ msgstr ""
 "<center>Naziv polja nije priznat.</center> <center>'<b>%1</b>'</center> "
 "Molimo ponovo unesite izbor kolona."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
 #: kmymoney/plugins/csv/import/csvwizard.cpp:962
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1033
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
@@ -10473,14 +10473,14 @@ msgstr ""
 msgid "CSV import"
 msgstr "CSV Uvoz"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:368
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:367
 #, kde-format
 msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
 "b>'."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:392
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:391
 #, kde-format
 msgid ""
 "<center>The %1 field contains '%2'</center><center>and the %3 field contains "
@@ -10489,13 +10489,13 @@ msgstr ""
 "<center>Polje %1 sadrži '%2'</center><center>i polje %3 sadrži '%4'.</"
 "center><center>Molimo odaberite šta želite prihvatiti.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:399
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:398
 #, kde-format
 msgid "CSV invalid field values"
 msgstr "CSV neispravne vrijednosti u poljima"
 
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:399
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:400
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #, kde-format
 msgid "Accept %1"
 msgstr "Prihvati %1"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-30 03:33+0000\n"
+"POT-Creation-Date: 2026-04-08 04:06+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -1621,7 +1621,7 @@ msgstr "Өшіру"
 #: kmymoney/dialogs/keditequityentry.ui:217
 #: kmymoney/dialogs/kimportverifydlg.ui:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:330
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:402
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:333
 #: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
@@ -10241,7 +10241,7 @@ msgid "Export completed.\n"
 msgstr "Импорттау бітті"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:468
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:467
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #: kmymoney/plugins/xml/xmlstorage.cpp:213
 #, kde-format
@@ -10424,7 +10424,7 @@ msgstr ""
 "Date '%2', Amount '%3'.\n"
 "Transaction dropped.\n"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:255
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:254
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -10435,27 +10435,27 @@ msgstr ""
 "center><center>Төлем алушы дерегін жаднама өрісіне көшірмек болсаңыз \"Иә\" "
 "деңіз.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:258
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:298
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:297
 #, fuzzy, kde-format
 #| msgid "None"
 msgctxt "@item:intext No field selection"
 msgid "None"
 msgstr "None"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:306
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:305
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:348
 #, kde-format
 msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
@@ -10464,7 +10464,7 @@ msgstr ""
 "<center>Өрістің атауы салстырып тексерілмеген.</center><center>'<b>%1</b>'</"
 "center> Таңдауыңызды қайталап көріңіз."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
 #: kmymoney/plugins/csv/import/csvwizard.cpp:962
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1033
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
@@ -10475,14 +10475,14 @@ msgstr ""
 msgid "CSV import"
 msgstr "CSV импорты"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:368
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:367
 #, kde-format
 msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
 "b>'."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:392
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:391
 #, fuzzy, kde-format
 #| msgid ""
 #| "<center>The start line is greater than the end line.\n"
@@ -10494,13 +10494,13 @@ msgstr ""
 "<center>Бастауы аяқатауынан артық.\n"
 "</center><center>Дұрыстаңыз.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:399
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:398
 #, kde-format
 msgid "CSV invalid field values"
 msgstr ""
 
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:399
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:400
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #, fuzzy, kde-format
 #| msgctxt "Accept 'imported' and 'matched' transaction"
 #| msgid "Accept"

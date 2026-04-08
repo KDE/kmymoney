@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-30 03:33+0000\n"
+"POT-Creation-Date: 2026-04-08 04:06+0000\n"
 "PO-Revision-Date: 2025-01-05 23:54+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -1603,7 +1603,7 @@ msgstr "Forigi"
 #: kmymoney/dialogs/keditequityentry.ui:217
 #: kmymoney/dialogs/kimportverifydlg.ui:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:330
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:402
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:333
 #: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
@@ -10009,7 +10009,7 @@ msgid "Export completed.\n"
 msgstr "Eksporto finiĝis.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:468
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:467
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #: kmymoney/plugins/xml/xmlstorage.cpp:213
 #, kde-format
@@ -10188,7 +10188,7 @@ msgstr ""
 "Dato '%2', Kvanto '%3'.\n"
 "Transakcio malsukcesis.\n"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:255
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:254
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -10199,26 +10199,26 @@ msgstr ""
 "center><center>Se vi volas kopii la datumojn de la Pagato al la memorkampo, "
 "alklaku 'Jes'.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:258
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:298
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:297
 #, kde-format
 msgctxt "@item:intext No field selection"
 msgid "None"
 msgstr "Neniu"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:306
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:305
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
 msgstr "<i>Memokolumnoj:</i> %1"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:348
 #, kde-format
 msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
@@ -10227,7 +10227,7 @@ msgstr ""
 "<center>Kamponomo ne rekonita.</center> <center>'<b>%1</b>'</center> Bonvolu "
 "reenigi viajn kolumnelektadojn."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
 #: kmymoney/plugins/csv/import/csvwizard.cpp:962
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1033
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
@@ -10238,7 +10238,7 @@ msgstr ""
 msgid "CSV import"
 msgstr "CSV-importo"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:368
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:367
 #, kde-format
 msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
@@ -10247,7 +10247,7 @@ msgstr ""
 "Kolumno <b>%1</b> ne povas esti elektita ĉar ĝi jam estas uzata en '<b>%2</"
 "b>'."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:392
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:391
 #, kde-format
 msgid ""
 "<center>The %1 field contains '%2'</center><center>and the %3 field contains "
@@ -10256,13 +10256,13 @@ msgstr ""
 "<center>La kampo %1 enhavas '%2'</center><center>kaj la kampo %3 enhavas "
 "'%4'.</center><center>Bonvolu elekti kiun vi volas akcepti.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:399
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:398
 #, kde-format
 msgid "CSV invalid field values"
 msgstr "CSV nevalidaj kampovaloroj"
 
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:399
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:400
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #, kde-format
 msgid "Accept %1"
 msgstr "Akcepti %1"
