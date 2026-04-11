@@ -336,6 +336,8 @@ void KBanking::createActions()
 {
     QAction *settings_aqbanking = actionCollection()->addAction("settings_aqbanking");
     settings_aqbanking->setText(i18n("Configure Aq&Banking..."));
+    // make sure that AqBanking shows up as a separate item in the “Settings" menu on MacOS
+    settings_aqbanking->setMenuRole(QAction::NoRole);
     connect(settings_aqbanking, &QAction::triggered, this, &KBanking::slotSettings);
     d->actions.insert(settings_aqbanking);
 
