@@ -43,22 +43,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QToolButton" name="buttonConfigure">
-     <property name="minimumSize">
-      <size>
-       <width>75</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>Configure this report</string>
-     </property>
-     <property name="text">
-      <string>Configure</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QToolButton" name="buttonNew">
      <property name="minimumSize">
       <size>
@@ -154,6 +138,22 @@
      </property>
      <property name="text">
       <string>Delete</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="buttonConfigure">
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Configure this report</string>
+     </property>
+     <property name="text">
+      <string>Configure</string>
      </property>
     </widget>
    </item>
