@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 04:06+0000\n"
+"POT-Creation-Date: 2026-04-12 03:35+0000\n"
 "PO-Revision-Date: 2026-03-30 11:03+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -65,8 +65,8 @@ msgid "Error creating security record: %1"
 msgstr "Error en crear el registre de títol: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:603
-#: kmymoney/plugins/kbanking/kbanking.cpp:625
+#: kmymoney/plugins/kbanking/kbanking.cpp:605
+#: kmymoney/plugins/kbanking/kbanking.cpp:627
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12499,13 +12499,13 @@ msgstr "El mòdul KBanking no s'ha inicialitzat correctament"
 msgid "Configure Aq&Banking..."
 msgstr "Configura l'Aq&Banking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:343
+#: kmymoney/plugins/kbanking/kbanking.cpp:345
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "Importador d'AqBanking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:522
-#: kmymoney/plugins/kbanking/kbanking.cpp:771
+#: kmymoney/plugins/kbanking/kbanking.cpp:524
+#: kmymoney/plugins/kbanking/kbanking.cpp:773
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12514,13 +12514,13 @@ msgstr ""
 "<qt>El compte d'aplicació indicat <b>%1</b> no està vinculat amb cap compte "
 "en línia.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:528
+#: kmymoney/plugins/kbanking/kbanking.cpp:530
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Compte sense vincular"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:600
-#: kmymoney/plugins/kbanking/kbanking.cpp:622
+#: kmymoney/plugins/kbanking/kbanking.cpp:602
+#: kmymoney/plugins/kbanking/kbanking.cpp:624
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12529,12 +12529,12 @@ msgstr ""
 "<qt>No s'ha pogut enviar el treball a la cua.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1564
+#: kmymoney/plugins/kbanking/kbanking.cpp:1566
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Error en importar un extracte. Voleu continuar?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1565
+#: kmymoney/plugins/kbanking/kbanking.cpp:1567
 #: kmymoney/plugins/views/reports/kreportsview.cpp:435
 #: kmymoney/plugins/views/reports/kreportsview.cpp:494
 #: kmymoney/plugins/views/reports/kreportsview.cpp:513

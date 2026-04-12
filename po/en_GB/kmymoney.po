@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 04:06+0000\n"
+"POT-Creation-Date: 2026-04-12 03:35+0000\n"
 "PO-Revision-Date: 2024-06-02 12:16+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -64,8 +64,8 @@ msgid "Error creating security record: %1"
 msgstr "Error creating security record: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:603
-#: kmymoney/plugins/kbanking/kbanking.cpp:625
+#: kmymoney/plugins/kbanking/kbanking.cpp:605
+#: kmymoney/plugins/kbanking/kbanking.cpp:627
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12718,13 +12718,13 @@ msgstr "KBanking module not correctly initialised"
 msgid "Configure Aq&Banking..."
 msgstr "Configure Aq&Banking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:343
+#: kmymoney/plugins/kbanking/kbanking.cpp:345
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "AqBanking importer..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:522
-#: kmymoney/plugins/kbanking/kbanking.cpp:771
+#: kmymoney/plugins/kbanking/kbanking.cpp:524
+#: kmymoney/plugins/kbanking/kbanking.cpp:773
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12733,13 +12733,13 @@ msgstr ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
 "account.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:528
+#: kmymoney/plugins/kbanking/kbanking.cpp:530
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Account Not Mapped"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:600
-#: kmymoney/plugins/kbanking/kbanking.cpp:622
+#: kmymoney/plugins/kbanking/kbanking.cpp:602
+#: kmymoney/plugins/kbanking/kbanking.cpp:624
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12748,12 +12748,12 @@ msgstr ""
 "<qt>Could not enqueue the job.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1564
+#: kmymoney/plugins/kbanking/kbanking.cpp:1566
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Error importing statement. Do you want to continue?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1565
+#: kmymoney/plugins/kbanking/kbanking.cpp:1567
 #: kmymoney/plugins/views/reports/kreportsview.cpp:435
 #: kmymoney/plugins/views/reports/kreportsview.cpp:494
 #: kmymoney/plugins/views/reports/kreportsview.cpp:513

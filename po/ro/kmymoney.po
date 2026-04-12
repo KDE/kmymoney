@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 04:06+0000\n"
+"POT-Creation-Date: 2026-04-12 03:35+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -64,8 +64,8 @@ msgid "Error creating security record: %1"
 msgstr "Eroare la crearea înregistrării titlului de valoare: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:603
-#: kmymoney/plugins/kbanking/kbanking.cpp:625
+#: kmymoney/plugins/kbanking/kbanking.cpp:605
+#: kmymoney/plugins/kbanking/kbanking.cpp:627
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -13130,13 +13130,13 @@ msgstr "Modulul KBanking nu a fost inițializat corect"
 msgid "Configure Aq&Banking..."
 msgstr "Configurează A&qBanking ..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:343
+#: kmymoney/plugins/kbanking/kbanking.cpp:345
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "Importator AqBanking ..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:522
-#: kmymoney/plugins/kbanking/kbanking.cpp:771
+#: kmymoney/plugins/kbanking/kbanking.cpp:524
+#: kmymoney/plugins/kbanking/kbanking.cpp:773
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -13145,13 +13145,13 @@ msgstr ""
 "<qt>Contul de aplicație dat <b>%1</b> nu a fost asociat la un cont online.</"
 "qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:528
+#: kmymoney/plugins/kbanking/kbanking.cpp:530
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Contul nu a fost asociat"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:600
-#: kmymoney/plugins/kbanking/kbanking.cpp:622
+#: kmymoney/plugins/kbanking/kbanking.cpp:602
+#: kmymoney/plugins/kbanking/kbanking.cpp:624
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -13160,12 +13160,12 @@ msgstr ""
 "<qt>Nu s-a putut adăuga sarcina în coada de execuție.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1564
+#: kmymoney/plugins/kbanking/kbanking.cpp:1566
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Eroare la importul extrasului de cont. Doriți să continuați?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1565
+#: kmymoney/plugins/kbanking/kbanking.cpp:1567
 #: kmymoney/plugins/views/reports/kreportsview.cpp:435
 #: kmymoney/plugins/views/reports/kreportsview.cpp:494
 #: kmymoney/plugins/views/reports/kreportsview.cpp:513

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 04:06+0000\n"
+"POT-Creation-Date: 2026-04-12 03:35+0000\n"
 "PO-Revision-Date: 2025-01-05 23:54+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -63,8 +63,8 @@ msgid "Error creating security record: %1"
 msgstr "Eraro dum kreado de sekureca rikordo: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:603
-#: kmymoney/plugins/kbanking/kbanking.cpp:625
+#: kmymoney/plugins/kbanking/kbanking.cpp:605
+#: kmymoney/plugins/kbanking/kbanking.cpp:627
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12651,13 +12651,13 @@ msgstr "KBanking-modulo ne ĝuste pravigita"
 msgid "Configure Aq&Banking..."
 msgstr "Agordi Aq&Banking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:343
+#: kmymoney/plugins/kbanking/kbanking.cpp:345
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "AqBanking-importisto..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:522
-#: kmymoney/plugins/kbanking/kbanking.cpp:771
+#: kmymoney/plugins/kbanking/kbanking.cpp:524
+#: kmymoney/plugins/kbanking/kbanking.cpp:773
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12665,13 +12665,13 @@ msgid ""
 msgstr ""
 "<qt>La donita aplikaĵa konto <b>%1</b> ne estas mapita al reta konto.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:528
+#: kmymoney/plugins/kbanking/kbanking.cpp:530
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Konto Ne Mapita"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:600
-#: kmymoney/plugins/kbanking/kbanking.cpp:622
+#: kmymoney/plugins/kbanking/kbanking.cpp:602
+#: kmymoney/plugins/kbanking/kbanking.cpp:624
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12680,12 +12680,12 @@ msgstr ""
 "<qt>Ne eblis envicigi la taskon.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1564
+#: kmymoney/plugins/kbanking/kbanking.cpp:1566
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Eraro dum importo de deklaro. Ĉu vi volas daŭrigi?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1565
+#: kmymoney/plugins/kbanking/kbanking.cpp:1567
 #: kmymoney/plugins/views/reports/kreportsview.cpp:435
 #: kmymoney/plugins/views/reports/kreportsview.cpp:494
 #: kmymoney/plugins/views/reports/kreportsview.cpp:513

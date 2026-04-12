@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 04:06+0000\n"
+"POT-Creation-Date: 2026-04-12 03:35+0000\n"
 "PO-Revision-Date: 2023-07-14 18:45+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -76,8 +76,8 @@ msgid "Error creating security record: %1"
 msgstr "Ошибка создания записи о ценной бумаге: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
-#: kmymoney/plugins/kbanking/kbanking.cpp:603
-#: kmymoney/plugins/kbanking/kbanking.cpp:625
+#: kmymoney/plugins/kbanking/kbanking.cpp:605
+#: kmymoney/plugins/kbanking/kbanking.cpp:627
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
 #, kde-format
 msgid "Error"
@@ -12787,13 +12787,13 @@ msgstr "Модуль KBanking инициализирован некоррект�
 msgid "Configure Aq&Banking..."
 msgstr "Настроить Aq&Banking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:343
+#: kmymoney/plugins/kbanking/kbanking.cpp:345
 #, kde-format
 msgid "AqBanking importer..."
 msgstr "Импорт через AqBanking..."
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:522
-#: kmymoney/plugins/kbanking/kbanking.cpp:771
+#: kmymoney/plugins/kbanking/kbanking.cpp:524
+#: kmymoney/plugins/kbanking/kbanking.cpp:773
 #, kde-format
 msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
@@ -12801,13 +12801,13 @@ msgid ""
 msgstr ""
 "<qt>Данный счёт из приложения <b>%1</b> не был привязан к онлайн-счёту.</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:528
+#: kmymoney/plugins/kbanking/kbanking.cpp:530
 #, kde-format
 msgid "Account Not Mapped"
 msgstr "Счёт не привязан"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:600
-#: kmymoney/plugins/kbanking/kbanking.cpp:622
+#: kmymoney/plugins/kbanking/kbanking.cpp:602
+#: kmymoney/plugins/kbanking/kbanking.cpp:624
 #, kde-format
 msgid ""
 "<qt>Could not enqueue the job.\n"
@@ -12816,12 +12816,12 @@ msgstr ""
 "<qt>Невозможно поставить задание в очередь.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1564
+#: kmymoney/plugins/kbanking/kbanking.cpp:1566
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Ошибка импорта выписки. Продолжить?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1565
+#: kmymoney/plugins/kbanking/kbanking.cpp:1567
 #: kmymoney/plugins/views/reports/kreportsview.cpp:435
 #: kmymoney/plugins/views/reports/kreportsview.cpp:494
 #: kmymoney/plugins/views/reports/kreportsview.cpp:513
