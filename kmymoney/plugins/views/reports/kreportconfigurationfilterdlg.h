@@ -49,9 +49,14 @@ public:
     ~KReportConfigurationFilterDlg();
 
     MyMoneyReport getConfig() const;
+    void loadReport(const MyMoneyReport& report);
 
     Type type() const;
     void setType(Type newType);
+
+Q_SIGNALS:
+    void configurationApplied(const MyMoneyReport& report);
+    void closeRequested();
 
 protected Q_SLOTS:
     void slotRowTypeChanged(int);

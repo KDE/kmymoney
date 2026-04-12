@@ -10,6 +10,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QFrame>
+#include <QGroupBox>
+#include <QScrollArea>
+#include <QStyle>
+#include <QTabBar>
+#include <QTabWidget>
+#include <QVBoxLayout>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -551,4 +559,48 @@ DateRangeDlg* KTransactionFilter::dateRange()
 {
     Q_D(KTransactionFilter);
     return d->m_dateRange;
+}
+
+void KTransactionFilter::setCriteriaTabPosition(QTabWidget::TabPosition tabPosition)
+{
+    Q_D(KTransactionFilter);
+    d->ui->m_criteriaTab->setTabPosition(tabPosition);
+    d->ui->m_criteriaTab->tabBar()->setUsesScrollButtons(false);
+
+    if (d->ui->m_criteriaTab->property("stackedSectionsCreated").toBool()) {
+        return;
+    }
+
+    auto* sectionsContainer = new QWidget(this);
+    auto* sectionsLayout = new QVBoxLayout(sectionsContainer);
+    sectionsLayout->setContentsMargins(0, 0, 0, 0);
+    sectionsLayout->setSpacing(style()->pixelMetric(QStyle::PM_LayoutVerticalSpacing));
+
+    while (d->ui->m_criteriaTab->count() > 0) {
+        auto* sectionWidget = d->ui->m_criteriaTab->widget(0);
+        const auto sectionTitle = d->ui->m_criteriaTab->tabText(0);
+        d->ui->m_criteriaTab->removeTab(0);
+
+        auto* sectionGroup = new QGroupBox(sectionTitle, sectionsContainer);
+        auto* sectionLayout = new QVBoxLayout(sectionGroup);
+        sectionLayout->setContentsMargins(6, 6, 6, 6);
+        sectionWidget->setParent(sectionGroup);
+        sectionWidget->show();
+        sectionLayout->addWidget(sectionWidget);
+        sectionsLayout->addWidget(sectionGroup);
+    }
+    sectionsLayout->addStretch();
+
+    auto* scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setFrameShape(QFrame::NoFrame);
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    scrollArea->setWidget(sectionsContainer);
+
+    if (auto* pageLayout = qobject_cast<QVBoxLayout*>(layout())) {
+        pageLayout->replaceWidget(d->ui->m_criteriaTab, scrollArea);
+        pageLayout->setStretch(pageLayout->indexOf(scrollArea), 1);
+        d->ui->m_criteriaTab->hide();
+    }
+    d->ui->m_criteriaTab->setProperty("stackedSectionsCreated", true);
 }

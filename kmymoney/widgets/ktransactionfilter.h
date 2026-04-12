@@ -12,6 +12,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QTabWidget>
 #include <QWidget>
 
 // ----------------------------------------------------------------------------
@@ -48,6 +49,7 @@ public:
     void resetFilter(MyMoneyReport& rep);
     KMyMoneyAccountSelector* categoriesView();
     DateRangeDlg* dateRange();
+    void setCriteriaTabPosition(QTabWidget::TabPosition tabPosition);
 
     /**
       * This slot opens the detailed help page in khelpcenter. The

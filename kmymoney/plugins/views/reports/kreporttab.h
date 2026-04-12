@@ -23,6 +23,7 @@ class KReportChartView;
 class ReportControl;
 class QTabWidget;
 class QVBoxLayout;
+class QSplitter;
 
 /**
  * Helper class for KReportView.
@@ -39,6 +40,10 @@ private:
     reports::KReportChartView* m_chartView;
     ReportControl* m_control;
     QVBoxLayout* m_layout;
+    QSplitter* m_contentSplitter;
+    QWidget* m_viewContainer;
+    QVBoxLayout* m_viewLayout;
+    QWidget* m_configurationWidget;
     MyMoneyReport m_report;
     bool m_deleteMe;
     bool m_chartEnabled;
@@ -52,6 +57,8 @@ private:
      * Users character set encoding.
      */
     QByteArray m_encoding;
+    void saveState();
+    void restoreState();
 
 public:
     KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler, KReportsView::OpenOption openOption);
@@ -93,6 +100,9 @@ public:
     }
 
     void enableAllReportActions();
+    void showConfigurationSidebar(QWidget* widget = nullptr);
+    void closeConfigurationSidebar();
+    QWidget* configurationSidebar() const;
 
     void showEvent(QShowEvent* event) final override;
     void loadTab();

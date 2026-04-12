@@ -16,7 +16,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QFrame>
+#include <QGroupBox>
 #include <QPushButton>
+#include <QScrollArea>
+#include <QStyle>
+#include <QTabBar>
+#include <QTabWidget>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -105,6 +112,9 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
     //
 
     setWindowTitle(i18n("Report Configuration"));
+    d->ui->m_tabWidget->setTabPosition(QTabWidget::East);
+    d->ui->m_criteriaTab->setTabPosition(QTabWidget::North);
+    d->ui->m_criteriaTab->tabBar()->setUsesScrollButtons(false);
     //
     // Rework the buttons
     //
@@ -115,7 +125,13 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
 
 
     connect(d->ui->buttonBox->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, this, &KReportConfigurationFilterDlg::slotSearch);
-    connect(d->ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked, this, &QDialog::close);
+    connect(d->ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked, this, [this]() {
+        if (isWindow()) {
+            close();
+        } else {
+            Q_EMIT closeRequested();
+        }
+    });
     connect(d->ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, this, &KReportConfigurationFilterDlg::slotReset);
     connect(d->ui->buttonBox->button(QDialogButtonBox::Help), &QAbstractButton::clicked, this, &KReportConfigurationFilterDlg::slotShowHelp);
 
@@ -136,6 +152,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
     }
 
     d->ui->m_tabWidget->addTab(d->m_tabFilters, i18nc("Filters tab", "Filters"));
+    d->m_tabFilters->setCriteriaTabPosition(QTabWidget::North);
 
     d->m_tabGeneral = new ReportTabGeneral(d->ui->m_criteriaTab);
     d->ui->m_criteriaTab->insertTab(0, d->m_tabGeneral, i18nc("General tab", "General"));
@@ -184,8 +201,45 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
 
     connect(d->m_tabGeneral->ui->m_checkCurrency, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotConvertCurrencyChanged);
 
-    d->ui->m_criteriaTab->setCurrentIndex(d->ui->m_criteriaTab->indexOf(d->m_tabGeneral));
-    d->ui->m_criteriaTab->setMinimumSize(500, 200);
+    auto* criteriaSections = new QWidget(d->ui->m_reportPage);
+    auto* criteriaSectionsLayout = new QVBoxLayout(criteriaSections);
+    criteriaSectionsLayout->setContentsMargins(0, 0, 0, 0);
+    criteriaSectionsLayout->setSpacing(style()->pixelMetric(QStyle::PM_LayoutVerticalSpacing));
+
+    while (d->ui->m_criteriaTab->count() > 0) {
+        auto* sectionWidget = d->ui->m_criteriaTab->widget(0);
+        const auto sectionTitle = d->ui->m_criteriaTab->tabText(0);
+        d->ui->m_criteriaTab->removeTab(0);
+
+        auto* sectionGroup = new QGroupBox(sectionTitle, criteriaSections);
+        auto* sectionLayout = new QVBoxLayout(sectionGroup);
+        sectionLayout->setContentsMargins(6, 6, 6, 6);
+        sectionWidget->setParent(sectionGroup);
+        sectionWidget->show();
+        sectionLayout->addWidget(sectionWidget);
+        criteriaSectionsLayout->addWidget(sectionGroup);
+    }
+    criteriaSectionsLayout->addStretch();
+
+    auto* scrollArea = new QScrollArea(d->ui->m_reportPage);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setFrameShape(QFrame::NoFrame);
+    scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    scrollArea->setWidget(criteriaSections);
+
+    auto* reportPageLayout = qobject_cast<QVBoxLayout*>(d->ui->m_reportPage->layout());
+    if (reportPageLayout) {
+        reportPageLayout->replaceWidget(d->ui->m_criteriaTab, scrollArea);
+        d->ui->m_criteriaTab->hide();
+        for (int i = reportPageLayout->count() - 1; i >= 0; --i) {
+            auto* item = reportPageLayout->itemAt(i);
+            if (item && item->spacerItem()) {
+                reportPageLayout->removeItem(item);
+                delete item;
+            }
+        }
+        reportPageLayout->setStretchFactor(scrollArea, 1);
+    }
 
     QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
     QList<MyMoneyBudget>::const_iterator it_b;
@@ -207,6 +261,14 @@ MyMoneyReport KReportConfigurationFilterDlg::getConfig() const
 {
     Q_D(const KReportConfigurationFilterDlg);
     return d->m_currentState;
+}
+
+void KReportConfigurationFilterDlg::loadReport(const MyMoneyReport& report)
+{
+    Q_D(KReportConfigurationFilterDlg);
+    d->m_initialState = report;
+    d->m_currentState = report;
+    slotReset();
 }
 
 void KReportConfigurationFilterDlg::setType(Type newType)
@@ -269,7 +331,11 @@ void KReportConfigurationFilterDlg::slotSearch()
         if (d->m_tabChart) {
             d->m_tabChart->apply(&d->m_currentState);
         }
-        done(true);
+        if (isWindow()) {
+            done(true);
+        } else {
+            Q_EMIT configurationApplied(d->m_currentState);
+        }
         return;
     }
 
@@ -405,7 +471,11 @@ void KReportConfigurationFilterDlg::slotSearch()
         d->m_currentState.setInvestmentSum(static_cast<eMyMoney::Report::InvestmentSum>(d->m_tabPerformance->ui->m_investmentSum->currentData().toInt()));
     }
 
-    done(true);
+    if (isWindow()) {
+        done(true);
+    } else {
+        Q_EMIT configurationApplied(d->m_currentState);
+    }
 }
 
 void KReportConfigurationFilterDlg::slotRowTypeChanged(int row)

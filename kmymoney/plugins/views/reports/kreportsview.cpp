@@ -191,6 +191,12 @@ void KReportsView::showEvent(QShowEvent * event)
             Q_D(KReportsView);
             d->setFilter(text);
         });
+        connect(d->ui.m_reportTabWidget, &QTabWidget::currentChanged, this, [this](int) {
+            Q_D(KReportsView);
+            if (d->m_configurationSidebarOpen) {
+                doConfigure(NoConfigureOption);
+            }
+        });
 
         // remove close button from list tab
         QTabBar* bar = d->ui.m_reportTabWidget->findChild<QTabBar*>();
@@ -414,6 +420,7 @@ void KReportsView::doConfigure(ConfigureOption configureOption)
 
     if (!tab) // nothing to do
         return;
+    d->m_configurationSidebarOpen = true;
     int tabNr = d->ui.m_reportTabWidget->currentIndex();
 
     tab->updateDataRange(); // range will be needed during configuration, but cannot be obtained earlier
@@ -428,36 +435,60 @@ void KReportsView::doConfigure(ConfigureOption configureOption)
 
     KReportConfigurationFilterDlg::Type dlgType =
         report.isStaticEvaluation() ? KReportConfigurationFilterDlg::Type::StaticEvaluationSafe : KReportConfigurationFilterDlg::Type::Default;
-    QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(report, dlgType);
+    auto dlg = qobject_cast<KReportConfigurationFilterDlg*>(tab->configurationSidebar());
+    if (!dlg) {
+        dlg = new KReportConfigurationFilterDlg(report, dlgType, tab);
+        dlg->setWindowFlags(Qt::Widget);
 
-    if (dlg->exec()) {
-        MyMoneyReport newReport = dlg->getConfig();
-        newReport.setModified(true);
-
-        // If this report has an ID, then MODIFY it, otherwise ADD it
-        MyMoneyFileTransaction ft;
-        try {
-            if (!newReport.id().isEmpty()) {
-                MyMoneyFile::instance()->modifyReport(newReport);
-                ft.commit();
-                tab->modifyReport(newReport);
-
-                d->ui.m_reportTabWidget->setTabText(tabNr, newReport.name());
-                d->ui.m_reportTabWidget->setCurrentIndex(tabNr);
-            } else {
-                MyMoneyFile::instance()->addReport(newReport);
-                ft.commit();
-                d->addReportTab(newReport, OpenImmediately);
-                d->ui.m_tocTreeViewDefault->clearSelection();
-                d->selectReportInViewById(d->ui.m_tocTreeViewCustom, newReport.id());
+        QPointer<KReportTab> configuredTab(tab);
+        connect(dlg, &KReportConfigurationFilterDlg::configurationApplied, this, [this, configuredTab, tabNr](const MyMoneyReport& configuredReport) {
+            Q_D(KReportsView);
+            if (!configuredTab) {
+                return;
             }
-        } catch (const MyMoneyException &e) {
-            KMessageBox::error(this, i18n("Failed to configure report: %1", QString::fromLatin1(e.what())));
-        }
-    } else if (configureOption == LoadReportOnCancel) {
-        tab->loadTab();
+
+            MyMoneyReport newReport = configuredReport;
+            newReport.setModified(true);
+
+            // If this report has an ID, then MODIFY it, otherwise ADD it
+            MyMoneyFileTransaction ft;
+            try {
+                if (!newReport.id().isEmpty()) {
+                    MyMoneyFile::instance()->modifyReport(newReport);
+                    ft.commit();
+                    configuredTab->modifyReport(newReport);
+
+                    if (tabNr >= 0 && tabNr < d->ui.m_reportTabWidget->count()) {
+                        d->ui.m_reportTabWidget->setTabText(tabNr, newReport.name());
+                        d->ui.m_reportTabWidget->setCurrentIndex(tabNr);
+                    }
+                } else {
+                    MyMoneyFile::instance()->addReport(newReport);
+                    ft.commit();
+                    d->addReportTab(newReport, OpenImmediately);
+                    d->ui.m_tocTreeViewDefault->clearSelection();
+                    d->selectReportInViewById(d->ui.m_tocTreeViewCustom, newReport.id());
+                }
+            } catch (const MyMoneyException& e) {
+                KMessageBox::error(this, i18n("Failed to configure report: %1", QString::fromLatin1(e.what())));
+            }
+        });
+
+        connect(dlg, &KReportConfigurationFilterDlg::closeRequested, this, [this, configuredTab, configureOption]() {
+            Q_D(KReportsView);
+            if (!configuredTab) {
+                return;
+            }
+            if (configureOption == LoadReportOnCancel) {
+                configuredTab->loadTab();
+            }
+            d->m_configurationSidebarOpen = false;
+            configuredTab->closeConfigurationSidebar();
+        });
     }
-    delete dlg;
+
+    dlg->loadReport(report);
+    tab->showConfigurationSidebar(dlg);
 }
 
 void KReportsView::slotDuplicate()

@@ -6,12 +6,16 @@
 
 #include <QApplication>
 #include <QClipboard>
+#include <QSplitter>
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <kmm_codec.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+#include <KConfigGroup>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -33,6 +37,10 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     , m_chartView(new reports::KReportChartView(this))
     , m_control(new ReportControl(this))
     , m_layout(new QVBoxLayout(this))
+    , m_contentSplitter(new QSplitter(Qt::Horizontal, this))
+    , m_viewContainer(new QWidget(this))
+    , m_viewLayout(new QVBoxLayout(m_viewContainer))
+    , m_configurationWidget(nullptr)
     , m_report(report)
     , m_deleteMe(false)
     , m_chartEnabled(false)
@@ -70,11 +78,19 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_tableView->hide();
     m_tableView->setOpenLinks(false);
 
+    m_viewLayout->setContentsMargins(0, 0, 0, 0);
+    m_viewLayout->addWidget(m_tableView);
+    m_viewLayout->addWidget(m_chartView);
+    m_viewLayout->setStretch(0, 10);
+    m_viewLayout->setStretch(1, 10);
+
+    m_contentSplitter->addWidget(m_viewContainer);
+    m_contentSplitter->setChildrenCollapsible(false);
+    m_contentSplitter->setStretchFactor(0, 1);
+
     m_layout->addWidget(m_control);
-    m_layout->addWidget(m_tableView);
-    m_layout->addWidget(m_chartView);
+    m_layout->addWidget(m_contentSplitter);
     m_layout->setStretch(1, 10);
-    m_layout->setStretch(2, 10);
 
     connect(m_control->ui->buttonChart, &QAbstractButton::clicked, eventHandler, &KReportsView::slotToggleChart);
 
@@ -101,6 +117,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
 
 KReportTab::~KReportTab()
 {
+    saveState();
     delete m_table;
 }
 
@@ -279,6 +296,70 @@ void KReportTab::enableAllReportActions()
     pActions[eMenu::Action::ReportCopy]->setEnabled(true);
     pActions[eMenu::Action::ReportDelete]->setEnabled(true);
     pActions[eMenu::Action::ReportClose]->setEnabled(true);
+}
+
+void KReportTab::showConfigurationSidebar(QWidget* widget)
+{
+    if (!widget && !m_configurationWidget) {
+        return;
+    }
+
+    if (widget && m_configurationWidget != widget) {
+        if (m_configurationWidget) {
+            m_configurationWidget->deleteLater();
+        }
+        m_configurationWidget = widget;
+        m_configurationWidget->setParent(m_contentSplitter);
+        m_contentSplitter->addWidget(m_configurationWidget);
+    }
+
+    if (!m_configurationWidget) {
+        return;
+    }
+
+    if (!m_configurationWidget->isVisible())
+        restoreState();
+    m_configurationWidget->show();
+    m_configurationWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+    m_contentSplitter->setStretchFactor(1, 0);
+}
+
+void KReportTab::saveState()
+{
+    const auto state = m_contentSplitter->saveState();
+    if (state.isEmpty()) {
+        return;
+    }
+    const auto config = KSharedConfig::openConfig();
+    auto group = config->group("Last Use Settings");
+    group.writeEntry("ReportTabSplitterState", state);
+    group.sync();
+}
+
+void KReportTab::restoreState()
+{
+    const auto config = KSharedConfig::openConfig();
+    const auto group = config->group("Last Use Settings");
+    QByteArray state = group.readEntry("ReportTabSplitterState", QByteArray());
+    if (m_contentSplitter->count() > 1 && !state.isEmpty()) {
+        m_contentSplitter->restoreState(state);
+    }
+}
+
+void KReportTab::closeConfigurationSidebar()
+{
+    if (!m_configurationWidget) {
+        return;
+    }
+
+    saveState();
+    m_configurationWidget->hide();
+    m_contentSplitter->setSizes({width(), 0});
+}
+
+QWidget* KReportTab::configurationSidebar() const
+{
+    return m_configurationWidget;
 }
 
 void KReportTab::toggleChart()

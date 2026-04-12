@@ -91,11 +91,12 @@ class KReportsViewPrivate : public KMyMoneyViewBasePrivate
     Q_DECLARE_PUBLIC(KReportsView)
 
 public:
-    explicit KReportsViewPrivate(KReportsView *qq)
+    explicit KReportsViewPrivate(KReportsView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , m_needLoad(true)
         , m_reportListView(nullptr)
         , m_columnsAlreadyAdjusted(false)
+        , m_configurationSidebarOpen(false)
     {
     }
 
@@ -962,6 +963,7 @@ public:
     QString m_selectedExportFilter;
 
     bool m_columnsAlreadyAdjusted;
+    bool m_configurationSidebarOpen;
     MyMoneyAccount m_currentAccount;
     QMap<QString, bool> expandStatesBeforeSearch;
     ReportsModel* m_builtInReports;
