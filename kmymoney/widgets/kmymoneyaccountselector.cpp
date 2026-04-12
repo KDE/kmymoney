@@ -26,6 +26,7 @@
 
 #include "dialogenums.h"
 #include "icons.h"
+#include "kguiutils.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
@@ -52,8 +53,11 @@ public:
     QPushButton*              m_noAccountButton;
     QPushButton*              m_incomeCategoriesButton;
     QPushButton*              m_expenseCategoriesButton;
+    QPushButton* m_expandButton;
     QList<int>                m_typeList;
     QStringList               m_accountList;
+    bool m_expandButtonState;
+    int m_collapsedRowCount;
 };
 
 KMyMoneyAccountSelector::KMyMoneyAccountSelector(QWidget *parent, Qt::WindowFlags flags, const bool createButtons) :
@@ -84,6 +88,13 @@ KMyMoneyAccountSelector::KMyMoneyAccountSelector(QWidget *parent, Qt::WindowFlag
         d->m_noAccountButton->setText(i18nc("No account", "None"));
         buttonLayout->addWidget(d->m_noAccountButton);
 
+        d->m_expandButton = new QPushButton(this);
+        d->m_expandButton->setObjectName("m_expandButton");
+        d->m_expandButton->setText(i18nc("@action:button", "Expand"));
+        buttonLayout->addWidget(d->m_expandButton);
+        d->m_collapsedRowCount = numberOfVisibleRows();
+        d->m_expandButtonState = false;
+
         QSpacerItem* spacer = new QSpacerItem(0, 67, QSizePolicy::Minimum, QSizePolicy::Expanding);
         buttonLayout->addItem(spacer);
         d->m_layout->addLayout(buttonLayout);
@@ -92,6 +103,8 @@ KMyMoneyAccountSelector::KMyMoneyAccountSelector(QWidget *parent, Qt::WindowFlag
         connect(d->m_noAccountButton, &QAbstractButton::clicked, this, &KMyMoneyAccountSelector::slotDeselectAllAccounts);
         connect(d->m_incomeCategoriesButton, &QAbstractButton::clicked, this, &KMyMoneyAccountSelector::slotSelectIncomeCategories);
         connect(d->m_expenseCategoriesButton, &QAbstractButton::clicked, this, &KMyMoneyAccountSelector::slotSelectExpenseCategories);
+        // automatic setup of height does not work as expected
+        KGuiUtils::setupExpandCollapseButton(d->m_expandButton, d->m_treeWidget, d->m_collapsedRowCount * 4);
     }
 }
 

@@ -22,11 +22,12 @@
 
 #include "ui_ktransactionfilter.h"
 
+#include "kguiutils.h"
+#include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
-#include "kmymoneysettings.h"
 // #include "transaction.h"
 #include "daterangedlg.h"
 #include "mymoneytransactionfilter.h"
@@ -322,6 +323,7 @@ public:
         q->connect(ui->m_clearTagsButton, &QAbstractButton::clicked, q, &KTransactionFilter::slotDeselectAllTags);
         q->connect(ui->m_emptyTagsButton, &QCheckBox::stateChanged,  q, &KTransactionFilter::slotUpdateSelections);
         q->connect(ui->m_tagsView,        &QTreeWidget::itemChanged, q, &KTransactionFilter::slotUpdateSelections);
+        KGuiUtils::setupExpandCollapseButton(ui->m_expandTagsButton, ui->m_tagsView);
     }
 
     void setupPayeesPage()
@@ -340,6 +342,7 @@ public:
         q->connect(ui->m_clearPayeesButton, &QAbstractButton::clicked, q, &KTransactionFilter::slotDeselectAllPayees);
         q->connect(ui->m_emptyPayeesButton, &QCheckBox::stateChanged,  q, &KTransactionFilter::slotUpdateSelections);
         q->connect(ui->m_payeesView,        &QTreeWidget::itemChanged, q, &KTransactionFilter::slotUpdateSelections);
+        KGuiUtils::setupExpandCollapseButton(ui->m_expandPayeesButton, ui->m_payeesView);
     }
 
     void setupAmountPage()
