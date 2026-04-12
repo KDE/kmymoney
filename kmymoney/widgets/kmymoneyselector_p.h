@@ -51,6 +51,9 @@ public:
         // don't show horizontal scroll bar
         m_treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+        // let it be expandable
+        m_treeWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
         m_treeWidget->setSortingEnabled(false);
         m_treeWidget->setAlternatingRowColors(true);
 
@@ -62,11 +65,13 @@ public:
 
         m_treeWidget->header()->hide();
 
-        m_layout->addWidget(m_treeWidget);
+        m_layout->addWidget(m_treeWidget, 1);
 
         // force init
         m_selMode = QTreeWidget::MultiSelection;
         q->setSelectionMode(QTreeWidget::SingleSelection);
+
+        setNumberOfVisibleRows(5);
 
         q->connect(m_treeWidget, &QTreeWidget::itemPressed, q, &KMyMoneySelector::slotItemPressed);
         q->connect(m_treeWidget, &QTreeWidget::itemChanged, q, &KMyMoneySelector::stateChanged);
@@ -86,12 +91,24 @@ public:
         }
     }
 
+    int numberOfVisibleRows() const
+    {
+        return m_visibleRows;
+    }
+
+    void setNumberOfVisibleRows(int rows)
+    {
+        m_visibleRows = rows;
+        m_treeWidget->setMinimumHeight(rows * (m_treeWidget->fontMetrics().height() + 4));
+    }
+
     KMyMoneySelector          *q_ptr;
     QTreeWidget*               m_treeWidget;
     QStringList                m_itemList;
     QString                    m_baseName;
     QTreeWidget::SelectionMode m_selMode;
     QHBoxLayout*               m_layout;
+    int                        m_visibleRows;
 };
 
 #endif

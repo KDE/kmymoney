@@ -257,6 +257,9 @@ public:
       */
     void setSelectable(QTreeWidgetItem *item, bool selectable);
 
+    int numberOfVisibleRows() const;
+    void setNumberOfVisibleRows(int rows);
+
 public Q_SLOTS:
     /**
       * This slot selects all items that are currently in

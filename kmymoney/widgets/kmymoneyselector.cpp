@@ -60,6 +60,18 @@ void KMyMoneySelector::setSelectable(QTreeWidgetItem *item, bool selectable)
     }
 }
 
+int KMyMoneySelector::numberOfVisibleRows() const
+{
+    Q_D(const KMyMoneySelector);
+    return d->numberOfVisibleRows();
+}
+
+void KMyMoneySelector::setNumberOfVisibleRows(int rows)
+{
+    Q_D(KMyMoneySelector);
+    d->setNumberOfVisibleRows(rows);
+}
+
 void KMyMoneySelector::slotSelectAllItems()
 {
     selectAllItems(true);
