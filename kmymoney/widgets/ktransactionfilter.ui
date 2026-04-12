@@ -431,6 +431,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="m_expandTagsButton">
+           <property name="text">
+            <string>Expand</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="Spacer29">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -536,6 +543,13 @@
           <widget class="QPushButton" name="m_clearPayeesButton">
            <property name="text">
             <string>Select none</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_expandPayeesButton">
+           <property name="text">
+            <string>Expand</string>
            </property>
           </widget>
          </item>

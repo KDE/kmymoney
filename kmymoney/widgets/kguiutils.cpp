@@ -10,19 +10,22 @@
 // QT Includes
 // No need for QDateEdit, QSpinBox, etc., since these always return values
 
-#include <QCheckBox>
-#include <QPushButton>
-#include <QWidget>
-#include <QSpinBox>
 #include <QApplication>
-#include <QListWidget>
+#include <QCheckBox>
+#include <QHeaderView>
 #include <QList>
+#include <QListWidget>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QTreeWidget>
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KComboBox>
 #include <KLineEdit>
+#include <KLocalizedString>
 #include <KUrlRequester>
 
 // ----------------------------------------------------------------------------
@@ -282,4 +285,32 @@ void KMandatoryFieldGroup::clear()
         d->m_okButton = nullptr;
         d->m_enabled = true;
     }
+}
+
+void KGuiUtils::setupExpandCollapseButton(QPushButton* button, QTreeWidget* widget, int rows)
+{
+    button->setProperty("expanded", false);
+
+    QObject::connect(button, &QPushButton::clicked, button, [=]() {
+        bool expanded = button->property("expanded").toBool();
+
+        // Determine number of rows if rows == -1
+        int rowCount = rows;
+        if (rowCount == -1) {
+            rowCount = widget->topLevelItemCount();
+        }
+
+        int rowHeight = widget->sizeHintForRow(0);
+        int headerHeight = widget->header()->height();
+
+        if (!expanded) {
+            widget->setMinimumHeight(rowCount * rowHeight + headerHeight);
+            button->setText(i18nc("@action:button", "Collapse"));
+        } else {
+            widget->setMinimumHeight(0);
+            button->setText(i18nc("@action:button", "Expand"));
+        }
+
+        button->setProperty("expanded", !expanded);
+    });
 }

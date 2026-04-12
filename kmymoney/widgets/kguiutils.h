@@ -20,8 +20,9 @@
 
 #include "kmm_base_widgets_export.h"
 
-class QWidget;
 class QPushButton;
+class QTreeWidget;
+class QWidget;
 
 /**
   * @author Tony Bloomfield
@@ -94,5 +95,9 @@ private:
     KMandatoryFieldGroupPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(KMandatoryFieldGroup)
 };
+
+namespace KGuiUtils {
+void KMM_BASE_WIDGETS_EXPORT setupExpandCollapseButton(QPushButton* button, QTreeWidget* widget, int rows = -1);
+}
 
 #endif // KGUIUTILS_H
