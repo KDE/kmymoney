@@ -17,6 +17,28 @@
    <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="topMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>9</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Close|QDialogButtonBox::Help|QDialogButtonBox::Reset</set>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QTabWidget" name="m_tabWidget">
      <property name="currentIndex">
@@ -27,16 +49,6 @@
        <string>Report</string>
       </attribute>
       <layout class="QVBoxLayout">
-       <item>
-        <widget class="QLabel" name="TextLabel1">
-         <property name="text">
-          <string>Configure your report</string>
-         </property>
-         <property name="wordWrap">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QTabWidget" name="m_criteriaTab">
          <property name="sizePolicy">
@@ -68,13 +80,6 @@
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Close|QDialogButtonBox::Help|QDialogButtonBox::Reset</set>
-     </property>
     </widget>
    </item>
   </layout>
