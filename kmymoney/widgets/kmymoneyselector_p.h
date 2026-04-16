@@ -99,7 +99,9 @@ public:
     void setNumberOfVisibleRows(int rows)
     {
         m_visibleRows = rows;
-        m_treeWidget->setMinimumHeight(rows * (m_treeWidget->fontMetrics().height() + 4));
+        int rowHeight = m_treeWidget->sizeHintForRow(0);
+        int headerHeight = m_treeWidget->header()->height();
+        m_treeWidget->setMinimumHeight(rows * rowHeight + headerHeight);
     }
 
     KMyMoneySelector          *q_ptr;
