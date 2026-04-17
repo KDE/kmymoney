@@ -70,7 +70,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
     connect(ui->buttonAbort, &QAbstractButton::clicked, this, &kOnlineTransferForm::reject);
     connect(ui->buttonSend, &QAbstractButton::clicked, this, &kOnlineTransferForm::sendJob);
     connect(ui->buttonEnque, &QAbstractButton::clicked, this, &kOnlineTransferForm::accept);
-    connect(m_requiredFields, static_cast<void (KMandatoryFieldGroup::*)(bool)>(&KMandatoryFieldGroup::stateChanged), this, &kOnlineTransferForm::enableSendAndEnqueue);
+    connect(m_requiredFields, &KMandatoryFieldGroup::stateChanged, this, &kOnlineTransferForm::enableSendAndEnqueue);
 
     connect(ui->originAccount, &KMyMoneyAccountCombo::accountSelected, this, &kOnlineTransferForm::accountChanged);
 

@@ -259,7 +259,6 @@ void KMandatoryFieldGroup::changed()
     }
     d->m_enabled = enable;
 
-    Q_EMIT stateChanged();
     Q_EMIT stateChanged(enable);
 }
 

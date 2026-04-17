@@ -31,7 +31,7 @@ KMyMoneyWizardPage::KMyMoneyWizardPage(uint step, QWidget* widget) :
     d->m_step = step;
     d->m_widget = widget;
     d->m_mandatoryGroup = new KMandatoryFieldGroup(widget);
-    QObject::connect(d->m_mandatoryGroup, static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    QObject::connect(d->m_mandatoryGroup, &KMandatoryFieldGroup::stateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     widget->hide();
 }
 
@@ -42,7 +42,7 @@ KMyMoneyWizardPage::KMyMoneyWizardPage(KMyMoneyWizardPagePrivate &dd, uint step,
     d->m_step = step;
     d->m_widget = widget;
     d->m_mandatoryGroup = new KMandatoryFieldGroup(widget);
-    QObject::connect(d->m_mandatoryGroup, static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    QObject::connect(d->m_mandatoryGroup, &KMandatoryFieldGroup::stateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     widget->hide();
 }
 

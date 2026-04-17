@@ -200,7 +200,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
     m_requiredFields->add(ui->value);
     // Other required fields are set in updateSettings()
 
-    connect(m_requiredFields, QOverload<bool>::of(&KMandatoryFieldGroup::stateChanged), this, &sepaCreditTransferEdit::requiredFieldsCompleted);
+    connect(m_requiredFields, &KMandatoryFieldGroup::stateChanged, this, &sepaCreditTransferEdit::requiredFieldsCompleted);
 
     // make sure to disconnect the textChanged() signals manually in our dtor
     // before we destruct the widgets

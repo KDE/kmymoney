@@ -88,7 +88,6 @@ public Q_SLOTS:
     void setExternalMandatoryState(bool state);
 
 Q_SIGNALS:
-    void stateChanged();
     void stateChanged(bool state);
 
 private:
