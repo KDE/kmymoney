@@ -34,11 +34,16 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "onlinejobsmodel.h"
 #include "onlinepluginextended.h"
-#include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
+#include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "tasks/onlinetask.h"
 
-onlineJobAdministration::onlineJobAdministration(QObject *parent)
+QJsonObject kmyMoneyObj(const KPluginMetaData& data)
+{
+    return data.rawData().value("KMyMoney").toObject();
+}
+
+onlineJobAdministration::onlineJobAdministration(QObject* parent)
     : QObject(parent)
     , m_onlinePlugins(nullptr)
     , m_inRegistration(false)
@@ -93,12 +98,12 @@ void onlineJobAdministration::updateActions()
 QStringList onlineJobAdministration::availableOnlineTasks()
 {
     const auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins", [](const KPluginMetaData& data) {
-        return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].isNull());
+        return !(kmyMoneyObj(data).value("OnlineTask").isNull());
     });
 
     QStringList list;
     for (const KPluginMetaData& plugin : std::as_const(plugins)) {
-        QJsonValue array = plugin.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
+        QJsonValue array = kmyMoneyObj(plugin).value("OnlineTask").toObject().value("Iids");
         if (array.isArray())
             list.append(array.toVariant().toStringList());
     }
@@ -180,7 +185,7 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(QXmlStreamReader* rea
 onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
 {
     auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins", [&name](const KPluginMetaData& data) {
-        QJsonValue array = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
+        QJsonValue array = kmyMoneyObj(data).value("OnlineTask").toObject().value("Iids");
         if (array.isArray())
             return (array.toVariant().toStringList().contains(name));
         return false;
@@ -236,7 +241,11 @@ onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QStri
 /**
  * @todo if more than one converter offers the convert, use best
  */
-onlineJob onlineJobAdministration::convert(const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId) const
+onlineJob onlineJobAdministration::convert(const onlineJob& original,
+                                           const QString& convertTaskIid,
+                                           onlineTaskConverter::convertType& convertType,
+                                           QString& userInformation,
+                                           const QString& onlineJobId) const
 {
     onlineJob newJob;
 
@@ -257,12 +266,19 @@ onlineJob onlineJobAdministration::convert(const onlineJob& original, const QStr
     return newJob;
 }
 
-onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation) const
+onlineJob onlineJobAdministration::convertBest(const onlineJob& original,
+                                               const QStringList& convertTaskIids,
+                                               onlineTaskConverter::convertType& convertType,
+                                               QString& userInformation) const
 {
     return convertBest(original, convertTaskIids, convertType, userInformation, original.id());
 }
 
-onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& bestConvertType, QString& bestUserInformation, const QString& onlineJobId) const
+onlineJob onlineJobAdministration::convertBest(const onlineJob& original,
+                                               const QStringList& convertTaskIids,
+                                               onlineTaskConverter::convertType& bestConvertType,
+                                               QString& bestUserInformation,
+                                               const QString& onlineJobId) const
 {
     onlineJob bestConvert;
     bestConvertType = onlineTaskConverter::convertImpossible;
@@ -302,7 +318,7 @@ void onlineJobAdministration::registerAllOnlineTasks()
     m_inRegistration = false;
 }
 
-void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
+void onlineJobAdministration::registerOnlineTask(onlineTask* const task)
 {
     if (Q_UNLIKELY(task == nullptr))
         return;
@@ -330,15 +346,15 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
 onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobEdits()
 {
     auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins", [](const KPluginMetaData& data) {
-        return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].isNull());
+        return !(kmyMoneyObj(data).value("OnlineTask").toObject().value("Editors").isNull());
     });
 
     onlineJobAdministration::onlineJobEditOffers list;
     list.reserve(plugins.size());
     for (const KPluginMetaData& data : std::as_const(plugins)) {
-        QJsonArray editorsArray = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].toArray();
+        QJsonArray editorsArray = kmyMoneyObj(data).value("OnlineTask").toObject().value("Editors").toArray();
         for (const QJsonValue& entry : std::as_const(editorsArray)) {
-            if (!entry.toObject()["OnlineTaskIds"].isNull()) {
+            if (!entry.toObject().value("OnlineTaskIds").isNull()) {
                 list.append(onlineJobAdministration::onlineJobEditOffer{data.fileName(), KJsonUtils::readTranslatedString(entry.toObject(), "Name")});
             }
         }

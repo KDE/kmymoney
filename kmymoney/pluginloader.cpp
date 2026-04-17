@@ -35,14 +35,14 @@ namespace KMyMoneyPlugin
 {
 Category pluginCategory(const KPluginMetaData& pluginInfo)
 {
-        auto jsonKMyMoneyData = pluginInfo.rawData()[QLatin1String("KMyMoney")].toObject();
-        if (!jsonKMyMoneyData[QLatin1String("OnlineTask")].isNull()) {
-            return OnlineBankOperations;
-        } else if (!jsonKMyMoneyData[QLatin1String("PayeeIdentifier")].isNull()) {
-            return PayeeIdentifier;
-        } else {
-            return StandardPlugin;
-        }
+    const auto jsonKMyMoneyData = pluginInfo.rawData().value(QLatin1String("KMyMoney")).toObject();
+    if (!jsonKMyMoneyData[QLatin1String("OnlineTask")].isNull()) {
+        return OnlineBankOperations;
+    } else if (!jsonKMyMoneyData[QLatin1String("PayeeIdentifier")].isNull()) {
+        return PayeeIdentifier;
+    } else {
+        return StandardPlugin;
+    }
 }
 
 QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)

@@ -25,8 +25,7 @@
 #include "mymoneyutils.h"
 #include "reportgroup.h"
 
-struct ReportsModel::Private
-{
+struct ReportsModel::Private {
     Private()
         : m_useGroups(false)
     {
@@ -53,8 +52,8 @@ int ReportsModel::columnCount(const QModelIndex& parent) const
 
 QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch (section) {
         case ReportName:
             return i18nc("Reportname", "Name");
             break;
@@ -89,9 +88,9 @@ QVariant ReportsModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     const MyMoneyReport& report = static_cast<TreeItem<MyMoneyReport>*>(index.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case ReportName:
             return report.name();
         case Comment:
@@ -150,7 +149,7 @@ QVariant ReportsModel::data(const QModelIndex& index, int role) const
 
 bool ReportsModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 
@@ -160,7 +159,7 @@ bool ReportsModel::setData(const QModelIndex& index, const QVariant& value, int 
 
 int ReportsModel::processItems(Worker* worker)
 {
-    QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+    const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
     int result = MyMoneyModel::processItems(worker, indexes);
     for (const auto& idx : indexes) {
         auto& report = static_cast<TreeItem<MyMoneyReport>*>(idx.internalPointer())->dataRef();

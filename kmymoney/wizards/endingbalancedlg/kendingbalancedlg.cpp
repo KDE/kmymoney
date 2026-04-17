@@ -420,7 +420,7 @@ int KEndingBalanceDlg::nextId() const
     // If the end of the list is encountered first, then return -1.
     for (int i = currentId() + 1; i < d->m_pages.size() && i < pageIds().size(); ++i) {
         if (d->m_pages.testBit(i))
-            return pageIds()[i];
+            return pageIds().at(i);
     }
     return -1;
 }
