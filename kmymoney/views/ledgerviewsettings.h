@@ -86,7 +86,7 @@ public Q_SLOTS:
      */
     void setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader showHeader);
 
-    void setReconciliationChangeByClick(ReconciliationChangeByClick reconciliaionChangeByClick);
+    void setReconciliationChangeByClick(LedgerViewSettings::ReconciliationChangeByClick reconciliaionChangeByClick);
 
     void setSortOrder(LedgerViewSettings::SortOrderType type, const QString& sortOrder);
 

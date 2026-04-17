@@ -28,7 +28,7 @@ public:
 
 public Q_SLOTS:
     void urlSelected();
-    void urlSelected(const QUrl &url);
+    void urlSelected(const KMMUrl& url);
     void urlSelected(const QString& url);
     void textChanged(const QString& text);
 
