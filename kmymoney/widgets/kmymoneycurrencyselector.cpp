@@ -142,9 +142,9 @@ void KMyMoneySecuritySelector::update(const QString& id)
         default:
         case KMyMoneySecuritySelectorPrivate::FullName:
             if ((*it).isCurrency()) {
-                display = QString("%2 (%1)").arg((*it).id()).arg((*it).name());
+                display = QString("%2 (%1)").arg((*it).id(), (*it).name());
             } else
-                display = QString("%2 (%1)").arg((*it).tradingSymbol()).arg((*it).name());
+                display = QString("%2 (%1)").arg((*it).tradingSymbol(), (*it).name());
             break;
             break;
 

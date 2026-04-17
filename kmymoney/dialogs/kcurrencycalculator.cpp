@@ -139,22 +139,20 @@ public:
     {
         QString msg;
         if (price.isZero()) {
-            msg = QString("1 %1 = ? %2").arg(m_fromCurrency.tradingSymbol())
-                  .arg(m_toCurrency.tradingSymbol());
+            msg = QString("1 %1 = ? %2").arg(m_fromCurrency.tradingSymbol(), m_toCurrency.tradingSymbol());
             if (m_fromCurrency.isCurrency()) {
                 msg += QString("\n");
-                msg += QString("1 %1 = ? %2").arg(m_toCurrency.tradingSymbol())
-                       .arg(m_fromCurrency.tradingSymbol());
+                msg += QString("1 %1 = ? %2").arg(m_toCurrency.tradingSymbol(), m_fromCurrency.tradingSymbol());
             }
         } else {
-            msg = QString("1 %1 = %2 %3").arg(m_fromCurrency.tradingSymbol())
-                  .arg(price.formatMoney(QString(), m_fromCurrency.pricePrecision()))
-                  .arg(m_toCurrency.tradingSymbol());
+            msg = QString("1 %1 = %2 %3")
+                      .arg(m_fromCurrency.tradingSymbol(), price.formatMoney(QString(), m_fromCurrency.pricePrecision()), m_toCurrency.tradingSymbol());
             if (m_fromCurrency.isCurrency()) {
                 msg += QString("\n");
-                msg += QString("1 %1 = %2 %3").arg(m_toCurrency.tradingSymbol())
-                       .arg((MyMoneyMoney::ONE / price).formatMoney(QString(), m_toCurrency.pricePrecision()))
-                       .arg(m_fromCurrency.tradingSymbol());
+                msg += QString("1 %1 = %2 %3")
+                           .arg(m_toCurrency.tradingSymbol(),
+                                (MyMoneyMoney::ONE / price).formatMoney(QString(), m_toCurrency.pricePrecision()),
+                                m_fromCurrency.tradingSymbol());
             }
         }
         ui->m_conversionExample->setText(msg);

@@ -206,7 +206,7 @@ bool KMyMoneyAccountSelector::contains(const QString& txt) const
                        i18n("Security");
 
     while ((it_v = *it) != nullptr) {
-        const QRegularExpression exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegularExpression::escape(txt)));
+        const QRegularExpression exp(QString("^(?:%1):%2$").arg(baseName, QRegularExpression::escape(txt)));
         const auto matchingItem(exp.match(it_v->data(0, static_cast<int>(eWidgets::Selector::Role::Key)).toString().mid(1)));
         if (matchingItem.hasMatch()) {
             return true;
