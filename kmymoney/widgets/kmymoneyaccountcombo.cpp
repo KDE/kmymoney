@@ -414,7 +414,7 @@ void KMyMoneyAccountCombo::setModel(QAbstractItemModel* model)
     // after the qlineedit had been cleared using the clear button does not trigger the
     // activated() signal of d->m_popupView. This is a workaround to catch this scenario
     // and still get valid settings.
-    connect(this, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
+    connect(this, &QComboBox::currentIndexChanged, this, [&](int index) {
         if (index != -1) {
             const auto idx = d->m_popupView->currentIndex();
             if (idx.isValid()) {
@@ -428,7 +428,7 @@ void KMyMoneyAccountCombo::setModel(QAbstractItemModel* model)
     if(isEditable()) {
         connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion, Qt::UniqueConnection);
     } else {
-        connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyAccountCombo::KComboBox::activated), this, &KMyMoneyAccountCombo::activated);
+        connect(this, &KMyMoneyAccountCombo::KComboBox::activated, this, &KMyMoneyAccountCombo::activated);
     }
 
     // since the standard QComboBox implementation does not deal with data changes in tree models

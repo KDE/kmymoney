@@ -20,7 +20,7 @@
 KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w) :
     KComboBox(w)
 {
-    connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &KMyMoneyGeneralCombo::slotChangeItem);
+    connect(this, &QComboBox::highlighted, this, &KMyMoneyGeneralCombo::slotChangeItem);
 }
 
 KMyMoneyGeneralCombo::~KMyMoneyGeneralCombo()

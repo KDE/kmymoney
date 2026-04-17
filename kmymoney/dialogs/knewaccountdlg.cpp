@@ -408,7 +408,7 @@ public:
         q->connect(ui->buttonBox, &QDialogButtonBox::rejected, q, &QDialog::reject);
         q->connect(ui->buttonBox, &QDialogButtonBox::accepted, q, &KNewAccountDlg::okClicked);
         q->connect(ui->m_qbuttonNew, &QAbstractButton::clicked, q, &KNewAccountDlg::slotNewClicked);
-        q->connect(ui->typeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), q, &KNewAccountDlg::slotAccountTypeChanged);
+        q->connect(ui->typeCombo, &QComboBox::currentIndexChanged, q, &KNewAccountDlg::slotAccountTypeChanged);
 
         q->connect(ui->accountNameEdit, &QLineEdit::textChanged, q, &KNewAccountDlg::slotCheckFinished);
 
@@ -418,7 +418,7 @@ public:
         q->connect(ui->m_vatAssignment, &QAbstractButton::toggled,       q, &KNewAccountDlg::slotCheckFinished);
         q->connect(ui->m_vatRate,       &AmountEdit::textChanged,      q, &KNewAccountDlg::slotCheckFinished);
         q->connect(ui->m_vatAccount,    &KMyMoneySelector::stateChanged, q, &KNewAccountDlg::slotCheckFinished);
-        q->connect(ui->m_currency, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KNewAccountDlg::slotCheckCurrency);
+        q->connect(ui->m_currency, &QComboBox::activated, q, &KNewAccountDlg::slotCheckCurrency);
 
         q->connect(ui->m_minBalanceEarlyEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
         q->connect(ui->m_minBalanceAbsoluteEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMinBalanceEarlyEdit);

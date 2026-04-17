@@ -207,7 +207,7 @@ public:
         q->connect(ui->emailEdit,     &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
         q->connect(ui->notesEdit,     &QTextEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
         q->connect(ui->payeeIdentifiers, &KPayeeIdentifierView::dataChanged, q, &KPayeesView::slotPayeeDataChanged);
-        q->connect(ui->matchTypeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), q, &KPayeesView::slotPayeeDataChanged);
+        q->connect(ui->matchTypeCombo, &QComboBox::currentIndexChanged, q, &KPayeesView::slotPayeeDataChanged);
         q->connect(ui->checkMatchIgnoreCase, &QAbstractButton::toggled, q, &KPayeesView::slotPayeeDataChanged);
         q->connect(ui->checkEnableDefaultCategory,  &QAbstractButton::toggled, q,               &KPayeesView::slotPayeeDataChanged);
         q->connect(ui->comboDefaultCategory,        &KMyMoneyAccountCombo::accountSelected, q,  &KPayeesView::slotPayeeDataChanged);

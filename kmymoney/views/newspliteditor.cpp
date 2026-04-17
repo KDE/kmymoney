@@ -454,7 +454,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
         },
         Qt::QueuedConnection);
 
-    connect(d->ui->costCenterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int costCenterIndex) {
+    connect(d->ui->costCenterCombo, &QComboBox::currentIndexChanged, this, [&](int costCenterIndex) {
         d->costCenterChanged(costCenterIndex);
     });
     connect(d->ui->accountCombo, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& categoryId) {

@@ -64,7 +64,7 @@ TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& co
     m_buttonOK->setEnabled(false);
     ui->cbActionTypes->setCurrentIndex(-1);
 
-    connect(ui->cbActionTypes, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TransactionDlg::slotActionSelected);
+    connect(ui->cbActionTypes, &QComboBox::currentIndexChanged, this, &TransactionDlg::slotActionSelected);
     m_typeColumn = typeCol;
     m_validActionTypes = validActionTypes;
     displayLine(colList, colHeaders, typeCol);

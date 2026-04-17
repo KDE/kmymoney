@@ -54,7 +54,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
         Q_EMIT requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
     });
 
-    connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
+    connect(d->ui->m_filterBox, &QComboBox::currentIndexChanged, this, [&](int idx) {
         Q_D(KPayeesView);
         d->m_renameProxyModel->setReferenceFilter(d->ui->m_filterBox->itemData(idx));
     });

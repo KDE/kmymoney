@@ -67,7 +67,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget* p
     m_userAgentEdit->setPlaceholderText(KProtocolManager::defaultUserAgent());
 #endif
     m_userAgentEdit->setText(settings.value(QLatin1String("kmmofx-useragent")));
-    connect(m_applicationCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KOnlineBankingStatus::applicationSelectionChanged);
+    connect(m_applicationCombo, &QComboBox::currentIndexChanged, this, &KOnlineBankingStatus::applicationSelectionChanged);
     m_headerVersionEdit->hide();
 
     int numDays = 60;

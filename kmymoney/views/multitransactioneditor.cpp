@@ -450,7 +450,7 @@ MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& a
         d->numberChanged(newNumber);
     });
 
-    connect(d->ui->costCenterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int costCenterIndex) {
+    connect(d->ui->costCenterCombo, &QComboBox::currentIndexChanged, this, [&](int costCenterIndex) {
         d->costCenterChanged(costCenterIndex);
     });
 
@@ -471,7 +471,7 @@ MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& a
         d->amountChanged();
     });
 
-    connect(d->ui->payeeEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int payeeIndex) {
+    connect(d->ui->payeeEdit, &QComboBox::currentIndexChanged, this, [&](int payeeIndex) {
         d->payeeChanged(payeeIndex);
     });
 

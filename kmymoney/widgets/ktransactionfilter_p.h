@@ -293,9 +293,9 @@ public:
     void setupDetailsPage()
     {
         Q_Q(KTransactionFilter);
-        q->connect(ui->m_typeBox,     static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KTransactionFilter::slotUpdateSelections);
-        q->connect(ui->m_stateBox,    static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KTransactionFilter::slotUpdateSelections);
-        q->connect(ui->m_validityBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KTransactionFilter::slotUpdateSelections);
+        q->connect(ui->m_typeBox, &QComboBox::activated, q, &KTransactionFilter::slotUpdateSelections);
+        q->connect(ui->m_stateBox, &QComboBox::activated, q, &KTransactionFilter::slotUpdateSelections);
+        q->connect(ui->m_validityBox, &QComboBox::activated, q, &KTransactionFilter::slotUpdateSelections);
 
         q->connect(ui->m_nrButton, &QAbstractButton::clicked, q, &KTransactionFilter::slotNrSelected);
         q->connect(ui->m_nrRangeButton, &QAbstractButton::clicked, q, &KTransactionFilter::slotNrRangeSelected);

@@ -263,7 +263,7 @@ MyMoneyQifReader::MyMoneyQifReader() :
 
     connect(&m_filter, &QProcess::bytesWritten, this, &MyMoneyQifReader::slotSendDataToFilter);
     connect(&m_filter, &QProcess::readyReadStandardOutput, this, &MyMoneyQifReader::slotReceivedDataFromFilter);
-    connect(&m_filter, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &MyMoneyQifReader::slotImportFinished);
+    connect(&m_filter, &QProcess::finished, this, &MyMoneyQifReader::slotImportFinished);
     connect(&m_filter, &QProcess::readyReadStandardError, this, &MyMoneyQifReader::slotReceivedErrorFromFilter);
 }
 

@@ -1145,7 +1145,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
 
     setCentralWidget(frame);
 
-    connect(&d->m_proc, QOverload<int,QProcess::ExitStatus>::of(&KProcess::finished), this, &KMyMoneyApp::slotBackupHandleEvents);
+    connect(&d->m_proc, &KProcess::finished, this, &KMyMoneyApp::slotBackupHandleEvents);
 
     d->m_backupState = BACKUP_IDLE;
 

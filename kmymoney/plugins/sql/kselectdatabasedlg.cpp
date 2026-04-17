@@ -111,7 +111,7 @@ int KSelectDatabaseDlg::exec()
         m_widget->textUserName->setText(QString());
         m_widget->textUserName->setText(KUser().loginName());
         m_widget->textPassword->setText(QString());
-        connect(m_widget->databaseTypeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KSelectDatabaseDlg::slotDriverSelected);
+        connect(m_widget->databaseTypeCombo, &QComboBox::currentIndexChanged, this, &KSelectDatabaseDlg::slotDriverSelected);
         m_widget->checkPreLoad->setChecked(false);
         // ensure a driver gets selected; pre-select the first one
         if (m_widget->databaseTypeCombo->count() != 0) {

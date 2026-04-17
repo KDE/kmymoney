@@ -44,9 +44,9 @@ PricesPage::PricesPage(CSVWizard *dlg, CSVImporterCore *imp) :
     // initialize column names
     m_dlg->m_colTypeName.insert(Column::Price, i18n("Price"));
     m_dlg->m_colTypeName.insert(Column::Date, i18n("Date"));
-    connect(ui->m_dateCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PricesPage::dateColSelected);
-    connect(ui->m_priceCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PricesPage::priceColSelected);
-    connect(ui->m_priceFraction, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PricesPage::fractionChanged);
+    connect(ui->m_dateCol, &QComboBox::currentIndexChanged, this, &PricesPage::dateColSelected);
+    connect(ui->m_priceCol, &QComboBox::currentIndexChanged, this, &PricesPage::priceColSelected);
+    connect(ui->m_priceFraction, &QComboBox::currentIndexChanged, this, &PricesPage::fractionChanged);
 }
 
 PricesPage::~PricesPage()

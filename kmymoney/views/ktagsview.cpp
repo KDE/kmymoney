@@ -540,10 +540,10 @@ void KTagsView::showEvent(QShowEvent* event)
             d->finalizePendingChanges();
             d->m_renameProxyModel->setFilterFixedString(txt);
         });
-        connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
+        connect(d->ui->m_filterBox, &QComboBox::currentIndexChanged, this, [&](int idx) {
             Q_D(KTagsView);
             d->m_renameProxyModel->setReferenceFilter(d->ui->m_filterBox->itemData(idx));
-        } );
+        });
 
         connect(d->ui->m_tagsList, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
             Q_D(KTagsView);

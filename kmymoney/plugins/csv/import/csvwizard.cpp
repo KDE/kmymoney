@@ -479,7 +479,7 @@ void IntroPage::initializePage()
 
     ui->m_profiles->lineEdit()->setClearButtonEnabled(true);
 
-    connect(ui->m_profiles, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &IntroPage::slotComboSourceIndexChanged);
+    connect(ui->m_profiles, &QComboBox::currentIndexChanged, this, &IntroPage::slotComboSourceIndexChanged);
     connect(ui->m_add, &QAbstractButton::clicked, this, &IntroPage::slotAddProfile);
     connect(ui->m_remove, &QAbstractButton::clicked, this, &IntroPage::slotRemoveProfile);
     connect(ui->m_rename, &QAbstractButton::clicked, this, &IntroPage::slotRenameProfile);
@@ -666,9 +666,9 @@ SeparatorPage::SeparatorPage(CSVWizard *dlg, CSVImporterCore *imp) :
     ui(new Ui::SeparatorPage)
 {
     ui->setupUi(this);
-    connect(ui->m_encoding, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SeparatorPage::encodingChanged);
-    connect(ui->m_fieldDelimiter, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SeparatorPage::fieldDelimiterChanged);
-    connect(ui->m_textDelimiter, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SeparatorPage::textDelimiterChanged);
+    connect(ui->m_encoding, &QComboBox::currentIndexChanged, this, &SeparatorPage::encodingChanged);
+    connect(ui->m_fieldDelimiter, &QComboBox::currentIndexChanged, this, &SeparatorPage::fieldDelimiterChanged);
+    connect(ui->m_textDelimiter, &QComboBox::currentIndexChanged, this, &SeparatorPage::textDelimiterChanged);
 }
 
 SeparatorPage::~SeparatorPage()
@@ -800,8 +800,8 @@ RowsPage::RowsPage(CSVWizard *dlg, CSVImporterCore *imp) :
     connect(ui->m_headerHasName, &QAbstractButton::clicked, this, [&](bool checked) {
         m_imp->m_profile->m_autoAccountName = checked;
     });
-    connect(ui->m_startLine, QOverload<int>::of(&QSpinBox::valueChanged), this, &RowsPage::startRowChanged);
-    connect(ui->m_endLine, QOverload<int>::of(&QSpinBox::valueChanged), this, &RowsPage::endRowChanged);
+    connect(ui->m_startLine, &QSpinBox::valueChanged, this, &RowsPage::startRowChanged);
+    connect(ui->m_endLine, &QSpinBox::valueChanged, this, &RowsPage::endRowChanged);
 }
 
 RowsPage::~RowsPage()
@@ -900,8 +900,8 @@ FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporterCore *imp) :
     m_isDateFormatOK(false)
 {
     ui->setupUi(this);
-    connect(ui->m_dateFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FormatsPage::dateFormatChanged);
-    connect(ui->m_decimalSymbol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FormatsPage::decimalSymbolChanged);
+    connect(ui->m_dateFormat, &QComboBox::currentIndexChanged, this, &FormatsPage::dateFormatChanged);
+    connect(ui->m_decimalSymbol, &QComboBox::currentIndexChanged, this, &FormatsPage::decimalSymbolChanged);
 }
 
 FormatsPage::~FormatsPage()

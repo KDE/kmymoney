@@ -19,8 +19,8 @@ CurrenciesDlg::CurrenciesDlg() : ui(new Ui::CurrenciesDlg)
     m_buttonOK->setShortcut(Qt::CTRL | Qt::Key_Return);
     m_buttonOK->setEnabled(false);
 
-    connect(ui->cbFrom, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &CurrenciesDlg::slotIndexChanged);
-    connect(ui->cbTo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &CurrenciesDlg::slotIndexChanged);
+    connect(ui->cbFrom, &QComboBox::currentIndexChanged, this, &CurrenciesDlg::slotIndexChanged);
+    connect(ui->cbTo, &QComboBox::currentIndexChanged, this, &CurrenciesDlg::slotIndexChanged);
 }
 
 CurrenciesDlg::~CurrenciesDlg()

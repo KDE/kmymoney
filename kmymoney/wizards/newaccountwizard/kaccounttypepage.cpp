@@ -91,7 +91,7 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
     slotUpdateCurrency();
 
     connect(d->ui->m_typeSelection, &KMyMoneyGeneralCombo::itemSelected, this, &AccountTypePage::slotUpdateType);
-    connect(d->ui->m_currencyComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &AccountTypePage::slotUpdateCurrency);
+    connect(d->ui->m_currencyComboBox, &QComboBox::activated, this, &AccountTypePage::slotUpdateCurrency);
     /// @todo fix this logic with new amount edit logic (at least check)
     connect(d->ui->m_conversionRate, &AmountEdit::textChanged, this, &AccountTypePage::slotUpdateConversionRate);
     connect(d->ui->m_conversionRate, &AmountEdit::amountChanged, this, &AccountTypePage::slotPriceWarning);

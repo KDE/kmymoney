@@ -46,7 +46,7 @@ KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent) :
     addItem(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Yearly), (int)Schedule::Occurrence::Yearly);
     addItem(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::EveryOtherYear), (int)Schedule::Occurrence::EveryOtherYear);
 
-    connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KMyMoneyFrequencyCombo::slotCurrentDataChanged);
+    connect(this, &QComboBox::currentIndexChanged, this, &KMyMoneyFrequencyCombo::slotCurrentDataChanged);
 }
 
 KMyMoneyFrequencyCombo::~KMyMoneyFrequencyCombo()

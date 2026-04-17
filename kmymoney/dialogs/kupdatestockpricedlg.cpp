@@ -31,8 +31,8 @@ KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent) :
     setModal(true);
     ui->m_date->setDate(QDate::currentDate());
 
-    connect(ui->m_security, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
-    connect(ui->m_currency, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
+    connect(ui->m_security, &QComboBox::activated, this, static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
+    connect(ui->m_currency, &QComboBox::activated, this, static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
 
     // load initial values into the selection widgets
     ui->m_currency->update(QString());

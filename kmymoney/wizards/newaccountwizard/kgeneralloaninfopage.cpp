@@ -67,10 +67,10 @@ GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
     slotLoadWidgets();
 
     connect(d->ui->m_payee, &KMyMoneyMVCCombo::createItem, wizard, &Wizard::slotPayeeNew);
-    connect(d->ui->m_anyPayments, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
-    connect(d->ui->m_recordings, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_anyPayments, &QComboBox::activated, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_recordings, &QComboBox::activated, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
 
-    connect(d->ui->m_interestType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_interestType, &QComboBox::activated, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_interestChangeDateEdit, &KMyMoneyDateEdit::dateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_interestChangeDateEdit, &KMyMoneyDateEdit::dateValidityChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_openingBalance, &AmountEdit::textChanged, object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);

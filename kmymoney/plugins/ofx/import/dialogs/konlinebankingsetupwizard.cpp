@@ -113,7 +113,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget* parent)
     connect(m_editUsername, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
     connect(m_editPassword, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
     connect(m_applicationEdit, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
-    connect(m_applicationCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KOnlineBankingSetupWizard::applicationSelectionChanged);
+    connect(m_applicationCombo, &QComboBox::currentIndexChanged, this, &KOnlineBankingSetupWizard::applicationSelectionChanged);
 
     // setup text on buttons
     setButtonText(QWizard::NextButton, i18nc("Go to next page of the wizard", "&Next"));

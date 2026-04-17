@@ -38,7 +38,7 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
     // Register the fields with the QWizard and connect the
     // appropriate signals to update the "Next" button correctly
     registerField("institution", ui->m_qcomboboxInstitutions);
-    connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &QWizardPage::completeChanged);
+    connect(ui->m_qcomboboxInstitutions, &QComboBox::currentIndexChanged, this, &QWizardPage::completeChanged);
     connect(ui->m_qbuttonNew, &QAbstractButton::clicked, this, &LoanAttributesWizardPage::slotNewClicked);
 
     registerField("budgetoption", ui->m_budgetTreatmentAsCategory);

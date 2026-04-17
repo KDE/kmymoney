@@ -58,7 +58,7 @@ KTagReassignDlg::KTagReassignDlg(QWidget* parent)
     d->model->setSortLocaleAware(true);
     d->ui->tagCombo->setModel(d->model);
 
-    connect(d->ui->tagCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&]() {
+    connect(d->ui->tagCombo, &QComboBox::currentIndexChanged, this, [&]() {
         d->checkValidInput();
     });
     connect(d->ui->removeCheckBox, &QCheckBox::toggled, this, [&]() {

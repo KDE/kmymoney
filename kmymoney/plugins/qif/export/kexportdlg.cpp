@@ -85,7 +85,7 @@ KExportDlg::KExportDlg(QWidget *parent)
         checkData();
     });
     connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, &KExportDlg::checkData);
-    connect(m_profileComboBox, QOverload<int>::of(&KComboBox::activated), this, [&]() {
+    connect(m_profileComboBox, &KComboBox::activated, this, [&]() {
         checkData();
     });
     connect(m_kmymoneydateStart, &KMyMoneyDateEdit::dateChanged, this, [&]() {

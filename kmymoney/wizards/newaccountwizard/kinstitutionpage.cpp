@@ -42,7 +42,7 @@ InstitutionPage::InstitutionPage(Wizard* wizard) :
     d->ui->setupUi(this);
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &InstitutionPage::slotLoadWidgets);
     connect(d_func()->ui->m_newInstitutionButton, &QAbstractButton::clicked, this, &InstitutionPage::slotNewInstitution);
-    connect(d_func()->ui->m_institutionComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &InstitutionPage::slotSelectInstitution);
+    connect(d_func()->ui->m_institutionComboBox, &QComboBox::activated, this, &InstitutionPage::slotSelectInstitution);
 
     slotLoadWidgets();
     d_func()->ui->m_institutionComboBox->setCurrentItem(nullptr);

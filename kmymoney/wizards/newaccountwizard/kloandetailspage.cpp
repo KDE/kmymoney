@@ -57,10 +57,10 @@ LoanDetailsPage::LoanDetailsPage(Wizard* wizard) :
     // allow any precision for the interest rate
     d->ui->m_interestRate->setPrecision(-1);
 
-    connect(d->ui->m_paymentDue, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &LoanDetailsPage::slotValuesChanged);
+    connect(d->ui->m_paymentDue, &QComboBox::activated, this, &LoanDetailsPage::slotValuesChanged);
 
-    connect(d->ui->m_termAmount, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &LoanDetailsPage::slotValuesChanged);
-    connect(d->ui->m_termUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &LoanDetailsPage::slotValuesChanged);
+    connect(d->ui->m_termAmount, &QSpinBox::valueChanged, this, &LoanDetailsPage::slotValuesChanged);
+    connect(d->ui->m_termUnit, &QComboBox::highlighted, this, &LoanDetailsPage::slotValuesChanged);
     connect(d->ui->m_loanAmount, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
     connect(d->ui->m_interestRate, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
     connect(d->ui->m_paymentAmount, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);

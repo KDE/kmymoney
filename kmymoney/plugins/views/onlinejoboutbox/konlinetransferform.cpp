@@ -65,7 +65,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
     ui->headMessage->setCloseButtonVisible(false);
     ui->headMessage->addAction(m_duplicateJob);
 
-    connect(ui->transferTypeSelection, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &kOnlineTransferForm::convertCurrentJob);
+    connect(ui->transferTypeSelection, &QComboBox::currentIndexChanged, this, &kOnlineTransferForm::convertCurrentJob);
 
     connect(ui->buttonAbort, &QAbstractButton::clicked, this, &kOnlineTransferForm::reject);
     connect(ui->buttonSend, &QAbstractButton::clicked, this, &kOnlineTransferForm::sendJob);

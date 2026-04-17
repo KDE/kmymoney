@@ -162,8 +162,14 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
         if (!(d->m_initialState.isIncludingPrice() || d->m_initialState.isIncludingAveragePrice())) {
             d->m_tabRowColPivot = new ReportTabRowColPivot(d->ui->m_criteriaTab);
             d->ui->m_criteriaTab->insertTab(tabNr++, d->m_tabRowColPivot, i18n("Rows/Columns"));
-            connect(d->m_tabRowColPivot->ui->m_comboRows, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotRowTypeChanged));
-            connect(d->m_tabRowColPivot->ui->m_comboRows, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotUpdateColumnsCombo));
+            connect(d->m_tabRowColPivot->ui->m_comboRows,
+                    &QComboBox::activated,
+                    this,
+                    static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotRowTypeChanged));
+            connect(d->m_tabRowColPivot->ui->m_comboRows,
+                    &QComboBox::activated,
+                    this,
+                    static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotUpdateColumnsCombo));
             //control the state of the includeTransfer check
             connect(d->m_tabFilters->categoriesView(), &KMyMoneySelector::stateChanged, this, &KReportConfigurationFilterDlg::slotUpdateCheckTransfers);
         }
@@ -177,8 +183,11 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
         d->m_dateRange = d->m_tabRange->m_dateRange;
 
         if (!(d->m_initialState.isIncludingPrice() || d->m_initialState.isIncludingAveragePrice())) {
-            connect(d->m_tabRange->ui->m_comboColumns, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &KReportConfigurationFilterDlg::slotColumnTypeChanged);
-            connect(d->m_tabRange->ui->m_comboColumns, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotUpdateColumnsCombo));
+            connect(d->m_tabRange->ui->m_comboColumns, &QComboBox::activated, this, &KReportConfigurationFilterDlg::slotColumnTypeChanged);
+            connect(d->m_tabRange->ui->m_comboColumns,
+                    &QComboBox::activated,
+                    this,
+                    static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotUpdateColumnsCombo));
         }
         connect(d->m_tabChart->ui->m_logYaxis, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotLogAxisChanged);
         connect(d->m_tabChart->ui->m_negExpenses, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotNegExpensesChanged);

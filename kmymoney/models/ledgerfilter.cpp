@@ -80,7 +80,7 @@ void LedgerFilter::setComboBox(QComboBox* filterBox)
     filterBox->setCurrentIndex(static_cast<int>(d->state));
 
     // connect(d->ui->m_filterBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
-    connect(filterBox, QOverload<int>::of(&QComboBox::activated), this, [&](int idx) {
+    connect(filterBox, &QComboBox::activated, this, [&](int idx) {
         setStateFilter(static_cast<LedgerFilter::State>(idx));
     });
     connect(filterBox, &QComboBox::destroyed, this, [&]() {

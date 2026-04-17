@@ -321,7 +321,7 @@ KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
     connect(d->ui->kcfg_HolidayRegion, &QLineEdit::textChanged, this, &KSettingsSchedules::slotLoadRegion);
 
     // setup connections so that changes are forwarded to the field
-    connect(d->ui->m_holidayRegion, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KSettingsSchedules::slotSetRegion);
+    connect(d->ui->m_holidayRegion, &QComboBox::currentIndexChanged, this, &KSettingsSchedules::slotSetRegion);
 }
 
 KSettingsSchedules::~KSettingsSchedules()

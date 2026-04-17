@@ -102,7 +102,7 @@ KCMCSVImporter::KCMCSVImporter(QObject* parent, const QVariantList& args)
     setButtons(NoAdditionalButton);
 
     // make sure to keep track of the user's selection in the hidden field
-    connect(d->ui->qifProfileCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
+    connect(d->ui->qifProfileCombo, &QComboBox::currentIndexChanged, this, [&](int idx) {
         Q_D(KCMCSVImporter);
         d->setSelectedProfile(idx);
     });

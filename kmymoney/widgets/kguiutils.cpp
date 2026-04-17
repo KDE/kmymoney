@@ -99,7 +99,7 @@ void KMandatoryFieldGroup::add(QWidget *widget)
             if (lineedit) {
                 connect(lineedit, &QLineEdit::textChanged, this, &KMandatoryFieldGroup::changed);
             } else {
-                connect(combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &KMandatoryFieldGroup::changed);
+                connect(combo, &QComboBox::highlighted, this, &KMandatoryFieldGroup::changed);
             }
         }
 
@@ -110,9 +110,7 @@ void KMandatoryFieldGroup::add(QWidget *widget)
         }
 
         else if (qobject_cast<QSpinBox*>(widget))
-            connect(qobject_cast<QSpinBox*>(widget),
-                    static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-                    this, &KMandatoryFieldGroup::changed);
+            connect(qobject_cast<QSpinBox*>(widget), &QSpinBox::valueChanged, this, &KMandatoryFieldGroup::changed);
 
         else if (qobject_cast<QListWidget*>(widget))
             connect(qobject_cast<QListWidget*>(widget),

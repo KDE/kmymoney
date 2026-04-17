@@ -1315,7 +1315,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         d->numberChanged(newNumber);
     });
 
-    connect(d->ui->costCenterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int costCenterIndex) {
+    connect(d->ui->costCenterCombo, &QComboBox::currentIndexChanged, this, [&](int costCenterIndex) {
         d->costCenterChanged(costCenterIndex);
     });
 
@@ -1343,7 +1343,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         d->amountChanged();
     });
 
-    connect(d->ui->payeeEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int payeeIndex) {
+    connect(d->ui->payeeEdit, &QComboBox::currentIndexChanged, this, [&](int payeeIndex) {
         d->payeeChanged(payeeIndex);
     });
 
@@ -1351,7 +1351,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         d->tagsChanged(tagIds);
     });
 
-    connect(d->ui->statusCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int reconcileIndex) {
+    connect(d->ui->statusCombo, &QComboBox::currentIndexChanged, this, [&](int reconcileIndex) {
         const auto newState = static_cast<eMyMoney::Split::State>(reconcileIndex);
         if (newState == eMyMoney::Split::State::Frozen) {
             const auto message = i18nc("@info Question for confirmation of operation",

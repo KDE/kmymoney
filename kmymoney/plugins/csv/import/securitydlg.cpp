@@ -20,7 +20,7 @@ SecurityDlg::SecurityDlg() : ui(new Ui::SecurityDlg)
     m_buttonOK->setShortcut(Qt::CTRL | Qt::Key_Return);
     m_buttonOK->setEnabled(false);
 
-    connect(ui->cbSecurity, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SecurityDlg::slotIndexChanged);
+    connect(ui->cbSecurity, &QComboBox::currentIndexChanged, this, &SecurityDlg::slotIndexChanged);
     connect(ui->leNewSymbol, &QLineEdit::editingFinished, this, &SecurityDlg::slotEditingFinished);
     connect(ui->leNewName, &QLineEdit::editingFinished, this, &SecurityDlg::slotEditingFinished);
 }

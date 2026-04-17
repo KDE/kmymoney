@@ -899,8 +899,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         d->postdateChanged(date);
     });
 
-    connect(d->ui->activityCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestTransactionEditor::activityChanged);
-    connect(d->ui->securityAccountCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
+    connect(d->ui->activityCombo, &QComboBox::currentIndexChanged, this, &InvestTransactionEditor::activityChanged);
+    connect(d->ui->securityAccountCombo, &QComboBox::currentIndexChanged, this, [&](int index) {
         const auto idx = d->ui->securityAccountCombo->model()->index(index, 0);
         if (idx.isValid()) {
             const auto accountId = idx.data(eMyMoney::Model::IdRole).toString();

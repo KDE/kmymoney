@@ -56,10 +56,10 @@ public:
             q->completeChanged();
         });
 
-        q->connect(ui->m_onlineSourceCombo, qOverload<int>(&QComboBox::currentIndexChanged), q, [&](int idx) {
+        q->connect(ui->m_onlineSourceCombo, &QComboBox::currentIndexChanged, q, [&](int idx) {
             setFactorEnabled(ui->m_onlineSourceCombo->itemText(idx));
         });
-        q->connect(ui->m_onlineSourceCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &QWizardPage::completeChanged);
+        q->connect(ui->m_onlineSourceCombo, &QComboBox::activated, q, &QWizardPage::completeChanged);
 
         q->connect(ui->m_onlineFactor, &AmountEdit::textChanged, q, &QWizardPage::completeChanged);
 

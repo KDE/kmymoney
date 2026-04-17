@@ -619,7 +619,7 @@ void AccountsProxyModel::setFilterComboBox(QComboBox* comboBox)
     d->m_filterComboBox->insertItem(static_cast<int>(State::Unused), i18nc("Account filter", "Unused"));
     d->m_filterComboBox->insertItem(static_cast<int>(State::Closed), i18nc("Account filter", "Closed"));
 
-    connect(comboBox, QOverload<int>::of(&QComboBox::activated), this, [&](int idx) {
+    connect(comboBox, &QComboBox::activated, this, [&](int idx) {
         setState(static_cast<AccountsProxyModel::State>(idx));
     });
     connect(comboBox, &QComboBox::destroyed, this, [&]() {

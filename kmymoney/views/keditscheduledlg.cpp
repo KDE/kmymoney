@@ -340,7 +340,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
     d->init();
     setSizeGripEnabled(true);
 
-    connect(d->ui->remainingEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [&](int value) {
+    connect(d->ui->remainingEdit, &QSpinBox::valueChanged, this, [&](int value) {
         Q_D(KEditScheduleDlg);
         // Make sure the required fields are set
         d->m_schedule.setNextDueDate(d->transactionEditor->postDate());
@@ -362,7 +362,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         d->updateTransactionsRemaining();
     });
 
-    connect(d->ui->frequencyEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
+    connect(d->ui->frequencyEdit, &QComboBox::currentIndexChanged, this, [&](int idx) {
         Q_D(KEditScheduleDlg);
         const auto model = d->ui->frequencyEdit->model();
         const auto paymentType = model->index(idx, 0).data(eMyMoney::Model::ScheduleFrequencyRole).value<eMyMoney::Schedule::Occurrence>();
@@ -404,7 +404,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         }
     });
 
-    connect(d->ui->frequencyNoEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [&](int multiplier) {
+    connect(d->ui->frequencyNoEdit, &QSpinBox::valueChanged, this, [&](int multiplier) {
         Q_D(KEditScheduleDlg);
         // Make sure the required fields are set
         auto oldOccurrenceMultiplier = d->m_schedule.occurrenceMultiplier();
@@ -457,7 +457,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
     d->updateState();
 
     // This connection must not be established before loadWidgets() was called
-    connect(d->ui->frequencyEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&]() {
+    connect(d->ui->frequencyEdit, &QComboBox::currentIndexChanged, this, [&]() {
         Q_D(KEditScheduleDlg);
         d->showWarningAboutChangedFrequency();
     });

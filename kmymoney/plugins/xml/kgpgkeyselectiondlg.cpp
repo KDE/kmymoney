@@ -63,7 +63,7 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
         *it = (*it).replace(QLatin1String("0x"), QString());
     }
 
-    connect(d->ui->m_secretKey, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KGpgKeySelectionDlg::slotIdChanged);
+    connect(d->ui->m_secretKey, &QComboBox::currentIndexChanged, this, &KGpgKeySelectionDlg::slotIdChanged);
     connect(d->ui->m_listWidget, &KEditListWidget::changed, this, &KGpgKeySelectionDlg::slotIdChanged);
     connect(d->ui->m_listWidget, &KEditListWidget::added, this, &KGpgKeySelectionDlg::slotKeyListChanged);
     connect(d->ui->m_listWidget, &KEditListWidget::removed, this, &KGpgKeySelectionDlg::slotKeyListChanged);
