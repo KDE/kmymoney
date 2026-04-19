@@ -215,7 +215,7 @@ QString KNewLoanWizard::initialPaymentAccount() const
     if (field("dontCreatePayoutCheckBox").toBool()) {
         return QString();
     }
-    return field("assetAccountEdit").toStringList().first();
+    return field("assetAccountEdit").toStringList().constFirst();
 }
 
 QDate KNewLoanWizard::initialPaymentDate() const

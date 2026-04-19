@@ -431,12 +431,12 @@ public:
         // account that the amortization will be performed on, because we
         // create the account. So the id is yet unknown. But all others
         // must exist, otherwise we cannot create a schedule.
-        sPayment.setAccountId(q->field("paymentAccountEdit").toStringList().first());
+        sPayment.setAccountId(q->field("paymentAccountEdit").toStringList().constFirst());
         if (!sPayment.accountId().isEmpty()) {
 
             //Only create the interest split if not zero
             if (hasInterest) {
-                sInterest.setAccountId(q->field("interestAccountEdit").toStringList().first());
+                sInterest.setAccountId(q->field("interestAccountEdit").toStringList().constFirst());
                 sInterest.setValue(MyMoneyMoney::autoCalc);
                 sInterest.setShares(sInterest.value());
                 sInterest.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));

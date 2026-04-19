@@ -2072,7 +2072,7 @@ void KMyMoneyApp::slotPerformanceTest()
 //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     if (MyMoneyFile::instance()->asset().accountCount()) {
-        MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList()[0]);
+        MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList().constFirst());
         filter.setDateFilter(QDate(), QDate::currentDate());
         QList<MyMoneyTransaction> list;
 
@@ -2091,7 +2091,7 @@ void KMyMoneyApp::slotPerformanceTest()
 //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     if (MyMoneyFile::instance()->asset().accountCount()) {
-        MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList()[0]);
+        MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList().constFirst());
         filter.setDateFilter(QDate(), QDate::currentDate());
         QList<MyMoneyTransaction> list;
 

@@ -371,7 +371,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
     if (!QPixmapCache::find("account", &accountPixmap)) {
         QIcon icon = Icons::get(Icon::BankAccount);
         if (!icon.availableSizes().isEmpty())
-            accountPixmap = icon.pixmap(icon.availableSizes().first());
+            accountPixmap = icon.pixmap(icon.availableSizes().constFirst());
         QPixmapCache::insert("account", accountPixmap);
     }
     d->m_favorites->setIcon(0, QIcon(accountPixmap));
