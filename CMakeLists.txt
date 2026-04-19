@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.16)
 option(BUILD_STATIC_PLUGINS "Build the plugins statically" OFF)
 
 set(KF6_MIN_VERSION 6.1)
-set(KF5_MIN_VERSION 5.90)
+set(KF5_MIN_VERSION 5.91)
 set(QT6_MIN_VERSION 6.7)
 set(QT5_MIN_VERSION 5.15.2)
 set(KDE5_MIN_LEVEL 5.82)
@@ -132,11 +132,10 @@ if(BUILD_WITH_QT6)
     )
 endif()
 
-add_definitions(
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x60000
-    -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x56200C
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x60000
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x50f02
+include(ECMDeprecationSettings)
+ecm_set_disabled_deprecation_versions(
+    QT 6.5
+    KF 6.24
 )
 
 message(STATUS "cmake version: ${CMAKE_VERSION}")
