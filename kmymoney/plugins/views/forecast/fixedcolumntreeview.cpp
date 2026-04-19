@@ -11,11 +11,12 @@
 
 #include <QEvent>
 
+#include <QApplication>
+#include <QCursor>
+#include <QHeaderView>
+#include <QMouseEvent>
 #include <QScrollBar>
 #include <QStyledItemDelegate>
-#include <QHeaderView>
-#include <QApplication>
-#include <QMouseEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -219,7 +220,12 @@ bool FixedColumnTreeView::eventFilter(QObject *object, QEvent *event)
             if (!underMouse() && d->m_parent->underMouse()) {
                 QMouseEvent *me = static_cast<QMouseEvent*>(event);
                 // translate the position of the event but don't send buttons or modifiers because we only need the movement for the hover
-                QMouseEvent translatedMouseEvent(me->type(), QPoint(width() - 2, me->pos().y()), Qt::NoButton, Qt::MouseButtons(), Qt::KeyboardModifiers());
+                QMouseEvent translatedMouseEvent(me->type(),
+                                                 QPoint(width() - 2, me->pos().y()),
+                                                 QCursor::pos(),
+                                                 Qt::NoButton,
+                                                 Qt::MouseButtons(),
+                                                 Qt::KeyboardModifiers());
                 QApplication::sendEvent(viewport(), &translatedMouseEvent);
             }
             break;
