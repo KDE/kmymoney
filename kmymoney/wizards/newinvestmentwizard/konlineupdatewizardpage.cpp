@@ -53,7 +53,7 @@ public:
 
         q->connect(ui->m_useFinanceQuote, &QAbstractButton::toggled, q, [&](bool checked) {
             slotSourceChanged(checked);
-            q->completeChanged();
+            Q_EMIT q->completeChanged();
         });
 
         q->connect(ui->m_onlineSourceCombo, &QComboBox::currentIndexChanged, q, [&](int idx) {
