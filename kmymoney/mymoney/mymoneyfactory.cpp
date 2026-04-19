@@ -28,7 +28,7 @@ QObject* MyMoneyFactory::createFactoryObject(QObject* parent, const QString& obj
                                           Qt::DirectConnection,
                                           Q_RETURN_ARG(QObject*, createdObject),
                                           Q_ARG(QObject*, parent),
-                                          Q_ARG(const QString&, objectName));
+                                          Q_ARG(QString, objectName));
             return createdObject;
         }
     }
