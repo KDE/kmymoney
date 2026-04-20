@@ -2318,9 +2318,10 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
             trans += "<tr><th>Memo</th><td>" + t.memo() + "</td></tr>";
             trans += "</table>";
             // Transaction KVPs
-            if (t.pairs().count() > 0) {
+            if (!t.pairs().empty()) {
                 kvpt = "<p><b>Key Value Pairs</b></p><table><tr><th>Key</th><th>Value</th></tr>";
-                for (auto it = t.pairs().cbegin(); it != t.pairs().cend(); ++it) {
+                const auto pairs = t.pairs();
+                for (auto it = pairs.begin(); it != pairs.end(); ++it) {
                     kvpt += "<tr><th>" + it.key() + "</th><th>" + it.value() + "</th></tr>";
                 }
                 kvpt += "</table><br/><br/>";
@@ -2377,9 +2378,10 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
                 }
                 splits += "<tr><td>&nbsp;</td><td colspan=\"10\">" + tagList + "</td></tr>";
 
-                if (split.pairs().count() > 0) {
+                if (!split.pairs().isEmpty()) {
+                    const auto splitPairs = split.pairs();
                     splits += "<tr><th>KVP</th><th colspan=\"2\">Key</th><th colspan=\"8\">Value</th></tr>";
-                    for (auto it = split.pairs().cbegin(); it != split.pairs().cend(); ++it) {
+                    for (auto it = splitPairs.begin(); it != splitPairs.end(); ++it) {
                         splits += "<tr><td></td><td colspan=\"2\">" + it.key() + "</td><td colspan=\"8\">" + it.value() + "</td></tr>";
                     }
                 }
