@@ -34,7 +34,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
     d_ptr(new KMyMoneyMVCComboPrivate)
 {
     view()->setAlternatingRowColors(true);
-    connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
+    connect(this, qOverload<int>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
 }
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
@@ -51,7 +51,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
 
     view()->setAlternatingRowColors(true);
     setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
-    connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
+    connect(this, qOverload<int>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
 }
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, QWidget* parent) :
@@ -59,7 +59,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, QWidget* parent)
     d_ptr(&dd)
 {
     view()->setAlternatingRowColors(true);
-    connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
+    connect(this, qOverload<int>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
 }
 
 KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, bool editable, QWidget* parent) :
@@ -76,7 +76,7 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, bool editable, Q
 
     view()->setAlternatingRowColors(true);
     setInsertPolicy(QComboBox::NoInsert); // don't insert new objects due to object creation
-    connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
+    connect(this, qOverload<int>(&KMyMoneyMVCCombo::KComboBox::activated), this, &KMyMoneyMVCCombo::activated);
 }
 
 KMyMoneyMVCCombo::~KMyMoneyMVCCombo()

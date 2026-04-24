@@ -213,7 +213,7 @@ public:
         qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
         qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
         qq->connect(&journalModel, &JournalModel::balancesChanged, &accountsModel, &AccountsModel::updateAccountBalances);
-        qq->connect(&schedulesModel, &SchedulesModel::dataChanged, &schedulesJournalModel, static_cast<void (SchedulesJournalModel::*)()>(&SchedulesJournalModel::updateData));
+        qq->connect(&schedulesModel, &SchedulesModel::dataChanged, &schedulesJournalModel, &SchedulesJournalModel::updateData);
         qq->connect(&schedulesModel, &SchedulesModel::modelReset, &schedulesJournalModel, &SchedulesJournalModel::updateData);
         qq->connect(&schedulesModel, &SchedulesModel::rowsAboutToBeRemoved, &schedulesJournalModel, &SchedulesJournalModel::updateData);
         qq->connect(&accountsModel, &AccountsModel::reconciliationInfoChanged, &reconciliationModel, &ReconciliationModel::updateData);
@@ -1107,7 +1107,7 @@ MyMoneyFile::MyMoneyFile() :
     d(new Private(this))
 {
     reloadSpecialDates();
-    connect(&d->journalModel, &JournalModel::balanceChanged, &d->m_balanceCache, QOverload<const QString&>::of(&MyMoneyBalanceCache::clear));
+    connect(&d->journalModel, &JournalModel::balanceChanged, &d->m_balanceCache, qOverload<const QString&>(&MyMoneyBalanceCache::clear));
 }
 
 MyMoneyFile::~MyMoneyFile()

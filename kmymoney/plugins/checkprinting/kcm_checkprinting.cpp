@@ -40,13 +40,12 @@ CheckPrintingSettingsWidget::CheckPrintingSettingsWidget(QWidget *parent)
             &KUrlRequester::urlSelected,
             this,
             QOverload<const QUrl &>::of(&CheckPrintingSettingsWidget::urlSelected));
-    connect(kcfg_checkTemplateFile, QOverload<const QString &>::of(&KUrlRequester::returnPressed), this,
-            QOverload<const QString &>::of(&CheckPrintingSettingsWidget::urlSelected));
-    connect(kcfg_useCustomCheckTemplate, SIGNAL(toggled(bool)), kcfg_checkTemplateFile, SLOT(setEnabled(bool)));
-    connect(kcfg_useCustomCheckTemplate,
-            &QCheckBox::toggled,
+    connect(kcfg_checkTemplateFile,
+            qOverload<const QString&>(&KUrlRequester::returnPressed),
             this,
-            QOverload<>::of(&CheckPrintingSettingsWidget::urlSelected));
+            qOverload<const QString&>(&CheckPrintingSettingsWidget::urlSelected));
+    connect(kcfg_useCustomCheckTemplate, SIGNAL(toggled(bool)), kcfg_checkTemplateFile, SLOT(setEnabled(bool)));
+    connect(kcfg_useCustomCheckTemplate, &QCheckBox::toggled, this, qOverload<>(&CheckPrintingSettingsWidget::urlSelected));
 }
 
 void CheckPrintingSettingsWidget::urlSelected()

@@ -15,7 +15,7 @@
 payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* parent)
     : QComboBox(parent)
 {
-    connect(this, QOverload<int>::of(&payeeIdentifierTypeSelectionWidget::activated), this, &payeeIdentifierTypeSelectionWidget::itemSelected);
+    connect(this, qOverload<int>(&payeeIdentifierTypeSelectionWidget::activated), this, &payeeIdentifierTypeSelectionWidget::itemSelected);
 }
 
 void payeeIdentifierTypeSelectionWidget::itemSelected(int index)

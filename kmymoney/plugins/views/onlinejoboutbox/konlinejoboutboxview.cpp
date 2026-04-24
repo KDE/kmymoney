@@ -113,7 +113,7 @@ public:
         ui->m_buttonEdit->setDefaultAction(m_actions[eMenu::OnlineAction::EditOnlineJob]);
         ui->m_buttonNewCreditTransfer->setDefaultAction(m_actions[eMenu::OnlineAction::AccountCreditTransfer]);
 
-        q->connect(ui->m_onlineJobView, &QAbstractItemView::doubleClicked, q, static_cast<void (KOnlineJobOutboxView::*)(const QModelIndex &)>(&KOnlineJobOutboxView::slotEditJob));
+        q->connect(ui->m_onlineJobView, &QAbstractItemView::doubleClicked, q, qOverload<const QModelIndex&>(&KOnlineJobOutboxView::slotEditJob));
         q->connect(ui->m_onlineJobView->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KOnlineJobOutboxView::updateSelection);
         q->connect(onlineJobAdministration::instance(), &onlineJobAdministration::canSendCreditTransferChanged, m_actions[eMenu::OnlineAction::AccountCreditTransfer], &QAction::setEnabled);
 
@@ -157,7 +157,7 @@ public:
         transferForm->setOnlineJob(job);
         q->connect(transferForm, &QDialog::rejected, transferForm, &QObject::deleteLater);
         q->connect(transferForm, &kOnlineTransferForm::acceptedForSave, q, &KOnlineJobOutboxView::slotOnlineJobSave);
-        q->connect(transferForm, &kOnlineTransferForm::acceptedForSend, q, static_cast<void (KOnlineJobOutboxView::*)(onlineJob)>(&KOnlineJobOutboxView::slotOnlineJobSend));
+        q->connect(transferForm, &kOnlineTransferForm::acceptedForSend, q, qOverload<onlineJob>(&KOnlineJobOutboxView::slotOnlineJobSend));
         q->connect(transferForm, &QDialog::accepted, transferForm, &QObject::deleteLater);
         transferForm->show();
     }
@@ -612,7 +612,7 @@ void KOnlineJobOutboxView::slotNewCreditTransfer()
     }
     connect(transferForm, &QDialog::rejected, transferForm, &QObject::deleteLater);
     connect(transferForm, &kOnlineTransferForm::acceptedForSave, this, &KOnlineJobOutboxView::slotOnlineJobSave);
-    connect(transferForm, &kOnlineTransferForm::acceptedForSend, this, static_cast<void (KOnlineJobOutboxView::*)(onlineJob)>(&KOnlineJobOutboxView::slotOnlineJobSend));
+    connect(transferForm, &kOnlineTransferForm::acceptedForSend, this, qOverload<onlineJob>(&KOnlineJobOutboxView::slotOnlineJobSend));
     connect(transferForm, &QDialog::accepted, transferForm, &QObject::deleteLater);
     transferForm->show();
 }

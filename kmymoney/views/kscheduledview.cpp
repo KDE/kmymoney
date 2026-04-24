@@ -71,7 +71,7 @@ void KScheduledView::showEvent(QShowEvent* event)
             Q_D(KScheduledView);
             Q_EMIT requestCustomContextMenu(eMenu::Menu::Schedule, d->ui->m_scheduleTree->viewport()->mapToGlobal(pos));
         });
-        connect(d->ui->m_scheduleTree, &KMyMoneyTreeView::startEdit, this, QOverload<const QModelIndex&>::of(&KScheduledView::slotEditSchedule));
+        connect(d->ui->m_scheduleTree, &KMyMoneyTreeView::startEdit, this, qOverload<const QModelIndex&>(&KScheduledView::slotEditSchedule));
 
         connect(d->ui->m_scheduleTree->header(), &QHeaderView::sortIndicatorChanged, this, [&](int logicalIndex, Qt::SortOrder order) {
             Q_D(KScheduledView);

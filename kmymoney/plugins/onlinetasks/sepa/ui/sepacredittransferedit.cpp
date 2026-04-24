@@ -148,8 +148,8 @@ private Q_SLOTS:
 ibanBicCompleter::ibanBicCompleter(QObject *parent)
     : QCompleter(parent)
 {
-    connect(this, QOverload<const QModelIndex&>::of(&QCompleter::activated), this, &ibanBicCompleter::slotActivated);
-    connect(this, QOverload<const QModelIndex&>::of(&QCompleter::highlighted), this, &ibanBicCompleter::slotHighlighted);
+    connect(this, qOverload<const QModelIndex&>(&QCompleter::activated), this, &ibanBicCompleter::slotActivated);
+    connect(this, qOverload<const QModelIndex&>(&QCompleter::highlighted), this, &ibanBicCompleter::slotHighlighted);
 }
 
 void ibanBicCompleter::slotActivated(const QModelIndex &index) const

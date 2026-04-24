@@ -79,7 +79,6 @@ void LedgerFilter::setComboBox(QComboBox* filterBox)
     filterBox->insertItem(static_cast<int>(State::Cleared), Icons::get(Icon::TransactionStateCleared), i18nc("Reconciliation state 'Cleared'", "Cleared"));
     filterBox->setCurrentIndex(static_cast<int>(d->state));
 
-    // connect(d->ui->m_filterBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
     connect(filterBox, &QComboBox::activated, this, [&](int idx) {
         setStateFilter(static_cast<LedgerFilter::State>(idx));
     });

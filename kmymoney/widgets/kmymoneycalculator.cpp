@@ -220,7 +220,7 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
     QSignalMapper* mapper = new QSignalMapper(this);
     for (auto i = 0; i < 10; ++i) {
         mapper->setMapping(d->buttons[i], i);
-        connect(d->buttons[i], &QAbstractButton::clicked, mapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
+        connect(d->buttons[i], &QAbstractButton::clicked, mapper, qOverload<>(&QSignalMapper::map));
     }
     connect(mapper, &QSignalMapper::mappedInt, this, &KMyMoneyCalculator::digitClicked);
 
@@ -228,7 +228,7 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
     mapper = new QSignalMapper(this);
     for (int i = KMyMoneyCalculatorPrivate::PLUS; i <= KMyMoneyCalculatorPrivate::EQUAL; ++i) {
         mapper->setMapping(d->buttons[i], i);
-        connect(d->buttons[i], &QAbstractButton::clicked, mapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
+        connect(d->buttons[i], &QAbstractButton::clicked, mapper, qOverload<>(&QSignalMapper::map));
     }
     connect(mapper, &QSignalMapper::mappedInt, this, &KMyMoneyCalculator::calculationClicked);
 

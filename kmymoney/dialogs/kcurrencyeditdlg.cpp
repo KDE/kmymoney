@@ -237,7 +237,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
 
     connect(d->ui->m_currencyList, &QWidget::customContextMenuRequested, this, &KCurrencyEditDlg::slotShowCurrencyMenu);
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KCurrencyEditDlg::slotLoadCurrencies);
-    connect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
+    connect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, qOverload<QTreeWidgetItem*, int>(&KCurrencyEditDlg::slotUpdateCurrency));
     connect(d->ui->m_currencyList, &QTreeWidget::itemSelectionChanged, this, &KCurrencyEditDlg::slotItemSelectionChanged);
 
     connect(d->ui->m_selectBaseCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotSelectBaseCurrency);
@@ -289,8 +289,11 @@ void KCurrencyEditDlg::slotLoadCurrencies()
         return;
     d->m_inLoading = true;
 
-    disconnect(d->ui->m_currencyList, &QTreeWidget::currentItemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, QTreeWidgetItem *)>(&KCurrencyEditDlg::slotSelectCurrency));
-    disconnect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
+    disconnect(d->ui->m_currencyList,
+               &QTreeWidget::currentItemChanged,
+               this,
+               qOverload<QTreeWidgetItem*, QTreeWidgetItem*>(&KCurrencyEditDlg::slotSelectCurrency));
+    disconnect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, qOverload<QTreeWidgetItem*, int>(&KCurrencyEditDlg::slotUpdateCurrency));
 
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
     QList<MyMoneySecurity>::const_iterator it;
@@ -360,8 +363,11 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     }
     d->ui->m_removeUnusedCurrencyButton->setDisabled(list.count() <= 1);
 
-    connect(d->ui->m_currencyList, &QTreeWidget::currentItemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, QTreeWidgetItem *)>(&KCurrencyEditDlg::slotSelectCurrency));
-    connect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
+    connect(d->ui->m_currencyList,
+            &QTreeWidget::currentItemChanged,
+            this,
+            qOverload<QTreeWidgetItem*, QTreeWidgetItem*>(&KCurrencyEditDlg::slotSelectCurrency));
+    connect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, qOverload<QTreeWidgetItem*, int>(&KCurrencyEditDlg::slotUpdateCurrency));
 
     if (first == nullptr)
         first = d->ui->m_currencyList->invisibleRootItem()->child(0);

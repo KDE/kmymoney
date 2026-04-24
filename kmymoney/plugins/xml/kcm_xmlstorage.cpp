@@ -61,8 +61,8 @@ XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent)
     kcfg_GpgRecipient->hide();
 
     connect(kcfg_WriteDataEncrypted, &QAbstractButton::toggled, this, &XMLStorageSettingsWidget::slotStatusChanged);
-    connect(m_masterKeyCombo, &QComboBox::activated, this, static_cast<void (XMLStorageSettingsWidget::*)(int)>(&XMLStorageSettingsWidget::slotIdChanged));
-    connect(kcfg_GpgRecipientList, &KEditListWidget::changed, this, static_cast<void (XMLStorageSettingsWidget::*)()>(&XMLStorageSettingsWidget::slotIdChanged));
+    connect(m_masterKeyCombo, &QComboBox::activated, this, qOverload<int>(&XMLStorageSettingsWidget::slotIdChanged));
+    connect(kcfg_GpgRecipientList, &KEditListWidget::changed, this, qOverload<>(&XMLStorageSettingsWidget::slotIdChanged));
     connect(kcfg_GpgRecipientList, &KEditListWidget::added, this, &XMLStorageSettingsWidget::slotKeyListChanged);
     connect(kcfg_GpgRecipientList, &KEditListWidget::removed, this, &XMLStorageSettingsWidget::slotKeyListChanged);
 

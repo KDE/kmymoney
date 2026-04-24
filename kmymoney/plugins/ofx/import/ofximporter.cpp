@@ -158,7 +158,7 @@ void OFXImporter::createActions()
 {
     d->m_action = actionCollection()->addAction(QStringLiteral("file_import_ofx"));
     d->m_action->setText(i18n("OFX..."));
-    connect(d->m_action, &QAction::triggered, this, static_cast<void (OFXImporter::*)()>(&OFXImporter::slotImportFile));
+    connect(d->m_action, &QAction::triggered, this, qOverload<>(&OFXImporter::slotImportFile));
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, d->m_action, &QAction::setEnabled);
 }
 
@@ -995,7 +995,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                 d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource"), 0));
             QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
-            connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
+            connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, qOverload<const QString&>(&OFXImporter::slotImportFile));
 
             // get the date of the earliest transaction that we are interested in
             // as well as other parameters from the settings for this account
