@@ -123,7 +123,7 @@ public:
 
     ~MyMoneyDbTransaction()
     {
-        if (QT6_IF(std::uncaught_exceptions(), std::uncaught_exception())) {
+        if (std::uncaught_exceptions()) {
             m_db.cancelCommitUnit(m_name);
         } else {
             try {
