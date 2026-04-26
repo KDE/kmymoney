@@ -641,7 +641,7 @@ public:
         if (m_referencedObjects.isEmpty()) {
             const int rows = rowCount();
             if (m_idToItemMapper) {
-                for (const auto& item : qAsConst(*m_idToItemMapper)) {
+                for (const auto& item : std::as_const(*m_idToItemMapper)) {
                     m_referencedObjects.unite(item->constDataRef().referencedObjects());
                 }
             } else {

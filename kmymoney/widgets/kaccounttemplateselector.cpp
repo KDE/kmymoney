@@ -118,7 +118,7 @@ public:
         }
         templateHierarchy.clear();
         const auto selection = ui->m_groupList->selectionModel()->selectedIndexes();
-        for (const auto& idx : qAsConst(selection)) {
+        for (const auto& idx : std::as_const(selection)) {
             const auto tmpl = model->itemByIndex(idx);
             hierarchy(tmpl.accountTree(), templateHierarchy);
         }
@@ -203,7 +203,7 @@ QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates() const
     QList<MyMoneyTemplate> list;
     if (d->model != nullptr) {
         const auto selection = d->ui->m_groupList->selectionModel()->selectedIndexes();
-        for (const auto& idx : qAsConst(selection)) {
+        for (const auto& idx : std::as_const(selection)) {
             list << d->model->itemByIndex(idx);
         }
     }

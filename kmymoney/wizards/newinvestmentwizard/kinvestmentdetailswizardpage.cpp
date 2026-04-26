@@ -234,7 +234,7 @@ void KInvestmentDetailsWizardPage::init(const MyMoneyAccount& account, const MyM
         // collect how many accounts use this security
         QList<MyMoneyAccount> accountList;
         MyMoneyFile::instance()->accountList(accountList);
-        for (const auto& acc : qAsConst(accountList)) {
+        for (const auto& acc : std::as_const(accountList)) {
             if (acc.currencyId() == security.id()) {
                 ++d->m_symbolUsageCount;
             }

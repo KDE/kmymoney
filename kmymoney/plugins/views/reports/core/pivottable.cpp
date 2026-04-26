@@ -224,7 +224,7 @@ void PivotTable::init()
             m_config.isIncludingAveragePrice()) {
         QList<MyMoneyAccount> accounts;
         file->accountList(accounts);
-        for (const auto& acc : qAsConst(accounts)) {
+        for (const auto& acc : std::as_const(accounts)) {
             if (acc.isInvest()) {
                 const ReportAccount repAcc(acc);
                 if (m_config.includes(repAcc)) {
@@ -361,7 +361,7 @@ void PivotTable::init()
 
                     //if the loan split is not included in the report, update the balance for the next occurrence
                     if (!m_config.includes(splitAccount)) {
-                        for (const auto& txsplit : qAsConst(tx.splits())) {
+                        for (const auto& txsplit : std::as_const(tx.splits())) {
                             if (txsplit.isAmortizationSplit() && txsplit.accountId() == splitAccount.id())
                                 loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + txsplit.shares();
                         }
@@ -974,7 +974,7 @@ void PivotTable::calculateBudgetMapping()
         QList<MyMoneyAccount> accounts;
         file->accountList(accounts);
 
-        for (const auto& account : qAsConst(accounts)) {
+        for (const auto& account : std::as_const(accounts)) {
             //include only the accounts selected for the report
             if (m_config.includes(account)) {
                 QString id = account.id();
@@ -1009,7 +1009,7 @@ void PivotTable::calculateBudgetMapping()
 
         // Place the budget values into the budget grid
         const QList<MyMoneyBudget::AccountGroup> baccounts = budget.getaccounts();
-        for (const auto& budgetAccount : qAsConst(baccounts)) {
+        for (const auto& budgetAccount : std::as_const(baccounts)) {
             ReportAccount splitAccount(budgetAccount.id());
 
             // include the budget account only if it is included in the report
@@ -1151,7 +1151,7 @@ void PivotTable::convertToBaseCurrency()
                     } else
                         pricePrecision = MyMoneyMoney::denomToPrec(fraction);
 
-                    for (const auto& rowType : qAsConst(rowTypeList)) {
+                    for (const auto& rowType : std::as_const(rowTypeList)) {
                         //calculate base value
                         MyMoneyMoney oldval = it_row.value()[rowType][column];
                         MyMoneyMoney value = (oldval * conversionfactor).reduce();
@@ -1560,7 +1560,7 @@ QString PivotTable::renderCSV() const
                     while (column < m_numColumns) {
 
                         //show columns
-                        for (const auto& rowType : qAsConst(m_rowTypeList)) {
+                        for (const auto& rowType : std::as_const(m_rowTypeList)) {
                             if (rowType == ePrice) {
                                 if (pricePrecision == 0) {
                                     if (it_row.key().isInvest()) {
@@ -1860,7 +1860,7 @@ QString PivotTable::renderHTML() const
                                 if (column > 0)
                                     lb = leftborder;
 
-                                for (const auto& rowType : qAsConst(m_rowTypeList)) {
+                                for (const auto& rowType : std::as_const(m_rowTypeList)) {
                                     if (rowType == ePrice) {
                                         if (pricePrecision == 0) {
                                             if (it_row.key().isInvest()) {
@@ -2493,11 +2493,11 @@ void PivotTable::includeInvestmentSubAccounts()
     QStringList accountList;
     if (m_config.accounts(accountList)) {
         if (!KMyMoneySettings::expertMode()) {
-            for (const auto& sAccount : qAsConst(accountList)) {
+            for (const auto& sAccount : std::as_const(accountList)) {
                 auto acc = MyMoneyFile::instance()->account(sAccount);
                 if (acc.accountType() == eMyMoney::Account::Type::Investment) {
                     const auto subAccounts = acc.accountList();
-                    for (const auto& sSubAccount : qAsConst(subAccounts)) {
+                    for (const auto& sSubAccount : std::as_const(subAccounts)) {
                         if (!accountList.contains(sSubAccount)) {
                             m_config.addAccount(sSubAccount);
                         }

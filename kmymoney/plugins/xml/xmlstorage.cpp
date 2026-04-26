@@ -131,7 +131,7 @@ public:
                 }
 
                 const auto keys = keyList.split(',', Qt::SkipEmptyParts);
-                for (const QString& key : qAsConst(keys)) {
+                for (const QString& key : std::as_const(keys)) {
                     if (!KGPGFile::keyAvailable(key)) {
                         KMessageBox::error(nullptr,
                                            i18n("<p>You have specified to encrypt your data for the "
@@ -188,7 +188,7 @@ public:
             std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
             if (kgpg) {
                 const auto keys = keyList.split(',', Qt::SkipEmptyParts);
-                for (const QString& key : qAsConst(keys)) {
+                for (const QString& key : std::as_const(keys)) {
                     kgpg->addRecipient(key.toLatin1());
                 }
 

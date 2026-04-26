@@ -277,7 +277,7 @@ public:
         else
             list = accountsByParentID(id);
 
-        for (const auto account : qAsConst(list)) {
+        for (const auto account : std::as_const(list)) {
             if (account->m_type != "ROOT")
             {
                 xml.writeStartElement("","account");
@@ -368,7 +368,7 @@ public:
         else
             list = accountsByParentID(id);
 
-        for (const auto account : qAsConst(list)) {
+        for (const auto account : std::as_const(list)) {
             QString a;
             a.fill(' ', index);
             qDebug() << a << account->m_name << toKMyMoneyAccountType(account->m_type, index);
@@ -558,7 +558,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
     int result = 0;
 
     // process templates
-    for (const auto& file : qAsConst(files)) {
+    for (const auto& file : std::as_const(files)) {
         if (debug || verbose)
             qDebug() << "processing" << file;
 

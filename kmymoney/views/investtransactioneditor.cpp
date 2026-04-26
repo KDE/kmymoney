@@ -303,7 +303,7 @@ bool InvestTransactionEditor::Private::postdateChanged(const QDate& date)
         collectAccounts(interestSplitModel);
     }
 
-    for (const auto& accountId : qAsConst(accountIds)) {
+    for (const auto& accountId : std::as_const(accountIds)) {
         if (!isDatePostOpeningDate(date, accountId)) {
             const auto account = MyMoneyFile::instance()->account(accountId);
             WidgetHintFrame::show(ui->dateEdit, i18n("The posting date is prior to the opening date of account <b>%1</b>.", account.name()));

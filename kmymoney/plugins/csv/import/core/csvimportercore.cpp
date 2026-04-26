@@ -693,7 +693,7 @@ int CSVImporterCore::detectDecimalSymbols(const QList<int> &columns)
     };
 
     KMMStringSet currencySymbols;
-    for (const auto& account : qAsConst(accounts)) {
+    for (const auto& account : std::as_const(accounts)) {
         if (accountTypes.contains(account.accountType())) {                             // account must actually have currency property
             currencySymbols.insert(account.currencyId());                                 // add currency id
             currencySymbols.insert(file->currency(account.currencyId()).tradingSymbol()); // add currency symbol
@@ -726,13 +726,13 @@ QList<MyMoneyAccount> CSVImporterCore::findAccounts(const QList<eMyMoney::Accoun
     MyMoneyFile* file = MyMoneyFile::instance();
     file->accountList(accountList);
 
-    for (const auto& account : qAsConst(accountList)) {
+    for (const auto& account : std::as_const(accountList)) {
         if (accountTypes.contains(account.accountType()) && !(account).isClosed())
             filteredTypes.append(account);
     }
 
     // filter out accounts with matching numbers, names, and both
-    for (const auto& account : qAsConst(filteredTypes)) {
+    for (const auto& account : std::as_const(filteredTypes)) {
         bool matchedNumber = false;
         bool matchedName = false;
 
@@ -1758,7 +1758,7 @@ void CSVFile::getColumnCount(CSVProfile *profile, const QStringList &rows)
     m_columnCount = 0;
 
     for (const auto& row : rows) {
-        for (const auto& delimiterIndex : qAsConst(delimiterIndexes)) {
+        for (const auto& delimiterIndex : std::as_const(delimiterIndexes)) {
             m_parse->setFieldDelimiter(delimiterIndex);
             colCount = m_parse->parseLine(row).count(); //  parse each line using each delimiter
 

@@ -244,7 +244,7 @@ public:
             auto balance = file->balance(accountId, endingBalanceDlg->statementDate());
 
             // walk the list of journalEntries to figure out the balance(s)
-            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
+            for (const auto& journalEntryId : std::as_const(journalEntryIds)) {
                 const auto idx = journalModel->indexById(journalEntryId);
                 if (idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>() == eMyMoney::Split::State::NotReconciled) {
                     balance -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
@@ -298,7 +298,7 @@ public:
             QStringList reconciledJournalEntryIds;
             TransactionMatcher matcher;
             file->journalModel()->startBulkOperation();
-            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
+            for (const auto& journalEntryId : std::as_const(journalEntryIds)) {
                 // update the progress dialog
 
                 const auto journalEntry = journalModel->itemById(journalEntryId);

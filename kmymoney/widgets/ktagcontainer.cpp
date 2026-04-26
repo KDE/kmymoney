@@ -57,7 +57,7 @@ public:
     QStringList tagIdList() const
     {
         QStringList tags;
-        for(const auto tag : qAsConst(m_tagLabelList)) {
+        for (const auto tag : std::as_const(m_tagLabelList)) {
             tags << tag->id();
         }
         return tags;

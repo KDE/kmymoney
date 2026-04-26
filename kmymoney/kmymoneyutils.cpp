@@ -312,7 +312,7 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
 KXmlGuiWindow* KMyMoneyUtils::mainWindow()
 {
     const auto widgetList = QApplication::topLevelWidgets();
-    for (QWidget* widget : qAsConst(widgetList)) {
+    for (QWidget* widget : std::as_const(widgetList)) {
         KXmlGuiWindow* result = dynamic_cast<KXmlGuiWindow*>(widget);
         if (result)
             return result;

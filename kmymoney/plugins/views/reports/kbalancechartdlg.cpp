@@ -201,7 +201,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     // setup accounts
     if (account.accountType() == eMyMoney::Account::Type::Investment) {
         const auto subAccountList = account.accountList();
-        for (const auto& accountID : qAsConst(subAccountList)) {
+        for (const auto& accountID : std::as_const(subAccountList)) {
             m_reportCfg->addAccount(accountID);
         }
         // show the legend when more than one graph is displayed

@@ -243,7 +243,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     e.setAttribute(getAttrName(Statement::Attribute::SkipCategoryMatching), m_skipCategoryMatching);
 
     // iterate over transactions, and add each one
-    for (const auto& transaction : qAsConst(m_listTransactions)) {
+    for (const auto& transaction : std::as_const(m_listTransactions)) {
         auto p = _doc->createElement(getElName(Statement::Element::Transaction));
         p.setAttribute(getAttrName(Statement::Attribute::DatePosted), transaction.m_datePosted.toString(Qt::ISODate));
         if (transaction.m_dateProcessed.isValid()) {
@@ -267,7 +267,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
         }
 
         // add all the splits we know of (might be empty)
-        for (const auto& split : qAsConst(transaction.m_listSplits)) {
+        for (const auto& split : std::as_const(transaction.m_listSplits)) {
             auto el = _doc->createElement(getElName(Statement::Element::Split));
             el.setAttribute(getAttrName(Statement::Attribute::AccountID), split.m_accountId);
             el.setAttribute(getAttrName(Statement::Attribute::Amount), split.m_amount.toString());
@@ -281,7 +281,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     }
 
     // iterate over prices, and add each one
-    for (const auto& price : qAsConst(m_listPrices)) {
+    for (const auto& price : std::as_const(m_listPrices)) {
         auto p = _doc->createElement(getElName(Statement::Element::Price));
         p.setAttribute(getAttrName(Statement::Attribute::DatePosted), price.m_date.toString(Qt::ISODate));
         p.setAttribute(getAttrName(Statement::Attribute::Security), price.m_strSecurity);
@@ -291,7 +291,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     }
 
     // iterate over securities, and add each one
-    for (const auto& security : qAsConst(m_listSecurities)) {
+    for (const auto& security : std::as_const(m_listSecurities)) {
         auto p = _doc->createElement(getElName(Statement::Element::Security));
         p.setAttribute(getAttrName(Statement::Attribute::Name), security.m_strName);
         p.setAttribute(getAttrName(Statement::Attribute::Symbol), security.m_strSymbol);

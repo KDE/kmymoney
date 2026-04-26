@@ -378,7 +378,7 @@ void KCategoriesView::slotDeleteCategory()
             //          d->m_currentCategory and remember all that cannot be deleted and
             //          must be "reparented"
             const auto subAccountList = d->m_currentCategory.accountList();
-            for (const auto& accountID : qAsConst(subAccountList)) {
+            for (const auto& accountID : std::as_const(subAccountList)) {
                 // reparent account if a transaction is assigned
                 if (file->transactionCount(accountID) != 0)
                     accountsToReparent.push_back(accountID);

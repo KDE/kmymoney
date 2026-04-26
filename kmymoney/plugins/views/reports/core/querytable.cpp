@@ -313,7 +313,7 @@ void QueryTable::constructTotalRows()
     QMap<cellTypeE, MyMoneyMoney> totalsValues;
 
     // initialize all total values under summed columns to be zero
-    for (const auto& subtotal : qAsConst(subtotals)) {
+    for (const auto& subtotal : std::as_const(subtotals)) {
         totalsValues.insert(subtotal, MyMoneyMoney());
     }
     totalsValues.insert(ctRowsCount, MyMoneyMoney());
@@ -340,7 +340,7 @@ void QueryTable::constructTotalRows()
         // sum all subtotal values for lowest group
         QString currencyID = m_rows.at(iCurrentRow).value(ctCurrency);
         if (m_rows.at(iCurrentRow).value(ctRank) == FIRST_SPLIT_RANK) { // only sum up on FIRST_SPLIT_RANK
-            for (const auto& subtotal : qAsConst(subtotals)) {
+            for (const auto& subtotal : std::as_const(subtotals)) {
                 if (!totalCurrency.contains(currencyID))
                     totalCurrency[currencyID].append(totalGroups);
                 totalCurrency[currencyID].last()[subtotal] += MyMoneyMoney(m_rows.at(iCurrentRow)[subtotal]);
@@ -379,7 +379,7 @@ void QueryTable::constructTotalRows()
                     }
 
                     // custom total values calculations
-                    for (const auto& subtotal : qAsConst(subtotals)) {
+                    for (const auto& subtotal : std::as_const(subtotals)) {
                         totalsRow.addSourceLine(subtotal, __LINE__);
                         if (subtotal == ctReturn) {
                             totalsRow[subtotal] = helperReturnValue((*currencyGrp).at(i + 1).value(ctBuys),
@@ -421,7 +421,7 @@ void QueryTable::constructTotalRows()
                         for (int j = 0; j < stashedTotalRows.count(); ++j) {
                             if (stashedTotalRows.at(j).value(ctCurrency) != currencyID)
                                 continue;
-                            for (const auto& subtotal : qAsConst(subtotals)) {
+                            for (const auto& subtotal : std::as_const(subtotals)) {
                                 if (subtotal == ctExtendedInternalRateOfReturn)
                                     totalsRow[ctExtendedInternalRateOfReturn] = stashedTotalRows.takeAt(j).value(ctExtendedInternalRateOfReturn);
                             }
@@ -464,7 +464,7 @@ void QueryTable::constructTotalRows()
                     ++grandTotalGrp;
                 }
 
-                for (const auto& subtotal : qAsConst(subtotals)) {
+                for (const auto& subtotal : std::as_const(subtotals)) {
                     totalsRow.addSourceLine(subtotal, __LINE__);
                     if (subtotal == ctReturn) {
                         totalsRow[subtotal] = helperReturnValue((*currencyGrp).at(0).value(ctBuys),
@@ -505,7 +505,7 @@ void QueryTable::constructTotalRows()
 
                 if (!stashedTotalRows.isEmpty()) {
                     for (int j = 0; j < stashedTotalRows.count(); ++j) {
-                        for (const auto& subtotal : qAsConst(subtotals)) {
+                        for (const auto& subtotal : std::as_const(subtotals)) {
                             if (subtotal == ctExtendedInternalRateOfReturn)
                                 totalsRow[ctExtendedInternalRateOfReturn] = stashedTotalRows.takeAt(j).value(ctExtendedInternalRateOfReturn);
                         }
@@ -600,7 +600,7 @@ void QueryTable::constructTransactionTable()
             if (m_config.rowType() == eMyMoney::Report::RowType::Tag) {
                 // if group by tags, we add the row for each tag we found
                 if (!tagIds.isEmpty()) {
-                    for (const auto& tagId : qAsConst(tagIds)) {
+                    for (const auto& tagId : std::as_const(tagIds)) {
                         qT[ctTag] = file->tag(tagId).name().simplified();
                         m_rows += qT;
                     }
@@ -611,7 +611,7 @@ void QueryTable::constructTransactionTable()
             } else {
                 // otherwise, we combine the tags into one list
                 QString tags;
-                for (const auto& tagId : qAsConst(tagIds)) {
+                for (const auto& tagId : std::as_const(tagIds)) {
                     if (!tags.isEmpty()) {
                         tags.append(QLatin1Char(','));
                     }
@@ -1124,7 +1124,7 @@ void QueryTable::constructTransactionTable()
             qStack.clear();
         }
         // check if the stack contains a foreign currency
-        for (const auto& row : qAsConst(qStack)) {
+        for (const auto& row : std::as_const(qStack)) {
             if (!m_containsNonBaseCurrency && row[ctCurrency] != file->baseCurrency().id()) {
                 m_containsNonBaseCurrency = true;
                 break;
@@ -1132,7 +1132,7 @@ void QueryTable::constructTransactionTable()
         }
 
         // add any pending rows
-        for (const auto& row : qAsConst(qStack)) {
+        for (const auto& row : std::as_const(qStack)) {
             addRow(row);
         }
     }
@@ -1483,7 +1483,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
                 }
                 if (transactionType == eMyMoney::Split::InvestmentTransactionType::ReinvestDividend) {
                     value = MyMoneyMoney();
-                    for (const auto& split : qAsConst(interestSplits))
+                    for (const auto& split : std::as_const(interestSplits))
                         value += split.value();
                     value *= price;
                     cfList[ReinvestIncome].append(CashFlowListItem(postDate, -value));
@@ -1517,7 +1517,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
         file->transactionList(transactions, report);
         shList[BuysOfOwned] = shList[LongTermBuysOfSells];
 
-        for (const auto& transaction : qAsConst(transactions)) {
+        for (const auto& transaction : std::as_const(transactions)) {
             MyMoneySplit shareSplit = transaction.splitByAccount(account.id());
             MyMoneySplit assetAccountSplit;
             QList<MyMoneySplit> feeSplits;
@@ -2050,7 +2050,7 @@ void QueryTable::constructSplitsTable()
 
             //FIXME-ALEX Is this useless? Isn't constructSplitsTable called only for cashflow type report?
             QString delimiter;
-            for (const auto& tagId : qAsConst(tagIdList)) {
+            for (const auto& tagId : std::as_const(tagIdList)) {
                 qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
                 delimiter = QLatin1Char(',');
             }

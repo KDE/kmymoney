@@ -276,7 +276,7 @@ MyMoneyTransactionFilter KTransactionFilter::setupFilter()
         // account are also selected
         if (!KMyMoneySettings::expertMode()) {
             QStringList missing;
-            for (const auto& selection : qAsConst(list)) {
+            for (const auto& selection : std::as_const(list)) {
                 const auto acc = MyMoneyFile::instance()->account(selection);
                 if (acc.accountType() == eMyMoney::Account::Type::Investment) {
                     for (const auto& sAccount : acc.accountList()) {
@@ -491,7 +491,7 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
             // ... we need to turn them on again in case our own
             // configuration references a closed account
             const MyMoneyFile* file = MyMoneyFile::instance();
-            for (const auto& accId : qAsConst(accounts)) {
+            for (const auto& accId : std::as_const(accounts)) {
                 try {
                     if (file->account(accId).isClosed()) {
                         d->accountSet.setHideClosedAccounts(false);

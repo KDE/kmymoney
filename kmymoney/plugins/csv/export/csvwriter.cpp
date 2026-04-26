@@ -172,7 +172,7 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
     s << Qt::endl;
 
     const auto accountList = acc.accountList();
-    for (const auto& sAccount : qAsConst(accountList))
+    for (const auto& sAccount : std::as_const(accountList))
         writeCategoryEntry(s, sAccount, name);
 }
 
@@ -266,7 +266,7 @@ void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& 
     MyMoneyFile* file = MyMoneyFile::instance();
 
     const auto accountList = file->account(accountId).accountList();
-    for (const auto& sAccount : qAsConst(accountList)) {
+    for (const auto& sAccount : std::as_const(accountList)) {
         MyMoneyTransactionFilter filter(sAccount);
         filter.setDateFilter(startDate, endDate);
         QList<MyMoneyTransaction> list;

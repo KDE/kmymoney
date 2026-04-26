@@ -248,7 +248,7 @@ bool KReportsView::eventFilter(QObject* watched, QEvent* event)
         const auto kev = static_cast<QKeyEvent*>(event);
         const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
         const auto buttons = findChildren<QToolButton*>();
-        for (const auto& button : qAsConst(buttons)) {
+        for (const auto& button : std::as_const(buttons)) {
             const auto action = button->defaultAction();
             if (action) {
                 if (action->shortcuts().contains(keySeq)) {

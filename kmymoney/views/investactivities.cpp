@@ -273,7 +273,7 @@ void Activity::setLabelText(const QString& idx, const QString& txt) const
 void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) const
 {
     Q_D(const Activity);
-    for (const auto& name : qAsConst(widgetIds)) {
+    for (const auto& name : std::as_const(widgetIds)) {
         auto w = d->haveWidget<QWidget>(name);
         if (w) {
             w->setVisible(visible);

@@ -96,7 +96,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
 
     // setup style for all buttons to contain icon and text
     const auto buttons = m_control->findChildren<QToolButton*>();
-    for (auto* button : qAsConst(buttons)) {
+    for (auto* button : std::as_const(buttons)) {
         button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     }
     enableAllReportActions();

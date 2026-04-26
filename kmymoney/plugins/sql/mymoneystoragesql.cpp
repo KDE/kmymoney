@@ -514,7 +514,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
 
     // Add new and modify old payeeIdentifiers
     const auto payeeIdentifiers = payee.payeeIdentifiers();
-    for (auto ident : qAsConst(payeeIdentifiers)) {
+    for (auto ident : std::as_const(payeeIdentifiers)) {
         if (ident.idString().isEmpty()) {
             payeeIdentifier oldIdent(ident);
             addPayeeIdentifier(ident);
@@ -530,7 +530,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     }
 
     // Remove identifiers which are not used anymore
-    for (const auto& idToRemove : qAsConst(oldIdentIds)) {
+    for (const auto& idToRemove : std::as_const(oldIdentIds)) {
         payeeIdentifier ident(fetchPayeeIdentifier(idToRemove));
         removePayeeIdentifier(ident);
     }
@@ -718,7 +718,7 @@ void MyMoneyStorageSql::addTransaction(const MyMoneyTransaction& tx)
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
     const auto splits = tx.splits();
-    for (const auto& it_s : qAsConst(splits)) {
+    for (const auto& it_s : std::as_const(splits)) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         ++d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -747,7 +747,7 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
     const auto splits = tx.splits();
-    for (const auto& it_s : qAsConst(splits)) {
+    for (const auto& it_s : std::as_const(splits)) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         ++d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -768,7 +768,7 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx)
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
     const auto splits = tx.splits();
-    for (const auto& it_s : qAsConst(splits)) {
+    for (const auto& it_s : std::as_const(splits)) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         --d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -1227,7 +1227,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
         if (!sq.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Institution AccountList")); // krazy:exclude=crashy
         QStringList aList;
         while (sq.next()) aList.append(sq.value(0).toString());
-        for (const auto& it : qAsConst(aList))
+        for (const auto& it : std::as_const(aList))
             inst.addAccountId(it);
 
         iList[iid] = MyMoneyInstitution(iid, inst);
@@ -2115,7 +2115,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     if (filter.payees(payees)) {
         QString itemConnector = "payeeId IN (";
         QString payeesClause = "";
-        for (const auto& it : qAsConst(payees)) {
+        for (const auto& it : std::as_const(payees)) {
             payeesClause.append(QString("%1'%2'")
                                 .arg(itemConnector).arg(it));
             itemConnector = ", ";
@@ -2132,7 +2132,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     if (filter.tags(tags)) {
         QString itemConnector = "splitId IN ( SELECT splitId FROM kmmTagSplits WHERE kmmTagSplits.transactionId = kmmSplits.transactionId AND tagId IN (";
         QString tagsClause = "";
-        for (const auto& it : qAsConst(tags)) {
+        for (const auto& it : std::as_const(tags)) {
             tagsClause.append(QString("%1'%2'")
                               .arg(itemConnector).arg(it));
             itemConnector = ", ";
@@ -2149,7 +2149,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
         splitFilterActive = true;
         QString itemConnector = "accountId IN (";
         QString accountsClause = "";
-        for (const auto& it : qAsConst(accounts)) {
+        for (const auto& it : std::as_const(accounts)) {
             accountsClause.append(QString("%1 '%2'")
                                   .arg(itemConnector).arg(it));
             itemConnector = ", ";

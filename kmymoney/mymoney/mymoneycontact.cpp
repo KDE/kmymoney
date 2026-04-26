@@ -102,7 +102,7 @@ void MyMoneyContact::searchContactResult(KJob *job)
         items = contactJob->items();
     ContactData contactData;
     contactData.email = job->property("MyMoneyContact_email").toString();
-    for (const Akonadi::Item& item : qAsConst(items)) {
+    for (const Akonadi::Item& item : std::as_const(items)) {
         const KContacts::Addressee &contact = item.payload<KContacts::Addressee>();
         if (contact.emails().contains(contactData.email)) {
             KContacts::PhoneNumber phone;

@@ -965,7 +965,7 @@ void FormatsPage::decimalSymbolChanged(int index)
         } else if (index == -1) { // if detection went well and decimal symbol was unspecified then we'll be specifying it
             DecimalSymbol firstDecSymbol = m_imp->m_decimalSymbolIndexMap.first();
             bool allSymbolsEqual = true;
-            for (const auto& mapDecSymbol : qAsConst(m_imp->m_decimalSymbolIndexMap)) {
+            for (const auto& mapDecSymbol : std::as_const(m_imp->m_decimalSymbolIndexMap)) {
                 if (firstDecSymbol != mapDecSymbol)
                     allSymbolsEqual = false;
             }

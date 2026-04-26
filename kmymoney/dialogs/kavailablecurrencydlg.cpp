@@ -63,7 +63,7 @@ void KAvailableCurrencyDlg::slotLoadCurrencies(const QList<QString>& usedCurrenc
 
     ui->m_currencyList->clear();
     // remove the used currencies from the list
-    for (const auto& currency : qAsConst(list)) {
+    for (const auto& currency : std::as_const(list)) {
         if (!usedCurrencies.contains(currency.id())) {
             const auto item = new QTreeWidgetItem(ui->m_currencyList);
             item->setText(0, currency.name());

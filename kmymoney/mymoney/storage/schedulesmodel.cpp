@@ -76,7 +76,7 @@ struct SchedulesModel::Private
             auto found = false;
             QStringList list;
             const auto splits = transaction.splits();
-            for (const auto& s : qAsConst(splits)) {
+            for (const auto& s : std::as_const(splits)) {
                 acc = MyMoneyFile::instance()->account(s.accountId());
                 list.append(acc.id());
                 if (acc.accountGroup() == eMyMoney::Account::Type::Asset
@@ -473,7 +473,7 @@ QList<MyMoneySchedule> SchedulesModel::scheduleList(const QString& accountId,
             bool found = false;
             const MyMoneyTransaction& t = schedule.transaction();
             const auto splits = t.splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 if (split.accountId() == accountId) {
                     found = true;
                     break;

@@ -385,7 +385,7 @@ void KAccountsView::slotAccountUpdateOnlineAll()
     MyMoneyFile::instance()->accountList(accList);
 
     QList<MyMoneyAccount> mappedAccList;
-    for (const auto& account : qAsConst(accList)) {
+    for (const auto& account : std::as_const(accList)) {
         if (account.hasOnlineMapping())
             mappedAccList += account;
     }

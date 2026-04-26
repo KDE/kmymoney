@@ -171,7 +171,7 @@ bool DelegateProxy::eventFilter(QObject* watched, QEvent* event)
 {
     Q_D(DelegateProxy);
     bool rc = false;
-    for (const auto& delegate : qAsConst(d->mapping)) {
+    for (const auto& delegate : std::as_const(d->mapping)) {
         rc |= const_cast<KMMStyledItemDelegate*>(delegate)->eventFilter(watched, event);
         if (rc)
             break;

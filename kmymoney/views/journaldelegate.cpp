@@ -697,7 +697,7 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
         if (rows == 0) {
             // Scan certain rows which may show multiple lines in a table row
             const QList<int> columns = {JournalModel::Column::Detail, JournalModel::Column::Deposit, JournalModel::Column::Payment};
-            for (const auto& column : qAsConst(columns)) {
+            for (const auto& column : std::as_const(columns)) {
                 const auto idx = index.model()->index(index.row(), column);
                 const auto displayString = d->displayString(idx, option);
                 const auto displayMatchedString = d->displayMatchedString(idx, option);

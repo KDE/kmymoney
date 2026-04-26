@@ -140,7 +140,7 @@ public:
         columns = m_equityColumnSelector->columns();
 
         int colIdx;
-        for (const auto& col : qAsConst(equityColumns)) {
+        for (const auto& col : std::as_const(equityColumns)) {
             colIdx = columns.indexOf(col);
             if (colIdx != -1)
                 columns.remove(colIdx);

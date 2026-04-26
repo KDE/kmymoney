@@ -297,7 +297,7 @@ public:
       * objects mentioned in m_notificationList from the cache.
       */
     void notify() {
-        for (const BalanceNotifyList::value_type& i : qAsConst(m_balanceNotifyList)) {
+        for (const BalanceNotifyList::value_type& i : std::as_const(m_balanceNotifyList)) {
             m_balanceChangedSet.insert(i.first);
             if (i.second.isValid()) {
                 m_balanceCache.clear(i.first, i.second);
@@ -621,7 +621,7 @@ public:
         // which reference an account and a category to have the memo text
         // of the account.
         auto count = 0;
-        for (const auto& transaction : qAsConst(transactionList)) {
+        for (const auto& transaction : std::as_const(transactionList)) {
             if (transaction.splitCount() == 2) {
                 QString accountId;
                 QString categoryId;
@@ -1570,7 +1570,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
         institution(account.institutionId());
 
     const auto subAccountList = account.accountList();
-    for (const auto& sAccount : qAsConst(subAccountList))
+    for (const auto& sAccount : std::as_const(subAccountList))
         this->account(sAccount);
 
     // if the account was moved to another institution, we notify
@@ -1784,7 +1784,7 @@ bool MyMoneyFile::isStandardAccount(const QString& id) const
 bool MyMoneyFile::isInvestmentTransaction(const MyMoneyTransaction& t) const
 {
     const auto splits = t.splits();
-    for (const auto& split : qAsConst(splits)) {
+    for (const auto& split : std::as_const(splits)) {
         if (split.investmentTransactionType() != eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType) {
             auto acc = d->accountsModel.itemById(split.accountId());
             if (!acc.id().isEmpty()) {
@@ -1826,7 +1826,7 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
     // to be deleted. First round check that all accounts exist, second
     // round do the re-parenting.
     auto subAccountList = account.accountList();
-    for (const auto& accountId : qAsConst(subAccountList)) {
+    for (const auto& accountId : std::as_const(subAccountList)) {
         this->account(accountId);
     }
 
@@ -1834,7 +1834,7 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
     // thrown and we would not make it until here.
     auto newParent = d->accountsModel.itemById(acc.parentAccountId());
     subAccountList = acc.accountList();
-    for (const auto& accountId : qAsConst(subAccountList)) {
+    for (const auto& accountId : std::as_const(subAccountList)) {
         auto accountToMove = d->accountsModel.itemById(accountId);
         reparentAccount(accountToMove, newParent);
         d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, accountToMove.id());
@@ -2348,7 +2348,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
     // change transfer splits between asset/liability and loan accounts
     // into amortization splits
     if (loanAccountAffected) {
-        for (const auto& split : qAsConst(transaction.splits())) {
+        for (const auto& split : std::as_const(transaction.splits())) {
             if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)) {
                 auto acc = MyMoneyFile::account(split.accountId());
 
@@ -2775,7 +2775,7 @@ MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) con
     MyMoneyMoney result(balance(id, date));
 
     const auto subAccountList = account(id).accountList();
-    for (const auto& sAccount : qAsConst(subAccountList))
+    for (const auto& sAccount : std::as_const(subAccountList))
         result += totalBalance(sAccount, date);
 
     return result;
@@ -3336,7 +3336,7 @@ QStringList MyMoneyFile::consistencyCheck()
     transactionList(tList, filter);
 
     // Generate the list of interest accounts
-    for (const auto& transaction : qAsConst(tList)) {
+    for (const auto& transaction : std::as_const(tList)) {
         const auto splits = transaction.splits();
         for (const auto& split : splits) {
             if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))
@@ -3351,7 +3351,7 @@ QStringList MyMoneyFile::consistencyCheck()
     const auto txProblemHeader(i18n("* Problems with transactions"));
     rc << txProblemHeader;
 
-    for (const auto& transaction : qAsConst(tList)) {
+    for (const auto& transaction : std::as_const(tList)) {
         MyMoneyTransaction t = transaction;
         bool tChanged = false;
         QDate accountOpeningDate;
@@ -3544,7 +3544,7 @@ QStringList MyMoneyFile::consistencyCheck()
             tChanged = true;
             // copy the price information for investments to the new date
             QList<MyMoneySplit>::const_iterator it_t;
-            for (const auto& split : qAsConst(t.splits())) {
+            for (const auto& split : std::as_const(t.splits())) {
                 if ((split.action() != "Buy") &&
                         (split.action() != "Reinvest")) {
                     continue;
@@ -3584,7 +3584,7 @@ QStringList MyMoneyFile::consistencyCheck()
         MyMoneySchedule sch = (*it_sch);
         MyMoneyTransaction t = sch.transaction();
         auto tChanged = false;
-        for (const auto& split : qAsConst(t.splits())) {
+        for (const auto& split : std::as_const(t.splits())) {
             MyMoneySplit s = split;
             bool sChanged = false;
             if (payeeConversionMap.find(split.payeeId()) != payeeConversionMap.end()) {
@@ -4591,7 +4591,7 @@ void MyMoneyFile::updateVAT(MyMoneyTransaction& transaction) const
         MyMoneyAccount category;
         MyMoneySplit taxSplit;
         const QString currencyId = transaction.commodity();
-        for (const auto& split : qAsConst(transaction.splits())) {
+        for (const auto& split : std::as_const(transaction.splits())) {
             const auto acc = account(split.accountId());
             // all splits must reference accounts denoted in the same currency
             if (acc.currencyId() != currencyId) {
@@ -4989,7 +4989,7 @@ QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconcili
     // fill with empty result for all existing accounts
     QList<MyMoneyAccount> list;
     accountList(list);
-    for (const auto& acc : qAsConst(list)) {
+    for (const auto& acc : std::as_const(list)) {
         result[acc.id()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
     }
 
@@ -5072,7 +5072,7 @@ bool MyMoneyFile::hasValidId(const MyMoneyAccount& acc) const
         eMyMoney::Account::Standard::Equity,
     };
     const auto id = acc.id();
-    for (const auto idx : qAsConst(stdAccNames)) {
+    for (const auto idx : std::as_const(stdAccNames)) {
         if (id == MyMoneyAccount::stdAccName(idx))
             return true;
     }

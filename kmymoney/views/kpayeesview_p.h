@@ -571,7 +571,7 @@ public:
                     } // for - Schedules
 
                     // reassign the payees in the loans that reference the deleted payees
-                    for (const MyMoneyAccount& account : qAsConst(usedAccounts)) {
+                    for (const MyMoneyAccount& account : std::as_const(usedAccounts)) {
                         MyMoneyAccountLoan loanAccount(account);
                         loanAccount.setPayee(payee_id);
                         file->modifyAccount(loanAccount);

@@ -384,7 +384,7 @@ void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selectio
             // More than one item selected, so show sum
             MyMoneyMoney balance;
             const auto journalEntryIds = selections.selection(SelectedObjects::JournalEntry);
-            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
+            for (const auto& journalEntryId : std::as_const(journalEntryIds)) {
                 const auto ledgerIdx = MyMoneyFile::instance()->journalModel()->indexById(journalEntryId);
                 if (ledgerIdx.isValid()) {
                     balance += ledgerIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();

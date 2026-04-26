@@ -187,7 +187,7 @@ void KBudgetView::slotDeleteBudget()
         for (const auto& idx: indexes) {
             budgetIds << idx.data(eMyMoney::Model::IdRole).toString();
         }
-        for (const auto& id : qAsConst(budgetIds)) {
+        for (const auto& id : std::as_const(budgetIds)) {
             auto budget = file->budget(id);
             file->removeBudget(budget);
         }
@@ -555,7 +555,7 @@ void KBudgetView::removeActions()
 {
     Q_D(KBudgetView);
     // remove and delete the actions for this plugin
-    for (const auto& action : qAsConst(d->m_actions)) {
+    for (const auto& action : std::as_const(d->m_actions)) {
         d->m_actionCollection->removeAction(action);
     }
     // the context menu should be our child, but you never know

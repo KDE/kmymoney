@@ -470,7 +470,7 @@ void KEditLoanWizard::updateEditSummary()
     QList<MyMoneyTransaction> list;
     MyMoneyFile::instance()->transactionList(list, filter);
 
-    for (const auto& it : qAsConst(list)) {
+    for (const auto& it : std::as_const(list)) {
         int match = 0;
         for (const auto& it_s : it.splits()) {
             // we only count those transactions that have an interest

@@ -335,7 +335,7 @@ public:
         auto file = MyMoneyFile::instance();
         auto value = file->balance(acc.id(), QDate::currentDate());
         const auto subAccountList = acc.accountList();
-        for (const auto& accountID : qAsConst(subAccountList)) {
+        for (const auto& accountID : std::as_const(subAccountList)) {
             auto stock = file->account(accountID);
             if (!stock.isClosed()) {
                 try {
@@ -692,7 +692,7 @@ public:
             addScheduleHeader(i18nc("@title Home page sub-section", "Overdue payments"), QLatin1String("itemtitle negativetext"));
 
             int i = 0;
-            for (const auto& overDueSchedule : qAsConst(overdues)) {
+            for (const auto& overDueSchedule : std::as_const(overdues)) {
                 // determine number of overdue payments
                 const int cnt = overDueSchedule.transactionsRemainingUntil(QDate::currentDate().addDays(-1));
 
@@ -838,7 +838,7 @@ public:
 
                     const auto splits = t.splits();
                     QVector<MyMoneyAccount> accounts;
-                    for (const auto& sp : qAsConst(splits)) {
+                    for (const auto& sp : std::as_const(splits)) {
                         accounts.append(file->account(sp.accountId()));
                     }
                     bool isTransfer =
@@ -846,7 +846,7 @@ public:
 
                     do {
                         int idx = 0;
-                        for (const auto& sp : qAsConst(splits)) {
+                        for (const auto& sp : std::as_const(splits)) {
                             if (processMainSplit == (sp.accountId() == mainAccount.id())) {
                                 const auto& account = accounts.at(idx);
                                 if (account.isAssetLiability()) {
@@ -1344,7 +1344,7 @@ public:
                     // for investment accounts we also need to check the sub-accounts
                     if (value.isZero()) {
                         const auto subAccountList = (*it).accountList();
-                        for (const auto& accId : qAsConst(subAccountList)) {
+                        for (const auto& accId : std::as_const(subAccountList)) {
                             const auto subValue = MyMoneyFile::instance()->balance(accId, QDate::currentDate());
                             if (!(subValue.isZero() && hideZeroBalanceAccounts)) {
                                 assets << *it;
@@ -1613,10 +1613,10 @@ public:
         if (transactions.size() > 0) {
 
             //get all transactions for this month
-            for (const auto& transaction : qAsConst(transactions)) {
+            for (const auto& transaction : std::as_const(transactions)) {
                 //get the splits for each transaction
                 const auto splits = transaction.splits();
-                for (const auto& split : qAsConst(splits)) {
+                for (const auto& split : std::as_const(splits)) {
                     if (!split.shares().isZero()) {
                         auto repSplitAcc = file->account(split.accountId());
 
@@ -1706,7 +1706,7 @@ public:
                     //make sure we have all 'starting balances' so that the autocalc works
                     QMap<QString, MyMoneyMoney> balanceMap;
 
-                    for (const auto& split : qAsConst(transaction.splits())) {
+                    for (const auto& split : std::as_const(transaction.splits())) {
                         acc = file->account(split.accountId());
                         // collect all overdues on the first day
                         QDate schedDate = nextDate;

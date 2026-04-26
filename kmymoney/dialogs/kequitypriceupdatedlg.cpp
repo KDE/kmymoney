@@ -813,7 +813,7 @@ void KEquityPriceUpdateDlg::storePrices()
     try {
         const auto rows = d->m_prices.count();
         int row = 0;
-        for (const auto& price : qAsConst(d->m_prices)) {
+        for (const auto& price : std::as_const(d->m_prices)) {
             // turn on MyMoneyFile signal emission on last entry only
             file->blockSignals(row < (rows - 1));
             ++row;

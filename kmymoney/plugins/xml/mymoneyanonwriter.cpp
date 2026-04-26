@@ -228,7 +228,7 @@ MyMoneyTransaction MyMoneyAnonWriterPrivate::fakeTransaction(const MyMoneyTransa
 
     // hide split data
     const auto splits = transaction.splits();
-    for (const auto& split : qAsConst(splits)) {
+    for (const auto& split : std::as_const(splits)) {
         MyMoneySplit s = split;
         s.setMemo(QString("%1/%2").arg(anonTransaction.id(), s.id()));
 
@@ -416,7 +416,7 @@ void MyMoneyAnonWriterPrivate::writeAccount(const MyMoneyAccount& account)
     if (isBrokerageAccount) {
         // search the name of the corresponding investment account
         // and setup the name according to the rule of brokerage accounts
-        for (const auto& acc : qAsConst(m_accountList)) {
+        for (const auto& acc : std::as_const(m_accountList)) {
             if (acc.accountType() == eMyMoney::Account::Type::Investment && account.name() == i18n("%1 (Brokerage)", acc.name())) {
                 newAccount.setName(i18n("%1 (Brokerage)", acc.id()));
                 break;

@@ -768,7 +768,7 @@ public:
             return true;
 
         const auto subAccountList = acc.accountList();
-        for (const auto& sAccount : qAsConst(subAccountList)) {
+        for (const auto& sAccount : std::as_const(subAccountList)) {
             auto account = file->account(sAccount);
             if (includeAccount(forecast, account))
                 return true;

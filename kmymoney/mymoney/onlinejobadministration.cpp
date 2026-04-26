@@ -97,7 +97,7 @@ QStringList onlineJobAdministration::availableOnlineTasks()
     });
 
     QStringList list;
-    for (const KPluginMetaData& plugin : qAsConst(plugins)) {
+    for (const KPluginMetaData& plugin : std::as_const(plugins)) {
         QJsonValue array = plugin.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
         if (array.isArray())
             list.append(array.toVariant().toStringList());
@@ -112,7 +112,7 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const QSt
 {
     if (!m_onlinePlugins)
         return false;
-    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
+    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : std::as_const(*m_onlinePlugins)) {
         if (plugin->availableJobs(accountId).contains(name))
             return true;
     }
@@ -136,7 +136,7 @@ bool onlineJobAdministration::isAnyJobSupported(const QString& accountId) const
     if (!m_onlinePlugins)
         return false;
 
-    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
+    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : std::as_const(*m_onlinePlugins)) {
         if (!(plugin->availableJobs(accountId).isEmpty()))
             return true;
     }
@@ -335,9 +335,9 @@ onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobE
 
     onlineJobAdministration::onlineJobEditOffers list;
     list.reserve(plugins.size());
-    for (const KPluginMetaData& data : qAsConst(plugins)) {
+    for (const KPluginMetaData& data : std::as_const(plugins)) {
         QJsonArray editorsArray = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].toArray();
-        for (const QJsonValue& entry : qAsConst(editorsArray)) {
+        for (const QJsonValue& entry : std::as_const(editorsArray)) {
             if (!entry.toObject()["OnlineTaskIds"].isNull()) {
                 list.append(onlineJobAdministration::onlineJobEditOffer{data.fileName(), KJsonUtils::readTranslatedString(entry.toObject(), "Name")});
             }
@@ -365,13 +365,13 @@ bool onlineJobAdministration::canSendAnyTask()
 
     // Check if any plugin supports a loaded online task
     /// @todo optimize this loop to move the accounts to the outer loop
-    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
+    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : std::as_const(*m_onlinePlugins)) {
         QList<MyMoneyAccount> accounts;
         MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
-        for (const auto& account : qAsConst(accounts)) {
+        for (const auto& account : std::as_const(accounts)) {
             if (account.hasOnlineMapping()) {
                 const auto availableJobs = plugin->availableJobs(account.id());
-                for (const auto& onlineTaskIid : qAsConst(availableJobs)) {
+                for (const auto& onlineTaskIid : std::as_const(availableJobs)) {
                     if (m_onlineTasks.contains(onlineTaskIid)) {
                         return true;
                     }
@@ -393,12 +393,12 @@ bool onlineJobAdministration::canSendCreditTransfer()
 
     QList<MyMoneyAccount> accounts;
     MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
-    for (const auto& account : qAsConst(accounts)) {
+    for (const auto& account : std::as_const(accounts)) {
         if (account.hasOnlineMapping()) {
-            for (const onlineTask* task : qAsConst(m_onlineTasks)) {
+            for (const onlineTask* task : std::as_const(m_onlineTasks)) {
                 // Check if a online task has the correct type
                 if (dynamic_cast<const creditTransfer*>(task) != nullptr) {
-                    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
+                    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : std::as_const(*m_onlinePlugins)) {
                         if (plugin->availableJobs(account.id()).contains(task->taskName()))
                             return true;
                     }

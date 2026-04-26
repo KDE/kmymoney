@@ -336,7 +336,7 @@ QStringList KOnlineJobOutboxView::selectedOnlineJobs() const
 
     QStringList jobIds;
     jobIds.reserve(indexes.count());
-    for (const auto& idx : qAsConst(indexes)) {
+    for (const auto& idx : std::as_const(indexes)) {
         jobIds << idx.data(eMyMoney::Model::IdRole).toString();
     }
     return jobIds;
@@ -361,7 +361,7 @@ void KOnlineJobOutboxView::slotSendAllSendableJobs()
 {
     QList<onlineJob> validJobs;
     const auto onlineJobList = MyMoneyFile::instance()->onlineJobList();
-    for (const onlineJob& job : qAsConst(onlineJobList)) {
+    for (const onlineJob& job : std::as_const(onlineJobList)) {
         if (job.isValid() && job.isEditable())
             validJobs.append(job);
     }
@@ -383,7 +383,7 @@ void KOnlineJobOutboxView::slotSendSelectedJobs()
     validJobs.reserve(indexes.count());
 
     // Get valid jobs
-    for (const auto& idx : qAsConst(indexes)) {
+    for (const auto& idx : std::as_const(indexes)) {
         onlineJob job = idx.data(eMyMoney::Model::OnlineJobRole).value<onlineJob>();
         if (job.isValid() && job.isEditable())
             validJobs.append(job);
@@ -550,7 +550,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
     const QList<QString>::iterator newEnd = std::unique(usedPlugins.begin(), usedPlugins.end());
     usedPlugins.erase(newEnd, usedPlugins.end());
 
-    for (const auto& pluginKey : qAsConst(usedPlugins)) {
+    for (const auto& pluginKey : std::as_const(usedPlugins)) {
         QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins->constFind(pluginKey);
 
         if (it_p != d->m_onlinePlugins->cend()) {
@@ -568,7 +568,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
 
             // Save possible changes of the online job and remove lock
             MyMoneyFileTransaction fileTransaction;
-            for (onlineJob job : qAsConst(executedJobs)) {
+            for (onlineJob job : std::as_const(executedJobs)) {
                 fileTransaction.restart();
                 job.setLock(false);
                 kmmFile->modifyOnlineJob(job);

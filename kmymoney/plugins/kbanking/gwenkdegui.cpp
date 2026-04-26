@@ -48,7 +48,7 @@ int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
     PassStore* passStore(nullptr);
     QDialog* dialog = dynamic_cast<QDialog*>(qt5Dlg.getMainWindow());
     const auto lineedits = dialog->findChildren<QLineEdit*>();
-    for (const auto& edit : qAsConst(lineedits)) {
+    for (const auto& edit : std::as_const(lineedits)) {
         if (edit->echoMode() == QLineEdit::Password) {
             // check for available pass entry
             passStore = new PassStore(edit, QLatin1String("KMyMoney/KBanking"), passwordId);

@@ -36,7 +36,7 @@ public:
     QString nextSplitID()
     {
         int lastIdUsed(0);
-        for (const auto& split : qAsConst(m_splits)) {
+        for (const auto& split : std::as_const(m_splits)) {
             const int id = QStringView{split.id()}.mid(1).toInt();
             if (id > lastIdUsed) {
                 lastIdUsed = id;
@@ -49,7 +49,7 @@ public:
     void collectReferencedObjects() override
     {
         m_referencedObjects.insert(m_commodity);
-        for (const auto& split : qAsConst(m_splits)) {
+        for (const auto& split : std::as_const(m_splits)) {
             m_referencedObjects.unite(split.referencedObjects());
         }
     }

@@ -320,7 +320,7 @@ public:
         if (!dbList.isEmpty()) {
             QVariantList deleteList;
             // qCopy segfaults here, so do it with a hand-rolled loop
-            for (const auto& it : qAsConst(dbList)) {
+            for (const auto& it : std::as_const(dbList)) {
                 deleteList << it;
             }
             query.prepare("DELETE FROM kmmInstitutions WHERE id = :id");
@@ -353,7 +353,7 @@ public:
         list.prepend(user);
         signalProgress(0, list.count(), "Writing Payees...");
 
-        for (const auto& it : qAsConst(list)) {
+        for (const auto& it : std::as_const(list)) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 q->modifyPayee(it);
@@ -399,7 +399,7 @@ public:
         if (!dbList.isEmpty()) {
             QVariantList deleteList;
             // qCopy segfaults here, so do it with a hand-rolled loop
-            for (const auto& it : qAsConst(dbList)) {
+            for (const auto& it : std::as_const(dbList)) {
                 deleteList << it;
             }
             query.prepare(m_db.m_tables["kmmTags"].deleteString());
@@ -483,7 +483,7 @@ public:
         QList<MyMoneyAccount> updateList;
         QList<MyMoneyAccount> insertList;
         // Update the accounts that exist; insert the ones that do not.
-        for (const auto& it : qAsConst(list)) {
+        for (const auto& it : std::as_const(list)) {
             m_transactionCountMap[it.id()] = m_file->transactionCount(it.id());
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
@@ -503,7 +503,7 @@ public:
             QVariantList kvpList;
 
             query.prepare("DELETE FROM kmmAccounts WHERE id = :id");
-            for (const auto& it : qAsConst(dbList)) {
+            for (const auto& it : std::as_const(dbList)) {
                 if (!m_file->isStandardAccount(it)) {
                     kvpList << it;
                 }
@@ -534,7 +534,7 @@ public:
         QSqlQuery q2(*q);
         query.prepare(m_db.m_tables["kmmTransactions"].updateString());
         q2.prepare(m_db.m_tables["kmmTransactions"].insertString());
-        for (const MyMoneyTransaction& it : qAsConst(list)) {
+        for (const MyMoneyTransaction& it : std::as_const(list)) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 writeTransaction(it.id(), it, query, "N");
@@ -545,7 +545,7 @@ public:
         }
 
         if (!dbList.isEmpty()) {
-            for (const QString& it : qAsConst(dbList)) {
+            for (const QString& it : std::as_const(dbList)) {
                 deleteTransaction(it);
             }
         }
@@ -567,7 +567,7 @@ public:
         //TODO: find a way to prepare the queries outside of the loop.  writeSchedule()
         // modifies the query passed to it, so they have to be re-prepared every pass.
         signalProgress(0, list.count(), "Writing Schedules...");
-        for (const MyMoneySchedule& it : qAsConst(list)) {
+        for (const MyMoneySchedule& it : std::as_const(list)) {
             query.prepare(m_db.m_tables["kmmSchedules"].updateString());
             query2.prepare(m_db.m_tables["kmmSchedules"].insertString());
             if (dbList.contains(it.id())) {
@@ -580,7 +580,7 @@ public:
         }
 
         if (!dbList.isEmpty()) {
-            for (const QString& it : qAsConst(dbList)) {
+            for (const QString& it : std::as_const(dbList)) {
                 deleteSchedule(it);
             }
         }
@@ -614,7 +614,7 @@ public:
         if (!dbList.isEmpty()) {
             QVariantList idList;
             // qCopy segfaults here, so do it with a hand-rolled loop
-            for (const QString& it : qAsConst(dbList)) {
+            for (const QString& it : std::as_const(dbList)) {
                 idList << it;
             }
 
@@ -688,7 +688,7 @@ public:
             QVariantList isoCodeList;
             query.prepare("DELETE FROM kmmCurrencies WHERE ISOCode = :ISOCode");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            for (const QString& it : qAsConst(dbList)) {
+            for (const QString& it : std::as_const(dbList)) {
                 isoCodeList << it;
             }
 
@@ -851,7 +851,7 @@ public:
             QVariantList idList;
             query.prepare("DELETE FROM kmmReportConfig WHERE id = :id");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            for (const QString& it : qAsConst(dbList)) {
+            for (const QString& it : std::as_const(dbList)) {
                 idList << it;
             }
 
@@ -891,7 +891,7 @@ public:
             QVariantList idList;
             query.prepare("DELETE FROM kmmBudgetConfig WHERE id = :id");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            for (const QString& it : qAsConst(dbList)) {
+            for (const QString& it : std::as_const(dbList)) {
                 idList << it;
             }
 
@@ -1225,7 +1225,7 @@ public:
             QVariantList splitIdList;
             query.prepare("DELETE FROM kmmSplits WHERE transactionId = :txId AND splitId = :splitId");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            for (int it : qAsConst(dbList)) {
+            for (int it : std::as_const(dbList)) {
                 splitIdList << it;
             }
             query.bindValue(":txId", txIdList.toList());
@@ -1399,7 +1399,7 @@ public:
 
         query.prepare(m_db.m_tables["kmmSchedulePaymentHistory"].insertString());
         const auto recordedPayments = sch.recordedPayments();
-        for (const QDate& it : qAsConst(recordedPayments)) {
+        for (const QDate& it : std::as_const(recordedPayments)) {
             query.bindValue(":schedId", sch.id());
             query.bindValue(":payDate", it.toString(Qt::ISODate));
             if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Schedule Payment History"); // krazy:exclude=crashy

@@ -86,7 +86,7 @@ public:
     int pageId(const QWizardPage* page) const
     {
         const auto pageIds = q_ptr->pageIds();
-        for (const auto id : qAsConst(pageIds)) {
+        for (const auto id : std::as_const(pageIds)) {
             if (q_ptr->page(id) == page) {
                 return id;
             }

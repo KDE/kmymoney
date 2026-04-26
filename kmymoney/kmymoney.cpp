@@ -424,7 +424,7 @@ public:
             currencyIDs.append(currency.id());
 
         try {
-            for (auto currency : qAsConst(storedCurrencies)) {
+            for (auto currency : std::as_const(storedCurrencies)) {
                 int i = currencyIDs.indexOf(currency.id());
                 if (i != -1 && availableCurrencies.at(i).name() != currency.name()) {
                     currency.setName(availableCurrencies.at(i).name());
@@ -2368,7 +2368,7 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
                 // collect tags and add them to the view
                 const auto tagIdList = split.tagIdList();
                 QString tagList;
-                for (const auto& tagId : qAsConst(tagIdList)) {
+                for (const auto& tagId : std::as_const(tagIdList)) {
                     if (!tagList.isEmpty()) {
                         tagList += QLatin1String(", ");
                     }
@@ -2575,14 +2575,14 @@ void KMyMoneyApp::slotCopyTransactionsToClipboard()
 
         QStringList lines;
         QStringList headerLabels;
-        for (const auto column : qAsConst(columns)) {
+        for (const auto column : std::as_const(columns)) {
             headerLabels << ledgerView->model()->headerData(column, Qt::Horizontal, Qt::DisplayRole).toString().simplified();
         }
         lines << headerLabels.join(QLatin1Char('\t'));
 
         for (const auto& rowIndex : selectedRows) {
             QStringList fields;
-            for (const auto column : qAsConst(columns)) {
+            for (const auto column : std::as_const(columns)) {
                 fields << ledgerView->model()->index(rowIndex.row(), column).data(Qt::DisplayRole).toString().simplified();
             }
             lines << fields.join(QLatin1Char('\t'));
@@ -3363,7 +3363,7 @@ void KMyMoneyApp::slotLoadAccountTemplates()
         try {
             // import the account templates
             const auto templates = dlg->templates();
-            for (const auto& tmpl : qAsConst(templates)) {
+            for (const auto& tmpl : std::as_const(templates)) {
                 loader.importTemplate(tmpl);
             }
             ft.commit();

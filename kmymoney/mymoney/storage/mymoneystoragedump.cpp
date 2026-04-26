@@ -91,7 +91,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     QList<MyMoneyTransaction>::const_iterator it_t;
     s << "transactions = " << list_t.count() << ", next id = " << file->journalModel()->peekNextId() << "\n";
     QMap<int, int> xferCount;
-    for (const auto& transaction : qAsConst(list_t)) {
+    for (const auto& transaction : std::as_const(list_t)) {
         auto accountCount = 0;
         const auto splits = transaction.splits();
         for (const auto& split : splits) {
@@ -403,7 +403,7 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyFile* file, cons
     s << "  Splits\n";
     s << "  ------\n";
     const auto splits = it_t.splits();
-    for (const auto& split : qAsConst(splits)) {
+    for (const auto& split : std::as_const(splits)) {
         s << "   ID = " << split.id() << "\n";
         s << "    Transaction = " << split.transactionId() << "\n";
         s << "    Payee = " << split.payeeId();

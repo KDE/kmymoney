@@ -262,7 +262,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
             if (split.reconcileFlag() == eMyMoney::Split::State::NotReconciled && split.shares().isNegative()) {
                 QString category;
                 const auto splits = transaction.splits();
-                for (const auto& tSplit : qAsConst(splits)) {
+                for (const auto& tSplit : std::as_const(splits)) {
                     if (tSplit.accountId() != account.id()) {
                         if (!category.isEmpty())
                             category += QLatin1String(", "); // this is a split transaction
@@ -308,7 +308,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
             if (split.reconcileFlag() == eMyMoney::Split::State::NotReconciled && !split.shares().isNegative()) {
                 QString category;
                 const auto splits = transaction.splits();
-                for (const auto& tSplit : qAsConst(splits)) {
+                for (const auto& tSplit : std::as_const(splits)) {
                     if (tSplit.accountId() != account.id()) {
                         if (!category.isEmpty())
                             category += QLatin1String(", "); // this is a split transaction

@@ -308,7 +308,7 @@ void TemplateLoader::slotLoadCountry()
         QDir dir(QString("%1/%2").arg(*it, d->it_m.value()));
         if (dir.exists()) {
             const QStringList files = dir.entryList(QStringList("*.kmt"), QDir::Files);
-            for (const auto& file : qAsConst(files)) {
+            for (const auto& file : std::as_const(files)) {
                 const auto url = QUrl::fromUserInput(QString("%1/%2").arg(dir.canonicalPath(), file));
                 MyMoneyTemplate tmpl;
                 if (d->loadTemplate(url, tmpl)) {
@@ -383,7 +383,7 @@ bool TemplateLoader::importTemplate(const MyMoneyTemplate& tmpl)
      */
     QList<MyMoneyAccount> accountList;
     file->accountList(accountList);
-    for (auto acc : qAsConst(accountList)) {
+    for (auto acc : std::as_const(accountList)) {
         if (!acc.pairs().contains("UnresolvedVatAccount"))
             continue;
         QString id = acc.value("UnresolvedVatAccount");

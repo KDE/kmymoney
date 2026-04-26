@@ -52,7 +52,7 @@ QVector<ListTable::cellTypeE> ListTable::TableRow::m_sortCriteria;
 bool ListTable::TableRow::operator< (const TableRow& _compare) const
 {
     bool result = false;
-    for (const auto& criterion : qAsConst(m_sortCriteria)) {
+    for (const auto& criterion : std::as_const(m_sortCriteria)) {
         if (this->operator[](criterion) < _compare[criterion]) {
             result = true;
             break;
@@ -117,7 +117,7 @@ void ListTable::render(QString& result, QString& csv) const
     //
     // Table header
     //
-    for (const auto& cellType : qAsConst(columns)) {
+    for (const auto& cellType : std::as_const(columns)) {
         result.append(QString::fromLatin1("<th title=\"%1\">%2</th>").arg(tableToolTip(cellType), tableHeader(cellType)));
         csv.append(tableHeader(cellType) + QLatin1Char(','));
     }
@@ -570,11 +570,11 @@ void ListTable::includeInvestmentSubAccounts()
         }
     }
 
-    for (const auto& sAccount : qAsConst(accountIdList)) {
+    for (const auto& sAccount : std::as_const(accountIdList)) {
         const auto acc = file->account(sAccount);
         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
             const auto subAccountList = acc.accountList();
-            for (const auto& sSubAccount : qAsConst(subAccountList)) {
+            for (const auto& sSubAccount : std::as_const(subAccountList)) {
                 if (!accountIdList.contains(sSubAccount)) {
                     subAccountsList.append(sSubAccount);
                 }

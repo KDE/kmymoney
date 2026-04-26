@@ -415,7 +415,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
 
     // update actions in all views. process the current last
     const auto viewBasesKeys = d->viewBases.keys();
-    for (const auto& view : qAsConst(viewBasesKeys)) {
+    for (const auto& view : std::as_const(viewBasesKeys)) {
         if (view == currentView)
             continue;
         d->viewBases[view]->updateActions(selections);
@@ -476,7 +476,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             int importedTransactions(0);
 
             const auto journalEntryIds = selections.selection(SelectedObjects::JournalEntry);
-            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
+            for (const auto& journalEntryId : std::as_const(journalEntryIds)) {
                 const auto idx = file->journalModel()->indexById(journalEntryId);
                 if ((singleSplitTransactions < 1) || (multipleSplitTransactions < 2)) {
                     const auto indeces = file->journalModel()->indexesByTransactionId(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
@@ -687,7 +687,7 @@ void KMyMoneyView::executeCustomAction(eView::Action action)
     Q_D(KMyMoneyView);
     // execute the action, at last on the current view
     const auto currentView = d->viewBases[d->currentViewId()];
-    for (const auto& view : qAsConst(d->viewBases)) {
+    for (const auto& view : std::as_const(d->viewBases)) {
         if (view != currentView) {
             view->executeCustomAction(action);
         }
@@ -723,7 +723,7 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
 
     // execute the action, at last on the current view
     const auto currentView = d->viewBases[d->currentViewId()];
-    for (const auto& view : qAsConst(d->viewBases)) {
+    for (const auto& view : std::as_const(d->viewBases)) {
         if (view != currentView) {
             view->executeAction(action, selections);
         }

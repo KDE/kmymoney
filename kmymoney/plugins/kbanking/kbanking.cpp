@@ -265,7 +265,7 @@ void KBanking::unplug()
     d->gui = nullptr;
 
     // remove and delete the actions for this plugin
-    for (const auto& action : qAsConst(d->actions)) {
+    for (const auto& action : std::as_const(d->actions)) {
         actionCollection()->removeAction(action);
     }
     qDebug("Plugins: kbanking unplugged");

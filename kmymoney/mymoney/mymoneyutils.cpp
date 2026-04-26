@@ -245,7 +245,7 @@ modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QStringLis
                 try {
                     const auto journalEntry = journalModel->itemByIndex(idx);
                     const auto splits = journalEntry.transaction().splits();
-                    for (const auto& split : qAsConst(splits)) {
+                    for (const auto& split : std::as_const(splits)) {
                         auto acc = file->account(split.accountId());
                         if (acc.isClosed())
                             rc = OneAccountClosed;

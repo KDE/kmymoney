@@ -16,7 +16,7 @@ void SelectedObjects::addSelection(SelectedObjects::Object_t type, const QString
 
 void SelectedObjects::addSelections(SelectedObjects::Object_t type, const QStringList& ids)
 {
-    for(const auto& id : qAsConst(ids)) {
+    for (const auto& id : std::as_const(ids)) {
         if (!id.isEmpty()) {
             if (!m_selections[type].contains(id)) {
                 m_selections[type].append(id);

@@ -58,7 +58,7 @@ bicModel::bicModel(QObject* parent)
 
     unsigned int databaseCount = 0;
 
-    for (const KService::Ptr service : qAsConst(services)) {
+    for (const KService::Ptr service : std::as_const(services)) {
         QString database = service->property(QLatin1String("X-KMyMoney-Bankdata-Database")).toString();
 
         // Locate database
@@ -82,7 +82,7 @@ bicModel::bicModel(QObject* parent)
     }
 
     QStringList queries;
-    for (const auto& dbName : qAsConst(dbNames)) {
+    for (const auto& dbName : std::as_const(dbNames)) {
         queries.append(QString("SELECT bic, name FROM %1.institutions").arg(dbName));
     }
 

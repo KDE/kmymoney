@@ -193,7 +193,7 @@ void KMandatoryFieldGroup::changed()
     Q_D(KMandatoryFieldGroup);
     bool enable = d->m_externalMandatoryState;
 
-    for (auto widget : qAsConst(d->m_widgets)) {
+    for (auto widget : std::as_const(d->m_widgets)) {
         bool widgetEmpty = false;
 
         auto showFrame = [](QWidget* editWidget, bool visible) -> void {
@@ -270,7 +270,7 @@ void KMandatoryFieldGroup::clear()
 {
     Q_D(KMandatoryFieldGroup);
 
-    for (auto widget : qAsConst(d->m_widgets)) {
+    for (auto widget : std::as_const(d->m_widgets)) {
         const auto frame = WidgetHintFrame::frameForWidget(widget);
         delete frame;
     }

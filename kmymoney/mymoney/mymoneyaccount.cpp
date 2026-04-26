@@ -619,7 +619,7 @@ QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory()
     // check if the internal history member is already loaded
     if (d->m_reconciliationHistory.isEmpty() && !value("reconciliationHistory").isEmpty()) {
         const QStringList entries = value("reconciliationHistory").split(';');
-        for (const auto& entry : qAsConst(entries)) {
+        for (const auto& entry : std::as_const(entries)) {
             const auto parts = entry.split(':');
             if (parts.count() == 2) {
                 const auto date = QDate::fromString(parts[0], Qt::ISODate);

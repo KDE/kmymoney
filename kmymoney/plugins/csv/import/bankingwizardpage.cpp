@@ -316,7 +316,7 @@ void BankingPage::payeeColSelected(int col)
 
 void BankingPage::clearColumns()
 {
-    for (const auto& comboBox : qAsConst(m_columnBoxes)) {
+    for (const auto& comboBox : std::as_const(m_columnBoxes)) {
         comboBox->setCurrentIndex(-1);
     }
     ui->m_creditIndicator->clear();

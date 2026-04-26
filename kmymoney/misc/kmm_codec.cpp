@@ -354,7 +354,7 @@ void KMM_Codec::loadComboBox(QComboBox* cb)
     static const QRegularExpression iso8859RegExp(QLatin1String("ISO[- ]8859-([0-9]+).*"));
 
     const auto availableMibs = KMM_Codec::availableMibs();
-    for (const auto& mib : qAsConst(availableMibs)) {
+    for (const auto& mib : std::as_const(availableMibs)) {
         const auto codecName = codecNameForMib(mib);
         if (hasEncodingForName(codecName)) {
             auto sortKey = codecName.toUpper();

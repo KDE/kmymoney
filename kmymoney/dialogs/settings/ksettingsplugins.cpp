@@ -46,7 +46,7 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent)
     QVector<KPluginMetaData> onlinePlugins;
 
     // divide plugins in some arbitrary categories
-    for (const KPluginMetaData& pluginData : qAsConst(allPluginDatas))
+    for (const KPluginMetaData& pluginData : std::as_const(allPluginDatas))
         switch (KMyMoneyPlugin::pluginCategory(pluginData)) {
         case KMyMoneyPlugin::Category::StandardPlugin:
             standardPlugins.append(pluginData);

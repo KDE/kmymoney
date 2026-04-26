@@ -147,7 +147,7 @@ struct JournalModel::Private
         if (transaction.splitCount() == 2) {
             const auto& splitId = journalEntry.split().id();
             const auto splits = transaction.splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 if (splitId != split.id()) {
                     return split.accountId();
                 }
@@ -192,7 +192,7 @@ struct JournalModel::Private
         } else if(rows == 2) {
             const auto& splitId = journalEntry.split().id();
             const auto splits = transaction.splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 if (splitId != split.id()) {
                     return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(split.accountId());
                 }
@@ -210,7 +210,7 @@ struct JournalModel::Private
         const auto file = MyMoneyFile::instance();
         if (file->isInvestmentTransaction(journalEntry.transaction())) {
             const auto splits = journalEntry.transaction().splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 const auto acc = file->account(split.accountId());
                 if (acc.isAssetLiability() && !acc.isInvest() && (acc.accountType() != eMyMoney::Account::Type::Investment)) {
                     return acc.name();
@@ -227,7 +227,7 @@ struct JournalModel::Private
         const auto file = MyMoneyFile::instance();
         if (file->isInvestmentTransaction(journalEntry.transaction())) {
             const auto splits = journalEntry.transaction().splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 const auto acc = file->account(split.accountId());
                 if (acc.isIncomeExpense()) {
                     if (split.shares().isNegative() ^ fees) {
@@ -250,7 +250,7 @@ struct JournalModel::Private
         const auto file = MyMoneyFile::instance();
         if (file->isInvestmentTransaction(journalEntry.transaction())) {
             const auto splits = journalEntry.transaction().splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 const auto acc = file->account(split.accountId());
                 if (acc.isIncomeExpense()) {
                     if (split.shares().isNegative() ^ fees) {
@@ -267,7 +267,7 @@ struct JournalModel::Private
         const auto file = MyMoneyFile::instance();
         if (file->isInvestmentTransaction(journalEntry.transaction())) {
             const auto splits = journalEntry.transaction().splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 const auto acc = file->account(split.accountId());
                 if (acc.isIncomeExpense()) {
                     if (split.shares().isNegative() && (type == Interest)) {
@@ -401,7 +401,7 @@ struct JournalModel::Private
         if (!bulkBalanceCacheOperation) {
             if (!fullBalanceRecalc.isEmpty()) {
                 const auto journalRows = q->rowCount();
-                for (const auto& accountId : qAsConst(fullBalanceRecalc)) {
+                for (const auto& accountId : std::as_const(fullBalanceRecalc)) {
                     balanceCache[accountId].clear();
                 }
 
@@ -420,7 +420,7 @@ struct JournalModel::Private
 
             // inform others about the changes
             QHash<QString, AccountBalances> balances;
-            for (const auto& accountId : qAsConst(balanceChangedSet)) {
+            for (const auto& accountId : std::as_const(balanceChangedSet)) {
                 balances.insert(accountId, balanceCache.value(accountId));
                 Q_EMIT q->balanceChanged(accountId);
             }
@@ -717,7 +717,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
                 return MyMoneyUtils::formatMoney(assetAccountSplit.value().abs(), currency);
 
             case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
-                for(const auto& sp : qAsConst(interestSplits)) {
+                for (const auto& sp : std::as_const(interestSplits)) {
                     amount += sp.value();
                 }
                 return  MyMoneyUtils::formatMoney(-amount, currency);
@@ -784,7 +784,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::JournalEntryIsFrozenRole: {
         const auto splits = transaction.splits();
-        for (const auto& sp : qAsConst(splits)) {
+        for (const auto& sp : std::as_const(splits)) {
             if (sp.reconcileFlag() == eMyMoney::Split::State::Frozen) {
                 return true;
             }
@@ -816,7 +816,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionIsTransferRole:
         if (journalEntry.transaction().splitCount() == 2) {
             const auto splits = journalEntry.transaction().splits();
-            for (const auto& sp : qAsConst(splits)) {
+            for (const auto& sp : std::as_const(splits)) {
                 const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(sp.accountId());
                 if (acc.isIncomeExpense()) {
                     return false;
@@ -859,7 +859,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         if (MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction())) {
             QString accountId;
             const auto splits = journalEntry.transaction().splits();
-            for (const auto& sp : qAsConst(splits)) {
+            for (const auto& sp : std::as_const(splits)) {
                 const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(sp.accountId());
                 if (acc.accountType() == eMyMoney::Account::Type::Investment) {
                     return acc.id();
@@ -1080,7 +1080,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             return QVariant::fromValue(assetAccountSplit.value().abs());
 
         case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
-            for (const auto& sp : qAsConst(interestSplits)) {
+            for (const auto& sp : std::as_const(interestSplits)) {
                 amount += sp.value();
             }
             return QVariant::fromValue(-amount);
@@ -1158,7 +1158,7 @@ void JournalModel::load(const QMap<QString, QSharedPointer<MyMoneyTransaction>>&
 
     // create the number of required items
     int itemCount = 0;
-    for (const auto& item : qAsConst(list)) {
+    for (const auto& item : std::as_const(list)) {
         itemCount += item->splitCount();
     }
     insertRows(0, itemCount);
@@ -1173,7 +1173,7 @@ void JournalModel::load(const QMap<QString, QSharedPointer<MyMoneyTransaction>>&
         d->addIdKeyMapping(id, it.key());
         // auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
         const auto splits = (*it)->splits();
-        for (const auto& split : qAsConst(splits)) {
+        for (const auto& split : std::as_const(splits)) {
             const JournalEntry journalEntry(QString("%1-%2").arg(it.key(), split.id()), *it, split);
             const auto newIdx = index(row, 0);
             static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer())->dataRef() = journalEntry;
@@ -1280,7 +1280,7 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
     d->startBalanceCacheOperation();
 
     const auto splits = (*transaction).splits();
-    for (const auto& split : qAsConst(splits)) {
+    for (const auto& split : std::as_const(splits)) {
         const JournalEntry journalEntry(QString("%1-%2").arg(key, split.id()), transaction, split);
         const auto newIdx = index(startRow, 0);
         static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer())->dataRef() = journalEntry;
@@ -1397,7 +1397,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     // use the oldKey for now to keep sorting in a correct state
     int row = srcIdx.row();
     const auto splits = newTransaction.splits();
-    for (const auto& split : qAsConst(splits)) {
+    for (const auto& split : std::as_const(splits)) {
         JournalEntry journalEntry(QString("%1-%2").arg(oldKey, split.id()), transaction, split);
         // force recalc of row height
         journalEntry.setLinesInLedger(0);
@@ -1561,7 +1561,7 @@ void JournalModel::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit
         const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
         splits = filter.matchingSplits(journalEntry.transaction());
         if (!splits.isEmpty()) {
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 list.append(qMakePair(journalEntry.transaction(), split));
             }
         }

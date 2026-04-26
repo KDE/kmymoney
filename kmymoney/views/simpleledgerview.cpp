@@ -189,7 +189,7 @@ public:
         // in case we have a previous setting, we open them
         const auto openLedgers = grp.readEntry(storageId, QStringList());
         if (!openLedgers.isEmpty() && (openMode != AccountsOpenAtStart::FavoriteAccounts)) {
-            for (const auto& id : qAsConst(openLedgers)) {
+            for (const auto& id : std::as_const(openLedgers)) {
                 auto thisId = id;
                 const auto lastUsedAtClose = id.endsWith(QLatin1String("*"));
                 if ((openMode == AccountsOpenAtStart::AccountsOpenedLastTime) || lastUsedAtClose) {
@@ -221,7 +221,7 @@ public:
                 // if favorite accounts were previously opened, we open them
                 // in the same order
                 if (!openLedgers.isEmpty()) {
-                    for (const auto& id : qAsConst(openLedgers)) {
+                    for (const auto& id : std::as_const(openLedgers)) {
                         // make sure to only look at favorite accounts
                         auto thisId = id;
                         thisId.remove(QLatin1String("*"));

@@ -122,7 +122,7 @@ bool KMyMoneyPlugin::ImporterPlugin::isMyFormat(const QString& filename) const
 
     if (!mime.isDefault()) {
         const QStringList formatTypes = formatMimeTypes();
-        for (const auto& mimeTypeName : qAsConst(formatTypes))
+        for (const auto& mimeTypeName : std::as_const(formatTypes))
             if (mime.inherits(mimeTypeName)) {
                 return true;
             }

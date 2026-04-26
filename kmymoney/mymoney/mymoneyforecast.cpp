@@ -266,9 +266,9 @@ public:
 
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
-        for (const auto& transaction : qAsConst(list)) {
+        for (const auto& transaction : std::as_const(list)) {
             const auto splits = transaction.splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 if (!split.shares().isZero()) {
                     auto acc = file->account(split.accountId());
                     if (q->isForecastAccount(acc)) {
@@ -364,7 +364,7 @@ public:
                                 // make sure we have all 'starting balances' so that the autocalc works
                                 QMap<QString, MyMoneyMoney> balanceMap;
 
-                                for (const auto& split : qAsConst(t.splits())) {
+                                for (const auto& split : std::as_const(t.splits())) {
                                     auto accountFromSplit = file->account(split.accountId());
                                     if (q->isForecastAccount(accountFromSplit)) {
                                         // collect all overdues on the first day
@@ -385,7 +385,7 @@ public:
                                 q->calculateAutoLoan(*it, t, balanceMap, m_evaluationDate);
 
                                 // now add the splits to the balances
-                                for (const auto& split : qAsConst(t.splits())) {
+                                for (const auto& split : std::as_const(t.splits())) {
                                     auto accountFromSplit = file->account(split.accountId());
                                     if (q->isForecastAccount(accountFromSplit)) {
                                         dailyBalances balance;
@@ -735,9 +735,9 @@ public:
         //Check past transactions
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
-        for (const auto& transaction : qAsConst(list)) {
+        for (const auto& transaction : std::as_const(list)) {
             const auto splits = transaction.splits();
-            for (const auto& split : qAsConst(splits)) {
+            for (const auto& split : std::as_const(splits)) {
                 if (!split.shares().isZero()) {
                     auto acc = file->account(split.accountId());
 
@@ -1140,9 +1140,9 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, q
     //add all transactions for that account
     QList<MyMoneyTransaction> list;
     file->transactionList(list, filter);
-    for (const auto& transaction : qAsConst(list)) {
+    for (const auto& transaction : std::as_const(list)) {
         const auto splits = transaction.splits();
-        for (const auto& split : qAsConst(splits)) {
+        for (const auto& split : std::as_const(splits)) {
             if (!split.shares().isZero()) {
                 if (acc.id() == split.accountId()) netIncome += split.value();
             }

@@ -191,7 +191,7 @@ void MyMoneyXmlWriterPrivate::writeInstitution(const MyMoneyInstitution& institu
 
     writer->writeStartElement(elementName(Element::Institution::AccountIDS));
     const auto accountList = institution.accountList();
-    for (const auto& accountId : qAsConst(accountList)) {
+    for (const auto& accountId : std::as_const(accountList)) {
         writer->writeStartElement(elementName(Element::Institution::AccountID));
         writer->writeAttribute(attributeName(Attribute::Institution::ID), accountId);
         writer->writeEndElement();
@@ -247,7 +247,7 @@ void MyMoneyXmlWriterPrivate::writePayee(const MyMoneyPayee& payee, QXmlStreamWr
 
     // Save payeeIdentifiers (account numbers)
     const auto payeeIdentifiers = payee.payeeIdentifiers();
-    for (const auto& payeeIdentifier : qAsConst(payeeIdentifiers)) {
+    for (const auto& payeeIdentifier : std::as_const(payeeIdentifiers)) {
         if (!payeeIdentifier.isNull()) {
             writePayeeIdentifier(writer, payeeIdentifier);
         }
@@ -330,7 +330,7 @@ void MyMoneyXmlWriterPrivate::writeAccount(const MyMoneyAccount& account)
     if (!account.accountList().isEmpty()) {
         m_writer->writeStartElement(elementName(Element::Account::SubAccounts));
         const auto subAccounts = account.accountList();
-        for (const auto& accountId : qAsConst(subAccounts)) {
+        for (const auto& accountId : std::as_const(subAccounts)) {
             m_writer->writeStartElement(elementName(Element::Account::SubAccount));
             m_writer->writeAttribute(attributeName(Attribute::Account::ID), accountId);
             m_writer->writeEndElement();
@@ -389,7 +389,7 @@ void MyMoneyXmlWriterPrivate::writeAccounts()
         return a1.id() < a2.id();
     });
 
-    for (const auto& account : qAsConst(m_accountList)) {
+    for (const auto& account : std::as_const(m_accountList)) {
         writeAccount(account);
     }
 
@@ -454,7 +454,7 @@ void MyMoneyXmlWriterPrivate::writeTransaction(QXmlStreamWriter* writer, const M
 
     writer->writeStartElement(elementName(Element::Transaction::Splits));
     const auto splits = transaction.splits();
-    for (const auto& split : qAsConst(splits)) {
+    for (const auto& split : std::as_const(splits)) {
         writeSplit(writer, split);
     }
     writer->writeEndElement();
@@ -505,7 +505,7 @@ void MyMoneyXmlWriterPrivate::writeSchedule(QXmlStreamWriter* writer, const MyMo
     // ipwizard: i am not sure if this is used at all
     const QList<QDate> payments = schedule.recordedPayments();
     writer->writeStartElement(elementName(Element::Schedule::Payments));
-    for (const auto date : qAsConst(payments)) {
+    for (const auto date : std::as_const(payments)) {
         writer->writeStartElement(elementName(Element::Schedule::Payment));
         writer->writeAttribute(attributeName(Attribute::Schedule::Date), MyMoneyUtils::dateToIsoString(date));
         writer->writeEndElement();
@@ -530,7 +530,7 @@ void MyMoneyXmlWriterPrivate::writeSchedules()
         return t1.id() < t2.id();
     });
 
-    for (const auto& schedule : qAsConst(list)) {
+    for (const auto& schedule : std::as_const(list)) {
         writeSchedule(m_writer, schedule);
     }
 

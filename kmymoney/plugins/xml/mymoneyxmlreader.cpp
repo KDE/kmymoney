@@ -626,7 +626,7 @@ public:
 
         m_kvp.clear();
         const auto attributes = m_reader->attributes();
-        for (const auto& attribute : qAsConst(attributes)) {
+        for (const auto& attribute : std::as_const(attributes)) {
             attribute.name();
             const auto key = attribute.name().toString();
             const auto value = attribute.value().toString();
