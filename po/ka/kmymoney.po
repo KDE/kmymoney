@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-25 00:45+0000\n"
-"PO-Revision-Date: 2026-04-25 05:51+0200\n"
+"PO-Revision-Date: 2026-04-26 04:33+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -12297,7 +12297,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/kbanking.kcfg:13
 #, kde-format
 msgid "Clock length of optical tan flickering in ms."
-msgstr ""
+msgstr "TAN-ის ციმციმის საათის სიგრძე მილიწამებში."
 
 #. i18n: ectx: tooltip, entry (clocksetting), group (opticalTan)
 #: kmymoney/plugins/kbanking/kbanking.kcfg:14
