@@ -6248,9 +6248,7 @@ msgstr "Overiť Import"
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
-msgstr ""
-"<p>Do you revšetkýchy want to odstrániť the currency <b>%1</b> from the file?"
-"</p>"
+msgstr "<p>Naozaj chcete odstrániť menu <b>%1</b> zo súboru?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:426
 #, kde-format
@@ -10578,8 +10576,8 @@ msgid ""
 "<center>There are invalid date formats in column '%1'.</"
 "center><center>Please check your selections.</center>"
 msgstr ""
-"<center>There are invalid date formats in stĺpec '%1'.</"
-"center><center>Please check your selections.</center>"
+"<center>V stĺpci '%1' sa nachádzajú neplatné formáty dátumov.</"
+"center><center>Skontrolujte prosím vaše výbery.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1079
 #, kde-format
@@ -17630,9 +17628,9 @@ msgid ""
 "will not be shown.</p>"
 msgstr ""
 "<p>Vyberte túto možnosť na prevod všetkých hodnôt vo výkaze na vašu základnú "
-"menu.</p><p>Nechajte to nezaškrtnuté, ak by ste chceli vidieť hodnoty v ich "
-"pôvodnej mene.</p><p>Ak meny nie sú prevedené, potom sa nebudú zobrazovať "
-"medzisúčty.</p>"
+"menu.</p><p>Nechajte to nezaškrtnuté, ak chcete vidieť hodnoty v ich "
+"pôvodnej mene.</p><p>Ak meny nie sú prevedené, medzisúčty sa nebudú "
+"zobrazovať.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCurrency)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:39
@@ -21571,7 +21569,7 @@ msgstr "Použiť na vyčistenie všetkých rozdelení tejto transakcie"
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr "Prosím, use the split editor to assign tags."
+msgstr "Na priradenie značiek použite editor rozdelenia."
 
 #: kmymoney/views/newtransactioneditor.cpp:259
 #, kde-format
@@ -22751,17 +22749,17 @@ msgid ""
 "\n"
 "The starting balance is the sum of your cleared and reconciled transactions."
 msgstr ""
-"Zosúladenie vášho účtu zaisťuje, že vaše záznamy zodpovedajú tým z vašej "
-"inštitúcie, a že neexistujú žiadne chyby na oboch stranách. Mali by ste "
-"zosúladiť svoj účet kedykoľvek obdržíte výpis zo svojej inštitúcie.\n"
+"Zosúladenie vášho účtu zaisťuje, že vaše záznamy zodpovedajú záznamom vašej "
+"inštitúcie a že neexistujú žiadne chyby na žiadnej strane. Mali by ste "
+"zosúladiť svoj účet vždy, keď dostanete výpis zo svojej inštitúcie.\n"
 "\n"
-"Všetky dôležité informácie potrebné pre tento proces sú zvyčajne vytlačená "
+"Všetky dôležité informácie potrebné pre tento proces sú zvyčajne vytlačené "
 "na vašom výpise.\n"
 "\n"
-"Na ďalšej stránke potvrdíte, že konečný stav zodpovedá tomu na výpise. Ak "
-"tomu tak nie je, prosím, upravte to.\n"
+"Na ďalšej stránke potvrdíte, že konečný zostatok zodpovedá tomu na výpise. "
+"Ak tomu tak nie je, prosím upravte ho.\n"
 "\n"
-"Počiatočný stav je súčet vašich vyčistených a zosúladených transakcií."
+"Počiatočný zostatok je súčet vašich vyčistených a zosúladených transakcií."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipIntroPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
@@ -23321,12 +23319,12 @@ msgid ""
 "enter an estimate. You can change this value later before you reconcile this "
 "account for the first time.</p>"
 msgstr ""
-"<p>Počiatočný stav je zostatok na účte, keď  ho začnete používať s KMyMoney. "
-"U nových účtov je to zvyčajne 0, ale pre existujúce účty sa to môže líšiť. "
-"Prosím, pozrite sa do výpisov z účtu pre vyriešenie tejto hodnoty. "
-"Počiatočný stav má byť poskytnutý v mene účtu, aká je vybraná s tlačidlom "
-"meny. </p>\n"
-"<p><i>Poznámka</i>: Ak nepoznáte presnú výšku počiatočného stavu, zadajte "
+"<p>Počiatočný zostatok je zostatok na účte, keď ho začnete používať s "
+"KMyMoney. U nových účtov je to zvyčajne 0, ale pre existujúce účty sa to "
+"môže líšiť. Pozrite sa do výpisov z účtu, aby ste zistili túto hodnotu. "
+"Počiatočný zostatok musí byť zadaný v mene účtu, ktorá je vybraná tlačidlom "
+"meny.</p>\n"
+"<p><i>Poznámka</i>: Ak nepoznáte presnú výšku počiatočného zostatku, zadajte "
 "odhad. Túto hodnotu môžete zmeniť neskôr pred prvým zosúladením tohto účtu.</"
 "p>"
 
@@ -23344,8 +23342,8 @@ msgid ""
 "should be the price of the foreign currency in the base currency on the "
 "opening date of the account."
 msgstr ""
-"Pre cudzie meny musí byť poskytnutý počiatočný konverzný kurz. To by mala "
-"byť cena cudzej meny v základnej mene v počiatočný dátum účtu."
+"Pre cudzie meny musí byť zadaný počiatočný konverzný kurz. Malo by to byť "
+"cena cudzej meny v základnej mene k počiatočnému dátumu účtu."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuote)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:226
@@ -24358,7 +24356,7 @@ msgid ""
 "category. If you lend the money, you receive the interest. In this case, "
 "select an income category here."
 msgstr ""
-"Kategórie, do ktorej bude pridelená úroková časť platby. Ak ste si požičali "
+"Kategória, do ktorej bude pridelená úroková časť platby. Ak ste si požičali "
 "peniaze, zvyčajne musíte platiť úroky, takže by to mala byť výdavková "
 "kategória. Ak poskytujete peniaze, obdržíte úrok. V tomto prípade tu vyberte "
 "príjmovú kategóriu."
