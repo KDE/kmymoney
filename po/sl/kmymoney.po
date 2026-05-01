@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-25 00:45+0000\n"
-"PO-Revision-Date: 2026-04-15 07:21+0200\n"
+"PO-Revision-Date: 2026-04-30 21:47+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19619,7 +19619,7 @@ msgstr "Kategorija za obresti"
 #: kmymoney/views/newtransactioneditor.ui:133
 #, kde-format
 msgid "Enter"
-msgstr "Vnesite"
+msgstr "Vnesi"
 
 #. i18n: ectx: property (text), widget (QLabel, activityLabel)
 #: kmymoney/views/investtransactioneditor.ui:348
