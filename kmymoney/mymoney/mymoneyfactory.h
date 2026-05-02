@@ -33,19 +33,19 @@ public:
     T* create()
     {
         return qobject_cast<T*>(createFactoryObject(m_parent, className(typeid(T).name())));
-    };
+    }
 
     template<class T, class U>
     void registerCreator(T* (*creator)(U*))
     {
         registerFactoryObject(className(typeid(T).name()), reinterpret_cast<void* (*)(U*)>(creator));
-    };
+    }
 
     template<class T>
     void unregisterCreator()
     {
         unregisterFactoryObject(className(typeid(T).name()));
-    };
+    }
 
 protected:
     virtual QObject* createFactoryObject(QObject* parent, const QString& objectName);
