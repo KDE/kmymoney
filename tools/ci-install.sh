@@ -142,6 +142,16 @@ case "$ci_distro" in
             xterm
         )
 
+        # for running kmymoney
+        packages=(
+           "${packages[@]}"
+            fontconfig
+            dejavu-fonts
+            google-noto-sans-fonts
+            google-noto-sans-cjk-fonts
+            google-noto-coloremoji-fonts
+        )
+
         if [ "$ci_webserver" = "yes" ]; then
             packages=(
             "${packages[@]}"
