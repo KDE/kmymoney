@@ -41,7 +41,16 @@ if [ "$1" == "--use-host-display" ]; then
     shopts+=" export DISPLAY=$DISPLAY;"
 fi
 
+# workaround for chromium issues running as root
+shopts+=" export LANG=UTF-8; export QTWEBENGINE_CHROMIUM_FLAGS='--remote-debugging-port= --disable-gpu'; export QTWEBENGINE_DISABLE_SANDBOX=1;"
+
+# allow access to display
+xhost +local:docker
+
+# pull image
 sudo docker pull $ci_image
+
+# run container
 sudo docker run \
     -v $PWD:/mnt \
     $options \
