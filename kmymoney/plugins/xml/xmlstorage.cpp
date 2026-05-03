@@ -655,7 +655,7 @@ bool XMLStorage::saveAs()
     });
 
     if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
-        QUrl newURL = dlg->selectedUrls().first();
+        QUrl newURL = dlg->selectedUrls().constFirst();
         if (!newURL.fileName().isEmpty()) {
             QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 

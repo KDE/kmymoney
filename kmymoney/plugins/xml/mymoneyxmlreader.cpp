@@ -1243,8 +1243,6 @@ public:
         readKeyValueContainer();
 
         if (!m_reader->hasError()) {
-            auto pairs = m_kvp.pairs();
-
             m_file->parametersModel()->load(m_kvp.pairs());
 
             // loading does not count as making dirty

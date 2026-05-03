@@ -286,7 +286,7 @@ QString KMM_Codec::codecNameForMib(int mib)
             mibToName.insert(it.value(), it.key());
         }
     }
-    const auto it = mibToName.find(mib);
+    const auto it = mibToName.constFind(mib);
     if (it != mibToName.cend()) {
         return it.value();
     }

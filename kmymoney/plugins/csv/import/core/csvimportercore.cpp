@@ -1809,7 +1809,7 @@ bool CSVFile::getInFileName(QString inFileName)
     dialog->setFileMode(QFileDialog::ExistingFile);
     QUrl url;
     if (dialog->exec() == QDialog::Accepted)
-        url = dialog->selectedUrls().first();
+        url = dialog->selectedUrls().constFirst();
     delete dialog;
 
     if (url.isEmpty()) {

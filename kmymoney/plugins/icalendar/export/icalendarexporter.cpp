@@ -116,7 +116,7 @@ void iCalendarExporter::slotFirstExport()
         // make sure that the dialog was not deleted
         // behind the scenes before using it again
         if (fileDialog != nullptr) {
-            QUrl newURL = fileDialog->selectedUrls().front();
+            QUrl newURL = fileDialog->selectedUrls().constFirst();
             if (newURL.isLocalFile()) {
                 ICalendarSettings::setIcalendarFile(newURL.toLocalFile());
                 ICalendarSettings::self()->save();

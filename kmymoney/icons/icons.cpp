@@ -227,7 +227,7 @@ QString iconCacheDir()
 KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIcon& icon)
 {
     // split the icon name from the type
-    QRegularExpression iconPath(QStringLiteral("^(?<type>[a-zA-Z]+):(?<name>.+)"), QRegularExpression::CaseInsensitiveOption);
+    const static QRegularExpression iconPath(QStringLiteral("^(?<type>[a-zA-Z]+):(?<name>.+)"), QRegularExpression::CaseInsensitiveOption);
     QRegularExpressionMatch matcher = iconPath.match(name);
     if (matcher.hasMatch()) {
         if (matcher.captured(QStringLiteral("type")).compare(QLatin1String("enum")) == 0) {

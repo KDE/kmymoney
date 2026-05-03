@@ -288,7 +288,7 @@ void MyMoneyQifProfileEditor::showProfile()
     QTreeWidgetItemIterator it(m_editAmounts);
 
     while (*it) {
-        QChar key = (*it)->text(1)[0];
+        QChar key = (*it)->text(1).at(0);
         (*it)->setText(2, m_profile.amountDecimal(key));
         (*it)->setTextAlignment(2, Qt::AlignCenter);
         (*it)->setText(3, m_profile.amountThousands(key));
