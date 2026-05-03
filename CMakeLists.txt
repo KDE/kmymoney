@@ -134,6 +134,7 @@ endif()
 
 include(ECMDeprecationSettings)
 ecm_set_disabled_deprecation_versions(
+    DISABLE_NEWER_WARNINGS
     QT 6.5
     KF 6.24
 )
