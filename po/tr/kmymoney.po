@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-25 00:45+0000\n"
-"PO-Revision-Date: 2026-04-15 12:15+0300\n"
+"PO-Revision-Date: 2026-05-02 19:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Serdar Soytetir, Volkan Gezer, Emir SARI"
+msgstr "Serdar SOYTETİR, Volkan GEZER, Emir SARI"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -2243,7 +2243,7 @@ msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
 "category with the same name."
 msgstr ""
-"<b>%1</b> adlı bir kategori halihazırda var. Aynı adla ikinci bir kategori "
+"<b>%1</b> adlı bir kategori hâlihazırda var. Aynı adla ikinci bir kategori "
 "oluşturamazsınız."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:918
@@ -3779,12 +3779,12 @@ msgstr "Eklentiler"
 #, kde-format
 msgid "CSV profile <b>%1</b> already exists.<br>Do you want to overwrite it?"
 msgstr ""
-"<b>%1</b> CSV profili halihazırda var.<br>Üzerine yazmak istiyor musunuz?"
+"<b>%1</b> CSV profili hâlihazırda var.<br>Üzerine yazmak istiyor musunuz?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:139
 #, kde-format
 msgid "CSV Profile Already Exists"
-msgstr "CSV Profili Halihazırda Var"
+msgstr "CSV Profili Hâlihazırda Var"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, groupParsing)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:36
@@ -5519,7 +5519,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:2189
 #, kde-format
 msgid "Transaction already reconciled"
-msgstr "İşlemin mutabakatı halihazırda yapıldı"
+msgstr "İşlemin mutabakatı hâlihazırda yapıldı"
 
 #: kmymoney/kmymoney.cpp:2194
 #, kde-format
@@ -5688,12 +5688,12 @@ msgstr "Şablonu Dışa Aktar"
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr ""
-"<b>%1</b> dosyası halihazırda var. Üzerine yazmayı gerçekten istiyor musunuz?"
+"<b>%1</b> dosyası hâlihazırda var. Üzerine yazmayı gerçekten istiyor musunuz?"
 
 #: kmymoney/kmymoney.cpp:3437 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
-msgstr "Bu dosya halihazırda var"
+msgstr "Bu dosya hâlihazırda var"
 
 #: kmymoney/kmymoney.cpp:3475
 #, kde-format
@@ -9886,7 +9886,7 @@ msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
 "qt>"
 msgstr ""
-"<qt><b>%1</b> dosyası halihazırda var. Üzerine yazmayı gerçekten istiyor "
+"<qt><b>%1</b> dosyası hâlihazırda var. Üzerine yazmayı gerçekten istiyor "
 "musunuz?</qt>"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:78
@@ -10068,7 +10068,7 @@ msgid ""
 "center><center>If you wish to copy the Payee data to the memo field, click "
 "'Yes'.</center>"
 msgstr ""
-"<center><b>“%1”</b> alanında bu sütun halihazırda seçili.</"
+"<center><b>“%1”</b> alanında bu sütun hâlihazırda seçili.</"
 "center><center>Eğer alacaklı verisini anımsatma alanına kopyalamak "
 "isterseniz “Evet”e tıklayın.</center>"
 
@@ -10117,7 +10117,7 @@ msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
 "b>'."
 msgstr ""
-"<b>%1</b> sütunu seçilemez; çünkü halihazırda <b>“%2”</b> içinde kullanılmış."
+"<b>%1</b> sütunu seçilemez; çünkü hâlihazırda <b>“%2”</b> içinde kullanılmış."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:391
 #, kde-format
@@ -10518,7 +10518,7 @@ msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr ""
-"<center><b>%1</b> profili halihazırda var.<br>Lütfen başka bir ad girin</"
+"<center><b>%1</b> profili hâlihazırda var.<br>Lütfen başka bir ad girin</"
 "center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:563
@@ -10882,7 +10882,7 @@ msgid ""
 "The '<b>%1</b>' field already has this column selected. <center>Please "
 "reselect both entries as necessary.</center>"
 msgstr ""
-"<b>“%1”</b> alanında bu sütun halihazırda seçili. <center>Lütfen her iki "
+"<b>“%1”</b> alanında bu sütun hâlihazırda seçili. <center>Lütfen her iki "
 "girdiyi de gerektiği gibi yeniden seçin.</center>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, InvestmentPage)
@@ -11037,7 +11037,7 @@ msgid ""
 msgstr ""
 "Gerekliyse ücretleri içeren\n"
 "sütunu seçin. Dikkat. Bu,\n"
-"halihazırda fiyatta içerilebilir."
+"hâlihazırda fiyatta içerilebilir."
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_feeRate)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:428
@@ -13757,7 +13757,7 @@ msgstr "Profil adı boş olamaz. Bir ad belirtin veya iptal edin."
 #, kde-format
 msgid "The name <b>%1</b> is already taken. Please change the name or cancel."
 msgstr ""
-"<b>%1</b> adı halihazırda kullanılıyor. Lütfen başka bir ad seçin veya iptal "
+"<b>%1</b> adı hâlihazırda kullanılıyor. Lütfen başka bir ad seçin veya iptal "
 "edin."
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:399
@@ -15121,7 +15121,7 @@ msgid ""
 "The current budget already contains data. Continuing will replace all "
 "current values of this budget."
 msgstr ""
-"Geçerli bütçe halihazırda veri içeriyor. Sürdürmek, bu bütçenin tüm geçerli "
+"Geçerli bütçe hâlihazırda veri içeriyor. Sürdürmek, bu bütçenin tüm geçerli "
 "değerlerini değiştirecek."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:237
@@ -18464,7 +18464,7 @@ msgstr "Kurtarma anahtarı yakında geçerliliğini yitirecek"
 #, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr "<b>%1</b> dosyası halihazırda başka bir süreç tarafından açılmış."
+msgstr "<b>%1</b> dosyası hâlihazırda başka bir süreç tarafından açılmış."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
@@ -20526,7 +20526,7 @@ msgid ""
 "multiple payees with the same identification name. Are you sure you would "
 "like to rename the payee?"
 msgstr ""
-"“%1” adlı bir alacaklı halihazırda var. Aynı kimlik adına sahip birden fazla "
+"“%1” adlı bir alacaklı hâlihazırda var. Aynı kimlik adına sahip birden fazla "
 "alacaklı olması tavsiye edilmez. Alacaklıyı yeniden adlandırmak "
 "istediğinizden emin misiniz?"
 
@@ -21075,7 +21075,7 @@ msgid ""
 "multiple tags with the same identification name. Are you sure you would like "
 "to rename the tag?"
 msgstr ""
-"“%1” adlı bir künye halihazırda var. Aynı tanımlama adına sahip birden fazla "
+"“%1” adlı bir künye hâlihazırda var. Aynı tanımlama adına sahip birden fazla "
 "künyenin olması tavsiye edilmez. Künyeyi yeniden adlandırmak istediğinizden "
 "emin misiniz?"
 
@@ -21214,7 +21214,7 @@ msgid ""
 "support editing two transactions in parallel. <a href=\"jumpToEditor\">Jump "
 "to current editor</a>"
 msgstr ""
-"Halihazırda başka bir görünümde bir işlemi düzenliyorsunuz. K Param, iki "
+"Hâlihazırda başka bir görünümde bir işlemi düzenliyorsunuz. K Param, iki "
 "işlemin aynı anda düzenlenmesini desteklemez. <a href=\"jumpToEditor"
 "\">Geçerli düzenleyiciye atla</a>"
 
@@ -21485,7 +21485,7 @@ msgstr "Bu işlem için kullanılan çek numarası."
 #: kmymoney/views/newtransactioneditor.cpp:484
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
-msgstr "<b>%1</b> çek numarası bu hesapta halihazırda kullanılmış."
+msgstr "<b>%1</b> çek numarası bu hesapta hâlihazırda kullanılmış."
 
 #: kmymoney/views/newspliteditor.cpp:892
 #: kmymoney/views/newtransactioneditor.cpp:210
@@ -24234,7 +24234,7 @@ msgstr "Ödeme işlemi oluşturma"
 msgid ""
 "Check this if you are refinancing a loan that already exists in KMyMoney"
 msgstr ""
-"K Param’da halihazırda var olan bir krediyi yeniden taksitlendiriyorsanız "
+"K Param’da hâlihazırda var olan bir krediyi yeniden taksitlendiriyorsanız "
 "bunu denetleyin."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_refinanceLoan)
@@ -25171,7 +25171,7 @@ msgid ""
 "requires you to enter the loan amount exactly as found on your last "
 "statement."
 msgstr ""
-"Bu krediye yönelik ödemelerin daha önce halihazırda yapıldığını seçtiniz. "
+"Bu krediye yönelik ödemelerin daha önce hâlihazırda yapıldığını seçtiniz. "
 "Bu, kredi tutarını tam olarak son hesap özetinizde bulunan biçimde girmenizi "
 "gerektirir."
 
