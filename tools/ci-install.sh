@@ -75,6 +75,7 @@ case "$ci_distro" in
         mjv=
         kf=
         qt=
+        fonts=
         case "$ci_variant-$ci_host" in
             (*-mingw*)
                 bits=$(echo $ci_host | sed 's,mingw,,g')
@@ -93,6 +94,13 @@ case "$ci_distro" in
                 kf=KF6
                 qt=Qt6
                 mjv=6
+                fonts=(
+                    fontconfig
+                    dejavu-fonts
+                    google-noto-sans-fonts
+                    google-noto-sans-cjk-fonts
+                    google-noto-coloremoji-fonts
+                )
                 ;;
             (kf5-native)
                 repos=(
@@ -145,11 +153,7 @@ case "$ci_distro" in
         # for running kmymoney
         packages=(
            "${packages[@]}"
-            fontconfig
-            dejavu-fonts
-            google-noto-sans-fonts
-            google-noto-sans-cjk-fonts
-            google-noto-coloremoji-fonts
+            $fonts
         )
 
         if [ "$ci_webserver" = "yes" ]; then
