@@ -737,8 +737,13 @@ void MyMoneyMoneyTest::testReduce()
 
 void MyMoneyMoneyTest::testZeroDenominator()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 3, 0)
     QVERIFY_EXCEPTION_THROWN(MyMoneyMoney m((int)1, 0), MyMoneyException);
     QVERIFY_EXCEPTION_THROWN(MyMoneyMoney m((signed64)1, 0), MyMoneyException);
+#else
+    QVERIFY_THROWS_EXCEPTION(MyMoneyException, MyMoneyMoney m((int)1, 0));
+    QVERIFY_THROWS_EXCEPTION(MyMoneyException, MyMoneyMoney m((signed64)1, 0));
+#endif
 }
 
 void MyMoneyMoneyTest::testMaxPrecision()
