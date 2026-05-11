@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-25 00:45+0000\n"
-"PO-Revision-Date: 2026-05-02 19:50+0300\n"
+"PO-Revision-Date: 2026-05-10 20:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2968,7 +2968,7 @@ msgstr "Nasıl sürdürelim?"
 #: kmymoney/dialogs/splitadjustdialog.ui:64
 #, kde-format
 msgid "Continue to edit splits"
-msgstr "Bölümleri düzenlemeyi sürdür"
+msgstr "Bölmeleri düzenlemeyi sürdür"
 
 #. i18n: ectx: property (text), widget (QRadioButton, changeBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:68
@@ -4355,7 +4355,7 @@ msgstr "Temizlendi"
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
-msgstr "Mutabakat yapılmış"
+msgstr "Mutabık"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_AutoFillTransaction)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:391
@@ -5052,7 +5052,7 @@ msgstr "Bakiye Grafiğini Göster…"
 #: kmymoney/kmymoney.cpp:1429
 #, kde-format
 msgid "Map account..."
-msgstr "Hesabı Eşleştir…"
+msgstr "Hesabı Eşlemle…"
 
 #: kmymoney/kmymoney.cpp:1430
 #, kde-format
@@ -5513,8 +5513,8 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to delete the transactions anyway?"
 msgstr ""
-"Seçili işlemlerin en az bir bölümünün mutabakatı sağlandı. İşlemleri yine de "
-"silmek istiyor musunuz?"
+"Seçili işlemlerin en az bir bölmesinin mutabakatı sağlandı. İşlemleri yine "
+"de silmek istiyor musunuz?"
 
 #: kmymoney/kmymoney.cpp:2189
 #, kde-format
@@ -5566,8 +5566,8 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to change the transactions anyway?"
 msgstr ""
-"Seçili işlemlerin en az bir bölümünün mutabakatı sağlandı. Yine de işlemleri "
-"değiştirmek istiyor musunuz?"
+"Seçili işlemlerin en az bir bölmesinin mutabakatı sağlandı. Yine de "
+"işlemleri değiştirmek istiyor musunuz?"
 
 #: kmymoney/kmymoney.cpp:2860
 #, kde-format
@@ -19645,7 +19645,7 @@ msgstr "Çevrim İçi Sağlayıcı"
 #: kmymoney/views/kaccountsview.cpp:373
 #, kde-format
 msgid "Unable to map account to online account: %1"
-msgstr "Hesap, çevrim içi hesapla eşleştirilemiyor: %1"
+msgstr "Hesap, çevrim içi hesapla eşlemlenemiyor: %1"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/views/kaccountsview.ui:58 kmymoney/views/kcategoriesview.ui:44
@@ -20882,7 +20882,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview_p.h:581
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
-msgstr "İşlemin/bölümün alacaklısı yeniden atanamıyor"
+msgstr "İşlemin/bölmenin alacaklısı yeniden atanamıyor"
 
 #: kmymoney/views/kpayeesview_p.h:585
 #, kde-format
@@ -21883,7 +21883,7 @@ msgstr "Tüm bölmeleri temizle"
 #: kmymoney/views/splitdialog.ui:704
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
-msgstr "Bu işlemin tüm bölümlerini silmek için bunu kullanın."
+msgstr "Bu işlemin tüm bölmelerini silmek için bunu kullanın."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
 #: kmymoney/views/splitdialog.ui:707
@@ -22508,14 +22508,14 @@ msgstr "Tüm durumlar"
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Not reconciled"
-msgstr "Mutabık kalınmamış"
+msgstr "Mutabık değil"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
 #: kmymoney/widgets/ktransactionfilter.ui:610
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Reconciled"
-msgstr "Mutabık kalınmış"
+msgstr "Mutabık"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
 #: kmymoney/widgets/ktransactionfilter.ui:619
