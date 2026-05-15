@@ -1,0 +1,1375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="reference">
+<chapterinfo>
+  <date
+>2024‒12‒01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>Başvuru</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+  <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+</sect1info>
+<title
+>Menüler</title>
+
+<para
+>Aşağıda, &kmymoney; uygulamasındaki tüm menü seçeneklerinin tam listesi ve her birinin ne işe yaradığına dair kısa bir açıklama bulunmaktadır. Bu menü seçeneklerinin birçoğunun, uygulamanın geçerli görünümüne veya durumuna bağlı olarak kullanılamayacağını veya gri renkte gösterileceğini unutmayın. Ayrıca, bazı seçenekler, kullandığınız sürümde bulunmayan bir özellikle ilgiliyse var olmayabilir. Örneğin, geçerli görünümde bir hesap seçili veya görüntülenmedikçe bir hesabı düzenleyemezsiniz. </para>
+
+<sect2 id="reference.menus.file"
+><title
+>Dosya Menüsü</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Yeni Defter</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Yeni, boş bir &kmymoney; veri dosyası oluşturur. Aynı anda yalnızca bir &kmymoney; dosyası açık olabilir, bu nedenle açık bir dosya varsa önce geçerli dosyanızı kapatacaktır. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Aç</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir &kmymoney; veri dosyasını açar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Son Kullanılanı Aç</guimenuitem
+><guimenuitem
+>…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Son açılan dosyalara tez erişim sağlar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+><guimenuitem
+>Veri Tabanı Aç…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir veri tabanını açar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Kaydet</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Şu anda açık olan dosyayı kaydeder. Yalnızca kaydedilecek değişiklikler varsa etkinleştirilir. </para>
+    </listitem>
+  </varlistentry>
+
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Farklı Kaydet…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Şu anda açık olan dosyayı farklı bir adla kaydeder.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+> <guisubmenu
+>İçe Aktar</guisubmenu
+> <guimenuitem
+>…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>QIF ve &gnucash; gibi diğer dosya türlerinden veya yeni hesaplar oluşturmak için kullanılabilecek hesap ve kategori şablon dosyasından finansal veriler içe aktarır. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Dışa Aktar</guimenuitem
+> <guimenuitem
+>…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Geçerli dosyayı QIF gibi farklı bir dosya türü olarak dışa aktarır veya hesaplarınızın ve kategorilerinizin listesini şablon olarak dışa aktarır. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Yazdır…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Geçerli dosyayı yazdırır.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+><guimenuitem
+>Yedekle…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Geçerli dosyanın yedeğini alır.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+><guimenuitem
+>Kişisel Veri…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Kişisel verinizi düzenlemenize olanak tanır.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+><guimenuitem
+>Dosya Bilgisi…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Şu anda açık olan &kmymoney; dosyası üzerine bilgi görüntüler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Kapat</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Şu anda açık olan veri dosyasını kapatır.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Çık</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>&kmymoney;’dan çıkar. Herhangi bir değişiklik olması durumunda, şu anda açık olan veri dosyasını kaydetmeyi teklif eder. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.edit"
+><title
+>Düzen Menüsü</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>Geri Al</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>En son eylemi geri alır.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>Yinele</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>En son geri alınan eylemi yeniden uygular.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>İşlem Bul…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>İşlemlerde arama yapar.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.view"
+><title
+>Görünüm Menüsü</title>
+<variablelist>
+  <varlistentry id="reference.menus.settings.transactiondetail">
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Görünüm</guimenu
+> <guimenuitem
+>İşlem Ayrıntısını Göster</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><link linkend="details.ledgers"
+>Defterler</link
+> görünümünde işlem ayrıntılarını gösterir. Bu seçenek açık olduğunda, işlemin tüm satırları gösterilecektir. Kapalı olduğunda ise yalnızca bir satır gösterilir. </para>
+      <para
+>Şu anda seçili olan işlemin ayrıntılarını görmek; ancak diğerlerini olduğu gibi bırakmak istiyorsanız <link linkend="details.settings.register.lens"
+>defter merceğini</link
+> açabilirsiniz. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Görünüm</guimenu
+> <guimenuitem
+>Mutabık Kalınan İşlemleri Gizle</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Defterdeki mutabakatı yapılmış işlemleri gizler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Görünüm</guimenu
+> <guimenuitem
+>Kullanılmayan Kategorileri Gizle</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Görünümlerdeki kullanılmayan kategorileri gizler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Tüm Hesapları Göster</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Kapalı hesaplar ve bakiyesi sıfır olan hesaplar da içerilmek üzere, görünümlerdeki tüm hesapları gösterir. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.institution"
+><title
+>Kurum Menüsü</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kurum</guimenu
+> <guimenuitem
+>Yeni Kurum…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Yeni kurum ekler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kurum</guimenu
+> <guimenuitem
+>Kurumu Düzenle…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir kurumu düzenler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kurum</guimenu
+> <guimenuitem
+>Kurumu Sil…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir kurumu siler.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.account"
+><title
+>Hesap Menüsü</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+> <guimenuitem
+>Yeni Hesap…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Yeni hesap ekler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Hesabı Düzenle…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir hesabı düzenler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Hesabı Sil…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir hesabı siler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Defter Aç</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçili hesabın defterler görünümünü görüntüler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Hesap</guimenu
+><guimenuitem
+>Mutabakat Yap…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Mutabakat sihirbazı ile bir hesabın mutabakatını yapar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Ertele</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Hesabın mutabakatını daha sonrasına erteler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Bitir</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bir hesabın mutabakatını bitirir.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>İptal</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bir hesabın mutabakatını iptal eder.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>İşlem Raporu</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçili hesabın işlem raporunu açar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Bakiye Grafiğini Göster…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçilen hesabın yıl başından bugüne (YTD) bakiyesinin grafiğini açar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Hesabı Kapat</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bir hesabı kapatır.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Hesabı Yeniden Aç</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Hesap daha önceden kapatılmışsa onu yeniden açar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Hesap Eşlemesini Kaldır…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Çevrim içi bir hesabın eşlemesini kaldırır.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Hesabı Eşlemle…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bir hesabı, çevrim içi bir hesaba eşlemler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+><guimenuitem
+>Hesabı Güncelle…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçilen hesap için internet bankacılığından işlem verilerini içe aktarır.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hesap</guimenu
+> <guimenuitem
+>Tüm Hesapları Güncelle…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Eşlemli tüm hesaplardaki işlemleri içe aktarır.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.category"
+><title
+>Kategori Menüsü</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+><guimenuitem
+>Yeni Kategori…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Yeni kategori ekler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+><guimenuitem
+>Kategoriyi Düzenle…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir kategoriyi düzenler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+><guimenuitem
+>Kategoriyi Sil…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir kategoriyi siler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+><guimenuitem
+>Defter Aç</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bir kategorideki defterleri görüntüler.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.transaction"
+><title
+>İşlem Menüsü</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Ins;</keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+><guimenuitem
+>Yeni İşlem</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Yeni işlem ekler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+><guimenuitem
+>Düzenle</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir işlemi düzenler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+><guimenuitem
+>Bölmeleri Düzenle</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bir işlemin parçalarını düzenleyin.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Del;</keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+><guimenuitem
+>Sil</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir işlemi siler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+><guimenuitem
+>Çoğalt</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Var olan bir işlemi yineler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;&Shift;&Space;</keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+> <guimenuitem
+>İşlemi Farklı İmle…</guimenuitem
+> <guimenuitem
+>Mutabık Değil</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçilen işlemlerin durumunu “Mutabık Değil” olarak değiştirir. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;&Space;</keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+> <guimenuitem
+>İşlemi Farklı İmle…</guimenuitem
+> <guimenuitem
+>Temizlendi</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçilen işlemlerin durumunu “Temizlendi” olarak değiştirir.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;&Space;</keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+> <guimenuitem
+>İşlemi Farklı İmle…</guimenuitem
+> <guimenuitem
+>Mutabık</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçilen işlemlerin durumunu “Mutabık” olarak değiştirir.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>İşlem</guimenu
+><guimenuitem
+>Git: “Hesap”</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Defterdeki bir işlemin diğer hesabını görüntüler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+><guimenuitem
+>Alacaklıya Git</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Alacaklı görünümünü görüntüler ve seçilen işlemin ödeme alıcısına odaklanır. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>İşlem</guimenu
+> <guimenuitem
+>Planlı İşlem Oluştur…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçilen işlemin ayrıntılarını kullanarak yeni bir planlı işlem oluşturur. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>İşlem</guimenu
+><guimenuitem
+>Eşleştir</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>İki işlemi eşleştirir. Bu özellik en yaygın olarak içe aktarılan bir işlemle elle girilen bir işlemi eşleştirmek için kullanılır; ancak diğer kombinasyonlar da çalışır. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>İşlem</guimenu
+><guimenuitem
+>Eşleşmeyi Kaldır</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>&kmymoney; tarafından içe aktarılan işlemler arasında eşleşme olarak önerilen bir işlemin eşleşmesini kaldırır. Bu menü seçeneğinin yalnızca eşleşen bir işlem varsa ve seçiliyse göründüğünü unutmayın. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>İşlem</guimenu
+><guimenuitem
+>Kabul Et</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>İki işlemin birleştirilmesi teklifini kabul eder.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>İşlem</guimenu
+><guimenuitem
+>Tümünü Seç</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Defterdeki tüm işlemleri seçer.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>İşlem</guimenu
+><guimenuitem
+>Çek Yazdır</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Seçilen işlemin içeriğini, seçilen şablona göre biçimlendirilmiş olarak görüntülenen deftere yazdırır. Daha fazla bilgi için <link linkend="details.settings.plugins"
+>Çek Yazdır</link
+> eklentisinin yapılandırılması bölümüne bakın. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.tools"
+><title
+>Araçlar Menüsü</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Araçlar</guimenu
+><guimenuitem
+>Para Birimleri…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>&kmymoney;’ın tanıdığı para birimlerini listeler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Araçlar</guimenu
+><guimenuitem
+>Fiyatlar…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Hisse senedi ve para birimi fiyatlarını listeler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Araçlar</guimenu
+> <guimenuitem
+>Hisse Senedi/Para Birimi Fiyatlarını Güncelle</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><link linkend="details.investments.onlinequotes"
+>Çevrim İçi Kurlar</link
+> özelliğini kullanarak, hisse senedi ve para birimi fiyatlarını çevrim içi olarak günceller. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Araçlar</guimenu
+><guimenuitem
+>Tutarlılık Denetimi</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Dosyanızda bir denetim gerçekleştirir, olası sorunları düzeltir ve sonuçların raporunu görüntüler. </para>
+      <para
+>Bu seçeneği çalıştırmadan önce dosyanızın yedeğini alın.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Araçlar</guimenu
+><guimenuitem
+>Başarım Sınaması</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Dosyanız üzerinde başarım testi yapar ve sonuçları görüntüler.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Araçlar</guimenu
+><guimenuitem
+>SQL Veri Tabanı Üret</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Veri tabanı oluşturmak için gerekli SQL kodunu üretir.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Araçlar</guimenu
+><guimenuitem
+>Debug timers</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bu, geliştiriciler için bir araçtır.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.settings.help"
+><title
+>Ayarlar ve Yardım Menüleri</title>
+<para
+>&kmymoney;’ın Ayarlar ve Yardım menüleri, <ulink url="help:/fundamentals/menus.html"
+>&kde; temelleri</ulink
+> içinde açıklanan menülerle aynıdır ve birkaç ek öge içerir. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Tüm İletileri Etkinleştir</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Bir iletişim kutusunda <guimenuitem
+>Bir daha sorma</guimenuitem
+> ögesini işaretleyerek kapatmış olabileceğiniz bütün iletileri yeniden etkinleştirir.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Dili Yapılandır…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Öntanımlı olarak, &kmymoney; tarafından kullanılan dil, sistem genelindeki konum veya yerel ayarlara bağlıdır. Bu, dili değiştirmenize ve birincil dile çevrilmemiş metinler için kullanılan bir yedek dil belirlemenize olanak tanır. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>,</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Klavye Kısayollarını Yapılandır…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Çeşitli eylemler için klavye kısayolları eklemenize veya onlarda değişiklik yapmanıza olanak tanır. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
+    <term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Aq&Banking’i Yapılandır…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>KBanking modülü etkinleştirilmişse çevrim içi bankacılık ayarlarını yapılandırın. Bunun hakkında daha fazla bilgi <link linkend="details.settings.plugins.kbanking"
+>KBanking eklentisini</link
+> yapılandırma bölümünde ve <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
+>&gnucash; belgelendirmesinde</ulink
+> bulunabilir. </para>
+
+      <para
+>AqBanking ile çevrim içi erişimi ayarlama ile ilgili bilgi <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
+>&gnucash; vikisinde (yalnızca Almanca)</ulink
+> bulunabilir. Bu menü girdisi, 3. adımda size gösterilen iletişim kutusunu getirir. K Param için olan adımlar, 18. adıma kadar aynıdır. Bitirdikten sonra, <guimenu
+>Hesap</guimenu
+> <guisubmenu
+>Hesabı Eşlemle…</guisubmenu
+> menü ögesini kullanarak &kmymoney; içinde eşlemleyebilir ve sağlanan listeden hesabınızı seçebilirsiniz. Sonrasında yalnızca <guimenu
+>Hesap</guimenu
+> <guisubmenu
+>Hesabı Güncelle</guisubmenu
+> ögesini veya birden çok çevrim içi hesap eşlemlediyseniz <guimenu
+>Hesap</guimenu
+> <guisubmenu
+>Tüm Hesapları Güncelle</guisubmenu
+> ögesini kullanabilirsiniz. </para>
+
+      <para
+>Daha fazla ayrıntı için <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>How do I configure online banking</ulink
+> bağlantısına bakın. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Yardım</guimenu
+><guimenuitem
+>Eylem Bul…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>&kmymoney; uygulamasındaki tüm işlemlerin adlarını ve kısayollarını görüntüler. Birine tıklamak, etkinse o işlemi başlatır. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1
+>&details-widgets; </chapter>

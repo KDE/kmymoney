@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>2024‒12‒01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>Bu yayımda neler yeni</title>
+
+<sect1
+><title
+>Hata düzeltmeleri ve işlevsellik iyileştirmeleri</title>
+<para
+>Her sürümde olduğu gibi, &kmymoney; geliştirme ekibi her sürümü her açıdan daha iyi ve kullanımı daha kolay hale getirmek için yoğun bir şekilde çalışmayı sürdürüyor. Önceki kararlı sürüm olan 5.1.3’ten bu yana birçok hata düzeltildi; programın çeşitli alanlarında işlevsel iyileştirmeler yapıldı; ancak 5.1 serisi sürümlerinden en belirgin değişiklikler defterde yer alıyor — daha fazla ayrıntı aşağıda. </para>
+
+<para
+>Önceki &kde; kitaplıklarından &kde-frameworks;’e geçiş, 5.1.x sürümlerinin başlarında esasen tamamlanmıştı ve bu çalışmanın büyük bir kısmı arka planda gerçekleşmiş olup son kullanıcı tarafından doğrudan görülememiştir. Genel görünüm ve his kararlı kalmayı sürdürecek olsa da, bazı küçük değişiklikler fark edilebilir. Ek olarak, ekip Qt5’in ve KDE5’in yerini almaya başlayan Qt6 ve KDE6 kitaplıklarını kullanmaya geçişi desteklemek için değişiklikler yapmaya başladı. Tüm bu değişikliklerle birlikte, kasıtlı hata düzeltmeleri, iyileştirmeler ve eklemeler dışında, programın temel işlevselliği aynı kalmaktadır. </para>
+
+<para
+>Önceki sürümlerde, kılavuzun bu bölümü birçok özel hata düzeltmesi ve işlevsel iyileştirmenin listesini içeriyordu. Aynı şeyleri tekrar tekrar yazmak yerine, onları doğrudan <ulink url="https://kmymoney.org/changelog.html"
+>değişiklik günlüğünde</ulink
+> bulabilirsiniz. </para>
+
+<para
+>5.0.x ve 5.1.x serileri, 4.8.x veya daha eski bir sürümden yükseltme yapan kullanıcılar için bazı ayarlamalar gerektiren değişiklikler içeriyordu. Ancak, çoğu kullanıcının şu anda 5.1.x sürümüne geçtiğini tahmin ediyoruz. Özellikle, 5.1.x’ten 5.2’ye geçiş yapan kullanıcıların herhangi bir ayarlama yapmasına gerek kalmamalıdır. Eğer herhangi bir nedenle hala &kmymoney; sürüm 4 kullanıyorsanız yükseltme yapmanız şiddetle tavsiye edilir; çünkü ekip için çok eski sürümler için herhangi bir yardım sağlamak giderek zorlaşıyor. </para>
+</sect1>
+
+<sect1
+><title
+>Bu el kitabına yapılan değişiklikler</title>
+<para
+>Bu bölüm, 4.x’ten 5.x’e geçişte el kitabının tam olarak güncellenmemesiyle ilgili bazı ayrıntıları sunuyordu. El kitabı artık 5.2 için tamamen güncellendiğinden, bu bölüme artık gerek kalmamıştır. </para>
+</sect1>
+</chapter>
