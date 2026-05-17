@@ -46,7 +46,7 @@ struct InstitutionsModel::Private
         q->insertRows(0, accounts, idx);
         // we create institution subentries here with the id of the account. These will never
         // be used as institutions and also not found by indexById for a different m_leadIn
-        // The are only used in data() to proxy data from the accountsModel.
+        // They are only used in data() to proxy data from the accountsModel.
         for (int row = 0; row < accounts; ++row) {
             const auto subIdx = q->index(row, 0, idx);
             MyMoneyInstitution account(idList.at(row), MyMoneyInstitution());
