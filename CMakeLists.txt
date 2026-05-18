@@ -138,6 +138,7 @@ ecm_set_disabled_deprecation_versions(
     QT 6.5
     KF 6.24
 )
+add_definitions(-DQT_DEPRECATED_WARNINGS_SINCE=0x60500)
 
 message(STATUS "cmake version: ${CMAKE_VERSION}")
 
