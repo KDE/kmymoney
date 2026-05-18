@@ -11,6 +11,7 @@
 
 #include <QDate>
 #include <QDebug>
+#include <QMetaObject>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -127,6 +128,11 @@ public:
      * is based on a date.
      */
     bool reconciliationSorting;
+
+    /**
+     * Connection used to trigger deferred sorting when source data changes.
+     */
+    QMetaObject::Connection sourceDataChangedConnection;
 };
 
 #endif // LEDGERSORTPROXYMODEL_P_H

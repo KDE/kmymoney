@@ -39,11 +39,37 @@ LedgerSortProxyModel::~LedgerSortProxyModel()
 
 void LedgerSortProxyModel::setSourceModel(QAbstractItemModel* model)
 {
+    Q_D(LedgerSortProxyModel);
     if (sourceModel()) {
-        disconnect(model, &QAbstractItemModel::rowsInserted, this, &LedgerSortProxyModel::sortOnIdle);
+        disconnect(sourceModel(), &QAbstractItemModel::rowsInserted, this, &LedgerSortProxyModel::sortOnIdle);
+        disconnect(sourceModel(), &QAbstractItemModel::rowsRemoved, this, &LedgerSortProxyModel::sortOnIdle);
+        disconnect(sourceModel(), &QAbstractItemModel::rowsMoved, this, &LedgerSortProxyModel::sortOnIdle);
+        disconnect(sourceModel(), &QAbstractItemModel::modelReset, this, &LedgerSortProxyModel::sortOnIdle);
+        QObject::disconnect(d->sourceDataChangedConnection);
     }
     if (model) {
         connect(model, &QAbstractItemModel::rowsInserted, this, &LedgerSortProxyModel::sortOnIdle);
+        connect(model, &QAbstractItemModel::rowsRemoved, this, &LedgerSortProxyModel::sortOnIdle);
+        connect(model, &QAbstractItemModel::rowsMoved, this, &LedgerSortProxyModel::sortOnIdle);
+        connect(model, &QAbstractItemModel::modelReset, this, &LedgerSortProxyModel::sortOnIdle);
+        d->sourceDataChangedConnection =
+            connect(model, &QAbstractItemModel::dataChanged, this, [this](const QModelIndex&, const QModelIndex&, const auto& roles) {
+                Q_D(LedgerSortProxyModel);
+
+                if (roles.isEmpty()) {
+                    sortOnIdle();
+                    return;
+                }
+
+                for (const auto changedRole : roles) {
+                    for (const auto& sortOrderItem : d->ledgerSortOrder) {
+                        if (sortOrderItem.sortRole == changedRole) {
+                            sortOnIdle();
+                            return;
+                        }
+                    }
+                }
+            });
     }
     QSortFilterProxyModel::setSourceModel(model);
 }

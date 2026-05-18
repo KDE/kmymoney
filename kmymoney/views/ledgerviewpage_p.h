@@ -171,6 +171,7 @@ public:
     void setLedgerSortOrder(LedgerSortOrder newSortOrder)
     {
         if (sortOrder != newSortOrder) {
+            sortOrder = newSortOrder;
             specialItemFilter->setLedgerSortOrder(newSortOrder);
             specialItemFilter->forceReload();
         }

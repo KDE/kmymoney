@@ -6,6 +6,7 @@ kmm_add_tests(${tests_sources}
     Qt::Core
     Qt::Test
     kmm_testutils
+    kmm_models
     kmymoney_common
 )
 
