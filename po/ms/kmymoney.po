@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-25 00:45+0000\n"
+"POT-Creation-Date: 2026-05-19 00:45+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -1837,7 +1837,7 @@ msgstr "Mata wang"
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:384
 #: kmymoney/plugins/views/reports/core/listtable.cpp:774
-#: kmymoney/widgets/ktransactionfilter.ui:584
+#: kmymoney/widgets/ktransactionfilter.ui:598
 #: kmymoney/widgets/transactionsortoption.cpp:42
 #, fuzzy, kde-format
 msgid "Type"
@@ -2012,16 +2012,16 @@ msgid "VAT account"
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:446
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:188
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:370
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:201
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:383
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:74
 #, kde-format
 msgid "Asset"
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:447
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:189
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:378
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:202
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:391
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:76
 #, kde-format
 msgid "Liability"
@@ -2029,18 +2029,18 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:448
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1846
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:74
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:190
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:386
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:78
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:203
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:399
 #, kde-format
 msgid "Income"
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:556 kmymoney/kmymoney.cpp:449
 #: kmymoney/models/ledgerfilterbase.cpp:97
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:79
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:191
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:397
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:83
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:204
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:410
 #, kde-format
 msgid "Expense"
 msgstr ""
@@ -2871,7 +2871,7 @@ msgstr "Mata wang"
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:80
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:105
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:193
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:206
 #: kmymoney/widgets/transactionsortoption.cpp:45
 #, fuzzy, kde-format
 msgid "Security"
@@ -3588,7 +3588,7 @@ msgstr ""
 #. i18n: ectx: attribute (title), widget (QWidget, m_detailsTab)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:39
 #: kmymoney/views/ktagsview.ui:187 kmymoney/widgets/ktransactionfilter.cpp:162
-#: kmymoney/widgets/ktransactionfilter.ui:564
+#: kmymoney/widgets/ktransactionfilter.ui:578
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:76
 #, fuzzy, kde-format
 msgid "Details"
@@ -4081,7 +4081,7 @@ msgstr ""
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:360
-#: kmymoney/widgets/ktransactionfilter.ui:605
+#: kmymoney/widgets/ktransactionfilter.ui:619
 #, fuzzy, kde-format
 msgctxt "@item reconciliation status"
 msgid "Cleared"
@@ -4560,8 +4560,8 @@ msgid "CSV import/export"
 msgstr "Import"
 
 #: kmymoney/kmymoney.cpp:450 kmymoney/models/equitiesmodel.cpp:424
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:192
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:408
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:205
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:421
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:79
 #, kde-format
 msgid "Equity"
@@ -8357,33 +8357,33 @@ msgid "Favorite"
 msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:399
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:371
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:384
 #, kde-format
 msgid "Asset accounts"
 msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:400
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:379
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:392
 #, kde-format
 msgid "Liability accounts"
 msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:401
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:127
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:387
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:140
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:400
 #, kde-format
 msgid "Income categories"
 msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:402
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:129
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:398
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:142
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:411
 #, kde-format
 msgid "Expense categories"
 msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:403
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:409
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:422
 #, kde-format
 msgid "Equity accounts"
 msgstr ""
@@ -8849,8 +8849,8 @@ msgstr "Nilai"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
 #: kmymoney/plugins/views/reports/core/listtable.cpp:704
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:164
-#: kmymoney/widgets/ktransactionfilter.ui:455
-#: kmymoney/widgets/ktransactionfilter.ui:497
+#: kmymoney/widgets/ktransactionfilter.ui:462
+#: kmymoney/widgets/ktransactionfilter.ui:504
 #: kmymoney/widgets/transactionsortoption.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:76
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:79
@@ -9689,7 +9689,7 @@ msgstr ""
 #: kmymoney/plugins/csv/export/csvwriter.cpp:194
 #: kmymoney/plugins/csv/export/csvwriter.cpp:379
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:347
-#: kmymoney/widgets/ktransactionfilter.ui:653
+#: kmymoney/widgets/ktransactionfilter.ui:667
 #, kde-format
 msgid "Invalid transaction"
 msgstr ""
@@ -15710,7 +15710,7 @@ msgstr "Ya"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:409
-#: kmymoney/widgets/ktransactionfilter.ui:634
+#: kmymoney/widgets/ktransactionfilter.ui:648
 #, kde-format
 msgid "Transfers"
 msgstr ""
@@ -21159,6 +21159,19 @@ msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Nama"
 
+#: kmymoney/widgets/kguiutils.cpp:308
+#, kde-format
+msgctxt "@action:button"
+msgid "Collapse"
+msgstr ""
+
+#: kmymoney/widgets/kguiutils.cpp:311
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:93
+#, kde-format
+msgctxt "@action:button"
+msgid "Expand"
+msgstr ""
+
 #: kmymoney/widgets/kmmemptyview.h:49
 #, fuzzy, kde-format
 msgctxt "Placeholder for when there is no data in a view"
@@ -21185,20 +21198,20 @@ msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
 msgstr ""
 
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:69
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:73
 #, fuzzy, kde-format
 msgctxt "Select all accounts"
 msgid "All"
 msgstr "Semua"
 
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:84
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:88
 #, fuzzy, kde-format
 msgctxt "No account"
 msgid "None"
 msgstr "Tiada"
 
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:353
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:354
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:366
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:367
 #, kde-format
 msgid "Favorites"
 msgstr ""
@@ -21569,7 +21582,7 @@ msgstr "Pilih tahun"
 #. i18n: ectx: property (text), widget (QPushButton, m_allTagsButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_allPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:422
-#: kmymoney/widgets/ktransactionfilter.ui:531
+#: kmymoney/widgets/ktransactionfilter.ui:538
 #, fuzzy, kde-format
 msgid "Select all"
 msgstr "Pilih Gaya"
@@ -21577,53 +21590,61 @@ msgstr "Pilih Gaya"
 #. i18n: ectx: property (text), widget (QPushButton, m_clearTagsButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_clearPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:429
-#: kmymoney/widgets/ktransactionfilter.ui:538
+#: kmymoney/widgets/ktransactionfilter.ui:545
 #, fuzzy, kde-format
 msgid "Select none"
 msgstr "Pilih Gaya"
 
+#. i18n: ectx: property (text), widget (QPushButton, m_expandTagsButton)
+#. i18n: ectx: property (text), widget (QPushButton, m_expandPayeesButton)
+#: kmymoney/widgets/ktransactionfilter.ui:436
+#: kmymoney/widgets/ktransactionfilter.ui:552
+#, kde-format
+msgid "Expand"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
-#: kmymoney/widgets/ktransactionfilter.ui:505
+#: kmymoney/widgets/ktransactionfilter.ui:512
 #, fuzzy, kde-format
 msgid "Select transactions without payees"
 msgstr "Pilih tahun"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel11_2)
-#: kmymoney/widgets/ktransactionfilter.ui:574
+#: kmymoney/widgets/ktransactionfilter.ui:588
 #, fuzzy, kde-format
 msgid "Validity"
 msgstr "Kesahan"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/widgets/ktransactionfilter.ui:595
+#: kmymoney/widgets/ktransactionfilter.ui:609
 #, fuzzy, kde-format
 msgctxt "@item reconciliation status"
 msgid "All states"
 msgstr "Semua Fail"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/widgets/ktransactionfilter.ui:600
+#: kmymoney/widgets/ktransactionfilter.ui:614
 #, fuzzy, kde-format
 msgctxt "@item reconciliation status"
 msgid "Not reconciled"
 msgstr "Fail Baru-baru Ini"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/widgets/ktransactionfilter.ui:610
+#: kmymoney/widgets/ktransactionfilter.ui:624
 #, fuzzy, kde-format
 msgctxt "@item reconciliation status"
 msgid "Reconciled"
 msgstr "Fail Baru-baru Ini"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/widgets/ktransactionfilter.ui:619
+#: kmymoney/widgets/ktransactionfilter.ui:633
 #, fuzzy, kde-format
 msgid "All types"
 msgstr "Semua Fail"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewPaymentsWizardPage)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/widgets/ktransactionfilter.ui:624
+#: kmymoney/widgets/ktransactionfilter.ui:638
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:97
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:77
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:36
@@ -21633,58 +21654,58 @@ msgid "Payments"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/widgets/ktransactionfilter.ui:629
+#: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Deposits"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/widgets/ktransactionfilter.ui:643
+#: kmymoney/widgets/ktransactionfilter.ui:657
 #, fuzzy, kde-format
 msgid "Any transaction"
 msgstr "Pilih tahun"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/widgets/ktransactionfilter.ui:648
+#: kmymoney/widgets/ktransactionfilter.ui:662
 #, fuzzy, kde-format
 msgid "Valid transaction"
 msgstr "Pilih tahun"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel11)
-#: kmymoney/widgets/ktransactionfilter.ui:661
+#: kmymoney/widgets/ktransactionfilter.ui:675
 #, fuzzy, kde-format
 msgctxt "@label reconciliation status"
 msgid "State"
 msgstr "Keadaan"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_nrButton)
-#: kmymoney/widgets/ktransactionfilter.ui:699
+#: kmymoney/widgets/ktransactionfilter.ui:713
 #, kde-format
 msgid "Search this number"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_nrRangeButton)
-#: kmymoney/widgets/ktransactionfilter.ui:712
+#: kmymoney/widgets/ktransactionfilter.ui:726
 #, kde-format
 msgid "Search number in range"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel14)
-#: kmymoney/widgets/ktransactionfilter.ui:734
+#: kmymoney/widgets/ktransactionfilter.ui:748
 #, fuzzy, kde-format
 msgctxt "to (number)"
 msgid "to"
 msgstr "hingga"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel13)
-#: kmymoney/widgets/ktransactionfilter.ui:750
+#: kmymoney/widgets/ktransactionfilter.ui:764
 #, kde-format
 msgctxt "from (number)"
 msgid "from"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, m_selectedCriteria)
-#: kmymoney/widgets/ktransactionfilter.ui:803
+#: kmymoney/widgets/ktransactionfilter.ui:817
 #, fuzzy, kde-format
 msgid "text"
 msgstr "teks"
