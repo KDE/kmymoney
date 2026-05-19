@@ -48,7 +48,7 @@ public:
             MyMoneyTransactionFilter::translateDateRange(static_cast<TransactionFilter::Date>(i), m_startDates[i], m_endDates[i]);
         }
 
-        q->connect(ui->m_dateRange, qOverload<int>(&KMyMoneyPeriodCombo::currentIndexChanged), q, &DateRangeDlg::slotDateRangeSelectedByUser);
+        q->connect(ui->m_dateRange, &KMyMoneyPeriodCombo::currentIndexChanged, q, &DateRangeDlg::slotDateRangeSelectedByUser);
 
         q->setDateRange(TransactionFilter::Date::All);
 

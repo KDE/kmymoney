@@ -53,8 +53,7 @@ KSettingsIcons::KSettingsIcons(QWidget* parent) :
     connect(d->ui->kcfg_IconsTheme, &QLineEdit::textChanged, this, &KSettingsIcons::slotLoadTheme);
 
     // setup connections so that changes are forwarded to the field
-    connect(d->ui->m_IconsTheme,
-            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KSettingsIcons::slotSetTheme);
+    connect(d->ui->m_IconsTheme, &QComboBox::currentIndexChanged, this, &KSettingsIcons::slotSetTheme);
 }
 
 KSettingsIcons::~KSettingsIcons()

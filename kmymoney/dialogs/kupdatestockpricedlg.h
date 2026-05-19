@@ -52,7 +52,6 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void slotCheckData();
-    void slotCheckData(int idx);
 };
 
 #endif
