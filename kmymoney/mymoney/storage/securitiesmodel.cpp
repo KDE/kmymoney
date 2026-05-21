@@ -241,7 +241,6 @@ SecuritiesModelNewSecurity::SecuritiesModelNewSecurity(QObject* parent)
     : SecuritiesModel(parent)
 {
     setObjectName(QLatin1String("SecuritiesModelNewSecurity"));
-    QMap<QString, QSharedPointer<MyMoneySecurity>> list;
     MyMoneySecurity sec;
     SecuritiesModel::doAddItem(sec);
 }

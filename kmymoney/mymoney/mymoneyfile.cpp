@@ -994,7 +994,6 @@ public:
 
         const auto match = m_numericalCheckNumberExp.match(checkNumber);
         if (match.hasMatch()) {
-            const auto nextNumber = (MyMoneyMoney(match.captured(3)) + MyMoneyMoney(offset, 1)).formatMoney(1, false);
             return QStringLiteral("%1%2%3%4")
                 .arg(match.captured(1), match.captured(2), QString::number(match.captured(3).toULong() + offset), match.captured(4));
         }
