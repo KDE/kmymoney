@@ -36,6 +36,7 @@
 #include "journalmodel.h"
 #include "kmmyesno.h"
 #include "kmymoneysettings.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
@@ -421,6 +422,7 @@ MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& a
     });
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
+    d->ui->editTabOrderButton->setDefaultAction(pActions[eMenu::Action::EditTabOrder]);
 
     // construct a special status model that supports the unchanged (unknown) entry
     QMap<QString, StatusEntry> states = {

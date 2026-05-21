@@ -457,6 +457,7 @@ bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
     case eMenu::Action::EditTabOrder: {
         const auto editor = d->ui->m_ledgerView->indexWidget(d->ui->m_ledgerView->editIndex());
         if (editor) {
+            pActions[eMenu::Action::EditTabOrder]->setDisabled(true);
             QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(d->ui->m_ledgerView);
             auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(editor->qt_metacast("TabOrderEditorInterface"));
             tabOrderDialog->setTarget(tabOrderWidget);
@@ -464,6 +465,7 @@ bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
             if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
                 tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
             }
+            pActions[eMenu::Action::EditTabOrder]->setDisabled(false);
             delete tabOrderDialog;
         }
         break;
