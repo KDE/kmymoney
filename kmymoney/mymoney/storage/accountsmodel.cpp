@@ -99,6 +99,11 @@ struct AccountsModel::Private
         , parentObject(parent)
         , updateOnBalanceChange(true)
     {
+        // match our own account ids
+        QString regEx = QStringLiteral("%1\\d{%2}").arg(qq->m_idLeadin).arg(ID_SIZE);
+        // and also match non-conformant ids created by Skrooge
+        regEx.append(QLatin1String("|\\d+\\-account|\\d+\\-category"));
+        accountIdMatch = QRegularExpression(regEx, QRegularExpression::CaseInsensitiveOption);
     }
 
     int loadSubAccounts(const QModelIndex parent, const QMap<QString, MyMoneyAccount>& list)
@@ -414,6 +419,7 @@ struct AccountsModel::Private
     QColor                          positiveScheme;
     QColor                          negativeScheme;
     QMimeData dragAccountId;
+    QRegularExpression accountIdMatch;
 };
 
 const char* const AccountsModel::Private::mimeTypeName = "application/x-org-kmymoney-account-id";
@@ -968,7 +974,7 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
 {
     QList<MyMoneyAccount> list;
     // never search in the first row which is favorites
-    QModelIndexList indexes = match(assetIndex(), eMyMoney::Model::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+    const auto indexes = match(assetIndex(), eMyMoney::Model::IdRole, d->accountIdMatch, -1, Qt::MatchRegularExpression | Qt::MatchRecursive);
 
     for (int row = 0; row < indexes.count(); ++row) {
         const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexes.value(row).internalPointer())->constDataRef();
@@ -1067,7 +1073,9 @@ void AccountsModel::removeFavorite(const QString& id)
 int AccountsModel::processItems(Worker *worker)
 {
     // make sure to work only on real entries and not on favorites
-    return MyMoneyModel<MyMoneyAccount>::processItems(worker, match(assetIndex(), eMyMoney::Model::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
+    return MyMoneyModel<MyMoneyAccount>::processItems(
+        worker,
+        match(assetIndex(), eMyMoney::Model::IdRole, d->accountIdMatch, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
 }
 
 QString AccountsModel::indexToHierarchicalName(const QModelIndex& _idx, bool includeStandardAccounts) const
@@ -1114,7 +1122,7 @@ QString AccountsModel::accountNameToId(const QString& category, eMyMoney::Accoun
 
 void AccountsModel::setupAccountFractions()
 {
-    QModelIndexList indexes = match(assetIndex(), eMyMoney::Model::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+    const auto indexes = match(assetIndex(), eMyMoney::Model::IdRole, d->accountIdMatch, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
     MyMoneySecurity currency;
     for (int row = 0; row < indexes.count(); ++row) {
         MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexes.value(row).internalPointer())->dataRef();
