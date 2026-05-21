@@ -12,8 +12,6 @@ vcpkg-manifest-install.log
 ui_*.h
 moc_*.cpp
 *.moc
-kmymoney/icons/kmm_icons.qrc
-kmymoney/templates/templates.qrc
 /compile_commands.json
 CMakeSettings.json
 .clangd
