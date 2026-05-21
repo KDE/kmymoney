@@ -21,14 +21,17 @@ string(APPEND qrcContents ">\n")
 
 file(GLOB_RECURSE icon_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "breeze/*" "breeze-dark/*")
 foreach(icon_file ${icon_files})
-    string(APPEND qrcContents "    <file>${icon_file}</file>\n")
+    string(APPEND qrcContents "    <file alias=\"${icon_file}\">${CMAKE_CURRENT_SOURCE_DIR}/${icon_file}</file>\n")
 endforeach()
 string(APPEND qrcContents "  </qresource>\n</RCC>\n")
 
-file(WRITE "kmm_icons.qrc" "${qrcContents}")
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/kmm_icons.qrc.in" "${qrcContents}")
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${CMAKE_CURRENT_BINARY_DIR}/kmm_icons.qrc.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/kmm_icons.qrc")
 
 # add generated file to resources
-qt_add_resources(icons_SOURCES kmm_icons.qrc)
+qt_add_resources(icons_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/kmm_icons.qrc")
 
 add_library(kmm_icons ${icons_SOURCES})
 

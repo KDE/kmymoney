@@ -26,14 +26,17 @@ file(GLOB_RECURSE template_files
         "C/*" "[a-z][a-z]/*" "[a-z][a-z]\_*/*")
 
 foreach(template_file ${template_files})
-    string(APPEND qrcContents "    <file>${template_file}</file>\n")
+    string(APPEND qrcContents "    <file alias=\"${template_file}\">${CMAKE_CURRENT_SOURCE_DIR}/${template_file}</file>\n")
 endforeach()
 string(APPEND qrcContents "  </qresource>\n</RCC>\n")
 
-file(WRITE "templates.qrc" "${qrcContents}")
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/templates.qrc.in" "${qrcContents}")
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${CMAKE_CURRENT_BINARY_DIR}/templates.qrc.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/templates.qrc")
 
 # add generated file to resources
-qt_add_resources(kmm_templates_SOURCES templates.qrc)
+qt_add_resources(kmm_templates_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/templates.qrc")
 
 add_library(kmm_templates ${kmm_templates_SOURCES})
 
