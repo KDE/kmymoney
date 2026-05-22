@@ -1433,10 +1433,16 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
                     createCategory(d->ui->assetAccountCombo, eMyMoney::Account::Type::Asset);
                 }
             } else if (o == d->ui->securityAccountCombo) {
-                const auto accountId = d->ui->securityAccountCombo->completer()->currentIndex().data(eMyMoney::Model::IdRole).toString();
-                const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0, 0), eMyMoney::Model::IdRole, accountId);
-                if (indexes.count() == 1) {
-                    d->ui->securityAccountCombo->setCurrentIndex(indexes.at(0).row());
+                // if the completion popup is open then use the currently selected security from the popup; otherwise, use the current security of the combo box
+                const auto comboPopup = d->ui->securityAccountCombo->completer()->popup();
+                const auto modelIndex = comboPopup->isVisible() ? comboPopup->currentIndex()
+                                                                : d->ui->securityAccountCombo->model()->index(d->ui->securityAccountCombo->currentIndex(), 0);
+                if (modelIndex.isValid()) {
+                    const auto accountId = modelIndex.data(eMyMoney::Model::IdRole).toString();
+                    const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0, 0), eMyMoney::Model::IdRole, accountId);
+                    if (indexes.count() == 1) {
+                        d->ui->securityAccountCombo->setCurrentIndex(indexes.at(0).row());
+                    }
                 }
             }
             updateWidgets();
