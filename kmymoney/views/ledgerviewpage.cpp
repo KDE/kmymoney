@@ -68,6 +68,7 @@ void LedgerViewPage::showEvent(QShowEvent* event)
 {
     prepareToShow();
     QWidget::showEvent(event);
+    d->ui->m_ledgerView->setFocus();
 }
 
 void LedgerViewPage::prepareToShow()
