@@ -5,27 +5,24 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <QDebug>
-#include <QTemporaryFile>
-
-#include "woobinterface.h"
-
-// Python uses slots var that is QT macro
-#pragma push_macro("slots")
-#undef slots
 #include <Python.h>
 #include <patchlevel.h>
-#pragma pop_macro("slots")
+// Python uses slots var that is QT macro
+#undef slots
+
+#include "woobinterface.h"
 
 #include <memory>
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDebug>
 #include <QFileInfo>
 #include <QLibrary>
 #include <QMutexLocker>
 #include <QStandardPaths>
+#include <QTemporaryFile>
 #include <QVariant>
 
 // ----------------------------------------------------------------------------
