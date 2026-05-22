@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-19 00:45+0000\n"
+"POT-Creation-Date: 2026-05-22 00:44+0000\n"
 "PO-Revision-Date: 2025-10-01 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -587,10 +587,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3683
-#: kmymoney/kmymoney.cpp:3754 kmymoney/kmymoney.cpp:3770
-#: kmymoney/kmymoney.cpp:3776 kmymoney/kmymoney.cpp:3790
-#: kmymoney/kmymoney.cpp:3792
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3685
+#: kmymoney/kmymoney.cpp:3756 kmymoney/kmymoney.cpp:3772
+#: kmymoney/kmymoney.cpp:3778 kmymoney/kmymoney.cpp:3792
+#: kmymoney/kmymoney.cpp:3794
 #, kde-format
 msgid "Backup"
 msgstr "備份"
@@ -952,7 +952,7 @@ msgstr "輸入這些新數值，但對這次的交易。"
 msgid "Set all further occurrences &in this schedule to be these values."
 msgstr "設定此排程將來所有的事件都使用這些數值。"
 
-#: kmymoney/dialogs/kcurrencycalculator.cpp:438
+#: kmymoney/dialogs/kcurrencycalculator.cpp:436
 #: kmymoney/mymoney/mymoneyfile.cpp:3774
 #, kde-format
 msgctxt "@info price source"
@@ -1107,13 +1107,13 @@ msgid "Update price history"
 msgstr "更新價格歷史紀錄"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:657
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "無法將 %1 設定為基本貨幣：%2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:657
 #, kde-format
 msgid "Set base currency"
 msgstr "設定基本貨幣"
@@ -1137,7 +1137,7 @@ msgid "Cannot create new currency. %1"
 msgstr "無法建立新貨幣。%1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:497
 #, kde-format
 msgid "New currency"
 msgstr "新增貨幣"
@@ -1152,29 +1152,29 @@ msgstr "無法修改貨幣。%1"
 msgid "Edit currency"
 msgstr "編輯貨幣"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:498
 #, kde-format
 msgid "Rename currency"
 msgstr "重新命名貨幣"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:499
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:642
 #, kde-format
 msgid "Delete currency"
 msgstr "刪除貨幣"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:500
 #, kde-format
 msgid "Select as base currency"
 msgstr "選擇基本貨幣"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:510
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "貨幣選項"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:642
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "無法刪除貨幣 %1。%2"
@@ -1856,7 +1856,7 @@ msgstr "基本貨幣"
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:88
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:652
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:647
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:264
 #: kmymoney/views/kmymoneyview.cpp:192
 #: kmymoney/widgets/ktransactionfilter.cpp:149
@@ -4272,7 +4272,7 @@ msgstr "日"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:312
 #: kmymoney/plugins/views/reports/core/listtable.cpp:718
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:661
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:656
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:279
 #, kde-format
 msgid "Month"
@@ -5576,20 +5576,20 @@ msgctxt "@info:placeholder amount widget"
 msgid "calculated"
 msgstr "計算"
 
-#: kmymoney/kmymoney.cpp:2402
+#: kmymoney/kmymoney.cpp:2404
 #, fuzzy, kde-format
 #| msgid "Close"
 msgctxt "@action:button"
 msgid "Close"
 msgstr "關閉"
 
-#: kmymoney/kmymoney.cpp:2714
+#: kmymoney/kmymoney.cpp:2716
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "無法新增交易"
 
-#: kmymoney/kmymoney.cpp:2858
+#: kmymoney/kmymoney.cpp:2860
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5599,14 +5599,14 @@ msgid ""
 "wish to change the transactions anyway?"
 msgstr "選取的交易中至少有一個分割已經對帳完成。您還是要刪除這些交易嗎？"
 
-#: kmymoney/kmymoney.cpp:2860
+#: kmymoney/kmymoney.cpp:2862
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "交易已對帳"
 
-#: kmymoney/kmymoney.cpp:2865
+#: kmymoney/kmymoney.cpp:2867
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5614,20 +5614,20 @@ msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "您確定要刪除這 %1 筆選取的交易嗎？"
 
-#: kmymoney/kmymoney.cpp:2869
+#: kmymoney/kmymoney.cpp:2871
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "任何交易"
 
-#: kmymoney/kmymoney.cpp:3000
+#: kmymoney/kmymoney.cpp:3002
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "無法新增交易"
 
-#: kmymoney/kmymoney.cpp:3040
+#: kmymoney/kmymoney.cpp:3042
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5637,12 +5637,12 @@ msgid ""
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr "KMyMoney 偵測到這個帳戶裡有些排程交易已過時。您要現在輸入這些交易嗎？"
 
-#: kmymoney/kmymoney.cpp:3043
+#: kmymoney/kmymoney.cpp:3045
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "找到已排程交易"
 
-#: kmymoney/kmymoney.cpp:3118
+#: kmymoney/kmymoney.cpp:3120
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5660,17 +5660,17 @@ msgstr ""
 "帳戶未顯示在檢視中。您可以到「檢視」選單中選擇「顯示所有帳戶」，或是取消「不"
 "要顯示已關閉的帳戶」選項將帳戶顯示出來。"
 
-#: kmymoney/kmymoney.cpp:3120
+#: kmymoney/kmymoney.cpp:3122
 #, kde-format
 msgid "Information"
 msgstr "資訊"
 
-#: kmymoney/kmymoney.cpp:3224 kmymoney/kmymoney.cpp:3323
+#: kmymoney/kmymoney.cpp:3226 kmymoney/kmymoney.cpp:3325
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "沒有開啟任何 KMyMoney 檔案"
 
-#: kmymoney/kmymoney.cpp:3260 kmymoney/kmymoney.cpp:3262
+#: kmymoney/kmymoney.cpp:3262 kmymoney/kmymoney.cpp:3264
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
@@ -5678,43 +5678,43 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "已就緒。"
 
-#: kmymoney/kmymoney.cpp:3327
+#: kmymoney/kmymoney.cpp:3329
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "檢視個人資料..."
 
-#: kmymoney/kmymoney.cpp:3334
+#: kmymoney/kmymoney.cpp:3336
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "編輯個人資料"
 
-#: kmymoney/kmymoney.cpp:3349
+#: kmymoney/kmymoney.cpp:3351
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "無法儲存使用者資訊：%1"
 
-#: kmymoney/kmymoney.cpp:3357
+#: kmymoney/kmymoney.cpp:3359
 #, kde-format
 msgid "Importing account templates."
 msgstr "匯入帳戶樣本中。"
 
-#: kmymoney/kmymoney.cpp:3371
+#: kmymoney/kmymoney.cpp:3373
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "無法匯入樣本：%1，例外來自 %2：%3"
 
-#: kmymoney/kmymoney.cpp:3379
+#: kmymoney/kmymoney.cpp:3381
 #, kde-format
 msgid "Exporting account templates."
 msgstr "匯出帳戶樣本中。"
 
-#: kmymoney/kmymoney.cpp:3385
+#: kmymoney/kmymoney.cpp:3387
 #, kde-format
 msgid "Save as..."
 msgstr "另存為..."
 
-#: kmymoney/kmymoney.cpp:3386
+#: kmymoney/kmymoney.cpp:3388
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5724,48 +5724,48 @@ msgstr ""
 "*.kmt|KMyMoney 樣本檔\n"
 "*|所有檔案"
 
-#: kmymoney/kmymoney.cpp:3417
+#: kmymoney/kmymoney.cpp:3419
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "樣本錯誤"
 
-#: kmymoney/kmymoney.cpp:3435
+#: kmymoney/kmymoney.cpp:3437
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "檔案 <b>%1</b> 已存在。您確定要覆寫它嗎？"
 
-#: kmymoney/kmymoney.cpp:3437 kmymoney/plugins/csv/export/csvexporter.cpp:106
+#: kmymoney/kmymoney.cpp:3439 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "檔案已經存在"
 
-#: kmymoney/kmymoney.cpp:3475
+#: kmymoney/kmymoney.cpp:3477
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3476
+#: kmymoney/kmymoney.cpp:3478
 #, kde-format
 msgid "Hide menu bar"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3589
+#: kmymoney/kmymoney.cpp:3591
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
 msgstr "在備份前您必須先儲存檔案。您要繼續嗎？"
 
-#: kmymoney/kmymoney.cpp:3591
+#: kmymoney/kmymoney.cpp:3593
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3608
+#: kmymoney/kmymoney.cpp:3610
 #, fuzzy, kde-format
 #| msgid ""
 #| "The current implementation of the backup functionality only supports "
@@ -5775,70 +5775,70 @@ msgid ""
 "files as source files. Your current source file is '%1'."
 msgstr "目前備份功能只支援備份本地檔案。您目前的來源檔為 %1。"
 
-#: kmymoney/kmymoney.cpp:3610
+#: kmymoney/kmymoney.cpp:3612
 #, kde-format
 msgid "Local files only"
 msgstr "只有本地檔案"
 
-#: kmymoney/kmymoney.cpp:3649
+#: kmymoney/kmymoney.cpp:3651
 #, kde-format
 msgid "Mounting %1"
 msgstr "掛載 %1 中"
 
-#: kmymoney/kmymoney.cpp:3683
+#: kmymoney/kmymoney.cpp:3685
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "今天的備份已經存在。要取代它嗎？"
 
-#: kmymoney/kmymoney.cpp:3683
+#: kmymoney/kmymoney.cpp:3685
 #, kde-format
 msgid "&Replace"
 msgstr "取代(&R)"
 
-#: kmymoney/kmymoney.cpp:3691
+#: kmymoney/kmymoney.cpp:3693
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "無法建立帳戶：%1"
 
-#: kmymoney/kmymoney.cpp:3696
+#: kmymoney/kmymoney.cpp:3698
 #, kde-format
 msgid "Writing %1"
 msgstr "正在寫入 %1"
 
-#: kmymoney/kmymoney.cpp:3717
+#: kmymoney/kmymoney.cpp:3719
 #, kde-format
 msgid "Unmounting %1"
 msgstr "卸載 %1中"
 
-#: kmymoney/kmymoney.cpp:3754
+#: kmymoney/kmymoney.cpp:3756
 #, kde-format
 msgid "Error mounting device"
 msgstr "掛載裝置時發生錯誤"
 
-#: kmymoney/kmymoney.cpp:3769 kmymoney/kmymoney.cpp:3788
+#: kmymoney/kmymoney.cpp:3771 kmymoney/kmymoney.cpp:3790
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "完成"
 
-#: kmymoney/kmymoney.cpp:3770 kmymoney/kmymoney.cpp:3790
+#: kmymoney/kmymoney.cpp:3772 kmymoney/kmymoney.cpp:3792
 #, kde-format
 msgid "File successfully backed up"
 msgstr "檔案已成功備份"
 
-#: kmymoney/kmymoney.cpp:3776
+#: kmymoney/kmymoney.cpp:3778
 #, kde-format
 msgid "Error copying file to device"
 msgstr "複製檔案到裝置時發生錯誤"
 
-#: kmymoney/kmymoney.cpp:3792
+#: kmymoney/kmymoney.cpp:3794
 #, kde-format
 msgid "Error unmounting device"
 msgstr "卸載裝置時發生錯誤"
 
-#: kmymoney/kmymoney.cpp:3839
+#: kmymoney/kmymoney.cpp:3841
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5855,37 +5855,37 @@ msgstr ""
 "若點擊「否」，則保持開戶金額為 %2，\n"
 "若點擊「取消」則會中止建立帳戶。"
 
-#: kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3851
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "開戶金額發生問題"
 
-#: kmymoney/kmymoney.cpp:3860
+#: kmymoney/kmymoney.cpp:3862
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "無法新增帳戶：%1"
 
-#: kmymoney/kmymoney.cpp:3930
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "Running consistency check..."
 msgstr "正在執行一致性檢查..."
 
-#: kmymoney/kmymoney.cpp:3937
+#: kmymoney/kmymoney.cpp:3939
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "一致性檢查失敗：%1"
 
-#: kmymoney/kmymoney.cpp:3947
+#: kmymoney/kmymoney.cpp:3949
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
 "presented below."
 msgstr "一致性檢查在您的資料中發現了一些問題。詳情列在下方。"
 
-#: kmymoney/kmymoney.cpp:3949
+#: kmymoney/kmymoney.cpp:3951
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5895,28 +5895,28 @@ msgstr ""
 "一致性檢查在您的資料中發現了一些問題。詳情列在下方。這些問題無法自動修正，因"
 "此需要您手動解決。"
 
-#: kmymoney/kmymoney.cpp:3952
+#: kmymoney/kmymoney.cpp:3954
 #, kde-format
 msgid "Consistency check result"
 msgstr "一致性檢查結果"
 
-#: kmymoney/kmymoney.cpp:4018
+#: kmymoney/kmymoney.cpp:4020
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "正在檢查逾期的排程交易..."
 
-#: kmymoney/kmymoney.cpp:4182
+#: kmymoney/kmymoney.cpp:4184
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "您必須先選擇 KMyMoney 檔，才能匯入報表。"
 
-#: kmymoney/kmymoney.cpp:4187
+#: kmymoney/kmymoney.cpp:4189
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "透過網頁連線來匯入報表"
 
-#: kmymoney/kmymoney.cpp:4199
+#: kmymoney/kmymoney.cpp:4201
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5927,60 +5927,60 @@ msgid ""
 "error: %3"
 msgstr "無法用 %2 外掛程式匯入 %1。外掛程式傳回以下的錯誤：%3"
 
-#: kmymoney/kmymoney.cpp:4199 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:4201 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "匯入錯誤"
 
-#: kmymoney/kmymoney.cpp:4226
+#: kmymoney/kmymoney.cpp:4228
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "所有訊息均已被開啟。"
 
-#: kmymoney/kmymoney.cpp:4226
+#: kmymoney/kmymoney.cpp:4228
 #, kde-format
 msgid "All messages"
 msgstr "所有訊息"
 
-#: kmymoney/kmymoney.cpp:4262
+#: kmymoney/kmymoney.cpp:4264
 #, kde-format
 msgid "Auto saving..."
 msgstr "自動儲存..."
 
-#: kmymoney/kmymoney.cpp:4382
+#: kmymoney/kmymoney.cpp:4384
 #, kde-format
 msgid "Creating new document..."
 msgstr "正在建立新文件..."
 
-#: kmymoney/kmymoney.cpp:4442
+#: kmymoney/kmymoney.cpp:4444
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "建立新設定檔"
 
-#: kmymoney/kmymoney.cpp:4453
+#: kmymoney/kmymoney.cpp:4455
 #, kde-format
 msgid "Open a file."
 msgstr "開啟一個檔案。"
 
-#: kmymoney/kmymoney.cpp:4467
+#: kmymoney/kmymoney.cpp:4469
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4471
+#: kmymoney/kmymoney.cpp:4473
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "所有檔案"
 
-#: kmymoney/kmymoney.cpp:4484
+#: kmymoney/kmymoney.cpp:4486
 #, kde-format
 msgid "Loading file..."
 msgstr "載入檔案中..."
 
-#: kmymoney/kmymoney.cpp:4492
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5989,58 +5989,58 @@ msgstr ""
 "<p><b>%1</b> 檔名無效，或是檔案不存在。您可以開啟另一個檔案，或是建立新檔案。"
 "</p>"
 
-#: kmymoney/kmymoney.cpp:4492
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid "File not found"
 msgstr "找不到檔案"
 
-#: kmymoney/kmymoney.cpp:4524
+#: kmymoney/kmymoney.cpp:4526
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4530
+#: kmymoney/kmymoney.cpp:4532
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "不能開啟要寫入的檔案 %1 "
 
-#: kmymoney/kmymoney.cpp:4537
+#: kmymoney/kmymoney.cpp:4539
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4548
+#: kmymoney/kmymoney.cpp:4550
 #, kde-format
 msgid "Saving file..."
 msgstr "正在儲存檔案..."
 
-#: kmymoney/kmymoney.cpp:4560
+#: kmymoney/kmymoney.cpp:4562
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "儲存失敗：%1"
 
-#: kmymoney/kmymoney.cpp:4566
+#: kmymoney/kmymoney.cpp:4568
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4572
+#: kmymoney/kmymoney.cpp:4574
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "正在儲存檔案..."
 
-#: kmymoney/kmymoney.cpp:4588
+#: kmymoney/kmymoney.cpp:4590
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4617
+#: kmymoney/kmymoney.cpp:4619
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -9385,49 +9385,49 @@ msgstr "股票名稱"
 msgid "Source"
 msgstr "來源"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:59
+#: kmymoney/mymoney/storage/reportsmodel.cpp:58
 #, fuzzy, kde-format
 #| msgid "Name"
 msgctxt "Reportname"
 msgid "Name"
 msgstr "名稱"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:62
+#: kmymoney/mymoney/storage/reportsmodel.cpp:61
 #, fuzzy, kde-format
 #| msgid "Comment"
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "備註"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:65
+#: kmymoney/mymoney/storage/reportsmodel.cpp:64
 #, fuzzy, kde-format
 #| msgid "Start Date"
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "開始日期"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:68
+#: kmymoney/mymoney/storage/reportsmodel.cpp:67
 #, fuzzy, kde-format
 #| msgid "Date"
 msgctxt "Report date range"
 msgid "End Date"
 msgstr "日期"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:71
+#: kmymoney/mymoney/storage/reportsmodel.cpp:70
 #, fuzzy, kde-format
 #| msgid "Favorites"
 msgctxt "Report favorite"
 msgid "Favorite"
 msgstr "我的最愛"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:74
+#: kmymoney/mymoney/storage/reportsmodel.cpp:73
 #, fuzzy, kde-format
 #| msgid "Groups"
 msgctxt "Report group"
 msgid "Group"
 msgstr "群組"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:77
+#: kmymoney/mymoney/storage/reportsmodel.cpp:76
 #, fuzzy, kde-format
 #| msgid "Modify"
 msgctxt "Report state"
@@ -14384,7 +14384,7 @@ msgstr "QIF 設定檔"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:254
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:643
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
 #: kmymoney/views/kmymoneyview.cpp:190
 #, kde-format
@@ -15762,7 +15762,7 @@ msgstr "全部"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:565
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:560
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
@@ -15770,7 +15770,7 @@ msgstr "頂層"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:568
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:563
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -15778,7 +15778,7 @@ msgstr "群組"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:571
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:566
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -16220,7 +16220,7 @@ msgstr "編號"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:706
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:649
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:644
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:259
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
 #: kmymoney/views/newtransactioneditor.ui:214
@@ -16242,7 +16242,7 @@ msgstr "類別型態"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:720
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:664
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:659
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:284
 #, kde-format
 msgid "Week"
@@ -16837,35 +16837,35 @@ msgstr "報告"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:491
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:502
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:726
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:721
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
 msgid "Monthly"
 msgstr "每月"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:562
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:557
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
 msgstr "全部"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:580
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:575
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "收入與支出"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:583
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:578
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "資產與負債"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:646
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:641
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:254
 #, kde-format
 msgid "Top Categories"
@@ -16873,7 +16873,7 @@ msgstr "頂層分類"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:655
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:650
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:269
 #: kmymoney/views/kmymoneyview.cpp:188
 #: kmymoney/widgets/kaccounttemplateselector.ui:87
@@ -16882,14 +16882,14 @@ msgid "Accounts"
 msgstr "帳戶"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:658
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:653
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:274
 #, kde-format
 msgid "Top Accounts"
 msgstr "頂層帳戶"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:714
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:709
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -16897,7 +16897,7 @@ msgid "Daily"
 msgstr "每天"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:717
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:712
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -16905,7 +16905,7 @@ msgid "Weekly"
 msgstr "每週"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:729
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:724
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -16913,7 +16913,7 @@ msgid "Bi-Monthly"
 msgstr "每 2 個月"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:732
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:727
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -16921,31 +16921,31 @@ msgid "Quarterly"
 msgstr "每季"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:735
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:730
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "每年"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:750
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:762
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:745
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:757
 #, kde-format
 msgid "Only owned"
 msgstr "僅擁有的"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:751
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:763
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:746
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:758
 #, kde-format
 msgid "Only sold"
 msgstr "僅已售出的"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:760
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:755
 #, kde-format
 msgid "From period"
 msgstr "從時間範圍"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:761
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:756
 #, kde-format
 msgid "Owned and sold"
 msgstr "擁有的與已售出的"
@@ -22386,13 +22386,13 @@ msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "名稱"
 
-#: kmymoney/widgets/kguiutils.cpp:308
+#: kmymoney/widgets/kguiutils.cpp:305
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
 msgstr ""
 
-#: kmymoney/widgets/kguiutils.cpp:311
+#: kmymoney/widgets/kguiutils.cpp:308
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"

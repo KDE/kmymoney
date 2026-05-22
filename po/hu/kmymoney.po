@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-19 00:45+0000\n"
+"POT-Creation-Date: 2026-05-22 00:44+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -568,10 +568,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3683
-#: kmymoney/kmymoney.cpp:3754 kmymoney/kmymoney.cpp:3770
-#: kmymoney/kmymoney.cpp:3776 kmymoney/kmymoney.cpp:3790
-#: kmymoney/kmymoney.cpp:3792
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3685
+#: kmymoney/kmymoney.cpp:3756 kmymoney/kmymoney.cpp:3772
+#: kmymoney/kmymoney.cpp:3778 kmymoney/kmymoney.cpp:3792
+#: kmymoney/kmymoney.cpp:3794
 #, kde-format
 msgid "Backup"
 msgstr "Biztonsági mentés"
@@ -946,7 +946,7 @@ msgstr "Elfogadom az új adatokat ez alkalommal, de csak ennél az eseménynél.
 msgid "Set all further occurrences &in this schedule to be these values."
 msgstr "Minden további eseményt átállítok az új adatokra."
 
-#: kmymoney/dialogs/kcurrencycalculator.cpp:438
+#: kmymoney/dialogs/kcurrencycalculator.cpp:436
 #: kmymoney/mymoney/mymoneyfile.cpp:3774
 #, fuzzy, kde-format
 #| msgid "User"
@@ -1103,13 +1103,13 @@ msgid "Update price history"
 msgstr "Árfolyam előzmények frissítése"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:657
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Nem lehet beállítani a %1-t %2 alap pénznemének"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:657
 #, kde-format
 msgid "Set base currency"
 msgstr "Alap pénznem megadása"
@@ -1132,7 +1132,7 @@ msgid "Cannot create new currency. %1"
 msgstr "Nem lehet létrehozni az új pénznemet. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:497
 #, kde-format
 msgid "New currency"
 msgstr "Új pénznem"
@@ -1149,30 +1149,30 @@ msgstr "Nem lehet frissíteni a pénznemet. %1"
 msgid "Edit currency"
 msgstr "Pénznem frissítése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:498
 #, kde-format
 msgid "Rename currency"
 msgstr "Pénznem átnevezése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:499
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:642
 #, kde-format
 msgid "Delete currency"
 msgstr "Pénznem törlése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:500
 #, kde-format
 msgid "Select as base currency"
 msgstr "Kiválasztás alap pénznemnek"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:510
 #, fuzzy, kde-format
 #| msgid "Currency options"
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Pénznembeállítások"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:642
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Nem lehet törölni a pénznemet %1. %2"
@@ -1874,7 +1874,7 @@ msgstr "Alap pénznem"
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:88
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:652
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:647
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:264
 #: kmymoney/views/kmymoneyview.cpp:192
 #: kmymoney/widgets/ktransactionfilter.cpp:149
@@ -4287,7 +4287,7 @@ msgstr "Nap"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:312
 #: kmymoney/plugins/views/reports/core/listtable.cpp:718
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:661
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:656
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:279
 #, kde-format
 msgid "Month"
@@ -5589,20 +5589,20 @@ msgctxt "@info:placeholder amount widget"
 msgid "calculated"
 msgstr "kiszámol"
 
-#: kmymoney/kmymoney.cpp:2402
+#: kmymoney/kmymoney.cpp:2404
 #, fuzzy, kde-format
 #| msgid "Close"
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Bezárás"
 
-#: kmymoney/kmymoney.cpp:2714
+#: kmymoney/kmymoney.cpp:2716
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "Nem lehet hozzáadni a tranzakciókat"
 
-#: kmymoney/kmymoney.cpp:2858
+#: kmymoney/kmymoney.cpp:2860
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5614,14 +5614,14 @@ msgstr ""
 "Legalább egy rekordja az osztott tranzakciónak egyeztettve lett. "
 "Mindenképpen törölni akarja a tranzakciót?"
 
-#: kmymoney/kmymoney.cpp:2860
+#: kmymoney/kmymoney.cpp:2862
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "A tranzakció már egyeztetve van"
 
-#: kmymoney/kmymoney.cpp:2865
+#: kmymoney/kmymoney.cpp:2867
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5630,20 +5630,20 @@ msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Valóban törölni akarja a kiválasztott tranzakciót?"
 msgstr[1] "Valóban törölni akarja az összes %1 kiválasztott tranzakciót?"
 
-#: kmymoney/kmymoney.cpp:2869
+#: kmymoney/kmymoney.cpp:2871
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Minden tranzakció"
 
-#: kmymoney/kmymoney.cpp:3000
+#: kmymoney/kmymoney.cpp:3002
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Nem lehet hozzáadni a tranzakciókat"
 
-#: kmymoney/kmymoney.cpp:3040
+#: kmymoney/kmymoney.cpp:3042
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5655,12 +5655,12 @@ msgstr ""
 "KMyMoney néhány lejárt ütemezett tranzakciót észlelt ennél a számlánál. "
 "Szeretné most elfogadni ezeket az ütemezett tranzakciókat?"
 
-#: kmymoney/kmymoney.cpp:3043
+#: kmymoney/kmymoney.cpp:3045
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Ütemezett tranzakciók találhatóak"
 
-#: kmymoney/kmymoney.cpp:3118
+#: kmymoney/kmymoney.cpp:3120
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5680,17 +5680,17 @@ msgstr ""
 "menüpontra kattintva, vagy ha kiveszi a pipát a <b>Ne mutassa a lezárt "
 "számlákat</b> beállításnál."
 
-#: kmymoney/kmymoney.cpp:3120
+#: kmymoney/kmymoney.cpp:3122
 #, kde-format
 msgid "Information"
 msgstr "Információ"
 
-#: kmymoney/kmymoney.cpp:3224 kmymoney/kmymoney.cpp:3323
+#: kmymoney/kmymoney.cpp:3226 kmymoney/kmymoney.cpp:3325
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Nincs KMyMoney fájl nyitva"
 
-#: kmymoney/kmymoney.cpp:3260 kmymoney/kmymoney.cpp:3262
+#: kmymoney/kmymoney.cpp:3262 kmymoney/kmymoney.cpp:3264
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1380
 #: kmymoney/plugins/xml/xmlstorage.cpp:701
 #, kde-format
@@ -5698,43 +5698,43 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Kész."
 
-#: kmymoney/kmymoney.cpp:3327
+#: kmymoney/kmymoney.cpp:3329
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Személyes adatok megtekintése…"
 
-#: kmymoney/kmymoney.cpp:3334
+#: kmymoney/kmymoney.cpp:3336
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Személyes adatok szerkesztése"
 
-#: kmymoney/kmymoney.cpp:3349
+#: kmymoney/kmymoney.cpp:3351
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Nem lehet tárolni a felhasználó információt: %1"
 
-#: kmymoney/kmymoney.cpp:3357
+#: kmymoney/kmymoney.cpp:3359
 #, kde-format
 msgid "Importing account templates."
 msgstr "Számla sablonok importálása."
 
-#: kmymoney/kmymoney.cpp:3371
+#: kmymoney/kmymoney.cpp:3373
 #, fuzzy, kde-format
 #| msgid "Unable to remove payee(s)"
 msgid "Unable to import template(s)"
 msgstr "Nem lehet eltávolítani a kedvezményezett(ek)et"
 
-#: kmymoney/kmymoney.cpp:3379
+#: kmymoney/kmymoney.cpp:3381
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Számla sablonok exportálása."
 
-#: kmymoney/kmymoney.cpp:3385
+#: kmymoney/kmymoney.cpp:3387
 #, kde-format
 msgid "Save as..."
 msgstr "Mentés másként…"
 
-#: kmymoney/kmymoney.cpp:3386
+#: kmymoney/kmymoney.cpp:3388
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5744,35 +5744,35 @@ msgstr ""
 "*.kmt|KMyMoney sablonfájl\n"
 "*|Összes fájl"
 
-#: kmymoney/kmymoney.cpp:3417
+#: kmymoney/kmymoney.cpp:3419
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Sablonhiba"
 
-#: kmymoney/kmymoney.cpp:3435
+#: kmymoney/kmymoney.cpp:3437
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "A(z) <b>%1</b> fájl már létezik. Biztosan felül kívánja írni?"
 
-#: kmymoney/kmymoney.cpp:3437 kmymoney/plugins/csv/export/csvexporter.cpp:106
+#: kmymoney/kmymoney.cpp:3439 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "A fájl már létezik"
 
-#: kmymoney/kmymoney.cpp:3475
+#: kmymoney/kmymoney.cpp:3477
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3476
+#: kmymoney/kmymoney.cpp:3478
 #, kde-format
 msgid "Hide menu bar"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3589
+#: kmymoney/kmymoney.cpp:3591
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5781,85 +5781,85 @@ msgstr ""
 "A fájlt először el kell menteni, mielőtt biztonsági mentést lehetne róla "
 "készíteni. Szeretné folytatni?"
 
-#: kmymoney/kmymoney.cpp:3591
+#: kmymoney/kmymoney.cpp:3593
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3608
+#: kmymoney/kmymoney.cpp:3610
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
 "files as source files. Your current source file is '%1'."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3610
+#: kmymoney/kmymoney.cpp:3612
 #, kde-format
 msgid "Local files only"
 msgstr "Csak helyi fájlok"
 
-#: kmymoney/kmymoney.cpp:3649
+#: kmymoney/kmymoney.cpp:3651
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 csatolása"
 
-#: kmymoney/kmymoney.cpp:3683
+#: kmymoney/kmymoney.cpp:3685
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "A biztonsági mentés fájlja a mai napra már létezik ezen az eszközön. "
 "Kicseréli?"
 
-#: kmymoney/kmymoney.cpp:3683
+#: kmymoney/kmymoney.cpp:3685
 #, kde-format
 msgid "&Replace"
 msgstr "&Cserélés"
 
-#: kmymoney/kmymoney.cpp:3691
+#: kmymoney/kmymoney.cpp:3693
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Nem lehet létrehozni a számlát: %1"
 
-#: kmymoney/kmymoney.cpp:3696
+#: kmymoney/kmymoney.cpp:3698
 #, kde-format
 msgid "Writing %1"
 msgstr "%1 írása"
 
-#: kmymoney/kmymoney.cpp:3717
+#: kmymoney/kmymoney.cpp:3719
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1 leválasztása"
 
-#: kmymoney/kmymoney.cpp:3754
+#: kmymoney/kmymoney.cpp:3756
 #, kde-format
 msgid "Error mounting device"
 msgstr "Hiba az eszköz csatolásakor"
 
-#: kmymoney/kmymoney.cpp:3769 kmymoney/kmymoney.cpp:3788
+#: kmymoney/kmymoney.cpp:3771 kmymoney/kmymoney.cpp:3790
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Kész"
 
-#: kmymoney/kmymoney.cpp:3770 kmymoney/kmymoney.cpp:3790
+#: kmymoney/kmymoney.cpp:3772 kmymoney/kmymoney.cpp:3792
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Fájl sikeresen mentve"
 
-#: kmymoney/kmymoney.cpp:3776
+#: kmymoney/kmymoney.cpp:3778
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Hiba az eszközre való másoláskor"
 
-#: kmymoney/kmymoney.cpp:3792
+#: kmymoney/kmymoney.cpp:3794
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Hiba az eszköz leválasztásakor"
 
-#: kmymoney/kmymoney.cpp:3839
+#: kmymoney/kmymoney.cpp:3841
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5876,30 +5876,30 @@ msgstr ""
 "kattintson a Nem-re, hogy %2 maradjon,\n"
 "vagy a Mégsem-re, hogy megszakítsa a számla létrehozását."
 
-#: kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3851
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Nyitóegyenleg probléma"
 
-#: kmymoney/kmymoney.cpp:3860
+#: kmymoney/kmymoney.cpp:3862
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Nem lehet hozzáadni ezt a számlát: %1"
 
-#: kmymoney/kmymoney.cpp:3930
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Összefüggés ellenőrzés futtatása..."
 
-#: kmymoney/kmymoney.cpp:3937
+#: kmymoney/kmymoney.cpp:3939
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Összefüggés ellenőrzés hiba: %1"
 
-#: kmymoney/kmymoney.cpp:3947
+#: kmymoney/kmymoney.cpp:3949
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5908,7 +5908,7 @@ msgstr ""
 "Az összefüggés ellenőrző nem talált ellentétet az adatokban. A részletek "
 "megtalálhatóak alább."
 
-#: kmymoney/kmymoney.cpp:3949
+#: kmymoney/kmymoney.cpp:3951
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5919,28 +5919,28 @@ msgstr ""
 "alább vannak felsorolva. Azokat az ellentéteket, amik automatikusan nem "
 "voltak javíthatóak, a felhasználónak kell megoldania."
 
-#: kmymoney/kmymoney.cpp:3952
+#: kmymoney/kmymoney.cpp:3954
 #, kde-format
 msgid "Consistency check result"
 msgstr "Összefüggés ellenőrzés eredménye"
 
-#: kmymoney/kmymoney.cpp:4018
+#: kmymoney/kmymoney.cpp:4020
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Lejárt ütemezett tranzakciók ellenőrzése"
 
-#: kmymoney/kmymoney.cpp:4182
+#: kmymoney/kmymoney.cpp:4184
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4187
+#: kmymoney/kmymoney.cpp:4189
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4199
+#: kmymoney/kmymoney.cpp:4201
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5953,60 +5953,60 @@ msgstr ""
 "Nem sikerült %1 importálása a(z) %2 bővítmény használatával. A bővítmény a "
 "következő hibával tért vissza: %3"
 
-#: kmymoney/kmymoney.cpp:4199 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
+#: kmymoney/kmymoney.cpp:4201 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "Importálási hiba"
 
-#: kmymoney/kmymoney.cpp:4226
+#: kmymoney/kmymoney.cpp:4228
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Minden üzenet engedélyezve lett."
 
-#: kmymoney/kmymoney.cpp:4226
+#: kmymoney/kmymoney.cpp:4228
 #, kde-format
 msgid "All messages"
 msgstr "Minden üzenet"
 
-#: kmymoney/kmymoney.cpp:4262
+#: kmymoney/kmymoney.cpp:4264
 #, kde-format
 msgid "Auto saving..."
 msgstr "Automatikus mentés..."
 
-#: kmymoney/kmymoney.cpp:4382
+#: kmymoney/kmymoney.cpp:4384
 #, kde-format
 msgid "Creating new document..."
 msgstr "Új dokumentum létrehozása…"
 
-#: kmymoney/kmymoney.cpp:4442
+#: kmymoney/kmymoney.cpp:4444
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Új profil létrehozása"
 
-#: kmymoney/kmymoney.cpp:4453
+#: kmymoney/kmymoney.cpp:4455
 #, kde-format
 msgid "Open a file."
 msgstr "Fájl megnyitása."
 
-#: kmymoney/kmymoney.cpp:4467
+#: kmymoney/kmymoney.cpp:4469
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4471
+#: kmymoney/kmymoney.cpp:4473
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Összes fájl"
 
-#: kmymoney/kmymoney.cpp:4484
+#: kmymoney/kmymoney.cpp:4486
 #, kde-format
 msgid "Loading file..."
 msgstr "Fájl betöltése…"
 
-#: kmymoney/kmymoney.cpp:4492
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6015,58 +6015,58 @@ msgstr ""
 "<p><b>%1</b> egy érvénytelen fájlnév, vagy a fájl nem létezik. Megnyithat "
 "egy másik fájlt, vagy létrehozhat egy újat.</p>"
 
-#: kmymoney/kmymoney.cpp:4492
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid "File not found"
 msgstr "A fájl nem található"
 
-#: kmymoney/kmymoney.cpp:4524
+#: kmymoney/kmymoney.cpp:4526
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4530
+#: kmymoney/kmymoney.cpp:4532
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "%1 fájlt nem lehet megnyitni írásra"
 
-#: kmymoney/kmymoney.cpp:4537
+#: kmymoney/kmymoney.cpp:4539
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4548
+#: kmymoney/kmymoney.cpp:4550
 #, kde-format
 msgid "Saving file..."
 msgstr "Fájl mentése…"
 
-#: kmymoney/kmymoney.cpp:4560
+#: kmymoney/kmymoney.cpp:4562
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Sikertelen mentés: %1"
 
-#: kmymoney/kmymoney.cpp:4566
+#: kmymoney/kmymoney.cpp:4568
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4572
+#: kmymoney/kmymoney.cpp:4574
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Fájl mentése…"
 
-#: kmymoney/kmymoney.cpp:4588
+#: kmymoney/kmymoney.cpp:4590
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4617
+#: kmymoney/kmymoney.cpp:4619
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -9437,7 +9437,7 @@ msgstr "Részvény neve"
 msgid "Source"
 msgstr "Forrás"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:59
+#: kmymoney/mymoney/storage/reportsmodel.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "@title header of the currency name column"
 #| msgid "Name"
@@ -9445,42 +9445,42 @@ msgctxt "Reportname"
 msgid "Name"
 msgstr "Név"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:62
+#: kmymoney/mymoney/storage/reportsmodel.cpp:61
 #, fuzzy, kde-format
 #| msgid "Comment"
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Megjegyzés"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:65
+#: kmymoney/mymoney/storage/reportsmodel.cpp:64
 #, fuzzy, kde-format
 #| msgid "Start Date"
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "Indítási dátum"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:68
+#: kmymoney/mymoney/storage/reportsmodel.cpp:67
 #, fuzzy, kde-format
 #| msgid "Date"
 msgctxt "Report date range"
 msgid "End Date"
 msgstr "Dátum"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:71
+#: kmymoney/mymoney/storage/reportsmodel.cpp:70
 #, fuzzy, kde-format
 #| msgid "Favorites"
 msgctxt "Report favorite"
 msgid "Favorite"
 msgstr "Kedvencek"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:74
+#: kmymoney/mymoney/storage/reportsmodel.cpp:73
 #, fuzzy, kde-format
 #| msgid "Groups"
 msgctxt "Report group"
 msgid "Group"
 msgstr "Csoportok"
 
-#: kmymoney/mymoney/storage/reportsmodel.cpp:77
+#: kmymoney/mymoney/storage/reportsmodel.cpp:76
 #, fuzzy, kde-format
 #| msgid "Modify"
 msgctxt "Report state"
@@ -14524,7 +14524,7 @@ msgstr "QIF profil"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:254
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:643
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
 #: kmymoney/views/kmymoneyview.cpp:190
 #, kde-format
@@ -15905,7 +15905,7 @@ msgstr "Összes"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:565
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:560
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
@@ -15913,7 +15913,7 @@ msgstr "Felső szint"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:568
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:563
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -15921,7 +15921,7 @@ msgstr "Csoportok"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:571
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:566
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -16369,7 +16369,7 @@ msgstr "Szám"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:706
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:649
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:644
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:259
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
 #: kmymoney/views/newtransactioneditor.ui:214
@@ -16391,7 +16391,7 @@ msgstr "Kategóriatípus"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:720
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:664
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:659
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:284
 #, kde-format
 msgid "Week"
@@ -17009,35 +17009,35 @@ msgstr "Jelentés"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:491
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:502
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:726
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:721
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
 msgid "Monthly"
 msgstr "Havi"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:562
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:557
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
 msgstr "Összes"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:580
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:575
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "Bevételek & Költségek"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:583
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:578
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "Vagyontárgyak & Kötelezettségek"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:646
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:641
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:254
 #, kde-format
 msgid "Top Categories"
@@ -17045,7 +17045,7 @@ msgstr "Legjobb kategóriák"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:655
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:650
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:269
 #: kmymoney/views/kmymoneyview.cpp:188
 #: kmymoney/widgets/kaccounttemplateselector.ui:87
@@ -17054,14 +17054,14 @@ msgid "Accounts"
 msgstr "Számlák"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:658
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:653
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:274
 #, kde-format
 msgid "Top Accounts"
 msgstr "Legjobb számlák"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:714
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:709
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -17069,7 +17069,7 @@ msgid "Daily"
 msgstr "Napi"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:717
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:712
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -17077,7 +17077,7 @@ msgid "Weekly"
 msgstr "Heti"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:729
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:724
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -17085,7 +17085,7 @@ msgid "Bi-Monthly"
 msgstr "Kéthavi"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:732
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:727
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -17093,31 +17093,31 @@ msgid "Quarterly"
 msgstr "Negyedévi"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:735
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:730
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "Éves"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:750
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:762
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:745
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:757
 #, kde-format
 msgid "Only owned"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:751
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:763
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:746
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:758
 #, kde-format
 msgid "Only sold"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:760
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:755
 #, kde-format
 msgid "From period"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:761
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:756
 #, kde-format
 msgid "Owned and sold"
 msgstr ""
@@ -22589,13 +22589,13 @@ msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Név"
 
-#: kmymoney/widgets/kguiutils.cpp:308
+#: kmymoney/widgets/kguiutils.cpp:305
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
 msgstr ""
 
-#: kmymoney/widgets/kguiutils.cpp:311
+#: kmymoney/widgets/kguiutils.cpp:308
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"
