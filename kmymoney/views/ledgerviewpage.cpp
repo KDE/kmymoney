@@ -107,6 +107,7 @@ void LedgerViewPage::initModel()
     connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
         if (isVisible()) {
             d->ui->m_searchWidget->show();
+            d->ui->m_searchWidget->lineEdit()->setFocus();
         }
     });
 
