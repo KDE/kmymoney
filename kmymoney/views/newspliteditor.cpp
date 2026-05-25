@@ -373,6 +373,17 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->setupUi(this);
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
+    const auto& action = pActions[eMenu::Action::EditTabOrder];
+    d->ui->editTabOrderButton->setText(action->text());
+    d->ui->editTabOrderButton->setIcon(action->icon());
+    connect(d->ui->editTabOrderButton, &QToolButton::clicked, action, [&]() {
+        pActions[eMenu::Action::EditTabOrder]->setDisabled(true);
+        d->ui->editTabOrderButton->setDisabled(true);
+        TabOrderDialog::createAndExec(this);
+        d->ui->editTabOrderButton->setEnabled(true);
+        pActions[eMenu::Action::EditTabOrder]->setEnabled(true);
+    });
+
     setAutoFillBackground(true);
     setBackgroundRole(QPalette::Window);
 
@@ -474,6 +485,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->tagContainer->tagCombo()->installEventFilter(this);
     d->ui->accountCombo->installEventFilter(this);
     d->ui->creditDebitEdit->installEventFilter(this);
+    d->ui->editTabOrderButton->installEventFilter(this);
 
     // setup the tab order
     d->m_tabOrder.setWidget(this);
@@ -836,15 +848,11 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
         const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
 
         if (pActions[eMenu::Action::EditTabOrder]->shortcuts().contains(keySeq)) {
-            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
-            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
-            if (tabOrderWidget) {
-                tabOrderDialog->setTarget(tabOrderWidget);
-                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
-                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
-                }
-            }
-            tabOrderDialog->deleteLater();
+            pActions[eMenu::Action::EditTabOrder]->setDisabled(true);
+            d->ui->editTabOrderButton->setDisabled(true);
+            TabOrderDialog::createAndExec(this);
+            d->ui->editTabOrderButton->setEnabled(true);
+            pActions[eMenu::Action::EditTabOrder]->setEnabled(true);
             return true;
         }
 

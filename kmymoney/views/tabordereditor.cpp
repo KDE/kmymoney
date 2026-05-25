@@ -178,6 +178,19 @@ int TabOrderDialog::exec()
     return QDialog::exec();
 }
 
+void TabOrderDialog::createAndExec(QWidget* parent)
+{
+    auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(parent->qt_metacast("TabOrderEditorInterface"));
+    if (tabOrderWidget) {
+        QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(parent);
+        tabOrderDialog->setTarget(tabOrderWidget);
+        if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+            tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+        }
+        tabOrderDialog->deleteLater();
+    }
+}
+
 class TabOrderEditorPrivate
 {
     Q_DECLARE_PUBLIC(TabOrderEditor)

@@ -95,6 +95,8 @@ public:
 
     int exec() override;
 
+    static void createAndExec(QWidget* parent);
+
 private:
     TabOrderDialogPrivate* d_ptr;
 };

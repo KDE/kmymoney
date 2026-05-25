@@ -153,7 +153,11 @@ public:
         m_editTabOrderButton->setText(action->text());
         m_editTabOrderButton->setIcon(action->icon());
         connect(m_editTabOrderButton, &QPushButton::clicked, action, [&]() {
-            q_ptr->editTabOrder();
+            pActions[eMenu::Action::EditTabOrder]->setDisabled(true);
+            m_editTabOrderButton->setDisabled(true);
+            TabOrderDialog::createAndExec(q_ptr);
+            m_editTabOrderButton->setEnabled(true);
+            pActions[eMenu::Action::EditTabOrder]->setEnabled(true);
         });
     }
 
@@ -771,32 +775,22 @@ bool KEditScheduleDlg::focusNextPrevChild(bool next)
 
 bool KEditScheduleDlg::eventFilter(QObject* o, QEvent* e)
 {
+    Q_D(KEditScheduleDlg);
+
     if (e->type() == QEvent::KeyPress) {
         auto kev = static_cast<QKeyEvent*>(e);
         const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
 
         if (pActions[eMenu::Action::EditTabOrder]->shortcuts().contains(keySeq)) {
-            editTabOrder();
+            pActions[eMenu::Action::EditTabOrder]->setDisabled(true);
+            d->m_editTabOrderButton->setDisabled(true);
+            TabOrderDialog::createAndExec(this);
+            d->m_editTabOrderButton->setEnabled(true);
+            pActions[eMenu::Action::EditTabOrder]->setEnabled(true);
             return true;
         }
     }
     return QDialog::eventFilter(o, e);
-}
-
-void KEditScheduleDlg::editTabOrder()
-{
-    Q_D(KEditScheduleDlg);
-    d->m_editTabOrderButton->setEnabled(false);
-    QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
-    auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
-    if (tabOrderWidget) {
-        tabOrderDialog->setTarget(tabOrderWidget);
-        if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
-            tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
-        }
-    }
-    d->m_editTabOrderButton->setEnabled(true);
-    tabOrderDialog->deleteLater();
 }
 
 #include "keditscheduledlg.moc"
