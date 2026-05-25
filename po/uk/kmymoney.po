@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-12 03:35+0000\n"
+"POT-Creation-Date: 2026-05-25 03:29+0000\n"
 "PO-Revision-Date: 2026-02-23 09:23+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -1854,7 +1854,7 @@ msgstr "Стан:"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:471
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
-#: kmymoney/plugins/views/reports/kreportsview.ui:80
+#: kmymoney/plugins/views/reports/kreportsview.ui:85
 #: kmymoney/settings/kmymoney.kcfg:485 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
@@ -12065,7 +12065,7 @@ msgid "iCalendar files"
 msgstr "Файли iCalendar"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:347
+#: kmymoney/plugins/views/reports/kreportsview.cpp:349
 #, kde-format
 msgid "Export as"
 msgstr "Експортувати як"
@@ -12536,9 +12536,9 @@ msgstr ""
 "дії?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1567
-#: kmymoney/plugins/views/reports/kreportsview.cpp:435
-#: kmymoney/plugins/views/reports/kreportsview.cpp:494
-#: kmymoney/plugins/views/reports/kreportsview.cpp:513
+#: kmymoney/plugins/views/reports/kreportsview.cpp:438
+#: kmymoney/plugins/views/reports/kreportsview.cpp:497
+#: kmymoney/plugins/views/reports/kreportsview.cpp:516
 #, kde-format
 msgid "Critical Error"
 msgstr "Критична помилка"
@@ -15129,7 +15129,7 @@ msgid "Unable to remove budget."
 msgstr "Не вдалося вилучити бюджет."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:211
-#: kmymoney/plugins/views/reports/kreportsview.cpp:470
+#: kmymoney/plugins/views/reports/kreportsview.cpp:473
 #, kde-format
 msgid "Copy of %1"
 msgstr "Копія %1"
@@ -15740,12 +15740,12 @@ msgstr "Середній"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1433
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1573
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1623
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1700
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1880
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1455
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1595
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1645
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1722
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1902
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1973
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16007,8 +16007,8 @@ msgstr "Баланс закриття"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1647
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1988
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1669
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2010
 #, kde-format
 msgid "Grand Total"
 msgstr "Загальна сума"
@@ -16349,50 +16349,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Відкриття"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1419
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1687
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1441
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1709
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Рахунок"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2210
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2232
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Поточний"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2215
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2237
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Бюджет"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2220
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2242
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Різниця"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2225
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2247
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Прогноз"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2230
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2252
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Рухоме середнє"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2235
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2257
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Рухома середня ціна"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2240
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2262
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -16734,22 +16734,22 @@ msgstr "Шукати операції"
 msgid "Configure your report"
 msgstr "Налаштувати цей звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:305
+#: kmymoney/plugins/views/reports/kreportsview.cpp:307
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "Невідома команда «%1» у KReportsView::slotOpenUrl()"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:325
+#: kmymoney/plugins/views/reports/kreportsview.cpp:327
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "Невідома панель перегляду «%1» у KReportsView::slotOpenUrl()"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:375
+#: kmymoney/plugins/views/reports/kreportsview.cpp:377
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "Не вдалося зберегти: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1499
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
@@ -16758,8 +16758,8 @@ msgstr "Не вдалося зберегти: %1"
 msgid "Generated Report"
 msgstr "Створений звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
-#: kmymoney/plugins/views/reports/kreportsview.cpp:471
+#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:474
 #: kmymoney/plugins/views/reports/kreportsview_p.h:830
 #: kmymoney/plugins/views/reports/kreportsview_p.h:838
 #: kmymoney/plugins/views/reports/kreportsview_p.h:846
@@ -16818,19 +16818,19 @@ msgstr "Створений звіт"
 msgid "Default Report"
 msgstr "Типовий звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:401
-#: kmymoney/plugins/views/reports/kreportsview.cpp:472
+#: kmymoney/plugins/views/reports/kreportsview.cpp:403
+#: kmymoney/plugins/views/reports/kreportsview.cpp:475
 #, kde-format
 msgid "Custom Report"
 msgstr "Нетиповий звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:402
+#: kmymoney/plugins/views/reports/kreportsview.cpp:404
 #, kde-format
 msgid "%1 (Customized)"
 msgstr "%1 (змінений)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:429
-#: kmymoney/plugins/views/reports/kreportsview.cpp:488
+#: kmymoney/plugins/views/reports/kreportsview.cpp:432
+#: kmymoney/plugins/views/reports/kreportsview.cpp:491
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -16840,74 +16840,75 @@ msgstr ""
 "Будь ласка, повідомте про цю помилку у списку листування розробників: "
 "kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:449
+#: kmymoney/plugins/views/reports/kreportsview.cpp:452
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "Не вдалося налаштувати звіт: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:507
+#: kmymoney/plugins/views/reports/kreportsview.cpp:510
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Не вдалося додати звіт, причина: «%1»"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:542
+#: kmymoney/plugins/views/reports/kreportsview.cpp:545
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> є типовим звітом. Його не можна вилучати."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "Вилучити звіт?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:740
+#: kmymoney/plugins/views/reports/kreportsview.cpp:743
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Параметри звіту"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:741
+#: kmymoney/plugins/views/reports/kreportsview.cpp:744
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "&Відкрити"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:744
+#: kmymoney/plugins/views/reports/kreportsview.cpp:747
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr "На&друкувати"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:748
+#: kmymoney/plugins/views/reports/kreportsview.cpp:751
 #, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
 msgstr "&Експортувати до файла PDF"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:750
+#: kmymoney/plugins/views/reports/kreportsview.cpp:753
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "&Налаштувати"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:753
+#: kmymoney/plugins/views/reports/kreportsview.cpp:756
 #, kde-format
 msgid "&New report"
 msgstr "С&творити звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:763
+#: kmymoney/plugins/views/reports/kreportsview.cpp:766
+#: kmymoney/plugins/views/reports/kreportsview.cpp:772
 #, kde-format
 msgid "&Delete"
 msgstr "&Вилучити"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:768
+#: kmymoney/plugins/views/reports/kreportsview.cpp:771
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
 msgstr "&Експортувати до файлів PDF"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:821
+#: kmymoney/plugins/views/reports/kreportsview.cpp:825
 #, kde-format
 msgid "Export into directory"
 msgstr "Експортувати до каталогу"
@@ -16940,6 +16941,13 @@ msgstr "Звіти"
 #, kde-format
 msgid "Comment"
 msgstr "Коментар"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
+#: kmymoney/plugins/views/reports/kreportsview.ui:59
+#, fuzzy, kde-format
+#| msgid "Modify"
+msgid "Modified"
+msgstr "Змінити"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:438
