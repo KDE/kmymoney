@@ -570,10 +570,11 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
 
     if (!event->modifiers() || (event->modifiers() & Qt::KeypadModifier && event->key() == Qt::Key_Enter)) {
         const auto widgetIsButton = (focusWidget() == d->ui->enterButton) || (focusWidget() == d->ui->cancelButton);
+        const auto enterMovesBetweenFields = d->baseEditor && d->baseEditor->enterMovesBetweenFields();
         switch (event->key()) {
         case Qt::Key_Enter:
         case Qt::Key_Return:
-            if (!d->baseEditor->enterMovesBetweenFields() || widgetIsButton) {
+            if (!enterMovesBetweenFields || widgetIsButton) {
                 if (focusWidget() == d->ui->cancelButton) {
                     reject();
                 } else {
@@ -834,7 +835,7 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                 // no shift, ctrl, meta or alt
                 if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
                     // and the return key and we use it to move between fields
-                    if (d->baseEditor->enterMovesBetweenFields()) {
+                    if (d->baseEditor && d->baseEditor->enterMovesBetweenFields()) {
                         focusNextChild();
                         return true;
                     }
@@ -873,7 +874,7 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
         } else if (o == d->ui->memoEdit) {
             if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
                 // and the return key and we use it to move between fields
-                if (d->baseEditor->enterMovesBetweenFields()) {
+                if (d->baseEditor && d->baseEditor->enterMovesBetweenFields()) {
                     if (kev->modifiers() == Qt::AltModifier) {
                         d->ui->memoEdit->insertPlainText(QLatin1String("\n"));
                         d->ui->memoEdit->textCursor().movePosition(QTextCursor::Right);
