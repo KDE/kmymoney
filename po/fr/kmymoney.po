@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-25 00:44+0000\n"
+"POT-Creation-Date: 2026-05-26 00:45+0000\n"
 "PO-Revision-Date: 2026-05-20 12:20+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -6672,7 +6672,7 @@ msgstr ""
 "Le module externe permettant d'afficher ces informations est introuvable."
 
 #: kmymoney/models/statementmodel.cpp:93
-#: kmymoney/mymoney/storage/accountsmodel.cpp:467
+#: kmymoney/mymoney/storage/accountsmodel.cpp:473
 #, kde-format
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
@@ -6721,7 +6721,7 @@ msgid "Payees created"
 msgstr "Les bénéficiaires ont été créés."
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:503
+#: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -6730,7 +6730,7 @@ msgid "Full name"
 msgstr "Nom complet"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:505
+#: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -6739,28 +6739,28 @@ msgid "Type"
 msgstr "Type"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:507
+#: kmymoney/mymoney/storage/accountsmodel.cpp:513
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "Si le compte possède un paramétrage pour correspondance en ligne."
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:509
+#: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "Si le compte est intégré dans les déclarations d'impôts."
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:511
+#: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "Taux en pourcentage de TVA, si configuré."
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:513
+#: kmymoney/mymoney/storage/accountsmodel.cpp:519
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
@@ -6770,28 +6770,28 @@ msgstr ""
 "transaction."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:515
+#: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr "Solde du compte (Dans la devise du compte)"
 
 #: kmymoney/models/statementmodel.cpp:131
-#: kmymoney/mymoney/storage/accountsmodel.cpp:481
-#: kmymoney/mymoney/storage/accountsmodel.cpp:517
+#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:523
 #, kde-format
 msgid "Posted Value"
 msgstr "Valeur comptabilisée"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:519
+#: kmymoney/mymoney/storage/accountsmodel.cpp:525
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "Valeur totale (incluant les sous-comptes)"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:521
+#: kmymoney/mymoney/storage/accountsmodel.cpp:527
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
@@ -6799,7 +6799,7 @@ msgstr ""
 "Numéro de compte ou de carte de crédit, comme fourni par l'établissement."
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:523
+#: kmymoney/mymoney/storage/accountsmodel.cpp:529
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
@@ -6807,7 +6807,7 @@ msgstr ""
 "Numéro de compte au format « IBAN » (International Bank Account Number)"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:528
+#: kmymoney/mymoney/storage/accountsmodel.cpp:534
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6824,7 +6824,7 @@ msgstr ""
 "anglais)."
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:531
+#: kmymoney/mymoney/storage/accountsmodel.cpp:537
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8860,69 +8860,69 @@ msgctxt "Reconciliation state"
 msgid "Status"
 msgstr "État"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:398
+#: kmymoney/mymoney/storage/accountsmodel.cpp:403
 msgid "Favorite"
 msgstr "Favoris"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:399
+#: kmymoney/mymoney/storage/accountsmodel.cpp:404
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:384
 #, kde-format
 msgid "Asset accounts"
 msgstr "Comptes d'actif"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:400
+#: kmymoney/mymoney/storage/accountsmodel.cpp:405
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:392
 #, kde-format
 msgid "Liability accounts"
 msgstr "Comptes de passif"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:401
+#: kmymoney/mymoney/storage/accountsmodel.cpp:406
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:140
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:400
 #, kde-format
 msgid "Income categories"
 msgstr "Catégories de revenus"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:402
+#: kmymoney/mymoney/storage/accountsmodel.cpp:407
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:142
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:411
 #, kde-format
 msgid "Expense categories"
 msgstr "Catégories de dépenses"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:403
+#: kmymoney/mymoney/storage/accountsmodel.cpp:408
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:422
 #, kde-format
 msgid "Equity accounts"
 msgstr "Comptes titres"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:469
+#: kmymoney/mymoney/storage/accountsmodel.cpp:475
 #, kde-format
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "Type"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:471
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
 msgstr "En ligne"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:473
+#: kmymoney/mymoney/storage/accountsmodel.cpp:479
 #, kde-format
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Taxe"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:475
+#: kmymoney/mymoney/storage/accountsmodel.cpp:481
 #, kde-format
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "TVA"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:477
+#: kmymoney/mymoney/storage/accountsmodel.cpp:483
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
@@ -8930,13 +8930,13 @@ msgctxt ""
 msgid "CC"
 msgstr "CC"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:479
+#: kmymoney/mymoney/storage/accountsmodel.cpp:485
 #, kde-format
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Solde"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:483
+#: kmymoney/mymoney/storage/accountsmodel.cpp:489
 #, kde-format
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
@@ -8944,19 +8944,19 @@ msgctxt ""
 msgid "Total Value"
 msgstr "Valeur totale"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:485
+#: kmymoney/mymoney/storage/accountsmodel.cpp:491
 #, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Numéro"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:493
 #, kde-format
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:492
+#: kmymoney/mymoney/storage/accountsmodel.cpp:498
 #, kde-format
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
@@ -8965,7 +8965,7 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "Code de la banque"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:494
+#: kmymoney/mymoney/storage/accountsmodel.cpp:500
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"

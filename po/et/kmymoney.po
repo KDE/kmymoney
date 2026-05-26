@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-25 00:44+0000\n"
+"POT-Creation-Date: 2026-05-26 00:45+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -6686,7 +6686,7 @@ msgid "The plugin to show this information could not be found."
 msgstr "Selle teabe näitamiseks ei leitud pluginat."
 
 #: kmymoney/models/statementmodel.cpp:93
-#: kmymoney/mymoney/storage/accountsmodel.cpp:467
+#: kmymoney/mymoney/storage/accountsmodel.cpp:473
 #, fuzzy, kde-format
 #| msgid "Name"
 msgctxt "@title:column Shows the Name of account"
@@ -6745,7 +6745,7 @@ msgid "Payees created"
 msgstr "Maksesaaja loomine"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:503
+#: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, fuzzy, kde-format
 #| msgid "Full name"
 msgctxt ""
@@ -6755,7 +6755,7 @@ msgid "Full name"
 msgstr "Täisnimi"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:505
+#: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt ""
@@ -6765,7 +6765,7 @@ msgid "Type"
 msgstr "Tüüp"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:507
+#: kmymoney/mymoney/storage/accountsmodel.cpp:513
 #, fuzzy, kde-format
 #| msgid "This account is still included in an active schedule"
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
@@ -6773,7 +6773,7 @@ msgid "Whether account has online mapping set up"
 msgstr "See on konto on endiselt aktiivses ajaplaanis"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:509
+#: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, fuzzy, kde-format
 #| msgid "This account is still included in an active schedule"
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
@@ -6781,14 +6781,14 @@ msgid "Whether account is included in tax reports"
 msgstr "See on konto on endiselt aktiivses ajaplaanis"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:511
+#: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:513
+#: kmymoney/mymoney/storage/accountsmodel.cpp:519
 #, fuzzy, kde-format
 #| msgid ""
 #| "A cost center assignment is required for a transaction in the selected "
@@ -6799,21 +6799,21 @@ msgid ""
 msgstr "Valitud kategooria tehinguks on nõutav kuluüksuse omistamine."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:515
+#: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:131
-#: kmymoney/mymoney/storage/accountsmodel.cpp:481
-#: kmymoney/mymoney/storage/accountsmodel.cpp:517
+#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:523
 #, kde-format
 msgid "Posted Value"
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:519
+#: kmymoney/mymoney/storage/accountsmodel.cpp:525
 #, fuzzy, kde-format
 #| msgid "Include subaccounts"
 msgctxt "@info:tooltip for 'Total Value' column"
@@ -6821,14 +6821,14 @@ msgid "Total Value (including subaccounts)"
 msgstr "Kaasa arvatud allkontod"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:521
+#: kmymoney/mymoney/storage/accountsmodel.cpp:527
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:523
+#: kmymoney/mymoney/storage/accountsmodel.cpp:529
 #, fuzzy, kde-format
 #| msgid "Enter the International Bank Account Number into this field"
 msgctxt "@info:tooltip for 'IBAN' column"
@@ -6836,7 +6836,7 @@ msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr "Siia väljale tuleb kirjutada rahvusvaheline kontonumber"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:528
+#: kmymoney/mymoney/storage/accountsmodel.cpp:534
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6849,7 +6849,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:531
+#: kmymoney/mymoney/storage/accountsmodel.cpp:537
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8917,45 +8917,45 @@ msgctxt "Reconciliation state"
 msgid "Status"
 msgstr "Olek"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:398
+#: kmymoney/mymoney/storage/accountsmodel.cpp:403
 #, fuzzy
 #| msgid "Favorites"
 msgid "Favorite"
 msgstr "Lemmikud"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:399
+#: kmymoney/mymoney/storage/accountsmodel.cpp:404
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:384
 #, kde-format
 msgid "Asset accounts"
 msgstr "Varakontod"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:400
+#: kmymoney/mymoney/storage/accountsmodel.cpp:405
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:392
 #, kde-format
 msgid "Liability accounts"
 msgstr "Kohustiskontod"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:401
+#: kmymoney/mymoney/storage/accountsmodel.cpp:406
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:140
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:400
 #, kde-format
 msgid "Income categories"
 msgstr "Tulukategooriad"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:402
+#: kmymoney/mymoney/storage/accountsmodel.cpp:407
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:142
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:411
 #, kde-format
 msgid "Expense categories"
 msgstr "Kulukategooriad"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:403
+#: kmymoney/mymoney/storage/accountsmodel.cpp:408
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:422
 #, kde-format
 msgid "Equity accounts"
 msgstr "Finantsinstrumentide kontod"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:469
+#: kmymoney/mymoney/storage/accountsmodel.cpp:475
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt ""
@@ -8963,7 +8963,7 @@ msgctxt ""
 msgid "Type"
 msgstr "Tüüp"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:471
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, fuzzy, kde-format
 #| msgid "End line"
 msgctxt ""
@@ -8971,14 +8971,14 @@ msgctxt ""
 msgid "Online"
 msgstr "Lõpprida."
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:473
+#: kmymoney/mymoney/storage/accountsmodel.cpp:479
 #, fuzzy, kde-format
 #| msgid "Tax"
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Maksud"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:475
+#: kmymoney/mymoney/storage/accountsmodel.cpp:481
 #, fuzzy, kde-format
 #| msgctxt "Column heading for VAT category"
 #| msgid "VAT"
@@ -8986,7 +8986,7 @@ msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "Käibemaks"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:477
+#: kmymoney/mymoney/storage/accountsmodel.cpp:483
 #, fuzzy, kde-format
 #| msgid "CC"
 msgctxt ""
@@ -8995,14 +8995,14 @@ msgctxt ""
 msgid "CC"
 msgstr "Kuluüksus"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:479
+#: kmymoney/mymoney/storage/accountsmodel.cpp:485
 #, fuzzy, kde-format
 #| msgid "Balance"
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Bilanss"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:483
+#: kmymoney/mymoney/storage/accountsmodel.cpp:489
 #, fuzzy, kde-format
 #| msgid "Total Value"
 msgctxt ""
@@ -9011,21 +9011,21 @@ msgctxt ""
 msgid "Total Value"
 msgstr "Koguväärtus"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:485
+#: kmymoney/mymoney/storage/accountsmodel.cpp:491
 #, fuzzy, kde-format
 #| msgid "Number"
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Number"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:493
 #, fuzzy, kde-format
 #| msgid "IBAN"
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:492
+#: kmymoney/mymoney/storage/accountsmodel.cpp:498
 #, fuzzy, kde-format
 #| msgid "Bank Code"
 msgctxt ""
@@ -9035,7 +9035,7 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "Pangakood"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:494
+#: kmymoney/mymoney/storage/accountsmodel.cpp:500
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
