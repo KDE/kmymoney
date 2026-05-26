@@ -302,6 +302,13 @@
    <item row="11" column="2" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QToolButton" name="editTabOrderButton">
+       <property name="text">
+        <string>Edit tab order</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

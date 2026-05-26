@@ -57,6 +57,7 @@ public:
 
 protected:
     bool eventFilter(QObject* o, QEvent* e) override;
+    void editTabOrder();
     bool focusNextPrevChild(bool next) override;
 
 private Q_SLOTS:

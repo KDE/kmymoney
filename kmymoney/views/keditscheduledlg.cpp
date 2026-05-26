@@ -149,6 +149,13 @@ public:
         delete transactionEditor->focusFrame();
 
         ui->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
+        const auto& action = pActions[eMenu::Action::EditTabOrder];
+        m_editTabOrderButton = ui->buttonBox->addButton(QString(), QDialogButtonBox::ActionRole);
+        m_editTabOrderButton->setText(action->text());
+        m_editTabOrderButton->setIcon(action->icon());
+        connect(m_editTabOrderButton, &QPushButton::clicked, action, [&]() {
+            q_ptr->editTabOrder();
+        });
     }
 
     void updateState()
@@ -330,6 +337,7 @@ public:
     PaymentMethodModel m_paymentMethodModel;
     bool m_warningAboutChangedFrequencyShown;
     TabOrder m_tabOrder;
+    QPushButton* m_editTabOrderButton;
 };
 
 KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* parent)
@@ -769,18 +777,27 @@ bool KEditScheduleDlg::eventFilter(QObject* o, QEvent* e)
         const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
 
         if (pActions[eMenu::Action::EditTabOrder]->shortcuts().contains(keySeq)) {
-            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
-            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
-            if (tabOrderWidget) {
-                tabOrderDialog->setTarget(tabOrderWidget);
-                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
-                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
-                }
-            }
-            tabOrderDialog->deleteLater();
+            editTabOrder();
             return true;
         }
     }
     return QDialog::eventFilter(o, e);
 }
+
+void KEditScheduleDlg::editTabOrder()
+{
+    Q_D(KEditScheduleDlg);
+    d->m_editTabOrderButton->setEnabled(false);
+    QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
+    auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
+    if (tabOrderWidget) {
+        tabOrderDialog->setTarget(tabOrderWidget);
+        if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+            tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+        }
+    }
+    d->m_editTabOrderButton->setEnabled(true);
+    tabOrderDialog->deleteLater();
+}
+
 #include "keditscheduledlg.moc"

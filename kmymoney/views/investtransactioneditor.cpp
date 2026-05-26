@@ -32,6 +32,7 @@
 #include "kcurrencyconverter.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
@@ -829,6 +830,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
+    d->ui->editTabOrderButton->setDefaultAction(pActions[eMenu::Action::EditTabOrder]);
 
     d->ui->statusCombo->setModel(MyMoneyFile::instance()->statusModel());
 

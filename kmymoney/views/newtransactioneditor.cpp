@@ -5,6 +5,7 @@
 
 #include "newtransactioneditor.h"
 #include "config-kmymoney.h"
+#include "menuenums.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -1276,6 +1277,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     });
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
+    d->ui->editTabOrderButton->setDefaultAction(pActions[eMenu::Action::EditTabOrder]);
 
     d->ui->statusCombo->setModel(MyMoneyFile::instance()->statusModel());
 
@@ -1790,6 +1792,7 @@ void NewTransactionEditor::setShowButtons(bool show) const
 {
     d->ui->enterButton->setVisible(show);
     d->ui->cancelButton->setVisible(show);
+    d->ui->editTabOrderButton->setVisible(show);
 }
 
 void NewTransactionEditor::setShowNumberWidget(bool show) const
