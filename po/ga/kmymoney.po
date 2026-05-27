@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-25 03:29+0000\n"
+"POT-Creation-Date: 2026-05-27 03:35+0000\n"
 "PO-Revision-Date: 2026-04-22 16:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@yahoo.com>\n"
 "Language-Team: Irish <http://weblate.amgelocalnet.duckdns.org/projects/kde-"
@@ -1639,9 +1639,9 @@ msgstr "Bain"
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:330
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
-#: kmymoney/views/investtransactioneditor.ui:333
-#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
-#: kmymoney/views/newtransactioneditor.ui:146
+#: kmymoney/views/investtransactioneditor.ui:340
+#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:102
+#: kmymoney/views/newtransactioneditor.ui:153
 #, kde-format
 msgid "Cancel"
 msgstr "Cealaigh"
@@ -5408,7 +5408,10 @@ msgstr "Dún an tuarascáil"
 msgid "Toggle chart"
 msgstr "Scoránaigh an chairt"
 
-#: kmymoney/kmymoney.cpp:1520
+#. i18n: ectx: property (text), widget (QToolButton, editTabOrderButton)
+#: kmymoney/kmymoney.cpp:1520 kmymoney/views/investtransactioneditor.ui:307
+#: kmymoney/views/newspliteditor.ui:69
+#: kmymoney/views/newtransactioneditor.ui:120
 #, kde-format
 msgid "Edit tab order"
 msgstr "Cuir ord na dtab in eagar"
@@ -6535,7 +6538,7 @@ msgid "The plugin to show this information could not be found."
 msgstr "Níorbh fhéidir an breiseán a thaispeánann an fhaisnéis seo a aimsiú."
 
 #: kmymoney/models/statementmodel.cpp:93
-#: kmymoney/mymoney/storage/accountsmodel.cpp:467
+#: kmymoney/mymoney/storage/accountsmodel.cpp:473
 #, kde-format
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
@@ -6584,7 +6587,7 @@ msgid "Payees created"
 msgstr "Íocaithe cruthaithe"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:503
+#: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -6593,7 +6596,7 @@ msgid "Full name"
 msgstr "Ainm iomlán"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:505
+#: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -6602,28 +6605,28 @@ msgid "Type"
 msgstr "Cineál"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:507
+#: kmymoney/mymoney/storage/accountsmodel.cpp:513
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "Cibé an bhfuil mapáil ar líne socraithe sa chuntas"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:509
+#: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "Cibé an bhfuil cuntas san áireamh i dtuarascálacha cánach"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:511
+#: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "Ráta céatadáin CBL, más cumraithe."
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:513
+#: kmymoney/mymoney/storage/accountsmodel.cpp:519
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
@@ -6632,28 +6635,28 @@ msgstr ""
 "Cibé an bhfuil sannadh ionad costais riachtanach agus idirbheart á iontráil."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:515
+#: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr "Iarmhéid an chuntais (in airgeadra an chuntais)"
 
 #: kmymoney/models/statementmodel.cpp:131
-#: kmymoney/mymoney/storage/accountsmodel.cpp:481
-#: kmymoney/mymoney/storage/accountsmodel.cpp:517
+#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:523
 #, kde-format
 msgid "Posted Value"
 msgstr "Luach Postáilte"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:519
+#: kmymoney/mymoney/storage/accountsmodel.cpp:525
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "Luach Iomlán (lena n-áirítear fochuntais)"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:521
+#: kmymoney/mymoney/storage/accountsmodel.cpp:527
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
@@ -6661,7 +6664,7 @@ msgstr ""
 "Uimhir chuntais nó cárta creidmheasa, mar a shanntar í ag an institiúid."
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:523
+#: kmymoney/mymoney/storage/accountsmodel.cpp:529
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
@@ -6669,7 +6672,7 @@ msgstr ""
 "Uimhir chuntais i bhformáid IBAN (Uimhir Chuntais Bhainc Idirnáisiúnta)"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:528
+#: kmymoney/mymoney/storage/accountsmodel.cpp:534
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6685,7 +6688,7 @@ msgstr ""
 "'Cód Sórtála' (cuntais RA)."
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:531
+#: kmymoney/mymoney/storage/accountsmodel.cpp:537
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8720,69 +8723,69 @@ msgctxt "Reconciliation state"
 msgid "Status"
 msgstr "Stádas"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:398
+#: kmymoney/mymoney/storage/accountsmodel.cpp:403
 msgid "Favorite"
 msgstr "Ceanán"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:399
+#: kmymoney/mymoney/storage/accountsmodel.cpp:404
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:371
 #, kde-format
 msgid "Asset accounts"
 msgstr "Cuntais sócmhainní"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:400
+#: kmymoney/mymoney/storage/accountsmodel.cpp:405
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:379
 #, kde-format
 msgid "Liability accounts"
 msgstr "Cuntais dliteanais"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:401
+#: kmymoney/mymoney/storage/accountsmodel.cpp:406
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:127
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:387
 #, kde-format
 msgid "Income categories"
 msgstr "Catagóirí ioncaim"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:402
+#: kmymoney/mymoney/storage/accountsmodel.cpp:407
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:129
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:398
 #, kde-format
 msgid "Expense categories"
 msgstr "Catagóirí caiteachais"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:403
+#: kmymoney/mymoney/storage/accountsmodel.cpp:408
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:409
 #, kde-format
 msgid "Equity accounts"
 msgstr "Cuntais chothromais"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:469
+#: kmymoney/mymoney/storage/accountsmodel.cpp:475
 #, kde-format
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "Cineál"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:471
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
 msgstr "Ar líne"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:473
+#: kmymoney/mymoney/storage/accountsmodel.cpp:479
 #, kde-format
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Cáin"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:475
+#: kmymoney/mymoney/storage/accountsmodel.cpp:481
 #, kde-format
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "CBL"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:477
+#: kmymoney/mymoney/storage/accountsmodel.cpp:483
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
@@ -8790,13 +8793,13 @@ msgctxt ""
 msgid "CC"
 msgstr "CC"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:479
+#: kmymoney/mymoney/storage/accountsmodel.cpp:485
 #, kde-format
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Iarmhéid"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:483
+#: kmymoney/mymoney/storage/accountsmodel.cpp:489
 #, kde-format
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
@@ -8804,19 +8807,19 @@ msgctxt ""
 msgid "Total Value"
 msgstr "Luach Iomlán"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:485
+#: kmymoney/mymoney/storage/accountsmodel.cpp:491
 #, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Uimhir"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:493
 #, kde-format
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:492
+#: kmymoney/mymoney/storage/accountsmodel.cpp:498
 #, kde-format
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
@@ -8825,7 +8828,7 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "Cód Bainc"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:494
+#: kmymoney/mymoney/storage/accountsmodel.cpp:500
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
@@ -10234,8 +10237,8 @@ msgstr "Glan an rogha réimse catagóire."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:700
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:164
-#: kmymoney/views/newspliteditor.ui:191
-#: kmymoney/views/newtransactioneditor.ui:171
+#: kmymoney/views/newspliteditor.ui:198
+#: kmymoney/views/newtransactioneditor.ui:178
 #: kmymoney/views/newtransactionform.ui:124
 #, kde-format
 msgid "Memo"
@@ -13196,8 +13199,8 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:379
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
-#: kmymoney/views/newspliteditor.ui:130
-#: kmymoney/views/newtransactioneditor.ui:247
+#: kmymoney/views/newspliteditor.ui:137
+#: kmymoney/views/newtransactioneditor.ui:254
 #: kmymoney/views/newtransactionform.ui:54
 #: kmymoney/widgets/transactionsortoption.cpp:40
 #, kde-format
@@ -14737,8 +14740,8 @@ msgstr "Cláraigh an t-iarmhéid deiridh"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:696
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
-#: kmymoney/views/newspliteditor.ui:160
-#: kmymoney/views/newtransactioneditor.ui:221
+#: kmymoney/views/newspliteditor.ui:167
+#: kmymoney/views/newtransactioneditor.ui:228
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:124
 #: kmymoney/widgets/ktransactionfilter.ui:326
@@ -16140,8 +16143,8 @@ msgstr "Num"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:694
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:525
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
-#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
-#: kmymoney/views/newtransactioneditor.ui:214
+#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:117
+#: kmymoney/views/newtransactioneditor.ui:221
 #: kmymoney/views/newtransactionform.ui:96
 #: kmymoney/widgets/ktransactionfilter.cpp:132
 #, kde-format
@@ -16177,7 +16180,7 @@ msgstr "Gníomh"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShares)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:714
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:172
-#: kmymoney/views/investtransactioneditor.ui:386
+#: kmymoney/views/investtransactioneditor.ui:393
 #, kde-format
 msgid "Shares"
 msgstr "Scaireanna"
@@ -16278,7 +16281,7 @@ msgstr "Tuairisceán ar Infheistíocht"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:754
 #: kmymoney/views/investtransactioneditor.ui:112
 #: kmymoney/views/investtransactioneditor.ui:229
-#: kmymoney/views/investtransactioneditor.ui:367
+#: kmymoney/views/investtransactioneditor.ui:374
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #, kde-format
 msgid "Fees"
@@ -19472,68 +19475,68 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "Cóimheas 1/"
 
-#: kmymoney/views/investtransactioneditor.cpp:99
+#: kmymoney/views/investtransactioneditor.cpp:100
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Ceannaigh scaireanna"
 
-#: kmymoney/views/investtransactioneditor.cpp:100
+#: kmymoney/views/investtransactioneditor.cpp:101
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Díol scaireanna"
 
-#: kmymoney/views/investtransactioneditor.cpp:101
+#: kmymoney/views/investtransactioneditor.cpp:102
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "Díbhinn"
 
-#: kmymoney/views/investtransactioneditor.cpp:102
+#: kmymoney/views/investtransactioneditor.cpp:103
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Athinfheistiú díbhinne"
 
-#: kmymoney/views/investtransactioneditor.cpp:103
+#: kmymoney/views/investtransactioneditor.cpp:104
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Toradh"
 
-#: kmymoney/views/investtransactioneditor.cpp:104
+#: kmymoney/views/investtransactioneditor.cpp:105
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Cuir scaireanna leis"
 
-#: kmymoney/views/investtransactioneditor.cpp:105
+#: kmymoney/views/investtransactioneditor.cpp:106
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Bain scaireanna"
 
-#: kmymoney/views/investtransactioneditor.cpp:106
+#: kmymoney/views/investtransactioneditor.cpp:107
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Scaireanna scoilte"
 
-#: kmymoney/views/investtransactioneditor.cpp:107
+#: kmymoney/views/investtransactioneditor.cpp:108
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Ioncam Úis"
 
-#: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:232
-#: kmymoney/views/newtransactioneditor.cpp:319
+#: kmymoney/views/investtransactioneditor.cpp:310
+#: kmymoney/views/multitransactioneditor.cpp:233
+#: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Tá an dáta postála roimh dháta oscailte an chuntais <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:427
+#: kmymoney/views/investtransactioneditor.cpp:428
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19543,13 +19546,13 @@ msgstr ""
 "Tá athrú tagtha ar thráchtearra an idirbhirt agus is dócha go mbeidh an "
 "fhaisnéis praghais go léir neamhbhailí dá bharr. Seiceáil iad le do thoil."
 
-#: kmymoney/views/investtransactioneditor.cpp:607
+#: kmymoney/views/investtransactioneditor.cpp:608
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Roghnaigh an ghníomhaíocht don idirbheart seo."
 
-#: kmymoney/views/investtransactioneditor.cpp:610
+#: kmymoney/views/investtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19559,13 +19562,13 @@ msgstr ""
 "Ní féidir an urrús don idirbheart seo a mhodhnú mar go bhfuil an cuntas "
 "urrús dúnta."
 
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:624
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Líon na scaireanna"
 
-#: kmymoney/views/investtransactioneditor.cpp:625
+#: kmymoney/views/investtransactioneditor.cpp:626
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19575,19 +19578,19 @@ msgstr ""
 "Ní féidir líon na scaireanna a mhodhnú mar go bhfuil an cuntas slándála "
 "dúnta."
 
-#: kmymoney/views/investtransactioneditor.cpp:629
+#: kmymoney/views/investtransactioneditor.cpp:630
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Cuir isteach líon na scaireanna don idirbheart seo"
 
-#: kmymoney/views/investtransactioneditor.cpp:635
+#: kmymoney/views/investtransactioneditor.cpp:636
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Cóimheas scoilte"
 
-#: kmymoney/views/investtransactioneditor.cpp:637
+#: kmymoney/views/investtransactioneditor.cpp:638
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19596,55 +19599,55 @@ msgstr ""
 "Ní féidir an cóimheas scoilte a mhodhnú mar go bhfuil an cuntas slándála "
 "dúnta."
 
-#: kmymoney/views/investtransactioneditor.cpp:641
+#: kmymoney/views/investtransactioneditor.cpp:642
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Cuir isteach an cóimheas scoilte don idirbheart seo"
 
-#: kmymoney/views/investtransactioneditor.cpp:653
+#: kmymoney/views/investtransactioneditor.cpp:654
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Cuir isteach faisnéis praghais don idirbheart seo"
 
-#: kmymoney/views/investtransactioneditor.cpp:669
+#: kmymoney/views/investtransactioneditor.cpp:670
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Roghnaigh cuntas chun an t-idirbheart a chothromú"
 
-#: kmymoney/views/investtransactioneditor.cpp:676
+#: kmymoney/views/investtransactioneditor.cpp:677
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Cuir isteach catagóir le haghaidh táillí"
 
-#: kmymoney/views/investtransactioneditor.cpp:679
+#: kmymoney/views/investtransactioneditor.cpp:680
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Cuir isteach méid na dtáillí"
 
-#: kmymoney/views/investtransactioneditor.cpp:685
+#: kmymoney/views/investtransactioneditor.cpp:686
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Cuir isteach catagóir le haghaidh spéise"
 
-#: kmymoney/views/investtransactioneditor.cpp:688
+#: kmymoney/views/investtransactioneditor.cpp:689
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Cuir isteach méid an úis"
 
-#: kmymoney/views/investtransactioneditor.cpp:693
+#: kmymoney/views/investtransactioneditor.cpp:694
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Roghnaigh an urrús don idirbheart seo"
 
-#: kmymoney/views/investtransactioneditor.cpp:698
+#: kmymoney/views/investtransactioneditor.cpp:699
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19666,7 +19669,7 @@ msgstr "Praghas/scair"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
-#: kmymoney/views/newtransactioneditor.ui:256
+#: kmymoney/views/newtransactioneditor.ui:263
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
@@ -19681,7 +19684,7 @@ msgstr "Catagóir le haghaidh táillí"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, statusCombo)
 #: kmymoney/views/investtransactioneditor.ui:149
-#: kmymoney/views/newtransactioneditor.ui:232
+#: kmymoney/views/newtransactioneditor.ui:239
 #, kde-format
 msgid "Cleared"
 msgstr "Glanta"
@@ -19716,21 +19719,21 @@ msgstr "Catagóir spéise"
 
 #. i18n: ectx: property (text), widget (QToolButton, enterButton)
 #. i18n: ectx: property (text), widget (QPushButton, buttonOk)
-#: kmymoney/views/investtransactioneditor.ui:320
-#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:82
-#: kmymoney/views/newtransactioneditor.ui:133
+#: kmymoney/views/investtransactioneditor.ui:327
+#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:89
+#: kmymoney/views/newtransactioneditor.ui:140
 #, kde-format
 msgid "Enter"
 msgstr "Iontráil"
 
 #. i18n: ectx: property (text), widget (QLabel, activityLabel)
-#: kmymoney/views/investtransactioneditor.ui:348
+#: kmymoney/views/investtransactioneditor.ui:355
 #, kde-format
 msgid "Activity"
 msgstr "Gníomh"
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, feesAmountEdit)
-#: kmymoney/views/investtransactioneditor.ui:361
+#: kmymoney/views/investtransactioneditor.ui:368
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
@@ -20025,25 +20028,25 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Ní féidir catagóir '%1' a scriosadh. Cúis: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:162
+#: kmymoney/views/keditscheduledlg.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Is réimse riachtanach é an t-ainm le haghaidh sceidil"
 
-#: kmymoney/views/keditscheduledlg.cpp:165
+#: kmymoney/views/keditscheduledlg.cpp:176
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "Is réimse riachtanach é an cuntas le haghaidh sceideal"
 
-#: kmymoney/views/keditscheduledlg.cpp:169
+#: kmymoney/views/keditscheduledlg.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Is réimse riachtanach é an chatagóir le haghaidh sceidil"
 
-#: kmymoney/views/keditscheduledlg.cpp:311
+#: kmymoney/views/keditscheduledlg.cpp:322
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -20056,30 +20059,30 @@ msgstr ""
 "thaispeánfar an fhaisnéis seo ach uair amháin le haghaidh seisiún "
 "eagarthóireachta an sceidil seo.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:313
+#: kmymoney/views/keditscheduledlg.cpp:324
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Athraíodh minicíocht an sceidil"
 
-#: kmymoney/views/keditscheduledlg.cpp:617
+#: kmymoney/views/keditscheduledlg.cpp:629
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Ní féidir idirbheart sceidealaithe a chur leis: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:617
+#: kmymoney/views/keditscheduledlg.cpp:629
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Cuir idirbheart sceidealaithe leis"
 
-#: kmymoney/views/keditscheduledlg.cpp:647
-#: kmymoney/views/keditscheduledlg.cpp:690
-#: kmymoney/views/keditscheduledlg.cpp:700
+#: kmymoney/views/keditscheduledlg.cpp:659
+#: kmymoney/views/keditscheduledlg.cpp:702
+#: kmymoney/views/keditscheduledlg.cpp:712
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Ní féidir an t-idirbheart sceidealaithe '%1' a mhodhnú"
 
-#: kmymoney/views/keditscheduledlg.cpp:676
+#: kmymoney/views/keditscheduledlg.cpp:688
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -20094,7 +20097,7 @@ msgstr ""
 "dtí an chéad dáta eile mura ndéantar an dáta íocaíochta deireanach a "
 "athshocrú. Ar mhaith leat an dáta íocaíochta deireanach a athshocrú?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:681
+#: kmymoney/views/keditscheduledlg.cpp:693
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Athshocraigh Dáta na hÍocaíochta Deireanaí"
@@ -21599,14 +21602,14 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Iarmhéid: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:210
-#: kmymoney/views/newtransactioneditor.cpp:302
+#: kmymoney/views/multitransactioneditor.cpp:211
+#: kmymoney/views/newtransactioneditor.cpp:303
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Tá an dáta postála neamhbhailí."
 
-#: kmymoney/views/multitransactioneditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:346
+#: kmymoney/views/multitransactioneditor.cpp:247
+#: kmymoney/views/newtransactioneditor.cpp:347
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21615,7 +21618,7 @@ msgstr ""
 "Tá sannadh ionad costais ag teastáil le haghaidh idirbhirt sa chatagóir "
 "roghnaithe."
 
-#: kmymoney/views/multitransactioneditor.cpp:279
+#: kmymoney/views/multitransactioneditor.cpp:280
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -21625,13 +21628,13 @@ msgstr ""
 "Tá dáta iar-phoist (%1) ag idirbheart roghnaithe roimh dháta oscailte an "
 "chuntais roghnaithe (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:754
+#: kmymoney/views/multitransactioneditor.cpp:756
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Ní féidir sceidil iolracha a chur in eagar ag an am céanna."
 
-#: kmymoney/views/multitransactioneditor.cpp:763
+#: kmymoney/views/multitransactioneditor.cpp:765
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21641,7 +21644,7 @@ msgstr ""
 "Ní féidir catagóir ná cuntas a roghnú nuair a bhíonn idirbhearta scoilte mar "
 "chuid den roghnú."
 
-#: kmymoney/views/multitransactioneditor.cpp:767
+#: kmymoney/views/multitransactioneditor.cpp:769
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21651,7 +21654,7 @@ msgstr ""
 "Ní féidir clibeanna a roghnú nuair a bhíonn idirbhearta scoilte mar chuid "
 "den roghnú."
 
-#: kmymoney/views/multitransactioneditor.cpp:771
+#: kmymoney/views/multitransactioneditor.cpp:773
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21661,7 +21664,7 @@ msgstr ""
 "Ní féidir ionad costais a roghnú nuair a bhíonn idirbhearta scoilte mar "
 "chuid den roghnú."
 
-#: kmymoney/views/multitransactioneditor.cpp:801
+#: kmymoney/views/multitransactioneditor.cpp:803
 #, kde-format
 msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
@@ -21671,7 +21674,7 @@ msgstr ""
 "an mheamraim atá ann cheana féin. An bhfuil tú cinnte gur mhaith leat é seo "
 "a dhéanamh?"
 
-#: kmymoney/views/multitransactioneditor.cpp:802
+#: kmymoney/views/multitransactioneditor.cpp:804
 #, kde-format
 msgid "Clear memo"
 msgstr "Glan an meamram"
@@ -21710,13 +21713,13 @@ msgid "The check number used for this transaction."
 msgstr "An uimhir seice a úsáideadh don idirbheart seo."
 
 #: kmymoney/views/newspliteditor.cpp:264
-#: kmymoney/views/newtransactioneditor.cpp:464
+#: kmymoney/views/newtransactioneditor.cpp:465
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Tá an uimhir seiceála <b>%1</b> in úsáid cheana féin sa chuntas seo."
 
-#: kmymoney/views/newspliteditor.cpp:892
-#: kmymoney/views/newtransactioneditor.cpp:190
+#: kmymoney/views/newspliteditor.cpp:900
+#: kmymoney/views/newtransactioneditor.cpp:191
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21729,7 +21732,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
 #. i18n: ectx: property (text), widget (QLabel, payeeLabel)
-#: kmymoney/views/newspliteditor.ui:137
+#: kmymoney/views/newspliteditor.ui:144
 #: kmymoney/views/newtransactioneditor.ui:101
 #: kmymoney/views/newtransactionform.ui:40
 #, kde-format
@@ -21737,41 +21740,41 @@ msgid "Payer/Payee"
 msgstr "Íocóir/Faighteoir"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
-#: kmymoney/views/newspliteditor.ui:167
-#: kmymoney/views/newtransactioneditor.ui:240
+#: kmymoney/views/newspliteditor.ui:174
+#: kmymoney/views/newtransactioneditor.ui:247
 #: kmymoney/views/newtransactionform.ui:82
 #, kde-format
 msgid "Costcenter"
 msgstr "Lárionad Costais"
 
-#: kmymoney/views/newtransactioneditor.cpp:239
+#: kmymoney/views/newtransactioneditor.cpp:240
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Tá sannadh catagóire in easnamh ar an idirbheart."
 
-#: kmymoney/views/newtransactioneditor.cpp:243
+#: kmymoney/views/newtransactioneditor.cpp:244
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr "Tá an méid a iontráladh difriúil ó shuim na scoilteanna uile faoi %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:622
+#: kmymoney/views/newtransactioneditor.cpp:623
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Roghnaigh idirbheart uathlíonta"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1141
-#: kmymoney/views/newtransactioneditor.ui:320
+#: kmymoney/views/newtransactioneditor.cpp:1142
+#: kmymoney/views/newtransactioneditor.ui:327
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
 msgstr "Nasc"
 
-#: kmymoney/views/newtransactioneditor.cpp:1654
+#: kmymoney/views/newtransactioneditor.cpp:1656
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21780,7 +21783,7 @@ msgstr ""
 "Ar mhaith leat meamram<p><i>%1</i></p>a athsholáthar le meamram<p><i>%2</i></"
 "p>sa scoilt eile?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1655
+#: kmymoney/views/newtransactioneditor.cpp:1657
 #, kde-format
 msgid "Copy memo"
 msgstr "Cóipeáil meamram"
@@ -21800,14 +21803,14 @@ msgid "Enter the amount of the transaction."
 msgstr "Cuir isteach méid an idirbhirt."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, costCenterCombo)
-#: kmymoney/views/newtransactioneditor.ui:194
+#: kmymoney/views/newtransactioneditor.ui:201
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The cost center this transaction should be assigned to."
 msgstr "An t-ionad costais ar cheart an t-idirbheart seo a shannadh dó."
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, categoryCombo)
-#: kmymoney/views/newtransactioneditor.ui:281
+#: kmymoney/views/newtransactioneditor.ui:288
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
@@ -22134,37 +22137,37 @@ msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Scrios"
 
-#: kmymoney/views/tabordereditor.cpp:428
+#: kmymoney/views/tabordereditor.cpp:441
 #, kde-format
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
 msgstr "Roghanna Eagarthóra Cluaisíní"
 
-#: kmymoney/views/tabordereditor.cpp:431
+#: kmymoney/views/tabordereditor.cpp:444
 #, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
 msgstr "Tosaigh as seo"
 
-#: kmymoney/views/tabordereditor.cpp:433
+#: kmymoney/views/tabordereditor.cpp:446
 #, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "Atosaigh"
 
-#: kmymoney/views/tabordereditor.cpp:436
+#: kmymoney/views/tabordereditor.cpp:449
 #, kde-format
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
 msgstr "Cealaigh athruithe"
 
-#: kmymoney/views/tabordereditor.cpp:438
+#: kmymoney/views/tabordereditor.cpp:451
 #, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
 msgstr "Athshocraigh go réamhshocraithe"
 
-#: kmymoney/views/tabordereditor.cpp:443
+#: kmymoney/views/tabordereditor.cpp:456
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."

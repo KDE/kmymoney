@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-25 03:29+0000\n"
+"POT-Creation-Date: 2026-05-27 03:35+0000\n"
 "PO-Revision-Date: 2026-05-25 11:31+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -1625,9 +1625,9 @@ msgstr "Verwijderen"
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:330
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
-#: kmymoney/views/investtransactioneditor.ui:333
-#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
-#: kmymoney/views/newtransactioneditor.ui:146
+#: kmymoney/views/investtransactioneditor.ui:340
+#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:102
+#: kmymoney/views/newtransactioneditor.ui:153
 #, kde-format
 msgid "Cancel"
 msgstr "Annuleren"
@@ -5379,7 +5379,10 @@ msgstr "Rapport sluiten"
 msgid "Toggle chart"
 msgstr "Grafiek omschakelen"
 
-#: kmymoney/kmymoney.cpp:1520
+#. i18n: ectx: property (text), widget (QToolButton, editTabOrderButton)
+#: kmymoney/kmymoney.cpp:1520 kmymoney/views/investtransactioneditor.ui:307
+#: kmymoney/views/newspliteditor.ui:69
+#: kmymoney/views/newtransactioneditor.ui:120
 #, kde-format
 msgid "Edit tab order"
 msgstr "Tabbladvolgorde bewerken"
@@ -6471,7 +6474,7 @@ msgid "The plugin to show this information could not be found."
 msgstr "De plug-in om te tonen dat deze informatie niet gevonden kan worden."
 
 #: kmymoney/models/statementmodel.cpp:93
-#: kmymoney/mymoney/storage/accountsmodel.cpp:467
+#: kmymoney/mymoney/storage/accountsmodel.cpp:473
 #, kde-format
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
@@ -6520,7 +6523,7 @@ msgid "Payees created"
 msgstr "Begunstigden (debiteuren) aangemaakt"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:503
+#: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -6529,7 +6532,7 @@ msgid "Full name"
 msgstr "Volledige naam"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:505
+#: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -6538,28 +6541,28 @@ msgid "Type"
 msgstr "Type"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:507
+#: kmymoney/mymoney/storage/accountsmodel.cpp:513
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "Of het account online mapping heeft ingesteld"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:509
+#: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "Of het account is ingevoegd in belastingrapporten"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:511
+#: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "Percentage BTW, indien geconfigureerd."
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:513
+#: kmymoney/mymoney/storage/accountsmodel.cpp:519
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
@@ -6568,42 +6571,42 @@ msgstr ""
 "Of een kostencentrum toekenning nodig is bij invoeren van een transactie."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:515
+#: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr "Saldo van rekening (in valuta van de rekening)"
 
 #: kmymoney/models/statementmodel.cpp:131
-#: kmymoney/mymoney/storage/accountsmodel.cpp:481
-#: kmymoney/mymoney/storage/accountsmodel.cpp:517
+#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:523
 #, kde-format
 msgid "Posted Value"
 msgstr "Getoonde waarde"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:519
+#: kmymoney/mymoney/storage/accountsmodel.cpp:525
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "Totale waarde (inclusief sub-rekeningen)"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:521
+#: kmymoney/mymoney/storage/accountsmodel.cpp:527
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
 msgstr "Rekening- of creditcardnummer, zoals toegekend door de bank."
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:523
+#: kmymoney/mymoney/storage/accountsmodel.cpp:529
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr "Rekeningnummer in IBAN (International Bank Account Number) formaat"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:528
+#: kmymoney/mymoney/storage/accountsmodel.cpp:534
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6619,7 +6622,7 @@ msgstr ""
 "'Routeringsmummer' (US-rekeningen) of een 'Soortcode' (VK-rekeningen)."
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:531
+#: kmymoney/mymoney/storage/accountsmodel.cpp:537
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8652,69 +8655,69 @@ msgctxt "Reconciliation state"
 msgid "Status"
 msgstr "Status"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:398
+#: kmymoney/mymoney/storage/accountsmodel.cpp:403
 msgid "Favorite"
 msgstr "Favoriet"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:399
+#: kmymoney/mymoney/storage/accountsmodel.cpp:404
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:371
 #, kde-format
 msgid "Asset accounts"
 msgstr "Activarekeningen"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:400
+#: kmymoney/mymoney/storage/accountsmodel.cpp:405
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:379
 #, kde-format
 msgid "Liability accounts"
 msgstr "Rekening voor schulden"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:401
+#: kmymoney/mymoney/storage/accountsmodel.cpp:406
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:127
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:387
 #, kde-format
 msgid "Income categories"
 msgstr "Inkomsten categorieën"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:402
+#: kmymoney/mymoney/storage/accountsmodel.cpp:407
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:129
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:398
 #, kde-format
 msgid "Expense categories"
 msgstr "Uitgaven categorieën"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:403
+#: kmymoney/mymoney/storage/accountsmodel.cpp:408
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:409
 #, kde-format
 msgid "Equity accounts"
 msgstr "Rekeningen voor eigen vermogen"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:469
+#: kmymoney/mymoney/storage/accountsmodel.cpp:475
 #, kde-format
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "Type"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:471
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
 msgstr "Online"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:473
+#: kmymoney/mymoney/storage/accountsmodel.cpp:479
 #, kde-format
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Belasting"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:475
+#: kmymoney/mymoney/storage/accountsmodel.cpp:481
 #, kde-format
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "BTW"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:477
+#: kmymoney/mymoney/storage/accountsmodel.cpp:483
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
@@ -8722,13 +8725,13 @@ msgctxt ""
 msgid "CC"
 msgstr "CC"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:479
+#: kmymoney/mymoney/storage/accountsmodel.cpp:485
 #, kde-format
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Saldo"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:483
+#: kmymoney/mymoney/storage/accountsmodel.cpp:489
 #, kde-format
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
@@ -8736,19 +8739,19 @@ msgctxt ""
 msgid "Total Value"
 msgstr "Netto Waarde"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:485
+#: kmymoney/mymoney/storage/accountsmodel.cpp:491
 #, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Nummer"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:487
+#: kmymoney/mymoney/storage/accountsmodel.cpp:493
 #, kde-format
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:492
+#: kmymoney/mymoney/storage/accountsmodel.cpp:498
 #, kde-format
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
@@ -8757,7 +8760,7 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "Bankcode"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:494
+#: kmymoney/mymoney/storage/accountsmodel.cpp:500
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
@@ -10163,8 +10166,8 @@ msgstr "Selectie van categorieveld wissen."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:700
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:164
-#: kmymoney/views/newspliteditor.ui:191
-#: kmymoney/views/newtransactioneditor.ui:171
+#: kmymoney/views/newspliteditor.ui:198
+#: kmymoney/views/newtransactioneditor.ui:178
 #: kmymoney/views/newtransactionform.ui:124
 #, kde-format
 msgid "Memo"
@@ -13105,8 +13108,8 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:379
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
-#: kmymoney/views/newspliteditor.ui:130
-#: kmymoney/views/newtransactioneditor.ui:247
+#: kmymoney/views/newspliteditor.ui:137
+#: kmymoney/views/newtransactioneditor.ui:254
 #: kmymoney/views/newtransactionform.ui:54
 #: kmymoney/widgets/transactionsortoption.cpp:40
 #, kde-format
@@ -14591,8 +14594,8 @@ msgstr "Kasboekeindsaldo"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:696
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
-#: kmymoney/views/newspliteditor.ui:160
-#: kmymoney/views/newtransactioneditor.ui:221
+#: kmymoney/views/newspliteditor.ui:167
+#: kmymoney/views/newtransactioneditor.ui:228
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:124
 #: kmymoney/widgets/ktransactionfilter.ui:326
@@ -15958,8 +15961,8 @@ msgstr "Num"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:694
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:525
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
-#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
-#: kmymoney/views/newtransactioneditor.ui:214
+#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:117
+#: kmymoney/views/newtransactioneditor.ui:221
 #: kmymoney/views/newtransactionform.ui:96
 #: kmymoney/widgets/ktransactionfilter.cpp:132
 #, kde-format
@@ -15995,7 +15998,7 @@ msgstr "Actie"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShares)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:714
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:172
-#: kmymoney/views/investtransactioneditor.ui:386
+#: kmymoney/views/investtransactioneditor.ui:393
 #, kde-format
 msgid "Shares"
 msgstr "Aandelen"
@@ -16096,7 +16099,7 @@ msgstr "Investerings opbrengst"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:754
 #: kmymoney/views/investtransactioneditor.ui:112
 #: kmymoney/views/investtransactioneditor.ui:229
-#: kmymoney/views/investtransactioneditor.ui:367
+#: kmymoney/views/investtransactioneditor.ui:374
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #, kde-format
 msgid "Fees"
@@ -19248,69 +19251,69 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "Ratio /1"
 
-#: kmymoney/views/investtransactioneditor.cpp:99
+#: kmymoney/views/investtransactioneditor.cpp:100
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Koop aandelen"
 
-#: kmymoney/views/investtransactioneditor.cpp:100
+#: kmymoney/views/investtransactioneditor.cpp:101
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Verkoop aandelen"
 
-#: kmymoney/views/investtransactioneditor.cpp:101
+#: kmymoney/views/investtransactioneditor.cpp:102
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "Dividend"
 
-#: kmymoney/views/investtransactioneditor.cpp:102
+#: kmymoney/views/investtransactioneditor.cpp:103
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Dividend Herbeleggen"
 
-#: kmymoney/views/investtransactioneditor.cpp:103
+#: kmymoney/views/investtransactioneditor.cpp:104
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Opbrengst"
 
-#: kmymoney/views/investtransactioneditor.cpp:104
+#: kmymoney/views/investtransactioneditor.cpp:105
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Aandelen toevoegen"
 
-#: kmymoney/views/investtransactioneditor.cpp:105
+#: kmymoney/views/investtransactioneditor.cpp:106
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Verwijdere aandelen"
 
-#: kmymoney/views/investtransactioneditor.cpp:106
+#: kmymoney/views/investtransactioneditor.cpp:107
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Splits aandelen"
 
-#: kmymoney/views/investtransactioneditor.cpp:107
+#: kmymoney/views/investtransactioneditor.cpp:108
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Rente-inkomsten"
 
-#: kmymoney/views/investtransactioneditor.cpp:309
-#: kmymoney/views/multitransactioneditor.cpp:232
-#: kmymoney/views/newtransactioneditor.cpp:319
+#: kmymoney/views/investtransactioneditor.cpp:310
+#: kmymoney/views/multitransactioneditor.cpp:233
+#: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 "De plaatsingsdatum is ouder dan de openingsdatum van rekening <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:427
+#: kmymoney/views/investtransactioneditor.cpp:428
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19320,13 +19323,13 @@ msgstr ""
 "De transactiezaak is gewijzigd die mogelijk alle prijsinformatie ongeldig "
 "zal maken. Controleer dat."
 
-#: kmymoney/views/investtransactioneditor.cpp:607
+#: kmymoney/views/investtransactioneditor.cpp:608
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "De activiteit voor deze transactie selecteren."
 
-#: kmymoney/views/investtransactioneditor.cpp:610
+#: kmymoney/views/investtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19336,13 +19339,13 @@ msgstr ""
 "Het waardepapier voor deze transactie kan niet gewijzigd worden omdat het "
 "account voor het waardepapier gesloten is."
 
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:624
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Aantal aandelen"
 
-#: kmymoney/views/investtransactioneditor.cpp:625
+#: kmymoney/views/investtransactioneditor.cpp:626
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19352,19 +19355,19 @@ msgstr ""
 "Het aantal aandelen kan niet gewijzigd worden omdat het account voor het "
 "waardepapier gesloten is."
 
-#: kmymoney/views/investtransactioneditor.cpp:629
+#: kmymoney/views/investtransactioneditor.cpp:630
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Het aantal aandelen voor deze transactie invoeren."
 
-#: kmymoney/views/investtransactioneditor.cpp:635
+#: kmymoney/views/investtransactioneditor.cpp:636
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Splitsverhouding"
 
-#: kmymoney/views/investtransactioneditor.cpp:637
+#: kmymoney/views/investtransactioneditor.cpp:638
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19373,55 +19376,55 @@ msgstr ""
 "De splitsverhouding kan niet gewijzigd worden omdat het account voor het "
 "waardepapier gesloten is."
 
-#: kmymoney/views/investtransactioneditor.cpp:641
+#: kmymoney/views/investtransactioneditor.cpp:642
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "De splitsverhouding voor deze transactie invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:653
+#: kmymoney/views/investtransactioneditor.cpp:654
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "De prijsinformatie voor deze transactie invoeren."
 
-#: kmymoney/views/investtransactioneditor.cpp:669
+#: kmymoney/views/investtransactioneditor.cpp:670
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "De rekening selecteren om de transactie gelijk te trekken"
 
-#: kmymoney/views/investtransactioneditor.cpp:676
+#: kmymoney/views/investtransactioneditor.cpp:677
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Categorie voor kosten invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:679
+#: kmymoney/views/investtransactioneditor.cpp:680
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Het bedrag van de kosten invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:685
+#: kmymoney/views/investtransactioneditor.cpp:686
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Categorie voor rente invoeren"
 
-#: kmymoney/views/investtransactioneditor.cpp:688
+#: kmymoney/views/investtransactioneditor.cpp:689
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Bedrag aan rente"
 
-#: kmymoney/views/investtransactioneditor.cpp:693
+#: kmymoney/views/investtransactioneditor.cpp:694
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Het waardepapier voor deze transactie selecteren"
 
-#: kmymoney/views/investtransactioneditor.cpp:698
+#: kmymoney/views/investtransactioneditor.cpp:699
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19445,7 +19448,7 @@ msgstr "Koers/aandeel"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
-#: kmymoney/views/newtransactioneditor.ui:256
+#: kmymoney/views/newtransactioneditor.ui:263
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
@@ -19460,7 +19463,7 @@ msgstr "Categorie voor kosten"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, statusCombo)
 #: kmymoney/views/investtransactioneditor.ui:149
-#: kmymoney/views/newtransactioneditor.ui:232
+#: kmymoney/views/newtransactioneditor.ui:239
 #, kde-format
 msgid "Cleared"
 msgstr "In orde bevonden"
@@ -19495,21 +19498,21 @@ msgstr "Categorie voor rente"
 
 #. i18n: ectx: property (text), widget (QToolButton, enterButton)
 #. i18n: ectx: property (text), widget (QPushButton, buttonOk)
-#: kmymoney/views/investtransactioneditor.ui:320
-#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:82
-#: kmymoney/views/newtransactioneditor.ui:133
+#: kmymoney/views/investtransactioneditor.ui:327
+#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:89
+#: kmymoney/views/newtransactioneditor.ui:140
 #, kde-format
 msgid "Enter"
 msgstr "Invoeren"
 
 #. i18n: ectx: property (text), widget (QLabel, activityLabel)
-#: kmymoney/views/investtransactioneditor.ui:348
+#: kmymoney/views/investtransactioneditor.ui:355
 #, kde-format
 msgid "Activity"
 msgstr "Activiteit"
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, feesAmountEdit)
-#: kmymoney/views/investtransactioneditor.ui:361
+#: kmymoney/views/investtransactioneditor.ui:368
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
@@ -19803,25 +19806,25 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Kan categorie '%1' niet verwijderen. Oorzaak: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:162
+#: kmymoney/views/keditscheduledlg.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "De naam is een vereist veld voor een planning"
 
-#: kmymoney/views/keditscheduledlg.cpp:165
+#: kmymoney/views/keditscheduledlg.cpp:176
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "De rekening is een vereist veld voor een planning"
 
-#: kmymoney/views/keditscheduledlg.cpp:169
+#: kmymoney/views/keditscheduledlg.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "De categorie is een vereist veld voor een planning"
 
-#: kmymoney/views/keditscheduledlg.cpp:311
+#: kmymoney/views/keditscheduledlg.cpp:322
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19834,30 +19837,30 @@ msgstr ""
 "Deze informatie zal alleen eenmaal getoond worden voor deze bewerkingssessie "
 "van de planning.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:313
+#: kmymoney/views/keditscheduledlg.cpp:324
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Frequentie periodieke transactie gewijzigd"
 
-#: kmymoney/views/keditscheduledlg.cpp:617
+#: kmymoney/views/keditscheduledlg.cpp:629
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Kan periodieke transactie niet toevoegen: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:617
+#: kmymoney/views/keditscheduledlg.cpp:629
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Periodieke transactie toevoegen"
 
-#: kmymoney/views/keditscheduledlg.cpp:647
-#: kmymoney/views/keditscheduledlg.cpp:690
-#: kmymoney/views/keditscheduledlg.cpp:700
+#: kmymoney/views/keditscheduledlg.cpp:659
+#: kmymoney/views/keditscheduledlg.cpp:702
+#: kmymoney/views/keditscheduledlg.cpp:712
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Kan periodieke transactie '%1' niet wijzigen"
 
-#: kmymoney/views/keditscheduledlg.cpp:676
+#: kmymoney/views/keditscheduledlg.cpp:688
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19872,7 +19875,7 @@ msgstr ""
 "van de laatste betaling zelf invoert. Wilt u de datum van de laatste "
 "betaling zelf invoeren?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:681
+#: kmymoney/views/keditscheduledlg.cpp:693
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Herstel laatste betaaldatum"
@@ -21349,14 +21352,14 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:210
-#: kmymoney/views/newtransactioneditor.cpp:302
+#: kmymoney/views/multitransactioneditor.cpp:211
+#: kmymoney/views/newtransactioneditor.cpp:303
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "De plaatsingsdatum is ongeldig."
 
-#: kmymoney/views/multitransactioneditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:346
+#: kmymoney/views/multitransactioneditor.cpp:247
+#: kmymoney/views/newtransactioneditor.cpp:347
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21365,7 +21368,7 @@ msgstr ""
 "Koppeling aan een kostencentrum is vereist voor een transacties in de "
 "geselecteerde categorie."
 
-#: kmymoney/views/multitransactioneditor.cpp:279
+#: kmymoney/views/multitransactioneditor.cpp:280
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -21375,13 +21378,13 @@ msgstr ""
 "Een geselecteerde transactie heeft een plaatsingsdatum (%1) voor een "
 "openingsdatum van de geselecteerde rekening (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:754
+#: kmymoney/views/multitransactioneditor.cpp:756
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Kan niet meerdere planningen tegelijk bewerken."
 
-#: kmymoney/views/multitransactioneditor.cpp:763
+#: kmymoney/views/multitransactioneditor.cpp:765
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21391,7 +21394,7 @@ msgstr ""
 "Selectie van categorie of rekening is niet mogelijk wanneer gesplitste "
 "transacties onderdeel zijn van de selectie."
 
-#: kmymoney/views/multitransactioneditor.cpp:767
+#: kmymoney/views/multitransactioneditor.cpp:769
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21401,7 +21404,7 @@ msgstr ""
 "Selectie van tags is niet mogelijk wanneer gesplitste transacties onderdeel "
 "zijn van de selectie."
 
-#: kmymoney/views/multitransactioneditor.cpp:771
+#: kmymoney/views/multitransactioneditor.cpp:773
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21411,7 +21414,7 @@ msgstr ""
 "Selectie van kostencentrum is niet mogelijk wanneer gesplitste transacties "
 "onderdeel zijn van de selectie."
 
-#: kmymoney/views/multitransactioneditor.cpp:801
+#: kmymoney/views/multitransactioneditor.cpp:803
 #, kde-format
 msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
@@ -21420,7 +21423,7 @@ msgstr ""
 "U hebt alleen spaties ingevoerd in het memoveld, waardoor de bestaande memo-"
 "inhoud wordt gewist. Wilt u dit echt doen?"
 
-#: kmymoney/views/multitransactioneditor.cpp:802
+#: kmymoney/views/multitransactioneditor.cpp:804
 #, kde-format
 msgid "Clear memo"
 msgstr "Wis memo"
@@ -21459,13 +21462,13 @@ msgid "The check number used for this transaction."
 msgstr "Het nummer van de cheque gebruikt voor deze transactie."
 
 #: kmymoney/views/newspliteditor.cpp:264
-#: kmymoney/views/newtransactioneditor.cpp:464
+#: kmymoney/views/newtransactioneditor.cpp:465
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Het number <b>%1</b> voor een cheque is al gebruikt in dit account."
 
-#: kmymoney/views/newspliteditor.cpp:892
-#: kmymoney/views/newtransactioneditor.cpp:190
+#: kmymoney/views/newspliteditor.cpp:900
+#: kmymoney/views/newtransactioneditor.cpp:191
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21478,7 +21481,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
 #. i18n: ectx: property (text), widget (QLabel, payeeLabel)
-#: kmymoney/views/newspliteditor.ui:137
+#: kmymoney/views/newspliteditor.ui:144
 #: kmymoney/views/newtransactioneditor.ui:101
 #: kmymoney/views/newtransactionform.ui:40
 #, kde-format
@@ -21486,42 +21489,42 @@ msgid "Payer/Payee"
 msgstr "Betaler/Ontvanger"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
-#: kmymoney/views/newspliteditor.ui:167
-#: kmymoney/views/newtransactioneditor.ui:240
+#: kmymoney/views/newspliteditor.ui:174
+#: kmymoney/views/newtransactioneditor.ui:247
 #: kmymoney/views/newtransactionform.ui:82
 #, kde-format
 msgid "Costcenter"
 msgstr "Kostencentrum"
 
-#: kmymoney/views/newtransactioneditor.cpp:239
+#: kmymoney/views/newtransactioneditor.cpp:240
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Aan de transactie is geen categorie toegewezen."
 
-#: kmymoney/views/newtransactioneditor.cpp:243
+#: kmymoney/views/newtransactioneditor.cpp:244
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 "De ingevoerde hoeveelheid verschilt van de som van alle splitsingen door %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:622
+#: kmymoney/views/newtransactioneditor.cpp:623
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Selecteer automatisch aanvullen van transactie"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1141
-#: kmymoney/views/newtransactioneditor.ui:320
+#: kmymoney/views/newtransactioneditor.cpp:1142
+#: kmymoney/views/newtransactioneditor.ui:327
 #: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
 msgstr "Koppeling"
 
-#: kmymoney/views/newtransactioneditor.cpp:1654
+#: kmymoney/views/newtransactioneditor.cpp:1656
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21530,7 +21533,7 @@ msgstr ""
 "Wilt u memo<p><i>%1</i></p>vervangen door memo<p><i>%2</i></p>in de andere "
 "splitsing?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1655
+#: kmymoney/views/newtransactioneditor.cpp:1657
 #, kde-format
 msgid "Copy memo"
 msgstr "Memo kopiëren"
@@ -21550,14 +21553,14 @@ msgid "Enter the amount of the transaction."
 msgstr "De hoeveelheid van deze transactie invoeren"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, costCenterCombo)
-#: kmymoney/views/newtransactioneditor.ui:194
+#: kmymoney/views/newtransactioneditor.ui:201
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Het kostencentrum waaraan deze transactie gekoppeld moet worden."
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, categoryCombo)
-#: kmymoney/views/newtransactioneditor.ui:281
+#: kmymoney/views/newtransactioneditor.ui:288
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
@@ -21888,37 +21891,37 @@ msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: kmymoney/views/tabordereditor.cpp:428
+#: kmymoney/views/tabordereditor.cpp:441
 #, kde-format
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
 msgstr "Opties voor tabbewerker"
 
-#: kmymoney/views/tabordereditor.cpp:431
+#: kmymoney/views/tabordereditor.cpp:444
 #, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
 msgstr "Vanaf hier beginnen"
 
-#: kmymoney/views/tabordereditor.cpp:433
+#: kmymoney/views/tabordereditor.cpp:446
 #, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "Herstarten"
 
-#: kmymoney/views/tabordereditor.cpp:436
+#: kmymoney/views/tabordereditor.cpp:449
 #, kde-format
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
 msgstr "Wijzigingen ongedaan maken"
 
-#: kmymoney/views/tabordereditor.cpp:438
+#: kmymoney/views/tabordereditor.cpp:451
 #, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
 msgstr "Terugzetten naar standaard"
 
-#: kmymoney/views/tabordereditor.cpp:443
+#: kmymoney/views/tabordereditor.cpp:456
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
