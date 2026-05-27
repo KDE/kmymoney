@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-26 00:45+0000\n"
+"POT-Creation-Date: 2026-05-27 00:45+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1668,7 +1668,7 @@ msgstr "Elimină"
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:340
-#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
+#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:102
 #: kmymoney/views/newtransactioneditor.ui:153
 #, kde-format
 msgid "Cancel"
@@ -5654,6 +5654,7 @@ msgstr "Comută"
 
 #. i18n: ectx: property (text), widget (QToolButton, editTabOrderButton)
 #: kmymoney/kmymoney.cpp:1526 kmymoney/views/investtransactioneditor.ui:307
+#: kmymoney/views/newspliteditor.ui:69
 #: kmymoney/views/newtransactioneditor.ui:120
 #, fuzzy, kde-format
 #| msgid "Include transfers"
@@ -10893,7 +10894,7 @@ msgstr "Alegere categorie"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:712
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:145
 #: kmymoney/views/investtransactioneditor.ui:164
-#: kmymoney/views/newspliteditor.ui:191
+#: kmymoney/views/newspliteditor.ui:198
 #: kmymoney/views/newtransactioneditor.ui:178
 #: kmymoney/views/newtransactionform.ui:124
 #, kde-format
@@ -13932,7 +13933,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:379
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:126
-#: kmymoney/views/newspliteditor.ui:130
+#: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:254
 #: kmymoney/views/newtransactionform.ui:54
 #: kmymoney/widgets/transactionsortoption.cpp:40
@@ -15457,7 +15458,7 @@ msgstr "Soldul final al registrului"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:708
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:75
-#: kmymoney/views/newspliteditor.ui:160
+#: kmymoney/views/newspliteditor.ui:167
 #: kmymoney/views/newtransactioneditor.ui:228
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:132
@@ -16880,7 +16881,7 @@ msgstr "Num"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:706
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:644
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:259
-#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
+#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:117
 #: kmymoney/views/newtransactioneditor.ui:221
 #: kmymoney/views/newtransactionform.ui:96
 #: kmymoney/widgets/ktransactionfilter.cpp:140
@@ -20630,7 +20631,7 @@ msgstr "Opțiuni categorie"
 #. i18n: ectx: property (text), widget (QToolButton, enterButton)
 #. i18n: ectx: property (text), widget (QPushButton, buttonOk)
 #: kmymoney/views/investtransactioneditor.ui:327
-#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:82
+#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:89
 #: kmymoney/views/newtransactioneditor.ui:140
 #, kde-format
 msgid "Enter"
@@ -20959,27 +20960,27 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Nu s-a putut șterge categoria<b>%1</b>. Motivul: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:168
+#: kmymoney/views/keditscheduledlg.cpp:172
 #, fuzzy, kde-format
 #| msgid "No name assigned for schedule"
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Nu a fost ales numele programării"
 
-#: kmymoney/views/keditscheduledlg.cpp:171
+#: kmymoney/views/keditscheduledlg.cpp:175
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:175
+#: kmymoney/views/keditscheduledlg.cpp:179
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Nu pot fi create tranzacții în contextul unei categorii."
 
-#: kmymoney/views/keditscheduledlg.cpp:317
+#: kmymoney/views/keditscheduledlg.cpp:321
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -20988,31 +20989,31 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:319
+#: kmymoney/views/keditscheduledlg.cpp:323
 #, fuzzy, kde-format
 #| msgid "Schedule found"
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "A fost găsit un program"
 
-#: kmymoney/views/keditscheduledlg.cpp:624
+#: kmymoney/views/keditscheduledlg.cpp:628
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Nu s-a putut adăuga tranzacția programată: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:624
+#: kmymoney/views/keditscheduledlg.cpp:628
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Adăugați o tranzacție programată"
 
-#: kmymoney/views/keditscheduledlg.cpp:654
-#: kmymoney/views/keditscheduledlg.cpp:697
-#: kmymoney/views/keditscheduledlg.cpp:707
+#: kmymoney/views/keditscheduledlg.cpp:658
+#: kmymoney/views/keditscheduledlg.cpp:701
+#: kmymoney/views/keditscheduledlg.cpp:711
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Nu s-a putut modifica tranzacția programată '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:683
+#: kmymoney/views/keditscheduledlg.cpp:687
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -21033,7 +21034,7 @@ msgstr ""
 "cazul în care ultima dată a tranzacției nu este reactualizată. Doriți să "
 "reactualizați data ultimului transfer?"
 
-#: kmymoney/views/keditscheduledlg.cpp:688
+#: kmymoney/views/keditscheduledlg.cpp:692
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Resetează ultima dată de plată"
@@ -22756,7 +22757,7 @@ msgstr "Introducere tranzacție următoare..."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:892
+#: kmymoney/views/newspliteditor.cpp:900
 #: kmymoney/views/newtransactioneditor.cpp:211
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
@@ -22769,7 +22770,7 @@ msgstr "Nu se poate șterge o tranzacție care se referă la un cont închis."
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
 #. i18n: ectx: property (text), widget (QLabel, payeeLabel)
-#: kmymoney/views/newspliteditor.ui:137
+#: kmymoney/views/newspliteditor.ui:144
 #: kmymoney/views/newtransactioneditor.ui:101
 #: kmymoney/views/newtransactionform.ui:40
 #, fuzzy, kde-format
@@ -22778,7 +22779,7 @@ msgid "Payer/Payee"
 msgstr "Plătitor/Beneficiar"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
-#: kmymoney/views/newspliteditor.ui:167
+#: kmymoney/views/newspliteditor.ui:174
 #: kmymoney/views/newtransactioneditor.ui:247
 #: kmymoney/views/newtransactionform.ui:82
 #, kde-format
@@ -23222,41 +23223,41 @@ msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Șterge"
 
-#: kmymoney/views/tabordereditor.cpp:428
+#: kmymoney/views/tabordereditor.cpp:441
 #, fuzzy, kde-format
 #| msgid "Tag options"
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
 msgstr "Opțiuni etichetare"
 
-#: kmymoney/views/tabordereditor.cpp:431
+#: kmymoney/views/tabordereditor.cpp:444
 #, fuzzy, kde-format
 #| msgid "Start operation"
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
 msgstr "Start operație"
 
-#: kmymoney/views/tabordereditor.cpp:433
+#: kmymoney/views/tabordereditor.cpp:446
 #, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr ""
 
-#: kmymoney/views/tabordereditor.cpp:436
+#: kmymoney/views/tabordereditor.cpp:449
 #, fuzzy, kde-format
 #| msgid "Save changes"
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
 msgstr "Salvați modificările"
 
-#: kmymoney/views/tabordereditor.cpp:438
+#: kmymoney/views/tabordereditor.cpp:451
 #, fuzzy, kde-format
 #| msgid "Use default"
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
 msgstr "Folosește valoare implicită"
 
-#: kmymoney/views/tabordereditor.cpp:443
+#: kmymoney/views/tabordereditor.cpp:456
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-26 00:45+0000\n"
+"POT-Creation-Date: 2026-05-27 00:45+0000\n"
 "PO-Revision-Date: 2026-05-19 04:36+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -1557,7 +1557,7 @@ msgstr "წაშლა"
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:340
-#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
+#: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:102
 #: kmymoney/views/newtransactioneditor.ui:153
 #, kde-format
 msgid "Cancel"
@@ -5297,6 +5297,7 @@ msgstr "გრაფიკის გადართვა"
 
 #. i18n: ectx: property (text), widget (QToolButton, editTabOrderButton)
 #: kmymoney/kmymoney.cpp:1526 kmymoney/views/investtransactioneditor.ui:307
+#: kmymoney/views/newspliteditor.ui:69
 #: kmymoney/views/newtransactioneditor.ui:120
 #, kde-format
 msgid "Edit tab order"
@@ -10063,7 +10064,7 @@ msgstr "კატეგორიის ველის არჩევნის 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:712
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:145
 #: kmymoney/views/investtransactioneditor.ui:164
-#: kmymoney/views/newspliteditor.ui:191
+#: kmymoney/views/newspliteditor.ui:198
 #: kmymoney/views/newtransactioneditor.ui:178
 #: kmymoney/views/newtransactionform.ui:124
 #, kde-format
@@ -12866,7 +12867,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:379
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:126
-#: kmymoney/views/newspliteditor.ui:130
+#: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:254
 #: kmymoney/views/newtransactionform.ui:54
 #: kmymoney/widgets/transactionsortoption.cpp:40
@@ -14294,7 +14295,7 @@ msgstr "საბოლოო ანგარიში რეესტრის 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:708
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:75
-#: kmymoney/views/newspliteditor.ui:160
+#: kmymoney/views/newspliteditor.ui:167
 #: kmymoney/views/newtransactioneditor.ui:228
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:132
@@ -15630,7 +15631,7 @@ msgstr "რიცხვი"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:706
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:644
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:259
-#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
+#: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:117
 #: kmymoney/views/newtransactioneditor.ui:221
 #: kmymoney/views/newtransactionform.ui:96
 #: kmymoney/widgets/ktransactionfilter.cpp:140
@@ -19036,7 +19037,7 @@ msgstr "კატეგორია საპროცენტო განა�
 #. i18n: ectx: property (text), widget (QToolButton, enterButton)
 #. i18n: ectx: property (text), widget (QPushButton, buttonOk)
 #: kmymoney/views/investtransactioneditor.ui:327
-#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:82
+#: kmymoney/views/kenterscheduledlg.ui:166 kmymoney/views/newspliteditor.ui:89
 #: kmymoney/views/newtransactioneditor.ui:140
 #, kde-format
 msgid "Enter"
@@ -19323,25 +19324,25 @@ msgstr "<qt>ვერ წავშალე ქვეკატეგორია
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "ვერ წავშალე კატეგორია '%1'. მიზეზი: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:168
+#: kmymoney/views/keditscheduledlg.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "გეგმისთვის სახელი აუცილებელი ველია"
 
-#: kmymoney/views/keditscheduledlg.cpp:171
+#: kmymoney/views/keditscheduledlg.cpp:175
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "გეგმისთვის ანგარიში აუცილებელი ველია"
 
-#: kmymoney/views/keditscheduledlg.cpp:175
+#: kmymoney/views/keditscheduledlg.cpp:179
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "გეგმისთვის კატეგორია აუცილებელი ველია"
 
-#: kmymoney/views/keditscheduledlg.cpp:317
+#: kmymoney/views/keditscheduledlg.cpp:321
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19350,30 +19351,30 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:319
+#: kmymoney/views/keditscheduledlg.cpp:323
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "განრიგის სიხშირე შეიცვალა"
 
-#: kmymoney/views/keditscheduledlg.cpp:624
+#: kmymoney/views/keditscheduledlg.cpp:628
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "ვერ დავამატე დაგეგმილი ტრანზაქცია: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:624
+#: kmymoney/views/keditscheduledlg.cpp:628
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "დაგეგმილი ტრანზაქციის დამატება"
 
-#: kmymoney/views/keditscheduledlg.cpp:654
-#: kmymoney/views/keditscheduledlg.cpp:697
-#: kmymoney/views/keditscheduledlg.cpp:707
+#: kmymoney/views/keditscheduledlg.cpp:658
+#: kmymoney/views/keditscheduledlg.cpp:701
+#: kmymoney/views/keditscheduledlg.cpp:711
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "ვერ შევცვალე დაგეგმილი ტრანზაქცია '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:683
+#: kmymoney/views/keditscheduledlg.cpp:687
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19383,7 +19384,7 @@ msgid ""
 "</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:688
+#: kmymoney/views/keditscheduledlg.cpp:692
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "ბოლო გადახდის თარიღის ცამოყრა"
@@ -20933,7 +20934,7 @@ msgstr "ტრანზაქციისთვის გამოყენე�
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "ჩეკი ნომრით <b>%1</b> უკვე გამოიყენება ამ ანგარიშში."
 
-#: kmymoney/views/newspliteditor.cpp:892
+#: kmymoney/views/newspliteditor.cpp:900
 #: kmymoney/views/newtransactioneditor.cpp:211
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -20946,7 +20947,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
 #. i18n: ectx: property (text), widget (QLabel, payeeLabel)
-#: kmymoney/views/newspliteditor.ui:137
+#: kmymoney/views/newspliteditor.ui:144
 #: kmymoney/views/newtransactioneditor.ui:101
 #: kmymoney/views/newtransactionform.ui:40
 #, kde-format
@@ -20954,7 +20955,7 @@ msgid "Payer/Payee"
 msgstr "გადამხდელი/მიმღები"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
-#: kmymoney/views/newspliteditor.ui:167
+#: kmymoney/views/newspliteditor.ui:174
 #: kmymoney/views/newtransactioneditor.ui:247
 #: kmymoney/views/newtransactionform.ui:82
 #, kde-format
@@ -21355,37 +21356,37 @@ msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "წავშალოთ"
 
-#: kmymoney/views/tabordereditor.cpp:428
+#: kmymoney/views/tabordereditor.cpp:441
 #, kde-format
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
 msgstr "ჩანართების რედაქტორის მორგება"
 
-#: kmymoney/views/tabordereditor.cpp:431
+#: kmymoney/views/tabordereditor.cpp:444
 #, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
 msgstr "აქედან დაწყება"
 
-#: kmymoney/views/tabordereditor.cpp:433
+#: kmymoney/views/tabordereditor.cpp:446
 #, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "გადატვირთვა"
 
-#: kmymoney/views/tabordereditor.cpp:436
+#: kmymoney/views/tabordereditor.cpp:449
 #, kde-format
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
 msgstr "ცვლილებების გაუქმება"
 
-#: kmymoney/views/tabordereditor.cpp:438
+#: kmymoney/views/tabordereditor.cpp:451
 #, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
 msgstr "ნაგულისხმევ მნიშვნელობაზე დაბრუნება"
 
-#: kmymoney/views/tabordereditor.cpp:443
+#: kmymoney/views/tabordereditor.cpp:456
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
