@@ -70,6 +70,11 @@ protected Q_SLOTS:
     void slotLogAxisChanged(int state);
     void slotNegExpensesChanged(int state);
 
+protected:
+    void saveState();
+    void restoreState();
+    void closeEvent(QCloseEvent* event) override;
+
 private:
     Q_DECLARE_PRIVATE(KReportConfigurationFilterDlg)
     KReportConfigurationFilterDlgPrivate * const d_ptr;
