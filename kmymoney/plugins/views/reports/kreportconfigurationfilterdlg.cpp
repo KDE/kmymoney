@@ -28,8 +28,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -251,6 +253,8 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
     // Now set up the widgets with proper values
     //
     slotReset();
+
+    restoreState();
 }
 
 KReportConfigurationFilterDlg::~KReportConfigurationFilterDlg()
@@ -802,4 +806,28 @@ void KReportConfigurationFilterDlg::slotUpdateCheckTransfers()
     } else {
         cb->setEnabled(true);
     }
+}
+
+void KReportConfigurationFilterDlg::saveState()
+{
+    const auto config = KSharedConfig::openConfig();
+    auto group = config->group("Last Use Settings");
+    group.writeEntry("KReportConfigurationFilterDlg", saveGeometry());
+    group.sync();
+}
+
+void KReportConfigurationFilterDlg::restoreState()
+{
+    const auto config = KSharedConfig::openConfig();
+    const auto group = config->group("Last Use Settings");
+    QByteArray geometry = group.readEntry("KReportConfigurationFilterDlg", QByteArray());
+    if (!geometry.isEmpty()) {
+        restoreGeometry(geometry);
+    }
+}
+
+void KReportConfigurationFilterDlg::closeEvent(QCloseEvent* event)
+{
+    saveState();
+    QDialog::closeEvent(event);
 }
