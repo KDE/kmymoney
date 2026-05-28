@@ -1,8 +1,8 @@
 Account,Opening,2024
 Asset
-"checking","0","222"
-Total Asset,"0","222"
+"checking","0.00","222.00"
+Total Asset,"0.00","222.00"
 Liability
-"liabilities","0","-100"
-Total Liability,"0","-100"
-Grand Total,"0","322"
+"liabilities","0.00","-100.00"
+Total Liability,"0.00","-100.00"
+Grand Total,"0.00","322.00"

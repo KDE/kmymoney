@@ -26,6 +26,7 @@
 #include "objectinfotable.h"
 #include "pivottable.h"
 #include "querytable.h"
+#include "storage/accountsmodel.h"
 
 using namespace reports;
 
@@ -178,6 +179,9 @@ int main(int argc, char** argv)
         reader.setFile(MyMoneyFile::instance());
         reader.read(&f);
         f.close();
+
+        // setup internal data for which we need all models loaded
+        MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
         MyMoneyFile::instance()->applyFileFixes(false);
 
         for (const auto& report : MyMoneyFile::instance()->reportList()) {
