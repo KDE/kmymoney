@@ -694,6 +694,7 @@ void KTagsView::slotDeleteTag()
         }
         // request a list of all transactions that still use the tags in question
         QList<MyMoneyTransaction> translist;
+        f.setConsiderCategorySplits(true);
         file->transactionList(translist, f);
         //     qDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
 
