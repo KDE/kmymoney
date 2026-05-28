@@ -123,11 +123,11 @@ void ObjectInfoTable::init()
         break;
     case eMyMoney::Report::RowType::AccountInfo:
         m_columns << ctState << ctNumber << ctDescription << ctOpeningDate << ctClosingDate << ctCurrencyName << ctBalanceWarning << ctCreditWarning
-                  << ctMaxCreditLimit << ctTax << ctFavorite;
+                  << ctMaxCreditLimit << ctTax << ctFavorite << ctCurrentBalance;
         break;
     case eMyMoney::Report::RowType::AccountLoanInfo:
         m_columns << ctState << ctNumber << ctDescription << ctOpeningDate << ctCurrencyName << ctPayee << ctLoanAmount << ctInterestRate
-                  << ctNextInterestChange << ctPeriodicPayment << ctFinalPayment << ctFavorite;
+                  << ctNextInterestChange << ctPeriodicPayment << ctFinalPayment << ctFavorite << ctCurrentBalance;
         break;
     default:
         m_columns.clear();
