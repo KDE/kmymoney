@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:43+0000\n"
+"POT-Creation-Date: 2026-05-29 00:44+0000\n"
 "PO-Revision-Date: 2026-03-01 12:31+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -6393,7 +6393,7 @@ msgstr "aktiver programsporing"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "dump navnene for alle QAction-objekter til stdout og avslutt"
 
-#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "fil som skal åpnes"
@@ -26144,62 +26144,62 @@ msgstr ""
 "<p>All informasjon er valgfri er oppgis kun for å tilpasse KMyMoney-fila "
 "din</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Eksporter KMyMoney-rapporter"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Eksporter i csv-format (standard)"
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Eksporter i HTML-format"
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, kde-format
 msgid "Export in xml format"
 msgstr "Eksporter i XML-format"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Lag referansefil fra utdata"
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Bruk informasjonstabell for eksportering"
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Bruk pivottabell for eksportering"
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Bruk spørringstabell for eksportering (standard)"
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, kde-format
 msgid "List all custom reports"
 msgstr "List opp alle tilpassede rapporter"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Filnavn for generert utdata"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr "Prosesser en spesifikk rapport"
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Kun en av --csv og --html er støttet"

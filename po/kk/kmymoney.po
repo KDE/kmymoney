@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:43+0000\n"
+"POT-Creation-Date: 2026-05-29 00:44+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -6583,7 +6583,7 @@ msgstr "бағдарлама орындау хатамасы жазылсын"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "барлық анықталған KAction нысандардың атауларын дамп етіп шығу"
 
-#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "ашатын файлы"
@@ -27052,66 +27052,66 @@ msgstr ""
 "\n"
 "<p>Мәліметті келтіру міндеті емес.</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export KMyMoney reports"
 msgstr "Таңдамалы есеп-берулері"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export in xml format"
 msgstr "Таңдамалы есеп-берулері"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, fuzzy, kde-format
 #| msgid "Old Customized Reports"
 msgid "List all custom reports"
 msgstr "Ескі өзгертілген есеп-беру"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, fuzzy, kde-format
 #| msgid "Unable to generate report"
 msgid "Filename for generated output"
 msgstr "Есеп-беру болмады"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr ""
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr ""

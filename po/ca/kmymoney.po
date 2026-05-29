@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:43+0000\n"
+"POT-Creation-Date: 2026-05-29 00:44+0000\n"
 "PO-Revision-Date: 2026-05-19 09:25+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -6445,7 +6445,7 @@ msgstr ""
 "bolca els noms de tots els objectes QAction definits a la sortida estàndard "
 "i surt"
 
-#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "fitxer a obrir"
@@ -26396,62 +26396,62 @@ msgstr ""
 "<p>Tota la informació és optativa i s'usa per a personalitzar el fitxer del "
 "KMyMoney.</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Exporta informes del KMyMoney"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Exporta en format «csv» (predeterminat)"
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Exporta en format HTML"
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, kde-format
 msgid "Export in xml format"
 msgstr "Exporta en format XML"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Crea un fitxer de referència a partir de la sortida"
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Usa la taula d'informació per a exportar"
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Usa la taula pivot per a exportar"
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Usa la taula de consulta per a exportar (predeterminada)"
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, kde-format
 msgid "List all custom reports"
 msgstr "Llista tots els informes personalitzats"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Nom de fitxer de la sortida generada"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr "Processa un informe específic"
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Només s'admet un d'entre --csv o --html"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:43+0000\n"
+"POT-Creation-Date: 2026-05-29 00:44+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -6393,7 +6393,7 @@ msgstr ""
 "uložiť názvy všetkých definovaných objektov QAction na štandardný výstup a "
 "skončiť"
 
-#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "súbor na otvorenie"
@@ -26162,62 +26162,62 @@ msgstr ""
 "<p>Všetky informácie sú voliteľné a poskytnuté len pre prispôsobenie vášho "
 "súboru KMyMoney.</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Exportovať výkazy KMyMoney"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Exportovať vo formáte CSV (predvolené)"
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Exportovať vo formáte HTML"
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, kde-format
 msgid "Export in xml format"
 msgstr "Exportovať vo formáte XML"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Vytvoriť referenčný súbor z výstupu"
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Použiť informačnú tabuľku pre export"
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Použiť kontingenčnú tabuľku pre export"
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Použiť dotazovú tabuľku pre export (predvolené)"
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, kde-format
 msgid "List all custom reports"
 msgstr "Staré prispôsobené výkazy"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Názov súboru pre generovaný výstup"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr "Spracovať konkrétnu správu"
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Podporovaná je iba jedna z --csv a --html"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:43+0000\n"
+"POT-Creation-Date: 2026-05-29 00:44+0000\n"
 "PO-Revision-Date: 2026-05-19 08:23+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -6444,7 +6444,7 @@ msgstr ""
 "надіслати список всіх визначених об'єктів QAction до stdout і завершити "
 "роботу програми"
 
-#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "файл, який слід відкрити"
@@ -26422,62 +26422,62 @@ msgstr ""
 "<p>Всі ці відомості є необов'язковими, їх призначено лише для персоніфікації "
 "вашого файла KMyMoney.</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Експортувати звіти KMyMoney"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Експортувати у форматі csv (типовий варіант)"
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Експортувати у форматі HTML"
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, kde-format
 msgid "Export in xml format"
 msgstr "Експортувати у форматі XML"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Створити з виведених даних еталонний файл"
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Використати для експортування інформаційну таблицю"
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Використати для експортування зведену таблицю"
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Використати таблицю запитів для експортування (типовий варіант)"
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, kde-format
 msgid "List all custom reports"
 msgstr "Список усіх нетипових звітів"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Назва файла для створених результатів"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr "Обробити вказаний звіт"
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Передбачено підтримку лише одного з варіантів, --csv або --html"

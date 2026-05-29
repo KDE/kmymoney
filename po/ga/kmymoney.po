@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:43+0000\n"
+"POT-Creation-Date: 2026-05-29 00:44+0000\n"
 "PO-Revision-Date: 2026-04-22 16:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@yahoo.com>\n"
 "Language-Team: Irish <http://weblate.amgelocalnet.duckdns.org/projects/kde-"
@@ -6499,7 +6499,7 @@ msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "dumpáil ainmneacha na réada QAction sainithe go léir chuig stdout agus scoir"
 
-#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:186 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "comhad le hoscailt"
@@ -26609,62 +26609,62 @@ msgstr ""
 "<p>Is rogha an fhaisnéis uile agus ní úsáidtear í ach chun do chomhad "
 "KMyMoney a phearsantú.</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Easpórtáil tuarascálacha KMyMoney"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Easpórtáil i bhformáid csv (réamhshocraithe)"
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Easpórtáil i bhformáid HTML"
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, kde-format
 msgid "Export in xml format"
 msgstr "Easpórtáil i bhformáid xml"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Cruthaigh comhad tagartha ón aschur"
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Úsáid tábla eolais le haghaidh easpórtála"
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Úsáid tábla pivot le haghaidh easpórtála"
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Úsáid tábla fiosrúcháin le haghaidh easpórtála (réamhshocraithe)"
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, kde-format
 msgid "List all custom reports"
 msgstr "Liostaigh na tuarascálacha saincheaptha go léir"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Ainm comhaid don aschur ginte"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr "Próiseáil tuarascáil shonrach"
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Ní thacaítear ach le ceann amháin de --csv agus --html"
