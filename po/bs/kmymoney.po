@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-29 00:44+0000\n"
+"POT-Creation-Date: 2026-05-30 00:45+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -22094,12 +22094,12 @@ msgstr "Kopiraj oznaku"
 msgid "Unable to modify tag"
 msgstr "Nemoguće izmjeniti oznaku"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Nije moguće ponovo dodijeliti oznaku za trasakciju/podjelu"
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Nemoguće ukloniti oznaku(oznake)"

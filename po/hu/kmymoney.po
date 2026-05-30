@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-29 00:44+0000\n"
+"POT-Creation-Date: 2026-05-30 00:45+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -21607,12 +21607,12 @@ msgstr "Címke kettőzése"
 msgid "Unable to modify tag"
 msgstr "Nem lehet módosítani a címkét"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Nem lehet eltávolítani a címkéket"

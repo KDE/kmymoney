@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-29 00:44+0000\n"
+"POT-Creation-Date: 2026-05-30 00:45+0000\n"
 "PO-Revision-Date: 2026-05-19 23:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -21274,12 +21274,12 @@ msgstr "Duplicar nombre de etiqueta"
 msgid "Unable to modify tag"
 msgstr "No se puede modificar la etiqueta"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "No es posible reasignar la etiqueta de la transacción/partida"
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "No es posible eliminar la(s) etiqueta(s)"

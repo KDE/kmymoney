@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-29 00:44+0000\n"
+"POT-Creation-Date: 2026-05-30 00:45+0000\n"
 "PO-Revision-Date: 2026-05-21 11:20+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -21078,12 +21078,12 @@ msgstr "اسم وسم مكرر"
 msgid "Unable to modify tag"
 msgstr "تعذّر تعديل الوسم"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "لا يمكن إعادة تعيين وسم المعاملة/التجزئة"
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "تعذّر إزالة الوسوم"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-29 00:44+0000\n"
+"POT-Creation-Date: 2026-05-30 00:45+0000\n"
 "PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -21208,12 +21208,12 @@ msgstr "Duplicate tag name"
 msgid "Unable to modify tag"
 msgstr "Unable to modify tag"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Unable to reassign tag of transaction/split"
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Unable to remove tag(s)"

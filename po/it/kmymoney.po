@@ -1,5 +1,5 @@
 # translation of kmymoney to Italian
-# SPDX-FileCopyrightText: 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2005-2008, 2010-2026 Vincenzo Reale <smart2128vr@gmail.com>
 # Samuel Algisi <woodhouse@member.fsf.org>, 2005.
 # Sandro Bonazzola <sandrobonazzola@users.sourceforge.net>, 2008.
 # SPDX-FileCopyrightText: 2025 Paolo Zamponi <feus73@gmail.com>
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-29 00:44+0000\n"
-"PO-Revision-Date: 2026-04-16 08:45+0200\n"
+"POT-Creation-Date: 2026-05-30 00:45+0000\n"
+"PO-Revision-Date: 2026-05-25 17:04+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -21288,12 +21288,12 @@ msgstr "Nome etichetta duplicato"
 msgid "Unable to modify tag"
 msgstr "Impossibile modificare l'etichetta"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Impossibile riassegnare l'etichetta della transazione/suddivisione"
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Impossibile rimuovere la(e) etichetta(e)"
@@ -22277,14 +22277,14 @@ msgstr "Nome"
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
-msgstr ""
+msgstr "Contrai"
 
 #: kmymoney/widgets/kguiutils.cpp:308
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Expand"
-msgstr ""
+msgstr "Espandi"
 
 #: kmymoney/widgets/kmmemptyview.h:49
 #, kde-format
@@ -22720,7 +22720,7 @@ msgstr "Selezione nulla"
 #: kmymoney/widgets/ktransactionfilter.ui:552
 #, kde-format
 msgid "Expand"
-msgstr ""
+msgstr "Espandi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:512
