@@ -293,7 +293,6 @@ void KReportTab::enableAllReportActions()
     pActions[eMenu::Action::ReportNew]->setEnabled(true);
     pActions[eMenu::Action::ReportConfigure]->setEnabled(true);
     pActions[eMenu::Action::ReportExport]->setEnabled(true);
-    pActions[eMenu::Action::ReportCopy]->setEnabled(true);
     pActions[eMenu::Action::ReportDelete]->setEnabled(true);
     pActions[eMenu::Action::ReportClose]->setEnabled(true);
 }

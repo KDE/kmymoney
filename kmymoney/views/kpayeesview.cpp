@@ -87,6 +87,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
     connect(d->ui->m_register, &LedgerView::editTransaction, this, &KMyMoneyViewBase::editTransaction);
 
     d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewPayee]);
+    addAction(pActions[eMenu::Action::CopyTransactionsToClipboard]);
 }
 
 KPayeesView::~KPayeesView()
@@ -231,9 +232,12 @@ void KPayeesView::aboutToShow()
     Q_D(KPayeesView);
     d->loadDetails();
     d->showTransactions();
+    updateActions(d->m_selections);
 
     // don't forget base class logic
     KMyMoneyViewBase::aboutToShow();
+
+    pActions[eMenu::Action::CopyTransactionsToClipboard]->setEnabled(true);
 }
 
 void KPayeesView::aboutToHide()
@@ -243,6 +247,8 @@ void KPayeesView::aboutToHide()
     d->finalizePendingChanges();
 
     KMyMoneyViewBase::aboutToHide();
+
+    pActions[eMenu::Action::CopyTransactionsToClipboard]->setEnabled(false);
 }
 
 void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
