@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-30 03:43+0000\n"
-"PO-Revision-Date: 2026-05-25 09:19+0200\n"
+"PO-Revision-Date: 2026-05-30 08:28+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -16173,17 +16173,14 @@ msgid "Payment Method"
 msgstr "Mètode de pagament"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "Estat"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:779
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Saldo final"
+msgstr "Data de tancament"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:781
 #, kde-format
@@ -16297,11 +16294,9 @@ msgstr "Transfereix a %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&Obre"
+msgstr "Obre"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -17257,11 +17252,9 @@ msgid "Loan Information"
 msgstr "Informació dels préstecs"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:991
-#, fuzzy, kde-format
-#| msgctxt "@title:window Balance chart for account"
-#| msgid "%1 Balance History"
+#, kde-format
 msgid "Value/Balance History"
-msgstr "Historial del saldo de %1"
+msgstr "Historial del valor/saldo"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1059
 #, kde-format

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-30 03:43+0000\n"
-"PO-Revision-Date: 2026-05-25 11:14+0100\n"
+"PO-Revision-Date: 2026-05-30 16:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -16164,17 +16164,14 @@ msgid "Payment Method"
 msgstr "Método de pago"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "Estado"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:779
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Saldo final"
+msgstr "Fecha de cierre"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:781
 #, kde-format
@@ -16288,11 +16285,9 @@ msgstr "Transferir a %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&Abrir"
+msgstr "Abrir"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -17240,11 +17235,9 @@ msgid "Loan Information"
 msgstr "Información de préstamos"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:991
-#, fuzzy, kde-format
-#| msgctxt "@title:window Balance chart for account"
-#| msgid "%1 Balance History"
+#, kde-format
 msgid "Value/Balance History"
-msgstr "Historial de saldo de %1"
+msgstr "Historial de valor/saldo"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1059
 #, kde-format

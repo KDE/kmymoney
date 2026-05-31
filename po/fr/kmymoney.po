@@ -16281,17 +16281,14 @@ msgid "Payment Method"
 msgstr "Moyen de paiement"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "État"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:779
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Solde de clôture"
+msgstr "Date de clôture"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:781
 #, kde-format
@@ -16405,11 +16402,9 @@ msgstr "Virement vers %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:268
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:330
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&Ouvrir"
+msgstr "Ouvrir"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:276
 #, kde-format
@@ -17359,11 +17354,9 @@ msgid "Loan Information"
 msgstr "Informations sur les prêts"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:991
-#, fuzzy, kde-format
-#| msgctxt "@title:window Balance chart for account"
-#| msgid "%1 Balance History"
+#, kde-format
 msgid "Value/Balance History"
-msgstr "Historique du solde %1 "
+msgstr "Historique des valeurs et du solde"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1059
 #, kde-format
