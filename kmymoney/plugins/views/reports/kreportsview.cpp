@@ -96,11 +96,12 @@ KReportsView::KReportsView(QWidget *parent) :
     connect(pActions[eMenu::Action::ReportDelete], &QAction::triggered, this, &KReportsView::slotDelete);
     connect(pActions[eMenu::Action::ReportClose], &QAction::triggered, this, &KReportsView::slotCloseCurrent);
 
-    pActions[eMenu::Action::ReportCopy]->setShortcut(QKeySequence::Copy);
     pActions[eMenu::Action::ReportNew]->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Plus));
     pActions[eMenu::Action::ReportConfigure]->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_P));
     pActions[eMenu::Action::ReportDelete]->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Delete));
     pActions[eMenu::Action::ReportClose]->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_W));
+
+    addAction(pActions[eMenu::Action::ReportCopy]);
 }
 
 KReportsView::~KReportsView()
@@ -218,8 +219,16 @@ void KReportsView::showEvent(QShowEvent * event)
     else
         Q_EMIT reportSelected(MyMoneyReport());
 
+    pActions[eMenu::Action::ReportCopy]->setEnabled(true);
     // don't forget base class implementation
     QWidget::showEvent(event);
+}
+
+void KReportsView::hideEvent(QHideEvent* event)
+{
+    pActions[eMenu::Action::ReportCopy]->setEnabled(false);
+    // don't forget base class implementation
+    QWidget::hideEvent(event);
 }
 
 bool KReportsView::eventFilter(QObject* watched, QEvent* event)
@@ -364,8 +373,10 @@ void KReportsView::slotPrintPreviewView()
 void KReportsView::slotCopyView()
 {
     Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget())) {
         tab->copyToClipboard();
+        qDebug() << "Report copied to clipboard";
+    }
 }
 
 void KReportsView::slotExportView()

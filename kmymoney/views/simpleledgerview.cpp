@@ -137,6 +137,8 @@ public:
 
         q->tabSelected(0);
         openLedgersAfterFileOpen();
+
+        q->addAction(pActions[eMenu::Action::CopyTransactionsToClipboard]);
     }
 
     void createAccountsCombo()
@@ -749,8 +751,14 @@ void SimpleLedgerView::showEvent(QShowEvent* event)
             }
         });
     }
-    // don't forget base class implementation
+    pActions[eMenu::Action::CopyTransactionsToClipboard]->setEnabled(true);
     QWidget::showEvent(event);
+}
+
+void SimpleLedgerView::hideEvent(QHideEvent* event)
+{
+    pActions[eMenu::Action::CopyTransactionsToClipboard]->setEnabled(false);
+    QWidget::hideEvent(event);
 }
 
 void SimpleLedgerView::setupCornerWidget()

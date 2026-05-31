@@ -1533,6 +1533,18 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
             // onlineJob actions
         };
+
+        // struct for creating useless (unconnected) QAction
+        struct contextInfo {
+            Action  action;
+            Qt::ShortcutContext context;
+        };
+
+        // clang-format off
+        const QVector<contextInfo> contextInfos {
+            { Action::CopyTransactionsToClipboard, Qt::WidgetWithChildrenShortcut },
+            { Action::ReportCopy, Qt::WidgetWithChildrenShortcut }
+        };
         // clang-format on
 
         for (const auto& info : actionInfos) {
@@ -1545,6 +1557,14 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
                 a->setIcon(Icons::get(info.icon));
             a->setEnabled(false);
             lutActions.insert(info.action, a);  // store QAction's pointer for later processing
+        }
+
+        for (const auto& info : contextInfos) {
+            const auto a = lutActions.find(info.action);
+            if (a != lutActions.cend()) {
+                (*a)->setShortcutContext(info.context);
+                (*a)->setEnabled(false);
+            }
         }
 
         auto a = new KDualAction(this);
@@ -1745,6 +1765,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {qMakePair(Action::EditTransaction,             Qt::CTRL | Qt::Key_E)},
             {qMakePair(Action::EditSplits,                  Qt::CTRL | Qt::SHIFT | Qt::Key_E)},
             {qMakePair(Action::CopyTransactionsToClipboard, Qt::CTRL | Qt::Key_C)},
+            {qMakePair(Action::ReportCopy,                  Qt::CTRL | Qt::Key_C)},
             {qMakePair(Action::CopySplits,                  Qt::CTRL | Qt::SHIFT | Qt::Key_C)},
             {qMakePair(Action::AddReversingTransaction,     Qt::CTRL | Qt::SHIFT | Qt::Key_R)},
             {qMakePair(Action::AddReversingTransaction,     Qt::CTRL | Qt::SHIFT | Qt::Key_Backspace)},
@@ -2590,6 +2611,7 @@ void KMyMoneyApp::slotCopyTransactionsToClipboard()
             lines << fields.join(QLatin1Char('\t'));
         }
         QApplication::clipboard()->setText(lines.join(QLatin1Char('\n')));
+        qDebug() << "Transaction copied to clipboard";
         return;
     }
 

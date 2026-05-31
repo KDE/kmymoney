@@ -107,11 +107,15 @@ Q_SIGNALS:
 
 protected:
     /**
-      * Overridden so we can reload the view if necessary.
-      *
-      * @return Nothing.
-      */
+     * Overridden so we can reload the view if necessary
+     * and control shortcuts.
+     */
     void showEvent(QShowEvent * event) override;
+
+    /**
+     * Overridden so we can control shorrtcuts
+     */
+    void hideEvent(QHideEvent* event) override;
 
     /**
      * Overridden so we can handle closing the search filter on ESC
