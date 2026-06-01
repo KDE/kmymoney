@@ -4,12 +4,27 @@ set(infotable_test_files
 
 set(querytable_test_files
   test-382245.xml
+  test-385993.xml
+  test-396301.xml
+  test-403825.xml
+  test-406403.xml
+  test-406525.xml
+  test-416274.xml
   test-423870.xml
   test-424674.xml
+  test-426241.xml
+  test-441023.xml
   test-448788.xml
+  test-452096.xml
+  test-452692.xml
   test-453033.xml
   test-469195.xml
+  test-498031.xml
+  test-498033.xml
+  test-498054.xml
+  test-499180.xml
   test-511104.xml
+  test-516585-convert-currency.xml
   test-cash-flow.xml
   test-investment-multi-currency.xml
   test-investment-no-sold.xml

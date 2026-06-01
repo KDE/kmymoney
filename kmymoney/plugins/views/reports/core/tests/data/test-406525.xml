@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+ <FILEINFO>
+  <CREATION_DATE date="2019-04-14"/>
+  <LAST_MODIFIED_DATE date="2019-04-14"/>
+  <VERSION id="1"/>
+  <FIXVERSION id="5"/>
+ </FILEINFO>
+ <USER name="" email="">
+  <ADDRESS telephone="" zipcode="" street="" city="" county=""/>
+ </USER>
+ <INSTITUTIONS count="0"/>
+ <PAYEES count="0"/>
+ <COSTCENTERS count="0"/>
+ <TAGS count="0"/>
+ <ACCOUNTS count="11">
+  <ACCOUNT opened="" type="9" currency="EUR" number="" name="Asset" parentaccount="" lastmodified="" lastreconciled="" id="AStd::Asset" description="" institution="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000001"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT opened="" type="10" currency="EUR" number="" name="Liability" parentaccount="" lastmodified="" lastreconciled="" id="AStd::Liability" description="" institution=""/>
+  <ACCOUNT opened="" type="13" currency="EUR" number="" name="Expense" parentaccount="" lastmodified="" lastreconciled="" id="AStd::Expense" description="" institution="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000005"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT opened="" type="12" currency="EUR" number="" name="Income" parentaccount="" lastmodified="" lastreconciled="" id="AStd::Income" description="" institution="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000002"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT opened="" type="16" currency="EUR" number="" name="Equity" parentaccount="" lastmodified="" lastreconciled="" id="AStd::Equity" description="" institution=""/>
+  <ACCOUNT opened="2019-01-01" type="1" currency="EUR" number="" name="Test" parentaccount="AStd::Asset" lastmodified="2019-04-14" lastreconciled="" id="A000001" description="" institution=""/>
+  <ACCOUNT opened="1900-01-01" type="12" currency="EUR" number="" name="Category A" parentaccount="AStd::Income" lastmodified="" lastreconciled="" id="A000002" description="" institution="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000004"/>
+    <SUBACCOUNT id="A000003"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT opened="1900-01-01" type="12" currency="EUR" number="" name="Sub-Category 1" parentaccount="A000002" lastmodified="2019-04-14" lastreconciled="" id="A000003" description="" institution="">
+   <KEYVALUEPAIRS>
+    <PAIR value="A000004" key="VatAccount"/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT opened="1900-01-01" type="12" currency="EUR" number="" name="Sub-Category 2" parentaccount="A000002" lastmodified="2019-04-14" lastreconciled="" id="A000004" description="" institution="">
+   <KEYVALUEPAIRS>
+    <PAIR value="19/100" key="VatRate"/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT opened="1900-01-01" type="13" currency="EUR" number="" name="Category A" parentaccount="AStd::Expense" lastmodified="" lastreconciled="" id="A000005" description="" institution="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000006"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT opened="1900-01-01" type="13" currency="EUR" number="" name="Sub-Category 3" parentaccount="A000005" lastmodified="2019-04-14" lastreconciled="" id="A000006" description="" institution=""/>
+ </ACCOUNTS>
+ <TRANSACTIONS count="2">
+  <TRANSACTION commodity="EUR" postdate="2019-04-14" memo="" entrydate="2019-04-14" id="T000000000000000001">
+   <SPLITS>
+    <SPLIT value="-100/1" reconciledate="" account="A000001" payee="" number="" memo="Purchase Goods" price="1/1" bankid="" shares="-100/1" id="S0001" action="" reconcileflag="0"/>
+    <SPLIT value="100/1" reconciledate="" account="A000006" payee="" number="" memo="Purchase Goods" price="1/1" bankid="" shares="100/1" id="S0002" action="" reconcileflag="0"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION commodity="EUR" postdate="2019-04-14" memo="" entrydate="2019-04-14" id="T000000000000000002">
+   <SPLITS>
+    <SPLIT value="88/1" reconciledate="" account="A000001" payee="" number="" memo="Sell goods" price="1/1" bankid="" shares="88/1" id="S0001" action="" reconcileflag="0"/>
+    <SPLIT value="-1479/20" reconciledate="" account="A000003" payee="" number="" memo="Sell goods" price="1/1" bankid="" shares="-1479/20" id="S0002" action="" reconcileflag="0"/>
+    <SPLIT value="-281/20" reconciledate="" account="A000004" payee="" number="" memo="" price="1/1" bankid="" shares="-281/20" id="S0003" action="" reconcileflag="0"/>
+   </SPLITS>
+  </TRANSACTION>
+ </TRANSACTIONS>
+ <KEYVALUEPAIRS>
+  <PAIR value="EUR" key="kmm-baseCurrency"/>
+  <PAIR value="{00b7d60c-592a-499d-9122-b305ff00909b}" key="kmm-id"/>
+ </KEYVALUEPAIRS>
+ <SCHEDULES count="0"/>
+ <SECURITIES count="0"/>
+ <CURRENCIES count="1">
+  <CURRENCY scf="100" type="3" symbol="€" saf="100" name="Euro" pp="4" id="EUR" rounding-method="7"/>
+ </CURRENCIES>
+ <PRICES count="0"/>
+ <REPORTS count="0"/>
+ <BUDGETS count="0"/>
+ <ONLINEJOBS count="0"/>
+</KMYMONEY-FILE>

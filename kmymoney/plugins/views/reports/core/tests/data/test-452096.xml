@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date="2022-03-29"/>
+    <LAST_MODIFIED_DATE date="2026-06-02T11:48:51+02:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION id="11"/>
+    <APPVERSION id="5.2.70-d3488feb3"/>
+  </FILEINFO>
+  <USER name="Tester" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES/>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="EGP">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="EGP"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="EGP"/>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="EGP">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+        <SUBACCOUNT id="A000003"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="EGP"/>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2022-03-29" institution="" opened="2022-02-01" number="" type="2" name="My Bank" description="" currency="AED">
+      <KEYVALUEPAIRS>
+        <PAIR key="lastNumberUsed" value="1"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000002" parentaccount="AStd::Income" lastreconciled="" lastmodified="2022-03-29" institution="" opened="1900-01-01" number="" type="12" name="Salary" description="" currency="EGP"/>
+    <ACCOUNT id="A000003" parentaccount="AStd::Income" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="12" name="Food" description="" currency="EGP"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000002" postdate="2022-03-22" memo="" entrydate="2022-03-29" commodity="AED">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="1000/1" shares="1000/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-1000/1" shares="-5000/1" price="1/5" memo="" account="A000002" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2026-06-02T11:48:51+02:00"/>
+    <PAIR key="kmm-baseCurrency" value="AED"/>
+    <PAIR key="kmm-id" value="{9048b545-aaee-43b1-9d67-7d8c2819e133}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="AED" name="United Arab Emirates Dirham" symbol="AED" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="EGP" name="Egyptian Pound" symbol="£" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES>
+    <PRICEPAIR from="AED" to="EGP">
+      <PRICE date="2022-01-01" price="4/1" source="User"/>
+      <PRICE date="2022-03-20" price="5/1" source="User"/>
+      <PRICE date="2022-03-22" price="5/1" source="User"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="EGP" to="AED">
+      <PRICE date="2022-01-01" price="1/4" source="User"/>
+      <PRICE date="2022-03-20" price="1/5" source="User"/>
+    </PRICEPAIR>
+  </PRICES>
+  <REPORTS>
+    <REPORT id="R000001" type="querytable 1.15" group="Transactions" name="Transactions by Category (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="category" querycolumns="number,payee,tag,account,rate" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>

@@ -1,0 +1,7 @@
+Date,Num,Payee,Tags,Category,Amount,Balance
+"TestAccount"
+"2019-02-01","","Opening Balance","","",""," 0.00"
+"2019-02-01","","","[No Tag]","*** UNASSIGNED ***"," -100.00"," -100.00"
+"2019-02-01","","Closing Balance","","",""," -100.00"
+Total TestAccount,,,,," -100.00",
+Grand Total,,,,," -100.00",

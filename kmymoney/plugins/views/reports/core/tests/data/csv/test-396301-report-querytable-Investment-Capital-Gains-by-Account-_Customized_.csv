@@ -1,0 +1,6 @@
+Account,Shares,Buy Price,Buy Value,Last Price,Ending Market Value,Percentage Gain,Capital Gain
+"Investment"
+"A","2.00"," 100.0000"," -200.00"," 7.0000"," 14.00","-93.00 %"," -186.00"
+"B","3.50"," 100.0000"," -350.00"," 25.0000"," 87.50","-75.00 %"," -262.50"
+Total Investment,"5.50",""," -550.00",""," 101.50","-81.54 %"," -448.50"
+Grand Total,"5.50",""," -550.00",""," 101.50","-81.54 %"," -448.50"

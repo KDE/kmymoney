@@ -1,0 +1,27 @@
+Date,Category,Account,Action,Shares,Price,Amount,Balance
+"Shares"
+"BHP"
+"2022-01-10","Initial Market Value","BHP","","0.00"," 0.00",""," 0.00"
+"2022-01-10","[Split Transaction]","BHP","Buy shares","500.00"," 44.90"," 22,450.00"," 22,450.00"
+"","Transfer from Shares (Brokerage)","","","",""," 22,475.00",""
+"","Brokerage","","","",""," -25.00",""
+"2022-02-10","[Split Transaction]","BHP","Dividend","",""," 0.00"," 22,450.00"
+"","Transfer to Shares (Brokerage)","","","",""," -2,715.00",""
+"","Dividend","","","",""," 2,715.00",""
+"2022-03-10","[Split Transaction]","BHP","Dividend","",""," 0.00"," 22,450.00"
+"","Transfer to Shares (Brokerage)","","","",""," -1,500.00",""
+"","Dividend","","","",""," 1,500.00",""
+"2022-04-01","Transfer to Shares (Brokerage)","BHP","Sell shares","-50.00"," 44.90"," -2,245.00"," 20,205.00"
+"2022-05-01","[Split Transaction]","BHP","Interest income","",""," 0.00"," 20,205.00"
+"","Transfer to Shares (Brokerage)","","","",""," -100.00",""
+"","Interest","","","",""," 100.00",""
+"2022-06-01","Dividend","BHP","Reinvest dividends","10.00"," 44.90"," 449.00"," 20,654.00"
+"2022-07-01","[Split Transaction]","BHP","Yield","",""," 0.00"," 20,654.00"
+"","Transfer to Shares (Brokerage)","","","",""," -50.00",""
+"","Interest","","","",""," 50.00",""
+"2022-08-01","","BHP","","5.00"," 1.00"," 5.00"," 20,659.00"
+"2022-09-01","","BHP","","-5.00"," 1.00"," -5.00"," 20,654.00"
+"2026-06-01","Ending Market Value","BHP","","460.00"," 44.90",""," 20,654.00"
+Total BHP,,,,,," 20,654.00",
+Total Shares,,,,,," 20,654.00",
+Grand Total,,,,,," 20,654.00",

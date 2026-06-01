@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+ <FILEINFO>
+  <CREATION_DATE date="2020-01-15"/>
+  <LAST_MODIFIED_DATE date="2020-01-15"/>
+  <VERSION id="1"/>
+  <FIXVERSION id="5"/>
+ </FILEINFO>
+ <USER name="" email="">
+  <ADDRESS street="" county="" zipcode="" telephone="" city=""/>
+ </USER>
+ <INSTITUTIONS count="0"/>
+ <PAYEES count="0"/>
+ <COSTCENTERS count="0"/>
+ <TAGS count="0"/>
+ <ACCOUNTS count="19">
+  <ACCOUNT id="AStd::Asset" parentaccount="" opened="" name="Asset" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="9" number="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000011"/>
+    <SUBACCOUNT id="A000012"/>
+    <SUBACCOUNT id="A000014"/>
+    <SUBACCOUNT id="A000015"/>
+    <SUBACCOUNT id="A000017"/>
+    <SUBACCOUNT id="A000018"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT id="AStd::Liability" parentaccount="" opened="" name="Liability" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="10" number=""/>
+  <ACCOUNT id="AStd::Expense" parentaccount="" opened="" name="Expense" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="13" number="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000007"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT id="AStd::Income" parentaccount="" opened="" name="Income" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="12" number="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000008"/>
+    <SUBACCOUNT id="A000009"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT id="AStd::Equity" parentaccount="" opened="" name="Equity" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="16" number=""/>
+  <ACCOUNT id="A000007" parentaccount="AStd::Expense" opened="1900-01-01" name="Commissions" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="13" number=""/>
+  <ACCOUNT id="A000008" parentaccount="AStd::Income" opened="1900-01-01" name="Dividend Income" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="12" number=""/>
+  <ACCOUNT id="A000009" parentaccount="AStd::Income" opened="1900-01-01" name="Interest Income" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="12" number="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000010"/>
+   </SUBACCOUNTS>
+  </ACCOUNT>
+  <ACCOUNT id="A000010" parentaccount="A000009" opened="1900-01-01" name="Bond Interest" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="12" number=""/>
+  <ACCOUNT id="A000011" parentaccount="AStd::Asset" opened="2019-04-06" name="ABC" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="7" number="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000013"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR value="" key="iban"/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT id="A000012" parentaccount="AStd::Asset" opened="2019-04-06" name="ABC (Brokerage)" description="" currency="GBP" institution="" lastmodified="2020-01-15" lastreconciled="" type="1" number=""/>
+  <ACCOUNT id="A000013" parentaccount="A000011" opened="2019-06-15" name="American Bee Company" description="" currency="E000001" institution="" lastmodified="2020-01-15" lastreconciled="" type="15" number=""/>
+  <ACCOUNT id="A000014" parentaccount="AStd::Asset" opened="2019-04-06" name="DEF" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="7" number="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000016"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR value="" key="iban"/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT id="A000015" parentaccount="AStd::Asset" opened="2019-04-06" name="DEF (Brokerage)" description="" currency="GBP" institution="" lastmodified="2020-01-15" lastreconciled="" type="1" number=""/>
+  <ACCOUNT id="A000016" parentaccount="A000014" opened="2019-06-15" name="Dalek Empire Fund" description="" currency="E000002" institution="" lastmodified="2020-01-15" lastreconciled="" type="15" number=""/>
+  <ACCOUNT id="A000017" parentaccount="AStd::Asset" opened="2019-04-06" name="GHI" description="" currency="GBP" institution="" lastmodified="" lastreconciled="" type="7" number="">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000019"/>
+    <SUBACCOUNT id="A000020"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR value="" key="iban"/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT id="A000018" parentaccount="AStd::Asset" opened="2019-04-06" name="GHI (Brokerage)" description="" currency="GBP" institution="" lastmodified="2020-01-15" lastreconciled="" type="1" number=""/>
+  <ACCOUNT id="A000019" parentaccount="A000017" opened="2019-06-15" name="General Hedge Investment" description="" currency="E000003" institution="" lastmodified="2020-01-15" lastreconciled="" type="15" number=""/>
+  <ACCOUNT id="A000020" parentaccount="A000017" opened="2019-06-15" name="Good Hope Income" description="" currency="E000004" institution="" lastmodified="2020-01-15" lastreconciled="" type="15" number=""/>
+ </ACCOUNTS>
+ <TRANSACTIONS count="4">
+  <TRANSACTION id="T000000000000000001" entrydate="2020-01-15" postdate="2019-06-15" memo="" commodity="GBP">
+   <SPLITS>
+    <SPLIT id="S0001" payee="" value="-100/1" account="A000012" price="1/1" memo="" bankid="" reconciledate="" action="" shares="-100/1" number="" reconcileflag="0"/>
+    <SPLIT id="S0002" payee="" value="100/1" account="A000013" price="1/1" memo="" bankid="" reconciledate="" action="Buy" shares="100/1" number="" reconcileflag="0"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION id="T000000000000000002" entrydate="2020-01-15" postdate="2019-06-15" memo="" commodity="GBP">
+   <SPLITS>
+    <SPLIT id="S0001" payee="" value="-100/1" account="A000015" price="1/1" memo="" bankid="" reconciledate="" action="" shares="-100/1" number="" reconcileflag="0"/>
+    <SPLIT id="S0002" payee="" value="100/1" account="A000016" price="1/1" memo="" bankid="" reconciledate="" action="Buy" shares="100/1" number="" reconcileflag="0"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION id="T000000000000000003" entrydate="2020-01-15" postdate="2019-06-15" memo="" commodity="GBP">
+   <SPLITS>
+    <SPLIT id="S0001" payee="" value="-100/1" account="A000018" price="1/1" memo="" bankid="" reconciledate="" action="" shares="-100/1" number="" reconcileflag="0"/>
+    <SPLIT id="S0002" payee="" value="100/1" account="A000019" price="1/1" memo="" bankid="" reconciledate="" action="Buy" shares="100/1" number="" reconcileflag="0"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION id="T000000000000000004" entrydate="2020-01-15" postdate="2019-06-15" memo="" commodity="GBP">
+   <SPLITS>
+    <SPLIT id="S0001" payee="" value="-100/1" account="A000018" price="1/1" memo="" bankid="" reconciledate="" action="" shares="-100/1" number="" reconcileflag="0"/>
+    <SPLIT id="S0002" payee="" value="100/1" account="A000020" price="1/1" memo="" bankid="" reconciledate="" action="Buy" shares="100/1" number="" reconcileflag="0"/>
+   </SPLITS>
+  </TRANSACTION>
+ </TRANSACTIONS>
+ <KEYVALUEPAIRS>
+  <PAIR value="GBP" key="kmm-baseCurrency"/>
+  <PAIR value="{c821587f-1c76-4896-9760-99fbe89ce5b6}" key="kmm-id"/>
+ </KEYVALUEPAIRS>
+ <SCHEDULES count="0"/>
+ <SECURITIES count="4">
+  <SECURITY id="E000001" rounding-method="7" symbol="ABC1" saf="100" pp="2" name="American Bee Company" trading-market="AMEX" trading-currency="GBP" type="0"/>
+  <SECURITY id="E000002" rounding-method="7" symbol="DEF1" saf="100" pp="2" name="Dalek Empire Fund" trading-market="AMEX" trading-currency="GBP" type="0"/>
+  <SECURITY id="E000003" rounding-method="7" symbol="GHI1" saf="100" pp="2" name="General Hedge Investment" trading-market="AMEX" trading-currency="GBP" type="0"/>
+  <SECURITY id="E000004" rounding-method="7" symbol="GHI2" saf="100" pp="2" name="Good Hope Income" trading-market="AMEX" trading-currency="GBP" type="0"/>
+ </SECURITIES>
+ <CURRENCIES count="1">
+  <CURRENCY id="GBP" rounding-method="7" symbol="£" saf="100" pp="4" name="British Pound" type="3" scf="100"/>
+ </CURRENCIES>
+ <PRICES count="4">
+  <PRICEPAIR to="GBP" from="E000001">
+   <PRICE source="Transaction" price="1/1" date="2019-06-15"/>
+   <PRICE source="User" price="3/2" date="2019-08-15"/>
+  </PRICEPAIR>
+  <PRICEPAIR to="GBP" from="E000002">
+   <PRICE source="Transaction" price="1/1" date="2019-06-15"/>
+   <PRICE source="User" price="5/4" date="2019-08-15"/>
+  </PRICEPAIR>
+  <PRICEPAIR to="GBP" from="E000003">
+   <PRICE source="Transaction" price="1/1" date="2019-06-15"/>
+   <PRICE source="User" price="2/1" date="2019-10-15"/>
+  </PRICEPAIR>
+  <PRICEPAIR to="GBP" from="E000004">
+   <PRICE source="Transaction" price="1/1" date="2019-06-15"/>
+   <PRICE source="User" price="3/2" date="2019-10-15"/>
+  </PRICEPAIR>
+ </PRICES>
+ <REPORTS count="1">
+  <REPORT querycolumns="performance" rowtype="topaccount-account" name="Investment Performance by Account (12m)" investmentsum="0" group="Investments" convertcurrency="1" hidetransactions="0" datelock="last12months" comment="Last 12 Months Report" skipZero="0" favorite="0" showcolumntotals="1" includestransfers="0" investments="1" loans="0" type="querytable 1.15" id="R000001" detail="all" tax="0"/>
+ </REPORTS>
+ <BUDGETS count="0"/>
+ <ONLINEJOBS count="0"/>
+</KMYMONEY-FILE>

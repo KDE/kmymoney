@@ -1,0 +1,6 @@
+Account,Starting Market Value,Buy Value,Sell Value,Dividends Reinvested,Dividends Paid Out,Ending Market Value,Return,Return On Investment,Annualized Return,Extended internal rate of return
+"Investment"
+"A"," 0.00"," -1,200.00"," 1,000.00"," 0.00"," 150.00"," 200.00"," 150.00","12.50 %","13.61 %","15.89 %"
+"B"," 0.00"," -1,200.00"," 1,000.00"," 150.00"," 0.00"," 350.00"," 150.00","12.50 %","13.61 %","14.91 %"
+Total Investment," 0.00"," -2,400.00"," 2,000.00"," 150.00"," 150.00"," 550.00"," 300.00","12.50 %","13.61 %","15.38 %"
+Grand Total," 0.00"," -2,400.00"," 2,000.00"," 150.00"," 150.00"," 550.00"," 300.00","12.50 %","13.61 %","15.38 %"

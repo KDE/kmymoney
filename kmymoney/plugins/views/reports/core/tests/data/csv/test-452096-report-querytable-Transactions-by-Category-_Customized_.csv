@@ -1,0 +1,9 @@
+Date,Num,Payee,Tags,Account,Rate,Amount
+"Income"
+"Salary"
+"Salary"
+"2022-03-22","","[Empty Payee]","[No Tag]","My Bank"," 1.0000"," 200.00"
+Total Salary,,,,,," 200.00"
+Total Salary,,,,,," 200.00"
+Total Income,,,,,," 200.00"
+Grand Total,,,,,," 200.00"

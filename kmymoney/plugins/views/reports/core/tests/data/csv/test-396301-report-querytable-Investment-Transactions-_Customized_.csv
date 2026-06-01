@@ -1,0 +1,22 @@
+Date,Category,Account,Action,Shares,Price,Amount,Balance
+"Investment"
+"A"
+"2021-12-31","Initial Market Value","A","","0.00"," 0.0000",""," 0.00"
+"2021-12-31","Transfer from Investment (Brokerage)","A","Buy shares","8.00"," 100.0000"," 800.00"," 800.00"
+"2022-03-22","Transfer from Investment (Brokerage)","A","Buy shares","4.00"," 100.0000"," 400.00"," 1,200.00"
+"2022-06-30","[Split Transaction]","A","Dividend","",""," 0.00"," 1,200.00"
+"","Transfer to Investment (Brokerage)","","","",""," -150.00",""
+"","Interest","","","",""," 150.00",""
+"2022-12-02","Transfer to Investment (Brokerage)","A","Sell shares","-10.00"," 100.0000"," -1,000.00"," 200.00"
+"2022-12-02","Ending Market Value","A","","2.00"," 100.0000",""," 200.00"
+Total A,,,,,," 200.00",
+"B"
+"2021-12-31","Initial Market Value","B","","0.00"," 0.0000",""," 0.00"
+"2021-12-31","Transfer from Investment (Brokerage)","B","Buy shares","8.00"," 100.0000"," 800.00"," 800.00"
+"2022-03-22","Transfer from Investment (Brokerage)","B","Buy shares","4.00"," 100.0000"," 400.00"," 1,200.00"
+"2022-06-30","Interest","B","Reinvest dividends","1.50"," 100.0000"," 150.00"," 1,350.00"
+"2022-12-02","Transfer to Investment (Brokerage)","B","Sell shares","-10.00"," 100.0000"," -1,000.00"," 350.00"
+"2022-12-02","Ending Market Value","B","","3.50"," 100.0000",""," 350.00"
+Total B,,,,,," 350.00",
+Total Investment,,,,,," 550.00",
+Grand Total,,,,,," 550.00",

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date="2020-11-19"/>
+    <LAST_MODIFIED_DATE date="2022-04-29"/>
+    <VERSION id="1"/>
+    <FIXVERSION date="5"/>
+  </FILEINFO>
+  <USER name="CT Chapter: American Chestnut Foundation" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES>
+    <PAYEE id="P000015" name="Big Org" reference="" email="" matchingenabled="1" usingmatchkey="1" matchignorecase="1" matchkey="^THE\ AMERICAN\ CHE\ CONS\ PAY$">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+    </PAYEE>
+    <PAYEE id="P000016" name="Local Org 1" reference="" email="" matchingenabled="0">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+    </PAYEE>
+    <PAYEE id="P000017" name="Payee Person 2" reference="" email="" matchingenabled="0">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+    </PAYEE>
+    <PAYEE id="P000024" name="Local Org 2" reference="" email="" matchingenabled="0">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+    </PAYEE>
+    <PAYEE id="P000025" name="Payee Person 1" reference="" email="" matchingenabled="0">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+    </PAYEE>
+  </PAYEES>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+        <SUBACCOUNT id="A000024"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="USD"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000006"/>
+        <SUBACCOUNT id="A000016"/>
+        <SUBACCOUNT id="A000019"/>
+        <SUBACCOUNT id="A000034"/>
+        <SUBACCOUNT id="A000037"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000015"/>
+        <SUBACCOUNT id="A000033"/>
+        <SUBACCOUNT id="A000035"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="2023-01-31" lastmodified="2023-03-01" institution="" opened="2020-01-01" number="9703290" type="1" name="Checking" description="" currency="USD">
+      <RECONCILIATIONS>
+        <RECONCILIATION date="2020-11-30" value="832157/100"/>
+        <RECONCILIATION date="2020-12-31" value="832157/100"/>
+        <RECONCILIATION date="2021-02-28" value="264889/25"/>
+        <RECONCILIATION date="2021-03-31" value="264889/25"/>
+        <RECONCILIATION date="2021-04-30" value="974463/100"/>
+        <RECONCILIATION date="2021-06-30" value="1007463/100"/>
+        <RECONCILIATION date="2021-07-31" value="1064963/100"/>
+        <RECONCILIATION date="2021-08-31" value="1073963/100"/>
+        <RECONCILIATION date="2021-09-30" value="266044/25"/>
+        <RECONCILIATION date="2021-10-31" value="270919/25"/>
+        <RECONCILIATION date="2021-11-30" value="278864/25"/>
+        <RECONCILIATION date="2021-12-31" value="286614/25"/>
+        <RECONCILIATION date="2022-01-31" value="301614/25"/>
+        <RECONCILIATION date="2022-02-28" value="680489/25"/>
+        <RECONCILIATION date="2022-03-31" value="1366263/50"/>
+        <RECONCILIATION date="2022-04-30" value="1382763/50"/>
+        <RECONCILIATION date="2022-05-31" value="2427541/100"/>
+        <RECONCILIATION date="2022-06-30" value="2446541/100"/>
+        <RECONCILIATION date="2022-07-31" value="2454041/100"/>
+        <RECONCILIATION date="2022-08-31" value="79741/4"/>
+        <RECONCILIATION date="2022-09-30" value="2044311/100"/>
+        <RECONCILIATION date="2022-10-31" value="2071311/100"/>
+        <RECONCILIATION date="2022-11-30" value="2018079/100"/>
+        <RECONCILIATION date="2022-12-31" value="2039579/100"/>
+        <RECONCILIATION date="2023-01-31" value="2150579/100"/>
+      </RECONCILIATIONS>
+      <KEYVALUEPAIRS>
+        <PAIR key="StatementKey" value="211170101  xxxxxx3290"/>
+        <PAIR key="lastImportedTransactionDate" value="2023-02-15"/>
+        <PAIR key="lastNumberUsed" value="417"/>
+        <PAIR key="lastStatementBalance" value="2150579/100"/>
+        <PAIR key="reconciliationHistory" value="2020-11-30:832157/100;2020-12-31:832157/100;2021-02-28:264889/25;2021-03-31:264889/25;2021-04-30:974463/100;2021-06-30:1007463/100;2021-07-31:1064963/100;2021-08-31:1073963/100;2021-09-30:266044/25;2021-10-31:270919/25;2021-11-30:278864/25;2021-12-31:286614/25;2022-01-31:301614/25;2022-02-28:680489/25;2022-03-31:1366263/50;2022-04-30:1382763/50;2022-05-31:2427541/100;2022-06-30:2446541/100;2022-07-31:2454041/100;2022-08-31:79741/4;2022-09-30:2044311/100;2022-10-31:2071311/100;2022-11-30:2018079/100;2022-12-31:2039579/100;2023-01-31:2150579/100"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000002" parentaccount="AStd::Equity" lastreconciled="" lastmodified="2020-11-19" institution="" opened="2020-01-01" number="" type="16" name="Opening Balances" description="" currency="USD">
+      <KEYVALUEPAIRS>
+        <PAIR key="OpeningBalanceAccount" value="Yes"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000006" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2022-11-11" institution="" opened="1900-01-01" number="" type="13" name="Miscellaneous/Other" description="" currency="USD"/>
+    <ACCOUNT id="A000015" parentaccount="AStd::Income" lastreconciled="" lastmodified="2023-03-01" institution="" opened="1900-01-01" number="" type="12" name="Memberships" description="" currency="USD"/>
+    <ACCOUNT id="A000016" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2022-04-29" institution="" opened="1900-01-01" number="" type="13" name="OtherGroups" description="" currency="USD">
+      <KEYVALUEPAIRS>
+        <PAIR key="Tax" value="yes"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000019" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2022-04-29" institution="" opened="1900-01-01" number="" type="13" name="Meeting registration" description="" currency="USD"/>
+    <ACCOUNT id="A000024" parentaccount="AStd::Asset" lastreconciled="2022-11-30" lastmodified="" institution="" opened="2019-12-31" number="" type="7" name="Dead Invest" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000026"/>
+      </SUBACCOUNTS>
+      <ONLINEBANKING accountid="Z46095109" appId="QWIN:2500" bankid="fidelity.com" bankname="Fidelity Investments" fid="7776" fipid="" kmmofx-acc-ref="fidelity.com-fidelity.com Z46095109" kmmofx-headerVersion="102" kmmofx-lastUpdate="1" kmmofx-numRequestDays="60" kmmofx-pickDate="0" kmmofx-preferName="0" kmmofx-specificDate="Mon Sep 12 2022" kmmofx-todayMinus="0" kmmofx-uniqueIdSource="0" org="fidelity.com" protocol="OFX" provider="ofximporter" type="INVESTMENT" uniqueId="fidelity.com Z46095109" url="https://ofx.fidelity.com/ftgw/OFX/clients/download" username="ostroffjh"/>
+      <RECONCILIATIONS>
+        <RECONCILIATION date="2020-12-31" value="0/1"/>
+        <RECONCILIATION date="2021-03-31" value="0/1"/>
+        <RECONCILIATION date="2021-08-31" value="0/1"/>
+        <RECONCILIATION date="2021-09-30" value="0/1"/>
+        <RECONCILIATION date="2021-10-31" value="0/1"/>
+        <RECONCILIATION date="2021-12-31" value="0/1"/>
+        <RECONCILIATION date="2022-01-31" value="0/1"/>
+        <RECONCILIATION date="2022-02-28" value="0/1"/>
+        <RECONCILIATION date="2022-03-31" value="0/1"/>
+        <RECONCILIATION date="2022-04-30" value="0/1"/>
+        <RECONCILIATION date="2022-05-31" value="0/1"/>
+        <RECONCILIATION date="2022-06-30" value="0/1"/>
+        <RECONCILIATION date="2022-07-31" value="0/1"/>
+        <RECONCILIATION date="2022-08-31" value="0/1"/>
+        <RECONCILIATION date="2022-09-30" value="0/1"/>
+        <RECONCILIATION date="2022-10-31" value="0/1"/>
+        <RECONCILIATION date="2022-11-30" value="0/1"/>
+      </RECONCILIATIONS>
+      <KEYVALUEPAIRS>
+        <PAIR key="lastImportedTransactionDate" value="2023-01-20"/>
+        <PAIR key="reconciliationHistory" value="2020-12-31:0/1;2021-03-31:0/1;2021-08-31:0/1;2021-09-30:0/1;2021-10-31:0/1;2021-12-31:0/1;2022-01-31:0/1;2022-02-28:0/1;2022-03-31:0/1;2022-04-30:0/1;2022-05-31:0/1;2022-06-30:0/1;2022-07-31:0/1;2022-08-31:0/1;2022-09-30:0/1;2022-10-31:0/1;2022-11-30:0/1"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000026" parentaccount="A000024" lastreconciled="" lastmodified="2023-01-20" institution="" opened="2019-12-31" number="" type="15" name="FIDELITY GOVERNMENT CASH RESERVES" description="" currency="USD">
+      <KEYVALUEPAIRS>
+        <PAIR key="lastNumberUsed" value="1"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000033" parentaccount="AStd::Income" lastreconciled="" lastmodified="2022-03-30" institution="" opened="1900-01-01" number="" type="12" name="Donations" description="" currency="USD"/>
+    <ACCOUNT id="A000034" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2022-04-29" institution="" opened="1900-01-01" number="" type="13" name="Outreach" description="" currency="USD"/>
+    <ACCOUNT id="A000035" parentaccount="AStd::Income" lastreconciled="" lastmodified="2022-03-30" institution="" opened="1900-01-01" number="" type="12" name="Grants" description="" currency="USD"/>
+    <ACCOUNT id="A000037" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2022-11-11" institution="" opened="1900-01-01" number="" type="13" name="Insurance" description="" currency="USD"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000003" postdate="2020-01-01" memo="" entrydate="2020-11-19" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="2020-03-31" action="" reconcileflag="2" value="164907/20" shares="164907/20" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-164907/20" shares="-164907/20" price="1/1" memo="" account="A000002" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000079" postdate="2022-01-12" memo="" entrydate="2022-01-10" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000024" reconciledate="2022-01-31" action="" reconcileflag="2" value="-35/1" shares="-35/1" price="1/1" memo="1/10" account="A000001" number="413" bankid=""/>
+        <SPLIT id="S0002" payee="P000024" reconciledate="" action="" reconcileflag="0" value="35/1" shares="35/1" price="1/1" memo="1/10" account="A000016" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000080" postdate="2022-01-19" memo="" entrydate="2022-02-07" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-01-31" action="" reconcileflag="2" value="635/1" shares="635/1" price="1/1" memo="Dec 2021 (ACH)" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-635/1" shares="-635/1" price="1/1" memo="Dec 2021 (ACH)" account="A000015" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000082" postdate="2022-02-18" memo="" entrydate="2022-02-11" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-02-28" action="" reconcileflag="2" value="-75/1" shares="-75/1" price="1/1" memo="2/14 Chapter share Meeting in March" account="A000001" number="414" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="75/1" shares="75/1" price="1/1" memo="2/14 Chapter share NESAF Meeting in March" account="A000019" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000083" postdate="2022-02-18" memo="" entrydate="2022-03-09" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-02-28" action="" reconcileflag="2" value="730/1" shares="730/1" price="1/1" memo="ACH" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-500/1" shares="-500/1" price="1/1" memo="special grant" account="A000035" number="" bankid=""/>
+        <SPLIT id="S0003" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-210/1" shares="-210/1" price="1/1" memo="Jan 2022" account="A000015" number="" bankid=""/>
+        <SPLIT id="S0004" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-20/1" shares="-20/1" price="1/1" memo="with Jan 2022 membership" account="A000033" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000085" postdate="2022-03-08" memo="" entrydate="2022-03-09" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000016" reconciledate="2022-03-31" action="" reconcileflag="2" value="-100/1" shares="-100/1" price="1/1" memo="3/3" account="A000001" number="415" bankid=""/>
+        <SPLIT id="S0002" payee="P000016" reconciledate="" action="" reconcileflag="0" value="100/1" shares="100/1" price="1/1" memo="3/3" account="A000016" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000086" postdate="2022-03-15" memo="" entrydate="2022-03-09" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000025" reconciledate="2022-03-31" action="" reconcileflag="2" value="-53/1" shares="-53/1" price="1/1" memo="3/8, Hartford Show, various costs" account="A000001" number="416" bankid=""/>
+        <SPLIT id="S0002" payee="P000025" reconciledate="" action="" reconcileflag="0" value="53/1" shares="53/1" price="1/1" memo="3/8, CT Flower &amp; Garden Show, admission and parking reimbursement for two volunteer members" account="A000034" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000087" postdate="2022-03-23" memo="" entrydate="2022-03-30" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-03-31" action="" reconcileflag="2" value="2587/10" shares="2587/10" price="1/1" memo="ACH" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-240/1" shares="-240/1" price="1/1" memo="Feb 2022" account="A000015" number="" bankid=""/>
+        <SPLIT id="S0003" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-187/10" shares="-187/10" price="1/1" memo="" account="A000035" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000091" postdate="2022-04-29" memo="" entrydate="2022-04-29" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-04-30" action="" reconcileflag="2" value="330/1" shares="330/1" price="1/1" memo="Mar 2022 (ACH)" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-330/1" shares="-330/1" price="1/1" memo="Mar 2022 (ACH)" account="A000015" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000090" postdate="2022-05-02" memo="" entrydate="2022-04-01" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000025" reconciledate="2022-05-31" action="" reconcileflag="2" value="-114/1" shares="-114/1" price="1/1" memo="4/29/22, reimbursement" account="A000001" number="418" bankid=""/>
+        <SPLIT id="S0002" payee="P000025" reconciledate="" action="" reconcileflag="0" value="65/1" shares="65/1" price="1/1" memo="" account="A000019" number="" bankid=""/>
+        <SPLIT id="S0003" payee="P000025" reconciledate="" action="" reconcileflag="0" value="49/1" shares="49/1" price="1/1" memo="" account="A000037" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000092" postdate="2022-05-16" memo="" entrydate="2022-07-17" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-05-31" action="" reconcileflag="2" value="180/1" shares="180/1" price="1/1" memo="Apr 2022 (ACH)" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-180/1" shares="-180/1" price="1/1" memo="Mar 2022 (ACH)" account="A000015" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000094" postdate="2022-06-14" memo="" entrydate="2022-07-17" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-06-30" action="" reconcileflag="2" value="190/1" shares="190/1" price="1/1" memo="May 2022 (ACH)" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-190/1" shares="-190/1" price="1/1" memo="Mar 2022 (ACH)" account="A000015" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000093" postdate="2022-07-19" memo="" entrydate="2022-07-17" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-07-31" action="" reconcileflag="2" value="75/1" shares="75/1" price="1/1" memo="June 2022 (ACH)" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-75/1" shares="-75/1" price="1/1" memo="" account="A000015" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000125" postdate="2022-11-15" memo="" entrydate="2022-11-11" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000025" reconciledate="2022-11-30" action="" reconcileflag="2" value="603/25" shares="603/25" price="1/1" memo="" account="A000001" number="155" bankid="ID 08009105ae7c0dc0aea752e26571387"/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="1022/25" shares="1022/25" price="1/1" memo="refreshments for 11/11/22 Board Meeting" account="A000006" number="" bankid=""/>
+        <SPLIT id="S0003" payee="" reconciledate="" action="" reconcileflag="0" value="-65/1" shares="-65/1" price="1/1" memo="return reimbursement from event organizer, waived for nonprofit" account="A000037" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000139" postdate="2022-12-05" memo="Other Credit" entrydate="2023-01-20" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2022-12-31" action="" reconcileflag="2" value="215/1" shares="215/1" price="1/1" memo="October 2022 (ACH)" account="A000001" number="" bankid="ID 39a88dce30370949cee1677e79161de"/>
+        <SPLIT id="S0002" payee="P000015" reconciledate="" action="" reconcileflag="0" value="-165/1" shares="-165/1" price="1/1" memo="" account="A000015" number="" bankid=""/>
+        <SPLIT id="S0003" payee="" reconciledate="" action="" reconcileflag="0" value="-50/1" shares="-50/1" price="1/1" memo="" account="A000033" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000140" postdate="2023-01-04" memo="Other Credit" entrydate="2023-01-20" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000015" reconciledate="2023-01-31" action="" reconcileflag="2" value="210/1" shares="210/1" price="1/1" memo="November 2022 (ACH)" account="A000001" number="" bankid="ID 33499e467938ab625a0679340ac0b5d"/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-75/1" shares="-75/1" price="1/1" memo="" account="A000015" number="" bankid=""/>
+        <SPLIT id="S0003" payee="" reconciledate="" action="" reconcileflag="0" value="-135/1" shares="-135/1" price="1/1" memo="" account="A000033" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000142" postdate="2023-02-01" memo="" entrydate="2023-03-01" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000024" reconciledate="" action="" reconcileflag="0" value="-50/1" shares="-50/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000024" reconciledate="" action="" reconcileflag="0" value="50/1" shares="50/1" price="1/1" memo="" account="A000016" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="CreationDate" value="2020-11-19"/>
+    <PAIR key="FixVersion" value="5"/>
+    <PAIR key="LastModificationDate" value="2022-04-29"/>
+    <PAIR key="kmm-baseCurrency" value="USD"/>
+    <PAIR key="kmm-id" value="{e0355b2e-a801-4db1-a761-faf3f51b728f}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="USD" name="US Dollar" symbol="$" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES/>
+  <REPORTS>
+    <REPORT id="R000002" type="pivottable 1.16" group="Income and Expenses" name="Income and Expenses 2021" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="expenseincome" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2021-01-01" to="2021-12-31"/>
+    </REPORT>
+    <REPORT id="R000003" type="pivottable 1.16" group="Income and Expenses" name="Income and Expenses This Year (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="expenseincome" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2022-01-01" to="2022-04-30"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>
