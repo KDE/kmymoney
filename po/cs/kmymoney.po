@@ -16768,7 +16768,7 @@ msgstr "Zkopírovat do schránky"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:122
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopírovat"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonDelete)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:137
@@ -17527,7 +17527,7 @@ msgstr "<p>Vyberte tuto volbu pro zobrazení sloupce \"Průběžná bilance\"</p
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:226
 #, kde-format
 msgid "Rate"
-msgstr ""
+msgstr "Míra"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:245
@@ -21340,14 +21340,14 @@ msgstr "Název"
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
-msgstr ""
+msgstr "Svinout"
 
 #: kmymoney/widgets/kguiutils.cpp:311
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Expand"
-msgstr ""
+msgstr "Rozvinout"
 
 #: kmymoney/widgets/kmmemptyview.h:49
 #, kde-format
@@ -21781,7 +21781,7 @@ msgstr "Zrušit výběr"
 #: kmymoney/widgets/ktransactionfilter.ui:552
 #, kde-format
 msgid "Expand"
-msgstr ""
+msgstr "Rozvinout"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:512

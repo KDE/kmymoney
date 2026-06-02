@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kmymoney package.
 #
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2025 Matjaž Jeran <matjaz.jeran@amis.net>
+# SPDX-FileCopyrightText: 2020-2023, 2025-2026 Matjaž Jeran <matjaz.jeran@amis.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-01 03:28+0000\n"
-"PO-Revision-Date: 2026-05-30 06:40+0200\n"
+"PO-Revision-Date: 2026-06-01 07:26+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1942,17 +1942,15 @@ msgstr "Urniki"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel19)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:208
-#, fuzzy, kde-format
-#| msgid "Stock p&rices"
+#, kde-format
 msgid "Stock prices"
 msgstr "Cene delnic"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel20)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:228
-#, fuzzy, kde-format
-#| msgid "Exchange &rate / Price"
+#, kde-format
 msgid "Exchange rates"
-msgstr "Menjalno razmerje / Cena"
+msgstr "Menjalni tečaji"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (text), widget (QLabel, textLabel11)
@@ -5040,13 +5038,12 @@ msgstr "Valute..."
 #: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgid "Stock prices and exchange rates..."
-msgstr ""
+msgstr "Cene delnic in menjalni tečaji..."
 
 #: kmymoney/kmymoney.cpp:1442
-#, fuzzy, kde-format
-#| msgid "Update Stock and Currency Prices..."
+#, kde-format
 msgid "Update stock prices and exchange rates..."
-msgstr "Posodobi tečajnice delnic in tečajnice valut..."
+msgstr "Posodobi tečajnice delnic in menjalne tečaje..."
 
 #: kmymoney/kmymoney.cpp:1443
 #, kde-format
@@ -5228,10 +5225,9 @@ msgid "Copy splits"
 msgstr "Kopiraj razdelitve"
 
 #: kmymoney/kmymoney.cpp:1485
-#, fuzzy, kde-format
-#| msgid "Delete transaction"
+#, kde-format
 msgid "Copy selected transactions"
-msgstr "Zbriši transakcijo"
+msgstr "Kopiraj izbrane transakcije"
 
 #: kmymoney/kmymoney.cpp:1486
 #, kde-format
@@ -9186,46 +9182,40 @@ msgid "Name"
 msgstr "Ime"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Komentar"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Start Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "Začetni datum"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "End Date"
-msgstr "Datum"
+msgstr "Končni datum"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
-msgstr "Prednostni"
+msgstr "Priljubljeni"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:74
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Skupine"
+msgstr "Skupina"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:77
-#, fuzzy, kde-format
-#| msgid "Modified"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
-msgstr "Spremenjeno"
+msgstr "Spremenjena"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:153
 #, kde-format
@@ -16269,13 +16259,13 @@ msgstr "Začetna tržna vrednost"
 #, kde-format
 msgctxt "Exchange rate"
 msgid "Rate"
-msgstr ""
+msgstr "Tečaj"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:838
 #, kde-format
 msgctxt "Exchange rate"
 msgid "The applied currency exchange rate used in the conversion"
-msgstr ""
+msgstr "Uporabljeni menjalni tečaj valute pri pretvorbi"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:217
 #: kmymoney/plugins/views/reports/core/querytable.cpp:991
@@ -16784,15 +16774,13 @@ msgstr "Poročila"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
 msgstr "Privzeto poročilo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
 msgstr "Poročilo po meri"
 
@@ -17189,8 +17177,7 @@ msgid "Generated Report"
 msgstr "Zgenerirano poročilo"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:71
-#, fuzzy, kde-format
-#| msgid "CSV"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "CSV"
 msgstr "CSV"
@@ -17199,21 +17186,19 @@ msgstr "CSV"
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:73
-#, fuzzy, kde-format
-#| msgid "XML"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "XML"
 msgstr "XML"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:74
-#, fuzzy, kde-format
-#| msgid "Copy this report to the clipboard"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Format used when copying the report to the clipboard"
-msgstr "Kopiraj to poročilo na odlagališče"
+msgstr "Format uporabljen pri kopiranju poročila na odložišče"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreporttab.cpp:377
@@ -18055,7 +18040,7 @@ msgstr "<p>Izberite to možnost, da za prikaz stolpca Tekoče stanje</p>"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:226
 #, kde-format
 msgid "Rate"
-msgstr ""
+msgstr "Tečaj"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:245
@@ -22024,14 +22009,14 @@ msgstr "Ime"
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
-msgstr ""
+msgstr "Strni"
 
 #: kmymoney/widgets/kguiutils.cpp:311
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Expand"
-msgstr ""
+msgstr "Razširi"
 
 #: kmymoney/widgets/kmmemptyview.h:49
 #, kde-format
@@ -22472,7 +22457,7 @@ msgstr "Ne izberi ničesar"
 #: kmymoney/widgets/ktransactionfilter.ui:552
 #, kde-format
 msgid "Expand"
-msgstr ""
+msgstr "Razširi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:512

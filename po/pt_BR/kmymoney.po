@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-01 03:28+0000\n"
-"PO-Revision-Date: 2026-05-30 06:41-0300\n"
+"PO-Revision-Date: 2026-06-01 07:11-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -1953,17 +1953,15 @@ msgstr "Agendamentos"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel19)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:208
-#, fuzzy, kde-format
-#| msgid "Stock p&rices"
+#, kde-format
 msgid "Stock prices"
-msgstr "&Preços da ação"
+msgstr "Preços da ação"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel20)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:228
-#, fuzzy, kde-format
-#| msgid "Exchange &rate / Price"
+#, kde-format
 msgid "Exchange rates"
-msgstr "&Taxa de câmbio / Preço"
+msgstr "Taxas de câmbio"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (text), widget (QLabel, textLabel11)
@@ -5061,13 +5059,12 @@ msgstr "Moedas..."
 #: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgid "Stock prices and exchange rates..."
-msgstr ""
+msgstr "Preços das ações e taxas de câmbio..."
 
 #: kmymoney/kmymoney.cpp:1442
-#, fuzzy, kde-format
-#| msgid "Update Stock and Currency Prices..."
+#, kde-format
 msgid "Update stock prices and exchange rates..."
-msgstr "Atualizar o preço das moedas e ações..."
+msgstr "Atualizar os preços das ações e as taxas de câmbio..."
 
 #: kmymoney/kmymoney.cpp:1443
 #, kde-format
@@ -5249,10 +5246,9 @@ msgid "Copy splits"
 msgstr "Copiar parcelas"
 
 #: kmymoney/kmymoney.cpp:1485
-#, fuzzy, kde-format
-#| msgid "Delete transaction"
+#, kde-format
 msgid "Copy selected transactions"
-msgstr "Excluir transação"
+msgstr "Copiar transações selecionadas"
 
 #: kmymoney/kmymoney.cpp:1486
 #, kde-format
@@ -9202,43 +9198,37 @@ msgid "Name"
 msgstr "Nome"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Comentário"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Start Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "Data inicial"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "End Date"
-msgstr "Data"
+msgstr "Data final"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
-msgstr "Favoritos"
+msgstr "Favorito"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:74
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Grupos"
+msgstr "Grupo"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:77
-#, fuzzy, kde-format
-#| msgid "Modified"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
 msgstr "Modificado"
@@ -16281,13 +16271,13 @@ msgstr "Valor inicial de mercado"
 #, kde-format
 msgctxt "Exchange rate"
 msgid "Rate"
-msgstr ""
+msgstr "Taxa"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:838
 #, kde-format
 msgctxt "Exchange rate"
 msgid "The applied currency exchange rate used in the conversion"
-msgstr ""
+msgstr "A taxa de câmbio aplicada na conversão."
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:217
 #: kmymoney/plugins/views/reports/core/querytable.cpp:991
@@ -16796,17 +16786,15 @@ msgstr "Relatórios"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "Relatório predefinido"
+msgstr "Relatórios predefinidos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Relatório personalizado"
+msgstr "Relatórios personalizados"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:296
 #, kde-format
@@ -17201,8 +17189,7 @@ msgid "Generated Report"
 msgstr "Relatório Criado"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:71
-#, fuzzy, kde-format
-#| msgid "CSV"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "CSV"
 msgstr "CSV"
@@ -17211,21 +17198,19 @@ msgstr "CSV"
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:73
-#, fuzzy, kde-format
-#| msgid "XML"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "XML"
 msgstr "XML"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:74
-#, fuzzy, kde-format
-#| msgid "Copy this report to the clipboard"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Format used when copying the report to the clipboard"
-msgstr "Copiar este relatório para a área de transferência"
+msgstr "Formato utilizado ao copiar o relatório para a área de transferência"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreporttab.cpp:377
@@ -18073,7 +18058,7 @@ msgstr "<p>Selecione esta opção para mostrar a coluna de saldo em execução</
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:226
 #, kde-format
 msgid "Rate"
-msgstr ""
+msgstr "Taxa"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:245
@@ -22043,14 +22028,14 @@ msgstr "Nome"
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
-msgstr ""
+msgstr "Recolher"
 
 #: kmymoney/widgets/kguiutils.cpp:311
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #: kmymoney/widgets/kmmemptyview.h:49
 #, kde-format
@@ -22488,7 +22473,7 @@ msgstr "Limpar seleção"
 #: kmymoney/widgets/ktransactionfilter.ui:552
 #, kde-format
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:512

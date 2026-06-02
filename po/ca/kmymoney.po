@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-01 03:28+0000\n"
-"PO-Revision-Date: 2026-05-30 08:28+0200\n"
+"PO-Revision-Date: 2026-06-01 09:20+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -1950,17 +1950,15 @@ msgstr "Planificacions"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel19)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:208
-#, fuzzy, kde-format
-#| msgid "Stock p&rices"
+#, kde-format
 msgid "Stock prices"
-msgstr "Co&titzacions dels valors"
+msgstr "Cotitzacions dels valors"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel20)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:228
-#, fuzzy, kde-format
-#| msgid "Exchange &rate / Price"
+#, kde-format
 msgid "Exchange rates"
-msgstr "Tipus de canvi/p&reu"
+msgstr "Tipus de canvi"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (text), widget (QLabel, textLabel11)
@@ -5077,13 +5075,12 @@ msgstr "Divises..."
 #: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgid "Stock prices and exchange rates..."
-msgstr ""
+msgstr "Cotització dels valors i els tipus de canvi..."
 
 #: kmymoney/kmymoney.cpp:1442
-#, fuzzy, kde-format
-#| msgid "Update Stock and Currency Prices..."
+#, kde-format
 msgid "Update stock prices and exchange rates..."
-msgstr "Actualitza la cotització dels valors i divises..."
+msgstr "Actualitza la cotització dels valors i els tipus de canvi..."
 
 #: kmymoney/kmymoney.cpp:1443
 #, kde-format
@@ -5265,10 +5262,9 @@ msgid "Copy splits"
 msgstr "Copia els desglossaments"
 
 #: kmymoney/kmymoney.cpp:1485
-#, fuzzy, kde-format
-#| msgid "Delete transaction"
+#, kde-format
 msgid "Copy selected transactions"
-msgstr "Elimina operació"
+msgstr "Copia les operacions seleccionades"
 
 #: kmymoney/kmymoney.cpp:1486
 #, kde-format
@@ -9240,43 +9236,37 @@ msgid "Name"
 msgstr "Nom"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:62
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Comentari"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:65
-#, fuzzy, kde-format
-#| msgid "Start Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "Data d'inici"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "End Date"
-msgstr "Data"
+msgstr "Data final"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
 msgstr "Preferit"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:74
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Grups"
+msgstr "Grup"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:77
-#, fuzzy, kde-format
-#| msgid "Modified"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
 msgstr "Modificat"
@@ -16337,13 +16327,13 @@ msgstr "Valor inicial de mercat"
 #, kde-format
 msgctxt "Exchange rate"
 msgid "Rate"
-msgstr ""
+msgstr "Canvi"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:838
 #, kde-format
 msgctxt "Exchange rate"
 msgid "The applied currency exchange rate used in the conversion"
-msgstr ""
+msgstr "El tipus de canvi de divisa aplicat utilitzat en la conversió"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:217
 #: kmymoney/plugins/views/reports/core/querytable.cpp:991
@@ -16852,17 +16842,15 @@ msgstr "Informes"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "Informe predeterminat"
+msgstr "Informes predeterminats"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Informe personalitzat"
+msgstr "Informes personalitzats"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:296
 #, kde-format
@@ -17263,8 +17251,7 @@ msgid "Generated Report"
 msgstr "Informe generat"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:71
-#, fuzzy, kde-format
-#| msgid "CSV"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "CSV"
 msgstr "CSV"
@@ -17273,11 +17260,10 @@ msgstr "CSV"
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:73
-#, fuzzy, kde-format
-#| msgid "XML"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "XML"
 msgstr "XML"
@@ -17286,7 +17272,7 @@ msgstr "XML"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Format used when copying the report to the clipboard"
-msgstr ""
+msgstr "Format utilitzat en copiar l'informe al porta-retalls"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreporttab.cpp:377
@@ -17321,17 +17307,15 @@ msgstr "Exporta aquest informe com un fitxer HTML o CSV"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:119
-#, fuzzy, kde-format
-#| msgid "Copy to clipboard"
+#, kde-format
 msgid "Copy this report to the clipboard"
-msgstr "Copia al porta-retalls"
+msgstr "Copia aquest informe al porta-retalls"
 
 #. i18n: ectx: property (text), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:122
-#, fuzzy, kde-format
-#| msgid "Copy memo"
+#, kde-format
 msgid "Copy"
-msgstr "Copia el recordatori"
+msgstr "Copia"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonDelete)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:137
@@ -18140,7 +18124,7 @@ msgstr "<p>Seleccioneu aquesta opció per a mostrar la columna Saldo actual</p>"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:226
 #, kde-format
 msgid "Rate"
-msgstr ""
+msgstr "Canvi"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:245
@@ -22133,14 +22117,14 @@ msgstr "Nom"
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
-msgstr ""
+msgstr "Redueix"
 
 #: kmymoney/widgets/kguiutils.cpp:311
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Expand"
-msgstr ""
+msgstr "Expandeix"
 
 #: kmymoney/widgets/kmmemptyview.h:49
 #, kde-format
@@ -22578,7 +22562,7 @@ msgstr "No en seleccionis cap"
 #: kmymoney/widgets/ktransactionfilter.ui:552
 #, kde-format
 msgid "Expand"
-msgstr ""
+msgstr "Expandeix"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:512
