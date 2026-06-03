@@ -101,6 +101,7 @@
         "Name[sl]": "Podatki IBAN/BIC",
         "Name[sv]": "IBAN- och BIC-data",
         "Name[tr]": "IBAN/BIC Verisi",
+        "Name[ug]": "خەلقئارا بانكا ھېساب نومۇرى/بانكا پەرقلەندۈرۈش كودى (IBAN/BIC) سانلىق مەلۇماتى",
         "Name[uk]": "Дані IBAN та BIC",
         "Name[zh_CN]": "国际银行账号/银行识别码数据",
         "Name[zh_TW]": "IBAN/BIC Data",

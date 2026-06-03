@@ -101,6 +101,7 @@
         "Name[sl]": "Uvoznik GNC",
         "Name[sv]": "GNC-import",
         "Name[tr]": "GNC İçe Aktarıcısı",
+        "Name[ug]": "GNC ئەكىرگۈچ",
         "Name[uk]": "Імпортування GNC",
         "Name[zh_CN]": "GNC 导入工具",
         "Name[zh_TW]": "GNC 匯入工具",

@@ -101,6 +101,7 @@
         "Name[sl]": "Uvoznik QIF",
         "Name[sv]": "QIF-import",
         "Name[tr]": "QIF İçe Aktarıcısı",
+        "Name[ug]": "QIF ئەكىرگۈچ",
         "Name[uk]": "Інструмент імпортування QIF",
         "Name[zh_CN]": "QIF 导入工具",
         "Name[zh_TW]": "QIF 匯入工具",
