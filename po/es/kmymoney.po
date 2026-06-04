@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-01 03:28+0000\n"
+"POT-Creation-Date: 2026-06-04 03:50+0000\n"
 "PO-Revision-Date: 2026-06-01 19:13+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -21586,7 +21586,7 @@ msgstr "Seleccionar transacción para rellenar automáticamente"
 msgid "Link"
 msgstr "Enlace"
 
-#: kmymoney/views/newtransactioneditor.cpp:1656
+#: kmymoney/views/newtransactioneditor.cpp:1657
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21595,7 +21595,7 @@ msgstr ""
 "¿Desea sustituir el memorando<p><i>%1</i></p>con el memorando<p><i>%2</i></"
 "p> en la otra partida?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1657
+#: kmymoney/views/newtransactioneditor.cpp:1658
 #, kde-format
 msgid "Copy memo"
 msgstr "Copiar memorando"
@@ -21628,7 +21628,7 @@ msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Introduzca la categoría o la contracuenta de la transacción."
 
-#: kmymoney/views/newtransactionform.cpp:135
+#: kmymoney/views/newtransactionform.cpp:136
 #, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "

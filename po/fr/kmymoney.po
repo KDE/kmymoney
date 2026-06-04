@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-01 03:28+0000\n"
+"POT-Creation-Date: 2026-06-04 03:50+0000\n"
 "PO-Revision-Date: 2026-05-26 07:29+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -21755,7 +21755,7 @@ msgstr "Sélectionner une opération pour la saisie automatique"
 msgid "Link"
 msgstr "Lier"
 
-#: kmymoney/views/newtransactioneditor.cpp:1656
+#: kmymoney/views/newtransactioneditor.cpp:1657
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21764,7 +21764,7 @@ msgstr ""
 "Voulez-vous remplacer le mémo<p><i>%1</i></p>par le mémo<p><i>%2</i></p>dans "
 "l'autre répartition ?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1657
+#: kmymoney/views/newtransactioneditor.cpp:1658
 #, kde-format
 msgid "Copy memo"
 msgstr "Copier le mémo"
@@ -21798,7 +21798,7 @@ msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Saisissez la catégorie ou le numéro de compte de la transaction."
 
-#: kmymoney/views/newtransactionform.cpp:135
+#: kmymoney/views/newtransactionform.cpp:136
 #, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "

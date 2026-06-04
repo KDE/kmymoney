@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-01 03:28+0000\n"
+"POT-Creation-Date: 2026-06-04 03:50+0000\n"
 "PO-Revision-Date: 2024-11-10 18:13+0100\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -21462,7 +21462,7 @@ msgstr "Vybrať automatické vypĺňanie transakcie"
 msgid "Link"
 msgstr "Odkaz"
 
-#: kmymoney/views/newtransactioneditor.cpp:1656
+#: kmymoney/views/newtransactioneditor.cpp:1657
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21471,7 +21471,7 @@ msgstr ""
 "Chcete nahradiť poznámku<p><i>%1</i></p>poznámkou<p><i>%2</i></p>v inom "
 "rozdelení?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1657
+#: kmymoney/views/newtransactioneditor.cpp:1658
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopírovať poznámku"
@@ -21504,7 +21504,7 @@ msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Zadajte kategóriu alebo protiúčet transakcie."
 
-#: kmymoney/views/newtransactionform.cpp:135
+#: kmymoney/views/newtransactionform.cpp:136
 #, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
