@@ -3515,7 +3515,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingshome.ui:132
 #, kde-format
 msgid "Homepage/Summary page scaling"
-msgstr "主页、总计页缩放"
+msgstr "主页、概要页缩放"
 
 #. i18n: ectx: property (text), widget (QLabel, percentageLabel)
 #: kmymoney/dialogs/settings/ksettingshome.ui:138
@@ -14151,7 +14151,7 @@ msgstr "对账报告"
 #: kmymoney/plugins/reconciliationreport/kreconciliationreportdlgdecl.ui:27
 #, kde-format
 msgid "Summar&y"
-msgstr "总计(&Y)"
+msgstr "概要(&Y)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_detailsTab)
 #: kmymoney/plugins/reconciliationreport/kreconciliationreportdlgdecl.ui:33
@@ -14179,7 +14179,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:6
 #, kde-format
 msgid "Summary"
-msgstr "总计"
+msgstr "概要"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:139
 #, kde-format
