@@ -993,8 +993,22 @@ void PivotTable::calculateBudgetMapping()
                 // based on the kind of budget it is, deal accordingly
                 switch (budgetAccount.budgetLevel()) {
                 case eMyMoney::Budget::Level::Yearly:
-                    // divide the single yearly value by 12 and place it in each column
-                    value /= MyMoneyMoney(12, 1);
+                    switch (m_config.columnType()) {
+                    case eMyMoney::Report::ColumnType::Quarters:
+                        value /= MyMoneyMoney(4, 1);
+                        break;
+                    case eMyMoney::Report::ColumnType::BiMonths:
+                        value /= MyMoneyMoney(6, 1);
+                        break;
+                    case eMyMoney::Report::ColumnType::Months:
+                        value /= MyMoneyMoney(12, 1);
+                        break;
+                    case eMyMoney::Report::ColumnType::Weeks:
+                        value /= MyMoneyMoney(52, 1);
+                        break;
+                    default:
+                        break;
+                    }
                 // intentional fall through
 
                 case eMyMoney::Budget::Level::None:
