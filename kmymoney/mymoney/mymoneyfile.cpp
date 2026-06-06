@@ -5061,28 +5061,6 @@ QUndoStack* MyMoneyFile::undoStack() const
     return &d->undoStack;
 }
 
-bool MyMoneyFile::hasValidId(const MyMoneyAccount& acc) const
-{
-    static const KMMSet<eMyMoney::Account::Standard> stdAccNames{
-        eMyMoney::Account::Standard::Liability,
-        eMyMoney::Account::Standard::Asset,
-        eMyMoney::Account::Standard::Expense,
-        eMyMoney::Account::Standard::Income,
-        eMyMoney::Account::Standard::Equity,
-    };
-    const auto id = acc.id();
-    for (const auto idx : std::as_const(stdAccNames)) {
-        if (id == MyMoneyAccount::stdAccName(idx))
-            return true;
-    }
-    return d->accountsModel.isValidId(id);
-}
-
-bool MyMoneyFile::hasValidId(const MyMoneyPayee& payee) const
-{
-    return d->payeesModel.isValidId(payee.id());
-}
-
 bool MyMoneyFile::applyFileFixes(bool expertMode)
 {
     return d->applyFileFixes(expertMode);

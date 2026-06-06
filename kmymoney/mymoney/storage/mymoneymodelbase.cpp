@@ -144,15 +144,6 @@ void MyMoneyModelBase::updateNextObjectId(const QString& id)
     }
 }
 
-bool MyMoneyModelBase::isValidId(const QString& id) const
-{
-    QRegularExpressionMatch m = m_idMatchExp.match(id);
-    if (m.hasMatch()) {
-        return m.captured(1).length() == m_idSize;
-    }
-    return false;
-}
-
 void MyMoneyModelBase::setDirty(bool dirty)
 {
     m_dirty = dirty;

@@ -75,12 +75,6 @@ public:
     QString peekNextId() const;
 
     /**
-     * checks if the @a id follows the ids created by this model
-     * @returns @c true in case of a valid id, @c false otherwise.
-     */
-    bool isValidId (const QString& id) const;
-
-    /**
      * This is the default implementation that supports
      * the role eMyMoney::Model::LongDisplayRole. It simply
      * returns the models headerDate for Qt::DisplayRole if

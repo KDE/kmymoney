@@ -72,15 +72,6 @@ public:
                                         const QDate& endDate,
                                         bool overdue) const;
 
-    /// @todo simplify this to a QList<MyMoneySchedule> scheduleList() which returns
-    /// all schedules and move the filtering into a specific QSortFilterProxyModel.
-    /// For now, we keep this as it is and leave it for another day
-    QList<MyMoneySchedule> scheduleListEx(int scheduleTypes,
-                                          int scheduleOcurrences,
-                                          int schedulePaymentTypes,
-                                          QDate date,
-                                          const QStringList& accounts) const;
-
     void load(const QMap<QString, MyMoneySchedule>& list) override;
     void setColorScheme(ColorScheme scheme, const QColor& color);
 

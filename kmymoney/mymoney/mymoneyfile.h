@@ -1795,9 +1795,6 @@ public:
 
     QUndoStack* undoStack() const;
 
-    bool hasValidId (const MyMoneyAccount& acc) const;
-    bool hasValidId (const MyMoneyPayee& payee) const;
-
     bool applyFileFixes(bool expertMode);
 
 protected:
