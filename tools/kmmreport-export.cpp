@@ -183,6 +183,8 @@ int main(int argc, char** argv)
         // setup internal data for which we need all models loaded
         MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
         MyMoneyFile::instance()->applyFileFixes(false);
+        MyMoneyFile::instance()->modelsReadyToUse();
+        MyMoneyFile::instance()->forceDataChanged();
 
         for (const auto& report : MyMoneyFile::instance()->reportList()) {
             if (!options.useReportName.isEmpty() && options.useReportName != report.name())

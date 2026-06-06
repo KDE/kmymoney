@@ -1,0 +1,12 @@
+Account,Shares,Price,Rate,Amount
+"Investment"
+"A (USD)","200.00"," 7.0000",""," 1,400.00"
+"B (USD)","45.00"," 25.0000",""," 1,125.00"
+Total Investment,,,," 2,525.00"
+"Investment (EUR)"
+"E (EUR)","5.00"," 17.3651",""," 86.83"
+Total Investment (EUR),,,," 86.83"
+"Investment (JPY)"
+"C (JPY)","110.00"," 0.1836",""," 20.00"
+Total Investment (JPY),,,," 20.00"
+Grand Total,,,," 2,631.83"
