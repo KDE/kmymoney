@@ -20,6 +20,7 @@
 
 #include "config-kmymoney-version.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
 #include "mymoneyxmlreader.h"
@@ -181,7 +182,13 @@ int main(int argc, char** argv)
         f.close();
 
         // setup internal data for which we need all models loaded
-        MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
+        try {
+            MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
+        } catch (const MyMoneyException& e) {
+            qWarning() << fileUrl << e.what();
+            return 3;
+        }
+
         MyMoneyFile::instance()->applyFileFixes(false);
         MyMoneyFile::instance()->modelsReadyToUse();
         MyMoneyFile::instance()->forceDataChanged();
