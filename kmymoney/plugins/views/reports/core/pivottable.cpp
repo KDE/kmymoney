@@ -990,7 +990,6 @@ void PivotTable::calculateBudgetMapping()
                 MyMoneyMoney value = (*periods.begin()).amount() * reverse;
                 int column = m_startColumn;
 
-                // based on the kind of budget it is, deal accordingly
                 switch (budgetAccount.budgetLevel()) {
                 case eMyMoney::Budget::Level::Yearly:
                     switch (m_config.columnType()) {
@@ -1009,8 +1008,29 @@ void PivotTable::calculateBudgetMapping()
                     default:
                         break;
                     }
-                // intentional fall through
-
+                    break;
+                case eMyMoney::Budget::Level::Monthly:
+                    switch (m_config.columnType()) {
+                    case eMyMoney::Report::ColumnType::Years:
+                        value *= MyMoneyMoney(12, 1);
+                        break;
+                    case eMyMoney::Report::ColumnType::Quarters:
+                        value *= MyMoneyMoney(3, 1);
+                        break;
+                    case eMyMoney::Report::ColumnType::BiMonths:
+                        value *= MyMoneyMoney(2, 1);
+                        break;
+                    case eMyMoney::Report::ColumnType::Months:
+                        value *= MyMoneyMoney(1, 1);
+                        break;
+                    default:
+                        break;
+                    }
+                    break;
+                }
+                // based on the kind of budget it is, deal accordingly
+                switch (budgetAccount.budgetLevel()) {
+                case eMyMoney::Budget::Level::Yearly:
                 case eMyMoney::Budget::Level::None:
                 case eMyMoney::Budget::Level::Max:
                 case eMyMoney::Budget::Level::Monthly:
