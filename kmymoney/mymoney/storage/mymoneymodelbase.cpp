@@ -39,6 +39,11 @@ MyMoneyModelBase::~MyMoneyModelBase()
 {
 }
 
+void MyMoneyModelBase::addValidIdPattern(const QString& matchExp)
+{
+    m_idMatchExp = QRegularExpression(QStringLiteral("%1|%2").arg(m_idMatchExp.pattern()).arg(matchExp), QRegularExpression::CaseInsensitiveOption);
+}
+
 QModelIndexList MyMoneyModelBase::indexListByName(const QString& name, const QModelIndex& parent) const
 {
     return match(index(0, 0, parent), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);

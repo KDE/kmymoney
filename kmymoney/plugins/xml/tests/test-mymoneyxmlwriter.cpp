@@ -5,8 +5,13 @@
 
 #include "test-mymoneyxmlwriter.h"
 
+#include "accountsmodel.h"
+#include "institutionsmodel.h"
+#include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
+#include "payeesmodel.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -144,4 +149,62 @@ void MyMoneyXmlWriterTest::testWriteFileInfo()
     ft1.commit();
 
     writeAndCompare(m_file, QLatin1String("testfile2.xml"));
+}
+
+void MyMoneyXmlWriterTest::testWriteSkrooge()
+{
+    MyMoneyFileTransaction ft;
+
+    // store the user info
+    m_file->setUser(MyMoneyPayee());
+
+    // create and setup base currency
+    m_file->addCurrency(MyMoneySecurity("EUR"));
+    m_file->setBaseCurrency(MyMoneySecurity("EUR"));
+
+    MyMoneyInstitution institution("1-institution");
+    institution.setName("I000001");
+    institution.addAccountId("2-account");
+
+    QMap<QString, MyMoneyInstitution> institutionsMap;
+    institutionsMap.insert(institution.id(), institution);
+
+    m_file->institutionsModel()->load(institutionsMap);
+
+    MyMoneyAccount account("2-account");
+    account.setName("2-account");
+    account.setLastModified(QDate(2026, 5, 13));
+    account.setLastReconciliationDate(QDate(2026, 5, 13));
+    account.setOpeningDate(QDate(1999, 1, 1));
+    account.setAccountType(eMyMoney::Account::Type::CreditCard);
+    account.setCurrencyId("EUR");
+    account.setParentAccountId(m_file->liability().id());
+    account.setInstitutionId("1-institution");
+    account.setValue("lastNumberUsed", "10");
+    account.setValue("lastStatementBalance", "-7/5");
+    account.setValue("maxCreditAbsolute", "1000/1");
+
+    QMap<QString, MyMoneyAccount> accountsMap;
+
+    accountsMap.insert(m_file->asset().id(), m_file->asset());
+    accountsMap.insert(m_file->liability().id(), m_file->liability());
+    accountsMap.insert(m_file->income().id(), m_file->income());
+    accountsMap.insert(m_file->expense().id(), m_file->expense());
+    accountsMap.insert(m_file->equity().id(), m_file->equity());
+    accountsMap.insert(account.id(), account);
+
+    m_file->accountsModel()->load(accountsMap);
+
+    QMap<QString, MyMoneyPayee> payeesMap;
+
+    MyMoneyPayee payee("1-Payee");
+    payee.setName("P000001");
+
+    payeesMap.insert(payee.id(), payee);
+
+    m_file->payeesModel()->load(payeesMap);
+
+    ft.commit();
+
+    writeAndCompare(m_file, QLatin1String("testfile3.xml"));
 }

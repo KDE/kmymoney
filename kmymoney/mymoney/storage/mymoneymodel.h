@@ -596,7 +596,7 @@ public:
 
     virtual int processItems(Worker *worker)
     {
-        return processItems(worker, match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
+        return processItems(worker, match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idMatchExp, -1, Qt::MatchRegularExpression | Qt::MatchRecursive));
     }
 
     int processItems(Worker *worker, const QModelIndexList& indexes)
@@ -660,7 +660,7 @@ public:
     QList<T> itemList() const
     {
         QList<T> list;
-        const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+        const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idMatchExp, -1, Qt::MatchRegularExpression | Qt::MatchRecursive);
         for (const auto& idx : indexes) {
             list.append(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef());
         }

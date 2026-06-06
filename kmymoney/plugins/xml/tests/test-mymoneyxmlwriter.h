@@ -35,6 +35,7 @@ protected:
 private Q_SLOTS:
     void init();
     void testWriteFileInfo();
+    void testWriteSkrooge();
 };
 
 #endif // MYMONEYXMLWRITER_TEST_H

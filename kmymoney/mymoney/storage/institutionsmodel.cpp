@@ -85,6 +85,9 @@ InstitutionsModel::InstitutionsModel(AccountsModel* accountsModel, QObject* pare
 {
     d->accountsModel = accountsModel;
     setObjectName(QLatin1String("InstitutionsModel"));
+
+    // add the Skrooge id pattern
+    addValidIdPattern(QLatin1String("^\\d+\\-institution$"));
 }
 
 InstitutionsModel::~InstitutionsModel()
