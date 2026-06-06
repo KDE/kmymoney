@@ -1027,6 +1027,8 @@ void PivotTable::calculateBudgetMapping()
                         break;
                     }
                     break;
+                default:
+                    break;
                 }
                 // based on the kind of budget it is, deal accordingly
                 switch (budgetAccount.budgetLevel()) {
