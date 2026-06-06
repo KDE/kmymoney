@@ -28,6 +28,7 @@ set(pivottable_test_files
   test-closed-account.xml
   test-budget.xml
   test-budget-years.xml
+  test-budget-months.xml
 )
 
 macro(fetch_report_names file)
