@@ -179,7 +179,8 @@ void SecuritiesModel::loadCurrencies(const QMap<QString, MyMoneySecurity>& list)
 {
     // make sure this is a currency model
     m_idLeadin.clear();
-    m_idMatchExp.setPattern(QStringLiteral("^(\\d+)$"));
+    // match on ISO 4217 currency code (3 uppercase ASCII chars)
+    m_idMatchExp.setPattern(QStringLiteral("^([A-Z]{3})$"));
     setObjectName(QLatin1String("CurrenciesModel"));
 
     beginResetModel();
@@ -212,7 +213,8 @@ void SecuritiesModel::addCurrency(const MyMoneySecurity& currency)
 {
     // make sure this is a currency model
     m_idLeadin.clear();
-    m_idMatchExp.setPattern(QStringLiteral("^(\\d+)$"));
+    // match on ISO 4217 currency code (3 uppercase ASCII chars)
+    m_idMatchExp.setPattern(QStringLiteral("^([A-Z]{3})$"));
 
     if (!currency.id().isEmpty()) {
         auto idx = indexById(currency.id());

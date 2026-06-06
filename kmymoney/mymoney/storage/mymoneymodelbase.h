@@ -109,6 +109,13 @@ protected:
      */
     void endResetModel();
 
+    /**
+     * Adds @a matchExp to the set of valid ID patterns
+     * held in m_idMatchExp. The resulting expression will
+     * match case insensitive.
+     */
+    void addValidIdPattern(const QString& matchExp);
+
 protected Q_SLOTS:
     void updateReferencedObjects();
 

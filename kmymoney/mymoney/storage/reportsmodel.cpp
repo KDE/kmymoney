@@ -159,7 +159,7 @@ bool ReportsModel::setData(const QModelIndex& index, const QVariant& value, int 
 
 int ReportsModel::processItems(Worker* worker)
 {
-    QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+    const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idMatchExp, -1, Qt::MatchRegularExpression | Qt::MatchRecursive);
     int result = MyMoneyModel::processItems(worker, indexes);
     for (const auto& idx : indexes) {
         auto& report = static_cast<TreeItem<MyMoneyReport>*>(idx.internalPointer())->dataRef();

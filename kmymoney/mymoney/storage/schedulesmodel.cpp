@@ -509,7 +509,7 @@ QList<MyMoneySchedule> SchedulesModel::scheduleListEx(int scheduleTypes,
         QDate date,
         const QStringList& accounts) const
 {
-    const auto indexes = match(index(0, 0), eMyMoney::ModelRoles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+    const auto indexes = match(index(0, 0), eMyMoney::ModelRoles::IdRole, m_idMatchExp, -1, Qt::MatchRegularExpression| Qt::MatchRecursive);
 
     QList<MyMoneySchedule> list;
     if (!date.isValid())
