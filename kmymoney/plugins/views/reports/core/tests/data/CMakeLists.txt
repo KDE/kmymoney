@@ -11,24 +11,24 @@ set(querytable_test_files
   test-469195.xml
   test-511104.xml
   test-cash-flow.xml
-  test-investment.xml
   test-investment-multi-currency.xml
   test-investment-no-sold.xml
+  test-investment.xml
   test-net-worth.xml
   test-refinance-loan.xml
-  test-transactions.xml
   test-transactions-multi-currency.xml
+  test-transactions.xml
 )
 
 set(pivottable_test_files
   test-balance-forecast-report.xml
+  test-budget-months.xml
+  test-budget-years.xml
+  test-budget.xml
+  test-closed-account.xml
   test-income-and-expenses.xml
   test-net-worth.xml
   test-pivottable.xml
-  test-closed-account.xml
-  test-budget.xml
-  test-budget-years.xml
-  test-budget-months.xml
 )
 
 macro(fetch_report_names file)
