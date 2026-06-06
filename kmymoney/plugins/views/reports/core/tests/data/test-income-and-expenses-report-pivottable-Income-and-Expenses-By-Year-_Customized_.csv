@@ -1,8 +1,8 @@
 Account,2024,Total
 Expense
-"expense","123","123"
-Total Expense,"123","123"
+"expense","123.00","123.00"
+Total Expense,"123.00","123.00"
 Income
-"income","445","445"
-Total Income,"445","445"
-Grand Total,"322","322"
+"income","445.00","445.00"
+Total Income,"445.00","445.00"
+Grand Total,"322.00","322.00"
