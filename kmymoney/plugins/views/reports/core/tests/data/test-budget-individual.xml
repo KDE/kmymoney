@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date=""/>
+    <LAST_MODIFIED_DATE date="2026-06-07T22:29:22+02:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION id="11"/>
+    <APPVERSION id="5.2.70-203c29825"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES/>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000006"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="EUR"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+        <SUBACCOUNT id="A000004"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="EUR"/>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="EUR"/>
+    <ACCOUNT id="A000002" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Fixed" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000003"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000003" parentaccount="A000002" lastreconciled="" lastmodified="2026-06-06" institution="" opened="1900-01-01" number="" type="13" name="Insurance" description="" currency="EUR"/>
+    <ACCOUNT id="A000004" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="House" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000005"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000005" parentaccount="A000004" lastreconciled="" lastmodified="2026-06-06" institution="" opened="1900-01-01" number="" type="13" name="Alarm Service" description="" currency="EUR"/>
+    <ACCOUNT id="A000006" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2026-06-06" institution="" opened="2026-01-01" number="" type="9" name="checking" description="" currency="EUR"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000001" postdate="2026-01-01" memo="" entrydate="2026-06-06" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-11/1" shares="-11/1" price="1/1" memo="" account="A000006" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="11/1" shares="11/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000002" postdate="2026-02-02" memo="" entrydate="2026-06-06" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-22/1" shares="-22/1" price="1/1" memo="" account="A000006" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="22/1" shares="22/1" price="1/1" memo="" account="A000003" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000003" postdate="2026-05-04" memo="" entrydate="2026-06-06" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="45/1" shares="45/1" price="1/1" memo="" account="A000003" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-45/1" shares="-45/1" price="1/1" memo="" account="A000006" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000004" postdate="2026-07-07" memo="" entrydate="2026-06-06" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-76/1" shares="-76/1" price="1/1" memo="" account="A000006" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="76/1" shares="76/1" price="1/1" memo="" account="A000005" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2026-06-07T22:29:22+02:00"/>
+    <PAIR key="kmm-baseCurrency" value="EUR"/>
+    <PAIR key="kmm-id" value="{6e5ce436-70db-4068-b704-a3351cab560f}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="ATS" name="Austrian Schilling" symbol="ÃS" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="AZM" name="Azerbaijani Manat" symbol="m." type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="BEF" name="Belgian Franc" symbol="Fr" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="BGL" name="Bulgarian Lev" symbol="BGL" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="BGN" name="Bulgarian Lev (new)" symbol="BGN" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="BYR" name="Belarusian Ruble (old)" symbol="BYR" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="CYP" name="Cyprus Pound" symbol="C£" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="DEM" name="German Mark" symbol="DM" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="ESP" name="Spanish Peseta" symbol="ESP" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="EUR" name="Euro" symbol="€" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="FIM" name="Finnish Markka" symbol="FIM" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="FRF" name="French Franc" symbol="FF" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="GRD" name="Greek Drachma" symbol="₯" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="IEP" name="Irish Pound" symbol="£" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="ITL" name="Italian Lira" symbol="₤" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="LTL" name="Lithuanian Litas" symbol="Lt" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="LUF" name="Luxembourg Franc" symbol="Fr" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="MTL" name="Maltese Lira" symbol="MTL" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="MZM" name="Mozambique Metical" symbol="MT" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="NLG" name="Dutch Guilder" symbol="NLG" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="PTE" name="Portuguese Escudo" symbol="PTE" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="ROL" name="Romanian Leu" symbol="ROL" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="RON" name="Romanian Leu (new)" symbol="RON" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="RUB" name="Russian Ruble" symbol="RUB" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="RUR" name="Russian Ruble (old)" symbol="RUR" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="SIT" name="Slovenian Tolar" symbol="SIT" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="SKK" name="Slovak Koruna" symbol="SKK" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="TRL" name="Turkish Lira (old)" symbol="TL" type="3" rounding-method="0" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES>
+    <PRICEPAIR from="ATS" to="EUR">
+      <PRICE date="1998-12-31" price="10000/137603" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="BEF" to="EUR">
+      <PRICE date="1998-12-31" price="10000/403399" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="BGL" to="BGN">
+      <PRICE date="1999-07-05" price="1/1000" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="CYP" to="EUR">
+      <PRICE date="2008-01-01" price="292637/500000" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="DEM" to="EUR">
+      <PRICE date="1998-12-31" price="100000/195583" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="ESP" to="EUR">
+      <PRICE date="1998-12-31" price="500/83193" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="FIM" to="EUR">
+      <PRICE date="1998-12-31" price="100000/594573" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="FRF" to="EUR">
+      <PRICE date="1998-12-31" price="100000/655957" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="GRD" to="EUR">
+      <PRICE date="1998-12-31" price="4/1363" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="IEP" to="EUR">
+      <PRICE date="1998-12-31" price="250000/196891" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="ITL" to="EUR">
+      <PRICE date="1998-12-31" price="100/193627" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="LTL" to="EUR">
+      <PRICE date="2015-01-01" price="625/2158" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="LUF" to="EUR">
+      <PRICE date="1998-12-31" price="10000/403399" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="MTL" to="EUR">
+      <PRICE date="2008-01-01" price="4293/10000" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="NLG" to="EUR">
+      <PRICE date="1998-12-31" price="100000/220371" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="PTE" to="EUR">
+      <PRICE date="1998-12-31" price="500/100241" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="ROL" to="RON">
+      <PRICE date="2005-06-30" price="1/10000" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="RUR" to="RUB">
+      <PRICE date="1998-01-01" price="1/1000" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="SIT" to="EUR">
+      <PRICE date="2006-12-31" price="25/5991" source="KMyMoney"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="SKK" to="EUR">
+      <PRICE date="2008-12-31" price="500/15063" source="KMyMoney"/>
+    </PRICEPAIR>
+  </PRICES>
+  <REPORTS>
+    <REPORT id="R000009" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - yearly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="years" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000010" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - bimonthly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="bimonths" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000011" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - monthly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000012" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - quarterly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="quarters" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000013" type="pivottable 1.16" group="Budgeting" name="Individual Budget - monthly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000014" type="pivottable 1.16" group="Budgeting" name="Individual Budget - yearly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="years" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000015" type="pivottable 1.16" group="Budgeting" name="Individual Budget - quarterly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="quarters" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000016" type="pivottable 1.16" group="Budgeting" name="Individual Budget - bimonthly ticks" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="1" columntype="bimonths" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000017" type="pivottable 1.16" group="Budgeting" name="Individual Budget - monthly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-04" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000018" type="pivottable 1.16" group="Budgeting" name="Individual Budget - yearly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="years" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-04" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000019" type="pivottable 1.16" group="Budgeting" name="Individual Budget - quarterly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="1" columntype="quarters" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-03" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000020" type="pivottable 1.16" group="Budgeting" name="Individual Budget - bimonthly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budget" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="1" columntype="bimonths" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-03" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000021" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - quarterly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="quarters" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-03" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000022" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - monthly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="" dataRangeEnd="0" dataMajorTick="0" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-03" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000023" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - bimonthly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="bimonths" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-03" to="2026-12-31"/>
+    </REPORT>
+    <REPORT id="R000024" type="pivottable 1.16" group="Budgeting" name="Individual Budgeted vs. Actual - yearly ticks - partial month" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="budgetactual" includesactuals="1" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" budget="B000002" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="years" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2026-01-01" to="2026-12-31"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS>
+    <BUDGET id="B000002" name="monthbymonth" start="2026-01-01" version="2">
+      <ACCOUNT id="A000003" budgetlevel="monthbymonth" budgetsubaccounts="0">
+        <PERIOD amount="10/1" start="2026-01-01"/>
+        <PERIOD amount="10/1" start="2026-02-01"/>
+        <PERIOD amount="10/1" start="2026-05-01"/>
+      </ACCOUNT>
+      <ACCOUNT id="A000005" budgetlevel="monthbymonth" budgetsubaccounts="0">
+        <PERIOD amount="55/1" start="2026-01-01"/>
+        <PERIOD amount="45/1" start="2026-03-01"/>
+        <PERIOD amount="90/1" start="2026-05-01"/>
+      </ACCOUNT>
+    </BUDGET>
+  </BUDGETS>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>

@@ -22,6 +22,7 @@ set(querytable_test_files
 
 set(pivottable_test_files
   test-balance-forecast-report.xml
+  test-budget-individual.xml
   test-budget-months.xml
   test-budget-years.xml
   test-budget.xml

@@ -1114,37 +1114,33 @@ void PivotTable::calculateBudgetMapping()
                     // budget periods are supposed to come in order just like columns
                 {
                     QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_period = periods.begin();
-                    QDate beginDate = m_beginDate.addDays(-m_beginDate.day() + 1);
-                    QDate endDate = m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day());
 
                     while (it_period != periods.end() && column < m_numColumns) {
                             const QDate periodStart = (*it_period).startDate();
                             const QDate colDate = columnDate(column);
-                            const BudgetMonth periodStartMonth(periodStart);
-                            if (periodStartMonth > colDate) {
-                                ++column;
-                            } else {
-                                switch (m_config.columnType()) {
-                                case eMyMoney::Report::ColumnType::Years:
-                                case eMyMoney::Report::ColumnType::BiMonths:
-                                case eMyMoney::Report::ColumnType::Quarters:
-                                case eMyMoney::Report::ColumnType::Months: {
-                                    if (periodStart >= beginDate && periodStart <= endDate
-                                        && periodStart > (colDate.addMonths(-static_cast<int>(m_config.columnType())))) {
-                                        // no currency conversion is done here because that is done for all columns later
-                                        value = (*it_period).amount() * reverse;
-                                        assignCell(outergroup, splitAccount, column, value, true /*budget*/);
-                                    }
-                                    ++it_period;
-                                    break;
-                                }
-                                default:
-                                    break;
-                                }
+
+                            const int pitch = static_cast<int>(m_config.columnPitch());
+                            QDate columnBegin(colDate.year(), colDate.month(), 1);
+                            QDate columnEnd = columnBegin.addMonths(pitch);
+
+                            value = (*it_period).amount() * reverse;
+
+                            if (periodStart < columnBegin) {
+                                ++it_period;
+                                continue;
                             }
+
+                            if (periodStart >= columnEnd) {
+                                ++column;
+                                continue;
+                            }
+
+                            assignCell(outergroup, splitAccount, column, value, true);
+
+                            ++it_period;
                     }
-                    break;
                 }
+                break;
                 }
             }
         }
