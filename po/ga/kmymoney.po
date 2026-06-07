@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-04 03:50+0000\n"
+"POT-Creation-Date: 2026-06-07 03:48+0000\n"
 "PO-Revision-Date: 2026-04-22 16:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@yahoo.com>\n"
 "Language-Team: Irish <http://weblate.amgelocalnet.duckdns.org/projects/kde-"
@@ -6407,7 +6407,7 @@ msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "dumpáil ainmneacha na réada QAction sainithe go léir chuig stdout agus scoir"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "comhad le hoscailt"
@@ -15914,12 +15914,12 @@ msgstr "Meánach"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1456
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1596
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1646
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1723
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1903
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1974
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1492
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1632
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1682
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1759
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1939
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2010
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16185,8 +16185,8 @@ msgstr "Iarmhéid Deiridh"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1670
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2011
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1706
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2047
 #, kde-format
 msgid "Grand Total"
 msgstr "Iomlán Mór"
@@ -16560,50 +16560,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Oscailt"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1442
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1710
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1478
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1746
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Cuntas"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2234
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2270
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Iarbhír"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2239
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2275
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Buiséad"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2244
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2280
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Difríocht"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2249
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2285
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Réamhaisnéis"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2254
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2290
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Meán Bogtha"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2259
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2295
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Meán Phraghas Bogtha"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2264
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2300
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -26443,62 +26443,62 @@ msgstr ""
 "<p>Is rogha an fhaisnéis uile agus ní úsáidtear í ach chun do chomhad "
 "KMyMoney a phearsantú.</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Easpórtáil tuarascálacha KMyMoney"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Easpórtáil i bhformáid csv (réamhshocraithe)"
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Easpórtáil i bhformáid HTML"
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, kde-format
 msgid "Export in xml format"
 msgstr "Easpórtáil i bhformáid xml"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Cruthaigh comhad tagartha ón aschur"
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Úsáid tábla eolais le haghaidh easpórtála"
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Úsáid tábla pivot le haghaidh easpórtála"
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Úsáid tábla fiosrúcháin le haghaidh easpórtála (réamhshocraithe)"
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, kde-format
 msgid "List all custom reports"
 msgstr "Liostaigh na tuarascálacha saincheaptha go léir"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Ainm comhaid don aschur ginte"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr "Próiseáil tuarascáil shonrach"
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Ní thacaítear ach le ceann amháin de --csv agus --html"

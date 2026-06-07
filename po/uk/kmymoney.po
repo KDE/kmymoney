@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-04 03:50+0000\n"
+"POT-Creation-Date: 2026-06-07 03:48+0000\n"
 "PO-Revision-Date: 2026-05-31 12:48+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -6351,7 +6351,7 @@ msgstr ""
 "надіслати список всіх визначених об'єктів QAction до stdout і завершити "
 "роботу програми"
 
-#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:148
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "файл, який слід відкрити"
@@ -15807,12 +15807,12 @@ msgstr "Середній"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1456
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1596
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1646
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1723
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1903
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1974
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1492
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1632
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1682
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1759
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1939
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2010
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16074,8 +16074,8 @@ msgstr "Баланс закриття"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1670
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2011
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1706
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2047
 #, kde-format
 msgid "Grand Total"
 msgstr "Загальна сума"
@@ -16444,50 +16444,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Відкриття"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1442
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1710
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1478
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1746
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Рахунок"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2234
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2270
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Поточний"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2239
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2275
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Бюджет"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2244
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2280
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Різниця"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2249
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2285
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Прогноз"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2254
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2290
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Рухоме середнє"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2259
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2295
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Рухома середня ціна"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2264
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2300
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -26251,62 +26251,62 @@ msgstr ""
 "<p>Всі ці відомості є необов'язковими, їх призначено лише для персоніфікації "
 "вашого файла KMyMoney.</p>"
 
-#: tools/kmmreport-export.cpp:114
+#: tools/kmmreport-export.cpp:115
 #, kde-format
 msgid "Export KMyMoney reports"
 msgstr "Експортувати звіти KMyMoney"
 
-#: tools/kmmreport-export.cpp:118
+#: tools/kmmreport-export.cpp:119
 #, kde-format
 msgid "Export in csv format (default)"
 msgstr "Експортувати у форматі csv (типовий варіант)"
 
-#: tools/kmmreport-export.cpp:121
+#: tools/kmmreport-export.cpp:122
 #, kde-format
 msgid "Export in HTML format"
 msgstr "Експортувати у форматі HTML"
 
-#: tools/kmmreport-export.cpp:124
+#: tools/kmmreport-export.cpp:125
 #, kde-format
 msgid "Export in xml format"
 msgstr "Експортувати у форматі XML"
 
-#: tools/kmmreport-export.cpp:127
+#: tools/kmmreport-export.cpp:128
 #, kde-format
 msgid "Create reference file from output"
 msgstr "Створити з виведених даних еталонний файл"
 
-#: tools/kmmreport-export.cpp:130
+#: tools/kmmreport-export.cpp:131
 #, kde-format
 msgid "Use info table for exporting"
 msgstr "Використати для експортування інформаційну таблицю"
 
-#: tools/kmmreport-export.cpp:133
+#: tools/kmmreport-export.cpp:134
 #, kde-format
 msgid "Use pivot table for exporting"
 msgstr "Використати для експортування зведену таблицю"
 
-#: tools/kmmreport-export.cpp:136
+#: tools/kmmreport-export.cpp:137
 #, kde-format
 msgid "Use query table for exporting (default)"
 msgstr "Використати таблицю запитів для експортування (типовий варіант)"
 
-#: tools/kmmreport-export.cpp:139
+#: tools/kmmreport-export.cpp:140
 #, kde-format
 msgid "List all custom reports"
 msgstr "Список усіх нетипових звітів"
 
-#: tools/kmmreport-export.cpp:142
+#: tools/kmmreport-export.cpp:143
 #, kde-format
 msgid "Filename for generated output"
 msgstr "Назва файла для створених результатів"
 
-#: tools/kmmreport-export.cpp:145
+#: tools/kmmreport-export.cpp:146
 #, kde-format
 msgid "Process a specific report"
 msgstr "Обробити вказаний звіт"
 
-#: tools/kmmreport-export.cpp:158
+#: tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Передбачено підтримку лише одного з варіантів, --csv або --html"
