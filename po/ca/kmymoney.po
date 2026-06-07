@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-01 00:44+0000\n"
+"POT-Creation-Date: 2026-06-07 00:44+0000\n"
 "PO-Revision-Date: 2026-05-19 09:25+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -6613,7 +6613,7 @@ msgid "The plugin to show this information could not be found."
 msgstr "No s'ha pogut trobar el connector per a mostrar aquesta informació."
 
 #: kmymoney/models/statementmodel.cpp:93
-#: kmymoney/mymoney/storage/accountsmodel.cpp:473
+#: kmymoney/mymoney/storage/accountsmodel.cpp:470
 #, kde-format
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
@@ -6662,7 +6662,7 @@ msgid "Payees created"
 msgstr "Beneficiaris creats"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:509
+#: kmymoney/mymoney/storage/accountsmodel.cpp:506
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -6671,7 +6671,7 @@ msgid "Full name"
 msgstr "Nom complet"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:511
+#: kmymoney/mymoney/storage/accountsmodel.cpp:508
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -6680,28 +6680,28 @@ msgid "Type"
 msgstr "Tipus"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:513
+#: kmymoney/mymoney/storage/accountsmodel.cpp:510
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "Si el compte té una configuració vinculada en línia"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:515
+#: kmymoney/mymoney/storage/accountsmodel.cpp:512
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "Si aquest compte està inclòs als informes d'impostos"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:517
+#: kmymoney/mymoney/storage/accountsmodel.cpp:514
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "Tipus del percentatge d'IVA, si està configurat."
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:519
+#: kmymoney/mymoney/storage/accountsmodel.cpp:516
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
@@ -6711,28 +6711,28 @@ msgstr ""
 "operació."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:521
+#: kmymoney/mymoney/storage/accountsmodel.cpp:518
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr "Balanç del compte (en la divisa del compte)"
 
 #: kmymoney/models/statementmodel.cpp:131
-#: kmymoney/mymoney/storage/accountsmodel.cpp:487
-#: kmymoney/mymoney/storage/accountsmodel.cpp:523
+#: kmymoney/mymoney/storage/accountsmodel.cpp:484
+#: kmymoney/mymoney/storage/accountsmodel.cpp:520
 #, kde-format
 msgid "Posted Value"
 msgstr "Valor publicat"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:525
+#: kmymoney/mymoney/storage/accountsmodel.cpp:522
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "Valor total (inclou els subcomptes)"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:527
+#: kmymoney/mymoney/storage/accountsmodel.cpp:524
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
@@ -6740,7 +6740,7 @@ msgstr ""
 "Número de compte o de targeta de crèdit, tal com l'ha assignat la institució."
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:529
+#: kmymoney/mymoney/storage/accountsmodel.cpp:526
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
@@ -6749,7 +6749,7 @@ msgstr ""
 "de compte bancari internacional)"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:534
+#: kmymoney/mymoney/storage/accountsmodel.cpp:531
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6766,7 +6766,7 @@ msgstr ""
 "d'ordenació» (Sort Code) per als comptes al RU."
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:537
+#: kmymoney/mymoney/storage/accountsmodel.cpp:534
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8802,69 +8802,69 @@ msgctxt "Reconciliation state"
 msgid "Status"
 msgstr "Estat"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:403
+#: kmymoney/mymoney/storage/accountsmodel.cpp:398
 msgid "Favorite"
 msgstr "Preferit"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:404
+#: kmymoney/mymoney/storage/accountsmodel.cpp:399
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:384
 #, kde-format
 msgid "Asset accounts"
 msgstr "Comptes d'Actiu"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:405
+#: kmymoney/mymoney/storage/accountsmodel.cpp:400
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:392
 #, kde-format
 msgid "Liability accounts"
 msgstr "Comptes de Passiu"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:406
+#: kmymoney/mymoney/storage/accountsmodel.cpp:401
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:140
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:400
 #, kde-format
 msgid "Income categories"
 msgstr "Categories d'Ingressos"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:407
+#: kmymoney/mymoney/storage/accountsmodel.cpp:402
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:142
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:411
 #, kde-format
 msgid "Expense categories"
 msgstr "Categories de Despeses"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:408
+#: kmymoney/mymoney/storage/accountsmodel.cpp:403
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:422
 #, kde-format
 msgid "Equity accounts"
 msgstr "Comptes d'accions"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:475
+#: kmymoney/mymoney/storage/accountsmodel.cpp:472
 #, kde-format
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "Tipus"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:477
+#: kmymoney/mymoney/storage/accountsmodel.cpp:474
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
 msgstr "En línia"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:479
+#: kmymoney/mymoney/storage/accountsmodel.cpp:476
 #, kde-format
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Impost"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:481
+#: kmymoney/mymoney/storage/accountsmodel.cpp:478
 #, kde-format
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "IVA"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:483
+#: kmymoney/mymoney/storage/accountsmodel.cpp:480
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
@@ -8872,13 +8872,13 @@ msgctxt ""
 msgid "CC"
 msgstr "CD"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:485
+#: kmymoney/mymoney/storage/accountsmodel.cpp:482
 #, kde-format
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Saldo"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:489
+#: kmymoney/mymoney/storage/accountsmodel.cpp:486
 #, kde-format
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
@@ -8886,19 +8886,19 @@ msgctxt ""
 msgid "Total Value"
 msgstr "Valor total"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:491
+#: kmymoney/mymoney/storage/accountsmodel.cpp:488
 #, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Número"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:493
+#: kmymoney/mymoney/storage/accountsmodel.cpp:490
 #, kde-format
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:498
+#: kmymoney/mymoney/storage/accountsmodel.cpp:495
 #, kde-format
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
@@ -8907,7 +8907,7 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "Codi de banc"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:500
+#: kmymoney/mymoney/storage/accountsmodel.cpp:497
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
@@ -8924,7 +8924,7 @@ msgstr "Any"
 msgid "Cost center"
 msgstr "Centre de despesa"
 
-#: kmymoney/mymoney/storage/institutionsmodel.cpp:238
+#: kmymoney/mymoney/storage/institutionsmodel.cpp:241
 #, kde-format
 msgid "Accounts with no institution assigned"
 msgstr "Comptes sense una institució assignada"
@@ -9290,7 +9290,7 @@ msgstr "Valor"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_payeesView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkPayee)
 #. i18n: ectx: attribute (title), widget (QWidget, payeeTab)
-#: kmymoney/mymoney/storage/payeesmodel.cpp:96
+#: kmymoney/mymoney/storage/payeesmodel.cpp:99
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
@@ -15865,12 +15865,12 @@ msgstr "Mitjana"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:325
 #: kmymoney/plugins/views/reports/core/listtable.cpp:326
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1498
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1638
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1688
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1765
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1945
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2016
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1534
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1674
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1724
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1801
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1981
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2052
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16133,8 +16133,8 @@ msgstr "Saldo final"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:329
 #: kmymoney/plugins/views/reports/core/listtable.cpp:330
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1712
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2053
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1748
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2089
 #, kde-format
 msgid "Grand Total"
 msgstr "Suma total"
@@ -16507,50 +16507,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "En obrir"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1484
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1752
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1520
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1788
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Compte"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2276
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2312
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Real"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2281
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2317
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Pressupost"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2286
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2322
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Diferència"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2291
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2327
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Previsió"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2296
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2332
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Mitjana mòbil"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2301
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2337
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Mitjana mòbil del preu"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2306
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2342
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
