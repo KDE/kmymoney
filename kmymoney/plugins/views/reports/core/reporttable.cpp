@@ -28,10 +28,10 @@
 #include "mymoneysecurity.h"
 #include "mymoneyutils.h"
 
-reports::ReportTable::ReportTable(const MyMoneyReport& _report):
-    m_reportStyleSheet("reportstylesheet"),
-    m_config(_report),
-    m_containsNonBaseCurrency(false)
+reports::ReportTable::ReportTable(const MyMoneyReport& _report)
+    : m_reportStyleSheet("reportstylesheet")
+    , m_config(_report)
+    , m_containsNonBaseCurrency(false)
 {
 }
 
@@ -88,7 +88,7 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
     m_config.validDateRange(fromDate, toDate);
 
     if (type == QLatin1String("html")) {
-        //this renders the HEAD tag and sets the correct css file
+        // this renders the HEAD tag and sets the correct css file
         result = renderHeader(title, encoding);
 
         try {
@@ -102,32 +102,35 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
             // report's currency information
             if (m_containsNonBaseCurrency) {
                 result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
-                                                  "<div class=\"gap\">&nbsp;</div>\n").arg(m_config.isConvertCurrency() ?
-                                                          i18n("All currencies converted to %1", file->baseCurrency().name()) :
-                                                          i18n("All values shown in %1 unless otherwise noted", file->baseCurrency().name())));
+                                                  "<div class=\"gap\">&nbsp;</div>\n")
+                                  .arg(m_config.isConvertCurrency() ? i18n("All currencies converted to %1", file->baseCurrency().name())
+                                                                    : i18n("All values shown in %1 unless otherwise noted", file->baseCurrency().name())));
             } else {
                 result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
-                                                  "<div class=\"gap\">&nbsp;</div>\n").arg(
-                                  i18n("All values shown in %1", file->baseCurrency().name())));
+                                                  "<div class=\"gap\">&nbsp;</div>\n")
+                                  .arg(i18n("All values shown in %1", file->baseCurrency().name())));
             }
 
-            //this method is implemented by each concrete class
+            // this method is implemented by each concrete class
             result.append(renderHTML());
-        } catch (const MyMoneyException &e) {
-            result.append(QString::fromLatin1("<h1>%1</h1><p>%2</p>").arg(i18n("Unable to generate report"),
-                          i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e.what())));
+        } catch (const MyMoneyException& e) {
+            result.append(
+                QString::fromLatin1("<h1>%1</h1><p>%2</p>")
+                    .arg(i18n("Unable to generate report"),
+                         i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org",
+                              e.what())));
         }
 
-        //this renders a common footer
+        // this renders a common footer
         result.append(QLatin1String("</body>\n</html>\n"));
     } else if (type == QLatin1String("csv")) {
         result.append(QString::fromLatin1("\"Report: %1\"\n").arg(m_config.name()));
         result.append(
             QString::fromLatin1("%1\n").arg(i18nc("Report date range", "%1 through %2", MyMoneyUtils::formatDate(fromDate), MyMoneyUtils::formatDate(toDate))));
         if (m_containsNonBaseCurrency)
-            result.append(QString::fromLatin1("%1\n").arg(m_config.isConvertCurrency() ?
-                          i18n("All currencies converted to %1", file->baseCurrency().name()) :
-                          i18n("All values shown in %1 unless otherwise noted", file->baseCurrency().name())));
+            result.append(QString::fromLatin1("%1\n").arg(m_config.isConvertCurrency()
+                                                              ? i18n("All currencies converted to %1", file->baseCurrency().name())
+                                                              : i18n("All values shown in %1 unless otherwise noted", file->baseCurrency().name())));
         result.append(renderCSV());
     }
 

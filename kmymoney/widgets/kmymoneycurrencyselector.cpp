@@ -9,8 +9,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
 #include <QIcon>
+#include <QPixmap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "icons/icons.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
-#include "icons/icons.h"
 
 using namespace Icons;
 
@@ -38,15 +38,15 @@ public:
     enum displayTypeE {
         TypeCurrencies = 0x01,
         TypeSecurities = 0x02,
-        TypeAll        = 0x03,
+        TypeAll = 0x03,
     };
 
-    explicit KMyMoneySecuritySelectorPrivate(KMyMoneySecuritySelector *qq):
-        q_ptr(qq),
-        m_displayItem(FullName),
-        m_selectedItemId(0),
-        m_displayOnly(false),
-        m_displayType(TypeAll)
+    explicit KMyMoneySecuritySelectorPrivate(KMyMoneySecuritySelector* qq)
+        : q_ptr(qq)
+        , m_displayItem(FullName)
+        , m_selectedItemId(0)
+        , m_displayOnly(false)
+        , m_displayType(TypeAll)
     {
     }
 
@@ -62,18 +62,18 @@ public:
         m_displayType = type;
     }
 
-    KMyMoneySecuritySelector *q_ptr;
+    KMyMoneySecuritySelector* q_ptr;
     MyMoneySecurity m_currency;
-    displayItemE    m_displayItem;
-    int             m_selectedItemId;
-    bool            m_displayOnly;
-    displayTypeE    m_displayType;
+    displayItemE m_displayItem;
+    int m_selectedItemId;
+    bool m_displayOnly;
+    displayTypeE m_displayType;
     QList<MyMoneySecurity> m_list;
 };
 
-KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
-    KComboBox(parent),
-    d_ptr(new KMyMoneySecuritySelectorPrivate(this))
+KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget* parent)
+    : KComboBox(parent)
+    , d_ptr(new KMyMoneySecuritySelectorPrivate(this))
 {
     // update(QString());
 }
@@ -188,8 +188,8 @@ void KMyMoneySecuritySelector::setSecurity(const MyMoneySecurity& currency)
     update(QString("x"));
 }
 
-KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget *parent) :
-    KMyMoneySecuritySelector(parent)
+KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget* parent)
+    : KMyMoneySecuritySelector(parent)
 {
     Q_D(KMyMoneySecuritySelector);
     d->setDisplayType(KMyMoneySecuritySelectorPrivate::TypeCurrencies);

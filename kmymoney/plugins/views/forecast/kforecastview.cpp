@@ -19,8 +19,8 @@
 using namespace reports;
 using namespace Icons;
 
-KForecastView::KForecastView(QWidget *parent) :
-    KMyMoneyViewBase(*new KForecastViewPrivate(this), parent)
+KForecastView::KForecastView(QWidget* parent)
+    : KMyMoneyViewBase(*new KForecastViewPrivate(this), parent)
 {
 }
 
@@ -82,23 +82,26 @@ void KForecastView::refresh()
     d->m_needReload[ChartView] = true;
 
     if (isVisible()) {
-        //refresh settings
+        // refresh settings
         d->loadForecastSettings();
         slotTabChanged(d->ui->m_tab->currentIndex());
     }
 }
 
-void KForecastView::itemExpanded(QTreeWidgetItem *item)
+void KForecastView::itemExpanded(QTreeWidgetItem* item)
 {
     Q_D(KForecastView);
     if (!item->parent() || !item->parent()->parent())
         return;
     for (int i = 1; i < item->columnCount(); ++i) {
-        d->showAmount(item, i, item->data(i, AmountRole).value<MyMoneyMoney>(), MyMoneyFile::instance()->security(item->data(0, AccountRole).value<MyMoneyAccount>().currencyId()));
+        d->showAmount(item,
+                      i,
+                      item->data(i, AmountRole).value<MyMoneyMoney>(),
+                      MyMoneyFile::instance()->security(item->data(0, AccountRole).value<MyMoneyAccount>().currencyId()));
     }
 }
 
-void KForecastView::itemCollapsed(QTreeWidgetItem *item)
+void KForecastView::itemCollapsed(QTreeWidgetItem* item)
 {
     Q_D(KForecastView);
     for (int i = 1; i < item->columnCount(); ++i) {

@@ -6,14 +6,14 @@
 
 #include "securitiesdlg.h"
 
-#include <QTableWidgetItem>
 #include <QPushButton>
+#include <QTableWidgetItem>
 
 #include "ui_securitiesdlg.h"
 
-SecuritiesDlg::SecuritiesDlg() :
-    ui(new Ui::SecuritiesDlg),
-    m_RowCount(0)
+SecuritiesDlg::SecuritiesDlg()
+    : ui(new Ui::SecuritiesDlg)
+    , m_RowCount(0)
 {
     ui->setupUi(this);
     m_validRowCount = 0;
@@ -41,10 +41,10 @@ void SecuritiesDlg::displayLine(const QString symbol, const QString name)
     nameItem->setText(name);
     if (name.isEmpty()) {
         statusItem->setText(i18nc("Security has no name", "No name"));
-        symbolItem->setFlags(Qt::NoItemFlags);               // no editing of symbol allowed
+        symbolItem->setFlags(Qt::NoItemFlags); // no editing of symbol allowed
     } else if (symbol.isEmpty()) {
         statusItem->setText(i18nc("Security has no symbol", "No symbol"));
-        nameItem->setFlags(Qt::NoItemFlags);                 // no editing of name allowed
+        nameItem->setFlags(Qt::NoItemFlags); // no editing of name allowed
     }
     int nextRow = ui->tableWidget->rowCount();
     ui->tableWidget->setRowCount(nextRow + 1);

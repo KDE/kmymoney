@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -23,9 +22,9 @@
 #include "mymoneyaccountloan.h"
 #include "mymoneyutils.h"
 
-EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::EffectiveDateWizardPage)
+EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::EffectiveDateWizardPage)
 {
     ui->setupUi(this);
     // Register the fields with the QWizard and connect the

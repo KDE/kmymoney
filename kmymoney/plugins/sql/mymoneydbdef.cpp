@@ -15,10 +15,10 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "mymoneydbdriver.h"
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneydbdriver.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "parametersmodel.h"
 
 #include <alkimia/alkvalue.h>
@@ -67,7 +67,7 @@ static const bool UNSIGNED = false;
 #define appendField(a) fields.append(QExplicitlySharedDataPointer<MyMoneyDbColumn>(new a))
 void MyMoneyDbDef::FileInfo()
 {
-    QList< QExplicitlySharedDataPointer<MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("version", "varchar(16)"));
     appendField(MyMoneyDbColumn("created", "date"));
     appendField(MyMoneyDbColumn("lastModified", "date"));
@@ -102,8 +102,7 @@ void MyMoneyDbDef::FileInfo()
     appendField(MyMoneyDbIntColumn("hiPayeeIdentifierId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 8));
     appendField(MyMoneyDbColumn("logonUser", "varchar(255)", false, false, 1));
     appendField(MyMoneyDbDatetimeColumn("logonAt", false, false, 1));
-    appendField(MyMoneyDbIntColumn("fixLevel",
-                                   MyMoneyDbIntColumn::MEDIUM, UNSIGNED, false, false, 6));
+    appendField(MyMoneyDbIntColumn("fixLevel", MyMoneyDbIntColumn::MEDIUM, UNSIGNED, false, false, 6));
     MyMoneyDbTable t("kmmFileInfo", fields);
     t.buildSQLStrings();
     m_tables[t.name()] = t;
@@ -111,7 +110,7 @@ void MyMoneyDbDef::FileInfo()
 
 void MyMoneyDbDef::Institutions()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
     appendField(MyMoneyDbTextColumn("manager"));
@@ -127,8 +126,8 @@ void MyMoneyDbDef::Institutions()
 
 void MyMoneyDbDef::Payees()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
-    appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
+    appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbTextColumn("name"));
     appendField(MyMoneyDbTextColumn("reference"));
     appendField(MyMoneyDbTextColumn("email"));
@@ -151,8 +150,8 @@ void MyMoneyDbDef::Payees()
 
 void MyMoneyDbDef::PayeesPayeeIdentifier()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
-    appendField(MyMoneyDbColumn("payeeId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
+    appendField(MyMoneyDbColumn("payeeId", "varchar(32)", PRIMARYKEY, NOTNULL, 8));
     appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8, 9));
     appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
     appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
@@ -164,8 +163,8 @@ void MyMoneyDbDef::PayeesPayeeIdentifier()
 
 void MyMoneyDbDef::Tags()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
-    appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
+    appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbTextColumn("name"));
     appendField(MyMoneyDbColumn("closed", "char(1)", false, false, 5));
     appendField(MyMoneyDbTextColumn("notes", MyMoneyDbTextColumn::LONG, false, false, 5));
@@ -177,7 +176,7 @@ void MyMoneyDbDef::Tags()
 
 void MyMoneyDbDef::TagSplits()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("transactionId", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("tagId", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL));
@@ -188,8 +187,8 @@ void MyMoneyDbDef::TagSplits()
 
 void MyMoneyDbDef::Accounts()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
-    appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
+    appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("institutionId", "varchar(32)"));
     appendField(MyMoneyDbColumn("parentId", "varchar(32)"));
     appendField(MyMoneyDbDatetimeColumn("lastReconciled"));
@@ -212,8 +211,8 @@ void MyMoneyDbDef::Accounts()
 
 void MyMoneyDbDef::AccountsPayeeIdentifier()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
-    appendField(MyMoneyDbColumn("accountId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
+    appendField(MyMoneyDbColumn("accountId", "varchar(32)", PRIMARYKEY, NOTNULL, 8));
     appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8, 9));
     appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
     appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
@@ -225,7 +224,7 @@ void MyMoneyDbDef::AccountsPayeeIdentifier()
 
 void MyMoneyDbDef::Transactions()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("txType", "char(1)"));
     appendField(MyMoneyDbDatetimeColumn("postDate"));
@@ -240,10 +239,10 @@ void MyMoneyDbDef::Transactions()
 
 void MyMoneyDbDef::Splits()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
-    appendField(MyMoneyDbColumn("transactionId", "varchar(32)",  PRIMARYKEY, NOTNULL));
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
+    appendField(MyMoneyDbColumn("transactionId", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("txType", "char(1)"));
-    appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED,  PRIMARYKEY, NOTNULL));
+    appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("payeeId", "varchar(32)"));
     appendField(MyMoneyDbDatetimeColumn("reconcileDate"));
     appendField(MyMoneyDbColumn("action", "varchar(16)"));
@@ -270,7 +269,7 @@ void MyMoneyDbDef::Splits()
 
 void MyMoneyDbDef::KeyValuePairs()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("kvpType", "varchar(16)", false, NOTNULL));
     appendField(MyMoneyDbColumn("kvpId", "varchar(32)"));
     appendField(MyMoneyDbColumn("kvpKey", "varchar(255)", false, NOTNULL));
@@ -285,15 +284,22 @@ void MyMoneyDbDef::KeyValuePairs()
 
 void MyMoneyDbDef::Schedules()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
     appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::TINY, UNSIGNED, false, NOTNULL));
     appendField(MyMoneyDbTextColumn("typeString"));
-    appendField(MyMoneyDbIntColumn("occurence", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, // krazy:exclude=spelling
+    appendField(MyMoneyDbIntColumn("occurence",
+                                   MyMoneyDbIntColumn::SMALL,
+                                   UNSIGNED,
+                                   false, // krazy:exclude=spelling
                                    NOTNULL));
-    appendField(MyMoneyDbIntColumn("occurenceMultiplier", MyMoneyDbIntColumn::SMALL, UNSIGNED, // krazy:exclude=spelling
-                                   false, NOTNULL, 3));
+    appendField(MyMoneyDbIntColumn("occurenceMultiplier",
+                                   MyMoneyDbIntColumn::SMALL,
+                                   UNSIGNED, // krazy:exclude=spelling
+                                   false,
+                                   NOTNULL,
+                                   3));
     appendField(MyMoneyDbTextColumn("occurenceString")); // krazy:exclude=spelling
     appendField(MyMoneyDbIntColumn("paymentType", MyMoneyDbIntColumn::TINY, UNSIGNED));
     appendField(MyMoneyDbTextColumn("paymentTypeString", MyMoneyDbTextColumn::LONG));
@@ -304,8 +310,7 @@ void MyMoneyDbDef::Schedules()
     appendField(MyMoneyDbColumn("autoEnter", "char(1)", false, NOTNULL));
     appendField(MyMoneyDbColumn("lastPayment", "date"));
     appendField(MyMoneyDbColumn("nextPaymentDue", "date"));
-    appendField(MyMoneyDbIntColumn("weekendOption", MyMoneyDbIntColumn::TINY, UNSIGNED, false,
-                                   NOTNULL));
+    appendField(MyMoneyDbIntColumn("weekendOption", MyMoneyDbIntColumn::TINY, UNSIGNED, false, NOTNULL));
     appendField(MyMoneyDbTextColumn("weekendOptionString"));
     MyMoneyDbTable t("kmmSchedules", fields);
     t.buildSQLStrings();
@@ -314,9 +319,9 @@ void MyMoneyDbDef::Schedules()
 
 void MyMoneyDbDef::SchedulePaymentHistory()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("schedId", "varchar(32)", PRIMARYKEY, NOTNULL));
-    appendField(MyMoneyDbColumn("payDate", "date", PRIMARYKEY,  NOTNULL));
+    appendField(MyMoneyDbColumn("payDate", "date", PRIMARYKEY, NOTNULL));
     MyMoneyDbTable t("kmmSchedulePaymentHistory", fields);
     t.buildSQLStrings();
     m_tables[t.name()] = t;
@@ -324,17 +329,25 @@ void MyMoneyDbDef::SchedulePaymentHistory()
 
 void MyMoneyDbDef::Securities()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
     appendField(MyMoneyDbTextColumn("symbol"));
     appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
     appendField(MyMoneyDbTextColumn("typeString"));
     appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
-    appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QLatin1String("4")));
+    appendField(
+        MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QLatin1String("4")));
     appendField(MyMoneyDbTextColumn("tradingMarket"));
     appendField(MyMoneyDbColumn("tradingCurrency", "char(3)"));
-    appendField(MyMoneyDbIntColumn("roundingMethod", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QString("%1").arg(AlkValue::RoundRound)));
+    appendField(MyMoneyDbIntColumn("roundingMethod",
+                                   MyMoneyDbIntColumn::SMALL,
+                                   UNSIGNED,
+                                   false,
+                                   NOTNULL,
+                                   11,
+                                   std::numeric_limits<int>::max(),
+                                   QString("%1").arg(AlkValue::RoundRound)));
     MyMoneyDbTable t("kmmSecurities", fields);
     t.buildSQLStrings();
     m_tables[t.name()] = t;
@@ -342,9 +355,9 @@ void MyMoneyDbDef::Securities()
 
 void MyMoneyDbDef::Prices()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("fromId", "varchar(32)", PRIMARYKEY, NOTNULL));
-    appendField(MyMoneyDbColumn("toId", "varchar(32)",  PRIMARYKEY, NOTNULL));
+    appendField(MyMoneyDbColumn("toId", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("priceDate", "date", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbTextColumn("price", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
     appendField(MyMoneyDbTextColumn("priceFormatted"));
@@ -356,7 +369,7 @@ void MyMoneyDbDef::Prices()
 
 void MyMoneyDbDef::Currencies()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("ISOcode", "char(3)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
     appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED));
@@ -368,7 +381,8 @@ void MyMoneyDbDef::Currencies()
     appendField(MyMoneyDbColumn("smallestCashFraction", "varchar(24)"));
     appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
     // the default for price precision was taken from MyMoneySecurity
-    appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QLatin1String("4")));
+    appendField(
+        MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QLatin1String("4")));
     MyMoneyDbTable t("kmmCurrencies", fields);
     t.buildSQLStrings();
     m_tables[t.name()] = t;
@@ -376,7 +390,7 @@ void MyMoneyDbDef::Currencies()
 
 void MyMoneyDbDef::Reports()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("name", "varchar(255)", false, NOTNULL));
     appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 6));
@@ -387,7 +401,7 @@ void MyMoneyDbDef::Reports()
 
 void MyMoneyDbDef::OnlineJobs()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
 
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 8));
     appendField(MyMoneyDbColumn("type", "varchar(255)", false, NOTNULL, 8));
@@ -403,7 +417,7 @@ void MyMoneyDbDef::OnlineJobs()
 
 void MyMoneyDbDef::PayeeIdentifier()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
 
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 8));
     appendField(MyMoneyDbColumn("type", "varchar(255)", false, false, 8));
@@ -415,7 +429,7 @@ void MyMoneyDbDef::PayeeIdentifier()
 
 void MyMoneyDbDef::PluginInfo()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
 
     appendField(MyMoneyDbColumn("iid", "varchar(255)", PRIMARYKEY, NOTNULL, 8));
     appendField(MyMoneyDbIntColumn("versionMajor", MyMoneyDbIntColumn::TINY, false, false, NOTNULL, 8));
@@ -429,7 +443,7 @@ void MyMoneyDbDef::PluginInfo()
 
 void MyMoneyDbDef::Budgets()
 {
-    QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
     appendField(MyMoneyDbColumn("start", "date", false, NOTNULL));
@@ -441,7 +455,7 @@ void MyMoneyDbDef::Budgets()
 
 void MyMoneyDbDef::CostCenter()
 {
-    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn> > fields;
+    QList<QExplicitlySharedDataPointer<MyMoneyDbColumn>> fields;
     appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
     appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
     MyMoneyDbTable t("kmmCostCenter", fields);
@@ -451,7 +465,8 @@ void MyMoneyDbDef::CostCenter()
 
 void MyMoneyDbDef::Balances()
 {
-    MyMoneyDbView v("kmmBalances", "CREATE VIEW kmmBalances AS "
+    MyMoneyDbView v("kmmBalances",
+                    "CREATE VIEW kmmBalances AS "
                     "SELECT kmmAccounts.id AS id, kmmAccounts.currencyId, "
                     "kmmSplits.txType, kmmSplits.value, kmmSplits.shares, "
                     "kmmSplits.postDate AS balDate, "
@@ -462,7 +477,6 @@ void MyMoneyDbDef::Balances()
                     "AND kmmSplits.transactionId = kmmTransactions.id;");
     m_views[v.name()] = v;
 }
-
 
 // function to write create SQL to a stream
 const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
@@ -499,13 +513,9 @@ const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMon
             replace = file->fileInfoModel()->itemById(file->fixedKey(MyMoneyFile::FileFixVersion)).value();
         }
         if ((*fit)->name() == "created")
-            replace = QLatin1Char('\'')
-                      + QDate::currentDate().toString(Qt::ISODate)
-                      + QLatin1Char('\'');
+            replace = QLatin1Char('\'') + QDate::currentDate().toString(Qt::ISODate) + QLatin1Char('\'');
         if ((*fit)->name() == "lastModified")
-            replace = QLatin1Char('\'')
-                      + QDate::currentDate().toString(Qt::ISODate)
-                      + QLatin1Char('\'');
+            replace = QLatin1Char('\'') + QDate::currentDate().toString(Qt::ISODate) + QLatin1Char('\'');
         if ((*fit)->name() == "updateInProgress")
             replace = enclose("N");
 
@@ -547,7 +557,7 @@ const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMon
                 replace = enclose(pac->name());
             qs.replace(toReplace, replace);
         }
-        qs.replace(":id", enclose(pac->id()));  // a real kludge
+        qs.replace(":id", enclose(pac->id())); // a real kludge
         qs += "\n\n";
         retval += qs;
     }
@@ -587,7 +597,8 @@ void MyMoneyDbTable::buildSQLStrings()
     ft = m_fields.cbegin();
     while (ft != m_fields.cend()) {
         if ((*ft)->isPrimaryKey()) {
-            if (!ws.isEmpty()) ws += " AND ";
+            if (!ws.isEmpty())
+                ws += " AND ";
             ws += QString("%1 = :%2").arg((*ft)->name(), (*ft)->name());
         } else {
             qs += QString("%1 = :%2, ").arg((*ft)->name(), (*ft)->name());
@@ -595,11 +606,13 @@ void MyMoneyDbTable::buildSQLStrings()
         ++ft;
     }
     qs = qs.left(qs.length() - 2);
-    if (!ws.isEmpty()) qs += " WHERE " + ws;
+    if (!ws.isEmpty())
+        qs += " WHERE " + ws;
     m_updateString = qs + ';';
     // build a delete string; where clause as for update
     qs = "DELETE FROM " + name();
-    if (!ws.isEmpty()) qs += " WHERE " + ws;
+    if (!ws.isEmpty())
+        qs += " WHERE " + ws;
     m_deleteString = qs + ';';
 
     // Setup the column name hash
@@ -621,7 +634,7 @@ QString MyMoneyDbTable::columnList(const int version, bool useNewNames) const
         if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version) {
             QString fieldName = (*ft)->name();
             if (useNewNames && m_newFieldNames.contains(fieldName)) {
-                if (m_newFieldNames[fieldName].first == version+1) {
+                if (m_newFieldNames[fieldName].first == version + 1) {
                     fieldName = m_newFieldNames[fieldName].second;
                 }
             }
@@ -678,7 +691,8 @@ bool MyMoneyDbTable::hasPrimaryKey(int version) const
     return (false);
 }
 
-const QString MyMoneyDbTable::modifyColumnString(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver, const QString& columnName, const MyMoneyDbColumn& newDef) const
+const QString
+MyMoneyDbTable::modifyColumnString(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
     return driver->modifyColumnString(m_name, columnName, newDef);
 }
@@ -708,8 +722,7 @@ const QString MyMoneyDbIndex::generateDDL(const QExplicitlySharedDataPointer<MyM
     if (m_unique)
         qs += "UNIQUE ";
 
-    qs += "INDEX " + m_table + '_' + m_name + "_idx ON "
-          + m_table + " (";
+    qs += "INDEX " + m_table + '_' + m_name + "_idx ON " + m_table + " (";
 
     // The following should probably be revised.  MySQL supports an index on
     // partial columns, but not on a function.  Postgres supports an index on
@@ -729,12 +742,12 @@ const QString MyMoneyDbIndex::generateDDL(const QExplicitlySharedDataPointer<MyM
 // These are the actual column types.
 //
 
-MyMoneyDbColumn*         MyMoneyDbColumn::clone() const
+MyMoneyDbColumn* MyMoneyDbColumn::clone() const
 {
     return (new MyMoneyDbColumn(*this));
 }
 
-MyMoneyDbIntColumn*      MyMoneyDbIntColumn::clone() const
+MyMoneyDbIntColumn* MyMoneyDbIntColumn::clone() const
 {
     return (new MyMoneyDbIntColumn(*this));
 }
@@ -754,7 +767,8 @@ const QString MyMoneyDbColumn::generateDDL(const QExplicitlySharedDataPointer<My
     Q_UNUSED(driver);
 
     QString qs = name() + ' ' + type();
-    if (isNotNull()) qs += " NOT NULL";
+    if (isNotNull())
+        qs += " NOT NULL";
     if (!defaultValue().isEmpty())
         qs += QString(" DEFAULT '%1'").arg(defaultValue());
     return qs;
@@ -777,5 +791,3 @@ const QString MyMoneyDbDatetimeColumn::generateDDL(const QExplicitlySharedDataPo
 {
     return driver->timestampString(*this);
 }
-
-

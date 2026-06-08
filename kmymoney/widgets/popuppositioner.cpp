@@ -19,14 +19,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-
 PopupPositioner::PopupPositioner(QWidget* baseWidget, QWidget* popupWidget, Anchor anchor)
 {
     const auto screenRect = baseWidget->screen()->availableGeometry();
 
     auto p = baseWidget->mapToGlobal(QPoint());
     // align the y coordinate
-    switch(anchor) {
+    switch (anchor) {
     case BottemLeft:
     case BottomRight:
         if (p.y() + baseWidget->height() + popupWidget->height() > screenRect.bottomLeft().y()) {
@@ -46,7 +45,7 @@ PopupPositioner::PopupPositioner(QWidget* baseWidget, QWidget* popupWidget, Anch
     }
 
     // align the x coordinate
-    switch(anchor) {
+    switch (anchor) {
     case BottemLeft:
     case TopLeft:
         // if left aligning causes the widget to leave the screen area

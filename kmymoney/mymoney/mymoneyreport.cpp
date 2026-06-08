@@ -60,21 +60,20 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
     d->m_dateLock = dl;
     d->m_origin = origin;
 
-    //set report type
+    // set report type
     if (d->m_reportType == eMyMoney::Report::ReportType::PivotTable)
         d->m_columnType = static_cast<eMyMoney::Report::ColumnType>(ct);
     if (d->m_reportType == eMyMoney::Report::ReportType::QueryTable)
         d->m_queryColumns = static_cast<eMyMoney::Report::QueryColumn>(ct);
     setDateFilter(dl);
 
-    //throw exception if the type is inconsistent
-    if (d->rowTypeToReportType(rt) == eMyMoney::Report::ReportType::Invalid ||
-            d->m_reportType == eMyMoney::Report::ReportType::NoReport)
+    // throw exception if the type is inconsistent
+    if (d->rowTypeToReportType(rt) == eMyMoney::Report::ReportType::Invalid || d->m_reportType == eMyMoney::Report::ReportType::NoReport)
         throw MYMONEYEXCEPTION_CSTRING("Invalid report type");
 
-    //add the corresponding account groups
+    // add the corresponding account groups
     addAccountGroupsByRowType(rt);
-    switch(rt) {
+    switch (rt) {
     case eMyMoney::Report::RowType::AssetLiability:
     case eMyMoney::Report::RowType::Account:
     case eMyMoney::Report::RowType::ExpenseIncome:
@@ -94,15 +93,15 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
 #endif
 }
 
-MyMoneyReport::MyMoneyReport(const MyMoneyReport& other) :
-    MyMoneyObject(*new MyMoneyReportPrivate(*other.d_func()), other.id()),
-    MyMoneyTransactionFilter(other)
+MyMoneyReport::MyMoneyReport(const MyMoneyReport& other)
+    : MyMoneyObject(*new MyMoneyReportPrivate(*other.d_func()), other.id())
+    , MyMoneyTransactionFilter(other)
 {
 }
 
-MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& other) :
-    MyMoneyObject(*new MyMoneyReportPrivate(*other.d_func()), id),
-    MyMoneyTransactionFilter(other)
+MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& other)
+    : MyMoneyObject(*new MyMoneyReportPrivate(*other.d_func()), id)
+    , MyMoneyTransactionFilter(other)
 {
     Q_D(MyMoneyReport);
     d->m_movingAverageDays = 0;
@@ -115,8 +114,8 @@ MyMoneyReport::~MyMoneyReport()
 
 void MyMoneyReport::addAccountGroupsByRowType(eMyMoney::Report::RowType rt)
 {
-    //add the corresponding account groups
-    switch(rt) {
+    // add the corresponding account groups
+    switch (rt) {
     case eMyMoney::Report::RowType::AccountInfo:
     case eMyMoney::Report::RowType::AssetLiability:
         addAccountGroup(eMyMoney::Account::Type::Asset);
@@ -144,14 +143,14 @@ void MyMoneyReport::addAccountGroupsByRowType(eMyMoney::Report::RowType rt)
         addAccountGroup(eMyMoney::Account::Type::Income);
         break;
 
-    //FIXME take this out once we have sorted out all issues regarding budget of assets and liabilities -- asoliverez@gmail.com
+    // FIXME take this out once we have sorted out all issues regarding budget of assets and liabilities -- asoliverez@gmail.com
     case eMyMoney::Report::RowType::Budget:
     case eMyMoney::Report::RowType::BudgetActual:
         addAccountGroup(eMyMoney::Account::Type::Expense);
         addAccountGroup(eMyMoney::Account::Type::Income);
         break;
 
-    //cash flow reports show splits for all account groups
+    // cash flow reports show splits for all account groups
     case eMyMoney::Report::RowType::CashFlow:
         addAccountGroup(eMyMoney::Account::Type::Expense);
         addAccountGroup(eMyMoney::Account::Type::Income);
@@ -419,7 +418,8 @@ void MyMoneyReport::setInvestmentsOnly(bool f)
 {
     Q_D(MyMoneyReport);
     d->m_investments = f;
-    if (f) d->m_loans = false;
+    if (f)
+        d->m_loans = false;
 }
 
 bool MyMoneyReport::isLoansOnly() const
@@ -432,7 +432,8 @@ void MyMoneyReport::setLoansOnly(bool f)
 {
     Q_D(MyMoneyReport);
     d->m_loans = f;
-    if (f) d->m_investments = false;
+    if (f)
+        d->m_investments = false;
 }
 
 eMyMoney::Report::DetailLevel MyMoneyReport::detailLevel() const
@@ -700,16 +701,16 @@ QString MyMoneyReport::budget() const
 }
 
 /**
-  * Sets the budget used for this report
-  *
-  * @param budget The ID of the budget to use, or an empty string
-  * to indicate a budget is NOT included
-  * @param fa Whether to display actual data alongside the budget.
-  * Setting to false means the report displays ONLY the budget itself.
-  * @warning For now, the budget ID is ignored.  The budget id is
-  * simply checked for any non-empty string, and if so, hasBudget()
-  * will return true.
-  */
+ * Sets the budget used for this report
+ *
+ * @param budget The ID of the budget to use, or an empty string
+ * to indicate a budget is NOT included
+ * @param fa Whether to display actual data alongside the budget.
+ * Setting to false means the report displays ONLY the budget itself.
+ * @warning For now, the budget ID is ignored.  The budget id is
+ * simply checked for any non-empty string, and if so, hasBudget()
+ * will return true.
+ */
 void MyMoneyReport::setBudget(const QString& budget, bool fa)
 {
     Q_D(MyMoneyReport);
@@ -820,16 +821,16 @@ bool MyMoneyReport::isDateUserDefined() const
 }
 
 /**
-  * Set the underlying date filter and LOCK that filter to the specified
-  * range.  For example, if @p _u is "CurrentMonth", this report should always
-  * be updated to the current month no matter when the report is run.
-  *
-  * This updating is not entirely automatic, you should update it yourself by
-  * calling updateDateFilter.
-  *
-  * @param _u The date range constant (MyMoneyTransactionFilter::dateRangeE)
-  *          which this report should be locked to.
-  */
+ * Set the underlying date filter and LOCK that filter to the specified
+ * range.  For example, if @p _u is "CurrentMonth", this report should always
+ * be updated to the current month no matter when the report is run.
+ *
+ * This updating is not entirely automatic, you should update it yourself by
+ * calling updateDateFilter.
+ *
+ * @param _u The date range constant (MyMoneyTransactionFilter::dateRangeE)
+ *          which this report should be locked to.
+ */
 
 void MyMoneyReport::setDateFilter(eMyMoney::TransactionFilter::Date u)
 {
@@ -851,7 +852,6 @@ void MyMoneyReport::updateDateFilter()
         MyMoneyTransactionFilter::setDateFilter(d->m_dateLock);
     }
 }
-
 
 bool MyMoneyReport::isMixedTime() const
 {
@@ -991,8 +991,8 @@ void MyMoneyReport::validDateRange(QDate& db, QDate& de)
 
         // make sure that we leave this function with valid dates no matter what
         if (!tmpBegin.isValid() || !tmpEnd.isValid() || tmpBegin > tmpEnd) {
-            tmpBegin = QDate(QDate::currentDate().year(), 1, 1);   // the first date in the file
-            tmpEnd = QDate(QDate::currentDate().year(), 12, 31);   // the last date in the file
+            tmpBegin = QDate(QDate::currentDate().year(), 1, 1); // the first date in the file
+            tmpEnd = QDate(QDate::currentDate().year(), 12, 31); // the last date in the file
         }
         if (!db.isValid())
             db = tmpBegin;
@@ -1033,9 +1033,8 @@ void MyMoneyReport::addAccountGroup(eMyMoney::Account::Type type)
 bool MyMoneyReport::includesAccountGroup(eMyMoney::Account::Type type) const
 {
     Q_D(const MyMoneyReport);
-    bool result = (! d->m_accountGroupFilter)
-                  || (isIncludingTransfers() && d->m_rowType == eMyMoney::Report::RowType::ExpenseIncome)
-                  || d->m_accountGroups.contains(type);
+    bool result =
+        (!d->m_accountGroupFilter) || (isIncludingTransfers() && d->m_rowType == eMyMoney::Report::RowType::ExpenseIncome) || d->m_accountGroups.contains(type);
 
     return result;
 }
@@ -1072,7 +1071,7 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
             else if (isIncludingTransfers() && d->m_rowType == eMyMoney::Report::RowType::ExpenseIncome)
                 // If transfers are included, ONLY include this account if it is NOT
                 // included in the report itself!!
-                result = ! includesAccount(acc.id());
+                result = !includesAccount(acc.id());
             else
                 result = includesAccount(acc.id());
             break;
@@ -1180,59 +1179,59 @@ bool MyMoneyReport::hasConversionRates() const
 
 QString MyMoneyReport::toString(eMyMoney::Report::RowType type)
 {
-    switch(type) {
-    case eMyMoney::Report::RowType::NoRows             :
+    switch (type) {
+    case eMyMoney::Report::RowType::NoRows:
         return "eMyMoney::Report::RowType::NoRows";
-    case eMyMoney::Report::RowType::AssetLiability     :
+    case eMyMoney::Report::RowType::AssetLiability:
         return "eMyMoney::Report::RowType::AssetLiability";
-    case eMyMoney::Report::RowType::ExpenseIncome      :
+    case eMyMoney::Report::RowType::ExpenseIncome:
         return "eMyMoney::Report::RowType::ExpenseIncome";
-    case eMyMoney::Report::RowType::Category           :
+    case eMyMoney::Report::RowType::Category:
         return "eMyMoney::Report::RowType::Category";
-    case eMyMoney::Report::RowType::TopCategory        :
+    case eMyMoney::Report::RowType::TopCategory:
         return "eTopCategory";
-    case eMyMoney::Report::RowType::Account            :
+    case eMyMoney::Report::RowType::Account:
         return "eAccount";
-    case eMyMoney::Report::RowType::Tag                :
+    case eMyMoney::Report::RowType::Tag:
         return "eTag";
-    case eMyMoney::Report::RowType::Payee              :
+    case eMyMoney::Report::RowType::Payee:
         return "ePayee";
-    case eMyMoney::Report::RowType::Month              :
+    case eMyMoney::Report::RowType::Month:
         return "eMonth";
-    case eMyMoney::Report::RowType::Week               :
+    case eMyMoney::Report::RowType::Week:
         return "eWeek";
-    case eMyMoney::Report::RowType::TopAccount         :
+    case eMyMoney::Report::RowType::TopAccount:
         return "eTopAccount";
     case eMyMoney::Report::RowType::AccountByTopAccount:
         return "eAccountByTopAccount";
-    case eMyMoney::Report::RowType::EquityType         :
+    case eMyMoney::Report::RowType::EquityType:
         return "eEquityType";
-    case eMyMoney::Report::RowType::AccountType        :
+    case eMyMoney::Report::RowType::AccountType:
         return "eAccountType";
-    case eMyMoney::Report::RowType::Institution        :
+    case eMyMoney::Report::RowType::Institution:
         return "eInstitution";
-    case eMyMoney::Report::RowType::Budget             :
+    case eMyMoney::Report::RowType::Budget:
         return "eBudget";
-    case eMyMoney::Report::RowType::BudgetActual       :
+    case eMyMoney::Report::RowType::BudgetActual:
         return "eBudgetActual";
-    case eMyMoney::Report::RowType::Schedule           :
+    case eMyMoney::Report::RowType::Schedule:
         return "eSchedule";
-    case eMyMoney::Report::RowType::AccountInfo        :
+    case eMyMoney::Report::RowType::AccountInfo:
         return "eAccountInfo";
-    case eMyMoney::Report::RowType::AccountLoanInfo    :
+    case eMyMoney::Report::RowType::AccountLoanInfo:
         return "eAccountLoanInfo";
-    case eMyMoney::Report::RowType::AccountReconcile   :
+    case eMyMoney::Report::RowType::AccountReconcile:
         return "eAccountReconcile";
-    case eMyMoney::Report::RowType::CashFlow           :
+    case eMyMoney::Report::RowType::CashFlow:
         return "eCashFlow";
-    default                  :
+    default:
         return "undefined";
     }
 }
 
 QString MyMoneyReport::toString(eMyMoney::Report::ReportType type)
 {
-    switch(type) {
+    switch (type) {
     case eMyMoney::Report::ReportType::NoReport:
         return "eNoReport";
     case eMyMoney::Report::ReportType::PivotTable:

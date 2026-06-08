@@ -40,7 +40,8 @@ KAboutData initializeCreditsData()
     features << i18n("Online banking");
 #endif
 
-    aboutData.setShortDescription(i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."));
+    aboutData.setShortDescription(
+        i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."));
     aboutData.setLicense(KAboutLicense::GPL);
     aboutData.setCopyrightStatement(i18n("(c) 2000-2026 The KMyMoney development team"));
     aboutData.setHomepage(QStringLiteral("https://kmymoney.org/"));

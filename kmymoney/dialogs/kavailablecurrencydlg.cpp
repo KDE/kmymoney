@@ -9,11 +9,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
 #include <QBitmap>
 #include <QList>
-#include <QTreeWidget>
+#include <QPixmap>
 #include <QPushButton>
+#include <QTreeWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -24,8 +24,8 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include <ui_kavailablecurrencydlg.h>
 #include "mymoneysecurity.h"
+#include <ui_kavailablecurrencydlg.h>
 
 KAvailableCurrencyDlg::KAvailableCurrencyDlg(const QList<QString>& usedCurrencies, QWidget* parent)
     : ui(new Ui::KAvailableCurrencyDlg)
@@ -39,7 +39,7 @@ KAvailableCurrencyDlg::KAvailableCurrencyDlg(const QList<QString>& usedCurrencie
 
     slotLoadCurrencies(usedCurrencies);
 
-    //resize the column widths
+    // resize the column widths
     for (auto i = 0; i < ui->m_currencyList->columnCount(); ++i)
         ui->m_currencyList->resizeColumnToContents(i);
 

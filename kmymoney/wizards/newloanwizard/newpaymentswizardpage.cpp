@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_newpaymentswizardpage.h"
 
-NewPaymentsWizardPage::NewPaymentsWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::NewPaymentsWizardPage)
+NewPaymentsWizardPage::NewPaymentsWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::NewPaymentsWizardPage)
 {
     ui->setupUi(this);
 }

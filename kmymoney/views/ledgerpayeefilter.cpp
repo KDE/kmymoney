@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "ledgerpayeefilter.h"
 #include "ledgerfilterbase_p.h"
 
@@ -16,12 +15,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-#include "mymoneymoney.h"
-#include "mymoneyaccount.h"
-#include "mymoneyfile.h"
-#include "journalmodel.h"
 #include "accountsmodel.h"
+#include "journalmodel.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 
 class LedgerPayeeFilterPrivate : public LedgerFilterBasePrivate
 {
@@ -29,15 +28,15 @@ public:
     explicit LedgerPayeeFilterPrivate(LedgerPayeeFilter* qq)
         : LedgerFilterBasePrivate(qq)
         , balanceCalculationPending(false)
-    {}
+    {
+    }
 
     ~LedgerPayeeFilterPrivate()
     {
     }
 
-    bool                        balanceCalculationPending;
+    bool balanceCalculationPending;
 };
-
 
 LedgerPayeeFilter::LedgerPayeeFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels)
     : LedgerFilterBase(new LedgerPayeeFilterPrivate(this), parent)
@@ -74,7 +73,7 @@ void LedgerPayeeFilter::recalculateBalancesOnIdle(const QString& accountId)
     Q_D(LedgerPayeeFilter);
 
     // make sure the balances are recalculated but trigger only once
-    if(!d->balanceCalculationPending) {
+    if (!d->balanceCalculationPending) {
         d->balanceCalculationPending = true;
         QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
     }
@@ -105,7 +104,7 @@ void LedgerPayeeFilter::recalculateBalances()
 
     // filterModel->invalidate();
     const QModelIndex top = index(0, JournalModel::Column::Balance);
-    const QModelIndex bottom = index(rowCount()-1, JournalModel::Column::Balance);
+    const QModelIndex bottom = index(rowCount() - 1, JournalModel::Column::Balance);
 
     Q_EMIT dataChanged(top, bottom);
     d->balanceCalculationPending = false;
@@ -124,7 +123,7 @@ void LedgerPayeeFilter::setPayeeIdList(const QStringList& payeeIds)
     invalidate();
 
     // if balance calculation has not been triggered, then run it immediately
-    if(!d->balanceCalculationPending) {
+    if (!d->balanceCalculationPending) {
         recalculateBalances();
     }
 }
@@ -133,7 +132,7 @@ bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& sour
 {
     Q_D(const LedgerPayeeFilter);
 
-    bool rc = LedgerFilterBase::filterAcceptsRow(source_row,  source_parent);
+    bool rc = LedgerFilterBase::filterAcceptsRow(source_row, source_parent);
 
     if (rc) {
         QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
@@ -147,7 +146,7 @@ bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& sour
         const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
         idx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
         const auto accountGroup = static_cast<eMyMoney::Account::Type>(idx.data(eMyMoney::Model::AccountGroupRole).toInt());
-        switch(accountGroup) {
+        switch (accountGroup) {
         case eMyMoney::Account::Type::Asset:
         case eMyMoney::Account::Type::Liability:
             break;

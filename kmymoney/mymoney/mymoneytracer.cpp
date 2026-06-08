@@ -6,9 +6,9 @@
 
 #include "mymoneytracer.h"
 
-#include <iostream>
-#include <cstdio>
 #include <cstdarg>
+#include <cstdio>
+#include <iostream>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -40,8 +40,8 @@ public:
 int MyMoneyTracerPrivate::m_indentLevel = 0;
 int MyMoneyTracerPrivate::m_onoff = 0;
 
-MyMoneyTracer::MyMoneyTracer(const char* name) :
-    d_ptr(new MyMoneyTracerPrivate)
+MyMoneyTracer::MyMoneyTracer(const char* name)
+    : d_ptr(new MyMoneyTracerPrivate)
 {
     static const QRegularExpression classMethodExp("(.*)::(.*)");
 
@@ -62,8 +62,8 @@ MyMoneyTracer::MyMoneyTracer(const char* name) :
     d->m_indentLevel += 2;
 }
 
-MyMoneyTracer::MyMoneyTracer(const QString& className, const QString& memberName) :
-    d_ptr(new MyMoneyTracerPrivate)
+MyMoneyTracer::MyMoneyTracer(const QString& className, const QString& memberName)
+    : d_ptr(new MyMoneyTracerPrivate)
 {
     Q_D(MyMoneyTracer);
     d->m_className = className;
@@ -88,7 +88,7 @@ MyMoneyTracer::~MyMoneyTracer()
     delete d;
 }
 
-void MyMoneyTracer::printf(const char *format, ...) const
+void MyMoneyTracer::printf(const char* format, ...) const
 {
     Q_D(const MyMoneyTracer);
     if (d->m_onoff) {

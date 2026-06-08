@@ -20,13 +20,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_transactiondlg.h"
 #include "icons/icons.h"
+#include "ui_transactiondlg.h"
 
 using namespace Icons;
 
-TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const int typeCol,
-                               const QList<eMyMoney::Transaction::Action>& validActionTypes) : ui(new Ui::TransactionDlg)
+TransactionDlg::TransactionDlg(const QStringList& colList,
+                               const QStringList& colHeaders,
+                               const int typeCol,
+                               const QList<eMyMoney::Transaction::Action>& validActionTypes)
+    : ui(new Ui::TransactionDlg)
 {
     ui->setupUi(this);
 
@@ -90,9 +93,7 @@ void TransactionDlg::updateWindowSize()
     columnsWidth += ui->tableWidget->verticalHeader()->width();
     for (int col = 0; col < ui->tableWidget->columnCount(); ++col)
         columnsWidth += ui->tableWidget->columnWidth(col);
-    headerWidth = ui->tableWidget->width() -
-                  ui->tableWidget->contentsMargins().left() -
-                  ui->tableWidget->contentsMargins().right();
+    headerWidth = ui->tableWidget->width() - ui->tableWidget->contentsMargins().left() - ui->tableWidget->contentsMargins().right();
 
     newWidth = columnsWidth - headerWidth + frameGeometry().width();
     if (newWidth > screen.width())
@@ -105,14 +106,13 @@ void TransactionDlg::updateWindowSize()
     setGeometry(dlg);
 }
 
-
 void TransactionDlg::displayLine(const QStringList& colList, const QStringList& colHeaders, const int typeCol)
 {
     auto colCount = colList.count();
     ui->tableWidget->setColumnCount(colCount);
     ui->tableWidget->setHorizontalHeaderLabels(colHeaders);
     for (int col = 0; col < colCount; ++col) {
-        QTableWidgetItem *item = new QTableWidgetItem;
+        QTableWidgetItem* item = new QTableWidgetItem;
         item->setText(colList.value(col));
         if (col == typeCol) {
             item->setBackground(m_errorBrush);
@@ -125,7 +125,7 @@ void TransactionDlg::displayLine(const QStringList& colList, const QStringList& 
 
 void TransactionDlg::slotActionSelected(int index)
 {
-    QTableWidgetItem *item = ui->tableWidget->item(0, m_typeColumn);
+    QTableWidgetItem* item = ui->tableWidget->item(0, m_typeColumn);
     if (m_validActionTypes.contains(m_actionTypes.value(index))) {
         item->setBackground(m_colorBrush);
         item->setForeground(m_colorBrushText);

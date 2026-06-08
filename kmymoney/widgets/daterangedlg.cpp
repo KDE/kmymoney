@@ -48,7 +48,10 @@ public:
             MyMoneyTransactionFilter::translateDateRange(static_cast<TransactionFilter::Date>(i), m_startDates[i], m_endDates[i]);
         }
 
-        q->connect(ui->m_dateRange, static_cast<void (KMyMoneyPeriodCombo::*)(int)>(&KMyMoneyPeriodCombo::currentIndexChanged), q, &DateRangeDlg::slotDateRangeSelectedByUser);
+        q->connect(ui->m_dateRange,
+                   static_cast<void (KMyMoneyPeriodCombo::*)(int)>(&KMyMoneyPeriodCombo::currentIndexChanged),
+                   q,
+                   &DateRangeDlg::slotDateRangeSelectedByUser);
 
         q->setDateRange(TransactionFilter::Date::All);
 
@@ -86,15 +89,15 @@ public:
     }
 
     DateRangeDlg* q_ptr;
-    Ui::DateRangeDlg *ui;
+    Ui::DateRangeDlg* ui;
     WidgetHintFrameCollection* m_frameCollection;
     QDate m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
     QDate m_endDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
 };
 
-DateRangeDlg::DateRangeDlg(QWidget *parent) :
-    QWidget(parent),
-    d_ptr(new DateRangeDlgPrivate(this))
+DateRangeDlg::DateRangeDlg(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new DateRangeDlgPrivate(this))
 {
     Q_D(DateRangeDlg);
     d->ui->setupUi(this);

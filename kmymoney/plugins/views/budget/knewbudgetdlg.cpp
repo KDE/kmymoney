@@ -9,14 +9,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPushButton>
 #include <QDate>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -28,8 +28,8 @@ class KNewBudgetDlgPrivate
     Q_DISABLE_COPY(KNewBudgetDlgPrivate)
 
 public:
-    KNewBudgetDlgPrivate() :
-        ui(new Ui::KNewBudgetDlg)
+    KNewBudgetDlgPrivate()
+        : ui(new Ui::KNewBudgetDlg)
     {
     }
 
@@ -38,7 +38,7 @@ public:
         delete ui;
     }
 
-    Ui::KNewBudgetDlg *ui;
+    Ui::KNewBudgetDlg* ui;
     QString m_year;
     QString m_name;
 };
@@ -47,9 +47,9 @@ public:
 static const int icFutureYears = 5;
 static const int icPastYears = 2;
 
-KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
-    QDialog(parent),
-    d_ptr(new KNewBudgetDlgPrivate)
+KNewBudgetDlg::KNewBudgetDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KNewBudgetDlgPrivate)
 {
     Q_D(KNewBudgetDlg);
     d->ui->setupUi(this);

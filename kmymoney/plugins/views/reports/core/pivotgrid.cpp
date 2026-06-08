@@ -42,7 +42,7 @@ PivotCell::~PivotCell()
 {
 }
 
-PivotCell PivotCell::operator += (const PivotCell& right)
+PivotCell PivotCell::operator+=(const PivotCell& right)
 {
     const MyMoneyMoney& r = static_cast<const MyMoneyMoney&>(right);
     *this += r;
@@ -53,13 +53,13 @@ PivotCell PivotCell::operator += (const PivotCell& right)
     return *this;
 }
 
-PivotCell PivotCell::operator += (const MyMoneyMoney& value)
+PivotCell PivotCell::operator+=(const MyMoneyMoney& value)
 {
     m_cellUsed |= !value.isZero();
     if (m_stockSplit != MyMoneyMoney::ONE)
         m_postSplit += value;
     else
-        MyMoneyMoney::operator += (value);
+        MyMoneyMoney::operator+=(value);
     return *this;
 }
 
@@ -92,8 +92,8 @@ const QString PivotCell::formatMoney(const QString& currency, const int prec, bo
 
 MyMoneyMoney PivotCell::calculateRunningSum(const MyMoneyMoney& runningSum)
 {
-    MyMoneyMoney::operator += (runningSum);
-    MyMoneyMoney::operator = ((*this * m_stockSplit) + m_postSplit);
+    MyMoneyMoney::operator+=(runningSum);
+    MyMoneyMoney::operator=((*this * m_stockSplit) + m_postSplit);
     m_postSplit = MyMoneyMoney();
     m_stockSplit = MyMoneyMoney::ONE;
     return *this;
@@ -131,8 +131,7 @@ PivotGridRowSet::PivotGridRowSet(unsigned _numcolumns)
 
 PivotGridRowSet PivotGrid::rowSet(QString id)
 {
-
-    //go through the data and get the row that matches the id
+    // go through the data and get the row that matches the id
     PivotGrid::iterator it_outergroup = begin();
     while (it_outergroup != end()) {
         PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();

@@ -26,7 +26,6 @@ void onlineJobTest::testDefaultConstructor()
     QVERIFY(job.bankAnswerState() == eMyMoney::OnlineJob::sendingState::noBankAnswer);
     QVERIFY(job.jobMessageList().isEmpty());
     QVERIFY(job.isLocked() == false);
-
 }
 
 void onlineJobTest::testCopyConstructor()
@@ -39,7 +38,6 @@ void onlineJobTest::testCopyConstructor()
     QVERIFY(!jobCopy.isNull());
     QCOMPARE(jobCopy.id(), QString("O000001"));
     QVERIFY(originalJob.task() != jobCopy.task());
-
 }
 
 void onlineJobTest::testCopyAssignment()

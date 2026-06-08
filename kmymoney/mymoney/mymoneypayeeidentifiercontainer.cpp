@@ -7,13 +7,13 @@
 
 #include <QDebug>
 
+#include "payeeidentifier.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "payeeidentifier/unavailableplugin/unavailableplugin.h"
-#include "payeeidentifier.h"
 
 MyMoneyPayeeIdentifierContainer::MyMoneyPayeeIdentifierContainer()
-    : m_payeeIdentifiers(QList< ::payeeIdentifier >())
+    : m_payeeIdentifiers(QList<::payeeIdentifier>())
 {
 }
 
@@ -55,8 +55,8 @@ void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const int index)
 
 void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const ::payeeIdentifier& ident)
 {
-    QList< ::payeeIdentifier >::Iterator end = m_payeeIdentifiers.end();
-    for (QList< ::payeeIdentifier >::Iterator iter = m_payeeIdentifiers.begin(); iter != end; ++iter) {
+    QList<::payeeIdentifier>::Iterator end = m_payeeIdentifiers.end();
+    for (QList<::payeeIdentifier>::Iterator iter = m_payeeIdentifiers.begin(); iter != end; ++iter) {
         if (iter->id() == ident.id()) {
             *iter = ident;
             return;
@@ -70,7 +70,7 @@ void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const int index, con
     m_payeeIdentifiers[index] = ident;
 }
 
-void MyMoneyPayeeIdentifierContainer::resetPayeeIdentifiers(const QList< ::payeeIdentifier >& list)
+void MyMoneyPayeeIdentifierContainer::resetPayeeIdentifiers(const QList<::payeeIdentifier>& list)
 {
     m_payeeIdentifiers = list;
 }

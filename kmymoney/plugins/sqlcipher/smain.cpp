@@ -8,9 +8,9 @@
 
 */
 
+#include "qsql_sqlite_p.h"
 #include <qsqldriverplugin.h>
 #include <qstringlist.h>
-#include "qsql_sqlite_p.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -22,7 +22,7 @@ class QSQLCipherDriverPlugin : public QSqlDriverPlugin
 public:
     QSQLCipherDriverPlugin();
 
-    QSqlDriver* create(const QString &) Q_DECL_OVERRIDE;
+    QSqlDriver* create(const QString&) Q_DECL_OVERRIDE;
 };
 
 QSQLCipherDriverPlugin::QSQLCipherDriverPlugin()
@@ -30,7 +30,7 @@ QSQLCipherDriverPlugin::QSQLCipherDriverPlugin()
 {
 }
 
-QSqlDriver* QSQLCipherDriverPlugin::create(const QString &name)
+QSqlDriver* QSQLCipherDriverPlugin::create(const QString& name)
 {
     if (name == QLatin1String("QSQLCIPHER")) {
         QSQLiteDriver* driver = new QSQLiteDriver();

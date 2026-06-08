@@ -21,9 +21,10 @@
 
 #include "mymoneyfile.h"
 
-struct CostCenterModel::Private
-{
-    Private() {}
+struct CostCenterModel::Private {
+    Private()
+    {
+    }
 };
 
 CostCenterModel::CostCenterModel(QObject* parent, QUndoStack* undoStack)
@@ -45,8 +46,8 @@ int CostCenterModel::columnCount(const QModelIndex& parent) const
 
 QVariant CostCenterModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch (section) {
         case 0:
             return i18n("Cost center");
             break;
@@ -64,7 +65,7 @@ QVariant CostCenterModel::data(const QModelIndex& index, int role) const
 
     QVariant rc;
     const MyMoneyCostCenter& costCenter = static_cast<TreeItem<MyMoneyCostCenter>*>(index.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
         // make sure to never return any displayable text for the dummy entry
@@ -92,7 +93,7 @@ QVariant CostCenterModel::data(const QModelIndex& index, int role) const
 
 bool CostCenterModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 

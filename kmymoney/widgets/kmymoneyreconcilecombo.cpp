@@ -25,8 +25,8 @@
 
 using namespace eMyMoney;
 
-KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :
-    KMyMoneyMVCCombo(false, w)
+KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w)
+    : KMyMoneyMVCCombo(false, w)
 {
     // add the items in reverse order of appearance (see KMyMoneySelector::newItem() for details)
     addItem(i18n("Reconciled"), QVariant("R"));
@@ -48,7 +48,7 @@ void KMyMoneyReconcileCombo::slotSetState(const QString& state)
 
 void KMyMoneyReconcileCombo::removeDontCare()
 {
-    //Remove unknown state
+    // Remove unknown state
     removeItem(3);
 }
 

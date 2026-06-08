@@ -27,10 +27,10 @@
 #include "kmymoneyutils.h"
 #include "mymoneyexception.h"
 
-KScheduledView::KScheduledView(QWidget *parent) :
-    KMyMoneyViewBase(*new KScheduledViewPrivate(this), parent)
+KScheduledView::KScheduledView(QWidget* parent)
+    : KMyMoneyViewBase(*new KScheduledViewPrivate(this), parent)
 {
-    typedef void(KScheduledView::*KScheduledViewFunc)();
+    typedef void (KScheduledView::*KScheduledViewFunc)();
     // clang-format off
     const QHash<eMenu::Action, KScheduledViewFunc> actionConnections {
         {eMenu::Action::NewSchedule,        &KScheduledView::slotNewSchedule},
@@ -148,7 +148,7 @@ void KScheduledView::slotListViewCollapsed(const QModelIndex& idx)
     }
 }
 
-void KScheduledView::slotSetSelectedItem(const QItemSelection& selected, const QItemSelection& deselected )
+void KScheduledView::slotSetSelectedItem(const QItemSelection& selected, const QItemSelection& deselected)
 {
     Q_UNUSED(deselected)
     SelectedObjects selections;
@@ -206,7 +206,7 @@ void KScheduledView::slotDeleteSchedule()
             MyMoneyFile::instance()->removeSchedule(schedule);
             ft.commit();
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Unable to remove scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
         }
     }
@@ -245,7 +245,7 @@ void KScheduledView::slotDuplicateSchedule()
                 }
             }
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Unable to duplicate scheduled transaction: '%1'", schedule.name()), QString::fromLatin1(e.what()));
         }
     }

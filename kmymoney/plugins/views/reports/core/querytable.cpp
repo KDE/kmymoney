@@ -12,8 +12,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
 #include <QDebug>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,8 +43,7 @@
 
 constexpr QChar tagSeparator = QChar(QChar::ParagraphSeparator);
 
-namespace reports
-{
+namespace reports {
 
 // ****************************************************************************
 //
@@ -53,16 +52,17 @@ namespace reports
 // ****************************************************************************
 
 /**
-  * TODO
-  *
-  * - Collapse 2- & 3- groups when they are identical
-  * - Way more test cases (especially splits & transfers)
-  * - Option to collapse splits
-  * - Option to exclude transfers
-  *
-  */
+ * TODO
+ *
+ * - Collapse 2- & 3- groups when they are identical
+ * - Way more test cases (especially splits & transfers)
+ * - Option to collapse splits
+ * - Option to exclude transfers
+ *
+ */
 
-QueryTable::QueryTable(const MyMoneyReport& _report): ListTable(_report)
+QueryTable::QueryTable(const MyMoneyReport& _report)
+    : ListTable(_report)
 {
     // separated into its own method to allow debugging (setting breakpoints
     // directly in ctors somehow does not work for me (ipwizard))
@@ -243,10 +243,8 @@ void QueryTable::init()
             m_columns << ctBuys << ctSells << ctCapitalGain;
             m_subtotal << ctBuys << ctSells << ctCapitalGain;
             if (m_config.isShowingSTLTCapitalGains()) {
-                m_columns << ctBuysST << ctSellsST << ctCapitalGainST
-                          << ctBuysLT << ctSellsLT << ctCapitalGainLT;
-                m_subtotal << ctBuysST << ctSellsST << ctCapitalGainST
-                           << ctBuysLT << ctSellsLT << ctCapitalGainLT;
+                m_columns << ctBuysST << ctSellsST << ctCapitalGainST << ctBuysLT << ctSellsLT << ctCapitalGainLT;
+                m_subtotal << ctBuysST << ctSellsST << ctCapitalGainST << ctBuysLT << ctSellsLT << ctCapitalGainLT;
             }
             break;
         }
@@ -276,26 +274,26 @@ void QueryTable::constructTotalRows()
     // qSort places grand total at first positions, because it doesn't belong to any group
     // subtotals are placed in front of the topAccount rows
     const auto rows = m_rows.count();
-    for (int i = 0; i < rows-1; ++i) {
+    for (int i = 0; i < rows - 1; ++i) {
         // it should be unlikely that total row is at the top of rows, so...
         if ((m_rows.at(i)[ctRank] == FOREIGN_CURRENCY_TOTAL_RANK) || (m_rows.at(i)[ctTopAccount].isEmpty())) {
             // check if there are other entries than totals so moving makes sense
-            for (int j = i+1; j <= rows-1; ++j) {
+            for (int j = i + 1; j <= rows - 1; ++j) {
                 if ((m_rows.at(j)[ctRank] != FOREIGN_CURRENCY_TOTAL_RANK) && (!m_rows.at(j)[ctTopAccount].isEmpty())) {
-                    m_rows.move(i, rows - 1);                   // ...move it at the end
-                    --i;                                        // check the same slot again
+                    m_rows.move(i, rows - 1); // ...move it at the end
+                    --i; // check the same slot again
                     break;
                 }
             }
         } else if (m_rows.at(i)[ctRank] == BASE_CURRENCY_TOTAL_RANK) {
             // search last entry of same topAccount
-            auto last = i+1;
+            auto last = i + 1;
             while ((m_rows.at(i)[ctTopAccount] == m_rows.at(last)[ctTopAccount]) && (last < (rows - 1))) {
                 ++last;
             }
             // move subtotal to last entry
-            m_rows.move(i, last - 1);                       // ...move to end of entries
-            i = last-1;
+            m_rows.move(i, last - 1); // ...move to end of entries
+            i = last - 1;
         }
     }
 
@@ -319,7 +317,7 @@ void QueryTable::constructTotalRows()
     totalsValues.insert(ctRowsCount, MyMoneyMoney());
 
     // create total groups containing totals row for each group
-    totalGroups.append(totalsValues);  // prepend with extra group for grand total
+    totalGroups.append(totalsValues); // prepend with extra group for grand total
     for (int j = 0; j < groups.count(); ++j) {
         totalGroups.append(totalsValues);
     }
@@ -357,21 +355,21 @@ void QueryTable::constructTotalRows()
                 }
             }
         } else {
-            levelToClose = 0;   // all, we're done
+            levelToClose = 0; // all, we're done
         }
         // iterate over groups from the lowest to the highest to close groups
-        for (int i = groups.count() - 1; i >= levelToClose ; --i) {
+        for (int i = groups.count() - 1; i >= levelToClose; --i) {
             bool isMainCurrencyTotal = true;
             QMap<QString, QList<QMap<cellTypeE, MyMoneyMoney>>>::iterator currencyGrp = totalCurrency.begin();
             while (currencyGrp != totalCurrency.end()) {
-                if (!MyMoneyMoney((*currencyGrp).at(i + 1).value(ctRowsCount)).isZero()) {    // if no rows summed up, then no totals row
+                if (!MyMoneyMoney((*currencyGrp).at(i + 1).value(ctRowsCount)).isZero()) { // if no rows summed up, then no totals row
                     TableRow totalsRow;
                     // sum all subtotal values for higher groups (excluding grand total) and reset lowest group values
                     QMap<cellTypeE, MyMoneyMoney>::iterator upperGrp = (*currencyGrp)[i].begin();
                     QMap<cellTypeE, MyMoneyMoney>::iterator lowerGrp = (*currencyGrp)[i + 1].begin();
 
-                    while(upperGrp != (*currencyGrp)[i].end()) {
-                        totalsRow[lowerGrp.key()] = lowerGrp.value().toString();  // fill totals row with subtotal values...
+                    while (upperGrp != (*currencyGrp)[i].end()) {
+                        totalsRow[lowerGrp.key()] = lowerGrp.value().toString(); // fill totals row with subtotal values...
                         (*upperGrp) += (*lowerGrp);
                         //          (*lowerGrp) = MyMoneyMoney();
                         ++upperGrp;
@@ -413,7 +411,8 @@ void QueryTable::constructTotalRows()
                                 ? QString()
                                 : (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctEndingMarketValue)) / denominator).toString();
                         } else if (subtotal == ctPrice)
-                            totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(i + 1).value(ctPrice) / (*currencyGrp).at(i + 1).value(ctRowsCount)).toString();
+                            totalsRow[subtotal] =
+                                MyMoneyMoney((*currencyGrp).at(i + 1).value(ctPrice) / (*currencyGrp).at(i + 1).value(ctRowsCount)).toString();
                     }
 
                     // total values that aren't calculated here, but are taken untouched from external source, e.g. constructPerformanceRow
@@ -431,7 +430,7 @@ void QueryTable::constructTotalRows()
 
                     (*currencyGrp).replace(i + 1, totalsValues);
                     for (int j = 0; j < groups.count(); ++j) {
-                        totalsRow[groups.at(j)] = m_rows.at(iCurrentRow)[groups.at(j)];   // ...and identification
+                        totalsRow[groups.at(j)] = m_rows.at(iCurrentRow)[groups.at(j)]; // ...and identification
                     }
 
                     currencyID = currencyGrp.key();
@@ -446,7 +445,7 @@ void QueryTable::constructTotalRows()
                     totalsRow[ctDepth] = QString::number(i);
                     totalsRow.remove(ctRowsCount);
 
-                    m_rows.insert(iNextRow++, totalsRow);  // iCurrentRow and iNextRow can diverge here by more than one
+                    m_rows.insert(iNextRow++, totalsRow); // iCurrentRow and iNextRow can diverge here by more than one
                 }
                 ++currencyGrp;
             }
@@ -513,7 +512,7 @@ void QueryTable::constructTotalRows()
                 }
 
                 for (int j = 0; j < groups.count(); ++j) {
-                    totalsRow[groups.at(j)] = QString();      // no identification
+                    totalsRow[groups.at(j)] = QString(); // no identification
                 }
 
                 currencyID = currencyGrp.key();
@@ -533,9 +532,9 @@ void QueryTable::constructTotalRows()
                 }
                 ++currencyGrp;
             }
-            break;                                      // no use to loop further
+            break; // no use to loop further
         }
-        iCurrentRow = iNextRow;                       // iCurrent makes here a leap forward by at least one
+        iCurrentRow = iNextRow; // iCurrent makes here a leap forward by at least one
     }
 }
 
@@ -543,7 +542,7 @@ void QueryTable::constructTransactionTable()
 {
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    //make sure we have all subaccounts of investment accounts
+    // make sure we have all subaccounts of investment accounts
     includeInvestmentSubAccounts();
 
     MyMoneyReport report(m_config);
@@ -585,7 +584,7 @@ void QueryTable::constructTransactionTable()
     // support for opening and closing balances
     QMap<QString, MyMoneyAccount> accts;
 
-    //get all transactions for this report
+    // get all transactions for this report
     QList<MyMoneyTransaction> transactions;
     file->transactionList(transactions, report);
 
@@ -625,12 +624,12 @@ void QueryTable::constructTransactionTable()
             }
         };
 
-        qA[ctID] = qS[ctID] = (* it_transaction).id();
-        qA[ctEntryDate] = qS[ctEntryDate] = (* it_transaction).entryDate().toString(Qt::ISODate);
-        qA[ctPostDate] = qS[ctPostDate] = (* it_transaction).postDate().toString(Qt::ISODate);
-        qA[ctCommodity] = qS[ctCommodity] = (* it_transaction).commodity();
+        qA[ctID] = qS[ctID] = (*it_transaction).id();
+        qA[ctEntryDate] = qS[ctEntryDate] = (*it_transaction).entryDate().toString(Qt::ISODate);
+        qA[ctPostDate] = qS[ctPostDate] = (*it_transaction).postDate().toString(Qt::ISODate);
+        qA[ctCommodity] = qS[ctCommodity] = (*it_transaction).commodity();
 
-        pd = (* it_transaction).postDate();
+        pd = (*it_transaction).postDate();
         qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
         qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
 
@@ -663,7 +662,7 @@ void QueryTable::constructTransactionTable()
             if (splitAcc.isLoan())
                 myBegin = it_split;
 
-            if ((myBegin == splits.end()) && ! splitAcc.isIncomeExpense()) {
+            if ((myBegin == splits.end()) && !splitAcc.isIncomeExpense()) {
                 // continue if split references an unselected account
                 if (report.includesAccount(splitAcc.id())) {
                     myBegin = it_split;
@@ -711,7 +710,7 @@ void QueryTable::constructTransactionTable()
         }
 
         bool include_me = true;
-        bool transaction_text = false; //indicates whether a text should be considered as a match for the transaction or for a split only
+        bool transaction_text = false; // indicates whether a text should be considered as a match for the transaction or for a split only
         QString a_fullname;
         QString a_memo;
         int pass = 1;
@@ -723,7 +722,7 @@ void QueryTable::constructTransactionTable()
 
         do {
             MyMoneyMoney xr;
-            ReportAccount splitAcc((* it_split).accountId());
+            ReportAccount splitAcc((*it_split).accountId());
             qA[csID] = qS[csID] = (*it_split).id();
 
             QString splitCurrency;
@@ -734,10 +733,10 @@ void QueryTable::constructTransactionTable()
             if (it_split == myBegin)
                 myBeginCurrency = splitCurrency;
 
-            //get fraction for account
+            // get fraction for account
             int fraction = splitAcc.currency().smallestAccountFraction();
 
-            //use base currency fraction if not initialized
+            // use base currency fraction if not initialized
             if (fraction == -1)
                 fraction = file->baseCurrency().smallestAccountFraction();
 
@@ -746,22 +745,22 @@ void QueryTable::constructTransactionTable()
 
             const QList<QString> tagIdList = (*it_split).tagIdList();
 
-            //convert to base currency
+            // convert to base currency
             if (m_config.isConvertCurrency()) {
-                xr = xrMap.value(splitCurrency, xr);  // check if there is conversion rate to myBeginCurrency already stored...
-                if (xr == MyMoneyMoney())             // ...if not...
+                xr = xrMap.value(splitCurrency, xr); // check if there is conversion rate to myBeginCurrency already stored...
+                if (xr == MyMoneyMoney()) // ...if not...
                     xr = (*it_split).possiblyCalculatedPrice(); // ...take conversion rate to myBeginCurrency from split
-                else if (splitAcc.isInvest())         // if it's stock split...
+                else if (splitAcc.isInvest()) // if it's stock split...
                     xr *= (*it_split).possiblyCalculatedPrice(); // ...multiply it by stock price stored in split
 
-                if (myBeginCurrency != baseCurrency) {                             // myBeginCurrency can differ from baseCurrency...
+                if (myBeginCurrency != baseCurrency) { // myBeginCurrency can differ from baseCurrency...
                     MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency,
-                                                     (*it_transaction).postDate());  // ...so check conversion rate...
+                                                     (*it_transaction).postDate()); // ...so check conversion rate...
                     if (price.isValid()) {
-                        xr *= price.rate(baseCurrency);                                // ...and multiply it by current price...
+                        xr *= price.rate(baseCurrency); // ...and multiply it by current price...
                         qA[ctCurrency] = qS[ctCurrency] = baseCurrency;
                     } else
-                        qA[ctCurrency] = qS[ctCurrency] = myBeginCurrency;             // ...and set information about non-baseCurrency
+                        qA[ctCurrency] = qS[ctCurrency] = myBeginCurrency; // ...and set information about non-baseCurrency
                 }
             } else if (splitAcc.isInvest())
                 xr = (*it_split).possiblyCalculatedPrice();
@@ -789,8 +788,8 @@ void QueryTable::constructTransactionTable()
                 }
                 if (include_me)
                     // track accts that will need opening and closing balances
-                    //FIXME in some cases it will show the opening and closing
-                    //balances but no transactions if the splits are all filtered out -- asoliverez
+                    // FIXME in some cases it will show the opening and closing
+                    // balances but no transactions if the splits are all filtered out -- asoliverez
                     accts.insert(splitAcc.id(), splitAcc);
 
                 qA[ctAccount] = splitAcc.name();
@@ -827,13 +826,9 @@ void QueryTable::constructTransactionTable()
 
                 transaction_text = m_config.match((*it_split));
 
-                qA[ctInstitution] = institution.isEmpty()
-                                    ? i18n("No Institution")
-                                    : file->institution(institution).name();
+                qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
 
-                qA[ctPayee] = payee.isEmpty()
-                              ? i18n("[Empty Payee]")
-                              : file->payee(payee).name().simplified();
+                qA[ctPayee] = payee.isEmpty() ? i18n("[Empty Payee]") : file->payee(payee).name().simplified();
 
                 qA[ctReconcileDate] = (*it_split).reconcileDate().toString(Qt::ISODate);
                 qA[ctReconcileFlag] = KMyMoneyUtils::reconcileStateToString((*it_split).reconcileFlag(), true);
@@ -882,7 +877,9 @@ void QueryTable::constructTransactionTable()
                             case eMyMoney::Report::RowType::Tag:
                             case eMyMoney::Report::RowType::Payee:
                                 if (splitAcc.isAssetLiability()) {
-                                    qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
+                                    qA[ctValue] = ((*it_split).shares() * xr)
+                                                      .convert(fraction)
+                                                      .toString(); // needed for category reports, in case of multicurrency transaction it breaks it
                                     qA.addSourceLine(ctValue, __LINE__);
                                     // make sure we use the right currency of the category
                                     // (will be ignored when converting to base currency)
@@ -902,9 +899,7 @@ void QueryTable::constructTransactionTable()
                 }
 
             } else {
-
                 if (include_me) {
-
                     if (loan_special_case) {
                         MyMoneyMoney value = -(((*it_split).shares() * xr).convert(fraction));
 
@@ -940,12 +935,12 @@ void QueryTable::constructTransactionTable()
                     }
                     //--- default case includes all transaction details
                     else {
-                        //this is when the splits are going to be shown as children of the main split
+                        // this is when the splits are going to be shown as children of the main split
                         if ((splits.count() > 2) && use_summary) {
                             qA[ctValue].clear();
                             qA.addSourceLine(ctValue, __LINE__);
 
-                            //convert to lowest fraction
+                            // convert to lowest fraction
                             qA[ctSplit] = (-(*it_split).shares() * xr).convert(fraction).toString();
                             qA[ctRank] = SECONDARY_SPLIT_RANK;
                         } else {
@@ -979,37 +974,33 @@ void QueryTable::constructTransactionTable()
                             qA[ctRank] = FIRST_SPLIT_RANK;
                         }
 
-                        qA [ctMemo] = (*it_split).memo();
+                        qA[ctMemo] = (*it_split).memo();
 
                         if (report.isConvertCurrency())
                             qS[ctCurrency] = file->baseCurrency().id();
                         else
                             qS[ctCurrency] = splitAcc.currency().id();
 
-                        if (! splitAcc.isIncomeExpense()) {
-                            qA[ctCategory] = ((*it_split).shares().isNegative()) ?
-                                             i18n("Transfer from %1", splitAcc.fullName())
-                                             : i18n("Transfer to %1", splitAcc.fullName());
+                        if (!splitAcc.isIncomeExpense()) {
+                            qA[ctCategory] = ((*it_split).shares().isNegative()) ? i18n("Transfer from %1", splitAcc.fullName())
+                                                                                 : i18n("Transfer to %1", splitAcc.fullName());
                             qA[ctTopCategory] = splitAcc.topParentName();
                             qA[ctCategoryType] = i18n("Transfer");
                         } else {
-                            qA [ctCategory] = splitAcc.fullName();
-                            qA [ctTopCategory] = splitAcc.topParentName();
-                            qA [ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
+                            qA[ctCategory] = splitAcc.fullName();
+                            qA[ctTopCategory] = splitAcc.topParentName();
+                            qA[ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
                         }
 
                         if (splits.count() > 1) {
                             if (use_transfers || (splitAcc.isIncomeExpense() && m_config.includes(splitAcc))) {
-                                //if it matches the text of the main split of the transaction or
-                                //it matches this particular split, include it
-                                //otherwise, skip it
-                                //if the filter is "does not contain" exclude the split if it does not match
-                                //even it matches the whole split
-                                if ((m_config.isInvertingText() &&
-                                        m_config.match((*it_split)))
-                                        || (!m_config.isInvertingText()
-                                            && (transaction_text
-                                                || m_config.match((*it_split))))) {
+                                // if it matches the text of the main split of the transaction or
+                                // it matches this particular split, include it
+                                // otherwise, skip it
+                                // if the filter is "does not contain" exclude the split if it does not match
+                                // even it matches the whole split
+                                if ((m_config.isInvertingText() && m_config.match((*it_split)))
+                                    || (!m_config.isInvertingText() && (transaction_text || m_config.match((*it_split))))) {
                                     addRow(qA);
                                     if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
                                         m_containsNonBaseCurrency = true;
@@ -1023,9 +1014,9 @@ void QueryTable::constructTransactionTable()
                     }
                 }
 
-                if ((m_config.includes(splitAcc) && use_transfers &&
-                        !(splitAcc.isInvest() && include_me)) || splits.count() == 1) { // otherwise stock split is displayed twice in report
-                    if (! splitAcc.isIncomeExpense()) {
+                if ((m_config.includes(splitAcc) && use_transfers && !(splitAcc.isInvest() && include_me))
+                    || splits.count() == 1) { // otherwise stock split is displayed twice in report
+                    if (!splitAcc.isIncomeExpense()) {
                         // Add/Remove shares
                         if (splitAcc.isInvest()) {
                             qS[ctShares] = (*it_split).shares().convert(fraction).toString();
@@ -1042,7 +1033,7 @@ void QueryTable::constructTransactionTable()
                         }
                         qS.addSourceLine(ctRate, __LINE__);
 
-                        //multiply by currency and convert to lowest fraction
+                        // multiply by currency and convert to lowest fraction
                         qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
                         qS.addSourceLine(ctValue, __LINE__);
 
@@ -1056,35 +1047,24 @@ void QueryTable::constructTransactionTable()
                         qS[ctTopAccount] = splitAcc.topParentName();
 
                         if (splits.count() > 1) {
-                            qS[ctCategory] = ((*it_split).shares().isNegative())
-                                             ? i18n("Transfer to %1", a_fullname)
-                                             : i18n("Transfer from %1", a_fullname);
+                            qS[ctCategory] = ((*it_split).shares().isNegative()) ? i18n("Transfer to %1", a_fullname) : i18n("Transfer from %1", a_fullname);
                         } else if ((*it_split).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
                             qS[ctCategory] = i18n("*** UNASSIGNED ***");
                         }
-                        qS[ctInstitution] = institution.isEmpty()
-                                            ? i18n("No Institution")
-                                            : file->institution(institution).name();
+                        qS[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
 
-                        qS[ctMemo] = (*it_split).memo().isEmpty()
-                                     ? a_memo
-                                     : (*it_split).memo();
+                        qS[ctMemo] = (*it_split).memo().isEmpty() ? a_memo : (*it_split).memo();
 
                         qS[ctTag] = tagIdList.join(tagSeparator);
 
-                        qS[ctPayee] = payee.isEmpty()
-                                      ? qA[ctPayee]
-                                      : file->payee(payee).name().simplified();
+                        qS[ctPayee] = payee.isEmpty() ? qA[ctPayee] : file->payee(payee).name().simplified();
 
-                        //check the specific split against the filter for text and amount
-                        //TODO this should be done at the engine, but I have no clear idea how -- asoliverez
-                        //if the filter is "does not contain" exclude the split if it does not match
-                        //even it matches the whole split
-                        if ((m_config.isInvertingText() &&
-                                m_config.match((*it_split)))
-                                || (!m_config.isInvertingText()
-                                    && (transaction_text
-                                        || m_config.match((*it_split))))) {
+                        // check the specific split against the filter for text and amount
+                        // TODO this should be done at the engine, but I have no clear idea how -- asoliverez
+                        // if the filter is "does not contain" exclude the split if it does not match
+                        // even it matches the whole split
+                        if ((m_config.isInvertingText() && m_config.match((*it_split)))
+                            || (!m_config.isInvertingText() && (transaction_text || m_config.match((*it_split))))) {
                             addRow(qS);
                             qStack.clear();
                             if (!m_containsNonBaseCurrency && qS[ctCurrency] != file->baseCurrency().id()) {
@@ -1108,8 +1088,8 @@ void QueryTable::constructTransactionTable()
             if (splits.count() < 2)
                 break;
 
-            //check if there have been more passes than there are splits
-            //this is to prevent infinite loops in cases of data inconsistency -- asoliverez
+            // check if there have been more passes than there are splits
+            // this is to prevent infinite loops in cases of data inconsistency -- asoliverez
             ++pass;
             if (pass > splits.count())
                 break;
@@ -1165,10 +1145,10 @@ void QueryTable::constructTransactionTable()
 
         ReportAccount account(*it_account);
 
-        //get fraction for account
+        // get fraction for account
         int fraction = account.currency().smallestAccountFraction();
 
-        //use base currency fraction if not initialized
+        // use base currency fraction if not initialized
         if (fraction == -1)
             fraction = file->baseCurrency().smallestAccountFraction();
 
@@ -1181,7 +1161,7 @@ void QueryTable::constructTransactionTable()
         MyMoneyMoney startBalance, endBalance, startPrice, endPrice;
         MyMoneyMoney startShares, endShares;
 
-        //get price and convert currency if necessary
+        // get price and convert currency if necessary
         if (m_config.isConvertCurrency()) {
             startPrice = (account.deepCurrencyPrice(startDate) * account.baseCurrencyPrice(startDate)).reduce();
             endPrice = (account.deepCurrencyPrice(endDate) * account.baseCurrencyPrice(endDate)).reduce();
@@ -1192,12 +1172,12 @@ void QueryTable::constructTransactionTable()
         startShares = file->balance(account.id(), startDate);
         endShares = file->balance(account.id(), endDate);
 
-        //get starting and ending balances
+        // get starting and ending balances
         startBalance = startShares * startPrice;
         endBalance = endShares * endPrice;
 
-        //starting balance
-        // don't show currency if we're converting or if it's not foreign
+        // starting balance
+        //  don't show currency if we're converting or if it's not foreign
         if (m_config.isConvertCurrency())
             qA[ctCurrency] = file->baseCurrency().id();
         else
@@ -1226,7 +1206,7 @@ void QueryTable::constructTransactionTable()
         qA[ctID] = FIRST_ID_SORT;
         m_rows += qA;
 
-        //ending balance
+        // ending balance
         const auto endRate = m_config.isConvertCurrency() ? account.baseCurrencyPrice(endDate).reduce() : MyMoneyMoney::ONE;
         qA[ctPrice] = account.isInvest() ? account.deepCurrencyPrice(endDate).convertPrecision(account.currency().pricePrecision()).toString() : QString();
         qA.addSourceLine(ctPrice, __LINE__);
@@ -1335,7 +1315,7 @@ QString QueryTable::helperXIRR(const CashFlowList& all) const
 {
     try {
         return MyMoneyMoney(all.XIRR(), 10000).toString();
-    } catch (MyMoneyException &e) {
+    } catch (MyMoneyException& e) {
         qDebug() << e.what();
         all.dumpDebug();
         return QString();
@@ -1374,7 +1354,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
             termSeparator = termSeparator.addDays(-1);
         else if (termSeparator.dayOfWeek() == Qt::Sunday)
             termSeparator = termSeparator.addDays(-2);
-        if (startingDate.daysTo(endingDate) <= settlementPeriod)        // no days to check for
+        if (startingDate.daysTo(endingDate) <= settlementPeriod) // no days to check for
             return;
         termSeparator = termSeparator.addDays(-settlementPeriod);
         newEndingDate = endingDate.addDays(-settlementPeriod);
@@ -1383,7 +1363,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
     shList[BuysOfOwned] = file->balance(account.id(), newEndingDate); // get how many shares there are at the end of period
     MyMoneyMoney stashedBuysOfOwned = shList.at(BuysOfOwned);
 
-    bool reportedDateRange = true;  // flag marking sell transactions between startingDate and endingDate
+    bool reportedDateRange = true; // flag marking sell transactions between startingDate and endingDate
     report.setReportAllSplits(false);
     report.setConsiderCategory(true);
     report.clearAccountFilter();
@@ -1393,7 +1373,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
     do {
         QList<MyMoneyTransaction> transactions;
         file->transactionList(transactions, report);
-        for (QList<MyMoneyTransaction>::const_reverse_iterator  it_t = transactions.crbegin(); it_t != transactions.crend(); ++it_t) {
+        for (QList<MyMoneyTransaction>::const_reverse_iterator it_t = transactions.crbegin(); it_t != transactions.crend(); ++it_t) {
             MyMoneySplit shareSplit = (*it_t).splitByAccount(account.id());
             MyMoneySplit assetAccountSplit;
             QList<MyMoneySplit> feeSplits;
@@ -1404,10 +1384,10 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
             MyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
             QDate postDate = (*it_t).postDate();
             MyMoneyMoney price;
-            //get price for the day of the transaction if we have to calculate base currency
-            //we are using the value of the split which is in deep currency
+            // get price for the day of the transaction if we have to calculate base currency
+            // we are using the value of the split which is in deep currency
             if (m_config.isConvertCurrency())
-                price = account.baseCurrencyPrice(postDate); //we only need base currency because the value is in deep currency
+                price = account.baseCurrencyPrice(postDate); // we only need base currency because the value is in deep currency
             else
                 price = MyMoneyMoney::ONE;
             MyMoneyMoney value = assetAccountSplit.value() * price;
@@ -1419,7 +1399,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
                     shList[Buys] += shares;
                 }
 
-                if (shList.at(BuysOfOwned).isZero()) {                      // add sold shares
+                if (shList.at(BuysOfOwned).isZero()) { // add sold shares
                     if (shList.at(BuysOfSells) + shares > shList.at(Sells).abs()) { // add partially sold shares
                         MyMoneyMoney tempVal = (((shList.at(Sells).abs() - shList.at(BuysOfSells))) / shares) * value;
                         cfList[BuysOfSells].append(CashFlowListItem(postDate, tempVal));
@@ -1428,7 +1408,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
                             cfList[LongTermBuysOfSells].append(CashFlowListItem(postDate, tempVal));
                             shList[LongTermBuysOfSells] = shList.at(BuysOfSells);
                         }
-                    } else {                                                  // add wholly sold shares
+                    } else { // add wholly sold shares
                         cfList[BuysOfSells].append(CashFlowListItem(postDate, value));
                         shList[BuysOfSells] += shares;
                         if (isSTLT && postDate < termSeparator) {
@@ -1436,10 +1416,10 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
                             shList[LongTermBuysOfSells] += shares;
                         }
                     }
-                } else if (shList.at(BuysOfOwned) >= shares) {              // subtract not-sold shares
+                } else if (shList.at(BuysOfOwned) >= shares) { // subtract not-sold shares
                     shList[BuysOfOwned] -= shares;
                     cfList[BuysOfOwned].append(CashFlowListItem(postDate, value));
-                } else {                                                    // subtract partially not-sold shares
+                } else { // subtract partially not-sold shares
                     MyMoneyMoney tempVal = ((shares - shList.at(BuysOfOwned)) / shares) * value;
                     MyMoneyMoney tempVal2 = (shares - shList.at(BuysOfOwned));
                     cfList[BuysOfSells].append(CashFlowListItem(postDate, tempVal));
@@ -1454,25 +1434,25 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
             } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::SellShares && reportedDateRange) {
                 cfList[Sells].append(CashFlowListItem(postDate, value));
                 shList[Sells] += shares;
-            } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {          // shares variable is denominator of split ratio here
+            } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::SplitShares) { // shares variable is denominator of split ratio here
                 for (int i = Buys; i <= InvestmentValue::BuysOfOwned; ++i)
                     shList[i] /= shares;
-            } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::AddShares ||            // added shares, when sold give 100% capital gain
+            } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::AddShares || // added shares, when sold give 100% capital gain
                        transactionType == eMyMoney::Split::InvestmentTransactionType::ReinvestDividend) {
-                if (shList.at(BuysOfOwned).isZero()) {                            // add added/reinvested shares
+                if (shList.at(BuysOfOwned).isZero()) { // add added/reinvested shares
                     if (shList.at(BuysOfSells) + shares > shList.at(Sells).abs()) { // add partially added/reinvested shares
                         shList[BuysOfSells] = shList.at(Sells).abs();
                         if (postDate < termSeparator)
                             shList[LongTermBuysOfSells] = shList[BuysOfSells];
-                    } else {                                                        // add wholly added/reinvested shares
+                    } else { // add wholly added/reinvested shares
                         shList[BuysOfSells] += shares;
                         if (postDate < termSeparator)
                             shList[LongTermBuysOfSells] += shares;
                     }
-                } else if (shList.at(BuysOfOwned) >= shares) {                    // subtract not-added/not-reinvested shares
+                } else if (shList.at(BuysOfOwned) >= shares) { // subtract not-added/not-reinvested shares
                     shList[BuysOfOwned] -= shares;
                     cfList[BuysOfOwned].append(CashFlowListItem(postDate, value));
-                } else {                                                          // subtract partially not-added/not-reinvested shares
+                } else { // subtract partially not-added/not-reinvested shares
                     MyMoneyMoney tempVal = (shares - shList.at(BuysOfOwned));
                     shList[BuysOfSells] += tempVal;
                     if (postDate < termSeparator)
@@ -1488,11 +1468,12 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
                     value *= price;
                     cfList[ReinvestIncome].append(CashFlowListItem(postDate, -value));
                 }
-            } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::RemoveShares && reportedDateRange) // removed shares give no value in return so no capital gain on them
+            } else if (transactionType == eMyMoney::Split::InvestmentTransactionType::RemoveShares
+                       && reportedDateRange) // removed shares give no value in return so no capital gain on them
                 shList[Sells] += shares;
-            else if (transactionType == eMyMoney::Split::InvestmentTransactionType::Dividend || transactionType == eMyMoney::Split::InvestmentTransactionType::Yield)
+            else if (transactionType == eMyMoney::Split::InvestmentTransactionType::Dividend
+                     || transactionType == eMyMoney::Split::InvestmentTransactionType::Yield)
                 cfList[CashIncome].append(CashFlowListItem(postDate, value));
-
         }
         reportedDateRange = false;
         newEndingDate = newStartingDate;
@@ -1500,13 +1481,12 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
         newEndingDate = newEndingDate.addDays(-1);
         report.setDateFilter(newStartingDate, newEndingDate); // search for matching buy transactions year earlier
 
-    } while (
-        (
-            (report.investmentSum() == eMyMoney::Report::InvestmentSum::Owned && !shList[BuysOfOwned].isZero()) ||
-            (report.investmentSum() == eMyMoney::Report::InvestmentSum::Sold && !shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs()) ||
-            (report.investmentSum() == eMyMoney::Report::InvestmentSum::OwnedAndSold && (!shList[BuysOfOwned].isZero() || (!shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs())))
-        ) && account.openingDate() <= newEndingDate
-    );
+    } while (((report.investmentSum() == eMyMoney::Report::InvestmentSum::Owned && !shList[BuysOfOwned].isZero())
+              || (report.investmentSum() == eMyMoney::Report::InvestmentSum::Sold && !shList.at(Sells).isZero()
+                  && shList.at(Sells).abs() > shList.at(BuysOfSells).abs())
+              || (report.investmentSum() == eMyMoney::Report::InvestmentSum::OwnedAndSold
+                  && (!shList[BuysOfOwned].isZero() || (!shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs()))))
+             && account.openingDate() <= newEndingDate);
 
     // we've got buy value and no sell value of long-term shares, so get them
     if (isSTLT && !shList[LongTermBuysOfSells].isZero()) {
@@ -1529,7 +1509,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
             QDate postDate = transaction.postDate();
             MyMoneyMoney price;
             if (m_config.isConvertCurrency())
-                price = account.baseCurrencyPrice(postDate); //we only need base currency because the value is in deep currency
+                price = account.baseCurrencyPrice(postDate); // we only need base currency because the value is in deep currency
             else
                 price = MyMoneyMoney::ONE;
             MyMoneyMoney value = assetAccountSplit.value() * price;
@@ -1537,10 +1517,11 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
 
             if (transactionType == eMyMoney::Split::InvestmentTransactionType::SellShares) {
                 if ((shList.at(LongTermSellsOfBuys) + shares).abs() >= shList.at(LongTermBuysOfSells)) { // add partially sold long-term shares
-                    cfList[LongTermSellsOfBuys].append(CashFlowListItem(postDate, (shList.at(LongTermSellsOfBuys).abs() - shList.at(LongTermBuysOfSells)) / shares * value));
+                    cfList[LongTermSellsOfBuys].append(
+                        CashFlowListItem(postDate, (shList.at(LongTermSellsOfBuys).abs() - shList.at(LongTermBuysOfSells)) / shares * value));
                     shList[LongTermSellsOfBuys] = shList.at(LongTermBuysOfSells);
                     break;
-                } else {                      // add wholly sold long-term shares
+                } else { // add wholly sold long-term shares
                     cfList[LongTermSellsOfBuys].append(CashFlowListItem(postDate, value));
                     shList[LongTermSellsOfBuys] += shares;
                 }
@@ -1559,7 +1540,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
     return;
 }
 
-void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const
+void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList& all) const
 {
     MyMoneyReport report = m_config;
     QDate startingDate;
@@ -1568,7 +1549,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     startingDate = startingDate.addDays(-1);
 
     MyMoneyFile* file = MyMoneyFile::instance();
-    //get fraction depending on type of account
+    // get fraction depending on type of account
     int fraction = account.currency().smallestAccountFraction();
     // calculate starting market value
     MyMoneyMoney startingPrice;
@@ -1580,7 +1561,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     // file->balance is number of shares
     MyMoneyMoney startingMarketValue = file->balance(account.id(), startingDate) * startingPrice;
 
-    //convert to lowest fraction
+    // convert to lowest fraction
     startingMarketValue = startingMarketValue.convert(fraction);
 
     // calculate ending market value
@@ -1593,7 +1574,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     // file->balance is number of shares
     MyMoneyMoney endingMarketValue = file->balance((account).id(), endingDate) * endingPrice;
 
-    //convert to lowest fraction
+    // convert to lowest fraction
     endingMarketValue = endingMarketValue.convert(fraction);
 
     QList<CashFlowList> cfList;
@@ -1612,8 +1593,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         cashIncomeTotal = cfList.at(CashIncome).total();
         reinvestIncomeTotal = cfList.at(ReinvestIncome).total();
         startingMarketValue = MyMoneyMoney();
-        if (buysTotal.isZero() && sellsTotal.isZero() &&
-                cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero())
+        if (buysTotal.isZero() && sellsTotal.isZero() && cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero())
             return;
 
         all.append(cfList.at(BuysOfSells));
@@ -1701,8 +1681,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
     MyMoneyMoney longTermSellsOfBuys = cfList.at(LongTermSellsOfBuys).total();
 
     switch (m_config.investmentSum()) {
-    case eMyMoney::Report::InvestmentSum::Owned:
-    {
+    case eMyMoney::Report::InvestmentSum::Owned: {
         if (shList.at(BuysOfOwned).isZero())
             return;
 
@@ -1711,7 +1690,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
         QDate endingDate;
         report.validDateRange(startingDate, endingDate);
 
-        //get fraction depending on type of account
+        // get fraction depending on type of account
         int fraction = account.currency().smallestAccountFraction();
         MyMoneyMoney lastPrice;
 
@@ -1723,7 +1702,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
 
         MyMoneyMoney endingMarketValue = shList.at(BuysOfOwned) * lastPrice;
 
-        //convert to lowest fraction
+        // convert to lowest fraction
         endingMarketValue = endingMarketValue.convert(fraction);
 
         buysTotal = cfList.at(BuysOfOwned).total() - cfList.at(ReinvestIncome).total();
@@ -1745,8 +1724,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
         longTermBuysOfSellsTotal = cfList.at(LongTermBuysOfSells).total();
         longTermSellsOfBuys = cfList.at(LongTermSellsOfBuys).total();
         // check if there are any meaningful values before adding them to results
-        if (buysTotal.isZero() && sellsTotal.isZero() &&
-                longTermBuysOfSellsTotal.isZero() && longTermSellsOfBuys.isZero())
+        if (buysTotal.isZero() && sellsTotal.isZero() && longTermBuysOfSellsTotal.isZero() && longTermSellsOfBuys.isZero())
             return;
 
         result[ctBuys] = buysTotal.toString();
@@ -1770,7 +1748,7 @@ void QueryTable::constructAccountTable()
 {
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    //make sure we have all subaccounts of investment accounts
+    // make sure we have all subaccounts of investment accounts
     includeInvestmentSubAccounts();
 
     QMap<QString, QMap<QString, CashFlowList>> currencyCashFlow; // for total calculation
@@ -1803,16 +1781,18 @@ void QueryTable::constructAccountTable()
                         qaccountrow[ctCurrency] = account.currency().id();
 
                     if (!currencyCashFlow.value(qaccountrow.value(ctCurrency)).contains(qaccountrow.value(ctTopAccount)))
-                        currencyCashFlow[qaccountrow.value(ctCurrency)].insert(qaccountrow.value(ctTopAccount), accountCashflow);   // create cashflow for unknown account...
+                        currencyCashFlow[qaccountrow.value(ctCurrency)].insert(qaccountrow.value(ctTopAccount),
+                                                                               accountCashflow); // create cashflow for unknown account...
                     else
-                        currencyCashFlow[qaccountrow.value(ctCurrency)][qaccountrow.value(ctTopAccount)] += accountCashflow;        // ...or add cashflow for known account
+                        currencyCashFlow[qaccountrow.value(ctCurrency)][qaccountrow.value(ctTopAccount)] +=
+                            accountCashflow; // ...or add cashflow for known account
                 }
             } else if (queryColumns & eMyMoney::Report::QueryColumn::CapitalGain) {
                 constructCapitalGainRow(account, qaccountrow);
             } else {
-                //get fraction for account
-                int fraction = account.currency().smallestAccountFraction() != -1 ?
-                               account.currency().smallestAccountFraction() : file->baseCurrency().smallestAccountFraction();
+                // get fraction for account
+                int fraction = account.currency().smallestAccountFraction() != -1 ? account.currency().smallestAccountFraction()
+                                                                                  : file->baseCurrency().smallestAccountFraction();
 
                 MyMoneyMoney netprice = account.deepCurrencyPrice(m_config.toDate());
                 if (m_config.isConvertCurrency() && account.isForeignCurrency())
@@ -1866,8 +1846,8 @@ void QueryTable::constructAccountTable()
                 qtotalsrow[ctTopAccount] = topAccount.key();
                 qtotalsrow[ctExtendedInternalRateOfReturn] = helperXIRR(topAccount.value());
                 qtotalsrow[ctCurrency] = currencyAccGrp.key();
-                currencyGrandCashFlow[currencyAccGrp.key()] += topAccount.value();  // cumulative sum of cashflows of each topaccount
-                m_rows.append(qtotalsrow);            // rows aren't sorted yet, so no problem with adding them randomly at the end
+                currencyGrandCashFlow[currencyAccGrp.key()] += topAccount.value(); // cumulative sum of cashflows of each topaccount
+                m_rows.append(qtotalsrow); // rows aren't sorted yet, so no problem with adding them randomly at the end
                 if (!m_containsNonBaseCurrency && qtotalsrow[ctCurrency] != file->baseCurrency().id()) {
                     m_containsNonBaseCurrency = true;
                 }
@@ -1875,7 +1855,7 @@ void QueryTable::constructAccountTable()
             ++currencyAccGrp;
         }
         QMap<QString, CashFlowList>::iterator currencyGrp = currencyGrandCashFlow.begin();
-        qtotalsrow[ctTopAccount].clear();          // empty topaccount because it's grand cashflow
+        qtotalsrow[ctTopAccount].clear(); // empty topaccount because it's grand cashflow
         while (currencyGrp != currencyGrandCashFlow.end()) {
             qtotalsrow[ctExtendedInternalRateOfReturn] = helperXIRR(currencyGrp.value());
             qtotalsrow[ctCurrency] = currencyGrp.key();
@@ -1892,7 +1872,7 @@ void QueryTable::constructSplitsTable()
 {
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    //make sure we have all subaccounts of investment accounts
+    // make sure we have all subaccounts of investment accounts
     includeInvestmentSubAccounts();
 
     MyMoneyReport report(m_config);
@@ -1902,19 +1882,19 @@ void QueryTable::constructSplitsTable()
     // support for opening and closing balances
     QMap<QString, MyMoneyAccount> accts;
 
-    //get all transactions for this report
+    // get all transactions for this report
     QList<MyMoneyTransaction> transactions;
     file->transactionList(transactions, report);
     for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.cbegin(); it_transaction != transactions.cend(); ++it_transaction) {
         TableRow qA, qS;
         QDate pd;
 
-        qA[ctID] = qS[ctID] = (* it_transaction).id();
-        qA[ctEntryDate] = qS[ctEntryDate] = (* it_transaction).entryDate().toString(Qt::ISODate);
-        qA[ctPostDate] = qS[ctPostDate] = (* it_transaction).postDate().toString(Qt::ISODate);
-        qA[ctCommodity] = qS[ctCommodity] = (* it_transaction).commodity();
+        qA[ctID] = qS[ctID] = (*it_transaction).id();
+        qA[ctEntryDate] = qS[ctEntryDate] = (*it_transaction).entryDate().toString(Qt::ISODate);
+        qA[ctPostDate] = qS[ctPostDate] = (*it_transaction).postDate().toString(Qt::ISODate);
+        qA[ctCommodity] = qS[ctCommodity] = (*it_transaction).commodity();
 
-        pd = (* it_transaction).postDate();
+        pd = (*it_transaction).postDate();
         qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
         qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
 
@@ -1931,10 +1911,10 @@ void QueryTable::constructSplitsTable()
         // one transaction entry (qS) for each subsequent entry in the split.
         const QList<MyMoneySplit>& splits = (*it_transaction).splits();
         QList<MyMoneySplit>::const_iterator myBegin, it_split;
-        //S_end = splits.end();
+        // S_end = splits.end();
 
         for (it_split = splits.cbegin(), myBegin = splits.cend(); it_split != splits.cend(); ++it_split) {
-            ReportAccount splitAcc((* it_split).accountId());
+            ReportAccount splitAcc((*it_split).accountId());
             // always put split with a "stock" account if it exists
             if (splitAcc.isInvest())
                 break;
@@ -1943,7 +1923,7 @@ void QueryTable::constructSplitsTable()
             if (splitAcc.isLoan())
                 myBegin = it_split;
 
-            if ((myBegin == splits.end()) && ! splitAcc.isIncomeExpense()) {
+            if ((myBegin == splits.end()) && !splitAcc.isIncomeExpense()) {
                 myBegin = it_split;
             }
         }
@@ -1981,7 +1961,7 @@ void QueryTable::constructSplitsTable()
             myBegin = splits.begin();
         }
 
-        //the account of the beginning splits
+        // the account of the beginning splits
         ReportAccount myBeginAcc((*myBegin).accountId());
 
         QString a_fullname;
@@ -1990,12 +1970,12 @@ void QueryTable::constructSplitsTable()
 
         do {
             MyMoneyMoney xr;
-            ReportAccount splitAcc((* it_split).accountId());
+            ReportAccount splitAcc((*it_split).accountId());
 
-            //get fraction for account
+            // get fraction for account
             int fraction = splitAcc.currency().smallestAccountFraction();
 
-            //use base currency fraction if not initialized
+            // use base currency fraction if not initialized
             if (fraction == -1)
                 fraction = file->baseCurrency().smallestAccountFraction();
 
@@ -2044,20 +2024,16 @@ void QueryTable::constructSplitsTable()
             qA[ctAccountID] = splitAcc.id();
             qA[ctTopAccount] = splitAcc.topParentName();
 
-            qA[ctInstitution] = institution.isEmpty()
-                                ? i18n("No Institution")
-                                : file->institution(institution).name();
+            qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
 
-            //FIXME-ALEX Is this useless? Isn't constructSplitsTable called only for cashflow type report?
+            // FIXME-ALEX Is this useless? Isn't constructSplitsTable called only for cashflow type report?
             QString delimiter;
             for (const auto& tagId : qAsConst(tagIdList)) {
                 qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
                 delimiter = QLatin1Char(',');
             }
 
-            qA[ctPayee] = payee.isEmpty()
-                          ? i18n("[Empty Payee]")
-                          : file->payee(payee).name().simplified();
+            qA[ctPayee] = payee.isEmpty() ? i18n("[Empty Payee]") : file->payee(payee).name().simplified();
 
             qA[ctReconcileDate] = (*it_split).reconcileDate().toString(Qt::ISODate);
             qA[ctReconcileFlag] = KMyMoneyUtils::reconcileStateToString((*it_split).reconcileFlag(), true);
@@ -2080,43 +2056,41 @@ void QueryTable::constructSplitsTable()
                 qA.addSourceLine(ctValue, __LINE__);
                 qA[ctRank] = FIRST_SPLIT_RANK;
 
-                //fill in account information
-                if (! splitAcc.isIncomeExpense() && it_split != myBegin) {
-                    qA[ctAccount] = ((*it_split).shares().isNegative()) ?
-                                    i18n("Transfer to %1", myBeginAcc.fullName())
-                                    : i18n("Transfer from %1", myBeginAcc.fullName());
+                // fill in account information
+                if (!splitAcc.isIncomeExpense() && it_split != myBegin) {
+                    qA[ctAccount] =
+                        ((*it_split).shares().isNegative()) ? i18n("Transfer to %1", myBeginAcc.fullName()) : i18n("Transfer from %1", myBeginAcc.fullName());
                 } else if (it_split == myBegin) {
-                    //handle the main split
+                    // handle the main split
                     if ((splits.count() > 2)) {
-                        //if it is the main split and has multiple splits, note that
+                        // if it is the main split and has multiple splits, note that
                         qA[ctAccount] = i18n("[Split Transaction]");
                     } else {
-                        //fill the account name of the second split
+                        // fill the account name of the second split
                         QList<MyMoneySplit>::const_iterator tempSplit = splits.cbegin();
 
-                        //there are supposed to be only 2 splits if we ever get here
+                        // there are supposed to be only 2 splits if we ever get here
                         if (tempSplit == myBegin && splits.count() > 1)
                             ++tempSplit;
 
-                        //show the name of the category, or "transfer to/from" if it as an account
+                        // show the name of the category, or "transfer to/from" if it as an account
                         ReportAccount tempSplitAcc((*tempSplit).accountId());
-                        if (! tempSplitAcc.isIncomeExpense()) {
-                            qA[ctAccount] = ((*it_split).shares().isNegative()) ?
-                                            i18n("Transfer to %1", tempSplitAcc.fullName())
-                                            : i18n("Transfer from %1", tempSplitAcc.fullName());
+                        if (!tempSplitAcc.isIncomeExpense()) {
+                            qA[ctAccount] = ((*it_split).shares().isNegative()) ? i18n("Transfer to %1", tempSplitAcc.fullName())
+                                                                                : i18n("Transfer from %1", tempSplitAcc.fullName());
                         } else {
                             qA[ctAccount] = tempSplitAcc.fullName();
                         }
                     }
                 } else {
-                    //in any other case, fill in the account name of the main split
+                    // in any other case, fill in the account name of the main split
                     qA[ctAccount] = myBeginAcc.fullName();
                 }
 
-                //category data is always the one of the split
-                qA [ctCategory] = splitAcc.fullName();
-                qA [ctTopCategory] = splitAcc.topParentName();
-                qA [ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
+                // category data is always the one of the split
+                qA[ctCategory] = splitAcc.fullName();
+                qA[ctTopCategory] = splitAcc.topParentName();
+                qA[ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
 
                 m_rows += qA;
                 if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
@@ -2132,8 +2106,8 @@ void QueryTable::constructSplitsTable()
             if (it_split == splits.end())
                 it_split = splits.begin();
 
-            //check if there have been more passes than there are splits
-            //this is to prevent infinite loops in cases of data inconsistency -- asoliverez
+            // check if there have been more passes than there are splits
+            // this is to prevent infinite loops in cases of data inconsistency -- asoliverez
             ++pass;
             if (pass > splits.count())
                 break;
@@ -2174,12 +2148,12 @@ void QueryTable::constructSplitsTable()
     for (auto it_account = accts.cbegin(); it_account != accts.cend(); ++it_account) {
         TableRow qA;
 
-        ReportAccount account((* it_account));
+        ReportAccount account((*it_account));
 
-        //get fraction for account
+        // get fraction for account
         int fraction = account.currency().smallestAccountFraction();
 
-        //use base currency fraction if not initialized
+        // use base currency fraction if not initialized
         if (fraction == -1)
             fraction = file->baseCurrency().smallestAccountFraction();
 
@@ -2192,7 +2166,7 @@ void QueryTable::constructSplitsTable()
         MyMoneyMoney startBalance, endBalance, startPrice, endPrice;
         MyMoneyMoney startShares, endShares;
 
-        //get price and convert currency if necessary
+        // get price and convert currency if necessary
         if (m_config.isConvertCurrency()) {
             startPrice = (account.deepCurrencyPrice(startDate) * account.baseCurrencyPrice(startDate)).reduce();
             endPrice = (account.deepCurrencyPrice(endDate) * account.baseCurrencyPrice(endDate)).reduce();
@@ -2203,12 +2177,12 @@ void QueryTable::constructSplitsTable()
         startShares = file->balance(account.id(), startDate);
         endShares = file->balance(account.id(), endDate);
 
-        //get starting and ending balances
+        // get starting and ending balances
         startBalance = startShares * startPrice;
         endBalance = endShares * endPrice;
 
-        //starting balance
-        // don't show currency if we're converting or if it's not foreign
+        // starting balance
+        //  don't show currency if we're converting or if it's not foreign
         if (m_config.isConvertCurrency())
             qA[ctCurrency] = file->baseCurrency().id();
         else
@@ -2239,7 +2213,7 @@ void QueryTable::constructSplitsTable()
         m_rows += qA;
 
         qA[ctRank] = END_BALANCE_RANK;
-        //ending balance
+        // ending balance
         const auto endRate = m_config.isConvertCurrency() ? account.baseCurrencyPrice(endDate).reduce() : MyMoneyMoney::ONE;
         qA[ctPrice] = account.isInvest() ? account.deepCurrencyPrice(endDate).convertPrecision(pricePrecision).toString() : QString();
         qA.addSourceLine(ctPrice, __LINE__);
@@ -2259,7 +2233,5 @@ void QueryTable::constructSplitsTable()
         }
     }
 }
-
-
 
 }

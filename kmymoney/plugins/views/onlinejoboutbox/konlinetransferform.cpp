@@ -10,14 +10,14 @@
 
 #include <memory>
 
-#include <QList>
-#include <QDebug>
-#include <QPluginLoader>
 #include <QDateTime>
+#include <QDebug>
+#include <QList>
+#include <QPluginLoader>
 
-#include <KStandardAction>
 #include <KLocalizedString>
 #include <KPluginFactory>
+#include <KStandardAction>
 
 #include "accountsmodel.h"
 #include "icons.h"
@@ -32,11 +32,11 @@
 
 using namespace Icons;
 
-kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::kOnlineTransferForm),
-      m_onlineJobEditWidgets(QList<IonlineJobEdit*>()),
-      m_requiredFields(new KMandatoryFieldGroup(this))
+kOnlineTransferForm::kOnlineTransferForm(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::kOnlineTransferForm)
+    , m_onlineJobEditWidgets(QList<IonlineJobEdit*>())
+    , m_requiredFields(new KMandatoryFieldGroup(this))
 {
     ui->setupUi(this);
     ui->unsupportedIcon->setPixmap(Icons::get(Icon::DialogInformation).pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)));
@@ -70,7 +70,10 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
     connect(ui->buttonAbort, &QAbstractButton::clicked, this, &kOnlineTransferForm::reject);
     connect(ui->buttonSend, &QAbstractButton::clicked, this, &kOnlineTransferForm::sendJob);
     connect(ui->buttonEnque, &QAbstractButton::clicked, this, &kOnlineTransferForm::accept);
-    connect(m_requiredFields, static_cast<void (KMandatoryFieldGroup::*)(bool)>(&KMandatoryFieldGroup::stateChanged), this, &kOnlineTransferForm::enableSendAndEnqueue);
+    connect(m_requiredFields,
+            static_cast<void (KMandatoryFieldGroup::*)(bool)>(&KMandatoryFieldGroup::stateChanged),
+            this,
+            &kOnlineTransferForm::enableSendAndEnqueue);
 
     connect(ui->originAccount, &KMyMoneyAccountCombo::accountSelected, this, &kOnlineTransferForm::accountChanged);
 
@@ -92,7 +95,7 @@ void kOnlineTransferForm::loadOnlineJobEditPlugin(const onlineJobAdministration:
         }
 
         // Cast to KPluginFactory
-        KPluginFactory* pluginFactory = qobject_cast< KPluginFactory* >(plugin);
+        KPluginFactory* pluginFactory = qobject_cast<KPluginFactory*>(plugin);
         if (!pluginFactory) {
             qWarning() << "Could not create plugin factory for online job editor in file \"" << pluginDesc.fileName << "\".";
             return;
@@ -117,7 +120,7 @@ void kOnlineTransferForm::loadOnlineJobEditPlugin(const onlineJobAdministration:
 
         if (showWidget)
             showEditWidget(widget);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         qWarning("Error while loading a plugin (IonlineJobEdit).");
     }
 }
@@ -159,7 +162,7 @@ void kOnlineTransferForm::convertCurrentJob(const int& index)
 
 void kOnlineTransferForm::duplicateCurrentJob()
 {
-    IonlineJobEdit* widget = qobject_cast< IonlineJobEdit* >(ui->creditTransferEdit->widget());
+    IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
     if (widget == nullptr)
         return;
 
@@ -213,7 +216,7 @@ void kOnlineTransferForm::accountChanged()
     const QString accountId = ui->originAccount->getSelected();
     try {
         ui->orderAccountBalance->setValue(MyMoneyFile::instance()->balance(accountId));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         // @todo this can happen until the selection allows to select correct accounts only
         ui->orderAccountBalance->setText("");
     }

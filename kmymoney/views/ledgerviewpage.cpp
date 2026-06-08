@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "ledgerviewpage.h"
 #include "ledgerviewpage_p.h"
 
@@ -228,7 +227,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
     d->form = nullptr;
     d->hideFormReasons.insert(QLatin1String("FormAvailable"));
 
-    switch(acc.accountType()) {
+    switch (acc.accountType()) {
     case eMyMoney::Account::Type::Investment:
         columns = {
             JournalModel::Column::Invisible,
@@ -278,10 +277,10 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
         break;
     }
 
-    if(d->form) {
+    if (d->form) {
         d->hideFormReasons.erase(QLatin1String("FormAvailable"));
         // make sure we have a layout
-        if(!d->ui->m_formWidget->layout()) {
+        if (!d->ui->m_formWidget->layout()) {
             d->ui->m_formWidget->setLayout(new QHBoxLayout(d->ui->m_formWidget));
         }
         d->ui->m_formWidget->layout()->addWidget(d->form);
@@ -328,7 +327,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 
 void LedgerViewPage::showTransactionForm(bool show)
 {
-    if(show) {
+    if (show) {
         d->hideFormReasons.erase(QLatin1String("General"));
     } else {
         d->hideFormReasons.insert(QLatin1String("General"));

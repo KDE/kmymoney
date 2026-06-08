@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <config-kmymoney.h>
 #include "ofximporter.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -50,7 +50,7 @@
 
 // #define DEBUG_LIBOFX
 
-typedef enum  {
+typedef enum {
     UniqueIdUnknown = -1,
     UniqueIdOfx = 0,
     UniqueIdKMyMoney,
@@ -116,7 +116,6 @@ public:
     }
 };
 
-
 static UniqueTransactionIdSource defaultIdSource()
 {
     KSharedConfigPtr config = KSharedConfig::openConfig(QStringLiteral("kmymoney/ofximporterrc"));
@@ -125,16 +124,16 @@ static UniqueTransactionIdSource defaultIdSource()
     return (grp.readEntry<bool>("useOwnFITID", false) == true) ? UniqueIdKMyMoney : UniqueIdOfx;
 }
 
-
-OFXImporter::OFXImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args),
+OFXImporter::OFXImporter(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+    ,
     /*
      * the string in the line above must be the same as
      * X-KDE-PluginInfo-Name and the provider name assigned in
      * OfxImporterPlugin::onlineBankingSettings()
      */
-    KMyMoneyPlugin::ImporterPlugin(),
-    d(new Private)
+    KMyMoneyPlugin::ImporterPlugin()
+    , d(new Private)
 {
     Q_INIT_RESOURCE(ofximporter);
 
@@ -164,7 +163,7 @@ void OFXImporter::createActions()
 
 void OFXImporter::slotImportFile()
 {
-    QWidget * widget = new QWidget;
+    QWidget* widget = new QWidget;
     Ui_ImportOption* option = new Ui_ImportOption;
     option->setupUi(widget);
 
@@ -206,7 +205,6 @@ QStringList OFXImporter::formatMimeTypes() const
     return {"application/x-ofx", "application/vnd.intu.qfx", "application/x-ofc"};
 }
 
-
 bool OFXImporter::isMyFormat(const QString& filename) const
 {
     // filename is considered an Ofx file if it contains
@@ -220,7 +218,7 @@ bool OFXImporter::isMyFormat(const QString& filename) const
         QTextStream ts(&f);
 
         int lineCount = 20;
-        while (!ts.atEnd() && !result  && lineCount != 0) {
+        while (!ts.atEnd() && !result && lineCount != 0) {
             // get a line of data and remove all unnecessary whitespace chars
             QString line = ts.readLine().simplified();
             if (re.match(line).hasMatch()) {
@@ -259,7 +257,7 @@ bool OFXImporter::import(const QString& filename)
     // which crashes the application. So we avoid setting
     // them at all under Windows.
     ofx_STATUS_msg = true;
-    ofx_INFO_msg  = true;
+    ofx_INFO_msg = true;
     ofx_WARNING_msg = true;
     ofx_ERROR_msg = true;
 
@@ -344,9 +342,9 @@ QString OFXImporter::lastError() const
  * YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
  */
 
-int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * pv)
+int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void* pv)
 {
-//   kDebug(2) << Q_FUNC_INFO;
+    //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
     OFXImporter::Private* d = pofx->d;
@@ -366,7 +364,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     if (t.m_datePosted.isValid()) {
         // verify the transaction date is one we want
         if (t.m_datePosted < d->m_updateStartDate) {
-            //kDebug(0) << "discarding transaction dated" << qPrintable(t.m_datePosted.toString(Qt::ISODate));
+            // kDebug(0) << "discarding transaction dated" << qPrintable(t.m_datePosted.toString(Qt::ISODate));
             return 0;
         }
     }
@@ -462,12 +460,10 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         t.m_amount = MyMoneyMoney(data.amount, 1000);
 
         if (d->m_fixBuySellSignage) {
-            if (t.m_eAction == eMyMoney::Transaction::Action::Buy
-                    || t.m_eAction == eMyMoney::Transaction::Action::ReinvestDividend) {
+            if (t.m_eAction == eMyMoney::Transaction::Action::Buy || t.m_eAction == eMyMoney::Transaction::Action::ReinvestDividend) {
                 t.m_amount = -t.m_amount.abs();
                 t.m_shares = t.m_shares.abs();
-            }
-            else if (t.m_eAction == eMyMoney::Transaction::Action::Sell) {
+            } else if (t.m_eAction == eMyMoney::Transaction::Action::Sell) {
                 t.m_amount = t.m_amount.abs();
                 t.m_shares = -t.m_shares.abs();
             }
@@ -534,7 +530,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     bool validity[3] = {false, false, false};
     QStringList values;
     switch (d->m_preferName) {
-    case OFXImporter::Private::PreferId:  // PAYEEID
+    case OFXImporter::Private::PreferId: // PAYEEID
     default:
         validity[0] = data.payee_id_valid;
         validity[1] = data.name_valid;
@@ -544,7 +540,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         values += d->sanitizedString(data.memo);
         break;
 
-    case OFXImporter::Private::PreferName:  // NAME
+    case OFXImporter::Private::PreferName: // NAME
         validity[0] = data.name_valid;
         validity[1] = data.payee_id_valid;
         validity[2] = data.memo_valid;
@@ -553,7 +549,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         values += d->sanitizedString(data.memo);
         break;
 
-    case OFXImporter::Private::PreferMemo:  // MEMO
+    case OFXImporter::Private::PreferMemo: // MEMO
         validity[0] = data.memo_valid;
         validity[1] = data.payee_id_valid;
         validity[2] = data.name_valid;
@@ -589,7 +585,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     // the other one which is NOT blank.  (acejones)
     if (t.m_strPayee.isEmpty()) {
         // But we only create a payee for non-investment transactions (ipwizard)
-        if (! t.m_strMemo.isEmpty() && data.invtransactiontype_valid == false)
+        if (!t.m_strMemo.isEmpty() && data.invtransactiontype_valid == false)
             t.m_strPayee = t.m_strMemo;
     } else {
         if (t.m_strMemo.isEmpty())
@@ -667,14 +663,14 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     else
         s.m_listTransactions += t;
 
-//   kDebug(2) << Q_FUNC_INFO << "return 0 ";
+    //   kDebug(2) << Q_FUNC_INFO << "return 0 ";
 
     return 0;
 }
 
 int OFXImporter::ofxStatementCallback(struct OfxStatementData data, void* pv)
 {
-//   kDebug(2) << Q_FUNC_INFO;
+    //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
     OFXImporter::Private* d = pofx->d;
@@ -714,14 +710,14 @@ int OFXImporter::ofxStatementCallback(struct OfxStatementData data, void* pv)
         s.m_dateEnd = dt.date();
     }
 
-//   kDebug(2) << Q_FUNC_INFO << " return 0";
+    //   kDebug(2) << Q_FUNC_INFO << " return 0";
 
     return 0;
 }
 
-int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
+int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void* pv)
 {
-//   kDebug(2) << Q_FUNC_INFO;
+    //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
     OFXImporter::Private* d = pofx->d;
@@ -768,25 +764,25 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
 
     if (data.account_type_valid) {
         switch (data.account_type) {
-        case OfxAccountData::OFX_CHECKING :
+        case OfxAccountData::OFX_CHECKING:
             s.m_eType = eMyMoney::Statement::Type::Checkings;
             break;
-        case OfxAccountData::OFX_SAVINGS :
+        case OfxAccountData::OFX_SAVINGS:
             s.m_eType = eMyMoney::Statement::Type::Savings;
             break;
-        case OfxAccountData::OFX_MONEYMRKT :
+        case OfxAccountData::OFX_MONEYMRKT:
             s.m_eType = eMyMoney::Statement::Type::Investment;
             break;
-        case OfxAccountData::OFX_CREDITLINE :
+        case OfxAccountData::OFX_CREDITLINE:
             s.m_eType = eMyMoney::Statement::Type::CreditCard;
             break;
-        case OfxAccountData::OFX_CMA :
+        case OfxAccountData::OFX_CMA:
             s.m_eType = eMyMoney::Statement::Type::CreditCard;
             break;
-        case OfxAccountData::OFX_CREDITCARD :
+        case OfxAccountData::OFX_CREDITCARD:
             s.m_eType = eMyMoney::Statement::Type::CreditCard;
             break;
-        case OfxAccountData::OFX_INVESTMENT :
+        case OfxAccountData::OFX_INVESTMENT:
             s.m_eType = eMyMoney::Statement::Type::Investment;
             break;
         case OfxAccountData::OFX_401K:
@@ -832,9 +828,9 @@ int OFXImporter::ofxSecurityCallback(struct OfxSecurityData data, void* pv)
     return 0;
 }
 
-int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
+int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void* pv)
 {
-//   kDebug(2) << Q_FUNC_INFO;
+    //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
     OFXImporter::Private* d = pofx->d;
@@ -872,7 +868,7 @@ int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
         }
     }
 
-//   kDebug(2) << Q_FUNC_INFO << " return 0 ";
+    //   kDebug(2) << Q_FUNC_INFO << " return 0 ";
 
     return 0;
 }
@@ -995,42 +991,44 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                 d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource"), 0));
             QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
-            connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
+            connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString&)>(&OFXImporter::slotImportFile));
 
             // get the date of the earliest transaction that we are interested in
             // as well as other parameters from the settings for this account
             MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
             if (!settings.value(QStringLiteral("provider")).isEmpty()) {
                 if ((settings.value(QStringLiteral("kmmofx-todayMinus")).toInt() != 0) && !settings.value(QStringLiteral("kmmofx-numRequestDays")).isEmpty()) {
-                    //kDebug(0) << "start date = today minus";
+                    // kDebug(0) << "start date = today minus";
                     d->m_updateStartDate = QDate::currentDate().addDays(-settings.value(QStringLiteral("kmmofx-numRequestDays")).toInt());
-                } else if ((settings.value(QStringLiteral("kmmofx-lastUpdate")).toInt() != 0) && !acc.value(QStringLiteral("lastImportedTransactionDate")).isEmpty()) {
-                    //kDebug(0) << "start date = last update";
+                } else if ((settings.value(QStringLiteral("kmmofx-lastUpdate")).toInt() != 0)
+                           && !acc.value(QStringLiteral("lastImportedTransactionDate")).isEmpty()) {
+                    // kDebug(0) << "start date = last update";
                     d->m_updateStartDate = QDate::fromString(acc.value(QStringLiteral("lastImportedTransactionDate")), Qt::ISODate);
-                } else if ((settings.value(QStringLiteral("kmmofx-pickDate")).toInt() != 0) && !settings.value(QStringLiteral("kmmofx-specificDate")).isEmpty()) {
-                    //kDebug(0) << "start date = pick date";
+                } else if ((settings.value(QStringLiteral("kmmofx-pickDate")).toInt() != 0)
+                           && !settings.value(QStringLiteral("kmmofx-specificDate")).isEmpty()) {
+                    // kDebug(0) << "start date = pick date";
                     d->m_updateStartDate = QDate::fromString(settings.value(QStringLiteral("kmmofx-specificDate")));
-                }
-                else {
-                    //kDebug(0) << "start date = today - 2 months";
+                } else {
+                    // kDebug(0) << "start date = today - 2 months";
                     d->m_updateStartDate = QDate::currentDate().addMonths(-2);
                 }
 
                 d->m_invertAmount = settings.value("kmmofx-invertamount").toLower() == QStringLiteral("yes");
-                d->m_fixBuySellSignage= settings.value("kmmofx-fixbuysellsignage").toLower() == QStringLiteral("yes");
+                d->m_fixBuySellSignage = settings.value("kmmofx-fixbuysellsignage").toLower() == QStringLiteral("yes");
             }
             d->m_timestampOffset = settings.value("kmmofx-timestampOffset").toInt();
-            //kDebug(0) << "ofx plugin: account" << acc.name() << "earliest transaction date to process =" << qPrintable(d->m_updateStartDate.toString(Qt::ISODate));
+            // kDebug(0) << "ofx plugin: account" << acc.name() << "earliest transaction date to process =" <<
+            // qPrintable(d->m_updateStartDate.toString(Qt::ISODate));
 
             if (dlg->init())
                 dlg->exec();
             delete dlg;
 
             // reset the earliest-interesting-transaction date to the non-specific account setting
-            d->m_updateStartDate = QDate(1900,1,1);
+            d->m_updateStartDate = QDate(1900, 1, 1);
             d->m_timestampOffset = 0;
         }
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::information(nullptr, i18n("Error connecting to bank: %1", QString::fromLatin1(e.what())));
     }
 
@@ -1051,7 +1049,7 @@ void OFXImporter::slotImportFile(const QString& url)
     }
 }
 
-bool OFXImporter::storeStatements(const QList<MyMoneyStatement> &statements)
+bool OFXImporter::storeStatements(const QList<MyMoneyStatement>& statements)
 {
     if (statements.isEmpty())
         return true;
@@ -1061,14 +1059,14 @@ bool OFXImporter::storeStatements(const QList<MyMoneyStatement> &statements)
     // FIXME Deal with warnings/errors coming back from plugins
     /*if ( ofx.errors().count() )
     {
-      if ( KMessageBox::warningContinueCancelList(this,i18n("The following errors were returned from your bank"),ofx.errors(),i18n("OFX Errors")) == KMessageBox::Cancel )
-        abort = true;
+      if ( KMessageBox::warningContinueCancelList(this,i18n("The following errors were returned from your bank"),ofx.errors(),i18n("OFX Errors")) ==
+    KMessageBox::Cancel ) abort = true;
     }
 
     if ( ofx.warnings().count() )
     {
-      if ( KMessageBox::warningContinueCancelList(this,i18n("The following warnings were returned from your bank"),ofx.warnings(),i18n("OFX Warnings"),KStandardGuiItem::cont(),"ofxwarnings") == KMessageBox::Cancel )
-        abort = true;
+      if ( KMessageBox::warningContinueCancelList(this,i18n("The following warnings were returned from your bank"),ofx.warnings(),i18n("OFX
+    Warnings"),KStandardGuiItem::cont(),"ofxwarnings") == KMessageBox::Cancel ) abort = true;
     }*/
 
     qDebug("OfxImporterPlugin::storeStatements() with " QLIST_COUNT_FORMAT " statements called", statements.count());
@@ -1114,7 +1112,7 @@ void OFXImporter::addError(const QString& _msg)
 {
     d->m_errors += _msg;
 }
-const QStringList& OFXImporter::infos() const          // krazy:exclude=spelling
+const QStringList& OFXImporter::infos() const // krazy:exclude=spelling
 {
     return d->m_infos;
 }

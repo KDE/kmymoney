@@ -57,14 +57,13 @@ public:
         return true;
     }
 
-    KMyMoneyTextEdit *q_ptr;
+    KMyMoneyTextEdit* q_ptr;
     int m_maxLength;
     int m_maxLineLength;
     int m_maxLines;
     QString m_allowedChars;
     KMyMoneyTextEditHighlighter* m_highligther;
 };
-
 
 void KMyMoneyTextEdit::setReadOnly(bool readOnly)
 {
@@ -73,9 +72,9 @@ void KMyMoneyTextEdit::setReadOnly(bool readOnly)
 
 /* KMyMoneyTextEdit */
 
-KMyMoneyTextEdit::KMyMoneyTextEdit(QWidget* parent) :
-    KTextEdit(parent),
-    d_ptr(new KMyMoneyTextEditPrivate(this))
+KMyMoneyTextEdit::KMyMoneyTextEdit(QWidget* parent)
+    : KTextEdit(parent)
+    , d_ptr(new KMyMoneyTextEditPrivate(this))
 {
     Q_D(KMyMoneyTextEdit);
     setWordWrapMode(QTextOption::ManualWrap);

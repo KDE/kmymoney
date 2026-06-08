@@ -25,7 +25,7 @@ bool creditTransferSettingsBase::checkPurposeMaxLines(const QString& purpose) co
 validators::lengthStatus creditTransferSettingsBase::checkPurposeLength(const QString& purpose) const
 {
     const int length = purpose.length();
-    if (length > (_purposeMaxLines*_purposeLineLength))
+    if (length > (_purposeMaxLines * _purposeLineLength))
         return validators::tooLong;
     else if (length < _purposeMinLength)
         return validators::tooShort;
@@ -75,7 +75,9 @@ bool creditTransferSettingsBase::isBicMandatory(const QString& payeeIban, const 
      * Version 2.4
      * Date issued: 28 April 2016
      */
-    QStringList sepaParticipants{"FI", "AT", "PT", "BE", "BG", "ES", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GF", "DE", "GI", "GR", "GP", "GG", "HU", "IS", "IE", "IM", "IT", "JE", "LV", "LI", "LT", "LU", "PT", "MT", "MQ", "YT", "MC", "NL", "NO", "PL", "PT", "RE", "RO", "BL", "MF", "PM", "SM", "SK", "SI", "ES", "SE", "CH", "GB"};
+    QStringList sepaParticipants{"FI", "AT", "PT", "BE", "BG", "ES", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GF", "DE", "GI", "GR",
+                                 "GP", "GG", "HU", "IS", "IE", "IM", "IT", "JE", "LV", "LI", "LT", "LU", "PT", "MT", "MQ", "YT", "MC",
+                                 "NL", "NO", "PL", "PT", "RE", "RO", "BL", "MF", "PM", "SM", "SK", "SI", "ES", "SE", "CH", "GB"};
 
     // Starting form 1st February 2016 no bic is needed between sepa countries
     return (!sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive) || !sepaParticipants.contains(beneficaryCountryCode, Qt::CaseInsensitive));

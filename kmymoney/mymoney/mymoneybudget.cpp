@@ -23,17 +23,17 @@
 class MyMoneyBudget::PeriodGroupPrivate
 {
 public:
-    QDate         m_start;
-    MyMoneyMoney  m_amount;
+    QDate m_start;
+    MyMoneyMoney m_amount;
 };
 
-MyMoneyBudget::PeriodGroup::PeriodGroup() :
-    d_ptr(new PeriodGroupPrivate)
+MyMoneyBudget::PeriodGroup::PeriodGroup()
+    : d_ptr(new PeriodGroupPrivate)
 {
 }
 
-MyMoneyBudget::PeriodGroup::PeriodGroup(const MyMoneyBudget::PeriodGroup & other) :
-    d_ptr(new PeriodGroupPrivate(*other.d_func()))
+MyMoneyBudget::PeriodGroup::PeriodGroup(const MyMoneyBudget::PeriodGroup& other)
+    : d_ptr(new PeriodGroupPrivate(*other.d_func()))
 {
 }
 
@@ -52,7 +52,7 @@ QDate MyMoneyBudget::PeriodGroup::startDate() const
 void MyMoneyBudget::PeriodGroup::setStartDate(const QDate& start)
 {
     Q_D(PeriodGroup);
-    d->m_start  = start;
+    d->m_start = start;
 }
 
 MyMoneyMoney MyMoneyBudget::PeriodGroup::amount() const
@@ -67,15 +67,15 @@ void MyMoneyBudget::PeriodGroup::setAmount(const MyMoneyMoney& amount)
     d->m_amount = amount;
 }
 
-bool MyMoneyBudget::PeriodGroup::operator == (const PeriodGroup& right) const
+bool MyMoneyBudget::PeriodGroup::operator==(const PeriodGroup& right) const
 {
     Q_D(const PeriodGroup);
-    auto d2 = static_cast<const PeriodGroupPrivate *>(right.d_func());
+    auto d2 = static_cast<const PeriodGroupPrivate*>(right.d_func());
     return (d->m_start == d2->m_start && d->m_amount == d2->m_amount);
 }
 
-class MyMoneyBudget::AccountGroupPrivate {
-
+class MyMoneyBudget::AccountGroupPrivate
+{
 public:
     AccountGroupPrivate()
         : m_budgetlevel(eMyMoney::Budget::Level::None)
@@ -84,21 +84,20 @@ public:
     {
     }
 
-    QString                                   m_id;
-    eMyMoney::Budget::Level                   m_budgetlevel;
+    QString m_id;
+    eMyMoney::Budget::Level m_budgetlevel;
     eMyMoney::Account::Type m_budgetType;
-    bool                                      m_budgetsubaccounts;
-    QMap<QDate, MyMoneyBudget::PeriodGroup>   m_periods;
-
+    bool m_budgetsubaccounts;
+    QMap<QDate, MyMoneyBudget::PeriodGroup> m_periods;
 };
 
-MyMoneyBudget::AccountGroup::AccountGroup() :
-    d_ptr(new AccountGroupPrivate)
+MyMoneyBudget::AccountGroup::AccountGroup()
+    : d_ptr(new AccountGroupPrivate)
 {
 }
 
-MyMoneyBudget::AccountGroup::AccountGroup(const MyMoneyBudget::AccountGroup& other) :
-    d_ptr(new AccountGroupPrivate(*other.d_func()))
+MyMoneyBudget::AccountGroup::AccountGroup(const MyMoneyBudget::AccountGroup& other)
+    : d_ptr(new AccountGroupPrivate(*other.d_func()))
 {
 }
 
@@ -122,7 +121,7 @@ void MyMoneyBudget::AccountGroup::convertToMonthly()
     switch (d->m_budgetlevel) {
     case eMyMoney::Budget::Level::Yearly:
     case eMyMoney::Budget::Level::MonthByMonth:
-        period = d->m_periods.first();         // make him monthly
+        period = d->m_periods.first(); // make him monthly
         period.setAmount(balance() / MyMoneyMoney(12, 1));
         clearPeriods();
         addPeriod(period.startDate(), period);
@@ -141,7 +140,7 @@ void MyMoneyBudget::AccountGroup::convertToYearly()
     switch (d->m_budgetlevel) {
     case eMyMoney::Budget::Level::MonthByMonth:
     case eMyMoney::Budget::Level::Monthly:
-        period = d->m_periods.first();         // make him monthly
+        period = d->m_periods.first(); // make him monthly
         period.setAmount(totalBalance());
         clearPeriods();
         addPeriod(period.startDate(), period);
@@ -273,32 +272,32 @@ MyMoneyMoney MyMoneyBudget::AccountGroup::totalBalance() const
     return bal;
 }
 
-MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMoneyBudget::AccountGroup& right)
+MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator+=(const MyMoneyBudget::AccountGroup& right)
 {
     Q_D(AccountGroup);
-    auto d2 = static_cast<const AccountGroupPrivate *>(right.d_func());
+    auto d2 = static_cast<const AccountGroupPrivate*>(right.d_func());
     // in case the right side is empty, we're done
     if (d2->m_budgetlevel == eMyMoney::Budget::Level::None)
         return *this;
 
     MyMoneyBudget::AccountGroup r(right);
-    auto d3 = static_cast<const AccountGroupPrivate *>(r.d_func());
+    auto d3 = static_cast<const AccountGroupPrivate*>(r.d_func());
 
     // make both operands based on the same budget level
     if (d->m_budgetlevel != d3->m_budgetlevel) {
-        if (d->m_budgetlevel == eMyMoney::Budget::Level::Monthly) {        // my budget is monthly
-            if (d3->m_budgetlevel == eMyMoney::Budget::Level::Yearly) {     // his is yearly
+        if (d->m_budgetlevel == eMyMoney::Budget::Level::Monthly) { // my budget is monthly
+            if (d3->m_budgetlevel == eMyMoney::Budget::Level::Yearly) { // his is yearly
                 r.convertToMonthly();
             } else if (d3->m_budgetlevel == eMyMoney::Budget::Level::MonthByMonth) { // his is month by month
                 convertToMonthByMonth();
             }
-        } else if (d->m_budgetlevel == eMyMoney::Budget::Level::Yearly) {  // my budget is yearly
-            if (d3->m_budgetlevel == eMyMoney::Budget::Level::Monthly) {    // his is monthly
+        } else if (d->m_budgetlevel == eMyMoney::Budget::Level::Yearly) { // my budget is yearly
+            if (d3->m_budgetlevel == eMyMoney::Budget::Level::Monthly) { // his is monthly
                 r.convertToYearly();
             } else if (d3->m_budgetlevel == eMyMoney::Budget::Level::MonthByMonth) { // his is month by month
                 convertToMonthByMonth();
             }
-        } else if (d->m_budgetlevel == eMyMoney::Budget::Level::MonthByMonth) {  // my budget is month by month
+        } else if (d->m_budgetlevel == eMyMoney::Budget::Level::MonthByMonth) { // my budget is month by month
             r.convertToMonthByMonth();
         }
     }
@@ -343,37 +342,37 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
     return *this;
 }
 
-bool MyMoneyBudget::AccountGroup::operator == (const AccountGroup& right) const
+bool MyMoneyBudget::AccountGroup::operator==(const AccountGroup& right) const
 {
     Q_D(const AccountGroup);
-    auto d2 = static_cast<const AccountGroupPrivate *>(right.d_func());
+    auto d2 = static_cast<const AccountGroupPrivate*>(right.d_func());
     return (d->m_id == d2->m_id //
             && d->m_budgetlevel == d2->m_budgetlevel //
             && d->m_budgetsubaccounts == d2->m_budgetsubaccounts //
             && d->m_periods == d2->m_periods);
 }
 
-MyMoneyBudget::MyMoneyBudget() :
-    MyMoneyObject(*new MyMoneyBudgetPrivate)
+MyMoneyBudget::MyMoneyBudget()
+    : MyMoneyObject(*new MyMoneyBudgetPrivate)
 {
     Q_D(MyMoneyBudget);
     d->m_name = QStringLiteral("Unconfigured Budget");
 }
 
-MyMoneyBudget::MyMoneyBudget(const QString &id) :
-    MyMoneyObject(*new MyMoneyBudgetPrivate, id)
+MyMoneyBudget::MyMoneyBudget(const QString& id)
+    : MyMoneyObject(*new MyMoneyBudgetPrivate, id)
 {
     Q_D(MyMoneyBudget);
     d->m_name = QStringLiteral("Unconfigured Budget");
 }
 
-MyMoneyBudget::MyMoneyBudget(const QString& id, const MyMoneyBudget& other) :
-    MyMoneyObject(*new MyMoneyBudgetPrivate(*other.d_func()), id)
+MyMoneyBudget::MyMoneyBudget(const QString& id, const MyMoneyBudget& other)
+    : MyMoneyObject(*new MyMoneyBudgetPrivate(*other.d_func()), id)
 {
 }
 
-MyMoneyBudget::MyMoneyBudget(const MyMoneyBudget& other) :
-    MyMoneyObject(*new MyMoneyBudgetPrivate(*other.d_func()), other.id())
+MyMoneyBudget::MyMoneyBudget(const MyMoneyBudget& other)
+    : MyMoneyObject(*new MyMoneyBudgetPrivate(*other.d_func()), other.id())
 {
 }
 
@@ -381,10 +380,10 @@ MyMoneyBudget::~MyMoneyBudget()
 {
 }
 
-bool MyMoneyBudget::operator == (const MyMoneyBudget& right) const
+bool MyMoneyBudget::operator==(const MyMoneyBudget& right) const
 {
     Q_D(const MyMoneyBudget);
-    auto d2 = static_cast<const MyMoneyBudgetPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneyBudgetPrivate*>(right.d_func());
     // clang-format off
     return (MyMoneyObject::operator==(right)
             && (d->m_accounts.count() == d2->m_accounts.count())
@@ -430,7 +429,7 @@ void MyMoneyBudget::setAccount(const AccountGroup& account, const QString& id)
     d->clearReferences();
 }
 
-bool MyMoneyBudget::contains(const QString &id) const
+bool MyMoneyBudget::contains(const QString& id) const
 {
     Q_D(const MyMoneyBudget);
     return d->m_accounts.contains(id);

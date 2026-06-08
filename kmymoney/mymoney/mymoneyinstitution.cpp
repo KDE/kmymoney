@@ -28,15 +28,15 @@
 
 using namespace Icons;
 
-MyMoneyInstitution::MyMoneyInstitution() :
-    MyMoneyObject(*new MyMoneyInstitutionPrivate),
-    MyMoneyKeyValueContainer()
+MyMoneyInstitution::MyMoneyInstitution()
+    : MyMoneyObject(*new MyMoneyInstitutionPrivate)
+    , MyMoneyKeyValueContainer()
 {
 }
 
-MyMoneyInstitution::MyMoneyInstitution(const QString &id) :
-    MyMoneyObject(*new MyMoneyInstitutionPrivate, id),
-    MyMoneyKeyValueContainer()
+MyMoneyInstitution::MyMoneyInstitution(const QString& id)
+    : MyMoneyObject(*new MyMoneyInstitutionPrivate, id)
+    , MyMoneyKeyValueContainer()
 {
 }
 
@@ -46,9 +46,9 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
                                        const QString& postcode,
                                        const QString& telephone,
                                        const QString& manager,
-                                       const QString& bankcode) :
-    MyMoneyObject(*new MyMoneyInstitutionPrivate),
-    MyMoneyKeyValueContainer()
+                                       const QString& bankcode)
+    : MyMoneyObject(*new MyMoneyInstitutionPrivate)
+    , MyMoneyKeyValueContainer()
 {
     Q_D(MyMoneyInstitution);
     clearId();
@@ -61,15 +61,15 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
     d->m_bankcode = bankcode;
 }
 
-MyMoneyInstitution::MyMoneyInstitution(const MyMoneyInstitution& other) :
-    MyMoneyObject(*new MyMoneyInstitutionPrivate(*other.d_func()), other.id()),
-    MyMoneyKeyValueContainer(other)
+MyMoneyInstitution::MyMoneyInstitution(const MyMoneyInstitution& other)
+    : MyMoneyObject(*new MyMoneyInstitutionPrivate(*other.d_func()), other.id())
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
-MyMoneyInstitution::MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other) :
-    MyMoneyObject(*new MyMoneyInstitutionPrivate(*other.d_func()), id),
-    MyMoneyKeyValueContainer(other)
+MyMoneyInstitution::MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other)
+    : MyMoneyObject(*new MyMoneyInstitutionPrivate(*other.d_func()), id)
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
@@ -199,36 +199,35 @@ QStringList MyMoneyInstitution::accountList() const
 }
 
 /**
-  * This method returns the number of accounts known to
-  * this institution
-  * @return number of accounts
-  */
+ * This method returns the number of accounts known to
+ * this institution
+ * @return number of accounts
+ */
 unsigned int MyMoneyInstitution::accountCount() const
 {
     Q_D(const MyMoneyInstitution);
     return d->m_accountList.count();
 }
 
-bool MyMoneyInstitution::operator < (const MyMoneyInstitution& right) const
+bool MyMoneyInstitution::operator<(const MyMoneyInstitution& right) const
 {
     Q_D(const MyMoneyInstitution);
-    auto d2 = static_cast<const MyMoneyInstitutionPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneyInstitutionPrivate*>(right.d_func());
     return d->m_name < d2->m_name;
 }
 
-bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
+bool MyMoneyInstitution::operator==(const MyMoneyInstitution& right) const
 {
     Q_D(const MyMoneyInstitution);
-    auto d2 = static_cast<const MyMoneyInstitutionPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneyInstitutionPrivate*>(right.d_func());
     if (MyMoneyObject::operator==(right) //
-            && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
-            ((d->m_town.length() == 0 && d2->m_town.length() == 0) || (d->m_town == d2->m_town)) &&
-            ((d->m_street.length() == 0 && d2->m_street.length() == 0) || (d->m_street == d2->m_street)) &&
-            ((d->m_postcode.length() == 0 && d2->m_postcode.length() == 0) || (d->m_postcode == d2->m_postcode)) &&
-            ((d->m_telephone.length() == 0 && d2->m_telephone.length() == 0) || (d->m_telephone == d2->m_telephone)) &&
-            ((d->m_bankcode.length() == 0 && d2->m_bankcode.length() == 0) || (d->m_bankcode == d2->m_bankcode)) &&
-            ((d->m_manager.length() == 0 && d2->m_manager.length() == 0) || (d->m_manager == d2->m_manager)) &&
-            (d->m_accountList == d2->m_accountList)) {
+        && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name))
+        && ((d->m_town.length() == 0 && d2->m_town.length() == 0) || (d->m_town == d2->m_town))
+        && ((d->m_street.length() == 0 && d2->m_street.length() == 0) || (d->m_street == d2->m_street))
+        && ((d->m_postcode.length() == 0 && d2->m_postcode.length() == 0) || (d->m_postcode == d2->m_postcode))
+        && ((d->m_telephone.length() == 0 && d2->m_telephone.length() == 0) || (d->m_telephone == d2->m_telephone))
+        && ((d->m_bankcode.length() == 0 && d2->m_bankcode.length() == 0) || (d->m_bankcode == d2->m_bankcode))
+        && ((d->m_manager.length() == 0 && d2->m_manager.length() == 0) || (d->m_manager == d2->m_manager)) && (d->m_accountList == d2->m_accountList)) {
         return true;
     } else
         return false;

@@ -19,9 +19,9 @@
 
 #include "ui_checkingstatementinfowizardpage.h"
 
-CheckingStatementInfoWizardPage::CheckingStatementInfoWizardPage(QWidget *parent) :
-    QWizardPage(parent),
-    ui(new Ui::CheckingStatementInfoWizardPage)
+CheckingStatementInfoWizardPage::CheckingStatementInfoWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::CheckingStatementInfoWizardPage)
 {
     ui->setupUi(this);
     ui->m_statementDate->setDate(QDate::currentDate());

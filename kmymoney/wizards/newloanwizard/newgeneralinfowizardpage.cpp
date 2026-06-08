@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_newgeneralinfowizardpage.h"
 
-NewGeneralInfoWizardPage::NewGeneralInfoWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::NewGeneralInfoWizardPage)
+NewGeneralInfoWizardPage::NewGeneralInfoWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::NewGeneralInfoWizardPage)
 {
     ui->setupUi(this);
 }

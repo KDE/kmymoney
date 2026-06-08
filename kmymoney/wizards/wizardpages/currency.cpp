@@ -17,16 +17,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_currency.h"
 #include "mymoneysecurity.h"
+#include "ui_currency.h"
 
-Currency::Currency(QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::Currency)
+Currency::Currency(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::Currency)
 {
     ui->setupUi(this);
     ui->m_currencyList->setAllColumnsShowFocus(true);
-    ui->m_currencyList->setColumnWidth(0, size().width()*6 / 10);
+    ui->m_currencyList->setColumnWidth(0, size().width() * 6 / 10);
 }
 
 Currency::~Currency()

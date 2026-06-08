@@ -15,22 +15,22 @@
 
 #include "ui_assetaccountwizardpage.h"
 
-#include <KLocalizedString>
 #include <KGuiItem>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "icons/icons.h"
 #include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
-#include "icons/icons.h"
 
 using namespace Icons;
 
-AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::AssetAccountWizardPage)
+AssetAccountWizardPage::AssetAccountWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::AssetAccountWizardPage)
 {
     ui->setupUi(this);
 
@@ -40,8 +40,8 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
     registerField("paymentDate", ui->m_paymentDate, "date");
     registerField("assetAccountEdit", ui->m_assetAccountEdit, "selectedItems");
 
-    connect(ui->m_assetAccountEdit,  &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
-    connect(ui->m_dontCreatePayoutCheckBox,  &QAbstractButton::clicked, this, &QWizardPage::completeChanged);
+    connect(ui->m_assetAccountEdit, &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
+    connect(ui->m_dontCreatePayoutCheckBox, &QAbstractButton::clicked, this, &QWizardPage::completeChanged);
 
     // load button icons
     KGuiItem createAssetButtonItem(i18n("&Create..."),
@@ -75,8 +75,7 @@ bool AssetAccountWizardPage::isComplete() const
         ui->m_assetAccountEdit->setEnabled(true);
         ui->m_paymentDate->setEnabled(true);
         ui->m_createNewAssetButton->setEnabled(true);
-        if (!ui->m_assetAccountEdit->selectedItems().isEmpty()
-                && ui->m_paymentDate->date().isValid())
+        if (!ui->m_assetAccountEdit->selectedItems().isEmpty() && ui->m_paymentDate->date().isValid())
             return true;
     }
     return false;

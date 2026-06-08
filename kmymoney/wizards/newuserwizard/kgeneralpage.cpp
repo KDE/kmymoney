@@ -21,36 +21,35 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "userinfo.h"
 #include "ui_userinfo.h"
+#include "userinfo.h"
 
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
 
-#include "mymoneycontact.h"
 #include "kcurrencypage.h"
+#include "mymoneycontact.h"
 
 class KMyMoneyWizardPage;
 
-namespace NewUserWizard
-{
+namespace NewUserWizard {
 class GeneralPagePrivate : public WizardPagePrivate<Wizard>
 {
     Q_DISABLE_COPY(GeneralPagePrivate)
 
 public:
-    GeneralPagePrivate(QObject* parent) :
-        WizardPagePrivate<Wizard>(parent),
-        m_contact(nullptr)
+    GeneralPagePrivate(QObject* parent)
+        : WizardPagePrivate<Wizard>(parent)
+        , m_contact(nullptr)
     {
     }
 
-    MyMoneyContact *m_contact;
+    MyMoneyContact* m_contact;
 };
 
-GeneralPage::GeneralPage(Wizard* wizard) :
-    UserInfo(wizard),
-    WizardPage<Wizard>(*new GeneralPagePrivate(wizard), stepCount++, this, wizard)
+GeneralPage::GeneralPage(Wizard* wizard)
+    : UserInfo(wizard)
+    , WizardPage<Wizard>(*new GeneralPagePrivate(wizard), stepCount++, this, wizard)
 {
     Q_D(GeneralPage);
     d->m_contact = new MyMoneyContact(this);
@@ -68,14 +67,15 @@ void GeneralPage::enterPage()
     ui->m_userNameEdit->setFocus();
 }
 
-
 void GeneralPage::slotLoadFromAddressBook()
 {
     Q_D(GeneralPage);
     ui->m_userNameEdit->setText(d->m_contact->ownerFullName());
     ui->m_emailEdit->setText(d->m_contact->ownerEmail());
     if (ui->m_emailEdit->text().isEmpty()) {
-        KMessageBox::error(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
+        KMessageBox::error(this,
+                           i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."),
+                           i18n("Address book import"));
         return;
     }
     ui->m_loadAddressButton->setEnabled(false);
@@ -83,7 +83,7 @@ void GeneralPage::slotLoadFromAddressBook()
     d->m_contact->fetchContact(ui->m_emailEdit->text());
 }
 
-void GeneralPage::slotContactFetched(const ContactData &identity)
+void GeneralPage::slotContactFetched(const ContactData& identity)
 {
     ui->m_loadAddressButton->setEnabled(true);
     if (identity.email.isEmpty())

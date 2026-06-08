@@ -12,10 +12,10 @@
 // QT Includes
 
 #include <QCheckBox>
-#include <QUrl>
-#include <QPushButton>
-#include <QIcon>
 #include <QFileDialog>
+#include <QIcon>
+#include <QPushButton>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,9 +34,9 @@
 
 using namespace Icons;
 
-KBackupDlg::KBackupDlg(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::KBackupDlg)
+KBackupDlg::KBackupDlg(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KBackupDlg)
 {
     ui->setupUi(this);
     readConfig();

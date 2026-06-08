@@ -13,8 +13,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KGuiItem>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -29,9 +29,9 @@
 #include "mymoneysecurity.h"
 #include "splitdialog.h"
 
-AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::AdditionalFeesWizardPage)
+AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::AdditionalFeesWizardPage)
 {
     ui->setupUi(this);
 

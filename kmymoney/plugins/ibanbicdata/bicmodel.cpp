@@ -6,12 +6,12 @@
 #include "bicmodel.h"
 
 #include <KServiceTypeTrader>
-#include <QSqlQuery>
+#include <QDebug>
 #include <QSqlError>
+#include <QSqlQuery>
+#include <QStandardPaths>
 #include <QString>
 #include <QStringList>
-#include <QStandardPaths>
-#include <QDebug>
 
 /**
  * @warning At the moment the completion may fail if bicModel was created in more than one thread
@@ -23,7 +23,6 @@
 bicModel::bicModel(QObject* parent)
     : QSqlQueryModel(parent)
 {
-
     QSqlDatabase db = QSqlDatabase::database("bicModel", true);
     // Save if the database was opened before
     bool attachDatabases = false;
@@ -42,9 +41,7 @@ bicModel::bicModel(QObject* parent)
     QSqlQuery query(db);
 
     // Get services which support iban2bic and have a database entry
-    KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
-                              QString("exist [X-KMyMoney-Bankdata-Database]")
-                                                               );
+    KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData", QString("exist [X-KMyMoney-Bankdata-Database]"));
 
     if (services.isEmpty()) {
         // Set a valid query

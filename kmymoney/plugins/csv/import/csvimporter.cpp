@@ -6,8 +6,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <config-kmymoney.h>
 #include "csvimporter.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -17,9 +17,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes

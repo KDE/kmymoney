@@ -28,8 +28,7 @@
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 
-struct InstitutionsModel::Private
-{
+struct InstitutionsModel::Private {
     Q_DECLARE_PUBLIC(InstitutionsModel)
 
     Private(InstitutionsModel* qq, QObject* parent)
@@ -71,12 +70,11 @@ struct InstitutionsModel::Private
         return value;
     }
 
-    InstitutionsModel*  q_ptr;
-    QObject*            parentObject;
-    AccountsModel*      accountsModel;
-    QColor              positiveScheme;
-    QColor              negativeScheme;
-
+    InstitutionsModel* q_ptr;
+    QObject* parentObject;
+    AccountsModel* accountsModel;
+    QColor positiveScheme;
+    QColor negativeScheme;
 };
 
 InstitutionsModel::InstitutionsModel(AccountsModel* accountsModel, QObject* parent, QUndoStack* undoStack)
@@ -120,16 +118,15 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
         return d->accountsModel->data(subIdx, role);
     }
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case AccountsModel::Column::AccountName:
             // make sure to never return any displayable text for the dummy entry
             return institution.name();
 
-        case AccountsModel::Column::TotalPostedValue:
-        {
+        case AccountsModel::Column::TotalPostedValue: {
             const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
             return d->institutionValue(idx).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
         }
@@ -145,8 +142,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
         }
         break;
 
-    case Qt::FontRole:
-    {
+    case Qt::FontRole: {
         QFont font;
         // display top level account groups in bold
         if (!idx.parent().isValid()) {
@@ -168,7 +164,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
         return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
 
     case Qt::ForegroundRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case AccountsModel::Column::TotalPostedValue:
             return d->institutionValue(idx).isNegative() ? d->negativeScheme : d->positiveScheme;
         }
@@ -201,7 +197,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
 
 bool InstitutionsModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 
@@ -211,7 +207,7 @@ bool InstitutionsModel::setData(const QModelIndex& index, const QVariant& value,
 
 void InstitutionsModel::setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color)
 {
-    switch(scheme) {
+    switch (scheme) {
     case AccountsModel::Positive:
         d->positiveScheme = color;
         break;
@@ -220,7 +216,6 @@ void InstitutionsModel::setColorScheme(AccountsModel::ColorScheme scheme, const 
         break;
     }
 }
-
 
 void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 {
@@ -233,7 +228,7 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 
     int row = 0;
     // insert one more used for the no institution item
-    insertRows(0, list.count()+1);
+    insertRows(0, list.count() + 1);
     MyMoneyInstitution noBank((QString()), MyMoneyInstitution());
     noBank.setName(i18n("Accounts with no institution assigned"));
     static_cast<TreeItem<MyMoneyInstitution>*>(index(0, 0).internalPointer())->dataRef() = noBank;

@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <config-kmymoney.h>
 #include "kmymoneyview.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // Std Includes
@@ -16,13 +16,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QByteArray>
 #include <QFile>
+#include <QIcon>
 #include <QLayout>
 #include <QList>
-#include <QByteArray>
-#include <QUrl>
-#include <QIcon>
 #include <QTemporaryFile>
+#include <QUrl>
 #include <QUrlQuery>
 
 // ----------------------------------------------------------------------------
@@ -196,9 +196,6 @@ public:
     // clang-format on
 };
 
-
-
-
 KMyMoneyView::KMyMoneyView()
     : KPageWidget(nullptr)
     , d_ptr(new KMyMoneyViewPrivate(this))
@@ -210,7 +207,7 @@ KMyMoneyView::KMyMoneyView()
     // the main window's size is also increased to fit the header that is shown for a sort
     // period - reading the code in kpagewidget.cpp we know that the header should be at (1,1)
     // in a grid layout so if we find it there remove it for good to avoid the described issues
-    QGridLayout* gridLayout =  qobject_cast<QGridLayout*>(layout());
+    QGridLayout* gridLayout = qobject_cast<QGridLayout*>(layout());
     if (gridLayout) {
         QLayoutItem* headerItem = gridLayout->itemAtPosition(1, 1);
         // make sure that we remove only the header - we avoid surprises if the header is not at (1,1) in the layout
@@ -330,7 +327,7 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
     auto isViewInserted = false;
     for (auto i = (int)idView; i < (int)View::None; ++i) {
         if (d->viewFrames.contains((View)i)) {
-            d->viewFrames[idView] = d->m_model->insertPage(d->viewFrames[(View)i],view, adjustedName);
+            d->viewFrames[idView] = d->m_model->insertPage(d->viewFrames[(View)i], view, adjustedName);
             isViewInserted = true;
             break;
         }
@@ -553,33 +550,45 @@ void KMyMoneyView::slotSettingsChanged()
     Q_EMIT settingsChanged();
 }
 
-QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
+QHash<eMenu::Action, QAction*> KMyMoneyView::actionsToBeConnected()
 {
     using namespace eMenu;
     // add fast switching of main views through Ctrl + NUM_X
     struct pageInfo {
-        Action           action;
-        View             view;
-        QString          text;
-        QKeySequence     shortcut = QKeySequence();
+        Action action;
+        View view;
+        QString text;
+        QKeySequence shortcut = QKeySequence();
     };
-    const QVector<pageInfo> pageInfos {
-        {Action::ShowHomeView,            View::Home,               i18n("Show home page"),                   Qt::CTRL | Qt::Key_1},
-        {Action::ShowInstitutionsView,    View::Institutions,       i18n("Show institutions page"),           Qt::CTRL | Qt::Key_2},
-        {Action::ShowAccountsView,        View::Accounts,           i18n("Show accounts page"),               Qt::CTRL | Qt::Key_3},
-        {Action::ShowSchedulesView,       View::Schedules,          i18n("Show scheduled transactions page"), Qt::CTRL | Qt::Key_4},
-        {Action::ShowCategoriesView,      View::Categories,         i18n("Show categories page"),             Qt::CTRL | Qt::Key_5},
-        {Action::ShowTagsView,            View::Tags,               i18n("Show tags page"),                   },
-        {Action::ShowPayeesView,          View::Payees,             i18n("Show payees page"),                 Qt::CTRL | Qt::Key_6},
-        {Action::ShowLedgersView,         View::NewLedgers,         i18n("Show ledgers page"),                Qt::CTRL | Qt::Key_7},
-        {Action::ShowInvestmentsView,     View::Investments,        i18n("Show investments page"),            Qt::CTRL | Qt::Key_8},
-        {Action::ShowReportsView,         View::Reports,            i18n("Show reports page"),                Qt::CTRL | Qt::Key_9},
-        {Action::ShowBudgetView,          View::Budget,             i18n("Show budget page"),                 },
-        {Action::ShowForecastView,        View::Forecast,           i18n("Show forecast page"),               },
-        {Action::ShowOnlineJobOutboxView, View::OnlineJobOutbox,    i18n("Show outbox page")                  },
+    const QVector<pageInfo> pageInfos{
+        {Action::ShowHomeView, View::Home, i18n("Show home page"), Qt::CTRL | Qt::Key_1},
+        {Action::ShowInstitutionsView, View::Institutions, i18n("Show institutions page"), Qt::CTRL | Qt::Key_2},
+        {Action::ShowAccountsView, View::Accounts, i18n("Show accounts page"), Qt::CTRL | Qt::Key_3},
+        {Action::ShowSchedulesView, View::Schedules, i18n("Show scheduled transactions page"), Qt::CTRL | Qt::Key_4},
+        {Action::ShowCategoriesView, View::Categories, i18n("Show categories page"), Qt::CTRL | Qt::Key_5},
+        {
+            Action::ShowTagsView,
+            View::Tags,
+            i18n("Show tags page"),
+        },
+        {Action::ShowPayeesView, View::Payees, i18n("Show payees page"), Qt::CTRL | Qt::Key_6},
+        {Action::ShowLedgersView, View::NewLedgers, i18n("Show ledgers page"), Qt::CTRL | Qt::Key_7},
+        {Action::ShowInvestmentsView, View::Investments, i18n("Show investments page"), Qt::CTRL | Qt::Key_8},
+        {Action::ShowReportsView, View::Reports, i18n("Show reports page"), Qt::CTRL | Qt::Key_9},
+        {
+            Action::ShowBudgetView,
+            View::Budget,
+            i18n("Show budget page"),
+        },
+        {
+            Action::ShowForecastView,
+            View::Forecast,
+            i18n("Show forecast page"),
+        },
+        {Action::ShowOnlineJobOutboxView, View::OnlineJobOutbox, i18n("Show outbox page")},
     };
 
-    QHash<Action, QAction *> lutActions;
+    QHash<Action, QAction*> lutActions;
     auto pageCount = 0;
     for (const pageInfo& info : pageInfos) {
         auto a = new QAction(this);
@@ -591,7 +600,7 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
         connect(a, &QAction::triggered, this, [this, a] {
             showPageAndFocus(static_cast<View>(a->data().toUInt()));
         });
-        lutActions.insert(info.action, a);  // store QAction's pointer for later processing
+        lutActions.insert(info.action, a); // store QAction's pointer for later processing
         if (!info.shortcut.isEmpty())
             a->setShortcut(info.shortcut);
     }
@@ -626,7 +635,7 @@ void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
     Q_D(KMyMoneyView);
     // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
     Q_ASSERT_X((int)(View::Home) == 0, "viewenums.h", "View::Home must be the first entry");
-    Q_ASSERT_X(((int)(View::Home)+1) == (int)View::Institutions, "viewenums.h", "View::Institutions must be the second entry");
+    Q_ASSERT_X(((int)(View::Home) + 1) == (int)View::Institutions, "viewenums.h", "View::Institutions must be the second entry");
 
     // the home view is always enabled
     d->viewFrames[View::Home]->setEnabled(true);
@@ -640,9 +649,7 @@ void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
 
 void KMyMoneyView::switchToDefaultView()
 {
-    const auto idView = KMyMoneySettings::startLastViewSelected() ?
-                        static_cast<View>(KMyMoneySettings::lastViewSelected()) :
-                        View::Home;
+    const auto idView = KMyMoneySettings::startLastViewSelected() ? static_cast<View>(KMyMoneySettings::lastViewSelected()) : View::Home;
     showPage(idView, true);
 
     executeCustomAction(eView::Action::UnblockViewAfterFileOpen);

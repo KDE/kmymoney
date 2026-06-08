@@ -49,19 +49,19 @@ public:
     {
     }
 
-    QPushButton*              m_allAccountsButton;
-    QPushButton*              m_noAccountButton;
-    QPushButton*              m_incomeCategoriesButton;
-    QPushButton*              m_expenseCategoriesButton;
+    QPushButton* m_allAccountsButton;
+    QPushButton* m_noAccountButton;
+    QPushButton* m_incomeCategoriesButton;
+    QPushButton* m_expenseCategoriesButton;
     QPushButton* m_expandButton;
-    QList<int>                m_typeList;
-    QStringList               m_accountList;
+    QList<int> m_typeList;
+    QStringList m_accountList;
     bool m_expandButtonState;
     int m_collapsedRowCount;
 };
 
-KMyMoneyAccountSelector::KMyMoneyAccountSelector(QWidget *parent, Qt::WindowFlags flags, const bool createButtons) :
-    KMyMoneySelector(*new KMyMoneyAccountSelectorPrivate(this), parent, flags)
+KMyMoneyAccountSelector::KMyMoneyAccountSelector(QWidget* parent, Qt::WindowFlags flags, const bool createButtons)
+    : KMyMoneySelector(*new KMyMoneyAccountSelectorPrivate(this), parent, flags)
 {
     Q_D(KMyMoneyAccountSelector);
     if (createButtons) {
@@ -163,10 +163,10 @@ void KMyMoneyAccountSelector::setSelectionMode(QTreeWidget::SelectionMode mode)
     KMyMoneySelector::setSelectionMode(mode);
 }
 
-QStringList KMyMoneyAccountSelector::accountList(const  QList<Account::Type>& filterList) const
+QStringList KMyMoneyAccountSelector::accountList(const QList<Account::Type>& filterList) const
 {
     Q_D(const KMyMoneyAccountSelector);
-    QStringList    list;
+    QStringList list;
     QTreeWidgetItemIterator it(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
 
     while (*it) {
@@ -198,12 +198,7 @@ bool KMyMoneyAccountSelector::contains(const QString& txt) const
     QTreeWidgetItemIterator it(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
     QTreeWidgetItem* it_v;
 
-    QString baseName = i18n("Asset") + '|' +
-                       i18n("Liability") + '|' +
-                       i18n("Income") + '|' +
-                       i18n("Expense") + '|' +
-                       i18n("Equity") + '|' +
-                       i18n("Security");
+    QString baseName = i18n("Asset") + '|' + i18n("Liability") + '|' + i18n("Income") + '|' + i18n("Expense") + '|' + i18n("Equity") + '|' + i18n("Security");
 
     while ((it_v = *it) != nullptr) {
         const QRegularExpression exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegularExpression::escape(txt)));
@@ -237,16 +232,16 @@ public:
     {
     }
 
-    int                      m_count;
-    MyMoneyFile*             m_file;
+    int m_count;
+    MyMoneyFile* m_file;
     QList<eMyMoney::Account::Type> m_typeList;
-    QTreeWidgetItem*         m_favorites;
-    bool                     m_hideClosedAccounts;
-    bool                     m_showInvestments;
+    QTreeWidgetItem* m_favorites;
+    bool m_hideClosedAccounts;
+    bool m_showInvestments;
 };
 
-AccountSet::AccountSet() :
-    d_ptr(new AccountSetPrivate)
+AccountSet::AccountSet()
+    : d_ptr(new AccountSetPrivate)
 {
 }
 
@@ -366,7 +361,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
     key = QString("A%1").arg(i18n("Favorites"));
     d->m_favorites = selector->newItem(i18n("Favorites"), key);
 
-    //get the account icon from cache or insert it if it is not there
+    // get the account icon from cache or insert it if it is not there
     QPixmap accountPixmap;
     if (!QPixmapCache::find("account", &accountPixmap)) {
         QIcon icon = Icons::get(Icon::BankAccount);
@@ -433,10 +428,9 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
                 const MyMoneyAccount& acc = d->m_file->account(*it_l);
                 ++d->m_count;
                 ++count;
-                //this will include an account if it matches the account type and
-                //if it is still open or it has been set to show closed accounts
-                if (includeAccount(acc)
-                        && (!isHidingClosedAccounts() || !acc.isClosed())) {
+                // this will include an account if it matches the account type and
+                // if it is still open or it has been set to show closed accounts
+                if (includeAccount(acc) && (!isHidingClosedAccounts() || !acc.isClosed())) {
                     QString tmpKey;
                     tmpKey = key + MyMoneyFile::AccountSeparator + acc.name();
                     QTreeWidgetItem* subItem = selector->newItem(item, acc.name(), tmpKey, acc.id());
@@ -548,10 +542,9 @@ int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetIt
         if (acc.isInvest() && !d->m_showInvestments)
             continue;
 
-        //this will include an account if it matches the account type and
-        //if it is still open or it has been set to show closed accounts
-        if (includeAccount(acc)
-                && (!isHidingClosedAccounts() || !acc.isClosed())) {
+        // this will include an account if it matches the account type and
+        // if it is still open or it has been set to show closed accounts
+        if (includeAccount(acc) && (!isHidingClosedAccounts() || !acc.isClosed())) {
             QString tmpKey;
             tmpKey = key + MyMoneyFile::AccountSeparator + acc.name();
             ++count;

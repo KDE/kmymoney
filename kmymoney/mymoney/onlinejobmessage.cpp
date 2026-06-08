@@ -6,16 +6,16 @@
 
 #include "onlinejobmessage.h"
 
-#include <QString>
 #include <QDateTime>
+#include <QString>
 
 #include "mymoneyenums.h"
 
 class onlineJobMessagePrivate
 {
 public:
-    onlineJobMessagePrivate() :
-        m_type(eMyMoney::OnlineJob::MessageType::Log)
+    onlineJobMessagePrivate()
+        : m_type(eMyMoney::OnlineJob::MessageType::Log)
     {
     }
 
@@ -30,8 +30,8 @@ public:
     QString m_senderErrorCode;
 };
 
-onlineJobMessage::onlineJobMessage() :
-    d_ptr(new onlineJobMessagePrivate)
+onlineJobMessage::onlineJobMessage()
+    : d_ptr(new onlineJobMessagePrivate)
 {
     Q_D(onlineJobMessage);
     d->m_type = eMyMoney::OnlineJob::MessageType::Error;
@@ -40,11 +40,8 @@ onlineJobMessage::onlineJobMessage() :
     d->m_timestamp = QDateTime();
 }
 
-onlineJobMessage::onlineJobMessage(eMyMoney::OnlineJob::MessageType type,
-                                   QString sender,
-                                   QString message,
-                                   QDateTime timestamp) :
-    d_ptr(new onlineJobMessagePrivate)
+onlineJobMessage::onlineJobMessage(eMyMoney::OnlineJob::MessageType type, QString sender, QString message, QDateTime timestamp)
+    : d_ptr(new onlineJobMessagePrivate)
 {
     Q_D(onlineJobMessage);
     d->m_type = type;
@@ -53,10 +50,8 @@ onlineJobMessage::onlineJobMessage(eMyMoney::OnlineJob::MessageType type,
     d->m_timestamp = timestamp;
 }
 
-onlineJobMessage::onlineJobMessage(eMyMoney::OnlineJob::MessageType type,
-                                   QString sender,
-                                   QString message) :
-    d_ptr(new onlineJobMessagePrivate)
+onlineJobMessage::onlineJobMessage(eMyMoney::OnlineJob::MessageType type, QString sender, QString message)
+    : d_ptr(new onlineJobMessagePrivate)
 {
     Q_D(onlineJobMessage);
     d->m_type = type;
@@ -65,8 +60,8 @@ onlineJobMessage::onlineJobMessage(eMyMoney::OnlineJob::MessageType type,
     d->m_timestamp = QDateTime::currentDateTime();
 }
 
-onlineJobMessage::onlineJobMessage(const onlineJobMessage& other) :
-    d_ptr(new onlineJobMessagePrivate(*other.d_func()))
+onlineJobMessage::onlineJobMessage(const onlineJobMessage& other)
+    : d_ptr(new onlineJobMessagePrivate(*other.d_func()))
 {
 }
 

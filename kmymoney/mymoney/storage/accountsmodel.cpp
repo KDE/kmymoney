@@ -90,8 +90,7 @@ AccountBalances& AccountBalances::operator/=(const MyMoneyMoney& factor)
     return *this;
 }
 
-struct AccountsModel::Private
-{
+struct AccountsModel::Private {
     Q_DECLARE_PUBLIC(AccountsModel)
 
     Private(AccountsModel* qq, QObject* parent)
@@ -188,7 +187,7 @@ struct AccountsModel::Private
     bool isFavoriteIndex(const QModelIndex& idx) const
     {
         if (idx.isValid()) {
-            TreeItem<MyMoneyAccount> *item;
+            TreeItem<MyMoneyAccount>* item;
             item = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer());
             if (item->constDataRef().id() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite)) {
                 return true;
@@ -199,7 +198,7 @@ struct AccountsModel::Private
 
     MyMoneyMoney adjustedBalance(const MyMoneyMoney& amount, const MyMoneyAccount& account)
     {
-        switch(account.accountGroup()) {
+        switch (account.accountGroup()) {
         case eMyMoney::Account::Type::Liability:
         case eMyMoney::Account::Type::Income:
         case eMyMoney::Account::Type::Equity:
@@ -227,14 +226,14 @@ struct AccountsModel::Private
     {
         Q_Q(const AccountsModel);
         return q->assetIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
-               + q->liabilityIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
+            + q->liabilityIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
     }
 
     MyMoneyMoney profitLoss() const
     {
         Q_Q(const AccountsModel);
         return -q->incomeIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
-               - q->expenseIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
+            - q->expenseIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
     }
 
     QPair<MyMoneyMoney, bool> balanceToValue(const MyMoneyAccount& account, const MyMoneyMoney bal)
@@ -323,14 +322,13 @@ struct AccountsModel::Private
             }
             parent = indexes.first();
             parts.takeFirst();
-        } while(!parts.isEmpty());
+        } while (!parts.isEmpty());
         return q->MyMoneyModel::itemByIndex(parent);
     }
 
     bool hasOnlineBalance(const MyMoneyAccount& account)
     {
-        return !(account.value("lastImportedTransactionDate").isEmpty()
-                 || account.value("lastStatementBalance").isEmpty());
+        return !(account.value("lastImportedTransactionDate").isEmpty() || account.value("lastStatementBalance").isEmpty());
     }
 
     QString formatIban(const MyMoneyAccount& account)
@@ -396,8 +394,8 @@ struct AccountsModel::Private
 
     struct DefaultAccounts {
         eMyMoney::Account::Standard groupType;
-        eMyMoney::Account::Type     accountType;
-        const char*                 description;
+        eMyMoney::Account::Type accountType;
+        const char* description;
     };
     const QVector<DefaultAccounts> defaults = {
         {eMyMoney::Account::Standard::Favorite, eMyMoney::Account::Type::Asset, kli18n("Favorite").untranslatedText()},
@@ -410,14 +408,14 @@ struct AccountsModel::Private
 
     static const char* const mimeTypeName;
 
-    AccountsModel*                  q_ptr;
-    QObject*                        parentObject;
-    QHash<QString, MyMoneyMoney>    balance;
-    QHash<QString, MyMoneyMoney>    value;
-    QHash<QString, MyMoneyMoney>    totalValue;
-    bool                            updateOnBalanceChange;
-    QColor                          positiveScheme;
-    QColor                          negativeScheme;
+    AccountsModel* q_ptr;
+    QObject* parentObject;
+    QHash<QString, MyMoneyMoney> balance;
+    QHash<QString, MyMoneyMoney> value;
+    QHash<QString, MyMoneyMoney> totalValue;
+    bool updateOnBalanceChange;
+    QColor positiveScheme;
+    QColor negativeScheme;
     QMimeData dragAccountId;
     QRegularExpression accountIdMatch;
 };
@@ -458,7 +456,7 @@ int AccountsModel::columnCount(const QModelIndex& parent) const
 
 QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal) {
+    if (orientation == Qt::Horizontal) {
         // Using Qt::UserRole here to store QHeaderView::ResizeMode
         switch (role) {
         case Qt::UserRole:
@@ -580,10 +578,10 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
     const auto isInvestmentAccount = account.accountType() == eMyMoney::Account::Type::Investment;
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Column::AccountName:
             // make sure to never return any displayable text for the dummy entry
             if (!account.id().isEmpty()) {
@@ -627,8 +625,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             }
             break;
 
-        case Column::Balance:
-        {
+        case Column::Balance: {
             try {
                 if (!d->isFavoriteIndex(idx)) {
                     auto security = MyMoneyFile::instance()->security(account.currencyId());
@@ -639,8 +636,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             }
         } break;
 
-        case Column::PostedValue:
-        {
+        case Column::PostedValue: {
             if (!d->isFavoriteIndex(idx)) {
                 const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
                 return d->adjustedBalance(account.postedValue(), account)
@@ -648,8 +644,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             }
         } break;
 
-        case Column::TotalPostedValue:
-        {
+        case Column::TotalPostedValue: {
             if (!d->isFavoriteIndex(idx)) {
                 const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
                 return d->adjustedBalance(account.totalPostedValue(), account)
@@ -675,7 +670,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         return headerData(idx.column(), Qt::Horizontal, role);
 
     case Qt::ForegroundRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Column::Balance:
             return d->adjustedBalance(account.balance(), account).isNegative() ? d->negativeScheme : d->positiveScheme;
 
@@ -687,8 +682,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         }
         break;
 
-    case Qt::FontRole:
-    {
+    case Qt::FontRole: {
         QFont font;
         // display top level account groups in bold
         if (!idx.parent().isValid()) {
@@ -700,8 +694,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             font.setStrikeOut(account.isClosed());
         }
         return font;
-    }
-    break;
+    } break;
 
     case Qt::DecorationRole:
         switch (idx.column()) {
@@ -824,7 +817,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
 bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 
@@ -835,7 +828,7 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
     }
 
     MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(index.internalPointer())->dataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
 #if 0
@@ -872,7 +865,7 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
 
 void AccountsModel::setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color)
 {
-    switch(scheme) {
+    switch (scheme) {
     case Positive:
         d->positiveScheme = color;
         break;
@@ -945,7 +938,7 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& _list)
 
     auto list = d->checkHierarchy(_list);
     int itemCount = 0;
-    for(const auto& baseAccount : d->defaults) {
+    for (const auto& baseAccount : d->defaults) {
         ++itemCount;
         // we have nothing to do for favorites
         if (baseAccount.groupType == eMyMoney::Account::Standard::Favorite)
@@ -1070,7 +1063,7 @@ void AccountsModel::removeFavorite(const QString& id)
     }
 }
 
-int AccountsModel::processItems(Worker *worker)
+int AccountsModel::processItems(Worker* worker)
 {
     // make sure to work only on real entries and not on favorites
     return MyMoneyModel<MyMoneyAccount>::processItems(
@@ -1100,20 +1093,17 @@ QString AccountsModel::accountIdToHierarchicalName(const QString& accountId, boo
     return indexToHierarchicalName(indexById(accountId), includeStandardAccounts);
 }
 
-
 QString AccountsModel::accountNameToId(const QString& category, eMyMoney::Account::Type type) const
 {
     QString id;
 
     // search the category in the expense accounts and if it is not found, try
     // to locate it in the income accounts in case the type is not provided
-    if (type == eMyMoney::Account::Type::Unknown
-            || type == eMyMoney::Account::Type::Expense) {
+    if (type == eMyMoney::Account::Type::Unknown || type == eMyMoney::Account::Type::Expense) {
         id = d->itemByName(category, expenseIndex()).id();
     }
 
-    if ((id.isEmpty() && type == eMyMoney::Account::Type::Unknown)
-            || type == eMyMoney::Account::Type::Income) {
+    if ((id.isEmpty() && type == eMyMoney::Account::Type::Unknown) || type == eMyMoney::Account::Type::Income) {
         id = d->itemByName(category, incomeIndex()).id();
     }
 
@@ -1198,7 +1188,7 @@ void AccountsModel::addItem(MyMoneyAccount& account)
 QModelIndexList AccountsModel::accountsWithoutInstitutions() const
 {
     return match(index(0, 0, assetIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly | Qt::MatchRecursive)
-           + match(index(0, 0, liabilityIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly| Qt::MatchRecursive);
+        + match(index(0, 0, liabilityIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly | Qt::MatchRecursive);
 }
 
 void AccountsModel::removeItem(const QModelIndex& idx)
@@ -1212,7 +1202,6 @@ void AccountsModel::removeItem(const QModelIndex& idx)
         }
     }
 }
-
 
 void AccountsModel::reparentAccount(const QString& accountId, const QString& newParentId)
 {
@@ -1270,7 +1259,6 @@ void AccountsModel::doRemoveItem(const MyMoneyAccount& before)
     }
 }
 
-
 void AccountsModel::doReparentItem(const MyMoneyAccount& before, const MyMoneyAccount& after)
 {
     QModelIndex itemIdx = indexById(before.id());
@@ -1290,7 +1278,6 @@ void AccountsModel::doReparentItem(const MyMoneyAccount& before, const MyMoneyAc
 
     setDirty(true);
 }
-
 
 MyMoneyModel<MyMoneyAccount>::Operation AccountsModel::undoOperation(const MyMoneyAccount& before, const MyMoneyAccount& after) const
 {

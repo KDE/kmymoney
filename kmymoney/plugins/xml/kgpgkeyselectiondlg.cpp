@@ -8,8 +8,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QPushButton>
 #include <QDialogButtonBox>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,17 +41,16 @@ public:
         delete ui;
     }
 
-    Ui::KGpgKeySelectionDlg*  ui;
-    bool                      needCheckList;
-    bool                      listOk;
-    int                       checkCount;
+    Ui::KGpgKeySelectionDlg* ui;
+    bool needCheckList;
+    bool listOk;
+    int checkCount;
     QStringList m_recoverKeyList;
 };
 
-
-KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KGpgKeySelectionDlgPrivate)
+KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KGpgKeySelectionDlgPrivate)
 {
     Q_D(KGpgKeySelectionDlg);
     d->ui->setupUi(this);
@@ -192,7 +191,7 @@ void KGpgKeySelectionDlg::slotIdChanged()
                 continue;
             }
 
-            if (!d->ui->m_listWidget->items().isEmpty())  {
+            if (!d->ui->m_listWidget->items().isEmpty()) {
                 d->ui->m_keyLed->setState(static_cast<KLed::State>(keysOk ? KLed::On : KLed::Off));
             } else {
                 d->ui->m_keyLed->setState(KLed::On);

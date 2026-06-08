@@ -12,11 +12,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QApplication>
+#include <QStandardPaths>
 #include <QString>
 #include <QStringList>
 #include <QUrl>
-#include <QStandardPaths>
-#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,14 +41,13 @@ bool KWelcomePage::isGroupItem(const QString& item)
     return item.startsWith(QLatin1Char('-'));
 }
 
-
 const QString KWelcomePage::welcomePage()
 {
     QString header;
     QString footer;
     QString body;
 
-    //header
+    // header
     header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">");
     header = QString("<html>");
     header += QString("<head>");
@@ -57,10 +56,10 @@ const QString KWelcomePage::welcomePage()
 
     header += QString("</head>");
 
-    //body of the page
+    // body of the page
     body = QString("<body style=\"margin-top:100px; background: url(qrc:/html/images/bg-texture.png)\">");
 
-    //topright
+    // topright
     body += QString("<table cellpadding=10 align=center width=80% height=100%\">");
     body += QString("<tr><td><h1 id=\"title\">" + i18n("Welcome to KMyMoney") + "</h3></td></tr>");
     body += QString("<tr><td><h3 id=\"subtitle\">" + i18n("The free, easy to use, personal finance manager by KDE") + "</h4></td></tr>");
@@ -68,7 +67,7 @@ const QString KWelcomePage::welcomePage()
     body += QString("<td align=left valign='middle'>");
     body += QString("<table width=100% height=100%>");
 
-    //Welcome menu
+    // Welcome menu
     body += QString("<tr><td width=5%></td><td width=95%></td></tr>");
     body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/document-new.svg\"></td>");
     body += QString("<td><a href=\"/action?id=file_new\">" + i18n("Get started and setup accounts") + "</a></td></tr>");
@@ -91,7 +90,7 @@ const QString KWelcomePage::welcomePage()
 
     body += QString("</body>");
 
-    //footer
+    // footer
     footer = "</html>";
 
     return header + body + footer;

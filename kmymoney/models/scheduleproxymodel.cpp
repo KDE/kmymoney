@@ -26,12 +26,13 @@ class ScheduleProxyModelPrivate
 public:
     ScheduleProxyModelPrivate()
         : m_hideFinishedSchedules(false)
-    {}
+    {
+    }
 
     bool m_hideFinishedSchedules;
 };
 
-ScheduleProxyModel::ScheduleProxyModel(QObject *parent)
+ScheduleProxyModel::ScheduleProxyModel(QObject* parent)
     : QSortFilterProxyModel(parent)
     , d(new ScheduleProxyModelPrivate)
 {

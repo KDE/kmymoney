@@ -9,13 +9,13 @@
 
 // Qt includes
 
+#include <QDir>
 #include <QHash>
-#include <QString>
 #include <QIcon>
 #include <QPainter>
 #include <QRegularExpression>
-#include <QDir>
 #include <QStandardPaths>
+#include <QString>
 
 // Project includes
 
@@ -234,7 +234,9 @@ KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIc
         } else {
             const QString cacheDir = iconCacheDir();
             if (!cacheDir.isEmpty()) {
-                return icon.pixmap(16).save(QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name"))), "PNG");
+                return icon.pixmap(16).save(
+                    QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name"))),
+                    "PNG");
             }
         }
     }
@@ -243,8 +245,8 @@ KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIc
 
 KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name)
 {
-    const QHash<QString, Icon> sEnumIcons {
-        { QStringLiteral("Bank"), Icon::Institution },
+    const QHash<QString, Icon> sEnumIcons{
+        {QStringLiteral("Bank"), Icon::Institution},
     };
 
     // split the icon name from the type
@@ -262,7 +264,8 @@ KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name)
             // otherwise, we use the type as part of the filename
             const QString cacheDir = iconCacheDir();
             if (!cacheDir.isEmpty()) {
-                const QString filename = QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name")));
+                const QString filename =
+                    QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name")));
                 if (QFile::exists(filename)) {
                     return QIcon(filename);
                 }

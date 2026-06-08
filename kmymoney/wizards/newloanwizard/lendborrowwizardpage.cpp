@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_lendborrowwizardpage.h"
 
-LendBorrowWizardPage::LendBorrowWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::LendBorrowWizardPage)
+LendBorrowWizardPage::LendBorrowWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::LendBorrowWizardPage)
 {
     ui->setupUi(this);
 

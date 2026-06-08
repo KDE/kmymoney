@@ -17,9 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <ui_kcurrencyeditordlg.h>
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
+#include <ui_kcurrencyeditordlg.h>
 
 class KCurrencyEditorDlgPrivate
 {
@@ -41,13 +41,9 @@ public:
         // enable the OK button only, if all values are valid
         ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 
-        if (ui->leIsoCode->text().isEmpty()
-                || ui->leName->text().isEmpty()
-                || ui->leSymbol->text().isEmpty()
-                || MyMoneyMoney(ui->leCashFraction->text()).isZero()
-                || MyMoneyMoney(ui->leCashFraction->text()).isNegative()
-                || MyMoneyMoney(ui->leAccountFraction->text()).isZero()
-                || MyMoneyMoney(ui->leAccountFraction->text()).isNegative()) {
+        if (ui->leIsoCode->text().isEmpty() || ui->leName->text().isEmpty() || ui->leSymbol->text().isEmpty()
+            || MyMoneyMoney(ui->leCashFraction->text()).isZero() || MyMoneyMoney(ui->leCashFraction->text()).isNegative()
+            || MyMoneyMoney(ui->leAccountFraction->text()).isZero() || MyMoneyMoney(ui->leAccountFraction->text()).isNegative()) {
             ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
         }
     }
@@ -56,7 +52,7 @@ public:
     Ui::KCurrencyEditorDlg* ui;
 };
 
-KCurrencyEditorDlg::KCurrencyEditorDlg(const MyMoneySecurity& currency, QWidget *parent)
+KCurrencyEditorDlg::KCurrencyEditorDlg(const MyMoneySecurity& currency, QWidget* parent)
     : d_ptr(new KCurrencyEditorDlgPrivate)
 {
     Q_UNUSED(parent);
@@ -101,7 +97,6 @@ KCurrencyEditorDlg::KCurrencyEditorDlg(const MyMoneySecurity& currency, QWidget 
 
     d->ui->comboRoundingMethod->setCurrentIndex(currency.roundingMethod());
     d->ui->spbPricePrecision->setValue(currency.pricePrecision());
-
 
     // make those widgets readonly that are not allowed to change
     if (!currency.id().isEmpty()) {
@@ -157,4 +152,3 @@ MyMoneySecurity KCurrencyEditorDlg::currency() const
     newCurrency.setPricePrecision(d->ui->spbPricePrecision->value());
     return newCurrency;
 }
-

@@ -57,23 +57,22 @@ double CashFlowList::XIRR(double rate) const
     // - outer loop from libreoffice
     // - inner loop from KOffice
     do {
-        if (iterScan >=1)
-            resultRate = -0.99 + (iterScan -1)* 0.01;
+        if (iterScan >= 1)
+            resultRate = -0.99 + (iterScan - 1) * 0.01;
 
         do {
             resultValue = xirrResult(resultRate);
-            newRate =  resultRate - resultValue / xirrResultDerive(resultRate);
+            newRate = resultRate - resultValue / xirrResultDerive(resultRate);
             rateEpsilon = fabs(newRate - resultRate);
             resultRate = newRate;
             contLoop = (rateEpsilon > maxEpsilon) && (fabs(resultValue) > maxEpsilon);
         } while (contLoop && (++iter < maxIter));
         iter = 0;
-        if (std::isinf(resultRate) || std::isnan(resultRate) ||
-                std::isinf(resultValue) || std::isnan(resultValue))
+        if (std::isinf(resultRate) || std::isnan(resultRate) || std::isinf(resultValue) || std::isnan(resultValue))
             contLoop = true;
         iterScan++;
         resultRateScanEnd = (iterScan >= 200);
-    } while(contLoop && !resultRateScanEnd);
+    } while (contLoop && !resultRateScanEnd);
 
     if (contLoop)
         throw MYMONEYEXCEPTION("illegal argument exception");
@@ -90,9 +89,9 @@ double CashFlowList::xirrResult(double rate) const
 {
     double r = rate + 1.0;
     double result = at(0).value().toDouble();
-    const QDate &date0 = at(0).date();
+    const QDate& date0 = at(0).date();
 
-    for(int i = 1; i < size(); i++) {
+    for (int i = 1; i < size(); i++) {
         double e_i = date0.daysTo(at(i).date()) / 365.0;
         result += at(i).value().toDouble() / pow(r, e_i);
     }
@@ -109,9 +108,9 @@ double CashFlowList::xirrResultDerive(double rate) const
 {
     double r = rate + 1.0;
     double result = 0;
-    const QDate &date0 = at(0).date();
+    const QDate& date0 = at(0).date();
 
-    for(int i = 1; i < size(); i++) {
+    for (int i = 1; i < size(); i++) {
         double e_i = date0.daysTo(at(i).date()) / 365.0;
         result -= e_i * at(i).value().toDouble() / pow(r, e_i + 1.0);
     }

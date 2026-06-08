@@ -6,20 +6,20 @@
 
 #include "ibanbicdata.h"
 
-#include <KServiceTypeTrader>
 #include <KLocalizedString>
+#include <KServiceTypeTrader>
 
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QStandardPaths>
 #include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QStandardPaths>
 
-#include "payeeidentifier/ibanbic/ibanbic.h"
-#include "ibanbicdataenums.h"
 #include "bicmodel.h"
+#include "ibanbicdataenums.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 
-ibanBicData::ibanBicData(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args)
+ibanBicData::ibanBicData(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
 {
     // For information, announce that we have been loaded.
     qDebug("Plugins: ibanbicdata loaded");
@@ -30,7 +30,7 @@ ibanBicData::~ibanBicData()
     qDebug("Plugins: ibanbicdata unloaded");
 }
 
-QVariant ibanBicData::requestData(const QString &arg, uint type)
+QVariant ibanBicData::requestData(const QString& arg, uint type)
 {
     switch (type) {
     case eIBANBIC::DataType::bbanLength:
@@ -50,7 +50,7 @@ QVariant ibanBicData::requestData(const QString &arg, uint type)
     case eIBANBIC::DataType::isBicAllocated:
         return QVariant::fromValue(static_cast<uint>(isBicAllocated(arg)));
     case eIBANBIC::DataType::bicModel:
-        return QVariant::fromValue(static_cast<QAbstractItemModel *>(new bicModel()));
+        return QVariant::fromValue(static_cast<QAbstractItemModel*>(new bicModel()));
     default:
         return QVariant();
     }
@@ -87,7 +87,7 @@ QString ibanBicData::iban2Bic(const QString& iban)
     Q_ASSERT(iban.length() < 2 || iban.at(1).isLetterOrNumber());
     Q_ASSERT(iban == payeeIdentifiers::ibanBic::ibanToElectronic(iban));
 
-    if (iban.length() <= 4)   // This iban is to short to extract a BIC
+    if (iban.length() <= 4) // This iban is to short to extract a BIC
         return QString("");
 
     // Get bank identifier
@@ -100,14 +100,15 @@ QString ibanBicData::iban2Bic(const QString& iban)
 
     // Get services which support iban2bic and have a database entry
     KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
-                              QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and true == [X-KMyMoney-IBAN-2-BIC-supported] and exist [X-KMyMoney-Bankdata-Database]").arg(countryCode)
-                                                               );
+                                                                QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and true == "
+                                                                        "[X-KMyMoney-IBAN-2-BIC-supported] and exist [X-KMyMoney-Bankdata-Database]")
+                                                                    .arg(countryCode));
 
     if (services.isEmpty())
         return QString();
 
     QSqlDatabase db = createDatabaseConnection(services.first()->property(QLatin1String("X-KMyMoney-Bankdata-Database"), QVariant::String).toString());
-    if (!db.isOpen())   // This is an error
+    if (!db.isOpen()) // This is an error
         return QString();
 
     QSqlQuery query = QSqlQuery(db);
@@ -137,15 +138,15 @@ QString ibanBicData::bankNameByBic(QString bic)
     const QString countryCode = bic.mid(4, 2);
 
     // Get services which have a database entry
-    KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
-                              QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and exist [X-KMyMoney-Bankdata-Database]").arg(countryCode)
-                                                               );
+    KService::List services = KServiceTypeTrader::self()->query(
+        "KMyMoney/IbanBicData",
+        QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and exist [X-KMyMoney-Bankdata-Database]").arg(countryCode));
 
     if (services.isEmpty())
         return QString();
 
     QSqlDatabase db = createDatabaseConnection(services.first()->property("X-KMyMoney-Bankdata-Database", QVariant::String).toString());
-    if (!db.isOpen())   // This is an error
+    if (!db.isOpen()) // This is an error
         return QString();
 
     QSqlQuery query = QSqlQuery(db);
@@ -164,13 +165,13 @@ QString ibanBicData::bankNameByBic(QString bic)
     return QString("");
 }
 
-QPair< QString, QString > ibanBicData::bankNameAndBic(const QString& iban)
+QPair<QString, QString> ibanBicData::bankNameAndBic(const QString& iban)
 {
     Q_ASSERT(iban.length() < 1 || iban.at(0).isLetterOrNumber());
     Q_ASSERT(iban.length() < 2 || iban.at(1).isLetterOrNumber());
     Q_ASSERT(iban == payeeIdentifiers::ibanBic::ibanToElectronic(iban));
 
-    if (iban.length() <= 4)   // This iban is to short to extract a BIC
+    if (iban.length() <= 4) // This iban is to short to extract a BIC
         return QPair<QString, QString>();
 
     // Get bank identifier
@@ -183,14 +184,15 @@ QPair< QString, QString > ibanBicData::bankNameAndBic(const QString& iban)
 
     // Get services which support iban2bic and have a database entry
     KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
-                              QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and true == [X-KMyMoney-IBAN-2-BIC-supported] and exist [X-KMyMoney-Bankdata-Database]").arg(countryCode)
-                                                               );
+                                                                QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and true == "
+                                                                        "[X-KMyMoney-IBAN-2-BIC-supported] and exist [X-KMyMoney-Bankdata-Database]")
+                                                                    .arg(countryCode));
 
     if (services.isEmpty())
         return QPair<QString, QString>();
 
     QSqlDatabase db = createDatabaseConnection(services.first()->property(QLatin1String("X-KMyMoney-Bankdata-Database"), QVariant::String).toString());
-    if (!db.isOpen())   // This is an error
+    if (!db.isOpen()) // This is an error
         return QPair<QString, QString>();
 
     QSqlQuery query(db);
@@ -218,15 +220,15 @@ eIBANBIC::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
         return eIBANBIC::bicAllocationStatus::bicNotAllocated;
 
     // Get services which have a database entry
-    KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
-                              QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and exist [X-KMyMoney-Bankdata-Database]").arg(countryCode)
-                                                               );
+    KService::List services = KServiceTypeTrader::self()->query(
+        "KMyMoney/IbanBicData",
+        QString("(\'%1' ~in [X-KMyMoney-CountryCodes] or '*' in [X-KMyMoney-CountryCodes]) and exist [X-KMyMoney-Bankdata-Database]").arg(countryCode));
 
     if (services.isEmpty())
         return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
 
     QSqlDatabase db = createDatabaseConnection(services.first()->property(QLatin1String("X-KMyMoney-Bankdata-Database"), QVariant::String).toString());
-    if (!db.isOpen())   // This is an error
+    if (!db.isOpen()) // This is an error
         return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
 
     QSqlQuery query(db);
@@ -238,7 +240,7 @@ eIBANBIC::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
         return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
     }
 
-    if (query.value(0).toBool())   // Bic found
+    if (query.value(0).toBool()) // Bic found
         return eIBANBIC::bicAllocationStatus::bicAllocated;
 
     // Bic not found, test if database is complete
@@ -250,9 +252,8 @@ eIBANBIC::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
 
 QVariant ibanBicData::findPropertyByCountry(const QString& countryCode, const QString& property, const QMetaType::Type type)
 {
-    const KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
-                                    QString("'%1' ~in [X-KMyMoney-CountryCodes] and exist [%2]").arg(countryCode).arg(property)
-                                                                     );
+    const KService::List services =
+        KServiceTypeTrader::self()->query("KMyMoney/IbanBicData", QString("'%1' ~in [X-KMyMoney-CountryCodes] and exist [%2]").arg(countryCode).arg(property));
     if (!services.isEmpty())
         return services.first()->property(property, type);
 

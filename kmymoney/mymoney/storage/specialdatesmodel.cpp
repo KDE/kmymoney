@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
 #include <QDebug>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -21,17 +21,16 @@
 
 #include "journalmodel.h"
 
-struct SpecialDatesModel::Private
-{
+struct SpecialDatesModel::Private {
     Private(SpecialDatesModel* qq)
         : q(qq)
         , showDateHeaders(false)
     {
     }
 
-    SpecialDatesModel*  q;
-    bool                showDateHeaders;
-    QDate               firstFiscalDate;
+    SpecialDatesModel* q;
+    bool showDateHeaders;
+    QDate firstFiscalDate;
 };
 
 SpecialDatesModel::SpecialDatesModel(QObject* parent, QUndoStack* undoStack)
@@ -129,7 +128,7 @@ QVariant SpecialDatesModel::data(const QModelIndex& idx, int role) const
 
     const SpecialDateEntry& dateEntry = static_cast<TreeItem<SpecialDateEntry>*>(idx.internalPointer())->constDataRef();
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
         return dateEntry.txt();

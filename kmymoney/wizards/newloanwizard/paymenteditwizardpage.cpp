@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_paymenteditwizardpage.h"
 
-PaymentEditWizardPage::PaymentEditWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::PaymentEditWizardPage)
+PaymentEditWizardPage::PaymentEditWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::PaymentEditWizardPage)
 {
     ui->setupUi(this);
     // Register the fields with the QWizard and connect the

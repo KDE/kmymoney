@@ -10,8 +10,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
 #include <QLineEdit>
+#include <QList>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------
@@ -43,9 +43,9 @@ class KPayeeReassignDlgPrivate
     Q_DISABLE_COPY(KPayeeReassignDlgPrivate)
 
 public:
-    KPayeeReassignDlgPrivate() :
-        ui(new Ui::KPayeeReassignDlg),
-        m_type(KPayeeReassignDlg::OperationType::TypeMerge)
+    KPayeeReassignDlgPrivate()
+        : ui(new Ui::KPayeeReassignDlg)
+        , m_type(KPayeeReassignDlg::OperationType::TypeMerge)
     {
     }
 
@@ -54,13 +54,13 @@ public:
         delete ui;
     }
 
-    Ui::KPayeeReassignDlg *ui;
+    Ui::KPayeeReassignDlg* ui;
     KPayeeReassignDlg::OperationType m_type;
 };
 
-KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWidget* parent) :
-    QDialog(parent),
-    d_ptr(new KPayeeReassignDlgPrivate)
+KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KPayeeReassignDlgPrivate)
 {
     Q_D(KPayeeReassignDlg);
     d->ui->setupUi(this);
@@ -96,7 +96,6 @@ QString KPayeeReassignDlg::show(const QList<MyMoneyPayee>& payeeslist)
     // otherwise return index of selected payee
     return d->ui->payeeCombo->selectedItem();
 }
-
 
 bool KPayeeReassignDlg::addToMatchList() const
 {

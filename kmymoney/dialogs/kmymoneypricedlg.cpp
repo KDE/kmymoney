@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 #include <KTreeWidgetSearchLine>
 #include <KTreeWidgetSearchLineWidget>
 
@@ -178,9 +178,9 @@ public:
     QKeySequence m_searchShortCut;
 };
 
-KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
-    QDialog(parent),
-    d_ptr(new KMyMoneyPriceDlgPrivate(this))
+KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KMyMoneyPriceDlgPrivate(this))
 {
     Q_D(KMyMoneyPriceDlg);
     d->ui->setupUi(this);
@@ -296,7 +296,7 @@ void KMyMoneyPriceDlg::slotDeletePrice()
                 // make sure current prices are shown
                 d->m_sortModel->invalidate();
 
-            } catch (const MyMoneyException &) {
+            } catch (const MyMoneyException&) {
                 qDebug("Cannot delete price");
             }
         }

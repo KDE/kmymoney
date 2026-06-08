@@ -14,9 +14,9 @@ class EquityPriceUpdateConfDlgPrivate
     Q_DISABLE_COPY(EquityPriceUpdateConfDlgPrivate)
 
 public:
-    EquityPriceUpdateConfDlgPrivate() :
-        ui(new Ui::EquityPriceUpdateConfDlg),
-        m_updatingPricePolicy(eDialogs::UpdatePrice::All)
+    EquityPriceUpdateConfDlgPrivate()
+        : ui(new Ui::EquityPriceUpdateConfDlg)
+        , m_updatingPricePolicy(eDialogs::UpdatePrice::All)
     {
     }
 
@@ -30,7 +30,7 @@ public:
         if (!toggled)
             return;
 
-        switch(policy) {
+        switch (policy) {
         case eDialogs::UpdatePrice::All:
             ui->m_updateMissing->setChecked(false);
             ui->m_updateDownloaded->setChecked(false);
@@ -65,17 +65,17 @@ public:
         m_updatingPricePolicy = policy;
     }
 
-    Ui::EquityPriceUpdateConfDlg  *ui;
-    eDialogs::UpdatePrice          m_updatingPricePolicy;
+    Ui::EquityPriceUpdateConfDlg* ui;
+    eDialogs::UpdatePrice m_updatingPricePolicy;
 };
 
-EquityPriceUpdateConfDlg::EquityPriceUpdateConfDlg(eDialogs::UpdatePrice policy) :
-    QDialog(nullptr),
-    d_ptr(new EquityPriceUpdateConfDlgPrivate)
+EquityPriceUpdateConfDlg::EquityPriceUpdateConfDlg(eDialogs::UpdatePrice policy)
+    : QDialog(nullptr)
+    , d_ptr(new EquityPriceUpdateConfDlgPrivate)
 {
     Q_D(EquityPriceUpdateConfDlg);
     d->ui->setupUi(this);
-    switch(policy) {
+    switch (policy) {
     case eDialogs::UpdatePrice::All:
         d->ui->m_updateAll->setChecked(true);
         break;

@@ -15,9 +15,9 @@
 QString platformTools::osUsername()
 {
     QString name;
-    DWORD size = UNLEN+1;
-    wchar_t  wcname[UNLEN+1];
-    if(GetUserNameW((LPWSTR) wcname, &size)) {
+    DWORD size = UNLEN + 1;
+    wchar_t wcname[UNLEN + 1];
+    if (GetUserNameW((LPWSTR)wcname, &size)) {
         name = QString::fromWCharArray(wcname);
     }
     return name;

@@ -19,7 +19,7 @@
 
 int KMMSqlQuery::queryId = 1;
 
-KMMSqlQuery::KMMSqlQuery(QSqlResult *r, char *file, int line)
+KMMSqlQuery::KMMSqlQuery(QSqlResult* r, char* file, int line)
     : QSqlQuery(r)
 {
     id = queryId++;

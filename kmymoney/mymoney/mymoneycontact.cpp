@@ -24,16 +24,17 @@ namespace KIdentityManagement = KIdentityManagementCore;
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/RecursiveItemFetchJob>
 #else
-#include <AkonadiCore/RecursiveItemFetchJob>
-#include <AkonadiCore/ItemFetchScope>
 #include <AkonadiCore/Collection>
+#include <AkonadiCore/ItemFetchScope>
+#include <AkonadiCore/RecursiveItemFetchJob>
 #endif
 
 #include <KContacts/Addressee>
 #include <QRegularExpression>
 #endif
 
-MyMoneyContact::MyMoneyContact(QObject *parent) : QObject(parent)
+MyMoneyContact::MyMoneyContact(QObject* parent)
+    : QObject(parent)
 {
 }
 
@@ -70,7 +71,7 @@ QString MyMoneyContact::ownerFullName() const
 #endif
 }
 
-void MyMoneyContact::fetchContact(const QString &email)
+void MyMoneyContact::fetchContact(const QString& email)
 {
 #ifdef ENABLE_ADDRESSBOOK
     static const QRegularExpression re(".+@.+");
@@ -79,7 +80,7 @@ void MyMoneyContact::fetchContact(const QString &email)
         Q_EMIT contactFetched(contact);
     } else {
         // fetch the contact data
-        Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList{KContacts::Addressee::mimeType()});
+        Akonadi::RecursiveItemFetchJob* job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList{KContacts::Addressee::mimeType()});
         job->fetchScope().fetchFullPayload();
         job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
         job->setProperty("MyMoneyContact_email", email);
@@ -93,17 +94,17 @@ void MyMoneyContact::fetchContact(const QString &email)
 #endif
 }
 
-void MyMoneyContact::searchContactResult(KJob *job)
+void MyMoneyContact::searchContactResult(KJob* job)
 {
 #ifdef ENABLE_ADDRESSBOOK
-    const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
+    const Akonadi::RecursiveItemFetchJob* contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
     Akonadi::Item::List items;
     if (contactJob)
         items = contactJob->items();
     ContactData contactData;
     contactData.email = job->property("MyMoneyContact_email").toString();
     for (const Akonadi::Item& item : qAsConst(items)) {
-        const KContacts::Addressee &contact = item.payload<KContacts::Addressee>();
+        const KContacts::Addressee& contact = item.payload<KContacts::Addressee>();
         if (contact.emails().contains(contactData.email)) {
             KContacts::PhoneNumber phone;
             const KContacts::PhoneNumber::List phones = contact.phoneNumbers();

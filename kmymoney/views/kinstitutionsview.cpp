@@ -11,8 +11,8 @@
 // QT Includes
 
 #include <QAction>
-#include <QPointer>
 #include <QKeyEvent>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -22,32 +22,31 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kinstitutionsview.h"
-#include "kmymoneyviewbase_p.h"
-#include "mymoneyfile.h"
-#include "mymoneymoney.h"
+#include "accountdelegate.h"
+#include "accountsproxymodel.h"
+#include "columnselector.h"
+#include "icons.h"
+#include "institutionsmodel.h"
+#include "institutionsproxymodel.h"
+#include "kmymoneyaccounttreeview.h"
 #include "kmymoneysettings.h"
-#include "mymoneyexception.h"
-#include "mymoneyinstitution.h"
+#include "kmymoneyviewbase_p.h"
 #include "knewinstitutiondlg.h"
 #include "menuenums.h"
-#include "accountdelegate.h"
-#include "institutionsmodel.h"
-#include "accountsproxymodel.h"
-#include "institutionsproxymodel.h"
-#include "icons.h"
-#include "columnselector.h"
-#include "kmymoneyaccounttreeview.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
+#include "mymoneymoney.h"
+#include "ui_kinstitutionsview.h"
 
 using namespace Icons;
-
 
 class KInstitutionsViewPrivate : public KMyMoneyViewBasePrivate
 {
     Q_DECLARE_PUBLIC(KInstitutionsView)
 
 public:
-    explicit KInstitutionsViewPrivate(KInstitutionsView *qq)
+    explicit KInstitutionsViewPrivate(KInstitutionsView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , ui(new Ui::KInstitutionsView)
         , m_proxyModel(nullptr)
@@ -73,7 +72,7 @@ public:
         ui->m_searchWidget->installEventFilter(q);
 
         auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
-        columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+        columnSelector->setAlwaysVisible(QVector<int>({AccountsModel::Column::AccountName}));
         columnSelector->setAlwaysHidden(QVector<int>({
             AccountsModel::Column::PostedValue,
             AccountsModel::Column::Type,
@@ -103,15 +102,13 @@ public:
         m_focusWidget = ui->m_accountTree;
     }
 
-    Ui::KInstitutionsView   *ui;
-    MyMoneyInstitution      m_currentInstitution;
-    AccountsProxyModel*     m_proxyModel;
+    Ui::KInstitutionsView* ui;
+    MyMoneyInstitution m_currentInstitution;
+    AccountsProxyModel* m_proxyModel;
 };
 
-
-
-KInstitutionsView::KInstitutionsView(QWidget *parent) :
-    KMyMoneyViewBase(*new KInstitutionsViewPrivate(this), parent)
+KInstitutionsView::KInstitutionsView(QWidget* parent)
+    : KMyMoneyViewBase(*new KInstitutionsViewPrivate(this), parent)
 {
     Q_D(KInstitutionsView);
     d->init();
@@ -131,8 +128,8 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
         }
     });
 
-    connect(pActions[eMenu::Action::NewInstitution],    &QAction::triggered, this, &KInstitutionsView::slotNewInstitution);
-    connect(pActions[eMenu::Action::EditInstitution],   &QAction::triggered, this, &KInstitutionsView::slotEditInstitution);
+    connect(pActions[eMenu::Action::NewInstitution], &QAction::triggered, this, &KInstitutionsView::slotNewInstitution);
+    connect(pActions[eMenu::Action::EditInstitution], &QAction::triggered, this, &KInstitutionsView::slotEditInstitution);
     connect(pActions[eMenu::Action::DeleteInstitution], &QAction::triggered, this, &KInstitutionsView::slotDeleteInstitution);
 
     d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
@@ -160,7 +157,6 @@ bool KInstitutionsView::eventFilter(QObject* watched, QEvent* event)
     return QWidget::eventFilter(watched, event);
 }
 
-
 void KInstitutionsView::slotSettingsChanged()
 {
     Q_D(KInstitutionsView);
@@ -172,7 +168,6 @@ void KInstitutionsView::slotSettingsChanged()
     MyMoneyFile::instance()->institutionsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
 
-
 void KInstitutionsView::updateActions(const SelectedObjects& selections)
 {
     Q_D(KInstitutionsView);
@@ -181,8 +176,7 @@ void KInstitutionsView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::DeleteInstitution]->setEnabled(false);
 
     // check if there is anything todo and quit if not
-    if (selections.selection(SelectedObjects::Institution).count() < 1
-            && d->m_currentInstitution.id().isEmpty() ) {
+    if (selections.selection(SelectedObjects::Institution).count() < 1 && d->m_currentInstitution.id().isEmpty()) {
         return;
     }
 
@@ -201,13 +195,12 @@ void KInstitutionsView::updateActions(const SelectedObjects& selections)
     d->m_currentInstitution = inst;
 }
 
-void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate)
+void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney& netWorth, bool isApproximate)
 {
     Q_D(KInstitutionsView);
     const auto formattedValue = d->formatViewLabelValue(netWorth);
     d->updateViewLabel(d->ui->m_totalProfitsLabel,
-                       isApproximate ? i18nc("Approximate net worth", "Net Worth: ~%1", formattedValue)
-                       : i18n("Net Worth: %1", formattedValue));
+                       isApproximate ? i18nc("Approximate net worth", "Net Worth: ~%1", formattedValue) : i18n("Net Worth: %1", formattedValue));
 }
 
 void KInstitutionsView::slotNewInstitution()
@@ -226,7 +219,7 @@ void KInstitutionsView::slotNewInstitution()
             file->addInstitution(d->m_currentInstitution);
             ft.commit();
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::information(this, i18n("Cannot add institution: %1", QString::fromLatin1(e.what())));
         }
     }
@@ -244,7 +237,7 @@ void KInstitutionsView::slotEditInstitution()
     try {
         const auto file = MyMoneyFile::instance();
 
-        //grab a pointer to the view, regardless of it being a account or institution view.
+        // grab a pointer to the view, regardless of it being a account or institution view.
         auto institution = file->institution(d->m_currentInstitution.id());
 
         // bankSuccess is not checked anymore because d->m_file->institution will throw anyway
@@ -255,13 +248,13 @@ void KInstitutionsView::slotEditInstitution()
             try {
                 file->modifyInstitution(dlg->institution());
                 ft.commit();
-            } catch (const MyMoneyException &e) {
+            } catch (const MyMoneyException& e) {
                 KMessageBox::information(this, i18n("Unable to store institution: %1", QString::fromLatin1(e.what())));
             }
         }
         delete dlg;
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::information(this, i18n("Unable to edit institution: %1", QString::fromLatin1(e.what())));
     }
 }
@@ -284,10 +277,10 @@ void KInstitutionsView::slotDeleteInstitution()
         try {
             file->removeInstitution(institution);
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::information(this, i18n("Unable to delete institution: %1", QString::fromLatin1(e.what())));
         }
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::information(this, i18n("Unable to delete institution: %1", QString::fromLatin1(e.what())));
     }
 }

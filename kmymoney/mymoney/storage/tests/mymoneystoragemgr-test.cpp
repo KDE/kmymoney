@@ -4,28 +4,28 @@
 */
 
 #include "mymoneystoragemgr-test.h"
-#include <iostream>
 #include <QList>
 #include <QTest>
+#include <iostream>
 
 #include "mymoneystoragemgr_p.h"
 
-#include "mymoneytestutils.h"
-#include "mymoneymoney.h"
+#include "mymoneyaccount.h"
+#include "mymoneybudget.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneytag.h"
+#include "mymoneymoney.h"
 #include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
 #include "mymoneyschedule.h"
 #include "mymoneyschedule_p.h"
-#include "mymoneyreport.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneysplit_p.h"
+#include "mymoneytag.h"
+#include "mymoneytestutils.h"
 #include "mymoneytransaction.h"
-#include "mymoneybudget.h"
-#include "mymoneyprice.h"
 #include "onlinejob.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
@@ -213,7 +213,7 @@ void MyMoneyStorageMgrTest::testAccount()
     try {
         a = m->account("Unknown ID");
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
     m->commitTransaction();
     m->startTransaction();
@@ -227,7 +227,7 @@ void MyMoneyStorageMgrTest::testAccount()
         QCOMPARE(a.name(), QLatin1String("AccountName"));
         QCOMPARE(a.id(), QLatin1String("A000001"));
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -253,7 +253,7 @@ void MyMoneyStorageMgrTest::testAddNewAccount()
         MyMoneyAccount c("UnknownID", b);
         m->addAccount(c, a);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
     m->commitTransaction();
     m->startTransaction();
@@ -270,7 +270,7 @@ void MyMoneyStorageMgrTest::testAddNewAccount()
         QCOMPARE(m->d_func()->m_accountList["A000002"].accountList().count(), 1);
         QCOMPARE(m->d_func()->m_accountList[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)].accountList().count(), 0);
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -298,7 +298,7 @@ void MyMoneyStorageMgrTest::testInstitution()
     try {
         i = m->institution("Unknown ID");
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     QCOMPARE(m->dirty(), false);
@@ -308,7 +308,7 @@ void MyMoneyStorageMgrTest::testInstitution()
         i = m->institution("I000001");
         QCOMPARE(i.name(), QLatin1String("Inst Name"));
         QCOMPARE(m->dirty(), false);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -324,7 +324,7 @@ void MyMoneyStorageMgrTest::testAccount2Institution()
     try {
         i = m->institution("I000001");
         a = m->account("A000001");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -336,7 +336,7 @@ void MyMoneyStorageMgrTest::testAccount2Institution()
     try {
         m->modifyAccount(a);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
     m->commitTransaction();
     m->startTransaction();
@@ -354,7 +354,7 @@ void MyMoneyStorageMgrTest::testAccount2Institution()
         b = m->account("A000001");
         QCOMPARE(b.institutionId(), i.id());
         QCOMPARE(i.accountList().count(), 0);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -375,7 +375,7 @@ void MyMoneyStorageMgrTest::testModifyAccount()
         QCOMPARE(b.parentAccountId(), a.parentAccountId());
         QCOMPARE(b.name(), QLatin1String("New account name"));
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -385,7 +385,7 @@ void MyMoneyStorageMgrTest::testModifyAccount()
     try {
         m->modifyAccount(c);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // use different account type
@@ -395,7 +395,7 @@ void MyMoneyStorageMgrTest::testModifyAccount()
     try {
         m->modifyAccount(f);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // use different parent
@@ -403,7 +403,7 @@ void MyMoneyStorageMgrTest::testModifyAccount()
     try {
         m->modifyAccount(c);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -422,7 +422,7 @@ void MyMoneyStorageMgrTest::testModifyInstitution()
         i = m->institution("I000001");
         QCOMPARE(i.name(), QLatin1String("New inst name"));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -431,7 +431,7 @@ void MyMoneyStorageMgrTest::testModifyInstitution()
     try {
         m->modifyInstitution(f);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -495,7 +495,7 @@ void MyMoneyStorageMgrTest::testReparentAccount()
         QCOMPARE(m->expense().accountCount(), 2);
         QCOMPARE(m->account(ex1.id()).accountCount(), 2);
         QCOMPARE(ex3.parentAccountId(), ex1.id());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         std::cout << std::endl << e.what() << std::endl;
         QFAIL("Unexpected exception");
     }
@@ -525,7 +525,7 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         t1.addSplit(s);
 
         t1.setPostDate(QDate(2002, 5, 10));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -538,7 +538,7 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         QCOMPARE(t1.id(), QLatin1String("T000000000000000001"));
         QCOMPARE(t1.splitCount(), 2u);
         QCOMPARE(m->transactionCount(QString()), 1u);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -573,7 +573,7 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         t2.addSplit(s);
 
         t2.setPostDate(QDate(2002, 5, 9));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
     m->d_func()->m_dirty = false;
@@ -617,7 +617,7 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         QCOMPARE((*it).id(), QLatin1String("T000000000000000001"));
         ++it;
         QCOMPARE(it, list.cend());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -638,12 +638,12 @@ void MyMoneyStorageMgrTest::testBalance()
     testAddTransactions();
 
     QVERIFY(m->balance("A000001", QDate()).isZero());
-    QCOMPARE(m->balance("A000002", QDate()),  MyMoneyMoney(1200, 100));
-    QCOMPARE(m->balance("A000003", QDate()),  MyMoneyMoney(400, 100));
-    QCOMPARE(m->totalBalance("A000001", QDate()),  MyMoneyMoney(1600, 100));
-    QCOMPARE(m->balance("A000006", QDate(2002, 5, 9)),  MyMoneyMoney(-11600, 100));
-    QCOMPARE(m->balance("A000005", QDate(2002, 5, 10)),  MyMoneyMoney(-100000, 100));
-    QCOMPARE(m->balance("A000006", QDate(2002, 5, 10)),  MyMoneyMoney(88400, 100));
+    QCOMPARE(m->balance("A000002", QDate()), MyMoneyMoney(1200, 100));
+    QCOMPARE(m->balance("A000003", QDate()), MyMoneyMoney(400, 100));
+    QCOMPARE(m->totalBalance("A000001", QDate()), MyMoneyMoney(1600, 100));
+    QCOMPARE(m->balance("A000006", QDate(2002, 5, 9)), MyMoneyMoney(-11600, 100));
+    QCOMPARE(m->balance("A000005", QDate(2002, 5, 10)), MyMoneyMoney(-100000, 100));
+    QCOMPARE(m->balance("A000006", QDate(2002, 5, 10)), MyMoneyMoney(88400, 100));
 }
 
 void MyMoneyStorageMgrTest::testModifyTransaction()
@@ -669,14 +669,14 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
     t.modifySplit(s);
 
     try {
-        QCOMPARE(m->balance("A000004", QDate()),  MyMoneyMoney(10000, 100));
-        QCOMPARE(m->balance("A000006", QDate()),  MyMoneyMoney(100000 - 11600, 100));
-        QCOMPARE(m->totalBalance("A000001", QDate()),  MyMoneyMoney(1600, 100));
+        QCOMPARE(m->balance("A000004", QDate()), MyMoneyMoney(10000, 100));
+        QCOMPARE(m->balance("A000006", QDate()), MyMoneyMoney(100000 - 11600, 100));
+        QCOMPARE(m->totalBalance("A000001", QDate()), MyMoneyMoney(1600, 100));
         m->modifyTransaction(t);
-        QCOMPARE(m->balance("A000004", QDate()),  MyMoneyMoney(11000, 100));
-        QCOMPARE(m->balance("A000006", QDate()),  MyMoneyMoney(100000 - 12600, 100));
-        QCOMPARE(m->totalBalance("A000001", QDate()),  MyMoneyMoney(1600, 100));
-    } catch (const MyMoneyException &) {
+        QCOMPARE(m->balance("A000004", QDate()), MyMoneyMoney(11000, 100));
+        QCOMPARE(m->balance("A000006", QDate()), MyMoneyMoney(100000 - 12600, 100));
+        QCOMPARE(m->totalBalance("A000001", QDate()), MyMoneyMoney(1600, 100));
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -684,9 +684,9 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
     t.setPostDate(QDate(2002, 5, 11));
     try {
         m->modifyTransaction(t);
-        QCOMPARE(m->balance("A000004", QDate()),  MyMoneyMoney(11000, 100));
-        QCOMPARE(m->balance("A000006", QDate()),  MyMoneyMoney(100000 - 12600, 100));
-        QCOMPARE(m->totalBalance("A000001", QDate()),  MyMoneyMoney(1600, 100));
+        QCOMPARE(m->balance("A000004", QDate()), MyMoneyMoney(11000, 100));
+        QCOMPARE(m->balance("A000006", QDate()), MyMoneyMoney(100000 - 12600, 100));
+        QCOMPARE(m->totalBalance("A000001", QDate()), MyMoneyMoney(1600, 100));
 
         QMap<QString, QString>::const_iterator it_k;
         QMap<QString, MyMoneyTransaction>::const_iterator it_t;
@@ -718,11 +718,10 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
         QCOMPARE((*it).id(), QLatin1String("T000000000000000002"));
         ++it;
         QCOMPARE(it, list.cend());
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
-
 
 void MyMoneyStorageMgrTest::testRemoveUnusedAccount()
 {
@@ -736,32 +735,32 @@ void MyMoneyStorageMgrTest::testRemoveUnusedAccount()
     try {
         m->removeAccount(m->liability());
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         m->removeAccount(m->asset());
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         m->removeAccount(m->expense());
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     try {
         m->removeAccount(m->income());
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // try to remove the account still attached to the institution
     try {
         m->removeAccount(a);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // now really remove an account
@@ -779,7 +778,7 @@ void MyMoneyStorageMgrTest::testRemoveUnusedAccount()
         QCOMPARE(m->dirty(), true);
         i = m->institution("I000001");
         QCOMPARE(i.accountCount(), 0u);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -793,7 +792,7 @@ void MyMoneyStorageMgrTest::testRemoveUsedAccount()
     try {
         m->removeAccount(a);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -812,7 +811,7 @@ void MyMoneyStorageMgrTest::testRemoveInstitution()
         a.setInstitutionId(i.id());
         m->modifyAccount(a);
         QCOMPARE(i.accountCount(), 0u);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -828,7 +827,7 @@ void MyMoneyStorageMgrTest::testRemoveInstitution()
         QCOMPARE(m->dirty(), true);
         QVERIFY(a.institutionId().isEmpty());
         QCOMPARE(m->institutionCount(), 0u);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -849,7 +848,7 @@ void MyMoneyStorageMgrTest::testRemoveTransaction()
         /* removed with MyMoneyAccount::Transaction
           QCOMPARE(m->account("A000006").transactionCount(QString()), 1);
         */
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -891,32 +890,31 @@ void MyMoneyStorageMgrTest::testAddPayee()
         m->startTransaction();
         QCOMPARE(m->dirty(), true);
         QCOMPARE(m->d_func()->m_nextPayeeID, 1ul);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
-
 }
 
 void MyMoneyStorageMgrTest::testSetAccountName()
 {
     try {
         m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability), "Verbindlichkeiten");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
     try {
         m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset), QString("Vermögen"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
     try {
         m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense), "Ausgaben");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
     try {
         m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income), "Einnahmen");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -928,7 +926,7 @@ void MyMoneyStorageMgrTest::testSetAccountName()
     try {
         m->setAccountName("A000001", "New account name");
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -948,7 +946,7 @@ void MyMoneyStorageMgrTest::testModifyPayee()
         p = m->payee("P000001");
         QCOMPARE(p.name(), QLatin1String("New name"));
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -967,7 +965,7 @@ void MyMoneyStorageMgrTest::testRemovePayee()
         m->startTransaction();
         QCOMPARE(m->d_func()->m_payeeList.count(), 0);
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -985,17 +983,17 @@ void MyMoneyStorageMgrTest::testRemovePayee()
     try {
         m->modifyTransaction(tr);
         QFAIL("Expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
-    m->d_func()->m_nextPayeeID = 0;  // reset here, so that the
+    m->d_func()->m_nextPayeeID = 0; // reset here, so that the
     // testAddPayee will not fail
     testAddPayee();
 
     // check that it works when the payee exists
     try {
         m->modifyTransaction(tr);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -1005,7 +1003,7 @@ void MyMoneyStorageMgrTest::testRemovePayee()
     try {
         m->removePayee(p);
         QFAIL("Expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
     QCOMPARE(m->d_func()->m_payeeList.count(), 1);
 }
@@ -1023,7 +1021,7 @@ void MyMoneyStorageMgrTest::testAddTag()
         m->startTransaction();
         QCOMPARE(m->dirty(), true);
         QCOMPARE(m->d_func()->m_nextTagID, 1ul);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -1044,7 +1042,7 @@ void MyMoneyStorageMgrTest::testModifyTag()
         ta = m->tag("G000001");
         QCOMPARE(ta.name(), QLatin1String("New name"));
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -1063,7 +1061,7 @@ void MyMoneyStorageMgrTest::testRemoveTag()
         m->startTransaction();
         QCOMPARE(m->d_func()->m_tagList.count(), 0);
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -1083,17 +1081,17 @@ void MyMoneyStorageMgrTest::testRemoveTag()
     try {
         m->modifyTransaction(tr);
         QFAIL("Expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
-    m->d_func()->m_nextTagID = 0;  // reset here, so that the
+    m->d_func()->m_nextTagID = 0; // reset here, so that the
     // testAddTag will not fail
     testAddTag();
 
     // check that it works when the tag exists
     try {
         m->modifyTransaction(tr);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -1103,7 +1101,7 @@ void MyMoneyStorageMgrTest::testRemoveTag()
     try {
         m->removeTag(ta);
         QFAIL("Expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
     QCOMPARE(m->d_func()->m_tagList.count(), 1);
 }
@@ -1142,14 +1140,14 @@ void MyMoneyStorageMgrTest::testRemoveAccountFromTree()
         try {
             b = m->account(b.id());
             QFAIL("Exception expected");
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
         }
         QCOMPARE(a.accountList().count(), 1);
         QCOMPARE(m->account(a.accountList()[0]).name(), QLatin1String("Acc C"));
 
         QCOMPARE(c.accountList().count(), 0);
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }
@@ -1166,7 +1164,7 @@ void MyMoneyStorageMgrTest::testPayeeName()
         p = m->payeeByName(name);
         QCOMPARE(p.name(), QLatin1String("THB"));
         QCOMPARE(p.id(), QLatin1String("P000001"));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -1175,7 +1173,7 @@ void MyMoneyStorageMgrTest::testPayeeName()
     try {
         p = m->payeeByName(name);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -1191,7 +1189,7 @@ void MyMoneyStorageMgrTest::testTagName()
         ta = m->tagByName(name);
         QCOMPARE(ta.name(), QLatin1String("THB"));
         QCOMPARE(ta.id(), QLatin1String("G000001"));
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -1200,12 +1198,12 @@ void MyMoneyStorageMgrTest::testTagName()
     try {
         ta = m->tagByName(name);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
 // disabled because of no real world use case
-//void MyMoneyStorageMgrTest::testAssignment()
+// void MyMoneyStorageMgrTest::testAssignment()
 //{
 //  testAddTransactions();
 
@@ -1217,7 +1215,7 @@ void MyMoneyStorageMgrTest::testTagName()
 //  testEquality(&test);
 //}
 
-void MyMoneyStorageMgrTest::testEquality(const MyMoneyStorageMgr *t)
+void MyMoneyStorageMgrTest::testEquality(const MyMoneyStorageMgr* t)
 {
     QCOMPARE(m->user().name(), t->user().name());
     QCOMPARE(m->user().address(), t->user().address());
@@ -1253,12 +1251,12 @@ void MyMoneyStorageMgrTest::testEquality(const MyMoneyStorageMgr *t)
     QCOMPARE(m->d_func()->m_transactionList.keys(), t->d_func()->m_transactionList.keys());
     QCOMPARE(m->d_func()->m_transactionList.values(), t->d_func()->m_transactionList.values());
 
-// QCOMPARE(m->d_func()->m_scheduleList.keys(), t->m_scheduleList.keys());
-// QCOMPARE(m->d_func()->m_scheduleList.values(), t->m_scheduleList.values());
+    // QCOMPARE(m->d_func()->m_scheduleList.keys(), t->m_scheduleList.keys());
+    // QCOMPARE(m->d_func()->m_scheduleList.values(), t->m_scheduleList.values());
 }
 
 // disabled because of no real world use case
-//void MyMoneyStorageMgrTest::testDuplicate()
+// void MyMoneyStorageMgrTest::testDuplicate()
 //{
 //  const MyMoneyStorageMgr* t;
 
@@ -1276,8 +1274,7 @@ void MyMoneyStorageMgrTest::testAddSchedule()
      * be checked to make sure its a valid account id.  The
      * tests currently fail because no splits are defined
      * for the schedules transaction.
-    */
-
+     */
 
     try {
         QCOMPARE(m->d_func()->m_scheduleList.count(), 0);
@@ -1294,7 +1291,8 @@ void MyMoneyStorageMgrTest::testAddSchedule()
 
         MyMoneySchedule schedule("Sched-Name",
                                  Schedule::Type::Deposit,
-                                 Schedule::Occurrence::Daily, 1,
+                                 Schedule::Occurrence::Daily,
+                                 1,
                                  Schedule::PaymentType::ManualDeposit,
                                  QDate(),
                                  QDate(),
@@ -1307,14 +1305,15 @@ void MyMoneyStorageMgrTest::testAddSchedule()
         QCOMPARE(m->d_func()->m_scheduleList.count(), 1);
         QCOMPARE(schedule.id(), QLatin1String("SCH000001"));
         QCOMPARE(m->d_func()->m_scheduleList["SCH000001"].id(), QLatin1String("SCH000001"));
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
     try {
         MyMoneySchedule schedule("Sched-Name",
                                  Schedule::Type::Deposit,
-                                 Schedule::Occurrence::Daily, 1,
+                                 Schedule::Occurrence::Daily,
+                                 1,
                                  Schedule::PaymentType::ManualDeposit,
                                  QDate(),
                                  QDate(),
@@ -1322,7 +1321,7 @@ void MyMoneyStorageMgrTest::testAddSchedule()
                                  false);
         m->addSchedule(schedule);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -1338,7 +1337,7 @@ void MyMoneyStorageMgrTest::testSchedule()
     try {
         m->schedule("SCH000002");
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -1352,7 +1351,7 @@ void MyMoneyStorageMgrTest::testModifySchedule()
     try {
         m->modifySchedule(sched);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     sched = m->schedule("SCH000001");
@@ -1362,10 +1361,9 @@ void MyMoneyStorageMgrTest::testModifySchedule()
         QCOMPARE(m->d_func()->m_scheduleList.count(), 1);
         QCOMPARE(m->d_func()->m_scheduleList["SCH000001"].name(), QLatin1String("New Sched-Name"));
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
-
 }
 
 void MyMoneyStorageMgrTest::testRemoveSchedule()
@@ -1381,7 +1379,7 @@ void MyMoneyStorageMgrTest::testRemoveSchedule()
         m->removeSchedule(sched);
         m->commitTransaction();
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         m->rollbackTransaction();
     }
     m->startTransaction();
@@ -1392,7 +1390,7 @@ void MyMoneyStorageMgrTest::testRemoveSchedule()
         m->commitTransaction();
         QCOMPARE(m->d_func()->m_scheduleList.count(), 0);
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         m->rollbackTransaction();
         QFAIL("Unexpected exception");
     }
@@ -1405,7 +1403,6 @@ void MyMoneyStorageMgrTest::testScheduleList()
     QDate notOverdue = testDate.addDays(2);
     QDate overdue = testDate.addDays(-2);
 
-
     MyMoneyTransaction t1;
     MyMoneySplit s1, s2;
     s1.setAccountId("A000001");
@@ -1416,14 +1413,8 @@ void MyMoneyStorageMgrTest::testScheduleList()
     MyMoneyAccount a2("A000002", MyMoneyAccount());
     m->addAccount(a1);
     m->addAccount(a2);
-    MyMoneySchedule schedule1("Schedule 1",
-                              Schedule::Type::Bill,
-                              Schedule::Occurrence::Once, 1,
-                              Schedule::PaymentType::DirectDebit,
-                              QDate(),
-                              QDate(),
-                              false,
-                              false);
+    MyMoneySchedule
+        schedule1("Schedule 1", Schedule::Type::Bill, Schedule::Occurrence::Once, 1, Schedule::PaymentType::DirectDebit, QDate(), QDate(), false, false);
     t1.setPostDate(notOverdue);
     schedule1.setTransaction(t1);
     schedule1.setLastPayment(notOverdue);
@@ -1436,14 +1427,8 @@ void MyMoneyStorageMgrTest::testScheduleList()
     t2.addSplit(s4);
     MyMoneyAccount a3("A000003", MyMoneyAccount());
     m->addAccount(a3);
-    MyMoneySchedule schedule2("Schedule 2",
-                              Schedule::Type::Deposit,
-                              Schedule::Occurrence::Daily, 1,
-                              Schedule::PaymentType::DirectDeposit,
-                              QDate(),
-                              QDate(),
-                              false,
-                              false);
+    MyMoneySchedule
+        schedule2("Schedule 2", Schedule::Type::Deposit, Schedule::Occurrence::Daily, 1, Schedule::PaymentType::DirectDeposit, QDate(), QDate(), false, false);
     t2.setPostDate(notOverdue.addDays(1));
     schedule2.setTransaction(t2);
     schedule2.setLastPayment(notOverdue.addDays(1));
@@ -1460,14 +1445,8 @@ void MyMoneyStorageMgrTest::testScheduleList()
     m->addAccount(a5);
     m->addAccount(a6);
     m->addAccount(a7);
-    MyMoneySchedule schedule3("Schedule 3",
-                              Schedule::Type::Transfer,
-                              Schedule::Occurrence::Weekly, 1,
-                              Schedule::PaymentType::Other,
-                              QDate(),
-                              QDate(),
-                              false,
-                              false);
+    MyMoneySchedule
+        schedule3("Schedule 3", Schedule::Type::Transfer, Schedule::Occurrence::Weekly, 1, Schedule::PaymentType::Other, QDate(), QDate(), false, false);
     t3.setPostDate(notOverdue.addDays(2));
     schedule3.setTransaction(t3);
     schedule3.setLastPayment(notOverdue.addDays(2));
@@ -1480,7 +1459,8 @@ void MyMoneyStorageMgrTest::testScheduleList()
     t4.addSplit(s8);
     MyMoneySchedule schedule4("Schedule 4",
                               Schedule::Type::Bill,
-                              Schedule::Occurrence::Weekly, 1,
+                              Schedule::Occurrence::Weekly,
+                              1,
                               Schedule::PaymentType::WriteChecque,
                               QDate(),
                               notOverdue.addDays(31),
@@ -1494,7 +1474,7 @@ void MyMoneyStorageMgrTest::testScheduleList()
         m->addSchedule(schedule2);
         m->addSchedule(schedule3);
         m->addSchedule(schedule4);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         qDebug("Error: %s", e.what());
         QFAIL("Unexpected exception");
     }
@@ -1502,84 +1482,56 @@ void MyMoneyStorageMgrTest::testScheduleList()
     QList<MyMoneySchedule> list;
 
     // no filter
-    list = m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
-                           QDate(), QDate(), false);
+    list = m->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, QDate(), QDate(), false);
     QCOMPARE(list.count(), 4);
 
     // filter by type
-    list = m->scheduleList("", Schedule::Type::Bill, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
-                           QDate(), QDate(), false);
+    list = m->scheduleList("", Schedule::Type::Bill, Schedule::Occurrence::Any, Schedule::PaymentType::Any, QDate(), QDate(), false);
     QCOMPARE(list.count(), 2);
     QCOMPARE(list[0].name(), QLatin1String("Schedule 1"));
     QCOMPARE(list[1].name(), QLatin1String("Schedule 4"));
 
     // filter by occurrence
-    list = m->scheduleList("", Schedule::Type::Any,
-                           Schedule::Occurrence::Daily, Schedule::PaymentType::Any,
-                           QDate(), QDate(), false);
+    list = m->scheduleList("", Schedule::Type::Any, Schedule::Occurrence::Daily, Schedule::PaymentType::Any, QDate(), QDate(), false);
     QCOMPARE(list.count(), 1);
     QCOMPARE(list[0].name(), QLatin1String("Schedule 2"));
 
     // filter by payment type
-    list = m->scheduleList("", Schedule::Type::Any,
-                           Schedule::Occurrence::Any,
-                           Schedule::PaymentType::DirectDeposit,
-                           QDate(), QDate(), false);
+    list = m->scheduleList("", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::DirectDeposit, QDate(), QDate(), false);
     QCOMPARE(list.count(), 1);
     QCOMPARE(list[0].name(), QLatin1String("Schedule 2"));
 
     // filter by account
-    list = m->scheduleList("A01", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
-                           QDate(), QDate(), false);
+    list = m->scheduleList("A01", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, QDate(), QDate(), false);
     QCOMPARE(list.count(), 0);
-    list = m->scheduleList("A000001", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
-                           QDate(), QDate(), false);
+    list = m->scheduleList("A000001", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, QDate(), QDate(), false);
     QCOMPARE(list.count(), 2);
-    list = m->scheduleList("A000002", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
-                           QDate(), QDate(), false);
+    list = m->scheduleList("A000002", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, QDate(), QDate(), false);
     QCOMPARE(list.count(), 1);
 
     // filter by start date
-    list = m->scheduleList("", Schedule::Type::Any,
-                           Schedule::Occurrence::Any,
-                           Schedule::PaymentType::Any,
-                           notOverdue.addDays(31),
-                           QDate(), false);
+    list = m->scheduleList("", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, notOverdue.addDays(31), QDate(), false);
     QCOMPARE(list.count(), 3);
     QCOMPARE(list[0].name(), QLatin1String("Schedule 2"));
     QCOMPARE(list[1].name(), QLatin1String("Schedule 3"));
     QCOMPARE(list[2].name(), QLatin1String("Schedule 4"));
 
     // filter by end date
-    list = m->scheduleList("", Schedule::Type::Any,
-                           Schedule::Occurrence::Any,
-                           Schedule::PaymentType::Any,
-                           QDate(),
-                           notOverdue.addDays(1),
-                           false);
+    list = m->scheduleList("", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, QDate(), notOverdue.addDays(1), false);
     QCOMPARE(list.count(), 3);
     QCOMPARE(list[0].name(), QLatin1String("Schedule 1"));
     QCOMPARE(list[1].name(), QLatin1String("Schedule 2"));
     QCOMPARE(list[2].name(), QLatin1String("Schedule 4"));
 
     // filter by start and end date
-    list = m->scheduleList("", Schedule::Type::Any,
-                           Schedule::Occurrence::Any,
-                           Schedule::PaymentType::Any,
-                           notOverdue.addDays(-1),
-                           notOverdue.addDays(1),
-                           false);
+    list =
+        m->scheduleList("", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, notOverdue.addDays(-1), notOverdue.addDays(1), false);
     QCOMPARE(list.count(), 2);
     QCOMPARE(list[0].name(), QLatin1String("Schedule 1"));
     QCOMPARE(list[1].name(), QLatin1String("Schedule 2"));
 
     // filter by overdue status
-    list = m->scheduleList("", Schedule::Type::Any,
-                           Schedule::Occurrence::Any,
-                           Schedule::PaymentType::Any,
-                           QDate(),
-                           QDate(),
-                           true);
+    list = m->scheduleList("", Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any, QDate(), QDate(), true);
     QCOMPARE(list.count(), 1);
     QCOMPARE(list[0].name(), QLatin1String("Schedule 4"));
 }
@@ -1596,7 +1548,7 @@ void MyMoneyStorageMgrTest::testAddCurrency()
         QCOMPARE(m->d_func()->m_currencyList.count(), 1);
         QCOMPARE(m->d_func()->m_currencyList["EUR"].name(), QLatin1String("Euro"));
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -1604,7 +1556,7 @@ void MyMoneyStorageMgrTest::testAddCurrency()
     try {
         m->addCurrency(curr);
         QFAIL("Expected exception missing");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         m->commitTransaction();
         m->startTransaction();
         QCOMPARE(m->dirty(), false);
@@ -1624,7 +1576,7 @@ void MyMoneyStorageMgrTest::testModifyCurrency()
         QCOMPARE(m->d_func()->m_currencyList.count(), 1);
         QCOMPARE(m->d_func()->m_currencyList["EUR"].name(), QLatin1String("EURO"));
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -1634,7 +1586,7 @@ void MyMoneyStorageMgrTest::testModifyCurrency()
     try {
         m->modifyCurrency(unknownCurr);
         QFAIL("Expected exception missing");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         m->commitTransaction();
         m->startTransaction();
         QCOMPARE(m->dirty(), false);
@@ -1652,7 +1604,7 @@ void MyMoneyStorageMgrTest::testRemoveCurrency()
         m->startTransaction();
         QCOMPARE(m->d_func()->m_currencyList.count(), 0);
         QCOMPARE(m->dirty(), true);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
@@ -1662,7 +1614,7 @@ void MyMoneyStorageMgrTest::testRemoveCurrency()
     try {
         m->removeCurrency(unknownCurr);
         QFAIL("Expected exception missing");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         m->commitTransaction();
         m->startTransaction();
         QCOMPARE(m->dirty(), false);
@@ -1682,14 +1634,14 @@ void MyMoneyStorageMgrTest::testCurrency()
         QCOMPARE(m->dirty(), false);
         QCOMPARE(newCurr.id(), curr.id());
         QCOMPARE(newCurr.name(), curr.name());
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
     try {
         m->currency("DEM");
         QFAIL("Expected exception missing");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         m->commitTransaction();
         m->startTransaction();
         QCOMPARE(m->dirty(), false);
@@ -1710,7 +1662,7 @@ void MyMoneyStorageMgrTest::testCurrencyList()
         QCOMPARE(m->d_func()->m_currencyList.count(), 2);
         QCOMPARE(m->currencyList().count(), 2);
         QCOMPARE(m->dirty(), false);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -1837,6 +1789,5 @@ void MyMoneyStorageMgrTest::testAddOnlineJob()
     QCOMPARE(m->d_func()->m_nextOnlineJobID, 1ul);
     QCOMPARE(m->dirty(), true);
     QCOMPARE(m->d_func()->m_onlineJobList.count(), 1);
-    QVERIFY(! m->d_func()->m_onlineJobList["O000001"].isNull());
-
+    QVERIFY(!m->d_func()->m_onlineJobList["O000001"].isNull());
 }

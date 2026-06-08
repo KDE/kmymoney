@@ -9,9 +9,9 @@
 // QT Includes
 
 #include <QDebug>
-#include <QString>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,15 +23,15 @@
 
 #include "mymoneyfile.h"
 
-struct PayeesModel::Private
-{
+struct PayeesModel::Private {
     Private(PayeesModel* parent)
         : q(parent)
         , emptyPayeeModel(nullptr)
-    {}
+    {
+    }
 
-    PayeesModel*            q;
-    PayeesModelEmptyPayee*  emptyPayeeModel;
+    PayeesModel* q;
+    PayeesModelEmptyPayee* emptyPayeeModel;
 };
 
 PayeesModelEmptyPayee::PayeesModelEmptyPayee(QObject* parent)
@@ -81,7 +81,6 @@ PayeesModelEmptyPayee* PayeesModel::emptyPayee()
     return d->emptyPayeeModel;
 }
 
-
 int PayeesModel::columnCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent);
@@ -91,7 +90,7 @@ int PayeesModel::columnCount(const QModelIndex& parent) const
 QVariant PayeesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+        switch (section) {
         case 0:
             return i18n("Payee");
             break;
@@ -184,7 +183,7 @@ bool PayeesModel::setData(const QModelIndex& index, const QVariant& value, int r
     MyMoneyPayee& payee = static_cast<TreeItem<MyMoneyPayee>*>(index.internalPointer())->dataRef();
 
     bool rc = true;
-    switch(role) {
+    switch (role) {
     case eMyMoney::Model::PayeeNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
@@ -249,7 +248,7 @@ bool PayeesModel::setData(const QModelIndex& index, const QVariant& value, int r
     if (rc) {
         setDirty();
         const auto topLeft = PayeesModel::index(index.row(), 0);
-        const auto bottomRight = PayeesModel::index(index.row(), columnCount()-1);
+        const auto bottomRight = PayeesModel::index(index.row(), columnCount() - 1);
         Q_EMIT dataChanged(topLeft, bottomRight);
     }
     return rc;

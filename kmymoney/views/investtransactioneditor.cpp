@@ -20,8 +20,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KDescendantsProxyModel>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -123,7 +123,8 @@ public:
         for (int row = 0; row < rows; ++row) {
             const auto idx = model->index(row, 0);
             qDebug() << row << idx.data(eMyMoney::Model::IdRole).toString() << idx.data(eMyMoney::Model::SplitAccountIdRole).toString()
-                     << idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().formatMoney(100) << idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().formatMoney(100);
+                     << idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().formatMoney(100)
+                     << idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().formatMoney(100);
         }
     }
     void createStatusEntry(eMyMoney::Split::State status);
@@ -246,7 +247,7 @@ void InvestTransactionEditor::Private::addSplits(MyMoneyTransaction& t, SplitMod
         // an empty split and will be added later.
         try {
             s = t.splitById(splitId);
-        } catch(const MyMoneyException&) {
+        } catch (const MyMoneyException&) {
         }
         s.setMemo(idx.data(eMyMoney::Model::SplitMemoRole).toString());
         s.setAccountId(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
@@ -425,7 +426,9 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
         }
 
         if (needWarning) {
-            ui->infoMessage->setText(i18nc("@info:usagetip", "The transaction commodity has been changed which will possibly make all price information invalid. Please check them."));
+            ui->infoMessage->setText(
+                i18nc("@info:usagetip",
+                      "The transaction commodity has been changed which will possibly make all price information invalid. Please check them."));
             if (!ui->infoMessage->isShowAnimationRunning()) {
                 ui->infoMessage->animatedShow();
                 Q_EMIT q->editorLayoutChanged();
@@ -573,7 +576,7 @@ QModelIndex InvestTransactionEditor::Private::adjustToSecuritySplitIdx(const QMo
 
     const auto rows = first.data(eMyMoney::Model::TransactionSplitCountRole).toInt();
     const auto endRow = first.row() + rows;
-    for(int row = first.row(); row < endRow; ++row) {
+    for (int row = first.row(); row < endRow; ++row) {
         const auto idx = index.model()->index(row, 0);
         const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
@@ -618,7 +621,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
     }
 
     const auto widget = ui->sharesAmountEdit;
-    switch(currentActivity->type()) {
+    switch (currentActivity->type()) {
     default:
         if (ui->securityAccountCombo->isEnabled()) {
             WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Number of shares"));
@@ -645,7 +648,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
         break;
     }
 
-    switch(currentActivity->priceRequired()) {
+    switch (currentActivity->priceRequired()) {
     case Invest::Activity::Unused:
         break;
     case Invest::Activity::Optional:
@@ -657,7 +660,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
     }
 
     QString accountId;
-    switch(currentActivity->assetAccountRequired()) {
+    switch (currentActivity->assetAccountRequired()) {
     case Invest::Activity::Unused:
         break;
     case Invest::Activity::Optional:
@@ -807,21 +810,21 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->ui->securityAccountCombo->completer()->setCaseSensitivity(Qt::CaseInsensitive);
     d->ui->securityAccountCombo->completer()->setFilterMode(Qt::MatchContains);
 
-    d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability } );
+    d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type>{eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability});
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setSourceModel(accountsModel);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->assetAccountCombo->setModel(d->accountsModel);
     d->ui->assetAccountCombo->setSplitActionVisible(false);
 
-    d->feesModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Expense });
+    d->feesModel->addAccountGroup(QVector<eMyMoney::Account::Type>{eMyMoney::Account::Type::Expense});
     d->feesModel->setSourceModel(accountsModel);
     d->feesModel->sort(AccountsModel::Column::AccountName);
     d->ui->feesCombo->setModel(d->feesModel);
     d->feeSplitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->feeSplitModel);
     connect(d->feeSplitHelper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->feesAmountEdit, &AmountEdit::setReadOnly);
 
-    d->interestModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Income });
+    d->interestModel->addAccountGroup(QVector<eMyMoney::Account::Type>{eMyMoney::Account::Type::Income});
     d->interestModel->setSourceModel(accountsModel);
     d->interestModel->sort(AccountsModel::Column::AccountName);
     d->ui->interestCombo->setModel(d->interestModel);
@@ -1059,7 +1062,6 @@ void InvestTransactionEditor::updateTotalAmount()
     }
 }
 
-
 void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     // we may also get here during saving the transaction as
@@ -1156,7 +1158,8 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->ui->statusCombo->setCurrentIndex(static_cast<int>(d->stockSplit.reconcileFlag()));
 
         // Avoid updating other widgets (connected through signal/slot) during loading
-        const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0,0), eMyMoney::Model::IdRole, d->stockSplit.accountId(), 1, Qt::MatchFixedString);
+        const auto indexes =
+            d->securitiesModel->match(d->securitiesModel->index(0, 0), eMyMoney::Model::IdRole, d->stockSplit.accountId(), 1, Qt::MatchFixedString);
         if (!indexes.isEmpty()) {
             d->ui->securityAccountCombo->setCurrentIndex(indexes.first().row());
         }
@@ -1217,7 +1220,7 @@ void InvestTransactionEditor::activityChanged(int index)
             oldType = d->currentActivity->type();
         }
         const auto previousActivity = d->currentActivity;
-        switch(type) {
+        switch (type) {
         default:
         case eMyMoney::Split::InvestmentTransactionType::BuyShares:
             d->currentActivity = new Invest::Buy(this);
@@ -1341,7 +1344,7 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
 
     d->currentActivity->adjustStockSplit(d->stockSplit);
 
-    QList<MyMoneySplit> resultSplits;  // concatenates splits for easy processing
+    QList<MyMoneySplit> resultSplits; // concatenates splits for easy processing
 
     // now update and add what we have in the models
     if (d->currentActivity->assetAccountRequired() != Invest::Activity::Unused) {

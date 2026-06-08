@@ -23,22 +23,24 @@
 
 #include "ui_kaccountpage.h"
 
+#include "kcategoriespage.h"
+#include "kguiutils.h"
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
-#include "kcategoriespage.h"
 #include "wizardpage.h"
-#include "kguiutils.h"
 
-namespace NewUserWizard
-{
-AccountPage::AccountPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new AccountPagePrivate(wizard), stepCount, this, wizard)       // don't inc. the step count here
+namespace NewUserWizard {
+AccountPage::AccountPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new AccountPagePrivate(wizard), stepCount, this, wizard) // don't inc. the step count here
 {
     Q_D(AccountPage);
     d->ui->setupUi(this);
     d->m_mandatoryGroup->add(d->ui->m_accountNameEdit);
-    connect(d->m_mandatoryGroup, static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->m_mandatoryGroup,
+            static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged),
+            object(),
+            &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_haveCheckingAccountButton, &QAbstractButton::toggled, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     d->ui->m_openingDateEdit->setDate(QDate(QDate::currentDate().year(), 1, 1));
 }

@@ -8,16 +8,16 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
+#include <QDebug>
 #include <QFile>
 #include <QList>
-#include <QDebug>
 #include <QStringBuilder>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -50,9 +50,11 @@ CsvWriter::~CsvWriter()
 }
 
 void CsvWriter::write(const QString& filename,
-                      const QString& accountId, const bool accountData,
+                      const QString& accountId,
+                      const bool accountData,
                       const bool categoryData,
-                      const QDate& startDate, const QDate& endDate,
+                      const QDate& startDate,
+                      const QDate& endDate,
                       const QString& separator)
 {
     m_separator = separator;
@@ -74,13 +76,13 @@ void CsvWriter::write(const QString& filename,
             }
             Q_EMIT signalProgress(-1, -1);
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::error(nullptr, i18n("Unexpected exception '%1'", QString::fromLatin1(e.what())));
         }
 
         csvFile.close();
         qDebug() << i18n("Export completed.\n");
-        delete m_plugin->exporterDialog();  //  Can now delete as export finished
+        delete m_plugin->exporterDialog(); //  Can now delete as export finished
     } else {
         KMessageBox::error(nullptr, i18n("Unable to open file '%1' for writing", filename).append(QString::fromLatin1(": ") + csvFile.errorString()));
     }
@@ -143,7 +145,7 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
     stream << data << result << QLatin1Char('\n');
 }
 
-void CsvWriter::writeCategoryEntries(QTextStream &s)
+void CsvWriter::writeCategoryEntries(QTextStream& s)
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyAccount income;
@@ -162,7 +164,7 @@ void CsvWriter::writeCategoryEntries(QTextStream &s)
     }
 }
 
-void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, const QString& leadIn)
+void CsvWriter::writeCategoryEntry(QTextStream& s, const QString& accountId, const QString& leadIn)
 {
     const MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
     QString name = format(acc.name());
@@ -175,7 +177,6 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
     for (const auto& sAccount : qAsConst(accountList))
         writeCategoryEntry(s, sAccount, name);
 }
-
 
 void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString& accountId, const int count)
 {
@@ -241,7 +242,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
     m_map.insert(date, str);
 }
 
-void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const int splitCount, const int lastEntry)
+void CsvWriter::writeSplitEntry(QString& str, const MyMoneySplit& split, const int splitCount, const int lastEntry)
 {
     if (m_firstSplit) {
         m_firstSplit = false;
@@ -313,12 +314,12 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         if (typ == eMyMoney::Account::Type::Stock) {
             switch (lst[i].reconcileFlag()) {
             case eMyMoney::Split::State::Cleared:
-                strStatus =  QLatin1Char('C');
+                strStatus = QLatin1Char('C');
                 break;
 
             case eMyMoney::Split::State::Reconciled:
             case eMyMoney::Split::State::Frozen:
-                strStatus =  QLatin1Char('R');
+                strStatus = QLatin1Char('R');
                 break;
 
             default:
@@ -336,7 +337,8 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         //
         //  eMyMoney::Account::Type::Checkings.
         //
-        if ((acc.accountType() == eMyMoney::Account::Type::Checkings) || (acc.accountType() == eMyMoney::Account::Type::Cash) || (acc.accountType() == eMyMoney::Account::Type::Savings)) {
+        if ((acc.accountType() == eMyMoney::Account::Type::Checkings) || (acc.accountType() == eMyMoney::Account::Type::Cash)
+            || (acc.accountType() == eMyMoney::Account::Type::Savings)) {
             chkAccntId = (*itSplit).accountId();
             chkAccnt = file->account(chkAccntId).name();
             strCheckingAccountName = format(file->accountToCategory(chkAccntId));
@@ -355,7 +357,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
             qty = (*itSplit).shares();
             value = (*itSplit).value();
             strFees = format(value, (*itSplit).accountId());
-        }  else if (acc.accountType() == eMyMoney::Account::Type::Stock) {
+        } else if (acc.accountType() == eMyMoney::Account::Type::Stock) {
             //
             //  eMyMoney::Account::Type::Stock.
             //
@@ -455,7 +457,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         if (strFees.isEmpty()) {
             strFees = m_separator;
         }
-    }  //  end of itSplit loop
+    } //  end of itSplit loop
     str += strAccName + strAccSymbol + strAction + strAmount + strQuantity + strPrice + strInterest + strFees + strCheckingAccountName + strMemo + strStatus;
     QString date = t.postDate().toString(Qt::ISODate);
     m_map.insert(date, str);

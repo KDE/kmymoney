@@ -13,7 +13,6 @@
 #ifndef AQ_BANKING_CPP_H
 #define AQ_BANKING_CPP_H
 
-
 #include <aqbanking/banking.h>
 #include <aqbanking/system.h>
 
@@ -35,89 +34,82 @@
 class AB_Banking
 {
 private:
-  AB_BANKING *_banking;
+    AB_BANKING* _banking;
 
 public:
-  AB_Banking(const char *appname,
-             const char *fname);
-  virtual ~AB_Banking();
+    AB_Banking(const char* appname, const char* fname);
+    virtual ~AB_Banking();
 
+    AB_BANKING* getCInterface();
 
-  AB_BANKING *getCInterface();
+    /**
+     * See @ref AB_Banking_Init
+     */
+    virtual int init();
 
+    /**
+     * See @ref AB_Banking_Fini
+     */
+    virtual int fini();
 
-  /**
-   * See @ref AB_Banking_Init
-   */
-  virtual int init();
+    /**
+     * Returns the application name as given to @ref AB_Banking_new.
+     */
+    const char* getAppName();
 
-  /**
-   * See @ref AB_Banking_Fini
-   */
-  virtual int fini();
+    /**
+     * Returns a list of pointers to currently known accounts.
+     * Please note that the pointers in this list are still owned by
+     * AqBanking, so you MUST NOT free them.
+     * However, destroying the list will not free the accounts, so it is
+     * safe to do that.
+     */
+    std::list<AB_ACCOUNT_SPEC*> getAccounts();
 
-  /**
-   * Returns the application name as given to @ref AB_Banking_new.
-   */
-  const char *getAppName();
+    /**
+     * This function does an account lookup based on the given unique id.
+     * This id is assigned by AqBanking when an account is created.
+     * The pointer returned is still owned by AqBanking, so you MUST NOT free
+     * it.
+     */
+    AB_ACCOUNT_SPEC* getAccount(uint32_t uniqueId);
 
-  /**
-   * Returns a list of pointers to currently known accounts.
-   * Please note that the pointers in this list are still owned by
-   * AqBanking, so you MUST NOT free them.
-   * However, destroying the list will not free the accounts, so it is
-   * safe to do that.
-   */
-  std::list<AB_ACCOUNT_SPEC*> getAccounts();
+    std::list<std::string> getActiveProviders();
 
-  /**
-   * This function does an account lookup based on the given unique id.
-   * This id is assigned by AqBanking when an account is created.
-   * The pointer returned is still owned by AqBanking, so you MUST NOT free
-   * it.
-   */
-  AB_ACCOUNT_SPEC *getAccount(uint32_t uniqueId);
+    int getUserDataDir(GWEN_BUFFER* buf) const;
 
-  std::list<std::string> getActiveProviders();
+    void setAccountAlias(AB_ACCOUNT_SPEC* a, const char* alias);
 
-  int getUserDataDir(GWEN_BUFFER *buf) const ;
+    /**
+     * Provide interface to setup ZKA FinTS registration
+     */
+    void registerFinTs(const char* regKey, const char* version) const;
 
-  void setAccountAlias(AB_ACCOUNT_SPEC *a, const char *alias);
+    /** @name Enqueueing, Dequeueing and Executing Jobs
+     *
+     * Enqueued jobs are preserved across shutdowns. As soon as a job has been
+     * sent to the appropriate backend it will be removed from the queue.
+     * Only those jobs are saved/reloaded which have been enqueued but never
+     * presented to the backend. This means after calling
+     * @ref AB_Banking_ExecuteQueue only those jobs are still in the queue which
+     * have not been processed (e.g. because they belonged to a second backend
+     * but the user aborted while the jobs for a first backend were in process).
+     */
+    /*@{*/
+    /**
+     * This function sends all jobs in the list to their corresponding backends
+     * and allows that backend to process it.
+     */
+    virtual int executeJobs(AB_TRANSACTION_LIST2* jl, AB_IMEXPORTER_CONTEXT* ctx);
 
-  /**
-   * Provide interface to setup ZKA FinTS registration
-   */
-  void registerFinTs(const char* regKey, const char* version) const;
+    /*@}*/
 
-  /** @name Enqueueing, Dequeueing and Executing Jobs
-   *
-   * Enqueued jobs are preserved across shutdowns. As soon as a job has been
-   * sent to the appropriate backend it will be removed from the queue.
-   * Only those jobs are saved/reloaded which have been enqueued but never
-   * presented to the backend. This means after calling
-   * @ref AB_Banking_ExecuteQueue only those jobs are still in the queue which
-   * have not been processed (e.g. because they belonged to a second backend
-   * but the user aborted while the jobs for a first backend were in process).
-   */
-  /*@{*/
-  /**
-   * This function sends all jobs in the list to their corresponding backends
-   * and allows that backend to process it.
-   */
-  virtual int executeJobs(AB_TRANSACTION_LIST2 *jl,
-                          AB_IMEXPORTER_CONTEXT *ctx);
+    /**
+     * Let the application import a given statement context.
+     */
+    virtual bool importContext(AB_IMEXPORTER_CONTEXT* ctx, uint32_t flags);
 
-  /*@}*/
-
-  /**
-   * Let the application import a given statement context.
-   */
-  virtual bool importContext(AB_IMEXPORTER_CONTEXT *ctx,
-                             uint32_t flags);
-
-  virtual bool importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx, AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
+    virtual bool importAccountInfo(AB_IMEXPORTER_CONTEXT* ctx, AB_IMEXPORTER_ACCOUNTINFO* ai, uint32_t flags);
 };
 
 #endif /* AQ_BANKING_CPP_H */
-
-

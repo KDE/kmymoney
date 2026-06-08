@@ -8,11 +8,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
-#include <QString>
 #include <QDate>
+#include <QDebug>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -22,12 +22,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-struct BudgetsModel::Private
-{
+struct BudgetsModel::Private {
     Private()
         : fiscalYearStartMonth(1)
         , fiscalYearStartDay(1)
-    {}
+    {
+    }
 
     int fiscalYearStartMonth;
     int fiscalYearStartDay;
@@ -50,7 +50,7 @@ int BudgetsModel::columnCount(const QModelIndex& parent) const
     return 2;
 }
 
-Qt::ItemFlags BudgetsModel::flags(const QModelIndex &index) const
+Qt::ItemFlags BudgetsModel::flags(const QModelIndex& index) const
 {
     if (!index.isValid())
         return Qt::ItemFlags();
@@ -63,7 +63,7 @@ Qt::ItemFlags BudgetsModel::flags(const QModelIndex &index) const
 QVariant BudgetsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+        switch (section) {
         case 0:
             return i18n("Budget");
 
@@ -85,13 +85,12 @@ QVariant BudgetsModel::data(const QModelIndex& index, int role) const
     switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case Columns::Name:
             return budget.name();
 
         case Columns::Year:
             return budget.budgetStart().year();
-
         }
         return QVariant();
 
@@ -132,7 +131,7 @@ bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int 
 
     setDirty();
     const auto topLeft = BudgetsModel::index(index.row(), 0);
-    const auto bottomRight = BudgetsModel::index(index.row(), columnCount()-1);
+    const auto bottomRight = BudgetsModel::index(index.row(), columnCount() - 1);
     Q_EMIT dataChanged(topLeft, bottomRight);
 
     return true;

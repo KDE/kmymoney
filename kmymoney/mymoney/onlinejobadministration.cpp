@@ -34,11 +34,11 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "onlinejobsmodel.h"
 #include "onlinepluginextended.h"
-#include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
+#include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "tasks/onlinetask.h"
 
-onlineJobAdministration::onlineJobAdministration(QObject *parent)
+onlineJobAdministration::onlineJobAdministration(QObject* parent)
     : QObject(parent)
     , m_onlinePlugins(nullptr)
     , m_inRegistration(false)
@@ -236,7 +236,11 @@ onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QStri
 /**
  * @todo if more than one converter offers the convert, use best
  */
-onlineJob onlineJobAdministration::convert(const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId) const
+onlineJob onlineJobAdministration::convert(const onlineJob& original,
+                                           const QString& convertTaskIid,
+                                           onlineTaskConverter::convertType& convertType,
+                                           QString& userInformation,
+                                           const QString& onlineJobId) const
 {
     onlineJob newJob;
 
@@ -257,12 +261,19 @@ onlineJob onlineJobAdministration::convert(const onlineJob& original, const QStr
     return newJob;
 }
 
-onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation) const
+onlineJob onlineJobAdministration::convertBest(const onlineJob& original,
+                                               const QStringList& convertTaskIids,
+                                               onlineTaskConverter::convertType& convertType,
+                                               QString& userInformation) const
 {
     return convertBest(original, convertTaskIids, convertType, userInformation, original.id());
 }
 
-onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& bestConvertType, QString& bestUserInformation, const QString& onlineJobId) const
+onlineJob onlineJobAdministration::convertBest(const onlineJob& original,
+                                               const QStringList& convertTaskIids,
+                                               onlineTaskConverter::convertType& bestConvertType,
+                                               QString& bestUserInformation,
+                                               const QString& onlineJobId) const
 {
     onlineJob bestConvert;
     bestConvertType = onlineTaskConverter::convertImpossible;
@@ -302,7 +313,7 @@ void onlineJobAdministration::registerAllOnlineTasks()
     m_inRegistration = false;
 }
 
-void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
+void onlineJobAdministration::registerOnlineTask(onlineTask* const task)
 {
     if (Q_UNLIKELY(task == nullptr))
         return;

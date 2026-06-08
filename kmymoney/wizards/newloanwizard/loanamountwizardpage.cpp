@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -19,9 +18,9 @@
 
 #include "ui_loanamountwizardpage.h"
 
-LoanAmountWizardPage::LoanAmountWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::LoanAmountWizardPage)
+LoanAmountWizardPage::LoanAmountWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::LoanAmountWizardPage)
 {
     ui->setupUi(this);
 
@@ -49,22 +48,19 @@ LoanAmountWizardPage::~LoanAmountWizardPage()
  */
 bool LoanAmountWizardPage::isComplete() const
 {
-    return !(field("thisYearPaymentButton").toBool()
-             && !ui->m_loanAmountEdit->isValid());
+    return !(field("thisYearPaymentButton").toBool() && !ui->m_loanAmountEdit->isValid());
 }
 
 void LoanAmountWizardPage::initializePage()
 {
     if (field("allPaymentsButton").toBool()) {
-        ui->m_balanceLabel->setText(
-            QString("\n") +
-            i18n("Please enter the original loan amount in the field below or leave it "
-                 "empty to be calculated."));
+        ui->m_balanceLabel->setText(QString("\n")
+                                    + i18n("Please enter the original loan amount in the field below or leave it "
+                                           "empty to be calculated."));
     } else if (field("thisYearPaymentButton").toBool()) {
-        ui->m_balanceLabel->setText(QString("\n") +
-                                    i18n("Please enter the remaining loan amount of last years final "
-                                         "statement in the field below. You should not leave this field empty."));
-
+        ui->m_balanceLabel->setText(QString("\n")
+                                    + i18n("Please enter the remaining loan amount of last years final "
+                                           "statement in the field below. You should not leave this field empty."));
     }
 }
 

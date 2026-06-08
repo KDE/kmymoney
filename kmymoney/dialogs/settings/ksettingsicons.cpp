@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QIcon>
 #include <QDir>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -24,8 +24,8 @@ class KSettingsIconsPrivate
     Q_DISABLE_COPY(KSettingsIconsPrivate)
 
 public:
-    KSettingsIconsPrivate() :
-        ui(new Ui::KSettingsIcons)
+    KSettingsIconsPrivate()
+        : ui(new Ui::KSettingsIcons)
     {
     }
 
@@ -34,13 +34,13 @@ public:
         delete ui;
     }
 
-    Ui::KSettingsIcons *ui;
-    QMap<int, QString>  m_themesMap;
+    Ui::KSettingsIcons* ui;
+    QMap<int, QString> m_themesMap;
 };
 
-KSettingsIcons::KSettingsIcons(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KSettingsIconsPrivate)
+KSettingsIcons::KSettingsIcons(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KSettingsIconsPrivate)
 {
     Q_D(KSettingsIcons);
     d->ui->setupUi(this);
@@ -53,8 +53,7 @@ KSettingsIcons::KSettingsIcons(QWidget* parent) :
     connect(d->ui->kcfg_IconsTheme, &QLineEdit::textChanged, this, &KSettingsIcons::slotLoadTheme);
 
     // setup connections so that changes are forwarded to the field
-    connect(d->ui->m_IconsTheme,
-            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KSettingsIcons::slotSetTheme);
+    connect(d->ui->m_IconsTheme, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KSettingsIcons::slotSetTheme);
 }
 
 KSettingsIcons::~KSettingsIcons()
@@ -66,7 +65,7 @@ KSettingsIcons::~KSettingsIcons()
 void KSettingsIcons::loadList()
 {
     Q_D(KSettingsIcons);
-    QStringList themes {QStringLiteral("oxygen"), QStringLiteral("Tango"), QStringLiteral("breeze"), QStringLiteral("breeze-dark")};
+    QStringList themes{QStringLiteral("oxygen"), QStringLiteral("Tango"), QStringLiteral("breeze"), QStringLiteral("breeze-dark")};
     QStringList searchPaths = QIcon::themeSearchPaths();
     d->ui->m_IconsTheme->addItem(QStringLiteral("system"));
     d->m_themesMap.insert(0, QStringLiteral("system"));
@@ -81,13 +80,13 @@ void KSettingsIcons::loadList()
     }
 }
 
-void KSettingsIcons::slotSetTheme(const int &theme)
+void KSettingsIcons::slotSetTheme(const int& theme)
 {
     Q_D(KSettingsIcons);
     d->ui->kcfg_IconsTheme->setText(d->m_themesMap.value(theme));
 }
 
-void KSettingsIcons::slotLoadTheme(const QString &theme)
+void KSettingsIcons::slotLoadTheme(const QString& theme)
 {
     Q_D(KSettingsIcons);
     // only need this once

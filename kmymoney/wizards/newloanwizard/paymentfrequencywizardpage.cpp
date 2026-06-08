@@ -18,14 +18,15 @@
 
 #include "mymoneyenums.h"
 
-PaymentFrequencyWizardPage::PaymentFrequencyWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::PaymentFrequencyWizardPage)
+PaymentFrequencyWizardPage::PaymentFrequencyWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::PaymentFrequencyWizardPage)
 {
     ui->setupUi(this);
 
     registerField("paymentFrequencyUnitEdit", ui->m_paymentFrequencyUnitEdit, "data", SIGNAL(currentDataChanged(QVariant)));
-    ui->m_paymentFrequencyUnitEdit->setCurrentIndex(ui->m_paymentFrequencyUnitEdit->findData(QVariant((int)eMyMoney::Schedule::Occurrence::Monthly), Qt::UserRole, Qt::MatchExactly));
+    ui->m_paymentFrequencyUnitEdit->setCurrentIndex(
+        ui->m_paymentFrequencyUnitEdit->findData(QVariant((int)eMyMoney::Schedule::Occurrence::Monthly), Qt::UserRole, Qt::MatchExactly));
 }
 
 PaymentFrequencyWizardPage::~PaymentFrequencyWizardPage()

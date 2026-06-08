@@ -11,13 +11,22 @@
 MyMoneyMoneyToWordsConverter::MyMoneyMoneyToWordsConverter()
 {
     // Single-digit and small number names
-    m_smallNumbers << i18nc("@item the number 0", "Zero") << i18nc("@item the number 1", "One") << i18nc("@item the number 2", "Two") << i18nc("@item the number 3", "Three") << i18nc("@item the number 4", "Four") << i18nc("@item the number 5", "Five") << i18nc("@item the number 6", "Six") << i18nc("@item the number 7", "Seven") << i18nc("@item the number 8", "Eight") << i18nc("@item the number 9", "Nine") << i18nc("@item the number 10", "Ten") << i18nc("@item the number 11", "Eleven") << i18nc("@item the number 12", "Twelve") << i18nc("@item the number 13", "Thirteen") << i18nc("@item the number 14", "Fourteen") << i18nc("@item the number 15", "Fifteen") << i18nc("@item the number 16", "Sixteen") << i18nc("@item the number 17", "Seventeen") << i18nc("@item the number 18", "Eighteen") << i18nc("@item the number 19", "Nineteen");
+    m_smallNumbers << i18nc("@item the number 0", "Zero") << i18nc("@item the number 1", "One") << i18nc("@item the number 2", "Two")
+                   << i18nc("@item the number 3", "Three") << i18nc("@item the number 4", "Four") << i18nc("@item the number 5", "Five")
+                   << i18nc("@item the number 6", "Six") << i18nc("@item the number 7", "Seven") << i18nc("@item the number 8", "Eight")
+                   << i18nc("@item the number 9", "Nine") << i18nc("@item the number 10", "Ten") << i18nc("@item the number 11", "Eleven")
+                   << i18nc("@item the number 12", "Twelve") << i18nc("@item the number 13", "Thirteen") << i18nc("@item the number 14", "Fourteen")
+                   << i18nc("@item the number 15", "Fifteen") << i18nc("@item the number 16", "Sixteen") << i18nc("@item the number 17", "Seventeen")
+                   << i18nc("@item the number 18", "Eighteen") << i18nc("@item the number 19", "Nineteen");
 
     // Tens number names from twenty upwards
-    m_tens << "" << "" << i18nc("@item the number 20", "Twenty") << i18nc("@item the number 30", "Thirty") << i18nc("@item the number 40", "Forty") << i18nc("@item the number 50", "Fifty") << i18nc("@item the number 60", "Sixty") << i18nc("@item the number 70", "Seventy") << i18nc("@item the number 80", "Eighty") << i18nc("@item the number 90", "Ninety");
+    m_tens << "" << "" << i18nc("@item the number 20", "Twenty") << i18nc("@item the number 30", "Thirty") << i18nc("@item the number 40", "Forty")
+           << i18nc("@item the number 50", "Fifty") << i18nc("@item the number 60", "Sixty") << i18nc("@item the number 70", "Seventy")
+           << i18nc("@item the number 80", "Eighty") << i18nc("@item the number 90", "Ninety");
 
     // Scale number names for use during recombination
-    m_scaleNumbers << "" << i18nc("@item the number 1000", "Thousand") << i18nc("@item the number 1,000,000", "Million") << i18nc("@item the number 1,000,000,000", "Billion");
+    m_scaleNumbers << "" << i18nc("@item the number 1000", "Thousand") << i18nc("@item the number 1,000,000", "Million")
+                   << i18nc("@item the number 1,000,000,000", "Billion");
 }
 
 // Converts a three-digit group into English words
@@ -62,7 +71,7 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
     return groupText;
 }
 
-QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed64 denom)
+QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney& money, signed64 denom)
 {
     // Zero rule
     if (money.isZero())
@@ -78,7 +87,12 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
     // If this is untranslated, then use the internal logic
     QString filterString = i18nc("Translate this string into \"custom\" if the construction of numerals are different from English.", "english");
     if (filterString == QStringLiteral("custom")) {
-        QString customString = i18nc("@item Can be used to script translation of numerals. Leave untranslated when not needed. %1 = integer, %2 = fraction, %3 = denominator", "%1 %2 %3", integer, fraction, denom);
+        QString customString =
+            i18nc("@item Can be used to script translation of numerals. Leave untranslated when not needed. %1 = integer, %2 = fraction, %3 = denominator",
+                  "%1 %2 %3",
+                  integer,
+                  fraction,
+                  denom);
         return customString;
     }
 
@@ -118,9 +132,12 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
     }
 
     if (fraction != 0)
-        return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
-                     "%1 and %2/%3", combined, fraction, denom);
+        return i18nc(
+            "@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
+            "%1 and %2/%3",
+            combined,
+            fraction,
+            denom);
     else
-        return i18nc("@label The first argument is the amount in words, the second is the denominator of the fractional part",
-                     "%1 and No/%2", combined, denom);
+        return i18nc("@label The first argument is the amount in words, the second is the denominator of the fractional part", "%1 and No/%2", combined, denom);
 }

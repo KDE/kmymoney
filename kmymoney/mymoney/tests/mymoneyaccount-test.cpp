@@ -212,7 +212,6 @@ void MyMoneyAccountTest::testSubAccounts()
     QVERIFY(a.accountList().count() == 1);
     a.addAccountId("Subaccount2");
     QVERIFY(a.accountList().count() == 2);
-
 }
 
 void MyMoneyAccountTest::testEquality()
@@ -288,7 +287,6 @@ void MyMoneyAccountTest::testEquality()
     a.setValue("noKey", "Value");
     QVERIFY(!(b == a));
     b = a;
-
 }
 
 void MyMoneyAccountTest::testHasReferenceTo()

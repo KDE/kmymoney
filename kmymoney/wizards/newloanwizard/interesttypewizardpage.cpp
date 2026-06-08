@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_interesttypewizardpage.h"
 
-InterestTypeWizardPage::InterestTypeWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::InterestTypeWizardPage)
+InterestTypeWizardPage::InterestTypeWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::InterestTypeWizardPage)
 {
     ui->setupUi(this);
 

@@ -23,16 +23,22 @@
 
 #include "kmymoneycurrencyselector.h"
 
-KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::KUpdateStockPriceDlg)
+KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KUpdateStockPriceDlg)
 {
     ui->setupUi(this);
     setModal(true);
     ui->m_date->setDate(QDate::currentDate());
 
-    connect(ui->m_security, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
-    connect(ui->m_currency, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
+    connect(ui->m_security,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),
+            this,
+            static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
+    connect(ui->m_currency,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),
+            this,
+            static_cast<void (KUpdateStockPriceDlg::*)(int)>(&KUpdateStockPriceDlg::slotCheckData));
 
     // load initial values into the selection widgets
     ui->m_currency->update(QString());
@@ -43,7 +49,7 @@ KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent) :
 
 KUpdateStockPriceDlg::~KUpdateStockPriceDlg()
 {
-    delete  ui;
+    delete ui;
 }
 
 int KUpdateStockPriceDlg::exec()
@@ -60,7 +66,7 @@ QDate KUpdateStockPriceDlg::date() const
 void KUpdateStockPriceDlg::slotCheckData()
 {
     auto from = ui->m_security->security().id();
-    auto to   = ui->m_currency->security().id();
+    auto to = ui->m_currency->security().id();
 
     ui->m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!from.isEmpty() && !to.isEmpty() && from != to);
 }

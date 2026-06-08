@@ -15,8 +15,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyobject_p.h"
 #include "mymoneyexception.h"
+#include "mymoneyobject_p.h"
 
 MyMoneyCostCenter MyMoneyCostCenter::null;
 
@@ -30,23 +30,23 @@ public:
     QString m_name;
 };
 
-MyMoneyCostCenter::MyMoneyCostCenter() :
-    MyMoneyObject(*new MyMoneyCostCenterPrivate)
+MyMoneyCostCenter::MyMoneyCostCenter()
+    : MyMoneyObject(*new MyMoneyCostCenterPrivate)
 {
 }
 
-MyMoneyCostCenter::MyMoneyCostCenter(const QString &id) :
-    MyMoneyObject(*new MyMoneyCostCenterPrivate, id)
+MyMoneyCostCenter::MyMoneyCostCenter(const QString& id)
+    : MyMoneyObject(*new MyMoneyCostCenterPrivate, id)
 {
 }
 
-MyMoneyCostCenter::MyMoneyCostCenter(const MyMoneyCostCenter& other) :
-    MyMoneyObject(*new MyMoneyCostCenterPrivate(*other.d_func()), other.id())
+MyMoneyCostCenter::MyMoneyCostCenter(const MyMoneyCostCenter& other)
+    : MyMoneyObject(*new MyMoneyCostCenterPrivate(*other.d_func()), other.id())
 {
 }
 
-MyMoneyCostCenter::MyMoneyCostCenter(const QString& id, const MyMoneyCostCenter& other) :
-    MyMoneyObject(*new MyMoneyCostCenterPrivate(*other.d_func()), id)
+MyMoneyCostCenter::MyMoneyCostCenter(const QString& id, const MyMoneyCostCenter& other)
+    : MyMoneyObject(*new MyMoneyCostCenterPrivate(*other.d_func()), id)
 {
 }
 
@@ -54,18 +54,17 @@ MyMoneyCostCenter::~MyMoneyCostCenter()
 {
 }
 
-bool MyMoneyCostCenter::operator == (const MyMoneyCostCenter& right) const
+bool MyMoneyCostCenter::operator==(const MyMoneyCostCenter& right) const
 {
     Q_D(const MyMoneyCostCenter);
-    auto d2 = static_cast<const MyMoneyCostCenterPrivate *>(right.d_func());
-    return (MyMoneyObject::operator==(right) &&
-            ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)));
+    auto d2 = static_cast<const MyMoneyCostCenterPrivate*>(right.d_func());
+    return (MyMoneyObject::operator==(right) && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)));
 }
 
-bool MyMoneyCostCenter::operator < (const MyMoneyCostCenter& right) const
+bool MyMoneyCostCenter::operator<(const MyMoneyCostCenter& right) const
 {
     Q_D(const MyMoneyCostCenter);
-    auto d2 = static_cast<const MyMoneyCostCenterPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneyCostCenterPrivate*>(right.d_func());
     QCollator col;
     return col.compare(d->m_name, d2->m_name);
 }
@@ -81,7 +80,6 @@ void MyMoneyCostCenter::setName(const QString& val)
     Q_D(MyMoneyCostCenter);
     d->m_name = val;
 }
-
 
 QString MyMoneyCostCenter::shortName() const
 {

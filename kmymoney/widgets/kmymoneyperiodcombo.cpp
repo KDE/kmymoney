@@ -21,13 +21,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransactionfilter.h"
 #include "mymoneyenums.h"
+#include "mymoneytransactionfilter.h"
 
 using namespace eMyMoney;
 
-KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent) :
-    KMyMoneyGeneralCombo(parent)
+KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent)
+    : KMyMoneyGeneralCombo(parent)
 {
     insertItem(i18n("All dates"), (int)TransactionFilter::Date::All);
     insertItem(i18n("As of today"), (int)TransactionFilter::Date::AsOfToday);

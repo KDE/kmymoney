@@ -9,8 +9,8 @@
 
 #include <KLocalizedString>
 
-#include "mymoneyfile.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
 
 /**
  * @brief create unique value for QModelIndex::internalId() to indicate "not set"
@@ -19,17 +19,17 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wnonnull"
 #endif
-static constexpr decltype(reinterpret_cast<QModelIndex*>(0)->internalId()) invalidParent = std::numeric_limits<decltype(reinterpret_cast<QModelIndex*>(0)->internalId())>::max();
+static constexpr decltype(reinterpret_cast<QModelIndex*>(0)->internalId()) invalidParent =
+    std::numeric_limits<decltype(reinterpret_cast<QModelIndex*>(0)->internalId())>::max();
 #if defined(__GNUC__)
 #pragma GCC diagnostic pop
 #endif
 
 payeeIdentifierModel::payeeIdentifierModel(QObject* parent)
-    : QAbstractItemModel(parent),
-      m_payeeIdentifierIds(),
-      m_typeFilter()
+    : QAbstractItemModel(parent)
+    , m_payeeIdentifierIds()
+    , m_typeFilter()
 {
-
 }
 
 void payeeIdentifierModel::setTypeFilter(QStringList filter)
@@ -42,7 +42,6 @@ void payeeIdentifierModel::setTypeFilter(QString type)
 {
     setTypeFilter(QStringList(type));
 }
-
 
 void payeeIdentifierModel::loadData()
 {
@@ -62,7 +61,7 @@ MyMoneyPayee payeeIdentifierModel::payeeByIndex(const QModelIndex& index) const
     if (index.isValid() && index.row() >= 0 && index.row() < m_payeeIdentifierIds.count()) {
         try {
             return MyMoneyFile::instance()->payee(m_payeeIdentifierIds.at(index.row()));
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
         }
     }
 
@@ -80,7 +79,6 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 
     const MyMoneyPayee payee = (isPayeeIdentifierValid) ? payeeByIndex(index.parent()) : payeeByIndex(index);
 
-
     if (role == payeeName || (!isPayeeIdentifierValid && role == Qt::DisplayRole)) {
         // Return data for MyMoneyPayee
         return payee.name();
@@ -90,7 +88,7 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
             ::payeeIdentifier ident = payee.payeeIdentifier(index.row());
 
             if (role == payeeIdentifier) {
-                return QVariant::fromValue< ::payeeIdentifier >(ident);
+                return QVariant::fromValue<::payeeIdentifier>(ident);
             } else if (ident.isNull()) {
                 return QVariant();
             } else if (role == payeeIdentifierType) {
@@ -105,7 +103,7 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex &index) const
+Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
 {
     Q_UNUSED(index)
 #if 0
@@ -126,7 +124,7 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex &index) const
  *
  * @todo Qt5: the type of the internal id changed!
  */
-QModelIndex payeeIdentifierModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex payeeIdentifierModel::index(int row, int column, const QModelIndex& parent) const
 {
     if (parent.isValid())
         return createIndex(row, column, parent.row());

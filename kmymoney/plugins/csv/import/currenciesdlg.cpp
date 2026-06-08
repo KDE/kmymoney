@@ -7,11 +7,12 @@
 
 #include <QPushButton>
 
-#include "ui_currenciesdlg.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
+#include "ui_currenciesdlg.h"
 
-CurrenciesDlg::CurrenciesDlg() : ui(new Ui::CurrenciesDlg)
+CurrenciesDlg::CurrenciesDlg()
+    : ui(new Ui::CurrenciesDlg)
 {
     ui->setupUi(this);
     m_buttonOK = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -28,7 +29,7 @@ CurrenciesDlg::~CurrenciesDlg()
     delete ui;
 }
 
-void CurrenciesDlg::initializeCurrencies(const QString &presetFromCurrency, const QString &presetToCurrency)
+void CurrenciesDlg::initializeCurrencies(const QString& presetFromCurrency, const QString& presetToCurrency)
 {
     QList<MyMoneySecurity> currencies = MyMoneyFile::instance()->currencyList();
 
@@ -54,23 +55,25 @@ void CurrenciesDlg::initializeCurrencies(const QString &presetFromCurrency, cons
     Q_EMIT ui->cbFrom->currentIndexChanged(presetFromIndex); // in case currentIndex == presetIndex and no signal would be emitted
 }
 
-QString CurrenciesDlg::fromCurrency() {
+QString CurrenciesDlg::fromCurrency()
+{
     return ui->cbFrom->currentData().toString();
 }
 
-QString CurrenciesDlg::toCurrency() {
+QString CurrenciesDlg::toCurrency()
+{
     return ui->cbTo->currentData().toString();
 }
 
-int CurrenciesDlg::dontAsk() {
+int CurrenciesDlg::dontAsk()
+{
     return int(ui->cbDontAsk->isChecked());
 }
 
 void CurrenciesDlg::slotIndexChanged(int index)
 {
     Q_UNUSED(index);
-    if (ui->cbFrom->currentIndex() != ui->cbTo->currentIndex() &&
-            ui->cbFrom->currentIndex() != -1 && ui->cbTo->currentIndex() != -1)
+    if (ui->cbFrom->currentIndex() != ui->cbTo->currentIndex() && ui->cbFrom->currentIndex() != -1 && ui->cbTo->currentIndex() != -1)
         m_buttonOK->setEnabled(true);
     else
         m_buttonOK->setEnabled(false);

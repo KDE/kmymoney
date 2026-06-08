@@ -7,9 +7,9 @@
 #include "ktemplateexportdlg.h"
 #include "ui_ktemplateexportdlg.h"
 
-KTemplateExportDlg::KTemplateExportDlg(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::KTemplateExportDlg)
+KTemplateExportDlg::KTemplateExportDlg(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KTemplateExportDlg)
 {
     ui->setupUi(this);
 }

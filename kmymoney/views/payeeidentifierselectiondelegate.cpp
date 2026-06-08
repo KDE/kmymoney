@@ -11,7 +11,6 @@
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 
-
 payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* parent)
     : QComboBox(parent)
 {
@@ -41,12 +40,10 @@ QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const Q
     connect(comboBox, &payeeIdentifierTypeSelectionWidget::commitData, this, &payeeIdentifierSelectionDelegate::commitData);
     comboBox->addItem(i18n("Please select the account number type"));
 
-    const QMap<QString, QString> availableDelegates {
-        {payeeIdentifiers::ibanBic::staticPayeeIdentifierIid(),         i18n("IBAN and BIC")},
-        {payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid(), i18n("National Account Number")}
-    };
+    const QMap<QString, QString> availableDelegates{{payeeIdentifiers::ibanBic::staticPayeeIdentifierIid(), i18n("IBAN and BIC")},
+                                                    {payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid(), i18n("National Account Number")}};
 
-    for (auto delegate = availableDelegates.cbegin(); delegate != availableDelegates.cend(); ++delegate )
+    for (auto delegate = availableDelegates.cbegin(); delegate != availableDelegates.cend(); ++delegate)
         comboBox->addItem(delegate.value(), delegate.key());
 
     return comboBox;
@@ -54,7 +51,7 @@ QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const Q
 
 void payeeIdentifierSelectionDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-    QComboBox *const comboBox = qobject_cast<QComboBox*>(editor);
+    QComboBox* const comboBox = qobject_cast<QComboBox*>(editor);
     const QString selectedPidType = comboBox->model()->data(comboBox->model()->index(comboBox->currentIndex(), 0), Qt::UserRole).toString();
     payeeIdentifier orig = model->data(index, payeeIdentifierContainerModel::payeeIdentifier).value<payeeIdentifier>();
 

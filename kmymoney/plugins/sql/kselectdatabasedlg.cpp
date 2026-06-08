@@ -15,20 +15,20 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
 #include <KHelpClient>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kselectdatabasedlg.h"
 #include "kguiutils.h"
-#include "mymoneystoragesql.h"
-#include "mymoneydbdriver.h"
 #include "misc/platformtools.h"
+#include "mymoneydbdriver.h"
+#include "mymoneystoragesql.h"
 #include "passwordtoggle.h"
+#include "ui_kselectdatabasedlg.h"
 
-KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
+KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget*)
     : m_widget(new Ui::KSelectDatabaseDlg())
     , m_mode(openMode)
     , m_url(openURL)
@@ -65,7 +65,7 @@ bool KSelectDatabaseDlg::checkDrivers()
     QStringList list = QSqlDatabase::drivers();
 
     // clear out the current list of drivers
-    while(m_widget->databaseTypeCombo->count()) {
+    while (m_widget->databaseTypeCombo->count()) {
         m_widget->databaseTypeCombo->removeItem(0);
     }
 
@@ -111,7 +111,10 @@ int KSelectDatabaseDlg::exec()
         m_widget->textUserName->setText(QString());
         m_widget->textUserName->setText(platformTools::osUsername());
         m_widget->textPassword->setText(QString());
-        connect(m_widget->databaseTypeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &KSelectDatabaseDlg::slotDriverSelected);
+        connect(m_widget->databaseTypeCombo,
+                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+                this,
+                &KSelectDatabaseDlg::slotDriverSelected);
         m_widget->checkPreLoad->setChecked(false);
         // ensure a driver gets selected; pre-select the first one
         if (m_widget->databaseTypeCombo->count() != 0) {
@@ -157,8 +160,7 @@ const QUrl KSelectDatabaseDlg::selectedURL()
         url.setPath('/' + m_widget->urlSqlite->url().toLocalFile());
     else
         url.setPath('/' + m_widget->textDbName->text());
-    QString qs = QString("driver=%1")
-                 .arg(m_widget->databaseTypeCombo->currentData().toString());
+    QString qs = QString("driver=%1").arg(m_widget->databaseTypeCombo->currentData().toString());
     if (m_widget->checkPreLoad->isChecked())
         qs.append("&options=loadAll");
     if (!m_widget->textPassword->text().isEmpty())
@@ -203,7 +205,7 @@ void KSelectDatabaseDlg::slotDriverSelected(int idx)
 
         // setup required fields last because the required widgets must be enabled
         m_requiredFields->add(m_widget->urlSqlite);
-    } else {                         // not sqlite3
+    } else { // not sqlite3
         m_sqliteSelected = false;
 
         m_widget->textDbName->setEnabled(true);

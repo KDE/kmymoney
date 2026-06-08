@@ -42,9 +42,12 @@
 class KOfxDirectConnectDlg::Private
 {
 public:
-    Private() : m_firstData(true) {}
-    QFile    m_fpTrace;
-    bool     m_firstData;
+    Private()
+        : m_firstData(true)
+    {
+    }
+    QFile m_fpTrace;
+    bool m_firstData;
 };
 
 KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget* parent)
@@ -120,7 +123,7 @@ bool KOfxDirectConnectDlg::init()
     // open the temp file. We come around here twice if init() is called twice
     if (m_tmpfile) {
         qDebug() << "Already connected, using " << m_tmpfile->fileName();
-        delete m_tmpfile; //delete otherwise we mem leak
+        delete m_tmpfile; // delete otherwise we mem leak
     }
     m_tmpfile = new QTemporaryFile();
     // for debugging purposes one might want to leave the temp file around

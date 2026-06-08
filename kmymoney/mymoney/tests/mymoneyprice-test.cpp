@@ -29,7 +29,7 @@ void MyMoneyPriceTest::testDefaultConstructor()
 
 void MyMoneyPriceTest::testConstructor()
 {
-    MyMoneyPrice n(QString("from"), QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3),  QString("MySource"));
+    MyMoneyPrice n(QString("from"), QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3), QString("MySource"));
 
     QVERIFY(n.isValid() == true);
     QVERIFY(n.from() == QString("from"));
@@ -42,10 +42,10 @@ void MyMoneyPriceTest::testConstructor()
 void MyMoneyPriceTest::testValidity()
 {
     QString emptyId;
-    MyMoneyPrice n1(emptyId, QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3),  QString("MySource"));
-    MyMoneyPrice n2(QString("from"), emptyId, QDate(2005, 9, 23), MyMoneyMoney(1, 3),  QString("MySource"));
-    MyMoneyPrice n3(QString("from"), QString("to"), QDate(), MyMoneyMoney(1, 3),  QString("MySource"));
-    MyMoneyPrice n4(QString("from"), QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3),  QString("MySource"));
+    MyMoneyPrice n1(emptyId, QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3), QString("MySource"));
+    MyMoneyPrice n2(QString("from"), emptyId, QDate(2005, 9, 23), MyMoneyMoney(1, 3), QString("MySource"));
+    MyMoneyPrice n3(QString("from"), QString("to"), QDate(), MyMoneyMoney(1, 3), QString("MySource"));
+    MyMoneyPrice n4(QString("from"), QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3), QString("MySource"));
 
     QVERIFY(n1.isValid() == false);
     QVERIFY(n2.isValid() == false);
@@ -55,8 +55,8 @@ void MyMoneyPriceTest::testValidity()
 
 void MyMoneyPriceTest::testRate()
 {
-    MyMoneyPrice n1(QString("from"), QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3),  QString("MySource"));
-    MyMoneyPrice n2(QString("from"), QString("to"), QDate(), MyMoneyMoney(1, 3),  QString("MySource"));
+    MyMoneyPrice n1(QString("from"), QString("to"), QDate(2005, 9, 23), MyMoneyMoney(1, 3), QString("MySource"));
+    MyMoneyPrice n2(QString("from"), QString("to"), QDate(), MyMoneyMoney(1, 3), QString("MySource"));
 
     try {
         QVERIFY(n1.rate("to") == MyMoneyMoney(1, 3));
@@ -65,13 +65,13 @@ void MyMoneyPriceTest::testRate()
 
         QVERIFY(n2.isValid() == false);
         QVERIFY(n2.rate("to") == MyMoneyMoney::ONE);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 
     try {
         n1.rate("unknown");
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }

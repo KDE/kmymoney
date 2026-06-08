@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <config-kmymoney.h>
 #include "qifimporter.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -14,10 +14,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -29,9 +29,9 @@
 
 class MyMoneyStatement;
 
-QIFImporter::QIFImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args),
-    m_qifReader(nullptr)
+QIFImporter::QIFImporter(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+    , m_qifReader(nullptr)
 {
     Q_INIT_RESOURCE(qifimporter);
 
@@ -81,7 +81,7 @@ void QIFImporter::slotQifImport()
     delete dlg;
 }
 
-bool QIFImporter::slotGetStatements(const QList<MyMoneyStatement> &statements)
+bool QIFImporter::slotGetStatements(const QList<MyMoneyStatement>& statements)
 {
     statementInterface()->resetMessages();
 

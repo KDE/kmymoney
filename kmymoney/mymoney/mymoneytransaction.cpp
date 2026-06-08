@@ -14,36 +14,36 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStringList>
 #include <QMap>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
-#include "mymoneymoney.h"
-#include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneymoney.h"
+#include "mymoneyutils.h"
 
-MyMoneyTransaction::MyMoneyTransaction() :
-    MyMoneyObject(*new MyMoneyTransactionPrivate)
+MyMoneyTransaction::MyMoneyTransaction()
+    : MyMoneyObject(*new MyMoneyTransactionPrivate)
 {
 }
 
-MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
-    MyMoneyObject(*new MyMoneyTransactionPrivate, id)
+MyMoneyTransaction::MyMoneyTransaction(const QString& id)
+    : MyMoneyObject(*new MyMoneyTransactionPrivate, id)
 {
 }
 
-MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other) :
-    MyMoneyObject(*new MyMoneyTransactionPrivate(*other.d_func()), other.id()),
-    MyMoneyKeyValueContainer(other)
+MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other)
+    : MyMoneyObject(*new MyMoneyTransactionPrivate(*other.d_func()), other.id())
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
-MyMoneyTransaction::MyMoneyTransaction(const QString& id, const MyMoneyTransaction& other) :
-    MyMoneyObject(*new MyMoneyTransactionPrivate(*other.d_func()), id),
-    MyMoneyKeyValueContainer(other)
+MyMoneyTransaction::MyMoneyTransaction(const QString& id, const MyMoneyTransaction& other)
+    : MyMoneyObject(*new MyMoneyTransactionPrivate(*other.d_func()), id)
+    , MyMoneyKeyValueContainer(other)
 {
     Q_D(MyMoneyTransaction);
     if (d->m_entryDate == QDate())
@@ -153,35 +153,34 @@ void MyMoneyTransaction::setBankID(const QString& bankID)
     d->m_bankID = bankID;
 }
 
-bool MyMoneyTransaction::operator == (const MyMoneyTransaction& right) const
+bool MyMoneyTransaction::operator==(const MyMoneyTransaction& right) const
 {
     Q_D(const MyMoneyTransaction);
-    auto d2 = static_cast<const MyMoneyTransactionPrivate *>(right.d_func());
-    return (MyMoneyObject::operator==(right)
-            && MyMoneyKeyValueContainer::operator==(right) //
+    auto d2 = static_cast<const MyMoneyTransactionPrivate*>(right.d_func());
+    return (MyMoneyObject::operator==(right) && MyMoneyKeyValueContainer::operator==(right) //
             && (d->m_commodity == d2->m_commodity) //
-            && ((d->m_memo.length() == 0 && d2->m_memo.length() == 0) || (d->m_memo == d2->m_memo))  //
+            && ((d->m_memo.length() == 0 && d2->m_memo.length() == 0) || (d->m_memo == d2->m_memo)) //
             && (d->m_splits == d2->m_splits) //
             && (d->m_entryDate == d2->m_entryDate) //
             && (d->m_postDate == d2->m_postDate));
 }
 
-bool MyMoneyTransaction::operator != (const MyMoneyTransaction& r) const
+bool MyMoneyTransaction::operator!=(const MyMoneyTransaction& r) const
 {
     return !(*this == r);
 }
 
-bool MyMoneyTransaction::operator< (const MyMoneyTransaction& r) const
+bool MyMoneyTransaction::operator<(const MyMoneyTransaction& r) const
 {
     return postDate() < r.postDate();
 }
 
-bool MyMoneyTransaction::operator<= (const MyMoneyTransaction& r) const
+bool MyMoneyTransaction::operator<=(const MyMoneyTransaction& r) const
 {
     return postDate() <= r.postDate();
 }
 
-bool MyMoneyTransaction::operator> (const MyMoneyTransaction& r) const
+bool MyMoneyTransaction::operator>(const MyMoneyTransaction& r) const
 {
     return postDate() > r.postDate();
 }
@@ -197,7 +196,7 @@ bool MyMoneyTransaction::accountReferenced(const QString& id) const
     return false;
 }
 
-void MyMoneyTransaction::addSplit(MyMoneySplit &split)
+void MyMoneyTransaction::addSplit(MyMoneySplit& split)
 {
     if (!split.id().isEmpty())
         throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split with assigned id '%1' to transaction %2").arg(split.id(), id()));
@@ -215,8 +214,8 @@ void MyMoneyTransaction::addSplit(MyMoneySplit &split)
 
 void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
 {
-// This is the other version which allows having more splits referencing
-// the same account.
+    // This is the other version which allows having more splits referencing
+    // the same account.
     if (split.accountId().isEmpty())
         throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot modify split that does not contain an account reference in transaction %1").arg(id()));
 
@@ -266,8 +265,7 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QString& accountId, const 
 {
     Q_D(const MyMoneyTransaction);
     for (const auto& split : d->m_splits) {
-        if ((match == true && split.accountId() == accountId) ||
-                (match == false && split.accountId() != accountId))
+        if ((match == true && split.accountId() == accountId) || (match == false && split.accountId() != accountId))
             return split;
     }
     throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for account %1%2 in transaction %3").arg(match ? "" : "!", accountId, id()));
@@ -277,8 +275,7 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QStringList& accountIds, c
 {
     Q_D(const MyMoneyTransaction);
     for (const auto& split : d->m_splits) {
-        if ((match == true && accountIds.contains(split.accountId())) ||
-                (match == false && !accountIds.contains(split.accountId())))
+        if ((match == true && accountIds.contains(split.accountId())) || (match == false && !accountIds.contains(split.accountId())))
             return split;
     }
     throw MYMONEYEXCEPTION(
@@ -324,13 +321,12 @@ void MyMoneyTransaction::reverse()
 bool MyMoneyTransaction::isLoanPayment() const
 {
     try {
-
         Q_D(const MyMoneyTransaction);
         for (const auto& split : d->m_splits) {
             if (split.isAmortizationSplit())
                 return true;
         }
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
     return false;
 }
@@ -372,7 +368,7 @@ unsigned long MyMoneyTransaction::hash(const QString& txt, unsigned long h)
                 break;
             h = (h << 4) + c;
             if ((g = (h & 0xf0000000))) {
-                h = h ^(g >> 24);
+                h = h ^ (g >> 24);
                 h = h ^ g;
             }
             uc >>= 8;

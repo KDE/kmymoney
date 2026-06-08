@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_recordpaymentwizardpage.h"
 
-RecordPaymentWizardPage::RecordPaymentWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::RecordPaymentWizardPage)
+RecordPaymentWizardPage::RecordPaymentWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::RecordPaymentWizardPage)
 {
     ui->setupUi(this);
 

@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_schedulewizardpage.h"
 
-ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::ScheduleWizardPage)
+ScheduleWizardPage::ScheduleWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::ScheduleWizardPage)
 {
     ui->setupUi(this);
 
@@ -30,7 +28,7 @@ ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
     registerField("paymentAccountEdit", ui->m_paymentAccountEdit, "selectedItems");
 
     connect(ui->m_nextDueDateEdit, &KMyMoneyDateEdit::dateChanged, this, &QWizardPage::completeChanged);
-    connect(ui->m_paymentAccountEdit,  &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
+    connect(ui->m_paymentAccountEdit, &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
 
     ui->m_paymentAccountEdit->removeButtons();
 }

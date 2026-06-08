@@ -9,34 +9,31 @@
 // QT Includes
 
 #include <QApplication>
-#include <QScrollBar>
-#include <QPainter>
-#include <QDebug>
 #include <QDate>
+#include <QDebug>
+#include <QPainter>
+#include <QScrollBar>
 #include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KColorScheme>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "journalmodel.h"
+#include "ledgerview.h"
 #include "mymoneyfile.h"
 #include "mymoneyutils.h"
-#include "ledgerview.h"
-#include "journalmodel.h"
-#include "payeesmodel.h"
 #include "newtransactioneditor.h"
+#include "payeesmodel.h"
 
 QColor OnlineBalanceDelegate::m_erroneousColor = QColor(Qt::red);
 QColor OnlineBalanceDelegate::m_importedColor = QColor(Qt::yellow);
 QColor OnlineBalanceDelegate::m_separatorColor = QColor(0xff, 0xf2, 0x9b);
-
-
-
 
 class OnlineBalanceDelegate::Private
 {
@@ -49,7 +46,8 @@ public:
         , m_lineHeight(12)
         , m_margin(2)
 
-    {}
+    {
+    }
 
     ~Private()
     {
@@ -58,20 +56,20 @@ public:
     QStringList displayString(const QModelIndex& index, const QStyleOptionViewItem& opt)
     {
         QStringList lines;
-        if(index.column() == JournalModel::Column::Detail) {
+        if (index.column() == JournalModel::Column::Detail) {
             lines << index.data(m_singleLineRole).toString();
-            if(opt.state & QStyle::State_Selected) {
+            if (opt.state & QStyle::State_Selected) {
                 lines.clear();
                 lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
                 lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
                 lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
 
             } else {
-                if(lines.at(0).isEmpty()) {
+                if (lines.at(0).isEmpty()) {
                     lines.clear();
                     lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
                 }
-                if(lines.at(0).isEmpty()) {
+                if (lines.at(0).isEmpty()) {
                     lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
                 }
             }
@@ -83,15 +81,14 @@ public:
         return lines;
     }
 
-    NewTransactionEditor*         m_editor;
-    LedgerView*                   m_view;
-    int                           m_editorRow;
-    eMyMoney::Model::Roles        m_singleLineRole;
-    int                           m_lineHeight;
-    int                           m_margin;
-    QBrush                        m_backGround;
+    NewTransactionEditor* m_editor;
+    LedgerView* m_view;
+    int m_editorRow;
+    eMyMoney::Model::Roles m_singleLineRole;
+    int m_lineHeight;
+    int m_margin;
+    QBrush m_backGround;
 };
-
 
 OnlineBalanceDelegate::OnlineBalanceDelegate(LedgerView* parent)
     : KMMStyledItemDelegate(parent)
@@ -132,10 +129,10 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
 
     painter->save();
 
-    QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
+    QAbstractItemView* view = qobject_cast<QAbstractItemView*>(parent());
 
     // Background
-    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
     const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
 
     const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
@@ -161,14 +158,14 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
     opt.backgroundBrush = opt.palette.base();
     d->m_backGround = opt.backgroundBrush;
 
-    opt.rect.setX(opt.rect.x()-2);
-    opt.rect.setWidth(opt.rect.width()+5);
+    opt.rect.setX(opt.rect.x() - 2);
+    opt.rect.setWidth(opt.rect.width() + 5);
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     switch (index.column()) {
     case JournalModel::Column::Detail:
         // adjust the rect to cover all columns
-        if(view && view->viewport()) {
+        if (view && view->viewport()) {
             opt.rect.setX(0);
             opt.rect.setWidth(view->viewport()->width());
         }
@@ -192,7 +189,7 @@ QSize OnlineBalanceDelegate::sizeHint(const QStyleOptionViewItem& option, const 
 {
     QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
-    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
     d->m_margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
     d->m_lineHeight = opt.fontMetrics.lineSpacing();
 

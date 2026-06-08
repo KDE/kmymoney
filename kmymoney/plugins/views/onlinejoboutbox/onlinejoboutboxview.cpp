@@ -13,18 +13,18 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "viewinterface.h"
 #include "konlinejoboutboxview.h"
+#include "viewinterface.h"
 
-OnlineJobOutboxView::OnlineJobOutboxView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args),
-    m_view(nullptr)
+OnlineJobOutboxView::OnlineJobOutboxView(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+    , m_view(nullptr)
 {
     Q_INIT_RESOURCE(onlinejoboutboxview);
 

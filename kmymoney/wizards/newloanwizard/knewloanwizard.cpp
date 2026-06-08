@@ -25,17 +25,17 @@
 #include "knewaccountdlg.h"
 #include "mymoneypayee.h"
 
-KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
-    QWizard(parent),
-    d_ptr(new KNewLoanWizardPrivate(this))
+KNewLoanWizard::KNewLoanWizard(QWidget* parent)
+    : QWizard(parent)
+    , d_ptr(new KNewLoanWizardPrivate(this))
 {
     Q_D(KNewLoanWizard);
     d->init();
 }
 
-KNewLoanWizard::KNewLoanWizard(KNewLoanWizardPrivate &dd, QWidget *parent) :
-    QWizard(parent),
-    d_ptr(&dd)
+KNewLoanWizard::KNewLoanWizard(KNewLoanWizardPrivate& dd, QWidget* parent)
+    : QWizard(parent)
+    , d_ptr(&dd)
 {
     Q_D(KNewLoanWizard);
     d->init();
@@ -69,10 +69,10 @@ bool KNewLoanWizard::validateCurrentPage()
     Q_D(KNewLoanWizard);
     auto dontLeavePage = false;
     KLocalizedString ks = ki18n(
-                              "The loan wizard is unable to calculate two different values for your loan "
-                              "at the same time. "
-                              "Please enter a value for the %1 on this page or backup to the page where the "
-                              "current value to be calculated is defined and fill in a value.");
+        "The loan wizard is unable to calculate two different values for your loan "
+        "at the same time. "
+        "Please enter a value for the %1 on this page or backup to the page where the "
+        "current value to be calculated is defined and fill in a value.");
 
     if (currentPage() == d->ui->m_lendBorrowPage) {
         // load the appropriate categories into the list
@@ -100,8 +100,7 @@ bool KNewLoanWizard::validateCurrentPage()
             d->m_pages.clearBit(Page_RecordPayment);
         }
     } else if (currentPage() == d->ui->m_loanAmountPage) {
-        if (field("thisYearPaymentButton").toBool()
-                && !field("loanAmountEditValid").toBool()) {
+        if (field("thisYearPaymentButton").toBool() && !field("loanAmountEditValid").toBool()) {
             dontLeavePage = true;
             KMessageBox::error(nullptr,
                                i18n("You selected, that payments have already been made towards this loan. "
@@ -112,39 +111,31 @@ bool KNewLoanWizard::validateCurrentPage()
             d->updateLoanAmount();
 
     } else if (currentPage() == d->ui->m_interestPage) {
-
-        if (!field("loanAmountEditValid").toBool()
-                && !field("interestRateEditValid").toBool()) {
+        if (!field("loanAmountEditValid").toBool() && !field("interestRateEditValid").toBool()) {
             dontLeavePage = true;
             KMessageBox::error(nullptr, ks.subs(i18n("interest rate")).toString(), i18n("Calculation error"));
         } else
             d->updateInterestRate();
 
     } else if (currentPage() == d->ui->m_durationPage) {
-        if ((!field("loanAmountEditValid").toBool()
-                || !field("interestRateEditValid").toBool())
-                && field("durationValueEdit").toInt() == 0) {
+        if ((!field("loanAmountEditValid").toBool() || !field("interestRateEditValid").toBool()) && field("durationValueEdit").toInt() == 0) {
             dontLeavePage = true;
             KMessageBox::error(nullptr, ks.subs(i18n("term")).toString(), i18n("Calculation error"));
         } else
             d->updateDuration();
 
     } else if (currentPage() == d->ui->m_paymentPage) {
-        if ((!field("loanAmountEditValid").toBool()
-                || !field("interestRateEditValid").toBool()
-                || field("durationValueEdit").toInt() == 0)
-                && !field("paymentEditValid").toBool()) {
+        if ((!field("loanAmountEditValid").toBool() || !field("interestRateEditValid").toBool() || field("durationValueEdit").toInt() == 0)
+            && !field("paymentEditValid").toBool()) {
             dontLeavePage = true;
             KMessageBox::error(nullptr, ks.subs(i18n("principal and interest")).toString(), i18n("Calculation error"));
         } else
             d->updatePayment();
 
     } else if (currentPage() == d->ui->m_finalPaymentPage) {
-        if ((!field("loanAmountEditValid").toBool()
-                || !field("interestRateEditValid").toBool()
-                || field("durationValueEdit").toInt() == 0
-                || !field("paymentEditValid").toBool())
-                && !field("finalPaymentEditValid").toBool()) {
+        if ((!field("loanAmountEditValid").toBool() || !field("interestRateEditValid").toBool() || field("durationValueEdit").toInt() == 0
+             || !field("paymentEditValid").toBool())
+            && !field("finalPaymentEditValid").toBool()) {
             // if two fields are empty and one of them is the final payment
             // we assume the final payment to be 0 instead of presenting a dialog
             setField("finalPaymentEdit", QVariant::fromValue<MyMoneyMoney>((MyMoneyMoney())));
@@ -178,7 +169,8 @@ MyMoneySchedule KNewLoanWizard::schedule() const
 {
     MyMoneySchedule sched(field("nameEdit").toString(),
                           eMyMoney::Schedule::Type::LoanPayment,
-                          eMyMoney::Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt()), 1,
+                          eMyMoney::Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt()),
+                          1,
                           eMyMoney::Schedule::PaymentType::Other,
                           QDate(),
                           QDate(),
@@ -202,7 +194,7 @@ void KNewLoanWizard::slotReloadEditWidgets()
     // reload payee widget
     auto payeeId = field("payeeEdit").toString();
 
-    //FIXME: port
+    // FIXME: port
     d->ui->m_namePage->ui->m_payeeEdit->loadPayees(MyMoneyFile::instance()->payeeList());
 
     if (!payeeId.isEmpty()) {

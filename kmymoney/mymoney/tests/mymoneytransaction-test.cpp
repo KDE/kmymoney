@@ -10,14 +10,14 @@
 
 #include <QTest>
 
-#include "mymoneytestutils.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneysplit_p.h"
+#include "mymoneytestutils.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransaction_p.h"
-#include "mymoneyexception.h"
-#include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(MyMoneyTransactionTest)
 
@@ -145,7 +145,7 @@ void MyMoneyTransactionTest::testAddSplits()
         QVERIFY(split1.transactionId() == "TestID");
         QVERIFY(split2.transactionId() == "TestID");
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 
@@ -154,7 +154,7 @@ void MyMoneyTransactionTest::testAddSplits()
         m->addSplit(split1);
         QFAIL("Exception expected!");
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -171,7 +171,7 @@ void MyMoneyTransactionTest::testModifySplits()
     try {
         m->modifySplit(split);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // set id to correct value, and check that it worked
@@ -189,7 +189,7 @@ void MyMoneyTransactionTest::testModifySplits()
         QVERIFY(split.id() == "S0001");
         QVERIFY(split.accountId() == "A000003");
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -204,7 +204,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
     split.setValue(MyMoneyMoney(300, 100));
     try {
         m->addSplit(split);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -213,7 +213,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
     try {
         m->modifySplit(split);
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // set id to correct value, and check that it worked
@@ -227,7 +227,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
         QVERIFY(m->accountReferenced("A000003") == true);
         QVERIFY(m->splits()[0].id() == "S0001");
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -240,7 +240,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
         QVERIFY(m->accountReferenced("A000003") == false);
         QVERIFY(m->splits()[0].id() == "S0001");
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -252,7 +252,7 @@ void MyMoneyTransactionTest::testDeleteAllSplits()
     try {
         m->removeSplits();
         QVERIFY(m->splitCount() == 0);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -267,7 +267,7 @@ void MyMoneyTransactionTest::testExtractSplit()
     try {
         split = m->splitByAccount(QString("A000003"));
         QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     // this one should be found
@@ -275,7 +275,7 @@ void MyMoneyTransactionTest::testExtractSplit()
         split = m->splitByAccount(QString("A000002"));
         QVERIFY(split.id() == "S0002");
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 
@@ -283,7 +283,7 @@ void MyMoneyTransactionTest::testExtractSplit()
     try {
         split = m->splitByAccount(QString("A000002"), false);
         QVERIFY(split.id() == "S0001");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
     }
 }
@@ -462,7 +462,7 @@ void MyMoneyTransactionTest::testAddMissingAccountId()
     try {
         m->addSplit(s);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -475,7 +475,7 @@ void MyMoneyTransactionTest::testModifyMissingAccountId()
     try {
         m->modifySplit(s);
         QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
@@ -501,7 +501,7 @@ void MyMoneyTransactionTest::testReplaceId()
         QVERIFY(m->splits()[0].accountId() == "A000003");
         QVERIFY(m->splits()[1].accountId() == "A000004");
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
 }

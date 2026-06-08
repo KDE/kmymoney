@@ -24,19 +24,18 @@
 
 #include "ui_kinstitutionpage.h"
 
+#include "kaccounttypepage.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
-#include "kaccounttypepage.h"
+#include "knewinstitutiondlg.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
-#include "knewinstitutiondlg.h"
 #include "wizardpage.h"
 
-namespace NewAccountWizard
-{
-InstitutionPage::InstitutionPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new InstitutionPagePrivate(wizard),StepInstitution, this, wizard)
+namespace NewAccountWizard {
+InstitutionPage::InstitutionPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new InstitutionPagePrivate(wizard), StepInstitution, this, wizard)
 {
     Q_D(InstitutionPage);
     d->ui->setupUi(this);
@@ -118,7 +117,7 @@ const MyMoneyInstitution& InstitutionPage::institution() const
     if (d->ui->m_institutionComboBox->currentIndex() == 0)
         return emptyInstitution;
 
-    return d->m_list[d->ui->m_institutionComboBox->currentIndex()-1];
+    return d->m_list[d->ui->m_institutionComboBox->currentIndex() - 1];
 }
 
 KMyMoneyWizardPage* InstitutionPage::nextPage() const

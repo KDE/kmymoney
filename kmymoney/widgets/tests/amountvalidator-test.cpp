@@ -8,8 +8,8 @@
 #include <QTest>
 #include <QValidator>
 
-#include <config-kmymoney.h>
 #include "amountvalidator.h"
+#include <config-kmymoney.h>
 
 QTEST_GUILESS_MAIN(AmountValidatorTest)
 
@@ -23,7 +23,6 @@ void AmountValidatorTest::cleanup()
     QLocale::setDefault(defaultLocale);
 }
 
-
 void AmountValidatorTest::setLocale(const QString& name, const QChar& decimal, const QChar& group)
 {
     currentLocale = name;
@@ -34,13 +33,15 @@ void AmountValidatorTest::setLocale(const QString& name, const QChar& decimal, c
 void AmountValidatorTest::addAcceptableNumber(const QString& testCaseName, const QString& number)
 {
     const int result = static_cast<int>(QValidator::Acceptable);
-    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << number << currentDecimalPoint << currentGroupSeparator << result;
+    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8())
+        << currentLocale << number << currentDecimalPoint << currentGroupSeparator << result;
 }
 
 void AmountValidatorTest::addInvalidNumber(const QString& testCaseName, const QString& number)
 {
     const int result = static_cast<int>(QValidator::Invalid);
-    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << number << currentDecimalPoint << currentGroupSeparator << result;
+    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8())
+        << currentLocale << number << currentDecimalPoint << currentGroupSeparator << result;
 }
 
 void AmountValidatorTest::testValidator_data()
@@ -98,12 +99,14 @@ void AmountValidatorTest::testValidator()
 
     QLocale::setDefault(QLocale(locale));
     if (QLocale().decimalPoint() != decimalPoint) {
-        const QString msg = QStringLiteral("Locale %1 does not seem to be loaded correctly: decimal point is %2 and should be  %3").arg(locale, QLocale().decimalPoint(), decimalPoint);
+        const QString msg = QStringLiteral("Locale %1 does not seem to be loaded correctly: decimal point is %2 and should be  %3")
+                                .arg(locale, QLocale().decimalPoint(), decimalPoint);
 
         QSKIP(msg.toLatin1());
     }
     if (QLocale().groupSeparator() != groupSeparator) {
-        QString msg = QStringLiteral("Locale %1 does not seem to be loaded correctly: group separator is %2 and should be  %3").arg(locale, QLocale().groupSeparator(), groupSeparator);
+        QString msg = QStringLiteral("Locale %1 does not seem to be loaded correctly: group separator is %2 and should be  %3")
+                          .arg(locale, QLocale().groupSeparator(), groupSeparator);
         QSKIP(msg.toLatin1());
     }
     AmountValidator m(nullptr);

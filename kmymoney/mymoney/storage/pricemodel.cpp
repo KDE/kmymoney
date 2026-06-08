@@ -8,9 +8,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QDebug>
 #include <QString>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,26 +30,21 @@ PriceEntry::PriceEntry(const MyMoneyPrice& price)
 {
 }
 
-
-struct PriceModel::Private
-{
+struct PriceModel::Private {
     Private()
-        : headerData(QHash<Column, QString> ({
-        { Commodity, i18n("Commodity") },
-        { StockName, i18n("Stock name") },
-        { Currency, i18n("Currency") },
-        { Date, i18n("Date") },
-        { Price, i18n("Price") },
-        { Source, i18n("Source") },
-    }))
+        : headerData(QHash<Column, QString>({
+              {Commodity, i18n("Commodity")},
+              {StockName, i18n("Stock name")},
+              {Currency, i18n("Currency")},
+              {Date, i18n("Date")},
+              {Price, i18n("Price")},
+              {Source, i18n("Source")},
+          }))
     {
     }
 
-
-    QHash<Column, QString>          headerData;
+    QHash<Column, QString> headerData;
 };
-
-
 
 PriceModel::PriceModel(QObject* parent, QUndoStack* undoStack)
     : MyMoneyModel<PriceEntry>(parent, QStringLiteral("p"), PriceModel::ID_SIZE, undoStack)
@@ -67,9 +62,9 @@ QString PriceModel::createId(const QString& from, const QString& to, const QDate
     return QString("%1-%2-%3").arg(from, to, date.toString(Qt::ISODate));
 }
 
-QPair<QString,QString> PriceEntry::pricePair() const
+QPair<QString, QString> PriceEntry::pricePair() const
 {
-    return qMakePair<QString,QString>(from(), to());
+    return qMakePair<QString, QString>(from(), to());
 }
 
 int PriceModel::columnCount(const QModelIndex& parent) const
@@ -80,7 +75,7 @@ int PriceModel::columnCount(const QModelIndex& parent) const
 
 QVariant PriceModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         return d->headerData.value(static_cast<Column>(section));
     }
     return MyMoneyModelBase::headerData(section, orientation, role);
@@ -102,10 +97,10 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
     if (security.isCurrency() && currency.isCurrency()) {
         precision = currency.pricePrecision();
     }
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Commodity:
             if (!security.isCurrency()) {
                 return security.tradingSymbol();
@@ -133,7 +128,7 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
         break;
 
     case Qt::TextAlignmentRole:
-        switch( idx.column()) {
+        switch (idx.column()) {
         case Price:
             return QVariant(Qt::AlignRight | Qt::AlignTop);
 
@@ -165,7 +160,7 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
 
     default:
         if (role >= Qt::UserRole)
-            qDebug() << "PriceModel::data(), role" << role << "offset" << role-Qt::UserRole << "not implemented";
+            qDebug() << "PriceModel::data(), role" << role << "offset" << role - Qt::UserRole << "not implemented";
         break;
     }
     return QVariant();
@@ -173,7 +168,7 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
 
 bool PriceModel::setData(const QModelIndex& idx, const QVariant& value, int role)
 {
-    if(!idx.isValid()) {
+    if (!idx.isValid()) {
         return false;
     }
 
@@ -237,7 +232,7 @@ void PriceModel::addPrice(const MyMoneyPrice& price)
 
     if (static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() != newEntry) {
         static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() = newEntry;
-        Q_EMIT dataChanged(idx, index(row, columnCount()-1));
+        Q_EMIT dataChanged(idx, index(row, columnCount() - 1));
         setDirty();
     }
 }
@@ -257,7 +252,7 @@ void PriceModel::removePrice(const MyMoneyPrice& price)
 MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDate& _date, bool exactDate) const
 {
     // if no valid date is passed, we use today's date.
-    const QDate &date = _date.isValid() ? _date : QDate::currentDate();
+    const QDate& date = _date.isValid() ? _date : QDate::currentDate();
     QString fullId(createId(from, to, date));
     QString pricePair(createId(from, to, QDate()));
 
@@ -268,7 +263,7 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
     }
 
     // find the last matching price
-    idx = lowerBound(fullId, idx.row(), rowCount()-1);
+    idx = lowerBound(fullId, idx.row(), rowCount() - 1);
     int row = idx.row();
     if (!idx.isValid()) {
         // if we found a price pair but get an invalid index here
@@ -278,7 +273,7 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
             return {};
         }
         // the last row is the one we look for.
-        row = rowCount()-1;
+        row = rowCount() - 1;
         auto priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->data();
         return priceEntry;
     }
@@ -299,7 +294,7 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
     // the exact key is not present) we need to return the previous item (the model
     // is not empty so there is one)
     if (row > 0) {
-        priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row-1, 0).internalPointer())->data();
+        priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row - 1, 0).internalPointer())->data();
         if ((priceEntry.from() == from) && (priceEntry.to() == to)) {
             return priceEntry;
         }
@@ -311,7 +306,7 @@ MyMoneyPriceList PriceModel::priceList() const
 {
     MyMoneyPriceList priceList;
     MyMoneyPriceEntries entries;
-    QPair<QString,QString> pricePair;
+    QPair<QString, QString> pricePair;
 
     QModelIndex idx;
     const auto rows = rowCount();

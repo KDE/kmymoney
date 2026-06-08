@@ -30,9 +30,9 @@ class KSettingsGeneralPrivate
     Q_DISABLE_COPY(KSettingsGeneralPrivate)
 
 public:
-    KSettingsGeneralPrivate() :
-        ui(new Ui::KSettingsGeneral),
-        initialHideZeroBalanceEquities(false)
+    KSettingsGeneralPrivate()
+        : ui(new Ui::KSettingsGeneral)
+        , initialHideZeroBalanceEquities(false)
     {
     }
 
@@ -41,13 +41,13 @@ public:
         delete ui;
     }
 
-    Ui::KSettingsGeneral *ui;
+    Ui::KSettingsGeneral* ui;
     bool initialHideZeroBalanceEquities;
 };
 
-KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KSettingsGeneralPrivate)
+KSettingsGeneral::KSettingsGeneral(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KSettingsGeneralPrivate)
 {
     Q_D(KSettingsGeneral);
     d->ui->setupUi(this);
@@ -110,7 +110,7 @@ void KSettingsGeneral::slotUpdateLogTypes()
     }
 }
 
-void KSettingsGeneral::showEvent(QShowEvent *event)
+void KSettingsGeneral::showEvent(QShowEvent* event)
 {
     Q_UNUSED(event)
     QWidget::showEvent(event);

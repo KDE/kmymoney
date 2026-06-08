@@ -17,9 +17,9 @@
 
 #include "ui_ksettingsfonts.h"
 
-KSettingsFonts::KSettingsFonts(QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::KSettingsFonts)
+KSettingsFonts::KSettingsFonts(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::KSettingsFonts)
 {
     ui->setupUi(this);
 }

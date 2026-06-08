@@ -6,21 +6,19 @@
 */
 
 #ifdef HAVE_CONFIG_H
-# include <config-kmymoney.h>
+#include <config-kmymoney.h>
 #endif
 
 #include "kbjoblist.h"
 #include <assert.h>
 
+#include <QHeaderView>
 #include <QString>
 #include <QWidget>
-#include <QHeaderView>
 
 #include <KLocalizedString>
 
-
-KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
-                                     AB_TRANSACTION *j)
+KBJobListViewItem::KBJobListViewItem(KBJobListView* parent, AB_TRANSACTION* j)
     : QTreeWidgetItem(parent)
     , _job(j)
 {
@@ -32,7 +30,6 @@ KBJobListViewItem::KBJobListViewItem(const KBJobListViewItem& item)
     : QTreeWidgetItem(item)
     , _job(nullptr)
 {
-
     if (item._job) {
         _job = item._job;
     }
@@ -42,13 +39,10 @@ KBJobListViewItem::~KBJobListViewItem()
 {
 }
 
-
-
-AB_TRANSACTION *KBJobListViewItem::getJob()
+AB_TRANSACTION* KBJobListViewItem::getJob()
 {
     return _job;
 }
-
 
 void KBJobListViewItem::_populate()
 {
@@ -137,44 +131,26 @@ void KBJobListViewItem::_populate()
     setText(column, tmp);
 }
 
-
-
-
-
-
-
-
-
-KBJobListView::KBJobListView(QWidget *parent)
+KBJobListView::KBJobListView(QWidget* parent)
     : QTreeWidget(parent)
 {
     setColumnCount(5);
     setAllColumnsShowFocus(true);
-    setHeaderLabels(QStringList() << i18n("Job Id")
-                    << i18n("Job Type")
-                    << i18n("Institute")
-                    << i18n("Account")
-                    << i18n("Status"));
+    setHeaderLabels(QStringList() << i18n("Job Id") << i18n("Job Type") << i18n("Institute") << i18n("Account") << i18n("Status"));
 
     header()->setSortIndicatorShown(true);
 }
-
-
 
 KBJobListView::~KBJobListView()
 {
 }
 
-
-
-void KBJobListView::addJob(AB_TRANSACTION *j)
+void KBJobListView::addJob(AB_TRANSACTION* j)
 {
     new KBJobListViewItem(this, j);
 }
 
-
-
-void KBJobListView::addJobs(const std::list<AB_TRANSACTION*> &js)
+void KBJobListView::addJobs(const std::list<AB_TRANSACTION*>& js)
 {
     std::list<AB_TRANSACTION*>::const_iterator it;
 
@@ -183,11 +159,9 @@ void KBJobListView::addJobs(const std::list<AB_TRANSACTION*> &js)
     } /* for */
 }
 
-
-
-AB_TRANSACTION *KBJobListView::getCurrentJob()
+AB_TRANSACTION* KBJobListView::getCurrentJob()
 {
-    KBJobListViewItem *entry;
+    KBJobListViewItem* entry;
 
     entry = dynamic_cast<KBJobListViewItem*>(currentItem());
     if (!entry) {
@@ -197,12 +171,10 @@ AB_TRANSACTION *KBJobListView::getCurrentJob()
     return entry->getJob();
 }
 
-
-
 std::list<AB_TRANSACTION*> KBJobListView::getSelectedJobs()
 {
     std::list<AB_TRANSACTION*> js;
-    KBJobListViewItem *entry;
+    KBJobListViewItem* entry;
     // Create an iterator and give the listview as argument
     QTreeWidgetItemIterator it(this, QTreeWidgetItemIterator::Selected);
     // iterate through all selected items of the listview
@@ -214,4 +186,3 @@ std::list<AB_TRANSACTION*> KBJobListView::getSelectedJobs()
 
     return js;
 }
-

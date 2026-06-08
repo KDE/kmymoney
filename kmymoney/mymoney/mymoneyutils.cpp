@@ -41,7 +41,7 @@ QString MyMoneyUtils::getFileExtension(QString strFileName)
 {
     QString strTemp;
     if (!strFileName.isEmpty()) {
-        //find last . deliminator
+        // find last . deliminator
         int nLoc = strFileName.lastIndexOf('.');
         if (nLoc != -1) {
             strTemp = strFileName.right(strFileName.length() - (nLoc + 1));
@@ -51,23 +51,14 @@ QString MyMoneyUtils::getFileExtension(QString strFileName)
     return strTemp;
 }
 
-QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val,
-                                  const MyMoneyAccount& acc,
-                                  const MyMoneySecurity& sec,
-                                  bool showThousandSeparator)
+QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val, const MyMoneyAccount& acc, const MyMoneySecurity& sec, bool showThousandSeparator)
 {
-    return val.formatMoney(sec.tradingSymbol(),
-                           val.denomToPrec(acc.fraction()),
-                           showThousandSeparator);
+    return val.formatMoney(sec.tradingSymbol(), val.denomToPrec(acc.fraction()), showThousandSeparator);
 }
 
-QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val,
-                                  const MyMoneySecurity& sec,
-                                  bool showThousandSeparator)
+QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val, const MyMoneySecurity& sec, bool showThousandSeparator)
 {
-    return val.formatMoney(sec.tradingSymbol(),
-                           val.denomToPrec(sec.smallestAccountFraction()),
-                           showThousandSeparator);
+    return val.formatMoney(sec.tradingSymbol(), val.denomToPrec(sec.smallestAccountFraction()), showThousandSeparator);
 }
 
 QString MyMoneyUtils::dateToIsoString(const QDate& date)
@@ -124,7 +115,14 @@ unsigned long MyMoneyUtils::extractId(const QString& txt)
     return rc;
 }
 
-void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType)
+void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction,
+                                      const MyMoneySplit& split,
+                                      MyMoneySplit& assetAccountSplit,
+                                      QList<MyMoneySplit>& feeSplits,
+                                      QList<MyMoneySplit>& interestSplits,
+                                      MyMoneySecurity& security,
+                                      MyMoneySecurity& currency,
+                                      eMyMoney::Split::InvestmentTransactionType& transactionType)
 {
     // collect the splits. split references the stock account and should already
     // be set up. assetAccountSplit references the corresponding asset account (maybe
@@ -146,8 +144,8 @@ void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, con
         } else {
             if (assetAccountSplit == MyMoneySplit()) // first asset Account should be our requested brokerage account
                 assetAccountSplit = tsplit;
-            else if (tsplit.value().isNegative())  // the rest (if present) is handled as fee or interest
-                feeSplits.append(tsplit);              // and shouldn't be allowed to override assetAccountSplit
+            else if (tsplit.value().isNegative()) // the rest (if present) is handled as fee or interest
+                feeSplits.append(tsplit); // and shouldn't be allowed to override assetAccountSplit
             else if (tsplit.value().isPositive())
                 interestSplits.append(tsplit);
         }
@@ -162,7 +160,7 @@ void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, con
     currency.setTradingSymbol("???");
     try {
         currency = file->security(transaction.commodity());
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 

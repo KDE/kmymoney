@@ -21,15 +21,15 @@ payeeIdentifier::payeeIdentifier(const payeeIdentifier& other)
         m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
-payeeIdentifier::payeeIdentifier(payeeIdentifierData*const identifierdata)
-    : m_id(0),
-      m_payeeIdentifier(identifierdata)
+payeeIdentifier::payeeIdentifier(payeeIdentifierData* const identifierdata)
+    : m_id(0)
+    , m_payeeIdentifier(identifierdata)
 {
 }
 
-payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData*const identifierdata)
-    : m_id(id),
-      m_payeeIdentifier(identifierdata)
+payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData* const identifierdata)
+    : m_id(id)
+    , m_payeeIdentifier(identifierdata)
 {
 }
 
@@ -101,7 +101,7 @@ QString payeeIdentifier::iid() const
     return QString();
 }
 
-payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier & other)
+payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier& other)
 {
     if (this == &other)
         return *this;
@@ -121,10 +121,9 @@ bool payeeIdentifier::operator==(const payeeIdentifier& other) const
         return false;
 
     if (isNull() || other.isNull()) {
-        if (!isNull() ||  !other.isNull())
+        if (!isNull() || !other.isNull())
             return false;
         return true;
     }
     return (*data() == *(other.data()));
 }
-

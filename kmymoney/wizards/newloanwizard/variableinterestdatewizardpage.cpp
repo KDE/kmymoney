@@ -20,9 +20,9 @@
 
 #include "mymoneyaccountloan.h"
 
-VariableInterestDateWizardPage::VariableInterestDateWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::VariableInterestDateWizardPage)
+VariableInterestDateWizardPage::VariableInterestDateWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::VariableInterestDateWizardPage)
 {
     ui->setupUi(this);
     ui->m_interestFrequencyUnitEdit->insertItem(i18nc("Occurrence period 'days'", "Days"), static_cast<int>(MyMoneyAccountLoan::changeDaily));
@@ -32,7 +32,7 @@ VariableInterestDateWizardPage::VariableInterestDateWizardPage(QWidget *parent)
 
     // Register the fields with the QWizard and connect the
     // appropriate signals to update the "Next" button correctly
-    //registerField("onlineFactor", m_onlineFactor, "value");
+    // registerField("onlineFactor", m_onlineFactor, "value");
     registerField("interestChangeDateEdit", ui->m_interestChangeDateEdit, "date");
     registerField("interestFrequencyAmountEdit", ui->m_interestFrequencyAmountEdit, "value");
     registerField("interestFrequencyUnitEdit", ui->m_interestFrequencyUnitEdit, "currentItem");

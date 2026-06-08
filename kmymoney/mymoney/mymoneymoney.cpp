@@ -12,7 +12,7 @@
 
 // make sure, that this is defined before we even include any other header file
 #ifndef __STDC_LIMIT_MACROS
-#define __STDC_LIMIT_MACROS         // force definition of min and max values
+#define __STDC_LIMIT_MACROS // force definition of min and max values
 #endif
 
 #include "mymoneymoney.h"
@@ -33,14 +33,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
 
 const MyMoneyMoney MyMoneyMoney::ONE = MyMoneyMoney(1, 1);
 const MyMoneyMoney MyMoneyMoney::MINUS_ONE = MyMoneyMoney(-1, 1);
-namespace eMyMoney
-{
-namespace Money {
+namespace eMyMoney { namespace Money {
 
 enum fileVersionE : int {
     FILE_4_BYTE_VALUE = 0,
@@ -58,8 +56,7 @@ bool _positiveSpaceSeparatesSymbol = true;
 bool _useQtInternalFormmater = false;
 QLocale _locale;
 eMyMoney::Money::fileVersionE _fileVersion = fileVersionE::FILE_4_BYTE_VALUE;
-}
-}
+}}
 
 MyMoneyMoney MyMoneyMoney::maxValue = MyMoneyMoney(INT64_MAX, 100);
 MyMoneyMoney MyMoneyMoney::minValue = MyMoneyMoney(INT64_MIN, 100);
@@ -67,12 +64,12 @@ MyMoneyMoney MyMoneyMoney::autoCalc = MyMoneyMoney(INT64_MIN + 1, 100);
 
 void MyMoneyMoney::setNegativeSpaceSeparatesSymbol(const bool flag)
 {
-    eMyMoney::Money::_negativeSpaceSeparatesSymbol= flag;
+    eMyMoney::Money::_negativeSpaceSeparatesSymbol = flag;
 }
 
 void MyMoneyMoney::setPositiveSpaceSeparatesSymbol(const bool flag)
 {
-    eMyMoney::Money::_positiveSpaceSeparatesSymbol= flag;
+    eMyMoney::Money::_positiveSpaceSeparatesSymbol = flag;
 }
 
 void MyMoneyMoney::setNegativePrefixCurrencySymbol(const bool flag)
@@ -105,7 +102,7 @@ eMyMoney::Money::signPosition MyMoneyMoney::positiveMonetarySignPosition()
     return eMyMoney::Money::_positiveMonetarySignPosition;
 }
 
-void MyMoneyMoney::setThousandSeparator(const QChar &separator)
+void MyMoneyMoney::setThousandSeparator(const QChar& separator)
 {
     if (separator != QLatin1Char(' '))
         eMyMoney::Money::_thousandSeparator = separator;
@@ -126,7 +123,7 @@ const QChar MyMoneyMoney::thousandSeparator()
     return eMyMoney::Money::_thousandSeparator.isEmpty() ? QLatin1Char(0) : eMyMoney::Money::_thousandSeparator.at(0);
 }
 
-void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
+void MyMoneyMoney::setDecimalSeparator(const QChar& separator)
 {
     if (separator != QLatin1Char(' '))
         eMyMoney::Money::_decimalSeparator = separator;
@@ -201,7 +198,6 @@ MyMoneyMoney::MyMoneyMoney(const long int iAmount, const unsigned int denom)
     *this = AlkValue(QString::fromLatin1("%1/%2").arg(iAmount).arg(denom), decimalSeparator());
 }
 
-
 MyMoneyMoney::~MyMoneyMoney()
 {
 }
@@ -265,7 +261,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
         if (decimalSeparator() != nullptr)
             res += decimalSeparator();
 
-        auto rs  = QString::fromLatin1("%1").arg(right.get_str().c_str());
+        auto rs = QString::fromLatin1("%1").arg(right.get_str().c_str());
         if (prec != -1)
             rs = rs.rightJustified(prec, QLatin1Char('0'), true);
         else {
@@ -333,7 +329,6 @@ const MyMoneyMoney MyMoneyMoney::operator+(const MyMoneyMoney& _b) const
 {
     return static_cast<const MyMoneyMoney>(AlkValue::operator+(_b));
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //      Name: operator-

@@ -14,24 +14,24 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <kguiutils.h>
-#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kcategoryreassigndlg.h"
 
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
+#include "kmymoneycategory.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 
-KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::KCategoryReassignDlg)
+KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KCategoryReassignDlg)
 {
     ui->setupUi(this);
     auto mandatory = new KMandatoryFieldGroup(this);
@@ -72,7 +72,12 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
 
     // if there is no category for reassignment left, we bail out
     if (list.isEmpty()) {
-        KMessageBox::error(this, QString("<qt>") + i18n("At least one transaction/schedule still references the category <b>%1</b>.  However, at least one category with the same currency must exist so that the transactions/schedules can be reassigned.", category.name()) + QString("</qt>"));
+        KMessageBox::error(this,
+                           QString("<qt>")
+                               + i18n("At least one transaction/schedule still references the category <b>%1</b>.  However, at least one category with the "
+                                      "same currency must exist so that the transactions/schedules can be reassigned.",
+                                      category.name())
+                               + QString("</qt>"));
         return QString();
     }
 
@@ -84,14 +89,15 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
     return ui->m_category->selectedItem();
 }
 
-
 void KCategoryReassignDlg::accept()
 {
     // force update of payeeCombo
     ui->buttonBox->button(QDialogButtonBox::Ok)->setFocus();
 
     if (ui->m_category->selectedItem().isEmpty())
-        KMessageBox::information(this, i18n("This dialog does not allow new categories to be created. Please pick a category from the list."), i18n("Category creation"));
+        KMessageBox::information(this,
+                                 i18n("This dialog does not allow new categories to be created. Please pick a category from the list."),
+                                 i18n("Category creation"));
     else
         QDialog::accept();
 }

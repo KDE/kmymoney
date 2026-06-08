@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <config-kmymoney.h>
 #include "icalendarexporter.h"
+#include <config-kmymoney.h>
 
 // Qt includes
 #include <QAction>
@@ -15,17 +15,17 @@
 #include <QUrl>
 
 // KDE includes
-#include <KPluginFactory>
 #include <KActionCollection>
-#include <KSharedConfig>
 #include <KLocalizedString>
+#include <KPluginFactory>
+#include <KSharedConfig>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
 #include "pluginloader.h"
 
-#include "schedulestoicalendar.h"
 #include "icalendarsettings.h"
+#include "schedulestoicalendar.h"
 #include "viewinterface.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -47,14 +47,14 @@ typedef QAction KMMAction;
 struct iCalendarExporter::Private {
     bool m_skipFirstUpdate;
     KMMAction* m_action;
-    QString  m_profileName;
-    QString  m_iCalendarFileEntryName;
+    QString m_profileName;
+    QString m_iCalendarFileEntryName;
     KMMSchedulesToiCalendar m_exporter;
 };
 
-iCalendarExporter::iCalendarExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args),
-    d(std::unique_ptr<Private>(new Private))
+iCalendarExporter::iCalendarExporter(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+    , d(std::unique_ptr<Private>(new Private))
 {
     Q_INIT_RESOURCE(icalendarexporter);
 
@@ -91,7 +91,7 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const KPluginMetaData &met
     if (!icalFilePath.isEmpty())
         actionName = i18n("Schedules to iCalendar [%1]", icalFilePath);
 
-    const auto &kpartgui = QStringLiteral("file_export_icalendar");
+    const auto& kpartgui = QStringLiteral("file_export_icalendar");
     d->m_action = static_cast<KMMAction*>(actionCollection()->addAction(kpartgui));
     d->m_action->setText(actionName);
     connect(d->m_action, &QAction::triggered, this, &iCalendarExporter::slotFirstExport);

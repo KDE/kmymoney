@@ -22,21 +22,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksettingsgeneral.h"
-#include "ksettingsregister.h"
 #include "ksettingscolors.h"
 #include "ksettingsfonts.h"
-#include "ksettingsicons.h"
-#include "ksettingsschedules.h"
-#include "ksettingsonlinequotes.h"
+#include "ksettingsgeneral.h"
 #include "ksettingshome.h"
+#include "ksettingsicons.h"
+#include "ksettingsonlinequotes.h"
 #include "ksettingsplugins.h"
+#include "ksettingsregister.h"
+#include "ksettingsschedules.h"
 
 #include "icons.h"
 
 using namespace Icons;
 
-KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config)
+KSettingsKMyMoney::KSettingsKMyMoney(QWidget* parent, const QString& name, KCoreConfigSkeleton* config)
     : KConfigDialog(parent, name, config)
 {
     // create the pages ...
@@ -53,7 +53,9 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
     addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::PreferencesGeneral).name());
     addPage(homePage, i18n("Home"), Icons::get(Icon::Home).name());
     addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::Ledgers).name());
-    addPage(schedulesPage, QString(i18n("Scheduled\ntransactions")).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")), Icons::get(Icon::Schedule).name());
+    addPage(schedulesPage,
+            QString(i18n("Scheduled\ntransactions")).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")),
+            Icons::get(Icon::Schedule).name());
     addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
     addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColors).name());
     addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFonts).name());

@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_calculationoverviewwizardpage.h"
 
-CalculationOverviewWizardPage::CalculationOverviewWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::CalculationOverviewWizardPage)
+CalculationOverviewWizardPage::CalculationOverviewWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::CalculationOverviewWizardPage)
 {
     ui->setupUi(this);
     // Register the fields with the QWizard and connect the

@@ -9,9 +9,9 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyBudgetTest;
 
-#include "mymoneymoney.h"
 #include "mymoneybudget.h"
 #include "mymoneybudget_p.h"
+#include "mymoneymoney.h"
 
 QTEST_GUILESS_MAIN(MyMoneyBudgetTest)
 

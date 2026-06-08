@@ -18,12 +18,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
 #include "kmymoneyaccountselector.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 
-KMyMoneyAccountCompletion::KMyMoneyAccountCompletion(QWidget *parent) :
-    KMyMoneyCompletion(parent)
+KMyMoneyAccountCompletion::KMyMoneyAccountCompletion(QWidget* parent)
+    : KMyMoneyCompletion(parent)
 {
     Q_D(KMyMoneyCompletion);
     delete d->m_selector;
@@ -62,7 +62,7 @@ QStringList KMyMoneyAccountCompletion::accountList() const
 KMyMoneyAccountSelector* KMyMoneyAccountCompletion::selector() const
 {
     Q_D(const KMyMoneyCompletion);
-//  return nullptr;
+    //  return nullptr;
     return dynamic_cast<KMyMoneyAccountSelector*>(d->m_selector);
 }
 

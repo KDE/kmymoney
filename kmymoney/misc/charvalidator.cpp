@@ -6,8 +6,8 @@
 #include "misc/charvalidator.h"
 
 charValidator::charValidator(QObject* parent, const QString& characters)
-    : QValidator(parent),
-      m_allowedCharacters(characters)
+    : QValidator(parent)
+    , m_allowedCharacters(characters)
 {
 }
 

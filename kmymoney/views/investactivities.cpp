@@ -47,14 +47,14 @@ public:
     {
     }
 
-    template <typename T>
-    inline T* haveWidget(const QString &aName) const
+    template<typename T>
+    inline T* haveWidget(const QString& aName) const
     {
         return m_editor->findChild<T*>(aName);
     }
 
-    template <typename T>
-    inline T* haveVisibleWidget(const QString &aName) const
+    template<typename T>
+    inline T* haveVisibleWidget(const QString& aName) const
     {
         auto widget = m_editor->findChild<T*>(aName);
         if (!widget) {
@@ -220,7 +220,7 @@ bool Activity::haveCategoryAndAmount(const QString& categoryWidget, const QStrin
     auto rc = true;
 
     if (cat && amount) {
-        switch(optional) {
+        switch (optional) {
         case Unused:
             break;
         case Optional:
@@ -303,7 +303,7 @@ QString Activity::priceLabelText() const
     return i18nc("@label:textbox", "Price");
 }
 
-void Activity::loadPriceWidget(const MyMoneySplit & split)
+void Activity::loadPriceWidget(const MyMoneySplit& split)
 {
     Q_D(const Activity);
     auto priceEdit = d->haveWidget<AmountEdit>("priceAmountEdit");
@@ -566,14 +566,13 @@ void Add::showWidgets() const
     setupWidgets(activityWidgets);
 }
 
-
 void Add::adjustStockSplit(MyMoneySplit& stockSplit)
 {
     stockSplit.setValue(MyMoneyMoney());
     stockSplit.setPrice(MyMoneyMoney());
 }
 
-MyMoneyMoney Invest::Add::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
+MyMoneyMoney Invest::Add::totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const
 {
     Q_UNUSED(stockSplit)
     Q_UNUSED(feesModel)
@@ -613,7 +612,7 @@ void Remove::adjustStockSplit(MyMoneySplit& stockSplit)
     stockSplit.setPrice(MyMoneyMoney());
 }
 
-MyMoneyMoney Invest::Remove::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
+MyMoneyMoney Invest::Remove::totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const
 {
     Q_UNUSED(stockSplit)
     Q_UNUSED(feesModel)
@@ -621,7 +620,6 @@ MyMoneyMoney Invest::Remove::totalAmount(const MyMoneySplit & stockSplit, const 
 
     return {};
 }
-
 
 MyMoneyMoney Remove::sharesFactor() const
 {
@@ -653,20 +651,18 @@ void Invest::Split::showWidgets() const
     setupWidgets(activityWidgets);
 }
 
-
-
 QString Invest::Split::sharesLabelText() const
 {
     return i18nc("@label:textbox", "Ratio 1/");
 }
 
-void Invest::Split::adjustStockSplit(MyMoneySplit & stockSplit)
+void Invest::Split::adjustStockSplit(MyMoneySplit& stockSplit)
 {
     stockSplit.setValue(MyMoneyMoney());
     stockSplit.setPrice(MyMoneyMoney());
 }
 
-MyMoneyMoney Invest::Split::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
+MyMoneyMoney Invest::Split::totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const
 {
     Q_UNUSED(stockSplit)
     Q_UNUSED(feesModel)

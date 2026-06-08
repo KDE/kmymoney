@@ -28,9 +28,9 @@ class KNewEquityEntryDlgPrivate
     Q_DISABLE_COPY(KNewEquityEntryDlgPrivate)
 
 public:
-    KNewEquityEntryDlgPrivate() :
-        ui(new Ui::KNewEquityEntryDlg),
-        m_fraction(2)
+    KNewEquityEntryDlgPrivate()
+        : ui(new Ui::KNewEquityEntryDlg)
+        , m_fraction(2)
     {
     }
 
@@ -39,15 +39,15 @@ public:
         delete ui;
     }
 
-    Ui::KNewEquityEntryDlg  *ui;
-    QString                  m_strSymbolName;
-    QString                  m_strName;
-    int                      m_fraction;
+    Ui::KNewEquityEntryDlg* ui;
+    QString m_strSymbolName;
+    QString m_strName;
+    int m_fraction;
 };
 
-KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KNewEquityEntryDlgPrivate)
+KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KNewEquityEntryDlgPrivate)
 {
     Q_D(KNewEquityEntryDlg);
     d->m_fraction = 0;
@@ -124,8 +124,8 @@ void KNewEquityEntryDlg::slotDataChanged()
     auto okEnabled = true;
 
     if (!d->ui->edtFraction->value().isPositive() //
-            || d->ui->edtMarketSymbol->text().isEmpty() //
-            || d->ui->edtEquityName->text().isEmpty()) //
+        || d->ui->edtMarketSymbol->text().isEmpty() //
+        || d->ui->edtEquityName->text().isEmpty()) //
         okEnabled = false;
 
     d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(okEnabled);

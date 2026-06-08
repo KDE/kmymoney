@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_interesteditwizardpage.h"
 
-InterestEditWizardPage::InterestEditWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::InterestEditWizardPage)
+InterestEditWizardPage::InterestEditWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::InterestEditWizardPage)
 {
     ui->setupUi(this);
 
@@ -42,7 +40,6 @@ InterestEditWizardPage::~InterestEditWizardPage()
  */
 bool InterestEditWizardPage::isComplete() const
 {
-    //FIXME: this only exists in the EditLoanWizard subclass
-    return field("newPaymentEditValid").toBool()
-           || ui->m_newInterestRateEdit->isValid();
+    // FIXME: this only exists in the EditLoanWizard subclass
+    return field("newPaymentEditValid").toBool() || ui->m_newInterestRateEdit->isValid();
 }

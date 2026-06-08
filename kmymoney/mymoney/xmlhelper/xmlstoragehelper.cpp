@@ -34,7 +34,6 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneyutils.h"
 
-
 using namespace MyMoneyXmlHelper;
 
 namespace MyMoneyXmlHelper {

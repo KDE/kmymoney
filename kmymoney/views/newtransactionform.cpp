@@ -21,8 +21,8 @@
 
 #include "journalmodel.h"
 #include "mymoneyfile.h"
-#include "tagsmodel.h"
 #include "statusmodel.h"
+#include "tagsmodel.h"
 
 #include "ui_newtransactionform.h"
 
@@ -46,10 +46,9 @@ public:
     }
     void updateMemoLink();
 
-    Ui_NewTransactionForm*  ui;
-    int                     row;
+    Ui_NewTransactionForm* ui;
+    int row;
 };
-
 
 NewTransactionForm::NewTransactionForm(QWidget* parent)
     : QFrame(parent)

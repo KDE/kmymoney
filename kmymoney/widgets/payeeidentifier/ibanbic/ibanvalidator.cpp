@@ -58,16 +58,16 @@ QValidator::State ibanValidator::validate(QString& input, int& pos) const
     return Intermediate;
 }
 
-QPair< eWidgets::ValidationFeedback::MessageType, QString > ibanValidator::validateWithMessage(const QString& string)
+QPair<eWidgets::ValidationFeedback::MessageType, QString> ibanValidator::validateWithMessage(const QString& string)
 {
     // string.length() > 32 should not happen because all line edits should have this validator installed
     if (string.length() < 5)
-        return QPair< eWidgets::ValidationFeedback::MessageType, QString >(eWidgets::ValidationFeedback::MessageType::Error, i18n("This IBAN is too short."));
+        return QPair<eWidgets::ValidationFeedback::MessageType, QString>(eWidgets::ValidationFeedback::MessageType::Error, i18n("This IBAN is too short."));
 
     if (!payeeIdentifiers::ibanBic::validateIbanChecksum(payeeIdentifiers::ibanBic::ibanToElectronic(string)))
-        return QPair< eWidgets::ValidationFeedback::MessageType, QString >(eWidgets::ValidationFeedback::MessageType::Warning, i18n("This IBAN is invalid."));
+        return QPair<eWidgets::ValidationFeedback::MessageType, QString>(eWidgets::ValidationFeedback::MessageType::Warning, i18n("This IBAN is invalid."));
 
-    return QPair< eWidgets::ValidationFeedback::MessageType, QString >(eWidgets::ValidationFeedback::MessageType::None, QString());
+    return QPair<eWidgets::ValidationFeedback::MessageType, QString>(eWidgets::ValidationFeedback::MessageType::None, QString());
 }
 
 void ibanValidator::fixup(QString& input) const

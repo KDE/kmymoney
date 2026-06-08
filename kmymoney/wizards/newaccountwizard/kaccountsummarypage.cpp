@@ -66,11 +66,10 @@ using namespace NewAccountWizard;
 using namespace Icons;
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
-AccountSummaryPage::AccountSummaryPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new AccountSummaryPagePrivate(wizard), StepFinish, this, wizard)
+namespace NewAccountWizard {
+AccountSummaryPage::AccountSummaryPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new AccountSummaryPagePrivate(wizard), StepFinish, this, wizard)
 {
     Q_D(AccountSummaryPage);
     d->ui->setupUi(this);
@@ -137,9 +136,11 @@ void AccountSummaryPage::enterPage()
 
             d->ui->m_dataList->append(i18nc("Account name", "Name: %1 (Brokerage)", acc.name()));
             d->ui->m_dataList->append(i18n("Currency: %1", d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_brokerageCurrency->security().name()));
-            if (d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_accountNumber->isEnabled() && !d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_accountNumber->text().isEmpty())
+            if (d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_accountNumber->isEnabled()
+                && !d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_accountNumber->text().isEmpty())
                 d->ui->m_dataList->append(i18n("Number: %1", d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_accountNumber->text()));
-            if (d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_iban->isEnabled() && !d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_iban->text().isEmpty())
+            if (d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_iban->isEnabled()
+                && !d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_iban->text().isEmpty())
                 d->ui->m_dataList->append(i18n("IBAN: %1", d->m_wizard->d_func()->m_brokeragepage->d_func()->ui->m_iban->text()));
         }
     }
@@ -150,13 +151,21 @@ void AccountSummaryPage::enterPage()
         d->ui->m_dataList->append(i18n("Loan information"));
         d->ui->m_dataList->setFontWeight(QFont::Normal);
         if (d->m_wizard->moneyBorrowed()) {
-            d->ui->m_dataList->append(i18n("Amount borrowed: %1", d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_loanAmount->value().formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(), d->m_wizard->d_func()->precision())));
+            d->ui->m_dataList->append(i18n(
+                "Amount borrowed: %1",
+                d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_loanAmount->value().formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(),
+                                                                                                          d->m_wizard->d_func()->precision())));
         } else {
-            d->ui->m_dataList->append(i18n("Amount lent: %1", d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_loanAmount->value().formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(), d->m_wizard->d_func()->precision())));
+            d->ui->m_dataList->append(i18n(
+                "Amount lent: %1",
+                d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_loanAmount->value().formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(),
+                                                                                                          d->m_wizard->d_func()->precision())));
         }
-        d->ui->m_dataList->append(i18n("Interest rate: %1 %", d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_interestRate->value().formatMoney(QString(), -1)));
+        d->ui->m_dataList->append(
+            i18n("Interest rate: %1 %", d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_interestRate->value().formatMoney(QString(), -1)));
         d->ui->m_dataList->append(i18n("Interest rate is %1", d->m_wizard->d_func()->m_generalLoanInfoPage->d_func()->ui->m_interestType->currentText()));
-        d->ui->m_dataList->append(i18n("Principal and interest: %1", MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_paymentAmount->value(), acc, sec)));
+        d->ui->m_dataList->append(i18n("Principal and interest: %1",
+                                       MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_paymentAmount->value(), acc, sec)));
         d->ui->m_dataList->append(i18n("Additional Fees: %1", MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_loanPaymentPage->additionalFees(), acc, sec)));
         d->ui->m_dataList->append(i18n("Payment frequency: %1", d->m_wizard->d_func()->m_generalLoanInfoPage->d_func()->ui->m_paymentFrequency->currentText()));
         d->ui->m_dataList->append(i18n("Payment account: %1", d->m_wizard->d_func()->m_loanSchedulePage->d_func()->ui->m_paymentAccount->currentText()));
@@ -169,9 +178,11 @@ void AccountSummaryPage::enterPage()
                 d->ui->m_dataList->append(i18n("Refinance: %1", d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_loanAccount->currentText()));
             } else {
                 if (d->m_wizard->moneyBorrowed())
-                    d->ui->m_dataList->append(i18n("Transfer amount to %1", d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_assetAccount->currentText()));
+                    d->ui->m_dataList->append(
+                        i18n("Transfer amount to %1", d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_assetAccount->currentText()));
                 else
-                    d->ui->m_dataList->append(i18n("Transfer amount from %1", d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_assetAccount->currentText()));
+                    d->ui->m_dataList->append(
+                        i18n("Transfer amount from %1", d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_assetAccount->currentText()));
             }
             d->ui->m_dataList->append(
                 i18n("Payment date: %1 ",
@@ -186,17 +197,23 @@ void AccountSummaryPage::enterPage()
         d->ui->m_dataList->setFontWeight(QFont::Normal);
         d->ui->m_dataList->append(i18nc("Schedule name", "Name: %1", sch.name()));
         if (acc.accountType() == Account::Type::CreditCard) {
-            MyMoneyAccount paymentAccount = MyMoneyFile::instance()->account(d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_paymentAccount->selectedItem());
+            MyMoneyAccount paymentAccount =
+                MyMoneyFile::instance()->account(d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_paymentAccount->selectedItem());
             d->ui->m_dataList->append(i18n("Occurrence: Monthly"));
             d->ui->m_dataList->append(i18n("Paid from %1", paymentAccount.name()));
             d->ui->m_dataList->append(i18n("Pay to %1", d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_payee->currentText()));
-            d->ui->m_dataList->append(i18n("Amount: %1", MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_amount->value(), acc, sec)));
+            d->ui->m_dataList->append(
+                i18n("Amount: %1", MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_amount->value(), acc, sec)));
             d->ui->m_dataList->append(i18n("First payment due on %1", MyMoneyUtils::formatDate(sch.nextDueDate(), QLocale::LongFormat)));
             d->ui->m_dataList->append(i18n("Payment method: %1", d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_method->currentText()));
         }
         if (acc.isLoan()) {
             d->ui->m_dataList->append(i18n("Occurrence: %1", d->m_wizard->d_func()->m_generalLoanInfoPage->d_func()->ui->m_paymentFrequency->currentText()));
-            d->ui->m_dataList->append(i18n("Amount: %1", MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_loanPaymentPage->basePayment() + d->m_wizard->d_func()->m_loanPaymentPage->additionalFees(), acc, sec)));
+            d->ui->m_dataList->append(i18n(
+                "Amount: %1",
+                MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_loanPaymentPage->basePayment() + d->m_wizard->d_func()->m_loanPaymentPage->additionalFees(),
+                                          acc,
+                                          sec)));
             d->ui->m_dataList->append(
                 i18n("First payment due on %1", MyMoneyUtils::formatDate(d->m_wizard->d_func()->m_loanSchedulePage->firstPaymentDueDate())));
         }

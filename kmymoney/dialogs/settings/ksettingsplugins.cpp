@@ -9,8 +9,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QVBoxLayout>
 #include <QBitArray>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -28,7 +28,7 @@
 
 struct pluginGroupInfo {
     QVector<KPluginMetaData> plugins;
-    QString                           categoryName;
+    QString categoryName;
 };
 
 KSettingsPlugins::KSettingsPlugins(QWidget* parent)
@@ -37,7 +37,7 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent)
 
 {
     auto layout = new QVBoxLayout;
-    setLayout(layout);  // otherwise KPluginSelector occupies very little area
+    setLayout(layout); // otherwise KPluginSelector occupies very little area
     layout->addWidget(m_pluginSelector);
 
     const auto allPluginDatas = KMyMoneyPlugin::listPlugins(false); // fetch all available KMyMoney plugins
@@ -71,7 +71,7 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent)
     m_pluginSelector->setConfig(grp);
 
     // add all plugins to selector
-    for(const auto& pluginGroup : pluginGroups) {
+    for (const auto& pluginGroup : pluginGroups) {
         if (!pluginGroup.plugins.isEmpty()) {
             m_pluginSelector->addPlugins(pluginGroup.plugins,
                                          pluginGroup.categoryName); // at that step plugin on/off state should be fetched automatically by KPluginSelector

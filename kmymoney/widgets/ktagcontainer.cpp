@@ -27,8 +27,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ktaglabel.h"
 #include "idfilter.h"
+#include "ktaglabel.h"
 #include "mymoneyenums.h"
 
 class KTagContainerPrivate
@@ -57,7 +57,7 @@ public:
     QStringList tagIdList() const
     {
         QStringList tags;
-        for(const auto tag : qAsConst(m_tagLabelList)) {
+        for (const auto tag : qAsConst(m_tagLabelList)) {
             tags << tag->id();
         }
         return tags;
@@ -80,7 +80,7 @@ KTagContainer::KTagContainer(QWidget* parent)
     d->m_tagCombo->setEditable(true);
     d->m_tagCombo->setInsertPolicy(QComboBox::NoInsert);
 
-    QHBoxLayout *layout = new QHBoxLayout;
+    QHBoxLayout* layout = new QHBoxLayout;
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->addWidget(d->m_tagCombo, 100);
@@ -206,7 +206,7 @@ void KTagContainer::addTagWidget(const QString& id)
 void KTagContainer::slotRemoveTagWidget()
 {
     Q_D(KTagContainer);
-    const auto tagLabel = qobject_cast<KTagLabel *>(sender());
+    const auto tagLabel = qobject_cast<KTagLabel*>(sender());
     d->m_idFilter->removeFilter(tagLabel->id());
     int index = d->m_tagLabelList.indexOf(tagLabel);
     d->m_tagLabelList.removeAt(index);

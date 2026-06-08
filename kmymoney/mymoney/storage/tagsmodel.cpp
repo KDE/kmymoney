@@ -21,9 +21,10 @@
 
 #include "mymoneyfile.h"
 
-struct TagsModel::Private
-{
-    Private() {}
+struct TagsModel::Private {
+    Private()
+    {
+    }
 };
 
 TagsModel::TagsModel(QObject* parent, QUndoStack* undoStack)
@@ -45,8 +46,8 @@ int TagsModel::columnCount(const QModelIndex& parent) const
 
 QVariant TagsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch (section) {
         case 0:
             return i18nc("Tagname", "Name");
             break;
@@ -64,7 +65,7 @@ QVariant TagsModel::data(const QModelIndex& index, int role) const
 
     QVariant rc;
     const MyMoneyTag& tag = static_cast<TreeItem<MyMoneyTag>*>(index.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case eMyMoney::Model::TagNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
@@ -100,7 +101,7 @@ bool TagsModel::setData(const QModelIndex& index, const QVariant& value, int rol
 
     MyMoneyTag& tag = static_cast<TreeItem<MyMoneyTag>*>(index.internalPointer())->dataRef();
 
-    switch(role) {
+    switch (role) {
     case eMyMoney::Model::TagNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:

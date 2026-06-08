@@ -20,7 +20,6 @@
 
 #include "mymoneyenums.h"
 
-
 StatusModel::StatusModel(QObject* parent)
     : MyMoneyModel<StatusEntry>(parent, QStringLiteral("ST"), 2, nullptr)
 {
@@ -85,10 +84,10 @@ QVariant StatusModel::data(const QModelIndex& idx, int role) const
         return QVariant();
 
     const StatusEntry& statusEntry = static_cast<TreeItem<StatusEntry>*>(idx.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case 0:
             return statusEntry.longName();
 

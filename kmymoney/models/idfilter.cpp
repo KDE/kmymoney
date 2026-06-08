@@ -27,7 +27,6 @@ public:
     KMMStringSet idList;
 };
 
-
 IdFilter::IdFilter(QObject* parent)
     : QSortFilterProxyModel(parent)
     , d_ptr(new IdFilterPrivate)
@@ -80,10 +79,10 @@ QList<QString> IdFilter::filterList() const
 bool IdFilter::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
     // make sure that the empty item is shown first in any case
-    if(left.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+    if (left.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         return true;
 
-    } else if(right.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+    } else if (right.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         return false;
     }
 

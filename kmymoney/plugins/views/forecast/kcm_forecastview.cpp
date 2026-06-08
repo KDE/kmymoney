@@ -12,8 +12,8 @@
 #include <KAboutData>
 #include <KPluginFactory>
 
-ForecastViewSettingsWidget::ForecastViewSettingsWidget(QWidget* parent) :
-    QWidget(parent)
+ForecastViewSettingsWidget::ForecastViewSettingsWidget(QWidget* parent)
+    : QWidget(parent)
 {
     setupUi(this);
 }
@@ -24,7 +24,7 @@ KCMForecastView::KCMForecastView(QObject* parent, const QVariantList& args)
     ForecastViewSettingsWidget* w = new ForecastViewSettingsWidget(widget());
     // addConfig(ForecastViewSettings::self(), w);
     addConfig(KMyMoneySettings::self(), w);
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout;
     widget()->setLayout(layout);
     layout->addWidget(w);
     setButtons(NoAdditionalButton);

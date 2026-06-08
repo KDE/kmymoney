@@ -17,22 +17,21 @@
 
 #include "ui_kintropage.h"
 
+#include "kgeneralpage.h"
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
-#include "kgeneralpage.h"
 
 class KMyMoneyWizardPage;
 
-namespace NewUserWizard
-{
+namespace NewUserWizard {
 class IntroPagePrivate : public WizardPagePrivate<Wizard>
 {
     Q_DISABLE_COPY(IntroPagePrivate)
 
 public:
-    IntroPagePrivate(QObject* parent) :
-        WizardPagePrivate<Wizard>(parent),
-        ui(new Ui::KIntroPage)
+    IntroPagePrivate(QObject* parent)
+        : WizardPagePrivate<Wizard>(parent)
+        , ui(new Ui::KIntroPage)
     {
     }
 
@@ -41,12 +40,12 @@ public:
         delete ui;
     }
 
-    Ui::KIntroPage *ui;
+    Ui::KIntroPage* ui;
 };
 
-IntroPage::IntroPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new IntroPagePrivate(wizard), stepCount++, this, wizard)
+IntroPage::IntroPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new IntroPagePrivate(wizard), stepCount++, this, wizard)
 {
     Q_D(IntroPage);
     d->ui->setupUi(this);

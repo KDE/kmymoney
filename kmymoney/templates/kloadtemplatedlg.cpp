@@ -19,8 +19,8 @@
 
 #include "ui_kloadtemplatedlg.h"
 
-#include "mymoneytemplate.h"
 #include "kaccounttemplateselector.h"
+#include "mymoneytemplate.h"
 #include "templateloader.h"
 
 class KLoadTemplateDlgPrivate
@@ -30,16 +30,17 @@ class KLoadTemplateDlgPrivate
 public:
     KLoadTemplateDlgPrivate()
         : ui(new Ui::KLoadTemplateDlg)
-    {}
+    {
+    }
 
     Ui::KLoadTemplateDlg* ui;
-    TemplatesModel        model;
-    TemplateLoader        loader;
+    TemplatesModel model;
+    TemplateLoader loader;
 };
 
-KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
-    QDialog(parent),
-    d_ptr(new KLoadTemplateDlgPrivate)
+KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KLoadTemplateDlgPrivate)
 {
     Q_D(KLoadTemplateDlg);
     d->ui->setupUi(this);

@@ -15,8 +15,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KMessageBox>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -61,8 +61,14 @@ XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent)
     kcfg_GpgRecipient->hide();
 
     connect(kcfg_WriteDataEncrypted, &QAbstractButton::toggled, this, &XMLStorageSettingsWidget::slotStatusChanged);
-    connect(m_masterKeyCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (XMLStorageSettingsWidget::*)(int)>(&XMLStorageSettingsWidget::slotIdChanged));
-    connect(kcfg_GpgRecipientList, &KEditListWidget::changed, this, static_cast<void (XMLStorageSettingsWidget::*)()>(&XMLStorageSettingsWidget::slotIdChanged));
+    connect(m_masterKeyCombo,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),
+            this,
+            static_cast<void (XMLStorageSettingsWidget::*)(int)>(&XMLStorageSettingsWidget::slotIdChanged));
+    connect(kcfg_GpgRecipientList,
+            &KEditListWidget::changed,
+            this,
+            static_cast<void (XMLStorageSettingsWidget::*)()>(&XMLStorageSettingsWidget::slotIdChanged));
     connect(kcfg_GpgRecipientList, &KEditListWidget::added, this, &XMLStorageSettingsWidget::slotKeyListChanged);
     connect(kcfg_GpgRecipientList, &KEditListWidget::removed, this, &XMLStorageSettingsWidget::slotKeyListChanged);
 
@@ -142,7 +148,7 @@ void XMLStorageSettingsWidget::slotIdChanged(int)
     slotIdChanged();
 }
 
-void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
+void XMLStorageSettingsWidget::showEvent(QShowEvent* event)
 {
     QString masterKey;
 
@@ -244,7 +250,7 @@ KCMXMLStorage::KCMXMLStorage(QObject* parent, const QVariantList& args)
 {
     XMLStorageSettingsWidget* w = new XMLStorageSettingsWidget(widget());
     addConfig(KMyMoneySettings::self(), w);
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout;
     widget()->setLayout(layout);
     layout->addWidget(w);
     setButtons(NoAdditionalButton);

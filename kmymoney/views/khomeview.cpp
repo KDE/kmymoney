@@ -25,8 +25,8 @@
 
 #include "kmm_printer.h"
 
-KHomeView::KHomeView(QWidget *parent) :
-    KMyMoneyViewBase(*new KHomeViewPrivate(this), parent)
+KHomeView::KHomeView(QWidget* parent)
+    : KMyMoneyViewBase(*new KHomeViewPrivate(this), parent)
 {
 }
 
@@ -85,7 +85,7 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
 
 void KHomeView::executeCustomAction(eView::Action action)
 {
-    switch(action) {
+    switch (action) {
     case eView::Action::BlockViewDuringFileOpen:
         slotDisableRefresh();
         break;
@@ -158,7 +158,7 @@ void KHomeView::slotPrintPreviewView()
     }
 }
 
-void KHomeView::slotOpenUrl(const QUrl &url)
+void KHomeView::slotOpenUrl(const QUrl& url)
 {
     Q_D(KHomeView);
 
@@ -227,7 +227,9 @@ void KHomeView::slotOpenUrl(const QUrl &url)
             } catch (const MyMoneyException&) {
             }
             if (list.isEmpty()) {
-                KMessageBox::information(this, i18n("Before KMyMoney can give you detailed information about your financial status, you need to create at least one account. Until then, KMyMoney shows the welcome page instead."));
+                KMessageBox::information(this,
+                                         i18n("Before KMyMoney can give you detailed information about your financial status, you need to create at least one "
+                                              "account. Until then, KMyMoney shows the welcome page instead."));
             }
             d->loadView();
 

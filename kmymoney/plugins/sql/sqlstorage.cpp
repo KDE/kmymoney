@@ -22,25 +22,25 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "sqlstorage.h"
 #include "appinterface.h"
-#include "viewinterface.h"
-#include "kselectdatabasedlg.h"
+#include "icons.h"
 #include "kgeneratesqldlg.h"
+#include "kmymoneyenums.h"
+#include "kmymoneysettings.h"
+#include "kselectdatabasedlg.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneystoragesql.h"
-#include "mymoneyexception.h"
-#include "icons.h"
-#include "kmymoneysettings.h"
-#include "kmymoneyenums.h"
+#include "sqlstorage.h"
+#include "viewinterface.h"
 
 #include "kmmyesno.h"
 
@@ -70,9 +70,8 @@ QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
     return query;
 }
 
-
-SQLStorage::SQLStorage(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args)
+SQLStorage::SQLStorage(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
 {
     Q_INIT_RESOURCE(sqlstorage);
 
@@ -93,7 +92,7 @@ SQLStorage::~SQLStorage()
     qDebug("Plugins: sqlstorage unloaded");
 }
 
-bool SQLStorage::open(const QUrl &url)
+bool SQLStorage::open(const QUrl& url)
 {
     if (url.scheme() != QLatin1String("sql"))
         return false;
@@ -133,9 +132,7 @@ bool SQLStorage::open(const QUrl &url)
             retry = false;
             break;
         case 1: // permanent error
-            KMessageBox::detailedError(nullptr,
-                                       i18n("Cannot open database %1\n", dbURL.toDisplayString()),
-                                       reader->lastError());
+            KMessageBox::detailedError(nullptr, i18n("Cannot open database %1\n", dbURL.toDisplayString()), reader->lastError());
             return false;
         case -1: // retryable error
             if (KMessageBox::warningTwoActions(nullptr, reader->lastError(), PACKAGE, KMMYesNo::yes(), KMMYesNo::no()) == KMessageBox::SecondaryAction) {
@@ -145,7 +142,7 @@ bool SQLStorage::open(const QUrl &url)
                 QUrlQuery query(dbURL);
                 const QString optionKey = QLatin1String("options");
                 QString options = query.queryItemValue(optionKey);
-                if(!options.isEmpty()) {
+                if (!options.isEmpty()) {
                     options += QLatin1Char(',');
                 }
                 options += QLatin1String("override");
@@ -164,7 +161,7 @@ bool SQLStorage::open(const QUrl &url)
     // FIXME - readFile no longer relevant?
     // tried removing it but then got no indication that loading was complete
     // also, didn't show home page
-//  reader->setProgressCallback(&KMyMoneyView::progressCallback);
+    //  reader->setProgressCallback(&KMyMoneyView::progressCallback);
     if (!reader->readFile()) {
         KMessageBox::detailedError(nullptr,
                                    i18n("An unrecoverable error occurred while reading the database"),
@@ -172,7 +169,7 @@ bool SQLStorage::open(const QUrl &url)
                                    i18n("Database malfunction"));
         return false;
     }
-//  reader->setProgressCallback(0);
+    //  reader->setProgressCallback(0);
     /// @todo port to new model code
     return true;
 }
@@ -186,7 +183,7 @@ QUrl SQLStorage::openUrl() const
     return dbUrl;
 }
 
-bool SQLStorage::save(const QUrl &url)
+bool SQLStorage::save(const QUrl& url)
 {
     auto rc = false;
     if (!appInterface()->fileOpen()) {
@@ -195,7 +192,7 @@ bool SQLStorage::save(const QUrl &url)
     }
     auto writer = new MyMoneyStorageSql(MyMoneyFile::instance(), url);
     writer->open(url, QIODevice::ReadWrite);
-//  writer->setProgressCallback(&KMyMoneyView::progressCallback);
+    //  writer->setProgressCallback(&KMyMoneyView::progressCallback);
     if (!writer->writeFile()) {
         KMessageBox::detailedError(nullptr,
                                    i18n("An unrecoverable error occurred while writing to the database.\n"
@@ -229,15 +226,14 @@ bool SQLStorage::saveAs()
         url = dialog->selectedURL();
         // If the protocol is SQL for the old and new, and the hostname and database names match
         // Let the user know that the current database cannot be saved on top of itself.
-        if (url.scheme() == "sql" && oldUrl.scheme() == "sql"
-                && oldUrl.host() == url.host()
-                && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
-                && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
+        if (url.scheme() == "sql" && oldUrl.scheme() == "sql" && oldUrl.host() == url.host()
+            && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
+            && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
             KMessageBox::error(nullptr, i18n("Cannot save to current database."));
         } else {
             try {
                 rc = saveAsDatabase(url);
-            } catch (const MyMoneyException &e) {
+            } catch (const MyMoneyException& e) {
                 KMessageBox::error(nullptr, i18n("Cannot save to current database: %1", QString::fromLatin1(e.what())));
             }
         }
@@ -245,8 +241,8 @@ bool SQLStorage::saveAs()
     delete dialog;
 
     if (rc) {
-        //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
-        //if(p)
+        // KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
+        // if(p)
         appInterface()->addToRecentFiles(url);
         appInterface()->writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
         appInterface()->writeFilenameURL(url);
@@ -321,7 +317,7 @@ void SQLStorage::slotGenerateSql()
     delete editor;
 }
 
-bool SQLStorage::saveAsDatabase(const QUrl &url)
+bool SQLStorage::saveAsDatabase(const QUrl& url)
 {
     auto writer = new MyMoneyStorageSql(MyMoneyFile::instance(), url);
     auto canWrite = false;
@@ -332,7 +328,9 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
     case -1: // dbase already has data, see if he wants to clear it out
         if (KMessageBox::warningContinueCancel(nullptr,
                                                i18n("Database contains data which must be removed before using Save As.\n"
-                                                       "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
+                                                    "Do you wish to continue?"),
+                                               "Database not empty")
+            == KMessageBox::Continue) {
             if (writer->open(url, QIODevice::WriteOnly, true) == 0)
                 canWrite = true;
         } else {
@@ -353,7 +351,9 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
         KMessageBox::detailedError(nullptr,
                                    i18n("Cannot open or create database %1.\n"
                                         "Retry Save As Database and click Help"
-                                        " for further info.", url.toDisplayString()), writer->lastError());
+                                        " for further info.",
+                                        url.toDisplayString()),
+                                   writer->lastError());
         delete writer;
         return false;
     }

@@ -27,9 +27,9 @@
 #include "schedulesjournalmodel.h"
 #include "securitiesmodel.h"
 
-AccountsProxyModel::AccountsProxyModel(QObject *parent) :
-    QSortFilterProxyModel(parent),
-    d_ptr(new AccountsProxyModelPrivate)
+AccountsProxyModel::AccountsProxyModel(QObject* parent)
+    : QSortFilterProxyModel(parent)
+    , d_ptr(new AccountsProxyModelPrivate)
 {
     setObjectName("AccountsProxyModel");
     setRecursiveFilteringEnabled(true);
@@ -38,8 +38,9 @@ AccountsProxyModel::AccountsProxyModel(QObject *parent) :
     setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
-AccountsProxyModel::AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent) :
-    QSortFilterProxyModel(parent), d_ptr(&dd)
+AccountsProxyModel::AccountsProxyModel(AccountsProxyModelPrivate& dd, QObject* parent)
+    : QSortFilterProxyModel(parent)
+    , d_ptr(&dd)
 {
     setRecursiveFilteringEnabled(true);
 }
@@ -62,9 +63,9 @@ void AccountsProxyModel::setSourceModel(QAbstractItemModel* model)
 }
 
 /**
-  * This function was re-implemented so we could have a special display order (favorites first)
-  */
-bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
+ * This function was re-implemented so we could have a special display order (favorites first)
+ */
+bool AccountsProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
     if (!left.isValid() || !right.isValid())
         return false;
@@ -85,19 +86,20 @@ bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &ri
     // the balance and total value columns are sorted based on the value of the account
     case AccountsModel::Column::Balance:
     case AccountsModel::Column::TotalPostedValue: {
-        const auto leftData = sourceModel()->data(sourceModel()->index(left.row(), AccountsModel::Column::AccountName, left.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
-        const auto rightData = sourceModel()->data(sourceModel()->index(right.row(), AccountsModel::Column::AccountName, right.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
+        const auto leftData = sourceModel()->data(sourceModel()->index(left.row(), AccountsModel::Column::AccountName, left.parent()),
+                                                  eMyMoney::Model::Roles::AccountTotalValueRole);
+        const auto rightData = sourceModel()->data(sourceModel()->index(right.row(), AccountsModel::Column::AccountName, right.parent()),
+                                                   eMyMoney::Model::Roles::AccountTotalValueRole);
         return leftData.value<MyMoneyMoney>() < rightData.value<MyMoneyMoney>();
-    }
-    break;
+    } break;
     }
     return QSortFilterProxyModel::lessThan(left, right);
 }
 
 /**
-  * This function was re-implemented to consider all the filtering aspects that we need in the application.
-  */
-bool AccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+ * This function was re-implemented to consider all the filtering aspects that we need in the application.
+ */
+bool AccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
     Q_D(const AccountsProxyModel);
     if (d->m_hideAllEntries)
@@ -111,10 +113,10 @@ bool AccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &sou
 }
 
 /**
-  * This function implements a recursive matching. It is used to match a row even if it's values
-  * doesn't match the current filtering criteria but it has at least one child row that does match.
-  */
-bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const
+ * This function implements a recursive matching. It is used to match a row even if it's values
+ * doesn't match the current filtering criteria but it has at least one child row that does match.
+ */
+bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QModelIndex& source_parent) const
 {
     if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
         return true;
@@ -128,11 +130,11 @@ bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QMode
 }
 
 /**
-  * Add the given account group to the filter.
-  * @param group The account group to be added.
-  * @see eMyMoney::Account
-  */
-void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> &groups)
+ * Add the given account group to the filter.
+ * @param group The account group to be added.
+ * @see eMyMoney::Account
+ */
+void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type>& groups)
 {
     Q_D(AccountsProxyModel);
     for (const auto& group : groups) {
@@ -172,10 +174,10 @@ void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> 
 }
 
 /**
-  * Add the given account type to the filter.
-  * @param type The account type to be added.
-  * @see eMyMoney::Account
-  */
+ * Add the given account type to the filter.
+ * @param type The account type to be added.
+ * @see eMyMoney::Account
+ */
 void AccountsProxyModel::addAccountType(eMyMoney::Account::Type type)
 {
     Q_D(AccountsProxyModel);
@@ -186,10 +188,10 @@ void AccountsProxyModel::addAccountType(eMyMoney::Account::Type type)
 }
 
 /**
-  * Remove the given account type from the filter.
-  * @param type The account type to be removed.
-  * @see eMyMoney::Account
-  */
+ * Remove the given account type from the filter.
+ * @param type The account type to be removed.
+ * @see eMyMoney::Account
+ */
 void AccountsProxyModel::removeAccountType(eMyMoney::Account::Type type)
 {
     Q_D(AccountsProxyModel);
@@ -199,8 +201,8 @@ void AccountsProxyModel::removeAccountType(eMyMoney::Account::Type type)
 }
 
 /**
-  * Use this to reset the filter.
-  */
+ * Use this to reset the filter.
+ */
 void AccountsProxyModel::clear()
 {
     Q_D(AccountsProxyModel);
@@ -257,9 +259,9 @@ QVariant AccountsProxyModel::data(const QModelIndex& index, int role) const
 }
 
 /**
-  * Implementation function that performs the actual filtering.
-  */
-bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
+ * Implementation function that performs the actual filtering.
+ */
+bool AccountsProxyModel::acceptSourceItem(const QModelIndex& source) const
 {
     Q_D(const AccountsProxyModel);
 
@@ -373,9 +375,9 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
 }
 
 /**
-  * Set if closed accounts should be hidden or not.
-  * @param hideClosedAccounts
-  */
+ * Set if closed accounts should be hidden or not.
+ * @param hideClosedAccounts
+ */
 void AccountsProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
 {
     Q_D(AccountsProxyModel);
@@ -386,8 +388,8 @@ void AccountsProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
 }
 
 /**
-  * Check if closed accounts are hidden or not.
-  */
+ * Check if closed accounts are hidden or not.
+ */
 bool AccountsProxyModel::hideClosedAccounts() const
 {
     Q_D(const AccountsProxyModel);
@@ -395,9 +397,9 @@ bool AccountsProxyModel::hideClosedAccounts() const
 }
 
 /**
-  * Set if equity and investment accounts should be hidden or not.
-  * @param hideEquityAccounts
-  */
+ * Set if equity and investment accounts should be hidden or not.
+ * @param hideEquityAccounts
+ */
 void AccountsProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
 {
     Q_D(AccountsProxyModel);
@@ -408,8 +410,8 @@ void AccountsProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
 }
 
 /**
-  * Check if equity and investment accounts are hidden or not.
-  */
+ * Check if equity and investment accounts are hidden or not.
+ */
 bool AccountsProxyModel::hideEquityAccounts() const
 {
     Q_D(const AccountsProxyModel);
@@ -461,9 +463,9 @@ bool AccountsProxyModel::hideZeroBalancedAccounts() const
 }
 
 /**
-  * Set if empty categories should be hidden or not.
-  * @param hideUnusedIncomeExpenseAccounts
-  */
+ * Set if empty categories should be hidden or not.
+ * @param hideUnusedIncomeExpenseAccounts
+ */
 void AccountsProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts)
 {
     Q_D(AccountsProxyModel);
@@ -474,8 +476,8 @@ void AccountsProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncom
 }
 
 /**
-  * Check if empty categories are hidden or not.
-  */
+ * Check if empty categories are hidden or not.
+ */
 bool AccountsProxyModel::hideUnusedIncomeExpenseAccounts() const
 {
     Q_D(const AccountsProxyModel);
@@ -535,15 +537,15 @@ bool AccountsProxyModel::showAllEntries() const
 }
 
 /**
-  * Returns the number of visible items after filtering. In case @a includeBaseAccounts
-  * is set to @c true, the 5 base accounts (asset, liability, income, expense and equity)
-  * will also be counted. The default is @c false.
-  */
+ * Returns the number of visible items after filtering. In case @a includeBaseAccounts
+ * is set to @c true, the 5 base accounts (asset, liability, income, expense and equity)
+ * will also be counted. The default is @c false.
+ */
 int AccountsProxyModel::visibleItems(bool includeBaseAccounts) const
 {
     auto rows = 0;
     for (auto i = 0; i < rowCount(QModelIndex()); ++i) {
-        if(includeBaseAccounts) {
+        if (includeBaseAccounts) {
             ++rows;
         }
         const auto childIndex = index(i, 0);
@@ -555,15 +557,15 @@ int AccountsProxyModel::visibleItems(bool includeBaseAccounts) const
 }
 
 /**
-  * Returns the number of visible items under the given @a index.
-  * The column of the @a index must be 0, otherwise no count will
-  * be returned (returns 0).
-  */
+ * Returns the number of visible items under the given @a index.
+ * The column of the @a index must be 0, otherwise no count will
+ * be returned (returns 0).
+ */
 int AccountsProxyModel::visibleItems(const QModelIndex& index) const
 {
     auto rows = 0;
     if (index.isValid() && index.column() == AccountsModel::Column::AccountName) { // CAUTION! Assumption is being made that Account column number is always 0
-        const auto *model = index.model();
+        const auto* model = index.model();
         const auto rowCount = model->rowCount(index);
         for (auto i = 0; i < rowCount; ++i) {
             ++rows;
@@ -582,12 +584,12 @@ QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiability()
 
 QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquity()
 {
-    return QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity });
+    return QVector<eMyMoney::Account::Type>({eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 }
 
 QVector<eMyMoney::Account::Type> AccountsProxyModel::incomeExpense()
 {
-    return QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense });
+    return QVector<eMyMoney::Account::Type>({eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
 }
 
 QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquityIncomeExpense()

@@ -25,13 +25,13 @@
 
 using namespace eMyMoney;
 
-MyMoneySecurity::MyMoneySecurity() :
-    MyMoneyObject(*new MyMoneySecurityPrivate)
+MyMoneySecurity::MyMoneySecurity()
+    : MyMoneyObject(*new MyMoneySecurityPrivate)
 {
 }
 
-MyMoneySecurity::MyMoneySecurity(const QString &id) :
-    MyMoneyObject(*new MyMoneySecurityPrivate, id)
+MyMoneySecurity::MyMoneySecurity(const QString& id)
+    : MyMoneyObject(*new MyMoneySecurityPrivate, id)
 {
 }
 
@@ -40,9 +40,9 @@ MyMoneySecurity::MyMoneySecurity(const QString& id,
                                  const QString& symbol,
                                  const int smallestCashFraction,
                                  const int smallestAccountFraction,
-                                 const int pricePrecision) :
-    MyMoneyObject(*new MyMoneySecurityPrivate, id),
-    MyMoneyKeyValueContainer()
+                                 const int pricePrecision)
+    : MyMoneyObject(*new MyMoneySecurityPrivate, id)
+    , MyMoneyKeyValueContainer()
 {
     Q_D(MyMoneySecurity);
     d->m_name = name;
@@ -61,15 +61,15 @@ MyMoneySecurity::MyMoneySecurity(const QString& id,
         d->m_smallestAccountFraction = smallestCashFraction;
 }
 
-MyMoneySecurity::MyMoneySecurity(const MyMoneySecurity& other) :
-    MyMoneyObject(*new MyMoneySecurityPrivate(*other.d_func()), other.id()),
-    MyMoneyKeyValueContainer(other)
+MyMoneySecurity::MyMoneySecurity(const MyMoneySecurity& other)
+    : MyMoneyObject(*new MyMoneySecurityPrivate(*other.d_func()), other.id())
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
-MyMoneySecurity::MyMoneySecurity(const QString& id, const MyMoneySecurity& other) :
-    MyMoneyObject(*new MyMoneySecurityPrivate(*other.d_func()), id),
-    MyMoneyKeyValueContainer(other)
+MyMoneySecurity::MyMoneySecurity(const QString& id, const MyMoneySecurity& other)
+    : MyMoneyObject(*new MyMoneySecurityPrivate(*other.d_func()), id)
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
@@ -77,10 +77,10 @@ MyMoneySecurity::~MyMoneySecurity()
 {
 }
 
-bool MyMoneySecurity::operator == (const MyMoneySecurity& right) const
+bool MyMoneySecurity::operator==(const MyMoneySecurity& right) const
 {
     Q_D(const MyMoneySecurity);
-    auto d2 = static_cast<const MyMoneySecurityPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneySecurityPrivate*>(right.d_func());
     // clang-format off
     return (d->m_id == d2->m_id)
            && (d->m_name == d2->m_name)
@@ -96,10 +96,10 @@ bool MyMoneySecurity::operator == (const MyMoneySecurity& right) const
     // clang-format on
 }
 
-bool MyMoneySecurity::operator < (const MyMoneySecurity& right) const
+bool MyMoneySecurity::operator<(const MyMoneySecurity& right) const
 {
     Q_D(const MyMoneySecurity);
-    auto d2 = static_cast<const MyMoneySecurityPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneySecurityPrivate*>(right.d_func());
     if (d->m_securityType == d2->m_securityType)
         return QString::localeAwareCompare(d->m_name, d2->m_name) < 0;
     return d->m_securityType < d2->m_securityType;
@@ -153,7 +153,7 @@ void MyMoneySecurity::setTradingCurrency(const QString& str)
     d->m_tradingCurrency = str;
 }
 
-bool MyMoneySecurity::operator != (const MyMoneySecurity& r) const
+bool MyMoneySecurity::operator!=(const MyMoneySecurity& r) const
 {
     return !(*this == r);
 }

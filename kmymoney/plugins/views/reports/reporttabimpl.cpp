@@ -16,15 +16,15 @@
 #include "mymoneyexception.h"
 #include "mymoneyreport.h"
 
+#include "ui_reporttabcapitalgain.h"
+#include "ui_reporttabchart.h"
 #include "ui_reporttabgeneral.h"
+#include "ui_reporttabperformance.h"
+#include "ui_reporttabrange.h"
 #include "ui_reporttabrowcolpivot.h"
 #include "ui_reporttabrowcolquery.h"
-#include "ui_reporttabchart.h"
-#include "ui_reporttabrange.h"
-#include "ui_reporttabcapitalgain.h"
-#include "ui_reporttabperformance.h"
 
-ReportTabGeneral::ReportTabGeneral(QWidget *parent)
+ReportTabGeneral::ReportTabGeneral(QWidget* parent)
     : QWidget(parent)
 {
     ui = new Ui::ReportTabGeneral;
@@ -36,7 +36,7 @@ ReportTabGeneral::~ReportTabGeneral()
     delete ui;
 }
 
-ReportTabRowColPivot::ReportTabRowColPivot(QWidget *parent)
+ReportTabRowColPivot::ReportTabRowColPivot(QWidget* parent)
     : QWidget(parent)
 {
     ui = new Ui::ReportTabRowColPivot;
@@ -48,7 +48,7 @@ ReportTabRowColPivot::~ReportTabRowColPivot()
     delete ui;
 }
 
-ReportTabRowColQuery::ReportTabRowColQuery(QWidget *parent)
+ReportTabRowColQuery::ReportTabRowColQuery(QWidget* parent)
     : QWidget(parent)
 {
     ui = new Ui::ReportTabRowColQuery;
@@ -69,9 +69,9 @@ ReportTabRowColQuery::ReportTabRowColQuery(QWidget *parent)
 
 void ReportTabRowColQuery::slotHideTransactionsChanged(bool checked)
 {
-    if (checked)                                          // toggle m_checkHideSplitDetails only if it's mandatory
+    if (checked) // toggle m_checkHideSplitDetails only if it's mandatory
         ui->m_checkHideSplitDetails->setChecked(checked);
-    ui->m_checkHideSplitDetails->setEnabled(!checked);    // hiding transactions without hiding splits isn't allowed
+    ui->m_checkHideSplitDetails->setEnabled(!checked); // hiding transactions without hiding splits isn't allowed
 }
 
 ReportTabRowColQuery::~ReportTabRowColQuery()
@@ -79,7 +79,7 @@ ReportTabRowColQuery::~ReportTabRowColQuery()
     delete ui;
 }
 
-ReportTabChart::ReportTabChart(QWidget *parent)
+ReportTabChart::ReportTabChart(QWidget* parent)
     : QWidget(parent)
 {
     ui = new Ui::ReportTabChart;
@@ -196,10 +196,10 @@ bool ReportTabChart::load(MyMoneyReport* report)
     return true;
 }
 
-ReportTabRange::ReportTabRange(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::ReportTabRange),
-      m_logYaxis(false)
+ReportTabRange::ReportTabRange(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::ReportTabRange)
+    , m_logYaxis(false)
 {
     ui->setupUi(this);
     m_dateRange = new DateRangeDlg;
@@ -245,9 +245,8 @@ void ReportTabRange::setRangeLogarythmic(bool set)
 
 void ReportTabRange::updateDataRangeValidators(const int& precision)
 {
-
-    const QValidator *dbValStart = ui->m_dataRangeStart->validator();
-    const QValidator *dbValEnd = ui->m_dataRangeEnd->validator();
+    const QValidator* dbValStart = ui->m_dataRangeStart->validator();
+    const QValidator* dbValEnd = ui->m_dataRangeEnd->validator();
 
     delete dbValStart;
     if (dbValStart != dbValEnd) {
@@ -299,11 +298,15 @@ void ReportTabRange::slotEditingFinished(EDimension dim)
                 dataMajorTick = dataRangeEnd - dataRangeStart;
 
             if (dataMajorTick != 0 && // if major tick isn't going to be reset
-                    dataMajorTick < (dataRangeEnd - dataRangeStart) * 0.01) // constraint major tick to be greater or equal to 1% of data range
+                dataMajorTick < (dataRangeEnd - dataRangeStart) * 0.01) // constraint major tick to be greater or equal to 1% of data range
                 dataMajorTick = (dataRangeEnd - dataRangeStart) * 0.01;
 
-            //set precision of major tick to be greater by 1
-            ui->m_dataMajorTick->setText(locale().toString(dataMajorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+            // set precision of major tick to be greater by 1
+            ui->m_dataMajorTick->setText(locale()
+                                             .toString(dataMajorTick, 'f', ui->m_yLabelsPrecision->value() + 1)
+                                             .remove(locale().groupSeparator())
+                                             .remove(QRegularExpression("0+$"))
+                                             .remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
         }
 
         if (dataMajorTick < dataMinorTick) { // major tick must be higher than minor
@@ -318,7 +321,11 @@ void ReportTabRange::slotEditingFinished(EDimension dim)
 
         if (dataMinorTick < dataMajorTick * 0.1) { // constraint minor tick to be greater or equal to 10% of major tick, and set precision to be greater by 1
             dataMinorTick = dataMajorTick * 0.1;
-            ui->m_dataMinorTick->setText(locale().toString(dataMinorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+            ui->m_dataMinorTick->setText(locale()
+                                             .toString(dataMinorTick, 'f', ui->m_yLabelsPrecision->value() + 1)
+                                             .remove(locale().groupSeparator())
+                                             .remove(QRegularExpression("0+$"))
+                                             .remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
         }
     }
 }
@@ -348,7 +355,7 @@ void ReportTabRange::slotYLabelsPrecisionChanged(const int& value)
     ui->m_dataMajorTick->setValidator(nullptr);
     ui->m_dataMinorTick->setValidator(nullptr);
 
-    MyDoubleValidator *dblVal2 = new MyDoubleValidator(value + 1);
+    MyDoubleValidator* dblVal2 = new MyDoubleValidator(value + 1);
     ui->m_dataMajorTick->setValidator(dblVal2);
     ui->m_dataMinorTick->setValidator(dblVal2);
 
@@ -374,7 +381,7 @@ void ReportTabRange::slotDataLockChanged(int index)
     }
 }
 
-ReportTabCapitalGain::ReportTabCapitalGain(QWidget *parent)
+ReportTabCapitalGain::ReportTabCapitalGain(QWidget* parent)
     : QWidget(parent)
 {
     ui = new Ui::ReportTabCapitalGain;
@@ -387,7 +394,8 @@ ReportTabCapitalGain::~ReportTabCapitalGain()
     delete ui;
 }
 
-void ReportTabCapitalGain::slotInvestmentSumChanged(int index) {
+void ReportTabCapitalGain::slotInvestmentSumChanged(int index)
+{
     Q_UNUSED(index);
     if (ui->m_investmentSum->currentData().value<eMyMoney::Report::InvestmentSum>() == eMyMoney::Report::InvestmentSum::Owned) {
         ui->m_settlementPeriod->setValue(0);
@@ -402,7 +410,7 @@ void ReportTabCapitalGain::slotInvestmentSumChanged(int index) {
     }
 }
 
-ReportTabPerformance::ReportTabPerformance(QWidget *parent)
+ReportTabPerformance::ReportTabPerformance(QWidget* parent)
     : QWidget(parent)
 {
     ui = new Ui::ReportTabPerformance;
@@ -414,12 +422,12 @@ ReportTabPerformance::~ReportTabPerformance()
     delete ui;
 }
 
-MyDoubleValidator::MyDoubleValidator(int decimals, QObject * parent) :
-    QDoubleValidator(0, 0, decimals, parent)
+MyDoubleValidator::MyDoubleValidator(int decimals, QObject* parent)
+    : QDoubleValidator(0, 0, decimals, parent)
 {
 }
 
-QValidator::State MyDoubleValidator::validate(QString &s, int &i) const
+QValidator::State MyDoubleValidator::validate(QString& s, int& i) const
 {
     Q_UNUSED(i);
     if (s.isEmpty() || s == "-") {
@@ -428,7 +436,7 @@ QValidator::State MyDoubleValidator::validate(QString &s, int &i) const
 
     QString decimalPoint = locale().decimalPoint();
 
-    if(s.indexOf(decimalPoint) != -1) {
+    if (s.indexOf(decimalPoint) != -1) {
         int charsAfterPoint = s.length() - s.indexOf(decimalPoint) - 1;
 
         if (charsAfterPoint > decimals()) {
@@ -446,13 +454,13 @@ QValidator::State MyDoubleValidator::validate(QString &s, int &i) const
     }
 }
 
-MyLogarithmicDoubleValidator::MyLogarithmicDoubleValidator(const int decimals, const qreal defaultValue, QObject *parent)
+MyLogarithmicDoubleValidator::MyLogarithmicDoubleValidator(const int decimals, const qreal defaultValue, QObject* parent)
     : QDoubleValidator(qPow(10, -decimals), 0, decimals, parent)
 {
     m_defaultText = KMyMoneyUtils::normalizeNumericString(defaultValue, locale(), 'f', decimals);
 }
 
-QValidator::State MyLogarithmicDoubleValidator::validate(QString &s, int &i) const
+QValidator::State MyLogarithmicDoubleValidator::validate(QString& s, int& i) const
 {
     Q_UNUSED(i);
     if (s.isEmpty() || s == QStringLiteral("0")) {
@@ -463,9 +471,7 @@ QValidator::State MyLogarithmicDoubleValidator::validate(QString &s, int &i) con
 
     // start numbering placeholders with a two-digit number to avoid
     // interpreting the following zero as part of the placeholder index
-    const QRegularExpression re((QStringLiteral("^0\\%110{0,%12}$")
-                                 .arg(decimalPoint)
-                                 .arg(decimals() - 1)));
+    const QRegularExpression re((QStringLiteral("^0\\%110{0,%12}$").arg(decimalPoint).arg(decimals() - 1)));
     if (re.match(s).hasMatch())
         return QValidator::Intermediate;
 
@@ -487,7 +493,7 @@ QValidator::State MyLogarithmicDoubleValidator::validate(QString &s, int &i) con
     }
 }
 
-void MyLogarithmicDoubleValidator::fixup(QString &input) const
+void MyLogarithmicDoubleValidator::fixup(QString& input) const
 {
     input = m_defaultText;
 }

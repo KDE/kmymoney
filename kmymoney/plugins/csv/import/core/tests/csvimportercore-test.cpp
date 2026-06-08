@@ -7,10 +7,10 @@
 
 #include <QTest>
 
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 
 #include "csvimportercore.h"
 #include "csvimporttestcommon.h"
@@ -65,11 +65,17 @@ void CSVImporterCoreTest::init()
         QMap<eMyMoney::Transaction::Action, QStringList>{{eMyMoney::Transaction::Action::Buy, QStringList{"buy"}},
                                                          {eMyMoney::Transaction::Action::Sell, QStringList{"sell"}}});
 
-    pricesProfile = new PricesProfile ("price source",
-                                       106, 1, 0, DateFormat::YearMonthDay, FieldDelimiter::Comma,
-                                       TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
-    QMap<Column, int> {{Column::Date, 0}, {Column::Price, 4}},
-    2, Profile::StockPrices);
+    pricesProfile = new PricesProfile("price source",
+                                      106,
+                                      1,
+                                      0,
+                                      DateFormat::YearMonthDay,
+                                      FieldDelimiter::Comma,
+                                      TextDelimiter::DoubleQuote,
+                                      DecimalSymbol::Dot,
+                                      QMap<Column, int>{{Column::Date, 0}, {Column::Price, 4}},
+                                      2,
+                                      Profile::StockPrices);
 
     amountProfile = new BankingProfile("amount",
                                        106,
@@ -128,8 +134,8 @@ void CSVImporterCoreTest::testBasicPriceTable()
     QVERIFY(st.m_listPrices[2].m_strSecurity == pricesProfile->m_securityName);
 }
 
-void CSVImporterCoreTest::testPriceFractionSetting() {
-
+void CSVImporterCoreTest::testPriceFractionSetting()
+{
     QString csvContent;
     csvContent += QLatin1String("Date;Open;High;Low;Close;Volume\n");
     csvContent += QLatin1String(";;;;;\n");
@@ -153,7 +159,8 @@ void CSVImporterCoreTest::testPriceFractionSetting() {
 
     QVERIFY(st.m_listPrices.count() == 3);
     QVERIFY(st.m_listPrices[2].m_date == QDate(2017, 8, 3));
-    QVERIFY(st.m_listPrices[2].m_amount == MyMoneyMoney(0.5567, 10000)); // user reported that visible price (5.567) should be treated as a fraction of real price (0.5567)
+    QVERIFY(st.m_listPrices[2].m_amount
+            == MyMoneyMoney(0.5567, 10000)); // user reported that visible price (5.567) should be treated as a fraction of real price (0.5567)
 }
 
 void CSVImporterCoreTest::testImportByDebitCredit()
@@ -260,14 +267,14 @@ void CSVImporterCoreTest::testFeeColumn()
     investmentProfile->m_colNumType.insert(6, Column::Fee);
     auto st = csvImporter->unattendedImport(filename, investmentProfile);
     QVERIFY(st.m_listTransactions[0].m_amount == MyMoneyMoney(-129)); // new_amount = original_amount + fee
-    QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(4));      // fee taken literally
+    QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(4)); // fee taken literally
     QVERIFY(st.m_listTransactions[1].m_amount == MyMoneyMoney(450));
     QVERIFY(st.m_listTransactions[1].m_fees == MyMoneyMoney(6));
 
     investmentProfile->m_feeIsPercentage = true;
     st = csvImporter->unattendedImport(filename, investmentProfile);
     QVERIFY(st.m_listTransactions[0].m_amount == MyMoneyMoney(-130)); // new_amount = original_amount (1 + fee/100)
-    QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(5));      // new_fee = original_amount * fee/100
+    QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(5)); // new_fee = original_amount * fee/100
 }
 
 void CSVImporterCoreTest::testAutoDecimalSymbol()
@@ -292,7 +299,11 @@ void CSVImporterCoreTest::testInvAccountAutodetection()
     makeAccount("BigInvestments", "", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());
     makeAccount("BigInvestments", "1234567890", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());
     makeAccount("EasyAccount", "", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());
-    auto toBeClosedAccID = makeAccount("EasyAccount", "123456789", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id()); // this account has the most characters matching the statement
+    auto toBeClosedAccID = makeAccount("EasyAccount",
+                                       "123456789",
+                                       eMyMoney::Account::Type::Investment,
+                                       QDate(2017, 8, 1),
+                                       file->asset().id()); // this account has the most characters matching the statement
     auto accID = makeAccount("Easy", "123456789", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());
     makeAccount("EasyAccount", "123456789", eMyMoney::Account::Type::Checkings, QDate(2017, 8, 1), file->asset().id());
     ft.commit();
@@ -334,7 +345,7 @@ void CSVImporterCoreTest::testCalculatedFeeColumn()
     writeStatementToCSV(csvContent, filename);
 
     investmentProfile->m_feeRate = QLatin1String("4");
-    investmentProfile->m_feeIsPercentage = true;  // fee is calculated always as percentage
+    investmentProfile->m_feeIsPercentage = true; // fee is calculated always as percentage
 
     auto st = csvImporter->unattendedImport(filename, investmentProfile);
     QVERIFY(st.m_listTransactions[0].m_amount == MyMoneyMoney(-130));
@@ -345,7 +356,7 @@ void CSVImporterCoreTest::testCalculatedFeeColumn()
     st = csvImporter->unattendedImport(filename, investmentProfile);
 
     QVERIFY(st.m_listTransactions[0].m_amount == MyMoneyMoney(-131));
-    QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(6));  // minimal fee is 6 now, so fee of 5 from above test must be increased to 6
+    QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(6)); // minimal fee is 6 now, so fee of 5 from above test must be increased to 6
 }
 
 void CSVImporterCoreTest::testSortSecurities_duplicateInSymbolsAndNames()

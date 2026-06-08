@@ -7,11 +7,11 @@
 
 #include "existingtransactionmatchfinder.h"
 
-#include <QDebug>
 #include <QDate>
+#include <QDebug>
 
-#include "mymoneymoney.h"
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneytransactionfilter.h"
 
 ExistingTransactionMatchFinder::ExistingTransactionMatchFinder(int matchWindow)
@@ -33,7 +33,7 @@ void ExistingTransactionMatchFinder::createListOfMatchCandidates()
 void ExistingTransactionMatchFinder::findMatchInMatchCandidatesList()
 {
     for (const TransactionAndSplitPair& transactionAndSplit : qAsConst(listOfMatchCandidates)) {
-        const MyMoneyTransaction & theTransaction = transactionAndSplit.first;
+        const MyMoneyTransaction& theTransaction = transactionAndSplit.first;
 
         if (theTransaction.id() == importedTransaction.id()) {
             // just skip myself

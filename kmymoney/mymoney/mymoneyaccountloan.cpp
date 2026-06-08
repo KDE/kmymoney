@@ -230,7 +230,6 @@ const QString MyMoneyAccountLoan::interestAccountId() const
 
 void MyMoneyAccountLoan::setInterestAccountId(const QString& /* id */)
 {
-
 }
 
 void MyMoneyAccountLoan::setInterestCompounding(int frequency)

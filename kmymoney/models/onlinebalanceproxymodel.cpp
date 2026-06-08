@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "onlinebalanceproxymodel.h"
 #include "accountsmodel.h"
 #include "mymoneyfile.h"
@@ -22,10 +21,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-#include "journalmodel.h"
 #include "accountsmodel.h"
+#include "journalmodel.h"
 #include "mymoneyenums.h"
+#include "mymoneymoney.h"
 
 class OnlineBalanceProxyModelPrivate
 {
@@ -38,10 +37,12 @@ public:
     {
     }
 
-    ~OnlineBalanceProxyModelPrivate() {}
+    ~OnlineBalanceProxyModelPrivate()
+    {
+    }
 };
 
-OnlineBalanceProxyModel::OnlineBalanceProxyModel(QObject *parent)
+OnlineBalanceProxyModel::OnlineBalanceProxyModel(QObject* parent)
     : QSortFilterProxyModel(parent)
     , d_ptr(new OnlineBalanceProxyModelPrivate(this))
 {
@@ -71,7 +72,7 @@ int OnlineBalanceProxyModel::columnCount(const QModelIndex& parent) const
 
 QModelIndex OnlineBalanceProxyModel::index(int row, int column, const QModelIndex& parent) const
 {
-    switch(column) {
+    switch (column) {
     case JournalModel::Column::Balance:
         column = AccountsModel::Column::Balance;
         break;
@@ -98,7 +99,7 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
     }
 
     if (idx.isValid()) {
-        switch(role) {
+        switch (role) {
         case eMyMoney::Model::DelegateRole:
             return static_cast<int>(eMyMoney::Delegates::Types::OnlineBalanceDelegate);
 
@@ -127,7 +128,7 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
             return QVariant();
 
         case Qt::TextAlignmentRole:
-            switch(idx.column()) {
+            switch (idx.column()) {
             case AccountsModel::Column::Balance:
                 return QVariant(Qt::AlignRight | Qt::AlignVCenter);
 

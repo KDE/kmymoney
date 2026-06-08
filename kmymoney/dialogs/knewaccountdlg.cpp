@@ -104,7 +104,7 @@ public:
         }
 
         // assign a standard account if the selected parent is not set/found
-        QVector<Account::Type> filterAccountGroup {m_account.accountGroup()};
+        QVector<Account::Type> filterAccountGroup{m_account.accountGroup()};
         if (m_account.parentAccountId().isEmpty()) {
             switch (m_account.accountGroup()) {
             case Account::Type::Asset:
@@ -154,14 +154,13 @@ public:
         // only show the name column for the parent account
         auto columnSelector = new ColumnSelector(ui->m_parentAccounts);
         columnSelector->setAlwaysHidden(columnSelector->columns());
-        columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+        columnSelector->setAlwaysVisible(QVector<int>({AccountsModel::Column::AccountName}));
 
         ui->m_parentAccounts->sortByColumn(AccountsModel::Column::AccountName, Qt::AscendingOrder);
 
         columnSelector->setModel(m_filterProxyModel);
 
-        q->connect(ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::selectionChanged,
-                   q, &KNewAccountDlg::slotSelectionChanged);
+        q->connect(ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KNewAccountDlg::slotSelectionChanged);
 
         // select the current parent in the hierarchy
         QModelIndex idx = model->indexById(m_account.parentAccountId());
@@ -355,9 +354,9 @@ public:
             loadKVP("maxCreditEarly", ui->m_maxCreditEarlyEdit);
             // reverse the sign for display purposes
             if (!ui->m_maxCreditAbsoluteEdit->text().isEmpty())
-                ui->m_maxCreditAbsoluteEdit->setValue(ui->m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
+                ui->m_maxCreditAbsoluteEdit->setValue(ui->m_maxCreditAbsoluteEdit->value() * MyMoneyMoney::MINUS_ONE);
             if (!ui->m_maxCreditEarlyEdit->text().isEmpty())
-                ui->m_maxCreditEarlyEdit->setValue(ui->m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
+                ui->m_maxCreditEarlyEdit->setValue(ui->m_maxCreditEarlyEdit->value() * MyMoneyMoney::MINUS_ONE);
             loadKVP("lastNumberUsed", ui->m_lastCheckNumberUsed);
             loadKVP("url", ui->m_urlEdit);
 
@@ -391,7 +390,7 @@ public:
                 institutionName.clear();
                 ui->m_urlEdit->setPlaceholderText(QString());
             }
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             qDebug("exception in init for account dialog: %s", e.what());
         }
 
@@ -412,12 +411,12 @@ public:
 
         q->connect(ui->accountNameEdit, &QLineEdit::textChanged, q, &KNewAccountDlg::slotCheckFinished);
 
-        q->connect(ui->m_vatCategory,   &QAbstractButton::toggled,       q, &KNewAccountDlg::slotVatChanged);
-        q->connect(ui->m_vatAssignment, &QAbstractButton::toggled,       q, &KNewAccountDlg::slotVatAssignmentChanged);
-        q->connect(ui->m_vatCategory,   &QAbstractButton::toggled,       q, &KNewAccountDlg::slotCheckFinished);
-        q->connect(ui->m_vatAssignment, &QAbstractButton::toggled,       q, &KNewAccountDlg::slotCheckFinished);
-        q->connect(ui->m_vatRate,       &AmountEdit::textChanged,      q, &KNewAccountDlg::slotCheckFinished);
-        q->connect(ui->m_vatAccount,    &KMyMoneySelector::stateChanged, q, &KNewAccountDlg::slotCheckFinished);
+        q->connect(ui->m_vatCategory, &QAbstractButton::toggled, q, &KNewAccountDlg::slotVatChanged);
+        q->connect(ui->m_vatAssignment, &QAbstractButton::toggled, q, &KNewAccountDlg::slotVatAssignmentChanged);
+        q->connect(ui->m_vatCategory, &QAbstractButton::toggled, q, &KNewAccountDlg::slotCheckFinished);
+        q->connect(ui->m_vatAssignment, &QAbstractButton::toggled, q, &KNewAccountDlg::slotCheckFinished);
+        q->connect(ui->m_vatRate, &AmountEdit::textChanged, q, &KNewAccountDlg::slotCheckFinished);
+        q->connect(ui->m_vatAccount, &KMyMoneySelector::stateChanged, q, &KNewAccountDlg::slotCheckFinished);
         q->connect(ui->m_currency, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KNewAccountDlg::slotCheckCurrency);
 
         q->connect(ui->m_minBalanceEarlyEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
@@ -452,7 +451,7 @@ public:
         } else {
             if (!m_account.value("VatRate").isEmpty()) {
                 ui->m_vatCategory->setChecked(true);
-                ui->m_vatRate->setValue(MyMoneyMoney(m_account.value("VatRate"))*MyMoneyMoney(100, 1));
+                ui->m_vatRate->setValue(MyMoneyMoney(m_account.value("VatRate")) * MyMoneyMoney(100, 1));
             } else {
                 if (!m_account.value("VatAccount").isEmpty()) {
                     QString accId = m_account.value("VatAccount").toLatin1();
@@ -464,7 +463,7 @@ public:
                         ui->m_grossAmount->setChecked(true);
                         if (m_account.value("VatAmount") == "Net")
                             ui->m_netAmount->setChecked(true);
-                    } catch (const MyMoneyException &) {
+                    } catch (const MyMoneyException&) {
                     }
                 }
             }
@@ -564,18 +563,18 @@ public:
 
         switch (mode) {
         case '<':
-            if (src->value()*factor < dst->value()*factor)
+            if (src->value() * factor < dst->value() * factor)
                 dst->setValue(src->value());
             break;
 
         case '>':
-            if (src->value()*factor > dst->value()*factor)
+            if (src->value() * factor > dst->value() * factor)
                 dst->setValue(src->value());
             break;
         }
     }
 
-    void handleOpeningBalanceCheckbox(const QString &currencyId)
+    void handleOpeningBalanceCheckbox(const QString& currencyId)
     {
         if (m_account.accountType() == Account::Type::Equity) {
             // check if there is another opening balance account with the same currency
@@ -584,8 +583,7 @@ public:
             MyMoneyFile::instance()->accountList(list);
             QList<MyMoneyAccount>::Iterator it;
             for (it = list.begin(); it != list.end(); ++it) {
-                if (it->id() == m_account.id() || currencyId != it->currencyId()
-                        || it->accountType() != Account::Type::Equity)
+                if (it->id() == m_account.id() || currencyId != it->currencyId() || it->accountType() != Account::Type::Equity)
                     continue;
                 if (it->value("OpeningBalanceAccount", false)) {
                     isOtherOpenBalancingAccount = true;
@@ -605,7 +603,8 @@ public:
             } else {
                 ui->m_qcheckboxOpeningBalance->setChecked(false);
                 ui->m_qcheckboxOpeningBalance->setEnabled(false);
-                ui->m_qcheckboxOpeningBalance->setToolTip(i18n("Option has been disabled because there is another account flagged to be an opening balance account for this currency"));
+                ui->m_qcheckboxOpeningBalance->setToolTip(
+                    i18n("Option has been disabled because there is another account flagged to be an opening balance account for this currency"));
             }
         } else {
             ui->m_qcheckboxOpeningBalance->setVisible(false);
@@ -745,9 +744,9 @@ public:
     bool m_isEditing;
 };
 
-KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const QString& title) :
-    QDialog(parent),
-    d_ptr(new KNewAccountDlgPrivate(this))
+KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget* parent, const QString& title)
+    : QDialog(parent)
+    , d_ptr(new KNewAccountDlgPrivate(this))
 {
     Q_D(KNewAccountDlg);
     d->m_account = account;
@@ -846,15 +845,15 @@ void KNewAccountDlg::okClicked()
 
     // the figures for credit line with reversed sign
     if (!d->ui->m_maxCreditAbsoluteEdit->text().isEmpty())
-        d->ui->m_maxCreditAbsoluteEdit->setValue(d->ui->m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
+        d->ui->m_maxCreditAbsoluteEdit->setValue(d->ui->m_maxCreditAbsoluteEdit->value() * MyMoneyMoney::MINUS_ONE);
     if (!d->ui->m_maxCreditEarlyEdit->text().isEmpty())
-        d->ui->m_maxCreditEarlyEdit->setValue(d->ui->m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
+        d->ui->m_maxCreditEarlyEdit->setValue(d->ui->m_maxCreditEarlyEdit->value() * MyMoneyMoney::MINUS_ONE);
     d->storeKVP("maxCreditAbsolute", d->ui->m_maxCreditAbsoluteEdit);
     d->storeKVP("maxCreditEarly", d->ui->m_maxCreditEarlyEdit);
     if (!d->ui->m_maxCreditAbsoluteEdit->text().isEmpty())
-        d->ui->m_maxCreditAbsoluteEdit->setValue(d->ui->m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
+        d->ui->m_maxCreditAbsoluteEdit->setValue(d->ui->m_maxCreditAbsoluteEdit->value() * MyMoneyMoney::MINUS_ONE);
     if (!d->ui->m_maxCreditEarlyEdit->text().isEmpty())
-        d->ui->m_maxCreditEarlyEdit->setValue(d->ui->m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
+        d->ui->m_maxCreditEarlyEdit->setValue(d->ui->m_maxCreditEarlyEdit->value() * MyMoneyMoney::MINUS_ONE);
 
     // if the user clears the last check number used but we still have a
     // check number on file we update the field to the highest number used
@@ -875,8 +874,7 @@ void KNewAccountDlg::okClicked()
         acctype = static_cast<Account::Type>(d->ui->typeCombo->currentData().toInt());
         // If it's a loan, check if the parent is asset or liability. In
         // case of asset, we change the account type to be AssetLoan
-        if (acctype == Account::Type::Loan
-                && parent.accountGroup() == Account::Type::Asset)
+        if (acctype == Account::Type::Loan && parent.accountGroup() == Account::Type::Asset)
             acctype = Account::Type::AssetLoan;
     } else {
         acctype = parent.accountGroup();
@@ -885,9 +883,11 @@ void KNewAccountDlg::okClicked()
             newName = MyMoneyFile::instance()->accountToCategory(parent.id()) + MyMoneyFile::AccountSeparator;
         }
         newName += accountNameText;
-        if (!file->categoryToAccount(newName, acctype).isEmpty()
-                && (file->categoryToAccount(newName, acctype) != d->m_account.id())) {
-            KMessageBox::error(this, QString("<qt>") + i18n("A category named <b>%1</b> already exists. You cannot create a second category with the same name.", newName) + QString("</qt>"));
+        if (!file->categoryToAccount(newName, acctype).isEmpty() && (file->categoryToAccount(newName, acctype) != d->m_account.id())) {
+            KMessageBox::error(this,
+                               QString("<qt>")
+                                   + i18n("A category named <b>%1</b> already exists. You cannot create a second category with the same name.", newName)
+                                   + QString("</qt>"));
             return;
         }
     }
@@ -968,7 +968,7 @@ MyMoneyAccount KNewAccountDlg::parentAccount() const
     return d->m_parentAccount;
 }
 
-void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const QItemSelection &previous)
+void KNewAccountDlg::slotSelectionChanged(const QItemSelection& current, const QItemSelection& previous)
 {
     Q_UNUSED(previous)
     Q_D(KNewAccountDlg);
@@ -1033,7 +1033,7 @@ void KNewAccountDlg::slotNewClicked()
             file->addInstitution(institution);
             ft.commit();
             slotLoadInstitutions(institution.name());
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
             KMessageBox::information(this, i18n("Cannot add institution"));
         }
     }
@@ -1052,11 +1052,10 @@ void KNewAccountDlg::slotAccountTypeChanged(int index)
             d->m_account.setAccountType(type);
             // update the account group displayed in the accounts hierarchy
             d->m_filterProxyModel->clear();
-            d->m_filterProxyModel->addAccountGroup(QVector<Account::Type> {d->m_account.accountGroup()});
+            d->m_filterProxyModel->addAccountGroup(QVector<Account::Type>{d->m_account.accountGroup()});
             d->selectParentAccount(d->m_filterProxyModel->index(0, 0));
-
         }
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         qWarning("Unexpected exception in KNewAccountDlg::slotAccountTypeChanged()");
     }
 }

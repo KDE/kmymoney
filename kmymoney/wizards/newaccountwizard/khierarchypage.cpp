@@ -4,7 +4,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "khierarchypage.h"
 
 // ----------------------------------------------------------------------------
@@ -22,24 +21,23 @@
 
 #include "ui_khierarchypage.h"
 
-#include "mymoneyfile.h"
 #include "accountsmodel.h"
 #include "accountsproxymodel.h"
+#include "columnselector.h"
+#include "kaccountsummarypage.h"
+#include "kaccounttypepage.h"
 #include "kmymoneyaccounttreeview.h"
 #include "kmymoneysettings.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
-#include "kaccountsummarypage.h"
-#include "kaccounttypepage.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 #include "wizardpage.h"
-#include "columnselector.h"
 
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
+namespace NewAccountWizard {
 class Wizard;
 
 class HierarchyPagePrivate : public WizardPagePrivate<Wizard>
@@ -59,17 +57,15 @@ public:
         delete ui;
     }
 
-    Ui::KHierarchyPage        *ui;
-    ColumnSelector*           m_columnSelector;
+    Ui::KHierarchyPage* ui;
+    ColumnSelector* m_columnSelector;
 };
 }
 
-
-namespace NewAccountWizard
-{
-HierarchyPage::HierarchyPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new HierarchyPagePrivate(wizard), StepParentAccount, this, wizard)
+namespace NewAccountWizard {
+HierarchyPage::HierarchyPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new HierarchyPagePrivate(wizard), StepParentAccount, this, wizard)
 {
     Q_D(HierarchyPage);
     d->ui->setupUi(this);
@@ -80,7 +76,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
     proxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
     proxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
     proxyModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
-    proxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability});
+    proxyModel->addAccountGroup(QVector<Account::Type>{Account::Type::Asset, Account::Type::Liability});
     // setup source model
     d->ui->m_parentAccounts->setModel(MyMoneyFile::instance()->accountsModel());
 
@@ -115,7 +111,7 @@ void HierarchyPage::enterPage()
     // Ensure that the list reflects the selected Account Type
     MyMoneyAccount topAccount = d->m_wizard->d_func()->m_accountTypePage->parentAccount();
     d->ui->m_parentAccounts->proxyModel()->clear();
-    d->ui->m_parentAccounts->proxyModel()->addAccountGroup(QVector<Account::Type> {topAccount.accountGroup()});
+    d->ui->m_parentAccounts->proxyModel()->addAccountGroup(QVector<Account::Type>{topAccount.accountGroup()});
     d->ui->m_parentAccounts->expandAll();
 
     const auto file = MyMoneyFile::instance();

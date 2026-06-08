@@ -15,7 +15,7 @@ QString platformTools::osUsername()
 {
     QString name;
     struct passwd* pwd = getpwuid(geteuid());
-    if( pwd != nullptr) {
+    if (pwd != nullptr) {
         name = QString::fromLatin1(pwd->pw_name);
     }
     return name;

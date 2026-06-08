@@ -7,31 +7,29 @@
 
 #include "gwenkdegui.h"
 
-#include <gwenhywfar/debug.h>
 #include "gwen-gui-qt5/qt5dialogbox.hpp"
+#include <gwenhywfar/debug.h>
 
-
+#include <QApplication>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
-#include <QRegularExpression>
-#include <QApplication>
 
 #include <QDebug>
-#include <QPointer>
 #include <QLineEdit>
+#include <QPointer>
 
 #include "passstore.h"
 #include "passwordtoggle.h"
 #include "widgets/chiptandialog.h"
 #include "widgets/phototandialog.h"
 
-#define KBANKING_TANMETHOD_TEXT          0x00000001
-#define KBANKING_TANMETHOD_CHIPTAN       0x00000002
+#define KBANKING_TANMETHOD_TEXT 0x00000001
+#define KBANKING_TANMETHOD_CHIPTAN 0x00000002
 #define KBANKING_TANMETHOD_CHIPTAN_OPTIC 0x00000003
-#define KBANKING_TANMETHOD_CHIPTAN_USB   0x00000004
-#define KBANKING_TANMETHOD_CHIPTAN_QR    0x00000005
-#define KBANKING_TANMETHOD_PHOTOTAN      0x00000006
-
+#define KBANKING_TANMETHOD_CHIPTAN_USB 0x00000004
+#define KBANKING_TANMETHOD_CHIPTAN_QR 0x00000005
+#define KBANKING_TANMETHOD_PHOTOTAN 0x00000006
 
 gwenKdeGui::gwenKdeGui()
     : QT5_Gui()
@@ -42,10 +40,10 @@ gwenKdeGui::~gwenKdeGui()
 {
 }
 
-int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
+int gwenKdeGui::execDialog(GWEN_DIALOG* dlg, GWEN_UNUSED uint32_t guiid)
 {
     QT5_GuiDialog qt5Dlg(this, dlg);
-    QWidget *owner = qApp->activeWindow();
+    QWidget* owner = qApp->activeWindow();
 
     /* setup widget tree for the dialog */
     if (!(qt5Dlg.setup(owner))) {
@@ -94,21 +92,22 @@ int gwenKdeGui::getPasswordText(uint32_t flags,
 }
 
 int gwenKdeGui::getPasswordHhd(uint32_t /*flags*/,
-                               const char * /*token*/,
-                               const char * /*title*/,
-                               const char *text,
-                               char *buffer,
+                               const char* /*token*/,
+                               const char* /*title*/,
+                               const char* text,
+                               char* buffer,
                                int minLen,
                                int maxLen,
                                GWEN_GUI_PASSWORD_METHOD /*methodId*/,
-                               GWEN_DB_NODE *methodParams,
-                               uint32_t /*guiid*/) {
+                               GWEN_DB_NODE* methodParams,
+                               uint32_t /*guiid*/)
+{
     QString hhdCode;
     QString infoText;
-    const char *sChallenge;
+    const char* sChallenge;
 
     sChallenge = GWEN_DB_GetCharValue(methodParams, "challenge", 0, nullptr);
-    if (! (sChallenge && *sChallenge)) {
+    if (!(sChallenge && *sChallenge)) {
         DBG_ERROR(nullptr, "Empty optical data");
         return GWEN_ERROR_NO_DATA;
     }
@@ -140,31 +139,30 @@ int gwenKdeGui::getPasswordHhd(uint32_t /*flags*/,
     return GWEN_ERROR_INTERNAL;
 }
 
-
-
 int gwenKdeGui::getPasswordPhoto(uint32_t /*flags*/,
-                                 const char * /*token*/,
-                                 const char * /*title*/,
-                                 const char *text,
-                                 char *buffer,
+                                 const char* /*token*/,
+                                 const char* /*title*/,
+                                 const char* text,
+                                 char* buffer,
                                  int minLen,
                                  int maxLen,
                                  GWEN_GUI_PASSWORD_METHOD /*methodId*/,
-                                 GWEN_DB_NODE *methodParams,
-                                 uint32_t /*guiid*/) {
+                                 GWEN_DB_NODE* methodParams,
+                                 uint32_t /*guiid*/)
+{
     QPixmap picture;
     QString infoText;
-    const uchar * pictureData;
+    const uchar* pictureData;
     unsigned int pictureDataSize;
 
     pictureData = (const uchar*)GWEN_DB_GetBinValue(methodParams, "imageData", 0, nullptr, 0, &pictureDataSize);
-    if (! (pictureData && pictureDataSize > 0)) {
+    if (!(pictureData && pictureDataSize > 0)) {
         DBG_ERROR(nullptr, "Empty optical data");
         return GWEN_ERROR_NO_DATA;
     }
 
     bool loadSuccessful = picture.loadFromData(pictureData, pictureDataSize);
-    if (! loadSuccessful) {
+    if (!loadSuccessful) {
         DBG_ERROR(nullptr, "Unable to read tan picture from image data");
         return GWEN_ERROR_NO_DATA;
     }
@@ -195,58 +193,34 @@ int gwenKdeGui::getPasswordPhoto(uint32_t /*flags*/,
     return GWEN_ERROR_INTERNAL;
 }
 
-
-
-
-int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title, const char* text, char* buffer,
-                            int minLen, int maxLen,
+int gwenKdeGui::getPassword(uint32_t flags,
+                            const char* token,
+                            const char* title,
+                            const char* text,
+                            char* buffer,
+                            int minLen,
+                            int maxLen,
                             GWEN_GUI_PASSWORD_METHOD methodId,
-                            GWEN_DB_NODE *methodParams,
+                            GWEN_DB_NODE* methodParams,
                             uint32_t guiid)
 {
-
-
-    switch( (methodId & GWEN_Gui_PasswordMethod_Mask)) {
+    switch ((methodId & GWEN_Gui_PasswordMethod_Mask)) {
     case GWEN_Gui_PasswordMethod_Unknown:
     case GWEN_Gui_PasswordMethod_Mask:
         DBG_ERROR(nullptr, "Invalid password method id %08x", methodId);
         return GWEN_ERROR_INVALID;
 
     case GWEN_Gui_PasswordMethod_Text:
-        return getPasswordText(flags,
-                               token,
-                               title,
-                               text,
-                               buffer,
-                               minLen,
-                               maxLen,
-                               methodId, methodParams,
-                               guiid);
+        return getPasswordText(flags, token, title, text, buffer, minLen, maxLen, methodId, methodParams, guiid);
 
     case GWEN_Gui_PasswordMethod_OpticalHHD:
         int tanMethodId = GWEN_DB_GetIntValue(methodParams, "tanMethodId", 0, 0);
-        switch(tanMethodId) {
+        switch (tanMethodId) {
         case KBANKING_TANMETHOD_CHIPTAN_OPTIC:
-            return getPasswordHhd(flags,
-                                  token,
-                                  title,
-                                  text,
-                                  buffer,
-                                  minLen,
-                                  maxLen,
-                                  methodId, methodParams,
-                                  guiid);
+            return getPasswordHhd(flags, token, title, text, buffer, minLen, maxLen, methodId, methodParams, guiid);
         case KBANKING_TANMETHOD_CHIPTAN_QR:
         case KBANKING_TANMETHOD_PHOTOTAN:
-            return getPasswordPhoto(flags,
-                                    token,
-                                    title,
-                                    text,
-                                    buffer,
-                                    minLen,
-                                    maxLen,
-                                    methodId, methodParams,
-                                    guiid);
+            return getPasswordPhoto(flags, token, title, text, buffer, minLen, maxLen, methodId, methodParams, guiid);
         default:
             DBG_ERROR(nullptr, "Unknown tan method ID %i", tanMethodId);
             return GWEN_ERROR_NO_DATA;

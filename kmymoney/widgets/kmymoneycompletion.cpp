@@ -23,18 +23,18 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneyselector.h>
 #include "kmymoneycombo.h"
 #include "widgetenums.h"
+#include <kmymoneyselector.h>
 
-KMyMoneyCompletion::KMyMoneyCompletion(QWidget *parent) :
-    QWidget(parent),
-    d_ptr(new KMyMoneyCompletionPrivate)
+KMyMoneyCompletion::KMyMoneyCompletion(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KMyMoneyCompletionPrivate)
 {
     Q_D(KMyMoneyCompletion);
     setWindowFlags(Qt::ToolTip);
     // make it look like the Qt completer
-    QVBoxLayout *completionLayout = new QVBoxLayout(this);
+    QVBoxLayout* completionLayout = new QVBoxLayout(this);
     completionLayout->setContentsMargins(0, 0, 0, 0);
     completionLayout->setSpacing(0);
 
@@ -59,9 +59,9 @@ void KMyMoneyCompletion::connectSignals(QWidget* widget, QTreeWidget* lv)
     connect(lv, &QTreeWidget::itemClicked, this, &KMyMoneyCompletion::slotItemSelected);
 }
 
-KMyMoneyCompletion::KMyMoneyCompletion(KMyMoneyCompletionPrivate &dd, QWidget* parent) :
-    QWidget(parent),
-    d_ptr(&dd)
+KMyMoneyCompletion::KMyMoneyCompletion(KMyMoneyCompletionPrivate& dd, QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(&dd)
 {
 }
 
@@ -98,7 +98,8 @@ void KMyMoneyCompletion::adjustSize(const int count)
     QTreeWidgetItem* item = *it;
     if (item)
         // the +1 in the next statement avoids the display of a scroll bar if count < MAX_ITEMS.
-        h = item->treeWidget()->visualItemRect(item).height() * (count > KMyMoneyCompletionPrivate::MAX_ITEMS - 1 ? KMyMoneyCompletionPrivate::MAX_ITEMS : count + 1);
+        h = item->treeWidget()->visualItemRect(item).height()
+            * (count > KMyMoneyCompletionPrivate::MAX_ITEMS - 1 ? KMyMoneyCompletionPrivate::MAX_ITEMS : count + 1);
 
     resize(w, h);
 
@@ -155,8 +156,8 @@ void KMyMoneyCompletion::show(bool presetSelected)
     QWidget::show();
 
     // make sure that the parent is the input context's focus widget instead of the selector's list
-    //if (qApp->inputContext()->focusWidget() == m_selector->listView())
-    //qApp->inputContext()->setFocusWidget(m_parent);
+    // if (qApp->inputContext()->focusWidget() == m_selector->listView())
+    // qApp->inputContext()->setFocusWidget(m_parent);
 }
 
 void KMyMoneyCompletion::hide()
@@ -178,7 +179,7 @@ void KMyMoneyCompletion::hide()
 bool KMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
 {
     Q_D(KMyMoneyCompletion);
-    KMyMoneyCombo *c = dynamic_cast<KMyMoneyCombo*>(d->m_parent);
+    KMyMoneyCombo* c = dynamic_cast<KMyMoneyCombo*>(d->m_parent);
     if (o == d->m_parent || (c && o == c->lineEdit()) || o == this) {
         if (isVisible()) {
 #ifdef Q_OS_WIN32 // krazy:exclude=cpp
@@ -298,7 +299,7 @@ void KMyMoneyCompletion::slotMakeCompletion(const QString& txt)
     }
 }
 
-void KMyMoneyCompletion::slotItemSelected(QTreeWidgetItem *item, int)
+void KMyMoneyCompletion::slotItemSelected(QTreeWidgetItem* item, int)
 {
     Q_D(KMyMoneyCompletion);
     if (item && item->flags().testFlag(Qt::ItemIsSelectable)) {

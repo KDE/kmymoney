@@ -35,12 +35,12 @@ public:
 
     WebConnect* q;
 
-    QString         socketName;
-    QLocalSocket*   clientSocket;
-    QLocalSocket*   serverSocket;
-    QLocalServer*   server;
-    bool            serverFail;
-    quint32         blockSize;
+    QString socketName;
+    QLocalSocket* clientSocket;
+    QLocalSocket* serverSocket;
+    QLocalServer* server;
+    bool serverFail;
+    quint32 blockSize;
 
     void startup()
     {
@@ -57,7 +57,7 @@ public:
             if (!server->listen(socketName)) {
                 qCInfo(WebConnectLog) << "Starting server failed. Try to remove stale socket.";
                 server->removeServer(socketName);
-                if(!server->listen(socketName)) {
+                if (!server->listen(socketName)) {
                     qCWarning(WebConnectLog) << "Starting server failed again. WebConnect not available.";
                     serverFail = true;
                 }
@@ -172,7 +172,7 @@ void WebConnect::loadFile(const QUrl& url)
         QByteArray block;
         QDataStream stream(&block, QIODevice::WriteOnly);
         stream.setVersion(QDataStream::Qt_4_0);
-        stream << (quint32) 0;
+        stream << (quint32)0;
         stream << url;
         stream.device()->seek(0);
         stream << (quint32)(block.size() - sizeof(quint32));

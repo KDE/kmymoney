@@ -18,14 +18,13 @@
 #include "mymoneyenums.h"
 #include "mymoneymoney.h"
 
-AmountValidator::AmountValidator(QObject * parent) :
-    AmountValidator(-HUGE_VAL, HUGE_VAL, 1000, parent)
+AmountValidator::AmountValidator(QObject* parent)
+    : AmountValidator(-HUGE_VAL, HUGE_VAL, 1000, parent)
 {
 }
 
-AmountValidator::AmountValidator(double bottom, double top, int decimals,
-                                 QObject * parent) :
-    QDoubleValidator(bottom, top, decimals, parent)
+AmountValidator::AmountValidator(double bottom, double top, int decimals, QObject* parent)
+    : QDoubleValidator(bottom, top, decimals, parent)
 {
     setNotation(StandardNotation);
 }

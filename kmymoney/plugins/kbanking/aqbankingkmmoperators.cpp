@@ -5,17 +5,17 @@
 
 #include "aqbankingkmmoperators.h"
 
-#include <aqbanking/types/transactionlimits.h>
-#include <aqbanking/types/transaction.h>
 #include <aqbanking/types/account_spec.h>
+#include <aqbanking/types/transaction.h>
+#include <aqbanking/types/transactionlimits.h>
 #include <aqbanking/types/value.h>
 
-#include "payeeidentifier/payeeidentifiertyped.h"
-#include "payeeidentifier/nationalaccount/nationalaccount.h"
-#include "tasksettings/credittransfersettingsbase.h"
-#include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "gwenhywfarqtoperators.h"
 #include "mymoneymoney.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
+#include "tasksettings/credittransfersettingsbase.h"
 
 /**
  * @brief SEPA Charset
@@ -37,17 +37,13 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
 
     settings->setPurposeLimits(AB_TransactionLimits_GetMaxLinesPurpose(aqlimits),
                                AB_TransactionLimits_GetMaxLenPurpose(aqlimits),
-                               AB_TransactionLimits_GetMinLenPurpose(aqlimits)
-                              );
+                               AB_TransactionLimits_GetMinLenPurpose(aqlimits));
 
     // AqBanking returns 0 as min length even if it requires one
     int minLength = AB_TransactionLimits_GetMinLenRemoteName(aqlimits);
     if (minLength == 0)
         minLength = 1;
-    settings->setRecipientNameLimits(1 /*AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits)*/,
-                                     AB_TransactionLimits_GetMaxLenRemoteName(aqlimits),
-                                     minLength
-                                    );
+    settings->setRecipientNameLimits(1 /*AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits)*/, AB_TransactionLimits_GetMaxLenRemoteName(aqlimits), minLength);
 
     // AqBanking returns 0 as min length even if it requires one
     minLength = AB_TransactionLimits_GetMinLenLocalName(aqlimits);
@@ -55,7 +51,7 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
         minLength = 1;
     settings->setPayeeNameLimits(1, AB_TransactionLimits_GetMaxLenLocalName(aqlimits), minLength);
 
-    //settings->referenceLength = AB_TransactionLimits_GetMax( aqlimits );
+    // settings->referenceLength = AB_TransactionLimits_GetMax( aqlimits );
     settings->setEndToEndReferenceLength(32);
 
     settings->setAllowedChars(sepaChars());
@@ -134,7 +130,7 @@ AB_VALUE* AB_Value_fromMyMoneyMoney(const MyMoneyMoney& input)
     return (AB_Value_fromString(input.toString().toUtf8().constData()));
 }
 
-MyMoneyMoney AB_Value_toMyMoneyMoney(const AB_VALUE *const value)
+MyMoneyMoney AB_Value_toMyMoneyMoney(const AB_VALUE* const value)
 {
     // I've read somewhere that in M1 were about 12 trillion dollar in 2013. So the buffer length of 32 should be sufficient.
     char buffer[32];

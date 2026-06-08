@@ -24,9 +24,7 @@
 #include "tests/testutilities.h"
 using namespace test;
 
-
 QTEST_GUILESS_MAIN(MyMoneyTransactionFilterTest)
-
 
 MyMoneyTransactionFilterTest::MyMoneyTransactionFilterTest::MyMoneyTransactionFilterTest()
     : file(nullptr)
@@ -258,7 +256,7 @@ void MyMoneyTransactionFilterTest::testMatchTransactionDate()
     QVERIFY(!filter.match(transaction));
 }
 
-void setupTransactionForNumber(MyMoneyTransaction &transaction, const QString &accountId)
+void setupTransactionForNumber(MyMoneyTransaction& transaction, const QString& accountId)
 {
     MyMoneySplit split;
     split.setAccountId(accountId);
@@ -291,7 +289,7 @@ void setupTransactionForNumber(MyMoneyTransaction &transaction, const QString &a
     transaction.addSplit(split4);
 }
 
-void runtTestMatchTransactionNumber(MyMoneyTransaction &transaction, MyMoneyTransactionFilter &filter)
+void runtTestMatchTransactionNumber(MyMoneyTransaction& transaction, MyMoneyTransactionFilter& filter)
 {
     // return all matching splits
     filter.setReportAllSplits(true);

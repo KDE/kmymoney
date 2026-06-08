@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_editselectionwizardpage.h"
 
-EditSelectionWizardPage::EditSelectionWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::EditSelectionWizardPage)
+EditSelectionWizardPage::EditSelectionWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::EditSelectionWizardPage)
 {
     ui->setupUi(this);
     ui->m_selectionButtonGroup->setId(ui->m_editInterestRateButton, 0);

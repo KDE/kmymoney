@@ -5,8 +5,8 @@
 
 #include <config-kmymoney.h>
 
-#include "ofxpartner.h"
 #include "kmymoneysettings.h"
+#include "ofxpartner.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -26,9 +26,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KIO/CopyJob>
 #include <KIO/Job>
 #include <KIO/TransferJob>
-#include <KIO/CopyJob>
 #include <KJobUiDelegate>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -43,10 +43,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace OfxPartner
-{
-bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename);
-bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename);
+namespace OfxPartner {
+bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl& url, const QUrl& filename);
+bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl& url, const QUrl& filename);
 
 Q_GLOBAL_STATIC_WITH_ARGS(QString, kBankFilename, ("ofx-bank-index.xml"));
 
@@ -245,9 +244,7 @@ OfxHomeServiceInfo ServiceInfo(const QString& fipid)
             result.ofxInfo.billpay = false;
             result.ofxInfo.investments = true;
         }
-    }
-    else
-    {
+    } else {
         memset(&result.ofxInfo, 0, sizeof(result.ofxInfo));
         result.ofxValidated = false;
         result.sslValidated = false;
@@ -258,7 +255,7 @@ OfxHomeServiceInfo ServiceInfo(const QString& fipid)
     return result;
 }
 
-bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename)
+bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl& url, const QUrl& filename)
 {
     Q_UNUSED(request);
     QByteArray req;
@@ -267,7 +264,7 @@ bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl 
     return job.error() == 0;
 }
 
-bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename)
+bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl& url, const QUrl& filename)
 {
     QByteArray req(request.toUtf8());
 
@@ -280,7 +277,7 @@ bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl
 class OfxHttpRequest::Private
 {
 public:
-    QFile  m_fpTrace;
+    QFile m_fpTrace;
 };
 
 OfxHttpRequest::OfxHttpRequest(const QString& method,
@@ -396,7 +393,7 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
         }
     }
 
-    if(m_postJob) {
+    if (m_postJob) {
         m_error = m_postJob->error();
         if (m_error) {
             m_postJob->uiDelegate()->showErrorMessage();
@@ -416,7 +413,7 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
             QFile::remove(m_dst);
 #endif
         }
-    } else if(m_getJob) {
+    } else if (m_getJob) {
         m_error = m_getJob->error();
         if (m_error) {
             m_getJob->uiDelegate()->showErrorMessage();

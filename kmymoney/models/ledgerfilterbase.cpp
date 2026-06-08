@@ -54,11 +54,11 @@ void LedgerFilterBase::setAccountType(Account::Type type)
 
 QVariant LedgerFilterBase::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         Q_D(const LedgerFilterBase);
-        switch(section) {
+        switch (section) {
         case JournalModel::Column::Payment:
-            switch(d->accountType) {
+            switch (d->accountType) {
             case Account::Type::CreditCard:
                 return i18nc("Payment made with credit card", "Charge");
 
@@ -80,7 +80,7 @@ QVariant LedgerFilterBase::headerData(int section, Qt::Orientation orientation, 
             break;
 
         case JournalModel::Column::Deposit:
-            switch(d->accountType) {
+            switch (d->accountType) {
             case Account::Type::CreditCard:
                 return i18nc("Payment towards credit card", "Payment");
 
@@ -223,7 +223,6 @@ QStringList LedgerFilterBase::filterFixedStrings() const
     return d->filterIds;
 }
 
-
 void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
 {
     if (show) {
@@ -232,7 +231,6 @@ void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
         removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
     }
 }
-
 
 void LedgerFilterBase::addSourceModel(QAbstractItemModel* model)
 {

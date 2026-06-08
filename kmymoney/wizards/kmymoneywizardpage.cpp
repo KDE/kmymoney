@@ -5,8 +5,8 @@
 */
 
 #include "kmymoneywizardpage.h"
-#include "kmymoneywizardpage_p.h"
 #include "kmymoneywizard_p.h"
+#include "kmymoneywizardpage_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -24,25 +24,31 @@
 #include "kguiutils.h"
 #include "kmymoneywizard.h"
 
-KMyMoneyWizardPage::KMyMoneyWizardPage(uint step, QWidget* widget) :
-    d_ptr(new KMyMoneyWizardPagePrivate(widget))
+KMyMoneyWizardPage::KMyMoneyWizardPage(uint step, QWidget* widget)
+    : d_ptr(new KMyMoneyWizardPagePrivate(widget))
 {
     Q_D(KMyMoneyWizardPage);
     d->m_step = step;
     d->m_widget = widget;
     d->m_mandatoryGroup = new KMandatoryFieldGroup(widget);
-    QObject::connect(d->m_mandatoryGroup, static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    QObject::connect(d->m_mandatoryGroup,
+                     static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged),
+                     object(),
+                     &KMyMoneyWizardPagePrivate::completeStateChanged);
     widget->hide();
 }
 
-KMyMoneyWizardPage::KMyMoneyWizardPage(KMyMoneyWizardPagePrivate &dd, uint step, QWidget *widget) :
-    d_ptr(&dd)
+KMyMoneyWizardPage::KMyMoneyWizardPage(KMyMoneyWizardPagePrivate& dd, uint step, QWidget* widget)
+    : d_ptr(&dd)
 {
     Q_D(KMyMoneyWizardPage);
     d->m_step = step;
     d->m_widget = widget;
     d->m_mandatoryGroup = new KMandatoryFieldGroup(widget);
-    QObject::connect(d->m_mandatoryGroup, static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    QObject::connect(d->m_mandatoryGroup,
+                     static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged),
+                     object(),
+                     &KMyMoneyWizardPagePrivate::completeStateChanged);
     widget->hide();
 }
 

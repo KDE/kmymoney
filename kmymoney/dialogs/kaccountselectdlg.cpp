@@ -9,29 +9,29 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QIcon>
 #include <QLabel>
 #include <QPushButton>
-#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KLocalizedString>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kaccountselectdlg.h"
 
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
-#include "mymoneyfile.h"
-#include "kmymoneycategory.h"
-#include "kmymoneyaccountselector.h"
-#include "knewaccountdlg.h"
 #include "accountsmodel.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneycategory.h"
+#include "knewaccountdlg.h"
+#include "mymoneyaccount.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 
 #include "dialogenums.h"
 #include "icons/icons.h"
@@ -44,11 +44,11 @@ class KAccountSelectDlgPrivate
     Q_DISABLE_COPY(KAccountSelectDlgPrivate)
 
 public:
-    KAccountSelectDlgPrivate() :
-        ui(new Ui::KAccountSelectDlg),
-        m_mode(0),
-        m_accountType(eDialogs::Category::none),
-        m_aborted(false)
+    KAccountSelectDlgPrivate()
+        : ui(new Ui::KAccountSelectDlg)
+        , m_mode(0)
+        , m_accountType(eDialogs::Category::none)
+        , m_aborted(false)
     {
     }
 
@@ -57,17 +57,17 @@ public:
         delete ui;
     }
 
-    Ui::KAccountSelectDlg *ui;
-    QString                m_purpose;
-    MyMoneyAccount         m_account;
-    int                    m_mode;       // 0 - select or create, 1 - create only
-    eDialogs::Category     m_accountType;
-    bool                   m_aborted;
+    Ui::KAccountSelectDlg* ui;
+    QString m_purpose;
+    MyMoneyAccount m_account;
+    int m_mode; // 0 - select or create, 1 - create only
+    eDialogs::Category m_accountType;
+    bool m_aborted;
 };
 
-KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const QString& purpose, QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KAccountSelectDlgPrivate)
+KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const QString& purpose, QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KAccountSelectDlgPrivate)
 {
     Q_D(KAccountSelectDlg);
     d->ui->setupUi(this);
@@ -125,10 +125,10 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
 
     d->ui->m_accountSelector->setModel(filterProxyModel);
 
-    connect(d->ui->m_createButton,  &QAbstractButton::clicked, this, &KAccountSelectDlg::slotCreateAccount);
-    connect(d->ui->m_qbuttonOk,     &QAbstractButton::clicked, this, &QDialog::accept);
+    connect(d->ui->m_createButton, &QAbstractButton::clicked, this, &KAccountSelectDlg::slotCreateAccount);
+    connect(d->ui->m_qbuttonOk, &QAbstractButton::clicked, this, &QDialog::accept);
     connect(d->ui->m_qbuttonCancel, &QAbstractButton::clicked, this, &QDialog::reject);
-    connect(d->ui->m_kButtonAbort,  &QAbstractButton::clicked, this, &KAccountSelectDlg::abort);
+    connect(d->ui->m_kButtonAbort, &QAbstractButton::clicked, this, &KAccountSelectDlg::abort);
 }
 
 KAccountSelectDlg::~KAccountSelectDlg()

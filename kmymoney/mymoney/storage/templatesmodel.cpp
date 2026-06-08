@@ -14,9 +14,9 @@
 // QT Includes
 
 #include <QDebug>
-#include <QString>
 #include <QFont>
 #include <QIcon>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -26,13 +26,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 
 #include "icons.h"
 
-struct TemplatesModel::Private
-{
+struct TemplatesModel::Private {
     Q_DECLARE_PUBLIC(TemplatesModel)
 
     Private(TemplatesModel* qq, QObject* parent)
@@ -41,9 +40,8 @@ struct TemplatesModel::Private
     {
     }
 
-
-    TemplatesModel*                  q_ptr;
-    QObject*                        parentObject;
+    TemplatesModel* q_ptr;
+    QObject* parentObject;
 };
 
 TemplatesModel::TemplatesModel(QObject* parent, QUndoStack* undoStack)
@@ -70,8 +68,8 @@ int TemplatesModel::columnCount(const QModelIndex& parent) const
 
 QVariant TemplatesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch (section) {
         case Column::Type:
             return i18nc("@title:column Country/Hierarchy type", "Type");
         case Column::Description:
@@ -92,10 +90,10 @@ QVariant TemplatesModel::data(const QModelIndex& idx, int role) const
 
     const MyMoneyTemplate& tmpl = static_cast<TreeItem<MyMoneyTemplate>*>(idx.internalPointer())->constDataRef();
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Column::Type:
             // make sure to never return any displayable text for the dummy entry
             return tmpl.title();
@@ -126,12 +124,11 @@ QVariant TemplatesModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::IdRole:
         return tmpl.id();
-
     }
     return QVariant();
 }
 
-Qt::ItemFlags TemplatesModel::flags(const QModelIndex &index) const
+Qt::ItemFlags TemplatesModel::flags(const QModelIndex& index) const
 {
     if (!index.isValid())
         return Qt::NoItemFlags;
@@ -142,19 +139,18 @@ Qt::ItemFlags TemplatesModel::flags(const QModelIndex &index) const
     return index.parent().isValid() ? (Qt::ItemIsEnabled | Qt::ItemIsSelectable) : Qt::ItemIsEnabled;
 }
 
-
 bool TemplatesModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 
     MyMoneyTemplate& tmpl = static_cast<TreeItem<MyMoneyTemplate>*>(index.internalPointer())->dataRef();
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case Column::Type:
             tmpl.setTitle(value.toString());
             return true;
@@ -200,4 +196,3 @@ void TemplatesModel::addItem(MyMoneyTemplate& tmpl, const QModelIndex& parentIdx
         doAddItem(tmpl, parentIdx);
     }
 }
-

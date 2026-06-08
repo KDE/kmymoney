@@ -17,8 +17,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w) :
-    KComboBox(w)
+KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w)
+    : KComboBox(w)
 {
     connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &KMyMoneyGeneralCombo::slotChangeItem);
 }

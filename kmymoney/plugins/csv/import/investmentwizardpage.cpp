@@ -11,8 +11,8 @@
 
 #include <QFile>
 #include <QStandardItemModel>
-#include <QTextStream>
 #include <QTableWidget>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -28,9 +28,9 @@
 #include "mymoneyqifprofile.h"
 #include "mymoneysecurity.h"
 
-#include "transactiondlg.h"
-#include "securitydlg.h"
 #include "securitiesdlg.h"
+#include "securitydlg.h"
+#include "transactiondlg.h"
 
 #include "ui_investmentwizardpage.h"
 #include "ui_securitiesdlg.h"
@@ -40,9 +40,9 @@
 
 // ----------------------------------------------------------------------------
 
-InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporterCore *imp) :
-    CSVWizardPage(dlg, imp),
-    ui(new Ui::InvestmentPage)
+InvestmentPage::InvestmentPage(CSVWizard* dlg, CSVImporterCore* imp)
+    : CSVWizardPage(dlg, imp)
+    , ui(new Ui::InvestmentPage)
 {
     ui->setupUi(this);
 
@@ -61,7 +61,7 @@ InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporterCore *imp) :
     m_dlg->m_colTypeName.insert(Column::Name, i18n("Name"));
     m_dlg->m_colTypeName.insert(Column::Memo, i18n("Memo"));
 
-    m_profile = dynamic_cast<InvestmentProfile *>(m_imp->m_profile);
+    m_profile = dynamic_cast<InvestmentProfile*>(m_imp->m_profile);
 
     connect(ui->m_memoCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::memoColSelected);
     connect(ui->m_typeCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::typeColSelected);
@@ -94,10 +94,15 @@ void InvestmentPage::calculateFee()
 
 void InvestmentPage::initializePage()
 {
-    QHash<Column, QComboBox *> columns {{Column::Amount, ui->m_amountCol}, {Column::Type, ui->m_typeCol},
-        {Column::Quantity, ui->m_quantityCol}, {Column::Memo, ui->m_memoCol},
-        {Column::Price, ui->m_priceCol}, {Column::Date, ui->m_dateCol},
-        {Column::Fee,  ui->m_feeCol},  {Column::Symbol, ui->m_symbolCol},
+    QHash<Column, QComboBox*> columns{
+        {Column::Amount, ui->m_amountCol},
+        {Column::Type, ui->m_typeCol},
+        {Column::Quantity, ui->m_quantityCol},
+        {Column::Memo, ui->m_memoCol},
+        {Column::Price, ui->m_priceCol},
+        {Column::Date, ui->m_dateCol},
+        {Column::Fee, ui->m_feeCol},
+        {Column::Symbol, ui->m_symbolCol},
         {Column::Name, ui->m_nameCol},
     };
 
@@ -117,10 +122,13 @@ void InvestmentPage::initializePage()
 
     ui->m_feeRate->setText(m_profile->m_feeRate);
     ui->m_minFee->setText(m_profile->m_minFee);
-    ui->m_feeRate->setValidator(new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,2}[") + QLocale().decimalPoint() + QStringLiteral("]{1,1}[0-9]{0,2}")), this) );
-    ui->m_minFee->setValidator(new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,}[") + QLocale().decimalPoint() + QStringLiteral("]{0,1}[0-9]{0,}")), this) );
+    ui->m_feeRate->setValidator(
+        new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,2}[") + QLocale().decimalPoint() + QStringLiteral("]{1,1}[0-9]{0,2}")),
+                                        this));
+    ui->m_minFee->setValidator(
+        new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,}[") + QLocale().decimalPoint() + QStringLiteral("]{0,1}[0-9]{0,}")), this));
 
-    if (!m_profile->m_feeRate.isEmpty()) {  // fee rate indicates that fee column needs to be calculated
+    if (!m_profile->m_feeRate.isEmpty()) { // fee rate indicates that fee column needs to be calculated
         if (m_imp->calculateFee()) {
             ui->m_feeCol->blockSignals(true);
             int feeCol = ui->m_feeCol->count();
@@ -131,7 +139,8 @@ void InvestmentPage::initializePage()
             m_dlg->updateWindowSize();
             m_dlg->markUnwantedRows();
         }
-    } else if (m_profile->m_colTypeNum.value(Column::Fee, -1) >= ui->m_feeCol->count()) { // no fee rate, calculated fee column index exist, but the column doesn't exist and that's not ok
+    } else if (m_profile->m_colTypeNum.value(Column::Fee, -1)
+               >= ui->m_feeCol->count()) { // no fee rate, calculated fee column index exist, but the column doesn't exist and that's not ok
         m_profile->m_colTypeNum[Column::Fee] = -1;
         m_profile->m_colNumType.remove(m_profile->m_colNumType.key(Column::Fee));
     }
@@ -157,8 +166,7 @@ bool InvestmentPage::isComplete() const
 
 bool InvestmentPage::validatePage()
 {
-    if (ui->m_symbolCol->currentIndex() == -1 &&
-            ui->m_nameCol->currentIndex() == -1)
+    if (ui->m_symbolCol->currentIndex() == -1 && ui->m_nameCol->currentIndex() == -1)
         return validateSecurity();
     else
         return validateSecurities();
@@ -171,8 +179,7 @@ void InvestmentPage::cleanupPage()
 
 void InvestmentPage::memoColSelected(int col)
 {
-    if (m_profile->m_colNumType.value(col) == Column::Type ||
-            m_profile->m_colNumType.value(col) == Column::Name) {
+    if (m_profile->m_colNumType.value(col) == Column::Type || m_profile->m_colNumType.value(col) == Column::Name) {
         int rc = KMessageBox::PrimaryAction;
         if (isVisible())
             rc = KMessageBox::questionTwoActions(m_dlg,
@@ -190,7 +197,7 @@ void InvestmentPage::memoColSelected(int col)
             ui->m_memoCol->setItemText(col, QString::number(col + 1));
             m_profile->m_memoColList.removeOne(col);
         }
-        //allow only separate memo field occupy combobox
+        // allow only separate memo field occupy combobox
         ui->m_memoCol->blockSignals(true);
         if (m_profile->m_colTypeNum.value(Column::Memo) != -1)
             ui->m_memoCol->setCurrentIndex(m_profile->m_colTypeNum.value(Column::Memo));
@@ -200,11 +207,11 @@ void InvestmentPage::memoColSelected(int col)
         return;
     }
 
-    if (m_profile->m_colTypeNum.value(Column::Memo) != -1)        // check if this memo has any column 'number' assigned...
-        m_profile->m_memoColList.removeOne(col);           // ...if true remove it from memo list
+    if (m_profile->m_colTypeNum.value(Column::Memo) != -1) // check if this memo has any column 'number' assigned...
+        m_profile->m_memoColList.removeOne(col); // ...if true remove it from memo list
 
-    if(validateSelectedColumn(col, Column::Memo))
-        if (col != - 1 && !m_profile->m_memoColList.contains(col))
+    if (validateSelectedColumn(col, Column::Memo))
+        if (col != -1 && !m_profile->m_memoColList.contains(col))
             m_profile->m_memoColList.append(col);
 }
 
@@ -222,8 +229,8 @@ void InvestmentPage::feeColSelected(int col)
 void InvestmentPage::typeColSelected(int col)
 {
     if (validateSelectedColumn(col, Column::Type))
-        if (!validateMemoComboBox())  // user could have it already in memo so...
-            memoColSelected(col);    // ...if true set memo field again
+        if (!validateMemoComboBox()) // user could have it already in memo so...
+            memoColSelected(col); // ...if true set memo field again
 }
 
 void InvestmentPage::quantityColSelected(int col)
@@ -246,15 +253,15 @@ void InvestmentPage::amountColSelected(int col)
 void InvestmentPage::symbolColSelected(int col)
 {
     validateSelectedColumn(col, Column::Symbol);
-    m_imp->m_mapSymbolName.clear();        // new symbol column so this map is no longer valid
+    m_imp->m_mapSymbolName.clear(); // new symbol column so this map is no longer valid
 }
 
 void InvestmentPage::nameColSelected(int col)
 {
     if (validateSelectedColumn(col, Column::Name))
-        if (!validateMemoComboBox())  // user could have it already in memo so...
-            memoColSelected(col);    // ...if true set memo field again
-    m_imp->m_mapSymbolName.clear();        // new name column so this map is no longer valid
+        if (!validateMemoComboBox()) // user could have it already in memo so...
+            memoColSelected(col); // ...if true set memo field again
+    m_imp->m_mapSymbolName.clear(); // new name column so this map is no longer valid
 }
 
 void InvestmentPage::feeIsPercentageClicked(bool checked)
@@ -296,15 +303,13 @@ void InvestmentPage::clearFee()
 
 void InvestmentPage::feeInputsChanged()
 {
-
-
-//  if (ui->comboBoxInv_feeCol->currentIndex() < m_importer->m_file->m_columnCount &&
-//      ui->comboBoxInv_feeCol->currentIndex() > -1) {
-//    ui->lineEdit_minFee->setEnabled(false);
-//    ui->lineEdit_feeRate->setEnabled(false);
-//    ui->lineEdit_minFee->clear();
-//    ui->lineEdit_feeRate->clear();
-//  }
+    //  if (ui->comboBoxInv_feeCol->currentIndex() < m_importer->m_file->m_columnCount &&
+    //      ui->comboBoxInv_feeCol->currentIndex() > -1) {
+    //    ui->lineEdit_minFee->setEnabled(false);
+    //    ui->lineEdit_feeRate->setEnabled(false);
+    //    ui->lineEdit_minFee->clear();
+    //    ui->lineEdit_feeRate->clear();
+    //  }
     if (m_profile->m_feeRate.isEmpty()) {
         ui->m_feeCol->setEnabled(true);
         ui->m_feeIsPercentage->setEnabled(true);
@@ -321,21 +326,20 @@ void InvestmentPage::feeInputsChanged()
     }
 }
 
-void InvestmentPage::feeRateChanged(const QString &text)
+void InvestmentPage::feeRateChanged(const QString& text)
 {
     m_profile->m_feeRate = text;
 }
 
-void InvestmentPage::minFeeChanged(const QString &text)
+void InvestmentPage::minFeeChanged(const QString& text)
 {
     m_profile->m_minFee = text;
 }
 
 void InvestmentPage::clearFeeCol()
 {
-    if (!m_profile->m_feeRate.isEmpty() &&                                                // if fee rate isn't empty...
-            m_profile->m_colTypeNum.value(Column::Fee) >= m_imp->m_file->m_columnCount - 1 &&
-            !ui->m_feeCol->isEnabled()) {  // ...and fee column is last...
+    if (!m_profile->m_feeRate.isEmpty() && // if fee rate isn't empty...
+        m_profile->m_colTypeNum.value(Column::Fee) >= m_imp->m_file->m_columnCount - 1 && !ui->m_feeCol->isEnabled()) { // ...and fee column is last...
         --m_imp->m_file->m_columnCount;
         m_imp->m_file->m_model->removeColumn(m_imp->m_file->m_columnCount);
         int feeCol = ui->m_feeCol->currentIndex();
@@ -379,7 +383,10 @@ void InvestmentPage::resetComboBox(const Column comboBox)
         ui->m_nameCol->setCurrentIndex(-1);
         break;
     default:
-        KMessageBox::error(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox), i18n("CSV import"));
+        KMessageBox::error(
+            m_dlg,
+            i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox),
+            i18n("CSV import"));
     }
 }
 
@@ -403,7 +410,7 @@ bool InvestmentPage::validateActionType()
         col = m_profile->m_colTypeNum.value(Column::Type);
         tr.m_eAction = m_imp->processActionTypeField(m_profile, row, col);
 
-        switch(m_imp->validateActionType(tr)) {
+        switch (m_imp->validateActionType(tr)) {
         case InvalidActionValues:
             KMessageBox::error(m_dlg,
                                i18n("The values in the columns you have selected\ndo not match any expected investment type.\n"
@@ -411,8 +418,7 @@ bool InvestmentPage::validateActionType()
                                i18n("CSV import"));
             return false;
             break;
-        case NoActionType:
-        {
+        case NoActionType: {
             bool unknownType = false;
             if (tr.m_eAction == eMyMoney::Transaction::Action::None)
                 unknownType = true;
@@ -450,15 +456,16 @@ bool InvestmentPage::validateActionType()
 
 bool InvestmentPage::validateSelectedColumn(const int col, const Column type)
 {
-    if (m_profile->m_colTypeNum.value(type) != -1)        // check if this 'type' has any column 'number' assigned...
+    if (m_profile->m_colTypeNum.value(type) != -1) // check if this 'type' has any column 'number' assigned...
         m_profile->m_colNumType.remove(m_profile->m_colTypeNum.value(type)); // ...if true remove 'type' assigned to this column 'number'
 
     bool ret = true;
     if (col == -1) { // user only wanted to reset his column so allow him
-        m_profile->m_colTypeNum[type] = col;  // assign new column 'number' to this 'type'
+        m_profile->m_colTypeNum[type] = col; // assign new column 'number' to this 'type'
     } else if (m_profile->m_colNumType.contains(col)) { // if this column 'number' has already 'type' assigned
-        KMessageBox::information(m_dlg, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>",
-                                             m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
+        KMessageBox::information(m_dlg,
+                                 i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>",
+                                      m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
         resetComboBox(m_profile->m_colNumType[col]);
         resetComboBox(type);
         ret = false;
@@ -474,12 +481,10 @@ bool InvestmentPage::validateMemoComboBox()
 {
     if (m_profile->m_memoColList.count() == 0)
         return true;
-    for (int i = 0; i < ui->m_memoCol->count(); ++i)
-    {
+    for (int i = 0; i < ui->m_memoCol->count(); ++i) {
         QString txt = ui->m_memoCol->itemText(i);
-        if (txt.contains(QLatin1Char('*')))  // check if text containing '*' belongs to valid column types
-            if (m_profile->m_colNumType.value(i) != Column::Name &&
-                    m_profile->m_colNumType.value(i) != Column::Type) {
+        if (txt.contains(QLatin1Char('*'))) // check if text containing '*' belongs to valid column types
+            if (m_profile->m_colNumType.value(i) != Column::Name && m_profile->m_colNumType.value(i) != Column::Type) {
                 ui->m_memoCol->setItemText(i, QString::number(i + 1));
                 m_profile->m_memoColList.removeOne(i);
                 return false;
@@ -488,11 +493,9 @@ bool InvestmentPage::validateMemoComboBox()
     return true;
 }
 
-
 bool InvestmentPage::validateSecurities()
 {
-    if (m_securitiesDlg.isNull() &&
-            m_imp->m_mapSymbolName.isEmpty()) {
+    if (m_securitiesDlg.isNull() && m_imp->m_mapSymbolName.isEmpty()) {
         KMMStringSet onlySymbols;
         KMMStringSet onlyNames;
         m_imp->sortSecurities(onlySymbols, onlyNames, m_imp->m_mapSymbolName);
@@ -525,14 +528,11 @@ bool InvestmentPage::validateSecurities()
 
 bool InvestmentPage::validateSecurity()
 {
-    if (!m_profile->m_securitySymbol.isEmpty() &&
-            !m_profile->m_securityName.isEmpty())
+    if (!m_profile->m_securitySymbol.isEmpty() && !m_profile->m_securityName.isEmpty())
         m_imp->m_mapSymbolName.insert(m_profile->m_securitySymbol, m_profile->m_securityName);
 
     MyMoneyFile* file = MyMoneyFile::instance();
-    if (m_securityDlg.isNull() &&
-            (m_imp->m_mapSymbolName.isEmpty() ||
-             !(m_profile->m_dontAsk && m_dlg->m_skipSetup))) {
+    if (m_securityDlg.isNull() && (m_imp->m_mapSymbolName.isEmpty() || !(m_profile->m_dontAsk && m_dlg->m_skipSetup))) {
         m_securityDlg = new SecurityDlg;
         m_securityDlg->initializeSecurities(m_profile->m_securitySymbol, m_profile->m_securityName);
         m_securityDlg->ui->cbDontAsk->setChecked(m_profile->m_dontAsk);
@@ -552,8 +552,9 @@ bool InvestmentPage::validateSecurity()
             }
             m_profile->m_dontAsk = m_securityDlg->dontAsk();
             m_imp->m_mapSymbolName.clear();
-            m_imp->m_mapSymbolName.insert(m_profile->m_securitySymbol, m_profile->m_securityName); // probably we should check if security with given symbol and name exists...
-            delete m_securityDlg;                                     // ...but KMM allows creating duplicates, so don't bother
+            m_imp->m_mapSymbolName.insert(m_profile->m_securitySymbol,
+                                          m_profile->m_securityName); // probably we should check if security with given symbol and name exists...
+            delete m_securityDlg; // ...but KMM allows creating duplicates, so don't bother
         }
     }
     if (m_imp->m_mapSymbolName.isEmpty())
@@ -634,7 +635,7 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
             txt = QStringLiteral("stksplit");
             break;
         default:
-            txt = QStringLiteral("unknown");  // shouldn't happen
+            txt = QStringLiteral("unknown"); // shouldn't happen
             break;
         }
 
@@ -659,7 +660,7 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
             buffer.append(QLatin1Char('M') + it->m_strMemo + eol);
         }
         buffer.append(QStringLiteral("^\n"));
-        out << buffer;// output qif file
+        out << buffer; // output qif file
         buffer.clear();
     }
     oFile.close();

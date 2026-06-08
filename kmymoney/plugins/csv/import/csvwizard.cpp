@@ -22,10 +22,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
-#include <KLocalizedString>
-#include <KConfigGroup>
 #include <KColorScheme>
+#include <KConfigGroup>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,10 +43,10 @@
 #include "priceswizardpage.h"
 
 #include "ui_csvwizard.h"
-#include "ui_introwizardpage.h"
-#include "ui_separatorwizardpage.h"
-#include "ui_rowswizardpage.h"
 #include "ui_formatswizardpage.h"
+#include "ui_introwizardpage.h"
+#include "ui_rowswizardpage.h"
+#include "ui_separatorwizardpage.h"
 
 using namespace Icons;
 
@@ -89,7 +89,8 @@ CSVWizard::CSVWizard(QWidget* parentWidget, CSVImporter* plugin)
     showStage();
     m_wiz->button(QWizard::CustomButton1)->setEnabled(false);
 
-    m_stageLabels << ui->label_intro << ui->label_separators << ui->label_rows << ui->label_columns << ui->label_columns << ui->label_columns << ui->label_formats;
+    m_stageLabels << ui->label_intro << ui->label_separators << ui->label_rows << ui->label_columns << ui->label_columns << ui->label_columns
+                  << ui->label_formats;
     m_pageFormats->setFinalPage(true);
 
     connect(m_wiz->button(QWizard::FinishButton), &QAbstractButton::clicked, this, &CSVWizard::importClicked);
@@ -130,13 +131,15 @@ void CSVWizard::showStage()
     ui->label_intro->setText(QString::fromLatin1("<b>%1</b>").arg(str));
 }
 
-void CSVWizard::readWindowSize(const KSharedConfigPtr& config) {
+void CSVWizard::readWindowSize(const KSharedConfigPtr& config)
+{
     KConfigGroup miscGroup(config, CSVImporterCore::m_confMiscName);
     m_initialWidth = miscGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfWidth), 800);
     m_initialHeight = miscGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfHeight), 400);
 }
 
-void CSVWizard::saveWindowSize(const KSharedConfigPtr& config) {
+void CSVWizard::saveWindowSize(const KSharedConfigPtr& config)
+{
     KConfigGroup miscGroup(config, CSVImporterCore::m_confMiscName);
     m_initialHeight = this->geometry().height();
     m_initialWidth = this->geometry().width();
@@ -169,9 +172,9 @@ void CSVWizard::clearColumnsBackground(const int col)
     clearColumnsBackground(columnList);
 }
 
-void CSVWizard::clearColumnsBackground(const QList<int> &columnList)
+void CSVWizard::clearColumnsBackground(const QList<int>& columnList)
 {
-    QStandardItemModel *model = m_imp->m_file->m_model;
+    QStandardItemModel* model = m_imp->m_file->m_model;
     for (int i = m_imp->m_profile->m_startLine; i <= m_imp->m_profile->m_endLine; ++i) {
         for (const auto j : columnList) {
             model->item(i, j)->setBackground(m_clearBrush);
@@ -182,7 +185,7 @@ void CSVWizard::clearColumnsBackground(const QList<int> &columnList)
 
 void CSVWizard::clearBackground()
 {
-    QStandardItemModel *model = m_imp->m_file->m_model;
+    QStandardItemModel* model = m_imp->m_file->m_model;
     int rowCount = model->rowCount();
     int colCount = model->columnCount();
     for (int i = 0; i < rowCount; ++i) {
@@ -195,7 +198,7 @@ void CSVWizard::clearBackground()
 
 void CSVWizard::markUnwantedRows()
 {
-    QStandardItemModel *model = m_imp->m_file->m_model;
+    QStandardItemModel* model = m_imp->m_file->m_model;
     int rowCount = model->rowCount();
     int colCount = model->columnCount();
     QBrush brush;
@@ -231,7 +234,7 @@ void CSVWizard::updateWindowSize()
                     + (wizard.width() - table->width()));
     if (table->verticalScrollBar()->isEnabled()) {
         if (!table->verticalScrollBar()->isVisible() && // vertical scrollbar may be not visible after repaint...
-                table->horizontalScrollBar()->isVisible())  // ...so use horizontal scrollbar dimension
+            table->horizontalScrollBar()->isVisible()) // ...so use horizontal scrollbar dimension
             newWidth += table->horizontalScrollBar()->height();
         else
             newWidth += table->verticalScrollBar()->width();
@@ -245,7 +248,7 @@ void CSVWizard::updateWindowSize()
 
     if (table->horizontalScrollBar()->isEnabled()) {
         if (!table->horizontalScrollBar()->isVisible() && // horizontal scrollbar may be not visible after repaint...
-                table->verticalScrollBar()->isVisible())      // ...so use vertical scrollbar dimension
+            table->verticalScrollBar()->isVisible()) // ...so use vertical scrollbar dimension
             newHeight += table->verticalScrollBar()->width();
         else
             newHeight += table->horizontalScrollBar()->height();
@@ -276,12 +279,12 @@ void CSVWizard::updateWindowSize()
     setGeometry(wizard);
 }
 
-bool CSVWizard::eventFilter(QObject *object, QEvent *event)
+bool CSVWizard::eventFilter(QObject* object, QEvent* event)
 {
     // prevent the QWizard part of CSVWizard window from closing on Escape key press
     if (object == this->m_wiz) {
         if (event->type() == QEvent::KeyPress) {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
             if (keyEvent->key() == Qt::Key_Escape) {
                 close();
                 return true;
@@ -301,7 +304,7 @@ void CSVWizard::saveSettings() const
 void CSVWizard::slotClose()
 {
     saveSettings();
-    m_st = MyMoneyStatement();        // nothing imported
+    m_st = MyMoneyStatement(); // nothing imported
     accept();
 }
 
@@ -325,7 +328,7 @@ void CSVWizard::fileDialogClicked()
 
     m_skipSetup = m_pageIntro->ui->m_skipSetup->isChecked();
 
-    switch(m_imp->m_profile->type()) {
+    switch (m_imp->m_profile->type()) {
     case Profile::Investment:
         if (!m_pageInvestment) {
             m_pageInvestment = new InvestmentPage(this, m_imp);
@@ -349,11 +352,11 @@ void CSVWizard::fileDialogClicked()
         return;
     }
 
-    m_wiz->next();  // go to separator page
+    m_wiz->next(); // go to separator page
 
     if (m_skipSetup && profileExists) {
         // programmatically skip to last page
-        while((m_wiz->currentPage() != m_pageFormats) && (m_wiz->nextId() != -1)) {
+        while ((m_wiz->currentPage() != m_pageFormats) && (m_wiz->nextId() != -1)) {
             m_wiz->next();
         }
     }
@@ -428,7 +431,7 @@ void CSVWizard::saveAsQIFClicked()
     }
 }
 
-void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
+void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox*>& columns)
 {
     QStringList columnNumbers;
     for (int i = 0; i < m_imp->m_file->m_columnCount; ++i)
@@ -447,10 +450,10 @@ void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
 }
 
 //-------------------------------------------------------------------------------------------------------
-IntroPage::IntroPage(CSVWizard *dlg, CSVImporterCore *imp) :
-    CSVWizardPage(dlg, imp),
-    m_profileType(Profile::Banking),
-    ui(new Ui::IntroPage)
+IntroPage::IntroPage(CSVWizard* dlg, CSVImporterCore* imp)
+    : CSVWizardPage(dlg, imp)
+    , m_profileType(Profile::Banking)
+    , ui(new Ui::IntroPage)
 {
     ui->setupUi(this);
 }
@@ -472,9 +475,7 @@ void IntroPage::initializePage()
     wizard()->setButtonText(QWizard::CustomButton1, i18n("Select File"));
     wizard()->button(QWizard::CustomButton1)->setToolTip(i18n("A profile must be selected before selecting a file."));
     QList<QWizard::WizardButton> layout;
-    layout << QWizard::Stretch <<
-           QWizard::CustomButton1 <<
-           QWizard::CancelButton;
+    layout << QWizard::Stretch << QWizard::CustomButton1 << QWizard::CancelButton;
     wizard()->setButtonLayout(layout);
 
     ui->m_profiles->lineEdit()->setClearButtonEnabled(true);
@@ -491,7 +492,7 @@ void IntroPage::initializePage()
         m_dlg->m_initialHeight = m_dlg->geometry().height();
         m_dlg->m_initialWidth = m_dlg->geometry().width();
     } else {
-        //resize wizard to its initial size and center it
+        // resize wizard to its initial size and center it
         m_dlg->setGeometry(
             QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, QSize(m_dlg->m_initialWidth, m_dlg->m_initialHeight), screen()->availableGeometry()));
 
@@ -531,16 +532,16 @@ void IntroPage::profileChanged(const ProfileAction action)
 
     switch (action) {
     case ProfileAction::Rename:
-    case ProfileAction::Add:
-    {
-        int dupIndex = m_profiles.indexOf(QRegularExpression (cbText));
-        if (dupIndex == cbIndex && cbIndex != -1)  // if profile name wasn't changed then return
+    case ProfileAction::Add: {
+        int dupIndex = m_profiles.indexOf(QRegularExpression(cbText));
+        if (dupIndex == cbIndex && cbIndex != -1) // if profile name wasn't changed then return
             return;
-        else if (dupIndex != -1) {    // profile with the same name already exists
+        else if (dupIndex != -1) { // profile with the same name already exists
             ui->m_profiles->setItemText(cbIndex, m_profiles.value(cbIndex));
             KMessageBox::information(m_dlg,
                                      i18n("<center>Profile <b>%1</b> already exists.<br>"
-                                          "Please enter another name</center>", cbText));
+                                          "Please enter another name</center>",
+                                          cbText));
             return;
         }
         break;
@@ -559,21 +560,17 @@ void IntroPage::profileChanged(const ProfileAction action)
             m_profiles.append(cbText);
             ui->m_profiles->addItem(cbText);
             ui->m_profiles->setCurrentIndex(m_profiles.count() - 1);
-            KMessageBox::information(m_dlg,
-                                     i18n("<center>Profile <b>%1</b> has been added.</center>", cbText));
+            KMessageBox::information(m_dlg, i18n("<center>Profile <b>%1</b> has been added.</center>", cbText));
             break;
         case ProfileAction::Remove:
             m_profiles.removeAt(cbIndex);
             ui->m_profiles->removeItem(cbIndex);
-            KMessageBox::information(m_dlg,
-                                     i18n("<center>Profile <b>%1</b> has been removed.</center>",
-                                          cbText));
+            KMessageBox::information(m_dlg, i18n("<center>Profile <b>%1</b> has been removed.</center>", cbText));
             break;
         case ProfileAction::Rename:
             ui->m_profiles->setItemText(cbIndex, cbText);
             KMessageBox::information(m_dlg,
-                                     i18n("<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>",
-                                          m_profiles.value(cbIndex), cbText));
+                                     i18n("<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>", m_profiles.value(cbIndex), cbText));
             m_profiles[cbIndex] = cbText;
             break;
         default:
@@ -589,8 +586,7 @@ void IntroPage::slotComboSourceIndexChanged(int idx)
         ui->m_skipSetup->setEnabled(false);
         ui->m_remove->setEnabled(false);
         ui->m_rename->setEnabled(false);
-    }
-    else {
+    } else {
         wizard()->button(QWizard::CustomButton1)->setEnabled(true);
         ui->m_skipSetup->setEnabled(true);
         ui->m_remove->setEnabled(true);
@@ -661,9 +657,9 @@ void IntroPage::slotStockPricesRadioToggled(bool toggled)
     profileTypeChanged(Profile::StockPrices, toggled);
 }
 
-SeparatorPage::SeparatorPage(CSVWizard *dlg, CSVImporterCore *imp) :
-    CSVWizardPage(dlg, imp),
-    ui(new Ui::SeparatorPage)
+SeparatorPage::SeparatorPage(CSVWizard* dlg, CSVImporterCore* imp)
+    : CSVWizardPage(dlg, imp)
+    , ui(new Ui::SeparatorPage)
 {
     ui->setupUi(this);
     connect(ui->m_encoding, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SeparatorPage::encodingChanged);
@@ -722,14 +718,14 @@ void SeparatorPage::encodingChanged(const int index)
 
 void SeparatorPage::fieldDelimiterChanged(const int index)
 {
-    if (index == -1 &&                                        // if field delimiter isn't set...
-            !m_imp->m_autodetect.value(AutoFieldDelimiter))  // ... and user disabled autodetecting...
-        return;                                                 // ... then wait for him to choose
+    if (index == -1 && // if field delimiter isn't set...
+        !m_imp->m_autodetect.value(AutoFieldDelimiter)) // ... and user disabled autodetecting...
+        return; // ... then wait for him to choose
     else if (index == (int)m_imp->m_profile->m_fieldDelimiter)
         return;
 
     m_imp->m_profile->m_fieldDelimiter = static_cast<FieldDelimiter>(int(index));
-    m_imp->m_file->readFile(m_imp->m_profile);      // get column count, we get with this fieldDelimiter
+    m_imp->m_file->readFile(m_imp->m_profile); // get column count, we get with this fieldDelimiter
     m_imp->m_file->setupParser(m_imp->m_profile);
 
     if (index == -1) {
@@ -743,8 +739,8 @@ void SeparatorPage::fieldDelimiterChanged(const int index)
 
 void SeparatorPage::textDelimiterChanged(const int index)
 {
-    if (index == -1) {                                  // if text delimiter isn't set...
-        ui->m_textDelimiter->setCurrentIndex(0);        // ...then set it to 0, as for now there is no better idea how to detect it
+    if (index == -1) { // if text delimiter isn't set...
+        ui->m_textDelimiter->setCurrentIndex(0); // ...then set it to 0, as for now there is no better idea how to detect it
         return;
     }
 
@@ -756,10 +752,8 @@ void SeparatorPage::textDelimiterChanged(const int index)
 bool SeparatorPage::isComplete() const
 {
     bool rc = false;
-    if (ui->m_encoding->currentIndex() != -1 &&
-            ui->m_fieldDelimiter->currentIndex() != -1 &&
-            ui->m_textDelimiter->currentIndex() != -1) {
-        switch(m_imp->m_profile->type()) {
+    if (ui->m_encoding->currentIndex() != -1 && ui->m_fieldDelimiter->currentIndex() != -1 && ui->m_textDelimiter->currentIndex() != -1) {
+        switch (m_imp->m_profile->type()) {
         case Profile::Banking:
             if (m_imp->m_file->m_columnCount > 2)
                 rc = true;
@@ -789,12 +783,12 @@ void SeparatorPage::cleanupPage()
 {
     //  On completion with error force use of 'Back' button.
     //  ...to allow resetting of 'Skip setup'
-    m_dlg->m_pageIntro->initializePage();  //  Need to show button(QWizard::CustomButton1) not 'NextButton'
+    m_dlg->m_pageIntro->initializePage(); //  Need to show button(QWizard::CustomButton1) not 'NextButton'
 }
 
-RowsPage::RowsPage(CSVWizard *dlg, CSVImporterCore *imp) :
-    CSVWizardPage(dlg, imp),
-    ui(new Ui::RowsPage)
+RowsPage::RowsPage(CSVWizard* dlg, CSVImporterCore* imp)
+    : CSVWizardPage(dlg, imp)
+    , ui(new Ui::RowsPage)
 {
     ui->setupUi(this);
     connect(ui->m_headerHasName, &QAbstractButton::clicked, this, [&](bool checked) {
@@ -825,10 +819,7 @@ void RowsPage::initializePage()
     m_dlg->m_vScrollBar->setValue(m_imp->m_profile->m_startLine);
 
     QList<QWizard::WizardButton> layout;
-    layout << QWizard::Stretch <<
-           QWizard::BackButton <<
-           QWizard::NextButton <<
-           QWizard::CancelButton;
+    layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton << QWizard::CancelButton;
     wizard()->setButtonLayout(layout);
 }
 
@@ -892,12 +883,11 @@ void RowsPage::endRowChanged(int val)
     m_dlg->markUnwantedRows();
 }
 
-
-FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporterCore *imp) :
-    CSVWizardPage(dlg, imp),
-    ui(new Ui::FormatsPage),
-    m_isDecimalSymbolOK(false),
-    m_isDateFormatOK(false)
+FormatsPage::FormatsPage(CSVWizard* dlg, CSVImporterCore* imp)
+    : CSVWizardPage(dlg, imp)
+    , ui(new Ui::FormatsPage)
+    , m_isDecimalSymbolOK(false)
+    , m_isDateFormatOK(false)
 {
     ui->setupUi(this);
     connect(ui->m_dateFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FormatsPage::dateFormatChanged);
@@ -914,11 +904,7 @@ void FormatsPage::initializePage()
     m_isDecimalSymbolOK = false;
     m_isDateFormatOK = false;
     QList<QWizard::WizardButton> layout;
-    layout << QWizard::Stretch
-           << QWizard::CustomButton2
-           << QWizard::BackButton
-           << QWizard::FinishButton
-           << QWizard::CancelButton;
+    layout << QWizard::Stretch << QWizard::CustomButton2 << QWizard::BackButton << QWizard::FinishButton << QWizard::CancelButton;
     wizard()->setButtonText(QWizard::FinishButton, i18n("Import CSV"));
     wizard()->setOption(QWizard::HaveCustomButton2, true);
     wizard()->setButtonText(QWizard::CustomButton2, i18n("Make QIF File"));
@@ -950,16 +936,18 @@ void FormatsPage::decimalSymbolChanged(int index)
         if (!m_imp->m_autodetect.value(AutoDecimalSymbol)) {
             break;
         }
-    // intentional fall through
+        // intentional fall through
 
-    case 2:
-    {
+    case 2: {
         ui->m_decimalSymbol->blockSignals(true);
         m_imp->m_profile->m_decimalSymbol = DecimalSymbol::Auto;
         int failColumn = m_imp->detectDecimalSymbols(columns);
         if (failColumn != -2) {
-            KMessageBox::error(this, i18n("<center>Autodetect could not detect your decimal symbol in column %1.</center>"
-                                          "<center>Try manual selection to see problematic cells and correct your data.</center>", failColumn), i18n("CSV import"));
+            KMessageBox::error(this,
+                               i18n("<center>Autodetect could not detect your decimal symbol in column %1.</center>"
+                                    "<center>Try manual selection to see problematic cells and correct your data.</center>",
+                                    failColumn),
+                               i18n("CSV import"));
             ui->m_decimalSymbol->setCurrentIndex(-1);
             ui->m_thousandsDelimiter->setCurrentIndex(-1);
         } else if (index == -1) { // if detection went well and decimal symbol was unspecified then we'll be specifying it
@@ -969,11 +957,11 @@ void FormatsPage::decimalSymbolChanged(int index)
                 if (firstDecSymbol != mapDecSymbol)
                     allSymbolsEqual = false;
             }
-            if (allSymbolsEqual) {   // if symbol in all columns is equal then set it...
+            if (allSymbolsEqual) { // if symbol in all columns is equal then set it...
                 m_imp->m_profile->m_decimalSymbol = firstDecSymbol;
                 ui->m_decimalSymbol->setCurrentIndex((int)firstDecSymbol);
                 ui->m_thousandsDelimiter->setCurrentIndex((int)firstDecSymbol);
-            } else {  // else set to auto
+            } else { // else set to auto
                 m_imp->m_profile->m_decimalSymbol = DecimalSymbol::Auto;
                 ui->m_decimalSymbol->setCurrentIndex((int)DecimalSymbol::Auto);
                 ui->m_thousandsDelimiter->setCurrentIndex((int)DecimalSymbol::Auto);
@@ -993,18 +981,17 @@ void FormatsPage::decimalSymbolChanged(int index)
     Q_EMIT completeChanged();
 }
 
-bool FormatsPage::validateDecimalSymbols(const QList<int> &columns)
+bool FormatsPage::validateDecimalSymbols(const QList<int>& columns)
 {
     bool isOK = true;
     for (const auto col : columns) {
         m_imp->m_file->m_parse->setDecimalSymbol(m_imp->m_decimalSymbolIndexMap.value(col));
         m_dlg->clearColumnsBackground(col);
         for (int row = m_imp->m_profile->m_startLine; row <= m_imp->m_profile->m_endLine; ++row) {
-            QStandardItem *item = m_imp->m_file->m_model->item(row, col);
+            QStandardItem* item = m_imp->m_file->m_model->item(row, col);
             QString rawNumber = item->text();
             m_imp->m_file->m_parse->possiblyReplaceSymbol(rawNumber);
-            if (!m_imp->m_file->m_parse->invalidConversion() ||
-                    rawNumber.isEmpty()) {                   // empty strings are welcome
+            if (!m_imp->m_file->m_parse->invalidConversion() || rawNumber.isEmpty()) { // empty strings are welcome
                 item->setBackground(m_dlg->m_colorBrush);
                 item->setForeground(m_dlg->m_colorBrushText);
             } else {
@@ -1028,9 +1015,11 @@ void FormatsPage::dateFormatChanged(const int index)
     m_imp->m_convertDate->setDateFormatIndex(static_cast<DateFormat>(index));
     m_isDateFormatOK = validateDateFormat(col);
     if (!m_isDateFormatOK) {
-        KMessageBox::error(this, i18n("<center>There are invalid date formats in column '%1'.</center>"
-                                      "<center>Please check your selections.</center>"
-                                      , col + 1), i18n("CSV import"));
+        KMessageBox::error(this,
+                           i18n("<center>There are invalid date formats in column '%1'.</center>"
+                                "<center>Please check your selections.</center>",
+                                col + 1),
+                           i18n("CSV import"));
     }
     Q_EMIT completeChanged();
 }
@@ -1088,12 +1077,9 @@ void FormatsPage::cleanupPage()
     QList<int> columns = m_imp->getNumericalColumns();
     columns.append(m_imp->m_profile->m_colTypeNum.value(Column::Date));
     m_dlg->clearColumnsBackground(columns);
-    m_dlg->m_st = MyMoneyStatement();  // any change on investment/banking page invalidates created statement
+    m_dlg->m_st = MyMoneyStatement(); // any change on investment/banking page invalidates created statement
 
     QList<QWizard::WizardButton> layout;
-    layout << QWizard::Stretch <<
-           QWizard::BackButton <<
-           QWizard::NextButton <<
-           QWizard::CancelButton;
+    layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton << QWizard::CancelButton;
     wizard()->setButtonLayout(layout);
 }

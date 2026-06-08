@@ -531,7 +531,7 @@ public:
     ColumnSelector* columnSelector;
     KMessageWidget* infoMessage;
     TransactionEditorBase* editor;
-    QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
+    QHash<const QAbstractItemModel*, QStyledItemDelegate*> delegates;
     int adjustableColumn;
     bool adjustingColumn;
     bool showValuesInverted;
@@ -549,8 +549,6 @@ public:
     QStringList selectionBeforeReset;
     QString currentBeforeReset;
 };
-
-
 
 LedgerView::LedgerView(QWidget* parent)
     : QTableView(parent)
@@ -762,7 +760,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
 {
     bool suppressDuplicateEditorStart = false;
 
-    switch(trigger) {
+    switch (trigger) {
     case QAbstractItemView::DoubleClicked:
     case QAbstractItemView::EditKeyPressed:
         suppressDuplicateEditorStart = true;
@@ -771,7 +769,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
         break;
     }
 
-    if(d->haveGlobalEditor() && suppressDuplicateEditorStart) {
+    if (d->haveGlobalEditor() && suppressDuplicateEditorStart) {
         if (!d->infoMessage->isVisible() && !d->infoMessage->isShowAnimationRunning()) {
             d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
             d->infoMessage->setText(
@@ -784,7 +782,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
     } else {
         bool rc = QTableView::edit(index, trigger, event);
 
-        if(rc) {
+        if (rc) {
             // editing started, but we need the editor to cover all columns
             // so we close it, set the span to have a single row and recreate
             // the editor in that single cell in case an editor was created at all.
@@ -1238,27 +1236,27 @@ void LedgerView::paintEvent(QPaintEvent* event)
     // here if that is the case and fill that part with the base color to
     // remove the false painted grid.
 
-    const QHeaderView *verticalHeader = this->verticalHeader();
-    if(verticalHeader->count() == 0)
+    const QHeaderView* verticalHeader = this->verticalHeader();
+    if (verticalHeader->count() == 0)
         return;
 
     int lastVisualRow = verticalHeader->visualIndexAt(verticalHeader->viewport()->height());
     if (lastVisualRow == -1)
         lastVisualRow = model()->rowCount(QModelIndex()) - 1;
 
-    while(lastVisualRow >= model()->rowCount(QModelIndex()))
+    while (lastVisualRow >= model()->rowCount(QModelIndex()))
         --lastVisualRow;
 
     while ((lastVisualRow > -1) && verticalHeader->isSectionHidden(verticalHeader->logicalIndex(lastVisualRow)))
         --lastVisualRow;
 
     int top = 0;
-    if(lastVisualRow != -1)
+    if (lastVisualRow != -1)
         top = verticalHeader->sectionViewportPosition(lastVisualRow) + verticalHeader->sectionSize(lastVisualRow);
 
-    if(top < viewport()->height()) {
+    if (top < viewport()->height()) {
         QPainter painter(viewport());
-        QRect rect(0, top, viewport()->width(), viewport()->height()-top);
+        QRect rect(0, top, viewport()->width(), viewport()->height() - top);
         painter.fillRect(rect, QBrush(palette().base()));
     }
 }
@@ -1283,7 +1281,7 @@ int LedgerView::sizeHintForColumn(int col) const
         const auto delegate = d->delegateProxy->delegate(index);
         if (delegate) {
             int hint = delegate->sizeHint(opt, index).width();
-            if(showGrid())
+            if (showGrid())
                 hint += 1;
             return hint;
         }
@@ -1335,7 +1333,7 @@ void LedgerView::resizeEvent(QResizeEvent* event)
 void LedgerView::adjustDetailColumn(int newViewportWidth, bool informOtherViews)
 {
     // make sure we don't get here recursively
-    if(d->adjustingColumn)
+    if (d->adjustingColumn)
         return;
 
     d->adjustingColumn = true;
@@ -1348,14 +1346,14 @@ void LedgerView::adjustDetailColumn(int newViewportWidth, bool informOtherViews)
 
     int totalColumnWidth = 0;
     for (int i = 0; i < header->count(); ++i) {
-        if(header->isSectionHidden(i)) {
+        if (header->isSectionHidden(i)) {
             continue;
         }
         totalColumnWidth += header->sectionSize(i);
     }
     const int delta = newViewportWidth - totalColumnWidth;
     const int newWidth = header->sectionSize(d->adjustableColumn) + delta;
-    if(newWidth > 10) {
+    if (newWidth > 10) {
         QSignalBlocker blocker(header);
         if (informOtherViews)
             blocker.unblock();
@@ -1404,14 +1402,13 @@ void LedgerView::slotSettingsChanged()
 void LedgerView::selectMostRecentTransaction()
 {
     if (model()->rowCount() > 0) {
-
         // we need to check that the last row may contain a scheduled transaction or
         // the row that is shown for new transacations or a special entry (e.g.
         // online balance or date mark).
         // in that case, we need to go back to find the actual last transaction
-        int row = model()->rowCount()-1;
+        int row = model()->rowCount() - 1;
         const auto journalModel = MyMoneyFile::instance()->journalModel();
-        while(row >= 0) {
+        while (row >= 0) {
             const auto idx = model()->index(row, 0);
             if (MyMoneyFile::baseModel()->baseModel(idx) == journalModel) {
                 setCurrentIndex(idx);
@@ -1622,7 +1619,7 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
 {
     QItemSelection selection;
     const auto journalModel = MyMoneyFile::instance()->journalModel();
-    const auto lastColumn = model()->columnCount()-1;
+    const auto lastColumn = model()->columnCount() - 1;
     int startRow = -1;
     int lastRow = -1;
     QModelIndex currentIdx;
@@ -1683,7 +1680,7 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
                 currentIdx = model()->index(startRow, 0);
             }
         } else {
-            if (row == lastRow+1) {
+            if (row == lastRow + 1) {
                 lastRow = row;
             } else {
                 // a new range start, so we take care of it
@@ -1700,7 +1697,7 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
     // so we have to skip that.
     if ((lastRow == -1) && (model()->rowCount() > 1)) {
         // find the last 'real' transaction
-        startRow = model()->rowCount()-1;
+        startRow = model()->rowCount() - 1;
         do {
             --startRow;
             currentIdx = model()->index(startRow, 0);

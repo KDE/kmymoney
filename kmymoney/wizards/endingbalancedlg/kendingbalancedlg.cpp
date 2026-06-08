@@ -92,8 +92,12 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* par
     d->m_account = account;
 
     MyMoneySecurity currency = MyMoneyFile::instance()->security(account.currencyId());
-    //FIXME: port
-    d->ui->m_statementInfoPageCheckings->ui->m_enterInformationLabel->setText(QString("<qt>") + i18n("Please enter the following fields with the information as you find them on your statement. Make sure to enter all values in <b>%1</b>.", currency.name()) + QString("</qt>"));
+    // FIXME: port
+    d->ui->m_statementInfoPageCheckings->ui->m_enterInformationLabel->setText(
+        QString("<qt>")
+        + i18n("Please enter the following fields with the information as you find them on your statement. Make sure to enter all values in <b>%1</b>.",
+               currency.name())
+        + QString("</qt>"));
 
     bool skipIntroPage = false;
     KSharedConfigPtr kconfig = KSharedConfig::openConfig();
@@ -124,8 +128,8 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* par
     } else {
         d->m_pages.clearBit(Page_CheckingStart);
         d->m_pages.clearBit(Page_InterestChargeCheckings);
-        //removePage(d->ui->m_interestChargeCheckings);
-        // make sure, we show the correct start page
+        // removePage(d->ui->m_interestChargeCheckings);
+        //  make sure, we show the correct start page
         setStartId(Page_PreviousPostpone);
 
         MyMoneyMoney factor(1, 1);
@@ -136,7 +140,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* par
         value = account.value("statementBalance");
         endBalance = MyMoneyMoney(value) * factor;
 
-        //FIXME: port
+        // FIXME: port
         d->ui->m_statementInfoPageCheckings->ui->m_previousBalance->setValue(startBalance);
         d->ui->m_statementInfoPageCheckings->ui->m_endingBalance->setValue(endBalance);
     }
@@ -150,7 +154,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* par
     if (!value.isEmpty()) {
         setField("statementDate", QDate::fromString(value, Qt::ISODate));
     }
-    //FIXME: port
+    // FIXME: port
     d->ui->m_statementInfoPageCheckings->ui->m_lastStatementDate->setText(QString());
     if (account.lastReconciliationDate().isValid()) {
         d->ui->m_statementInfoPageCheckings->ui->m_lastStatementDate->setText(
@@ -177,7 +181,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* par
             MyMoneyPayee payee = MyMoneyFile::instance()->payeeByName(inst.name());
             setField("payeeEdit", payee.id());
         }
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     KMyMoneyUtils::updateWizardButtons(this);
@@ -259,8 +263,18 @@ void KEndingBalanceDlg::slotUpdateBalances()
 void KEndingBalanceDlg::accept()
 {
     Q_D(KEndingBalanceDlg);
-    if ((!field("interestEditValid").toBool() || createTransaction(d->m_tInterest, -1, field("interestEdit").value<MyMoneyMoney>(), field("interestCategoryEdit").toString(), field("interestDateEdit").toDate()))
-            && (!field("chargesEditValid").toBool() || createTransaction(d->m_tCharges, 1, field("chargesEdit").value<MyMoneyMoney>(), field("chargesCategoryEdit").toString(), field("chargesDateEdit").toDate())))
+    if ((!field("interestEditValid").toBool()
+         || createTransaction(d->m_tInterest,
+                              -1,
+                              field("interestEdit").value<MyMoneyMoney>(),
+                              field("interestCategoryEdit").toString(),
+                              field("interestDateEdit").toDate()))
+        && (!field("chargesEditValid").toBool()
+            || createTransaction(d->m_tCharges,
+                                 1,
+                                 field("chargesEdit").value<MyMoneyMoney>(),
+                                 field("chargesCategoryEdit").toString(),
+                                 field("chargesDateEdit").toDate())))
         QWizard::accept();
 }
 
@@ -324,14 +338,14 @@ void KEndingBalanceDlg::slotReloadEditWidgets()
     chargesId = field("chargesCategoryEdit").toString();
 
     // load the payee and category widgets with data from the engine
-    //FIXME: port
+    // FIXME: port
     d->ui->m_interestChargeCheckings->ui->m_payeeEdit->loadPayees(MyMoneyFile::instance()->payeeList());
 
     // a user request to show all categories in both selectors due to a valid use case.
     AccountSet aSet;
     aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
     aSet.addAccountGroup(eMyMoney::Account::Type::Income);
-    //FIXME: port
+    // FIXME: port
     aSet.load(d->ui->m_interestChargeCheckings->ui->m_interestCategoryEdit->selector());
     aSet.load(d->ui->m_interestChargeCheckings->ui->m_chargesCategoryEdit->selector());
 
@@ -356,7 +370,7 @@ MyMoneyTransaction KEndingBalanceDlg::chargeTransaction()
     return d->m_tCharges;
 }
 
-bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign, const MyMoneyMoney& amount, const QString& category, const QDate& date)
+bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction& t, const int sign, const MyMoneyMoney& amount, const QString& category, const QDate& date)
 {
     Q_D(KEndingBalanceDlg);
     t = MyMoneyTransaction();
@@ -393,7 +407,7 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
         s2.setShares(shares);
         t.modifySplit(s2);
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         qDebug("%s", e.what());
         t = MyMoneyTransaction();
         return false;

@@ -10,15 +10,15 @@
 
 #include <KPluginFactory>
 
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "onlinejobadministration.h"
-#include "mymoneyexception.h"
 
 #include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "sepacredittransfersettingsmockup.h"
 
-onlineJobPluginMockup::onlineJobPluginMockup(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    OnlinePluginExtended(parent, metaData, args)
+onlineJobPluginMockup::onlineJobPluginMockup(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : OnlinePluginExtended(parent, metaData, args)
 {
     qDebug("onlineJobPluginMockup should be used during development only!");
 }
@@ -65,7 +65,7 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId) const
     try {
         if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())
             return onlineJobAdministration::instance()->availableOnlineTasks();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     return QStringList();
@@ -74,14 +74,15 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId) const
 IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QString taskName)
 {
     try {
-        if (taskName == sepaOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())
+        if (taskName == sepaOnlineTransfer::name()
+            && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())
             return IonlineTaskSettings::ptr(new sepaCreditTransferSettingsMockup);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
     return IonlineTaskSettings::ptr();
 }
 
-void onlineJobPluginMockup::sendOnlineJob(QList< onlineJob >& jobs)
+void onlineJobPluginMockup::sendOnlineJob(QList<onlineJob>& jobs)
 {
     for (const onlineJob& job : qAsConst(jobs)) {
         qDebug() << "Pretend to send: " << job.taskIid() << job.id();

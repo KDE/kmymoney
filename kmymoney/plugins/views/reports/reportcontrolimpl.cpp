@@ -7,9 +7,9 @@
 #include "reportcontrolimpl.h"
 #include "ui_reportcontrol.h"
 
-ReportControl::ReportControl(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ReportControl)
+ReportControl::ReportControl(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::ReportControl)
 {
     ui->setupUi(this);
 }
@@ -18,5 +18,3 @@ ReportControl::~ReportControl()
 {
     delete ui;
 }
-
-

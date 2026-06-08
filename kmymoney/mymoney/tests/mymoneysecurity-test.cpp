@@ -9,10 +9,10 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneySecurityTest;
 
+#include "mymoneyenums.h"
+#include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 #include "mymoneysecurity_p.h"
-#include "mymoneymoney.h"
-#include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(MyMoneySecurityTest)
 
@@ -65,7 +65,6 @@ void MyMoneySecurityTest::testNonemptyConstructor()
     QVERIFY(n.securityType() == eMyMoney::Security::Type::Currency);
     // QVERIFY(n.priceHistory().count() == 1);
 }
-
 
 void MyMoneySecurityTest::testSetFunctions()
 {

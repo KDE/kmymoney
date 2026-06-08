@@ -22,23 +22,22 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
-#include <KXmlGuiWindow>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KTextEdit>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "templatesmodel.h"
-#include "mymoneytemplate.h"
 #include "kmymoneyutils.h"
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
-
+#include "mymoneyfile.h"
+#include "mymoneytemplate.h"
+#include "templatesmodel.h"
 
 class TemplateWriterPrivate
 {
@@ -148,9 +147,9 @@ public:
         if (acc.accountList().count() > 0) {
             QList<MyMoneyAccount> list;
             MyMoneyFile::instance()->accountList(list, acc.accountList(), false);
-            std::sort(list.begin(), list.end(), [](MyMoneyAccount &a1, MyMoneyAccount &a2) {
+            std::sort(list.begin(), list.end(), [](MyMoneyAccount& a1, MyMoneyAccount& a2) {
                 return a1.name() < a2.name();
-            } );
+            });
             QList<MyMoneyAccount>::Iterator it;
             for (it = list.begin(); it != list.end(); ++it) {
                 addAccountStructure(account, *it);
@@ -158,11 +157,9 @@ public:
         }
     }
 
-    bool saveTemplate(const QUrl &url)
+    bool saveTemplate(const QUrl& url)
     {
-
-        auto saveToLocalFile = [&](QSaveFile* qfile)
-        {
+        auto saveToLocalFile = [&](QSaveFile* qfile) {
             QTextStream stream(qfile);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             stream.setCodec("UTF-8");
@@ -173,7 +170,6 @@ public:
 
         QString filename;
 
-
         if (!url.isValid()) {
             m_errMsg = i18n("Invalid template URL '%1'", url.toDisplayString());
             return false;
@@ -181,7 +177,7 @@ public:
 
         if (url.isLocalFile()) {
             filename = url.toLocalFile();
-            QSaveFile qfile(filename/*, 0600*/);
+            QSaveFile qfile(filename /*, 0600*/);
             if (qfile.open(QIODevice::WriteOnly)) {
                 saveToLocalFile(&qfile);
                 if (!qfile.commit()) {
@@ -227,17 +223,16 @@ public:
     }
 
 public:
-    TemplateWriter*                         q_ptr;
-    QMap<QString,QString>                   m_vatAccountMap;
-    QDomDocument                            m_doc;
-    QDomElement                             m_mainElement;
-    QString                                 m_errMsg;
+    TemplateWriter* q_ptr;
+    QMap<QString, QString> m_vatAccountMap;
+    QDomDocument m_doc;
+    QDomElement m_mainElement;
+    QString m_errMsg;
 };
 
-
-TemplateWriter::TemplateWriter(QWidget* parent) :
-    QObject(parent),
-    d_ptr(new TemplateWriterPrivate(this))
+TemplateWriter::TemplateWriter(QWidget* parent)
+    : QObject(parent)
+    , d_ptr(new TemplateWriterPrivate(this))
 {
 }
 
@@ -247,8 +242,7 @@ TemplateWriter::~TemplateWriter()
     delete d;
 }
 
-
-bool TemplateWriter::exportTemplate(const MyMoneyTemplate& tmpl, const QUrl &url)
+bool TemplateWriter::exportTemplate(const MyMoneyTemplate& tmpl, const QUrl& url)
 {
     Q_D(TemplateWriter);
 

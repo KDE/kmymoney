@@ -20,14 +20,13 @@
 #include "checkprintingsettings.h"
 #include "kcm_checkprinting.h"
 
-CheckPrintingSettingsWidget::CheckPrintingSettingsWidget(QWidget *parent)
-    :
-    QWidget(parent)
+CheckPrintingSettingsWidget::CheckPrintingSettingsWidget(QWidget* parent)
+    : QWidget(parent)
 {
     setupUi(this);
     m_checkTemplatePreviewHTMLPart = new QTextEdit(m_previewFrame);
 
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout;
     m_previewFrame->setLayout(layout);
     layout->addWidget(m_checkTemplatePreviewHTMLPart);
 
@@ -36,17 +35,13 @@ CheckPrintingSettingsWidget::CheckPrintingSettingsWidget(QWidget *parent)
     }
 
     connect(kcfg_checkTemplateFile, &KUrlRequester::textChanged, this, &CheckPrintingSettingsWidget::textChanged);
+    connect(kcfg_checkTemplateFile, &KUrlRequester::urlSelected, this, QOverload<const QUrl&>::of(&CheckPrintingSettingsWidget::urlSelected));
     connect(kcfg_checkTemplateFile,
-            &KUrlRequester::urlSelected,
+            QOverload<const QString&>::of(&KUrlRequester::returnPressed),
             this,
-            QOverload<const QUrl &>::of(&CheckPrintingSettingsWidget::urlSelected));
-    connect(kcfg_checkTemplateFile, QOverload<const QString &>::of(&KUrlRequester::returnPressed), this,
-            QOverload<const QString &>::of(&CheckPrintingSettingsWidget::urlSelected));
+            QOverload<const QString&>::of(&CheckPrintingSettingsWidget::urlSelected));
     connect(kcfg_useCustomCheckTemplate, SIGNAL(toggled(bool)), kcfg_checkTemplateFile, SLOT(setEnabled(bool)));
-    connect(kcfg_useCustomCheckTemplate,
-            &QCheckBox::toggled,
-            this,
-            QOverload<>::of(&CheckPrintingSettingsWidget::urlSelected));
+    connect(kcfg_useCustomCheckTemplate, &QCheckBox::toggled, this, QOverload<>::of(&CheckPrintingSettingsWidget::urlSelected));
 }
 
 void CheckPrintingSettingsWidget::urlSelected()
@@ -59,12 +54,12 @@ void CheckPrintingSettingsWidget::urlSelected()
     }
 }
 
-void CheckPrintingSettingsWidget::urlSelected(const QString &url)
+void CheckPrintingSettingsWidget::urlSelected(const QString& url)
 {
     urlSelected(QUrl::fromUserInput(url));
 }
 
-void CheckPrintingSettingsWidget::urlSelected(const QUrl &url)
+void CheckPrintingSettingsWidget::urlSelected(const QUrl& url)
 {
     if (!url.isEmpty()) {
         m_checkTemplatePreviewHTMLPart->clear();
@@ -75,8 +70,7 @@ void CheckPrintingSettingsWidget::urlSelected(const QUrl &url)
             m_checkTemplatePreviewHTMLPart->setHtml(stream.readAll());
             file.close();
         }
-    }
-    else {
+    } else {
         urlSelected();
     }
 }
@@ -108,7 +102,7 @@ KCMCheckPrinting::KCMCheckPrinting(QObject* parent, const QVariantList& args)
 {
     CheckPrintingSettingsWidget* w = new CheckPrintingSettingsWidget(widget());
     addConfig(CheckPrintingSettings::self(), w);
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout;
     widget()->setLayout(layout);
     layout->addWidget(w);
     load();

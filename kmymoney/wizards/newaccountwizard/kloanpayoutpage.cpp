@@ -30,30 +30,29 @@
 #include "ui_kaccounttypepage.h"
 #include "ui_kloanpayoutpage.h"
 
-#include <kguiutils.h>
 #include "icons.h"
+#include "kaccountsummarypage.h"
+#include "kaccounttypepage.h"
+#include "kaccounttypepage_p.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneycategory.h"
 #include "kmymoneywizardpage.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
-#include "kaccountsummarypage.h"
-#include "kaccounttypepage.h"
-#include "kaccounttypepage_p.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "wizardpage.h"
+#include <kguiutils.h>
 
 using namespace NewAccountWizard;
 using namespace Icons;
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
-LoanPayoutPage::LoanPayoutPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new LoanPayoutPagePrivate(wizard), StepPayout, this, wizard)
+namespace NewAccountWizard {
+LoanPayoutPage::LoanPayoutPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new LoanPayoutPagePrivate(wizard), StepPayout, this, wizard)
 {
     Q_D(LoanPayoutPage);
     d->ui->setupUi(this);

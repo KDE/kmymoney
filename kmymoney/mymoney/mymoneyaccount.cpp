@@ -41,15 +41,15 @@
 
 using namespace Icons;
 
-MyMoneyAccount::MyMoneyAccount() :
-    MyMoneyObject(*new MyMoneyAccountPrivate),
-    MyMoneyKeyValueContainer()
+MyMoneyAccount::MyMoneyAccount()
+    : MyMoneyObject(*new MyMoneyAccountPrivate)
+    , MyMoneyKeyValueContainer()
 {
 }
 
-MyMoneyAccount::MyMoneyAccount(const QString &id):
-    MyMoneyObject(*new MyMoneyAccountPrivate, id),
-    MyMoneyKeyValueContainer()
+MyMoneyAccount::MyMoneyAccount(const QString& id)
+    : MyMoneyObject(*new MyMoneyAccountPrivate, id)
+    , MyMoneyKeyValueContainer()
 {
 }
 
@@ -59,15 +59,15 @@ MyMoneyAccount::MyMoneyAccount(MyMoneyAccountPrivate* dd, const MyMoneyAccount& 
 {
 }
 
-MyMoneyAccount::MyMoneyAccount(const MyMoneyAccount& other) :
-    MyMoneyObject(*new MyMoneyAccountPrivate(*other.d_func()), other.id()),
-    MyMoneyKeyValueContainer(other)
+MyMoneyAccount::MyMoneyAccount(const MyMoneyAccount& other)
+    : MyMoneyObject(*new MyMoneyAccountPrivate(*other.d_func()), other.id())
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
-MyMoneyAccount::MyMoneyAccount(const QString& id, const MyMoneyAccount& other) :
-    MyMoneyObject(*new MyMoneyAccountPrivate(*other.d_func()), id),
-    MyMoneyKeyValueContainer(other)
+MyMoneyAccount::MyMoneyAccount(const QString& id, const MyMoneyAccount& other)
+    : MyMoneyObject(*new MyMoneyAccountPrivate(*other.d_func()), id)
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
@@ -223,10 +223,10 @@ void MyMoneyAccount::removeAccountId(const QString& account)
         d->m_accountList.removeAt(pos);
 }
 
-bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
+bool MyMoneyAccount::operator==(const MyMoneyAccount& right) const
 {
     Q_D(const MyMoneyAccount);
-    auto d2 = static_cast<const MyMoneyAccountPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneyAccountPrivate*>(right.d_func());
     // clang-format off
     return (MyMoneyKeyValueContainer::operator==(right)
             && MyMoneyObject::operator==(right)
@@ -332,8 +332,8 @@ bool MyMoneyAccount::isInvest() const
 bool MyMoneyAccount::isLiquidAsset() const
 {
     return accountType() == Account::Type::Checkings //
-            || accountType() == Account::Type::Savings //
-            || accountType() == Account::Type::Cash;
+        || accountType() == Account::Type::Savings //
+        || accountType() == Account::Type::Cash;
 }
 
 bool MyMoneyAccount::isLiquidLiability() const
@@ -525,7 +525,7 @@ QIcon MyMoneyAccount::accountIcon() const
         return Icons::get(isClosed() ? Icons::Icon::LoanClosed : Icons::Icon::Loan);
     case Account::Type::Investment:
     case Account::Type::MoneyMarket:
-        return Icons::get(isClosed()? Icons::Icon::InvestmentClosed : Icons::Icon::Investment);
+        return Icons::get(isClosed() ? Icons::Icon::InvestmentClosed : Icons::Icon::Investment);
     case Account::Type::Asset:
         return Icons::get(isClosed() ? Icons::Icon::AssetClosed : Icons::Icon::Asset);
     case Account::Type::Liability:
@@ -599,9 +599,7 @@ bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& am
     QString history, sep;
     QMap<QDate, MyMoneyMoney>::const_iterator it;
     for (it = d->m_reconciliationHistory.cbegin(); it != d->m_reconciliationHistory.cend(); ++it) {
-        history += QString("%1%2:%3").arg(sep,
-                                          it.key().toString(Qt::ISODate),
-                                          (*it).toString());
+        history += QString("%1%2:%3").arg(sep, it.key().toString(Qt::ISODate), (*it).toString());
         sep = QLatin1Char(';');
     }
     setValue(QLatin1String("reconciliationHistory"), history);
@@ -644,9 +642,9 @@ QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory() const
 /**
  * @todo Improve setting of country for nationalAccount
  */
-QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
+QList<payeeIdentifier> MyMoneyAccount::payeeIdentifiers() const
 {
-    QList< payeeIdentifier > list;
+    QList<payeeIdentifier> list;
 
     MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -696,13 +694,13 @@ QString MyMoneyAccount::stdAccName(eMyMoney::Account::Type type)
 
 QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
 {
-    static const QHash<eMyMoney::Account::Standard, QString> stdAccNames {
+    static const QHash<eMyMoney::Account::Standard, QString> stdAccNames{
         {eMyMoney::Account::Standard::Liability, QStringLiteral("AStd::Liability")},
-        {eMyMoney::Account::Standard::Asset,     QStringLiteral("AStd::Asset")},
-        {eMyMoney::Account::Standard::Expense,   QStringLiteral("AStd::Expense")},
-        {eMyMoney::Account::Standard::Income,    QStringLiteral("AStd::Income")},
-        {eMyMoney::Account::Standard::Equity,    QStringLiteral("AStd::Equity")},
-        {eMyMoney::Account::Standard::Favorite,  QStringLiteral("AStd::Favorite")},
+        {eMyMoney::Account::Standard::Asset, QStringLiteral("AStd::Asset")},
+        {eMyMoney::Account::Standard::Expense, QStringLiteral("AStd::Expense")},
+        {eMyMoney::Account::Standard::Income, QStringLiteral("AStd::Income")},
+        {eMyMoney::Account::Standard::Equity, QStringLiteral("AStd::Equity")},
+        {eMyMoney::Account::Standard::Favorite, QStringLiteral("AStd::Favorite")},
     };
     return stdAccNames.value(stdAccID);
 }

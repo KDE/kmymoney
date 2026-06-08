@@ -5,40 +5,33 @@
 
 */
 
-
 #ifdef HAVE_CONFIG_H
-# include <config-kmymoney.h>
+#include <config-kmymoney.h>
 #endif
 
-
 // QBanking includes
-#include "kbmapaccount.h"
-#include "../widgets/kbaccountlist.h"
 #include "../kbanking.h"
+#include "../widgets/kbaccountlist.h"
+#include "kbmapaccount.h"
 
 // QT includes
 #include <QLabel>
-#include <QPushButton>
-#include <QMessageBox>
 #include <QLayout>
 #include <QLineEdit>
-
+#include <QMessageBox>
+#include <QPushButton>
 
 #include "ui_kbmapaccount.h"
 
 struct KBMapAccount::Private {
     Ui::KBMapAccount ui;
-    KBankingExt *banking;
-    AB_ACCOUNT_SPEC *account;
+    KBankingExt* banking;
+    AB_ACCOUNT_SPEC* account;
 };
 
-KBMapAccount::KBMapAccount(KBankingExt *kb,
-                           const char *bankCode,
-                           const char *accountId,
-                           QWidget* parent,
-                           Qt::WindowFlags fl) :
-    QDialog(parent, fl),
-    d(new Private)
+KBMapAccount::KBMapAccount(KBankingExt* kb, const char* bankCode, const char* accountId, QWidget* parent, Qt::WindowFlags fl)
+    : QDialog(parent, fl)
+    , d(new Private)
 {
     d->banking = kb;
     d->account = nullptr;
@@ -66,7 +59,7 @@ KBMapAccount::~KBMapAccount()
     delete d;
 }
 
-AB_ACCOUNT_SPEC *KBMapAccount::getAccount()
+AB_ACCOUNT_SPEC* KBMapAccount::getAccount()
 {
     return d->account;
 }
@@ -80,7 +73,7 @@ void KBMapAccount::accept()
 void KBMapAccount::slotSelectionChanged()
 {
     std::list<AB_ACCOUNT_SPEC*> al;
-    AB_ACCOUNT_SPEC *a;
+    AB_ACCOUNT_SPEC* a;
 
     al = d->ui.accountList->getSelectedAccounts();
     if (al.empty()) {
@@ -99,4 +92,3 @@ void KBMapAccount::slotSelectionChanged()
 void KBMapAccount::slotHelpClicked()
 {
 }
-
