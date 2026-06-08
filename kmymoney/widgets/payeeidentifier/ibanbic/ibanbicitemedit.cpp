@@ -15,8 +15,8 @@ struct ibanBicItemEdit::Private {
 };
 
 ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
-    : QWidget(parent),
-      d(new Private)
+    : QWidget(parent)
+    , d(new Private)
 {
     d->ui = new Ui::ibanBicItemEdit;
     d->ui->setupUi(this);
@@ -60,8 +60,8 @@ void ibanBicItemEdit::setIdentifier(const payeeIdentifier& ident)
         d->ui->bicEdit->setText(identTyped->storedBic());
         d->ui->ibanEdit->setText(identTyped->paperformatIban());
         d->m_identifier = ident;
-    } catch (const payeeIdentifier::empty &) {
-    } catch (const payeeIdentifier::badCast &) {
+    } catch (const payeeIdentifier::empty&) {
+    } catch (const payeeIdentifier::badCast&) {
     }
 }
 

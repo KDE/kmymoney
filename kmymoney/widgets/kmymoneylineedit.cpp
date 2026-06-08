@@ -10,10 +10,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QKeyEvent>
 #include <QFocusEvent>
-#include <QTimer>
+#include <QKeyEvent>
 #include <QLocale>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -25,24 +25,24 @@ class KMyMoneyLineEdit::Private
 {
 public:
     /**
-      * This member keeps the initial value. It is used during
-      * resetText() to set the widgets text back to this initial value
-      * and as comparison during focusOutEvent() to Q_EMIT the lineChanged
-      * signal if the current text is different.
-      */
+     * This member keeps the initial value. It is used during
+     * resetText() to set the widgets text back to this initial value
+     * and as comparison during focusOutEvent() to Q_EMIT the lineChanged
+     * signal if the current text is different.
+     */
     QString m_text;
 
     /**
-      * This member keeps the status if overriding the numeric keypad comma key
-      * is requested or not.
-      */
+     * This member keeps the status if overriding the numeric keypad comma key
+     * is requested or not.
+     */
     bool m_forceMonetaryDecimalSymbol;
-    bool  skipSelectAll;
+    bool skipSelectAll;
 };
 
-KMyMoneyLineEdit::KMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
-    KLineEdit(w),
-    d(new Private)
+KMyMoneyLineEdit::KMyMoneyLineEdit(QWidget* w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment)
+    : KLineEdit(w)
+    , d(new Private)
 {
     d->m_forceMonetaryDecimalSymbol = forceMonetaryDecimalSymbol;
     setAlignment(alignment);
@@ -70,7 +70,7 @@ void KMyMoneyLineEdit::loadText(const QString& text)
     setText(text);
 }
 
-void KMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
+void KMyMoneyLineEdit::focusOutEvent(QFocusEvent* ev)
 {
     // if the current text is not in the list of
     // possible completions, we have a new payee
@@ -85,7 +85,7 @@ void KMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
         repaint();
 }
 
-void KMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
+void KMyMoneyLineEdit::focusInEvent(QFocusEvent* ev)
 {
     KLineEdit::focusInEvent(ev);
     // select the text so it can be edited by the user - only if the widget
@@ -106,8 +106,7 @@ void KMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 {
     if (d->m_forceMonetaryDecimalSymbol) {
         if (k->modifiers() & Qt::KeypadModifier) {
-            if (k->key() == Qt::Key_Comma
-                    || k->key() == Qt::Key_Period) {
+            if (k->key() == Qt::Key_Comma || k->key() == Qt::Key_Period) {
                 if (QLocale().decimalPoint() == QLatin1Char(',')) {
                     QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
                     KLineEdit::keyReleaseEvent(&newk);
@@ -131,8 +130,7 @@ void KMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 {
     if (d->m_forceMonetaryDecimalSymbol) {
         if (k->modifiers() & Qt::KeypadModifier) {
-            if (k->key() == Qt::Key_Comma
-                    || k->key() == Qt::Key_Period) {
+            if (k->key() == Qt::Key_Comma || k->key() == Qt::Key_Period) {
                 if (QLocale().decimalPoint() == QLatin1Char(',')) {
                     QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
                     KLineEdit::keyPressEvent(&newk);

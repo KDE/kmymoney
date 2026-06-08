@@ -5,8 +5,8 @@
 
 #include "nationalaccountedit.h"
 
-#include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
 
 #include "ui_nationalaccountedit.h"
 
@@ -16,8 +16,8 @@ struct nationalAccountEdit::Private {
 };
 
 nationalAccountEdit::nationalAccountEdit(QWidget* parent)
-    : QWidget(parent),
-      d(new Private)
+    : QWidget(parent)
+    , d(new Private)
 {
     d->ui.setupUi(this);
     setFocusProxy(d->ui.accountNumberEdit);
@@ -36,8 +36,8 @@ payeeIdentifier nationalAccountEdit::identifier() const
             payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident(d->m_identifier);
             ident->setAccountNumber(d->ui.accountNumberEdit->text());
             ident->setBankCode(d->ui.institutionCodeEdit->text());
-        } catch (const payeeIdentifier::empty &) {
-        } catch (const payeeIdentifier::badCast &) {
+        } catch (const payeeIdentifier::empty&) {
+        } catch (const payeeIdentifier::badCast&) {
         }
     }
     return d->m_identifier;
@@ -66,8 +66,8 @@ void nationalAccountEdit::setIdentifier(const payeeIdentifier& ident)
         d->ui.accountNumberEdit->setText(identTyped->accountNumber());
         d->ui.institutionCodeEdit->setText(identTyped->bankCode());
         d->m_identifier = ident;
-    } catch (const payeeIdentifier::empty &) {
-    } catch (const payeeIdentifier::badCast &) {
+    } catch (const payeeIdentifier::empty&) {
+    } catch (const payeeIdentifier::badCast&) {
     }
 }
 

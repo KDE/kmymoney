@@ -15,9 +15,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
 #include <KHelpClient>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -40,10 +40,10 @@ class KNewInvestmentWizardPrivate
     Q_DECLARE_PUBLIC(KNewInvestmentWizard)
 
 public:
-    explicit KNewInvestmentWizardPrivate(KNewInvestmentWizard *qq) :
-        q_ptr(qq),
-        ui(new Ui::KNewInvestmentWizard),
-        m_createAccount(false)
+    explicit KNewInvestmentWizardPrivate(KNewInvestmentWizard* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KNewInvestmentWizard)
+        , m_createAccount(false)
     {
     }
 
@@ -171,17 +171,17 @@ public:
         }
     }
 
-    KNewInvestmentWizard      *q_ptr;
-    Ui::KNewInvestmentWizard  *ui;
+    KNewInvestmentWizard* q_ptr;
+    Ui::KNewInvestmentWizard* ui;
 
-    MyMoneyAccount    m_account;
-    MyMoneySecurity   m_security;
-    bool              m_createAccount;
+    MyMoneyAccount m_account;
+    MyMoneySecurity m_security;
+    bool m_createAccount;
 };
 
-KNewInvestmentWizard::KNewInvestmentWizard(QWidget *parent) :
-    QWizard(parent),
-    d_ptr(new KNewInvestmentWizardPrivate(this))
+KNewInvestmentWizard::KNewInvestmentWizard(QWidget* parent)
+    : QWizard(parent)
+    , d_ptr(new KNewInvestmentWizardPrivate(this))
 {
     Q_D(KNewInvestmentWizard);
     d->init();
@@ -205,9 +205,9 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneyAccount& account, QWidge
     setField("priceMode", QVariant::fromValue<eMyMoney::Invest::PriceMode>(d->m_account.priceMode()));
 }
 
-KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWidget *parent) :
-    QWizard(parent),
-    d_ptr(new KNewInvestmentWizardPrivate(this))
+KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWidget* parent)
+    : QWizard(parent)
+    , d_ptr(new KNewInvestmentWizardPrivate(this))
 {
     Q_D(KNewInvestmentWizard);
     d->m_security = security;

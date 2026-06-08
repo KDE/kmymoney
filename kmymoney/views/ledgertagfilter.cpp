@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "ledgertagfilter.h"
 #include "ledgerfilterbase_p.h"
 
@@ -16,12 +15,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-#include "mymoneymoney.h"
-#include "mymoneyaccount.h"
-#include "mymoneyfile.h"
-#include "journalmodel.h"
 #include "accountsmodel.h"
+#include "journalmodel.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 
 class LedgerTagFilterPrivate : public LedgerFilterBasePrivate
 {
@@ -29,15 +28,15 @@ public:
     explicit LedgerTagFilterPrivate(LedgerTagFilter* qq)
         : LedgerFilterBasePrivate(qq)
         , balanceCalculationPending(false)
-    {}
+    {
+    }
 
     ~LedgerTagFilterPrivate()
     {
     }
 
-    bool                        balanceCalculationPending;
+    bool balanceCalculationPending;
 };
-
 
 LedgerTagFilter::LedgerTagFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels)
     : LedgerFilterBase(new LedgerTagFilterPrivate(this), parent)
@@ -74,7 +73,7 @@ void LedgerTagFilter::recalculateBalancesOnIdle(const QString& accountId)
     Q_D(LedgerTagFilter);
 
     // make sure the balances are recalculated but trigger only once
-    if(!d->balanceCalculationPending) {
+    if (!d->balanceCalculationPending) {
         d->balanceCalculationPending = true;
         QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
     }
@@ -105,7 +104,7 @@ void LedgerTagFilter::recalculateBalances()
 
     // filterModel->invalidate();
     const QModelIndex top = index(0, JournalModel::Column::Balance);
-    const QModelIndex bottom = index(rowCount()-1, JournalModel::Column::Balance);
+    const QModelIndex bottom = index(rowCount() - 1, JournalModel::Column::Balance);
 
     Q_EMIT dataChanged(top, bottom);
     d->balanceCalculationPending = false;
@@ -121,7 +120,7 @@ void LedgerTagFilter::setTagIdList(const QStringList& tagIds)
     sort(JournalModel::Column::Date, sortOrder());
 
     // if balance calculation has not been triggered, then run it immediately
-    if(!d->balanceCalculationPending) {
+    if (!d->balanceCalculationPending) {
         recalculateBalances();
     }
 
@@ -132,7 +131,7 @@ bool LedgerTagFilter::filterAcceptsRow(int source_row, const QModelIndex& source
 {
     Q_D(const LedgerTagFilter);
 
-    bool rc = LedgerFilterBase::filterAcceptsRow(source_row,  source_parent);
+    bool rc = LedgerFilterBase::filterAcceptsRow(source_row, source_parent);
 
     if (rc) {
         QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);

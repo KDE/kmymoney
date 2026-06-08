@@ -32,16 +32,16 @@ KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent)
     setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
     setBackgroundRole(QPalette::Button);
 
-    QToolButton *t = new QToolButton(this);
+    QToolButton* t = new QToolButton(this);
     t->setIcon(Icons::get(Icon::DialogClose));
     t->setAutoRaise(true);
 
-    QHBoxLayout *layout = new QHBoxLayout;
+    QHBoxLayout* layout = new QHBoxLayout;
     layout->setContentsMargins(0, 0, 4, 0);
     layout->setSpacing(0);
     layout->addWidget(t);
 
-    QLabel *l = new QLabel(name, this);
+    QLabel* l = new QLabel(name, this);
     layout->addWidget(l);
 
     setLayout(layout);

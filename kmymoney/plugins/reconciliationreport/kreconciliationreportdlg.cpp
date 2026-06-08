@@ -22,8 +22,8 @@
 #include "kmm_printer.h"
 #include "kmmtextbrowser.h"
 
-KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) :
-    QDialog(parent)
+KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML)
+    : QDialog(parent)
 {
     setupUi(this);
 

@@ -5,9 +5,9 @@
 
 #include "onlinebankingaccountsfilterproxymodel.h"
 
+#include "accountsmodel.h"
 #include "mymoney/onlinejobadministration.h"
 #include "mymoneyenums.h"
-#include "accountsmodel.h"
 
 OnlineBankingAccountsFilterProxyModel::OnlineBankingAccountsFilterProxyModel(QObject* parent)
     : QSortFilterProxyModel(parent)
@@ -34,13 +34,13 @@ Qt::ItemFlags OnlineBankingAccountsFilterProxyModel::flags(const QModelIndex& in
     return QSortFilterProxyModel::flags(index) & ~Qt::ItemIsSelectable;
 }
 
-
 bool OnlineBankingAccountsFilterProxyModel::filterAcceptsParent(const QModelIndex& index) const
 {
     auto const model = sourceModel();
     const auto rowCount = model->rowCount(index);
     for (auto i = 0; i < rowCount; ++i) {
-        const auto childIndex = model->index(i, AccountsModel::Column::AccountName, index); // CAUTION! Assumption is being made that Account column number is always 0
+        const auto childIndex =
+            model->index(i, AccountsModel::Column::AccountName, index); // CAUTION! Assumption is being made that Account column number is always 0
         if (onlineJobAdministration::instance()->isAnyJobSupported(model->data(childIndex, eMyMoney::Model::Roles::IdRole).toString()))
             return true;
         if (filterAcceptsParent(childIndex))

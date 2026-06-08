@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "accountdelegate.h"
 
 // ----------------------------------------------------------------------------
@@ -20,25 +19,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
 #include "accountsmodel.h"
-#include "securitiesmodel.h"
-#include "mymoneymoney.h"
 #include "mymoneyenums.h"
-
-
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "securitiesmodel.h"
 
 class AccountDelegate::Private
 {
 public:
     Private()
-    {}
+    {
+    }
 
     ~Private()
     {
     }
 };
-
 
 AccountDelegate::AccountDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
@@ -57,10 +54,10 @@ void AccountDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     QModelIndex columnZeroIdx;
     initStyleOption(&opt, index);
 
-    QTreeView* view = qobject_cast< QTreeView*>(parent());
+    QTreeView* view = qobject_cast<QTreeView*>(parent());
 
     if (view) {
-        switch(index.column()) {
+        switch (index.column()) {
         case AccountsModel::Column::Balance:
             columnZeroIdx = index.model()->index(index.row(), 0, index.parent());
             if (!view->isExpanded(columnZeroIdx) && index.model()->rowCount(index) != 0

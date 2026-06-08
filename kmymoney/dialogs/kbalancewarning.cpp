@@ -9,8 +9,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
 #include <QMap>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -25,15 +25,16 @@
 class KBalanceWarning::Private
 {
 public:
-    QString dontShowAgain() const {
+    QString dontShowAgain() const
+    {
         return "BalanceWarning";
     }
     QMap<QString, bool> m_deselectedAccounts;
 };
 
-KBalanceWarning::KBalanceWarning(QObject* parent) :
-    QObject(parent),
-    d(new Private)
+KBalanceWarning::KBalanceWarning(QObject* parent)
+    : QObject(parent)
+    , d(new Private)
 {
     KMessageBox::enableMessage(d->dontShowAgain());
 }

@@ -10,12 +10,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPalette>
-#include <QHBoxLayout>
-#include <QFrame>
-#include <QPushButton>
-#include <QIcon>
 #include <QEvent>
+#include <QFrame>
+#include <QHBoxLayout>
+#include <QIcon>
+#include <QPalette>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -26,11 +26,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountselector.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "kmymoneyaccountcompletion.h"
 #include "icons/icons.h"
+#include "kmymoneyaccountcompletion.h"
+#include "kmymoneyaccountselector.h"
+#include "mymoneyaccount.h"
+#include "mymoneyfile.h"
 
 using namespace Icons;
 
@@ -45,14 +45,14 @@ public:
     {
     }
 
-    QPushButton*      splitButton;
-    QFrame*           frame;
-    bool              recursive;
-    bool              isSplit;
+    QPushButton* splitButton;
+    QFrame* frame;
+    bool recursive;
+    bool isSplit;
 };
 
-KMyMoneyCategory::KMyMoneyCategory(bool splitButton, QWidget* parent) :
-    KMyMoneyCombo(*new KMyMoneyCategoryPrivate, true, parent)
+KMyMoneyCategory::KMyMoneyCategory(bool splitButton, QWidget* parent)
+    : KMyMoneyCombo(*new KMyMoneyCategoryPrivate, true, parent)
 {
     Q_D(KMyMoneyCategory);
     if (splitButton) {
@@ -64,7 +64,7 @@ KMyMoneyCategory::KMyMoneyCategory(bool splitButton, QWidget* parent) :
         layout->setContentsMargins(0, 0, 0, 0);
 
         // make sure not to use our own overridden version of reparent() here
-        KMyMoneyCombo::setParent(d->frame, windowFlags()  & ~Qt::WindowType_Mask);
+        KMyMoneyCombo::setParent(d->frame, windowFlags() & ~Qt::WindowType_Mask);
         KMyMoneyCombo::show();
         if (parent) {
             d->frame->setParent(parent);
@@ -72,8 +72,7 @@ KMyMoneyCategory::KMyMoneyCategory(bool splitButton, QWidget* parent) :
         }
 
         // create button
-        KGuiItem splitButtonItem(QString(),
-                                 Icons::get(Icon::Split), QString(), QString());
+        KGuiItem splitButtonItem(QString(), Icons::get(Icon::Split), QString(), QString());
         d->splitButton = new QPushButton(d->frame);
         d->splitButton->setObjectName("splitButton");
         KGuiItem::assign(d->splitButton, splitButtonItem);
@@ -111,7 +110,7 @@ void KMyMoneyCategory::setPalette(const QPalette& palette)
     KMyMoneyCombo::setPalette(palette);
 }
 
-void KMyMoneyCategory::reparent(QWidget *parent, Qt::WindowFlags w, const QPoint&, bool showIt)
+void KMyMoneyCategory::reparent(QWidget* parent, Qt::WindowFlags w, const QPoint&, bool showIt)
 {
     Q_D(KMyMoneyCategory);
     if (d->frame) {
@@ -156,7 +155,7 @@ void KMyMoneyCategory::slotItemSelected(const QString& id)
     }
 }
 
-void KMyMoneyCategory::focusOutEvent(QFocusEvent *ev)
+void KMyMoneyCategory::focusOutEvent(QFocusEvent* ev)
 {
     if (isSplitTransaction()) {
         KComboBox::focusOutEvent(ev);
@@ -165,7 +164,7 @@ void KMyMoneyCategory::focusOutEvent(QFocusEvent *ev)
     }
 }
 
-void KMyMoneyCategory::focusInEvent(QFocusEvent *ev)
+void KMyMoneyCategory::focusInEvent(QFocusEvent* ev)
 {
     KMyMoneyCombo::focusInEvent(ev);
 
@@ -199,7 +198,7 @@ void KMyMoneyCategory::setCurrentText()
     KMyMoneyCombo::setCurrentText(QString());
 }
 
-bool KMyMoneyCategory::eventFilter(QObject *o, QEvent *ev)
+bool KMyMoneyCategory::eventFilter(QObject* o, QEvent* ev)
 {
     Q_D(KMyMoneyCategory);
     // forward enable/disable state to split button
@@ -211,8 +210,8 @@ bool KMyMoneyCategory::eventFilter(QObject *o, QEvent *ev)
     return KMyMoneyCombo::eventFilter(o, ev);
 }
 
-KMyMoneySecurity::KMyMoneySecurity(QWidget* parent) :
-    KMyMoneyCategory(false, parent)
+KMyMoneySecurity::KMyMoneySecurity(QWidget* parent)
+    : KMyMoneyCategory(false, parent)
 {
 }
 

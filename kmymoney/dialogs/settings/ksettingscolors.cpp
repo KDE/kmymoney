@@ -18,9 +18,9 @@
 
 #include "ui_ksettingscolors.h"
 
-KSettingsColors::KSettingsColors(QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::KSettingsColors)
+KSettingsColors::KSettingsColors(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::KSettingsColors)
 {
     ui->setupUi(this);
 }

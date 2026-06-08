@@ -16,7 +16,5 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-QHash<eMenu::Action, QAction *> pActions;
-QHash<eMenu::Menu, QMenu *> pMenus;
-
-
+QHash<eMenu::Action, QAction*> pActions;
+QHash<eMenu::Menu, QMenu*> pMenus;

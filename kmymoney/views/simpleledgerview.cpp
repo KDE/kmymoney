@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "simpleledgerview.h"
 
 // ----------------------------------------------------------------------------
@@ -64,7 +63,8 @@ public:
         , lastIdx(-1)
         , inModelUpdate(false)
         , m_needInit(true)
-    {}
+    {
+    }
 
     ~SimpleLedgerViewPrivate()
     {
@@ -100,7 +100,7 @@ public:
 
         // remove close button from new page
         QTabBar* bar = ui->ledgerTab->findChild<QTabBar*>();
-        if(bar) {
+        if (bar) {
             q->connect(bar, &QTabBar::tabMoved, q, &SimpleLedgerView::checkTabOrder);
         }
         removeCloseButton(0);
@@ -119,7 +119,8 @@ public:
         q->connect(MyMoneyFile::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
         q->connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
 
-        accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
+        accountsModel->addAccountGroup(
+            QVector<eMyMoney::Account::Type>{eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 
         accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
@@ -208,7 +209,7 @@ public:
 
         AccountsModel* model = MyMoneyFile::instance()->accountsModel();
 
-        const auto subtrees = QVector<QModelIndex> ({ model->favoriteIndex(), model->assetIndex(), model->liabilityIndex() });
+        const auto subtrees = QVector<QModelIndex>({model->favoriteIndex(), model->assetIndex(), model->liabilityIndex()});
 
         bool stopAfterFirstAccount = false;
         for (const auto& startIdx : subtrees) {
@@ -274,7 +275,7 @@ public:
     void openLedger(QString accountId, bool makeCurrentLedger)
     {
         Q_Q(SimpleLedgerView);
-        if(inModelUpdate || accountId.isEmpty())
+        if (inModelUpdate || accountId.isEmpty())
             return;
 
         hideAccountsCombo();
@@ -289,10 +290,9 @@ public:
         MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
 
         // need a new tab, we insert it before the rightmost one
-        if(!acc.id().isEmpty()) {
-
+        if (!acc.id().isEmpty()) {
             QString configGroupName;
-            switch(acc.accountType()) {
+            switch (acc.accountType()) {
             case eMyMoney::Account::Type::Investment:
                 configGroupName = QStringLiteral("InvestmentLedger");
                 break;
@@ -439,7 +439,7 @@ public:
         LedgerViewPage* view = nullptr;
         for (int idx = 1; idx < ui->ledgerTab->count(); ++idx) {
             view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
-            if(view) {
+            if (view) {
                 auto id = view->accountId();
                 if (idx == ui->ledgerTab->currentIndex()) {
                     id.append(QLatin1String("*"));
@@ -454,7 +454,7 @@ public:
 
         auto tabCount = ui->ledgerTab->count();
         // check that we have a least one tab that can be closed
-        if(tabCount > 1) {
+        if (tabCount > 1) {
             // we keep the tab with the selector open at all times
             // which is located in the left most position
             do {
@@ -561,21 +561,20 @@ public:
         ui->ledgerTab->setCurrentIndex(idx);
     }
 
-    Ui_SimpleLedgerView*          ui;
+    Ui_SimpleLedgerView* ui;
     AccountNamesFilterProxyModel* accountsModel;
-    QWidget*                      newTabWidget;
-    QToolButton*                  webSiteButton;
-    KMyMoneyAccountCombo*         accountCombo;
-    QUrl                          webSiteUrl;
+    QWidget* newTabWidget;
+    QToolButton* webSiteButton;
+    KMyMoneyAccountCombo* accountCombo;
+    QUrl webSiteUrl;
     QString reconciledAccount;
-    int                           lastIdx;
-    bool                          inModelUpdate;
-    bool                          m_needInit;
+    int lastIdx;
+    bool inModelUpdate;
+    bool m_needInit;
 };
 
-
-SimpleLedgerView::SimpleLedgerView(QWidget *parent) :
-    KMyMoneyViewBase(*new SimpleLedgerViewPrivate(this), parent)
+SimpleLedgerView::SimpleLedgerView(QWidget* parent)
+    : KMyMoneyViewBase(*new SimpleLedgerViewPrivate(this), parent)
 {
     Q_D(SimpleLedgerView);
     d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewTransaction]);
@@ -714,11 +713,11 @@ void SimpleLedgerView::closeLedger(int idx)
 void SimpleLedgerView::checkTabOrder(int from, int to)
 {
     Q_D(SimpleLedgerView);
-    if(d->inModelUpdate)
+    if (d->inModelUpdate)
         return;
 
     QTabBar* bar = d->ui->ledgerTab->findChild<QTabBar*>();
-    if(bar) {
+    if (bar) {
         if (from == 0) {
             // someone tries to move the new account tab away from the leftmost position
             d->inModelUpdate = true;
@@ -774,7 +773,7 @@ void SimpleLedgerView::setupCornerWidget()
     if (view) {
         const auto accountsModel = MyMoneyFile::instance()->accountsModel();
         auto index = accountsModel->indexById(view->accountId());
-        if(index.isValid()) {
+        if (index.isValid()) {
             // get icon name and url via account and institution object
             const auto acc = accountsModel->itemByIndex(index);
             // use the URL stored with the account and only the one of the

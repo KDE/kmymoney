@@ -17,9 +17,9 @@
 
 #include "ui_ksettingsforecast.h"
 
-KSettingsForecast::KSettingsForecast(QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::KSettingsForecast)
+KSettingsForecast::KSettingsForecast(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::KSettingsForecast)
 {
     ui->setupUi(this);
 }

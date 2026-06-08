@@ -218,8 +218,6 @@ public:
     ColumnSelector* columnSelector;
 };
 
-
-
 SplitView::SplitView(QWidget* parent)
     : QTableView(parent)
     , d(new Private(this))
@@ -310,7 +308,7 @@ bool SplitView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger tr
 {
     bool rc = QTableView::edit(index, trigger, event);
 
-    if(rc) {
+    if (rc) {
         // editing started, but we need the editor to cover all columns
         // so we close it, set the span to have a single row and recreate
         // the editor in that single cell
@@ -319,7 +317,7 @@ bool SplitView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger tr
         bool haveEditorInOtherView = false;
         /// @todo Here we need to make sure that only a single editor can be started at a time
 
-        if(!haveEditorInOtherView) {
+        if (!haveEditorInOtherView) {
             Q_EMIT aboutToStartEdit();
 
             if (index.data(eMyMoney::Model::SplitIsNewRole).toBool()) {
@@ -359,7 +357,7 @@ void SplitView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint 
 void SplitView::mousePressEvent(QMouseEvent* event)
 {
     // qDebug() << "mousePressEvent";
-    if(state() != QAbstractItemView::EditingState) {
+    if (state() != QAbstractItemView::EditingState) {
         d->rightMouseButtonPress = (event->button() == Qt::RightButton);
         QTableView::mousePressEvent(event);
         d->rightMouseButtonPress = false;
@@ -522,27 +520,27 @@ void SplitView::paintEvent(QPaintEvent* event)
     // here if that is the case and fill that part with the base color to
     // remove the false painted grid.
 
-    const QHeaderView *verticalHeader = this->verticalHeader();
-    if(verticalHeader->count() == 0)
+    const QHeaderView* verticalHeader = this->verticalHeader();
+    if (verticalHeader->count() == 0)
         return;
 
     int lastVisualRow = verticalHeader->visualIndexAt(verticalHeader->viewport()->height());
     if (lastVisualRow == -1)
         lastVisualRow = model()->rowCount(QModelIndex()) - 1;
 
-    while(lastVisualRow >= model()->rowCount(QModelIndex()))
+    while (lastVisualRow >= model()->rowCount(QModelIndex()))
         --lastVisualRow;
 
     while ((lastVisualRow > -1) && verticalHeader->isSectionHidden(verticalHeader->logicalIndex(lastVisualRow)))
         --lastVisualRow;
 
     int top = 0;
-    if(lastVisualRow != -1)
+    if (lastVisualRow != -1)
         top = verticalHeader->sectionViewportPosition(lastVisualRow) + verticalHeader->sectionSize(lastVisualRow);
 
-    if(top < viewport()->height()) {
+    if (top < viewport()->height()) {
         QPainter painter(viewport());
-        QRect rect(0, top, viewport()->width(), viewport()->height()-top);
+        QRect rect(0, top, viewport()->width(), viewport()->height() - top);
         painter.fillRect(rect, QBrush(palette().base()));
     }
 }
@@ -585,13 +583,13 @@ int SplitView::sizeHintForRow(int row) const
         const auto delegate = itemDelegate();
         const auto splitDelegate = qobject_cast<const SplitDelegate*>(delegate);
 
-        if(splitDelegate&& (splitDelegate->editorRow() != row)) {
+        if (splitDelegate && (splitDelegate->editorRow() != row)) {
             QStyleOptionViewItem opt;
             opt.font = font();
             opt.fontMetrics = fontMetrics();
             opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
             int hint = delegate->sizeHint(opt, index).height();
-            if(showGrid())
+            if (showGrid())
                 hint += 1;
             return hint;
         }
@@ -610,7 +608,7 @@ void SplitView::resizeEvent(QResizeEvent* event)
 void SplitView::adjustDetailColumn(int newViewportWidth)
 {
     // make sure we don't get here recursively
-    if(d->adjustingColumn)
+    if (d->adjustingColumn)
         return;
 
     d->adjustingColumn = true;
@@ -618,15 +616,15 @@ void SplitView::adjustDetailColumn(int newViewportWidth)
     QHeaderView* header = horizontalHeader();
 
     int totalColumnWidth = 0;
-    for(int i=0; i < header->count(); ++i) {
-        if(header->isSectionHidden(i)) {
+    for (int i = 0; i < header->count(); ++i) {
+        if (header->isSectionHidden(i)) {
             continue;
         }
         totalColumnWidth += header->sectionSize(i);
     }
     const int delta = newViewportWidth - totalColumnWidth;
     const int newWidth = header->sectionSize(d->adjustableColumn) + delta;
-    if(newWidth > 10) {
+    if (newWidth > 10) {
         header->resizeSection(d->adjustableColumn, newWidth);
     }
 
@@ -656,13 +654,12 @@ void SplitView::slotSettingsChanged()
 void SplitView::selectMostRecentTransaction()
 {
     if (model()->rowCount() > 0) {
-
         // we need to check that the last row may contain a scheduled transaction or
         // the row that is shown for new transacations or a special entry (e.g.
         // online balance or date mark).
         // in that case, we need to go back to find the actual last transaction
-        int row = model()->rowCount()-1;
-        if(row >= 0) {
+        int row = model()->rowCount() - 1;
+        if (row >= 0) {
             const QModelIndex idx = model()->index(row, 0);
             setCurrentIndex(idx);
             selectRow(idx.row());

@@ -19,8 +19,8 @@
 
 #include "mymoneypayee.h"
 
-KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent) :
-    KMyMoneyMVCCombo(true, parent)
+KMyMoneyPayeeCombo::KMyMoneyPayeeCombo(QWidget* parent)
+    : KMyMoneyMVCCombo(true, parent)
 {
 }
 
@@ -32,19 +32,19 @@ void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
 {
     clear();
 
-    //add a blank item, since the field is optional
+    // add a blank item, since the field is optional
     addItem(QString(), QVariant(QString()));
 
-    //add all payees
+    // add all payees
     QList<MyMoneyPayee>::const_iterator it;
     for (it = list.cbegin(); it != list.cend(); ++it) {
         addItem((*it).name(), QVariant((*it).id()));
     }
 
-    //sort the model, which will sort the list in the combo
+    // sort the model, which will sort the list in the combo
     model()->sort(Qt::DisplayRole, Qt::AscendingOrder);
 
-    //set the text to empty and the index to the first item on the list
+    // set the text to empty and the index to the first item on the list
     setCurrentIndex(0);
     clearEditText();
 }

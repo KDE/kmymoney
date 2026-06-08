@@ -70,9 +70,9 @@ public:
     bool m_externalMandatoryState;
 };
 
-KMandatoryFieldGroup::KMandatoryFieldGroup(QObject *parent) :
-    QObject(parent),
-    d_ptr(new KMandatoryFieldGroupPrivate)
+KMandatoryFieldGroup::KMandatoryFieldGroup(QObject* parent)
+    : QObject(parent)
+    , d_ptr(new KMandatoryFieldGroupPrivate)
 {
     Q_D(KMandatoryFieldGroup);
     d->m_frameCollection = new WidgetHintFrameCollection(this);
@@ -84,14 +84,12 @@ KMandatoryFieldGroup::~KMandatoryFieldGroup()
     delete d;
 }
 
-void KMandatoryFieldGroup::add(QWidget *widget)
+void KMandatoryFieldGroup::add(QWidget* widget)
 {
     Q_D(KMandatoryFieldGroup);
     if (!d->m_widgets.contains(widget)) {
         if (qobject_cast<QCheckBox*>(widget))
-            connect(qobject_cast<QCheckBox*>(widget),
-                    &QCheckBox::clicked,
-                    this, &KMandatoryFieldGroup::changed);
+            connect(qobject_cast<QCheckBox*>(widget), &QCheckBox::clicked, this, &KMandatoryFieldGroup::changed);
 
         else if (qobject_cast<KComboBox*>(widget)) {
             KComboBox* combo = qobject_cast<KComboBox*>(widget);
@@ -104,33 +102,23 @@ void KMandatoryFieldGroup::add(QWidget *widget)
         }
 
         else if (qobject_cast<QLineEdit*>(widget)) {
-            connect(qobject_cast<QLineEdit*>(widget),
-                    &QLineEdit::textChanged,
-                    this, &KMandatoryFieldGroup::changed);
+            connect(qobject_cast<QLineEdit*>(widget), &QLineEdit::textChanged, this, &KMandatoryFieldGroup::changed);
         }
 
         else if (qobject_cast<QSpinBox*>(widget))
             connect(qobject_cast<QSpinBox*>(widget), &QSpinBox::valueChanged, this, &KMandatoryFieldGroup::changed);
 
         else if (qobject_cast<QListWidget*>(widget))
-            connect(qobject_cast<QListWidget*>(widget),
-                    &QListWidget::itemSelectionChanged,
-                    this, &KMandatoryFieldGroup::changed);
+            connect(qobject_cast<QListWidget*>(widget), &QListWidget::itemSelectionChanged, this, &KMandatoryFieldGroup::changed);
 
         else if (qobject_cast<KUrlRequester*>(widget))
-            connect(qobject_cast<KUrlRequester*>(widget),
-                    &KUrlRequester::textChanged,
-                    this, &KMandatoryFieldGroup::changed);
+            connect(qobject_cast<KUrlRequester*>(widget), &KUrlRequester::textChanged, this, &KMandatoryFieldGroup::changed);
 
         else if (qobject_cast<KMyMoneyTextEdit*>(widget))
-            connect(qobject_cast<KMyMoneyTextEdit*>(widget),
-                    &KMyMoneyTextEdit::textChanged,
-                    this, &KMandatoryFieldGroup::changed);
+            connect(qobject_cast<KMyMoneyTextEdit*>(widget), &KMyMoneyTextEdit::textChanged, this, &KMandatoryFieldGroup::changed);
 
         else if (qobject_cast<IonlineJobEdit*>(widget)) {
-            connect(qobject_cast<IonlineJobEdit*>(widget),
-                    &IonlineJobEdit::validityChanged,
-                    this, &KMandatoryFieldGroup::changed);
+            connect(qobject_cast<IonlineJobEdit*>(widget), &IonlineJobEdit::validityChanged, this, &KMandatoryFieldGroup::changed);
 
             // Do not use WidgetHintFrame on IonlineJobEdits as they contain subwidgets
             d->m_widgets.append(widget);
@@ -152,7 +140,7 @@ void KMandatoryFieldGroup::add(QWidget *widget)
 void KMandatoryFieldGroup::removeAll()
 {
     Q_D(KMandatoryFieldGroup);
-    while(!d->m_widgets.isEmpty()) {
+    while (!d->m_widgets.isEmpty()) {
         const auto widget = d->m_widgets.at(0);
         const auto frame = WidgetHintFrame::frameForWidget(widget);
         delete frame;
@@ -161,7 +149,7 @@ void KMandatoryFieldGroup::removeAll()
     changed();
 }
 
-void KMandatoryFieldGroup::remove(QWidget *widget)
+void KMandatoryFieldGroup::remove(QWidget* widget)
 {
     Q_D(KMandatoryFieldGroup);
 
@@ -171,7 +159,7 @@ void KMandatoryFieldGroup::remove(QWidget *widget)
     changed();
 }
 
-void KMandatoryFieldGroup::setOkButton(QPushButton *button)
+void KMandatoryFieldGroup::setOkButton(QPushButton* button)
 {
     Q_D(KMandatoryFieldGroup);
     if (d->m_okButton && d->m_okButton != button)

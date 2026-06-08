@@ -5,21 +5,20 @@
 
 #include "onlinejobmessagesmodel.h"
 
-#include <QIcon>
 #include <QDateTime>
+#include <QIcon>
 
 #include <KLocalizedString>
 
-#include "mymoneyenums.h"
 #include "icons/icons.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 
 onlineJobMessagesModel::onlineJobMessagesModel(QObject* parent)
-    : QAbstractTableModel(parent),
-      m_job()
+    : QAbstractTableModel(parent)
+    , m_job()
 {
-
 }
 
 QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const

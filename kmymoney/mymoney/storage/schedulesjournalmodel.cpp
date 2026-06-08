@@ -8,9 +8,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
 #include <QDate>
 #include <QDebug>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -24,17 +24,17 @@
 #include "mymoneyfile.h"
 #include "schedulesmodel.h"
 
-struct SchedulesJournalModel::Private
-{
+struct SchedulesJournalModel::Private {
     Private()
         : m_journalModel(nullptr)
         , previewPeriod(0)
         , updateRequested(false)
         , showPlannedDate(false)
-    {}
+    {
+    }
 
     const JournalModel* m_journalModel;
-    int  previewPeriod;
+    int previewPeriod;
     bool updateRequested;
     bool showPlannedDate;
 };
@@ -68,7 +68,6 @@ QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
         return QVariant();
     if (index.row() < 0 || index.row() >= rowCount(index.parent()))
         return QVariant();
-
 
     const JournalEntry& entry = static_cast<TreeItem<JournalEntry>*>(index.internalPointer())->constDataRef();
     switch (role) {
@@ -205,7 +204,9 @@ void SchedulesJournalModel::doLoad()
                         // if the transaction is scheduled and overdue, it can't
                         // certainly be posted in the past. So we take today's date
                         // as the alternative
-                        qDebug() << "Adjust scheduled transaction" << s.name() << "from" << t.postDate() << "to" << s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter) << s.weekendOptionToString(eMyMoney::Schedule::WeekendOption::MoveAfter);
+                        qDebug() << "Adjust scheduled transaction" << s.name() << "from" << t.postDate() << "to"
+                                 << s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter)
+                                 << s.weekendOptionToString(eMyMoney::Schedule::WeekendOption::MoveAfter);
                         t.setPostDate(s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter));
                     } else {
                         t.setPostDate(s.adjustedNextDueDate());

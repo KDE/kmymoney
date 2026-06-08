@@ -30,21 +30,20 @@
 #include "kpreferencepage.h"
 #include "kpreferencepage_p.h"
 
-#include "mymoneysecurity.h"
-#include "mymoneypayee.h"
-#include "mymoneymoney.h"
-#include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
 #include "kmymoneysettings.h"
-#include "mymoneytemplate.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyinstitution.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneysecurity.h"
+#include "mymoneytemplate.h"
 
-namespace NewUserWizard
-{
+namespace NewUserWizard {
 int stepCount = 0;
 
-Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags) :
-    KMyMoneyWizard(*new WizardPrivate(this), parent, modal, flags)
+Wizard::Wizard(QWidget* parent, bool modal, Qt::WindowFlags flags)
+    : KMyMoneyWizard(*new WizardPrivate(this), parent, modal, flags)
 {
     Q_D(Wizard);
     bool isFirstTime = KMyMoneySettings::firstTimeRun();

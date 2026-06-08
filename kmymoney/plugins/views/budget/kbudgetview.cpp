@@ -19,9 +19,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KActionCollection>
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
-#include <KActionCollection>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -62,7 +62,7 @@ void KBudgetView::slotSettingsChanged()
     }
 }
 
-void KBudgetView::showEvent(QShowEvent * event)
+void KBudgetView::showEvent(QShowEvent* event)
 {
     Q_D(KBudgetView);
     if (!d->m_budgetProxyModel) {
@@ -138,7 +138,7 @@ void KBudgetView::slotNewBudget()
         int i = 1;
         while (!MyMoneyFile::instance()->budgetByName(newname).id().isEmpty())
             newname = i18nc("@item:intable Your bugets, %1 budget year, %2 unique index", "Budget %1 (%2)", QString::number(date.year()), i++);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         // all ok, the name is unique
     }
 
@@ -152,7 +152,7 @@ void KBudgetView::slotNewBudget()
         // select the newly created budget
         d->ui->m_budgetList->setCurrentIndex(MyMoneyFile::instance()->budgetsModel()->indexById(budget.id()));
         d->ui->m_budgetValue->setBudgetStartDate(date);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
     }
 }
@@ -184,7 +184,7 @@ void KBudgetView::slotDeleteBudget()
         // we first collect all budget ids because the indexes will
         // become invalid during the removal
         QStringList budgetIds;
-        for (const auto& idx: indexes) {
+        for (const auto& idx : indexes) {
             budgetIds << idx.data(eMyMoney::Model::IdRole).toString();
         }
         for (const auto& id : std::as_const(budgetIds)) {
@@ -192,7 +192,7 @@ void KBudgetView::slotDeleteBudget()
             file->removeBudget(budget);
         }
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to remove budget."), QString::fromLatin1(e.what()));
     }
 }
@@ -205,14 +205,13 @@ void KBudgetView::slotCopyBudget()
         const auto file = MyMoneyFile::instance();
         MyMoneyFileTransaction ft;
         try {
-
             MyMoneyBudget budget = file->budget(indexes.first().data(eMyMoney::Model::IdRole).toString());
             budget.clearId();
             budget.setName(i18n("Copy of %1", budget.name()));
 
             file->addBudget(budget);
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
         }
     }
@@ -259,7 +258,7 @@ void KBudgetView::slotBudgetForecast()
                     slotSelectBudget();
                 }
             }
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Unable to modify budget."), QString::fromLatin1(e.what()));
         }
     }
@@ -274,7 +273,7 @@ void KBudgetView::slotResetBudget()
         d->ui->m_updateButton->setEnabled(false);
         slotSelectBudget();
         d->loadBudgetAccountsView();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to reset budget"), QString::fromLatin1(e.what()));
     }
 }
@@ -289,7 +288,7 @@ void KBudgetView::slotUpdateBudget()
         d->ui->m_updateButton->setEnabled(false);
         // load updated data
         slotSelectBudget();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to modify budget"), QString::fromLatin1(e.what()));
     }
 }
@@ -402,14 +401,13 @@ void KBudgetView::cb_includesSubaccounts_clicked()
     }
 }
 
-void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
+void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney& balance)
 {
     Q_D(KBudgetView);
     const auto formattedValue = balance.isNegative() ? d->formatViewLabelValue(-balance, KMyMoneySettings::schemeColor(SchemeColor::Negative))
-                                : d->formatViewLabelValue(balance, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+                                                     : d->formatViewLabelValue(balance, KMyMoneySettings::schemeColor(SchemeColor::Positive));
     d->updateViewLabel(d->ui->m_balanceLabel,
-                       balance.isNegative() ? i18nc("Profit/Loss", "Loss: %1", formattedValue)
-                       : i18nc("Profit/Loss", "Profit: %1", formattedValue));
+                       balance.isNegative() ? i18nc("Profit/Loss", "Loss: %1", formattedValue) : i18nc("Profit/Loss", "Profit: %1", formattedValue));
 }
 
 void KBudgetView::slotAccountSelectionChanged(const SelectedObjects& selections)
@@ -475,12 +473,12 @@ void KBudgetView::slotTreatAsIncome()
 
 void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient)
 {
-    typedef void(KBudgetView::*KBudgetViewFunc)();
+    typedef void (KBudgetView::*KBudgetViewFunc)();
     struct actionInfo {
-        QString             name;
-        KBudgetViewFunc     callback;
-        QString             text;
-        Icon                icon;
+        QString name;
+        KBudgetViewFunc callback;
+        QString text;
+        Icon icon;
         eMenu::BudgetAction id;
     };
 
@@ -519,7 +517,7 @@ void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiCl
     }
 
     for (const auto& actionInfo : accountActionInfos) {
-        QAction *action = d->m_actionCollection->addAction(actionInfo.name, this, actionInfo.callback);
+        QAction* action = d->m_actionCollection->addAction(actionInfo.name, this, actionInfo.callback);
         action->setText(actionInfo.text);
         action->setIcon(Icons::get(actionInfo.icon));
         d->m_actions.insert(actionInfo.id, action);

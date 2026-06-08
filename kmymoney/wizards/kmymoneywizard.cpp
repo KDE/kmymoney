@@ -11,8 +11,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
 #include <QFont>
+#include <QLabel>
 #include <QList>
 #include <QPushButton>
 

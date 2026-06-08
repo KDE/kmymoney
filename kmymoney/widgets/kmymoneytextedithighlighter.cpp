@@ -27,10 +27,10 @@ public:
     int m_maxLength;
 };
 
-
-KMyMoneyTextEditHighlighter::KMyMoneyTextEditHighlighter(QTextEdit *parent) : // krazy:exclude=qclasses
-    Highlighter(parent),
-    d_ptr(new KMyMoneyTextEditHighlighterPrivate)
+KMyMoneyTextEditHighlighter::KMyMoneyTextEditHighlighter(QTextEdit* parent)
+    : // krazy:exclude=qclasses
+    Highlighter(parent)
+    , d_ptr(new KMyMoneyTextEditHighlighterPrivate)
 {
 }
 

@@ -14,13 +14,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountsmodel.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
 #include "mymoneymoney.h"
-#include "accountsmodel.h"
 
-InstitutionsProxyModel::InstitutionsProxyModel(QObject *parent)
+InstitutionsProxyModel::InstitutionsProxyModel(QObject* parent)
     : AccountsProxyModel(parent)
 {
     setDynamicSortFilter(true);
@@ -33,9 +33,9 @@ InstitutionsProxyModel::~InstitutionsProxyModel()
 }
 
 /**
-  * This function was re-implemented so we could have a special display order (favorites first)
-  */
-bool InstitutionsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
+ * This function was re-implemented so we could have a special display order (favorites first)
+ */
+bool InstitutionsProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
     if (!left.isValid() || !right.isValid())
         return false;
@@ -56,8 +56,10 @@ bool InstitutionsProxyModel::lessThan(const QModelIndex &left, const QModelIndex
     // the balance and total value columns are sorted based on the value of the account
     case AccountsModel::Column::Balance:
     case AccountsModel::Column::TotalPostedValue: {
-        const auto leftData = sourceModel()->data(sourceModel()->index(left.row(), AccountsModel::Column::AccountName, left.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
-        const auto rightData = sourceModel()->data(sourceModel()->index(right.row(), AccountsModel::Column::AccountName, right.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
+        const auto leftData = sourceModel()->data(sourceModel()->index(left.row(), AccountsModel::Column::AccountName, left.parent()),
+                                                  eMyMoney::Model::Roles::AccountTotalValueRole);
+        const auto rightData = sourceModel()->data(sourceModel()->index(right.row(), AccountsModel::Column::AccountName, right.parent()),
+                                                   eMyMoney::Model::Roles::AccountTotalValueRole);
         return leftData.value<MyMoneyMoney>() < rightData.value<MyMoneyMoney>();
     }
     default:
@@ -69,9 +71,9 @@ bool InstitutionsProxyModel::lessThan(const QModelIndex &left, const QModelIndex
 }
 
 /**
-  * This function was re-implemented to consider all the filtering aspects that we need in the application.
-  */
-bool InstitutionsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+ * This function was re-implemented to consider all the filtering aspects that we need in the application.
+ */
+bool InstitutionsProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
     if (source_parent.isValid()) {
         // if the entry has a valid parent it is an account

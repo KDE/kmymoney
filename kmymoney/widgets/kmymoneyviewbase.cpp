@@ -29,7 +29,7 @@ KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent)
 {
 }
 
-KMyMoneyViewBase::KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent)
+KMyMoneyViewBase::KMyMoneyViewBase(KMyMoneyViewBasePrivate& dd, QWidget* parent)
     : QWidget(parent)
     , d_ptr(&dd)
 {

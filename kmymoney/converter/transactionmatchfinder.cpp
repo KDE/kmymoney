@@ -7,20 +7,20 @@
 
 #include "transactionmatchfinder.h"
 
-#include <QDebug>
 #include <QDate>
+#include <QDebug>
 
 #include <KLocalizedString>
 
-#include "mymoneymoney.h"
 #include "mymoneyaccount.h"
-#include "mymoneyfile.h"
-#include "mymoneypayee.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
 
-TransactionMatchFinder::TransactionMatchFinder(int _matchWindow) :
-    m_matchWindow(_matchWindow),
-    matchResult(MatchNotFound)
+TransactionMatchFinder::TransactionMatchFinder(int _matchWindow)
+    : m_matchWindow(_matchWindow)
+    , matchResult(MatchNotFound)
 {
 }
 
@@ -41,8 +41,7 @@ TransactionMatchFinder::MatchResult TransactionMatchFinder::findMatch(const MyMo
     QString payeeName = MyMoneyFile::instance()->payee(m_importedSplit.payeeId()).name();
     QString amount = m_importedSplit.shares().formatMoney(QString(), 2);
     QString account = MyMoneyFile::instance()->account(m_importedSplit.accountId()).name();
-    qDebug() << "Looking for a match with transaction: " << date << "," << payeeName << "," << amount
-             << "(referenced account: " << account << ")";
+    qDebug() << "Looking for a match with transaction: " << date << "," << payeeName << "," << amount << "(referenced account: " << account << ")";
 
     createListOfMatchCandidates();
     findMatchInMatchCandidatesList();
@@ -85,12 +84,12 @@ bool TransactionMatchFinder::splitsMatch(const MyMoneySplit& importedSplit, cons
 {
     return (splitsAccountsMatch(importedSplit, existingSplit) //
             && splitsBankIdsMatch(importedSplit, existingSplit) //
-            && splitsAmountsMatch(importedSplit, existingSplit, amountVariation)  //
+            && splitsAmountsMatch(importedSplit, existingSplit, amountVariation) //
             && splitsPayeesMatchOrEmpty(importedSplit, existingSplit) //
             && !existingSplit.isMatched());
 }
 
-bool TransactionMatchFinder::splitsAccountsMatch(const MyMoneySplit & split1, const MyMoneySplit & split2) const
+bool TransactionMatchFinder::splitsAccountsMatch(const MyMoneySplit& split1, const MyMoneySplit& split2) const
 {
     return split1.accountId() == split2.accountId();
 }

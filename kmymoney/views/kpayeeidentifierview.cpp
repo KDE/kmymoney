@@ -8,8 +8,8 @@
 
 #include <algorithm>
 
-#include <QPointer>
 #include <QAbstractItemDelegate>
+#include <QPointer>
 #include <QStyledItemDelegate>
 
 #include "payeeidentifiercontainermodel.h"
@@ -52,8 +52,8 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
 }
 
 KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
-    : QWidget(parent),
-      ui(new Ui::KPayeeIdentifierView)
+    : QWidget(parent)
+    , ui(new Ui::KPayeeIdentifierView)
 {
     ui->setupUi(this);
     ui->view->setItemDelegate(new payeeIdentifierDelegate(ui->view));
@@ -75,7 +75,7 @@ void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
         ui->view->setModel(model);
     }
 
-    Q_ASSERT(qobject_cast<payeeIdentifierContainerModel*>(ui->view->model()));    // this should never fail but may help during debugging
+    Q_ASSERT(qobject_cast<payeeIdentifierContainerModel*>(ui->view->model())); // this should never fail but may help during debugging
     static_cast<payeeIdentifierContainerModel*>(ui->view->model())->setSource(container);
 
     // Open persistent editor for last row
@@ -89,12 +89,12 @@ void KPayeeIdentifierView::closeSource()
         static_cast<payeeIdentifierContainerModel*>(model)->closeSource();
 }
 
-QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const
+QList<payeeIdentifier> KPayeeIdentifierView::identifiers() const
 {
     const QAbstractItemModel* model = ui->view->model();
     if (model != nullptr)
         return static_cast<const payeeIdentifierContainerModel*>(model)->identifiers();
-    return QList< payeeIdentifier >();
+    return QList<payeeIdentifier>();
 }
 
 /**

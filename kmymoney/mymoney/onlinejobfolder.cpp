@@ -5,17 +5,17 @@
 
 #include "onlinejobfolder.h"
 
-onlineJobFolder::onlineJobFolder() :
-    m_folder(folderOutbox)
+onlineJobFolder::onlineJobFolder()
+    : m_folder(folderOutbox)
 {
 }
 
-onlineJobFolder::onlineJobFolder(const onlineJobFolders& folder) :
-    m_folder(folder)
+onlineJobFolder::onlineJobFolder(const onlineJobFolders& folder)
+    : m_folder(folder)
 {
 }
 
-onlineJobFolder::onlineJobFolder(const onlineJobFolder &other)
+onlineJobFolder::onlineJobFolder(const onlineJobFolder& other)
     : m_folder(other.m_folder)
 {
 }

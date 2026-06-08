@@ -23,9 +23,9 @@
 #include "mymoneyenums.h"
 #include "mymoneysecurity.h"
 
-KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent) :
-    QWizardPage(parent),
-    ui(new Ui::KInvestmentTypeWizardPage)
+KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::KInvestmentTypeWizardPage)
 {
     ui->setupUi(this);
     ui->m_securityType->addItem(i18nc("Security type", "Stock"), (int)eMyMoney::Security::Type::Stock);

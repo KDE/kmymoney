@@ -58,8 +58,7 @@
 
 using namespace Icons;
 
-struct NewSplitEditor::Private
-{
+struct NewSplitEditor::Private {
     Q_DISABLE_COPY_MOVE(Private)
 
     Private(NewSplitEditor* parent)
@@ -154,7 +153,7 @@ bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
 {
     QStringList infos;
     bool rc = true;
-    if(!costCenterChanged(ui->costCenterCombo->currentIndex())) {
+    if (!costCenterChanged(ui->costCenterCombo->currentIndex())) {
         infos << ui->costCenterCombo->toolTip();
         rc = false;
     }
@@ -164,7 +163,7 @@ bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
         rc = false;
     }
 
-    if(doUserInteraction) {
+    if (doUserInteraction) {
         /// @todo add dialog here that shows the @a infos
     }
     return rc;
@@ -199,7 +198,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
     bool rc = true;
     isIncomeExpense = false;
     WidgetHintFrame::hide(ui->accountCombo, i18nc("@info:tooltip category combo in split editor", "The category this split should be assigned to."));
-    if(!accountId.isEmpty()) {
+    if (!accountId.isEmpty()) {
         try {
             const auto account = MyMoneyFile::instance()->account(accountId);
             const bool isCategory = account.isIncomeExpense();
@@ -253,7 +252,7 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
 {
     bool rc = true;
     WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
-    if(!newNumber.isEmpty()) {
+    if (!newNumber.isEmpty()) {
         const auto model = MyMoneyFile::instance()->journalModel();
         const auto rows = model->rowCount();
         const auto accountId = ui->accountCombo->getSelected();
@@ -401,7 +400,13 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->payeeEdit->completer()->setCompletionMode(QCompleter::PopupCompletion);
     d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
 
-    d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity,});
+    d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type>{
+        eMyMoney::Account::Type::Asset,
+        eMyMoney::Account::Type::Liability,
+        eMyMoney::Account::Type::Income,
+        eMyMoney::Account::Type::Expense,
+        eMyMoney::Account::Type::Equity,
+    });
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setHideZeroBalancedEquityAccounts(false);
     d->accountsModel->setHideZeroBalancedAccounts(false);
@@ -546,7 +551,7 @@ bool NewSplitEditor::accepted() const
 
 void NewSplitEditor::acceptEdit()
 {
-    if(d->checkForValidSplit()) {
+    if (d->checkForValidSplit()) {
         d->accepted = true;
         Q_EMIT done();
     }
@@ -623,7 +628,6 @@ void NewSplitEditor::setAccountId(const QString& id)
     d->ui->accountCombo->setSelected(id);
 }
 
-
 QString NewSplitEditor::memo() const
 {
     return d->ui->memoEdit->toPlainText();
@@ -670,7 +674,7 @@ void NewSplitEditor::setCostCenterId(const QString& id)
     const auto baseIdx = MyMoneyFile::instance()->costCenterModel()->indexById(id);
     if (baseIdx.isValid()) {
         const auto index = MyMoneyFile::baseModel()->mapFromBaseSource(d->costCenterModel, baseIdx);
-        if(index.isValid()) {
+        if (index.isValid()) {
             d->ui->costCenterCombo->setCurrentIndex(index.row());
         }
     }
@@ -694,7 +698,11 @@ QString NewSplitEditor::payeeId() const
 
 void NewSplitEditor::setPayeeId(const QString& id)
 {
-    QModelIndexList indexes = d->payeesModel->match(d->payeesModel->index(0, 0), eMyMoney::Model::IdRole, QVariant(id), 1, Qt::MatchFlags(Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive)));
+    QModelIndexList indexes = d->payeesModel->match(d->payeesModel->index(0, 0),
+                                                    eMyMoney::Model::IdRole,
+                                                    QVariant(id),
+                                                    1,
+                                                    Qt::MatchFlags(Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive)));
     int row(-1);
     if (!indexes.isEmpty()) {
         row = indexes.first().row();

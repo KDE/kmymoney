@@ -23,17 +23,16 @@
 
 #include "ui_kaccountpage.h"
 
+#include "kcategoriespage.h"
+#include "kguiutils.h"
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
-#include "kcategoriespage.h"
 #include "wizardpage.h"
-#include "kguiutils.h"
 
-namespace NewUserWizard
-{
-AccountPage::AccountPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new AccountPagePrivate(wizard), stepCount, this, wizard)       // don't inc. the step count here
+namespace NewUserWizard {
+AccountPage::AccountPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new AccountPagePrivate(wizard), stepCount, this, wizard) // don't inc. the step count here
 {
     Q_D(AccountPage);
     d->ui->setupUi(this);

@@ -26,15 +26,17 @@
 
 class FixedColumnDelegate : public QStyledItemDelegate
 {
-    QTreeView *m_sourceView;
+    QTreeView* m_sourceView;
 
 public:
-    explicit FixedColumnDelegate(FixedColumnTreeView *fixedColumView, QTreeView *sourceView) :
-        QStyledItemDelegate(fixedColumView),
-        m_sourceView(sourceView) {
+    explicit FixedColumnDelegate(FixedColumnTreeView* fixedColumView, QTreeView* sourceView)
+        : QStyledItemDelegate(fixedColumView)
+        , m_sourceView(sourceView)
+    {
     }
 
-    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const final override {
+    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override
+    {
         QStyleOptionViewItem optV4 = option;
         initStyleOption(&optV4, index);
         // the fixed column's position has always this value
@@ -51,15 +53,17 @@ public:
 };
 
 struct FixedColumnTreeView::Private {
-    Private(FixedColumnTreeView *pub, QTreeView *parent) :
-        m_pub(pub),
-        m_parent(parent) {
+    Private(FixedColumnTreeView* pub, QTreeView* parent)
+        : m_pub(pub)
+        , m_parent(parent)
+    {
     }
 
-    void syncExpanded(const QModelIndex& parentIndex = QModelIndex()) {
+    void syncExpanded(const QModelIndex& parentIndex = QModelIndex())
+    {
         const int rows = m_parent->model()->rowCount(parentIndex);
         for (auto i = 0; i < rows; ++i) {
-            const QModelIndex &index = m_parent->model()->index(i, 0, parentIndex);
+            const QModelIndex& index = m_parent->model()->index(i, 0, parentIndex);
             if (m_parent->isExpanded(index)) {
                 m_pub->expand(index);
                 syncExpanded(index);
@@ -67,7 +71,8 @@ struct FixedColumnTreeView::Private {
         }
     }
 
-    void syncModels() {
+    void syncModels()
+    {
         if (m_pub->model() != m_parent->model()) {
             // set the model
             m_pub->setModel(m_parent->model());
@@ -84,25 +89,29 @@ struct FixedColumnTreeView::Private {
         }
     }
 
-    void syncProperties() {
-        //pub->setAllColumnsShowFocus(parent->allColumnsShowFocus());
+    void syncProperties()
+    {
+        // pub->setAllColumnsShowFocus(parent->allColumnsShowFocus());
         m_pub->setAlternatingRowColors(m_parent->alternatingRowColors());
         m_pub->setIconSize(m_parent->iconSize());
         m_pub->setSortingEnabled(m_parent->isSortingEnabled());
         m_pub->setUniformRowHeights(m_pub->uniformRowHeights());
     }
 
-    void syncGeometry() {
+    void syncGeometry()
+    {
         // update the geometry of the fixed column view to match that of the source model's geometry
-        m_pub->setGeometry(m_parent->frameWidth(), m_parent->frameWidth(), m_parent->columnWidth(0),
+        m_pub->setGeometry(m_parent->frameWidth(),
+                           m_parent->frameWidth(),
+                           m_parent->columnWidth(0),
                            m_parent->viewport()->height() + (m_parent->header()->isVisible() ? m_parent->header()->height() : 0));
     }
 
-    FixedColumnTreeView *m_pub;
-    QTreeView *m_parent;
+    FixedColumnTreeView* m_pub;
+    QTreeView* m_parent;
 };
 
-FixedColumnTreeView::FixedColumnTreeView(QTreeView *parent)
+FixedColumnTreeView::FixedColumnTreeView(QTreeView* parent)
     : QTreeView(parent)
     , d(new Private(this, parent))
 {
@@ -201,7 +210,7 @@ void FixedColumnTreeView::onCollapsed(const QModelIndex& index)
     }
 }
 
-bool FixedColumnTreeView::viewportEvent(QEvent *event)
+bool FixedColumnTreeView::viewportEvent(QEvent* event)
 {
     if (underMouse()) {
         // forward mouse move and hover leave events to the source list
@@ -212,13 +221,13 @@ bool FixedColumnTreeView::viewportEvent(QEvent *event)
     return QTreeView::viewportEvent(event);
 }
 
-bool FixedColumnTreeView::eventFilter(QObject *object, QEvent *event)
+bool FixedColumnTreeView::eventFilter(QObject* object, QEvent* event)
 {
     if (object == d->m_parent->viewport()) {
         switch (event->type()) {
         case QEvent::MouseMove:
             if (!underMouse() && d->m_parent->underMouse()) {
-                QMouseEvent *me = static_cast<QMouseEvent*>(event);
+                QMouseEvent* me = static_cast<QMouseEvent*>(event);
                 // translate the position of the event but don't send buttons or modifiers because we only need the movement for the hover
                 QMouseEvent translatedMouseEvent(me->type(),
                                                  QPoint(width() - 2, me->pos().y()),

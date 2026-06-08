@@ -21,11 +21,10 @@
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
 
-namespace NewUserWizard
-{
-PreferencePage::PreferencePage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new PreferencePagePrivate(wizard), stepCount++, this, wizard)
+namespace NewUserWizard {
+PreferencePage::PreferencePage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new PreferencePagePrivate(wizard), stepCount++, this, wizard)
 {
     Q_D(PreferencePage);
     d->ui->setupUi(this);

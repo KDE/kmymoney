@@ -21,9 +21,9 @@
 
 #include "ui_checkingstartwizardpage.h"
 
-CheckingStartWizardPage::CheckingStartWizardPage(QWidget *parent) :
-    QWizardPage(parent),
-    ui(new Ui::CheckingStartWizardPage)
+CheckingStartWizardPage::CheckingStartWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::CheckingStartWizardPage)
 {
     ui->setupUi(this);
     // Register the fields with the QWizard and connect the

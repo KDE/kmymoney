@@ -14,28 +14,28 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
+#include <QDebug>
 #include <QFile>
 #include <QList>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
 #include <KLocalizedString>
+#include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
-#include "mymoneysplit.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneypayee.h"
-#include "mymoneyexception.h"
-#include "mymoneyenums.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 
 MyMoneyQifWriter::MyMoneyQifWriter()
 {
@@ -45,10 +45,13 @@ MyMoneyQifWriter::~MyMoneyQifWriter()
 {
 }
 
-void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
-                             const QString& accountId, const bool accountData,
+void MyMoneyQifWriter::write(const QString& filename,
+                             const QString& profile,
+                             const QString& accountId,
+                             const bool accountData,
                              const bool categoryData,
-                             const QDate& startDate, const QDate& endDate)
+                             const QDate& startDate,
+                             const QDate& endDate)
 {
     m_qifProfile.loadProfile(profile);
 
@@ -69,7 +72,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
             }
             Q_EMIT signalProgress(-1, -1);
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::error(nullptr, i18n("Unexpected exception '%1'", QString::fromLatin1(e.what())));
         }
 
@@ -134,7 +137,7 @@ void MyMoneyQifWriter::writeAccountEntry(QTextStream& s, const QString& accountI
     }
 }
 
-void MyMoneyQifWriter::writeCategoryEntries(QTextStream &s)
+void MyMoneyQifWriter::writeCategoryEntries(QTextStream& s)
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyAccount income;
@@ -154,7 +157,7 @@ void MyMoneyQifWriter::writeCategoryEntries(QTextStream &s)
     }
 }
 
-void MyMoneyQifWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, const QString& leadIn)
+void MyMoneyQifWriter::writeCategoryEntry(QTextStream& s, const QString& accountId, const QString& leadIn)
 {
     MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
     QString name = acc.name();
@@ -171,7 +174,7 @@ void MyMoneyQifWriter::writeCategoryEntry(QTextStream &s, const QString& account
     }
 }
 
-void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransaction& t, const QString& accountId)
+void MyMoneyQifWriter::writeTransactionEntry(QTextStream& s, const MyMoneyTransaction& t, const QString& accountId)
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySplit split = t.splitByAccount(accountId);
@@ -212,8 +215,7 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
     if (list.count() > 1) {
         MyMoneySplit sp = t.splitByAccount(accountId, false);
         MyMoneyAccount acc = file->account(sp.accountId());
-        if (acc.accountGroup() != eMyMoney::Account::Type::Income
-                && acc.accountGroup() != eMyMoney::Account::Type::Expense) {
+        if (acc.accountGroup() != eMyMoney::Account::Type::Income && acc.accountGroup() != eMyMoney::Account::Type::Expense) {
             s << "L" << m_qifProfile.accountDelimiter().at(0) << MyMoneyFile::instance()->accountToCategory(sp.accountId())
               << m_qifProfile.accountDelimiter().at(1) << Qt::endl;
         } else {
@@ -237,8 +239,7 @@ void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split
 
     s << "S";
     MyMoneyAccount acc = file->account(split.accountId());
-    if (acc.accountGroup() != eMyMoney::Account::Type::Income
-            && acc.accountGroup() != eMyMoney::Account::Type::Expense) {
+    if (acc.accountGroup() != eMyMoney::Account::Type::Income && acc.accountGroup() != eMyMoney::Account::Type::Expense) {
         s << m_qifProfile.accountDelimiter().at(0) << file->accountToCategory(split.accountId()) << m_qifProfile.accountDelimiter().at(1);
     } else {
         s << file->accountToCategory(split.accountId());
@@ -254,7 +255,7 @@ void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split
     s << "$" << m_qifProfile.value('$', -split.value()) << Qt::endl;
 }
 
-void MyMoneyQifWriter::extractInvestmentEntries(QTextStream &s, const QString& accountId, const QDate& startDate, const QDate& endDate)
+void MyMoneyQifWriter::extractInvestmentEntries(QTextStream& s, const QString& accountId, const QDate& startDate, const QDate& endDate)
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     QList<QString> accList = file->account(accountId).accountList();
@@ -351,7 +352,6 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
                 QString txt = sp.value().formatMoney(QString(), 2);
                 s += 'T' + txt + '\n';
             } else if ((*it).action() == "Buy") {
-
                 if (qty.isNegative()) {
                     action = "Sell";
                 } else {

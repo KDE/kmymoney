@@ -26,8 +26,7 @@
 #include "mymoneystoragedump.h"
 #include "xmlhelper/xmlstoragehelper.h"
 
-namespace test
-{
+namespace test {
 
 const MyMoneyMoney moCheckingOpen(0.0);
 const MyMoneyMoney moCreditOpen(-0.0);
@@ -77,14 +76,20 @@ QString acTax;
 QString acCash;
 QString curBase;
 
-TransactionHelper::TransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid, const QString& _payee)
+TransactionHelper::TransactionHelper(const QDate& _date,
+                                     const QString& _action,
+                                     MyMoneyMoney _value,
+                                     const QString& _accountid,
+                                     const QString& _categoryid,
+                                     const QString& _currencyid,
+                                     const QString& _payee)
 {
     // _currencyid is the currency of the transaction, and of the _value
     // both the account and category can have their own currency (although the category having
     // a foreign currency is not yet supported by the program, the reports will still allow it,
     // so it must be tested.)
     MyMoneyFile* file = MyMoneyFile::instance();
-    bool haspayee = ! _payee.isEmpty();
+    bool haspayee = !_payee.isEmpty();
     MyMoneyPayee payeeTest = file->payeeByName(_payee);
 
     MyMoneyFileTransaction ft;
@@ -126,7 +131,7 @@ TransactionHelper::~TransactionHelper()
     try {
         MyMoneyFile::instance()->removeTransaction(*this);
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         qDebug() << e.what();
     }
 }
@@ -138,12 +143,26 @@ void TransactionHelper::update()
     ft.commit();
 }
 
-InvTransactionHelper::InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid, MyMoneyMoney _fee)
+InvTransactionHelper::InvTransactionHelper(const QDate& _date,
+                                           const QString& _action,
+                                           MyMoneyMoney _shares,
+                                           MyMoneyMoney _price,
+                                           const QString& _stockaccountid,
+                                           const QString& _transferid,
+                                           const QString& _categoryid,
+                                           MyMoneyMoney _fee)
 {
     init(_date, _action, _shares, _price, _fee, _stockaccountid, _transferid, _categoryid);
 }
 
-void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, MyMoneyMoney _fee, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid)
+void InvTransactionHelper::init(const QDate& _date,
+                                const QString& _action,
+                                MyMoneyMoney _shares,
+                                MyMoneyMoney _price,
+                                MyMoneyMoney _fee,
+                                const QString& _stockaccountid,
+                                const QString& _transferid,
+                                const QString& _categoryid)
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyAccount stockaccount = file->account(_stockaccountid);
@@ -210,12 +229,12 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
     }
     addSplit(s1);
 
-    //qDebug() << "created transaction, now adding...";
+    // qDebug() << "created transaction, now adding...";
 
     MyMoneyFileTransaction ft;
     file->addTransaction(*this);
 
-    //qDebug() << "updating price...";
+    // qDebug() << "updating price...";
 
     // update the price, while we're here
     if (_action != MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
@@ -228,10 +247,18 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
         }
     }
     ft.commit();
-    //qDebug() << "successfully added " << id();
+    // qDebug() << "successfully added " << id();
 }
 
-QString makeAccount(const QString& id, const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport, bool _openingBalance)
+QString makeAccount(const QString& id,
+                    const QString& _name,
+                    eMyMoney::Account::Type _type,
+                    MyMoneyMoney _balance,
+                    const QDate& _open,
+                    const QString& _parent,
+                    QString _currency,
+                    bool _taxReport,
+                    bool _openingBalance)
 {
     int maxTries = 1000;
     QString cid;
@@ -243,13 +270,20 @@ QString makeAccount(const QString& id, const QString& _name, eMyMoney::Account::
             ft.commit();
         }
         cid = makeAccount(_name, _type, _balance, _open, _parent, _currency, _taxReport, _openingBalance);
-    } while(maxTries-- && id != cid);
+    } while (maxTries-- && id != cid);
     if (maxTries <= 0)
         throw MYMONEYEXCEPTION_CSTRING("Account could not be prepared");
     return cid;
 }
 
-QString makeAccount(const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport, bool _openingBalance)
+QString makeAccount(const QString& _name,
+                    eMyMoney::Account::Type _type,
+                    MyMoneyMoney _balance,
+                    const QDate& _open,
+                    const QString& _parent,
+                    QString _currency,
+                    bool _taxReport,
+                    bool _openingBalance)
 {
     MyMoneyAccount info;
     MyMoneyFileTransaction ft;
@@ -299,7 +333,7 @@ QString makeEquity(const QString& _name, const QString& _symbol)
     equity.setName(_name);
     equity.setTradingSymbol(_symbol);
     equity.setSmallestAccountFraction(1000);
-    equity.setSecurityType(eMyMoney::Security::Type::None/*MyMoneyEquity::ETYPE_STOCK*/);
+    equity.setSecurityType(eMyMoney::Security::Type::None /*MyMoneyEquity::ETYPE_STOCK*/);
     MyMoneyFile::instance()->addSecurity(equity);
     ft.commit();
 
@@ -403,7 +437,6 @@ bool readRCFfromXML(QList<MyMoneyReport>& list, const QString& filename)
         result = readRCFfromXMLDoc(list, &reader);
     }
     return result;
-
 }
 
 void XMLandback(MyMoneyReport& filter)

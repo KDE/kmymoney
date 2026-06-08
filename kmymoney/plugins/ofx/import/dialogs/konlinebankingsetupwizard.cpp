@@ -50,7 +50,7 @@ public:
         : m_prevPage(-1)
     {
     }
-    QFile       m_fpTrace;
+    QFile m_fpTrace;
     QTextStream m_trace;
     int m_prevPage;
 };
@@ -160,9 +160,7 @@ void KOnlineBankingSetupWizard::checkNextButton()
         break;
 
     case 1:
-        enableButton = !(m_editUsername->text().isEmpty()
-                         || m_editPassword->text().isEmpty()
-                         || !m_appId->isValid());
+        enableButton = !(m_editUsername->text().isEmpty() || m_editPassword->text().isEmpty() || !m_appId->isValid());
         break;
 
     case 2:
@@ -224,7 +222,6 @@ bool KOnlineBankingSetupWizard::finishFiPage()
     OfxHomeServiceInfo info;
 
     if (m_selectionTab->currentIndex() == 0) {
-
         // Get the fipids for the selected bank
         QListWidgetItem* item = m_listFi->currentItem();
         if (item && item->isSelected()) {
@@ -277,10 +274,8 @@ bool KOnlineBankingSetupWizard::finishFiPage()
             // error!  No current item
             KMessageBox::error(this, i18n("Please choose a bank."));
 
-    } else {  // manual entry of values
-        if (m_fid->text().isEmpty()
-                || m_url->url().isEmpty()
-                || m_bankName->text().isEmpty()) {
+    } else { // manual entry of values
+        if (m_fid->text().isEmpty() || m_url->url().isEmpty() || m_bankName->text().isEmpty()) {
             KMessageBox::error(this, i18n("Please fill all fields with values."));
         }
 
@@ -376,7 +371,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
 
         // because the event loop is running while the request is performed disable the back button
         // (this function is not reentrant so the application might crash when back/next are used)
-        QAbstractButton *backButton = button(QWizard::BackButton);
+        QAbstractButton* backButton = button(QWizard::BackButton);
         bool backButtonState = backButton->isEnabled();
         backButton->setEnabled(false);
 
@@ -407,7 +402,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         ++m_it_info;
     }
 
-    if (! m_listAccount->topLevelItem(0)) {
+    if (!m_listAccount->topLevelItem(0)) {
         KMessageBox::error(this, i18n("No suitable accounts were found at this bank."));
         result = false;
     } else {
@@ -423,7 +418,7 @@ bool KOnlineBankingSetupWizard::finishAccountPage()
 {
     bool result = true;
 
-    if (! m_listAccount->currentItem()) {
+    if (!m_listAccount->currentItem()) {
         KMessageBox::error(this, i18n("Please choose an account"));
         result = false;
     }
@@ -431,7 +426,7 @@ bool KOnlineBankingSetupWizard::finishAccountPage()
     return result;
 }
 
-int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, void * pv)
+int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, void* pv)
 {
     KOnlineBankingSetupWizard* pthis = reinterpret_cast<KOnlineBankingSetupWizard*>(pv);
     // Put the account info in the view
@@ -441,10 +436,10 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
     if (data.account_type_valid) {
         QString type;
         switch (data.account_type) {
-        case OfxAccountData::OFX_CHECKING:  /**< A standard checking account */
+        case OfxAccountData::OFX_CHECKING: /**< A standard checking account */
             type = "CHECKING";
             break;
-        case OfxAccountData::OFX_SAVINGS:   /**< A standard savings account */
+        case OfxAccountData::OFX_SAVINGS: /**< A standard savings account */
             type = "SAVINGS";
             break;
         case OfxAccountData::OFX_MONEYMRKT: /**< A money market account */
@@ -453,7 +448,7 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
         case OfxAccountData::OFX_CREDITLINE: /**< A line of credit */
             type = "CREDIT LINE";
             break;
-        case OfxAccountData::OFX_CMA:       /**< Cash Management Account */
+        case OfxAccountData::OFX_CMA: /**< Cash Management Account */
             type = "CMA";
             break;
         case OfxAccountData::OFX_CREDITCARD: /**< A credit card account */
@@ -504,7 +499,6 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
     // simply use it blank. (ipwizard 2009-06-21)
     if (/* !kvps.value("bankid").isEmpty()
   && */ !kvps.value("uniqueId").isEmpty()) {
-
         kvps.setValue("kmmofx-acc-ref", QString("%1-%2").arg(kvps.value("bankid"), kvps.value("uniqueId")));
     } else {
         qDebug("Cannot setup kmmofx-acc-ref for '%s'", qPrintable(kvps.value("bankname")));
@@ -516,7 +510,7 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
     return 0;
 }
 
-int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void * pv)
+int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void* pv)
 {
     KOnlineBankingSetupWizard* pthis = reinterpret_cast<KOnlineBankingSetupWizard*>(pv);
 
@@ -532,12 +526,12 @@ int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void
 
     if (data.severity_valid) {
         switch (data.severity) {
-        case OfxStatusData::INFO :
+        case OfxStatusData::INFO:
             break;
-        case OfxStatusData::WARN :
+        case OfxStatusData::WARN:
             KMessageBox::detailedError(pthis, i18n("Your bank returned warnings when signing on"), i18nc("Warning 'message'", "WARNING %1", message));
             break;
-        case OfxStatusData::ERROR :
+        case OfxStatusData::ERROR:
             KMessageBox::detailedError(pthis, i18n("Error signing onto your bank"), i18n("ERROR %1", message));
             break;
         default:
@@ -582,8 +576,9 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
     return result;
 }
 
-KOnlineBankingSetupWizard::ListViewItem::ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps):
-    MyMoneyKeyValueContainer(kvps), QTreeWidgetItem(parent)
+KOnlineBankingSetupWizard::ListViewItem::ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps)
+    : MyMoneyKeyValueContainer(kvps)
+    , QTreeWidgetItem(parent)
 {
     setText(0, value("accountid"));
     setText(1, value("type"));

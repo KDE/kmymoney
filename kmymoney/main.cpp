@@ -3,9 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
-#include <config-kmymoney.h>
 #include <config-kmymoney-version.h>
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -60,8 +59,8 @@
 #endif
 
 #ifdef KMM_DEBUG
-#include "mymoneyutils.h"
 #include "mymoneytracer.h"
+#include "mymoneyutils.h"
 #endif
 
 #ifdef IMPORT_SQLCIPHER_PLUGIN
@@ -72,7 +71,7 @@ bool timersOn = false;
 
 KMyMoneyApp* kmymoney;
 
-static int runKMyMoney(QApplication &a, const QUrl &file, bool noFile);
+static int runKMyMoney(QApplication& a, const QUrl& file, bool noFile);
 static void migrateConfigFiles();
 
 static void emergencySaveFunction(int)
@@ -81,7 +80,7 @@ static void emergencySaveFunction(int)
         kmymoney->slotFileClose();
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef Q_OS_WIN
     // enable console logging on Windows
@@ -246,7 +245,7 @@ int main(int argc, char *argv[])
         // Before we delete the application, we make sure that we destroy all
         // widgets by running the event loop for some time to catch all those
         // widgets that are requested to be destroyed using the deleteLater() method.
-        //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
+        // QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
         QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 10);
 
         delete kmymoney;
@@ -270,12 +269,12 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_WIN
         QRegularExpression exp("^[a-z]:", QRegularExpression::CaseInsensitiveOption);
         needLeadIn &= !exp.match(fname).hasMatch() //
-                      && !fname.startsWith(QLatin1String(".\\")) //
-                      && !fname.startsWith(QLatin1String("\\"));
+            && !fname.startsWith(QLatin1String(".\\")) //
+            && !fname.startsWith(QLatin1String("\\"));
 #endif
         needLeadIn &= !fname.startsWith(QLatin1String("file://")) //
-                      && !fname.startsWith(QLatin1String("./")) //
-                      && !fname.startsWith(QLatin1String("/"));
+            && !fname.startsWith(QLatin1String("./")) //
+            && !fname.startsWith(QLatin1String("/"));
         if (needLeadIn) {
             fname.prepend(QLatin1String("./"));
         }
@@ -289,7 +288,7 @@ int main(int argc, char *argv[])
     } else {
         try {
             rc = runKMyMoney(app, url, isNoFileOption);
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(nullptr, i18n("Uncaught error. Please report the details to the developers"), QString::fromLatin1(e.what()));
             throw;
         }
@@ -298,9 +297,8 @@ int main(int argc, char *argv[])
     return rc;
 }
 
-int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
+int runKMyMoney(QApplication& a, const QUrl& file, bool noFile)
 {
-
 #ifdef Q_OS_MAC
     kmymoney->setUnifiedTitleAndToolBarOnMac(true);
     kmymoney->setAttribute(Qt::WA_TranslucentBackground, true);
@@ -381,7 +379,7 @@ int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
 
     kmymoney->centralWidget()->setEnabled(true);
 
-    const int rc = a.exec();      //krazy:exclude=crashy
+    const int rc = a.exec(); // krazy:exclude=crashy
     return rc;
 }
 
@@ -389,15 +387,12 @@ static void migrateConfigFiles()
 {
     const QString sMainConfigName(QStringLiteral("kmymoneyrc"));
     const QString sMainConfigSubdirectory(QStringLiteral("kmymoney/")); // all KMM config files should be in ~/.config/kmymoney/
-    const QString sMainConfigPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
-                                    QLatin1Char('/') +
-                                    sMainConfigSubdirectory;
+    const QString sMainConfigPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + QLatin1Char('/') + sMainConfigSubdirectory;
 
     if (!QFile::exists(sMainConfigPath + sMainConfigName)) { // if main config file doesn't exist, then it's first run
 
         // it could be migration from KDE4 to KF5 so prepare list of configuration files to migrate
-        QStringList sConfigNames
-        {
+        QStringList sConfigNames{
             sMainConfigName,
             QStringLiteral("csvimporterrc"),
             QStringLiteral("printcheckpluginrc"),
@@ -407,11 +402,10 @@ static void migrateConfigFiles()
 
         QFileInfo fileInfo(sMainConfigPath + sMainConfigName);
         QDir().mkpath(fileInfo.absolutePath());
-        const QString sOldMainConfigPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
-                                           QLatin1Char('/');
+        const QString sOldMainConfigPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + QLatin1Char('/');
 
         // some files have changed their names during switch to KF5, so prepare map for name replacements
-        QMap<QString, QString> configNamesChange {
+        QMap<QString, QString> configNamesChange{
             {QStringLiteral("printcheckpluginrc"), QStringLiteral("checkprintingrc")},
             {QStringLiteral("icalendarexportpluginrc"), QStringLiteral("icalendarexporterrc")},
         };

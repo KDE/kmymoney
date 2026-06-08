@@ -122,7 +122,7 @@ int chipTanDialog::flickerFieldWidth()
 
 void chipTanDialog::setFlickerFieldClockSetting(const int& clock)
 {
-    QQuickItem *const rootObject = ui->declarativeView->rootObject();
+    QQuickItem* const rootObject = ui->declarativeView->rootObject();
     if (rootObject) {
         QMetaObject::invokeMethod(rootObject, "setFlickerClockSetting", Q_ARG(QVariant, QVariant(clock)));
     }
@@ -148,7 +148,7 @@ void chipTanDialog::setFlickerFieldWidth(const int& width)
 
 void chipTanDialog::setTanInput(const QString& input)
 {
-    QPushButton *const button = ui->buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton* const button = ui->buttonBox->button(QDialogButtonBox::Ok);
     Q_ASSERT(button);
     if (input.isEmpty() || !ui->tanInput->hasAcceptableInput()) {
         button->setEnabled(false);
@@ -161,7 +161,7 @@ void chipTanDialog::setTanInput(const QString& input)
 
 void chipTanDialog::setRootObjectProperty(const char* property, const QVariant& value)
 {
-    QQuickItem *const rootObject = ui->declarativeView->rootObject();
+    QQuickItem* const rootObject = ui->declarativeView->rootObject();
     if (rootObject)
         rootObject->setProperty(property, value);
 }

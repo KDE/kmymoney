@@ -8,14 +8,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLineEdit>
 #include <QAction>
+#include <QLineEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -50,4 +49,3 @@ void PasswordToggle::toggleEchoMode()
         m_toggleAction->setIcon(Icons::get(Icon::Visibility));
     }
 }
-

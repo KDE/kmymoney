@@ -8,12 +8,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
-#include <QUrl>
-#include <QMap>
+#include <QDebug>
 #include <QDomDocument>
 #include <QDomNode>
-#include <QDebug>
+#include <QFile>
+#include <QMap>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -25,10 +25,10 @@
 
 #if 0
 #include "kmymoneyutils.h"
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #endif
 #include "mymoneyobject_p.h"
 
@@ -50,16 +50,18 @@ void MyMoneyTemplateLoadResult::setErrorMsg(const QString& msg)
 class MyMoneyTemplatePrivate : public MyMoneyObjectPrivate
 {
 public:
-    MyMoneyTemplatePrivate() {}
+    MyMoneyTemplatePrivate()
+    {
+    }
 
-    QDomDocument          m_doc;
-    QDomNode              m_accounts;
-    QString               m_title;
-    QString               m_shortDesc;
-    QString               m_longDesc;
-    QString               m_locale;
-    QUrl                  m_source;
-    QMap<QString,QString> m_vatAccountMap;
+    QDomDocument m_doc;
+    QDomNode m_accounts;
+    QString m_title;
+    QString m_shortDesc;
+    QString m_longDesc;
+    QString m_locale;
+    QUrl m_source;
+    QMap<QString, QString> m_vatAccountMap;
 
     void collectReferencedObjects() override
     {
@@ -77,8 +79,7 @@ public:
         const int validHeader = 0x0F;
 
         QDomElement rootElement = m_doc.documentElement();
-        if (!rootElement.isNull()
-                && rootElement.tagName() == QLatin1String("kmymoney-account-template")) {
+        if (!rootElement.isNull() && rootElement.tagName() == QLatin1String("kmymoney-account-template")) {
             QDomNode child = rootElement.firstChild();
             while (!child.isNull() && child.isElement()) {
                 QDomElement childElement = child.toElement();
@@ -118,7 +119,6 @@ public:
         return result;
     }
 };
-
 
 MyMoneyTemplate::MyMoneyTemplate()
     : MyMoneyObject(*(new MyMoneyTemplatePrivate))
@@ -186,19 +186,19 @@ const QUrl& MyMoneyTemplate::source() const
     return d->m_source;
 }
 
-void MyMoneyTemplate::setTitle(const QString &s)
+void MyMoneyTemplate::setTitle(const QString& s)
 {
     Q_D(MyMoneyTemplate);
     d->m_title = s;
 }
 
-void MyMoneyTemplate::setShortDescription(const QString &s)
+void MyMoneyTemplate::setShortDescription(const QString& s)
 {
     Q_D(MyMoneyTemplate);
     d->m_shortDesc = s;
 }
 
-void MyMoneyTemplate::setLongDescription(const QString &s)
+void MyMoneyTemplate::setLongDescription(const QString& s)
 {
     Q_D(MyMoneyTemplate);
     d->m_longDesc = s;

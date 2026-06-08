@@ -22,12 +22,14 @@ public:
     {
     }
 
-    ~Private() {}
-
+    ~Private()
+    {
+    }
 };
 
-SecuritiesFilterProxyModel::SecuritiesFilterProxyModel(QObject *parent, SecuritiesModel *model)
-    : QSortFilterProxyModel(parent), d(new Private)
+SecuritiesFilterProxyModel::SecuritiesFilterProxyModel(QObject* parent, SecuritiesModel* model)
+    : QSortFilterProxyModel(parent)
+    , d(new Private)
 {
     setRecursiveFilteringEnabled(true);
     setDynamicSortFilter(true);

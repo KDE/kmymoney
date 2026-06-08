@@ -6,9 +6,9 @@
 
 #include "mymoneycategory.h"
 
+#include <QDataStream>
 #include <QString>
 #include <QStringList>
-#include <QDataStream>
 
 class MyMoneyCategoryPrivate
 {
@@ -18,23 +18,23 @@ public:
     QStringList m_minorCategories;
 };
 
-MyMoneyCategory::MyMoneyCategory() :
-    d_ptr(new MyMoneyCategoryPrivate)
+MyMoneyCategory::MyMoneyCategory()
+    : d_ptr(new MyMoneyCategoryPrivate)
 {
     Q_D(MyMoneyCategory);
     d->m_income = true;
 }
 
-MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name) :
-    d_ptr(new MyMoneyCategoryPrivate)
+MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name)
+    : d_ptr(new MyMoneyCategoryPrivate)
 {
     Q_D(MyMoneyCategory);
     d->m_income = income;
     d->m_name = name;
 }
 
-MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name, QStringList minors) :
-    d_ptr(new MyMoneyCategoryPrivate)
+MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name, QStringList minors)
+    : d_ptr(new MyMoneyCategoryPrivate)
 {
     Q_D(MyMoneyCategory);
     d->m_income = income;
@@ -42,8 +42,8 @@ MyMoneyCategory::MyMoneyCategory(const bool income, const QString& name, QString
     d->m_minorCategories = minors;
 }
 
-MyMoneyCategory::MyMoneyCategory(const MyMoneyCategory& other) :
-    d_ptr(new MyMoneyCategoryPrivate(*other.d_func()))
+MyMoneyCategory::MyMoneyCategory(const MyMoneyCategory& other)
+    : d_ptr(new MyMoneyCategoryPrivate(*other.d_func()))
 {
 }
 
@@ -118,9 +118,7 @@ bool MyMoneyCategory::renameMinorCategory(const QString& oldVal, const QString& 
     if (oldVal.isEmpty() || oldVal.isNull() || newVal.isEmpty() || newVal.isNull())
         return false;
 
-    if ((d->m_minorCategories.indexOf(oldVal) != -1) &&
-            (d->m_minorCategories.indexOf(newVal) == -1)) {
-
+    if ((d->m_minorCategories.indexOf(oldVal) != -1) && (d->m_minorCategories.indexOf(newVal) == -1)) {
         d->m_minorCategories.removeOne(oldVal);
         return addMinorCategory(newVal);
     }
@@ -157,7 +155,7 @@ QString MyMoneyCategory::firstMinor()
     return d->m_minorCategories.first();
 }
 
-QDataStream &operator<<(QDataStream &s, MyMoneyCategory &category)
+QDataStream& operator<<(QDataStream& s, MyMoneyCategory& category)
 {
     if (category.d_func()->m_income)
         s << (qint32)1;
@@ -174,7 +172,7 @@ QDataStream &operator<<(QDataStream &s, MyMoneyCategory &category)
     return s;
 }
 
-QDataStream &operator>>(QDataStream &s, MyMoneyCategory &category)
+QDataStream& operator>>(QDataStream& s, MyMoneyCategory& category)
 {
     qint32 inc;
     s >> inc;

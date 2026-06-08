@@ -6,9 +6,10 @@
 #include "onlinetask.h"
 
 onlineTask::onlineTask()
-{}
+{
+}
 
-onlineTask::onlineTask(const onlineTask &other)
+onlineTask::onlineTask(const onlineTask& other)
 {
     Q_UNUSED(other);
 }

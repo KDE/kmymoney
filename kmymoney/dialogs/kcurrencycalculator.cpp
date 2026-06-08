@@ -10,12 +10,12 @@
 // QT Includes
 
 #include <QButtonGroup>
-#include <QLabel>
-#include <QRadioButton>
 #include <QCheckBox>
-#include <QPushButton>
 #include <QDialogButtonBox>
+#include <QLabel>
 #include <QPointer>
+#include <QPushButton>
+#include <QRadioButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -98,7 +98,7 @@ public:
 
         // setup initial result
         if (m_toAmount.isZero() && !m_fromAmount.isZero()) {
-            const MyMoneyPrice &pr = file->price(m_fromCurrency.id(), m_toCurrency.id(), m_date);
+            const MyMoneyPrice& pr = file->price(m_fromCurrency.id(), m_toCurrency.id(), m_date);
             if (pr.isValid()) {
                 m_toAmount = m_fromAmount * pr.rate(m_toCurrency.id());
             }
@@ -177,7 +177,7 @@ public:
     }
 
     KCurrencyCalculator* q_ptr;
-    Ui::KCurrencyCalculator *ui;
+    Ui::KCurrencyCalculator* ui;
     MyMoneySecurity m_fromCurrency;
     MyMoneySecurity m_toCurrency;
     MyMoneyMoney m_toAmount;
@@ -201,20 +201,14 @@ KCurrencyCalculator* KCurrencyCalculator::createObject(QWidget* parent)
 }
 
 KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from,
-        const MyMoneySecurity& to,
-        const MyMoneyMoney& value,
-        const MyMoneyMoney& shares,
-        const QDate& date,
-        const signed64 resultFraction,
-        QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KCurrencyCalculatorPrivate(this,
-                                         from,
-                                         to,
-                                         value,
-                                         shares,
-                                         date,
-                                         resultFraction))
+                                         const MyMoneySecurity& to,
+                                         const MyMoneyMoney& value,
+                                         const MyMoneyMoney& shares,
+                                         const QDate& date,
+                                         const signed64 resultFraction,
+                                         QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KCurrencyCalculatorPrivate(this, from, to, value, shares, date, resultFraction))
 {
     Q_D(KCurrencyCalculator);
     d->init();
@@ -288,11 +282,10 @@ void KCurrencyCalculator::setResultFraction(signed64 fraction)
 }
 
 bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares,
-        const MyMoneyTransaction& t,
-        const MyMoneySplit& s,
-        const QMap<QString,
-        MyMoneyMoney>& priceInfo,
-        QWidget* parentWidget)
+                                          const MyMoneyTransaction& t,
+                                          const MyMoneySplit& s,
+                                          const QMap<QString, MyMoneyMoney>& priceInfo,
+                                          QWidget* parentWidget)
 {
     auto rc = true;
     auto file = MyMoneyFile::instance();
@@ -305,7 +298,6 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares,
         int fract = cat.fraction(toCurrency);
 
         if (cat.currencyId() != t.commodity()) {
-
             MyMoneyMoney toValue;
             auto fromCurrency = file->security(t.commodity());
             // display only positive values to the user
@@ -328,14 +320,7 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares,
             }
 
             // now present all that to the user
-            QPointer<KCurrencyCalculator> calc =
-                new KCurrencyCalculator(fromCurrency,
-                                        toCurrency,
-                                        fromValue,
-                                        toValue,
-                                        t.postDate(),
-                                        10000000000,
-                                        parentWidget);
+            QPointer<KCurrencyCalculator> calc = new KCurrencyCalculator(fromCurrency, toCurrency, fromValue, toValue, t.postDate(), 10000000000, parentWidget);
 
             if (calc->exec() == QDialog::Rejected) {
                 rc = false;
@@ -431,8 +416,8 @@ void KCurrencyCalculator::accept()
     if (d->ui->m_updateButton->isChecked()) {
         auto pr = MyMoneyFile::instance()->price(d->m_fromCurrency.id(), d->m_toCurrency.id(), d->ui->m_dateEdit->date());
         if (!pr.isValid() //
-                || pr.date() != d->ui->m_dateEdit->date() //
-                || (pr.date() == d->ui->m_dateEdit->date() && pr.rate(d->m_fromCurrency.id()) != price())) {
+            || pr.date() != d->ui->m_dateEdit->date() //
+            || (pr.date() == d->ui->m_dateEdit->date() && pr.rate(d->m_fromCurrency.id()) != price())) {
             pr = MyMoneyPrice(d->m_fromCurrency.id(), d->m_toCurrency.id(), d->ui->m_dateEdit->date(), price(), i18nc("@info price source", "User"));
             MyMoneyFileTransaction ft;
             try {
@@ -442,7 +427,7 @@ void KCurrencyCalculator::accept()
                     blocker.unblock();
                 }
                 ft.commit();
-            } catch (const MyMoneyException &) {
+            } catch (const MyMoneyException&) {
                 qDebug("Cannot add price");
             }
         }

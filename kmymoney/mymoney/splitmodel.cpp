@@ -29,8 +29,7 @@
 #include "securitiesmodel.h"
 #include "tagsmodel.h"
 
-struct SplitModel::Private
-{
+struct SplitModel::Private {
     Private(SplitModel* qq)
         : q(qq)
         , headerData(QHash<Column, QString>({
@@ -93,15 +92,14 @@ struct SplitModel::Private
         }
     }
 
-
     QString counterAccount() const
     {
         // A transaction can have more than 2 splits ...
-        if(splitCount() > 1) {
+        if (splitCount() > 1) {
             return i18n("Split transaction");
 
             // ... exactly two splits ...
-        } else if(splitCount() == 1) {
+        } else if (splitCount() == 1) {
             // we have to check which one is filled and which one
             // could be an empty (new) split
             const auto rows = q->rowCount();
@@ -319,7 +317,9 @@ SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack)
     // editor when the transaction is created. (see
     // NewTransactionEditor::saveTransaction() )
     ++m_nextId;
-    connect(this, &SplitModel::modelReset, this, [&] { d->updateItemCount(); });
+    connect(this, &SplitModel::modelReset, this, [&] {
+        d->updateItemCount();
+    });
     connect(this, &SplitModel::dataChanged, this, &SplitModel::checkForForeignCurrency);
 }
 
@@ -395,15 +395,14 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
 
     const MyMoneySplit& split = static_cast<TreeItem<MyMoneySplit>*>(idx.internalPointer())->constDataRef();
     const auto file = MyMoneyFile::instance();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Column::Category:
             return file->accountsModel()->accountIdToHierarchicalName(split.accountId());
 
-        case Column::Memo:
-        {
+        case Column::Memo: {
             QString rc(split.memo());
             // remove empty lines
             rc.replace(QStringLiteral("\n\n"), QStringLiteral("\n"));
@@ -513,7 +512,7 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
 
 bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role)
 {
-    if(!idx.isValid()) {
+    if (!idx.isValid()) {
         return false;
     }
     if (idx.row() < 0 || idx.row() >= rowCount(idx.parent())) {
@@ -521,7 +520,7 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
     }
 
     const auto startIdx = idx.model()->index(idx.row(), 0);
-    const auto endIdx = idx.model()->index(idx.row(), idx.model()->columnCount()-1);
+    const auto endIdx = idx.model()->index(idx.row(), idx.model()->columnCount() - 1);
     MyMoneySplit& split = static_cast<TreeItem<MyMoneySplit>*>(idx.internalPointer())->dataRef();
 
     // in case we modify the data of a new split, we need to setup an id
@@ -532,7 +531,7 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
         split = MyMoneySplit(newSplitId(), split);
     }
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
         break;
@@ -601,7 +600,7 @@ void SplitModel::appendSplit(const MyMoneySplit& split)
 void SplitModel::appendEmptySplit()
 {
     const QModelIndexList list = match(index(0, 0), eMyMoney::Model::IdRole, QString(), -1, Qt::MatchExactly);
-    if(list.isEmpty()) {
+    if (list.isEmpty()) {
         doAddItem(MyMoneySplit());
     }
 }
@@ -609,7 +608,7 @@ void SplitModel::appendEmptySplit()
 void SplitModel::removeEmptySplit()
 {
     const QModelIndexList list = match(index(0, 0), eMyMoney::Model::IdRole, QString(), -1, Qt::MatchExactly);
-    if(!list.isEmpty()) {
+    if (!list.isEmpty()) {
         removeRow(list.first().row(), list.first().parent());
     }
 }

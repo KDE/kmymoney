@@ -9,10 +9,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
 #include <QButtonGroup>
-#include <QListWidget>
 #include <QDialogButtonBox>
+#include <QLabel>
+#include <QListWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,9 +30,9 @@ class KGncPriceSourceDlgPrivate
     Q_DISABLE_COPY(KGncPriceSourceDlgPrivate)
 
 public:
-    KGncPriceSourceDlgPrivate() :
-        ui(new Ui::KGncPriceSourceDlg),
-        currentButton(0)
+    KGncPriceSourceDlgPrivate()
+        : ui(new Ui::KGncPriceSourceDlg)
+        , currentButton(0)
     {
     }
 
@@ -41,14 +41,13 @@ public:
         delete ui;
     }
 
-    Ui::KGncPriceSourceDlg  *ui;
+    Ui::KGncPriceSourceDlg* ui;
     int currentButton;
 };
 
-
-KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& gncSource, QWidget * parent) :
-    QDialog(parent),
-    d_ptr(new KGncPriceSourceDlgPrivate)
+KGncPriceSourceDlg::KGncPriceSourceDlg(const QString& stockName, const QString& gncSource, QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KGncPriceSourceDlgPrivate)
 {
     Q_D(KGncPriceSourceDlg);
     d->ui->setupUi(this);
@@ -59,8 +58,8 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& 
     d->ui->textStockName->setText(i18n("Investment: %1", stockName));
     d->ui->textGncSource->setText(i18n("Quote source: %1", gncSource));
     d->ui->listKnownSource->clear();
-//  TODO: return this feature
-//  d->ui->listKnownSource->insertItems(0, WebPriceQuote::quoteSources());
+    //  TODO: return this feature
+    //  d->ui->listKnownSource->insertItems(0, WebPriceQuote::quoteSources());
     d->ui->lineUserSource->setText(gncSource);
     d->ui->checkAlwaysUse->setChecked(true);
     d->ui->buttonsSource->setId(d->ui->buttonNoSource, 0);
@@ -76,7 +75,7 @@ KGncPriceSourceDlg::~KGncPriceSourceDlg()
     delete d;
 }
 
-enum ButtonIds {NOSOURCE = 0, KMMSOURCE, USERSOURCE};
+enum ButtonIds { NOSOURCE = 0, KMMSOURCE, USERSOURCE };
 
 void KGncPriceSourceDlg::buttonPressed(int buttonId)
 {

@@ -50,11 +50,10 @@
 
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
-AccountTypePage::AccountTypePage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new AccountTypePagePrivate(wizard), StepAccount, this, wizard)
+namespace NewAccountWizard {
+AccountTypePage::AccountTypePage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new AccountTypePagePrivate(wizard), StepAccount, this, wizard)
 {
     Q_D(AccountTypePage);
     d->ui->setupUi(this);
@@ -126,9 +125,8 @@ void AccountTypePage::slotUpdateType(int i)
 void AccountTypePage::hideShowPages(Account::Type accountType) const
 {
     Q_D(const AccountTypePage);
-    bool hideSchedulePage = (accountType != Account::Type::CreditCard)
-                            && (accountType != Account::Type::Loan);
-    bool hideLoanPage     = (accountType != Account::Type::Loan);
+    bool hideSchedulePage = (accountType != Account::Type::CreditCard) && (accountType != Account::Type::Loan);
+    bool hideLoanPage = (accountType != Account::Type::Loan);
     d->m_wizard->d_func()->setStepHidden(StepDetails, hideLoanPage);
     d->m_wizard->d_func()->setStepHidden(StepPayments, hideLoanPage);
     d->m_wizard->d_func()->setStepHidden(StepFees, hideLoanPage);
@@ -166,12 +164,12 @@ void AccountTypePage::slotUpdateCurrency()
 
     d->ui->m_openingBalance->setPrecision(MyMoneyMoney::denomToPrec(acc.fraction(currency())));
 
-    bool show =  d->ui->m_currencyComboBox->security().id() != MyMoneyFile::instance()->baseCurrency().id();
+    bool show = d->ui->m_currencyComboBox->security().id() != MyMoneyFile::instance()->baseCurrency().id();
     d->ui->m_conversionLabel->setVisible(show);
     d->ui->m_conversionRate->setVisible(show);
     d->ui->m_conversionExample->setVisible(show);
     d->ui->m_onlineQuote->setVisible(show);
-    d->ui->m_conversionRate->setEnabled(show);       // make sure to include/exclude in mandatoryGroup
+    d->ui->m_conversionRate->setEnabled(show); // make sure to include/exclude in mandatoryGroup
     d->ui->m_conversionRate->setPrecision(d->ui->m_currencyComboBox->security().pricePrecision());
     d->m_mandatoryGroup->changed();
     slotUpdateConversionRate(d->ui->m_conversionRate->text());
@@ -183,7 +181,7 @@ void AccountTypePage::slotGetOnlineQuote()
     QString id = MyMoneyFile::instance()->baseCurrency().id() + ' ' + d->ui->m_currencyComboBox->security().id();
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, id);
     if (dlg->exec() == QDialog::Accepted) {
-        const MyMoneyPrice &price = dlg->price(id);
+        const MyMoneyPrice& price = dlg->price(id);
         if (price.isValid()) {
             d->ui->m_conversionRate->setValue(price.rate(d->ui->m_currencyComboBox->security().id()));
             slotUpdateConversionRate(d->ui->m_conversionRate->text());
@@ -204,7 +202,10 @@ void AccountTypePage::priceWarning(bool always)
 {
     Q_D(AccountTypePage);
     if (d->m_showPriceWarning || always) {
-        KMessageBox::information(this, i18n("Please make sure to enter the correct conversion for the selected opening date. If you requested an online quote it might be provided for a different date."), i18n("Check date"));
+        KMessageBox::information(this,
+                                 i18n("Please make sure to enter the correct conversion for the selected opening date. If you requested an online quote it "
+                                      "might be provided for a different date."),
+                                 i18n("Check date"));
     }
     d->m_showPriceWarning = false;
 }
@@ -212,7 +213,10 @@ void AccountTypePage::priceWarning(bool always)
 void AccountTypePage::slotUpdateConversionRate(const QString& txt)
 {
     Q_D(AccountTypePage);
-    d->ui->m_conversionExample->setText(i18n("1 %1 equals %2", MyMoneyFile::instance()->baseCurrency().tradingSymbol(), MyMoneyMoney(txt).formatMoney(d->ui->m_currencyComboBox->security().tradingSymbol(), d->ui->m_currencyComboBox->security().pricePrecision())));
+    d->ui->m_conversionExample->setText(
+        i18n("1 %1 equals %2",
+             MyMoneyFile::instance()->baseCurrency().tradingSymbol(),
+             MyMoneyMoney(txt).formatMoney(d->ui->m_currencyComboBox->security().tradingSymbol(), d->ui->m_currencyComboBox->security().pricePrecision())));
 }
 
 bool AccountTypePage::isComplete() const
@@ -236,7 +240,7 @@ bool AccountTypePage::isComplete() const
 
 bool AccountTypePage::accountTypeSupportsOpeningBalance(Account::Type type) const
 {
-    switch(type) {
+    switch (type) {
     case Account::Type::Equity:
     case Account::Type::Investment:
         return false;

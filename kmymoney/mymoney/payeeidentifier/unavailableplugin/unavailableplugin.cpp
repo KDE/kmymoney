@@ -11,8 +11,7 @@
 
 #include <typeinfo>
 
-namespace payeeIdentifiers
-{
+namespace payeeIdentifiers {
 
 payeeIdentifierUnavailable::payeeIdentifierUnavailable()
     : payeeIdentifierData()
@@ -82,6 +81,5 @@ bool payeeIdentifierUnavailable::operator==(const payeeIdentifierUnavailable& ot
 {
     return (m_data == other.m_data);
 }
-
 
 } // namespace payeeIdentifiers

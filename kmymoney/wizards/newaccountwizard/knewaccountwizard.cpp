@@ -17,8 +17,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KLineEdit>
+#include <KLocalizedString>
 #include <KMessageBox>
 
 // ----------------------------------------------------------------------------
@@ -45,26 +45,25 @@
 #include "kloanpayoutpage_p.h"
 #include "kloanschedulepage_p.h"
 
-#include "kmymoneycurrencyselector.h"
 #include "kcurrencycalculator.h"
+#include "kmymoneycurrencyselector.h"
 #include "kmymoneyutils.h"
 
+#include "mymoneyaccountloan.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
-#include "mymoneyaccountloan.h"
 #include "mymoneyprice.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneyexception.h"
-#include "mymoneyenums.h"
 
 using namespace NewAccountWizard;
 using namespace Icons;
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
-Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags)
+namespace NewAccountWizard {
+Wizard::Wizard(QWidget* parent, bool modal, Qt::WindowFlags flags)
     : KMyMoneyWizard(*new WizardPrivate(this), parent, modal, flags)
 {
     Q_D(Wizard);
@@ -129,8 +128,6 @@ MyMoneyMoney Wizard::interestRate() const
     return d->m_loanDetailsPage->d_func()->ui->m_interestRate->value() / MyMoneyMoney(100, 1);
 }
 
-
-
 const MyMoneyAccount& Wizard::account()
 {
     Q_D(Wizard);
@@ -150,7 +147,8 @@ const MyMoneyAccount& Wizard::account()
             d->m_account.setAccountType(Account::Type::AssetLoan);
         d->m_account.setLoanAmount(d->m_loanDetailsPage->d_func()->ui->m_loanAmount->value());
         d->m_account.setInterestRate(d->m_loanSchedulePage->firstPaymentDueDate(), d->m_loanDetailsPage->d_func()->ui->m_interestRate->value());
-        d->m_account.setInterestCalculation(d->m_loanDetailsPage->d_func()->ui->m_paymentDue->currentIndex() == 0 ? MyMoneyAccountLoan::paymentReceived : MyMoneyAccountLoan::paymentDue);
+        d->m_account.setInterestCalculation(d->m_loanDetailsPage->d_func()->ui->m_paymentDue->currentIndex() == 0 ? MyMoneyAccountLoan::paymentReceived
+                                                                                                                  : MyMoneyAccountLoan::paymentDue);
         d->m_account.setFixedInterestRate(d->m_generalLoanInfoPage->d_func()->ui->m_interestType->currentIndex() == 0);
         d->m_account.setFinalPayment(d->m_loanDetailsPage->d_func()->ui->m_balloonAmount->value());
         d->m_account.setTerm(d->m_loanDetailsPage->term());
@@ -160,7 +158,8 @@ const MyMoneyAccount& Wizard::account()
 
         if (!d->m_account.fixedInterestRate()) {
             d->m_account.setNextInterestChange(d->m_generalLoanInfoPage->d_func()->ui->m_interestChangeDateEdit->date());
-            d->m_account.setInterestChangeFrequency(d->m_generalLoanInfoPage->d_func()->ui->m_interestFrequencyAmountEdit->value(), d->m_generalLoanInfoPage->d_func()->ui->m_interestFrequencyUnitEdit->currentIndex());
+            d->m_account.setInterestChangeFrequency(d->m_generalLoanInfoPage->d_func()->ui->m_interestFrequencyAmountEdit->value(),
+                                                    d->m_generalLoanInfoPage->d_func()->ui->m_interestFrequencyUnitEdit->currentIndex());
         }
     }
     return d->m_account;
@@ -170,9 +169,9 @@ MyMoneyTransaction Wizard::payoutTransaction()
 {
     Q_D(Wizard);
     MyMoneyTransaction t;
-    if (d->m_account.isLoan()                                      // we're creating a loan
-            && openingBalance().isZero()                                // and don't have an opening balance
-            && !d->m_loanPayoutPage->d_func()->ui->m_noPayoutTransaction->isChecked()) { // and the user wants to have a payout transaction
+    if (d->m_account.isLoan() // we're creating a loan
+        && openingBalance().isZero() // and don't have an opening balance
+        && !d->m_loanPayoutPage->d_func()->ui->m_noPayoutTransaction->isChecked()) { // and the user wants to have a payout transaction
         t.setPostDate(d->m_loanPayoutPage->d_func()->ui->m_payoutDate->date());
         t.setCommodity(d->m_account.currencyId());
         MyMoneySplit s;
@@ -198,18 +197,15 @@ MyMoneyAccount Wizard::parentAccount()
 {
     Q_D(Wizard);
     return d->m_accountTypePage->allowsParentAccount()
-           ? d->m_hierarchyPage->parentAccount()
-           : (d->m_accountTypePage->accountType() == Account::Type::Loan
-              ? d->m_generalLoanInfoPage->parentAccount()
-              : d->m_accountTypePage->parentAccount());
+        ? d->m_hierarchyPage->parentAccount()
+        : (d->m_accountTypePage->accountType() == Account::Type::Loan ? d->m_generalLoanInfoPage->parentAccount() : d->m_accountTypePage->parentAccount());
 }
 
 MyMoneyAccount Wizard::brokerageAccount() const
 {
     Q_D(const Wizard);
     MyMoneyAccount account;
-    if (d->m_account.accountType() == Account::Type::Investment
-            && d->m_brokeragepage->d_func()->ui->m_createBrokerageButton->isChecked()) {
+    if (d->m_account.accountType() == Account::Type::Investment && d->m_brokeragepage->d_func()->ui->m_createBrokerageButton->isChecked()) {
         account.setName(d->m_account.brokerageName());
         account.setAccountType(Account::Type::Checkings);
         account.setInstitutionId(d->m_account.institutionId());
@@ -296,7 +292,7 @@ const MyMoneySchedule& Wizard::schedule()
             t.addSplit(s);
 
             // interest split
-            //only add if interest is above zero
+            // only add if interest is above zero
             if (!d->m_loanDetailsPage->d_func()->ui->m_interestRate->value().isZero()) {
                 s.clearId();
                 s.setAccountId(d->m_loanSchedulePage->d_func()->ui->m_interestCategory->selectedItem());
@@ -364,7 +360,6 @@ MyMoneyPrice Wizard::conversionRate() const
 
 void Wizard::newAccount(MyMoneyAccount& account)
 {
-
     QPointer<NewAccountWizard::Wizard> wizard = new NewAccountWizard::Wizard();
 
     wizard->setAccount(account);
@@ -415,13 +410,12 @@ void Wizard::newAccount(MyMoneyAccount& account)
                 }
                 ft.commit();
                 account = acc;
-            } catch (const MyMoneyException &e) {
+            } catch (const MyMoneyException& e) {
                 KMessageBox::error(nullptr, i18n("Unable to create account: %1", QString::fromLatin1(e.what())));
             }
         }
     }
     delete wizard;
-
 }
 
 void Wizard::slotPayeeNew(const QString& txt, QString& id)

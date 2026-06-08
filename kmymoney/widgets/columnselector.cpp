@@ -18,9 +18,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -51,8 +51,7 @@ public:
     {
         if (treeView) {
             treeView->setColumnHidden(col, state);
-        }
-        else if (tableView) {
+        } else if (tableView) {
             tableView->setColumnHidden(col, state);
         }
     }
@@ -61,8 +60,7 @@ public:
     {
         if (treeView) {
             return treeView->isColumnHidden(col);
-        }
-        else if (tableView) {
+        } else if (tableView) {
             return tableView->isColumnHidden(col);
         }
         return false;
@@ -86,7 +84,7 @@ public:
 
                 visibleColumns = grp.readEntry<int>("ColumnsSelection", QList<int>());
                 // add the storage offset during loading operation
-                for (auto &column : visibleColumns) {
+                for (auto& column : visibleColumns) {
                     if (applyStorageOffsetColumns.contains(column + storageOffset)) {
                         column += storageOffset;
                     }
@@ -136,21 +134,21 @@ public:
         }
     }
 
-    ColumnSelector*       q_ptr;
+    ColumnSelector* q_ptr;
 
-    QTreeView*            treeView;
-    QTableView*           tableView;
-    QHeaderView*          headerView;
-    QAbstractItemModel*   model;
+    QTreeView* treeView;
+    QTableView* tableView;
+    QHeaderView* headerView;
+    QAbstractItemModel* model;
 
-    QVector<int>          selectableColumns;
-    QVector<int>          alwaysHiddenColumns;
-    QVector<int>          alwaysVisibleColumns;
-    QVector<int>          applyStorageOffsetColumns;
-    QString               configGroupName;
+    QVector<int> selectableColumns;
+    QVector<int> alwaysHiddenColumns;
+    QVector<int> alwaysVisibleColumns;
+    QVector<int> applyStorageOffsetColumns;
+    QString configGroupName;
 
-    int                   storageOffset;
-    bool                  isInit;
+    int storageOffset;
+    bool isInit;
     bool columnSelectionEnabled;
 };
 
@@ -204,7 +202,7 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
     }
 
     // create actions menu
-    QList<QAction *> actions;
+    QList<QAction*> actions;
     const auto maxColumn = d->headerView->count();
 
     for (int col = 0; col < maxColumn; ++col) {
@@ -253,7 +251,7 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
             if (!d->configGroupName.isEmpty()) {
                 auto grp = KSharedConfig::openConfig()->group(d->configGroupName);
                 // subtract offset during storage operation
-                for (auto &column : visibleColumns) {
+                for (auto& column : visibleColumns) {
                     if (d->applyStorageOffsetColumns.contains(column)) {
                         column -= d->storageOffset;
                     }
@@ -309,7 +307,7 @@ QVector<int> ColumnSelector::columns() const
 {
     Q_D(const ColumnSelector);
 
-    QVector<int>    columns;
+    QVector<int> columns;
     const auto maxColumn = d->headerView->count();
 
     for (int col = 0; col < maxColumn; ++col) {

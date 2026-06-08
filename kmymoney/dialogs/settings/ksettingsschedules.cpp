@@ -302,13 +302,13 @@ public:
         delete ui;
     }
 
-    Ui::KSettingsSchedules *ui;
+    Ui::KSettingsSchedules* ui;
     const QMap<QString, QString> m_countryCodesToCountryNames;
 };
 
-KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KSettingsSchedulesPrivate)
+KSettingsSchedules::KSettingsSchedules(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KSettingsSchedulesPrivate)
 {
     Q_D(KSettingsSchedules);
     d->ui->setupUi(this);
@@ -401,7 +401,7 @@ void KSettingsSchedules::slotSetRegion(int idx)
     }
 }
 
-void KSettingsSchedules::slotLoadRegion(const QString &region)
+void KSettingsSchedules::slotLoadRegion(const QString& region)
 {
     Q_D(KSettingsSchedules);
     // only need this once

@@ -10,9 +10,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QObject>
 #include <QHeaderView>
 #include <QMouseEvent>
+#include <QObject>
 #include <QPoint>
 
 // ----------------------------------------------------------------------------
@@ -24,13 +24,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountsmodel.h"
+#include "accountsproxymodel.h"
+#include "institutionsmodel.h"
+#include "menuenums.h"
+#include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
-#include "accountsmodel.h"
-#include "institutionsmodel.h"
-#include "accountsproxymodel.h"
-#include "menuenums.h"
 #include "selectedobjects.h"
 
 class KMyMoneyAccountTreeViewPrivate
@@ -39,12 +39,13 @@ class KMyMoneyAccountTreeViewPrivate
     Q_DISABLE_COPY_MOVE(KMyMoneyAccountTreeViewPrivate)
 
 public:
-    KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq)
-        : q_ptr(qq),
-          proxyModel(new AccountsProxyModel(qq))
-    {}
+    KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView* qq)
+        : q_ptr(qq)
+        , proxyModel(new AccountsProxyModel(qq))
+    {
+    }
 
-    void openIndex(const QModelIndex &index)
+    void openIndex(const QModelIndex& index)
     {
         Q_Q(KMyMoneyAccountTreeView);
         if (index.isValid()) {
@@ -72,15 +73,15 @@ public:
         }
     }
 
-    KMyMoneyAccountTreeView*  q_ptr;
-    AccountsProxyModel*       proxyModel;
+    KMyMoneyAccountTreeView* q_ptr;
+    AccountsProxyModel* proxyModel;
 };
 
-KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
+KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget* parent)
     : KMyMoneyTreeView(parent)
     , d_ptr(new KMyMoneyAccountTreeViewPrivate(this))
 {
-    setContextMenuPolicy(Qt::CustomContextMenu);            // allow context menu to be opened on tree items
+    setContextMenuPolicy(Qt::CustomContextMenu); // allow context menu to be opened on tree items
     connect(this, &QWidget::customContextMenuRequested, this, &KMyMoneyAccountTreeView::customContextMenuRequested);
     setAllColumnsShowFocus(true);
     setAlternatingRowColors(true);
@@ -97,7 +98,6 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
 }
-
 
 void KMyMoneyAccountTreeView::setModel(QAbstractItemModel* model)
 {
@@ -131,7 +131,6 @@ void KMyMoneyAccountTreeView::setProxyModel(AccountsProxyModel* model)
     d->proxyModel = model;
     d->proxyModel->setSourceModel(sourceModel);
     QTreeView::setModel(d->proxyModel);
-
 }
 
 AccountsProxyModel* KMyMoneyAccountTreeView::proxyModel() const
@@ -165,7 +164,7 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)
     }
 }
 
-void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
+void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
     QTreeView::selectionChanged(selected, deselected);
 

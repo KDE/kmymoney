@@ -31,11 +31,11 @@
 #include "reportsviewenums.h"
 #include "viewinterface.h"
 
-#define VIEW_LEDGER         "ledger"
+#define VIEW_LEDGER "ledger"
 
-ReportsView::ReportsView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args),
-    m_view(nullptr)
+ReportsView::ReportsView(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+    , m_view(nullptr)
 {
     // For information, announce that we have been loaded.
     qDebug("Plugins: reportsview loaded");
@@ -58,9 +58,9 @@ void ReportsView::unplug()
     viewInterface()->removeView(View::Reports);
 }
 
-QVariant ReportsView::requestData(const QString &arg, uint type)
+QVariant ReportsView::requestData(const QString& arg, uint type)
 {
-    switch(type) {
+    switch (type) {
     case eWidgetPlugin::WidgetType::NetWorthForecast:
         return QVariant::fromValue(netWorthForecast());
     case eWidgetPlugin::WidgetType::NetWorthForecastWithArgs:
@@ -70,10 +70,9 @@ QVariant ReportsView::requestData(const QString &arg, uint type)
     default:
         return QVariant();
     }
-
 }
 
-QWidget *ReportsView::netWorthForecast() const
+QWidget* ReportsView::netWorthForecast() const
 {
     MyMoneyReport reportCfg = MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
                                             static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
@@ -94,7 +93,7 @@ QWidget *ReportsView::netWorthForecast() const
     reportCfg.setColumnsAreDays(true);
     reportCfg.setConvertCurrency(true);
     reportCfg.setIncludingForecast(true);
-    reportCfg.setDateFilter(QDate::currentDate(), QDate::currentDate().addDays(+ 90));
+    reportCfg.setDateFilter(QDate::currentDate(), QDate::currentDate().addDays(+90));
     reports::PivotTable table(reportCfg, KMyMoneyUtils::forecastConfig());
 
     auto chartWidget = new reports::KReportChartView(nullptr);
@@ -103,13 +102,18 @@ QWidget *ReportsView::netWorthForecast() const
     return chartWidget;
 }
 
-QWidget *ReportsView::netWorthForecast(const QString &arg) const
+QWidget* ReportsView::netWorthForecast(const QString& arg) const
 {
     const QStringList liArgs = arg.split(';');
     if (liArgs.count() != 4)
         return new QWidget();
 
-    eMyMoney::Report::DetailLevel detailLevel[4] = { eMyMoney::Report::DetailLevel::All, eMyMoney::Report::DetailLevel::Top, eMyMoney::Report::DetailLevel::Group, eMyMoney::Report::DetailLevel::Total, };
+    eMyMoney::Report::DetailLevel detailLevel[4] = {
+        eMyMoney::Report::DetailLevel::All,
+        eMyMoney::Report::DetailLevel::Top,
+        eMyMoney::Report::DetailLevel::Group,
+        eMyMoney::Report::DetailLevel::Total,
+    };
 
     MyMoneyReport reportCfg = MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
                                             static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
@@ -124,7 +128,7 @@ QWidget *ReportsView::netWorthForecast(const QString &arg) const
     reportCfg.setChartSVGridLines(false);
     reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
     reportCfg.setIncludingSchedules(false);
-    reportCfg.setColumnsAreDays( true );
+    reportCfg.setColumnsAreDays(true);
     reportCfg.setChartDataLabels(false);
     reportCfg.setConvertCurrency(true);
     reportCfg.setIncludingForecast(true);
@@ -183,7 +187,7 @@ QString ReportsView::budget() const
 
     reports::PivotGrid grid = table.grid();
 
-    //display budget summary
+    // display budget summary
     html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     html += "<tr class=\"itemtitle\">";
     html += "<td class=\"left\" colspan=\"3\">";
@@ -216,7 +220,7 @@ QString ReportsView::budget() const
     html += "</tr>";
     html += "</table></td></tr>";
 
-    //budget overrun
+    // budget overrun
     html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
     html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     html += "<tr class=\"itemtitle\">";
@@ -245,12 +249,12 @@ QString ReportsView::budget() const
         while (it_innergroup != (*it_outergroup).end()) {
             reports::PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
             while (it_row != (*it_innergroup).end()) {
-                //column number is 1 because the report includes only current month
+                // column number is 1 because the report includes only current month
                 if (it_row.value()[reports::eBudgetDiff].value(column).isNegative()) {
-                    //get report account to get the name later
+                    // get report account to get the name later
                     reports::ReportAccount rowname = it_row.key();
 
-                    //write the outergroup if it is the first row of outergroup being shown
+                    // write the outergroup if it is the first row of outergroup being shown
                     if (i == 0) {
                         html += "<tr style=\"font-weight:bold;\">";
                         html += QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(MyMoneyAccount::accountTypeToString(rowname.accountType()));
@@ -258,26 +262,26 @@ QString ReportsView::budget() const
                     }
                     html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
 
-                    //get values from grid
+                    // get values from grid
                     MyMoneyMoney actualValue = it_row.value()[reports::eActual][column];
                     MyMoneyMoney budgetValue = it_row.value()[reports::eBudget][column];
                     MyMoneyMoney budgetDiffValue = it_row.value()[reports::eBudgetDiff][column];
 
-                    //format amounts
+                    // format amounts
                     QString actualAmount = actualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
                     QString budgetAmount = budgetValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
                     QString budgetDiffAmount = budgetDiffValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
 
-                    //account name
+                    // account name
                     html += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(rowname.id()), QString()) + rowname.name() + linkend() + "</td>";
 
-                    //show amounts
+                    // show amounts
                     html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(budgetAmount, budgetValue.isNegative()));
                     html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(actualAmount, actualValue.isNegative()));
                     html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(budgetDiffAmount, budgetDiffValue.isNegative()));
                     html += "</tr>";
 
-                    //set the flag that there are overruns
+                    // set the flag that there are overruns
                     isOverrun = true;
                 }
                 ++it_row;
@@ -287,7 +291,7 @@ QString ReportsView::budget() const
         ++it_outergroup;
     }
 
-    //if no negative differences are found, then inform that
+    // if no negative differences are found, then inform that
     if (isOverrun == false) {
         html += QString::fromLatin1("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(((i++ & 1) == 1) ? QLatin1String("even") : QLatin1String("odd"));
         html += QString::fromLatin1("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
@@ -298,14 +302,14 @@ QString ReportsView::budget() const
     return html;
 }
 
-QString ReportsView::showColoredAmount(const QString &amount, bool isNegative) const
+QString ReportsView::showColoredAmount(const QString& amount, bool isNegative) const
 {
     if (isNegative) {
-        //if negative, get the settings for negative numbers
+        // if negative, get the settings for negative numbers
         return QString("<font color=\"%1\">%2</font>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), amount);
     }
 
-    //if positive, return the same string
+    // if positive, return the same string
     return amount;
 }
 

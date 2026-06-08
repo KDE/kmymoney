@@ -9,9 +9,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStringList>
-#include <QPushButton>
 #include <QIcon>
+#include <QPushButton>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,9 +23,9 @@
 
 #include "ui_ksettingshome.h"
 
-#include "kmymoneysettings.h"
-#include "kmymoney/kmymoneyutils.h"
 #include "icons/icons.h"
+#include "kmymoney/kmymoneyutils.h"
+#include "kmymoneysettings.h"
 
 using namespace Icons;
 
@@ -34,9 +34,9 @@ class KSettingsHomePrivate
     Q_DISABLE_COPY(KSettingsHomePrivate)
 
 public:
-    KSettingsHomePrivate() :
-        ui(new Ui::KSettingsHome),
-        m_noNeedToUpdateList(false)
+    KSettingsHomePrivate()
+        : ui(new Ui::KSettingsHome)
+        , m_noNeedToUpdateList(false)
     {
     }
 
@@ -45,13 +45,13 @@ public:
         delete ui;
     }
 
-    Ui::KSettingsHome *ui;
+    Ui::KSettingsHome* ui;
     bool m_noNeedToUpdateList;
 };
 
-KSettingsHome::KSettingsHome(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KSettingsHomePrivate)
+KSettingsHome::KSettingsHome(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KSettingsHomePrivate)
 {
     Q_D(KSettingsHome);
     d->ui->setupUi(this);
@@ -66,8 +66,7 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
     // connect this, so that the list gets loaded once the edit field is filled
     connect(d->ui->kcfg_ItemList, &QLineEdit::textChanged, this, &KSettingsHome::slotLoadItems);
 
-    connect(d->ui->m_homePageList, &QListWidget::itemSelectionChanged,
-            this, &KSettingsHome::slotSelectHomePageItem);
+    connect(d->ui->m_homePageList, &QListWidget::itemSelectionChanged, this, &KSettingsHome::slotSelectHomePageItem);
     connect(d->ui->m_homePageList, &QAbstractItemView::clicked, this, &KSettingsHome::slotUpdateItemList);
 
     connect(d->ui->m_upButton, &QAbstractButton::clicked, this, &KSettingsHome::slotMoveUp);
@@ -119,7 +118,8 @@ void KSettingsHome::slotLoadItems()
             continue;
 
         bool enabled = idx > 0;
-        if (!enabled) idx = -idx;
+        if (!enabled)
+            idx = -idx;
         QListWidgetItem* item = new QListWidgetItem(d->ui->m_homePageList);
         item->setText(KMyMoneyUtils::homePageItemToString(idx));
         item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
@@ -140,7 +140,7 @@ void KSettingsHome::slotUpdateItemList()
 {
     Q_D(KSettingsHome);
     QString list;
-    QListWidgetItem *it;
+    QListWidgetItem* it;
 
     for (it = d->ui->m_homePageList->item(0); it;) {
         int item = KMyMoneyUtils::stringToHomePageItem(it->text());

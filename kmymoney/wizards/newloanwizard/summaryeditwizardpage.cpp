@@ -20,9 +20,9 @@
 
 #include "mymoneyutils.h"
 
-SummaryEditWizardPage::SummaryEditWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::SummaryEditWizardPage)
+SummaryEditWizardPage::SummaryEditWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::SummaryEditWizardPage)
 {
     ui->setupUi(this);
 

@@ -29,9 +29,9 @@
 
 #include "ui_knewinstitutiondlg.h"
 
-#include "mymoneyinstitution.h"
-#include "kmymoneyutils.h"
 #include "icons.h"
+#include "kmymoneyutils.h"
+#include "mymoneyinstitution.h"
 
 #include <errno.h>
 
@@ -40,8 +40,8 @@ class KNewInstitutionDlgPrivate
     Q_DISABLE_COPY(KNewInstitutionDlgPrivate)
 
 public:
-    KNewInstitutionDlgPrivate() :
-        ui(new Ui::KNewInstitutionDlg)
+    KNewInstitutionDlgPrivate()
+        : ui(new Ui::KNewInstitutionDlg)
     {
         m_iconLoadTimer.setSingleShot(true);
     }
@@ -51,18 +51,18 @@ public:
         delete ui;
     }
 
-    Ui::KNewInstitutionDlg*           ui;
-    MyMoneyInstitution                m_institution;
-    QTimer                            m_iconLoadTimer;
-    QPointer<KIO::FavIconRequestJob>  m_favIconJob;
-    QIcon                             m_favIcon;
-    QString                           m_iconName;
-    QUrl                              m_url;
+    Ui::KNewInstitutionDlg* ui;
+    MyMoneyInstitution m_institution;
+    QTimer m_iconLoadTimer;
+    QPointer<KIO::FavIconRequestJob> m_favIconJob;
+    QIcon m_favIcon;
+    QString m_iconName;
+    QUrl m_url;
 };
 
-KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KNewInstitutionDlgPrivate)
+KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KNewInstitutionDlgPrivate)
 {
     Q_D(KNewInstitutionDlg);
     d->ui->setupUi(this);
@@ -102,8 +102,7 @@ KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget 
         slotUrlChanged(d->ui->iconUrlEdit);
     });
     connect(&d->m_iconLoadTimer, &QTimer::timeout, this, &KNewInstitutionDlg::slotLoadIcon);
-    connect(d->ui->iconButton, &QToolButton::pressed, this,
-    [=] {
+    connect(d->ui->iconButton, &QToolButton::pressed, this, [=] {
         QUrl url;
         url.setUrl(QString::fromLatin1("https://%1").arg(d->ui->urlEdit->text()));
         QDesktopServices::openUrl(url);
@@ -121,7 +120,7 @@ KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget 
     requiredFields->add(d->ui->nameEdit);
 }
 
-void KNewInstitutionDlg::institutionNameChanged(const QString &_text)
+void KNewInstitutionDlg::institutionNameChanged(const QString& _text)
 {
     Q_D(KNewInstitutionDlg);
     d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!_text.isEmpty());
@@ -186,7 +185,8 @@ void KNewInstitutionDlg::slotUrlChanged(QLineEdit* edit)
     QRegularExpressionMatch matcher = protocol.match(edit->text());
     if (matcher.hasMatch()) {
         edit->setText(matcher.captured(QStringLiteral("url")));
-        d->ui->messageWidget->setText(i18nc("@info:usagetip", "The protocol part has been removed by KMyMoney because it is fixed to https for security reasons."));
+        d->ui->messageWidget->setText(
+            i18nc("@info:usagetip", "The protocol part has been removed by KMyMoney because it is fixed to https for security reasons."));
         d->ui->messageWidget->setMessageType(KMessageWidget::Information);
         d->ui->messageWidget->animatedShow();
     }
@@ -231,7 +231,7 @@ void KNewInstitutionDlg::slotIconLoaded(KJob* job)
 {
     Q_D(KNewInstitutionDlg);
 
-    switch(job->error()) {
+    switch (job->error()) {
     case ECONNREFUSED:
         // There is an answer from the server, but no favicon. In case we
         // already have one, we keep it
@@ -257,7 +257,7 @@ void KNewInstitutionDlg::slotIconLoaded(KJob* job)
         qDebug() << "KIO::FavIconRequestJob error" << job->error() << job->errorString();
         // intentional fall through
 
-    case EALREADY:    // invalid URL, no server response
+    case EALREADY: // invalid URL, no server response
         d->ui->iconButton->setEnabled(false);
         d->m_favIcon = QIcon();
         d->m_iconName.clear();

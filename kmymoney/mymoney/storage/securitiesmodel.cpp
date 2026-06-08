@@ -21,8 +21,7 @@
 
 #include "mymoneyfile.h"
 
-struct SecuritiesModel::Private
-{
+struct SecuritiesModel::Private {
     Private(SecuritiesModel* qq, QObject* parent)
         : q_ptr(qq)
         , parentObject(parent)
@@ -50,8 +49,8 @@ struct SecuritiesModel::Private
         return idx.data(eMyMoney::Model::Roles::SecuritySymbolRole).toString();
     }
 
-    SecuritiesModel*    q_ptr;
-    QObject*            parentObject;
+    SecuritiesModel* q_ptr;
+    QObject* parentObject;
 };
 
 SecuritiesModel::SecuritiesModel(QObject* parent, QUndoStack* undoStack)
@@ -74,8 +73,8 @@ int SecuritiesModel::columnCount(const QModelIndex& parent) const
 
 QVariant SecuritiesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch (section) {
         case Column::Security:
             return i18n("Security");
         case Column::Symbol:
@@ -103,10 +102,10 @@ QVariant SecuritiesModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     const MyMoneySecurity& security = static_cast<TreeItem<MyMoneySecurity>*>(index.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case Column::Security:
             // make sure to never return any displayable text for the dummy entry
             if (!security.id().isEmpty()) {
@@ -168,7 +167,7 @@ QVariant SecuritiesModel::data(const QModelIndex& index, int role) const
 
 bool SecuritiesModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 
@@ -209,8 +208,6 @@ void SecuritiesModel::loadCurrencies(const QMap<QString, MyMoneySecurity>& list)
 
     qDebug() << "Model for currencies loaded with" << rowCount() << "items";
 }
-
-
 
 void SecuritiesModel::addCurrency(const MyMoneySecurity& currency)
 {

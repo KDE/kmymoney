@@ -202,8 +202,8 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[14][ListTable::ctPostDate] == "2005-01-01");
 
         QVERIFY(MyMoneyMoney(rows[6][ListTable::ctValue]) == -(moParent1 + moParent2) * 3);
-        QVERIFY(MyMoneyMoney(rows[10][ListTable::ctValue]) == -(moChild)*3);
-        QVERIFY(MyMoneyMoney(rows[16][ListTable::ctValue]) == -(moSolo)*3);
+        QVERIFY(MyMoneyMoney(rows[10][ListTable::ctValue]) == -(moChild) * 3);
+        QVERIFY(MyMoneyMoney(rows[16][ListTable::ctValue]) == -(moSolo) * 3);
         QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
         QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
@@ -229,7 +229,7 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[12][ListTable::ctPostDate] == "2005-01-01");
 
         QVERIFY(MyMoneyMoney(rows[9][ListTable::ctValue]) == -(moParent1 + moParent2 + moChild) * 3);
-        QVERIFY(MyMoneyMoney(rows[13][ListTable::ctValue]) == -(moSolo)*3);
+        QVERIFY(MyMoneyMoney(rows[13][ListTable::ctValue]) == -(moSolo) * 3);
         QVERIFY(MyMoneyMoney(rows[14][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
         QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
@@ -262,7 +262,7 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[11][ListTable::ctPostDate] == "2005-09-01");
 #endif
 
-        QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == -(moSolo)*3 + moCheckingOpen);
+        QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == -(moSolo) * 3 + moCheckingOpen);
         QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
         QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
@@ -312,7 +312,7 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[20][ListTable::ctPostDate] == "2005-09-01");
 
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == -moSolo);
-        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild)*3);
+        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild) * 3);
         QVERIFY(MyMoneyMoney(rows[9][ListTable::ctValue]) == -moParent1 + moCheckingOpen);
         QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
@@ -335,7 +335,7 @@ void QueryTableTest::testQueryBasics()
         QVERIFY(rows[20][ListTable::ctPostDate] == "2005-09-01");
 
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == -moSolo);
-        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild)*3);
+        QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moChild) * 3);
         QVERIFY(MyMoneyMoney(rows[21][ListTable::ctValue]) == -moParent2);
         QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
     } catch (const MyMoneyException& e) {

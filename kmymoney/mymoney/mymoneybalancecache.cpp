@@ -15,8 +15,10 @@
 // Project Includes
 
 MyMoneyBalanceCacheItem::MyMoneyBalanceCacheItem(const MyMoneyMoney& balance, const QDate& date)
-    : m_balance(balance), m_date(date)
-{}
+    : m_balance(balance)
+    , m_date(date)
+{
+}
 
 const MyMoneyMoney& MyMoneyBalanceCacheItem::balance() const
 {
@@ -116,4 +118,3 @@ MyMoneyBalanceCacheItem MyMoneyBalanceCache::mostRecentBalance(const QString& ac
 
     return MyMoneyBalanceCacheItem(datePos.value(), datePos.key());
 }
-

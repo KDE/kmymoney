@@ -10,12 +10,11 @@ loanattributeswizardpage  -  description
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -29,9 +28,9 @@ loanattributeswizardpage  -  description
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 
-LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::LoanAttributesWizardPage)
+LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::LoanAttributesWizardPage)
 {
     ui->setupUi(this);
 
@@ -48,7 +47,7 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
     // Are we forcing the user to use institutions?
     ui->m_qcomboboxInstitutions->addItem(i18n("(No Institution)"));
     try {
-        MyMoneyFile *file = MyMoneyFile::instance();
+        MyMoneyFile* file = MyMoneyFile::instance();
 
         auto list = file->institutionList();
         std::sort(list.begin(), list.end());
@@ -56,7 +55,7 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
         for (const auto& institution : std::as_const(list)) {
             ui->m_qcomboboxInstitutions->addItem(institution.name());
         }
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         qDebug("Exception in institution load: %s", e.what());
     }
 }
@@ -78,7 +77,7 @@ void LoanAttributesWizardPage::initializePage()
 {
 }
 
-void LoanAttributesWizardPage::setInstitution(const QString &institutionName)
+void LoanAttributesWizardPage::setInstitution(const QString& institutionName)
 {
     if (institutionName.isEmpty()) {
         ui->m_qcomboboxInstitutions->setCurrentItem(i18n("(No Institution)"));
@@ -95,14 +94,14 @@ void LoanAttributesWizardPage::slotNewClicked()
     if (dlg->exec() && dlg != nullptr) {
         MyMoneyFileTransaction ft;
         try {
-            MyMoneyFile *file = MyMoneyFile::instance();
+            MyMoneyFile* file = MyMoneyFile::instance();
 
             institution = dlg->institution();
             file->addInstitution(institution);
             ft.commit();
             initializePage();
             ui->m_qcomboboxInstitutions->setCurrentItem(institution.name(), false);
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
             KMessageBox::information(this, i18n("Cannot add institution"));
         }
     }

@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPointer>
 #include <QIcon>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -22,18 +22,18 @@
 
 #include "ui_interestcategorywizardpage.h"
 
-#include "knewaccountdlg.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "icons/icons.h"
-#include "mymoneyexception.h"
+#include "knewaccountdlg.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 
 using namespace Icons;
 
-InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::InterestCategoryWizardPage)
+InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::InterestCategoryWizardPage)
 {
     ui->setupUi(this);
     // Register the fields with the QWizard and connect the
@@ -94,7 +94,7 @@ void InterestCategoryWizardPage::slotCreateCategory()
 
             ui->m_interestAccountEdit->setSelected(id);
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::information(this, i18n("Unable to add account: %1", QString::fromLatin1(e.what())));
         }
     }

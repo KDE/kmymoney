@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <config-kmymoney.h>
 #include "csvexporter.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -33,7 +33,7 @@
 
 #include "kmmyesno.h"
 
-CSVExporter::CSVExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+CSVExporter::CSVExporter(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
     : KMyMoneyPlugin::Plugin(parent, metaData, args)
     , m_action(nullptr)
 {
@@ -55,7 +55,7 @@ CSVExporter::~CSVExporter()
 
 void CSVExporter::createActions()
 {
-    const auto &kpartgui = QStringLiteral("file_export_csv");
+    const auto& kpartgui = QStringLiteral("file_export_csv");
     m_action = actionCollection()->addAction(kpartgui);
     m_action->setText(i18n("&CSV..."));
     connect(m_action, &QAction::triggered, this, &CSVExporter::slotCsvExport);
@@ -71,15 +71,18 @@ void CSVExporter::slotCsvExport()
             CsvWriter* writer = new CsvWriter;
             writer->m_plugin = this;
 
-            writer->write(m_dlg->filename(), m_dlg->accountId(),
-                          m_dlg->accountSelected(), m_dlg->categorySelected(),
-                          m_dlg->startDate(), m_dlg->endDate(),
+            writer->write(m_dlg->filename(),
+                          m_dlg->accountId(),
+                          m_dlg->accountSelected(),
+                          m_dlg->categorySelected(),
+                          m_dlg->startDate(),
+                          m_dlg->endDate(),
                           m_dlg->separator());
         }
     }
 }
 
-bool CSVExporter::okToWriteFile(const QUrl &url)
+bool CSVExporter::okToWriteFile(const QUrl& url)
 {
     // check if the file exists and warn the user
     bool reallySaveFile = true;

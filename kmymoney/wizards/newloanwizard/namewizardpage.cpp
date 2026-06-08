@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -19,9 +18,9 @@
 
 #include "ui_namewizardpage.h"
 
-NameWizardPage::NameWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::NameWizardPage)
+NameWizardPage::NameWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::NameWizardPage)
 {
     ui->setupUi(this);
 

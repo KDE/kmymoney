@@ -9,8 +9,8 @@
 #include "kbaccountsettings.h"
 
 // KDE Includes
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // Project Includes
 #include "aqbanking/version.h"
@@ -25,10 +25,9 @@ struct KBAccountSettings::Private {
     Ui::KBAccountSettings ui;
 };
 
-KBAccountSettings::KBAccountSettings(const MyMoneyAccount& /*acc*/,
-                                     QWidget* parent) :
-    QWidget(parent),
-    d(new Private)
+KBAccountSettings::KBAccountSettings(const MyMoneyAccount& /*acc*/, QWidget* parent)
+    : QWidget(parent)
+    , d(new Private)
 {
     d->ui.setupUi(this);
 }
@@ -78,9 +77,7 @@ void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
     // The key "kbanking-jobexec" is not used since version 4.8 anymore
     kvp.deletePair("kbanking-jobexec");
 
-    if (d->ui.m_extractPayeeButton->isChecked()
-            && !d->ui.m_payeeRegExpEdit->text().isEmpty()
-            && !d->ui.m_memoRegExpEdit->text().isEmpty()) {
+    if (d->ui.m_extractPayeeButton->isChecked() && !d->ui.m_payeeRegExpEdit->text().isEmpty() && !d->ui.m_memoRegExpEdit->text().isEmpty()) {
         kvp["kbanking-payee-regexp"] = d->ui.m_payeeRegExpEdit->text();
         kvp["kbanking-memo-regexp"] = d->ui.m_memoRegExpEdit->text();
         kvp["kbanking-payee-exceptions"] = d->ui.m_payeeExceptions->items().join(";");

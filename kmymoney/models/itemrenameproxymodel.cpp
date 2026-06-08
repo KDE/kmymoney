@@ -19,7 +19,7 @@
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
 
-ItemRenameProxyModel::ItemRenameProxyModel(QObject *parent)
+ItemRenameProxyModel::ItemRenameProxyModel(QObject* parent)
     : QSortFilterProxyModel(parent)
     , m_renameColumn(0)
     , m_referenceFilter(eAllItem)
@@ -83,7 +83,7 @@ bool ItemRenameProxyModel::filterAcceptsRow(int source_row, const QModelIndex& s
         if (!itemId.isEmpty()) {
             QVariant rc;
             const auto objectList = MyMoneyFile::instance()->referencedObjects();
-            switch(m_referenceFilter) {
+            switch (m_referenceFilter) {
             case eReferencedItems:
                 if (!objectList.contains(itemId))
                     return false;

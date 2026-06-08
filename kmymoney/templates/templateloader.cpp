@@ -24,22 +24,22 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
-#include <KXmlGuiWindow>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KTextEdit>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "templatesmodel.h"
-#include "mymoneytemplate.h"
 #include "kmymoneyutils.h"
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneytemplate.h"
+#include "templatesmodel.h"
 
 class TemplateLoaderPrivate
 {
@@ -57,7 +57,7 @@ public:
     {
     }
 
-    bool loadTemplate(const QUrl &url, MyMoneyTemplate& tmpl)
+    bool loadTemplate(const QUrl& url, MyMoneyTemplate& tmpl)
     {
         QString filename;
         bool downloadedFile = false;
@@ -71,9 +71,9 @@ public:
 
         } else {
             downloadedFile = true;
-            KIO::StoredTransferJob *transferjob = KIO::storedGet (url);
+            KIO::StoredTransferJob* transferjob = KIO::storedGet(url);
             KJobWidgets::setWindow(transferjob, KMyMoneyUtils::mainWindow());
-            if (! transferjob->exec()) {
+            if (!transferjob->exec()) {
                 KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
                                            i18n("Error while loading file '%1'.", url.url()),
                                            transferjob->errorString(),
@@ -153,7 +153,7 @@ public:
                         setFlags(tmpl, acc, account.firstChild());
                         try {
                             MyMoneyFile::instance()->addAccount(acc, parent);
-                        } catch (const MyMoneyException &) {
+                        } catch (const MyMoneyException&) {
                         }
                         QString id = accountElement.attribute("id");
                         if (!id.isEmpty())
@@ -186,7 +186,11 @@ public:
                     } else if (value == "OpeningBalanceAccount") {
                         acc.setValue("OpeningBalanceAccount", "Yes");
                     } else {
-                        KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>", flagElement.attribute("name"), tmpl.source().toDisplayString(), acc.name()));
+                        KMessageBox::error(KMyMoneyUtils::mainWindow(),
+                                           i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>",
+                                                flagElement.attribute("name"),
+                                                tmpl.source().toDisplayString(),
+                                                acc.name()));
                         rc = false;
                     }
                     QString currency = flagElement.attribute("currency");
@@ -200,21 +204,21 @@ public:
     }
 
 public:
-    TemplateLoader*                         q_ptr;
-    TemplatesModel*                         model;
+    TemplateLoader* q_ptr;
+    TemplatesModel* model;
     // a map of country name or country name (language name) -> localeId (lang_country) so be careful how you use it
-    QMap<QString, QString>                  countries;
-    QString                                 currentLocaleId;
+    QMap<QString, QString> countries;
+    QString currentLocaleId;
 
-    QStringList                             dirlist;          ///< list of directories to scan for templates
-    QMap<QString, QString>::const_iterator  it_m;
-    int                                     countryRow;
-    QMap<QString,QString>                   m_vatAccountMap;
+    QStringList dirlist; ///< list of directories to scan for templates
+    QMap<QString, QString>::const_iterator it_m;
+    int countryRow;
+    QMap<QString, QString> m_vatAccountMap;
 };
 
-TemplateLoader::TemplateLoader(QWidget* parent) :
-    QObject(parent),
-    d_ptr(new TemplateLoaderPrivate(this))
+TemplateLoader::TemplateLoader(QWidget* parent)
+    : QObject(parent)
+    , d_ptr(new TemplateLoaderPrivate(this))
 {
     Q_INIT_RESOURCE(templates);
 }
@@ -358,7 +362,10 @@ bool TemplateLoader::importTemplate(const MyMoneyTemplate& tmpl)
                 break;
 
             default:
-                KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>", childElement.attribute("type"), tmpl.source().toDisplayString()));
+                KMessageBox::error(KMyMoneyUtils::mainWindow(),
+                                   i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>",
+                                        childElement.attribute("type"),
+                                        tmpl.source().toDisplayString()));
                 rc = false;
             }
 

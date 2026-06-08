@@ -10,23 +10,23 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QLabel>
-#include <QPixmap>
-#include <QList>
-#include <QUrl>
-#include <QPushButton>
-#include <QIcon>
 #include <QFileDialog>
+#include <QIcon>
+#include <QLabel>
+#include <QList>
+#include <QPixmap>
+#include <QPushButton>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
 #include <KConfigGroup>
 #include <KGuiItem>
-#include <KStandardGuiItem>
-#include <KSharedConfig>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KStandardGuiItem>
+#include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -45,7 +45,7 @@
 
 using namespace Icons;
 
-KExportDlg::KExportDlg(QWidget *parent)
+KExportDlg::KExportDlg(QWidget* parent)
     : KExportDlgDecl(parent)
 {
     // Set (almost) all the last used options
@@ -57,16 +57,10 @@ KExportDlg::KExportDlg(QWidget *parent)
     // load button icons
     KGuiItem::assign(m_qbuttonCancel, KStandardGuiItem::cancel());
 
-    KGuiItem okButtenItem(i18n("&Export"),
-                          Icons::get(Icon::DocumentExport),
-                          i18n("Start operation"),
-                          i18n("Use this to start the export operation"));
+    KGuiItem okButtenItem(i18n("&Export"), Icons::get(Icon::DocumentExport), i18n("Start operation"), i18n("Use this to start the export operation"));
     KGuiItem::assign(m_qbuttonOk, okButtenItem);
 
-    KGuiItem browseButtenItem(i18n("&Browse..."),
-                              Icons::get(Icon::DocumentOpen),
-                              i18n("Select filename"),
-                              i18n("Use this to select a filename to export to"));
+    KGuiItem browseButtenItem(i18n("&Browse..."), Icons::get(Icon::DocumentOpen), i18n("Select filename"), i18n("Use this to select a filename to export to"));
     KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
     // connect the buttons to their functionality
@@ -181,7 +175,7 @@ void KExportDlg::writeConfig()
 
 void KExportDlg::checkData(const QString& accountId)
 {
-    bool  okEnabled = false;
+    bool okEnabled = false;
 
     if (!m_qlineeditFile->text().isEmpty()) {
         auto strFile(m_qlineeditFile->text());
@@ -213,10 +207,10 @@ void KExportDlg::checkData(const QString& accountId)
     }
 
     if (!m_qlineeditFile->text().isEmpty() //
-            && !m_accountComboBox->getSelected().isEmpty() //
-            && !m_profileComboBox->currentText().isEmpty() //
-            && m_kmymoneydateStart->date() <= m_kmymoneydateEnd->date() //
-            && (m_qcheckboxAccount->isChecked() || m_qcheckboxCategories->isChecked()))
+        && !m_accountComboBox->getSelected().isEmpty() //
+        && !m_profileComboBox->currentText().isEmpty() //
+        && m_kmymoneydateStart->date() <= m_kmymoneydateEnd->date() //
+        && (m_qcheckboxAccount->isChecked() || m_qcheckboxCategories->isChecked()))
         okEnabled = true;
 
     m_qbuttonOk->setEnabled(okEnabled);
@@ -225,7 +219,7 @@ void KExportDlg::checkData(const QString& accountId)
 void KExportDlg::loadAccounts()
 {
     auto filterProxyModel = new AccountNamesFilterProxyModel(this);
-    filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability});
+    filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type>{eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability});
     filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
     filterProxyModel->sort(AccountsModel::Column::AccountName);
     m_accountComboBox->setModel(filterProxyModel);

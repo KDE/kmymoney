@@ -19,31 +19,31 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
-#include "mymoneytransaction.h"
 #include "mymoneyexception.h"
+#include "mymoneytransaction.h"
+#include "mymoneyutils.h"
 
-MyMoneySplit::MyMoneySplit() :
-    MyMoneyObject(*new MyMoneySplitPrivate)
+MyMoneySplit::MyMoneySplit()
+    : MyMoneyObject(*new MyMoneySplitPrivate)
 {
 }
 
-MyMoneySplit::MyMoneySplit(const QString &id) :
-    MyMoneyObject(*new MyMoneySplitPrivate, id)
+MyMoneySplit::MyMoneySplit(const QString& id)
+    : MyMoneyObject(*new MyMoneySplitPrivate, id)
 {
     Q_D(MyMoneySplit);
     d->m_reconcileFlag = eMyMoney::Split::State::NotReconciled;
 }
 
-MyMoneySplit::MyMoneySplit(const MyMoneySplit& other) :
-    MyMoneyObject(*new MyMoneySplitPrivate(*other.d_func()), other.id()),
-    MyMoneyKeyValueContainer(other)
+MyMoneySplit::MyMoneySplit(const MyMoneySplit& other)
+    : MyMoneyObject(*new MyMoneySplitPrivate(*other.d_func()), other.id())
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
-MyMoneySplit::MyMoneySplit(const QString& id, const MyMoneySplit& other) :
-    MyMoneyObject(*new MyMoneySplitPrivate(*other.d_func()), id),
-    MyMoneyKeyValueContainer(other)
+MyMoneySplit::MyMoneySplit(const QString& id, const MyMoneySplit& other)
+    : MyMoneyObject(*new MyMoneySplitPrivate(*other.d_func()), id)
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
@@ -51,10 +51,10 @@ MyMoneySplit::~MyMoneySplit()
 {
 }
 
-bool MyMoneySplit::operator == (const MyMoneySplit& right) const
+bool MyMoneySplit::operator==(const MyMoneySplit& right) const
 {
     Q_D(const MyMoneySplit);
-    auto d2 = static_cast<const MyMoneySplitPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneySplitPrivate*>(right.d_func());
     // clang-format off
     return MyMoneyObject::operator==(right)
         && MyMoneyKeyValueContainer::operator==(right)
@@ -252,7 +252,7 @@ void MyMoneySplit::setAction(eMyMoney::Split::InvestmentTransactionType type)
 eMyMoney::Split::InvestmentTransactionType MyMoneySplit::investmentTransactionType() const
 {
     Q_D(const MyMoneySplit);
-    switch(actionStringToAction(d->m_action)) {
+    switch (actionStringToAction(d->m_action)) {
     case Split::Action::BuyShares:
         return (d->m_shares.isNegative()) ? Split::InvestmentTransactionType::SellShares : Split::InvestmentTransactionType::BuyShares;
 
@@ -344,7 +344,6 @@ void MyMoneySplit::setTransactionId(const QString& id)
     Q_D(MyMoneySplit);
     d->m_transactionId = id;
 }
-
 
 MyMoneyMoney MyMoneySplit::value() const
 {

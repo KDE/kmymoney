@@ -61,7 +61,8 @@ public:
         , m_editorWidthOfs(0)
         , m_showPayeeInDetailColumn(true)
         , m_accountType(eMyMoney::Account::Type::Unknown)
-    {}
+    {
+    }
 
     ~Private()
     {
@@ -118,7 +119,7 @@ public:
         const auto showAllSplits = LedgerViewSettings::instance()->showAllSplits() & showLedgerLens;
         const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
 
-        if(index.column() == JournalModel::Column::Detail) {
+        if (index.column() == JournalModel::Column::Detail) {
             const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
 
             if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool() && isInvestmentView()) {
@@ -208,7 +209,7 @@ public:
             }
             rc.lines.removeAll(QString());
 
-        } else if(index.column() == JournalModel::Column::Quantity) {
+        } else if (index.column() == JournalModel::Column::Quantity) {
             if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
                 const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
                 rc.lines << opt.text;
@@ -312,7 +313,6 @@ public:
     eMyMoney::Account::Type m_accountType;
 };
 
-
 JournalDelegate::JournalDelegate(LedgerView* parent)
     : KMMStyledItemDelegate(parent)
     , d(new Private)
@@ -340,7 +340,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
     Q_UNUSED(option);
     QString errorMessage;
 
-    if(index.isValid()) {
+    if (index.isValid()) {
         d->m_editor = nullptr;
         // check that no selected transaction references a closed account
         const auto file = MyMoneyFile::instance();
@@ -371,7 +371,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
             return nullptr;
         }
 
-        if(d->m_view->selectionModel()->selectedRows().count() > 1) {
+        if (d->m_view->selectionModel()->selectedRows().count() > 1) {
             auto accountId = d->m_view->accountId();
             if (!accountId.isEmpty()) {
                 const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
@@ -419,8 +419,8 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
             if (d->m_editor->setSelectedJournalEntryIds(d->m_view->selectedJournalEntryIds())) {
                 d->m_editor->setAmountPlaceHolderText(index.model());
                 d->m_editorWidthOfs = 8;
-                if(d->m_view) {
-                    if(d->m_view->verticalScrollBar()->isVisible()) {
+                if (d->m_view) {
+                    if (d->m_view->verticalScrollBar()->isVisible()) {
                         d->m_editorWidthOfs += d->m_view->verticalScrollBar()->width();
                     }
                 }
@@ -434,7 +434,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
         }
 
         // if we still have an editor here,
-        if(d->m_editor) {
+        if (d->m_editor) {
             d->m_editorRow = index.row();
             d->m_editorCol = index.column();
             connect(d->m_editor, &TransactionEditorBase::done, this, &JournalDelegate::endEdit);
@@ -491,7 +491,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     painter->save();
 
     // Background
-    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
     const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
     d->m_lineHeight = opt.fontMetrics.lineSpacing();
     const int lineHeight = d->m_lineHeight + 2;
@@ -502,8 +502,8 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     if (editWidget == nullptr) {
         QPalette::ColorGroup cg;
 
-        if(view && (index.column() == JournalModel::Column::Detail)) {
-            if(view->currentIndex().row() == index.row()) {
+        if (view && (index.column() == JournalModel::Column::Detail)) {
+            if (view->currentIndex().row() == index.row()) {
                 opt.state |= QStyle::State_HasFocus;
             }
         }
@@ -666,14 +666,14 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
 
     bool resizeSection(false);
 
-    if(index.isValid()) {
+    if (index.isValid()) {
         // check if we are showing the edit widget
         // const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
         if (d->m_view) {
             QModelIndex editIndex = d->m_view->model()->index(index.row(), d->m_editorCol);
-            if(editIndex.isValid()) {
+            if (editIndex.isValid()) {
                 QWidget* editor = d->m_view->indexWidget(editIndex);
-                if(editor) {
+                if (editor) {
                     return editor->minimumSizeHint();
                 }
             }
@@ -737,8 +737,8 @@ void JournalDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVi
 
 void JournalDelegate::endEdit()
 {
-    if(d->m_editor) {
-        if(d->m_editor->accepted()) {
+    if (d->m_editor) {
+        if (d->m_editor->accepted()) {
             Q_EMIT commitData(d->m_editor);
         }
         Q_EMIT closeEditor(d->m_editor, NoHint);
@@ -761,7 +761,7 @@ bool JournalDelegate::eventFilter(QObject* o, QEvent* event)
 void JournalDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index) const
 {
     auto* editor = qobject_cast<TransactionEditorBase*>(editWidget);
-    if(editor) {
+    if (editor) {
         editor->loadTransaction(index);
     }
 }
@@ -772,7 +772,7 @@ void JournalDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* mode
     Q_UNUSED(index)
 
     auto* editor = qobject_cast<TransactionEditorBase*>(editWidget);
-    if(editor) {
+    if (editor) {
         // the editor may adjust the selection in case it changes when
         // it moves the selected transaction(s) around due to a date change.
         // therefore, we reselect when we return from saving.

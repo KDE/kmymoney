@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "delegateproxy.h"
 
 // ----------------------------------------------------------------------------
@@ -31,7 +30,7 @@ class DelegateProxyPrivate
     Q_DECLARE_PUBLIC(DelegateProxy)
 
 public:
-    explicit DelegateProxyPrivate(DelegateProxy *qq)
+    explicit DelegateProxyPrivate(DelegateProxy* qq)
         : q_ptr(qq)
     {
     }
@@ -48,7 +47,6 @@ public:
     DelegateProxy* q_ptr;
     QHash<int, const KMMStyledItemDelegate*> mapping;
 };
-
 
 DelegateProxy::DelegateProxy(QObject* parent)
     : QStyledItemDelegate(parent)
@@ -73,7 +71,7 @@ void DelegateProxy::addDelegate(eMyMoney::Delegates::Types role, KMMStyledItemDe
     }
 }
 
-const QStyledItemDelegate * DelegateProxy::delegate(const QModelIndex& idx) const
+const QStyledItemDelegate* DelegateProxy::delegate(const QModelIndex& idx) const
 {
     Q_D(const DelegateProxy);
     if (idx.isValid()) {

@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_interestcalculationwizardpage.h"
 
-InterestCalculationWizardPage::InterestCalculationWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::InterestCalculationWizardPage)
+InterestCalculationWizardPage::InterestCalculationWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::InterestCalculationWizardPage)
 {
     ui->setupUi(this);
     ui->ButtonGroup5->setId(ui->m_interestOnReceptionButton, 0);

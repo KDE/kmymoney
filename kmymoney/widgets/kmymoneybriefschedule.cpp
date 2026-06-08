@@ -11,11 +11,11 @@
 // QT Includes
 
 #include <QDate>
+#include <QIcon>
 #include <QLabel>
-#include <QToolButton>
 #include <QList>
 #include <QPushButton>
-#include <QIcon>
+#include <QToolButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -45,9 +45,9 @@ class KMyMoneyBriefSchedulePrivate
     Q_DISABLE_COPY(KMyMoneyBriefSchedulePrivate)
 
 public:
-    KMyMoneyBriefSchedulePrivate() :
-        ui(new Ui::KMyMoneyBriefSchedule),
-        m_index(0)
+    KMyMoneyBriefSchedulePrivate()
+        : ui(new Ui::KMyMoneyBriefSchedule)
+        , m_index(0)
     {
     }
 
@@ -87,9 +87,7 @@ public:
 
                 if (m_date < QDate::currentDate()) {
                     if (sched.isOverdue()) {
-                        QDate startD = (sched.lastPayment().isValid()) ?
-                                       sched.lastPayment() :
-                                       sched.startDate();
+                        QDate startD = (sched.lastPayment().isValid()) ? sched.lastPayment() : sched.startDate();
 
                         if (m_date.isValid())
                             startD = m_date;
@@ -116,21 +114,19 @@ public:
                 if (m_index == (m_scheduleList.count() - 1))
                     ui->m_nextButton->setEnabled(false);
             }
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
         }
     }
 
-
-    Ui::KMyMoneyBriefSchedule *ui;
+    Ui::KMyMoneyBriefSchedule* ui;
     QList<MyMoneySchedule> m_scheduleList;
     int m_index;
     QDate m_date;
-
 };
 
-KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent) :
-    QWidget(parent),
-    d_ptr(new KMyMoneyBriefSchedulePrivate)
+KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KMyMoneyBriefSchedulePrivate)
 {
     Q_D(KMyMoneyBriefSchedule);
     d->ui->setupUi(this);
@@ -195,4 +191,3 @@ void KMyMoneyBriefSchedule::slotSkipClicked()
     hide();
     Q_EMIT skipClicked(d->m_scheduleList[d->m_index], d->m_date);
 }
-

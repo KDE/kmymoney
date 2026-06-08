@@ -15,30 +15,30 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KTextEdit>
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KTextEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_kconfirmmanualenterdlg.h"
 
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneypayee.h"
-#include "mymoneysplit.h"
-#include "mymoneyschedule.h"
-#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
-#include "mymoneytransaction.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
-KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::KConfirmManualEnterDlg)
+KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KConfirmManualEnterDlg)
 {
     ui->setupUi(this);
     ui->buttonGroup1->setId(ui->m_discardRadio, 0);
@@ -147,14 +147,18 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
         ao = toSplits.front().value();
         an = tnSplits.front().value();
         if (ao != an) {
-            messageDetail += i18n("<p>Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
+            messageDetail += i18n("<p>Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",
+                                  ao.formatMoney(sec.smallestAccountFraction()),
+                                  an.formatMoney(sec.smallestAccountFraction()));
         }
 
         eMyMoney::Split::State fo, fn;
         fo = toSplits.front().reconcileFlag();
         fn = tnSplits.front().reconcileFlag();
         if (fo != fn) {
-            messageDetail += i18n("<p>Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
+            messageDetail += i18n("<p>Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",
+                                  KMyMoneyUtils::reconcileStateToString(fo, true),
+                                  KMyMoneyUtils::reconcileStateToString(fn, true));
         }
     } catch (const MyMoneyException& e) {
         KMessageBox::error(this, i18n("Fatal error in determining data: %1", QString::fromLatin1(e.what())));

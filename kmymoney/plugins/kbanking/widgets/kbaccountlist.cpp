@@ -8,13 +8,11 @@
 #include "config-kmymoney.h"
 
 #include "kbaccountlist.h"
-#include <assert.h>
-#include <QString>
 #include <KLocalizedString>
+#include <QString>
+#include <assert.h>
 
-
-KBAccountListViewItem::KBAccountListViewItem(KBAccountListView *parent,
-        AB_ACCOUNT_SPEC *acc)
+KBAccountListViewItem::KBAccountListViewItem(KBAccountListView* parent, AB_ACCOUNT_SPEC* acc)
     : QTreeWidgetItem(parent)
     , _account(acc)
 {
@@ -31,9 +29,7 @@ KBAccountListViewItem::KBAccountListViewItem(const KBAccountListViewItem& item)
     }
 }
 
-KBAccountListViewItem::KBAccountListViewItem(KBAccountListView *parent,
-        QTreeWidgetItem *after,
-        AB_ACCOUNT_SPEC *acc)
+KBAccountListViewItem::KBAccountListViewItem(KBAccountListView* parent, QTreeWidgetItem* after, AB_ACCOUNT_SPEC* acc)
     : QTreeWidgetItem(parent, after)
     , _account(acc)
 {
@@ -45,7 +41,7 @@ KBAccountListViewItem::~KBAccountListViewItem()
 {
 }
 
-AB_ACCOUNT_SPEC *KBAccountListViewItem::getAccount()
+AB_ACCOUNT_SPEC* KBAccountListViewItem::getAccount()
 {
     return _account;
 }
@@ -66,8 +62,8 @@ void KBAccountListViewItem::_populate()
     setText(column++, QString::fromUtf8(AB_AccountSpec_GetBankCode(_account)));
 
     // bank name
-//  tmp = AB_Account_GetBankName(_account);
-//  if (tmp.isEmpty())
+    //  tmp = AB_Account_GetBankName(_account);
+    //  if (tmp.isEmpty())
     tmp = i18nc("replacement for institution or account w/o name", "(unnamed)");
     setText(column++, tmp);
 
@@ -91,7 +87,7 @@ void KBAccountListViewItem::_populate()
     setText(column, tmp);
 }
 
-bool KBAccountListViewItem::operator< (const QTreeWidgetItem & other) const
+bool KBAccountListViewItem::operator<(const QTreeWidgetItem& other) const
 {
     bool ok1, ok2;
     int column = treeWidget() ? treeWidget()->sortColumn() : 0;
@@ -102,7 +98,7 @@ bool KBAccountListViewItem::operator< (const QTreeWidgetItem & other) const
     return QTreeWidgetItem::operator<(other);
 }
 
-KBAccountListView::KBAccountListView(QWidget *parent)
+KBAccountListView::KBAccountListView(QWidget* parent)
     : QTreeWidget(parent)
 {
     setAllColumnsShowFocus(true);
@@ -125,12 +121,12 @@ KBAccountListView::~KBAccountListView()
 {
 }
 
-void KBAccountListView::addAccount(AB_ACCOUNT_SPEC *acc)
+void KBAccountListView::addAccount(AB_ACCOUNT_SPEC* acc)
 {
     new KBAccountListViewItem(this, acc);
 }
 
-void KBAccountListView::addAccounts(const std::list<AB_ACCOUNT_SPEC*> &accs)
+void KBAccountListView::addAccounts(const std::list<AB_ACCOUNT_SPEC*>& accs)
 {
     std::list<AB_ACCOUNT_SPEC*>::const_iterator it;
 
@@ -139,9 +135,9 @@ void KBAccountListView::addAccounts(const std::list<AB_ACCOUNT_SPEC*> &accs)
     } /* for */
 }
 
-AB_ACCOUNT_SPEC *KBAccountListView::getCurrentAccount()
+AB_ACCOUNT_SPEC* KBAccountListView::getCurrentAccount()
 {
-    KBAccountListViewItem *entry;
+    KBAccountListViewItem* entry;
 
     entry = dynamic_cast<KBAccountListViewItem*>(currentItem());
     if (!entry) {
@@ -153,7 +149,7 @@ AB_ACCOUNT_SPEC *KBAccountListView::getCurrentAccount()
 std::list<AB_ACCOUNT_SPEC*> KBAccountListView::getSelectedAccounts()
 {
     std::list<AB_ACCOUNT_SPEC*> accs;
-    KBAccountListViewItem *entry;
+    KBAccountListViewItem* entry;
 
     // Create an iterator and give the listview as argument
     QTreeWidgetItemIterator it(this);
@@ -172,7 +168,7 @@ std::list<AB_ACCOUNT_SPEC*> KBAccountListView::getSelectedAccounts()
 std::list<AB_ACCOUNT_SPEC*> KBAccountListView::getSortedAccounts()
 {
     std::list<AB_ACCOUNT_SPEC*> accs;
-    KBAccountListViewItem *entry;
+    KBAccountListViewItem* entry;
 
     // Create an iterator and give the listview as argument
     QTreeWidgetItemIterator it(this);

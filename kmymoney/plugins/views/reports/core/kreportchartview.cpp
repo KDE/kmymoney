@@ -11,8 +11,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QStandardItemModel>
 #include <QFontDatabase>
+#include <QStandardItemModel>
 #include <QtMath>
 
 // ----------------------------------------------------------------------------
@@ -22,70 +22,75 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#include "kmymoneysettings.h"
+#include "kreportcartesianaxis.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include <KChartBackgroundAttributes>
+#include <KChartBarDiagram>
+#include <KChartCartesianAxis>
 #include <KChartDataValueAttributes>
-#include <KChartMarkerAttributes>
+#include <KChartFrameAttributes>
 #include <KChartGridAttributes>
 #include <KChartHeaderFooter>
 #include <KChartLegend>
 #include <KChartLineDiagram>
-#include <KChartBarDiagram>
+#include <KChartMarkerAttributes>
 #include <KChartPieDiagram>
 #include <KChartRingDiagram>
-#include <KChartCartesianAxis>
-#include <KChartFrameAttributes>
-#include "kmymoneysettings.h"
-#include "kreportcartesianaxis.h"
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
-#include "mymoneyenums.h"
 
 using namespace reports;
 
-KReportChartView::KReportChartView(QWidget* parent) :
-    KChart::Chart(parent),
-    m_accountSeries(0),
-    m_seriesTotals(0),
-    m_numColumns(0),
-    m_skipZero(0),
-    m_backgroundBrush(KColorScheme(QPalette::Current).background()),
-    m_foregroundBrush(KColorScheme(QPalette::Current).foreground()),
-    m_precision(2)
+KReportChartView::KReportChartView(QWidget* parent)
+    : KChart::Chart(parent)
+    , m_accountSeries(0)
+    , m_seriesTotals(0)
+    , m_numColumns(0)
+    , m_skipZero(0)
+    , m_backgroundBrush(KColorScheme(QPalette::Current).background())
+    , m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
+    , m_precision(2)
 {
     // ********************************************************************
     // Set KMyMoney's Chart Parameter Defaults
     // ********************************************************************
 
-    //Set the background obtained from the color scheme
+    // Set the background obtained from the color scheme
     BackgroundAttributes backAttr(backgroundAttributes());
     backAttr.setBrush(m_backgroundBrush);
     backAttr.setVisible(true);
     setBackgroundAttributes(backAttr);
 }
 
-void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numberColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList)
+void KReportChartView::drawPivotChart(const PivotGrid& grid,
+                                      const MyMoneyReport& config,
+                                      int numberColumns,
+                                      const QStringList& columnHeadings,
+                                      const QList<ERowType>& rowTypeList,
+                                      const QStringList& columnTypeHeaderList)
 {
     if (numberColumns == 0)
         return;
 
-    //set skipZero
+    // set skipZero
     m_skipZero = config.isSkippingZero();
 
-    //remove existing headers
+    // remove existing headers
     const HeaderFooterList hfList = headerFooters();
     for (const auto& hf : hfList)
         delete hf;
 
-    //remove existing legends
+    // remove existing legends
     const LegendList lgList = legends();
     for (const auto& lg : lgList)
         delete lg;
 
-    //make sure the model is clear
+    // make sure the model is clear
     m_model.clear();
     const bool blocked = m_model.blockSignals(true); // don't Q_EMIT dataChanged() signal during each drawPivotRowSet
 
-    //set the new header
+    // set the new header
     HeaderFooter* header = new HeaderFooter;
     // adding some extra spaces at the end here avoids truncation
     // of the label on the diagram and solves bug #399260
@@ -135,10 +140,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
         // set-up data range
         cartesianPlane->setVerticalRange(qMakePair(config.isDataUserDefined() ? loc.toDouble(config.dataRangeStart()) : 0.0,
-                                         config.isDataUserDefined() ? loc.toDouble(config.dataRangeEnd()) : 0.0));
+                                                   config.isDataUserDefined() ? loc.toDouble(config.dataRangeEnd()) : 0.0));
 
-        //set-up x axis
-        CartesianAxis *xAxis = new CartesianAxis();
+        // set-up x axis
+        CartesianAxis* xAxis = new CartesianAxis();
         xAxis->setPosition(CartesianAxis::Bottom);
         xAxis->setTitleText(i18n("Time"));
         TextAttributes xAxisTitleTextAttr(xAxis->titleTextAttributes());
@@ -153,8 +158,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         xAxisRulerAttr.setShowRulerLine(true);
         xAxis->setRulerAttributes(xAxisRulerAttr);
 
-        //set-up y axis
-        KReportCartesianAxis *yAxis = new KReportCartesianAxis(loc, config.yLabelsPrecision());
+        // set-up y axis
+        KReportCartesianAxis* yAxis = new KReportCartesianAxis(loc, config.yLabelsPrecision());
         yAxis->setPosition(CartesianAxis::Left);
 
         if (config.isIncludingPrice())
@@ -245,10 +250,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
         break;
     }
-    default:  // no valid chart types
+    default: // no valid chart types
         return;
     }
-    //get the coordinate plane  and the diagram for later use
+    // get the coordinate plane  and the diagram for later use
     AbstractCoordinatePlane* cPlane = coordinatePlane();
     AbstractDiagram* planeDiagram = cPlane->diagram();
     planeDiagram->setAntiAliasing(true);
@@ -301,7 +306,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
-            //determine whether expenses should be displayed as negative
+            // determine whether expenses should be displayed as negative
             const bool invertValue = (config.isNegExpenses() && (*it_outergroup).m_inverted);
             // iterate over inner groups
             PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
@@ -309,9 +314,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                 // iterate over accounts
                 PivotInnerGroup::const_iterator it_row = (*it_innergroup).begin();
                 while (it_row != (*it_innergroup).end()) {
-                    //Do not include investments accounts in the chart because they are merely container of stock and other accounts
+                    // Do not include investments accounts in the chart because they are merely container of stock and other accounts
                     if (it_row.key().accountType() != eMyMoney::Account::Type::Investment) {
-
                         // get displayed precision
                         int currencyPrecision = precision;
                         int securityPrecision = precision;
@@ -326,25 +330,29 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                         }
 
                         // iterate row types
-                        for (int i = 0 ; i < myRowTypeListSize; ++i) {
+                        for (int i = 0; i < myRowTypeListSize; ++i) {
                             QString legendText;
 
-                            //only show the column type in the header if there is more than one type
+                            // only show the column type in the header if there is more than one type
                             if (myRowTypeListSize > 1)
                                 legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + it_row.key().name());
                             else
                                 legendText = it_row.key().name();
 
-                            //set the legend text
+                            // set the legend text
                             legendNames.append(legendText);
                             legendTotal.insert(it_row.value().value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
                             precision = myRowTypeList.at(i) == ePrice ? securityPrecision : currencyPrecision;
 
-                            //set the cell value and tooltip
-                            rowNum = drawPivotGridRow(rowNum, it_row.value().value(myRowTypeList.at(i)),
+                            // set the cell value and tooltip
+                            rowNum = drawPivotGridRow(rowNum,
+                                                      it_row.value().value(myRowTypeList.at(i)),
                                                       config.isChartDataLabels() ? legendText : QString(),
-                                                      0, numberColumns, precision, invertValue);
+                                                      0,
+                                                      numberColumns,
+                                                      precision,
+                                                      invertValue);
                         }
                     }
                     ++it_row;
@@ -353,113 +361,122 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             }
             ++it_outergroup;
         }
-    }
-    break;
+    } break;
 
     case eMyMoney::Report::DetailLevel::Top: {
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
-            //determine whether expenses should be displayed as negative
+            // determine whether expenses should be displayed as negative
             const bool invertValue = (config.isNegExpenses() && (*it_outergroup).m_inverted);
             // iterate over inner groups
             PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
             while (it_innergroup != (*it_outergroup).end()) {
                 // iterate row types
-                for (int i = 0 ; i < myRowTypeListSize; ++i) {
+                for (int i = 0; i < myRowTypeListSize; ++i) {
                     QString legendText;
 
-                    //only show the column type in the header if there is more than one type
+                    // only show the column type in the header if there is more than one type
                     if (myRowTypeListSize > 1)
                         legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + it_innergroup.key());
                     else
                         legendText = it_innergroup.key();
 
-                    //set the legend text
+                    // set the legend text
                     legendNames.append(legendText);
                     legendTotal.insert((*it_innergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
-                    //set the cell value and tooltip
-                    rowNum = drawPivotGridRow(rowNum, (*it_innergroup).m_total.value(myRowTypeList.at(i)),
+                    // set the cell value and tooltip
+                    rowNum = drawPivotGridRow(rowNum,
+                                              (*it_innergroup).m_total.value(myRowTypeList.at(i)),
                                               config.isChartDataLabels() ? legendText : QString(),
-                                              0, numberColumns, precision, invertValue);
+                                              0,
+                                              numberColumns,
+                                              precision,
+                                              invertValue);
                 }
                 ++it_innergroup;
             }
             ++it_outergroup;
         }
-    }
-    break;
+    } break;
 
     case eMyMoney::Report::DetailLevel::Group: {
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
-            //determine whether expenses should be displayed as negative
+            // determine whether expenses should be displayed as negative
             const bool invertValue = (config.isNegExpenses() && (*it_outergroup).m_inverted);
             // iterate row types
-            for (int i = 0 ; i < myRowTypeListSize; ++i) {
+            for (int i = 0; i < myRowTypeListSize; ++i) {
                 QString legendText;
 
-                //only show the column type in the header if there is more than one type
+                // only show the column type in the header if there is more than one type
                 if (myRowTypeListSize > 1)
                     legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + it_outergroup.key());
                 else
                     legendText = it_outergroup.key();
 
-                //set the legend text
+                // set the legend text
                 legendNames.append(legendText);
                 legendTotal.insert((*it_outergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
-                //set the cell value and tooltip
-                rowNum = drawPivotGridRow(rowNum, (*it_outergroup).m_total.value(myRowTypeList.at(i)),
+                // set the cell value and tooltip
+                rowNum = drawPivotGridRow(rowNum,
+                                          (*it_outergroup).m_total.value(myRowTypeList.at(i)),
                                           config.isChartDataLabels() ? legendText : QString(),
-                                          0, numberColumns, precision, invertValue);
+                                          0,
+                                          numberColumns,
+                                          precision,
+                                          invertValue);
             }
             ++it_outergroup;
         }
 
-        //if selected, show totals too
+        // if selected, show totals too
         if (config.isShowingRowTotals()) {
             // iterate row types
-            for (int i = 0 ; i < myRowTypeListSize; ++i) {
+            for (int i = 0; i < myRowTypeListSize; ++i) {
                 QString legendText;
 
-                //only show the column type in the header if there is more than one type
+                // only show the column type in the header if there is more than one type
                 if (myRowTypeListSize > 1)
                     legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + i18nc("Total balance", "Total"));
                 else
                     legendText = QString(i18nc("Total balance", "Total"));
 
-                //set the legend text
+                // set the legend text
                 legendNames.append(legendText);
                 legendTotal.insert(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
-                //set the cell value and tooltip
-                rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
+                // set the cell value and tooltip
+                rowNum = drawPivotGridRow(rowNum,
+                                          grid.m_total.value(myRowTypeList.at(i)),
                                           config.isChartDataLabels() ? legendText : QString(),
-                                          0, numberColumns, precision, false);
+                                          0,
+                                          numberColumns,
+                                          precision,
+                                          false);
             }
         }
-    }
-    break;
+    } break;
 
     case eMyMoney::Report::DetailLevel::Total: {
         // iterate row types
-        for (int i = 0 ; i < myRowTypeListSize; ++i) {
+        for (int i = 0; i < myRowTypeListSize; ++i) {
             QString legendText;
 
-            //only show the column type in the header if there is more than one type
+            // only show the column type in the header if there is more than one type
             if (myRowTypeListSize > 1)
                 legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + i18nc("Total balance", "Total"));
             else
                 legendText = QString(i18nc("Total balance", "Total"));
 
-            //set the legend text
+            // set the legend text
             legendNames.append(legendText);
             legendTotal.insert(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
-            //set the cell value and tooltip
+            // set the cell value and tooltip
             if (config.isMixedTime()) {
                 if (myRowTypeList.at(i) == eActual)
                     rowNum = drawPivotGridRow(rowNum,
@@ -469,7 +486,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                                               config.currentDateColumn(),
                                               precision,
                                               config.isNegExpenses());
-                else if (myRowTypeList.at(i)== eForecast) {
+                else if (myRowTypeList.at(i) == eForecast) {
                     rowNum = drawPivotGridRow(rowNum,
                                               grid.m_total.value(myRowTypeList.at(i)),
                                               config.isChartDataLabels() ? legendText : QString(),
@@ -496,25 +513,23 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                                           config.isNegExpenses());
         }
 
-    }
-    break;
+    } break;
     default:
     case eMyMoney::Report::DetailLevel::End:
         return;
     }
 
-    auto legendRows = legendTotal.values();                     // list of legend rows sorted ascending by total value
+    auto legendRows = legendTotal.values(); // list of legend rows sorted ascending by total value
     for (auto i = 0; i < legendRows.count(); ++i) {
-        const auto ixRow = legendRows.count() - 1 - i;            // take row with the highest total value i.e. form the bottom
+        const auto ixRow = legendRows.count() - 1 - i; // take row with the highest total value i.e. form the bottom
         const auto row = legendRows.at(ixRow);
-        if ( row != i) {                                          // if legend isn't sorted by total value, then rearrange model
-            if ((accountSeries() && !seriesTotals()) ||
-                    (seriesTotals() && !accountSeries()))
+        if (row != i) { // if legend isn't sorted by total value, then rearrange model
+            if ((accountSeries() && !seriesTotals()) || (seriesTotals() && !accountSeries()))
                 m_model.insertColumn(i, m_model.takeColumn(row));
             else
                 m_model.insertRow(i, m_model.takeRow(row));
 
-            for (auto j = i; j < ixRow; ++j) {                      // fix invalid indexes after above move operation
+            for (auto j = i; j < ixRow; ++j) { // fix invalid indexes after above move operation
                 if (legendRows.at(j) < row)
                     ++legendRows[j];
             }
@@ -536,8 +551,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     if (config.chartType() == eMyMoney::Report::ChartType::Line) {
         AttributesModel* diagramAttributes = planeDiagram->attributesModel();
         int penWidth = config.chartLineWidth();
-        for (int i = 0 ; i < rowNum ; ++i) {
-            QPen pen = diagramAttributes->headerData(i, Qt::Horizontal, DatasetPenRole).value< QPen >();
+        for (int i = 0; i < rowNum; ++i) {
+            QPen pen = diagramAttributes->headerData(i, Qt::Horizontal, DatasetPenRole).value<QPen>();
             pen.setWidth(penWidth);
             m_model.setHeaderData(i, Qt::Horizontal, QVariant::fromValue(pen), DatasetPenRole);
         }
@@ -550,12 +565,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     // the legend is needed only if at least two data sets are rendered
     if (qMin(static_cast<int>(KMyMoneySettings::maximumLegendItems()), rowNum) > 1) {
-        //the legend will be used later
+        // the legend will be used later
         Legend* legend = new Legend(planeDiagram, this);
         legend->setTitleText(i18nc("Chart legend title", "Legend"));
 
-        //set the legend basic attributes
-        //this is done after adding the legend because the values are overridden when adding the legend to the chart
+        // set the legend basic attributes
+        // this is done after adding the legend because the values are overridden when adding the legend to the chart
         const auto maxLegendItems = KMyMoneySettings::maximumLegendItems();
         auto legendItems = legendNames.count();
 
@@ -590,8 +605,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         legend->setTitleTextAttributes(legendTitleTextAttr);
     }
 
-    //set data value attributes
-    //make sure to show only the required number of fractional digits on the labels of the graph
+    // set data value attributes
+    // make sure to show only the required number of fractional digits on the labels of the graph
     DataValueAttributes dataValueAttr(planeDiagram->dataValueAttributes());
     MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
     markerAttr.setVisible(true);
@@ -609,7 +624,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     m_model.blockSignals(blocked); // reenable dataChanged() signal
 
-    //assign model to the diagram
+    // assign model to the diagram
     planeDiagram->setModel(&m_model);
 
     // use MyMoney::formatMoney to format the values
@@ -680,7 +695,13 @@ void KReportChartView::adjustVerticalRange(const int precision)
         cartesianPlane->setVerticalRange(qMakePair(dataRangeStart - 2, dataRangeEnd + 2));
 }
 
-int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::PivotGridRow& gridRow, const QString& legendText, const int startColumn, const int columnsToDraw, const int precision, const bool invertValue )
+int reports::KReportChartView::drawPivotGridRow(int rowNum,
+                                                const reports::PivotGridRow& gridRow,
+                                                const QString& legendText,
+                                                const int startColumn,
+                                                const int columnsToDraw,
+                                                const int precision,
+                                                const bool invertValue)
 {
     // Columns
     const QString toolTip = QStringLiteral("<h2>%1</h2><strong>%2</strong><br>");
@@ -693,7 +714,7 @@ int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::Piv
             const MyMoneyMoney monetaryValue(value);
             item->setToolTip(toolTip.arg(legendText, monetaryValue.formatMoney(QString(), precision)));
         }
-        //set the cell value
+        // set the cell value
         if (accountSeries()) {
             m_model.insertRows(rowNum, 1);
             m_model.setItem(rowNum, 0, item);
@@ -704,7 +725,7 @@ int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::Piv
 
     } else {
         QList<QStandardItem*> itemList;
-        for (int i = 0; i < startColumn-1; ++i) {
+        for (int i = 0; i < startColumn - 1; ++i) {
             itemList.append(new QStandardItem);
         }
         for (int i = startColumn; i < startColumn + columnsToDraw; ++i) {
@@ -748,10 +769,10 @@ void KReportChartView::justifyModelSize(int rows, int columns)
     const int currentCols = m_model.columnCount();
 
     if (currentCols < columns)
-        if (! m_model.insertColumns(currentCols, columns - currentCols))
+        if (!m_model.insertColumns(currentCols, columns - currentCols))
             qDebug() << "justifyModelSize: could not increase model size.";
     if (currentRows < rows)
-        if (! m_model.insertRows(currentRows, rows - currentRows))
+        if (!m_model.insertRows(currentRows, rows - currentRows))
             qDebug() << "justifyModelSize: could not increase model size.";
 
     Q_ASSERT(m_model.rowCount() >= rows);
@@ -762,7 +783,7 @@ void KReportChartView::setLineWidth(const int lineWidth)
 {
     LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
     if (lineDiagram) {
-        QList <QPen> pens;
+        QList<QPen> pens;
         pens = lineDiagram->datasetPens();
         for (int i = 0; i < pens.count(); ++i) {
             pens[i].setWidth(lineWidth);
@@ -794,7 +815,7 @@ void KReportChartView::drawLimitLine(const double limit)
 
     planeDiagram->setModel(&m_model);
 
-//TODO: add format to the line
+    // TODO: add format to the line
 }
 
 void KReportChartView::removeLegend()

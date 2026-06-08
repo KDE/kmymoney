@@ -22,21 +22,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksettingsgeneral.h"
-#include "ksettingsregister.h"
 #include "ksettingscolors.h"
 #include "ksettingsfonts.h"
-#include "ksettingsicons.h"
-#include "ksettingsschedules.h"
-#include "ksettingsonlinequotes.h"
+#include "ksettingsgeneral.h"
 #include "ksettingshome.h"
+#include "ksettingsicons.h"
+#include "ksettingsonlinequotes.h"
 #include "ksettingsplugins.h"
+#include "ksettingsregister.h"
+#include "ksettingsschedules.h"
 
 #include "icons.h"
 
 using namespace Icons;
 
-KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config)
+KSettingsKMyMoney::KSettingsKMyMoney(QWidget* parent, const QString& name, KCoreConfigSkeleton* config)
     : KConfigDialog(parent, name, config)
 {
     // create the pages ...

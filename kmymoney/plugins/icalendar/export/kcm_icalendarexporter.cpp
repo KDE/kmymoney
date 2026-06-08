@@ -7,8 +7,8 @@
 #include <config-kmymoney-version.h>
 
 // Qt includes
-#include <QComboBox>
 #include <QBoxLayout>
+#include <QComboBox>
 
 // KDE includes
 #include <KAboutData>
@@ -44,7 +44,7 @@ KCMiCalendarExporter::KCMiCalendarExporter(QObject* parent, const QVariantList& 
 {
     PluginSettingsWidget* w = new PluginSettingsWidget(widget());
     addConfig(ICalendarSettings::self(), w);
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout;
     widget()->setLayout(layout);
     layout->addWidget(w);
     load();

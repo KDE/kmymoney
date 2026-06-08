@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyprice.h"
-#include "mymoneymoney.h"
 #include "mymoneyenums.h"
+#include "mymoneymoney.h"
+#include "mymoneyprice.h"
 #include "mymoneyutils.h"
 
 class EquitiesModelPrivate
@@ -37,7 +37,9 @@ public:
     {
     }
 
-    ~EquitiesModelPrivate() {}
+    ~EquitiesModelPrivate()
+    {
+    }
 
 #if 0
     void loadInvestmentAccount(QStandardItem *node, const MyMoneyAccount &invAcc)
@@ -186,7 +188,7 @@ public:
 #endif
 };
 
-EquitiesModel::EquitiesModel(QObject *parent)
+EquitiesModel::EquitiesModel(QObject* parent)
     : KExtraColumnsProxyModel(parent)
     , d_ptr(new EquitiesModelPrivate(this))
 {
@@ -229,7 +231,7 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
 
             const auto value = (file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId) * balance);
 
-            if(role == Qt::EditRole) {
+            if (role == Qt::EditRole) {
                 return value.toDouble();
             } else {
                 return value.formatMoney(tradingCurrencySymbol, prec);
@@ -240,7 +242,7 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
             const auto balance = file->balance(acc.id(), QDate::currentDate());
             const auto prec = MyMoneyMoney::denomToPrec(securityIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
 
-            if(role == Qt::EditRole) {
+            if (role == Qt::EditRole) {
                 return balance.toDouble();
             } else {
                 return balance.formatMoney(QString(), prec);
@@ -254,7 +256,7 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
 
             const auto value = file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId);
 
-            if(role == Qt::EditRole) {
+            if (role == Qt::EditRole) {
                 return value.toDouble();
             } else {
                 return value.formatMoney(tradingCurrencySymbol, prec);
@@ -271,12 +273,12 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
             break;
         }
     } else {
-        switch(role) {
+        switch (role) {
         case Qt::DecorationRole:
             return QVariant();
 
         case Qt::TextAlignmentRole:
-            switch(extraColumn) {
+            switch (extraColumn) {
             case Symbol:
                 return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
             default:
@@ -458,7 +460,7 @@ public:
     bool m_hideZeroBalanceAccounts;
 };
 
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
 #define QSortFilterProxyModel KRecursiveFilterProxyModel
 #endif
 EquitiesFilterProxyModel::EquitiesFilterProxyModel(QObject *parent, EquitiesModel *model, const QList<EquitiesModel::Column> &columns)

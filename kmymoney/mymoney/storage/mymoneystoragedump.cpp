@@ -9,13 +9,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
+#include <QColor>
+#include <QDataStream>
 #include <QDate>
 #include <QList>
+#include <QString>
 #include <QStringList>
 #include <QTextStream>
-#include <QDataStream>
-#include <QColor>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -24,28 +24,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
-#include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneytag.h"
-#include "mymoneyreport.h"
-#include "mymoneybudget.h"
-#include "mymoneyschedule.h"
-#include "mymoneypayee.h"
-#include "mymoneymoney.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "mymoneyenums.h"
-#include "parametersmodel.h"
 #include "accountsmodel.h"
-#include "journalmodel.h"
-#include "payeesmodel.h"
-#include "tagsmodel.h"
 #include "institutionsmodel.h"
+#include "journalmodel.h"
+#include "mymoneyaccount.h"
+#include "mymoneybudget.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytag.h"
+#include "mymoneytransaction.h"
+#include "parametersmodel.h"
+#include "payeesmodel.h"
 #include "schedulesmodel.h"
+#include "tagsmodel.h"
 
 MyMoneyStorageDump::MyMoneyStorageDump()
 {
@@ -96,8 +96,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         const auto splits = transaction.splits();
         for (const auto& split : splits) {
             auto acc = file->account(split.accountId());
-            if (acc.accountGroup() != eMyMoney::Account::Type::Expense
-                    && acc.accountGroup() != eMyMoney::Account::Type::Income)
+            if (acc.accountGroup() != eMyMoney::Account::Type::Expense && acc.accountGroup() != eMyMoney::Account::Type::Income)
                 accountCount++;
         }
         if (accountCount > 1)
@@ -111,8 +110,16 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "payees = " << file->payeeList().count() << ", next id = " << file->payeesModel()->peekNextId() << "\n";
     s << "tags = " << file->tagList().count() << ", next id = " << file->tagsModel()->peekNextId() << "\n";
     s << "institutions = " << file->institutionList().count() << ", next id = " << file->institutionsModel()->peekNextId() << "\n";
-    s << "schedules = " << file->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
-            QDate(), QDate(), false).count() << ", next id = " << file->schedulesModel()->peekNextId() << "\n";
+    s << "schedules = "
+      << file->scheduleList(QString(),
+                            eMyMoney::Schedule::Type::Any,
+                            eMyMoney::Schedule::Occurrence::Any,
+                            eMyMoney::Schedule::PaymentType::Any,
+                            QDate(),
+                            QDate(),
+                            false)
+             .count()
+      << ", next id = " << file->schedulesModel()->peekNextId() << "\n";
     s << "\n";
 
     s << "Institutions\n";
@@ -270,7 +277,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         s << "    price precision = " << (*it_e).pricePrecision() << "\n";
 
         s << "    KVP: " << "\n";
-        QMap<QString, QString>kvp = (*it_e).pairs();
+        QMap<QString, QString> kvp = (*it_e).pairs();
         QMap<QString, QString>::Iterator it;
         for (it = kvp.begin(); it != kvp.end(); ++it) {
             s << "      '" << it.key() << "' = '" << it.value() << "'\n";
@@ -307,12 +314,16 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     }
     s << "\n";
 
-
     s << "Schedules" << "\n";
     s << "---------" << "\n";
 
-    auto list_s = file->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
-                                     QDate(), QDate(), false);
+    auto list_s = file->scheduleList(QString(),
+                                     eMyMoney::Schedule::Type::Any,
+                                     eMyMoney::Schedule::Occurrence::Any,
+                                     eMyMoney::Schedule::PaymentType::Any,
+                                     QDate(),
+                                     QDate(),
+                                     false);
     QList<MyMoneySchedule>::const_iterator it_s;
     for (it_s = list_s.cbegin(); it_s != list_s.cend(); ++it_s) {
         s << "  ID = " << (*it_s).id() << "\n";
@@ -378,7 +389,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     }
 }
 
-void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent)
+void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer& kvp, int indent)
 {
     QString ind;
     ind.fill(' ', indent);
@@ -425,7 +436,7 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyFile* file, cons
         try {
             acc = file->account(split.accountId());
             s << " (" << acc.name() << ") [" << acc.currencyId() << "]\n";
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
             s << " (---) [---]\n";
         }
         s << "    Memo = " << split.memo() << "\n";

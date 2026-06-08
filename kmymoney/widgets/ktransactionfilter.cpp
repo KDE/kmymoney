@@ -39,9 +39,9 @@
 
 #include "ui_ktransactionfilter.h"
 
-KTransactionFilter::KTransactionFilter(QWidget *parent, bool withEquityAccounts, bool withInvestments, bool withDataTab) :
-    QWidget(parent),
-    d_ptr(new KTransactionFilterPrivate(this))
+KTransactionFilter::KTransactionFilter(QWidget* parent, bool withEquityAccounts, bool withInvestments, bool withDataTab)
+    : QWidget(parent)
+    , d_ptr(new KTransactionFilterPrivate(this))
 {
     Q_D(KTransactionFilter);
     d->init(withEquityAccounts, withInvestments, withDataTab);
@@ -118,8 +118,7 @@ void KTransactionFilter::slotUpdateSelections()
 
     // Amount tab
     if ((d->ui->m_amountButton->isChecked() && d->ui->m_amountEdit->isValid())
-            || (d->ui->m_amountRangeButton->isChecked()
-                && (d->ui->m_amountFromEdit->isValid() || d->ui->m_amountToEdit->isValid()))) {
+        || (d->ui->m_amountRangeButton->isChecked() && (d->ui->m_amountFromEdit->isValid() || d->ui->m_amountToEdit->isValid()))) {
         if (!txt.isEmpty())
             txt += separator;
         txt += i18n("Amount");
@@ -133,8 +132,7 @@ void KTransactionFilter::slotUpdateSelections()
     }
 
     // Tags tab
-    if (!d->allItemsSelected(d->ui->m_tagsView)
-            || d->ui->m_emptyTagsButton->isChecked()) {
+    if (!d->allItemsSelected(d->ui->m_tagsView) || d->ui->m_emptyTagsButton->isChecked()) {
         if (!txt.isEmpty())
             txt += separator;
         txt += i18n("Tags");
@@ -142,8 +140,7 @@ void KTransactionFilter::slotUpdateSelections()
     d->ui->m_tagsView->setEnabled(!d->ui->m_emptyTagsButton->isChecked());
 
     // Payees tab
-    if (!d->allItemsSelected(d->ui->m_payeesView)
-            || d->ui->m_emptyPayeesButton->isChecked()) {
+    if (!d->allItemsSelected(d->ui->m_payeesView) || d->ui->m_emptyPayeesButton->isChecked()) {
         if (!txt.isEmpty())
             txt += separator;
         txt += i18n("Payees");
@@ -152,17 +149,17 @@ void KTransactionFilter::slotUpdateSelections()
 
     // Details tab
     if (d->ui->m_typeBox->currentIndex() != 0 //
-            || d->ui->m_stateBox->currentIndex() != 0 //
-            || d->ui->m_validityBox->currentIndex() != 0 //
-            || (d->ui->m_nrButton->isChecked() && d->ui->m_nrEdit->text().length() != 0) //
-            || (d->ui->m_nrRangeButton->isChecked() //
-                && (d->ui->m_nrFromEdit->text().length() != 0 || d->ui->m_nrToEdit->text().length() != 0))) {
+        || d->ui->m_stateBox->currentIndex() != 0 //
+        || d->ui->m_validityBox->currentIndex() != 0 //
+        || (d->ui->m_nrButton->isChecked() && d->ui->m_nrEdit->text().length() != 0) //
+        || (d->ui->m_nrRangeButton->isChecked() //
+            && (d->ui->m_nrFromEdit->text().length() != 0 || d->ui->m_nrToEdit->text().length() != 0))) {
         if (!txt.isEmpty())
             txt += separator;
         txt += i18n("Details");
     }
 
-    //Show a warning about transfers if Categories are filtered - bug #1523508
+    // Show a warning about transfers if Categories are filtered - bug #1523508
     if (!d->ui->m_categoriesView->allItemsSelected()) {
         d->ui->m_transferWarning->setText(i18n("Warning: Filtering by Category will exclude all transfers from the results."));
     } else {
@@ -303,7 +300,6 @@ MyMoneyTransactionFilter KTransactionFilter::setupFilter()
 
     } else if ((d->ui->m_amountRangeButton->isChecked() //
                 && (d->ui->m_amountFromEdit->isValid() || d->ui->m_amountToEdit->isValid()))) {
-
         MyMoneyMoney from(MyMoneyMoney::minValue), to(MyMoneyMoney::maxValue);
         if (d->ui->m_amountFromEdit->isValid())
             from = d->ui->m_amountFromEdit->value();
@@ -348,7 +344,7 @@ MyMoneyTransactionFilter KTransactionFilter::setupFilter()
         d->m_filter.setNumberFilter(d->ui->m_nrEdit->text(), d->ui->m_nrEdit->text());
 
     if (d->ui->m_nrRangeButton->isChecked() //
-            && (!d->ui->m_nrFromEdit->text().isEmpty() || !d->ui->m_nrToEdit->text().isEmpty())) {
+        && (!d->ui->m_nrFromEdit->text().isEmpty() || !d->ui->m_nrToEdit->text().isEmpty())) {
         d->m_filter.setNumberFilter(d->ui->m_nrFromEdit->text(), d->ui->m_nrToEdit->text());
     }
     return d->m_filter;
@@ -546,7 +542,6 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
             d->m_dateRange->setDateRange(eMyMoney::TransactionFilter::Date::All);
         }
     }
-
 }
 
 KMyMoneyAccountSelector* KTransactionFilter::categoriesView()

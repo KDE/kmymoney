@@ -20,26 +20,25 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneymoney.h"
-#include "mymoneybudget.h"
 #include "accountsproxymodel.h"
 #include "accountsproxymodel_p.h"
 #include "budgetviewproxymodel.h"
+#include "mymoneyaccount.h"
+#include "mymoneybudget.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 #include "mymoneymodelbase.h"
-
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+#include "mymoneyutils.h"
 
 class BudgetViewProxyModelPrivate : public AccountsProxyModelPrivate
 {
     Q_DISABLE_COPY(BudgetViewProxyModelPrivate)
 
 public:
-    BudgetViewProxyModelPrivate() :
-        AccountsProxyModelPrivate()
+    BudgetViewProxyModelPrivate()
+        : AccountsProxyModelPrivate()
     {
     }
 
@@ -72,14 +71,14 @@ public:
         return basename;
     }
 
-    MyMoneyBudget   m_budget;
-    MyMoneyMoney    m_lastBalance;
-    QColor          positiveScheme;
-    QColor          negativeScheme;
+    MyMoneyBudget m_budget;
+    MyMoneyMoney m_lastBalance;
+    QColor positiveScheme;
+    QColor negativeScheme;
 };
 
-BudgetViewProxyModel::BudgetViewProxyModel(QObject *parent) :
-    AccountsProxyModel(*new BudgetViewProxyModelPrivate, parent)
+BudgetViewProxyModel::BudgetViewProxyModel(QObject* parent)
+    : AccountsProxyModel(*new BudgetViewProxyModelPrivate, parent)
 {
     setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
@@ -91,7 +90,7 @@ BudgetViewProxyModel::~BudgetViewProxyModel()
 void BudgetViewProxyModel::setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color)
 {
     Q_D(BudgetViewProxyModel);
-    switch(scheme) {
+    switch (scheme) {
     case AccountsModel::Positive:
         d->positiveScheme = color;
         break;
@@ -101,12 +100,11 @@ void BudgetViewProxyModel::setColorScheme(AccountsModel::ColorScheme scheme, con
     }
 }
 
-
 /**
-  * This function was reimplemented to add the data needed by the other columns that this model
-  * is adding besides the columns of the @ref AccountsModel.
-  */
-QVariant BudgetViewProxyModel::data(const QModelIndex & idx, int role) const
+ * This function was reimplemented to add the data needed by the other columns that this model
+ * is adding besides the columns of the @ref AccountsModel.
+ */
+QVariant BudgetViewProxyModel::data(const QModelIndex& idx, int role) const
 {
     Q_D(const BudgetViewProxyModel);
 

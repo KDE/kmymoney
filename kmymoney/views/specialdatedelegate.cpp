@@ -9,32 +9,29 @@
 // QT Includes
 
 #include <QApplication>
-#include <QScrollBar>
-#include <QPainter>
-#include <QDate>
-#include <QSortFilterProxyModel>
 #include <QColor>
+#include <QDate>
 #include <QDebug>
+#include <QPainter>
+#include <QScrollBar>
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KColorScheme>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "ledgerview.h"
 #include "journalmodel.h"
-#include "payeesmodel.h"
+#include "ledgerview.h"
+#include "mymoneyfile.h"
 #include "newtransactioneditor.h"
+#include "payeesmodel.h"
 
 QColor SpecialDateDelegate::m_separatorColor = QColor(0xff, 0xf2, 0x9b);
-
-
-
 
 class SpecialDateDelegate::Private
 {
@@ -43,16 +40,16 @@ public:
         : m_lineHeight(12)
         , m_margin(2)
 
-    {}
+    {
+    }
 
     ~Private()
     {
     }
 
-    int                           m_lineHeight;
-    int                           m_margin;
+    int m_lineHeight;
+    int m_margin;
 };
-
 
 SpecialDateDelegate::SpecialDateDelegate(LedgerView* parent)
     : KMMStyledItemDelegate(parent)
@@ -83,7 +80,7 @@ void SpecialDateDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 
     painter->save();
 
-    QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
+    QAbstractItemView* view = qobject_cast<QAbstractItemView*>(parent());
 
     // Background
     opt.backgroundBrush = opt.palette.base();
@@ -91,15 +88,15 @@ void SpecialDateDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
     opt.palette.setColor(QPalette::Normal, QPalette::Text, property("groupMarkerText").value<QColor>());
     opt.state &= ~QStyle::State_Selected;
 
-    opt.rect.setX(opt.rect.x()-2);
-    opt.rect.setWidth(opt.rect.width()+5);
+    opt.rect.setX(opt.rect.x() - 2);
+    opt.rect.setWidth(opt.rect.width() + 5);
     QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     switch (index.column()) {
     case JournalModel::Column::Detail:
         // adjust the rect to cover all columns
-        if(view && view->viewport()) {
+        if (view && view->viewport()) {
             opt.rect.setX(0);
             opt.rect.setWidth(view->viewport()->width());
         }
@@ -121,7 +118,7 @@ QSize SpecialDateDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 {
     QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
-    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
     d->m_margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
     d->m_lineHeight = opt.fontMetrics.lineSpacing();
 

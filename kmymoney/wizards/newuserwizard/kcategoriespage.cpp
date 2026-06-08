@@ -23,29 +23,28 @@
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
 #include "kpreferencepage.h"
-#include "wizardpage_p.h"
 #include "mymoneytemplate.h"
-#include "templatesmodel.h"
 #include "templateloader.h"
+#include "templatesmodel.h"
+#include "wizardpage_p.h"
 
-namespace NewUserWizard
-{
+namespace NewUserWizard {
 class CategoriesPagePrivate : public WizardPagePrivate<Wizard>
 {
     Q_DISABLE_COPY(CategoriesPagePrivate)
 
 public:
-    CategoriesPagePrivate(QObject* parent) :
-        WizardPagePrivate<Wizard>(parent)
+    CategoriesPagePrivate(QObject* parent)
+        : WizardPagePrivate<Wizard>(parent)
     {
     }
-    TemplatesModel        model;
-    TemplateLoader        loader;
+    TemplatesModel model;
+    TemplateLoader loader;
 };
 
-CategoriesPage::CategoriesPage(Wizard* wizard) :
-    Accounts(wizard),
-    WizardPage<Wizard>(*new CategoriesPagePrivate(wizard), stepCount++, this, wizard)
+CategoriesPage::CategoriesPage(Wizard* wizard)
+    : Accounts(wizard)
+    , WizardPage<Wizard>(*new CategoriesPagePrivate(wizard), stepCount++, this, wizard)
 {
     Q_D(CategoriesPage);
     d->loader.load(&d->model);

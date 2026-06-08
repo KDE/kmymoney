@@ -31,13 +31,13 @@ class KMyMoneyCalculatorPrivate
     Q_DISABLE_COPY(KMyMoneyCalculatorPrivate)
 
 public:
-    KMyMoneyCalculatorPrivate() :
-        op0(0.0),
-        op1(0.0),
-        op(0),
-        stackedOp(0),
-        display(nullptr),
-        m_clearOperandOnDigit(false)
+    KMyMoneyCalculatorPrivate()
+        : op0(0.0)
+        , op1(0.0)
+        , op(0)
+        , stackedOp(0)
+        , display(nullptr)
+        , m_clearOperandOnDigit(false)
     {
         for (auto& button : buttons) {
             button = nullptr;
@@ -65,36 +65,36 @@ public:
     }
 
     /**
-      * This member variable stores the current (second) operand
-      */
+     * This member variable stores the current (second) operand
+     */
     QString operand;
 
     /**
-      * This member variable stores the last result
-      */
+     * This member variable stores the last result
+     */
     QString m_result;
 
     /**
-      * This member variable stores the representation of the
-      * character to be used to separate the integer and fractional
-      * part of numbers. The internal representation is always a period.
-      */
+     * This member variable stores the representation of the
+     * character to be used to separate the integer and fractional
+     * part of numbers. The internal representation is always a period.
+     */
     QString m_comma;
 
     /**
-      * The numeric representation of a stacked first operand
-      */
+     * The numeric representation of a stacked first operand
+     */
     double op0;
 
     /**
-      * The numeric representation of the first operand
-      */
+     * The numeric representation of the first operand
+     */
     double op1;
 
     /**
-      * This member stores the operation to be performed between
-      * the first and the second operand.
-      */
+     * This member stores the operation to be performed between
+     * the first and the second operand.
+     */
     int op;
 
     /**
@@ -103,21 +103,21 @@ public:
     int stackedOp;
 
     /**
-      * This member stores a pointer to the display area
-      */
-    QLabel *display;
+     * This member stores a pointer to the display area
+     */
+    QLabel* display;
 
     /**
-      * This member array stores the pointers to the various
-      * buttons of the calculator. It is setup during the
-      * constructor of this object
-      */
-    QPushButton *buttons[20];
+     * This member array stores the pointers to the various
+     * buttons of the calculator. It is setup during the
+     * constructor of this object
+     */
+    QPushButton* buttons[20];
 
     /**
-      * This enumeration type stores the values used for the
-      * various keys internally
-      */
+     * This enumeration type stores the values used for the
+     * various keys internally
+     */
     enum {
         /* 0-9 are used by digits */
         COMMA = 10,
@@ -140,16 +140,16 @@ public:
     };
 
     /**
-      * This flag signals, if the operand should be replaced upon
-      * a digit key pressure. Defaults to false and will be set, if
-      * setInitialValues() is called without an operation.
-      */
+     * This flag signals, if the operand should be replaced upon
+     * a digit key pressure. Defaults to false and will be set, if
+     * setInitialValues() is called without an operation.
+     */
     bool m_clearOperandOnDigit;
 };
 
-KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
-    QFrame(parent),
-    d_ptr(new KMyMoneyCalculatorPrivate)
+KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent)
+    : QFrame(parent)
+    , d_ptr(new KMyMoneyCalculatorPrivate)
 {
     Q_D(KMyMoneyCalculator);
     d->m_comma = QLocale().decimalPoint();
@@ -308,7 +308,8 @@ void KMyMoneyCalculator::calculationClicked(int button)
 
         // if the pending operation is addition and we now do multiplication
         // we just stack op1 and remember the operation in
-        if ((d->op == KMyMoneyCalculatorPrivate::PLUS || d->op == KMyMoneyCalculatorPrivate::MINUS) && (button == KMyMoneyCalculatorPrivate::STAR || button == KMyMoneyCalculatorPrivate::SLASH)) {
+        if ((d->op == KMyMoneyCalculatorPrivate::PLUS || d->op == KMyMoneyCalculatorPrivate::MINUS)
+            && (button == KMyMoneyCalculatorPrivate::STAR || button == KMyMoneyCalculatorPrivate::SLASH)) {
             d->op0 = d->op1;
             d->stackedOp = d->op;
             d->op = 0;
@@ -375,14 +376,14 @@ QString KMyMoneyCalculator::normalizeString(const double& val)
     QString str;
     str.setNum(val, 'f');
     int i = str.length();
-    while (i > 1 && str[i-1] == '0') {
+    while (i > 1 && str[i - 1] == '0') {
         --i;
     }
     // cut off trailing 0's
     str.remove(i, str.length());
     if (str.length() > 0) {
         // possibly remove trailing period
-        if (str[str.length()-1] == '.') {
+        if (str[str.length() - 1] == '.') {
             str.remove(str.length() - 1, 1);
         }
     }
@@ -534,7 +535,7 @@ void KMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
         break;
     case Qt::Key_Backspace:
         button = KMyMoneyCalculatorPrivate::CLEAR;
-        if(ev->modifiers() & Qt::ShiftModifier) {
+        if (ev->modifiers() & Qt::ShiftModifier) {
             button = KMyMoneyCalculatorPrivate::CLEARALL;
         }
         break;

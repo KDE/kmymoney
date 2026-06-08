@@ -5,8 +5,8 @@
 */
 
 /**
-  * @author Thomas Baumgart
-  */
+ * @author Thomas Baumgart
+ */
 
 #include "mymoneyprice.h"
 
@@ -23,29 +23,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
 #include "mymoneyexception.h"
+#include "mymoneymoney.h"
 
 class MyMoneyPricePrivate
 {
 public:
-    QString       m_fromSecurity;
-    QString       m_toSecurity;
-    QDate         m_date;
-    MyMoneyMoney  m_rate;
-    MyMoneyMoney  m_invRate;
-    QString       m_source;
+    QString m_fromSecurity;
+    QString m_toSecurity;
+    QDate m_date;
+    MyMoneyMoney m_rate;
+    MyMoneyMoney m_invRate;
+    QString m_source;
 };
 
-MyMoneyPrice::MyMoneyPrice() :
-    d_ptr(new MyMoneyPricePrivate)
+MyMoneyPrice::MyMoneyPrice()
+    : d_ptr(new MyMoneyPricePrivate)
 {
 }
 
-MyMoneyPrice::MyMoneyPrice(const QString& from,
-                           const QString& to,
-                           const QDomElement& node) :
-    d_ptr(new MyMoneyPricePrivate)
+MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDomElement& node)
+    : d_ptr(new MyMoneyPricePrivate)
 {
     if ("PRICE" != node.tagName())
         throw MYMONEYEXCEPTION_CSTRING("Node was not PRICE");
@@ -64,11 +62,11 @@ MyMoneyPrice::MyMoneyPrice(const QString& from,
         qDebug("Price with zero value loaded");
 }
 
-MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDate& date, const MyMoneyMoney& rate, const QString& source) :
-    d_ptr(new MyMoneyPricePrivate)
+MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDate& date, const MyMoneyMoney& rate, const QString& source)
+    : d_ptr(new MyMoneyPricePrivate)
 {
     Q_D(MyMoneyPrice);
-    d->m_fromSecurity =from;
+    d->m_fromSecurity = from;
     d->m_toSecurity = to;
     d->m_date = date;
     d->m_rate = rate;
@@ -77,12 +75,11 @@ MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDate& 
     if (!d->m_rate.isZero())
         d->m_invRate = MyMoneyMoney::ONE / d->m_rate;
     else
-        qDebug("Price with zero value created for '%s' to '%s'",
-               qPrintable(from), qPrintable(to));
+        qDebug("Price with zero value created for '%s' to '%s'", qPrintable(from), qPrintable(to));
 }
 
-MyMoneyPrice::MyMoneyPrice(const MyMoneyPrice& other) :
-    d_ptr(new MyMoneyPricePrivate(*other.d_func()))
+MyMoneyPrice::MyMoneyPrice(const MyMoneyPrice& other)
+    : d_ptr(new MyMoneyPricePrivate(*other.d_func()))
 {
 }
 
@@ -144,20 +141,19 @@ bool MyMoneyPrice::isValid() const
 }
 
 // Equality operator
-bool MyMoneyPrice::operator == (const MyMoneyPrice &right) const
+bool MyMoneyPrice::operator==(const MyMoneyPrice& right) const
 {
     Q_D(const MyMoneyPrice);
-    auto d2 = static_cast<const MyMoneyPricePrivate *>(right.d_func());
-    return ((d->m_date == d2->m_date) &&
-            (d->m_rate == d2->m_rate) &&
-            ((d->m_fromSecurity.length() == 0 && d2->m_fromSecurity.length() == 0) || (d->m_fromSecurity == d2->m_fromSecurity)) &&
-            ((d->m_toSecurity.length() == 0 && d2->m_toSecurity.length() == 0) || (d->m_toSecurity == d2->m_toSecurity)) &&
-            ((d->m_source.length() == 0 && d2->m_source.length() == 0) || (d->m_source == d2->m_source)));
+    auto d2 = static_cast<const MyMoneyPricePrivate*>(right.d_func());
+    return ((d->m_date == d2->m_date) && (d->m_rate == d2->m_rate)
+            && ((d->m_fromSecurity.length() == 0 && d2->m_fromSecurity.length() == 0) || (d->m_fromSecurity == d2->m_fromSecurity))
+            && ((d->m_toSecurity.length() == 0 && d2->m_toSecurity.length() == 0) || (d->m_toSecurity == d2->m_toSecurity))
+            && ((d->m_source.length() == 0 && d2->m_source.length() == 0) || (d->m_source == d2->m_source)));
 }
 
-bool MyMoneyPrice::operator != (const MyMoneyPrice &right) const
+bool MyMoneyPrice::operator!=(const MyMoneyPrice& right) const
 {
-    return !(operator == (right));
+    return !(operator==(right));
 }
 
 bool MyMoneyPrice::hasReferenceTo(const QString& id) const

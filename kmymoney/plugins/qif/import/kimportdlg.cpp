@@ -11,12 +11,12 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
+#include <QApplication>
+#include <QFileDialog>
+#include <QIcon>
 #include <QLabel>
 #include <QPixmap>
-#include <QApplication>
 #include <QPushButton>
-#include <QIcon>
-#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -34,15 +34,15 @@
 // Project Headers
 
 #include "kmymoneyutils.h"
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyfile.h"
 
 #include "icons.h"
 #include "mymoneyqifprofile.h"
 
 using namespace Icons;
 
-KImportDlg::KImportDlg(QWidget *parent)
+KImportDlg::KImportDlg(QWidget* parent)
     : KImportDlgDecl(parent)
 {
     // Set all the last used options
@@ -51,16 +51,10 @@ KImportDlg::KImportDlg(QWidget *parent)
     loadProfiles(true);
 
     // load button icons
-    KGuiItem okButtenItem(i18n("&Import"),
-                          Icons::get(Icon::DocumentImport),
-                          i18n("Start operation"),
-                          i18n("Use this to start the import operation"));
+    KGuiItem okButtenItem(i18n("&Import"), Icons::get(Icon::DocumentImport), i18n("Start operation"), i18n("Use this to start the import operation"));
     KGuiItem::assign(m_buttonBox->button(QDialogButtonBox::Ok), okButtenItem);
 
-    KGuiItem browseButtenItem(i18n("&Browse..."),
-                              Icons::get(Icon::DocumentOpen),
-                              i18n("Select filename"),
-                              i18n("Use this to select a filename to export to"));
+    KGuiItem browseButtenItem(i18n("&Browse..."), Icons::get(Icon::DocumentOpen), i18n("Select filename"), i18n("Use this to select a filename to export to"));
     KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
     KGuiItem newButtenItem(i18nc("New profile", "&New..."),
@@ -196,7 +190,7 @@ void KImportDlg::loadProfiles(const bool selectLast)
 
 void KImportDlg::addCategories(QStringList& strList, const QString& id, const QString& leadIn) const
 {
-    MyMoneyFile *file = MyMoneyFile::instance();
+    MyMoneyFile* file = MyMoneyFile::instance();
 
     MyMoneyAccount account = file->account(id);
 

@@ -28,8 +28,8 @@ using namespace Icons;
 
 // *** KPayeesView Implementation ***
 
-KPayeesView::KPayeesView(QWidget *parent) :
-    KMyMoneyViewBase(*new KPayeesViewPrivate(this), parent)
+KPayeesView::KPayeesView(QWidget* parent)
+    : KMyMoneyViewBase(*new KPayeesViewPrivate(this), parent)
 {
     Q_D(KPayeesView);
     d->init();
@@ -100,18 +100,15 @@ void KPayeesView::slotChooseDefaultAccount()
     MyMoneyFile* file = MyMoneyFile::instance();
     QMap<QString, int> account_count;
 
-
     QModelIndex idx;
     const auto rows = d->m_transactionFilter->rowCount();
-    for(int row = 0; row < rows; ++row) {
+    for (int row = 0; row < rows; ++row) {
         idx = d->m_transactionFilter->index(row, 0);
-        if (!idx.data(eMyMoney::Model::TransactionIsTransferRole).toBool()
-                && idx.data(eMyMoney::Model::TransactionSplitCountRole).toInt() == 2) {
+        if (!idx.data(eMyMoney::Model::TransactionIsTransferRole).toBool() && idx.data(eMyMoney::Model::TransactionSplitCountRole).toInt() == 2) {
             const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
             const auto action = idx.data(eMyMoney::Model::SplitActionRole).toString();
             const MyMoneyAccount& acc = file->account(accountId);
-            if (action != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)
-                    && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
+            if (action != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization) && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
                 const auto counterAccount = idx.data(eMyMoney::Model::TransactionCounterAccountIdRole).toString();
                 if (!counterAccount.isEmpty()) {
                     if (account_count.contains(counterAccount)) {
@@ -142,12 +139,12 @@ void KPayeesView::slotChooseDefaultAccount()
 void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value)
 {
     Q_D(KPayeesView);
-    //if there is no current item selected, exit
+    // if there is no current item selected, exit
     if (!idx.isValid())
         return;
 
-    //qDebug() << "[KPayeesView::slotRenamePayee]";
-    // create a copy of the new name without appended whitespaces
+    // qDebug() << "[KPayeesView::slotRenamePayee]";
+    //  create a copy of the new name without appended whitespaces
     QString new_name = value.toString();
     if (d->m_payee.name() != new_name) {
         MyMoneyFileTransaction ft;
@@ -183,7 +180,7 @@ void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& 
             // out of sight due to the rename operation
             d->ensurePayeeVisible(d->m_payee.id());
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
         }
     }
@@ -216,7 +213,7 @@ void KPayeesView::updateActions(const SelectedObjects& selections)
         d->ui->m_tabWidget->setEnabled(true); // enable tab widget
         break;
 
-    default:  // if we have multiple payees selected, clear and disable the payee information
+    default: // if we have multiple payees selected, clear and disable the payee information
         pActions[eMenu::Action::DeletePayee]->setEnabled(true);
         pActions[eMenu::Action::MergePayee]->setEnabled(true);
         d->ui->m_balanceLabel->hide();
@@ -291,7 +288,6 @@ void KPayeesView::slotModelDataChanged(const QModelIndex& topLeft, const QModelI
     }
 }
 
-
 void KPayeesView::slotPayeeDataChanged()
 {
     Q_D(KPayeesView);
@@ -310,8 +306,7 @@ void KPayeesView::slotPayeeDataChanged()
                || (!d->ui->postcodeEdit->text().isEmpty() && d->m_payee.postcode() != d->ui->postcodeEdit->text()));
         rc |= ((d->m_payee.telephone().isEmpty() != d->ui->telephoneEdit->text().isEmpty())
                || (!d->ui->telephoneEdit->text().isEmpty() && d->m_payee.telephone() != d->ui->telephoneEdit->text()));
-        rc |= ((d->m_payee.name().isEmpty() != d->m_newName.isEmpty())
-               || (!d->m_newName.isEmpty() && d->m_payee.name() != d->m_newName));
+        rc |= ((d->m_payee.name().isEmpty() != d->m_newName.isEmpty()) || (!d->m_newName.isEmpty() && d->m_payee.name() != d->m_newName));
         rc |= ((d->m_payee.notes().isEmpty() != d->ui->notesEdit->toPlainText().isEmpty())
                || (!d->ui->notesEdit->toPlainText().isEmpty() && d->m_payee.notes() != d->ui->notesEdit->toPlainText()));
         rc |= ((d->m_payee.idPattern().isEmpty() != d->ui->idPatternEdit->text().isEmpty())
@@ -352,7 +347,7 @@ void KPayeesView::slotPayeeDataChanged()
             } else {
                 QString temp = d->ui->comboDefaultCategory->getSelected();
                 rc |= (temp.isEmpty() != d->m_payee.defaultAccountId().isEmpty())
-                      || (!d->m_payee.defaultAccountId().isEmpty() && temp != d->m_payee.defaultAccountId());
+                    || (!d->m_payee.defaultAccountId().isEmpty() && temp != d->m_payee.defaultAccountId());
             }
         } else {
             d->ui->comboDefaultCategory->setEnabled(false);
@@ -400,7 +395,9 @@ void KPayeesView::slotUpdatePayee()
             d->m_payee.setNotes(d->ui->notesEdit->toPlainText());
             d->m_payee.setIdPattern(d->ui->idPatternEdit->text());
             d->m_payee.setUrlTemplate(d->ui->urlTemplateEdit->text());
-            d->m_payee.setMatchData(static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()), d->ui->checkMatchIgnoreCase->isChecked(), d->ui->matchKeyEditList->items());
+            d->m_payee.setMatchData(static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()),
+                                    d->ui->checkMatchIgnoreCase->isChecked(),
+                                    d->ui->matchKeyEditList->items());
             d->m_payee.setDefaultAccountId();
             d->m_payee.resetPayeeIdentifiers(d->ui->payeeIdentifiers->identifiers());
 
@@ -415,7 +412,7 @@ void KPayeesView::slotUpdatePayee()
             MyMoneyFile::instance()->modifyPayee(d->m_payee);
             ft.commit();
 
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
         }
     }
@@ -424,10 +421,10 @@ void KPayeesView::slotUpdatePayee()
 void KPayeesView::slotSyncAddressBook()
 {
     Q_D(KPayeesView);
-    if (d->m_payeesToSync.isEmpty()) {                            // empty list means no syncing is pending...
-        d->m_payeesToSync = d->selectedPayees();                    // ...so initialize one
+    if (d->m_payeesToSync.isEmpty()) { // empty list means no syncing is pending...
+        d->m_payeesToSync = d->selectedPayees(); // ...so initialize one
         d->m_syncedPayees = 0;
-        d->ui->m_syncAddressbook->setEnabled(false);                // disallow concurrent syncs
+        d->ui->m_syncAddressbook->setEnabled(false); // disallow concurrent syncs
     }
 
     if (d->m_payeesToSync.count() <= d->m_syncedPayees) {
@@ -438,11 +435,11 @@ void KPayeesView::slotSyncAddressBook()
                     MyMoneyFile::instance()->modifyPayee(payee);
                 }
                 ft.commit();
-            } catch (const MyMoneyException &e) {
+            } catch (const MyMoneyException& e) {
                 KMessageBox::detailedError(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
             }
         }
-        d->m_payeesToSync.clear();  // that means end of sync
+        d->m_payeesToSync.clear(); // that means end of sync
         d->m_syncedPayees = 0;
         d->ui->m_syncAddressbook->setEnabled(true);
         return;
@@ -452,12 +449,12 @@ void KPayeesView::slotSyncAddressBook()
     d->m_contact->fetchContact(d->m_payeesToSync[d->m_syncedPayees].email());
 }
 
-void KPayeesView::slotContactFetched(const ContactData &identity)
+void KPayeesView::slotContactFetched(const ContactData& identity)
 {
     Q_D(KPayeesView);
     MyMoneyPayee& payee = d->m_payeesToSync[d->m_syncedPayees];
 
-    if (!identity.email.isEmpty()) {  // empty e-mail means no identity fetched
+    if (!identity.email.isEmpty()) { // empty e-mail means no identity fetched
         QString txt;
         if (!identity.street.isEmpty())
             txt.append(identity.street + '\n');
@@ -491,7 +488,7 @@ void KPayeesView::slotContactFetched(const ContactData &identity)
     }
 
     ++d->m_syncedPayees;
-    slotSyncAddressBook();  // process next payee
+    slotSyncAddressBook(); // process next payee
 }
 
 void KPayeesView::slotSendMail()

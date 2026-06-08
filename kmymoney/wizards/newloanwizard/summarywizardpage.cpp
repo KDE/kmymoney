@@ -27,9 +27,9 @@
 #include "mymoneyschedule.h"
 #include "mymoneyutils.h"
 
-SummaryWizardPage::SummaryWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::SummaryWizardPage)
+SummaryWizardPage::SummaryWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::SummaryWizardPage)
 {
     ui->setupUi(this);
 
@@ -52,12 +52,12 @@ void SummaryWizardPage::initializePage()
 
     ui->m_summaryFirstPayment->setText(MyMoneyUtils::formatDate(field("firstDueDateEdit").toDate(), QLocale::LongFormat));
 
-    const QString &payeeId = field("payeeEdit").toString();
+    const QString& payeeId = field("payeeEdit").toString();
     if (!payeeId.isEmpty()) {
         try {
-            const MyMoneyPayee &payee = MyMoneyFile::instance()->payee(payeeId);
+            const MyMoneyPayee& payee = MyMoneyFile::instance()->payee(payeeId);
             ui->m_summaryPayee->setText(payee.name());
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
             qWarning("Unable to load the payee name from the id");
         }
     } else {
@@ -83,7 +83,7 @@ void SummaryWizardPage::initializePage()
             throw MYMONEYEXCEPTION_CSTRING("Need a single selected interest category");
         MyMoneyAccount acc = MyMoneyFile::instance()->account(sel.first());
         ui->m_summaryInterestCategory->setText(acc.name());
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         qWarning("Unable to determine interest category for loan account creation");
     }
     ui->m_summaryAdditionalFees->setText(field("additionalCost").toString());
@@ -96,8 +96,7 @@ void SummaryWizardPage::initializePage()
             throw MYMONEYEXCEPTION_CSTRING("Need a single selected payment account");
         MyMoneyAccount acc = MyMoneyFile::instance()->account(sel.first());
         ui->m_summaryPaymentAccount->setText(acc.name());
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         qWarning("Unable to determine payment account for loan account creation");
     }
-
 }

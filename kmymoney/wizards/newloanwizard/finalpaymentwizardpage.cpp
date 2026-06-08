@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_finalpaymentwizardpage.h"
 
-FinalPaymentWizardPage::FinalPaymentWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::FinalPaymentWizardPage)
+FinalPaymentWizardPage::FinalPaymentWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::FinalPaymentWizardPage)
 {
     ui->setupUi(this);
     // Register the fields with the QWizard and connect the

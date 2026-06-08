@@ -35,8 +35,8 @@
 
 #include "kreconciliationreportdlg.h"
 
-ReconciliationReport::ReconciliationReport(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args)
+ReconciliationReport::ReconciliationReport(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
 {
     qDebug("Plugins: reconciliation report loaded");
 }
@@ -50,7 +50,7 @@ void ReconciliationReport::plug(KXMLGUIFactory* guiFactory)
 {
     Q_UNUSED(guiFactory)
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &ReconciliationReport::slotGenerateReconciliationReport);
-//  qDebug() << "Connect was done" << viewInterface();
+    //  qDebug() << "Connect was done" << viewInterface();
 }
 
 void ReconciliationReport::unplug()
@@ -188,7 +188,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     report += "</td></tr>";
 
     // retrieve list of all transactions after the reconciliation date that are not reconciled or cleared
-    QList<QPair<MyMoneyTransaction, MyMoneySplit> > afterTransactionList;
+    QList<QPair<MyMoneyTransaction, MyMoneySplit>> afterTransactionList;
     MyMoneyTransactionFilter filter(account.id());
     filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
     filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
@@ -246,7 +246,6 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     detailsTableHeader += "<th>" + i18n("Amount") + "</th>";
     detailsTableHeader += "</tr></thead>\n";
 
-
     QString detailsReport = QString("<h2 class=\"report\">%1</h2>\n").arg(i18n("Outstanding payments"));
     detailsReport += detailsTableHeader;
 
@@ -293,8 +292,8 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                               MyMoneyUtils::formatMoney(outstandingPaymentAmount, currency));
 
     detailsReport += "</table>\n";
-    detailsReport += QString("<h2 class=\"report\">%1</h2>\n").arg(
-                         account.accountType() == eMyMoney::Account::Type::CreditCard ? i18n("Outstanding charges") : i18n("Outstanding deposits"));
+    detailsReport += QString("<h2 class=\"report\">%1</h2>\n")
+                         .arg(account.accountType() == eMyMoney::Account::Type::CreditCard ? i18n("Outstanding charges") : i18n("Outstanding deposits"));
     detailsReport += detailsTableHeader;
 
     index = 0;

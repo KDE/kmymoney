@@ -46,8 +46,8 @@
 #include "mymoneyenums.h"
 #include "mymoneykeyvaluecontainer.h"
 
-OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersion) :
-    m_combo(combo)
+OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersion)
+    : m_combo(combo)
 {
     combo->clear();
     combo->addItem("102");
@@ -65,12 +65,12 @@ QString OfxHeaderVersion::headerVersion() const
     return m_combo->currentText();
 }
 
-OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId) :
-    m_combo(combo),
-    m_versionEdit(versionEdit)
+OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId)
+    : m_combo(combo)
+    , m_versionEdit(versionEdit)
 {
-// https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
-// https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
+    // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
+    // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
 
     // Quicken
     m_appMap[i18n("Quicken Windows 2003")] = "QWIN:1200";
@@ -185,8 +185,8 @@ bool OfxAppVersion::isValid() const
     return validAppVersionExp.match(app).hasMatch();
 }
 
-MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account):
-    m_account(_account)
+MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account)
+    : m_account(_account)
 {
     m_fiSettings = m_account.onlineBankingSettings();
 }

@@ -60,7 +60,7 @@ public:
         ui->buttonGroup2->setExclusive(false);
         ui->checkSchedules->setChecked(false);
 
-        buildCodecList();  // build list of codecs and insert into combo box
+        buildCodecList(); // build list of codecs and insert into combo box
 
         ui->buttonGroup4->setExclusive(false);
         ui->checkDecode->setChecked(false);
@@ -83,13 +83,13 @@ public:
         KMM_Codec::loadComboBox(ui->comboDecode);
     }
 
-    KGncImportOptionsDlg      *q_ptr;
+    KGncImportOptionsDlg* q_ptr;
     Ui::KGncImportOptionsDlg* ui;
 };
 
-KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KGncImportOptionsDlgPrivate(this))
+KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KGncImportOptionsDlgPrivate(this))
 {
     Q_D(KGncImportOptionsDlg);
     d->init();

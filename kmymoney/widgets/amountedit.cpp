@@ -27,9 +27,9 @@
 // Project Includes
 
 #include "amountvalidator.h"
+#include "icons.h"
 #include "kmymoneycalculator.h"
 #include "mymoneysecurity.h"
-#include "icons.h"
 #include "popuppositioner.h"
 
 using namespace Icons;
@@ -37,11 +37,15 @@ using namespace Icons;
 class AmountEditHelper
 {
 public:
-    AmountEditHelper() : q(nullptr) {}
-    ~AmountEditHelper() {
+    AmountEditHelper()
+        : q(nullptr)
+    {
+    }
+    ~AmountEditHelper()
+    {
         delete q;
     }
-    AmountEdit *q;
+    AmountEdit* q;
 };
 
 Q_GLOBAL_STATIC(AmountEditHelper, s_globalAmountEdit)
@@ -139,20 +143,20 @@ public:
     }
 
     /**
-      * Internal helper function for value() and ensureFractionalPart().
-      */
+     * Internal helper function for value() and ensureFractionalPart().
+     */
     void ensureFractionalPart(QString& s, MultiCurrencyEdit::DisplayState state) const
     {
         s = MyMoneyMoney(s).formatMoney(QString(), precision(state), false);
     }
 
     /**
-      * This method opens the calculator and replays the key
-      * event pointed to by @p ev. If @p ev is 0, then no key
-      * event is replayed.
-      *
-      * @param ev pointer to QKeyEvent that started the calculator.
-      */
+     * This method opens the calculator and replays the key
+     * event pointed to by @p ev. If @p ev is 0, then no key
+     * event is replayed.
+     *
+     * @param ev pointer to QKeyEvent that started the calculator.
+     */
     void calculatorOpen(QKeyEvent* k)
     {
         Q_Q(AmountEdit);
@@ -177,7 +181,7 @@ public:
 
         int height = q->sizeHint().height();
         int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-        const int btnHeight = height - 2*frameWidth;
+        const int btnHeight = height - 2 * frameWidth;
         const int btnX = (height - btnHeight) / 2;
         const int currencyX = (height - h) / 2;
 
@@ -430,9 +434,9 @@ void AmountEdit::setReadOnly(bool ro)
     d->setReadOnly(ro);
 }
 
-AmountEdit::AmountEdit(QWidget *parent, const int prec) :
-    QLineEdit(parent),
-    d_ptr(new AmountEditPrivate(this))
+AmountEdit::AmountEdit(QWidget* parent, const int prec)
+    : QLineEdit(parent)
+    , d_ptr(new AmountEditPrivate(this))
 {
     Q_D(AmountEdit);
     d->m_prec = prec;
@@ -448,9 +452,9 @@ AmountEdit::AmountEdit(QWidget *parent, const int prec) :
     });
 }
 
-AmountEdit::AmountEdit(const MyMoneySecurity& sec, QWidget *parent) :
-    QLineEdit(parent),
-    d_ptr(new AmountEditPrivate(this))
+AmountEdit::AmountEdit(const MyMoneySecurity& sec, QWidget* parent)
+    : QLineEdit(parent)
+    , d_ptr(new AmountEditPrivate(this))
 {
     Q_D(AmountEdit);
     d->m_prec = MyMoneyMoney::denomToPrec(sec.smallestAccountFraction());
@@ -486,7 +490,6 @@ int AmountEdit::standardPrecision()
 {
     return global()->d_ptr->m_prec;
 }
-
 
 void AmountEdit::resizeEvent(QResizeEvent* event)
 {
@@ -744,7 +747,7 @@ void AmountEdit::clear()
     d->m_previousText.clear();
 }
 
-void AmountEdit::theTextChanged(const QString & theText)
+void AmountEdit::theTextChanged(const QString& theText)
 {
     Q_D(AmountEdit);
 
@@ -759,7 +762,7 @@ void AmountEdit::theTextChanged(const QString & theText)
 
     auto i = 0;
     if (isEnabled()) {
-        QValidator::State state =  validator()->validate(l_text, i);
+        QValidator::State state = validator()->validate(l_text, i);
         if (state == QValidator::Intermediate) {
             if (l_text.length() == 1) {
                 if (l_text != dec && l_text != nsign && l_text != psign)

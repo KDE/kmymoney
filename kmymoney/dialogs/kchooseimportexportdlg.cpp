@@ -17,8 +17,8 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KSharedConfig>
 #include <KLocalizedString>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -30,8 +30,8 @@ class KChooseImportExportDlgPrivate
     Q_DISABLE_COPY(KChooseImportExportDlgPrivate)
 
 public:
-    KChooseImportExportDlgPrivate() :
-        ui(new Ui::KChooseImportExportDlg)
+    KChooseImportExportDlgPrivate()
+        : ui(new Ui::KChooseImportExportDlg)
     {
     }
 
@@ -55,31 +55,32 @@ public:
         config->sync();
     }
 
-    Ui::KChooseImportExportDlg *ui;
+    Ui::KChooseImportExportDlg* ui;
     QString m_lastType;
 };
 
-
-KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KChooseImportExportDlgPrivate)
+KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KChooseImportExportDlgPrivate)
 {
     Q_D(KChooseImportExportDlg);
     d->ui->setupUi(this);
     setModal(true);
 
     if (type == 0) { // import
-        d->ui->topLabel->setText(i18n("Please choose the type of import you wish to perform.  A simple explanation\n"
-                                      "of the import type is available at the bottom of the screen and is updated when\n"
-                                      "you select an item from the choice box."
-                                      "\n\nOnce you have chosen an import type please press the OK button."));
+        d->ui->topLabel->setText(
+            i18n("Please choose the type of import you wish to perform.  A simple explanation\n"
+                 "of the import type is available at the bottom of the screen and is updated when\n"
+                 "you select an item from the choice box."
+                 "\n\nOnce you have chosen an import type please press the OK button."));
         d->ui->promptLabel->setText(i18n("Choose import type:"));
         setWindowTitle(i18n("Choose Import Type Dialog"));
     } else { // export
-        d->ui->topLabel->setText(i18n("Please choose the type of export you wish to perform.  A simple explanation\n"
-                                      "of the export type is available at the bottom of the screen and is updated when\n"
-                                      "you select an item from the choice box."
-                                      "\n\nOnce you have chosen an export type please press the OK button."));
+        d->ui->topLabel->setText(
+            i18n("Please choose the type of export you wish to perform.  A simple explanation\n"
+                 "of the export type is available at the bottom of the screen and is updated when\n"
+                 "you select an item from the choice box."
+                 "\n\nOnce you have chosen an export type please press the OK button."));
         d->ui->promptLabel->setText(i18n("Choose export type:"));
         setWindowTitle(i18n("Choose Export Type Dialog"));
     }
@@ -102,13 +103,15 @@ void KChooseImportExportDlg::slotTypeActivated(const QString& text)
 {
     Q_D(KChooseImportExportDlg);
     if (text == "QIF") {
-        d->ui->descriptionLabel->setText(i18n("QIF files are created by the popular accounting program Quicken.\n"
-                                              "Another dialog will appear, if you choose this type, asking for further\n"
-                                              "information relevant to the Quicken format."));
+        d->ui->descriptionLabel->setText(
+            i18n("QIF files are created by the popular accounting program Quicken.\n"
+                 "Another dialog will appear, if you choose this type, asking for further\n"
+                 "information relevant to the Quicken format."));
     } else {
-        d->ui->descriptionLabel->setText(i18n("The CSV type uses a comma delimited text file that can be used by\n"
-                                              "most popular spreadsheet programs available for Linux and other operating\n"
-                                              "systems."));
+        d->ui->descriptionLabel->setText(
+            i18n("The CSV type uses a comma delimited text file that can be used by\n"
+                 "most popular spreadsheet programs available for Linux and other operating\n"
+                 "systems."));
     }
 }
 

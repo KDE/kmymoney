@@ -8,27 +8,27 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPushButton>
 #include <QCheckBox>
-#include <QListWidget>
-#include <QTabWidget>
 #include <QIcon>
 #include <QInputDialog>
+#include <QListWidget>
+#include <QPushButton>
+#include <QTabWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
-#include <kconfig.h>
 #include <KConfigGroup>
+#include <KGuiItem>
+#include <KLocalizedString>
+#include <KSharedConfig>
+#include <KStandardGuiItem>
+#include <kcombobox.h>
+#include <kconfig.h>
+#include <khelpclient.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
-#include <kcombobox.h>
 #include <kurlrequester.h>
-#include <khelpclient.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
-#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -39,7 +39,7 @@
 
 using namespace Icons;
 
-MyMoneyQifProfileNameValidator::MyMoneyQifProfileNameValidator(QObject *o)
+MyMoneyQifProfileNameValidator::MyMoneyQifProfileNameValidator(QObject* o)
     : QValidator(o)
 {
 }
@@ -200,7 +200,7 @@ void MyMoneyQifProfileEditor::loadWidgets()
 void MyMoneyQifProfileEditor::loadProfileListFromConfig()
 {
     QFontMetrics fontMetrics(m_profileListBox->font());
-    int w = 100;      // minimum is 100 pixels width for the list box
+    int w = 100; // minimum is 100 pixels width for the list box
 
     if (m_profile.isDirty()) {
         m_profile.saveProfile();
@@ -381,11 +381,7 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
     bool internalOk;
 
     do {
-        rc = QInputDialog::getText(this, i18n("QIF Profile Editor"),
-                                   i18n("Enter new profile name"),
-                                   QLineEdit::Normal,
-                                   rc,
-                                   &internalOk);
+        rc = QInputDialog::getText(this, i18n("QIF Profile Editor"), i18n("Enter new profile name"), QLineEdit::Normal, rc, &internalOk);
         // if user pressed OK we check the name
         if (internalOk) {
             int pos = 0;
@@ -438,7 +434,7 @@ void MyMoneyQifProfileEditor::slotHelp()
 void MyMoneyQifProfileEditor::slotAmountTypeSelected()
 {
     QList<QTreeWidgetItem*> selectedItems = m_editAmounts->selectedItems();
-    if (! selectedItems.empty()) {
+    if (!selectedItems.empty()) {
         QTreeWidgetItem* item = selectedItems.at(0);
         m_decimalBox->setCurrentIndex(m_decimalBox->findText(item->text(2), Qt::MatchExactly));
         m_thousandsBox->setCurrentIndex(m_thousandsBox->findText(item->text(3), Qt::MatchExactly));

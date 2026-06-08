@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_editintrowizardpage.h"
 
-EditIntroWizardPage::EditIntroWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::EditIntroWizardPage)
+EditIntroWizardPage::EditIntroWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::EditIntroWizardPage)
 {
     ui->setupUi(this);
 }

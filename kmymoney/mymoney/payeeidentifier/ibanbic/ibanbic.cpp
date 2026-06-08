@@ -6,9 +6,9 @@
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "xmlhelper/xmlstoragehelper.h"
 
-#include <typeinfo>
 #include <algorithm>
 #include <gmpxx.h>
+#include <typeinfo>
 
 #include <QDebug>
 
@@ -16,8 +16,7 @@
 #include "mymoneyexception.h"
 #include "plugins/ibanbicdata/ibanbicdataenums.h"
 
-namespace payeeIdentifiers
-{
+namespace payeeIdentifiers {
 
 const int ibanBic::ibanMaxLength = 30;
 
@@ -26,10 +25,10 @@ ibanBic::ibanBic()
 }
 
 ibanBic::ibanBic(const ibanBic& other)
-    : payeeIdentifierData(other),
-      m_bic(other.m_bic),
-      m_iban(other.m_iban),
-      m_ownerName(other.m_ownerName)
+    : payeeIdentifierData(other)
+    , m_bic(other.m_bic)
+    , m_iban(other.m_iban)
+    , m_ownerName(other.m_ownerName)
 {
 }
 
@@ -107,8 +106,9 @@ QString ibanBic::fullStoredBic() const
     return m_bic;
 }
 
-QString ibanBic::institutionName() const {
-    if (const auto &plugin = getIbanBicData())
+QString ibanBic::institutionName() const
+{
+    if (const auto& plugin = getIbanBicData())
         return plugin->requestData(bic(), eIBANBIC::DataType::bankNameByBic).toString();
     return QString();
 }
@@ -116,7 +116,7 @@ QString ibanBic::institutionName() const {
 QString ibanBic::fullBic() const
 {
     if (m_bic.isNull())
-        if (const auto &plugin = getIbanBicData())
+        if (const auto& plugin = getIbanBicData())
             return plugin->requestData(m_iban, eIBANBIC::DataType::iban2Bic).toString();
     return fullStoredBic();
 }
@@ -124,7 +124,7 @@ QString ibanBic::fullBic() const
 QString ibanBic::bic() const
 {
     if (m_bic.isNull()) {
-        if (const auto &plugin = getIbanBicData()) {
+        if (const auto& plugin = getIbanBicData()) {
             auto bic = plugin->requestData(m_iban, eIBANBIC::DataType::iban2Bic).toString();
             if (bic.length() == 11 && bic.endsWith(QLatin1String("XXX")))
                 return bic.left(8);
@@ -256,35 +256,35 @@ bool ibanBic::validateIbanChecksum(const QString& iban)
     return false;
 }
 
-KMyMoneyPlugin::DataPlugin *ibanBic::getIbanBicData()
+KMyMoneyPlugin::DataPlugin* ibanBic::getIbanBicData()
 {
     return pPlugins.data.value(QString::fromLatin1("ibanbicdata"), nullptr);
 }
 
 int ibanBic::ibanLengthByCountry(const QString& countryCode)
 {
-    if (const auto &plugin = getIbanBicData())
+    if (const auto& plugin = getIbanBicData())
         return (plugin->requestData(countryCode, eIBANBIC::DataType::bbanLength).toInt() + 4);
     return int();
 }
 
 QString ibanBic::bicByIban(const QString& iban)
 {
-    if (const auto &plugin = getIbanBicData())
+    if (const auto& plugin = getIbanBicData())
         return (plugin->requestData(iban, eIBANBIC::DataType::iban2Bic).toString());
     return QString();
 }
 
 QString ibanBic::localBankCodeByIban(const QString& iban)
 {
-    if (const auto &plugin = getIbanBicData())
+    if (const auto& plugin = getIbanBicData())
         return (plugin->requestData(iban, eIBANBIC::DataType::extractBankIdentifier).toString());
     return QString();
 }
 
 QString ibanBic::institutionNameByBic(const QString& bic)
 {
-    if (const auto &plugin = getIbanBicData())
+    if (const auto& plugin = getIbanBicData())
         return (plugin->requestData(bic, eIBANBIC::DataType::bankNameByBic).toString());
     return QString();
 }
@@ -301,7 +301,7 @@ ibanBic::bicAllocationStatus ibanBic::isCanonicalBicAllocated(const QString& bic
 {
     Q_ASSERT(bic == bicToFullFormat(bic));
 
-    if (const auto &plugin = getIbanBicData()) {
+    if (const auto& plugin = getIbanBicData()) {
         auto status = static_cast<eIBANBIC::bicAllocationStatus>(plugin->requestData(bic, eIBANBIC::DataType::isBicAllocated).toInt());
         switch (status) {
         case eIBANBIC::bicAllocationStatus::bicAllocated:
@@ -321,6 +321,5 @@ ibanBic::bicAllocationStatus ibanBic::isBicAllocated(const QString& bic)
         return bicNotAllocated;
     return isCanonicalBicAllocated(bicToFullFormat(bic));
 }
-
 
 } // namespace payeeIdentifiers

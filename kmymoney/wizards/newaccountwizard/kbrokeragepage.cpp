@@ -23,23 +23,22 @@
 
 #include "ui_kbrokeragepage.h"
 
-#include "kmymoneycurrencyselector.h"
-#include "knewaccountwizard.h"
-#include "knewaccountwizard_p.h"
 #include "kaccounttypepage.h"
 #include "kaccounttypepage_p.h"
 #include "khierarchypage.h"
 #include "kinstitutionpage.h"
 #include "kinstitutionpage_p.h"
+#include "kmymoneycurrencyselector.h"
+#include "knewaccountwizard.h"
+#include "knewaccountwizard_p.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "wizardpage.h"
 
-namespace NewAccountWizard
-{
-BrokeragePage::BrokeragePage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new BrokeragePagePrivate(wizard), StepBroker, this, wizard)
+namespace NewAccountWizard {
+BrokeragePage::BrokeragePage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new BrokeragePagePrivate(wizard), StepBroker, this, wizard)
 {
     Q_D(BrokeragePage);
     d->ui->setupUi(this);

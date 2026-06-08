@@ -21,31 +21,30 @@
 #include "ui_kgeneralloaninfopage.h"
 #include "ui_kloanschedulepage.h"
 
-#include <kguiutils.h>
-#include "kmymoneyaccountselector.h"
-#include "kmymoneycategory.h"
-#include "knewaccountwizard.h"
-#include "knewaccountwizard_p.h"
 #include "kaccountsummarypage.h"
 #include "kgeneralloaninfopage.h"
 #include "kgeneralloaninfopage_p.h"
 #include "kloanpayoutpage.h"
-#include "mymoneyaccount.h"
-#include "mymoneyfile.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneycategory.h"
 #include "knewaccountdlg.h"
+#include "knewaccountwizard.h"
+#include "knewaccountwizard_p.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "wizardpage.h"
-#include "mymoneyenums.h"
+#include <kguiutils.h>
 
 using namespace NewAccountWizard;
 using namespace Icons;
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
-LoanSchedulePage::LoanSchedulePage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new LoanSchedulePagePrivate(wizard), StepSchedule, this, wizard)
+namespace NewAccountWizard {
+LoanSchedulePage::LoanSchedulePage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new LoanSchedulePagePrivate(wizard), StepSchedule, this, wizard)
 {
     Q_D(const LoanSchedulePage);
     d->ui->setupUi(this);

@@ -19,9 +19,9 @@
 
 #include "ui_ksettingsregister.h"
 
-KSettingsRegister::KSettingsRegister(QWidget* parent) :
-    QWidget(parent),
-    ui(new Ui::KSettingsRegister)
+KSettingsRegister::KSettingsRegister(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::KSettingsRegister)
 {
     ui->setupUi(this);
     // hide the internally used text fields

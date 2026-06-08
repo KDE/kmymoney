@@ -25,8 +25,8 @@ static inline double dabs(const double x)
     return (x >= 0.0) ? x : -x;
 }
 
-MyMoneyFinancialCalculator::MyMoneyFinancialCalculator() :
-    d_ptr(new MyMoneyFinancialCalculatorPrivate)
+MyMoneyFinancialCalculator::MyMoneyFinancialCalculator()
+    : d_ptr(new MyMoneyFinancialCalculatorPrivate)
 {
     Q_D(MyMoneyFinancialCalculator);
     setPrec();
@@ -156,7 +156,7 @@ double MyMoneyFinancialCalculator::numPayments()
 
     double eint = d->eff_int();
 
-    //add exception for zero interest
+    // add exception for zero interest
     if (eint == 0.0) {
         d->m_npp = -(d->m_pv / d->m_pmt);
 
@@ -181,7 +181,7 @@ double MyMoneyFinancialCalculator::payment()
 
     double eint = d->eff_int();
 
-    //add exception for zero interest
+    // add exception for zero interest
     if (eint == 0.0) {
         d->m_pmt = -(d->m_pv / d->m_npp);
     } else {
@@ -205,7 +205,7 @@ double MyMoneyFinancialCalculator::presentValue()
 
     double eint = d->eff_int();
 
-    //add exception for zero interest
+    // add exception for zero interest
     if (eint == 0.0) {
         d->m_pv = -(d->m_fv + (d->m_npp * d->m_pmt));
     } else {
@@ -213,7 +213,6 @@ double MyMoneyFinancialCalculator::presentValue()
         double CC = d->_Cx(eint);
 
         d->m_pv = d->rnd(-(d->m_fv + (AA * CC)) / (AA + 1.0));
-
     }
 
     d->m_mask |= PV_SET;
@@ -230,7 +229,7 @@ double MyMoneyFinancialCalculator::futureValue()
 
     double eint = d->eff_int();
 
-    //add exception for zero interest
+    // add exception for zero interest
     if (eint == 0.0) {
         d->m_fv = d->rnd(-(d->m_pv + (d->m_npp * d->m_pmt)));
     } else {
@@ -279,10 +278,10 @@ double MyMoneyFinancialCalculator::interestRate()
             try {
                 dik = d->_fi(eint) / d->_fip(eint);
                 eint -= dik;
-            } catch (const MyMoneyException &) {
+            } catch (const MyMoneyException&) {
                 eint = 0;
             }
-            (void) modf(ratio *(dik / eint), &a);
+            (void)modf(ratio * (dik / eint), &a);
             ri = static_cast<unsigned>(a);
         } while (ri);
     }
@@ -298,4 +297,3 @@ double MyMoneyFinancialCalculator::interestDue() const
 
     return (d->m_pv + (d->m_bep ? d->m_pmt : 0.0)) * eint;
 }
-

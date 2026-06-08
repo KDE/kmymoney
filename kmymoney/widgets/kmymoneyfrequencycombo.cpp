@@ -21,13 +21,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyschedule.h"
 #include "mymoneyenums.h"
+#include "mymoneyschedule.h"
 
 using namespace eMyMoney;
 
-KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent) :
-    KMyMoneyOccurrenceCombo(parent)
+KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent)
+    : KMyMoneyOccurrenceCombo(parent)
 {
     addItem(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Once), (int)Schedule::Occurrence::Once);
     addItem(MyMoneySchedule::occurrenceToString(Schedule::Occurrence::Daily), (int)Schedule::Occurrence::Daily);

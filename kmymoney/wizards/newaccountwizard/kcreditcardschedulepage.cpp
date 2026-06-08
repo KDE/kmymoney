@@ -25,28 +25,27 @@
 
 #include "ui_kcreditcardschedulepage.h"
 
+#include "kaccounttypepage.h"
+#include "kaccounttypepage_p.h"
+#include "kguiutils.h"
+#include "khierarchypage.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneycategory.h"
 #include "kmymoneygeneralcombo.h"
 #include "kmymoneypayeecombo.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
-#include "kaccounttypepage.h"
-#include "kaccounttypepage_p.h"
-#include "khierarchypage.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
-#include "kguiutils.h"
 #include "mymoneypayee.h"
 #include "wizardpage.h"
 
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
-CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new CreditCardSchedulePagePrivate(wizard), StepSchedule, this, wizard)
+namespace NewAccountWizard {
+CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new CreditCardSchedulePagePrivate(wizard), StepSchedule, this, wizard)
 {
     Q_D(CreditCardSchedulePage);
     d->ui->setupUi(this);

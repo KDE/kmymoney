@@ -28,13 +28,13 @@ QString MyMoneyKeyValueContainerPrivate::toString(int value) const
     return QStringLiteral("%1").arg(value);
 }
 
-MyMoneyKeyValueContainer::MyMoneyKeyValueContainer() :
-    d_ptr(new MyMoneyKeyValueContainerPrivate)
+MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
+    : d_ptr(new MyMoneyKeyValueContainerPrivate)
 {
 }
 
-MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const MyMoneyKeyValueContainer& other) :
-    d_ptr(new MyMoneyKeyValueContainerPrivate(*other.d_func()))
+MyMoneyKeyValueContainer::MyMoneyKeyValueContainer(const MyMoneyKeyValueContainer& other)
+    : d_ptr(new MyMoneyKeyValueContainerPrivate(*other.d_func()))
 {
 }
 
@@ -136,18 +136,17 @@ void MyMoneyKeyValueContainer::clear()
     d->m_kvp.clear();
 }
 
-bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& right) const
+bool MyMoneyKeyValueContainer::operator==(const MyMoneyKeyValueContainer& right) const
 {
     Q_D(const MyMoneyKeyValueContainer);
     QMap<QString, QString>::const_iterator it_a, it_b;
 
-    auto d2 = static_cast<const MyMoneyKeyValueContainerPrivate *>(right.d_func());
+    auto d2 = static_cast<const MyMoneyKeyValueContainerPrivate*>(right.d_func());
     it_a = d->m_kvp.begin();
     it_b = d2->m_kvp.begin();
 
     while (it_a != d->m_kvp.end() && it_b != d2->m_kvp.end()) {
-        if (it_a.key() != it_b.key()
-                || (((*it_a).length() != 0 || (*it_b).length() != 0) && *it_a != *it_b))
+        if (it_a.key() != it_b.key() || (((*it_a).length() != 0 || (*it_b).length() != 0) && *it_a != *it_b))
             return false;
         ++it_a;
         ++it_b;
@@ -155,7 +154,6 @@ bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& righ
 
     return (it_a == d->m_kvp.end() && it_b == d2->m_kvp.end());
 }
-
 
 QString MyMoneyKeyValueContainer::operator[](const QString& k) const
 {

@@ -9,9 +9,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
 #include <QDate>
 #include <QDebug>
+#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -21,25 +21,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "mymoneyinstitution.h"
+#include "kmymoneyutils.h"
 #include "mymoneyaccount.h"
 #include "mymoneyaccountloan.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneypayee.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "mymoneymoney.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
 #include "mymoneyreport.h"
 #include "mymoneyschedule.h"
-#include "mymoneyexception.h"
-#include "kmymoneyutils.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "reportaccount.h"
-#include "mymoneyenums.h"
 
-namespace reports
-{
+namespace reports {
 
 // ****************************************************************************
 //
@@ -48,16 +47,17 @@ namespace reports
 // ****************************************************************************
 
 /**
-  * TODO
-  *
-  * - Collapse 2- & 3- groups when they are identical
-  * - Way more test cases (especially splits & transfers)
-  * - Option to collapse splits
-  * - Option to exclude transfers
-  *
-  */
+ * TODO
+ *
+ * - Collapse 2- & 3- groups when they are identical
+ * - Way more test cases (especially splits & transfers)
+ * - Option to collapse splits
+ * - Option to exclude transfers
+ *
+ */
 
-ObjectInfoTable::ObjectInfoTable(const MyMoneyReport& _report): ListTable(_report)
+ObjectInfoTable::ObjectInfoTable(const MyMoneyReport& _report)
+    : ListTable(_report)
 {
     // separated into its own method to allow debugging (setting breakpoints
     // directly in ctors somehow does not work for me (ipwizard))
@@ -114,11 +114,9 @@ void ObjectInfoTable::init()
     switch (m_config.rowType()) {
     case eMyMoney::Report::RowType::Schedule:
         if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
-            m_columns << ctPayee << ctPaymentType << ctOccurrence
-                      << ctNextDueDate << ctCategory << ctValue;
+            m_columns << ctPayee << ctPaymentType << ctOccurrence << ctNextDueDate << ctCategory << ctValue;
         } else {
-            m_columns << ctPayee << ctPaymentType << ctOccurrence
-                      << ctNextDueDate << ctValue;
+            m_columns << ctPayee << ctPaymentType << ctOccurrence << ctNextDueDate << ctValue;
         }
         break;
     case eMyMoney::Report::RowType::AccountInfo:
@@ -143,7 +141,13 @@ void ObjectInfoTable::constructScheduleTable()
 
     QList<MyMoneySchedule> schedules;
 
-    schedules = file->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, m_config.fromDate(), m_config.toDate(), false);
+    schedules = file->scheduleList(QString(),
+                                   eMyMoney::Schedule::Type::Any,
+                                   eMyMoney::Schedule::Occurrence::Any,
+                                   eMyMoney::Schedule::PaymentType::Any,
+                                   m_config.fromDate(),
+                                   m_config.toDate(),
+                                   false);
 
     QList<MyMoneySchedule>::const_iterator it_schedule = schedules.cbegin();
     while (it_schedule != schedules.cend()) {
@@ -151,10 +155,10 @@ void ObjectInfoTable::constructScheduleTable()
 
         ReportAccount account(schedule.account());
 
-        if (m_config.includes(account))  {
+        if (m_config.includes(account)) {
             TableRow scheduleRow;
 
-            //convert to base currency if needed
+            // convert to base currency if needed
             MyMoneyMoney xr = MyMoneyMoney::ONE;
             if (m_config.isConvertCurrency() && account.isForeignCurrency()) {
                 xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
@@ -163,7 +167,7 @@ void ObjectInfoTable::constructScheduleTable()
             // help for sort and render functions
             scheduleRow[ctRank] = FIRST_SPLIT_RANK;
 
-            //schedule data
+            // schedule data
             scheduleRow[ctID] = schedule.id();
             scheduleRow[ctName] = schedule.name();
             scheduleRow[ctNextDueDate] = schedule.nextDueDate().toString(Qt::ISODate);
@@ -171,9 +175,9 @@ void ObjectInfoTable::constructScheduleTable()
             scheduleRow[ctOccurrence] = schedule.occurrenceToString();
             scheduleRow[ctPaymentType] = KMyMoneyUtils::paymentMethodToString(schedule.paymentType());
 
-            //scheduleRow["category"] = account.name();
+            // scheduleRow["category"] = account.name();
 
-            //to get the payee we must look into the splits of the transaction
+            // to get the payee we must look into the splits of the transaction
             MyMoneyTransaction transaction = schedule.transaction();
             MyMoneySplit split = transaction.splitByAccount(account.id(), true);
             scheduleRow[ctValue] = (split.value() * xr).toString();
@@ -182,11 +186,11 @@ void ObjectInfoTable::constructScheduleTable()
             scheduleRow[ctPayee] = payee.name();
             m_rows += scheduleRow;
 
-            //the text matches the main split
+            // the text matches the main split
             bool transaction_text = m_config.match(split);
 
             if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
-                //get the information for all splits
+                // get the information for all splits
                 QList<MyMoneySplit> splits = transaction.splits();
                 QList<MyMoneySplit>::const_iterator split_it = splits.cbegin();
                 for (; split_it != splits.cend(); ++split_it) {
@@ -205,22 +209,21 @@ void ObjectInfoTable::constructScheduleTable()
 
                     if ((*split_it).value() == MyMoneyMoney::autoCalc) {
                         splitRow[ctSplit] = MyMoneyMoney::autoCalc.toString();
-                    } else if (! splitAcc.isIncomeExpense()) {
+                    } else if (!splitAcc.isIncomeExpense()) {
                         splitRow[ctSplit] = (*split_it).value().toString();
                     } else {
-                        splitRow[ctSplit] = (- (*split_it).value()).toString();
+                        splitRow[ctSplit] = (-(*split_it).value()).toString();
                     }
 
-                    //if it is an assett account, mark it as a transfer
-                    if (! splitAcc.isIncomeExpense()) {
-                        splitRow[ctCategory] = ((* split_it).value().isNegative())
-                                               ? i18n("Transfer from %1", splitAcc.fullName())
-                                               : i18n("Transfer to %1", splitAcc.fullName());
+                    // if it is an assett account, mark it as a transfer
+                    if (!splitAcc.isIncomeExpense()) {
+                        splitRow[ctCategory] =
+                            ((*split_it).value().isNegative()) ? i18n("Transfer from %1", splitAcc.fullName()) : i18n("Transfer to %1", splitAcc.fullName());
                     } else {
-                        splitRow [ctCategory] = splitAcc.fullName();
+                        splitRow[ctCategory] = splitAcc.fullName();
                     }
 
-                    //add the split only if it matches the text or it matches the main split
+                    // add the split only if it matches the text or it matches the main split
                     if (m_config.match((*split_it)) || transaction_text) {
                         // only add separate rows when we have a split transaction
                         // otherwise, we simply copy the category to the
@@ -228,7 +231,7 @@ void ObjectInfoTable::constructScheduleTable()
                         if (splits.count() > 2) {
                             m_rows += splitRow;
                         } else {
-                            m_rows.last()[ctCategory] = splitRow [ctCategory];
+                            m_rows.last()[ctCategory] = splitRow[ctCategory];
                         }
                     }
                 }
@@ -242,7 +245,7 @@ void ObjectInfoTable::constructAccountTable()
 {
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    //make sure we have all subaccounts of investment accounts
+    // make sure we have all subaccounts of investment accounts
     includeInvestmentSubAccounts();
 
     QList<MyMoneyAccount> accounts;
@@ -277,14 +280,14 @@ void ObjectInfoTable::constructAccountTable()
             accountRow[ctOpeningBalance] = account.value("OpeningBalanceAccount", false) ? i18nc("Is this an opening balance account?", "Yes") : QString();
             accountRow[ctFavorite] = account.value("PreferredAccount", false) ? i18nc("Is this a favorite account?", "Yes") : QString();
 
-            //investment accounts show the balances of all its subaccounts
+            // investment accounts show the balances of all its subaccounts
             if (account.accountType() == eMyMoney::Account::Type::Investment) {
                 value = investmentBalance(account);
             } else {
                 value = file->balance(account.id());
             }
 
-            //convert to base currency if needed
+            // convert to base currency if needed
             if (m_config.isConvertCurrency() && account.isForeignCurrency()) {
                 MyMoneyMoney xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
                 value = value * xr;
@@ -310,7 +313,7 @@ void ObjectInfoTable::constructAccountLoanTable()
         MyMoneyAccountLoan loan = *it_account;
 
         if (m_config.includes(account) && account.isLoan() && !account.isClosed()) {
-            //convert to base currency if needed
+            // convert to base currency if needed
             MyMoneyMoney xr = MyMoneyMoney::ONE;
             if (m_config.isConvertCurrency() && account.isForeignCurrency()) {
                 xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
@@ -360,14 +363,14 @@ MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
             MyMoneyMoney val;
             MyMoneyMoney balance = file->balance(stock.id());
             MyMoneySecurity security = file->security(stock.currencyId());
-            const MyMoneyPrice &price = file->price(stock.currencyId(), security.tradingCurrency());
+            const MyMoneyPrice& price = file->price(stock.currencyId(), security.tradingCurrency());
             val = balance * price.rate(security.tradingCurrency());
             // adjust value of security to the currency of the account
             MyMoneySecurity accountCurrency = file->currency(acc.currencyId());
             val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());
             val = val.convert(acc.fraction());
             value += val;
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e.what())));
         }
     }

@@ -11,7 +11,7 @@
 KIbanLineEdit::KIbanLineEdit(QWidget* parent)
     : KLineEdit(parent)
 {
-    ibanValidator *const validatorPtr = new ibanValidator;
+    ibanValidator* const validatorPtr = new ibanValidator;
     setValidator(validatorPtr);
 }
 

@@ -17,9 +17,9 @@
 
 #include "ui_ksaveasquestion.h"
 
-KSaveAsQuestion::KSaveAsQuestion(QVector<eKMyMoney::StorageType> fileTypes, QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::KSaveAsQuestion)
+KSaveAsQuestion::KSaveAsQuestion(QVector<eKMyMoney::StorageType> fileTypes, QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KSaveAsQuestion)
 {
     ui->setupUi(this);
     for (const auto& fileType : fileTypes) {

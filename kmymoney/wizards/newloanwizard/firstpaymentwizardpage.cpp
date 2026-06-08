@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -19,9 +18,9 @@
 
 #include "ui_firstpaymentwizardpage.h"
 
-FirstPaymentWizardPage::FirstPaymentWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::FirstPaymentWizardPage)
+FirstPaymentWizardPage::FirstPaymentWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::FirstPaymentWizardPage)
 {
     ui->setupUi(this);
 
@@ -47,17 +46,13 @@ bool FirstPaymentWizardPage::isComplete() const
 void FirstPaymentWizardPage::initializePage()
 {
     if (field("allPaymentsButton").toBool()) {
-        ui->m_firstPaymentLabel->setText(
-            QString("\n") +
-            i18n("Please enter the date, the first payment for this loan was/is due."));
+        ui->m_firstPaymentLabel->setText(QString("\n") + i18n("Please enter the date, the first payment for this loan was/is due."));
         ui->m_firstPaymentNote->setText(
             i18n("Note: Consult the loan contract for details of the first due date. "
                  "Keep in mind, that the first due date usually differs from the date "
                  "the contract was signed"));
     } else if (field("thisYearPaymentButton").toBool()) {
-        ui->m_firstPaymentLabel->setText(
-            QString("\n") +
-            i18n("Please enter the date, the first payment for this loan was/is due this year."));
+        ui->m_firstPaymentLabel->setText(QString("\n") + i18n("Please enter the date, the first payment for this loan was/is due this year."));
         ui->m_firstPaymentNote->setText(
             i18n("Note: You can easily figure out the date of the first payment "
                  "if you consult the last statement of last year."));

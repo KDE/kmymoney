@@ -25,7 +25,7 @@ KMyMoneyTreeView::~KMyMoneyTreeView()
 {
 }
 
-void KMyMoneyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
+void KMyMoneyTreeView::mouseDoubleClickEvent(QMouseEvent* event)
 {
     Q_EMIT startEdit(currentIndex());
     event->accept();

@@ -14,18 +14,18 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "viewinterface.h"
 #include "kforecastview.h"
+#include "viewinterface.h"
 
-ForecastView::ForecastView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args),
-    m_view(nullptr)
+ForecastView::ForecastView(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+    , m_view(nullptr)
 {
     Q_INIT_RESOURCE(forecastview);
 

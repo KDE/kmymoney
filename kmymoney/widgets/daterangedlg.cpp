@@ -86,15 +86,15 @@ public:
     }
 
     DateRangeDlg* q_ptr;
-    Ui::DateRangeDlg *ui;
+    Ui::DateRangeDlg* ui;
     WidgetHintFrameCollection* m_frameCollection;
     QDate m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
     QDate m_endDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
 };
 
-DateRangeDlg::DateRangeDlg(QWidget *parent) :
-    QWidget(parent),
-    d_ptr(new DateRangeDlgPrivate(this))
+DateRangeDlg::DateRangeDlg(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new DateRangeDlgPrivate(this))
 {
     Q_D(DateRangeDlg);
     d->ui->setupUi(this);

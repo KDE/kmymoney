@@ -23,17 +23,17 @@
 
 using namespace eWidgets;
 
-KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WindowFlags flags) :
-    QWidget(parent, flags),
-    d_ptr(new KMyMoneySelectorPrivate(this))
+KMyMoneySelector::KMyMoneySelector(QWidget* parent, Qt::WindowFlags flags)
+    : QWidget(parent, flags)
+    , d_ptr(new KMyMoneySelectorPrivate(this))
 {
     Q_D(KMyMoneySelector);
     d->init();
 }
 
-KMyMoneySelector::KMyMoneySelector(KMyMoneySelectorPrivate &dd, QWidget* parent, Qt::WindowFlags flags) :
-    QWidget(parent, flags),
-    d_ptr(&dd)
+KMyMoneySelector::KMyMoneySelector(KMyMoneySelectorPrivate& dd, QWidget* parent, Qt::WindowFlags flags)
+    : QWidget(parent, flags)
+    , d_ptr(&dd)
 {
     Q_D(KMyMoneySelector);
     d->init();
@@ -51,7 +51,7 @@ void KMyMoneySelector::clear()
     d->m_treeWidget->clear();
 }
 
-void KMyMoneySelector::setSelectable(QTreeWidgetItem *item, bool selectable)
+void KMyMoneySelector::setSelectable(QTreeWidgetItem* item, bool selectable)
 {
     if (selectable) {
         item->setFlags(item->flags() | Qt::ItemIsSelectable);
@@ -110,7 +110,7 @@ QTreeWidget::SelectionMode KMyMoneySelector::selectionMode() const
     return d->m_selMode;
 }
 
-void KMyMoneySelector::slotItemSelected(QTreeWidgetItem *item)
+void KMyMoneySelector::slotItemSelected(QTreeWidgetItem* item)
 {
     Q_D(KMyMoneySelector);
     if (d->m_selMode == QTreeWidget::SingleSelection) {
@@ -233,7 +233,7 @@ bool KMyMoneySelector::allItemsSelected() const
     return true;
 }
 
-bool KMyMoneySelector::allItemsSelected(const QTreeWidgetItem *item) const
+bool KMyMoneySelector::allItemsSelected(const QTreeWidgetItem* item) const
 {
     for (auto i = 0; i < item->childCount(); ++i) {
         QTreeWidgetItem* child = item->child(i);
@@ -270,7 +270,6 @@ void KMyMoneySelector::removeItem(const QString& id)
         it++;
     }
 }
-
 
 void KMyMoneySelector::selectAllItems(const bool state)
 {

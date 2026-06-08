@@ -5,20 +5,20 @@
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
-#include <config-kmymoney.h>
 #include "checkprinting.h"
+#include <config-kmymoney.h>
 
 // QT includes
 #include <QAction>
-#include <QFile>
 #include <QDialog>
-#include <QTextDocument>
+#include <QFile>
 #include <QStandardPaths>
+#include <QTextDocument>
 
 // KDE includes
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // KMyMoney includes
 #include "journalmodel.h"
@@ -42,10 +42,10 @@
 #include "kmm_printer.h"
 
 struct CheckPrinting::Private {
-    QAction*          m_action;
-    QString           m_checkTemplateHTML;
-    QStringList       m_printedTransactionIdList;
-    SelectedObjects   selections;
+    QAction* m_action;
+    QString m_checkTemplateHTML;
+    QStringList m_printedTransactionIdList;
+    SelectedObjects selections;
     // KMyMoneyRegister::SelectedTransactions m_transactions;
 
     bool canBePrinted(const QString& accountId) const
@@ -138,15 +138,15 @@ struct CheckPrinting::Private {
         checkHTML.replace("$TRANSACTIONCURRENCY", accountcurrency.tradingSymbol());
         int numSplits = (int)transaction.splitCount();
         const int maxSplits = 11;
-        for (int i = maxSplits-1; i >= 0 ; i--) {
+        for (int i = maxSplits - 1; i >= 0; i--) {
             const QString valueVariable = QString("$SPLITVALUE%1").arg(i);
             const QString accountVariable = QString("$SPLITACCOUNTNAME%1").arg(i);
             if (i < numSplits) {
                 checkHTML.replace(valueVariable, MyMoneyUtils::formatMoney(transaction.splits().at(i).value().abs(), currency));
                 checkHTML.replace(accountVariable, (file->account(transaction.splits().at(i).accountId())).name());
             } else {
-                checkHTML.replace( valueVariable, " ");
-                checkHTML.replace( accountVariable, " ");
+                checkHTML.replace(valueVariable, " ");
+                checkHTML.replace(accountVariable, " ");
             }
         }
 
@@ -163,14 +163,13 @@ struct CheckPrinting::Private {
     }
 };
 
-CheckPrinting::CheckPrinting(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args)
+CheckPrinting::CheckPrinting(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
 {
     Q_INIT_RESOURCE(checkprinting);
 
     // Tell the host application to load my GUI component
     const auto rcFileName = QLatin1String("checkprinting.rc");
-
 
     setXMLFile(rcFileName);
 

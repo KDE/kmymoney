@@ -9,9 +9,9 @@
 // QT Includes
 
 #include <QComboBox>
+#include <QDebug>
 #include <QLineEdit>
 #include <QTimer>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

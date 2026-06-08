@@ -14,10 +14,10 @@
 #include <gwenhywfar/debug.h>
 
 // QT includes
-#include <QRadioButton>
-#include <QLabel>
 #include <QDateTime>
+#include <QLabel>
 #include <QPushButton>
+#include <QRadioButton>
 
 // KDE includes
 #include <KLocalizedString>
@@ -39,20 +39,20 @@ struct KBPickStartDate::Private {
     }
 
     Ui::KBPickStartDate ui;
-    KBankingExt *banking;
+    KBankingExt* banking;
     QDate firstPossible;
     QDate lastUpdate;
 };
 
-
 KBPickStartDate::KBPickStartDate(KBankingExt* qb,
-                                 const QDate &firstPossible,
-                                 const QDate &lastUpdate,
+                                 const QDate& firstPossible,
+                                 const QDate& lastUpdate,
                                  const QString& accountName,
                                  int defaultChoice,
-                                 QWidget* parent, bool modal) :
-    QDialog(parent),
-    d(new Private)
+                                 QWidget* parent,
+                                 bool modal)
+    : QDialog(parent)
+    , d(new Private)
 {
     d->ui.setupUi(this);
     d->firstPossible = firstPossible;
@@ -67,7 +67,10 @@ KBPickStartDate::KBPickStartDate(KBankingExt* qb,
     // since we did not fully implement the help, we better hide it for now
     d->ui.buttonBox->button(QDialogButtonBox::Help)->hide();
 
-    d->ui.label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>", accountName));
+    d->ui.label->setText(
+        i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will "
+             "choose one.</p></qt>",
+             accountName));
 
     if (lastUpdate.isValid()) {
         d->ui.lastUpdateLabel->setText(lastUpdate.toString());
@@ -130,13 +133,10 @@ KBPickStartDate::KBPickStartDate(KBankingExt* qb,
     d->ui.buttonGroup->setFocus();
 }
 
-
-
 KBPickStartDate::~KBPickStartDate()
 {
     delete d;
 }
-
 
 QDate KBPickStartDate::date()
 {
@@ -154,9 +154,6 @@ QDate KBPickStartDate::date()
     }
 }
 
-
-
 void KBPickStartDate::slotHelpClicked()
 {
 }
-

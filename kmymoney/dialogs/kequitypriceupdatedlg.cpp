@@ -22,14 +22,14 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
-#include <KTextEdit>
+#include <KColorScheme>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
+#include <KMessageBox>
 #include <KSharedConfig>
 #include <KStandardGuiItem>
-#include <KLocalizedString>
-#include <KColorScheme>
+#include <KTextEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -198,9 +198,8 @@ public:
         QList<MyMoneySecurity> securities = file->securityList();
         for (QList<MyMoneySecurity>::const_iterator it = securities.cbegin(); it != securities.cend(); ++it) {
             if (!(*it).isCurrency() //
-                    && (securityId.isEmpty() || ((*it).id() == securityId)) //
-                    && !(*it).value("kmm-online-source").isEmpty()
-               ) {
+                && (securityId.isEmpty() || ((*it).id() == securityId)) //
+                && !(*it).value("kmm-online-source").isEmpty()) {
                 addInvestment(*it);
             }
         }
@@ -303,11 +302,10 @@ public:
         const auto id = QString::fromLatin1("%1 %2").arg(pair.first, pair.second);
         // Check that the pair does not already exist
         if (!m_onlinePriceModel.indexById(id).isValid()) {
-            const MyMoneyPrice &pr = file->price(pair.first, pair.second);
+            const MyMoneyPrice& pr = file->price(pair.first, pair.second);
             if (pr.source() != QLatin1String("KMyMoney")) {
                 bool keep = true;
-                if ((pair.first == file->baseCurrency().id())
-                        || (pair.second == file->baseCurrency().id())) {
+                if ((pair.first == file->baseCurrency().id()) || (pair.second == file->baseCurrency().id())) {
                     const QString& foreignCurrency = file->foreignCurrency(pair.first, pair.second);
                     // check that the foreign currency is still in use
                     QList<MyMoneyAccount>::const_iterator it_a;
@@ -316,8 +314,7 @@ public:
                     for (it_a = list.cbegin(); !dontCheckExistance && it_a != list.cend(); ++it_a) {
                         // if it's an account denominated in the foreign currency
                         // keep it
-                        if (((*it_a).currencyId() == foreignCurrency)
-                                && !(*it_a).isClosed())
+                        if (((*it_a).currencyId() == foreignCurrency) && !(*it_a).isClosed())
                             break;
                         // if it's an investment traded in the foreign currency
                         // keep it
@@ -371,13 +368,13 @@ public:
                                                      quoteProfile(inv.value(QLatin1String("kmm-online-quote-system"))));
                 switch (alkOnlineSource.idSelector()) {
                 case AlkOnlineQuoteSource::IdentificationNumber:
-                    webID = inv.value("kmm-security-id");   // insert ISIN number...
+                    webID = inv.value("kmm-security-id"); // insert ISIN number...
                     break;
                 case AlkOnlineQuoteSource::Name:
-                    webID = inv.name();                     // ...or name...
+                    webID = inv.name(); // ...or name...
                     break;
                 default:
-                    webID = inv.tradingSymbol();            // ...or symbol
+                    webID = inv.tradingSymbol(); // ...or symbol
                     break;
                 }
                 if (webID.isEmpty()) {
@@ -685,9 +682,9 @@ public:
     QKeySequence m_searchShortCut;
 };
 
-KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId) :
-    QDialog(parent),
-    d_ptr(new KEquityPriceUpdateDlgPrivate(this))
+KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget* parent, const QString& securityId)
+    : QDialog(parent)
+    , d_ptr(new KEquityPriceUpdateDlgPrivate(this))
 {
     Q_D(KEquityPriceUpdateDlg);
     d->init(securityId);
@@ -794,7 +791,7 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
                 QString toid = ids[1].toUtf8();
                 price = MyMoneyPrice(fromid, toid, date, rate, source);
             } else
-                // otherwise, it's a security quote
+            // otherwise, it's a security quote
             {
                 MyMoneySecurity security = MyMoneyFile::instance()->security(kmm_id);
                 price = MyMoneyPrice(kmm_id, security.tradingCurrency(), date, rate, source);
@@ -821,7 +818,7 @@ void KEquityPriceUpdateDlg::storePrices()
         }
         ft.commit();
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         qDebug() << "Unable to add downloaded prices to storage";
     }
 }

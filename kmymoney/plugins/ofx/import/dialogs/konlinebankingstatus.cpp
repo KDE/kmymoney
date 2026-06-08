@@ -91,7 +91,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget* p
 
     const int offset = settings.value("kmmofx-timestampOffset").toInt();
     m_timestampOffsetSign->setCurrentIndex(offset < 0 ? 1 : 0);
-    m_timestampOffset->setTime(QTime::fromMSecsSinceStartOfDay(qAbs(offset)*60*1000));
+    m_timestampOffset->setTime(QTime::fromMSecsSinceStartOfDay(qAbs(offset) * 60 * 1000));
 
     m_invertAmount->setChecked(settings.value("kmmofx-invertamount").toLower() == QStringLiteral("yes"));
     m_fixBuySellSignage->setChecked(settings.value("kmmofx-fixbuysellsignage").toLower() == QStringLiteral("yes"));
@@ -122,7 +122,6 @@ void KOnlineBankingStatus::applicationSelectionChanged()
 {
     m_applicationEdit->setVisible(m_appId->appId().endsWith(':'));
 }
-
 
 const QString KOnlineBankingStatus::appId() const
 {

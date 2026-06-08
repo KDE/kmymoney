@@ -7,15 +7,16 @@
 
 #include "scheduledtransactionmatchfinder.h"
 
-#include <QDebug>
 #include <QDate>
+#include <QDebug>
 
+#include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyschedule.h"
-#include "kmymoneyutils.h"
 
 ScheduledTransactionMatchFinder::ScheduledTransactionMatchFinder(const MyMoneyAccount& account, int matchWindow)
-    : TransactionMatchFinder(matchWindow), m_account(account)
+    : TransactionMatchFinder(matchWindow)
+    , m_account(account)
 {
 }
 
@@ -29,8 +30,8 @@ void ScheduledTransactionMatchFinder::findMatchInMatchCandidatesList()
 {
     for (const MyMoneySchedule& schedule : std::as_const(listOfMatchCandidates)) {
         QDate nextDueDate = schedule.nextDueDate();
-        bool nextDueDateWithinMatchWindowRange = (nextDueDate >= importedTransaction.postDate().addDays(-m_matchWindow))
-                && (nextDueDate <= importedTransaction.postDate().addDays(m_matchWindow));
+        bool nextDueDateWithinMatchWindowRange =
+            (nextDueDate >= importedTransaction.postDate().addDays(-m_matchWindow)) && (nextDueDate <= importedTransaction.postDate().addDays(m_matchWindow));
         if (schedule.isOverdue() || nextDueDateWithinMatchWindowRange) {
             MyMoneyTransaction scheduledTransaction = KMyMoneyUtils::scheduledTransaction(schedule);
 

@@ -17,27 +17,27 @@
 // KDE Includes
 
 #include <KActionCollection>
-#include <KLocalizedString>
-#include <KPluginFactory>
-#include <KMessageBox>
 #include <KCompressionDevice>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "appinterface.h"
+#include "kmymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneygncreader.h"
 #include "viewinterface.h"
-#include "appinterface.h"
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
-#include "kmymoneyenums.h"
 
 class MyMoneyStatement;
 
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 
-GNCImporter::GNCImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args)
+GNCImporter::GNCImporter(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
 {
     // For information, announce that we have been loaded.
     qDebug("Plugins: gncimporter loaded");
@@ -48,7 +48,7 @@ GNCImporter::~GNCImporter()
     qDebug("Plugins: gncimporter unloaded");
 }
 
-bool GNCImporter::open(const QUrl &url)
+bool GNCImporter::open(const QUrl& url)
 {
     if (url.scheme() == QLatin1String("sql"))
         return false;
@@ -112,7 +112,7 @@ QUrl GNCImporter::openUrl() const
     return QUrl();
 }
 
-bool GNCImporter::save(const QUrl &url)
+bool GNCImporter::save(const QUrl& url)
 {
     Q_UNUSED(url)
     return false;

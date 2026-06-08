@@ -60,9 +60,9 @@ public:
     QPushButton* m_acceptButton;
 };
 
-KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent) :
-    QWidget(parent),
-    d_ptr(new KSettingsOnlineQuotesPrivate)
+KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KSettingsOnlineQuotesPrivate)
 {
     Q_D(KSettingsOnlineQuotes);
 

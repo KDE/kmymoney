@@ -16,16 +16,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-
-KMyMoneyMoneyValidator::KMyMoneyMoneyValidator(QObject * parent) :
-    QDoubleValidator(parent)
+KMyMoneyMoneyValidator::KMyMoneyMoneyValidator(QObject* parent)
+    : QDoubleValidator(parent)
 {
     setLocale(QLocale::c());
 }
 
-KMyMoneyMoneyValidator::KMyMoneyMoneyValidator(double bottom, double top, int decimals,
-        QObject * parent) :
-    QDoubleValidator(bottom, top, decimals, parent)
+KMyMoneyMoneyValidator::KMyMoneyMoneyValidator(double bottom, double top, int decimals, QObject* parent)
+    : QDoubleValidator(bottom, top, decimals, parent)
 {
     setLocale(QLocale::c());
 }
@@ -38,7 +36,7 @@ KMyMoneyMoneyValidator::~KMyMoneyMoneyValidator()
  * The code of the following function is taken from kdeui/knumvalidator.cpp
  * and adjusted to always use the monetary symbols defined in the KDE System Settings
  */
-QValidator::State KMyMoneyMoneyValidator::validate(QString & input, int & _p) const
+QValidator::State KMyMoneyMoneyValidator::validate(QString& input, int& _p) const
 {
     Q_UNUSED(_p)
     Q_UNUSED(input)

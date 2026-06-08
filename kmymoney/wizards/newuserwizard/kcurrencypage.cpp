@@ -22,10 +22,10 @@
 // Project Includes
 
 #include "icons/icons.h"
-#include "knewuserwizard.h"
-#include "knewuserwizard_p.h"
 #include "kaccountpage.h"
 #include "kaccountpage_p.h"
+#include "knewuserwizard.h"
+#include "knewuserwizard_p.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "ui_currency.h"
@@ -34,22 +34,21 @@
 
 using namespace Icons;
 
-namespace NewUserWizard
-{
+namespace NewUserWizard {
 class CurrencyPagePrivate : public WizardPagePrivate<Wizard>
 {
     Q_DISABLE_COPY(CurrencyPagePrivate)
 
 public:
-    CurrencyPagePrivate(QObject* parent) :
-        WizardPagePrivate<Wizard>(parent)
+    CurrencyPagePrivate(QObject* parent)
+        : WizardPagePrivate<Wizard>(parent)
     {
     }
 };
 
-CurrencyPage::CurrencyPage(Wizard* wizard) :
-    Currency(wizard),
-    WizardPage<Wizard>(*new CurrencyPagePrivate(wizard), stepCount++, this, wizard)
+CurrencyPage::CurrencyPage(Wizard* wizard)
+    : Currency(wizard)
+    , WizardPage<Wizard>(*new CurrencyPagePrivate(wizard), stepCount++, this, wizard)
 {
     QTreeWidgetItem* first = nullptr;
 
@@ -58,7 +57,6 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
 
     QString localCurrency(QLocale().currencySymbol(QLocale::CurrencyIsoCode));
     QString baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
-
 
     ui->m_currencyList->clear();
     for (it = list.cbegin(); it != list.cend(); ++it) {

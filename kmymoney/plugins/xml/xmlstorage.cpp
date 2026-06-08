@@ -7,8 +7,8 @@
 
 #include "xmlstorage.h"
 
-#include <memory>
 #include <config-kmymoney.h>
+#include <memory>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -24,13 +24,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KActionCollection>
-#include <KLocalizedString>
-#include <KMessageBox>
+#include <KBackup>
 #include <KCompressionDevice>
 #include <KIO/StoredTransferJob>
-#include <KBackup>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -342,7 +342,7 @@ XMLStorage::~XMLStorage()
     qDebug("Plugins: xmlstorage unloaded");
 }
 
-bool XMLStorage::open(const QUrl &url)
+bool XMLStorage::open(const QUrl& url)
 {
     d->m_fileUrl.clear();
     d->m_openErrorMessage.clear();
@@ -365,9 +365,9 @@ bool XMLStorage::open(const QUrl &url)
 
     if (!KMyMoneyUtils::fileExists(QUrl::fromLocalFile(fileName)))
         throw MYMONEYEXCEPTION(QString::fromLatin1("Error opening the file.\n"
-                               "Requested file: '%1'.\n"
-                               "Downloaded file: '%2'").arg(qPrintable(url.url()), fileName));
-
+                                                   "Requested file: '%1'.\n"
+                                                   "Downloaded file: '%2'")
+                                   .arg(qPrintable(url.url()), fileName));
 
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly))
@@ -391,11 +391,11 @@ bool XMLStorage::open(const QUrl &url)
 
     QIODevice* qfile = nullptr;
     QString sFileHeader(qbaFileHeader);
-    if (sFileHeader == QString("\037\213")) {        // gzipped?
+    if (sFileHeader == QString("\037\213")) { // gzipped?
         qfile = new KCompressionDevice(fileName, COMPRESSION_TYPE);
-    } else if (sFileHeader == QString("--") ||        // PGP ASCII armored?
-               sFileHeader == QString("\205\001") ||  // PGP binary?
-               sFileHeader == QString("\205\002")) {  // PGP binary?
+    } else if (sFileHeader == QString("--") || // PGP ASCII armored?
+               sFileHeader == QString("\205\001") || // PGP binary?
+               sFileHeader == QString("\205\002")) { // PGP binary?
 #ifdef ENABLE_GPG
         if (KGPGFile::GPGAvailable()) {
             qfile = new KGPGFile(fileName);
@@ -443,10 +443,11 @@ bool XMLStorage::open(const QUrl &url)
     // should be removed at some point. An alternative is to
     // check the beginning of the file against an pattern
     // of the XML file (e.g. '?<xml' ).
-    if ((magic0 == MAGIC_0_50 && magic1 == MAGIC_0_51) ||
-            magic0 < 30) {
+    if ((magic0 == MAGIC_0_50 && magic1 == MAGIC_0_51) || magic0 < 30) {
         // we do not support this file format anymore
-        throw MYMONEYEXCEPTION(QString::fromLatin1("<qt>File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.</qt>").arg(fileName));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("<qt>File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of "
+                                                   "KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.</qt>")
+                                   .arg(fileName));
     }
 
     // Scan the first 70 bytes to see if we find something
@@ -494,7 +495,7 @@ bool XMLStorage::open(const QUrl &url)
     }
 
     d->m_fileUrl = url;
-    //write the directory used for this file as the default one for next time.
+    // write the directory used for this file as the default one for next time.
     appInterface()->writeLastUsedDir(url.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
 
     return true;
@@ -510,7 +511,7 @@ QUrl XMLStorage::openUrl() const
     return d->m_fileUrl;
 }
 
-bool XMLStorage::save(const QUrl &url)
+bool XMLStorage::save(const QUrl& url)
 {
     QString filename = url.path();
 
@@ -539,7 +540,7 @@ bool XMLStorage::save(const QUrl &url)
     // but for now, this would involve too many changes
     auto rc = true;
     try {
-        if (! url.isValid()) {
+        if (!url.isValid()) {
             throw MYMONEYEXCEPTION(QString::fromLatin1("Malformed URL '%1'").arg(url.url()));
         }
 
@@ -551,7 +552,7 @@ bool XMLStorage::save(const QUrl &url)
                     KBackup::numberedBackupFile(filename, QString(), KMyMoneySettings::backupExtension(), nbak);
                 }
                 d->saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
-            } catch (const MyMoneyException &e) {
+            } catch (const MyMoneyException& e) {
                 qWarning("Unable to write changes to: %s\nReason: %s", qPrintable(filename), e.what());
                 throw;
             }
@@ -589,7 +590,7 @@ bool XMLStorage::save(const QUrl &url)
                 qDebug() << "Unable to create temporary file";
             }
         }
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::error(nullptr, QString::fromLatin1(e.what()));
         MyMoneyFile::instance()->setDirty();
         rc = false;
@@ -651,7 +652,6 @@ bool XMLStorage::saveAs()
         } else {
             dlg->setDefaultSuffix(QString());
         }
-
     });
 
     if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
@@ -660,8 +660,7 @@ bool XMLStorage::saveAs()
             QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
             // append extension if not present
-            if (!newName.endsWith(QLatin1String(".kmy"), Qt::CaseInsensitive) &&
-                    !newName.endsWith(QLatin1String(".xml"), Qt::CaseInsensitive))
+            if (!newName.endsWith(QLatin1String(".kmy"), Qt::CaseInsensitive) && !newName.endsWith(QLatin1String(".xml"), Qt::CaseInsensitive))
                 newName.append(QLatin1String(".kmy"));
             newURL = QUrl::fromUserInput(newName);
 
@@ -692,13 +691,13 @@ bool XMLStorage::saveAs()
                 rc = save(newURL);
 
                 appInterface()->addToRecentFiles(newURL);
-                //write the directory used for this file as the default one for next time.
+                // write the directory used for this file as the default one for next time.
                 appInterface()->writeLastUsedDir(newURL.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
                 appInterface()->writeLastUsedFile(newName);
             }
         }
     }
-    (*appInterface()->progressCallback())(0,0, i18nc("Application is ready to use", "Ready."));
+    (*appInterface()->progressCallback())(0, 0, i18nc("Application is ready to use", "Ready."));
     delete dlg;
     return rc;
 }

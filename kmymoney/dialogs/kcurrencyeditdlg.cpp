@@ -12,16 +12,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPixmap>
-#include <QBitmap>
-#include <QList>
-#include <QTreeWidget>
-#include <QStyledItemDelegate>
-#include <QIcon>
-#include <QPushButton>
 #include <QBitArray>
+#include <QBitmap>
+#include <QIcon>
 #include <QInputDialog>
+#include <QList>
 #include <QMenu>
+#include <QPixmap>
+#include <QPushButton>
+#include <QStyledItemDelegate>
+#include <QTreeWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -59,14 +59,15 @@ public:
     explicit KCurrencyEditDelegate(QObject* parent = nullptr);
 
 protected:
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const final override;
+    QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 };
 
-KCurrencyEditDelegate::KCurrencyEditDelegate(QObject* parent): QStyledItemDelegate(parent)
+KCurrencyEditDelegate::KCurrencyEditDelegate(QObject* parent)
+    : QStyledItemDelegate(parent)
 {
 }
 
-QWidget *KCurrencyEditDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+QWidget* KCurrencyEditDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     if (index.column() == 1)
         return nullptr;
@@ -79,13 +80,13 @@ class KCurrencyEditDlgPrivate
     Q_DECLARE_PUBLIC(KCurrencyEditDlg)
 
 public:
-    explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KCurrencyEditDlg),
-        m_availableCurrencyDlg(nullptr),
-        m_currencyEditorDlg(nullptr),
-        m_searchWidget(nullptr),
-        m_inLoading(false)
+    explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KCurrencyEditDlg)
+        , m_availableCurrencyDlg(nullptr)
+        , m_currencyEditorDlg(nullptr)
+        , m_searchWidget(nullptr)
+        , m_inLoading(false)
     {
     }
 
@@ -94,7 +95,7 @@ public:
         delete ui;
     }
 
-    enum removalModeE :int { RemoveSelected, RemoveUnused };
+    enum removalModeE : int { RemoveSelected, RemoveUnused };
 
     void removeCurrency(const removalModeE& mode)
     {
@@ -102,10 +103,10 @@ public:
         auto file = MyMoneyFile::instance();
         MyMoneyFileTransaction ft;
         QBitArray skip((int)eStorage::Reference::Count);
-        skip.fill(false);                                 // check reference to all...
-        skip.setBit((int)eStorage::Reference::Price);      // ...except price
+        skip.fill(false); // check reference to all...
+        skip.setBit((int)eStorage::Reference::Price); // ...except price
 
-        QTreeWidgetItemIterator it (ui->m_currencyList);  // iterate over whole tree
+        QTreeWidgetItemIterator it(ui->m_currencyList); // iterate over whole tree
         if (mode == RemoveUnused) {
             while (*it) {
                 MyMoneySecurity currency = (*it)->data(0, Qt::UserRole).value<MyMoneySecurity>();
@@ -134,14 +135,14 @@ public:
                 try {
                     MyMoneyFile::instance()->setBaseCurrency(cur);
                     ft.commit();
-                } catch (const MyMoneyException &e) {
+                } catch (const MyMoneyException& e) {
                     KMessageBox::error(q, i18n("Cannot set %1 as base currency: %2", cur.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
                 }
             }
         }
     }
 
-    void updateCurrency(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol)
+    void updateCurrency(const QString& currencyId, const QString& currencyName, const QString& currencyTradingSymbol)
     {
         Q_Q(KCurrencyEditDlg);
         const auto file = MyMoneyFile::instance();
@@ -155,11 +156,11 @@ public:
                     file->modifyCurrency(currency);
                     m_currentCurrency = currency;
                     ft.commit();
-                } catch (const MyMoneyException &e) {
+                } catch (const MyMoneyException& e) {
                     KMessageBox::error(q, i18n("Cannot update currency. %1", QString::fromLatin1(e.what())), i18n("Update currency"));
                 }
             }
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::error(q, i18n("Cannot update currency. %1", QString::fromLatin1(e.what())), i18n("Update currency"));
         }
     }
@@ -191,7 +192,7 @@ public:
                     // to inform caller
                     currency = currencyEditorDlg->currency();
 
-                } catch (const MyMoneyException &e) {
+                } catch (const MyMoneyException& e) {
                     if (currency.id().isEmpty()) {
                         KMessageBox::error(q_ptr, i18n("Cannot create new currency. %1", QString::fromLatin1(e.what())), i18n("New currency"));
                     } else {
@@ -199,29 +200,29 @@ public:
                     }
                 }
             } else {
-                rc = false;   // aborted by user
+                rc = false; // aborted by user
             }
-        } while(false);
+        } while (false);
 
         return rc;
     }
 
-    KCurrencyEditDlg      *q_ptr;
-    Ui::KCurrencyEditDlg  *ui;
+    KCurrencyEditDlg* q_ptr;
+    Ui::KCurrencyEditDlg* ui;
 
-    KAvailableCurrencyDlg *m_availableCurrencyDlg;
-    KCurrencyEditorDlg    *m_currencyEditorDlg;
-    MyMoneySecurity        m_currentCurrency;
+    KAvailableCurrencyDlg* m_availableCurrencyDlg;
+    KCurrencyEditorDlg* m_currencyEditorDlg;
+    MyMoneySecurity m_currentCurrency;
     /**
-      * Search widget for the list
-      */
-    KTreeWidgetSearchLineWidget*    m_searchWidget;
-    bool                   m_inLoading;
+     * Search widget for the list
+     */
+    KTreeWidgetSearchLineWidget* m_searchWidget;
+    bool m_inLoading;
 };
 
-KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KCurrencyEditDlgPrivate(this))
+KCurrencyEditDlg::KCurrencyEditDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KCurrencyEditDlgPrivate(this))
 {
     Q_D(KCurrencyEditDlg);
     d->ui->setupUi(this);
@@ -255,7 +256,7 @@ void KCurrencyEditDlg::finishCtor()
     Q_D(KCurrencyEditDlg);
     slotLoadCurrencies();
 
-    //resize the column widths
+    // resize the column widths
     for (auto i = 0; i < 3; ++i)
         d->ui->m_currencyList->resizeColumnToContents(i);
 
@@ -301,9 +302,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
 
     // sort the currencies ...
     // ... and make sure a few precious metals are at the end
-    std::sort(list.begin(), list.end(),
-              [=] (const MyMoneySecurity& c1, const MyMoneySecurity& c2)
-    {
+    std::sort(list.begin(), list.end(), [=](const MyMoneySecurity& c1, const MyMoneySecurity& c2) {
         const bool c1Metal = c1.tradingSymbol().startsWith(QLatin1Char('X')) && metalSymbols.contains(c1.tradingSymbol());
         const bool c2Metal = c2.tradingSymbol().startsWith(QLatin1Char('X')) && metalSymbols.contains(c2.tradingSymbol());
         if (c1Metal ^ c2Metal)
@@ -318,7 +317,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     QString baseCurrency;
     try {
         baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         qDebug("%s", e.what());
     }
 
@@ -331,7 +330,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     d->ui->m_currencyList->setSortingEnabled(false);
     d->ui->m_currencyList->clear();
     for (it = list.cbegin(); it != list.cend(); ++it) {
-        QTreeWidgetItem *p = new QTreeWidgetItem(d->ui->m_currencyList);
+        QTreeWidgetItem* p = new QTreeWidgetItem(d->ui->m_currencyList);
         p->setText(0, (*it).name());
         p->setData(0, Qt::UserRole, QVariant::fromValue(*it));
         p->setFlags(p->flags() | Qt::ItemIsEditable);
@@ -385,7 +384,7 @@ void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* citem, int)
     slotUpdateCurrency(citem, nullptr);
 }
 
-void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* citem, QTreeWidgetItem *pitem)
+void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* citem, QTreeWidgetItem* pitem)
 {
     Q_D(KCurrencyEditDlg);
     Q_UNUSED(pitem)
@@ -397,9 +396,7 @@ void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* citem, QTreeWidgetIte
     const auto newSymbol = d->ui->m_currencyList->currentItem()->text(2);
 
     // verify that the stored currency id is not empty and the edited fields are not empty either
-    if (!d->m_currentCurrency.id().isEmpty()
-            && !newSymbol.isEmpty()
-            && !newName.isEmpty()) {
+    if (!d->m_currentCurrency.id().isEmpty() && !newSymbol.isEmpty() && !newName.isEmpty()) {
         d->updateCurrency(d->m_currentCurrency.id(), newName, newSymbol);
     }
 }
@@ -421,27 +418,27 @@ void KCurrencyEditDlg::slotSelectCurrency(const QString& id)
     }
 }
 
-void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *citem, QTreeWidgetItem *pitem)
+void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem* citem, QTreeWidgetItem* pitem)
 {
     Q_UNUSED(pitem)
     slotSelectCurrency(citem);
 }
 
-void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
+void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem* item)
 {
     Q_D(KCurrencyEditDlg);
     auto file = MyMoneyFile::instance();
     QString baseId;
     try {
         baseId = MyMoneyFile::instance()->baseCurrency().id();
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 
     if (item) {
         try {
             d->m_currentCurrency = file->security(item->text(1));
 
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
             d->m_currentCurrency = MyMoneySecurity();
         }
 
@@ -484,20 +481,20 @@ void KCurrencyEditDlg::slotShowCurrencyMenu(const QPoint& p)
         const auto cond2 = cond1 && !file->isReferenced(sec, skip);
         const auto cond3 = cond1 && sec.id() != file->baseCurrency().id();
         auto menu = new QMenu;
-        typedef void(KCurrencyEditDlg::*KCurrencyEditDlgFunc)();
+        typedef void (KCurrencyEditDlg::*KCurrencyEditDlgFunc)();
         struct actionInfo {
-            eMenu::Action        action;
+            eMenu::Action action;
             KCurrencyEditDlgFunc callback;
-            QString              text;
-            Icon                 icon;
-            bool                 enabled;
+            QString text;
+            Icon icon;
+            bool enabled;
         };
 
-        const QVector<actionInfo> actionInfos {
-            {eMenu::Action::NewCurrency,      &KCurrencyEditDlg::slotNewCurrency,     i18n("New currency"),            Icon::DocumentNew, true},
-            {eMenu::Action::RenameCurrency,   &KCurrencyEditDlg::slotRenameCurrency,  i18n("Rename currency"),         Icon::EditRename,  cond1},
-            {eMenu::Action::DeleteCurrency,   &KCurrencyEditDlg::slotDeleteCurrency,  i18n("Delete currency"),         Icon::EditRemove,  cond2},
-            {eMenu::Action::SetBaseCurrency,  &KCurrencyEditDlg::slotSetBaseCurrency, i18n("Select as base currency"), Icon::KMyMoney,    cond3},
+        const QVector<actionInfo> actionInfos{
+            {eMenu::Action::NewCurrency, &KCurrencyEditDlg::slotNewCurrency, i18n("New currency"), Icon::DocumentNew, true},
+            {eMenu::Action::RenameCurrency, &KCurrencyEditDlg::slotRenameCurrency, i18n("Rename currency"), Icon::EditRename, cond1},
+            {eMenu::Action::DeleteCurrency, &KCurrencyEditDlg::slotDeleteCurrency, i18n("Delete currency"), Icon::EditRemove, cond2},
+            {eMenu::Action::SetBaseCurrency, &KCurrencyEditDlg::slotSetBaseCurrency, i18n("Select as base currency"), Icon::KMyMoney, cond3},
         };
 
         QList<QAction*> LUTActions;
@@ -548,7 +545,7 @@ void KCurrencyEditDlg::slotAddCurrency()
             MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
             file->addCurrency(currency);
             if (ancientCurrencies.value(currency, MyMoneyPrice()) != MyMoneyPrice()) { // if ancient currency is added...
-                file->addPrice(ancientCurrencies[currency]);                             // ...we want to add last known exchange rate as well
+                file->addPrice(ancientCurrencies[currency]); // ...we want to add last known exchange rate as well
             } else {
                 // check if a new currency is added and the old one is already on file.
                 // in that case, we want to add the last know exchange rate as well
@@ -638,8 +635,10 @@ void KCurrencyEditDlg::slotDeleteCurrency()
         try {
             MyMoneyFile::instance()->removeCurrency(d->m_currentCurrency);
             ft.commit();
-        } catch (const MyMoneyException &e) {
-            KMessageBox::error(this, i18n("Cannot delete currency %1. %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())), i18n("Delete currency"));
+        } catch (const MyMoneyException& e) {
+            KMessageBox::error(this,
+                               i18n("Cannot delete currency %1. %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())),
+                               i18n("Delete currency"));
         }
     }
 }
@@ -653,8 +652,10 @@ void KCurrencyEditDlg::slotSetBaseCurrency()
             try {
                 MyMoneyFile::instance()->setBaseCurrency(d->m_currentCurrency);
                 ft.commit();
-            } catch (const MyMoneyException &e) {
-                KMessageBox::error(this, i18n("Cannot set %1 as base currency: %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
+            } catch (const MyMoneyException& e) {
+                KMessageBox::error(this,
+                                   i18n("Cannot set %1 as base currency: %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())),
+                                   i18n("Set base currency"));
             }
         }
     }

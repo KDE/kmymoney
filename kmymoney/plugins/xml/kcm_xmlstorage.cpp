@@ -15,8 +15,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KMessageBox>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -142,7 +142,7 @@ void XMLStorageSettingsWidget::slotIdChanged(int)
     slotIdChanged();
 }
 
-void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
+void XMLStorageSettingsWidget::showEvent(QShowEvent* event)
 {
     QString masterKey;
 
@@ -244,7 +244,7 @@ KCMXMLStorage::KCMXMLStorage(QObject* parent, const QVariantList& args)
 {
     XMLStorageSettingsWidget* w = new XMLStorageSettingsWidget(widget());
     addConfig(KMyMoneySettings::self(), w);
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout;
     widget()->setLayout(layout);
     layout->addWidget(w);
     setButtons(NoAdditionalButton);

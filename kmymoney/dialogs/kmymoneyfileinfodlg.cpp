@@ -9,9 +9,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QLabel>
 #include <QList>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -21,21 +21,21 @@
 
 #include "ui_kmymoneyfileinfodlg.h"
 
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneyprice.h"
-#include "mymoneysecurity.h"
-#include "mymoneyenums.h"
-#include "pricemodel.h"
-#include "parametersmodel.h"
-#include "payeesmodel.h"
 #include "institutionsmodel.h"
 #include "journalmodel.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
+#include "parametersmodel.h"
+#include "payeesmodel.h"
+#include "pricemodel.h"
 #include "schedulesmodel.h"
 
-KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::KMyMoneyFileInfoDlg)
+KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KMyMoneyFileInfoDlg)
 {
     ui->setupUi(this);
     // Now fill the fields with data
@@ -63,7 +63,7 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
 
     QMap<eMyMoney::Account::Type, int>::const_iterator it_m;
     for (it_m = accountMap.cbegin(); it_m != accountMap.cend(); ++it_m) {
-        QTreeWidgetItem *item = new QTreeWidgetItem();
+        QTreeWidgetItem* item = new QTreeWidgetItem();
         item->setText(0, MyMoneyAccount::accountTypeToString(it_m.key()));
         item->setText(1, QString::fromLatin1("%1").arg(*it_m));
         item->setText(2, QString::fromLatin1("%1").arg(accountMapClosed[it_m.key()]));

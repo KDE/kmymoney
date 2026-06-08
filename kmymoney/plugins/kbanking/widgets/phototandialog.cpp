@@ -59,9 +59,9 @@ QString photoTanDialog::infoText()
     return ui->infoText->toPlainText();
 }
 
-void photoTanDialog::setPicture(const QPixmap &picture)
+void photoTanDialog::setPicture(const QPixmap& picture)
 {
-    QGraphicsScene *scene = new QGraphicsScene();
+    QGraphicsScene* scene = new QGraphicsScene();
     pictureItem = scene->addPixmap(picture);
     ui->graphicsView->setScene(scene);
 }
@@ -83,7 +83,7 @@ void photoTanDialog::setTanLimits(const int& minLength, const int& maxLength)
 
 void photoTanDialog::tanInputChanged(const QString& input)
 {
-    QPushButton *const button = ui->buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton* const button = ui->buttonBox->button(QDialogButtonBox::Ok);
     Q_ASSERT(button);
     if (input.isEmpty() || !ui->tanInput->hasAcceptableInput()) {
         button->setEnabled(false);

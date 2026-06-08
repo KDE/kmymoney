@@ -10,8 +10,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QUrl>
 #include <QFileInfo>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,9 +34,9 @@ class ReportsViewSettingsWidgetPrivate
     Q_DISABLE_COPY(ReportsViewSettingsWidgetPrivate)
 
 public:
-    ReportsViewSettingsWidgetPrivate() :
-        ui(new Ui::ReportsViewSettings),
-        m_fileKLineEdit(nullptr)
+    ReportsViewSettingsWidgetPrivate()
+        : ui(new Ui::ReportsViewSettings)
+        , m_fileKLineEdit(nullptr)
     {
     }
 
@@ -44,7 +44,6 @@ public:
     {
         delete ui;
     }
-
 
     /**
      * Collector for both signals
@@ -60,8 +59,8 @@ public:
      * @see ReportsViewSettingsWidget#slotCssUrlSelected
      * @see ReportsViewSettingsWidget#slotEditingFinished
      */
-    void checkCssFile(QString& css) {
-
+    void checkCssFile(QString& css)
+    {
         if (css == m_cssFileOld) {
             // do not check again to avoid emitting a warning more than 1 time
             return;
@@ -105,7 +104,7 @@ public:
         KMessageBox::error(nullptr, out);
     }
 
-    Ui::ReportsViewSettings *ui;
+    Ui::ReportsViewSettings* ui;
     /**
      * Old value of css file to avoid warnings
      * when a signal is emitted
@@ -120,9 +119,9 @@ public:
     KLineEdit* m_fileKLineEdit;
 };
 
-ReportsViewSettingsWidget::ReportsViewSettingsWidget(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new ReportsViewSettingsWidgetPrivate)
+ReportsViewSettingsWidget::ReportsViewSettingsWidget(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new ReportsViewSettingsWidgetPrivate)
 {
     Q_D(ReportsViewSettingsWidget);
     d->ui->setupUi(this);
@@ -141,11 +140,9 @@ ReportsViewSettingsWidget::ReportsViewSettingsWidget(QWidget* parent) :
 
     d->m_fileKLineEdit = d->ui->kcfg_CssFileDefault->lineEdit();
 
-    connect(d->ui->kcfg_CssFileDefault, &KUrlRequester::urlSelected,
-            this, &ReportsViewSettingsWidget::slotCssUrlSelected);
+    connect(d->ui->kcfg_CssFileDefault, &KUrlRequester::urlSelected, this, &ReportsViewSettingsWidget::slotCssUrlSelected);
 
-    connect(d->m_fileKLineEdit, &QLineEdit::editingFinished,
-            this, &ReportsViewSettingsWidget::slotEditingFinished);
+    connect(d->m_fileKLineEdit, &QLineEdit::editingFinished, this, &ReportsViewSettingsWidget::slotEditingFinished);
 }
 
 ReportsViewSettingsWidget::~ReportsViewSettingsWidget()
@@ -164,7 +161,7 @@ ReportsViewSettingsWidget::~ReportsViewSettingsWidget()
  *
  * @see ReportsViewSettingsWidget#Private#checkCssFile
  */
-void ReportsViewSettingsWidget::slotCssUrlSelected(const QUrl &cssUrl)
+void ReportsViewSettingsWidget::slotCssUrlSelected(const QUrl& cssUrl)
 {
     Q_D(ReportsViewSettingsWidget);
     auto css = cssUrl.toLocalFile();
@@ -193,7 +190,7 @@ KCMReportsView::KCMReportsView(QObject* parent, const QVariantList& args)
     ReportsViewSettingsWidget* w = new ReportsViewSettingsWidget(widget());
     // addConfig(ReportsViewSettings::self(), w);
     addConfig(KMyMoneySettings::self(), w);
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout;
     widget()->setLayout(layout);
     layout->addWidget(w);
     setButtons(NoAdditionalButton);

@@ -4,7 +4,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -19,17 +18,20 @@
 
 KMMUrl::KMMUrl()
     : QUrl()
-{}
+{
+}
 
-KMMUrl::KMMUrl(const KMMUrl &copy)
+KMMUrl::KMMUrl(const KMMUrl& copy)
     : QUrl(copy)
-{}
+{
+}
 
-KMMUrl::KMMUrl(const QUrl &copy)
+KMMUrl::KMMUrl(const QUrl& copy)
     : QUrl(copy)
-{}
+{
+}
 
-KMMUrl KMMUrl::fromUserInput(const QString &userInput)
+KMMUrl KMMUrl::fromUserInput(const QString& userInput)
 {
     auto properUrl = normalizeUrlString(userInput);
 
@@ -38,8 +40,7 @@ KMMUrl KMMUrl::fromUserInput(const QString &userInput)
         properQUrl.setScheme(QStringLiteral("qrc"));
 
         return properQUrl;
-    }
-    else {
+    } else {
         return QUrl::fromUserInput(properUrl);
     }
 }
@@ -48,15 +49,13 @@ QString KMMUrl::toLocalFile() const
 {
     if (this->scheme() == QStringLiteral("qrc") || this->url().startsWith(QStringLiteral("qrc"))) {
         return normalizeUrlString(this->url());
-    }
-    else {
+    } else {
         return QUrl::toLocalFile();
     }
 }
 
-QString KMMUrl::normalizeUrlString(const QString &url)
+QString KMMUrl::normalizeUrlString(const QString& url)
 {
     static const QRegularExpression regex("^(file:|qrc)", QRegularExpression::CaseInsensitiveOption);
     return QString(url).remove(regex);
 }
-

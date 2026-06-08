@@ -29,25 +29,24 @@
 #include "ui_kgeneralloaninfopage.h"
 #include "ui_kloandetailspage.h"
 
-#include "knewaccountwizard.h"
-#include "knewaccountwizard_p.h"
 #include "kgeneralloaninfopage.h"
 #include "kgeneralloaninfopage_p.h"
+#include "kguiutils.h"
 #include "kloanpaymentpage.h"
+#include "knewaccountwizard.h"
+#include "knewaccountwizard_p.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfinancialcalculator.h"
 #include "mymoneymoney.h"
 #include "wizardpage.h"
-#include "kguiutils.h"
 
 using namespace eMyMoney;
 
-namespace NewAccountWizard
-{
-LoanDetailsPage::LoanDetailsPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new LoanDetailsPagePrivate(wizard), StepPayments, this, wizard)
+namespace NewAccountWizard {
+LoanDetailsPage::LoanDetailsPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new LoanDetailsPagePrivate(wizard), StepPayments, this, wizard)
 {
     Q_D(LoanDetailsPage);
     d->m_needCalculate = true;
@@ -140,7 +139,6 @@ void LoanDetailsPage::slotCalculate()
     calc.setPF(PF);
     calc.setCF(CF);
 
-
     if (!d->ui->m_loanAmount->text().isEmpty()) {
         val = d->ui->m_loanAmount->value().abs();
         if (moneyBorrowed)
@@ -200,7 +198,7 @@ void LoanDetailsPage::slotCalculate()
 
             val = MyMoneyMoney(calc.futureValue());
             if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) >= qAbs(calc.payment()))
-                    || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) >= qAbs(calc.payment()))) {
+                || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) >= qAbs(calc.payment()))) {
                 calc.setNpp(calc.npp() - 1);
                 // updateTermWidgets(calc.npp());
                 val = MyMoneyMoney(calc.futureValue());
@@ -249,7 +247,7 @@ void LoanDetailsPage::slotCalculate()
             //    future value is to be treated as  (fully paid back)
             // c) the loan is not paid back yet
             if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) > qAbs(calc.payment()))
-                    || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) > qAbs(calc.payment()))) {
+                || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) > qAbs(calc.payment()))) {
                 // case a)
                 qDebug("Future Value is %f", val.toDouble());
                 throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
@@ -260,7 +258,8 @@ void LoanDetailsPage::slotCalculate()
                 val = nullptr;
             }
 
-            result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.", val.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
+            result =
+                i18n("KMyMoney has calculated a balloon payment of %1 for this loan.", val.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
 
             if (!d->ui->m_balloonAmount->text().isEmpty()) {
                 if ((d->ui->m_balloonAmount->value().abs() - val.abs()).abs().toDouble() > 1) {
@@ -271,7 +270,7 @@ void LoanDetailsPage::slotCalculate()
             d->ui->m_balloonAmount->setValue(val);
         }
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         KMessageBox::error(nullptr,
                            i18n("You have entered mis-matching information. Please modify "
                                 "your figures or leave one value empty "
@@ -299,7 +298,7 @@ int LoanDetailsPage::term() const
         switch (d->ui->m_termUnit->currentItem()) {
         case Schedule::Occurrence::Yearly: // years
             factor = 12;
-        // intentional fall through
+            // intentional fall through
 
         case Schedule::Occurrence::Monthly: // months
             factor *= 30;
@@ -311,7 +310,7 @@ int LoanDetailsPage::term() const
 
         default:
             qDebug("Unknown term unit %d in LoanDetailsPage::term(). Using payments.", (int)d->ui->m_termUnit->currentItem());
-        // intentional fall through
+            // intentional fall through
 
         case Schedule::Occurrence::Once: // payments
             factor = d->ui->m_termAmount->value();
@@ -329,8 +328,7 @@ QString LoanDetailsPage::updateTermWidgets(const double val)
     QString valString;
     Schedule::Occurrence unit = d->ui->m_termUnit->currentItem();
 
-    if ((unit == Schedule::Occurrence::Monthly)
-            && ((vl % 12) == 0)) {
+    if ((unit == Schedule::Occurrence::Monthly) && ((vl % 12) == 0)) {
         vl /= 12;
         unit = Schedule::Occurrence::Yearly;
     }

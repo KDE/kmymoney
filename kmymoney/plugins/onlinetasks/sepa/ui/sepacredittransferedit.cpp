@@ -14,37 +14,38 @@
 
 #include "kguiutils.h"
 
-#include "mymoney/payeeidentifiermodel.h"
-#include "onlinetasks/sepa/sepaonlinetransfer.h"
-#include "widgets/payeeidentifier/ibanbic/ibanvalidator.h"
-#include "widgets/payeeidentifier/ibanbic/bicvalidator.h"
-#include "payeeidentifier/payeeidentifiertyped.h"
 #include "misc/charvalidator.h"
-#include "payeeidentifier/ibanbic/ibanbic.h"
-#include "styleditemdelegateforwarder.h"
-#include "widgets/payeeidentifier/ibanbic/ibanbicitemdelegate.h"
-#include "onlinejobtyped.h"
+#include "mymoney/payeeidentifiermodel.h"
 #include "mymoneyaccount.h"
+#include "onlinejobtyped.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
+#include "styleditemdelegateforwarder.h"
 #include "widgetenums.h"
+#include "widgets/payeeidentifier/ibanbic/bicvalidator.h"
+#include "widgets/payeeidentifier/ibanbic/ibanbicitemdelegate.h"
+#include "widgets/payeeidentifier/ibanbic/ibanvalidator.h"
 
 class ibanBicCompleterDelegate : public StyledItemDelegateForwarder
 {
     Q_OBJECT
 
 public:
-    ibanBicCompleterDelegate(QObject *parent)
-        : StyledItemDelegateForwarder(parent) {}
+    ibanBicCompleterDelegate(QObject* parent)
+        : StyledItemDelegateForwarder(parent)
+    {
+    }
 
 protected:
-    QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const final override {
+    QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const final override
+    {
         static QPointer<QAbstractItemDelegate> defaultDelegate;
         static QPointer<QAbstractItemDelegate> ibanBicDelegate;
 
         const bool ibanBicRequested = index.model()->data(index, payeeIdentifierModel::isPayeeIdentifier).toBool();
 
-        QAbstractItemDelegate* delegate = (ibanBicRequested)
-                                          ? ibanBicDelegate
-                                          : defaultDelegate;
+        QAbstractItemDelegate* delegate = (ibanBicRequested) ? ibanBicDelegate : defaultDelegate;
 
         if (delegate == nullptr) {
             if (ibanBicRequested) {
@@ -94,19 +95,19 @@ public:
     {
     }
 
-    QVariant data(const QModelIndex &index, int role) const final override {
+    QVariant data(const QModelIndex& index, int role) const final override
+    {
         if (role == payeeIban) {
             if (!index.isValid())
                 return QVariant();
 
             try {
-                payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
-                            index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
-                        );
+                payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban =
+                    payeeIdentifierTyped<payeeIdentifiers::ibanBic>(index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>());
                 return iban->electronicIban();
-            } catch (const payeeIdentifier::empty &) {
+            } catch (const payeeIdentifier::empty&) {
                 return QVariant();
-            } catch (const payeeIdentifier::badCast &) {
+            } catch (const payeeIdentifier::badCast&) {
                 return QVariant();
             }
         }
@@ -114,12 +115,14 @@ public:
         return QSortFilterProxyModel::data(index, role);
     }
 
-    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const final override {
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const final override
+    {
         if (!source_parent.isValid())
             return true;
 
         QModelIndex index = source_parent.model()->index(source_row, 0, source_parent);
-        return (source_parent.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+        return (source_parent.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString()
+                == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
     }
 };
 
@@ -145,54 +148,52 @@ private Q_SLOTS:
     void slotHighlighted(const QModelIndex& index) const;
 };
 
-ibanBicCompleter::ibanBicCompleter(QObject *parent)
+ibanBicCompleter::ibanBicCompleter(QObject* parent)
     : QCompleter(parent)
 {
     connect(this, qOverload<const QModelIndex&>(&QCompleter::activated), this, &ibanBicCompleter::slotActivated);
     connect(this, qOverload<const QModelIndex&>(&QCompleter::highlighted), this, &ibanBicCompleter::slotHighlighted);
 }
 
-void ibanBicCompleter::slotActivated(const QModelIndex &index) const
+void ibanBicCompleter::slotActivated(const QModelIndex& index) const
 {
     if (!index.isValid())
         return;
 
     Q_EMIT activatedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
     try {
-        payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
-                    index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
-                );
+        payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban =
+            payeeIdentifierTyped<payeeIdentifiers::ibanBic>(index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>());
         Q_EMIT activatedIban(iban->electronicIban());
         Q_EMIT activatedBic(iban->storedBic());
-    } catch (const payeeIdentifier::empty &) {
-    } catch (const payeeIdentifier::badCast &) {
+    } catch (const payeeIdentifier::empty&) {
+    } catch (const payeeIdentifier::badCast&) {
     }
 }
 
-void ibanBicCompleter::slotHighlighted(const QModelIndex &index) const
+void ibanBicCompleter::slotHighlighted(const QModelIndex& index) const
 {
     if (!index.isValid())
         return;
 
     Q_EMIT highlightedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
     try {
-        payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
-                    index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
-                );
+        payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban =
+            payeeIdentifierTyped<payeeIdentifiers::ibanBic>(index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>());
         Q_EMIT highlightedIban(iban->electronicIban());
         Q_EMIT highlightedBic(iban->storedBic());
-    } catch (const payeeIdentifier::empty &) {
-    } catch (const payeeIdentifier::badCast &) {
+    } catch (const payeeIdentifier::empty&) {
+    } catch (const payeeIdentifier::badCast&) {
     }
 }
 
-sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList args) :
-    IonlineJobEdit(parent, args),
-    ui(new Ui::sepaCreditTransferEdit),
-    m_onlineJob(onlineJobTyped<sepaOnlineTransfer>()),
-    m_requiredFields(new KMandatoryFieldGroup(this)),
-    m_readOnly(false),
-    m_showAllErrors(false)
+sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget* parent, QVariantList args)
+    : IonlineJobEdit(parent, args)
+    , ui(new Ui::sepaCreditTransferEdit)
+    , m_onlineJob(onlineJobTyped<sepaOnlineTransfer>())
+    , m_requiredFields(new KMandatoryFieldGroup(this))
+    , m_readOnly(false)
+    , m_showAllErrors(false)
 {
     ui->setupUi(this);
 
@@ -245,7 +246,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
 
         ui->beneficiaryName->setCompleter(completer);
 
-        QAbstractItemView *itemView = new payeeIdentifierCompleterPopup();
+        QAbstractItemView* itemView = new payeeIdentifierCompleterPopup();
         completer->setPopup(itemView);
 
         // setPopup() resets the delegate
@@ -263,7 +264,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
 
         ui->beneficiaryIban->setCompleter(ibanCompleter);
 
-        QAbstractItemView *itemView = new payeeIdentifierCompleterPopup();
+        QAbstractItemView* itemView = new payeeIdentifierCompleterPopup();
         ibanCompleter->setPopup(itemView);
 
         // setPopup() resets the delegate
@@ -413,8 +414,8 @@ void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
     try {
         payeeIdentifier ident = getOnlineJobTyped().task()->originAccountIdentifier();
         payeeIban = ident.data<payeeIdentifiers::ibanBic>()->electronicIban();
-    } catch (const payeeIdentifier::empty &) {
-    } catch (const payeeIdentifier::badCast &) {
+    } catch (const payeeIdentifier::empty&) {
+    } catch (const payeeIdentifier::badCast&) {
     }
 
     if (settings->isBicMandatory(payeeIban, iban)) {
@@ -435,7 +436,7 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
         QString iban;
         try {
             iban = payee.data<payeeIdentifiers::ibanBic>()->electronicIban();
-        } catch (const payeeIdentifier::badCast &) {
+        } catch (const payeeIdentifier::badCast&) {
         }
 
         if (settings->isBicMandatory(iban, ui->beneficiaryIban->text())) {
@@ -455,9 +456,9 @@ void sepaCreditTransferEdit::beneficiaryNameChanged(const QString& name)
 {
     QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
     if (name.length() < settings->recipientNameMinLength() && (m_showAllErrors || (!ui->beneficiaryName->hasFocus() && !name.isEmpty()))) {
-        ui->feedbackName->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long",
-                                      settings->recipientNameMinLength()
-                                                                                             ));
+        ui->feedbackName->setFeedback(
+            eWidgets::ValidationFeedback::MessageType::Error,
+            i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long", settings->recipientNameMinLength()));
     } else {
         ui->feedbackName->removeFeedback();
     }
@@ -465,7 +466,8 @@ void sepaCreditTransferEdit::beneficiaryNameChanged(const QString& name)
 
 void sepaCreditTransferEdit::valueChanged()
 {
-    if ((!ui->value->isValid() && (m_showAllErrors || (!ui->value->hasFocus() && ui->value->value().toDouble() != 0))) || (!ui->value->value().isPositive() && ui->value->value().toDouble() != 0)) {
+    if ((!ui->value->isValid() && (m_showAllErrors || (!ui->value->hasFocus() && ui->value->value().toDouble() != 0)))
+        || (!ui->value->value().isPositive() && ui->value->value().toDouble() != 0)) {
         ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, i18n("A positive amount to transfer is needed."));
         return;
     }
@@ -477,9 +479,11 @@ void sepaCreditTransferEdit::valueChanged()
     const MyMoneyMoney expectedBalance = account.balance() - ui->value->value();
 
     if (expectedBalance < MyMoneyMoney(account.value("maxCreditAbsolute"))) {
-        ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Warning, i18n("After this credit transfer the account's balance will be below your credit limit."));
+        ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Warning,
+                                        i18n("After this credit transfer the account's balance will be below your credit limit."));
     } else if (expectedBalance < MyMoneyMoney(account.value("minBalanceAbsolute"))) {
-        ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Information, i18n("After this credit transfer the account's balance will be below the minimal balance."));
+        ui->feedbackAmount->setFeedback(eWidgets::ValidationFeedback::MessageType::Information,
+                                        i18n("After this credit transfer the account's balance will be below the minimal balance."));
     } else {
         ui->feedbackAmount->removeFeedback();
     }
@@ -489,10 +493,10 @@ void sepaCreditTransferEdit::endToEndReferenceChanged(const QString& reference)
 {
     QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
     if (settings->checkEndToEndReferenceLength(reference) == validators::tooLong) {
-        ui->feedbackReference->setFeedback(eWidgets::ValidationFeedback::MessageType::Error, i18np("The end-to-end reference cannot contain more than one character.",
-                                           "The end-to-end reference cannot contain more than %1 characters.",
-                                           settings->endToEndReferenceLength()
-                                                                                                  ));
+        ui->feedbackReference->setFeedback(eWidgets::ValidationFeedback::MessageType::Error,
+                                           i18np("The end-to-end reference cannot contain more than one character.",
+                                                 "The end-to-end reference cannot contain more than %1 characters.",
+                                                 settings->endToEndReferenceLength()));
     } else {
         ui->feedbackReference->removeFeedback();
     }
@@ -505,18 +509,17 @@ void sepaCreditTransferEdit::purposeChanged()
 
     QString message;
     if (!settings->checkPurposeLineLength(purpose))
-        message = i18np("The maximal line length of %1 character per line is exceeded.", "The maximal line length of %1 characters per line is exceeded.",
+        message = i18np("The maximal line length of %1 character per line is exceeded.",
+                        "The maximal line length of %1 characters per line is exceeded.",
                         settings->purposeLineLength())
-                  .append('\n');
+                      .append('\n');
     if (!settings->checkPurposeCharset(purpose))
         message.append(i18n("The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /")).append('\n');
     if (!settings->checkPurposeMaxLines(purpose)) {
-        message.append(i18np("In the purpose only a single line is allowed.", "The purpose cannot contain more than %1 lines.",
-                             settings->purposeMaxLines()))
-        .append('\n');
+        message.append(i18np("In the purpose only a single line is allowed.", "The purpose cannot contain more than %1 lines.", settings->purposeMaxLines()))
+            .append('\n');
     } else if (settings->checkPurposeLength(purpose) == validators::tooShort) {
-        message.append(i18np("A purpose is needed.", "The purpose must be at least %1 characters long.", settings->purposeMinLength()))
-        .append('\n');
+        message.append(i18np("A purpose is needed.", "The purpose must be at least %1 characters long.", settings->purposeMinLength())).append('\n');
     }
 
     // Remove the last '\n'
@@ -529,7 +532,7 @@ void sepaCreditTransferEdit::purposeChanged()
     }
 }
 
-QSharedPointer< const sepaOnlineTransfer::settings > sepaCreditTransferEdit::taskSettings()
+QSharedPointer<const sepaOnlineTransfer::settings> sepaCreditTransferEdit::taskSettings()
 {
     return getOnlineJobTyped().constTask()->getSettings();
 }

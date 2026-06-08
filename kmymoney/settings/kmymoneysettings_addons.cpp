@@ -39,31 +39,31 @@ QFont KMyMoneySettings::listHeaderFontEx()
 
 QColor KMyMoneySettings::schemeColor(const SchemeColor color)
 {
-    switch(color) {
+    switch (color) {
     case SchemeColor::ListBackground1:
-        return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NormalBackground).color();
+        return KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::NormalBackground).color();
     case SchemeColor::ListBackground2:
-        return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
+        return KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
     case SchemeColor::ListGrid:
-        return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::InactiveText).color();
+        return KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::InactiveText).color();
     case SchemeColor::ListHighlightText:
-        return KColorScheme (QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color();
+        return KColorScheme(QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color();
     case SchemeColor::ListHighlight:
-        return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
+        return KColorScheme(QPalette::Active, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
     case SchemeColor::WindowText:
-        return KColorScheme (QPalette::Active, KColorScheme::Window).foreground(KColorScheme::NormalText).color();
+        return KColorScheme(QPalette::Active, KColorScheme::Window).foreground(KColorScheme::NormalText).color();
     case SchemeColor::WindowBackground:
-        return KColorScheme (QPalette::Active, KColorScheme::Window).background(KColorScheme::NormalBackground).color();
+        return KColorScheme(QPalette::Active, KColorScheme::Window).background(KColorScheme::NormalBackground).color();
     case SchemeColor::Positive:
-        return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::PositiveText).color();
+        return KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::PositiveText).color();
     case SchemeColor::Negative:
-        return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+        return KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
 
     case SchemeColor::TransactionImported:
         if (useCustomColors())
             return transactionImportedColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
+            return KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
 
     case SchemeColor::TransactionImportedText:
         if (useCustomColors())
@@ -75,7 +75,7 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
         if (useCustomColors())
             return transactionMatchedColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
+            return KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
 
     case SchemeColor::TransactionMatchedText:
         if (useCustomColors())
@@ -87,18 +87,18 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
         if (useCustomColors())
             return transactionErroneousColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+            return KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
     case SchemeColor::FieldRequired:
         if (useCustomColors())
             return fieldRequiredColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NeutralBackground).color();
+            return KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::NeutralBackground).color();
 
     case SchemeColor::GroupMarker:
         if (useCustomColors())
             return groupMarkerColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::LinkBackground).color();
+            return KColorScheme(QPalette::Active, KColorScheme::Selection).background(KColorScheme::LinkBackground).color();
 
     case SchemeColor::GroupMarkerText:
         if (useCustomColors())
@@ -110,10 +110,9 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
         if (useCustomColors())
             return missingConversionRateColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::Complementary).foreground(KColorScheme::LinkText).color();
+            return KColorScheme(QPalette::Active, KColorScheme::Complementary).foreground(KColorScheme::LinkText).color();
     default:
         return QColor();
-
     }
 }
 
@@ -161,4 +160,3 @@ QDate KMyMoneySettings::firstFiscalDate()
         date = date.addYears(-1);
     return date;
 }
-

@@ -21,8 +21,8 @@
 
 using namespace eMyMoney;
 
-KMyMoneyOccurrenceCombo::KMyMoneyOccurrenceCombo(QWidget* parent) :
-    KMyMoneyGeneralCombo(parent)
+KMyMoneyOccurrenceCombo::KMyMoneyOccurrenceCombo(QWidget* parent)
+    : KMyMoneyGeneralCombo(parent)
 {
 }
 
@@ -34,4 +34,3 @@ Schedule::Occurrence KMyMoneyOccurrenceCombo::currentItem() const
 {
     return static_cast<Schedule::Occurrence>(KMyMoneyGeneralCombo::currentItem());
 }
-

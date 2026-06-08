@@ -8,19 +8,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_newcalculateloanwizardpage.h"
 
-NewCalculateLoanWizardPage::NewCalculateLoanWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::NewCalculateLoanWizardPage)
+NewCalculateLoanWizardPage::NewCalculateLoanWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::NewCalculateLoanWizardPage)
 {
     ui->setupUi(this);
 }

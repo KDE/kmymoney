@@ -29,16 +29,16 @@ class KMyMoneyActivityComboPrivate : public KMyMoneyMVCComboPrivate
     Q_DISABLE_COPY(KMyMoneyActivityComboPrivate)
 
 public:
-    KMyMoneyActivityComboPrivate() :
-        m_activity(Split::InvestmentTransactionType::UnknownTransactionType)
+    KMyMoneyActivityComboPrivate()
+        : m_activity(Split::InvestmentTransactionType::UnknownTransactionType)
     {
     }
 
-    eMyMoney::Split::InvestmentTransactionType  m_activity;
+    eMyMoney::Split::InvestmentTransactionType m_activity;
 };
 
-KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
-    KMyMoneyMVCCombo(*new KMyMoneyActivityComboPrivate, false, w)
+KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w)
+    : KMyMoneyMVCCombo(*new KMyMoneyActivityComboPrivate, false, w)
 {
     addItem(i18n("Buy shares"), QVariant((int)Split::InvestmentTransactionType::BuyShares));
     addItem(i18n("Sell shares"), QVariant((int)Split::InvestmentTransactionType::SellShares));

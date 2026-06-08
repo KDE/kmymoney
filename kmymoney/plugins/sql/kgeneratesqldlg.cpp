@@ -17,18 +17,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTextStream>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlError>
 #include <KLocalizedString>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KHelpClient>
 #include <KMessageBox>
 #include <KUrlRequester>
-#include <KHelpClient>
 #include <KUser>
 #include <QDialogButtonBox>
 #include <QPushButton>
@@ -38,11 +38,11 @@
 
 #include "ui_kgeneratesqldlg.h"
 
+#include "kguiutils.h"
+#include "mymoneydbdef.h"
+#include "mymoneydbdriver.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "kguiutils.h"
-#include "mymoneydbdriver.h"
-#include "mymoneydbdef.h"
 
 class KGenerateSqlDlgPrivate
 {
@@ -50,12 +50,12 @@ class KGenerateSqlDlgPrivate
     Q_DECLARE_PUBLIC(KGenerateSqlDlg)
 
 public:
-    explicit KGenerateSqlDlgPrivate(KGenerateSqlDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KGenerateSqlDlg),
-        m_createTablesButton(nullptr),
-        m_saveSqlButton(nullptr),
-        m_sqliteSelected(false)
+    explicit KGenerateSqlDlgPrivate(KGenerateSqlDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KGenerateSqlDlg)
+        , m_createTablesButton(nullptr)
+        , m_saveSqlButton(nullptr)
+        , m_sqliteSelected(false)
     {
     }
 
@@ -113,23 +113,22 @@ public:
         return drivers[0]->text().section(' ', 0, 0);
     }
 
-    KGenerateSqlDlg      *q_ptr;
-    Ui::KGenerateSqlDlg  *ui;
-    QPushButton          *m_createTablesButton;
-    QPushButton          *m_saveSqlButton;
+    KGenerateSqlDlg* q_ptr;
+    Ui::KGenerateSqlDlg* ui;
+    QPushButton* m_createTablesButton;
+    QPushButton* m_saveSqlButton;
 
     QList<QString> m_supportedDrivers;
-    //MyMoneyDbDrivers m_map;
+    // MyMoneyDbDrivers m_map;
     std::unique_ptr<KMandatoryFieldGroup> m_requiredFields;
     bool m_sqliteSelected;
     QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
     QString m_dbName;
 };
 
-
-KGenerateSqlDlg::KGenerateSqlDlg(QWidget *parent) :
-    QDialog(parent),
-    d_ptr(new KGenerateSqlDlgPrivate(this))
+KGenerateSqlDlg::KGenerateSqlDlg(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KGenerateSqlDlgPrivate(this))
 {
     Q_D(KGenerateSqlDlg);
     d->init();
@@ -141,7 +140,7 @@ KGenerateSqlDlg::~KGenerateSqlDlg()
     delete d;
 }
 
-int  KGenerateSqlDlg::exec()
+int KGenerateSqlDlg::exec()
 {
     Q_D(KGenerateSqlDlg);
     // list drivers supported by KMM
@@ -172,8 +171,7 @@ int  KGenerateSqlDlg::exec()
     }
     d->ui->listDrivers->clear();
     d->ui->listDrivers->addItems(d->m_supportedDrivers);
-    connect(d->ui->listDrivers, &QListWidget::itemSelectionChanged,
-            this, &KGenerateSqlDlg::slotdriverSelected);
+    connect(d->ui->listDrivers, &QListWidget::itemSelectionChanged, this, &KGenerateSqlDlg::slotdriverSelected);
     return (QDialog::exec());
 }
 
@@ -186,7 +184,7 @@ void KGenerateSqlDlg::slotcreateTables()
         d->m_dbName = d->ui->textDbName->text();
     }
     // check that the database has been pre-created
-    {   // all queries etc. must be in a block - see 'remove database' API doc
+    { // all queries etc. must be in a block - see 'remove database' API doc
         Q_ASSERT(!d->selectedDriver().isEmpty());
 
         QSqlDatabase dbase = QSqlDatabase::addDatabase(d->selectedDriver(), "creation");
@@ -197,8 +195,7 @@ void KGenerateSqlDlg::slotcreateTables()
         if (!dbase.open()) {
             KMessageBox::error(this,
                                i18n("Unable to open database.\n"
-                                    "You must use an SQL CREATE DATABASE statement before creating the tables.\n")
-                              );
+                                    "You must use an SQL CREATE DATABASE statement before creating the tables.\n"));
             return;
         }
         QSqlQuery q(dbase);
@@ -207,7 +204,7 @@ void KGenerateSqlDlg::slotcreateTables()
         QStringList::const_iterator cit;
         for (cit = commands.cbegin(); cit != commands.cend(); ++cit) {
             if (!(*cit).isEmpty()) {
-                //qDebug() << "exec" << *cit;
+                // qDebug() << "exec" << *cit;
                 q.prepare(*cit);
                 if (!q.exec()) {
                     QSqlError e = q.lastError();
@@ -234,14 +231,12 @@ void KGenerateSqlDlg::slotcreateTables()
 void KGenerateSqlDlg::slotsaveSQL()
 {
     Q_D(KGenerateSqlDlg);
-    auto fileName = QFileDialog::getSaveFileName(
-                        this,
-                        i18n("Select output file"),
-                        QString(),
-                        QString());
-    if (fileName.isEmpty()) return;
+    auto fileName = QFileDialog::getSaveFileName(this, i18n("Select output file"), QString(), QString());
+    if (fileName.isEmpty())
+        return;
     QFile out(fileName);
-    if (!out.open(QIODevice::WriteOnly)) return;
+    if (!out.open(QIODevice::WriteOnly))
+        return;
     QTextStream s(&out);
     MyMoneyDbDef db;
     s << d->ui->textSQL->toPlainText();
@@ -288,7 +283,7 @@ void KGenerateSqlDlg::slotdriverSelected()
         d->ui->textDbName->setEnabled(false);
         d->ui->textHostName->setEnabled(false);
         d->ui->textUserName->setEnabled(false);
-    } else {                         // not sqlite3
+    } else { // not sqlite3
         d->m_sqliteSelected = false;
         d->ui->urlSqlite->setEnabled(false);
         d->ui->textDbName->setEnabled(true);
@@ -310,8 +305,7 @@ void KGenerateSqlDlg::slotdriverSelected()
     // check if we have a storage; if not, create a skeleton one
     // we need a storage for MyMoneyDbDef to generate standard accounts
     MyMoneyDbDef db;
-    d->ui->textSQL->setText
-    (db.generateSQL(d->m_dbDriver));
+    d->ui->textSQL->setText(db.generateSQL(d->m_dbDriver));
 
     d->m_saveSqlButton->setEnabled(true);
     connect(d->m_saveSqlButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotsaveSQL);

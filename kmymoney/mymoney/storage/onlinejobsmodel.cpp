@@ -38,8 +38,7 @@
 
 using namespace Icons;
 
-struct OnlineJobsModel::Private
-{
+struct OnlineJobsModel::Private {
     Private(OnlineJobsModel* qq)
         : q(qq)
         , headerData(QHash<Columns, QString>({
@@ -115,10 +114,10 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     const onlineJob& job = static_cast<TreeItem<onlineJob>*>(index.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case PostDate:
             return MyMoneyUtils::formatDate(job.sendDate().date());
 
@@ -308,7 +307,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
 
 bool OnlineJobsModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 

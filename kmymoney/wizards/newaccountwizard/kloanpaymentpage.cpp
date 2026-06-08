@@ -40,11 +40,10 @@
 #include "splitdialog.h"
 #include "wizardpage.h"
 
-namespace NewAccountWizard
-{
-LoanPaymentPage::LoanPaymentPage(Wizard* wizard) :
-    QWidget(wizard),
-    WizardPage<Wizard>(*new LoanPaymentPagePrivate(wizard), StepFees, this, wizard)
+namespace NewAccountWizard {
+LoanPaymentPage::LoanPaymentPage(Wizard* wizard)
+    : QWidget(wizard)
+    , WizardPage<Wizard>(*new LoanPaymentPagePrivate(wizard), StepFees, this, wizard)
 {
     Q_D(LoanPaymentPage);
     d->ui->setupUi(this);
@@ -85,7 +84,8 @@ void LoanPaymentPage::updateAmounts()
 {
     Q_D(LoanPaymentPage);
     d->ui->m_additionalFees->setText(d->additionalFees.formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(), d->m_wizard->d_func()->precision()));
-    d->ui->m_totalPayment->setText((basePayment() + d->additionalFees).formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(), d->m_wizard->d_func()->precision()));
+    d->ui->m_totalPayment->setText(
+        (basePayment() + d->additionalFees).formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(), d->m_wizard->d_func()->precision()));
 }
 
 void LoanPaymentPage::enterPage()

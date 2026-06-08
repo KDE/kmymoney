@@ -10,20 +10,20 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
+#include <QFileDialog>
 #include <QList>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QStandardPaths>
-#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KGuiItem>
-#include <KStandardGuiItem>
 #include <KConfigGroup>
-#include <KSharedConfig>
+#include <KGuiItem>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Headers

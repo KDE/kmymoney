@@ -18,9 +18,9 @@
 
 #include "ui_interestchargecheckingswizardpage.h"
 
-InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *parent) :
-    QWizardPage(parent),
-    ui(new Ui::InterestChargeCheckingsWizardPage)
+InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::InterestChargeCheckingsWizardPage)
 {
     ui->setupUi(this);
 
@@ -82,4 +82,3 @@ bool InterestChargeCheckingsWizardPage::isComplete() const
 
     return ui->m_interestDateEdit->isValid() && ui->m_chargesDateEdit->isValid();
 }
-

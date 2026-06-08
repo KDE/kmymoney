@@ -375,7 +375,6 @@ public:
                 m_file->userModel()->addItem(user);
                 // loading does not count as making dirty
                 m_file->userModel()->setDirty(false);
-
             }
             m_reader->skipCurrentElement();
         }
@@ -1103,7 +1102,6 @@ public:
                 const auto source = readStringAttribute(attributeName(Attribute::General::Source));
                 MyMoneyPrice price(fromSecurity, toSecurity, date, rate, source);
                 prices[MyMoneySecurityPair(fromSecurity, toSecurity)][date] = price;
-
             }
             m_reader->skipCurrentElement();
         }

@@ -31,8 +31,7 @@
 #include "mymoneysecurity.h"
 #include "reportdebug.h"
 
-namespace reports
-{
+namespace reports {
 
 ReportAccount::ReportAccount()
     : m_securityCache(new QMap<QString, MyMoneySecurity>)
@@ -123,21 +122,21 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate)
     }
 
     MyMoneySecurity undersecurity(m_securityCache->find(currencyId()).value());
-    if (! undersecurity.isCurrency()) {
-        const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
+    if (!undersecurity.isCurrency()) {
+        const MyMoneyPrice& price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
         if (price.isValid()) {
             result = price.rate(undersecurity.tradingCurrency());
 
             DEBUG_OUTPUT(QString("Converting under %1 to deep %2, price on %3 is %4")
-                         .arg(undersecurity.name())
-                         .arg(file->security(undersecurity.tradingCurrency()).name())
-                         .arg(date.toString(Qt::ISODate))
-                         .arg(result.toDouble()));
+                             .arg(undersecurity.name())
+                             .arg(file->security(undersecurity.tradingCurrency()).name())
+                             .arg(date.toString(Qt::ISODate))
+                             .arg(result.toDouble()));
         } else {
             DEBUG_OUTPUT(QString("No price to convert under %1 to deep %2 on %3")
-                         .arg(undersecurity.name())
-                         .arg(file->security(undersecurity.tradingCurrency()).name())
-                         .arg(date.toString(Qt::ISODate)));
+                             .arg(undersecurity.name())
+                             .arg(file->security(undersecurity.tradingCurrency()).name())
+                             .arg(date.toString(Qt::ISODate)));
             result = MyMoneyMoney();
         }
     }
@@ -184,7 +183,7 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySecurity security = file->security(foreignCurrency);
 
-    //check whether it is a currency or a commodity. In the latter case case, get the trading currency
+    // check whether it is a currency or a commodity. In the latter case case, get the trading currency
     QString tradingCurrency;
     if (security.isCurrency()) {
         tradingCurrency = foreignCurrency;
@@ -192,32 +191,32 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
         tradingCurrency = security.tradingCurrency();
     }
 
-    //It makes no sense to get the price if both currencies are the same
+    // It makes no sense to get the price if both currencies are the same
     if (currency().id() != tradingCurrency) {
-        const MyMoneyPrice &price = file->price(currency().id(), tradingCurrency, date, exactDate);
+        const MyMoneyPrice& price = file->price(currency().id(), tradingCurrency, date, exactDate);
 
         if (price.isValid()) {
             result = price.rate(tradingCurrency);
             DEBUG_OUTPUT(QString("Converting deep %1 to currency %2, price on %3 is %4")
-                         .arg(file->currency(currency().id()).name())
-                         .arg(file->currency(foreignCurrency).name())
-                         .arg(date.toString())
-                         .arg(result.toDouble()));
+                             .arg(file->currency(currency().id()).name())
+                             .arg(file->currency(foreignCurrency).name())
+                             .arg(date.toString())
+                             .arg(result.toDouble()));
         } else {
             DEBUG_OUTPUT(QString("No price to convert deep %1 to currency %2 on %3")
-                         .arg(file->currency(currency().id()).name())
-                         .arg(file->currency(foreignCurrency).name())
-                         .arg(date.toString()));
+                             .arg(file->currency(currency().id()).name())
+                             .arg(file->currency(foreignCurrency).name())
+                             .arg(date.toString()));
         }
     }
     return result;
 }
 
 /**
-  * Fetch the trading currency of this account's currency
-  *
-  * @return The account's currency trading currency
-  */
+ * Fetch the trading currency of this account's currency
+ *
+ * @return The account's currency trading currency
+ */
 MyMoneySecurity ReportAccount::currency() const
 {
     return m_deepcurrency;
@@ -234,7 +233,7 @@ ReportAccount& ReportAccount::operator=(const ReportAccount& right)
 
 bool ReportAccount::operator<(const ReportAccount& second) const
 {
-//   DEBUG_ENTER(Q_FUNC_INFO);
+    //   DEBUG_ENTER(Q_FUNC_INFO);
 
     bool result = false;
     bool haveresult = false;
@@ -266,17 +265,17 @@ bool ReportAccount::operator<(const ReportAccount& second) const
     if (!haveresult && (it_second != second.m_nameHierarchy.end()))
         result = true;
 
-//   DEBUG_OUTPUT(QString("%1 < %2 is %3").arg(debugName(),second.debugName()).arg(result));
+    //   DEBUG_OUTPUT(QString("%1 < %2 is %3").arg(debugName(),second.debugName()).arg(result));
     return result;
 }
 
 /**
-  * The name of only this account.  No matter how deep the hierarchy, this
-  * method only returns the last name in the list, which is the engine name
-  * of this account.
-  *
-  * @return QString The account's name
-  */
+ * The name of only this account.  No matter how deep the hierarchy, this
+ * method only returns the last name in the list, which is the engine name
+ * of this account.
+ *
+ * @return QString The account's name
+ */
 QString ReportAccount::name() const
 {
     return m_nameHierarchy.back();
@@ -352,4 +351,4 @@ QString ReportAccount::institutionId() const
     return resultid;
 }
 
-}  // end namespace reports
+} // end namespace reports

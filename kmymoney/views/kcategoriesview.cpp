@@ -28,31 +28,31 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
+#include "accountdelegate.h"
+#include "kcategoryreassigndlg.h"
 #include "kmymoneysettings.h"
 #include "knewaccountdlg.h"
-#include "kcategoryreassigndlg.h"
-#include "mymoneyschedule.h"
+#include "menuenums.h"
 #include "mymoneybudget.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneyschedule.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "mymoneyenums.h"
 #include "storageenums.h"
-#include "menuenums.h"
-#include "mymoneymoney.h"
-#include "accountdelegate.h"
 
 using namespace Icons;
 
-KCategoriesView::KCategoriesView(QWidget *parent) :
-    KMyMoneyViewBase(*new KCategoriesViewPrivate(this), parent)
+KCategoriesView::KCategoriesView(QWidget* parent)
+    : KMyMoneyViewBase(*new KCategoriesViewPrivate(this), parent)
 {
     Q_D(KCategoriesView);
     d->init();
 
-    connect(pActions[eMenu::Action::NewCategory],    &QAction::triggered, this, &KCategoriesView::slotNewCategory);
-    connect(pActions[eMenu::Action::EditCategory],   &QAction::triggered, this, &KCategoriesView::slotEditCategory);
+    connect(pActions[eMenu::Action::NewCategory], &QAction::triggered, this, &KCategoriesView::slotNewCategory);
+    connect(pActions[eMenu::Action::EditCategory], &QAction::triggered, this, &KCategoriesView::slotEditCategory);
     connect(pActions[eMenu::Action::DeleteCategory], &QAction::triggered, this, &KCategoriesView::slotDeleteCategory);
 
     d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
@@ -87,15 +87,13 @@ void KCategoriesView::slotSettingsChanged()
     MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
 
-
 void KCategoriesView::updateActions(const SelectedObjects& selections)
 {
     Q_D(KCategoriesView);
     const auto file = MyMoneyFile::instance();
 
     // check if there is anything todo and quit if not
-    if (selections.selection(SelectedObjects::Account).count() < 1
-            && d->m_currentCategory.id().isEmpty() ) {
+    if (selections.selection(SelectedObjects::Account).count() < 1 && d->m_currentCategory.id().isEmpty()) {
         return;
     }
 
@@ -137,8 +135,8 @@ void KCategoriesView::updateActions(const SelectedObjects& selections)
 }
 
 /**
-  * The view is notified that an unused income expense account has been hidden.
-  */
+ * The view is notified that an unused income expense account has been hidden.
+ */
 void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
 {
     Q_D(KCategoriesView);
@@ -146,19 +144,17 @@ void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
     d->ui->m_hiddenCategories->setVisible(d->m_haveUnusedCategories);
 }
 
-void KCategoriesView::slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate)
+void KCategoriesView::slotProfitLossChanged(const MyMoneyMoney& profit, bool isApproximate)
 {
     Q_D(KCategoriesView);
     const auto formattedValue = profit.isNegative() ? d->formatViewLabelValue(-profit, KMyMoneySettings::schemeColor(SchemeColor::Negative))
-                                : d->formatViewLabelValue(profit, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+                                                    : d->formatViewLabelValue(profit, KMyMoneySettings::schemeColor(SchemeColor::Positive));
     if (profit.isNegative())
         d->updateViewLabel(d->ui->m_totalProfitsLabel,
-                           isApproximate ? i18nc("Approximate loss", "Loss: ~%1", formattedValue)
-                           : i18n("Loss: %1", formattedValue));
+                           isApproximate ? i18nc("Approximate loss", "Loss: ~%1", formattedValue) : i18n("Loss: %1", formattedValue));
     else
         d->updateViewLabel(d->ui->m_totalProfitsLabel,
-                           isApproximate ? i18nc("Approximate profit", "Profit: ~%1", formattedValue)
-                           : i18n("Profit: %1", formattedValue));
+                           isApproximate ? i18nc("Approximate profit", "Profit: ~%1", formattedValue) : i18n("Profit: %1", formattedValue));
 }
 
 void KCategoriesView::slotNewCategory()
@@ -168,11 +164,10 @@ void KCategoriesView::slotNewCategory()
     MyMoneyAccount account;
 
     // Preselect the parent account by looking at the current selected account/category
-    if (!d->m_currentCategory.id().isEmpty() &&
-            d->m_currentCategory.isIncomeExpense()) {
+    if (!d->m_currentCategory.id().isEmpty() && d->m_currentCategory.isIncomeExpense()) {
         try {
             parent = MyMoneyFile::instance()->account(d->m_currentCategory.id());
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
         }
     }
 
@@ -231,7 +226,7 @@ void KCategoriesView::slotDeleteCategory()
 {
     Q_D(KCategoriesView);
     if (d->m_currentCategory.id().isEmpty())
-        return;  // need an account ID
+        return; // need an account ID
 
     const auto file = MyMoneyFile::instance();
     // can't delete standard accounts or account which still have transactions assigned
@@ -315,8 +310,12 @@ void KCategoriesView::slotDeleteCategory()
                     }
                 }
             }
-        } catch (MyMoneyException &e) {
-            KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_currentCategory.name(), newCategory.name(), QString::fromLatin1(e.what())));
+        } catch (MyMoneyException& e) {
+            KMessageBox::error(this,
+                               i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3",
+                                    d->m_currentCategory.name(),
+                                    newCategory.name(),
+                                    QString::fromLatin1(e.what())));
             return;
         }
     }
@@ -346,8 +345,9 @@ void KCategoriesView::slotDeleteCategory()
                     file->removeAccount(d->m_currentCategory);
                     d->m_currentCategory.clearId();
                     ft.commit();
-                } catch (const MyMoneyException &e) {
-                    KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
+                } catch (const MyMoneyException& e) {
+                    KMessageBox::error(this,
+                                       i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
                 }
             }
             return;
@@ -386,7 +386,7 @@ void KCategoriesView::slotDeleteCategory()
                     // or if we have at least one sub-account that is used for transactions
                     if (!file->hasOnlyUnusedAccounts(file->account(accountID).accountList())) {
                         accountsToReparent.push_back(accountID);
-                        //qDebug() << "subaccount not empty";
+                        // qDebug() << "subaccount not empty";
                     }
                 }
             }
@@ -420,8 +420,10 @@ void KCategoriesView::slotDeleteCategory()
             // don't forget to update d->m_currentCategory, because we still have a copy of
             // the old account list, which is no longer valid
             d->m_currentCategory = file->account(d->m_currentCategory.id());
-        } catch (const MyMoneyException &e) {
-            KMessageBox::error(this, i18n("<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
+        } catch (const MyMoneyException& e) {
+            KMessageBox::error(
+                this,
+                i18n("<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
             return;
         }
     }
@@ -430,7 +432,7 @@ void KCategoriesView::slotDeleteCategory()
         file->removeAccount(d->m_currentCategory);
         d->m_currentCategory.clearId();
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
     }
 }

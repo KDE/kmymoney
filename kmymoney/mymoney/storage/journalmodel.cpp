@@ -21,19 +21,18 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
-#include "payeesmodel.h"
-#include "securitiesmodel.h"
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyutils.h"
+#include "payeesmodel.h"
+#include "securitiesmodel.h"
 
-struct JournalModel::Private
-{
+struct JournalModel::Private {
     typedef enum {
         Interest,
         Fees,
@@ -86,7 +85,7 @@ struct JournalModel::Private
 
     QString reconciliationStateShort(eMyMoney::Split::State reconcileState) const
     {
-        switch(reconcileState) {
+        switch (reconcileState) {
         case eMyMoney::Split::State::NotReconciled:
         default:
             break;
@@ -102,7 +101,7 @@ struct JournalModel::Private
 
     QString reconciliationStateLong(eMyMoney::Split::State reconcileState) const
     {
-        switch(reconcileState) {
+        switch (reconcileState) {
         case eMyMoney::Split::State::NotReconciled:
         default:
             return i18nc("Reconciliation flag empty", "Not reconciled");
@@ -160,7 +159,7 @@ struct JournalModel::Private
     {
         // A transaction can have more than 2 splits ...
         const int rows = transaction.splitCount();
-        if(rows > 2) {
+        if (rows > 2) {
             // find the first entry of the transaction and keep in 'row'
             QModelIndex idx = index;
             int row = index.row();
@@ -189,7 +188,7 @@ struct JournalModel::Private
             return txt;
 
             // ... exactly two splits ...
-        } else if(rows == 2) {
+        } else if (rows == 2) {
             const auto& splitId = journalEntry.split().id();
             const auto splits = transaction.splits();
             for (const auto& split : std::as_const(splits)) {
@@ -199,7 +198,7 @@ struct JournalModel::Private
             }
 
             // ... or a single split
-        } else if(!journalEntry.split().shares().isZero()) {
+        } else if (!journalEntry.split().shares().isZero()) {
             return i18n("*** UNASSIGNED ***");
         }
         return QString();
@@ -272,8 +271,7 @@ struct JournalModel::Private
                 if (acc.isIncomeExpense()) {
                     if (split.shares().isNegative() && (type == Interest)) {
                         return true;
-                    }
-                    else if (split.shares().isPositive() && (type == Fees)) {
+                    } else if (split.shares().isPositive() && (type == Fees)) {
                         return true;
                     }
                 }
@@ -323,7 +321,7 @@ struct JournalModel::Private
 
     void updateTransactionFromBalance(int startRow, int rows, BalanceCacheDirection direction)
     {
-        for (int row = 0; row < rows; ++row)  {
+        for (int row = 0; row < rows; ++row) {
             const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(startRow, 0).internalPointer())->constDataRef();
             balanceChangedSet.insert(journalEntry.split().accountId());
             if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
@@ -532,10 +530,6 @@ QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) cons
     return {};
 }
 
-
-
-
-
 JournalModel::JournalModel(QObject* parent, QUndoStack* undoStack)
     : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE, undoStack)
     , d(new Private(this))
@@ -556,7 +550,7 @@ JournalModel::~JournalModel()
 {
 }
 
-JournalModelNewTransaction * JournalModel::newTransaction()
+JournalModelNewTransaction* JournalModel::newTransaction()
 {
     if (d->newTransactionModel == nullptr) {
         d->newTransactionModel = new JournalModelNewTransaction(this);
@@ -622,10 +616,10 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     const MyMoneyTransaction& transaction = journalEntry.transaction();
     const MyMoneySplit& split = journalEntry.split();
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Number:
             return split.number();
 
@@ -700,15 +694,14 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             break;
 
         case Amount:
-        case Value:
-        {
+        case Value: {
             MyMoneySplit assetAccountSplit;
             QList<MyMoneySplit> feeSplits, interestSplits;
             MyMoneySecurity security, currency;
             MyMoneyMoney amount;
             eMyMoney::Split::InvestmentTransactionType transactionType;
             MyMoneyUtils::dissectTransaction(transaction, split, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
-            switch(transactionType) {
+            switch (transactionType) {
             case eMyMoney::Split::InvestmentTransactionType::BuyShares:
             case eMyMoney::Split::InvestmentTransactionType::SellShares:
             case eMyMoney::Split::InvestmentTransactionType::Dividend:
@@ -720,13 +713,12 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
                 for (const auto& sp : std::as_const(interestSplits)) {
                     amount += sp.value();
                 }
-                return  MyMoneyUtils::formatMoney(-amount, currency);
+                return MyMoneyUtils::formatMoney(-amount, currency);
 
             default:
                 break;
             }
-        }
-        break;
+        } break;
 
         case Balance:
             return QLatin1String("n/a");
@@ -737,7 +729,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         break;
 
     case Qt::TextAlignmentRole:
-        switch( idx.column()) {
+        switch (idx.column()) {
         case Quantity:
         case Price:
         case Amount:
@@ -892,8 +884,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             headerData(split.shares().isNegative() ? JournalModel::Column::Payment : JournalModel::Column::Deposit, Qt::Horizontal, Qt::DisplayRole)
                 .toString());
 
-    case eMyMoney::Model::SplitSharesRole:
-    {
+    case eMyMoney::Model::SplitSharesRole: {
         QVariant rc;
         rc.setValue(split.shares());
         return rc;
@@ -905,15 +896,13 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitFormattedSharesRole:
         return d->formatShares(split);
 
-    case eMyMoney::Model::SplitValueRole:
-    {
+    case eMyMoney::Model::SplitValueRole: {
         QVariant rc;
         rc.setValue(split.value());
         return rc;
     }
 
-    case eMyMoney::Model::SplitPriceRole:
-    {
+    case eMyMoney::Model::SplitPriceRole: {
         QVariant rc;
         rc.setValue(split.possiblyCalculatedPrice());
         return rc;
@@ -939,10 +928,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return QVariant::fromValue<QStringList>(split.tagIdList());
 
     case eMyMoney::Model::SplitSingleLineMemoRole:
-    case eMyMoney::Model::SplitMemoRole:
-    {
+    case eMyMoney::Model::SplitMemoRole: {
         QString rc(split.memo());
-        if(role == eMyMoney::Model::SplitSingleLineMemoRole) {
+        if (role == eMyMoney::Model::SplitSingleLineMemoRole) {
             // remove empty lines
             rc.replace(QStringLiteral("\n\n"), QStringLiteral("\n"));
             // replace '\n' with ", "
@@ -1102,7 +1090,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     default:
         if (role >= Qt::UserRole)
-            qDebug() << "JournalModel::data(), role" << role << "offset" << role-Qt::UserRole << "not implemented";
+            qDebug() << "JournalModel::data(), role" << role << "offset" << role - Qt::UserRole << "not implemented";
         break;
     }
     return QVariant();
@@ -1110,7 +1098,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
 bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int role)
 {
-    if(!idx.isValid()) {
+    if (!idx.isValid()) {
         return false;
     }
     if (idx.row() < 0 || idx.row() >= rowCount(idx.parent())) {
@@ -1122,10 +1110,10 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
         return false;
     }
 
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Balance:
             journalEntry.setBalance(value.value<MyMoneyMoney>());
             return true;
@@ -1141,7 +1129,6 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
 
     default:
         return false;
-
     }
     // qDebug() << "setData(" << idx.row() << idx.column() << ")" << value << role;
     return QAbstractItemModel::setData(idx, value, role);
@@ -1236,7 +1223,7 @@ QModelIndexList JournalModel::indexesByTransactionId(const QString& id) const
     QModelIndex idx = firstIndexById(id);
     while (idx.isValid() && (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() == id)) {
         indexes.append(idx);
-        idx = index(idx.row()+1, 0);
+        idx = index(idx.row() + 1, 0);
     }
     return indexes;
 }
@@ -1275,7 +1262,7 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
     // insert the items into the model
     insertRows(startRow, rows);
     const QModelIndex startIdx = index(startRow, 0);
-    const QModelIndex endIdx = index(startRow+rows-1, columnCount()-1);
+    const QModelIndex endIdx = index(startRow + rows - 1, columnCount() - 1);
 
     d->startBalanceCacheOperation();
 
@@ -1313,7 +1300,6 @@ void JournalModel::removeTransaction(const MyMoneyTransaction& item)
 
 void JournalModel::doRemoveItem(const JournalEntry& before)
 {
-
     const auto& transaction = before.transaction();
     const auto idx = firstIndexById(transaction.id());
     const auto rows = transaction.splitCount();
@@ -1410,7 +1396,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     }
 
     // let the world know that things have changed
-    QModelIndex endIdx = index(row-1, columnCount()-1);
+    QModelIndex endIdx = index(row - 1, columnCount() - 1);
     Q_EMIT dataChanged(srcIdx, endIdx);
 
     // Step 3
@@ -1551,13 +1537,13 @@ void JournalModel::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTrans
     }
 }
 
-void JournalModel::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
+void JournalModel::transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit>>& list, MyMoneyTransactionFilter& filter) const
 {
     list.clear();
 
     const int rows = rowCount();
     QVector<MyMoneySplit> splits;
-    for (int row = 0; row < rows; ) {
+    for (int row = 0; row < rows;) {
         const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
         splits = filter.matchingSplits(journalEntry.transaction());
         if (!splits.isEmpty()) {
@@ -1694,7 +1680,7 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
 {
     if (date.isValid()) {
         MyMoneyMoney balance;
-        QModelIndex lastIdx = upperBound(MyMoneyTransaction::uniqueSortKey(date, QStringLiteral("x")), 0, rowCount()-1);
+        QModelIndex lastIdx = upperBound(MyMoneyTransaction::uniqueSortKey(date, QStringLiteral("x")), 0, rowCount() - 1);
         // in case the index is invalid, we search for a date past
         // the end of the journal, so we can simply use the cached
         // balance if it is available. Otherwise, we have to go
@@ -1712,7 +1698,7 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
             }
 
             // invalid index or first half?
-            if (lastIdx.row() < rowCount()/2)  {
+            if (lastIdx.row() < rowCount() / 2) {
                 for (int row = 0; row < lastRow; ++row) {
                     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
                     if (journalEntry.split().accountId() == accountId) {
@@ -1730,7 +1716,7 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
                 // This requires the balance cache to always
                 // be up-to-date
                 balance = d->balanceCache.value(accountId).m_totalBalance;
-                for (int row = rowCount()-1; row >= lastIdx.row(); --row) {
+                for (int row = rowCount() - 1; row >= lastIdx.row(); --row) {
                     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
                     if (journalEntry.split().accountId() == accountId) {
                         if (journalEntry.transaction().isStockSplit()) {
@@ -1782,7 +1768,7 @@ QModelIndex JournalModel::adjustToFirstSplitIdx(const QModelIndex& index) const
     // find the first split of this transaction in the journal
     QModelIndex idx;
     int startRow;
-    for (startRow = index.row()-1; startRow >= 0; --startRow) {
+    for (startRow = index.row() - 1; startRow >= 0; --startRow) {
         idx = this->index(startRow, 0);
         const auto cid = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
         if (cid != id)

@@ -65,7 +65,7 @@ QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
         if (!idx.isValid()) {
             break;
         }
-        if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(idx.model())) != nullptr) {
+        if ((sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(idx.model())) != nullptr) {
             // qDebug() << "QSortFilterProxyModel";
             idx = sortFilterModel->mapToSource(idx);
         } else if ((concatModel = qobject_cast<const QConcatenateTablesProxyModel*>(idx.model())) != nullptr) {
@@ -92,7 +92,7 @@ QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, 
     const QConcatenateTablesProxyModel* concatModel;
     const KDescendantsProxyModel* descendantsModel;
 
-    if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(proxyModel)) != nullptr) {
+    if ((sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(proxyModel)) != nullptr) {
         if (sortFilterModel->sourceModel() != idx.model()) {
             idx = mapFromBaseSource(sortFilterModel->sourceModel(), idx);
         }
@@ -120,17 +120,17 @@ QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, 
 
 QModelIndex MyMoneyModelBase::lowerBound(const QString& id) const
 {
-    return lowerBound(id, 0, rowCount()-1);
+    return lowerBound(id, 0, rowCount() - 1);
 }
 
 QModelIndex MyMoneyModelBase::upperBound(const QString& id) const
 {
-    return upperBound(id, 0, rowCount()-1);
+    return upperBound(id, 0, rowCount() - 1);
 }
 
 QString MyMoneyModelBase::peekNextId() const
 {
-    return QString("%1%2").arg(m_idLeadin).arg(m_nextId+1, m_idSize, 10, QLatin1Char('0'));
+    return QString("%1%2").arg(m_idLeadin).arg(m_nextId + 1, m_idSize, 10, QLatin1Char('0'));
 }
 
 QString MyMoneyModelBase::nextId()

@@ -5,8 +5,8 @@
 */
 
 #include "kmymoneywizardpage.h"
-#include "kmymoneywizardpage_p.h"
 #include "kmymoneywizard_p.h"
+#include "kmymoneywizardpage_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -24,8 +24,8 @@
 #include "kguiutils.h"
 #include "kmymoneywizard.h"
 
-KMyMoneyWizardPage::KMyMoneyWizardPage(uint step, QWidget* widget) :
-    d_ptr(new KMyMoneyWizardPagePrivate(widget))
+KMyMoneyWizardPage::KMyMoneyWizardPage(uint step, QWidget* widget)
+    : d_ptr(new KMyMoneyWizardPagePrivate(widget))
 {
     Q_D(KMyMoneyWizardPage);
     d->m_step = step;
@@ -35,8 +35,8 @@ KMyMoneyWizardPage::KMyMoneyWizardPage(uint step, QWidget* widget) :
     widget->hide();
 }
 
-KMyMoneyWizardPage::KMyMoneyWizardPage(KMyMoneyWizardPagePrivate &dd, uint step, QWidget *widget) :
-    d_ptr(&dd)
+KMyMoneyWizardPage::KMyMoneyWizardPage(KMyMoneyWizardPagePrivate& dd, uint step, QWidget* widget)
+    : d_ptr(&dd)
 {
     Q_D(KMyMoneyWizardPage);
     d->m_step = step;

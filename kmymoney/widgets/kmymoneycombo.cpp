@@ -13,14 +13,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRect>
-#include <QStyle>
-#include <QPainter>
+#include <QFocusEvent>
 #include <QKeyEvent>
 #include <QList>
-#include <QFocusEvent>
-#include <QMouseEvent>
 #include <QMetaMethod>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QRect>
+#include <QStyle>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,19 +31,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyselector.h"
 #include "kmymoneycompletion.h"
 #include "kmymoneylineedit.h"
+#include "kmymoneyselector.h"
 
-KMyMoneyCombo::KMyMoneyCombo(QWidget *parent) :
-    KComboBox(parent),
-    d_ptr(new KMyMoneyComboPrivate)
+KMyMoneyCombo::KMyMoneyCombo(QWidget* parent)
+    : KComboBox(parent)
+    , d_ptr(new KMyMoneyComboPrivate)
 {
 }
 
-KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *parent) :
-    KComboBox(rw, parent),
-    d_ptr(new KMyMoneyComboPrivate)
+KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget* parent)
+    : KComboBox(rw, parent)
+    , d_ptr(new KMyMoneyComboPrivate)
 {
     Q_D(KMyMoneyCombo);
     if (rw) {
@@ -52,9 +52,9 @@ KMyMoneyCombo::KMyMoneyCombo(bool rw, QWidget *parent) :
     }
 }
 
-KMyMoneyCombo::KMyMoneyCombo(KMyMoneyComboPrivate &dd, bool rw, QWidget *parent) :
-    KComboBox(rw, parent),
-    d_ptr(&dd)
+KMyMoneyCombo::KMyMoneyCombo(KMyMoneyComboPrivate& dd, bool rw, QWidget* parent)
+    : KComboBox(rw, parent)
+    , d_ptr(&dd)
 {
     Q_D(KMyMoneyCombo);
     if (rw) {
@@ -156,7 +156,7 @@ void KMyMoneyCombo::paintEvent(QPaintEvent* ev)
     }
 }
 
-void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
+void KMyMoneyCombo::mousePressEvent(QMouseEvent* e)
 {
     Q_D(KMyMoneyCombo);
     // mostly copied from QCombo::mousePressEvent() and adjusted for our needs
@@ -203,7 +203,6 @@ bool KMyMoneyCombo::isInArrowArea(const QPoint& pos) const
     return arrowRect.contains(mapFromGlobal(pos));
 }
 
-
 void KMyMoneyCombo::setSuppressObjectCreation(bool suppress)
 {
     Q_D(KMyMoneyCombo);
@@ -223,9 +222,8 @@ void KMyMoneyCombo::setCurrentText()
 void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 {
     Q_D(KMyMoneyCombo);
-    if ((e->key() == Qt::Key_F4 && e->modifiers() == 0) ||
-            (e->key() == Qt::Key_Down && (e->modifiers() & Qt::AltModifier)) ||
-            (!isEditable() && e->key() == Qt::Key_Space)) {
+    if ((e->key() == Qt::Key_F4 && e->modifiers() == 0) || (e->key() == Qt::Key_Down && (e->modifiers() & Qt::AltModifier))
+        || (!isEditable() && e->key() == Qt::Key_Space)) {
         // if we have at least one item in the list, we open the dropdown
         if (selector()->listView()->itemAt(0, 0))
             d->m_completion->setVisible(true);
@@ -235,7 +233,7 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
     KComboBox::keyPressEvent(e);
 }
 
-void KMyMoneyCombo::connectNotify(const QMetaMethod & signal)
+void KMyMoneyCombo::connectNotify(const QMetaMethod& signal)
 {
     Q_D(KMyMoneyCombo);
     if (signal != QMetaMethod::fromSignal(&KMyMoneyCombo::createItem)) {
@@ -243,7 +241,7 @@ void KMyMoneyCombo::connectNotify(const QMetaMethod & signal)
     }
 }
 
-void KMyMoneyCombo::disconnectNotify(const QMetaMethod & signal)
+void KMyMoneyCombo::disconnectNotify(const QMetaMethod& signal)
 {
     Q_D(KMyMoneyCombo);
     if (signal != QMetaMethod::fromSignal(&KMyMoneyCombo::createItem)) {

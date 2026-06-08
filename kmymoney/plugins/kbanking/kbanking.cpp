@@ -29,31 +29,31 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
-#include <KLocalizedString>
-#include <KMessageBox>
+#include <KAboutData>
 #include <KActionCollection>
-#include <QMenu>
-#include <KGuiItem>
-#include <KLineEdit>
 #include <KComboBox>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KAboutData>
+#include <KGuiItem>
+#include <KLineEdit>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPluginFactory>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // Library Includes
 
 #include <aqbanking/banking.h>
+#include <aqbanking/gui/abgui.h>
 #include <aqbanking/types/imexporter_context.h>
 #include <aqbanking/types/transaction.h>
 #include <aqbanking/types/transactionlimits.h>
-#include <aqbanking/gui/abgui.h>
 #include <aqbanking/version.h>
-#include <gwenhywfar/logger.h>
 #include <gwenhywfar/debug.h>
-#include <gwenhywfar/version.h>
 #include <gwenhywfar/gwenhywfar.h>
+#include <gwenhywfar/logger.h>
+#include <gwenhywfar/version.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -141,7 +141,8 @@ public:
      * KMyMoney asks for accounts over and over again which causes a lot of "Job not supported with this account" error messages.
      * This function filters messages with that string.
      */
-    static int gwenLogHook(GWEN_GUI* gui, const char* domain, GWEN_LOGGER_LEVEL level, const char* message) {
+    static int gwenLogHook(GWEN_GUI* gui, const char* domain, GWEN_LOGGER_LEVEL level, const char* message)
+    {
         Q_UNUSED(gui);
 
         const char* messageToFilter = "Job not supported with this account";
@@ -153,7 +154,7 @@ public:
         return 1;
     }
 
-    QTimer *passwordCacheTimer;
+    QTimer* passwordCacheTimer;
     gwenKdeGui* gui;
     QMap<QString, QStringList> jobList;
     QString fileId;
@@ -271,7 +272,6 @@ void KBanking::unplug()
     qDebug("Plugins: kbanking unplugged");
 }
 
-
 void KBanking::loadProtocolConversion()
 {
     if (m_kbanking) {
@@ -284,7 +284,6 @@ void KBanking::loadProtocolConversion()
         };
     }
 }
-
 
 void KBanking::protocols(QStringList& protocolList) const
 {
@@ -305,7 +304,6 @@ void KBanking::protocols(QStringList& protocolList) const
     }
 }
 
-
 QWidget* KBanking::accountConfigTab(const MyMoneyAccount& acc, QString& name)
 {
     const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
@@ -320,7 +318,6 @@ QWidget* KBanking::accountConfigTab(const MyMoneyAccount& acc, QString& name)
     return label;
 }
 
-
 MyMoneyKeyValueContainer KBanking::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
     MyMoneyKeyValueContainer kvp(current);
@@ -331,17 +328,16 @@ MyMoneyKeyValueContainer KBanking::onlineBankingSettings(const MyMoneyKeyValueCo
     return kvp;
 }
 
-
 void KBanking::createActions()
 {
-    QAction *settings_aqbanking = actionCollection()->addAction("settings_aqbanking");
+    QAction* settings_aqbanking = actionCollection()->addAction("settings_aqbanking");
     settings_aqbanking->setText(i18n("Configure Aq&Banking..."));
     // make sure that AqBanking shows up as a separate item in the “Settings" menu on MacOS
     settings_aqbanking->setMenuRole(QAction::NoRole);
     connect(settings_aqbanking, &QAction::triggered, this, &KBanking::slotSettings);
     d->actions.insert(settings_aqbanking);
 
-    QAction *file_import_aqbanking = actionCollection()->addAction("file_import_aqbanking");
+    QAction* file_import_aqbanking = actionCollection()->addAction("file_import_aqbanking");
     file_import_aqbanking->setText(i18n("AqBanking importer..."));
     connect(file_import_aqbanking, &QAction::triggered, this, &KBanking::slotImport);
     d->actions.insert(file_import_aqbanking);
@@ -350,19 +346,20 @@ void KBanking::createActions()
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action("file_import_aqbanking"), &QAction::setEnabled);
 
 #ifdef KMM_DEBUG
-    QAction *openChipTanDialog = actionCollection()->addAction("open_chiptan_dialog");
+    QAction* openChipTanDialog = actionCollection()->addAction("open_chiptan_dialog");
     openChipTanDialog->setText("Open ChipTan Dialog");
     connect(openChipTanDialog, &QAction::triggered, this, [&]() {
         auto dlg = new chipTanDialog();
         dlg->setHhdCode("0F04871100030333555414312C32331D");
-        dlg->setInfoText("<html><h1>Test Graphic for debugging</h1><p>The encoded data is</p><p>Account Number: <b>335554</b><br/>Amount: <b>1,23</b></p></html>");
+        dlg->setInfoText(
+            "<html><h1>Test Graphic for debugging</h1><p>The encoded data is</p><p>Account Number: <b>335554</b><br/>Amount: <b>1,23</b></p></html>");
         connect(dlg, &QDialog::accepted, dlg, &chipTanDialog::deleteLater);
         connect(dlg, &QDialog::rejected, dlg, &chipTanDialog::deleteLater);
         dlg->show();
     });
     d->actions.insert(openChipTanDialog);
 
-    QAction *openPhotoTanDialog = actionCollection()->addAction("open_phototan_dialog");
+    QAction* openPhotoTanDialog = actionCollection()->addAction("open_phototan_dialog");
     openPhotoTanDialog->setText("Open PhotoTan Dialog");
     connect(openPhotoTanDialog, &QAction::triggered, this, [&]() {
         auto dlg = new photoTanDialog();
@@ -397,7 +394,6 @@ void KBanking::slotSettings()
     }
 }
 
-
 bool KBanking::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings)
 {
     bool rc = false;
@@ -418,7 +414,6 @@ bool KBanking::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& s
     return rc;
 }
 
-
 AB_ACCOUNT_SPEC* KBanking::aqbAccount(const MyMoneyAccount& acc) const
 {
     if (m_kbanking == nullptr) {
@@ -431,7 +426,7 @@ AB_ACCOUNT_SPEC* KBanking::aqbAccount(const MyMoneyAccount& acc) const
         return nullptr;
     }
 
-    AB_ACCOUNT_SPEC *ab_acc = AB_Banking_GetAccountSpecByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
+    AB_ACCOUNT_SPEC* ab_acc = AB_Banking_GetAccountSpecByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
     // if the account is not found, we temporarily scan for the 'old' mapping (the one w/o the file id)
     // in case we find it, we setup the new mapping in addition on the fly.
     if (!ab_acc && acc.isAssetLiability()) {
@@ -445,13 +440,11 @@ AB_ACCOUNT_SPEC* KBanking::aqbAccount(const MyMoneyAccount& acc) const
     return ab_acc;
 }
 
-
 AB_ACCOUNT_SPEC* KBanking::aqbAccount(const QString& accountId) const
 {
     MyMoneyAccount account = MyMoneyFile::instance()->account(accountId);
     return aqbAccount(account);
 }
-
 
 QString KBanking::stripLeadingZeroes(const QString& s) const
 {
@@ -496,7 +489,6 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT_SPEC*
     }
 }
 
-
 bool KBanking::accountIsMapped(const MyMoneyAccount& acc)
 {
     return aqbAccount(acc) != nullptr;
@@ -514,7 +506,7 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         int rv;
 
         /* get AqBanking account */
-        AB_ACCOUNT_SPEC *ba = aqbAccount(acc);
+        AB_ACCOUNT_SPEC* ba = aqbAccount(acc);
         // Update the connection between the KMyMoney account and the AqBanking equivalent.
         // If the account is not found anymore ba == 0 and the connection is removed.
         setupAccountReference(acc, ba);
@@ -543,9 +535,9 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                     int days = 0 /* TODO in AqBanking AB_JobGetTransactions_GetMaxStoreDays(job)*/;
                     QDate qd;
                     if (days > 0) {
-                        GWEN_DATE *dt;
+                        GWEN_DATE* dt;
 
-                        dt=GWEN_Date_CurrentDate();
+                        dt = GWEN_Date_CurrentDate();
                         GWEN_Date_SubDays(dt, days);
                         qd = QDate(GWEN_Date_GetYear(dt), GWEN_Date_GetMonth(dt), GWEN_Date_GetDay(dt));
                         GWEN_Date_free(dt);
@@ -588,9 +580,9 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
                     if (enqueJob) {
                         if (qd.isValid()) {
-                            GWEN_DATE *dt;
+                            GWEN_DATE* dt;
 
-                            dt=GWEN_Date_fromGregorian(qd.year(), qd.month(), qd.day());
+                            dt = GWEN_Date_fromGregorian(qd.year(), qd.month(), qd.day());
                             AB_Transaction_SetFirstDate(job, dt);
                             GWEN_Date_free(dt);
                         }
@@ -641,11 +633,10 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     return rc;
 }
 
-
 void KBanking::executeQueue()
 {
     if (m_kbanking && m_kbanking->getEnqueuedJobs().size() > 0) {
-        AB_IMEXPORTER_CONTEXT *ctx;
+        AB_IMEXPORTER_CONTEXT* ctx;
         ctx = AB_ImExporterContext_new();
         int rv = m_kbanking->executeQueue(ctx);
         if (!rv) {
@@ -656,7 +647,6 @@ void KBanking::executeQueue()
         AB_ImExporterContext_free(ctx);
     }
 }
-
 
 /** @todo improve error handling, e.g. by adding a .isValid to nationalTransfer
  * @todo use new onlineJob system
@@ -688,22 +678,21 @@ void KBanking::sendOnlineJob(QList<onlineJob>& jobs)
     m_onlineJobQueue.clear();
 }
 
-
 QStringList KBanking::availableJobs(QString accountId) const
 {
     try {
         MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
         QString id = MyMoneyFile::instance()->value("kmm-id");
-        if(id != d->fileId) {
+        if (id != d->fileId) {
             d->jobList.clear();
             d->fileId = id;
         }
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         // Exception usually means account was not found
         return QStringList();
     }
 
-    if(d->jobList.contains(accountId)) {
+    if (d->jobList.contains(accountId)) {
         return d->jobList[accountId];
     }
 
@@ -725,26 +714,25 @@ QStringList KBanking::availableJobs(QString accountId) const
     return list;
 }
 
-
 /** @brief experimenting with QScopedPointer and aqBanking pointers */
 class QScopedPointerAbJobDeleter
 {
 public:
-    static void cleanup(AB_TRANSACTION* job) {
+    static void cleanup(AB_TRANSACTION* job)
+    {
         AB_Transaction_free(job);
     }
 };
-
 
 /** @brief experimenting with QScopedPointer and aqBanking pointers */
 class QScopedPointerAbAccountDeleter
 {
 public:
-    static void cleanup(AB_ACCOUNT_SPEC* account) {
+    static void cleanup(AB_ACCOUNT_SPEC* account)
+    {
         AB_AccountSpec_free(account);
     }
 };
-
 
 IonlineTaskSettings::ptr KBanking::settings(QString accountId, QString taskName)
 {
@@ -754,7 +742,7 @@ IonlineTaskSettings::ptr KBanking::settings(QString accountId, QString taskName)
 
     if (sepaOnlineTransfer::name() == taskName) {
         // Get limits for sepaonlinetransfer
-        const AB_TRANSACTION_LIMITS *limits=AB_AccountSpec_GetTransactionLimitsForCommand(abAcc, AB_Transaction_CommandSepaTransfer);
+        const AB_TRANSACTION_LIMITS* limits = AB_AccountSpec_GetTransactionLimitsForCommand(abAcc, AB_Transaction_CommandSepaTransfer);
         if (limits == nullptr)
             return IonlineTaskSettings::ptr();
         return AB_TransactionLimits_toSepaOnlineTaskSettings(limits).dynamicCast<IonlineTaskSettings>();
@@ -762,34 +750,35 @@ IonlineTaskSettings::ptr KBanking::settings(QString accountId, QString taskName)
     return IonlineTaskSettings::ptr();
 }
 
-
 bool KBanking::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
 {
     /* get AqBanking account */
     const QString accId = job.constTask()->responsibleAccount();
 
-    AB_ACCOUNT_SPEC *abAccount = aqbAccount(accId);
+    AB_ACCOUNT_SPEC* abAccount = aqbAccount(accId);
     if (!abAccount) {
-        job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Warning, "KBanking", i18n("<qt>"
-                                           "The given application account <b>%1</b> "
-                                           "has not been mapped to an online "
-                                           "account."
-                                           "</qt>",
-                                           MyMoneyFile::instance()->account(accId).name())));
+        job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Warning,
+                                           "KBanking",
+                                           i18n("<qt>"
+                                                "The given application account <b>%1</b> "
+                                                "has not been mapped to an online "
+                                                "account."
+                                                "</qt>",
+                                                MyMoneyFile::instance()->account(accId).name())));
         return false;
     }
-    //setupAccountReference(acc, ba); // needed?
+    // setupAccountReference(acc, ba); // needed?
 
     if (AB_AccountSpec_GetTransactionLimitsForCommand(abAccount, AB_Transaction_CommandSepaTransfer) == nullptr) {
         qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
-        job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Error, "AqBanking",
-                                           QString("Sepa credit transfers for account \"%1\" are not available.").arg(MyMoneyFile::instance()->account(accId).name())
-                                          )
-                         );
+        job.addJobMessage(
+            onlineJobMessage(eMyMoney::OnlineJob::MessageType::Error,
+                             "AqBanking",
+                             QString("Sepa credit transfers for account \"%1\" are not available.").arg(MyMoneyFile::instance()->account(accId).name())));
         return false;
     }
 
-    AB_TRANSACTION *abJob = AB_Transaction_new();
+    AB_TRANSACTION* abJob = AB_Transaction_new();
 
     /* command */
     AB_Transaction_SetCommand(abJob, AB_Transaction_CommandSepaTransfer);
@@ -824,10 +813,9 @@ bool KBanking::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
 
     AB_Transaction_free(abJob);
 
-    //delete localAcc;
+    // delete localAcc;
     return true;
 }
-
 
 void KBanking::startPasswordTimer()
 {
@@ -836,12 +824,10 @@ void KBanking::startPasswordTimer()
     d->passwordCacheTimer->start();
 }
 
-
 void KBanking::slotClearPasswordCache()
 {
     m_kbanking->clearPasswordCache();
 }
-
 
 void KBanking::slotImport()
 {
@@ -858,12 +844,10 @@ bool KBanking::importStatement(const MyMoneyStatement& s)
     return statementInterface()->import(s);
 }
 
-
 MyMoneyAccount KBanking::account(const QString& key, const QString& value) const
 {
     return statementInterface()->account(key, value);
 }
-
 
 void KBanking::setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const
 {
@@ -880,7 +864,7 @@ KBankingExt::KBankingExt(KBanking* parent, const char* appname, const char* fnam
     QRegularExpressionMatch match = exp.match(KAboutData::applicationData().version());
 
     QByteArray regkey;
-    const char *p = "\x08\x0f\x41\x0f\x58\x5b\x56\x4a\x09\x7b\x40\x0e\x5f\x2a\x56\x3f\x0e\x7f\x3f\x7d\x5b\x56\x56\x4b\x0a\x4d";
+    const char* p = "\x08\x0f\x41\x0f\x58\x5b\x56\x4a\x09\x7b\x40\x0e\x5f\x2a\x56\x3f\x0e\x7f\x3f\x7d\x5b\x56\x56\x4b\x0a\x4d";
     const char* q = appname;
     while (*p) {
         regkey += (*q++ ^ *p++) & 0xff;
@@ -889,7 +873,6 @@ KBankingExt::KBankingExt(KBanking* parent, const char* appname, const char* fnam
     }
     registerFinTs(regkey.data(), match.captured(1).remove(QLatin1Char('.')).left(5).toLatin1());
 }
-
 
 int KBankingExt::init()
 {
@@ -901,7 +884,6 @@ int KBankingExt::init()
     return 0;
 }
 
-
 int KBankingExt::fini()
 {
     if (_jobQueue) {
@@ -912,8 +894,7 @@ int KBankingExt::fini()
     return AB_Banking::fini();
 }
 
-
-int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
+int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT* ctx)
 {
     m_parent->startPasswordTimer();
 
@@ -928,7 +909,7 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         AB_TRANSACTION* abJob = AB_Transaction_List2Iterator_Data(jobIter);
 
         while (abJob) {
-            const char *stringIdForApp=AB_Transaction_GetStringIdForApplication(abJob);
+            const char* stringIdForApp = AB_Transaction_GetStringIdForApplication(abJob);
 
             if (!(stringIdForApp && *stringIdForApp)) {
                 qWarning("Executed AB_Job without KMyMoney id");
@@ -949,11 +930,11 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
             AB_TRANSACTION_STATUS abStatus = AB_Transaction_GetStatus(abJob);
 
             if (abStatus == AB_Transaction_StatusSent //
-                    || abStatus == AB_Transaction_StatusPending //
-                    || abStatus == AB_Transaction_StatusAccepted //
-                    || abStatus == AB_Transaction_StatusRejected //
-                    || abStatus == AB_Transaction_StatusError //
-                    || abStatus == AB_Transaction_StatusUnknown)
+                || abStatus == AB_Transaction_StatusPending //
+                || abStatus == AB_Transaction_StatusAccepted //
+                || abStatus == AB_Transaction_StatusRejected //
+                || abStatus == AB_Transaction_StatusError //
+                || abStatus == AB_Transaction_StatusUnknown)
                 job.setJobSend();
 
             if (abStatus == AB_Transaction_StatusAccepted)
@@ -970,7 +951,7 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         AB_Transaction_List2Iterator_free(jobIter);
     }
 
-    AB_TRANSACTION_LIST2 *oldQ = _jobQueue;
+    AB_TRANSACTION_LIST2* oldQ = _jobQueue;
     _jobQueue = AB_Transaction_List2_new();
     AB_Transaction_List2_freeAll(oldQ);
 
@@ -980,23 +961,21 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
     return rv;
 }
 
-
 void KBankingExt::clearPasswordCache()
 {
     /* clear password DB */
     GWEN_Gui_SetPasswordStatus(nullptr, nullptr, GWEN_Gui_PasswordStatus_Remove, 0);
 }
 
-
 std::list<AB_TRANSACTION*> KBankingExt::getEnqueuedJobs()
 {
-    AB_TRANSACTION_LIST2 *ll;
+    AB_TRANSACTION_LIST2* ll;
     std::list<AB_TRANSACTION*> rl;
 
     ll = _jobQueue;
     if (ll && AB_Transaction_List2_GetSize(ll)) {
-        AB_TRANSACTION *j;
-        AB_TRANSACTION_LIST2_ITERATOR *it;
+        AB_TRANSACTION* j;
+        AB_TRANSACTION_LIST2_ITERATOR* it;
 
         it = AB_Transaction_List2_First(ll);
         assert(it);
@@ -1011,8 +990,7 @@ std::list<AB_TRANSACTION*> KBankingExt::getEnqueuedJobs()
     return rl;
 }
 
-
-int KBankingExt::enqueueJob(AB_TRANSACTION *j)
+int KBankingExt::enqueueJob(AB_TRANSACTION* j)
 {
     assert(_jobQueue);
     assert(j);
@@ -1021,8 +999,7 @@ int KBankingExt::enqueueJob(AB_TRANSACTION *j)
     return 0;
 }
 
-
-int KBankingExt::dequeueJob(AB_TRANSACTION *j)
+int KBankingExt::dequeueJob(AB_TRANSACTION* j)
 {
     assert(_jobQueue);
     AB_Transaction_List2_Remove(_jobQueue, j);
@@ -1031,12 +1008,10 @@ int KBankingExt::dequeueJob(AB_TRANSACTION *j)
     return 0;
 }
 
-
 void KBankingExt::transfer()
 {
-    //m_parent->transfer();
+    // m_parent->transfer();
 }
-
 
 bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
 {
@@ -1047,7 +1022,7 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
     // extract some information about the bank. if we have a bank code
     // (BLZ) we display it, otherwise the name is enough.
     try {
-        const MyMoneyInstitution &bank = file->institution(acc.institutionId());
+        const MyMoneyInstitution& bank = file->institution(acc.institutionId());
         bankId = bank.name();
         if (!bank.bankcode().isEmpty())
             bankId = bank.bankcode();
@@ -1066,12 +1041,10 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
     // decided to quit the dialog. So not really a great thing
     // to present some more information.
 
-    KBMapAccount *w;
-    w = new KBMapAccount(this,
-                         bankId.toUtf8().constData(),
-                         accountId.toUtf8().constData());
+    KBMapAccount* w;
+    w = new KBMapAccount(this, bankId.toUtf8().constData(), accountId.toUtf8().constData());
     if (w->exec() == QDialog::Accepted) {
-        AB_ACCOUNT_SPEC *a;
+        AB_ACCOUNT_SPEC* a;
 
         a = w->getAccount();
         assert(a);
@@ -1097,17 +1070,15 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
     return false;
 }
 
-
 QString KBankingExt::mappingId(const MyMoneyObject& object) const
 {
     return MyMoneyFile::instance()->storageId().toString(QUuid::WithoutBraces) + QLatin1Char('-') + object.id();
 }
 
-
 bool KBankingExt::interactiveImport()
 {
-    AB_IMEXPORTER_CONTEXT *ctx;
-    GWEN_DIALOG *dlg;
+    AB_IMEXPORTER_CONTEXT* ctx;
+    GWEN_DIALOG* dlg;
     int rv;
 
     ctx = AB_ImExporterContext_new();
@@ -1138,15 +1109,11 @@ bool KBankingExt::interactiveImport()
     return true;
 }
 
-
-
-void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
-                                 const MyMoneyAccount& acc,
-                                 const AB_TRANSACTION *t)
+void KBankingExt::_xaToStatement(MyMoneyStatement& ks, const MyMoneyAccount& acc, const AB_TRANSACTION* t)
 {
     QString s;
     QString memo;
-    const char *p;
+    const char* p;
     const AB_VALUE* val = nullptr;
     const GWEN_DATE* dt = nullptr;
     MyMoneyStatement::Transaction kt;
@@ -1356,8 +1323,8 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     }
 
     // add information about remote account to memo in case we have something
-    const char *remoteAcc = AB_Transaction_GetRemoteAccountNumber(t);
-    const char *remoteBankCode = AB_Transaction_GetRemoteBankCode(t);
+    const char* remoteAcc = AB_Transaction_GetRemoteAccountNumber(t);
+    const char* remoteBankCode = AB_Transaction_GetRemoteBankCode(t);
     if (remoteAcc && remoteBankCode) {
         kt.m_strMemo += QString("\n%1/%2").arg(remoteBankCode, remoteAcc);
     }
@@ -1384,15 +1351,12 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     ks.m_listTransactions += kt;
 }
 
-
-void KBankingExt::_slToStatement(MyMoneyStatement &ks,
-                                 const MyMoneyAccount& acc,
-                                 const AB_SECURITY *sy)
+void KBankingExt::_slToStatement(MyMoneyStatement& ks, const MyMoneyAccount& acc, const AB_SECURITY* sy)
 {
     MyMoneyFile* file = MyMoneyFile::instance();
-    const char *p;
-    const AB_VALUE *val;
-    const GWEN_TIME *ti;
+    const char* p;
+    const AB_VALUE* val;
+    const GWEN_TIME* ti;
     MyMoneyStatement::Security ksy;
     MyMoneyStatement::Price kpr;
     MyMoneyStatement::Transaction kt;
@@ -1430,21 +1394,22 @@ void KBankingExt::_slToStatement(MyMoneyStatement &ks,
     MyMoneyAccount sacc;
     const auto accountList = file->account(acc.id()).accountList();
     for (const auto& sAccount : accountList) {
-        sacc=file->account(sAccount);
-        security=file->security(sacc.currencyId());
-        if ((!ksy.m_strSymbol.isEmpty() && QString::compare(ksy.m_strSymbol, security.tradingSymbol(), Qt::CaseInsensitive) == 0) ||
-                (!ksy.m_strName.isEmpty() && QString::compare(ksy.m_strName, security.name(), Qt::CaseInsensitive) == 0)) {
+        sacc = file->account(sAccount);
+        security = file->security(sacc.currencyId());
+        if ((!ksy.m_strSymbol.isEmpty() && QString::compare(ksy.m_strSymbol, security.tradingSymbol(), Qt::CaseInsensitive) == 0)
+            || (!ksy.m_strName.isEmpty() && QString::compare(ksy.m_strName, security.name(), Qt::CaseInsensitive) == 0)) {
             if (sacc.balance().toDouble() != AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy))) {
-                qDebug("Creating dummy correction booking for '%s' with %f shares", qPrintable(security.tradingSymbol()),
-                       AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy))-sacc.balance().toDouble());
+                qDebug("Creating dummy correction booking for '%s' with %f shares",
+                       qPrintable(security.tradingSymbol()),
+                       AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) - sacc.balance().toDouble());
                 kt.m_fees = MyMoneyMoney();
                 kt.m_strMemo = "Dummy booking added by KMyMoney to reflect online balance - please adjust";
                 kt.m_datePosted = QDate::currentDate();
-                kt.m_strSymbol=security.tradingSymbol();
-                kt.m_strSecurity=security.name();
-                kt.m_strBrokerageAccount=acc.name();
+                kt.m_strSymbol = security.tradingSymbol();
+                kt.m_strSecurity = security.name();
+                kt.m_strBrokerageAccount = acc.name();
 
-                kt.m_shares=MyMoneyMoney(AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy))-sacc.balance().toDouble());
+                kt.m_shares = MyMoneyMoney(AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) - sacc.balance().toDouble());
                 if (AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) > sacc.balance().toDouble())
                     kt.m_eAction = eMyMoney::Transaction::Action::Shrsin;
                 else
@@ -1452,8 +1417,7 @@ void KBankingExt::_slToStatement(MyMoneyStatement &ks,
 
                 // store transaction
                 ks.m_listTransactions += kt;
-            }
-            else
+            } else
                 qDebug("Online balance matches balance in KMyMoney account!");
         }
     }
@@ -1465,12 +1429,9 @@ void KBankingExt::_slToStatement(MyMoneyStatement &ks,
     ks.m_listPrices += kpr;
 }
 
-
-bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
-                                    AB_IMEXPORTER_ACCOUNTINFO *ai,
-                                    uint32_t /*flags*/)
+bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT* ctx, AB_IMEXPORTER_ACCOUNTINFO* ai, uint32_t /*flags*/)
 {
-    const char *p;
+    const char* p;
 
     DBG_INFO(nullptr, "Importing account...");
 
@@ -1488,7 +1449,8 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
 
     MyMoneyAccount kacc;
     if (!ks.m_strAccountNumber.isEmpty() || !ks.m_strBankCode.isEmpty()) {
-        kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2-%3").arg(ks.m_strBankCode, ks.m_strAccountNumber).arg(AB_ImExporterAccountInfo_GetAccountType(ai)));
+        kacc = m_parent->account("kbanking-acc-ref",
+                                 QString("%1-%2-%3").arg(ks.m_strBankCode, ks.m_strAccountNumber).arg(AB_ImExporterAccountInfo_GetAccountType(ai)));
         ks.m_accountId = kacc.id();
     }
 
@@ -1520,7 +1482,7 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
     }
 
     // account status
-    const AB_BALANCE *bal = AB_Balance_List_GetLatestByType(AB_ImExporterAccountInfo_GetBalanceList(ai), AB_Balance_TypeBooked);
+    const AB_BALANCE* bal = AB_Balance_List_GetLatestByType(AB_ImExporterAccountInfo_GetBalanceList(ai), AB_Balance_TypeBooked);
     if (!bal)
         bal = AB_Balance_List_GetLatestByType(AB_ImExporterAccountInfo_GetBalanceList(ai), AB_Balance_TypeNoted);
     if (bal) {

@@ -41,7 +41,8 @@ public:
         , m_editorCol(-1)
         , m_showValuesInverted(false)
         , m_readOnly(false)
-    {}
+    {
+    }
 
     NewSplitEditor* m_editor;
     int m_editorRow;
@@ -52,7 +53,6 @@ public:
     QString m_transactionPayeeId;
     TransactionEditorBase* m_baseEditor;
 };
-
 
 SplitDelegate::SplitDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
@@ -94,12 +94,12 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
 {
     Q_UNUSED(option);
 
-    if(index.isValid()) {
+    if (index.isValid()) {
         Q_ASSERT(parent);
         auto view = qobject_cast<SplitView*>(parent->parentWidget());
         Q_ASSERT(view != nullptr);
 
-        if(view->selectionModel()->selectedRows().count() > 1) {
+        if (view->selectionModel()->selectedRows().count() > 1) {
             qDebug() << "Editing multiple splits at once is not yet supported";
 
             /**
@@ -116,7 +116,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
             d->m_editor = new NewSplitEditor(parent, d->m_commodity, accountId);
         }
 
-        if(d->m_editor) {
+        if (d->m_editor) {
             d->m_editorRow = index.row();
             d->m_editorCol = index.column();
             connect(d->m_editor, &NewSplitEditor::done, this, &SplitDelegate::endEdit);
@@ -246,9 +246,9 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
 {
     bool fullDisplay = false;
     auto view = qobject_cast<SplitView*>(parent());
-    if(view) {
+    if (view) {
         const auto currentIndex = view->currentIndex();
-        if(currentIndex.isValid()) {
+        if (currentIndex.isValid()) {
             const auto currentId = currentIndex.model()->data(currentIndex, eMyMoney::Model::IdRole).toString();
             const auto myId = index.model()->data(index, eMyMoney::Model::IdRole).toString();
             fullDisplay = (currentId == myId);
@@ -257,14 +257,14 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
 
     QSize size;
     QStyleOptionViewItem opt = option;
-    if(index.isValid()) {
+    if (index.isValid()) {
         // check if we are showing the edit widget
         const auto* viewWidget = qobject_cast<const QAbstractItemView*>(opt.widget);
         if (viewWidget) {
             const auto editIndex = viewWidget->model()->index(index.row(), d->m_editorCol);
-            if(editIndex.isValid()) {
+            if (editIndex.isValid()) {
                 QWidget* editor = viewWidget->indexWidget(editIndex);
-                if(editor) {
+                if (editor) {
                     size = editor->minimumSizeHint();
                     return size;
                 }
@@ -273,7 +273,7 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
     }
 
     int rows = 1;
-    if(fullDisplay) {
+    if (fullDisplay) {
         initStyleOption(&opt, index);
         rows = 0;
         const auto payeeId = index.data(eMyMoney::Model::SplitPayeeIdRole).toString();
@@ -285,7 +285,7 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
         }
 
         // make sure we show at least one row
-        if(!rows) {
+        if (!rows) {
             rows = 1;
         }
     }
@@ -303,7 +303,7 @@ void SplitDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionView
     const auto view = qobject_cast<const SplitView*>(opt.widget);
 
     QRect r(opt.rect);
-    if(view && view->verticalScrollBar()->isVisible()) {
+    if (view && view->verticalScrollBar()->isVisible()) {
         r.setWidth(opt.widget->width() - view->verticalScrollBar()->width());
     }
 
@@ -313,8 +313,8 @@ void SplitDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionView
 
 void SplitDelegate::endEdit()
 {
-    if(d->m_editor) {
-        if(d->m_editor->accepted()) {
+    if (d->m_editor) {
+        if (d->m_editor->accepted()) {
             Q_EMIT commitData(d->m_editor);
         }
         Q_EMIT closeEditor(d->m_editor, NoHint);
@@ -328,7 +328,7 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
     const SplitModel* model = qobject_cast<const SplitModel*>(index.model());
     NewSplitEditor* editor = qobject_cast<NewSplitEditor*>(editWidget);
 
-    if(model && editor) {
+    if (model && editor) {
         editor->startLoadingSplit();
         editor->setShowValuesInverted(d->m_showValuesInverted);
         editor->setMemo(index.data(eMyMoney::Model::SplitMemoRole).toString());
@@ -353,8 +353,8 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
 
 void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-    NewSplitEditor* splitEditor = qobject_cast< NewSplitEditor* >(editor);
-    if(splitEditor) {
+    NewSplitEditor* splitEditor = qobject_cast<NewSplitEditor*>(editor);
+    if (splitEditor) {
         // prevent update signals
         QSignalBlocker block(model);
         model->setData(index, splitEditor->number(), eMyMoney::Model::SplitNumberRole);
@@ -370,7 +370,7 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
 
         // in case this was a new split, we need to create a new empty one
         SplitModel* splitModel = qobject_cast<SplitModel*>(model);
-        if(splitModel) {
+        if (splitModel) {
             splitModel->appendEmptySplit();
         }
     }

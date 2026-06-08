@@ -4,15 +4,15 @@
 */
 
 #include "payeeidentifiercontainermodel.h"
-#include "payeeidentifier/payeeidentifier.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifier/payeeidentifier.h"
 
 #include <KLocalizedString>
 
 payeeIdentifierContainerModel::payeeIdentifierContainerModel(QObject* parent)
-    : QAbstractListModel(parent),
-      m_data(QSharedPointer<MyMoneyPayeeIdentifierContainer>())
+    : QAbstractListModel(parent)
+    , m_data(QSharedPointer<MyMoneyPayeeIdentifierContainer>())
 {
 }
 
@@ -25,7 +25,7 @@ QVariant payeeIdentifierContainerModel::data(const QModelIndex& index, int role)
     const ::payeeIdentifier ident = m_data->payeeIdentifiers().at(index.row());
 
     if (role == payeeIdentifier) {
-        return QVariant::fromValue< ::payeeIdentifier >(ident);
+        return QVariant::fromValue<::payeeIdentifier>(ident);
     } else if (ident.isNull()) {
         return QVariant();
     } else if (role == payeeIdentifierType) {
@@ -40,7 +40,7 @@ QVariant payeeIdentifierContainerModel::data(const QModelIndex& index, int role)
 bool payeeIdentifierContainerModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     if (!m_data.isNull() && role == payeeIdentifier) {
-        ::payeeIdentifier ident = value.value< ::payeeIdentifier >();
+        ::payeeIdentifier ident = value.value<::payeeIdentifier>();
         if (index.row() == rowCount(index.parent()) - 1) {
             // The new row will be the last but one
             beginInsertRows(index.parent(), index.row() - 1, index.row() - 1);
@@ -57,10 +57,8 @@ bool payeeIdentifierContainerModel::setData(const QModelIndex& index, const QVar
 
 Qt::ItemFlags payeeIdentifierContainerModel::flags(const QModelIndex& index) const
 {
-    static const QVector<QString> editableDelegates {
-        payeeIdentifiers::ibanBic::staticPayeeIdentifierIid(),
-        payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()
-    };
+    static const QVector<QString> editableDelegates{payeeIdentifiers::ibanBic::staticPayeeIdentifierIid(),
+                                                    payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()};
     auto flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
     const auto type = data(index, payeeIdentifierType).toString();
 
@@ -118,9 +116,9 @@ void payeeIdentifierContainerModel::closeSource()
     endResetModel();
 }
 
-QList< ::payeeIdentifier > payeeIdentifierContainerModel::identifiers() const
+QList<::payeeIdentifier> payeeIdentifierContainerModel::identifiers() const
 {
     if (m_data.isNull())
-        return QList< ::payeeIdentifier >();
+        return QList<::payeeIdentifier>();
     return m_data->payeeIdentifiers();
 }

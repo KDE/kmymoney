@@ -7,7 +7,7 @@
 
 #include "mymoneyexception.h"
 
-QString unexpectedExceptionString(const MyMoneyException &e)
+QString unexpectedExceptionString(const MyMoneyException& e)
 {
     return QString("Unexpected exception: %1").arg(e.what());
 }

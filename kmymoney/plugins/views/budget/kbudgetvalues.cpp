@@ -9,14 +9,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QButtonGroup>
-#include <QLabel>
-#include <QRadioButton>
 #include <QApplication>
-#include <QKeyEvent>
+#include <QButtonGroup>
 #include <QEvent>
-#include <QPushButton>
+#include <QKeyEvent>
+#include <QLabel>
 #include <QLocale>
+#include <QPushButton>
+#include <QRadioButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,8 +30,8 @@
 
 #include "ui_kbudgetvalues.h"
 
-#include "mymoneybudget.h"
 #include "kmymoneysettings.h"
+#include "mymoneybudget.h"
 #include "mymoneyenums.h"
 
 #include "kmmyesno.h"
@@ -41,9 +41,9 @@ class KBudgetValuesPrivate
     Q_DISABLE_COPY(KBudgetValuesPrivate)
 
 public:
-    KBudgetValuesPrivate() :
-        ui(new Ui::KBudgetValues),
-        m_currentTab(nullptr)
+    KBudgetValuesPrivate()
+        : ui(new Ui::KBudgetValues)
+        , m_currentTab(nullptr)
     {
         for (int i = 0; i < 12; ++i) {
             m_label[i] = nullptr;
@@ -77,16 +77,16 @@ public:
         }
     }
 
-    Ui::KBudgetValues *ui;
-    AmountEdit*     m_field[12];
-    QLabel*         m_label[12];
-    QWidget*        m_currentTab;
-    QDate           m_budgetDate;
+    Ui::KBudgetValues* ui;
+    AmountEdit* m_field[12];
+    QLabel* m_label[12];
+    QWidget* m_currentTab;
+    QDate m_budgetDate;
 };
 
-KBudgetValues::KBudgetValues(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KBudgetValuesPrivate)
+KBudgetValues::KBudgetValues(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KBudgetValuesPrivate)
 {
     Q_D(KBudgetValues);
     d->ui->setupUi(this);
@@ -157,14 +157,10 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
 {
     auto rc = false;
 
-    if (o->isWidgetType()
-            && (e->type() == QEvent::KeyPress)) {
+    if (o->isWidgetType() && (e->type() == QEvent::KeyPress)) {
         if (auto k = dynamic_cast<QKeyEvent*>(e)) {
-            if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
-                    || (k->modifiers() & Qt::KeypadModifier) != 0) {
-                QKeyEvent evt(e->type(),
-                              Qt::Key_Tab, k->modifiers(), QString(),
-                              k->isAutoRepeat(), k->count());
+            if ((k->modifiers() & Qt::KeyboardModifierMask) == 0 || (k->modifiers() & Qt::KeypadModifier) != 0) {
+                QKeyEvent evt(e->type(), Qt::Key_Tab, k->modifiers(), QString(), k->isAutoRepeat(), k->count());
                 switch (k->key()) {
                 case Qt::Key_Return:
                 case Qt::Key_Enter:
@@ -218,7 +214,7 @@ void KBudgetValues::slotChangePeriod(int id)
         return;
     inside = true;
 
-    QWidget *tab = d->ui->m_periodGroup->button(id);
+    QWidget* tab = d->ui->m_periodGroup->button(id);
     d->fillMonthLabels(tab);
 
     MyMoneyMoney newValue;

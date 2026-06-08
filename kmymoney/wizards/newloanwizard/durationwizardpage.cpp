@@ -20,14 +20,14 @@
 
 #include "ui_durationwizardpage.h"
 
-#include "mymoneyschedule.h"
 #include "mymoneyenums.h"
+#include "mymoneyschedule.h"
 
 using namespace eMyMoney;
 
-DurationWizardPage::DurationWizardPage(QWidget *parent)
-    : QWizardPage(parent),
-      ui(new Ui::DurationWizardPage)
+DurationWizardPage::DurationWizardPage(QWidget* parent)
+    : QWizardPage(parent)
+    , ui(new Ui::DurationWizardPage)
 {
     ui->setupUi(this);
 
@@ -70,7 +70,7 @@ int DurationWizardPage::term() const
         switch (ui->m_durationUnitEdit->currentItem()) {
         case (int)Schedule::Occurrence::Yearly: // years
             factor = 12;
-        // intentional fall through
+            // intentional fall through
 
         case (int)Schedule::Occurrence::Monthly: // months
             factor *= 30;
@@ -96,8 +96,7 @@ QString DurationWizardPage::updateTermWidgets(const double val)
     Schedule::Occurrence unit;
     unit = Schedule::Occurrence(field("paymentFrequencyUnitEdit").toInt());
 
-    if ((unit == Schedule::Occurrence::Monthly)
-            && ((vl % 12) == 0)) {
+    if ((unit == Schedule::Occurrence::Monthly) && ((vl % 12) == 0)) {
         vl /= 12;
         unit = Schedule::Occurrence::Yearly;
     }

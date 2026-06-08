@@ -3,7 +3,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "ledgeraccountfilter.h"
 #include "ledgerfilterbase_p.h"
 
@@ -45,12 +44,11 @@ public:
     {
     }
 
-    OnlineBalanceProxyModel*    onlinebalanceproxymodel;
+    OnlineBalanceProxyModel* onlinebalanceproxymodel;
     SecurityAccountsProxyModel* securityAccountsProxyModel;
 
-    MyMoneyAccount              account;
+    MyMoneyAccount account;
 };
-
 
 LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels)
     : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent)
@@ -99,8 +97,7 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
     d->account = acc;
 
     d->showValuesInverted = false;
-    if(d->account.accountGroup() == eMyMoney::Account::Type::Liability
-            || d->account.accountGroup() == eMyMoney::Account::Type::Income) {
+    if (d->account.accountGroup() == eMyMoney::Account::Type::Liability || d->account.accountGroup() == eMyMoney::Account::Type::Income) {
         d->showValuesInverted = true;
     }
 

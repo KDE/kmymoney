@@ -19,7 +19,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-
 ParameterItem::ParameterItem()
 {
 }
@@ -30,11 +29,10 @@ ParameterItem::ParameterItem(const QString& key, const QString& value)
 {
 }
 
-
-
-struct ParametersModel::Private
-{
-    Private() {}
+struct ParametersModel::Private {
+    Private()
+    {
+    }
 };
 
 ParametersModel::ParametersModel(QObject* parent, QUndoStack* undoStack)
@@ -56,8 +54,8 @@ int ParametersModel::columnCount(const QModelIndex& parent) const
 
 QVariant ParametersModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch(section) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch (section) {
         case ParameterKey:
             return i18nc("ParameterModel key", "Key");
         case ParameterValue:
@@ -75,10 +73,10 @@ QVariant ParametersModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     const ParameterItem& parameter = static_cast<TreeItem<ParameterItem>*>(index.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case ParameterKey:
             // make sure to never return any displayable text for the dummy entry
             if (!parameter.id().isEmpty()) {
@@ -110,7 +108,7 @@ QVariant ParametersModel::data(const QModelIndex& index, int role) const
 
 bool ParametersModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
 

@@ -287,8 +287,8 @@ public:
     int m_selectedRow;
 };
 
-KInvestmentView::KInvestmentView(QWidget *parent) :
-    KMyMoneyViewBase(*new KInvestmentViewPrivate(this), parent)
+KInvestmentView::KInvestmentView(QWidget* parent)
+    : KMyMoneyViewBase(*new KInvestmentViewPrivate(this), parent)
 {
     connect(pActions[eMenu::Action::NewInvestment], &QAction::triggered, this, &KInvestmentView::slotNewInvestment);
     connect(pActions[eMenu::Action::EditInvestment], &QAction::triggered, this, &KInvestmentView::slotEditInvestment);
@@ -611,7 +611,7 @@ void KInvestmentView::slotDeleteInvestment()
         try {
             file->removeAccount(d->currentEquity());
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::information(this, i18n("Unable to delete investment: %1", QString::fromLatin1(e.what())));
         }
     } else {
@@ -666,7 +666,7 @@ void KInvestmentView::slotUpdatePriceManually()
             // The dialog takes care of adding the price if necessary
             calc->exec();
             delete calc;
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             qDebug("Error in price update: %s", e.what());
         }
     }

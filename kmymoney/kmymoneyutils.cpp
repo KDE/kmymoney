@@ -97,20 +97,14 @@ const QString KMyMoneyUtils::scheduleTypeToString(eMyMoney::Schedule::Type type)
 
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 {
-    KGuiItem splitGuiItem(i18n("&New Schedule..."),
-                          Icons::get(Icon::DocumentNew),
-                          i18n("Create a new schedule."),
-                          i18n("Use this to create a new schedule."));
+    KGuiItem splitGuiItem(i18n("&New Schedule..."), Icons::get(Icon::DocumentNew), i18n("Create a new schedule."), i18n("Use this to create a new schedule."));
 
     return splitGuiItem;
 }
 
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 {
-    KGuiItem splitGuiItem(i18n("&Filter"),
-                          Icons::get(Icon::Filter),
-                          i18n("Filter out accounts"),
-                          i18n("Use this to filter out accounts"));
+    KGuiItem splitGuiItem(i18n("&Filter"), Icons::get(Icon::Filter), i18n("Filter out accounts"), i18n("Use this to filter out accounts"));
 
     return splitGuiItem;
 }
@@ -134,7 +128,7 @@ const QString KMyMoneyUtils::homePageItemToString(const int idx)
 {
     QString rc;
     if (abs(idx) > 0 && abs(idx) < static_cast<int>(sizeof(homePageItems) / sizeof(homePageItems[0]))) {
-        rc = i18n(homePageItems[abs(idx-1)]);
+        rc = i18n(homePageItems[abs(idx - 1)]);
     }
     return rc;
 }
@@ -154,7 +148,7 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
     bool rc = false;
 
     if (!str.isEmpty()) {
-        //find last . deliminator
+        // find last . deliminator
         int nLoc = str.lastIndexOf('.');
         if (nLoc != -1) {
             QString strExt, strTemp;
@@ -164,7 +158,7 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
                 // if the extension given contains a period, we remove ours
                 if (strExtToUse.indexOf('.') != -1)
                     strTemp = strTemp.left(strTemp.length() - 1);
-                //append extension to make complete file name
+                // append extension to make complete file name
                 strTemp.append(strExtToUse);
                 str = strTemp;
                 rc = true;
@@ -254,7 +248,7 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
         return SplitTransaction;
     }
     QString ida, idb;
-    const auto & splits = t.splits();
+    const auto& splits = t.splits();
     if (splits.size() > 0)
         ida = splits[0].accountId();
     if (splits.size() > 1)
@@ -265,10 +259,8 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
     MyMoneyAccount a, b;
     a = MyMoneyFile::instance()->account(ida);
     b = MyMoneyFile::instance()->account(idb);
-    if ((a.accountGroup() == eMyMoney::Account::Type::Asset
-            || a.accountGroup() == eMyMoney::Account::Type::Liability)
-            && (b.accountGroup() == eMyMoney::Account::Type::Asset
-                || b.accountGroup() == eMyMoney::Account::Type::Liability))
+    if ((a.accountGroup() == eMyMoney::Account::Type::Asset || a.accountGroup() == eMyMoney::Account::Type::Liability)
+        && (b.accountGroup() == eMyMoney::Account::Type::Asset || b.accountGroup() == eMyMoney::Account::Type::Liability))
         return Transfer;
     return Normal;
 }
@@ -277,7 +269,7 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
 {
     try {
         MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances, QDate::currentDate());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(nullptr, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
     }
 }
@@ -300,7 +292,7 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
         if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
             calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
         }
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), e.what());
     }
 
@@ -333,7 +325,13 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
     wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
-void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel* feeSplitModel, SplitModel* interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType)
+void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex& investSplitIdx,
+                                                 QModelIndex& assetAccountSplitIdx,
+                                                 SplitModel* feeSplitModel,
+                                                 SplitModel* interestSplitModel,
+                                                 MyMoneySecurity& security,
+                                                 MyMoneySecurity& currency,
+                                                 eMyMoney::Split::InvestmentTransactionType& transactionType)
 {
     // clear split models
     feeSplitModel->unload();
@@ -347,9 +345,10 @@ void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitI
     // empty), feeSplits is the list of all expenses and interestSplits
     // the list of all incomes
     auto idx = MyMoneyFile::baseModel()->mapToBaseSource(investSplitIdx);
-    const auto list = idx.model()->match(idx.model()->index(0, 0), eMyMoney::Model::JournalTransactionIdRole,
+    const auto list = idx.model()->match(idx.model()->index(0, 0),
+                                         eMyMoney::Model::JournalTransactionIdRole,
                                          idx.data(eMyMoney::Model::JournalTransactionIdRole),
-                                         -1,                         // all splits
+                                         -1, // all splits
                                          Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     for (const auto& splitIdx : list) {
         auto accIdx = file->accountsModel()->indexById(splitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString());
@@ -377,11 +376,11 @@ void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitI
     currency.setTradingSymbol("???");
     try {
         currency = file->security(file->journalModel()->itemByIndex(idx).transaction().commodity());
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
     }
 }
 
-void KMyMoneyUtils::processPriceList(const MyMoneyStatement &st)
+void KMyMoneyUtils::processPriceList(const MyMoneyStatement& st)
 {
     auto file = MyMoneyFile::instance();
     QHash<QString, MyMoneySecurity> secBySymbol;
@@ -412,7 +411,8 @@ void KMyMoneyUtils::processPriceList(const MyMoneyStatement &st)
         MyMoneyPrice price(security,
                            currency,
                            stPrice.m_date,
-                           stPrice.m_amount, stPrice.m_sourceName.isEmpty() ? i18n("Prices Importer") : stPrice.m_sourceName);
+                           stPrice.m_amount,
+                           stPrice.m_sourceName.isEmpty() ? i18n("Prices Importer") : stPrice.m_sourceName);
         file->addPrice(price);
     }
 }
@@ -427,8 +427,12 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
         dontAsk = "DeleteCurrency";
         dontAsk2 = "DeleteCurrencyRates";
     } else {
-        msg = i18n("<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>", MyMoneySecurity::securityTypeToString(security.securityType()), security.name());
-        msg2 = i18n("<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want to continue?</p>", MyMoneySecurity::securityTypeToString(security.securityType()), security.name());
+        msg = i18n("<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>",
+                   MyMoneySecurity::securityTypeToString(security.securityType()),
+                   security.name());
+        msg2 = i18n("<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want to continue?</p>",
+                    MyMoneySecurity::securityTypeToString(security.securityType()),
+                    security.name());
         dontAsk = "DeleteSecurity";
         dontAsk2 = "DeleteSecurityPrices";
     }
@@ -451,7 +455,7 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
                     }
                     ft.commit();
                     ft.restart();
-                } catch (const MyMoneyException &) {
+                } catch (const MyMoneyException&) {
                     qDebug("Cannot delete price");
                     return;
                 }
@@ -464,12 +468,12 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
             else
                 file->removeSecurity(security);
             ft.commit();
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
         }
     }
 }
 
-bool KMyMoneyUtils::fileExists(const QUrl &url)
+bool KMyMoneyUtils::fileExists(const QUrl& url)
 {
     bool fileExists = false;
     if (url.isValid()) {
@@ -494,16 +498,13 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
     return fileExists;
 }
 
-QString KMyMoneyUtils::downloadFile(const QUrl &url)
+QString KMyMoneyUtils::downloadFile(const QUrl& url)
 {
     QString filename;
-    KIO::StoredTransferJob *transferjob = KIO::storedGet (url);
-//  KJobWidgets::setWindow(transferjob, this);
-    if (! transferjob->exec()) {
-        KMessageBox::detailedError(nullptr,
-                                   i18n("Error while loading file '%1'.", url.url()),
-                                   transferjob->errorString(),
-                                   i18n("File access error"));
+    KIO::StoredTransferJob* transferjob = KIO::storedGet(url);
+    //  KJobWidgets::setWindow(transferjob, this);
+    if (!transferjob->exec()) {
+        KMessageBox::detailedError(nullptr, i18n("Error while loading file '%1'.", url.url()), transferjob->errorString(), i18n("File access error"));
         return filename;
     }
 
@@ -553,7 +554,7 @@ std::tuple<bool, QString> KMyMoneyUtils::newPayee(const QString& newnameBase)
                     if (payee.id().isEmpty())
                         break;
                     newname = QString::fromLatin1("%1 [%2]").arg(newnameBase).arg(++count);
-                } catch (const MyMoneyException &) {
+                } catch (const MyMoneyException&) {
                     break;
                 }
             }
@@ -564,7 +565,7 @@ std::tuple<bool, QString> KMyMoneyUtils::newPayee(const QString& newnameBase)
             MyMoneyFile::instance()->addPayee(p);
             id = p.id();
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(nullptr, i18n("Unable to add payee"), QString::fromLatin1(e.what()));
             doit = false;
         }
@@ -604,7 +605,7 @@ std::tuple<bool, QString> KMyMoneyUtils::newTag(const QString& newnameBase)
                         break;
                     }
                     newname = QString::fromLatin1("%1 [%2]").arg(newnameBase).arg(++count);
-                } catch (const MyMoneyException &) {
+                } catch (const MyMoneyException&) {
                     break;
                 }
             }
@@ -614,7 +615,7 @@ std::tuple<bool, QString> KMyMoneyUtils::newTag(const QString& newnameBase)
             MyMoneyFile::instance()->addTag(ta);
             id = ta.id();
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(nullptr, i18n("Unable to add tag"), QString::fromLatin1(e.what()));
         }
     }
@@ -631,7 +632,7 @@ void KMyMoneyUtils::newInstitution(MyMoneyInstitution& institution)
         file->addInstitution(institution);
         ft.commit();
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::information(nullptr, i18n("Cannot add institution: %1", QString::fromLatin1(e.what())));
     }
 }
@@ -684,14 +685,12 @@ bool KMyMoneyUtils::canUpdateAllAccounts()
 
 void KMyMoneyUtils::showStatementImportResult(const QStringList& resultMessages, uint statementCount)
 {
-    KMessageBox::informationList(nullptr,
-                                 i18np("One statement has been processed with the following results:",
-                                       "%1 statements have been processed with the following results:",
-                                       statementCount),
-                                 !resultMessages.isEmpty() ?
-                                 resultMessages :
-                                 QStringList { i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount) },
-                                 i18n("Statement import statistics"));
+    KMessageBox::informationList(
+        nullptr,
+        i18np("One statement has been processed with the following results:", "%1 statements have been processed with the following results:", statementCount),
+        !resultMessages.isEmpty() ? resultMessages
+                                  : QStringList{i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount)},
+        i18n("Statement import statistics"));
 }
 
 QString KMyMoneyUtils::normalizeNumericString(const qreal& val, const QLocale& loc, const char f, const int prec)

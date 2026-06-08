@@ -10,7 +10,7 @@
 
 GWEN_STRINGLIST* GWEN_StringList_fromQStringList(const QStringList& input)
 {
-    GWEN_STRINGLIST *ret = GWEN_StringList_new();
+    GWEN_STRINGLIST* ret = GWEN_StringList_new();
     for (const auto& line : input) {
         GWEN_StringList_AppendString(ret, line.toUtf8().constData(), false, false);
     }
@@ -19,7 +19,7 @@ GWEN_STRINGLIST* GWEN_StringList_fromQStringList(const QStringList& input)
 
 GWEN_STRINGLIST* GWEN_StringList_fromQString(const QString& input)
 {
-    GWEN_STRINGLIST *ret = GWEN_StringList_new();
+    GWEN_STRINGLIST* ret = GWEN_StringList_new();
     GWEN_StringList_AppendString(ret, input.toUtf8().constData(), false, false);
     return ret;
 }

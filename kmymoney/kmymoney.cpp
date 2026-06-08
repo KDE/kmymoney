@@ -6,7 +6,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include <config-kmymoney.h>
 
 #include "kmymoney.h"
@@ -155,11 +154,11 @@
 #include "mymoneyexception.h"
 #include "mymoneyreconciliationreport.h"
 
+#include "kloadtemplatedlg.h"
+#include "ktemplateexportdlg.h"
 #include "mymoneytemplate.h"
 #include "templateloader.h"
 #include "templatewriter.h"
-#include "kloadtemplatedlg.h"
-#include "ktemplateexportdlg.h"
 
 #include "converter/mymoneystatementreader.h"
 
@@ -177,14 +176,14 @@
 
 #include "misc/webconnect.h"
 
-#include "kmymoneyutils.h"
 #include "kcreditswindow.h"
+#include "kmymoneyutils.h"
 
-#include "mymoneyenums.h"
 #include "dialogenums.h"
-#include "viewenums.h"
-#include "menuenums.h"
 #include "kmymoneyenums.h"
+#include "menuenums.h"
+#include "mymoneyenums.h"
+#include "viewenums.h"
 
 #include "kmm_printer.h"
 
@@ -289,74 +288,74 @@ public:
     }
 
     struct storageInfo {
-        eKMyMoney::StorageType type {eKMyMoney::StorageType::None};
-        bool isOpened {false};
+        eKMyMoney::StorageType type{eKMyMoney::StorageType::None};
+        bool isOpened{false};
         QUrl url;
     };
 
     storageInfo m_storageInfo;
     /**
-      * The public interface.
-      */
-    KMyMoneyApp * const q;
+     * The public interface.
+     */
+    KMyMoneyApp* const q;
 
     /** the configuration object of the application */
     KSharedConfigPtr m_config;
 
     /**
-      * The following variable represents the state while crafting a backup.
-      * It can have the following values
-      *
-      * - IDLE: the default value if not performing a backup
-      * - MOUNTING: when a mount command has been issued
-      * - COPYING:  when a copy command has been issued
-      * - UNMOUNTING: when an unmount command has been issued
-      */
-    backupStateE   m_backupState;
+     * The following variable represents the state while crafting a backup.
+     * It can have the following values
+     *
+     * - IDLE: the default value if not performing a backup
+     * - MOUNTING: when a mount command has been issued
+     * - COPYING:  when a copy command has been issued
+     * - UNMOUNTING: when an unmount command has been issued
+     */
+    backupStateE m_backupState;
 
     /**
-      * This variable keeps the result of the backup operation.
-      */
-    int     m_backupResult;
+     * This variable keeps the result of the backup operation.
+     */
+    int m_backupResult;
 
     /**
-      * This variable is set, when the user selected to mount/unmount
-      * the backup volume.
-      */
-    bool    m_backupMount;
+     * This variable is set, when the user selected to mount/unmount
+     * the backup volume.
+     */
+    bool m_backupMount;
 
     /**
-      * Flag for internal run control
-      */
-    bool    m_ignoreBackupExitCode;
+     * Flag for internal run control
+     */
+    bool m_ignoreBackupExitCode;
 
     KProcess m_proc;
 
     /// A pointer to the view holding the tabs.
-    KMyMoneyView *m_myMoneyView;
+    KMyMoneyView* m_myMoneyView;
 
     bool m_startDialog;
     QString m_mountpoint;
 
     QProgressBar* m_progressBar;
-    QTime         m_lastUpdate;
-    QLabel*       m_statusLabel;
+    QTime m_lastUpdate;
+    QLabel* m_statusLabel;
 
     // allows multiple imports to be launched through web connect and to be executed sequentially
     QQueue<QString> m_importUrlsQueue;
 
     // This is Auto Saving related
-    bool                  m_autoSaveEnabled;
-    QTimer*               m_autoSaveTimer;
-    QTimer*               m_progressTimer;
+    bool m_autoSaveEnabled;
+    QTimer* m_autoSaveTimer;
+    QTimer* m_progressTimer;
 
-    int                   m_autoSavePeriod;
-    bool                  m_inAutoSaving;
+    int m_autoSavePeriod;
+    bool m_inAutoSaving;
 
     // id's that need to be remembered
-    QString               m_accountGoto, m_payeeGoto;
+    QString m_accountGoto, m_payeeGoto;
 
-    KRecentFilesAction*   m_recentFiles;
+    KRecentFilesAction* m_recentFiles;
 
 #ifdef ENABLE_HOLIDAYS
     // used by the calendar interface for schedules
@@ -364,18 +363,18 @@ public:
 #endif
 
 #ifdef ENABLE_ACTIVITIES
-    KActivities::ResourceInstance * m_activityResourceInstance;
+    KActivities::ResourceInstance* m_activityResourceInstance;
 #endif
 
-    QBitArray             m_processingDays;
-    QMap<QDate, bool>     m_holidayMap;
-    QStringList           m_consistencyCheckResult;
-    bool                  m_applicationIsReady;
+    QBitArray m_processingDays;
+    QMap<QDate, bool> m_holidayMap;
+    QStringList m_consistencyCheckResult;
+    bool m_applicationIsReady;
 
-    WebConnect*           m_webConnect;
+    WebConnect* m_webConnect;
 
-    SelectedObjects       m_selections;
-    QTimer                m_actionCollectorTimer;
+    SelectedObjects m_selections;
+    QTimer m_actionCollectorTimer;
 
     typedef struct SharedActionButtonInfo {
         QToolButton* button = nullptr;
@@ -409,8 +408,8 @@ public:
     }
 
     /**
-      * This method updates names of currencies from file to localized names
-      */
+     * This method updates names of currencies from file to localized names
+     */
     void updateCurrencyNames()
     {
         auto file = MyMoneyFile::instance();
@@ -432,7 +431,7 @@ public:
                 }
             }
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             qDebug("Error %s updating currency names", e.what());
         }
     }
@@ -449,13 +448,13 @@ public:
             checkAccountName(file->expense(), i18n("Expense"));
             checkAccountName(file->equity(), i18n("Equity"));
             ft.commit();
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
         }
     }
 
-    void ungetString(QIODevice *qfile, char *buf, int len)
+    void ungetString(QIODevice* qfile, char* buf, int len)
     {
-        buf = &buf[len-1];
+        buf = &buf[len - 1];
         while (len--) {
             qfile->ungetChar(*buf--);
         }
@@ -474,7 +473,7 @@ public:
         if (grp.readEntry("SkipFix", false) != true) {
             try {
                 result = file->applyFileFixes(KMyMoneySettings::expertMode());
-            } catch (const MyMoneyException &) {
+            } catch (const MyMoneyException&) {
                 return false;
             }
         } else {
@@ -519,17 +518,17 @@ public:
     }
 
     /**
-      * This method removes all data from the MyMoneyFile object
-      * and resets the dirty flag(s).
-      */
+     * This method removes all data from the MyMoneyFile object
+     * and resets the dirty flag(s).
+     */
     void removeStorage()
     {
         MyMoneyFile::instance()->unload();
     }
 
     /**
-      * if no base currency is defined, start the dialog and force it to be set
-      */
+     * if no base currency is defined, start the dialog and force it to be set
+     */
     void selectBaseCurrency()
     {
         auto file = MyMoneyFile::instance();
@@ -538,7 +537,7 @@ public:
         QString baseId;
         try {
             baseId = MyMoneyFile::instance()->baseCurrency().id();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             qDebug("%s", e.what());
         }
 
@@ -550,7 +549,7 @@ public:
 
         try {
             baseId = MyMoneyFile::instance()->baseCurrency().id();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             qDebug("%s", e.what());
         }
 
@@ -567,13 +566,12 @@ public:
             list << file->expense();
             list << file->equity();
 
-
             for (it = list.begin(); it != list.end(); ++it) {
                 QString cid;
                 try {
                     if (!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
                         cid = MyMoneyFile::instance()->security((*it).currencyId()).id();
-                } catch (const MyMoneyException &e) {
+                } catch (const MyMoneyException& e) {
                     qDebug() << QLatin1String("Account") << (*it).id() << (*it).name() << e.what();
                 }
 
@@ -583,7 +581,7 @@ public:
                     try {
                         file->modifyAccount(*it);
                         ft.commit();
-                    } catch (const MyMoneyException &e) {
+                    } catch (const MyMoneyException& e) {
                         qDebug("Unable to setup base currency in account %s (%s): %s", qPrintable((*it).name()), qPrintable((*it).id()), e.what());
                     }
                 }
@@ -592,11 +590,11 @@ public:
     }
 
     /**
-      * Call this to see if the MyMoneyFile contains any unsaved data.
-      *
-      * @retval true if any data has been modified but not saved
-      * @retval false otherwise
-      */
+     * Call this to see if the MyMoneyFile contains any unsaved data.
+     *
+     * @retval true if any data has been modified but not saved
+     * @retval false otherwise
+     */
     bool dirty()
     {
         if (!m_storageInfo.isOpened)
@@ -676,9 +674,9 @@ public:
     }
 
     /**
-      * This method is used to update the caption of the application window.
-      * It sets the caption to "filename [modified] - KMyMoney".
-      */
+     * This method is used to update the caption of the application window.
+     * It sets the caption to "filename [modified] - KMyMoney".
+     */
     void updateCaption()
     {
         auto caption = m_storageInfo.url.isEmpty() && m_myMoneyView && m_storageInfo.isOpened ? i18n("Untitled") : m_storageInfo.url.fileName();
@@ -1046,7 +1044,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
      * 2) using sqlite3_key only in sqlstorage plugin doesn't solve the issue,
      * 3) in a separate, minimal test case, loading libsqlite3 explicitly
      *  with QLibrary::ExportExternalSymbolsHint makes libsqlcipher non-functional
-    */
+     */
     sqlite3_key(nullptr, nullptr, 0);
 #endif
 
@@ -1150,8 +1148,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
     d->m_backupState = BACKUP_IDLE;
 
     QLocale locale;
-    for (auto const& weekDay: locale.weekdays())
-    {
+    for (auto const& weekDay : locale.weekdays()) {
         d->m_processingDays.setBit(static_cast<int>(weekDay));
     }
     d->m_autoSaveTimer = new QTimer(this);
@@ -1240,7 +1237,7 @@ void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
         // allow the user to resize the dialog, since the contents might be large
         dialog->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
         dialog->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        if (QListWidget* widget = dialog->findChild<QListWidget *>()) {
+        if (QListWidget* widget = dialog->findChild<QListWidget*>()) {
             // give the user a hint that the data can be saved
             widget->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
             widget->setWhatsThis(widget->toolTip());
@@ -1250,16 +1247,16 @@ void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
     }
 }
 
-void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint &pos)
+void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint& pos)
 {
     // allow the user to save the consistency check results
-    if (QWidget* widget = qobject_cast< QWidget* >(sender())) {
+    if (QWidget* widget = qobject_cast<QWidget*>(sender())) {
         QMenu contextMenu(widget);
         QAction* copy = new QAction(i18n("Copy to clipboard"), widget);
         QAction* save = new QAction(i18n("Save to file"), widget);
         contextMenu.addAction(copy);
         contextMenu.addAction(save);
-        QAction *result = contextMenu.exec(widget->mapToGlobal(pos));
+        QAction* result = contextMenu.exec(widget->mapToGlobal(pos));
         if (result == copy) {
             // copy the consistency check results to the clipboard
             d->copyConsistencyCheckResults();
@@ -1270,9 +1267,9 @@ void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint &pos)
     }
 }
 
-QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
+QHash<eMenu::Menu, QMenu*> KMyMoneyApp::initMenus()
 {
-    QHash<Menu, QMenu *> lutMenus;
+    QHash<Menu, QMenu*> lutMenus;
     const QHash<Menu, QString> menuNames{
         {Menu::Institution, QStringLiteral("institution_context_menu")},
         {Menu::Account, QStringLiteral("account_context_menu")},
@@ -1332,7 +1329,7 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
     d->m_actionCollectorTimer.start();
 }
 
-QHash<Action, QAction *> KMyMoneyApp::initActions()
+QHash<Action, QAction*> KMyMoneyApp::initActions()
 {
     auto aC = actionCollection();
 
@@ -1341,7 +1338,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     1) building QList with QActions to be added to ActionCollection
     2) adding custom features to QActions like e.g. keyboard shortcut
     */
-    QHash<Action, QAction *> lutActions;
+    QHash<Action, QAction*> lutActions;
 
     // *************
     // Adding standard actions
@@ -1373,10 +1370,10 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     {
         // struct for creating useless (unconnected) QAction
         struct actionInfo {
-            Action  action;
+            Action action;
             QString name;
             QString text;
-            Icon    icon;
+            Icon icon;
         };
 
         // clang-format off
@@ -1556,7 +1553,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             if (info.icon != Icon::Empty) // no need to set empty icon
                 a->setIcon(Icons::get(info.icon));
             a->setEnabled(false);
-            lutActions.insert(info.action, a);  // store QAction's pointer for later processing
+            lutActions.insert(info.action, a); // store QAction's pointer for later processing
         }
 
         for (const auto& info : contextInfos) {
@@ -1735,7 +1732,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // Setting actions that are always enabled
     // *************
     {
-        const QVector<eMenu::Action> alwaysEnabled {
+        const QVector<eMenu::Action> alwaysEnabled{
             Action::GetOnlineHelp,
             Action::SettingsAllMessages,
             Action::ToolPerformance,
@@ -1750,7 +1747,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // Setting keyboard shortcuts for some of added actions
     // *************
     //
-        {
+    {
         // clang-format off
             const QVector<QPair<Action, QKeySequence>> actionShortcuts{
             {qMakePair(Action::EditFindTransaction,         Qt::CTRL | Qt::SHIFT | Qt::Key_F)},
@@ -1825,7 +1822,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     aboutApp->disconnect();
     connect(aboutApp, &QAction::triggered, this, &KMyMoneyApp::slotShowCredits);
 
-    QMenu *menuContainer;
+    QMenu* menuContainer;
     menuContainer = static_cast<QMenu*>(factory()->container(QStringLiteral("import"), this));
     menuContainer->setIcon(Icons::get(Icon::DocumentImport));
 
@@ -1917,7 +1914,7 @@ void KMyMoneyApp::initIcons()
 #if defined(Q_OS_WIN)
     // @todo add support for dark icons, e.g. https://www.thetopsites.net/article/51334674.shtml
 
-    themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
+    themeName = QStringLiteral("breeze"); // only breeze is available for craft packages
     qDebug() << "Running under Windows, so will be forcing the icon theme to: " << themeName;
 #elif defined(Q_OS_MACOS)
     constexpr int OSX_LIGHT_MODE = 236;
@@ -1927,8 +1924,7 @@ void KMyMoneyApp::initIcons()
     if (bg.lightness() == OSX_LIGHT_MODE) {
         themeName = QStringLiteral("breeze");
         qDebug() << "Detected macOS light mode, so will be forcing the icon theme to: " << themeName;
-    }
-    else {
+    } else {
         themeName = QStringLiteral("breeze-dark");
         qDebug() << "Detected macOS dark mode, so will be forcing the icon theme to: " << themeName;
     }
@@ -1938,8 +1934,7 @@ void KMyMoneyApp::initIcons()
     if (!themeName.isEmpty() && themeName != QStringLiteral("system")) {
         QIcon::setThemeName(themeName);
         qDebug() << "Setting icon theme to: " << themeName;
-    }
-    else {
+    } else {
         themeName = QIcon::themeName();
         qDebug() << "Obeying the system-wide icon theme, currently set to: " << themeName;
     }
@@ -2022,7 +2017,7 @@ void KMyMoneyApp::slotPerformanceTest()
     qDebug("--- Starting performance tests ---");
 
     // AccountList
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     timer.start();
     for (int i = 0; i < 1000; ++i) {
@@ -2037,7 +2032,7 @@ void KMyMoneyApp::slotPerformanceTest()
     std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
     // Balance of asset account(s)
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     acc = MyMoneyFile::instance()->asset();
     for (int i = 0; i < 1000; ++i) {
@@ -2050,7 +2045,7 @@ void KMyMoneyApp::slotPerformanceTest()
     std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
     // total balance of asset account
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     acc = MyMoneyFile::instance()->asset();
     for (int i = 0; i < 1000; ++i) {
@@ -2063,7 +2058,7 @@ void KMyMoneyApp::slotPerformanceTest()
     std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
     // Balance of expense account(s)
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     acc = MyMoneyFile::instance()->expense();
     for (int i = 0; i < 1000; ++i) {
@@ -2076,7 +2071,7 @@ void KMyMoneyApp::slotPerformanceTest()
     std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
     // total balance of expense account
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     acc = MyMoneyFile::instance()->expense();
     timer.start();
@@ -2090,7 +2085,7 @@ void KMyMoneyApp::slotPerformanceTest()
     std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 1000 << " msec" << std::endl;
 
     // transaction list
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     if (MyMoneyFile::instance()->asset().accountCount()) {
         MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList().constFirst());
@@ -2109,7 +2104,7 @@ void KMyMoneyApp::slotPerformanceTest()
     }
 
     // transaction list
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
     measurement[0] = measurement[1] = 0;
     if (MyMoneyFile::instance()->asset().accountCount()) {
         MyMoneyTransactionFilter filter(MyMoneyFile::instance()->asset().accountList().constFirst());
@@ -2126,7 +2121,7 @@ void KMyMoneyApp::slotPerformanceTest()
         std::cerr << "Total time: " << (measurement[0] + measurement[1]) << " msec" << std::endl;
         std::cerr << "Average   : " << (measurement[0] + measurement[1]) / 100 << " msec" << std::endl;
     }
-//  MyMoneyFile::instance()->preloadCache();
+    //  MyMoneyFile::instance()->preloadCache();
 }
 
 bool KMyMoneyApp::isDatabase()
@@ -2154,7 +2149,7 @@ void KMyMoneyApp::consistencyCheck(bool alwaysDisplayResult)
     d->consistencyCheck(alwaysDisplayResult);
 }
 
-bool KMyMoneyApp::isImportableFile(const QUrl &url)
+bool KMyMoneyApp::isImportableFile(const QUrl& url)
 {
     bool result = false;
 
@@ -2205,16 +2200,16 @@ void KMyMoneyApp::slotDeleteTransactions()
 
     if (MyMoneyUtils::transactionWarnLevel(d->m_selections.selection(SelectedObjects::JournalEntry)) == OneSplitReconciled) {
         if (KMessageBox::warningContinueCancel(this,
-            i18n("At least one split of the selected transactions has been reconciled. "
-            "Do you wish to delete the transactions anyway?"),
-            i18n("Transaction already reconciled")) == KMessageBox::Cancel)
+                                               i18n("At least one split of the selected transactions has been reconciled. "
+                                                    "Do you wish to delete the transactions anyway?"),
+                                               i18n("Transaction already reconciled"))
+            == KMessageBox::Cancel)
             return;
 
     } else {
-        auto msg =
-        i18np("Do you really want to delete the selected transaction?",
-            "Do you really want to delete all %1 selected transactions?",
-            d->m_selections.selection(SelectedObjects::JournalEntry).count());
+        auto msg = i18np("Do you really want to delete the selected transaction?",
+                         "Do you really want to delete all %1 selected transactions?",
+                         d->m_selections.selection(SelectedObjects::JournalEntry).count());
 
         if (KMessageBox::questionTwoActions(this, msg, i18n("Delete transaction"), KMMYesNo::yes(), KMMYesNo::no()) == KMessageBox::SecondaryAction) {
             return;
@@ -2243,8 +2238,7 @@ void KMyMoneyApp::slotDuplicateTransactions()
     const auto reverse = (actionId == eMenu::Action::AddReversingTransaction);
     const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
 
-    if (d->m_selections.selection(SelectedObjects::JournalEntry).isEmpty()
-        || accountId.isEmpty())
+    if (d->m_selections.selection(SelectedObjects::JournalEntry).isEmpty() || accountId.isEmpty())
         return;
 
     MyMoneyFileTransaction ft;
@@ -2297,7 +2291,7 @@ void KMyMoneyApp::slotDuplicateTransactions()
         }
         d->m_myMoneyView->executeAction(eMenu::Action::OpenAccount, selections);
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
     }
 }
@@ -2485,16 +2479,16 @@ void KMyMoneyApp::slotCopySplits()
             if (!journalEntry.id().isEmpty()) {
                 const auto t = journalEntry.transaction();
                 switch (t.splitCount()) {
-                    case 0:
-                        break;
-                    case 1:
-                        singleSplitTransactions++;
-                        break;
-                    default:
-                        selectedSourceTransaction = t;
-                        selectedSourceSplitId = journalEntry.split().id();
-                        multipleSplitTransactions++;
-                        break;
+                case 0:
+                    break;
+                case 1:
+                    singleSplitTransactions++;
+                    break;
+                default:
+                    selectedSourceTransaction = t;
+                    selectedSourceSplitId = journalEntry.split().id();
+                    multipleSplitTransactions++;
+                    break;
                 }
             }
         }
@@ -2552,7 +2546,7 @@ void KMyMoneyApp::slotCopySplits()
                     }
                 }
                 ft.commit();
-            } catch (const MyMoneyException &) {
+            } catch (const MyMoneyException&) {
                 qDebug() << "transactionCopySplits() failed";
             }
         }
@@ -2696,31 +2690,31 @@ void KMyMoneyApp::slotMarkTransactions()
                             // in normal mode we cycle through all states
                             // except when reconciled transactions are hidden
                             switch (sp.reconcileFlag()) {
-                                case eMyMoney::Split::State::NotReconciled:
-                                    sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
-                                    break;
-                                case eMyMoney::Split::State::Cleared:
-                                    sp.setReconcileFlag(KMyMoneySettings::hideReconciledTransactions() ? eMyMoney::Split::State::NotReconciled
-                                                                                                       : eMyMoney::Split::State::Reconciled);
-                                    t.setImported(false);
-                                    break;
-                                case eMyMoney::Split::State::Reconciled:
-                                    sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
-                                    break;
-                                default:
-                                    break;
+                            case eMyMoney::Split::State::NotReconciled:
+                                sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
+                                break;
+                            case eMyMoney::Split::State::Cleared:
+                                sp.setReconcileFlag(KMyMoneySettings::hideReconciledTransactions() ? eMyMoney::Split::State::NotReconciled
+                                                                                                   : eMyMoney::Split::State::Reconciled);
+                                t.setImported(false);
+                                break;
+                            case eMyMoney::Split::State::Reconciled:
+                                sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+                                break;
+                            default:
+                                break;
                             }
                         } else {
                             // in reconciliation mode we skip the reconciled state
                             switch (sp.reconcileFlag()) {
-                                case eMyMoney::Split::State::NotReconciled:
-                                    sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
-                                    break;
-                                case eMyMoney::Split::State::Cleared:
-                                    sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
-                                    break;
-                                default:
-                                    break;
+                            case eMyMoney::Split::State::NotReconciled:
+                                sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
+                                break;
+                            case eMyMoney::Split::State::Cleared:
+                                sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+                                break;
+                            default:
+                                break;
                             }
                         }
                     } else {
@@ -2734,7 +2728,7 @@ void KMyMoneyApp::slotMarkTransactions()
             }
         }
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to modify transaction"), e.what());
     }
 }
@@ -2966,7 +2960,6 @@ void KMyMoneyApp::slotMatchTransaction()
         action->isActive() ? d->matchTransaction() : d->unmatchTransaction();
         d->updateActions(d->m_selections);
     }
-
 }
 
 void KMyMoneyApp::slotCreateScheduledTransaction()
@@ -3020,7 +3013,7 @@ void KMyMoneyApp::slotAcceptTransaction()
         ft.commit();
         d->updateActions(d->m_selections);
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
     }
 }
@@ -3039,7 +3032,11 @@ void KMyMoneyApp::slotReportReconciliation()
 
     const auto account = MyMoneyFile::instance()->accountsModel()->itemById(report.accountId);
     if (!account.id().isEmpty()) {
-        KMyMoneyPlugin::pluginInterfaces().viewInterface->accountReconciled(account, report.statementDate, report.startingBalance, report.endingBalance, report.journalEntryIds);
+        KMyMoneyPlugin::pluginInterfaces().viewInterface->accountReconciled(account,
+                                                                            report.statementDate,
+                                                                            report.startingBalance,
+                                                                            report.endingBalance,
+                                                                            report.journalEntryIds);
     }
 }
 
@@ -3056,7 +3053,13 @@ void KMyMoneyApp::slotEnterOverdueSchedules()
         return;
     }
 
-    auto schedules = file->scheduleList(accountId, eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
+    auto schedules = file->scheduleList(accountId,
+                                        eMyMoney::Schedule::Type::Any,
+                                        eMyMoney::Schedule::Occurrence::Any,
+                                        eMyMoney::Schedule::PaymentType::Any,
+                                        QDate(),
+                                        QDate(),
+                                        true);
     if (!schedules.isEmpty()) {
         const auto accountName = accountIdx.data(eMyMoney::Model::AccountNameRole).toString();
         if (KMessageBox::questionTwoActions(
@@ -3090,7 +3093,13 @@ void KMyMoneyApp::slotEnterOverdueSchedules()
                 }
 
                 // reload list (maybe this schedule needs to be added again)
-                schedules = file->scheduleList(accountId, eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
+                schedules = file->scheduleList(accountId,
+                                               eMyMoney::Schedule::Type::Any,
+                                               eMyMoney::Schedule::Occurrence::Any,
+                                               eMyMoney::Schedule::PaymentType::Any,
+                                               QDate(),
+                                               QDate(),
+                                               true);
             } while (processedOne);
         }
     }
@@ -3273,7 +3282,7 @@ void KMyMoneyApp::slotToggleTimers()
     timersOn = pActions[Action::DebugTimers]->isChecked();
 }
 
-QString KMyMoneyApp::slotStatusMsg(const QString &text)
+QString KMyMoneyApp::slotStatusMsg(const QString& text)
 {
     ///////////////////////////////////////////////////////////////////
     // change status message permanently
@@ -3302,20 +3311,20 @@ bool KMyMoneyApp::isReady()
 
 void KMyMoneyApp::slotStatusProgressBar(int current, int total)
 {
-    if (total == -1 && current == -1) {     // reset
+    if (total == -1 && current == -1) { // reset
         if (d->m_progressTimer) {
-            d->m_progressTimer->start(500);     // remove from screen in 500 msec
+            d->m_progressTimer->start(500); // remove from screen in 500 msec
             d->m_progressBar->setValue(d->m_progressBar->maximum());
         }
 
-    } else if (total != 0) {                // init
+    } else if (total != 0) { // init
         d->m_progressTimer->stop();
         d->m_progressBar->setMaximum(total);
         d->m_progressBar->setValue(0);
         d->m_progressBar->show();
         d->m_lastUpdate = QTime::currentTime();
 
-    } else {                                // update
+    } else { // update
         const auto currentTime = QTime::currentTime();
         // only process painting if last update is at least 200 ms ago
         if (abs(d->m_lastUpdate.msecsTo(currentTime)) > 200) {
@@ -3353,9 +3362,15 @@ void KMyMoneyApp::slotFileViewPersonal()
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyPayee user = file->user();
 
-    QPointer<EditPersonalDataDlg> editPersonalDataDlg = new EditPersonalDataDlg(user.name(), user.address(),
-            user.city(), user.state(), user.postcode(), user.telephone(),
-            user.email(), this, i18n("Edit Personal Data"));
+    QPointer<EditPersonalDataDlg> editPersonalDataDlg = new EditPersonalDataDlg(user.name(),
+                                                                                user.address(),
+                                                                                user.city(),
+                                                                                user.state(),
+                                                                                user.postcode(),
+                                                                                user.telephone(),
+                                                                                user.email(),
+                                                                                this,
+                                                                                i18n("Edit Personal Data"));
 
     if (editPersonalDataDlg->exec() == QDialog::Accepted && editPersonalDataDlg != nullptr) {
         user.setName(editPersonalDataDlg->userName());
@@ -3369,7 +3384,7 @@ void KMyMoneyApp::slotFileViewPersonal()
         try {
             file->setUser(user);
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::information(this, i18n("Unable to store user information: %1", QString::fromLatin1(e.what())));
         }
     }
@@ -3391,7 +3406,7 @@ void KMyMoneyApp::slotLoadAccountTemplates()
                 loader.importTemplate(tmpl);
             }
             ft.commit();
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Unable to import template(s)"), QString::fromLatin1(e.what()));
         }
     }
@@ -3406,8 +3421,7 @@ void KMyMoneyApp::slotSaveAccountTemplates()
     QDir templatesDir(savePath);
     if (!templatesDir.exists())
         templatesDir.mkpath(savePath);
-    QString newName = QFileDialog::getSaveFileName(this, i18n("Save as..."), savePath,
-                      i18n("KMyMoney template files (*.kmt);;All files (*)"));
+    QString newName = QFileDialog::getSaveFileName(this, i18n("Save as..."), savePath, i18n("KMyMoney template files (*.kmt);;All files (*)"));
 
     //
     // If there is no file extension, then append a .kmt at the end of the file name.
@@ -3422,14 +3436,14 @@ void KMyMoneyApp::slotSaveAccountTemplates()
             strExt = newName.right(newName.length() - (nLoc + 1));
             if ((strExt.indexOf("kmt", 0, Qt::CaseInsensitive) == -1)) {
                 strTemp.append("kmt");
-                //append to make complete file name
+                // append to make complete file name
                 newName = strTemp;
             }
         } else {
             newName.append(".kmt");
         }
 
-        QPointer <KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
+        QPointer<KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
         if ((dlg->exec() == QDialog::Accepted) && dlg) {
             MyMoneyTemplate tmpl;
             tmpl.setTitle(dlg->title());
@@ -3445,7 +3459,7 @@ void KMyMoneyApp::slotSaveAccountTemplates()
     }
 }
 
-bool KMyMoneyApp::okToWriteFile(const QUrl &url)
+bool KMyMoneyApp::okToWriteFile(const QUrl& url)
 {
     Q_UNUSED(url)
 
@@ -3510,9 +3524,9 @@ void KMyMoneyApp::slotShowCredits()
     dlg.exec();
 }
 
-void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
+void KMyMoneyApp::slotUpdateConfiguration(const QString& dialogName)
 {
-    if(dialogName.compare(QLatin1String("Plugins")) == 0) {
+    if (dialogName.compare(QLatin1String("Plugins")) == 0) {
         KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Reorganize, pPlugins, this, guiFactory());
         actionCollection()->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(d->canFileSaveAs());
         onlineJobAdministration::instance()->updateActions();
@@ -3622,16 +3636,16 @@ void KMyMoneyApp::slotBackupFile()
         slotFileSave();
     }
 
-
-
     if (d->m_storageInfo.url.isEmpty())
         return;
 
     if (!d->m_storageInfo.url.isLocalFile()) {
-        KMessageBox::error(this,
-                           i18n("The current implementation of the backup functionality only supports local files as source files. Your current source file is '%1'.", d->m_storageInfo.url.url()),
+        KMessageBox::error(
+            this,
+            i18n("The current implementation of the backup functionality only supports local files as source files. Your current source file is '%1'.",
+                 d->m_storageInfo.url.url()),
 
-                           i18n("Local files only"));
+            i18n("Local files only"));
         return;
     }
 
@@ -3693,8 +3707,7 @@ bool KMyMoneyApp::slotBackupWriteFile()
     // eg. "/Z:/path". In case we detect such a pattern, we simply remove
     // the leading slash
     const QRegularExpression re(QStringLiteral("/(?<path>\\w+:/.+)"),
-                                QRegularExpression::CaseInsensitiveOption|QRegularExpression::UseUnicodePropertiesOption
-                               );
+                                QRegularExpression::CaseInsensitiveOption | QRegularExpression::UseUnicodePropertiesOption);
     const auto match = re.match(backupfile);
     if (match.hasMatch() && !match.captured(QStringLiteral("path")).isEmpty()) {
         backupfile = match.captured(QStringLiteral("path"));
@@ -3704,7 +3717,8 @@ bool KMyMoneyApp::slotBackupWriteFile()
     // check if file already exists and ask what to do
     QFileInfo fileInfo(backupfile);
     if (fileInfo.exists()) {
-        int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device. Replace?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
+        int answer =
+            KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device. Replace?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
         if (answer == KMessageBox::Cancel) {
             return false;
         }
@@ -3763,8 +3777,7 @@ void KMyMoneyApp::slotBackupHandleEvents()
     switch (d->m_backupState) {
     case BACKUP_MOUNTING:
 
-        if (d->m_ignoreBackupExitCode ||
-                (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0)) {
+        if (d->m_ignoreBackupExitCode || (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0)) {
             d->m_ignoreBackupExitCode = false;
             d->m_backupResult = 0;
             if (!slotBackupWriteFile()) {
@@ -3786,7 +3799,6 @@ void KMyMoneyApp::slotBackupHandleEvents()
 
     case BACKUP_COPYING:
         if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
-
             if (d->m_backupMount) {
                 slotBackupUnmount();
             } else {
@@ -3805,10 +3817,8 @@ void KMyMoneyApp::slotBackupHandleEvents()
         }
         break;
 
-
     case BACKUP_UNMOUNTING:
         if (d->m_proc.exitStatus() == QProcess::NormalExit && d->m_proc.exitCode() == 0) {
-
             progressCallback(300, 0, i18nc("Backup done", "Done"));
             if (d->m_backupResult == 0)
                 KMessageBox::information(this, i18n("File successfully backed up"), i18n("Backup"));
@@ -3828,10 +3838,10 @@ void KMyMoneyApp::slotBackupHandleEvents()
 
 void KMyMoneyApp::slotGenerateSql()
 {
-//  QPointer<KGenerateSqlDlg> editor = new KGenerateSqlDlg(this);
-//  editor->setObjectName("Generate Database SQL");
-//  editor->exec();
-//  delete editor;
+    //  QPointer<KGenerateSqlDlg> editor = new KGenerateSqlDlg(this);
+    //  editor->setObjectName("Generate Database SQL");
+    //  editor->exec();
+    //  delete editor;
 }
 
 void KMyMoneyApp::slotToolsStartKCalc()
@@ -3847,7 +3857,7 @@ void KMyMoneyApp::slotToolsStartKCalc()
         cmd = QLatin1String("kcalc");
 #endif
     }
-    auto *job = new KIO::CommandLauncherJob(cmd, this);
+    auto* job = new KIO::CommandLauncherJob(cmd, this);
     job->setUiDelegate(new KDialogJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, this));
     job->setWorkingDirectory(QString());
     job->start();
@@ -3855,19 +3865,20 @@ void KMyMoneyApp::slotToolsStartKCalc()
 
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
 {
-    MyMoneyFile *file = MyMoneyFile::instance();
+    MyMoneyFile* file = MyMoneyFile::instance();
     try {
         const MyMoneySecurity& sec = file->security(newAccount.currencyId());
         // Check the opening balance
         if (openingBal.isPositive() && newAccount.accountGroup() == eMyMoney::Account::Type::Liability) {
-            QString message = i18n("This account is a liability and if the "
-                                   "opening balance represents money owed, then it should be negative.  "
-                                   "Negate the amount?\n\n"
-                                   "Please click Yes to change the opening balance to %1,\n"
-                                   "Please click No to leave the amount as %2,\n"
-                                   "Please click Cancel to abort the account creation."
-                                   , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
-                                   , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
+            QString message = i18n(
+                "This account is a liability and if the "
+                "opening balance represents money owed, then it should be negative.  "
+                "Negate the amount?\n\n"
+                "Please click Yes to change the opening balance to %1,\n"
+                "Please click No to leave the amount as %2,\n"
+                "Please click Cancel to abort the account creation.",
+                MyMoneyUtils::formatMoney(-openingBal, newAccount, sec),
+                MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
 
             int ans =
                 KMessageBox::questionTwoActionsCancel(this, message, i18nc("@title:window", "Opening balance for liability"), KMMYesNo::yes(), KMMYesNo::no());
@@ -3880,7 +3891,7 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
 
         file->createAccount(newAccount, parentAccount, brokerageAccount, openingBal);
 
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         KMessageBox::information(this, i18n("Unable to add account: %1", QString::fromLatin1(e.what())));
     }
 }
@@ -3957,7 +3968,7 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
     try {
         m_consistencyCheckResult = MyMoneyFile::instance()->consistencyCheck();
         ft.commit();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         m_consistencyCheckResult.append(i18n("Consistency check failed: %1", e.what()));
         // always display the result if the check failed
         alwaysDisplayResult = true;
@@ -3970,7 +3981,9 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
     if (alwaysDisplayResult || m_consistencyCheckResult.size() > 1) {
         QString msg = i18n("The consistency check has found no issues in your data. Details are presented below.");
         if (m_consistencyCheckResult.size() > 1)
-            msg = i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user.");
+            msg = i18n(
+                "The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically "
+                "need to be solved by the user.");
         // install a context menu for the list after the dialog is displayed
         QTimer::singleShot(500, q, SLOT(slotInstallConsistencyCheckContextMenu()));
         KMessageBox::informationList(nullptr, msg, m_consistencyCheckResult, i18n("Consistency check result"));
@@ -3981,7 +3994,7 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
 
 void KMyMoneyApp::Private::copyConsistencyCheckResults()
 {
-    QClipboard *clipboard = QApplication::clipboard();
+    QClipboard* clipboard = QApplication::clipboard();
     clipboard->setText(m_consistencyCheckResult.join(QLatin1String("\n")));
 }
 
@@ -4001,11 +4014,11 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
 
 void KMyMoneyApp::Private::setThemedCSS()
 {
-    const QStringList CSSnames {QStringLiteral("kmymoney.css")};
+    const QStringList CSSnames{QStringLiteral("kmymoney.css")};
     const QString cssDir("/html/");
     const QString embeddedCSSPath = ":" + cssDir;
     // make sure we have the local directory where the themed version is stored
-    const QString themedCSSPath  = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + cssDir;
+    const QString themedCSSPath = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + cssDir;
     QDir().mkpath(themedCSSPath);
 
     for (const auto& CSSname : CSSnames) {
@@ -4015,16 +4028,16 @@ void KMyMoneyApp::Private::setThemedCSS()
             const QString themedCSSFilename = themedCSSPath + CSSname;
             QFile::remove(themedCSSFilename);
             if (QFile::copy(defaultCSSFilename, themedCSSFilename)) {
-                QFile::setPermissions(themedCSSFilename, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
-                QFile cssFile (themedCSSFilename);
+                QFile::setPermissions(themedCSSFilename, QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+                QFile cssFile(themedCSSFilename);
                 if (cssFile.open(QIODevice::ReadWrite)) {
                     QTextStream cssStream(&cssFile);
                     auto cssText = cssStream.readAll();
-                    cssText.replace(QLatin1String("WindowText"),    KMyMoneySettings::schemeColor(SchemeColor::WindowText).name(),        Qt::CaseSensitive);
-                    cssText.replace(QLatin1String("Window"),        KMyMoneySettings::schemeColor(SchemeColor::WindowBackground).name(),  Qt::CaseSensitive);
+                    cssText.replace(QLatin1String("WindowText"), KMyMoneySettings::schemeColor(SchemeColor::WindowText).name(), Qt::CaseSensitive);
+                    cssText.replace(QLatin1String("Window"), KMyMoneySettings::schemeColor(SchemeColor::WindowBackground).name(), Qt::CaseSensitive);
                     cssText.replace(QLatin1String("HighlightText"), KMyMoneySettings::schemeColor(SchemeColor::ListHighlightText).name(), Qt::CaseSensitive);
-                    cssText.replace(QLatin1String("Highlight"),     KMyMoneySettings::schemeColor(SchemeColor::ListHighlight).name(),     Qt::CaseSensitive);
-                    cssText.replace(QLatin1String("black"),         KMyMoneySettings::schemeColor(SchemeColor::ListGrid).name(),          Qt::CaseSensitive);
+                    cssText.replace(QLatin1String("Highlight"), KMyMoneySettings::schemeColor(SchemeColor::ListHighlight).name(), Qt::CaseSensitive);
+                    cssText.replace(QLatin1String("black"), KMyMoneySettings::schemeColor(SchemeColor::ListGrid).name(), Qt::CaseSensitive);
                     cssStream.seek(0);
                     cssStream << cssText;
                     cssFile.resize(cssFile.pos());
@@ -4038,12 +4051,11 @@ void KMyMoneyApp::Private::setThemedCSS()
 void KMyMoneyApp::slotCheckSchedules()
 {
     if (KMyMoneySettings::checkSchedule() == true) {
-
         KMSTATUS(i18n("Checking for overdue scheduled transactions..."));
-        MyMoneyFile *file = MyMoneyFile::instance();
+        MyMoneyFile* file = MyMoneyFile::instance();
         QDate checkDate = QDate::currentDate().addDays(KMyMoneySettings::checkSchedulePreview());
 
-        QList<MyMoneySchedule> scheduleList =  file->scheduleList();
+        QList<MyMoneySchedule> scheduleList = file->scheduleList();
         QList<MyMoneySchedule>::Iterator it;
 
         eDialogs::ScheduleResultCode rc = eDialogs::ScheduleResultCode::Enter;
@@ -4054,12 +4066,12 @@ void KMyMoneyApp::slotCheckSchedules()
             if (schedule.autoEnter()) {
                 try {
                     while (!schedule.isFinished() && (schedule.adjustedNextDueDate() <= checkDate) //
-                            && rc != eDialogs::ScheduleResultCode::Ignore //
-                            && rc != eDialogs::ScheduleResultCode::Cancel) {
+                           && rc != eDialogs::ScheduleResultCode::Ignore //
+                           && rc != eDialogs::ScheduleResultCode::Cancel) {
                         rc = d->m_myMoneyView->enterSchedule(schedule, true, true);
                         schedule = file->schedule((*it).id()); // get a copy of the modified schedule
                     }
-                } catch (const MyMoneyException &) {
+                } catch (const MyMoneyException&) {
                 }
             }
             if (rc == eDialogs::ScheduleResultCode::Ignore) {
@@ -4072,19 +4084,19 @@ void KMyMoneyApp::slotCheckSchedules()
 
 void KMyMoneyApp::writeLastUsedDir(const QString& directory)
 {
-    //get global config object for our app.
+    // get global config object for our app.
     KSharedConfigPtr kconfig = KSharedConfig::openConfig();
     if (kconfig) {
         KConfigGroup grp = kconfig->group("General Options");
 
-        //write path entry, no error handling since its void.
+        // write path entry, no error handling since its void.
         grp.writeEntry("LastUsedDirectory", directory);
     }
 }
 
 void KMyMoneyApp::writeLastUsedFile(const QString& fileName)
 {
-    //get global config object for our app.
+    // get global config object for our app.
     KSharedConfigPtr kconfig = KSharedConfig::openConfig();
     if (kconfig) {
         KConfigGroup grp = d->m_config->group("General Options");
@@ -4100,12 +4112,12 @@ QString KMyMoneyApp::readLastUsedDir() const
 {
     QString str;
 
-    //get global config object for our app.
+    // get global config object for our app.
     KSharedConfigPtr kconfig = KSharedConfig::openConfig();
     if (kconfig) {
         KConfigGroup grp = d->m_config->group("General Options");
 
-        //read path entry.  Second parameter is the default if the setting is not found, which will be the default document path.
+        // read path entry.  Second parameter is the default if the setting is not found, which will be the default document path.
         str = grp.readEntry("LastUsedDirectory", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
         // if the path stored is empty, we use the default nevertheless
         if (str.isEmpty())
@@ -4141,7 +4153,7 @@ QUrl KMyMoneyApp::filenameURL() const
     return d->m_storageInfo.url;
 }
 
-void KMyMoneyApp::writeFilenameURL(const QUrl &url)
+void KMyMoneyApp::writeFilenameURL(const QUrl& url)
 {
     d->m_storageInfo.url = url;
 }
@@ -4199,11 +4211,12 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
             // Bring this window to the forefront.  This method was suggested by
             // Lubos Lunak <l.lunak@suse.cz> of the KDE core development team.
-            //KStartupInfo::setNewStartupId(this, asn_id);
+            // KStartupInfo::setNewStartupId(this, asn_id);
 
             // Make sure we have an open file
-            if (! d->m_storageInfo.isOpened &&
-                    KMessageBox::warningContinueCancel(this, i18n("You must first select a KMyMoney file before you can import a statement.")) == KMessageBox::Continue)
+            if (!d->m_storageInfo.isOpened
+                && KMessageBox::warningContinueCancel(this, i18n("You must first select a KMyMoney file before you can import a statement."))
+                    == KMessageBox::Continue)
                 slotFileOpen();
 
             // only continue if the user really did open a file.
@@ -4220,7 +4233,13 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                             QString pluginName;
                             if (pPlugins.standard.contains(it_plugin.key()))
                                 pluginName = pPlugins.standard.value(it_plugin.key())->componentDisplayName();
-                            KMessageBox::error(this, i18nc("%1 file location, %2 plugin name", "Unable to import %1 using %2 plugin. The plugin returned the following error: %3", url, pluginName, (*it_plugin)->lastError()), i18n("Importing error"));
+                            KMessageBox::error(this,
+                                               i18nc("%1 file location, %2 plugin name",
+                                                     "Unable to import %1 using %2 plugin. The plugin returned the following error: %3",
+                                                     url,
+                                                     pluginName,
+                                                     (*it_plugin)->lastError()),
+                                               i18n("Importing error"));
                         }
 
                         break;
@@ -4285,8 +4304,8 @@ void KMyMoneyApp::slotAutoSave()
         d->m_inAutoSaving = true;
         KMSTATUS(i18n("Auto saving..."));
 
-        //calls slotFileSave if needed, and restart the timer
-        //it the file is not saved, reinitializes the countdown.
+        // calls slotFileSave if needed, and restart the timer
+        // it the file is not saved, reinitializes the countdown.
         if (d->dirty() && d->m_autoSaveEnabled) {
             if (!slotFileSave() && d->m_autoSavePeriod > 0) {
                 d->m_autoSaveTimer->setSingleShot(true);
@@ -4309,21 +4328,21 @@ void KMyMoneyApp::slotDateChanged()
 
     // +1 is to make sure that we're already in the next day when the
     // signal is sent (this way we also avoid setting the timer to 0)
-    QTimer::singleShot((static_cast<int>(dt.secsTo(nextDay)) + 1)*1000, this, SLOT(slotDateChanged()));
+    QTimer::singleShot((static_cast<int>(dt.secsTo(nextDay)) + 1) * 1000, this, SLOT(slotDateChanged()));
 }
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
 #ifdef ENABLE_HOLIDAYS
-    //since the cost of updating the cache is now not negligible
-    //check whether the region has been modified
+    // since the cost of updating the cache is now not negligible
+    // check whether the region has been modified
     if (!d->m_holidayRegion || d->m_holidayRegion->regionCode() != holidayRegion) {
         // Delete the previous holidayRegion before creating a new one.
         delete d->m_holidayRegion;
         // Create a new holidayRegion.
         d->m_holidayRegion = new KHolidays::HolidayRegion(holidayRegion);
 
-        //clear and update the holiday cache
+        // clear and update the holiday cache
         preloadHolidays();
     }
 #else
@@ -4339,7 +4358,7 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
     if (!d->m_holidayRegion || !d->m_holidayRegion->isValid())
         return true;
 
-    //check first whether it's already in cache
+    // check first whether it's already in cache
     if (d->m_holidayMap.contains(date)) {
         return d->m_holidayMap.value(date);
     } else {
@@ -4355,7 +4374,7 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 void KMyMoneyApp::preloadHolidays()
 {
 #ifdef ENABLE_HOLIDAYS
-    //clear the cache before loading
+    // clear the cache before loading
     d->m_holidayMap.clear();
     // only do this if it is a valid region
     if (d->m_holidayRegion && d->m_holidayRegion->isValid()) {
@@ -4392,7 +4411,8 @@ void KMyMoneyApp::preloadHolidays()
 #endif
 }
 
-bool KMyMoneyApp::event(QEvent * event) {
+bool KMyMoneyApp::event(QEvent* event)
+{
     if (event->type() == QEvent::PaletteChange) {
         this->initIcons();
         return true;
@@ -4460,7 +4480,7 @@ bool KMyMoneyApp::slotFileNew()
         d->fileAction(eKMyMoney::FileAction::Opened);
         slotFileSaveAs();
 
-    } catch (const MyMoneyException & e) {
+    } catch (const MyMoneyException& e) {
         slotFileClose();
         d->removeStorage();
         KMessageBox::detailedError(this, i18n("Couldn't create a new file."), e.what());
@@ -4476,10 +4496,10 @@ void KMyMoneyApp::slotFileOpen()
 {
     KMSTATUS(i18n("Open a file."));
 
-    const QVector<eKMyMoney::StorageType> desiredFileExtensions {eKMyMoney::StorageType::XML, eKMyMoney::StorageType::GNC};
+    const QVector<eKMyMoney::StorageType> desiredFileExtensions{eKMyMoney::StorageType::XML, eKMyMoney::StorageType::GNC};
     QString fileExtensions;
-    for (const auto &extension : desiredFileExtensions) {
-        for (const auto &plugin : pPlugins.storage) {
+    for (const auto& extension : desiredFileExtensions) {
+        for (const auto& plugin : pPlugins.storage) {
             if (plugin->storageType() == extension) {
                 fileExtensions += plugin->fileExtension() + QLatin1String(";;");
                 break;
@@ -4503,7 +4523,7 @@ void KMyMoneyApp::slotFileOpen()
     delete dialog;
 }
 
-bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
+bool KMyMoneyApp::slotFileOpenRecent(const QUrl& url)
 {
     KMSTATUS(i18n("Loading file..."));
 
@@ -4513,7 +4533,10 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
     qDebug() << "Open file" << url;
 
     if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
-        KMessageBox::error(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
+        KMessageBox::error(this,
+                           i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>",
+                                url.toDisplayString(QUrl::PreferLocalFile)),
+                           i18n("File not found"));
         return false;
     }
 
@@ -4527,7 +4550,7 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
     // The information that the file is really open will
     // be sent out in KMyMoneyView::switchToDefaultView()
     d->executeCustomAction(eView::Action::BlockViewDuringFileOpen);
-    for (auto &plugin : pPlugins.storage) {
+    for (auto& plugin : pPlugins.storage) {
         try {
             if (plugin->open(url)) {
                 d->m_storageInfo.type = plugin->storageType();
@@ -4535,9 +4558,9 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
                     d->m_storageInfo.url = plugin->openUrl();
                     writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
                     /* Don't use url variable after KRecentFilesAction::addUrl
-                    * as it might delete it.
-                    * More in API reference to this method
-                    */
+                     * as it might delete it.
+                     * More in API reference to this method
+                     */
                     d->m_recentFiles->addUrl(url);
                 }
                 d->m_storageInfo.isOpened = true;
@@ -4550,14 +4573,14 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
                     return false;
                 }
             }
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(this, i18n("Cannot open file as requested."), QString::fromLatin1(e.what()));
             d->executeCustomAction(eView::Action::UnblockViewAfterFileOpen);
             return false;
         }
     }
 
-    if(d->m_storageInfo.type == eKMyMoney::StorageType::None) {
+    if (d->m_storageInfo.type == eKMyMoney::StorageType::None) {
         KMessageBox::error(this, i18n("Could not read your data source. Please check the KMyMoney settings that the necessary plugin is enabled."));
         d->executeCustomAction(eView::Action::UnblockViewAfterFileOpen);
         return false;
@@ -4580,7 +4603,7 @@ bool KMyMoneyApp::slotFileSave()
                     return true;
                 }
                 return false;
-            } catch (const MyMoneyException &e) {
+            } catch (const MyMoneyException& e) {
                 KMessageBox::detailedError(this, i18n("Failed to save your data."), e.what());
                 return false;
             }
@@ -4614,8 +4637,7 @@ bool KMyMoneyApp::slotFileSaveAs()
     case 1:
         chosenFileType = availableFileTypes.first();
         break;
-    default:
-    {
+    default: {
         QPointer<KSaveAsQuestion> dlg = new KSaveAsQuestion(availableFileTypes, this);
         auto rc = dlg->exec();
         if (dlg) {
@@ -4628,7 +4650,7 @@ bool KMyMoneyApp::slotFileSaveAs()
     }
     }
 
-    for (const auto &plugin : pPlugins.storage) {
+    for (const auto& plugin : pPlugins.storage) {
         if (chosenFileType == plugin->storageType()) {
             try {
                 d->consistencyCheck(false);
@@ -4637,7 +4659,7 @@ bool KMyMoneyApp::slotFileSaveAs()
                     d->m_storageInfo.type = plugin->storageType();
                     return true;
                 }
-            } catch (const MyMoneyException &e) {
+            } catch (const MyMoneyException& e) {
                 KMessageBox::detailedError(this, i18n("Failed to save your storage."), e.what());
             }
         }
@@ -4746,7 +4768,7 @@ void KMyMoneyApp::pauseAutoSave(void* id, bool pause)
     }
 }
 
-KMStatus::KMStatus(const QString &text)
+KMStatus::KMStatus(const QString& text)
     : m_prevText(kmymoney->slotStatusMsg(text))
 {
 }

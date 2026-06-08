@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <config-kmymoney.h>
 #include "qifexporter.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -14,9 +14,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -26,8 +26,8 @@
 #include "mymoneyqifwriter.h"
 #include "viewinterface.h"
 
-QIFExporter::QIFExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args)
+QIFExporter::QIFExporter(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
 {
     Q_INIT_RESOURCE(qifexporter);
 
@@ -45,7 +45,6 @@ QIFExporter::~QIFExporter()
     qDebug("Plugins: qifexporter unloaded");
 }
 
-
 void QIFExporter::createActions()
 {
     m_action = actionCollection()->addAction(QStringLiteral("file_export_qif"));
@@ -54,19 +53,16 @@ void QIFExporter::createActions()
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, m_action, &QAction::setEnabled);
 }
 
-
 void QIFExporter::slotQifExport()
 {
     m_action->setEnabled(false);
     QPointer<KExportDlg> dlg = new KExportDlg(nullptr);
     if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
-//    if (okToWriteFile(QUrl::fromLocalFile(dlg->filename()))) {
+        //    if (okToWriteFile(QUrl::fromLocalFile(dlg->filename()))) {
         MyMoneyQifWriter writer;
 
-        writer.write(dlg->filename(), dlg->profile(), dlg->accountId(),
-                     dlg->accountSelected(), dlg->categorySelected(),
-                     dlg->startDate(), dlg->endDate());
-//    }
+        writer.write(dlg->filename(), dlg->profile(), dlg->accountId(), dlg->accountSelected(), dlg->categorySelected(), dlg->startDate(), dlg->endDate());
+        //    }
     }
     delete dlg;
     m_action->setEnabled(true);

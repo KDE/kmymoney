@@ -22,18 +22,18 @@
 
 #include "ui_kaccounttemplateselector.h"
 
+#include <mymoneyaccount.h>
 #include <mymoneytemplate.h>
 #include <templatesmodel.h>
-#include <mymoneyaccount.h>
 
 class KAccountTemplateSelectorPrivate : public QObject
 {
     Q_DISABLE_COPY(KAccountTemplateSelectorPrivate)
 
 public:
-    Ui::KAccountTemplateSelector*     ui;
-    TemplatesModel*                   model;
-    QMap<QString, QTreeWidgetItem*>   templateHierarchy;
+    Ui::KAccountTemplateSelector* ui;
+    TemplatesModel* model;
+    QMap<QString, QTreeWidgetItem*> templateHierarchy;
 
 public:
     KAccountTemplateSelectorPrivate(QObject* parent)
@@ -48,7 +48,6 @@ public:
         delete ui;
     }
 
-
     QTreeWidgetItem* hierarchyItem(const QString& parent, const QString& name)
     {
         if (!templateHierarchy.contains(parent) || templateHierarchy[parent] == nullptr) {
@@ -57,7 +56,7 @@ public:
             if (hierarchyParts.hasMatch())
                 templateHierarchy[parent] = hierarchyItem(hierarchyParts.captured(1), hierarchyParts.captured(2));
         }
-        QTreeWidgetItem *item = new QTreeWidgetItem(templateHierarchy[parent]);
+        QTreeWidgetItem* item = new QTreeWidgetItem(templateHierarchy[parent]);
         item->setText(0, name);
         return item;
     }

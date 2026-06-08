@@ -8,11 +8,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
-#include <QString>
-#include <QDate>
 #include <QColor>
+#include <QDate>
+#include <QDebug>
 #include <QFont>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,20 +23,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
 #include "mymoneyaccount.h"
-#include "mymoneyutils.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneyutils.h"
 
-struct SchedulesModel::Private
-{
+struct SchedulesModel::Private {
     typedef struct {
-        QString     name;
-        QString     amount;
+        QString name;
+        QString amount;
     } ScheduleInfo;
 
     Private(SchedulesModel* qq)
@@ -71,18 +70,15 @@ struct SchedulesModel::Private
                 split = s1;
             break;
 
-        case eMyMoney::Schedule::Type::LoanPayment:
-        {
+        case eMyMoney::Schedule::Type::LoanPayment: {
             auto found = false;
             QStringList list;
             const auto splits = transaction.splits();
             for (const auto& s : std::as_const(splits)) {
                 acc = MyMoneyFile::instance()->account(s.accountId());
                 list.append(acc.id());
-                if (acc.accountGroup() == eMyMoney::Account::Type::Asset
-                        || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
-                    if (acc.accountType() != eMyMoney::Account::Type::Loan
-                            && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
+                if (acc.accountGroup() == eMyMoney::Account::Type::Asset || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
+                    if (acc.accountType() != eMyMoney::Account::Type::Loan && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
                         split = s;
                         found = true;
                         break;
@@ -90,10 +86,9 @@ struct SchedulesModel::Private
                 }
             }
             if (!found) {
-                qWarning() << "Split for payment account in" << schedule.id() << "not found in" << __FILE__ << __LINE__ ;
+                qWarning() << "Split for payment account in" << schedule.id() << "not found in" << __FILE__ << __LINE__;
             }
-        }
-        break;
+        } break;
 
         default:
             if (!s1.value().isPositive())
@@ -129,9 +124,9 @@ struct SchedulesModel::Private
         return MyMoneyFile::instance()->payee(s1.payeeId()).name();
     }
 
-    SchedulesModel*   q;
-    QColor            overdueScheme;
-    QColor            finishedScheme;
+    SchedulesModel* q;
+    QColor overdueScheme;
+    QColor finishedScheme;
 };
 
 SchedulesModel::SchedulesModel(QObject* parent, QUndoStack* undoStack)
@@ -149,12 +144,10 @@ SchedulesModel::~SchedulesModel()
 
 void SchedulesModel::clearModelItems()
 {
-    const QVector<QPair<eMyMoney::Schedule::Type, QString>> types = {
-        { eMyMoney::Schedule::Type::Bill, i18nc("Schedule group", "Bills") },
-        { eMyMoney::Schedule::Type::Deposit, i18nc("Schedule group", "Deposits") },
-        { eMyMoney::Schedule::Type::Transfer, i18nc("Schedule group", "Transfers") },
-        { eMyMoney::Schedule::Type::LoanPayment, i18nc("Schedule group", "Loans") }
-    };
+    const QVector<QPair<eMyMoney::Schedule::Type, QString>> types = {{eMyMoney::Schedule::Type::Bill, i18nc("Schedule group", "Bills")},
+                                                                     {eMyMoney::Schedule::Type::Deposit, i18nc("Schedule group", "Deposits")},
+                                                                     {eMyMoney::Schedule::Type::Transfer, i18nc("Schedule group", "Transfers")},
+                                                                     {eMyMoney::Schedule::Type::LoanPayment, i18nc("Schedule group", "Loans")}};
     MyMoneyModel<MyMoneySchedule>::clearModelItems();
 
     // create the type entries
@@ -174,7 +167,6 @@ int SchedulesModel::columnCount(const QModelIndex& parent) const
     return static_cast<int>(Column::MaxColumns);
 }
 
-
 QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     const QVector<const char*> headers = {
@@ -187,7 +179,7 @@ QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, in
         kli18nc("Schedule header", "Payment Method").untranslatedText(),
     };
 
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         if (section < headers.count())
             return i18n(headers.at(section));
     }
@@ -219,10 +211,10 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
 
     QVariant rc;
     const MyMoneySchedule& schedule = static_cast<TreeItem<MyMoneySchedule>*>(idx.internalPointer())->constDataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(idx.column()) {
+        switch (idx.column()) {
         case Column::Name:
             rc = schedule.name();
             break;
@@ -272,16 +264,14 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
         }
         break;
 
-    case Qt::FontRole:
-    {
+    case Qt::FontRole: {
         QFont font;
         // display top level account groups in bold
         if (!idx.parent().isValid()) {
             font.setBold(true);
         }
         return font;
-    }
-    break;
+    } break;
 
     case Qt::TextAlignmentRole:
         if (idx.column() == Column::Amount) {
@@ -328,17 +318,17 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
 
 bool SchedulesModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    if(!index.isValid()) {
+    if (!index.isValid()) {
         return false;
     }
     bool rc = false;
 
     // qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
     MyMoneySchedule& schedule = static_cast<TreeItem<MyMoneySchedule>*>(index.internalPointer())->dataRef();
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case Column::Name:
             schedule.setName(value.toString());
             rc = true;
@@ -362,16 +352,15 @@ bool SchedulesModel::setData(const QModelIndex& index, const QVariant& value, in
 
 void SchedulesModel::setColorScheme(SchedulesModel::ColorScheme scheme, const QColor& color)
 {
-    switch(scheme) {
+    switch (scheme) {
     case Overdue:
-        d->overdueScheme= color;
+        d->overdueScheme = color;
         break;
     case Finished:
         d->finishedScheme = color;
         break;
     }
 }
-
 
 void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
 {
@@ -436,12 +425,12 @@ void SchedulesModel::doAddItem(const MyMoneySchedule& schedule, const QModelInde
 }
 
 QList<MyMoneySchedule> SchedulesModel::scheduleList(const QString& accountId,
-        eMyMoney::Schedule::Type type,
-        eMyMoney::Schedule::Occurrence occurrence,
-        eMyMoney::Schedule::PaymentType paymentType,
-        const QDate& startDate,
-        const QDate& endDate,
-        bool overdue) const
+                                                    eMyMoney::Schedule::Type type,
+                                                    eMyMoney::Schedule::Occurrence occurrence,
+                                                    eMyMoney::Schedule::PaymentType paymentType,
+                                                    const QDate& startDate,
+                                                    const QDate& endDate,
+                                                    bool overdue) const
 
 {
     // in case the type is set, we take the group item as start point.

@@ -113,7 +113,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
                 sm.setBankID(bankID);
                 tm.modifySplit(sm);
             }
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to match all splits (%1)").arg(e.what()));
         }
     }
@@ -206,7 +206,7 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
         // if we don't have a split, then we don't have a memo
         try {
             si = ti.splitById(sm.value("kmm-match-split"));
-        } catch (const MyMoneyException &) {
+        } catch (const MyMoneyException&) {
         }
         sm.removeMatch();
 

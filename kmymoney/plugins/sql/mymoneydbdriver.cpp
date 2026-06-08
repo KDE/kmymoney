@@ -27,7 +27,8 @@
 class MyMoneyDb2Driver : public MyMoneyDbDriver
 {
 public:
-    MyMoneyDb2Driver() {
+    MyMoneyDb2Driver()
+    {
     }
 
     QString textString(const MyMoneyDbTextColumn& c) const final override;
@@ -36,14 +37,16 @@ public:
 class MyMoneyInterbaseDriver : public MyMoneyDbDriver
 {
 public:
-    MyMoneyInterbaseDriver() {
+    MyMoneyInterbaseDriver()
+    {
     }
 };
 
 class MyMoneyMysqlDriver : public MyMoneyDbDriver
 {
 public:
-    MyMoneyMysqlDriver() {
+    MyMoneyMysqlDriver()
+    {
     }
 
     bool isTested() const final override;
@@ -63,7 +66,8 @@ public:
 class MyMoneyOracleDriver : public MyMoneyDbDriver
 {
 public:
-    MyMoneyOracleDriver() {
+    MyMoneyOracleDriver()
+    {
     }
 
     QString dropPrimaryKeyString(const QString& name) const final override;
@@ -76,7 +80,8 @@ public:
 class MyMoneyODBCDriver : public MyMoneyDbDriver
 {
 public:
-    MyMoneyODBCDriver() {
+    MyMoneyODBCDriver()
+    {
     }
 
     QString timestampString(const MyMoneyDbDatetimeColumn& c) const final override;
@@ -85,7 +90,8 @@ public:
 class MyMoneyPostgresqlDriver : public MyMoneyDbDriver
 {
 public:
-    MyMoneyPostgresqlDriver() {
+    MyMoneyPostgresqlDriver()
+    {
     }
 
     bool isTested() const final override;
@@ -102,14 +108,16 @@ public:
 class MyMoneySybaseDriver : public MyMoneyDbDriver
 {
 public:
-    MyMoneySybaseDriver() {
+    MyMoneySybaseDriver()
+    {
     }
 };
 
 class MyMoneySqlite3Driver : public MyMoneyDbDriver
 {
 public:
-    MyMoneySqlite3Driver() {
+    MyMoneySqlite3Driver()
+    {
     }
 
     bool isTested() const final override;
@@ -151,24 +159,25 @@ const QMap<QString, QString> MyMoneyDbDriver::driverMap()
 QExplicitlySharedDataPointer<MyMoneyDbDriver> MyMoneyDbDriver::create(const QString& type)
 {
     if (type == "QDB2")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyDb2Driver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneyDb2Driver());
     else if (type == "QIBASE")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyInterbaseDriver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneyInterbaseDriver());
     else if (type == "QMYSQL")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyMysqlDriver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneyMysqlDriver());
     else if (type == "QOCI")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyOracleDriver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneyOracleDriver());
     else if (type == "QODBC")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyODBCDriver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneyODBCDriver());
     else if (type == "QPSQL")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyPostgresqlDriver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneyPostgresqlDriver());
     else if (type == "QTDS")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySybaseDriver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneySybaseDriver());
     else if (type == "QSQLITE")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlite3Driver());
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneySqlite3Driver());
     else if (type == "QSQLCIPHER")
-        return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlCipher3Driver());
-    else throw MYMONEYEXCEPTION_CSTRING("Unknown database driver type.");
+        return QExplicitlySharedDataPointer<MyMoneyDbDriver>(new MyMoneySqlCipher3Driver());
+    else
+        throw MYMONEYEXCEPTION_CSTRING("Unknown database driver type.");
 }
 
 MyMoneyDbDriver::MyMoneyDbDriver()
@@ -252,7 +261,7 @@ QString MyMoneyMysqlDriver::createDbString(const QString& name) const
     return MyMoneyDbDriver::createDbString(name) + " CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci'";
 }
 
-QString MyMoneyPostgresqlDriver:: createDbString(const QString& name) const
+QString MyMoneyPostgresqlDriver::createDbString(const QString& name) const
 {
     return MyMoneyDbDriver::createDbString(name) + " WITH ENCODING='UTF8' LC_CTYPE='C' TEMPLATE=template0";
 }
@@ -326,7 +335,6 @@ QString MyMoneyMysqlDriver::dropIndexString(const QString& tableName, const QStr
 // If it is supported, it will have to be implemented for each DBMS
 QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
-
     Q_UNUSED(tableName);
     Q_UNUSED(columnName);
     Q_UNUSED(newDef);
@@ -373,7 +381,8 @@ QString MyMoneyDbDriver::intString(const MyMoneyDbIntColumn& c) const
         break;
     }
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
     return qs;
 }
 
@@ -397,9 +406,11 @@ QString MyMoneyMysqlDriver::intString(const MyMoneyDbIntColumn& c) const
         break;
     }
 
-    if (! c.isSigned()) qs += " unsigned";
+    if (!c.isSigned())
+        qs += " unsigned";
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
     return qs;
 }
 
@@ -423,9 +434,11 @@ QString MyMoneySqlite3Driver::intString(const MyMoneyDbIntColumn& c) const
         break;
     }
 
-    if (! c.isSigned()) qs += " unsigned";
+    if (!c.isSigned())
+        qs += " unsigned";
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
     return qs;
 }
 
@@ -447,9 +460,11 @@ QString MyMoneyPostgresqlDriver::intString(const MyMoneyDbIntColumn& c) const
         break;
     }
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
-    if (! c.isSigned()) qs += QString(" check(%1 >= 0)").arg(c.name());
+    if (!c.isSigned())
+        qs += QString(" check(%1 >= 0)").arg(c.name());
 
     return qs;
 }
@@ -474,9 +489,11 @@ QString MyMoneyOracleDriver::intString(const MyMoneyDbIntColumn& c) const
         break;
     }
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
-    if (! c.isSigned()) qs += QString(" check(%1 >= 0)").arg(c.name());
+    if (!c.isSigned())
+        qs += QString(" check(%1 >= 0)").arg(c.name());
 
     return qs;
 }
@@ -504,7 +521,8 @@ QString MyMoneyDbDriver::textString(const MyMoneyDbTextColumn& c) const
         break;
     }
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
     return qs;
 }
@@ -529,7 +547,8 @@ QString MyMoneyDb2Driver::textString(const MyMoneyDbTextColumn& c) const
         break;
     }
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
     return qs;
 }
@@ -549,7 +568,8 @@ QString MyMoneyOracleDriver::textString(const MyMoneyDbTextColumn& c) const
         break;
     }
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
     return qs;
 }
@@ -558,7 +578,8 @@ QString MyMoneyPostgresqlDriver::textString(const MyMoneyDbTextColumn& c) const
 {
     QString qs = QString("%1 text").arg(c.name());
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
     return qs;
 }
@@ -570,7 +591,8 @@ QString MyMoneyDbDriver::timestampString(const MyMoneyDbDatetimeColumn& c) const
 {
     QString qs = QString("%1 timestamp").arg(c.name());
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
     return qs;
 }
@@ -580,7 +602,8 @@ QString MyMoneyMysqlDriver::timestampString(const MyMoneyDbDatetimeColumn& c) co
 {
     QString qs = QString("%1 datetime").arg(c.name());
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
     return qs;
 }
@@ -589,7 +612,8 @@ QString MyMoneyODBCDriver::timestampString(const MyMoneyDbDatetimeColumn& c) con
 {
     QString qs = QString("%1 datetime").arg(c.name());
 
-    if (c.isNotNull()) qs += " NOT NULL";
+    if (c.isNotNull())
+        qs += " NOT NULL";
 
     return qs;
 }
@@ -622,7 +646,8 @@ QString MyMoneyDbDriver::tableOptionString() const
 
 //***********************************************
 // Define the highestIdNum string
-// PostgreSQL and Oracle return errors when a non-numerical string is cast to an integer, so a regex is used to skip strings that aren't entirely numerical after the prefix is removed
+// PostgreSQL and Oracle return errors when a non-numerical string is cast to an integer, so a regex is used to skip strings that aren't entirely numerical
+// after the prefix is removed
 QString MyMoneyDbDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
 {
     return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS INTEGER)) FROM %3;").arg(tableField).arg(prefixLength + 1).arg(tableName);
@@ -635,12 +660,18 @@ QString MyMoneyMysqlDriver::highestNumberFromIdString(const QString& tableName, 
 
 QString MyMoneyPostgresqlDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
 {
-    return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS INTEGER)) FROM %3 WHERE SUBSTR(%1, %2) ~ '^[0-9]+$';").arg(tableField).arg(prefixLength + 1).arg(tableName);
+    return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS INTEGER)) FROM %3 WHERE SUBSTR(%1, %2) ~ '^[0-9]+$';")
+        .arg(tableField)
+        .arg(prefixLength + 1)
+        .arg(tableName);
 }
 
 QString MyMoneyOracleDriver::highestNumberFromIdString(const QString& tableName, const QString& tableField, const int prefixLength) const
 {
-    return QString("SELECT MAX(TO_NUMBER(SUBSTR(%1, %2))) FROM %3 WHERE REGEXP_LIKE(SUBSTR(%1, %2), '^[0-9]+$');").arg(tableField).arg(prefixLength + 1).arg(tableName);
+    return QString("SELECT MAX(TO_NUMBER(SUBSTR(%1, %2))) FROM %3 WHERE REGEXP_LIKE(SUBSTR(%1, %2), '^[0-9]+$');")
+        .arg(tableField)
+        .arg(prefixLength + 1)
+        .arg(tableName);
 }
 
 //*************************************************

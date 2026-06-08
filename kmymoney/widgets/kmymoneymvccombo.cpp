@@ -13,12 +13,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStandardItemModel>
 #include <QAbstractItemView>
+#include <QApplication>
 #include <QCompleter>
 #include <QFocusEvent>
-#include <QApplication>
 #include <QMetaMethod>
+#include <QStandardItemModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -28,18 +28,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-
-KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent) :
-    KComboBox(parent),
-    d_ptr(new KMyMoneyMVCComboPrivate)
+KMyMoneyMVCCombo::KMyMoneyMVCCombo(QWidget* parent)
+    : KComboBox(parent)
+    , d_ptr(new KMyMoneyMVCComboPrivate)
 {
     view()->setAlternatingRowColors(true);
     connect(this, &KMyMoneyMVCCombo::KComboBox::activated, this, &KMyMoneyMVCCombo::activated);
 }
 
-KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
-    KComboBox(editable, parent),
-    d_ptr(new KMyMoneyMVCComboPrivate)
+KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent)
+    : KComboBox(editable, parent)
+    , d_ptr(new KMyMoneyMVCComboPrivate)
 {
     Q_D(KMyMoneyMVCCombo);
     d->m_completer = new QCompleter(this);
@@ -54,17 +53,17 @@ KMyMoneyMVCCombo::KMyMoneyMVCCombo(bool editable, QWidget* parent) :
     connect(this, &KMyMoneyMVCCombo::KComboBox::activated, this, &KMyMoneyMVCCombo::activated);
 }
 
-KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, QWidget* parent) :
-    KComboBox(parent),
-    d_ptr(&dd)
+KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate& dd, QWidget* parent)
+    : KComboBox(parent)
+    , d_ptr(&dd)
 {
     view()->setAlternatingRowColors(true);
     connect(this, &KMyMoneyMVCCombo::KComboBox::activated, this, &KMyMoneyMVCCombo::activated);
 }
 
-KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate &dd, bool editable, QWidget* parent) :
-    KComboBox(editable, parent),
-    d_ptr(&dd)
+KMyMoneyMVCCombo::KMyMoneyMVCCombo(KMyMoneyMVCComboPrivate& dd, bool editable, QWidget* parent)
+    : KComboBox(editable, parent)
+    , d_ptr(&dd)
 {
     Q_D(KMyMoneyMVCCombo);
     d->m_completer = new QCompleter(this);
@@ -90,8 +89,8 @@ void KMyMoneyMVCCombo::setEditable(bool editable)
     Q_D(KMyMoneyMVCCombo);
     KComboBox::setEditable(editable);
 
-    if(editable) {
-        if(!d->m_completer) {
+    if (editable) {
+        if (!d->m_completer) {
             d->m_completer = new QCompleter(this);
             d->m_completer->setCaseSensitivity(Qt::CaseInsensitive);
             d->m_completer->setModel(model());
@@ -108,7 +107,7 @@ void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
     d->m_completer->setFilterMode(enabled ? Qt::MatchContains : Qt::MatchStartsWith);
 }
 
-void KMyMoneyMVCCombo::setSubstringSearchForChildren(QWidget*const widget, bool enabled)
+void KMyMoneyMVCCombo::setSubstringSearchForChildren(QWidget* const widget, bool enabled)
 {
     Q_ASSERT(widget);
     const QList<KMyMoneyMVCCombo*> comboList = widget->findChildren<KMyMoneyMVCCombo*>();
@@ -153,7 +152,7 @@ void KMyMoneyMVCCombo::activated(int index)
     }
 }
 
-void KMyMoneyMVCCombo::connectNotify(const QMetaMethod & signal)
+void KMyMoneyMVCCombo::connectNotify(const QMetaMethod& signal)
 {
     Q_D(KMyMoneyMVCCombo);
     if (signal != QMetaMethod::fromSignal(&KMyMoneyMVCCombo::createItem)) {
@@ -161,7 +160,7 @@ void KMyMoneyMVCCombo::connectNotify(const QMetaMethod & signal)
     }
 }
 
-void KMyMoneyMVCCombo::disconnectNotify(const QMetaMethod & signal)
+void KMyMoneyMVCCombo::disconnectNotify(const QMetaMethod& signal)
 {
     Q_D(KMyMoneyMVCCombo);
     if (signal != QMetaMethod::fromSignal(&KMyMoneyMVCCombo::createItem)) {
@@ -179,7 +178,6 @@ void KMyMoneyMVCCombo::setCurrentText()
     KComboBox::setItemText(KComboBox::currentIndex(), QString());
 }
 
-
 void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 {
     Q_D(KMyMoneyMVCCombo);
@@ -194,10 +192,10 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
         return;
     }
 
-    //check if the focus went to a widget in TransactionFrom, in the Register, or on a WizardPage
+    // check if the focus went to a widget in TransactionFrom, in the Register, or on a WizardPage
     if (e->reason() == Qt::MouseFocusReason) {
-        QObject *w = this->parent();
-        QObject *q = qApp->focusWidget()->parent();
+        QObject* w = this->parent();
+        QObject* q = qApp->focusWidget()->parent();
         // KMyMoneyTagCombo is inside KTagContainer, KMyMoneyPayeeCombo isn't it
         if (w->inherits("KTagContainer"))
             w = w->parent();
@@ -218,12 +216,12 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
             // BUG 254984 is resolved with the visibility check
             if (e->reason() != Qt::MouseFocusReason) {
                 if (d->m_completer->popup() && d->m_completer->popup()->isVisible()
-                        && d->m_completer->currentCompletion().contains(currentText(), Qt::CaseInsensitive)) {
+                    && d->m_completer->currentCompletion().contains(currentText(), Qt::CaseInsensitive)) {
                     lineEdit()->setText(d->m_completer->currentCompletion());
                 }
             }
 
-            //check if the current text is contained in the internal list, if not ask the user if want to create a new item.
+            // check if the current text is contained in the internal list, if not ask the user if want to create a new item.
             checkCurrentText();
 
             // else if we cannot create objects, and the current text is not
@@ -231,7 +229,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
         } else if (!contains(currentText())) {
             clearEditText();
         }
-        //this is to cover the case when you highlight an item but don't activate it with Enter
+        // this is to cover the case when you highlight an item but don't activate it with Enter
         if (currentText() != itemText(currentIndex())) {
             setCurrentIndex(findText(currentText(), Qt::MatchExactly));
             Q_EMIT activated(currentIndex());
@@ -281,7 +279,7 @@ void KMyMoneyMVCCombo::addEntry(const QString& newTxt, const QString& id)
 {
     // find the correct position in the list
     int idx;
-    for(idx = 0; idx < model()->rowCount(); ++idx) {
+    for (idx = 0; idx < model()->rowCount(); ++idx) {
         const QString txt = itemText(idx);
         if (txt.compare(newTxt) > 0) {
             break;
@@ -306,7 +304,7 @@ void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
 
 void KMyMoneyMVCCombo::protectItem(int id, bool protect)
 {
-    QStandardItemModel* standardModel = qobject_cast<QStandardItemModel*> (model());
+    QStandardItemModel* standardModel = qobject_cast<QStandardItemModel*>(model());
     QStandardItem* standardItem = standardModel->item(id);
     standardItem->setSelectable(!protect);
 }

@@ -14,8 +14,8 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -28,10 +28,10 @@ class EditPersonalDataDlgPrivate
     Q_DECLARE_PUBLIC(EditPersonalDataDlg)
 
 public:
-    explicit EditPersonalDataDlgPrivate(EditPersonalDataDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::EditPersonalDataDlg),
-        m_contact(nullptr)
+    explicit EditPersonalDataDlgPrivate(EditPersonalDataDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::EditPersonalDataDlg)
+        , m_contact(nullptr)
     {
     }
 
@@ -59,38 +59,37 @@ public:
         q->connect(ui->kabcBtn, &QAbstractButton::clicked, q, &EditPersonalDataDlg::loadFromAddressBook);
     }
 
-    EditPersonalDataDlg      *q_ptr;
-    Ui::EditPersonalDataDlg  *ui;
-    MyMoneyContact           *m_contact;
-    QString                   userNameText;
-    QString                   userStreetText;
-    QString                   userTownText;
-    QString                   userCountyText;
-    QString                   userPostcodeText;
-    QString                   userTelephoneText;
-    QString                   userEmailText;
+    EditPersonalDataDlg* q_ptr;
+    Ui::EditPersonalDataDlg* ui;
+    MyMoneyContact* m_contact;
+    QString userNameText;
+    QString userStreetText;
+    QString userTownText;
+    QString userCountyText;
+    QString userPostcodeText;
+    QString userTelephoneText;
+    QString userEmailText;
 };
 
-
-EditPersonalDataDlg::EditPersonalDataDlg(QWidget *parent, const QString& title) :
-    QDialog(parent),
-    d_ptr(new EditPersonalDataDlgPrivate(this))
+EditPersonalDataDlg::EditPersonalDataDlg(QWidget* parent, const QString& title)
+    : QDialog(parent)
+    , d_ptr(new EditPersonalDataDlgPrivate(this))
 {
     Q_D(EditPersonalDataDlg);
     d->init(title);
 }
 
 EditPersonalDataDlg::EditPersonalDataDlg(QString userName,
-        QString userStreet,
-        QString userTown,
-        QString userCounty,
-        QString userPostcode,
-        QString userTelephone,
-        QString userEmail,
-        QWidget *parent,
-        const QString& title) :
-    QDialog(parent),
-    d_ptr(new EditPersonalDataDlgPrivate(this))
+                                         QString userStreet,
+                                         QString userTown,
+                                         QString userCounty,
+                                         QString userPostcode,
+                                         QString userTelephone,
+                                         QString userEmail,
+                                         QWidget* parent,
+                                         const QString& title)
+    : QDialog(parent)
+    , d_ptr(new EditPersonalDataDlgPrivate(this))
 {
     Q_D(EditPersonalDataDlg);
     d->init(title);
@@ -171,7 +170,9 @@ void EditPersonalDataDlg::loadFromAddressBook()
     d->ui->userNameEdit->setText(d->m_contact->ownerFullName());
     d->ui->emailEdit->setText(d->m_contact->ownerEmail());
     if (d->ui->emailEdit->text().isEmpty()) {
-        KMessageBox::error(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
+        KMessageBox::error(this,
+                           i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."),
+                           i18n("Address book import"));
         return;
     }
     d->ui->kabcBtn->setEnabled(false);
@@ -179,7 +180,7 @@ void EditPersonalDataDlg::loadFromAddressBook()
     d->m_contact->fetchContact(d->ui->emailEdit->text());
 }
 
-void EditPersonalDataDlg::slotContactFetched(const ContactData &identity)
+void EditPersonalDataDlg::slotContactFetched(const ContactData& identity)
 {
     Q_D(EditPersonalDataDlg);
     d->ui->telephoneEdit->setText(identity.phoneNumber);
@@ -192,4 +193,3 @@ void EditPersonalDataDlg::slotContactFetched(const ContactData &identity)
     d->ui->streetEdit->setText(identity.street);
     d->ui->kabcBtn->setEnabled(true);
 }
-

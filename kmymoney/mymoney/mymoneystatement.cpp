@@ -10,13 +10,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStringList>
-#include <QFile>
-#include <QTextStream>
-#include <QList>
-#include <QDomProcessingInstruction>
-#include <QDomElement>
 #include <QDomDocument>
+#include <QDomElement>
+#include <QDomProcessingInstruction>
+#include <QFile>
+#include <QList>
+#include <QStringList>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -24,8 +24,7 @@
 #include "mymoneyobject.h"
 #include "mymoneyobject_p.h"
 
-namespace eMyMoney {
-namespace Statement {
+namespace eMyMoney { namespace Statement {
 enum class Element {
     KMMStatement,
     Statement,
@@ -77,8 +76,7 @@ qHashSeedType qHash(const Attribute key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
 }
-}
-}
+}}
 
 using namespace eMyMoney;
 
@@ -428,7 +426,7 @@ void MyMoneyStatement::writeXMLFile(const MyMoneyStatement& _s, const QString& _
     auto doc = new QDomDocument(getElName(Statement::Element::KMMStatement));
     Q_CHECK_PTR(doc);
 
-    //writeStatementtoXMLDoc(_s,doc);
+    // writeStatementtoXMLDoc(_s,doc);
     QDomProcessingInstruction instruct = doc->createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"utf-8\""));
     doc->appendChild(instruct);
     auto eroot = doc->createElement(getElName(Statement::Element::KMMStatement));
@@ -483,7 +481,7 @@ QDate MyMoneyStatement::statementEndDate() const
     // find that is not in the future and use it
     // as the end date of the statement.
     QDate postDate;
-    for(auto& t : m_listTransactions) {
+    for (auto& t : m_listTransactions) {
         if ((t.m_datePosted > postDate) && (t.m_datePosted <= QDate::currentDate())) {
             postDate = t.m_datePosted;
         }

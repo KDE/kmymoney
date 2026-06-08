@@ -7,9 +7,9 @@
 #include "kmymoneyvalidationfeedback.h"
 #include "ui_kmymoneyvalidationfeedback.h"
 
-#include <QIcon>
 #include "icons/icons.h"
 #include "widgetenums.h"
+#include <QIcon>
 
 using namespace eWidgets;
 using namespace Icons;
@@ -19,9 +19,9 @@ class KMyMoneyValidationFeedbackPrivate
     Q_DISABLE_COPY(KMyMoneyValidationFeedbackPrivate)
 
 public:
-    KMyMoneyValidationFeedbackPrivate() :
-        ui(new Ui::KMyMoneyValidationFeedback),
-        type(ValidationFeedback::MessageType::None)
+    KMyMoneyValidationFeedbackPrivate()
+        : ui(new Ui::KMyMoneyValidationFeedback)
+        , type(ValidationFeedback::MessageType::None)
     {
     }
 
@@ -30,13 +30,13 @@ public:
         delete ui;
     }
 
-    Ui::KMyMoneyValidationFeedback *ui;
+    Ui::KMyMoneyValidationFeedback* ui;
     ValidationFeedback::MessageType type;
 };
 
-KMyMoneyValidationFeedback::KMyMoneyValidationFeedback(QWidget *parent) :
-    QWidget(parent),
-    d_ptr(new KMyMoneyValidationFeedbackPrivate)
+KMyMoneyValidationFeedback::KMyMoneyValidationFeedback(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KMyMoneyValidationFeedbackPrivate)
 {
     Q_D(KMyMoneyValidationFeedback);
     d->ui->setupUi(this);
@@ -96,4 +96,3 @@ void KMyMoneyValidationFeedback::removeFeedback(ValidationFeedback::MessageType 
     if (d->type == type && d->ui->label->text() == message)
         removeFeedback();
 }
-

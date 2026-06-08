@@ -7,11 +7,11 @@
 #include "onlinejob.h"
 #include "onlinejob_p.h"
 
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyfile.h"
 
-#include "tasks/onlinetask.h"
 #include "onlinejobadministration.h"
+#include "tasks/onlinetask.h"
 
 onlineJob::onlineJob()
     : MyMoneyObject(*new onlineJobPrivate(this))
@@ -58,7 +58,7 @@ onlineJob::onlineJob(const QString& id, const onlineJob& other)
     copyPointerFromOtherJob(other);
 }
 
-void onlineJob::copyPointerFromOtherJob(const onlineJob &other)
+void onlineJob::copyPointerFromOtherJob(const onlineJob& other)
 {
     if (!other.isNull())
         m_task = other.constTask()->clone();
@@ -79,7 +79,7 @@ onlineJob::~onlineJob()
     delete m_task;
 }
 
-void onlineJob::setTask(onlineTask *_task)
+void onlineJob::setTask(onlineTask* _task)
 {
     Q_D(onlineJob);
     m_task = _task;
@@ -107,7 +107,6 @@ const onlineTask* onlineJob::constTask() const
 {
     return task();
 }
-
 
 QString onlineJob::taskIid() const
 {
@@ -161,7 +160,9 @@ bool onlineJob::isLocked() const
 bool onlineJob::isEditable() const
 {
     Q_D(const onlineJob);
-    return (!isLocked() && sendDate().isNull() && (d->m_jobBankAnswerState == eMyMoney::OnlineJob::sendingState::noBankAnswer || d->m_jobBankAnswerState == eMyMoney::OnlineJob::sendingState::sendingError));
+    return (!isLocked() && sendDate().isNull()
+            && (d->m_jobBankAnswerState == eMyMoney::OnlineJob::sendingState::noBankAnswer
+                || d->m_jobBankAnswerState == eMyMoney::OnlineJob::sendingState::sendingError));
 }
 
 bool onlineJob::isNull() const
@@ -169,7 +170,7 @@ bool onlineJob::isNull() const
     return (m_task == nullptr);
 }
 
-void onlineJob::setJobSend(const QDateTime &dateTime)
+void onlineJob::setJobSend(const QDateTime& dateTime)
 {
     Q_D(onlineJob);
     d->m_jobSend = dateTime;
@@ -180,7 +181,7 @@ void onlineJob::setJobSend()
     setJobSend(QDateTime::currentDateTime());
 }
 
-void onlineJob::setBankAnswer(const eMyMoney::OnlineJob::sendingState state, const QDateTime &dateTime)
+void onlineJob::setBankAnswer(const eMyMoney::OnlineJob::sendingState state, const QDateTime& dateTime)
 {
     Q_D(onlineJob);
     d->m_jobBankAnswerState = state;
@@ -210,7 +211,11 @@ void onlineJob::addJobMessage(const onlineJobMessage& message)
     d->m_messageList.append(message);
 }
 
-void onlineJob::addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message, const QString& errorCode, const QDateTime& timestamp)
+void onlineJob::addJobMessage(const eMyMoney::OnlineJob::MessageType& type,
+                              const QString& sender,
+                              const QString& message,
+                              const QString& errorCode,
+                              const QDateTime& timestamp)
 {
     Q_D(onlineJob);
     onlineJobMessage logMessage(type, sender, message, timestamp);
@@ -226,7 +231,6 @@ void onlineJob::addJobMessage(const eMyMoney::OnlineJob::MessageType& type, cons
 void onlineJob::addJobMessage(const eMyMoney::OnlineJob::MessageType& type, const QString& sender, const QString& message)
 {
     addJobMessage(type, sender, message, QString(), QDateTime::currentDateTime());
-
 }
 
 QList<onlineJobMessage> onlineJob::jobMessageList() const
