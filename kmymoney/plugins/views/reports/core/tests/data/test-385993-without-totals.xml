@@ -1,0 +1,1744 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+ <FILEINFO>
+  <CREATION_DATE date="2017-10-13"/>
+  <LAST_MODIFIED_DATE date="2017-10-20"/>
+  <VERSION id="1"/>
+  <FIXVERSION id="4"/>
+ </FILEINFO>
+ <USER email="" name="Paul Panzer">
+  <ADDRESS street="" telephone="" county="" city="Buxtehude" zipcode=""/>
+ </USER>
+ <INSTITUTIONS count="4">
+  <INSTITUTION manager="" id="I000001" name="Ebase" sortcode="">
+   <ADDRESS street="" telephone="" zip="" city=""/>
+   <ACCOUNTIDS>
+    <ACCOUNTID id="A000029"/>
+   </ACCOUNTIDS>
+   <KEYVALUEPAIRS>
+    <PAIR key="bic" value=""/>
+   </KEYVALUEPAIRS>
+  </INSTITUTION>
+  <INSTITUTION manager="" id="I000002" name="Diba Depot" sortcode="">
+   <ADDRESS street="" telephone="" zip="" city=""/>
+   <ACCOUNTIDS/>
+   <KEYVALUEPAIRS>
+    <PAIR key="bic" value=""/>
+   </KEYVALUEPAIRS>
+  </INSTITUTION>
+  <INSTITUTION manager="" id="I000003" name="ING Diba" sortcode="">
+   <ADDRESS street="" telephone="" zip="" city=""/>
+   <ACCOUNTIDS>
+    <ACCOUNTID id="A000031"/>
+   </ACCOUNTIDS>
+   <KEYVALUEPAIRS>
+    <PAIR key="bic" value=""/>
+   </KEYVALUEPAIRS>
+  </INSTITUTION>
+  <INSTITUTION manager="" id="I000004" name="Consors" sortcode="">
+   <ADDRESS street="" telephone="" zip="" city=""/>
+   <ACCOUNTIDS>
+    <ACCOUNTID id="A000055"/>
+   </ACCOUNTIDS>
+   <KEYVALUEPAIRS>
+    <PAIR key="bic" value=""/>
+   </KEYVALUEPAIRS>
+  </INSTITUTION>
+ </INSTITUTIONS>
+ <PAYEES count="0"/>
+ <ACCOUNTS count="53">
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="9" id="AStd::Asset" lastreconciled="" institution="" name="Anlagen">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000001"/>
+    <SUBACCOUNT id="A000012"/>
+    <SUBACCOUNT id="A000029"/>
+    <SUBACCOUNT id="A000031"/>
+    <SUBACCOUNT id="A000035"/>
+    <SUBACCOUNT id="A000055"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="10" id="AStd::Liability" lastreconciled="" institution="" name="Verbindlichkeiten">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="13" id="AStd::Expense" lastreconciled="" institution="" name="Ausgabe">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000007"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="12" id="AStd::Income" lastreconciled="" institution="" name="Einnahme">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000005"/>
+    <SUBACCOUNT id="A000037"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="16" id="AStd::Equity" lastreconciled="" institution="" name="Eigenkapital">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Asset" opened="1986-01-01" number="" lastmodified="2017-10-18" type="1" id="A000001" lastreconciled="" institution="" name="Money99">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastNumberUsed" value="1"/>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Income" opened="1900-01-01" number="" lastmodified="2017-10-18" type="12" id="A000005" lastreconciled="" institution="" name="Kapitalertrag">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Expense" opened="1900-01-01" number="" lastmodified="2017-10-18" type="13" id="A000007" lastreconciled="" institution="" name="Bankgebuehr">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Asset" opened="1986-01-01" number="" lastmodified="" type="7" id="A000012" lastreconciled="" institution="" name="Money99">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000013"/>
+    <SUBACCOUNT id="A000014"/>
+    <SUBACCOUNT id="A000015"/>
+    <SUBACCOUNT id="A000016"/>
+    <SUBACCOUNT id="A000017"/>
+    <SUBACCOUNT id="A000018"/>
+    <SUBACCOUNT id="A000020"/>
+    <SUBACCOUNT id="A000021"/>
+    <SUBACCOUNT id="A000022"/>
+    <SUBACCOUNT id="A000023"/>
+    <SUBACCOUNT id="A000024"/>
+    <SUBACCOUNT id="A000025"/>
+    <SUBACCOUNT id="A000026"/>
+    <SUBACCOUNT id="A000027"/>
+    <SUBACCOUNT id="A000028"/>
+    <SUBACCOUNT id="A000033"/>
+    <SUBACCOUNT id="A000038"/>
+    <SUBACCOUNT id="A000039"/>
+    <SUBACCOUNT id="A000040"/>
+    <SUBACCOUNT id="A000043"/>
+    <SUBACCOUNT id="A000044"/>
+    <SUBACCOUNT id="A000045"/>
+    <SUBACCOUNT id="A000047"/>
+    <SUBACCOUNT id="A000048"/>
+    <SUBACCOUNT id="A000049"/>
+    <SUBACCOUNT id="A000050"/>
+    <SUBACCOUNT id="A000057"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="iban" value=""/>
+    <PAIR key="kmm-sort-std" value="10,1,-9,-4"/>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000007" description="" parentaccount="A000012" opened="1995-09-22" number="" lastmodified="2017-10-13" type="15" id="A000013" lastreconciled="" institution="" name="ACMGI American Growth Trends">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000006" description="" parentaccount="A000012" opened="2001-01-29" number="" lastmodified="2017-10-13" type="15" id="A000014" lastreconciled="" institution="" name="ABN Amro Global Resources">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000001" description="" parentaccount="A000012" opened="2004-04-20" number="" lastmodified="2017-10-13" type="15" id="A000015" lastreconciled="" institution="" name="A2A Basis">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000005" description="" parentaccount="A000012" opened="2005-01-06" number="" lastmodified="2017-10-13" type="15" id="A000016" lastreconciled="" institution="" name="ABN Amro DTS Strategie Zertifikat">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000004" description="" parentaccount="A000012" opened="2005-10-06" number="" lastmodified="2017-10-13" type="15" id="A000017" lastreconciled="" institution="" name="A2A Wachstum">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000003" description="" parentaccount="A000012" opened="2005-11-11" number="" lastmodified="2017-10-13" type="15" id="A000018" lastreconciled="" institution="" name="A2A Chance">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000009" description="" parentaccount="A000012" opened="2004-10-19" number="" lastmodified="2017-10-13" type="15" id="A000020" lastreconciled="" institution="" name="Am Ex Fds GI High Yield Eur">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000010" description="" parentaccount="A000012" opened="2005-10-21" number="" lastmodified="2017-10-13" type="15" id="A000021" lastreconciled="" institution="" name="Axa Rosenberg Japan Small Cap">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000011" description="" parentaccount="A000012" opened="1999-07-07" number="" lastmodified="2017-10-13" type="15" id="A000022" lastreconciled="" institution="" name="Axa World Continental Europe Opportunities Actions">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000012" description="" parentaccount="A000012" opened="2000-11-03" number="" lastmodified="2017-10-13" type="15" id="A000023" lastreconciled="" institution="" name="Alger Large Cap Growth">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000013" description="" parentaccount="A000012" opened="2006-05-20" number="" lastmodified="2017-10-13" type="15" id="A000024" lastreconciled="" institution="" name="Bank Berlin Dax Baer Zertifikat">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000014" description="" parentaccount="A000012" opened="2004-10-26" number="" lastmodified="2017-10-13" type="15" id="A000025" lastreconciled="" institution="" name="BG Umbrella Global Balance">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000015" description="" parentaccount="A000012" opened="2004-10-26" number="" lastmodified="2017-10-13" type="15" id="A000026" lastreconciled="" institution="" name="BG Umbrella Global Challenge">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000016" description="" parentaccount="A000012" opened="2006-02-23" number="" lastmodified="2017-10-13" type="15" id="A000027" lastreconciled="" institution="" name="BGF Latin American A2 Fund">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000017" description="" parentaccount="A000012" opened="2006-03-20" number="" lastmodified="2017-10-13" type="15" id="A000028" lastreconciled="" institution="" name="BGF World Energy Fund">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Asset" opened="2008-12-01" number="" lastmodified="" type="7" id="A000029" lastreconciled="" institution="I000001" name="Ebase">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000030"/>
+    <SUBACCOUNT id="A000034"/>
+    <SUBACCOUNT id="A000041"/>
+    <SUBACCOUNT id="A000042"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="iban" value=""/>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000018" description="" parentaccount="A000029" opened="2008-12-08" number="" lastmodified="2017-10-13" type="15" id="A000030" lastreconciled="" institution="" name="BGF World Energy Fund">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Asset" opened="2017-01-01" number="" lastmodified="" type="7" id="A000031" lastreconciled="" institution="I000003" name="Diba Depot">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000032"/>
+    <SUBACCOUNT id="A000046"/>
+    <SUBACCOUNT id="A000051"/>
+    <SUBACCOUNT id="A000052"/>
+    <SUBACCOUNT id="A000053"/>
+    <SUBACCOUNT id="A000054"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="iban" value=""/>
+    <PAIR key="kmm-sort-std" value="10,1,-9,-4"/>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000019" description="" parentaccount="A000031" opened="2005-10-21" number="" lastmodified="2017-10-13" type="15" id="A000032" lastreconciled="" institution="" name="BGF World Gold Fund">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000020" description="" parentaccount="A000012" opened="2007-03-23" number="" lastmodified="2017-10-13" type="15" id="A000033" lastreconciled="" institution="" name="BGF World Mining Fund">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000021" description="" parentaccount="A000029" opened="2008-12-16" number="" lastmodified="2017-10-13" type="15" id="A000034" lastreconciled="" institution="" name="BGF World Mining Fund">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Asset" opened="2017-01-01" number="" lastmodified="" type="7" id="A000035" lastreconciled="" institution="" name="Biochar Europe">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000036"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="iban" value=""/>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000022" description="" parentaccount="A000035" opened="2009-11-24" number="" lastmodified="2017-10-13" type="15" id="A000036" lastreconciled="" institution="" name="Biochar Europe">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Income" opened="1900-01-01" number="" lastmodified="2017-10-13" type="12" id="A000037" lastreconciled="" institution="" name="Gewerbeertrag">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000023" description="" parentaccount="A000012" opened="2011-06-02" number="" lastmodified="2017-10-14" type="15" id="A000038" lastreconciled="" institution="" name="BNP Paribas Instcash CHF">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000024" description="" parentaccount="A000012" opened="2002-03-08" number="" lastmodified="2017-10-14" type="15" id="A000039" lastreconciled="" institution="" name="Carlson Asian Small Cap">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000025" description="" parentaccount="A000012" opened="2006-07-31" number="" lastmodified="2017-10-16" type="15" id="A000040" lastreconciled="" institution="" name="Carmignac Emergents">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000026" description="" parentaccount="A000029" opened="2008-06-01" number="" lastmodified="2017-10-16" type="15" id="A000041" lastreconciled="" institution="" name="Carmignac Investissement">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000027" description="" parentaccount="A000029" opened="2008-12-11" number="" lastmodified="2017-10-16" type="15" id="A000042" lastreconciled="" institution="" name="Carmignac Patrimoine">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000028" description="" parentaccount="A000012" opened="2005-10-26" number="" lastmodified="2017-10-16" type="15" id="A000043" lastreconciled="" institution="" name="Carmignac Patrimoine">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000029" description="" parentaccount="A000012" opened="1999-05-06" number="" lastmodified="2017-10-16" type="15" id="A000044" lastreconciled="" institution="" name="Citigarant Worldtop">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000030" description="" parentaccount="A000012" opened="2005-03-11" number="" lastmodified="2017-10-16" type="15" id="A000045" lastreconciled="" institution="" name="CROCI Japan Index Zertifikat">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000031" description="" parentaccount="A000031" opened="2002-06-24" number="" lastmodified="2017-10-16" type="15" id="A000046" lastreconciled="" institution="" name="CS Euroeal">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000032" description="" parentaccount="A000012" opened="2000-08-25" number="" lastmodified="2017-10-17" type="15" id="A000047" lastreconciled="" institution="" name="DAC Fonds UI">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000033" description="" parentaccount="A000012" opened="2000-11-27" number="" lastmodified="2017-10-17" type="15" id="A000048" lastreconciled="" institution="" name="DAC Kontrast">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000034" description="" parentaccount="A000012" opened="2007-03-02" number="" lastmodified="2017-10-17" type="15" id="A000049" lastreconciled="" institution="" name="DB Reverse Bonus ZT 09">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000035" description="" parentaccount="A000012" opened="1993-09-13" number="" lastmodified="2017-10-17" type="15" id="A000050" lastreconciled="" institution="" name="DB Tiger Fund">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000036" description="" parentaccount="A000031" opened="2012-07-29" number="" lastmodified="2017-10-17" type="15" id="A000051" lastreconciled="" institution="" name="db x-tracker SP500 Inverse Daily">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000037" description="" parentaccount="A000031" opened="2011-05-19" number="" lastmodified="2017-10-17" type="15" id="A000052" lastreconciled="" institution="" name="db x-tracker Banks Short">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000038" description="" parentaccount="A000031" opened="2011-02-17" number="" lastmodified="2017-10-18" type="15" id="A000053" lastreconciled="" institution="" name="db x-trackers FTSE MIB Index">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000039" description="" parentaccount="A000031" opened="2010-08-01" number="" lastmodified="2017-10-18" type="15" id="A000054" lastreconciled="" institution="" name="Deka Daxplus Maximum Dividend UC">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Asset" opened="2000-01-01" number="" lastmodified="" type="7" id="A000055" lastreconciled="" institution="I000004" name="Consors">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000056"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="iban" value=""/>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000040" description="" parentaccount="A000055" opened="2001-10-05" number="" lastmodified="2017-10-18" type="15" id="A000056" lastreconciled="" institution="" name="Deka Immoflex USA">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="E000041" description="" parentaccount="A000012" opened="1989-11-02" number="" lastmodified="2017-10-18" type="15" id="A000057" lastreconciled="" institution="" name="DEVK Sparda Rent">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+ </ACCOUNTS>
+ <TRANSACTIONS count="103">
+  <TRANSACTION postdate="1989-11-02" commodity="EUR" memo="" id="T000000000000000001" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-255633/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-255633/100" memo="Kauf DEVK Sparda Rent (Sparda)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="60/1" price="85211/2000" reconciledate="" action="Buy" bankid="" account="A000057" number="" value="255633/100" memo="Kauf DEVK Sparda Rent (Sparda)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1990-11-15" commodity="EUR" memo="" id="T000000000000000002" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-20093/100" reconciledate="" action="" bankid="" account="A000005" number="" value="-20093/100" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="5/1" price="20093/500" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="20093/100" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1991-11-15" commodity="EUR" memo="" id="T000000000000000003" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-11761/50" reconciledate="" action="" bankid="" account="A000005" number="" value="-11761/50" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="5/1" price="11761/250" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="11761/50" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1992-11-13" commodity="EUR" memo="" id="T000000000000000004" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-25559/100" reconciledate="" action="" bankid="" account="A000005" number="" value="-25559/100" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="6/1" price="425983/10000" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="25559/100" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1993-09-13" commodity="EUR" memo="" id="T000000000000000005" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-37018/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-37018/25" memo="Kauf DB Tiger Fund (DB)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="8/1" price="18509/100" reconciledate="" action="Buy" bankid="" account="A000050" number="" value="37018/25" memo="Kauf DB Tiger Fund (DB)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1993-11-15" commodity="EUR" memo="" id="T000000000000000006" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-5442/25" reconciledate="" action="" bankid="" account="A000005" number="" value="-5442/25" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="5/1" price="5442/125" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="5442/25" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1994-01-21" commodity="EUR" memo="" id="T000000000000000007" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-39804/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-39804/25" memo="Kauf DB Tiger Fund (DB)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="6/1" price="6634/25" reconciledate="" action="Buy" bankid="" account="A000050" number="" value="39804/25" memo="Kauf DB Tiger Fund (DB)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1994-02-03" commodity="EUR" memo="" id="T000000000000000008" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-783501/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-783501/100" memo="Kauf DEVK Sparda Rent (Sparda)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="182/1" price="86099/2000" reconciledate="" action="Buy" bankid="" account="A000057" number="" value="783501/100" memo="Kauf DEVK Sparda Rent (Sparda)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1994-02-07" commodity="EUR" memo="" id="T000000000000000009" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-130196/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-130196/25" memo="Kauf DB Tiger Fund (Sparda)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="19/1" price="342621/1250" reconciledate="" action="Buy" bankid="" account="A000050" number="" value="130196/25" memo="Kauf DB Tiger Fund (Sparda)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1994-11-15" commodity="EUR" memo="" id="T000000000000000010" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-62237/100" reconciledate="" action="" bankid="" account="A000005" number="" value="-62237/100" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="4/1" price="62237/400" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="62237/100" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1995-11-15" commodity="EUR" memo="" id="T000000000000000011" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-7487/50" reconciledate="" action="" bankid="" account="A000005" number="" value="-7487/50" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="4/1" price="7487/200" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="7487/50" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1995-11-25" commodity="EUR" memo="" id="T000000000000000012" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-10014/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-10014/25" memo="Kauf DEVK Sparda Rent (Sparda)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="11/1" price="72829/2000" reconciledate="" action="Buy" bankid="" account="A000057" number="" value="10014/25" memo="Kauf DEVK Sparda Rent (Sparda)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1996-11-15" commodity="EUR" memo="" id="T000000000000000013" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-23363/50" reconciledate="" action="" bankid="" account="A000005" number="" value="-23363/50" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="12/1" price="389383/10000" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="23363/50" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1997-11-15" commodity="EUR" memo="" id="T000000000000000014" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="20093/100" reconciledate="" action="" bankid="" account="A000001" number="" value="20093/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-12133/25" reconciledate="" action="" bankid="" account="A000005" number="" value="-12133/25" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="13/1" price="373323/10000" reconciledate="" action="Reinvest" bankid="" account="A000057" number="" value="12133/25" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1998-07-16" commodity="EUR" memo="" id="T000000000000000015" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="1205847/100" reconciledate="" action="" bankid="" account="A000001" number="" value="1205847/100" memo="Verkauf DEVK Sparda Rent" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-307/1" price="24549/625" reconciledate="" action="Buy" bankid="" account="A000057" number="" value="-1205847/100" memo="Verkauf DEVK Sparda Rent" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1999-05-06" commodity="EUR" memo="" id="T000000000000000016" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-10300/1" reconciledate="" action="" bankid="" account="A000001" number="" value="-10300/1" memo="Kauf Citigarant Worldtop (Citibank)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="10/1" price="1030/1" reconciledate="" action="Buy" bankid="" account="A000044" number="" value="10300/1" memo="Kauf Citigarant Worldtop (Citibank)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1999-07-07" commodity="EUR" memo="" id="T000000000000000017" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-10827/4" reconciledate="" action="" bankid="" account="A000001" number="" value="-10827/4" memo="Kauf Axa World Continental Europe Opportunities Actions (DB)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="450/1" price="1203/200" reconciledate="" action="Buy" bankid="" account="A000022" number="" value="10827/4" memo="Kauf Axa World Continental Europe Opportunities Actions (DB)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="1999-10-08" commodity="EUR" memo="" id="T000000000000000018" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="461619/50" reconciledate="" action="" bankid="" account="A000001" number="" value="461619/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-10/1" price="461619/500" reconciledate="" action="Buy" bankid="" account="A000044" number="" value="-461619/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2000-08-22" commodity="EUR" memo="" id="T000000000000000019" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="255573/50" reconciledate="" action="" bankid="" account="A000001" number="" value="255573/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-14/1" price="3651043/10000" reconciledate="" action="Buy" bankid="" account="A000050" number="" value="-255573/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2000-08-25" commodity="EUR" memo="" id="T000000000000000020" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-25707/10" reconciledate="" action="" bankid="" account="A000001" number="" value="-25707/10" memo="Kauf DAC Fonds UI" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="6/1" price="8569/20" reconciledate="" action="Buy" bankid="" account="A000047" number="" value="25707/10" memo="Kauf DAC Fonds UI" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2000-11-03" commodity="EUR" memo="" id="T000000000000000021" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-142459/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-142459/25" memo="Kauf Alger Large Cap Growth (Noramco Sparplan)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="6613/10" price="86169/10000" reconciledate="" action="Buy" bankid="" account="A000023" number="" value="142459/25" memo="Kauf Alger Large Cap Growth (Noramco Sparplan)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2000-11-27" commodity="EUR" memo="" id="T000000000000000022" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-15698/5" reconciledate="" action="" bankid="" account="A000001" number="" value="-15698/5" memo="Kauf DAC Kontrast (Consors)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="20/1" price="7849/50" reconciledate="" action="Buy" bankid="" account="A000048" number="" value="15698/5" memo="Kauf DAC Kontrast (Consors)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2001-01-29" commodity="EUR" memo="" id="T000000000000000023" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-204949/50" reconciledate="" action="" bankid="" account="A000001" number="" value="-204949/50" memo="Kauf ABN Amro Global Resources (Consors)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="50/1" price="204949/2500" reconciledate="" action="Buy" bankid="" account="A000014" number="" value="204949/50" memo="Kauf ABN Amro Global Resources (Consors)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2001-02-15" commodity="EUR" memo="" id="T000000000000000024" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="33/5" reconciledate="" action="" bankid="" account="A000001" number="" value="33/5" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-33/5" reconciledate="" action="" bankid="" account="A000005" number="" value="-33/5" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000047" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2001-02-15" commodity="EUR" memo="" id="T000000000000000025" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="41073/50" reconciledate="" action="" bankid="" account="A000001" number="" value="41073/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-6/1" price="13691/100" reconciledate="" action="Buy" bankid="" account="A000047" number="" value="-41073/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2001-07-26" commodity="EUR" memo="" id="T000000000000000026" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="207829/50" reconciledate="" action="" bankid="" account="A000001" number="" value="207829/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-19/1" price="1093837/5000" reconciledate="" action="Buy" bankid="" account="A000050" number="" value="-207829/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2001-10-05" commodity="EUR" memo="" id="T000000000000000027" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-1863/1" reconciledate="" action="" bankid="" account="A000001" number="" value="-1863/1" memo="Kauf Deka Immoflex USA" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="50/1" price="1863/50" reconciledate="" action="Buy" bankid="" account="A000056" number="" value="1863/1" memo="Kauf Deka Immoflex USA" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2002-03-08" commodity="EUR" memo="" id="T000000000000000028" entrydate="2017-10-14">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-11244/5" reconciledate="" action="" bankid="" account="A000001" number="" value="-11244/5" memo="Kauf Carlson Asian Small Cap (Consors)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="1000/1" price="2811/1250" reconciledate="" action="Buy" bankid="" account="A000039" number="" value="11244/5" memo="Kauf Carlson Asian Small Cap (Consors)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2002-05-15" commodity="EUR" memo="" id="T000000000000000029" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="221787/50" reconciledate="" action="" bankid="" account="A000001" number="" value="221787/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-6613/10" price="16769/2500" reconciledate="" action="Buy" bankid="" account="A000023" number="" value="-221787/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2002-06-24" commodity="EUR" memo="" id="T000000000000000030" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-107087/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-107087/25" memo="Kauf CS Euroeal" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="6861/100" price="12487/200" reconciledate="" action="Buy" bankid="" account="A000046" number="" value="107087/25" memo="Kauf CS Euroeal" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2002-08-20" commodity="EUR" memo="" id="T000000000000000031" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="863/25" reconciledate="" action="" bankid="" account="A000001" number="" value="863/25" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-863/25" reconciledate="" action="" bankid="" account="A000005" number="" value="-863/25" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000056" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2002-12-27" commodity="EUR" memo="" id="T000000000000000032" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="1711/1" reconciledate="" action="" bankid="" account="A000001" number="" value="1711/1" memo="Verkauf Deka Immoflex USA" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-50/1" price="1711/50" reconciledate="" action="Buy" bankid="" account="A000056" number="" value="-1711/1" memo="Verkauf Deka Immoflex USA" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-04-20" commodity="EUR" memo="" id="T000000000000000033" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-84437/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-84437/25" memo="A2A Basis Kauf (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="265/1" price="31863/2500" reconciledate="" action="Buy" bankid="" account="A000015" number="" value="84437/25" memo="A2A Basis Kauf (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-09-13" commodity="EUR" memo="" id="T000000000000000034" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="148541/50" reconciledate="" action="" bankid="" account="A000001" number="" value="148541/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-50/1" price="148541/2500" reconciledate="" action="Buy" bankid="" account="A000014" number="" value="-148541/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-09-13" commodity="EUR" memo="" id="T000000000000000035" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="1843/5" reconciledate="" action="" bankid="" account="A000001" number="" value="1843/5" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-20/1" price="1843/100" reconciledate="" action="Buy" bankid="" account="A000048" number="" value="-1843/5" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-10-12" commodity="EUR" memo="" id="T000000000000000036" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="27/2" reconciledate="" action="" bankid="" account="A000001" number="" value="27/2" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-27/2" reconciledate="" action="" bankid="" account="A000005" number="" value="-27/2" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000022" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-10-19" commodity="EUR" memo="" id="T000000000000000037" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-17324/5" reconciledate="" action="" bankid="" account="A000001" number="" value="-17324/5" memo="Kauf Am Ex Fds GI High Yield Eur (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="160/1" price="4331/200" reconciledate="" action="Buy" bankid="" account="A000020" number="" value="17324/5" memo="Kauf Am Ex Fds GI High Yield Eur (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-10-26" commodity="EUR" memo="" id="T000000000000000038" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-688167/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-688167/100" memo="Kauf BG Umbrella Global Balance (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="57/1" price="1207311/10000" reconciledate="" action="Buy" bankid="" account="A000025" number="" value="688167/100" memo="Kauf BG Umbrella Global Balance (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-10-26" commodity="EUR" memo="" id="T000000000000000039" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-173894/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-173894/25" memo="Kauf BG Umbrella Global Challenge (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="46/1" price="756061/5000" reconciledate="" action="Buy" bankid="" account="A000026" number="" value="173894/25" memo="Kauf BG Umbrella Global Challenge (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2004-11-25" commodity="EUR" memo="" id="T000000000000000040" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="234531/100" reconciledate="" action="" bankid="" account="A000001" number="" value="234531/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-450/1" price="26059/5000" reconciledate="" action="Buy" bankid="" account="A000022" number="" value="-234531/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-01-06" commodity="EUR" memo="" id="T000000000000000041" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-147771/50" reconciledate="" action="" bankid="" account="A000001" number="" value="-147771/50" memo="Kauf ABN Amro DTS Strategie Zertifikat (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="3/1" price="49257/50" reconciledate="" action="Buy" bankid="" account="A000016" number="" value="147771/50" memo="Kauf ABN Amro DTS Strategie Zertifikat (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-02-09" commodity="EUR" memo="" id="T000000000000000042" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="350889/100" reconciledate="" action="" bankid="" account="A000001" number="" value="350889/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-265/1" price="132411/10000" reconciledate="" action="Buy" bankid="" account="A000015" number="" value="-350889/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-02-14" commodity="EUR" memo="" id="T000000000000000043" entrydate="2017-10-14">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="14144/5" reconciledate="" action="" bankid="" account="A000001" number="" value="14144/5" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-1000/1" price="1768/625" reconciledate="" action="Buy" bankid="" account="A000039" number="" value="-14144/5" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-03-11" commodity="EUR" memo="" id="T000000000000000044" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-271309/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-271309/100" memo="Kauf CROCI Japan Index Zertifikat (Citibank)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="25/1" price="271309/2500" reconciledate="" action="Buy" bankid="" account="A000045" number="" value="271309/100" memo="Kauf CROCI Japan Index Zertifikat (Citibank)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-05-20" commodity="EUR" memo="" id="T000000000000000045" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="350507/100" reconciledate="" action="" bankid="" account="A000001" number="" value="350507/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-160/1" price="219067/10000" reconciledate="" action="Buy" bankid="" account="A000020" number="" value="-350507/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-05-28" commodity="EUR" memo="" id="T000000000000000046" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="157431/50" reconciledate="" action="" bankid="" account="A000001" number="" value="157431/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-25/1" price="157431/1250" reconciledate="" action="Buy" bankid="" account="A000025" number="" value="-157431/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-09-22" commodity="EUR" memo="" id="T000000000000000047" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-347257/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-347257/100" memo="Kauf ACMGI American Growth Trends (DB)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="440/1" price="39461/5000" reconciledate="" action="Buy" bankid="" account="A000013" number="" value="347257/100" memo="Kauf ACMGI American Growth Trends (DB)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-10-01" commodity="EUR" memo="" id="T000000000000000048" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="76169/25" reconciledate="" action="" bankid="" account="A000001" number="" value="76169/25" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-3/1" price="10155867/10000" reconciledate="" action="Buy" bankid="" account="A000016" number="" value="-76169/25" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-10-06" commodity="EUR" memo="" id="T000000000000000049" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-190487/50" reconciledate="" action="" bankid="" account="A000001" number="" value="-190487/50" memo="A2A Wachstum Kauf (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="263/1" price="144857/10000" reconciledate="" action="Buy" bankid="" account="A000017" number="" value="190487/50" memo="A2A Wachstum Kauf (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-10-21" commodity="EUR" memo="" id="T000000000000000050" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-55891/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-55891/25" memo="Kauf Axa Rosenberg Japan Small Cap (Citibank)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="150/1" price="149043/10000" reconciledate="" action="Buy" bankid="" account="A000021" number="" value="55891/25" memo="Kauf Axa Rosenberg Japan Small Cap (Citibank)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-10-21" commodity="EUR" memo="" id="T000000000000000051" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-83661/25" reconciledate="" action="" bankid="" account="A000001" number="" value="-83661/25" memo="Kauf BGF World Gold Fund (Citibank)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="150/1" price="27887/1250" reconciledate="" action="Buy" bankid="" account="A000032" number="" value="83661/25" memo="Kauf BGF World Gold Fund (Citibank)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-10-26" commodity="EUR" memo="" id="T000000000000000052" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-177193/50" reconciledate="" action="" bankid="" account="A000001" number="" value="-177193/50" memo="Kauf Carmignac Patrimoine (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="10/1" price="177193/500" reconciledate="" action="Buy" bankid="" account="A000043" number="" value="177193/50" memo="Kauf Carmignac Patrimoine (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2005-11-11" commodity="EUR" memo="" id="T000000000000000053" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-409633/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-409633/100" memo="A2A Chance Kauf (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="264/1" price="38791/2500" reconciledate="" action="Buy" bankid="" account="A000018" number="" value="409633/100" memo="A2A Chance Kauf (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-01-12" commodity="EUR" memo="" id="T000000000000000054" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="49/20" reconciledate="" action="" bankid="" account="A000001" number="" value="49/20" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-49/20" reconciledate="" action="" bankid="" account="A000005" number="" value="-49/20" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000018" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-01-13" commodity="EUR" memo="" id="T000000000000000055" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="981/100" reconciledate="" action="" bankid="" account="A000001" number="" value="981/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-981/100" reconciledate="" action="" bankid="" account="A000005" number="" value="-981/100" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000017" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-02-23" commodity="EUR" memo="" id="T000000000000000056" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-17343/4" reconciledate="" action="" bankid="" account="A000001" number="" value="-17343/4" memo="Kauf BGF Latin American A2 Fund (Diba)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="100/1" price="17343/400" reconciledate="" action="Buy" bankid="" account="A000027" number="" value="17343/4" memo="Kauf BGF Latin American A2 Fund (Diba)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-02-24" commodity="EUR" memo="" id="T000000000000000057" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="401989/100" reconciledate="" action="" bankid="" account="A000001" number="" value="401989/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-23/1" price="873889/5000" reconciledate="" action="Buy" bankid="" account="A000026" number="" value="-401989/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-03-20" commodity="EUR" memo="" id="T000000000000000058" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-46527/20" reconciledate="" action="" bankid="" account="A000001" number="" value="-46527/20" memo="Kauf BGF World Energy Fund (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="125/1" price="46527/2500" reconciledate="" action="Buy" bankid="" account="A000028" number="" value="46527/20" memo="Kauf BGF World Energy Fund (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-05-20" commodity="EUR" memo="" id="T000000000000000059" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-206607/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-206607/100" memo="Kauf Bank Berlin Day Baer Zertifikat (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="167/1" price="123717/10000" reconciledate="" action="Buy" bankid="" account="A000024" number="" value="206607/100" memo="Kauf Bank Berlin Day Baer Zertifikat (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-07-25" commodity="EUR" memo="" id="T000000000000000060" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="409459/100" reconciledate="" action="" bankid="" account="A000001" number="" value="409459/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-32/1" price="1279559/10000" reconciledate="" action="Buy" bankid="" account="A000025" number="" value="-409459/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-07-25" commodity="EUR" memo="" id="T000000000000000061" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="2223/1" reconciledate="" action="" bankid="" account="A000001" number="" value="2223/1" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-125/1" price="2223/125" reconciledate="" action="Buy" bankid="" account="A000028" number="" value="-2223/1" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-07-28" commodity="EUR" memo="" id="T000000000000000062" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="183357/50" reconciledate="" action="" bankid="" account="A000001" number="" value="183357/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-263/1" price="27887/2000" reconciledate="" action="Buy" bankid="" account="A000017" number="" value="-183357/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-07-31" commodity="EUR" memo="" id="T000000000000000063" entrydate="2017-10-14">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="531067/100" reconciledate="" action="" bankid="" account="A000001" number="" value="531067/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-7/1" price="7586671/10000" reconciledate="" action="Buy" bankid="" account="A000040" number="" value="-531067/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-09-22" commodity="EUR" memo="" id="T000000000000000064" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="87537/50" reconciledate="" action="" bankid="" account="A000001" number="" value="87537/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-167/1" price="20967/2000" reconciledate="" action="Buy" bankid="" account="A000024" number="" value="-87537/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2006-09-22" commodity="EUR" memo="" id="T000000000000000065" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="199739/50" reconciledate="" action="" bankid="" account="A000001" number="" value="199739/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-23/1" price="1736861/10000" reconciledate="" action="Buy" bankid="" account="A000026" number="" value="-199739/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-01-02" commodity="EUR" memo="" id="T000000000000000066" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="41/5" reconciledate="" action="" bankid="" account="A000001" number="" value="41/5" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-41/5" reconciledate="" action="" bankid="" account="A000005" number="" value="-41/5" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000018" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-03-01" commodity="EUR" memo="" id="T000000000000000067" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="109253/25" reconciledate="" action="" bankid="" account="A000001" number="" value="109253/25" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-264/1" price="33107/2000" reconciledate="" action="Buy" bankid="" account="A000018" number="" value="-109253/25" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-03-02" commodity="EUR" memo="" id="T000000000000000068" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-67303/5" reconciledate="" action="" bankid="" account="A000001" number="" value="-67303/5" memo="Kauf DB Reverse Bonus ZT 09 (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="156/1" price="862859/10000" reconciledate="" action="Buy" bankid="" account="A000049" number="" value="67303/5" memo="Kauf DB Reverse Bonus ZT 09 (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-03-02" commodity="EUR" memo="" id="T000000000000000069" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="110098/25" reconciledate="" action="" bankid="" account="A000001" number="" value="110098/25" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-50/1" price="55049/625" reconciledate="" action="Buy" bankid="" account="A000049" number="" value="-110098/25" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-03-22" commodity="EUR" memo="" id="T000000000000000070" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="880857/100" reconciledate="" action="" bankid="" account="A000001" number="" value="880857/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-106/1" price="830997/10000" reconciledate="" action="Buy" bankid="" account="A000049" number="" value="-880857/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-03-23" commodity="EUR" memo="" id="T000000000000000071" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-157779/50" reconciledate="" action="" bankid="" account="A000001" number="" value="-157779/50" memo="Kauf BGF World Mining Fund (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="66/1" price="239059/5000" reconciledate="" action="Buy" bankid="" account="A000033" number="" value="157779/50" memo="Kauf BGF World Mining Fund (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-07-17" commodity="EUR" memo="" id="T000000000000000072" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="387309/100" reconciledate="" action="" bankid="" account="A000001" number="" value="387309/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-10/1" price="387309/1000" reconciledate="" action="Buy" bankid="" account="A000043" number="" value="-387309/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-07-26" commodity="EUR" memo="" id="T000000000000000073" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="302847/50" reconciledate="" action="" bankid="" account="A000001" number="" value="302847/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-100/1" price="302847/5000" reconciledate="" action="Buy" bankid="" account="A000027" number="" value="-302847/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-09-21" commodity="EUR" memo="" id="T000000000000000074" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="376871/100" reconciledate="" action="" bankid="" account="A000001" number="" value="376871/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-66/1" price="571017/10000" reconciledate="" action="Buy" bankid="" account="A000033" number="" value="-376871/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2007-11-18" commodity="EUR" memo="" id="T000000000000000075" entrydate="2017-10-14">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-21166/5" reconciledate="" action="" bankid="" account="A000001" number="" value="-21166/5" memo="Kauf Carmignac Emergents (Selsam)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="7/1" price="6047429/10000" reconciledate="" action="Buy" bankid="" account="A000040" number="" value="21166/5" memo="Kauf Carmignac Emergents (Selsam)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2008-06-01" commodity="EUR" memo="" id="T000000000000000076" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-20000/1" reconciledate="" action="" bankid="" account="A000001" number="" value="-20000/1" memo="Kauf Carmignac Investissement" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="664/25" price="188253/250" reconciledate="" action="Buy" bankid="" account="A000041" number="" value="20000/1" memo="Kauf Carmignac Investissement" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2008-12-08" commodity="EUR" memo="" id="T000000000000000077" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="131193/100" reconciledate="" action="" bankid="" account="A000001" number="" value="131193/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-150/1" price="43731/5000" reconciledate="" action="Buy" bankid="" account="A000021" number="" value="-131193/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2008-12-08" commodity="EUR" memo="" id="T000000000000000078" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-5000/1" reconciledate="" action="" bankid="" account="A000001" number="" value="-5000/1" memo="Kauf BGF World Energy Fund" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="1981/5" price="126199/10000" reconciledate="" action="Buy" bankid="" account="A000030" number="" value="5000/1" memo="Kauf BGF World Energy Fund" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2008-12-08" commodity="EUR" memo="" id="T000000000000000079" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="9608/5" reconciledate="" action="" bankid="" account="A000001" number="" value="9608/5" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-25/1" price="9608/125" reconciledate="" action="Buy" bankid="" account="A000045" number="" value="-9608/5" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2008-12-11" commodity="EUR" memo="" id="T000000000000000080" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-5000/1" reconciledate="" action="" bankid="" account="A000001" number="" value="-5000/1" memo="Kauf Carmignac Patrimoine" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="617/50" price="506483/1250" reconciledate="" action="Buy" bankid="" account="A000042" number="" value="5000/1" memo="Kauf Carmignac Patrimoine" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2008-12-16" commodity="EUR" memo="" id="T000000000000000081" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-5000/1" reconciledate="" action="" bankid="" account="A000001" number="" value="-5000/1" memo="Kauf BGF World Mining Fund" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="2157/10" price="1159/50" reconciledate="" action="Buy" bankid="" account="A000034" number="" value="5000/1" memo="Kauf BGF World Mining Fund" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2009-03-18" commodity="EUR" memo="" id="T000000000000000082" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="151284/25" reconciledate="" action="" bankid="" account="A000001" number="" value="151284/25" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="1" shares="-440/1" price="137531/10000" reconciledate="" action="Buy" bankid="" account="A000013" number="" value="-151284/25" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2009-11-24" commodity="EUR" memo="" id="T000000000000000083" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-1000/1" reconciledate="" action="" bankid="" account="A000001" number="" value="-1000/1" memo="Kauf Biochar Europe" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="1000/1" price="1/1" reconciledate="" action="Buy" bankid="" account="A000036" number="" value="1000/1" memo="Kauf Biochar Europe" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2009-11-24" commodity="EUR" memo="" id="T000000000000000084" entrydate="2017-10-13">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="141274/5" reconciledate="" action="" bankid="" account="A000001" number="" value="141274/5" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-141274/5" reconciledate="" action="" bankid="" account="A000037" number="" value="-141274/5" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000036" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2010-08-01" commodity="EUR" memo="" id="T000000000000000085" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-397211/100" reconciledate="" action="" bankid="" account="A000001" number="" value="-397211/100" memo="Kauf Deka Daxplus Maximum Dividend UC" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="50/1" price="397211/5000" reconciledate="" action="Buy" bankid="" account="A000054" number="" value="397211/100" memo="Kauf Deka Daxplus Maximum Dividend UC" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2010-10-11" commodity="EUR" memo="" id="T000000000000000086" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-289/20" reconciledate="" action="" bankid="" account="A000001" number="" value="-289/20" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="499/20" reconciledate="" action="" bankid="" account="A000007" number="" value="499/20" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="-21/2" reconciledate="" action="" bankid="" account="A000005" number="" value="-21/2" memo="" id="S0003"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000054" number="" value="0/1" memo="" id="S0004"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-02-17" commodity="EUR" memo="" id="T000000000000000087" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-23863/5" reconciledate="" action="" bankid="" account="A000001" number="" value="-23863/5" memo="Kauf db x-trackers FTSE MIB Index" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="200/1" price="23863/1000" reconciledate="" action="Buy" bankid="" account="A000053" number="" value="23863/5" memo="Kauf db x-trackers FTSE MIB Index" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-05-19" commodity="EUR" memo="" id="T000000000000000088" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-63143/20" reconciledate="" action="" bankid="" account="A000001" number="" value="-63143/20" memo="Kauf db x-tracker Banks Short" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="100/1" price="63143/2000" reconciledate="" action="Buy" bankid="" account="A000052" number="" value="63143/20" memo="Kauf db x-tracker Banks Short" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-06-01" commodity="EUR" memo="" id="T000000000000000089" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="21627/5" reconciledate="" action="" bankid="" account="A000001" number="" value="21627/5" memo="Verkauf db x-trackers FTSE MIB Index" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-200/1" price="21627/1000" reconciledate="" action="Buy" bankid="" account="A000053" number="" value="-21627/5" memo="Verkauf db x-trackers FTSE MIB Index" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-06-02" commodity="EUR" memo="" id="T000000000000000090" entrydate="2017-10-14">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-25621/10" reconciledate="" action="" bankid="" account="A000001" number="" value="-25621/10" memo="Kauf BNP Paribas Instcash CHF (Diba)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="30/1" price="854033/10000" reconciledate="" action="Buy" bankid="" account="A000038" number="" value="25621/10" memo="Kauf BNP Paribas Instcash CHF (Diba)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-07-11" commodity="EUR" memo="" id="T000000000000000091" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="21203/100" reconciledate="" action="" bankid="" account="A000001" number="" value="21203/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="1247/100" reconciledate="" action="" bankid="" account="A000007" number="" value="1247/100" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="-449/2" reconciledate="" action="" bankid="" account="A000005" number="" value="-449/2" memo="" id="S0003"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000054" number="" value="0/1" memo="" id="S0004"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-09-06" commodity="EUR" memo="" id="T000000000000000092" entrydate="2017-10-14">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-128207/50" reconciledate="" action="" bankid="" account="A000001" number="" value="-128207/50" memo="Kauf BNP Paribas Instcash CHF (Diba)" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="30/1" price="854713/10000" reconciledate="" action="Buy" bankid="" account="A000038" number="" value="128207/50" memo="Kauf BNP Paribas Instcash CHF (Diba)" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-10-10" commodity="EUR" memo="" id="T000000000000000093" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="934/25" reconciledate="" action="" bankid="" account="A000001" number="" value="934/25" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="416/25" reconciledate="" action="" bankid="" account="A000007" number="" value="416/25" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="-54/1" reconciledate="" action="" bankid="" account="A000005" number="" value="-54/1" memo="" id="S0003"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000054" number="" value="0/1" memo="" id="S0004"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-10-31" commodity="EUR" memo="" id="T000000000000000094" entrydate="2017-10-18">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="35491/10" reconciledate="" action="" bankid="" account="A000001" number="" value="35491/10" memo="Verkauf Deka Daxplus Maximum Dividend UC" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-50/1" price="35491/500" reconciledate="" action="Buy" bankid="" account="A000054" number="" value="-35491/10" memo="Verkauf Deka Daxplus Maximum Dividend UC" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-12-22" commodity="EUR" memo="" id="T000000000000000095" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="195513/50" reconciledate="" action="" bankid="" account="A000001" number="" value="195513/50" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-100/1" price="195513/5000" reconciledate="" action="Buy" bankid="" account="A000052" number="" value="-195513/50" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2011-12-23" commodity="EUR" memo="" id="T000000000000000096" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-71633/20" reconciledate="" action="" bankid="" account="A000001" number="" value="-71633/20" memo="Kauf db x-tracker Banks Short" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="100/1" price="71633/2000" reconciledate="" action="Buy" bankid="" account="A000052" number="" value="71633/20" memo="Kauf db x-tracker Banks Short" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2012-03-21" commodity="EUR" memo="" id="T000000000000000097" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="32463/20" reconciledate="" action="" bankid="" account="A000001" number="" value="32463/20" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-50/1" price="32463/1000" reconciledate="" action="Buy" bankid="" account="A000052" number="" value="-32463/20" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2012-03-21" commodity="EUR" memo="" id="T000000000000000098" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="36833/20" reconciledate="" action="" bankid="" account="A000001" number="" value="36833/20" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-50/1" price="36833/1000" reconciledate="" action="Buy" bankid="" account="A000052" number="" value="-36833/20" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2012-07-29" commodity="EUR" memo="" id="T000000000000000099" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-65071/20" reconciledate="" action="" bankid="" account="A000001" number="" value="-65071/20" memo="Kauf db x-tracker SP500 Inverse Daily ETF" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="100/1" price="65071/2000" reconciledate="" action="Buy" bankid="" account="A000051" number="" value="65071/20" memo="Kauf db x-tracker SP500 Inverse Daily ETF" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2012-10-26" commodity="EUR" memo="" id="T000000000000000100" entrydate="2017-10-14">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="100451/20" reconciledate="" action="" bankid="" account="A000001" number="" value="100451/20" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-60/1" price="209273/2500" reconciledate="" action="Buy" bankid="" account="A000038" number="" value="-100451/20" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2012-12-08" commodity="EUR" memo="" id="T000000000000000101" entrydate="2017-10-16">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="363827/100" reconciledate="" action="" bankid="" account="A000001" number="" value="363827/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-363827/100" reconciledate="" action="" bankid="" account="A000005" number="" value="-363827/100" memo="" id="S0002"/>
+    <SPLIT payee="" reconcileflag="0" shares="0/1" price="1/1" reconciledate="" action="Dividend" bankid="" account="A000046" number="" value="0/1" memo="" id="S0003"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2013-12-10" commodity="EUR" memo="" id="T000000000000000102" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="9691/5" reconciledate="" action="" bankid="" account="A000001" number="" value="9691/5" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-100/1" price="9691/500" reconciledate="" action="Buy" bankid="" account="A000051" number="" value="-9691/5" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+  <TRANSACTION postdate="2017-08-11" commodity="EUR" memo="" id="T000000000000000103" entrydate="2017-10-17">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="-14319/5" reconciledate="" action="" bankid="" account="A000001" number="" value="-14319/5" memo="Kauf db x-tracker SP500 Inverse Daily ETF" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="200/1" price="14319/1000" reconciledate="" action="Buy" bankid="" account="A000051" number="" value="14319/5" memo="Kauf db x-tracker SP500 Inverse Daily ETF" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+ </TRANSACTIONS>
+ <KEYVALUEPAIRS>
+  <PAIR key="kmm-baseCurrency" value="EUR"/>
+  <PAIR key="kmm-id" value="{5beb7a03-d6ec-44c9-b3e9-34fe17e33ef7}"/>
+ </KEYVALUEPAIRS>
+ <SCHEDULES count="0"/>
+ <SECURITIES count="41">
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:556163" type="1" id="E000001" name="A2A Basis" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="A2A Basis"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="Test" type="1" id="E000002" name="Test" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Test"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:556165" type="1" id="E000003" name="A2A Chance" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="A2A Chance"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:556164" type="1" id="E000004" name="A2A Wachstum" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="A2A Wachstum"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:718346" type="1" id="E000005" name="ABN Amro DTS Strategie Zertifikat" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="ABN Amro DTS Strategie Zertifikat"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:988120" type="1" id="E000006" name="ABN Amro Global Resources" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="ABN Amro Global Resources"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:974332" type="1" id="E000007" name="ACMGI American Growth Trends" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="ACMGI American Growth Trends"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="Test" type="1" id="E000008" name="Test" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Test"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:523366" type="1" id="E000009" name="Am Ex Fds GI High Yield Eur" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Am Ex Fds GI High Yield Eur"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:IE0031069721" type="1" id="E000010" name="Axa Rosenberg Japan Small Cap" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Axa Rosenberg Japan Small Cap"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:971795" type="1" id="E000011" name="Axa World Continental Europe Opportunities Actions" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Axa World Continental Europe Opportunities Actions"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:973603" type="1" id="E000012" name="Alger Large Cap Growth" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Alger Large Cap Growth"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:168329" type="1" id="E000013" name="Bank Berlin Dax Baer Zertifikat" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Bank Berlin Dax Baer Zertifikat"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:728494" type="1" id="E000014" name="BG Umbrella Global Balance" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="BG Umbrella Global Balance"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:172958" type="1" id="E000015" name="BG Umbrella Global Challenge" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="BG Umbrella Global Challenge"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="ERDP.BE" type="1" id="E000016" name="BGF Latin American A2 Fund" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="BGF Latin American A2 Fund"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="ERDN.SG" type="1" id="E000017" name="BGF World Energy Fund" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="BGF World Energy Fund"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="1000" trading-currency="EUR" symbol="ERDN.SG" type="1" id="E000018" name="BGF World Energy Fund" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="BGF World Energy Fund"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="MI9C.SG" type="1" id="E000019" name="BGF World Gold Fund" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="BGF World Gold Fund"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="MI9T.SG" type="1" id="E000020" name="BGF World Mining Fund" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="BGF World Mining Fund"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="1000" trading-currency="EUR" symbol="MI9T.SG" type="1" id="E000021" name="BGF World Mining Fund" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="BGF World Mining Fund"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:BCE" type="0" id="E000022" name="Biochar Europe" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Biochar Europe"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:A0LCEJ" type="1" id="E000023" name="BNP Paribas Instcash CHF" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="BNP Paribas Instcash CHF"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:986071" type="1" id="E000024" name="Carlson Asian Small Cap" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Carlson Asian Small Cap"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="Y9U3.HM" type="1" id="E000025" name="Carmignac Emergents" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="Carmignac Emergents"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="Y9U1.HM" type="1" id="E000026" name="Carmignac Investissement" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="Carmignac Investissement"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="Y9U6.HM" type="1" id="E000027" name="Carmignac Patrimoine" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="Carmignac Patrimoine"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="Y9U6.HM" type="1" id="E000028" name="Carmignac Patrimoine" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="Carmignac Patrimoine"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:989466" type="1" id="E000029" name="Citigarant Worldtop" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Citigarant Worldtop"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:DE000DB091Y4" type="1" id="E000030" name="CROCI Japan Index Zertifikat" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="CROCI Japan Index Zertifikat"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="1000" trading-currency="EUR" symbol="C6JA.BE" type="1" id="E000031" name="CS Euroeal" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="CS Euroeal"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:978172" type="1" id="E000032" name="DAC Fonds UI" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="DAC Fonds UI"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:849069" type="1" id="E000033" name="DAC Kontrast" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="DAC Kontrast"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:DB1BQQ" type="1" id="E000034" name="DB Reverse Bonus ZT 09" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="DB Reverse Bonus ZT 09"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:971254" type="1" id="E000035" name="DB Tiger Fund" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="DB Tiger Fund"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DXS3.F" type="1" id="E000036" name="db x-tracker SP500 Inverse Daily" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="db x-tracker SP500 Inverse Daily"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DXS8.F" type="1" id="E000037" name="db x-tracker Banks Short" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="db x-tracker Banks Short"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:DBX1MB" type="1" id="E000038" name="db x-trackers FTSE MIB Index" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="db x-trackers FTSE MIB Index"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="EL4X.F" type="1" id="E000039" name="Deka Daxplus Maximum Dividend UC" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-online-source" value="Yahoo"/>
+    <PAIR key="kmm-security-id" value="Deka Daxplus Maximum Dividend UC"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:986472" type="1" id="E000040" name="Deka Immoflex USA" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="Deka Immoflex USA"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+  <SECURITY saf="100" trading-currency="EUR" symbol="DE:847787" type="1" id="E000041" name="DEVK Sparda Rent" trading-market="AMEX">
+   <KEYVALUEPAIRS>
+    <PAIR key="kmm-security-id" value="DEVK Sparda Rent"/>
+   </KEYVALUEPAIRS>
+  </SECURITY>
+ </SECURITIES>
+ <CURRENCIES count="185">
+  <CURRENCY saf="100" symbol="ADF" type="3" id="ADF" name="Andorranischer Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ADP" type="3" id="ADP" name="Andorranische Pesete" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="AED" type="3" id="AED" name="Ver. Arab. Emir.-Dirham" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="AFA" type="3" id="AFA" name="Afghanischer Afghani" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ALL" type="3" id="ALL" name="Albanischer Lek" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ANG" type="3" id="ANG" name="Niederländische Antillen Gulden" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="AON" type="3" id="AON" name="Angolanischer Kwanza" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="ARS" name="Argentinischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ÃS" type="3" id="ATS" name="Östereichischer Schilling" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="AUD" name="Australischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="AWG" type="3" id="AWG" name="Aruba Florin" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="m." type="3" id="AZM" name="Aserbaidschan-Manat" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="m." type="3" id="AZN" name="Aserbaidschan-Manat" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BAM" type="3" id="BAM" name="Bosnische konvertierbare Mark" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="BBD" name="Barbados-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BDT" type="3" id="BDT" name="Bangladeschischer Taka" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="Fr" type="3" id="BEF" name="Belgischer Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BGL" type="3" id="BGL" name="Bulgarischer Lew" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BGN" type="3" id="BGN" name="Bulgarischer Lew (neu)" ppu="100" scf="100"/>
+  <CURRENCY saf="1000" symbol="BHD" type="3" id="BHD" name="Bahrain-Dinar" ppu="1000" scf="1000"/>
+  <CURRENCY saf="100" symbol="BIF" type="3" id="BIF" name="Burundi-Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="BMD" name="Bermuda-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="BND" name="Brunei-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BOB" type="3" id="BOB" name="Bolivianischer Boliviano" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="R$" type="3" id="BRL" name="Brasilianischer Real" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="BSD" name="Bahama-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BTC" type="3" id="BTC" name="Bitcoin" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BTN" type="3" id="BTN" name="Bhutanischer Ngultrum" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BWP" type="3" id="BWP" name="Botsuanischer Pula" ppu="100" scf="100"/>
+  <CURRENCY saf="1" symbol="BYR" type="3" id="BYR" name="Weißrussischer Rubel" ppu="1" scf="1"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="BZD" name="Belize-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="CAD" name="Kanadischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SFr" type="3" id="CHF" name="Schweizer Franken" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="CLP" type="3" id="CLP" name="Chilenischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="CNY" type="3" id="CNY" name="Chinesischer Renminbi Yuan" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="COP" type="3" id="COP" name="Kolumbianischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₡" type="3" id="CRC" name="Costa-Rica-Colon" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="CUP" type="3" id="CUP" name="Kubanischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="CVE" type="3" id="CVE" name="Kap-Verde-Escudo" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="C£" type="3" id="CYP" name="Zypern-Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="CZK" type="3" id="CZK" name="Tschechische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="DM" type="3" id="DEM" name="Deutsche Mark" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="DJF" type="3" id="DJF" name="Dschibuti-Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="kr" type="3" id="DKK" name="Dänische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="DOP" type="3" id="DOP" name="Dominikanischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="DZD" type="3" id="DZD" name="Algerischer Dinar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="EEK" type="3" id="EEK" name="Estnische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="EGP" name="Ägyptisches Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ERN" type="3" id="ERN" name="Eritreischer Nakfa" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ESP" type="3" id="ESP" name="Spanische Pesete" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ETB" type="3" id="ETB" name="Äthiopischer Birr" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="€" type="3" id="EUR" name="Euro" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="FIM" type="3" id="FIM" name="Finnische Mark" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="FJD" name="Fidschi-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="FKP" name="Falkland-Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="FF" type="3" id="FRF" name="Französischer Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="GBP" name="Britisches Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="GEL" type="3" id="GEL" name="Georgischer Lari" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="GHC" type="3" id="GHC" name="Ghanaischer Cedi" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="GIP" name="Gibraltar-Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="GMD" type="3" id="GMD" name="Gambischer Dalasi" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₯" type="3" id="GRD" name="Griechische Drachme" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="GTQ" type="3" id="GTQ" name="Guatemaltekischer Quetzal" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="GWP" type="3" id="GWP" name="Guinea-Bissau-Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="GYD" name="Guyana-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="HKD" name="Hongkong-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="HNL" type="3" id="HNL" name="Honduranische Lempira" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="HRK" type="3" id="HRK" name="Kroatische Kuna" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="HTG" type="3" id="HTG" name="Haitianische Gourde" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="HUF" type="3" id="HUF" name="Ungarischer Forint" ppu="1" scf="1"/>
+  <CURRENCY saf="1" symbol="IDR" type="3" id="IDR" name="Indonesische Rupiah" ppu="100" scf="1"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="IEP" name="Irisches Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₪" type="3" id="ILS" name="Israelischer Neuer Schekel" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₨" type="3" id="INR" name="Indische Rupie" ppu="100" scf="100"/>
+  <CURRENCY saf="1000" symbol="IQD" type="3" id="IQD" name="Irakischer Dinar" ppu="1000" scf="1000"/>
+  <CURRENCY saf="1" symbol="IRR" type="3" id="IRR" name="Iranischer Rial" ppu="1" scf="1"/>
+  <CURRENCY saf="100" symbol="ISK" type="3" id="ISK" name="Isländische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₤" type="3" id="ITL" name="Italiänische Lire" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="JMD" name="Jamaikanischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="1000" symbol="JOD" type="3" id="JOD" name="Jordanischer Dinar" ppu="1000" scf="1000"/>
+  <CURRENCY saf="1" symbol="¥" type="3" id="JPY" name="Japanischer Yen" ppu="100" scf="1"/>
+  <CURRENCY saf="100" symbol="KES" type="3" id="KES" name="Kenianischer Schilling" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="KGS" type="3" id="KGS" name="Kirgisischer Som" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="KHR" type="3" id="KHR" name="Kambodschanischer Riel" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="KMF" type="3" id="KMF" name="Komoren-Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₩" type="3" id="KPW" name="Nordkoreanischer Won" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₩" type="3" id="KRW" name="Südkoreanischer Won" ppu="100" scf="100"/>
+  <CURRENCY saf="1000" symbol="KWD" type="3" id="KWD" name="Kuwaitischer Dinar" ppu="1000" scf="1000"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="KYD" name="Kaiman-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="KZT" type="3" id="KZT" name="Kasachstan Tenge" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₭" type="3" id="LAK" name="Laotischer Kip" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="LBP" name="Libanesisches Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="LKR" type="3" id="LKR" name="Sri-Lanka-Rupie" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="LRD" name="Liberianischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="LSL" type="3" id="LSL" name="Lesothischer Loti" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="Lt" type="3" id="LTL" name="Litauische Litas" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="Fr" type="3" id="LUF" name="Luxemburger Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="LVL" type="3" id="LVL" name="Lettische Lats" ppu="100" scf="100"/>
+  <CURRENCY saf="1000" symbol="LYD" type="3" id="LYD" name="Libyscher Dinar" ppu="1000" scf="1000"/>
+  <CURRENCY saf="100" symbol="MAD" type="3" id="MAD" name="Marokkanischer Dirham" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MDL" type="3" id="MDL" name="Moldauischer Leu" ppu="100" scf="100"/>
+  <CURRENCY saf="500" symbol="MGF" type="3" id="MGF" name="Madagaskar-Franc" ppu="500" scf="500"/>
+  <CURRENCY saf="100" symbol="MKD" type="3" id="MKD" name="Mazedonischer Denar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MLF" type="3" id="MLF" name="Mali-Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MMK" type="3" id="MMK" name="Myanmarischer Kyat" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₮" type="3" id="MNT" name="Mongolischer Tugrik" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MOP" type="3" id="MOP" name="Macauische Pataca" ppu="100" scf="100"/>
+  <CURRENCY saf="5" symbol="MRO" type="3" id="MRO" name="Mauretanische Ouguiya" ppu="5" scf="5"/>
+  <CURRENCY saf="100" symbol="MTL" type="3" id="MTL" name="Maltesische Lire" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MUR" type="3" id="MUR" name="Mauritius-Rupie" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MVR" type="3" id="MVR" name="Maledivische Rufiyaa" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MWK" type="3" id="MWK" name="Malawi-Kwacha" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="MXN" name="Mexikanischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MYR" type="3" id="MYR" name="Malaysischer Ringgit" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MT" type="3" id="MZM" name="Mosambikanischer Metical" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MT" type="3" id="MZN" name="Mosambikanischer Metical" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="NAD" name="Namibischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₦" type="3" id="NGN" name="Nigerianische Naira" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="NIC" type="3" id="NIC" name="Nicaraguanischer Cordoba" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="NLG" type="3" id="NLG" name="Holländischer Gulden" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="kr" type="3" id="NOK" name="Norwegische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="NPR" type="3" id="NPR" name="Nepalesische Rupie" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="NZD" name="Neuseländischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="1000" symbol="OMR" type="3" id="OMR" name="Omani Rial" ppu="1000" scf="1000"/>
+  <CURRENCY saf="100" symbol="PAB" type="3" id="PAB" name="Panamaischer Balboa" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="PEN" type="3" id="PEN" name="Peruanischer Sol" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="PGK" type="3" id="PGK" name="Papua-Neuguinea-Kina" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₱" type="3" id="PHP" name="Philippinischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="PKR" type="3" id="PKR" name="Pakistanische Rupie" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="PLN" type="3" id="PLN" name="Polnischer Zloty" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="PTE" type="3" id="PTE" name="Portugischer Escudo" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="PYG" type="3" id="PYG" name="Paraguayischer Guarani" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="QAR" type="3" id="QAR" name="Katar-Rial" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ROL" type="3" id="ROL" name="Rumänischer Lei" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RON" type="3" id="RON" name="Rumänischer Lei (neu)" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RSD" type="3" id="RSD" name="Serbischer Dinar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RUB" type="3" id="RUB" name="Russischer Rubel" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RUR" type="3" id="RUR" name="Russischer Rubel (alt)" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RWF" type="3" id="RWF" name="Ruanda-Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SAR" type="3" id="SAR" name="Saudi Riyal" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="SBD" name="Salomonen-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SCR" type="3" id="SCR" name="Seychellen-Rupie" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SDD" type="3" id="SDD" name="Sudanesischer Dinar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SEK" type="3" id="SEK" name="Schwedische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="SGD" name="Singapur Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="SHP" name="St. Helena-Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SIT" type="3" id="SIT" name="Slowenischer Tolar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SKK" type="3" id="SKK" name="Slovakische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SLL" type="3" id="SLL" name="Sierraleonische Leone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SOS" type="3" id="SOS" name="Somalischer Schilling" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SRG" type="3" id="SRG" name="Suriname-Gulden" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="STD" type="3" id="STD" name="Sao-Tome/Principe-Dobra" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SVC" type="3" id="SVC" name="El-Salvador-Colon" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="SYP" name="Syrisches Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SZL" type="3" id="SZL" name="Swasiländischer Lilangeni" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="฿" type="3" id="THB" name="Thailändischer Baht" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="TJS" type="3" id="TJS" name="Tadschikistan-Somani" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="TMM" type="3" id="TMM" name="Turkmenistan-Manat" ppu="100" scf="100"/>
+  <CURRENCY saf="1000" symbol="TND" type="3" id="TND" name="Tunesischer Dinar" ppu="1000" scf="1000"/>
+  <CURRENCY saf="100" symbol="TOP" type="3" id="TOP" name="Tongaische Pa'anga" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="TL" type="3" id="TRL" name="Turkish Lira (old)" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₺" type="3" id="TRY" name="Türkische Neue Lire" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="TTD" name="Trinidad/Tobago-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="TWD" name="Taiwanesischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="TZS" type="3" id="TZS" name="Tansania-Schilling " ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="UAH" type="3" id="UAH" name="Ukrainische Griwna " ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="UGX" type="3" id="UGX" name="Uganda-Schilling" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="USD" name="US-Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="UYU" type="3" id="UYU" name="Uruguayischer Peso" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="UZS" type="3" id="UZS" name="Usbekistan-Sum" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="VEB" type="3" id="VEB" name="Venezuelanischer Bolivar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₫" type="3" id="VND" name="Vietnamesischer Dong" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="VUV" type="3" id="VUV" name="Vanuatu-Vatu" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="WST" type="3" id="WST" name="Samoanischer Tala" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="XAF" type="3" id="XAF" name="CFA Franc BEAC" ppu="100" scf="100"/>
+  <CURRENCY saf="1000000" symbol="XAG" type="3" id="XAG" name="Silber" ppu="1" scf="1000000"/>
+  <CURRENCY saf="1000000" symbol="XAU" type="3" id="XAU" name="Gold" ppu="1" scf="1000000"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="XCD" name="Ost Karibischer Dollar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="XOF" type="3" id="XOF" name="CFA Franc BCEAO" ppu="100" scf="100"/>
+  <CURRENCY saf="1000000" symbol="XPD" type="3" id="XPD" name="Palladium" ppu="1" scf="1000000"/>
+  <CURRENCY saf="100" symbol="F" type="3" id="XPF" name="CFP Franc Pazific" ppu="1" scf="1"/>
+  <CURRENCY saf="1000000" symbol="XPT" type="3" id="XPT" name="Platin" ppu="1" scf="1000000"/>
+  <CURRENCY saf="100" symbol="ZAR" type="3" id="ZAR" name="Südafrikanischer Rand" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ZMK" type="3" id="ZMK" name="Sambischer Kwacha" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="$" type="3" id="ZWD" name="Simbabwe-Dollar" ppu="100" scf="100"/>
+ </CURRENCIES>
+ <PRICES count="64">
+  <PRICEPAIR from="ATS" to="EUR">
+   <PRICE price="10000/137603" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="AZM" to="AZN">
+   <PRICE price="1/5000" source="KMyMoney" date="2006-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="BEF" to="EUR">
+   <PRICE price="10000/403399" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="BGL" to="BGN">
+   <PRICE price="1/1000" source="KMyMoney" date="1999-07-05"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="CYP" to="EUR">
+   <PRICE price="292637/500000" source="KMyMoney" date="2008-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="DEM" to="EUR">
+   <PRICE price="100000/195583" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000001" to="EUR">
+   <PRICE price="31863/2500" source="Transaction" date="2004-04-20"/>
+   <PRICE price="132411/10000" source="Transaction" date="2005-02-09"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000002" to="EUR">
+   <PRICE price="1/1" source="Transaction" date="2016-01-01"/>
+   <PRICE price="3/2" source="Transaction" date="2016-06-30"/>
+   <PRICE price="3/2" source="Transaction" date="2016-12-31"/>
+   <PRICE price="3/2" source="Transaction" date="2017-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000003" to="EUR">
+   <PRICE price="38791/2500" source="Transaction" date="2005-11-11"/>
+   <PRICE price="33107/2000" source="Transaction" date="2007-03-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000004" to="EUR">
+   <PRICE price="144857/10000" source="Transaction" date="2005-10-06"/>
+   <PRICE price="27887/2000" source="Transaction" date="2006-07-28"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000005" to="EUR">
+   <PRICE price="49257/50" source="Transaction" date="2005-01-06"/>
+   <PRICE price="10155867/10000" source="Transaction" date="2005-10-01"/>
+   <PRICE price="49257/50" source="Transaction" date="2006-07-28"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000006" to="EUR">
+   <PRICE price="204949/2500" source="Transaction" date="2001-01-29"/>
+   <PRICE price="148541/2500" source="Transaction" date="2004-09-13"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000007" to="EUR">
+   <PRICE price="39461/5000" source="Transaction" date="1995-09-22"/>
+   <PRICE price="137531/10000" source="Transaction" date="1999-03-18"/>
+   <PRICE price="39461/5000" source="Transaction" date="2005-09-22"/>
+   <PRICE price="137531/10000" source="Transaction" date="2009-03-18"/>
+   <PRICE price="39461/5000" source="Transaction" date="2015-09-22"/>
+   <PRICE price="137531/10000" source="Transaction" date="2019-03-18"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000008" to="EUR">
+   <PRICE price="39461/5000" source="Transaction" date="1986-01-01"/>
+   <PRICE price="137531/10000" source="Transaction" date="1986-12-31"/>
+   <PRICE price="39461/5000" source="Transaction" date="1995-09-22"/>
+   <PRICE price="39461/5000" source="Transaction" date="1996-01-01"/>
+   <PRICE price="137531/10000" source="Transaction" date="1996-12-31"/>
+   <PRICE price="137531/10000" source="Transaction" date="1999-03-18"/>
+   <PRICE price="39461/5000" source="Transaction" date="2000-01-01"/>
+   <PRICE price="137531/10000" source="Transaction" date="2000-06-30"/>
+   <PRICE price="137531/10000" source="Transaction" date="2000-12-31"/>
+   <PRICE price="39461/5000" source="Transaction" date="2006-01-01"/>
+   <PRICE price="137531/10000" source="Transaction" date="2006-12-31"/>
+   <PRICE price="39461/5000" source="Transaction" date="2016-01-01"/>
+   <PRICE price="137531/10000" source="Transaction" date="2016-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000009" to="EUR">
+   <PRICE price="4331/200" source="Transaction" date="2004-10-19"/>
+   <PRICE price="219067/10000" source="Transaction" date="2005-05-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000010" to="EUR">
+   <PRICE price="149043/10000" source="Transaction" date="2005-10-21"/>
+   <PRICE price="43731/5000" source="Transaction" date="2008-12-08"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000011" to="EUR">
+   <PRICE price="1203/200" source="Transaction" date="1999-07-07"/>
+   <PRICE price="12721/2500" source="Transaction" date="2004-10-12"/>
+   <PRICE price="26059/5000" source="Transaction" date="2004-11-25"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000012" to="EUR">
+   <PRICE price="86169/10000" source="Transaction" date="2000-11-03"/>
+   <PRICE price="16769/2500" source="Transaction" date="2002-05-01"/>
+   <PRICE price="16769/2500" source="Transaction" date="2002-05-15"/>
+   <PRICE price="16769/2500" source="Transaction" date="2002-06-01"/>
+   <PRICE price="16769/2500" source="Transaction" date="2002-12-01"/>
+   <PRICE price="16769/2500" source="Transaction" date="2003-12-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000013" to="EUR">
+   <PRICE price="123717/10000" source="Transaction" date="2006-05-20"/>
+   <PRICE price="20967/2000" source="Transaction" date="2006-09-22"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000014" to="EUR">
+   <PRICE price="1207311/10000" source="Transaction" date="2004-10-26"/>
+   <PRICE price="157431/1250" source="Transaction" date="2005-05-28"/>
+   <PRICE price="1279559/10000" source="Transaction" date="2006-07-25"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000015" to="EUR">
+   <PRICE price="756061/5000" source="Transaction" date="2004-10-26"/>
+   <PRICE price="873889/5000" source="Transaction" date="2006-02-24"/>
+   <PRICE price="1736861/10000" source="Transaction" date="2006-09-22"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000016" to="EUR">
+   <PRICE price="17343/400" source="Transaction" date="2006-02-23"/>
+   <PRICE price="302847/5000" source="Transaction" date="2007-07-26"/>
+   <PRICE price="302/5" source="Yahoo" date="2017-10-13"/>
+   <PRICE price="2999/50" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000017" to="EUR">
+   <PRICE price="46527/2500" source="Transaction" date="2006-03-20"/>
+   <PRICE price="2223/125" source="Transaction" date="2006-07-25"/>
+   <PRICE price="364/25" source="Yahoo" date="2017-10-13"/>
+   <PRICE price="1453/100" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000018" to="EUR">
+   <PRICE price="126199/10000" source="Transaction" date="2008-12-08"/>
+   <PRICE price="364/25" source="Yahoo" date="2017-10-13"/>
+   <PRICE price="1453/100" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000019" to="EUR">
+   <PRICE price="27887/1250" source="Transaction" date="2005-10-21"/>
+   <PRICE price="662/25" source="Yahoo" date="2017-10-13"/>
+   <PRICE price="1293/50" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000020" to="EUR">
+   <PRICE price="239059/5000" source="Transaction" date="2007-03-23"/>
+   <PRICE price="571017/10000" source="Transaction" date="2007-09-21"/>
+   <PRICE price="3253/100" source="Yahoo" date="2017-10-13"/>
+   <PRICE price="3217/100" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000021" to="EUR">
+   <PRICE price="1159/50" source="Transaction" date="2008-12-16"/>
+   <PRICE price="3253/100" source="Yahoo" date="2017-10-13"/>
+   <PRICE price="3217/100" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000022" to="EUR">
+   <PRICE price="1/1" source="Transaction" date="2009-11-24"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000023" to="EUR">
+   <PRICE price="854033/10000" source="Transaction" date="2011-06-02"/>
+   <PRICE price="854713/10000" source="Transaction" date="2011-09-06"/>
+   <PRICE price="209273/2500" source="Transaction" date="2012-10-26"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000024" to="EUR">
+   <PRICE price="2811/1250" source="Transaction" date="2002-03-08"/>
+   <PRICE price="1768/625" source="Transaction" date="2005-02-14"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000025" to="EUR">
+   <PRICE price="7586671/10000" source="Transaction" date="2006-07-31"/>
+   <PRICE price="6047429/10000" source="Transaction" date="2006-11-18"/>
+   <PRICE price="7586671/10000" source="Transaction" date="2007-07-31"/>
+   <PRICE price="6047429/10000" source="Transaction" date="2007-11-18"/>
+   <PRICE price="6047429/10000" source="Transaction" date="2016-11-18"/>
+   <PRICE price="7586671/10000" source="Transaction" date="2017-07-31"/>
+   <PRICE price="1901/2" source="Yahoo" date="2017-10-20"/>
+   <PRICE price="6047429/10000" source="Transaction" date="2017-11-18"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000026" to="EUR">
+   <PRICE price="188253/250" source="Transaction" date="2008-06-01"/>
+   <PRICE price="121381/100" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000027" to="EUR">
+   <PRICE price="506483/1250" source="Transaction" date="2008-12-11"/>
+   <PRICE price="65281/100" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000028" to="EUR">
+   <PRICE price="177193/500" source="Transaction" date="2005-10-26"/>
+   <PRICE price="387309/1000" source="Transaction" date="2007-07-17"/>
+   <PRICE price="65281/100" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000029" to="EUR">
+   <PRICE price="1030/1" source="Transaction" date="1999-05-06"/>
+   <PRICE price="461619/500" source="Transaction" date="1999-10-08"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000030" to="EUR">
+   <PRICE price="271309/2500" source="Transaction" date="2005-03-11"/>
+   <PRICE price="9608/125" source="Transaction" date="2008-12-08"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000031" to="EUR">
+   <PRICE price="12487/200" source="Transaction" date="2002-06-24"/>
+   <PRICE price="591657/5000" source="Transaction" date="2008-12-08"/>
+   <PRICE price="249/20" source="Benutzer" date="2017-10-13"/>
+   <PRICE price="123/10" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000032" to="EUR">
+   <PRICE price="8569/20" source="Transaction" date="2000-08-25"/>
+   <PRICE price="13691/100" source="Transaction" date="2001-02-15"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000033" to="EUR">
+   <PRICE price="7849/50" source="Transaction" date="2000-11-27"/>
+   <PRICE price="1843/100" source="Transaction" date="2004-09-13"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000034" to="EUR">
+   <PRICE price="55049/625" source="Transaction" date="2007-03-02"/>
+   <PRICE price="830997/10000" source="Transaction" date="2007-03-22"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000035" to="EUR">
+   <PRICE price="18509/100" source="Transaction" date="1993-09-13"/>
+   <PRICE price="6634/25" source="Transaction" date="1994-01-21"/>
+   <PRICE price="342621/1250" source="Transaction" date="1994-02-07"/>
+   <PRICE price="3651043/10000" source="Transaction" date="2000-08-22"/>
+   <PRICE price="1093837/5000" source="Transaction" date="2001-07-26"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000036" to="EUR">
+   <PRICE price="65071/2000" source="Transaction" date="2012-07-29"/>
+   <PRICE price="9691/500" source="Transaction" date="2013-12-10"/>
+   <PRICE price="14319/1000" source="Transaction" date="2017-08-11"/>
+   <PRICE price="341/25" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000037" to="EUR">
+   <PRICE price="63143/2000" source="Transaction" date="2011-05-19"/>
+   <PRICE price="195513/5000" source="Transaction" date="2011-12-22"/>
+   <PRICE price="71633/2000" source="Transaction" date="2011-12-23"/>
+   <PRICE price="36833/1000" source="Yahoo" date="2012-03-21"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000038" to="EUR">
+   <PRICE price="23863/1000" source="Transaction" date="2011-02-17"/>
+   <PRICE price="21627/1000" source="Transaction" date="2011-06-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000039" to="EUR">
+   <PRICE price="397211/5000" source="Transaction" date="2010-08-01"/>
+   <PRICE price="35491/500" source="Transaction" date="2011-10-31"/>
+   <PRICE price="89593/1000" source="Yahoo" date="2017-10-20"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000040" to="EUR">
+   <PRICE price="1863/50" source="Transaction" date="2001-10-05"/>
+   <PRICE price="1711/50" source="Transaction" date="2002-12-27"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="E000041" to="EUR">
+   <PRICE price="85211/2000" source="Transaction" date="1989-11-02"/>
+   <PRICE price="20093/500" source="Transaction" date="1990-11-15"/>
+   <PRICE price="11761/250" source="Transaction" date="1991-11-15"/>
+   <PRICE price="425983/10000" source="Transaction" date="1992-11-13"/>
+   <PRICE price="5442/125" source="Transaction" date="1993-11-15"/>
+   <PRICE price="86099/2000" source="Transaction" date="1994-02-03"/>
+   <PRICE price="62237/400" source="Transaction" date="1994-11-15"/>
+   <PRICE price="7487/200" source="Transaction" date="1995-11-15"/>
+   <PRICE price="72829/2000" source="Transaction" date="1995-11-25"/>
+   <PRICE price="389383/10000" source="Transaction" date="1996-11-15"/>
+   <PRICE price="373323/10000" source="Transaction" date="1997-11-15"/>
+   <PRICE price="24549/625" source="Transaction" date="1998-07-16"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="ESP" to="EUR">
+   <PRICE price="500/83193" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="FIM" to="EUR">
+   <PRICE price="100000/594573" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="FRF" to="EUR">
+   <PRICE price="100000/655957" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="GRD" to="EUR">
+   <PRICE price="4/1363" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="IEP" to="EUR">
+   <PRICE price="250000/196891" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="ITL" to="EUR">
+   <PRICE price="100/193627" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="LTL" to="EUR">
+   <PRICE price="625/2158" source="KMyMoney" date="2015-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="LUF" to="EUR">
+   <PRICE price="10000/403399" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="MTL" to="EUR">
+   <PRICE price="4293/10000" source="KMyMoney" date="2008-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="MZM" to="MZN">
+   <PRICE price="1/1000" source="KMyMoney" date="2006-07-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="NLG" to="EUR">
+   <PRICE price="100000/220371" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="PTE" to="EUR">
+   <PRICE price="500/100241" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="ROL" to="RON">
+   <PRICE price="1/10000" source="KMyMoney" date="2005-06-30"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="RUR" to="RUB">
+   <PRICE price="1/1000" source="KMyMoney" date="1998-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="SIT" to="EUR">
+   <PRICE price="25/5991" source="KMyMoney" date="2006-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="SKK" to="EUR">
+   <PRICE price="500/15063" source="KMyMoney" date="2008-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="TRL" to="TRY">
+   <PRICE price="1/1000000" source="KMyMoney" date="2004-12-31"/>
+  </PRICEPAIR>
+ </PRICES>
+ <REPORTS count="1">
+  <REPORT id="R000003" type="querytable 1.15" group="Investments" name="Investitionsentwicklung nach Typen (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="1" favorite="1" skipZero="0" datelock="alldates" rowtype="equitytype" querycolumns="performance" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="0" detail="none" includestransfers="0" investmentsum="0"/>
+ </REPORTS>
+ <BUDGETS count="0"/>
+</KMYMONEY-FILE>

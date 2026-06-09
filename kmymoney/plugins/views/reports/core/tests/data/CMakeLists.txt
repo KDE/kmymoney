@@ -4,7 +4,7 @@ set(infotable_test_files
 
 set(querytable_test_files
   test-382245.xml
-  test-385993.xml
+  test-385993-without-totals.xml
   test-396301.xml
   test-403825.xml
   test-406403.xml
@@ -34,6 +34,10 @@ set(querytable_test_files
   test-transactions-multi-currency.xml
   test-transactions.xml
 )
+
+if(NOT WIN32)
+  list(APPEND querytable_test_files test-385993.xml)
+endif()
 
 set(pivottable_test_files
   test-balance-forecast-report.xml
