@@ -29,17 +29,17 @@ Total checking (EUR),,,,"€ 91,731.04",
 Total checking (USD),,,,"$ -231,364.73",
 "liabilities (EUR)"
 "2023-01-01","Opening Balance","liabilities (EUR)","","","€ 0.00"
-"2023-01-01","Transfer to Opening Balances (USD)","liabilities (EUR)","","€ -10,123.00","€ -10,123.00"
-"2024-01-03","Transfer from checking (EUR)","liabilities (EUR)","","€ 30,124.00","€ 20,001.00"
-"2024-10-14","Closing Balance","liabilities (EUR)","","","€ 20,001.00"
-Total liabilities (EUR),,,,"€ 20,001.00",
+"2023-02-01","Transfer to Opening Balances (USD)","liabilities (EUR)","","€ -10,223.00","€ -10,223.00"
+"2024-01-03","Transfer from checking (EUR)","liabilities (EUR)","","€ 30,124.00","€ 19,901.00"
+"2024-10-14","Closing Balance","liabilities (EUR)","","","€ 19,901.00"
+Total liabilities (EUR),,,,"€ 19,901.00",
 "liabilities (USD)"
 "2023-01-01","Opening Balance","liabilities (USD)","","","$ 0.00"
-"2023-01-01","Transfer to Opening Balances (EUR)","liabilities (USD)","","$ -10,123.00","$ -10,123.00"
-"2024-01-06","Transfer from checking (USD)","liabilities (USD)","","$ 60,124.00","$ 50,001.00"
-"2024-02-03","Transfer from checking (EUR)","liabilities (USD)","","$ 34,978.23","$ 84,979.23"
-"2024-02-06","Transfer from checking (USD)","liabilities (USD)","","$ 60,224.00","$ 145,203.23"
-"2024-10-14","Closing Balance","liabilities (USD)","","","$ 145,203.23"
-Total liabilities (USD),,,,"$ 145,203.23",
-Grand Total,,,,"€ 111,732.04",
-,,,"$ -86,161.50",
+"2023-02-01","Transfer to Opening Balances (EUR)","liabilities (USD)","","$ -10,223.00","$ -10,223.00"
+"2024-01-06","Transfer from checking (USD)","liabilities (USD)","","$ 60,124.00","$ 49,901.00"
+"2024-02-03","Transfer from checking (EUR)","liabilities (USD)","","$ 34,978.23","$ 84,879.23"
+"2024-02-06","Transfer from checking (USD)","liabilities (USD)","","$ 60,224.00","$ 145,103.23"
+"2024-10-14","Closing Balance","liabilities (USD)","","","$ 145,103.23"
+Total liabilities (USD),,,,"$ 145,103.23",
+Grand Total,,,,"€ 111,632.04",
+,,,"$ -86,261.50",

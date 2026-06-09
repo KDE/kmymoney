@@ -29,16 +29,16 @@ Total checking (EUR),,,,," 110,899.00",
 Total checking (USD),,,,," -219,085.64",
 "liabilities (EUR)"
 "2023-01-01","Opening Balance","liabilities (EUR)",""," 1.0000",""," 0.00"
-"2023-01-01","Transfer to Opening Balances (USD)","liabilities (EUR)",""," 1.0000"," -10,123.00"," -10,123.00"
-"2024-01-03","Transfer from checking (EUR)","liabilities (EUR)",""," 1.0000"," 30,124.00"," 20,001.00"
-"2024-10-14","Closing Balance","liabilities (EUR)",""," 1.0000",""," 20,001.00"
-Total liabilities (EUR),,,,," 20,001.00",
+"2023-02-01","Transfer to Opening Balances (USD)","liabilities (EUR)",""," 1.0000"," -10,223.00"," -10,223.00"
+"2024-01-03","Transfer from checking (EUR)","liabilities (EUR)",""," 1.0000"," 30,124.00"," 19,901.00"
+"2024-10-14","Closing Balance","liabilities (EUR)",""," 1.0000",""," 19,901.00"
+Total liabilities (EUR),,,,," 19,901.00",
 "liabilities (USD)"
 "2023-01-01","Opening Balance","liabilities (USD)",""," 1.0000",""," 0.00"
-"2023-01-01","Transfer to Opening Balances (EUR)","liabilities (USD)",""," 0.8641"," -8,747.08"," -8,747.08"
-"2024-01-06","Transfer from checking (USD)","liabilities (USD)",""," 0.8641"," 51,951.96"," 43,204.88"
-"2024-02-03","Transfer from checking (EUR)","liabilities (USD)",""," 0.8641"," 30,224.00"," 73,428.88"
-"2024-02-06","Transfer from checking (USD)","liabilities (USD)",""," 0.8641"," 52,038.37"," 125,467.25"
-"2024-10-14","Closing Balance","liabilities (USD)",""," 0.8641",""," 125,467.23"
-Total liabilities (USD),,,,," 125,467.25",
-Grand Total,,,,," 37,281.61",
+"2023-02-01","Transfer to Opening Balances (EUR)","liabilities (USD)",""," 0.8641"," -8,833.49"," -8,833.49"
+"2024-01-06","Transfer from checking (USD)","liabilities (USD)",""," 0.8641"," 51,951.96"," 43,118.47"
+"2024-02-03","Transfer from checking (EUR)","liabilities (USD)",""," 0.8641"," 30,224.00"," 73,342.47"
+"2024-02-06","Transfer from checking (USD)","liabilities (USD)",""," 0.8641"," 52,038.37"," 125,380.84"
+"2024-10-14","Closing Balance","liabilities (USD)",""," 0.8641",""," 125,380.82"
+Total liabilities (USD),,,,," 125,380.84",
+Grand Total,,,,," 37,095.20",

@@ -3,10 +3,10 @@
 <KMYMONEY-FILE>
   <FILEINFO>
     <CREATION_DATE date=""/>
-    <LAST_MODIFIED_DATE date="2026-04-14T21:57:35+02:00"/>
+    <LAST_MODIFIED_DATE date="2026-06-09T08:32:16+02:00"/>
     <VERSION id="1"/>
     <FIXVERSION id="11"/>
-    <APPVERSION id="5.2.70-4ea3ac943"/>
+    <APPVERSION id="5.2.70-e20c9b7af"/>
   </FILEINFO>
   <USER name="" email="">
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
@@ -19,32 +19,31 @@
     <TAG id="G000002" name="tag2" closed="0" tagcolor="#000000"/>
   </TAGS>
   <ACCOUNTS>
-    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="EUR">
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Anlagen" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000001"/>
         <SUBACCOUNT id="A000005"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="EUR">
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Verbindlichkeiten" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000004"/>
         <SUBACCOUNT id="A000008"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="EUR">
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Ausgabe" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000002"/>
         <SUBACCOUNT id="A000006"/>
-        <SUBACCOUNT id="A000009"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="EUR">
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Einnahme" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000003"/>
         <SUBACCOUNT id="A000007"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="EUR">
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Eigenkapital" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000010"/>
         <SUBACCOUNT id="A000011"/>
@@ -62,7 +61,6 @@
     <ACCOUNT id="A000006" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2026-02-22" institution="" opened="1900-01-01" number="" type="13" name="expense (USD)" description="" currency="USD"/>
     <ACCOUNT id="A000007" parentaccount="AStd::Income" lastreconciled="" lastmodified="2026-02-22" institution="" opened="1900-01-01" number="" type="12" name="income (USD)" description="" currency="USD"/>
     <ACCOUNT id="A000008" parentaccount="AStd::Liability" lastreconciled="" lastmodified="2026-02-23" institution="" opened="2023-01-01" number="" type="10" name="liabilities (USD)" description="" currency="USD"/>
-    <ACCOUNT id="A000009" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="test" description="" currency="EUR"/>
     <ACCOUNT id="A000010" parentaccount="AStd::Equity" lastreconciled="" lastmodified="2026-02-23" institution="" opened="2023-01-01" number="" type="16" name="Opening Balances (EUR)" description="" currency="USD">
       <KEYVALUEPAIRS>
         <PAIR key="OpeningBalanceAccount" value="Yes"/>
@@ -87,16 +85,16 @@
         <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-10123/1" shares="-585767/50" price="506150/585767" memo="" account="A000010" number="" bankid=""/>
       </SPLITS>
     </TRANSACTION>
-    <TRANSACTION id="T000000000000000020" postdate="2023-01-01" memo="" entrydate="2026-02-23" commodity="USD">
+    <TRANSACTION id="T000000000000000020" postdate="2023-02-01" memo="" entrydate="2026-02-23" commodity="USD">
       <SPLITS>
-        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-10123/1" shares="-10123/1" price="0/1" memo="" account="A000008" number="" bankid=""/>
-        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="10123/1" shares="10123/1" price="0/1" memo="" account="A000010" number="" bankid=""/>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-10223/1" shares="-10223/1" price="1/1" memo="" account="A000008" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="10223/1" shares="10223/1" price="1/1" memo="" account="A000010" number="" bankid=""/>
       </SPLITS>
     </TRANSACTION>
-    <TRANSACTION id="T000000000000000021" postdate="2023-01-01" memo="" entrydate="2026-02-23" commodity="EUR">
+    <TRANSACTION id="T000000000000000021" postdate="2023-02-01" memo="" entrydate="2026-02-23" commodity="EUR">
       <SPLITS>
-        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-10123/1" shares="-10123/1" price="0/1" memo="" account="A000004" number="" bankid=""/>
-        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="10123/1" shares="10123/1" price="0/1" memo="" account="A000011" number="" bankid=""/>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-10223/1" shares="-10223/1" price="1/1" memo="" account="A000004" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="10223/1" shares="10223/1" price="1/1" memo="" account="A000011" number="" bankid=""/>
       </SPLITS>
     </TRANSACTION>
     <TRANSACTION id="T000000000000000001" postdate="2024-01-01" memo="" entrydate="2024-09-06" commodity="EUR">
@@ -201,7 +199,7 @@
     </TRANSACTION>
   </TRANSACTIONS>
   <KEYVALUEPAIRS>
-    <PAIR key="LastModificationDate" value="2026-04-14T21:57:35+02:00"/>
+    <PAIR key="LastModificationDate" value="2026-06-09T08:32:16+02:00"/>
     <PAIR key="kmm-baseCurrency" value="EUR"/>
     <PAIR key="kmm-id" value="{f8f47595-3cac-4ace-8579-b740638b1629}"/>
   </KEYVALUEPAIRS>
@@ -209,7 +207,7 @@
   <SECURITIES/>
   <CURRENCIES>
     <CURRENCY id="EUR" name="Euro" symbol="€" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
-    <CURRENCY id="USD" name="US Dollar" symbol="$" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="USD" name="US-Dollar" symbol="$" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
   </CURRENCIES>
   <PRICES>
     <PRICEPAIR from="EUR" to="USD">
