@@ -10,23 +10,23 @@ Date,Category,Account,Memo,Rate,Amount,Balance
 "2024-02-03","Transfer to liabilities (USD)","checking (EUR)",""," 1.0000"," -30,224.00"," -30,225.00"
 "2024-03-01","Transfer to checking (USD)","checking (EUR)","round trip in EUR"," 1.0000"," -10,324.00"," -40,549.00"
 "2024-04-01","Transfer from checking (USD)","checking (EUR)","in EUR"," 1.0000"," 10,424.00"," -30,125.00"
-"2024-10-14","Transfer from checking (USD)","checking (EUR)","in USD"," 1.1573"," 141,024.00"," 110,899.00"
+"2024-10-14","Transfer from checking (USD)","checking (EUR)","in USD"," 0.8641"," 121,856.04"," 91,731.04"
 "2024-10-14","Closing Balance","checking (EUR)",""," 1.0000",""," 91,731.04"
-Total checking (EUR),,,,," 110,899.00",
+Total checking (EUR),,,,," 91,731.04",
 "checking (USD)"
 "2023-01-01","Opening Balance","checking (USD)",""," 1.0000",""," 0.00"
 "2023-01-01","Transfer from Opening Balances (USD)","checking (USD)",""," 0.8641"," 8,747.08"," 8,747.08"
 "2024-01-04","expense (USD)","checking (USD)",""," 0.8641"," -34,670.35"," -25,923.27"
 "2024-01-05","income (USD)","checking (USD)",""," 0.8641"," 43,311.16"," 17,387.89"
 "2024-01-06","Transfer to liabilities (USD)","checking (USD)",""," 0.8641"," -51,951.96"," -34,564.07"
-"2024-02-04","expense (EUR)","checking (USD)",""," 0.8641"," -34,756.76"," -69,320.83"
-"2024-02-05","income (EUR)","checking (USD)",""," 0.8641"," 43,397.56"," -25,923.27"
-"2024-02-06","Transfer to liabilities (USD)","checking (USD)",""," 0.8641"," -52,038.37"," -77,961.64"
-"2024-03-01","Transfer from checking (EUR)","checking (USD)","round trip in EUR"," 0.8641"," 10,324.00"," -67,637.64"
-"2024-04-01","Transfer to checking (EUR)","checking (USD)","in EUR"," 0.8641"," -10,424.00"," -78,061.64"
-"2024-10-14","Transfer to checking (EUR)","checking (USD)","in USD"," 1.0000"," -141,024.00"," -219,085.64"
+"2024-02-04","expense (EUR)","checking (USD)",""," 0.8641"," -34,756.73"," -69,320.80"
+"2024-02-05","income (EUR)","checking (USD)",""," 0.8641"," 43,397.56"," -25,923.24"
+"2024-02-06","Transfer to liabilities (USD)","checking (USD)",""," 0.8641"," -52,038.37"," -77,961.61"
+"2024-03-01","Transfer from checking (EUR)","checking (USD)","round trip in EUR"," 0.8641"," 10,324.00"," -67,637.61"
+"2024-04-01","Transfer to checking (EUR)","checking (USD)","in EUR"," 0.8641"," -10,424.00"," -78,061.61"
+"2024-10-14","Transfer to checking (EUR)","checking (USD)","in USD"," 0.8641"," -121,856.04"," -199,917.65"
 "2024-10-14","Closing Balance","checking (USD)",""," 0.8641",""," -199,917.67"
-Total checking (USD),,,,," -219,085.64",
+Total checking (USD),,,,," -199,917.65",
 "liabilities (EUR)"
 "2023-01-01","Opening Balance","liabilities (EUR)",""," 1.0000",""," 0.00"
 "2023-02-01","Transfer to Opening Balances (USD)","liabilities (EUR)",""," 1.0000"," -10,223.00"," -10,223.00"
@@ -41,4 +41,4 @@ Total liabilities (EUR),,,,," 19,901.00",
 "2024-02-06","Transfer from checking (USD)","liabilities (USD)",""," 0.8641"," 52,038.37"," 125,380.84"
 "2024-10-14","Closing Balance","liabilities (USD)",""," 0.8641",""," 125,380.82"
 Total liabilities (USD),,,,," 125,380.84",
-Grand Total,,,,," 37,095.20",
+Grand Total,,,,," 37,095.23",
