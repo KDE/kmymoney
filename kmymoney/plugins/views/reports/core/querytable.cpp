@@ -1930,6 +1930,7 @@ void QueryTable::constructAccountTable()
             if (queryColumns & eMyMoney::Report::QueryColumn::Performance) {
                 constructPerformanceRow(account, qaccountrow, accountCashflow);
                 if (!qaccountrow.isEmpty()) {
+                    qaccountrow[ctID] = account.id();
                     // assuming that that report is grouped by topaccount
                     qaccountrow[ctTopAccount] = account.topParentName();
                     if (m_config.isConvertCurrency())
