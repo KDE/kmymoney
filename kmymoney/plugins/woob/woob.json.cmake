@@ -84,6 +84,7 @@
         "Name[fr]": "Woob",
         "Name[ga]": "Woob",
         "Name[gl]": "Woob",
+        "Name[he]": "Woob",
         "Name[it]": "Woob",
         "Name[ka]": "Woob",
         "Name[ko]": "Woob",

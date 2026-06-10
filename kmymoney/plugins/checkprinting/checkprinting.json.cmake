@@ -86,6 +86,7 @@
         "Name[fr]": "Impression de chèques",
         "Name[ga]": "Seiceanna priontáil",
         "Name[gl]": "Impresión de cheques",
+        "Name[he]": "הדפסת המחאות",
         "Name[ia]": "Imprimente cheque",
         "Name[it]": "Stampa degli assegni",
         "Name[ka]": "შეამოწმეთ ბეჭდვა",

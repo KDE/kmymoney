@@ -52,6 +52,7 @@
         "Description[fr]": "Crée un rapport après chaque consolidation contenant des données sur le processus de consolidation",
         "Description[ga]": "Cruthaíonn sé tuarascáil i ndiaidh gach athmhuintearais ina bhfuil sonraí faoin bpróiseas athmhuintearais",
         "Description[gl]": "Crea un informe tras cada reconciliación que conteña datos sobre o proceso de reconciliación",
+        "Description[he]": "יצירת דוח אחרי כל התאמה שמכיל נתונים על תהליך ההתאמה",
         "Description[it]": "Crea un report dopo ogni riconciliazione che contiene dati sul processo di riconciliazione",
         "Description[ka]": "ქმნის ანგარიშს ყოველი შეთანხმების შემდეგ, რომელიც შეთანხმების პროცესის შემდეგ ინფორმაციას შეიცავს",
         "Description[ko]": "각각 조정 이후 조정 절차 정보가 있는 보고서를 생성합니다",

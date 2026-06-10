@@ -83,6 +83,7 @@
         "Name[fr]": "Vue boite d'envoi des tâches en ligne",
         "Name[ga]": "Amharc bosca amach poist ar líne",
         "Name[gl]": "Vista fóra da caixa de traballo por Internet",
+        "Name[he]": "תצוגת תיבת משימות מקוונות יוצאות",
         "Name[it]": "Vista delle operazioni in linea in uscita",
         "Name[ka]": "გამავალი ქსელური დავალებების ხედი",
         "Name[ko]": "온라인 보낼 작업함 보기",
