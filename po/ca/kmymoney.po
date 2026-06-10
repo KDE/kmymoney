@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:44+0000\n"
+"POT-Creation-Date: 2026-06-10 00:46+0000\n"
 "PO-Revision-Date: 2026-05-19 09:25+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -8752,7 +8752,7 @@ msgstr "Operació desglossada"
 
 #: kmymoney/mymoney/splitmodel.cpp:117
 #: kmymoney/mymoney/storage/journalmodel.cpp:202
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1052
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1091
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** SENSE ASSIGNAR ***"
@@ -12856,8 +12856,8 @@ msgid "Get Transactions"
 msgstr "Obtén les operacions"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:66
-#: kmymoney/plugins/views/reports/core/querytable.cpp:847
-#: kmymoney/plugins/views/reports/core/querytable.cpp:988
+#: kmymoney/plugins/views/reports/core/querytable.cpp:850
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1013
 #, kde-format
 msgid "Transfer"
 msgstr "Transferència"
@@ -16452,19 +16452,19 @@ msgid "The applied currency exchange rate used in the conversion"
 msgstr "El tipus de canvi de divisa aplicat utilitzat en la conversió"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:985
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1050
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2062
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2080
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1011
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1089
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2220
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2238
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Transfereix de %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:986
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1050
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2062
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2079
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1011
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1088
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2220
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2237
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Transfereix a %1"
@@ -16556,60 +16556,60 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Preu"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:607
-#: kmymoney/plugins/views/reports/core/querytable.cpp:620
+#: kmymoney/plugins/views/reports/core/querytable.cpp:718
+#: kmymoney/plugins/views/reports/core/querytable.cpp:731
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Sense etiqueta]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:633
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1898
-#, kde-format
-msgid "Month of %1"
-msgstr "Mes de %1"
-
-#: kmymoney/plugins/views/reports/core/querytable.cpp:634
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1899
-#, kde-format
-msgid "Week of %1"
-msgstr "Setmana del %1"
-
-#: kmymoney/plugins/views/reports/core/querytable.cpp:808
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2003
+#: kmymoney/plugins/views/reports/core/querytable.cpp:812
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2161
 #, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
 msgstr "Venda d'accions"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:829
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1054
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1189
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2027
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2194
+#: kmymoney/plugins/views/reports/core/querytable.cpp:832
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1093
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1346
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2185
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2352
 #, kde-format
 msgid "No Institution"
 msgstr "Sense institució"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:831
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2036
+#: kmymoney/plugins/views/reports/core/querytable.cpp:834
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2194
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Beneficiari buit]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:864
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2067
+#: kmymoney/plugins/views/reports/core/querytable.cpp:879
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2225
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Operació desglossada]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:865
-#: kmymoney/plugins/views/reports/core/querytable.cpp:866
+#: kmymoney/plugins/views/reports/core/querytable.cpp:880
+#: kmymoney/plugins/views/reports/core/querytable.cpp:881
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Desglossa"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1812
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1143
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2056
+#, kde-format
+msgid "Month of %1"
+msgstr "Mes de %1"
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1144
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2057
+#, kde-format
+msgid "Week of %1"
+msgstr "Setmana del %1"
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1970
 #, kde-format
 msgctxt "No institution"
 msgid "None"
