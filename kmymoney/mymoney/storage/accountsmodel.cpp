@@ -493,6 +493,8 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
                     "Bank Code");
             case Column::Bic:
                 return i18nc("@title:column Shows SWIFT/BIC", "SWIFT/BIC");
+            case Column::Currency:
+                return i18nc("@title:column Shows Currency", "Currency");
             default:
                 break;
             }
@@ -530,6 +532,8 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
                     "accounts) or a 'Sort Code' (UK accounts).");
             case Column::Bic:
                 return i18nc("@info:tooltip for 'SWIFT/BIC' column", "A Business Identifier Code, also known as SWIFT.");
+            case Column::Currency:
+                return i18nc("@info:tooltip for 'Currency' column", "The currency assigned to the account");
             default:
                 break;
             }
@@ -657,6 +661,13 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
         case Column::Iban:
             return d->formatIban(account);
+
+        case Column::Currency:
+            if (account.isInvest()) {
+                const auto security = MyMoneyFile::instance()->security(account.currencyId());
+                return security.tradingCurrency();
+            }
+            return account.currencyId();
 
         default:
             break;
