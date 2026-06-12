@@ -57,6 +57,7 @@ public:
         Iban,
         BankCode,
         Bic,
+        Currency,
         // insert new columns above this line
         MaxColumns,
     };
