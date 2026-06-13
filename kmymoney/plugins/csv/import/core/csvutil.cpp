@@ -15,7 +15,7 @@ Parse::Parse()
     , m_symbolFound(false)
     , m_invalidConversion(false)
 {
-    m_fieldDelimiters = {QLatin1Char(','), QLatin1Char(';'), QLatin1Char(':'), QLatin1Char('\t')};
+    m_fieldDelimiters = {QLatin1Char(','), QLatin1Char(';'), QLatin1Char(':'), QLatin1Char('\t'), QLatin1Char('|')};
     m_textDelimiters = {QLatin1Char('"'), QLatin1Char('\'')};
     m_decimalSymbols = {QLatin1Char('.'), QLatin1Char(',')};
     m_thousandsSeparators = {QLatin1Char(','), QLatin1Char('.')};

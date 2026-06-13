@@ -1723,12 +1723,13 @@ void CSVFile::getColumnCount(CSVProfile* profile, const QStringList& rows)
         delimiterIndexes = QVector<FieldDelimiter>{FieldDelimiter::Comma,
                                                    FieldDelimiter::Semicolon,
                                                    FieldDelimiter::Colon,
-                                                   FieldDelimiter::Tab}; // include all delimiters to test or ...
+                                                   FieldDelimiter::Tab,
+                                                   FieldDelimiter::Pipe}; // include all delimiters to test or ...
     else
         delimiterIndexes = QVector<FieldDelimiter>{profile->m_fieldDelimiter}; // ... only the one specified
 
-    QList<int> totalDelimiterCount({0, 0, 0, 0}); //  Total in file for each delimiter
-    QList<int> thisDelimiterCount({0, 0, 0, 0}); //  Total in this line for each delimiter
+    QList<int> totalDelimiterCount({0, 0, 0, 0, 0}); //  Total in file for each delimiter
+    QList<int> thisDelimiterCount({0, 0, 0, 0, 0}); //  Total in this line for each delimiter
     int colCount = 0; //  Total delimiters in this line
     FieldDelimiter possibleDelimiter = FieldDelimiter::Comma;
     m_columnCount = 0;

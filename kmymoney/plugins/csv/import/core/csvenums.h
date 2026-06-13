@@ -11,7 +11,7 @@
 
 #include "qhashseedtype.h"
 
-enum class FieldDelimiter { Comma = 0, Semicolon, Colon, Tab, Auto };
+enum class FieldDelimiter { Comma = 0, Semicolon, Colon, Tab, Pipe, Auto };
 enum class TextDelimiter { DoubleQuote = 0, SingleQuote };
 enum class DecimalSymbol { Dot = 0, Comma, Auto };
 enum class ThousandSeparator { Comma = 0, Dot };
