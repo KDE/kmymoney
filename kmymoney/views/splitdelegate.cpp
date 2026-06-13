@@ -47,6 +47,7 @@ public:
     NewSplitEditor* m_editor;
     int m_editorRow;
     int m_editorCol;
+    int m_lineHeight;
     bool m_showValuesInverted;
     bool m_readOnly;
     MyMoneySecurity m_commodity;
@@ -167,10 +168,12 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
 
     // Background
     QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
+    d->m_lineHeight = opt.fontMetrics.lineSpacing();
+    const int lineHeight = d->m_lineHeight + 2;
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, editWidget ? editWidget : opt.widget);
 
     if (editWidget == nullptr) {
-        const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
+        const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
         const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
 
         QStringList lines;
@@ -209,7 +212,7 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
         // collect data for the various columns
         if (index.column() == SplitModel::Column::Memo) {
             for (int i = 0; i < lines.count(); ++i) {
-                painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);
+                painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
             }
 
         } else {
