@@ -139,6 +139,11 @@ changed, except possibly when within a field.</string>
              <string>tab (\t)</string>
             </property>
            </item>
+           <item>
+            <property name="text">
+             <string>pipe (|)</string>
+            </property>
+           </item>
           </widget>
          </item>
          <item row="2" column="0">

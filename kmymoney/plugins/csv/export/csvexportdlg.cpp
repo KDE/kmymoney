@@ -66,6 +66,7 @@ public:
             {ki18nc("@item:inlistbox CSV separator", "Comma (,)"), ","},
             {ki18nc("@item:inlistbox CSV separator", "Semicolon (;)"), ";"},
             {ki18nc("@item:inlistbox CSV separator", "Tab (\\t)"), "\t"},
+            {ki18nc("@item:inlistbox CSV separator", "Pipe (|)"), "|"},
         };
         for (const auto& separatorItem : separatorList) {
             ui->m_separatorComboBox->addItem(separatorItem.first.toString(), separatorItem.second);

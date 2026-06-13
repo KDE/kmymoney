@@ -32,8 +32,8 @@ void ParseDataTest::cleanup()
 
 void ParseDataTest::parseSplitString()
 {
-    QVector<FieldDelimiter> delimiters{FieldDelimiter::Comma, FieldDelimiter::Semicolon, FieldDelimiter::Colon, FieldDelimiter::Tab};
-    QVector<QChar> delimiter_chars{',', ';', ':', '\t'};
+    QVector<FieldDelimiter> delimiters{FieldDelimiter::Comma, FieldDelimiter::Semicolon, FieldDelimiter::Colon, FieldDelimiter::Tab, FieldDelimiter::Pipe};
+    QVector<QChar> delimiter_chars{',', ';', ':', '\t', '|'};
     for (auto i = 0; i < delimiters.size(); i++) {
         auto delimiter_char = delimiter_chars[i];
         auto delimiter = delimiters[i];
