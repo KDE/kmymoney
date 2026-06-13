@@ -44,8 +44,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gnupg.org/ftp/gcrypt/qgpgme/qgpgme-2.0.0.tar.xz",
-                    "sha256": "15645b2475cca6118eb2ed331b3a8d9442c9d4019c3846ba3f6d25321b4a61ad",
+                    "url": "https://gnupg.org/ftp/gcrypt/qgpgme/qgpgme-2.1.0.tar.xz",
+                    "sha256": "5b32feb3eee4a7f9402d22b7206480908dc43bb4df382917c075c512116f8f08",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 378538,
@@ -377,8 +377,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://pcsclite.apdu.fr/files/pcsc-lite-2.4.1.tar.xz",
-                            "sha256": "afd3ba68c8000d2be048dc292df99a9812df9ad2efaf0a366eea22ac1faa19a7",
+                            "url": "https://pcsclite.apdu.fr/files/pcsc-lite-2.5.1.tar.xz",
+                            "sha256": "bfcfe38a20afc49849c6bf55325e38f449fc4b26d3923fdc32b969ae41a8741b",
                             "x-checker-data": {
                                 "type": "anitya",
                                 "project-id": 2611,
