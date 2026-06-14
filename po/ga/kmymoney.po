@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-11 03:27+0000\n"
+"POT-Creation-Date: 2026-06-14 03:25+0000\n"
 "PO-Revision-Date: 2026-04-22 16:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@yahoo.com>\n"
 "Language-Team: Irish <http://weblate.amgelocalnet.duckdns.org/projects/kde-"
@@ -6037,7 +6037,7 @@ msgstr "&Iompórtáil"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -9809,21 +9809,27 @@ msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tab (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:69
+#, kde-format
+msgctxt "@item:inlistbox CSV separator"
+msgid "Pipe (|)"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:54
 #, kde-format
 msgid "Start operation"
 msgstr "Tosaigh oibríocht"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "Úsáid é seo chun an oibríocht easpórtála a thosú"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9833,21 +9839,21 @@ msgstr "Úsáid é seo chun an oibríocht easpórtála a thosú"
 msgid "&Browse..."
 msgstr "&Brabhsáil..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:99
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Select filename"
 msgstr "Roghnaigh ainm comhaid"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:101
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "Úsáid é seo chun ainm comhaid a roghnú le honnmhairiú chuige"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:202
 #, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
@@ -10175,8 +10181,8 @@ msgstr ""
 "Cuir isteach do roghanna colún arís, le do thoil."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1022
+#: kmymoney/plugins/csv/import/csvwizard.cpp:965
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1037
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
@@ -10568,27 +10574,27 @@ msgstr "bain"
 msgid "CSV..."
 msgstr "CSV..."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, kde-format
 msgid "Save QIF"
 msgstr "Sábháil QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, kde-format
 msgid "QIF Files (*.qif)"
 msgstr "Comhaid QIF (*.qif)"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:475
+#: kmymoney/plugins/csv/import/csvwizard.cpp:490
 #, kde-format
 msgid "Select File"
 msgstr "Roghnaigh Comhad"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:476
+#: kmymoney/plugins/csv/import/csvwizard.cpp:491
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr "Ní mór próifíl a roghnú sula roghnaítear comhad."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:542
+#: kmymoney/plugins/csv/import/csvwizard.cpp:557
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
@@ -10597,34 +10603,34 @@ msgstr ""
 "Tá próifíl <b>%1</b> ann cheana féin.<br>Cuir isteach ainm eile le do thoil</"
 "center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:563
+#: kmymoney/plugins/csv/import/csvwizard.cpp:578
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr "<center>Tá próifíl <b>%1</b> curtha leis.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:568
+#: kmymoney/plugins/csv/import/csvwizard.cpp:583
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr "<center>Próifíl <b>%1</b> bainte.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:573
+#: kmymoney/plugins/csv/import/csvwizard.cpp:588
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr ""
 "<center>Athainmníodh ainm an phróifíle ó <b>%1</b> go <b>%2</b>.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:908
+#: kmymoney/plugins/csv/import/csvwizard.cpp:923
 #, kde-format
 msgid "Import CSV"
 msgstr "Iompórtáil CSV"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:910
+#: kmymoney/plugins/csv/import/csvwizard.cpp:925
 #, kde-format
 msgid "Make QIF File"
 msgstr "Cruthaigh Comhad QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:947
+#: kmymoney/plugins/csv/import/csvwizard.cpp:962
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -10635,7 +10641,7 @@ msgstr ""
 "gcolún %1.</center><center>Bain triail as roghnú de láimh chun cealla "
 "fadhbacha a fheiceáil agus do shonraí a cheartú.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1019
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1034
 #, kde-format
 msgid ""
 "<center>There are invalid date formats in column '%1'.</"
@@ -10644,7 +10650,7 @@ msgstr ""
 "<center>Tá formáidí dáta neamhbhailí i gcolún '%1'.</center><center>Seiceáil "
 "do roghanna le do thoil.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1068
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1083
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
@@ -11457,15 +11463,21 @@ msgstr "colon (:)"
 msgid "tab (\\t)"
 msgstr "táb (\\t)"
 
+#. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
+#, kde-format
+msgid "pipe (|)"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:150
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
 #, kde-format
 msgctxt "punctuation mark used as field delimiter"
 msgid "Text Delimiter"
 msgstr "Deighilteoir Téacs"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:167
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:172
 #, kde-format
 msgid ""
 "Select field delimiter/separator character.\n"
@@ -11475,19 +11487,19 @@ msgstr ""
 "Athshocróidh sé seo aon roghanna réimse atá ann cheana féin."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:171
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
 #, kde-format
 msgid "quote (\")"
 msgstr "luachan (\")"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:181
 #, kde-format
 msgid "apostrophe (')"
 msgstr "apostróf (')"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEncoding)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:187
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:192
 #, kde-format
 msgid "Encoding"
 msgstr "Ionchódú"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-11 03:27+0000\n"
+"POT-Creation-Date: 2026-06-14 03:25+0000\n"
 "PO-Revision-Date: 2026-06-01 07:26+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -5943,7 +5943,7 @@ msgstr "Uvoz"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -9696,21 +9696,27 @@ msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tabulator (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:69
+#, kde-format
+msgctxt "@item:inlistbox CSV separator"
+msgid "Pipe (|)"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:54
 #, kde-format
 msgid "Start operation"
 msgstr "Začni obdelavo"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "Uporabi to za začetek postopka izvoza"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9720,21 +9726,21 @@ msgstr "Uporabi to za začetek postopka izvoza"
 msgid "&Browse..."
 msgstr "&Brskaj..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:99
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Select filename"
 msgstr "Izberite ime datoteke"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:101
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "Uporabite to za izbiro imena datoteke za izvoz"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:202
 #, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
@@ -10058,8 +10064,8 @@ msgstr ""
 "center>Ponovno vnesite izbrane stolpce."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1022
+#: kmymoney/plugins/csv/import/csvwizard.cpp:965
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1037
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
@@ -10449,61 +10455,61 @@ msgstr "odstrani"
 msgid "CSV..."
 msgstr "CSV..."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, kde-format
 msgid "Save QIF"
 msgstr "Shrani QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, kde-format
 msgid "QIF Files (*.qif)"
 msgstr "Datoteke QIF (*.qif)"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:475
+#: kmymoney/plugins/csv/import/csvwizard.cpp:490
 #, kde-format
 msgid "Select File"
 msgstr "Izberite datoteko"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:476
+#: kmymoney/plugins/csv/import/csvwizard.cpp:491
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr "Pred izborom datoteke mora biti izbran profil."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:542
+#: kmymoney/plugins/csv/import/csvwizard.cpp:557
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr "<center>Profil <b>%1</b> že obstaja.<br>Izberite drugo ime</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:563
+#: kmymoney/plugins/csv/import/csvwizard.cpp:578
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr "<center>Profil <b>%1</b> je bil dodan.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:568
+#: kmymoney/plugins/csv/import/csvwizard.cpp:583
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr "<center>Profil <b>%1</b> je bil odstranjen.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:573
+#: kmymoney/plugins/csv/import/csvwizard.cpp:588
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr ""
 "<center>Ime profila je bilo preimenovano iz <b>%1</b> v <b>%2</b>.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:908
+#: kmymoney/plugins/csv/import/csvwizard.cpp:923
 #, kde-format
 msgid "Import CSV"
 msgstr "Uvozi CSV"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:910
+#: kmymoney/plugins/csv/import/csvwizard.cpp:925
 #, kde-format
 msgid "Make QIF File"
 msgstr "Izdelaj datoteko QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:947
+#: kmymoney/plugins/csv/import/csvwizard.cpp:962
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -10514,7 +10520,7 @@ msgstr ""
 "stolpcu %1.</center> <center>Poskusite ročno izbiro, si oglejte "
 "problematične celice in popravite podatke.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1019
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1034
 #, kde-format
 msgid ""
 "<center>There are invalid date formats in column '%1'.</"
@@ -10523,7 +10529,7 @@ msgstr ""
 "<center>Obstajajo neveljavni formati datumov v stolpcu '%1'.</"
 "center><center>Preverite vaše izbire.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1068
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1083
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
@@ -11328,15 +11334,21 @@ msgstr "dvopičje (:)"
 msgid "tab (\\t)"
 msgstr "tabulator (\\t)"
 
+#. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
+#, kde-format
+msgid "pipe (|)"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:150
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
 #, kde-format
 msgctxt "punctuation mark used as field delimiter"
 msgid "Text Delimiter"
 msgstr "Ločilnik besedila"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:167
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:172
 #, kde-format
 msgid ""
 "Select field delimiter/separator character.\n"
@@ -11346,19 +11358,19 @@ msgstr ""
 "S tem boste ponastavili vse obstoječe izbire."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:171
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
 #, kde-format
 msgid "quote (\")"
 msgstr "apostrof (\")"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:181
 #, kde-format
 msgid "apostrophe (')"
 msgstr "apostrof (')"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEncoding)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:187
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:192
 #, kde-format
 msgid "Encoding"
 msgstr "Kodiranje"
