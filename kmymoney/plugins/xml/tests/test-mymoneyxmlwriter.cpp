@@ -162,7 +162,7 @@ void MyMoneyXmlWriterTest::testWriteSkrooge()
     m_file->addCurrency(MyMoneySecurity("EUR"));
     m_file->setBaseCurrency(MyMoneySecurity("EUR"));
 
-    MyMoneyInstitution institution("1-institution");
+    MyMoneyInstitution institution("1-bank");
     institution.setName("I000001");
     institution.addAccountId("2-account");
 
@@ -179,7 +179,7 @@ void MyMoneyXmlWriterTest::testWriteSkrooge()
     account.setAccountType(eMyMoney::Account::Type::CreditCard);
     account.setCurrencyId("EUR");
     account.setParentAccountId(m_file->liability().id());
-    account.setInstitutionId("1-institution");
+    account.setInstitutionId("1-bank");
     account.setValue("lastNumberUsed", "10");
     account.setValue("lastStatementBalance", "-7/5");
     account.setValue("maxCreditAbsolute", "1000/1");

@@ -12,7 +12,7 @@
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
   </USER>
   <INSTITUTIONS>
-    <INSTITUTION id="1-institution" name="I000001" manager="" sortcode="">
+    <INSTITUTION id="1-bank" name="I000001" manager="" sortcode="">
       <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
       <ACCOUNTIDS>
         <ACCOUNTID id="2-account"/>
@@ -36,7 +36,7 @@
     <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense categories" description=""/>
     <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income categories" description=""/>
     <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity accounts" description=""/>
-    <ACCOUNT id="2-account" parentaccount="AStd::Liability" lastreconciled="2026-05-13" lastmodified="2026-05-13" institution="1-institution" opened="1999-01-01" number="" type="4" name="2-account" description="" currency="EUR">
+    <ACCOUNT id="2-account" parentaccount="AStd::Liability" lastreconciled="2026-05-13" lastmodified="2026-05-13" institution="1-bank" opened="1999-01-01" number="" type="4" name="2-account" description="" currency="EUR">
       <KEYVALUEPAIRS>
         <PAIR key="lastNumberUsed" value="10"/>
         <PAIR key="lastStatementBalance" value="-7/5"/>

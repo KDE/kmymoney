@@ -38,6 +38,9 @@ BudgetsModel::BudgetsModel(QObject* parent, QUndoStack* undoStack)
     , d(new Private)
 {
     setObjectName(QLatin1String("BudgetsModel"));
+
+    // add the Skrooge id patterns for budgets, which is only the year
+    addValidIdPattern(QLatin1String("^\\d+$"));
 }
 
 BudgetsModel::~BudgetsModel()
