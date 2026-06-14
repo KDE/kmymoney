@@ -30,8 +30,11 @@ MyMoneyModelBase::MyMoneyModelBase(QObject* parent, const QString& idLeadin, qui
     , m_idSize(idSize)
     , m_dirty(false)
     , m_blockedSignals(false)
-    , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
+    , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin), QRegularExpression::CaseInsensitiveOption)
 {
+    // add the generic Skrooge id patterns (number, dash, word)
+    addValidIdPattern(QLatin1String("^\\d+\\-\\w+$"));
+
     connect(this, &QAbstractItemModel::modelReset, this, &MyMoneyModelBase::updateReferencedObjects);
 }
 
@@ -41,7 +44,7 @@ MyMoneyModelBase::~MyMoneyModelBase()
 
 void MyMoneyModelBase::addValidIdPattern(const QString& matchExp)
 {
-    m_idMatchExp = QRegularExpression(QStringLiteral("%1|%2").arg(m_idMatchExp.pattern()).arg(matchExp), QRegularExpression::CaseInsensitiveOption);
+    m_idMatchExp.setPattern(QStringLiteral("%1|%2").arg(m_idMatchExp.pattern()).arg(matchExp));
 }
 
 QModelIndexList MyMoneyModelBase::indexListByName(const QString& name, const QModelIndex& parent) const

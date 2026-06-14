@@ -434,9 +434,6 @@ AccountsModel::AccountsModel(QObject* parent, QUndoStack* undoStack)
     setUseIdToItemMapper(true);
     setFullTableScan(true);
 
-    // add the Skrooge id patterns
-    addValidIdPattern(QLatin1String("^\\d+\\-account$|^\\d+\\-category$"));
-
     // force creation of empty account structure
     unload();
 }

@@ -84,8 +84,12 @@ InstitutionsModel::InstitutionsModel(AccountsModel* accountsModel, QObject* pare
     d->accountsModel = accountsModel;
     setObjectName(QLatin1String("InstitutionsModel"));
 
-    // add the Skrooge id pattern
-    addValidIdPattern(QLatin1String("^\\d+\\-institution$"));
+    // for institutions, the generic Skrooge pattern does not work as it
+    // also matches the accounts assigned to the institution. Therefore,
+    // the pattern is reset here and the specific Skrooge pattern for
+    // institution IDs is added.
+    m_idMatchExp.setPattern(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin));
+    addValidIdPattern(QLatin1String("^\\d\\-bank$"));
 }
 
 InstitutionsModel::~InstitutionsModel()

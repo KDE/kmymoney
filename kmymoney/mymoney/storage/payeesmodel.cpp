@@ -67,9 +67,6 @@ PayeesModel::PayeesModel(QObject* parent, QUndoStack* undoStack)
 {
     setObjectName(QLatin1String("PayeesModel"));
     setUseIdToItemMapper(true);
-
-    // add the Skrooge id pattern
-    addValidIdPattern(QLatin1String("^\\d+\\-payee$"));
 }
 
 PayeesModel::~PayeesModel()
