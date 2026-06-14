@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-10 00:46+0000\n"
+"POT-Creation-Date: 2026-06-14 00:44+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -6245,7 +6245,7 @@ msgstr "&Importér"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -6854,7 +6854,7 @@ msgid "Payees created"
 msgstr "Oprettelse af betalingsmodtager"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:504
+#: kmymoney/mymoney/storage/accountsmodel.cpp:506
 #, fuzzy, kde-format
 #| msgid "Full name"
 msgctxt ""
@@ -6864,7 +6864,7 @@ msgid "Full name"
 msgstr "Fulde navn"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:506
+#: kmymoney/mymoney/storage/accountsmodel.cpp:508
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt ""
@@ -6874,7 +6874,7 @@ msgid "Type"
 msgstr "Type"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:508
+#: kmymoney/mymoney/storage/accountsmodel.cpp:510
 #, fuzzy, kde-format
 #| msgid "Homepage can show accounts online banking status"
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
@@ -6882,7 +6882,7 @@ msgid "Whether account has online mapping set up"
 msgstr "Hjemmesiden kan vise kontis netbank-status"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:510
+#: kmymoney/mymoney/storage/accountsmodel.cpp:512
 #, fuzzy, kde-format
 #| msgid "Homepage can show accounts online banking status"
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
@@ -6890,14 +6890,14 @@ msgid "Whether account is included in tax reports"
 msgstr "Hjemmesiden kan vise kontis netbank-status"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:512
+#: kmymoney/mymoney/storage/accountsmodel.cpp:514
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:514
+#: kmymoney/mymoney/storage/accountsmodel.cpp:516
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
@@ -6906,7 +6906,7 @@ msgid ""
 msgstr "Kan ikke oprette transaktioner i en kategoris kontekst."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:516
+#: kmymoney/mymoney/storage/accountsmodel.cpp:518
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
@@ -6914,14 +6914,14 @@ msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:131
 #: kmymoney/mymoney/storage/accountsmodel.cpp:482
-#: kmymoney/mymoney/storage/accountsmodel.cpp:518
+#: kmymoney/mymoney/storage/accountsmodel.cpp:520
 #, fuzzy, kde-format
 #| msgid "Total Value"
 msgid "Posted Value"
 msgstr "Værdi i alt"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:520
+#: kmymoney/mymoney/storage/accountsmodel.cpp:522
 #, fuzzy, kde-format
 #| msgid "Include subaccounts"
 msgctxt "@info:tooltip for 'Total Value' column"
@@ -6929,14 +6929,14 @@ msgid "Total Value (including subaccounts)"
 msgstr "Medtag underkonti"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:522
+#: kmymoney/mymoney/storage/accountsmodel.cpp:524
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:524
+#: kmymoney/mymoney/storage/accountsmodel.cpp:526
 #, fuzzy, kde-format
 #| msgid "Enter the International Bank Account Number into this field"
 msgctxt "@info:tooltip for 'IBAN' column"
@@ -6944,7 +6944,7 @@ msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr "Angiv det internationale bankkontonummer i dette felt"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:529
+#: kmymoney/mymoney/storage/accountsmodel.cpp:531
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6957,7 +6957,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:532
+#: kmymoney/mymoney/storage/accountsmodel.cpp:534
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -9192,6 +9192,19 @@ msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
 msgstr ""
 
+#: kmymoney/mymoney/storage/accountsmodel.cpp:497
+#, fuzzy, kde-format
+#| msgid "Currency"
+msgctxt "@title:column Shows Currency"
+msgid "Currency"
+msgstr "Valuta"
+
+#: kmymoney/mymoney/storage/accountsmodel.cpp:536
+#, kde-format
+msgctxt "@info:tooltip for 'Currency' column"
+msgid "The currency assigned to the account"
+msgstr ""
+
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #, fuzzy, kde-format
 #| msgid "Year"
@@ -10267,21 +10280,27 @@ msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tabulator (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:69
+#, kde-format
+msgctxt "@item:inlistbox CSV separator"
+msgid "Pipe (|)"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:54
 #, kde-format
 msgid "Start operation"
 msgstr "Start operation"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "Brug dette til at starte eksporthandlingen"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -10291,21 +10310,21 @@ msgstr "Brug dette til at starte eksporthandlingen"
 msgid "&Browse..."
 msgstr "&Gennemse..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:99
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Select filename"
 msgstr "Vælg filnavn"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:101
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "Brug dette til at vælge et filnavn at eksportere til"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:202
 #, fuzzy, kde-format
 #| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
 msgctxt "@info Hint in CSV export dialog"
@@ -10656,8 +10675,8 @@ msgstr ""
 "Angiv venligst dine kolonnevalg igen."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1022
+#: kmymoney/plugins/csv/import/csvwizard.cpp:965
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1037
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
@@ -11069,61 +11088,61 @@ msgstr "fjern"
 msgid "CSV..."
 msgstr "CSV..."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, kde-format
 msgid "Save QIF"
 msgstr "Gem QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, fuzzy, kde-format
 #| msgid "QIF Files"
 msgid "QIF Files (*.qif)"
 msgstr "QIF-filer"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:475
+#: kmymoney/plugins/csv/import/csvwizard.cpp:490
 #, kde-format
 msgid "Select File"
 msgstr "Vælg fil"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:476
+#: kmymoney/plugins/csv/import/csvwizard.cpp:491
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr "En profil skal være markeret før der vælges en fil."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:542
+#: kmymoney/plugins/csv/import/csvwizard.cpp:557
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:563
+#: kmymoney/plugins/csv/import/csvwizard.cpp:578
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:568
+#: kmymoney/plugins/csv/import/csvwizard.cpp:583
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:573
+#: kmymoney/plugins/csv/import/csvwizard.cpp:588
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:908
+#: kmymoney/plugins/csv/import/csvwizard.cpp:923
 #, kde-format
 msgid "Import CSV"
 msgstr "Importér CSV"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:910
+#: kmymoney/plugins/csv/import/csvwizard.cpp:925
 #, kde-format
 msgid "Make QIF File"
 msgstr "Opret QIF-fil"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:947
+#: kmymoney/plugins/csv/import/csvwizard.cpp:962
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -11131,7 +11150,7 @@ msgid ""
 "your data.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1019
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1034
 #, fuzzy, kde-format
 #| msgid ""
 #| "<center>The start line is greater than the end line.\n"
@@ -11143,7 +11162,7 @@ msgstr ""
 "<center>Startlinjen er større end slutlinjen.\n"
 "</center><center>Korrigér venligst dine indstillinger.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1068
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1083
 #, fuzzy, kde-format
 #| msgid "Please select a parent account."
 msgctxt "@info:tooltip QIF profile not selected"
@@ -12007,15 +12026,21 @@ msgstr "kolon (:)"
 msgid "tab (\\t)"
 msgstr "tabulator (\\t)"
 
+#. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
+#, kde-format
+msgid "pipe (|)"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:150
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
 #, kde-format
 msgctxt "punctuation mark used as field delimiter"
 msgid "Text Delimiter"
 msgstr "Tekstafgrænser"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:167
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:172
 #, kde-format
 msgid ""
 "Select field delimiter/separator character.\n"
@@ -12025,19 +12050,19 @@ msgstr ""
 "Dette vil nulstille alle eksisterende feltvalg."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:171
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
 #, kde-format
 msgid "quote (\")"
 msgstr "citationstegn (\")"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:181
 #, kde-format
 msgid "apostrophe (')"
 msgstr "Apostrof (')"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEncoding)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:187
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:192
 #, fuzzy, kde-format
 #| msgctxt "codec for character-set encoding"
 #| msgid "Encoding"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-10 00:46+0000\n"
+"POT-Creation-Date: 2026-06-14 00:44+0000\n"
 "PO-Revision-Date: 2026-05-19 04:36+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -5846,7 +5846,7 @@ msgstr "&იმპორტი"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -6425,7 +6425,7 @@ msgid "Payees created"
 msgstr "გადამხდელები შეიქმნა"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:504
+#: kmymoney/mymoney/storage/accountsmodel.cpp:506
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -6434,7 +6434,7 @@ msgid "Full name"
 msgstr "სრული სახელი"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:506
+#: kmymoney/mymoney/storage/accountsmodel.cpp:508
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -6443,28 +6443,28 @@ msgid "Type"
 msgstr "ტიპით"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:508
+#: kmymoney/mymoney/storage/accountsmodel.cpp:510
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "აქვს თუ არა მორგებული ანგარიშს ინტერნეტ-ასახვა"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:510
+#: kmymoney/mymoney/storage/accountsmodel.cpp:512
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "ჩაისმება თუ არა ეს ანგარიში გადასახადების ანგარიშებში"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:512
+#: kmymoney/mymoney/storage/accountsmodel.cpp:514
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "დღგ-ს პროცენტული განაკვეთი, თუ მორგებულია."
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:514
+#: kmymoney/mymoney/storage/accountsmodel.cpp:516
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
@@ -6473,7 +6473,7 @@ msgstr ""
 "არის თუ არა ფასების ცენტრის მინიჭება აუცილებელი ტრანზაქციაში შესვლისას."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:516
+#: kmymoney/mymoney/storage/accountsmodel.cpp:518
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
@@ -6481,20 +6481,20 @@ msgstr "ანგარიშის ბალანსი (ანგარიშ
 
 #: kmymoney/models/statementmodel.cpp:131
 #: kmymoney/mymoney/storage/accountsmodel.cpp:482
-#: kmymoney/mymoney/storage/accountsmodel.cpp:518
+#: kmymoney/mymoney/storage/accountsmodel.cpp:520
 #, kde-format
 msgid "Posted Value"
 msgstr "გამოტანილი მნიშვნელობა"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:520
+#: kmymoney/mymoney/storage/accountsmodel.cpp:522
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "მთლიანი ღირებულება (ქვეანგარიშების ჩათვლით)"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:522
+#: kmymoney/mymoney/storage/accountsmodel.cpp:524
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
@@ -6502,14 +6502,14 @@ msgstr ""
 "ანგარიშის ან საკრედიტო ბარათის ნომერი, რომელიც დაწესებულებამ მოგანიჭათ."
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:524
+#: kmymoney/mymoney/storage/accountsmodel.cpp:526
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr "ანგარიშის ნომერი IBAN (საერთაშორისო ბანკის ანგარიშის ნომერი) ფორმატში"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:529
+#: kmymoney/mymoney/storage/accountsmodel.cpp:531
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6522,7 +6522,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:532
+#: kmymoney/mymoney/storage/accountsmodel.cpp:534
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8648,6 +8648,19 @@ msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
 msgstr "SWIFT/BIC"
 
+#: kmymoney/mymoney/storage/accountsmodel.cpp:497
+#, fuzzy, kde-format
+#| msgid "Currency"
+msgctxt "@title:column Shows Currency"
+msgid "Currency"
+msgstr "ფული"
+
+#: kmymoney/mymoney/storage/accountsmodel.cpp:536
+#, kde-format
+msgctxt "@info:tooltip for 'Currency' column"
+msgid "The currency assigned to the account"
+msgstr ""
+
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #, kde-format
 msgctxt "Budget year"
@@ -9577,21 +9590,27 @@ msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "ტაბულაცია (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:69
+#, kde-format
+msgctxt "@item:inlistbox CSV separator"
+msgid "Pipe (|)"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:54
 #, kde-format
 msgid "Start operation"
 msgstr "ოპერაციის დაწყება"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "გამოიყენეთ ეს გატანის ოპერაციის დასაწყებად"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9601,21 +9620,21 @@ msgstr "გამოიყენეთ ეს გატანის ოპერ
 msgid "&Browse..."
 msgstr "არჩევა..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:99
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Select filename"
 msgstr "აირჩიეთ ფაილის სახელი"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:101
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "გამოიყენეთ ეს გასატანი ფაილის სახელის ასარჩევად"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:202
 #, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
@@ -9924,8 +9943,8 @@ msgstr ""
 "შეიყვანეთ თქვენი სვეტის არჩევნები."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1022
+#: kmymoney/plugins/csv/import/csvwizard.cpp:965
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1037
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
@@ -10311,27 +10330,27 @@ msgstr "წაშლა"
 msgid "CSV..."
 msgstr "CSV..."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, kde-format
 msgid "Save QIF"
 msgstr "QIF-ის შენახვა"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:416
+#: kmymoney/plugins/csv/import/csvwizard.cpp:431
 #, kde-format
 msgid "QIF Files (*.qif)"
 msgstr "QIF ფაილები (*.qif)"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:475
+#: kmymoney/plugins/csv/import/csvwizard.cpp:490
 #, kde-format
 msgid "Select File"
 msgstr "აირჩიეთ ფაილი"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:476
+#: kmymoney/plugins/csv/import/csvwizard.cpp:491
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr "ფაილის არჩევამდე პროფილი უნდა აირჩიოთ."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:542
+#: kmymoney/plugins/csv/import/csvwizard.cpp:557
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
@@ -10339,33 +10358,33 @@ msgid ""
 msgstr ""
 "<center>პროფილი <b>%1</b> უკვე არსებობს.<br>შეიყვანეთ სხვა სახელი</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:563
+#: kmymoney/plugins/csv/import/csvwizard.cpp:578
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr "<center>პროფილი <b>%1</b> დაემატა.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:568
+#: kmymoney/plugins/csv/import/csvwizard.cpp:583
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr "<center>პროფილი <b>%1</b> წაიშალა.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:573
+#: kmymoney/plugins/csv/import/csvwizard.cpp:588
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr "<center>პროფილის სახელი შეიცვალა <b>%1</b>-დან <b>%2</b>-ზე.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:908
+#: kmymoney/plugins/csv/import/csvwizard.cpp:923
 #, kde-format
 msgid "Import CSV"
 msgstr "CSV-ის შემოტანა"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:910
+#: kmymoney/plugins/csv/import/csvwizard.cpp:925
 #, kde-format
 msgid "Make QIF File"
 msgstr "QIF ფაილის შექმნა"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:947
+#: kmymoney/plugins/csv/import/csvwizard.cpp:962
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -10376,7 +10395,7 @@ msgstr ""
 "center><center>სცადეთ ხელით არჩევანი, რომ ნახოთ პრობლემატური უჯრედები და "
 "გაასწოროთ თქვენი მონაცემები.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1019
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1034
 #, kde-format
 msgid ""
 "<center>There are invalid date formats in column '%1'.</"
@@ -10385,7 +10404,7 @@ msgstr ""
 "<center>აღმოჩენილი არასწორი თარიღის ფორმატები სვეტში '%1'.</"
 "center><center>შეამოწმეთ თქვენი მონიშნულები.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1068
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1083
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
@@ -11145,15 +11164,21 @@ msgstr "ორიწერტილი (:)"
 msgid "tab (\\t)"
 msgstr "ტაბულაცია (\\t)"
 
+#. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
+#, kde-format
+msgid "pipe (|)"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:150
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
 #, kde-format
 msgctxt "punctuation mark used as field delimiter"
 msgid "Text Delimiter"
 msgstr "ტექსტის გამყოფი"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:167
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:172
 #, kde-format
 msgid ""
 "Select field delimiter/separator character.\n"
@@ -11163,19 +11188,19 @@ msgstr ""
 "ეს ყველა არსებული ველის არჩევანს ჩამოყრის."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:171
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
 #, kde-format
 msgid "quote (\")"
 msgstr "ბრჭყალი (\")"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:181
 #, kde-format
 msgid "apostrophe (')"
 msgstr "აპოსტროფი (')"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEncoding)
-#: kmymoney/plugins/csv/import/separatorwizardpage.ui:187
+#: kmymoney/plugins/csv/import/separatorwizardpage.ui:192
 #, kde-format
 msgid "Encoding"
 msgstr "კოდირება"
