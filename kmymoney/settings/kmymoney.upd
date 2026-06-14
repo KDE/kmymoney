@@ -46,3 +46,10 @@ RemoveGroup=PayeeLedger
 RemoveGroup=SplitEditor
 RemoveGroup=SplitTransactionEditor
 RemoveGroup=StandardLedger
+
+# Remove account view settings due
+# to newly inserted column in account model
+# followup for 1a1199cb
+Id=add-currency-column-2026
+File=kmymoney/kmymoneyrc
+RemoveGroup=KAccountsView
