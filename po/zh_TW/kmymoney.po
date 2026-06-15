@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-14 00:44+0000\n"
+"POT-Creation-Date: 2026-06-15 00:44+0000\n"
 "PO-Revision-Date: 2025-10-01 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -6251,7 +6251,7 @@ msgid "Assets and Liabilities"
 msgstr "資產與負債"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/kmymoneyutils.cpp:121 kmymoney/mymoney/storage/budgetsmodel.cpp:68
+#: kmymoney/kmymoneyutils.cpp:121 kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
 #, kde-format
 msgid "Budget"
@@ -6603,7 +6603,7 @@ msgid "The plugin to show this information could not be found."
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:93
-#: kmymoney/mymoney/storage/accountsmodel.cpp:468
+#: kmymoney/mymoney/storage/accountsmodel.cpp:465
 #, fuzzy, kde-format
 #| msgid "Name"
 msgctxt "@title:column Shows the Name of account"
@@ -6661,7 +6661,7 @@ msgid "Payees created"
 msgstr "收款人建立"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:506
+#: kmymoney/mymoney/storage/accountsmodel.cpp:503
 #, fuzzy, kde-format
 #| msgid "Full name"
 msgctxt ""
@@ -6671,7 +6671,7 @@ msgid "Full name"
 msgstr "完整名稱"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:508
+#: kmymoney/mymoney/storage/accountsmodel.cpp:505
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt ""
@@ -6681,28 +6681,28 @@ msgid "Type"
 msgstr "類型"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:510
+#: kmymoney/mymoney/storage/accountsmodel.cpp:507
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:512
+#: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:514
+#: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:516
+#: kmymoney/mymoney/storage/accountsmodel.cpp:513
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
@@ -6711,22 +6711,22 @@ msgid ""
 msgstr "無法在類別的內文中建立交易。"
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:518
+#: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:131
-#: kmymoney/mymoney/storage/accountsmodel.cpp:482
-#: kmymoney/mymoney/storage/accountsmodel.cpp:520
+#: kmymoney/mymoney/storage/accountsmodel.cpp:479
+#: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, fuzzy, kde-format
 #| msgid "Total Value"
 msgid "Posted Value"
 msgstr "總計價值"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:522
+#: kmymoney/mymoney/storage/accountsmodel.cpp:519
 #, fuzzy, kde-format
 #| msgid "Include subaccounts"
 msgctxt "@info:tooltip for 'Total Value' column"
@@ -6734,14 +6734,14 @@ msgid "Total Value (including subaccounts)"
 msgstr "包含子帳戶"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:524
+#: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:526
+#: kmymoney/mymoney/storage/accountsmodel.cpp:523
 #, fuzzy, kde-format
 #| msgid "Enter the International Bank Account Number into this field"
 msgctxt "@info:tooltip for 'IBAN' column"
@@ -6749,7 +6749,7 @@ msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr "在此欄位輸入國際銀行帳戶（International Bank Account Number，IBAN）"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:531
+#: kmymoney/mymoney/storage/accountsmodel.cpp:528
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6762,7 +6762,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:534
+#: kmymoney/mymoney/storage/accountsmodel.cpp:531
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8855,7 +8855,7 @@ msgstr "支出類別"
 msgid "Equity accounts"
 msgstr "股票帳戶"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:470
+#: kmymoney/mymoney/storage/accountsmodel.cpp:467
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt ""
@@ -8863,7 +8863,7 @@ msgctxt ""
 msgid "Type"
 msgstr "類型"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:472
+#: kmymoney/mymoney/storage/accountsmodel.cpp:469
 #, fuzzy, kde-format
 #| msgid "End line"
 msgctxt ""
@@ -8871,14 +8871,14 @@ msgctxt ""
 msgid "Online"
 msgstr "結束行"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:474
+#: kmymoney/mymoney/storage/accountsmodel.cpp:471
 #, fuzzy, kde-format
 #| msgid "Tax"
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "稅"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:476
+#: kmymoney/mymoney/storage/accountsmodel.cpp:473
 #, fuzzy, kde-format
 #| msgctxt "Column heading for VAT category"
 #| msgid "VAT"
@@ -8886,7 +8886,7 @@ msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "增值稅"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:478
+#: kmymoney/mymoney/storage/accountsmodel.cpp:475
 #, fuzzy, kde-format
 #| msgid "C"
 msgctxt ""
@@ -8895,14 +8895,14 @@ msgctxt ""
 msgid "CC"
 msgstr "C"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:480
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, fuzzy, kde-format
 #| msgid "Balance"
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "餘額"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:484
+#: kmymoney/mymoney/storage/accountsmodel.cpp:481
 #, fuzzy, kde-format
 #| msgid "Total Value"
 msgctxt ""
@@ -8911,20 +8911,20 @@ msgctxt ""
 msgid "Total Value"
 msgstr "總計價值"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:486
+#: kmymoney/mymoney/storage/accountsmodel.cpp:483
 #, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "編號"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:488
+#: kmymoney/mymoney/storage/accountsmodel.cpp:485
 #, fuzzy, kde-format
 #| msgid "IBAN"
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:493
+#: kmymoney/mymoney/storage/accountsmodel.cpp:490
 #, fuzzy, kde-format
 #| msgid "Bank Code"
 msgctxt ""
@@ -8934,26 +8934,26 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "銀行代碼"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:495
+#: kmymoney/mymoney/storage/accountsmodel.cpp:492
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
 msgstr ""
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:497
+#: kmymoney/mymoney/storage/accountsmodel.cpp:494
 #, fuzzy, kde-format
 #| msgid "Currency"
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "貨幣"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:536
+#: kmymoney/mymoney/storage/accountsmodel.cpp:533
 #, kde-format
 msgctxt "@info:tooltip for 'Currency' column"
 msgid "The currency assigned to the account"
 msgstr ""
 
-#: kmymoney/mymoney/storage/budgetsmodel.cpp:71
+#: kmymoney/mymoney/storage/budgetsmodel.cpp:74
 #, fuzzy, kde-format
 #| msgid "Year"
 msgctxt "Budget year"
@@ -8966,7 +8966,7 @@ msgstr "年份"
 msgid "Cost center"
 msgstr "輸入的金額"
 
-#: kmymoney/mymoney/storage/institutionsmodel.cpp:236
+#: kmymoney/mymoney/storage/institutionsmodel.cpp:240
 #, kde-format
 msgid "Accounts with no institution assigned"
 msgstr "沒有指定機構的帳戶"
@@ -9368,7 +9368,7 @@ msgstr "數值"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_payeesView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkPayee)
 #. i18n: ectx: attribute (title), widget (QWidget, payeeTab)
-#: kmymoney/mymoney/storage/payeesmodel.cpp:98
+#: kmymoney/mymoney/storage/payeesmodel.cpp:95
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243

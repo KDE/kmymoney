@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-14 00:44+0000\n"
-"PO-Revision-Date: 2026-05-19 07:13+0200\n"
+"POT-Creation-Date: 2026-06-15 00:44+0000\n"
+"PO-Revision-Date: 2026-06-14 12:03+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -6229,7 +6229,7 @@ msgid "Assets and Liabilities"
 msgstr "Imetja in obveznosti"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/kmymoneyutils.cpp:121 kmymoney/mymoney/storage/budgetsmodel.cpp:68
+#: kmymoney/kmymoneyutils.cpp:121 kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
 #, kde-format
 msgid "Budget"
@@ -6570,7 +6570,7 @@ msgid "The plugin to show this information could not be found."
 msgstr "Vtičnika za prikaz tega podatka ni bilo mogoče najti."
 
 #: kmymoney/models/statementmodel.cpp:93
-#: kmymoney/mymoney/storage/accountsmodel.cpp:468
+#: kmymoney/mymoney/storage/accountsmodel.cpp:465
 #, kde-format
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
@@ -6619,7 +6619,7 @@ msgid "Payees created"
 msgstr "Ustvarjeni prejemniki plačil"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:506
+#: kmymoney/mymoney/storage/accountsmodel.cpp:503
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -6628,7 +6628,7 @@ msgid "Full name"
 msgstr "Polno ime"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:508
+#: kmymoney/mymoney/storage/accountsmodel.cpp:505
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -6637,28 +6637,28 @@ msgid "Type"
 msgstr "Vrsta"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:510
+#: kmymoney/mymoney/storage/accountsmodel.cpp:507
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "Ali ima račun vzpostavljen preslikavo v omrežje"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:512
+#: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "Ali je račun vključen v davčna poročila"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:514
+#: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "Davčna stopnja DDV, če je nastavljena."
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:516
+#: kmymoney/mymoney/storage/accountsmodel.cpp:513
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
@@ -6666,35 +6666,35 @@ msgid ""
 msgstr "Ali je potrebna dodelitev stroškovnega mesta ob vnosu transakcije."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:518
+#: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr "Stanje računa (v valuti računa)"
 
 #: kmymoney/models/statementmodel.cpp:131
-#: kmymoney/mymoney/storage/accountsmodel.cpp:482
-#: kmymoney/mymoney/storage/accountsmodel.cpp:520
+#: kmymoney/mymoney/storage/accountsmodel.cpp:479
+#: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, kde-format
 msgid "Posted Value"
 msgstr "Objavljena vrednost"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:522
+#: kmymoney/mymoney/storage/accountsmodel.cpp:519
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "Skupna vrednost (vključno s podračuni)"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:524
+#: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
 msgstr "Številka računa ali kreditne kartice, kot jo je dodelila institucija."
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:526
+#: kmymoney/mymoney/storage/accountsmodel.cpp:523
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
@@ -6702,7 +6702,7 @@ msgstr ""
 "Številka bančnega računa v obliki IBAN (International Bank Account Number)"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:531
+#: kmymoney/mymoney/storage/accountsmodel.cpp:528
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6718,7 +6718,7 @@ msgstr ""
 "code' (računi v Združenem kraljestvu)."
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:534
+#: kmymoney/mymoney/storage/accountsmodel.cpp:531
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8778,33 +8778,33 @@ msgstr "Kategorije izdatkov"
 msgid "Equity accounts"
 msgstr "Računi lastniškega kapitala"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:470
+#: kmymoney/mymoney/storage/accountsmodel.cpp:467
 #, kde-format
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "Vrsta"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:472
+#: kmymoney/mymoney/storage/accountsmodel.cpp:469
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
 msgstr "V omrežju"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:474
+#: kmymoney/mymoney/storage/accountsmodel.cpp:471
 #, kde-format
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Davek"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:476
+#: kmymoney/mymoney/storage/accountsmodel.cpp:473
 #, kde-format
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "DDV"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:478
+#: kmymoney/mymoney/storage/accountsmodel.cpp:475
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
@@ -8812,13 +8812,13 @@ msgctxt ""
 msgid "CC"
 msgstr "SM"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:480
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, kde-format
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Saldo"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:484
+#: kmymoney/mymoney/storage/accountsmodel.cpp:481
 #, kde-format
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
@@ -8826,19 +8826,19 @@ msgctxt ""
 msgid "Total Value"
 msgstr "Skupna vrednost"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:486
+#: kmymoney/mymoney/storage/accountsmodel.cpp:483
 #, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Številka"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:488
+#: kmymoney/mymoney/storage/accountsmodel.cpp:485
 #, kde-format
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:493
+#: kmymoney/mymoney/storage/accountsmodel.cpp:490
 #, kde-format
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
@@ -8847,26 +8847,25 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "Koda banke"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:495
+#: kmymoney/mymoney/storage/accountsmodel.cpp:492
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
 msgstr "SWIFT/BIC"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:497
-#, fuzzy, kde-format
-#| msgid "Currency"
+#: kmymoney/mymoney/storage/accountsmodel.cpp:494
+#, kde-format
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "Valuta"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:536
+#: kmymoney/mymoney/storage/accountsmodel.cpp:533
 #, kde-format
 msgctxt "@info:tooltip for 'Currency' column"
 msgid "The currency assigned to the account"
-msgstr ""
+msgstr "Valuta dodeljena računu"
 
-#: kmymoney/mymoney/storage/budgetsmodel.cpp:71
+#: kmymoney/mymoney/storage/budgetsmodel.cpp:74
 #, kde-format
 msgctxt "Budget year"
 msgid "Year"
@@ -8877,7 +8876,7 @@ msgstr "Leto"
 msgid "Cost center"
 msgstr "Stroškovno mesto"
 
-#: kmymoney/mymoney/storage/institutionsmodel.cpp:236
+#: kmymoney/mymoney/storage/institutionsmodel.cpp:240
 #, kde-format
 msgid "Accounts with no institution assigned"
 msgstr "Računi brez dodeljene institucije"
@@ -9243,7 +9242,7 @@ msgstr "Vrednost"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_payeesView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkPayee)
 #. i18n: ectx: attribute (title), widget (QWidget, payeeTab)
-#: kmymoney/mymoney/storage/payeesmodel.cpp:98
+#: kmymoney/mymoney/storage/payeesmodel.cpp:95
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
@@ -9798,7 +9797,7 @@ msgstr "Tabulator (\\t)"
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Pipe (|)"
-msgstr ""
+msgstr "Pipa (|)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
@@ -11436,7 +11435,7 @@ msgstr "tabulator (\\t)"
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
 #, kde-format
 msgid "pipe (|)"
-msgstr ""
+msgstr "pipa (|)"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
