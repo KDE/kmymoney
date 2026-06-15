@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-14 03:25+0000\n"
-"PO-Revision-Date: 2026-05-26 07:29+0200\n"
+"PO-Revision-Date: 2026-06-14 17:27+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -9820,7 +9820,7 @@ msgstr "Tabulation (\\t)"
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Pipe (|)"
-msgstr ""
+msgstr "Tuyau (|)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
@@ -11489,7 +11489,7 @@ msgstr "tabulation (\\t)"
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
 #, kde-format
 msgid "pipe (|)"
-msgstr ""
+msgstr "tuyau (|)"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
