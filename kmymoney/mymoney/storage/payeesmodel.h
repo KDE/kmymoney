@@ -50,6 +50,8 @@ public:
 
     PayeesModelEmptyPayee* emptyPayee();
 
+    void createMissingEntries(const QSet<QString>& payeesToCreate);
+
 public Q_SLOTS:
 
 private:
