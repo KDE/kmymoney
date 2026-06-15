@@ -63,6 +63,7 @@ BankingPage::BankingPage(CSVWizard* dlg, CSVImporterCore* imp)
         {Column::Category, ui->m_categoryCol},
         {Column::CreditDebitIndicator, ui->m_creditDebitIndicatorCol},
         {Column::Balance, ui->m_balanceCol},
+        {Column::Fee, ui->m_feeCol},
     };
 
     connect(ui->m_clear, &QAbstractButton::clicked, this, &BankingPage::clearColumns);
@@ -101,6 +102,9 @@ BankingPage::BankingPage(CSVWizard* dlg, CSVImporterCore* imp)
     connect(ui->m_balanceCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Balance);
     });
+    connect(ui->m_feeCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
+        validateSelectedColumn(col, Column::Fee);
+    });
 
     connect(ui->m_creditIndicator, &QLineEdit::textEdited, this, [&](const QString& indicator) {
         m_profile->m_creditIndicator = indicator;
@@ -130,6 +134,7 @@ BankingPage::BankingPage(CSVWizard* dlg, CSVImporterCore* imp)
     connectClearButton(m_payeeCol);
     connectClearButton(m_categoryCol);
     connectClearButton(m_balanceCol);
+    connectClearButton(m_feeCol);
     connectClearButton(m_amountCol);
     connectClearButton(m_creditDebitIndicatorCol);
     connectClearButton(m_debitCol);

@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2026 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -38,6 +39,7 @@ private Q_SLOTS:
     void testPriceFractionSetting();
     void testImportByDebitCredit();
     void testImportByAmount();
+    void testImportByAmountWithFee();
     void testImportByName();
     void testImportBySymbol();
     void testFeeColumn();

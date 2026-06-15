@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2026 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -205,6 +206,37 @@ void CSVImporterCoreTest::testImportByAmount()
     QVERIFY(st.m_listTransactions[1].m_listSplits.first().m_strCategoryName == "BAR");
     QVERIFY(st.m_listTransactions[1].m_listSplits.first().m_amount == MyMoneyMoney(-56.78));
     QVERIFY(st.m_listTransactions[1].m_amount == MyMoneyMoney(56.78));
+}
+
+void CSVImporterCoreTest::testImportByAmountWithFee()
+{
+    QString csvContent;
+    csvContent += QLatin1String("\"Trans Date\",\"Post Date\",\"Description\",\"Amount\",\"Fee\",\"Category\"\n");
+    csvContent += QLatin1String("05/16/2016,05/17/2016,FOO1,100.00,2.50,BAR\n");
+    csvContent += QLatin1String("06/17/2016,06/18/2016,FOO2,-100.00,2.50,BAR\n");
+    csvContent += QLatin1String("07/18/2016,07/19/2016,FOO3,-100.00,-2.50,BAR\n");
+    csvContent += QLatin1String("08/19/2016,08/20/2016,FOO4,100.00,,BAR\n");
+
+    QString filename("import-by-amount-with-fee.csv");
+    writeStatementToCSV(csvContent, filename);
+    amountProfile->m_colTypeNum.insert(Column::Fee, 4);
+    amountProfile->m_colTypeNum[Column::Category] = 5;
+    amountProfile->m_colNumType.remove(4);
+    amountProfile->m_colNumType.insert(4, Column::Fee);
+    amountProfile->m_colNumType.insert(5, Column::Category);
+
+    auto st = csvImporter->unattendedImport(filename, amountProfile);
+    QVERIFY(st.m_listTransactions.count() == 4);
+    QVERIFY(st.m_listTransactions[0].m_fees == MyMoneyMoney(2.50));
+    QVERIFY(st.m_listTransactions[0].m_amount == MyMoneyMoney(100.00));
+    QVERIFY(st.m_listTransactions[0].m_listSplits.first().m_amount == MyMoneyMoney(-100.00));
+    QVERIFY(st.m_listTransactions[1].m_fees == MyMoneyMoney(2.50));
+    QVERIFY(st.m_listTransactions[1].m_amount == MyMoneyMoney(-100.00));
+    QVERIFY(st.m_listTransactions[1].m_listSplits.first().m_amount == MyMoneyMoney(100.00));
+    QVERIFY(st.m_listTransactions[2].m_fees == MyMoneyMoney(2.50));
+    QVERIFY(st.m_listTransactions[2].m_amount == MyMoneyMoney(-100.00));
+    QVERIFY(st.m_listTransactions[3].m_fees == MyMoneyMoney());
+    QVERIFY(st.m_listTransactions[3].m_amount == MyMoneyMoney(100.00));
 }
 
 void CSVImporterCoreTest::testImportByName()

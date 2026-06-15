@@ -2,7 +2,7 @@
     SPDX-FileCopyrightText: 2010 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
-    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
+    SPDX-FileCopyrightText: 2021-2026 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -927,6 +927,24 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement& st, const BankingProfile*
             return false;
     }
 
+    // process fee field
+    col = profile->m_colTypeNum.value(Column::Fee, -1);
+    if (col != -1) {
+        if (profile->m_decimalSymbol == DecimalSymbol::Auto) {
+            DecimalSymbol decimalSymbol = m_decimalSymbolIndexMap.value(col);
+            m_file->m_parse->setDecimalSymbol(decimalSymbol);
+        }
+
+        txt = m_file->m_model->item(row, col)->text();
+        if (txt.startsWith(QLatin1Char('('))) // check if brackets notation is used for negative numbers
+            txt.remove(QRegularExpression(QStringLiteral("[()]")));
+
+        if (!txt.isEmpty()) {
+            const auto fee = MyMoneyMoney(m_file->m_parse->possiblyReplaceSymbol(txt)).abs();
+            tr.m_fees = fee;
+        }
+    }
+
     MyMoneyStatement::Split s1;
     s1.m_amount = tr.m_amount;
     s1.m_strMemo = tr.m_strMemo;
@@ -1056,8 +1074,7 @@ bool CSVImporterCore::processInvestRow(MyMoneyStatement& st, const InvestmentPro
             MyMoneyMoney fee(m_file->m_parse->possiblyReplaceSymbol(txt));
             if (profile->m_feeIsPercentage && profile->m_feeRate.isEmpty()) //   fee is percent
                 fee *= tr.m_amount / MyMoneyMoney(100); // as percentage
-            fee.abs();
-            tr.m_fees = fee;
+            tr.m_fees = fee.abs();
         }
     }
 

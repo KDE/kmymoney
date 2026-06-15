@@ -355,6 +355,42 @@
            </property>
           </widget>
          </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="labelBnk_fee">
+           <property name="text">
+            <string>Fee</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>m_feeCol</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QComboBox" name="m_feeCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing fee field.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="2">
+          <widget class="QToolButton" name="m_feeColClear">
+           <property name="toolTip">
+            <string>Clear fee field selection.</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -740,6 +776,8 @@
   <tabstop>m_memoColClear</tabstop>
   <tabstop>m_balanceCol</tabstop>
   <tabstop>m_balanceColClear</tabstop>
+  <tabstop>m_feeCol</tabstop>
+  <tabstop>m_feeColClear</tabstop>
   <tabstop>m_amountTabWidget</tabstop>
   <tabstop>m_amountCol</tabstop>
   <tabstop>m_amountColClear</tabstop>
