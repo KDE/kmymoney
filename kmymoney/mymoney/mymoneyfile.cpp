@@ -342,6 +342,55 @@ public:
         }
     }
 
+    void createMissingPayees()
+    {
+        QSet<QString> payeesToCreate;
+
+        auto checkAndCreatePayee = [&](const QString& id) {
+            if (!id.isEmpty() && !payeesModel.indexById(id).isValid()) {
+                payeesToCreate << id;
+            }
+        };
+
+        // scan the models for payees that do not exist and create a placeholder
+        // for each of them so that the user can rename them
+
+        // scan all splits
+        auto rows = journalModel.rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = journalModel.index(row, 0);
+            checkAndCreatePayee(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
+        }
+
+        // scan all reports
+        rows = reportsModel.rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = reportsModel.index(row, 0);
+            const auto reportId = idx.data(eMyMoney::Model::IdRole).toString();
+            try {
+                const auto report = m_file->report(reportId);
+                const auto payeesIdList = report.payees();
+                for (const auto& payeeId : payeesIdList) {
+                    checkAndCreatePayee(payeeId);
+                }
+            } catch ([[maybe_unused]] MyMoneyException& e) {
+                ;
+            }
+        }
+
+        // scan all scheduled splits
+        const auto schedules = m_file->scheduleList();
+        for (const auto& schedule : schedules) {
+            const auto transaction = schedule.transaction();
+            const auto splits = transaction.splits();
+            for (const auto& split : splits) {
+                checkAndCreatePayee(split.payeeId());
+            }
+        }
+
+        payeesModel.createMissingEntries(payeesToCreate);
+    }
+
     bool applyFileFixes(bool expertMode)
     {
         MyMoneyFileTransaction ft;
@@ -411,6 +460,11 @@ public:
                     throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown fix level in input file"));
                 }
             }
+
+            // Files exported from Skrooge may have lost payees using
+            // earlier versions.
+            createMissingPayees();
+
             ft.commit();
         } catch (const MyMoneyException&) {
             return false;
@@ -418,7 +472,7 @@ public:
         return true;
     }
 
-    /* DO NOT ADD code to this function or any of it's called ones.
+    /* DO NOT ADD code to these functions or any of it's called ones.
        Instead, create a new function, fixFile_n, and modify the applyFileFixes()
        logic above to call it */
 

@@ -253,3 +253,27 @@ bool PayeesModel::setData(const QModelIndex& index, const QVariant& value, int r
     }
     return rc;
 }
+
+void PayeesModel::createMissingEntries(const QSet<QString>& payeesToCreate)
+{
+    if (!payeesToCreate.isEmpty()) {
+        // create the number of required items
+        auto row = rowCount();
+        insertRows(row, payeesToCreate.count());
+
+        const auto topLeft = PayeesModel::index(row, 0);
+        for (const auto& id : payeesToCreate) {
+            auto payee = MyMoneyPayee(id);
+            payee.setName(i18nc("@info Name for recreated missing but referenced payee", "Unknown payee '%1'", id));
+            const auto idx = index(row, 0);
+            static_cast<TreeItem<MyMoneyPayee>*>(idx.internalPointer())->dataRef() = payee;
+            if (m_idToItemMapper) {
+                m_idToItemMapper->insert(id, static_cast<TreeItem<MyMoneyPayee>*>(idx.internalPointer()));
+            }
+            qDebug() << "Missing payee:" << payee.name() << "created";
+            ++row;
+        }
+        const auto bottomRight = PayeesModel::index(row - 1, columnCount() - 1);
+        Q_EMIT dataChanged(topLeft, bottomRight);
+    }
+}
