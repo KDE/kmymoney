@@ -21,7 +21,6 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QLibrary>
-#include <QMutexLocker>
 #include <QStandardPaths>
 #include <QTemporaryFile>
 #include <QVariant>
@@ -142,9 +141,6 @@ bool WoobInterface::isWoobInitialized() const
 
 PyObject* WoobInterface::execute(QString method, QVariantList args)
 {
-    QMutex mutex;
-    QMutexLocker locker(&mutex);
-
     PyObject* retVal = nullptr;
     auto ba = method.toLocal8Bit();
     const char* cmethod = ba.data();
