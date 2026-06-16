@@ -268,7 +268,8 @@ void Woob::gotAccount()
             KMessageBox::error(nullptr, msg);
     }
 
-    d->progress->hide();
+    if (d->progress)
+        d->progress->hide();
 }
 
 K_PLUGIN_CLASS_WITH_JSON(Woob, "woob.json")
