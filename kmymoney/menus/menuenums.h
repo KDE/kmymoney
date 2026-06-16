@@ -132,7 +132,7 @@ enum class Action {
     // *************
     EditTabOrder,
 #ifdef KMM_TRACING
-    NewFeature,
+    NewFeature, DebugTraces,
 #endif
     DebugTimers,
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,

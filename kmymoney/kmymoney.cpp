@@ -1711,8 +1711,8 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
         const QVector<Action> checkableActions{Action::ViewTransactionDetail,
                                                Action::ViewHideReconciled,
                                                Action::ViewHideCategories,
-                                               Action::DebugTraces,
 #ifdef KMM_TRACING
+                                               Action::DebugTraces,
                                                Action::DebugTimers,
 #endif
                                                Action::ViewShowAll};
