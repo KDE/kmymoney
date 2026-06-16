@@ -28,12 +28,12 @@ typedef _ts PyThreadState;
 
 class WoobInterface
 {
-    PyObject* m_pythonSysModule;
-    PyObject* m_pythonSysPathVariable;
-    PyObject* m_pythonWoobModuleLocation;
-    PyObject* m_pythonWoobModule;
+    PyObject* m_pythonSysModule = nullptr;
+    PyObject* m_pythonSysPathVariable = nullptr;
+    PyObject* m_pythonWoobModuleLocation = nullptr;
+    PyObject* m_pythonWoobModule = nullptr;
 
-    PyThreadState* m_pythonThreadState;
+    PyThreadState* m_pythonThreadState = nullptr;
 
 public:
     struct Backend {

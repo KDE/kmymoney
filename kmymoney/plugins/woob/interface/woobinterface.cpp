@@ -114,6 +114,9 @@ WoobInterface::WoobInterface()
 
 WoobInterface::~WoobInterface()
 {
+    if (m_pythonThreadState) {
+        PyEval_RestoreThread(m_pythonThreadState);
+    }
     if (m_pythonSysModule)
         Py_DECREF(m_pythonSysModule);
     if (m_pythonSysPathVariable)
