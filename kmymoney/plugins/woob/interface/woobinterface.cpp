@@ -10,9 +10,12 @@
 // Python uses slots var that is QT macro
 #undef slots
 
+#ifndef Q_OS_WIN
+#include <dlfcn.h>
+#endif
+
 #include "woobinterface.h"
 
-#include <dlfcn.h>
 #include <memory>
 
 // ----------------------------------------------------------------------------
@@ -52,9 +55,11 @@ WoobInterface::WoobInterface()
 {
     Q_INIT_RESOURCE(woobinterface);
 
+#ifndef Q_OS_WIN
     if (!dlopen(PYTHON_LIBRARY_NAME, RTLD_NOW | RTLD_GLOBAL)) {
         qWarning() << "Failed to load" << PYTHON_LIBRARY_NAME << "with RTLD_GLOBAL:" << dlerror();
     }
+#endif
 
     Py_Initialize();
     qDebug() << "Python interpreter found:" << Py_GetVersion();
