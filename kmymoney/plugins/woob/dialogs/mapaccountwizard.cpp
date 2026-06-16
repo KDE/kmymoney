@@ -122,6 +122,7 @@ void MapAccountWizard::slotNewPage(int id)
     d->progress->setMinimum(0);
     d->progress->setMaximum(0);
     d->progress->setMinimumDuration(0);
+    d->progress->show();
 
     switch (id) {
     case BACKENDS_PAGE: {
