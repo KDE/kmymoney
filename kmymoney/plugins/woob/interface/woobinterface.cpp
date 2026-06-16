@@ -226,14 +226,14 @@ QList<WoobInterface::Account> WoobInterface::getAccounts(QString backend)
     return accountsList;
 }
 
-WoobInterface::Account WoobInterface::getAccount(QString backend, QString accid, QString max)
+WoobInterface::Account WoobInterface::getAccount(QString backend, QString accid, QString endDate)
 {
     WoobInterface::Account acc;
     if (!isWoobInitialized())
         return acc;
 
     PyGILState_STATE gstate = PyGILState_Ensure();
-    auto retVal = execute("get_transactions", QVariantList{backend, accid, max});
+    auto retVal = execute("get_transactions", QVariantList{backend, accid, endDate});
     if (retVal) {
         acc.id = extractDictStringValue(retVal, "id");
         acc.name = extractDictStringValue(retVal, "name");
@@ -255,6 +255,7 @@ WoobInterface::Account WoobInterface::getAccount(QString backend, QString accid,
                     tr.raw = extractDictStringValue(val2, "raw");
                     tr.category = extractDictStringValue(val2, "category");
                     tr.label = extractDictStringValue(val2, "label");
+                    tr.payee = extractDictStringValue(val2, "payee");
                     tr.amount = MyMoneyMoney(extractDictLongValue(val2, "amount"), 100);
 
                     acc.transactions.append(tr);

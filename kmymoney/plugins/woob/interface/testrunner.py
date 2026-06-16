@@ -9,9 +9,10 @@ functions without needing the full KMyMoney application.
 Usage:
     python testrunner.py backends
     python testrunner.py accounts BACKEND_NAME
-    python testrunner.py transactions BACKEND_NAME ACCOUNT_ID [MAX_COUNT]
+    python testrunner.py transactions BACKEND_NAME ACCOUNT_ID [END_DATE]
 """
 
+import datetime
 import sys
 from pathlib import Path
 
@@ -47,17 +48,21 @@ def main():
 
     elif cmd == "transactions":
         if len(sys.argv) < 4:
-            print("Usage: python testrunner.py transactions BACKEND_NAME ACCOUNT_ID [MAX_COUNT]")
+            print("Usage: python testrunner.py transactions BACKEND_NAME ACCOUNT_ID [END_DATE]")
             return
         backend = sys.argv[2]
         accid = sys.argv[3]
-        maximum = sys.argv[4] if len(sys.argv) > 4 else "10"
-        result = get_transactions(backend, accid, maximum)
+        if len(sys.argv) > 4:
+            end_date = sys.argv[4]
+        else:
+            # Default: today minus 60 days, matching woob's default settings
+            end_date = (datetime.date.today() - datetime.timedelta(days=60)).isoformat()
+        result = get_transactions(backend, accid, end_date)
         print(f"Account: {result['name']} ({result['id']})")
         print(f"Balance: {result['balance']}")
         for tr in result["transactions"]:
             label = tr['label'] or '-'
-            print(f"  {tr['date']}  {label:40s}  {tr['amount']:>10}  [{tr['id']}]")
+            print(f"  {tr['date']}  {label:40s}  {tr['amount']/100:>10.2f}  [{tr['id']}]")
 
     else:
         print(f"Unknown command: {cmd}")

@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
 
+import datetime
 import logging
 import logging.config
 import os
@@ -113,7 +114,7 @@ def get_accounts(bname):
     return results
 
 
-def get_transactions(bname, accid, maximum):
+def get_transactions(bname, accid, end_date=None):
     w = _get_woob()
     w.load_backends(names=[bname])
     backend = w.get_backend(bname)
@@ -128,13 +129,12 @@ def get_transactions(bname, accid, maximum):
                'balance': int(acc.balance * 100), 'type': int(acc.type),
                'transactions': []}
 
-    count = 0
-    try:
-        count = int(maximum)
-        if count < 1:
-            count = 0
-    except (ValueError, TypeError):
-        count = 0
+    if end_date is not None and end_date != '':
+        try:
+            end_date = datetime.date.fromisoformat(end_date)
+        except (ValueError, TypeError):
+            LOGGER.warning("bank: invalid end_date '%s', falling back to fetching all history", end_date)
+            end_date = None
 
     i = 0
     first = True
@@ -147,6 +147,16 @@ def get_transactions(bname, accid, maximum):
             first = False
         if rewriteid:
             tr.id = tr.unique_id(seen)
+
+        if end_date is not None:
+            tr_date = tr.date.date() if hasattr(tr.date, 'date') else tr.date
+            if tr_date < end_date:
+                break
+
+        payee = ''
+        if tr.counterparty and tr.counterparty.label:
+            payee = tr.counterparty.label
+
         results['transactions'].append({
             'id': tr.id,
             'date': tr.date.strftime('%Y-%m-%d'),
@@ -155,11 +165,10 @@ def get_transactions(bname, accid, maximum):
             'raw': tr.raw,
             'category': tr.category,
             'label': tr.label,
+            'payee': payee,
             'amount': int(tr.amount * 100),
         })
         i += 1
-        if count != 0 and i >= count:
-            break
 
     backend.dump_state()
     LOGGER.debug("bank: got %d transactions for account %s", i, accid)

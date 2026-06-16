@@ -149,7 +149,8 @@ bool Woob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlin
         if (w->exec() == QDialog::Accepted && w != nullptr) {
             onlineBankingSettings.setValue("wb-backend", w->currentBackend());
             onlineBankingSettings.setValue("wb-id", w->currentAccount());
-            onlineBankingSettings.setValue("wb-max", "50");
+            onlineBankingSettings.setValue("wb-todayMinus", "1");
+            onlineBankingSettings.setValue("wb-numRequestDays", "60");
             rc = true;
         }
         delete w;
@@ -166,7 +167,21 @@ bool Woob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
     if (d->checkInitialized()) {
         QString bname = kacc.onlineBankingSettings().value("wb-backend");
         QString id = kacc.onlineBankingSettings().value("wb-id");
-        QString max = kacc.onlineBankingSettings().value("wb-max");
+
+        MyMoneyKeyValueContainer settings = kacc.onlineBankingSettings();
+        QDate endDate;
+        if ((settings.value("wb-todayMinus").toInt() != 0) && !settings.value("wb-numRequestDays").isEmpty()) {
+            endDate = QDate::currentDate().addDays(-settings.value("wb-numRequestDays").toInt());
+        } else if ((settings.value("wb-lastUpdate").toInt() != 0) && !kacc.value("lastImportedTransactionDate").isEmpty()) {
+            QDate lastUpdate = QDate::fromString(kacc.value("lastImportedTransactionDate"), Qt::ISODate);
+            if (lastUpdate.isValid()) {
+                endDate = lastUpdate.addDays(-3);
+            }
+        } else if ((settings.value("wb-pickDate").toInt() != 0) && !settings.value("wb-specificDate").isEmpty()) {
+            endDate = QDate::fromString(settings.value("wb-specificDate"));
+        } else {
+            endDate = QDate::currentDate().addMonths(-2);
+        }
 
         d->progress = std::make_unique<QProgressDialog>(nullptr);
         d->progress->setWindowTitle(i18n("Connecting to bank..."));
@@ -177,9 +192,9 @@ bool Woob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
         d->progress->setMaximum(0);
         d->progress->setMinimumDuration(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QFuture<WoobInterface::Account> future = QtConcurrent::run(&WoobInterface::getAccount, &d->woob, bname, id, max);
+        QFuture<WoobInterface::Account> future = QtConcurrent::run(&WoobInterface::getAccount, &d->woob, bname, id, endDate.toString(Qt::ISODate));
 #else
-        QFuture<WoobInterface::Account> future = QtConcurrent::run(&d->woob, &WoobInterface::getAccount, bname, id, max);
+        QFuture<WoobInterface::Account> future = QtConcurrent::run(&d->woob, &WoobInterface::getAccount, bname, id, endDate.toString(Qt::ISODate));
 #endif
         d->watcher.setFuture(future);
 
@@ -231,8 +246,8 @@ void Woob::gotAccount()
         kt.m_strBankID = QLatin1String("ID ") + tr.id;
         kt.m_datePosted = tr.rdate;
         kt.m_amount = tr.amount;
-        kt.m_strMemo = tr.raw;
-        kt.m_strPayee = tr.label;
+        kt.m_strMemo = tr.label;
+        kt.m_strPayee = tr.payee;
 
         ks.m_listTransactions += kt;
     }

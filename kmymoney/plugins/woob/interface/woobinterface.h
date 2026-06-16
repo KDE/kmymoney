@@ -60,6 +60,7 @@ public:
         QString raw;
         QString category;
         QString label;
+        QString payee;
         MyMoneyMoney amount;
     };
 
@@ -94,7 +95,7 @@ public:
 
     QList<Account> getAccounts(QString backend);
 
-    Account getAccount(QString backend, QString account, QString max);
+    Account getAccount(QString backend, QString account, QString endDate);
 
 private:
     PyObject* execute(QString method, QVariantList args);
