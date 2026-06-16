@@ -80,7 +80,7 @@
 #include "statementinterface.h"
 #include "viewinterface.h"
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
 #include "chiptandialog.h"
 #include "phototandialog.h"
 
@@ -345,7 +345,7 @@ void KBanking::createActions()
     Q_CHECK_PTR(viewInterface());
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action("file_import_aqbanking"), &QAction::setEnabled);
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
     QAction* openChipTanDialog = actionCollection()->addAction("open_chiptan_dialog");
     openChipTanDialog->setText("Open ChipTan Dialog");
     connect(openChipTanDialog, &QAction::triggered, this, [&]() {

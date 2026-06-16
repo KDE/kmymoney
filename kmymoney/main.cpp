@@ -11,6 +11,7 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QLoggingCategory>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QStandardPaths>
@@ -58,7 +59,7 @@
 #include <windows.h>
 #endif
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
 #include "mymoneytracer.h"
 #include "mymoneyutils.h"
 #endif
@@ -140,7 +141,8 @@ int main(int argc, char* argv[])
     bool isNoCatchOption = false;
     bool isNoFileOption = false;
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
+    QLoggingCategory::defaultCategory()->setEnabled(QtDebugMsg, true); // same as QT_LOGGING_RULES=default.debug=true
     bool isDumpActionsOption = false;
 #endif
 
@@ -167,7 +169,7 @@ int main(int argc, char* argv[])
         const QCommandLineOption noCatchOption(QStringLiteral("nocatch"), i18n("do not globally catch uncaught exceptions"));
         parser.addOption(noCatchOption);
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
         // The following options are only available when compiled in debug mode
         // trace
         const QCommandLineOption traceOption(QStringLiteral("trace"), i18n("turn on program traces"));
@@ -203,7 +205,7 @@ int main(int argc, char* argv[])
          */
         aboutData.processCommandLine(&parser);
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
         if (parser.isSet(traceOption))
             MyMoneyTracer::on();
         timersOn = parser.isSet(timersOption);
@@ -230,7 +232,7 @@ int main(int argc, char* argv[])
 
     kmymoney = new KMyMoneyApp();
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
     if (isDumpActionsOption) {
         kmymoney->dumpActions();
 
