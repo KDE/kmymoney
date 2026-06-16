@@ -149,7 +149,7 @@ bool Woob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlin
         if (w->exec() == QDialog::Accepted && w != nullptr) {
             onlineBankingSettings.setValue("wb-backend", w->currentBackend());
             onlineBankingSettings.setValue("wb-id", w->currentAccount());
-            onlineBankingSettings.setValue("wb-max", "0");
+            onlineBankingSettings.setValue("wb-max", "50");
             rc = true;
         }
         delete w;

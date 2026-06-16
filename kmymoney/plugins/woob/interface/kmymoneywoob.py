@@ -8,9 +8,11 @@
 
 import logging
 import logging.config
+import os
 import sys
 
-from woob.core import Woob
+from woob.tools.storage import StandardStorage
+from woob.tools.application.base import Woob
 from woob.capabilities.bank import CapBank
 from woob.exceptions import AppValidation, AppValidationCancelled, AppValidationExpired
 
@@ -55,9 +57,15 @@ config = {
 logging.config.dictConfig(config)
 LOGGER = logging.getLogger(__name__)
 
+def _get_woob():
+    w = Woob(storage=StandardStorage(
+        os.path.expanduser('~/.config/woob/bank.storage')
+    ))
+    return w
+
 
 def get_backends():
-    w = Woob()
+    w = _get_woob()
 
     result = {}
     for instance_name, name, params in sorted(w.backends_config.iter_backends()):
@@ -76,92 +84,83 @@ def get_backends():
 
 
 def get_accounts(bname):
-    w = Woob()
+    w = _get_woob()
     w.load_backends(names=[bname])
     backend = w.get_backend(bname)
     results = {}
-    accounts = {}
     try:
         accounts = backend.iter_accounts()
     except AppValidation:
-        # hacky copy from Woob's mfa.py do_double_authentication()
-        # See https://gitlab.com/woob/woob/-/issues/597
-        config_key = 'resume'
-        if config_key in backend.config:
-            for config_key, handle_method in backend.browser.AUTHENTICATION_METHODS.items():
-                try:
-                    handle_method()
-                except AppValidationCancelled:
-                    raise
-                except AppValidationExpired:
-                    raise
+        backend.config['resume'].set('1')
+        accounts = backend.iter_accounts()
+    except AppValidationCancelled:
+        LOGGER.warning("bank: 2FA cancelled by user")
+        return {}
+    except AppValidationExpired:
+        LOGGER.warning("bank: 2FA timed out")
+        return {}
 
-            accounts = backend.iter_accounts()
+    count = 0
     for account in accounts:
-        results[account.id] = {'name': account.label,
-                               'balance': int(account.balance * 100),
-                               'type': int(account.type),
-                               }
+        count += 1
+        results[account.id] = {
+            'name': account.label,
+            'balance': int(account.balance * 100),
+            'type': int(account.type),
+        }
+    backend.dump_state()
+    LOGGER.debug("bank: got %d accounts", count)
     return results
 
 
 def get_transactions(bname, accid, maximum):
-    w = Woob()
-
+    w = _get_woob()
     w.load_backends(names=[bname])
     backend = w.get_backend(bname)
 
     try:
         acc = backend.get_account(accid)
     except AppValidation:
-        config_key = 'resume'
-        if config_key in backend.config:
-            for config_key, handle_method in backend.browser.AUTHENTICATION_METHODS.items():
-                try:
-                    handle_method()
-                except AppValidationCancelled:
-                    raise
-                except AppValidationExpired:
-                    raise
+        backend.config['resume'].set('1')
+        acc = backend.get_account(accid)
 
-            acc = backend.get_account(accid)
+    results = {'id': acc.id, 'name': acc.label,
+               'balance': int(acc.balance * 100), 'type': int(acc.type),
+               'transactions': []}
 
-    results = {}
-    results['id'] = acc.id
-    results['name'] = acc.label
-    results['balance'] = int(acc.balance * 100)
-    results['type'] = int(acc.type)
-    results['transactions'] = []
-
+    count = 0
     try:
         count = int(maximum)
         if count < 1:
             count = 0
-    except:
+    except (ValueError, TypeError):
         count = 0
+
     i = 0
     first = True
     rewriteid = False
     seen = set()
     for tr in backend.iter_history(acc):
         if first:
-            if tr.id == u'0' or tr.id == u'':
+            if tr.id == '0' or tr.id == '':
                 rewriteid = True
             first = False
         if rewriteid:
             tr.id = tr.unique_id(seen)
-        t = {'id':          tr.id,
-             'date':        tr.date.strftime('%Y-%m-%d'),
-             'rdate':       tr.rdate.strftime('%Y-%m-%d'),
-             'type':        int(tr.type),
-             'raw':         tr.raw,
-             'category':    tr.category,
-             'label':       tr.label,
-             'amount':      int(tr.amount * 100),
-        }
-        results['transactions'].append(t)
+        results['transactions'].append({
+            'id': tr.id,
+            'date': tr.date.strftime('%Y-%m-%d'),
+            'rdate': tr.rdate.strftime('%Y-%m-%d'),
+            'type': int(tr.type),
+            'raw': tr.raw,
+            'category': tr.category,
+            'label': tr.label,
+            'amount': int(tr.amount * 100),
+        })
         i += 1
         if count != 0 and i >= count:
             break
 
+    backend.dump_state()
+    LOGGER.debug("bank: got %d transactions for account %s", i, accid)
     return results

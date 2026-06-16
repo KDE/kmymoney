@@ -12,6 +12,7 @@
 
 #include "woobinterface.h"
 
+#include <dlfcn.h>
 #include <memory>
 
 // ----------------------------------------------------------------------------
@@ -37,6 +38,10 @@ WoobInterface::WoobInterface()
     : m_pythonWoobModule(nullptr)
 {
     Q_INIT_RESOURCE(woobinterface);
+
+    if (!dlopen(PYTHON_LIBRARY_NAME, RTLD_NOW | RTLD_GLOBAL)) {
+        qWarning() << "Failed to load" << PYTHON_LIBRARY_NAME << "with RTLD_GLOBAL:" << dlerror();
+    }
 
     Py_Initialize();
     qDebug() << "Python interpreter found:" << Py_GetVersion();
