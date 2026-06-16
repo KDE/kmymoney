@@ -33,6 +33,7 @@
 
 #include "accountsettings.h"
 #include "mapaccountwizard.h"
+#include "woobexc.h"
 #include "woobinterface.h"
 
 #include "mymoneyaccount.h"
@@ -209,50 +210,63 @@ bool Woob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
 void Woob::gotAccount()
 {
     Q_D(Woob);
-    WoobInterface::Account acc = d->watcher.result();
+    try {
+        WoobInterface::Account acc = d->watcher.result();
 
-    MyMoneyAccount kacc = statementInterface()->account("wb-id", acc.id);
-    MyMoneyStatement ks;
+        MyMoneyAccount kacc = statementInterface()->account("wb-id", acc.id);
+        MyMoneyStatement ks;
 
-    ks.m_accountId = kacc.id();
-    ks.m_strAccountName = acc.name;
-    ks.m_closingBalance = acc.balance;
-    if (acc.transactions.length() > 0)
-        ks.m_dateEnd = acc.transactions.front().date;
+        ks.m_accountId = kacc.id();
+        ks.m_strAccountName = acc.name;
+        ks.m_closingBalance = acc.balance;
+        if (acc.transactions.length() > 0)
+            ks.m_dateEnd = acc.transactions.front().date;
 
 #if 0
-    switch (acc.type) {
-    case Woob::Account::TYPE_CHECKING:
-        ks.m_eType = MyMoneyStatement::etCheckings;
-        break;
-    case Woob::Account::TYPE_SAVINGS:
-        ks.m_eType = MyMoneyStatement::etSavings;
-        break;
-    case Woob::Account::TYPE_MARKET:
-        ks.m_eType = MyMoneyStatement::etInvestment;
-        break;
-    case Woob::Account::TYPE_DEPOSIT:
-    case Woob::Account::TYPE_LOAN:
-    case Woob::Account::TYPE_JOINT:
-    case Woob::Account::TYPE_UNKNOWN:
-        break;
-    }
+        switch (acc.type) {
+        case Woob::Account::TYPE_CHECKING:
+            ks.m_eType = MyMoneyStatement::etCheckings;
+            break;
+        case Woob::Account::TYPE_SAVINGS:
+            ks.m_eType = MyMoneyStatement::etSavings;
+            break;
+        case Woob::Account::TYPE_MARKET:
+            ks.m_eType = MyMoneyStatement::etInvestment;
+            break;
+        case Woob::Account::TYPE_DEPOSIT:
+        case Woob::Account::TYPE_LOAN:
+        case Woob::Account::TYPE_JOINT:
+        case Woob::Account::TYPE_UNKNOWN:
+            break;
+        }
 #endif
 
-    for (QListIterator<WoobInterface::Transaction> it(acc.transactions); it.hasNext();) {
-        WoobInterface::Transaction tr = it.next();
-        MyMoneyStatement::Transaction kt;
+        for (QListIterator<WoobInterface::Transaction> it(acc.transactions); it.hasNext();) {
+            WoobInterface::Transaction tr = it.next();
+            MyMoneyStatement::Transaction kt;
 
-        kt.m_strBankID = QLatin1String("ID ") + tr.id;
-        kt.m_datePosted = tr.rdate;
-        kt.m_amount = tr.amount;
-        kt.m_strMemo = tr.label;
-        kt.m_strPayee = tr.payee;
+            kt.m_strBankID = QLatin1String("ID ") + tr.id;
+            kt.m_datePosted = tr.rdate;
+            kt.m_amount = tr.amount;
+            kt.m_strMemo = tr.label;
+            kt.m_strPayee = tr.payee;
 
-        ks.m_listTransactions += kt;
+            ks.m_listTransactions += kt;
+        }
+
+        statementInterface()->import(ks);
+    } catch (const WoobException& e) {
+        QString msg;
+        switch (e.msg()) {
+        case ExceptionCode::BrowserIncorrectPassword:
+            msg = i18n("Incorrect password.");
+            break;
+        default:
+            break;
+        }
+        if (!msg.isEmpty())
+            KMessageBox::error(nullptr, msg);
     }
-
-    statementInterface()->import(ks);
 
     d->progress->hide();
 }

@@ -164,13 +164,27 @@ void MapAccountWizard::slotNewPage(int id)
 void MapAccountWizard::slotGotBackends()
 {
     Q_D(MapAccountWizard);
-    const auto backends = d->backendsWatcher.result();
-    for (const auto& backend : backends)
-        d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name, backend.module}));
-    d->progress.reset();
+    try {
+        const auto backends = d->backendsWatcher.result();
+        for (const auto& backend : backends)
+            d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name, backend.module}));
+        d->progress.reset();
 
-    if (backends.isEmpty())
-        KMessageBox::information(this, i18n("No backends available.\nAdd one using woob config-qt."));
+        if (backends.isEmpty())
+            KMessageBox::information(this, i18n("No backends available.\nAdd one using woob config-qt."));
+    } catch (const WoobException& e) {
+        d->progress.reset();
+        QString msg;
+        switch (e.msg()) {
+        case ExceptionCode::BrowserIncorrectPassword:
+            msg = i18n("Incorrect password.");
+            break;
+        default:
+            break;
+        }
+        if (!msg.isEmpty())
+            KMessageBox::error(this, msg);
+    }
 }
 
 void MapAccountWizard::slotGotAccounts()
