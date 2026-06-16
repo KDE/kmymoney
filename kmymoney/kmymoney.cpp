@@ -191,7 +191,7 @@
 #include "sqlcipher/sqlite3.h"
 #endif
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
 #include "mymoney/storage/mymoneystoragedump.h"
 #endif
 #include "mymoneytracer.h"
@@ -611,7 +611,7 @@ public:
             Action::FileImportTemplate,
             Action::FileExportTemplate,
             Action::EditTabOrder,
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
             Action::FileDump,
             Action::NewFeature,
 #endif
@@ -681,7 +681,7 @@ public:
     {
         auto caption = m_storageInfo.url.isEmpty() && m_myMoneyView && m_storageInfo.isOpened ? i18n("Untitled") : m_storageInfo.url.fileName();
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
         caption += QString(" (%1 x %2)").arg(q->width()).arg(q->height());
 #endif
 
@@ -1386,7 +1386,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             {Action::FileImportTemplate,            QStringLiteral("file_import_template"),           i18n("Account Template..."),                        Icon::Empty},
             {Action::FileExportTemplate,            QStringLiteral("file_export_template"),           i18n("Account Template..."),                        Icon::Empty},
             {Action::FilePersonalData,              QStringLiteral("view_personal_data"),             i18n("Personal Data..."),                           Icon::UserProperties},
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
             {Action::FileDump,                      QStringLiteral("file_dump"),                      i18n("Dump Memory"),                                Icon::Empty},
 #endif
             {Action::FileInformation,               QStringLiteral("view_file_info"),                 i18n("File-Information..."),                        Icon::DocumentProperties},
@@ -1523,7 +1523,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             {Action::EditTabOrder,                  QStringLiteral("edit_taborder"),                  i18n("Edit tab order"),                             Icon::Empty},
             //debug actions
             {Action::LedgerQuickOpen,               QStringLiteral("ledger_quick_open"),              i18n("Ledger Quick Open"),                          Icon::Empty},
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
             {Action::NewFeature,                    QStringLiteral("new feature"),                    i18n("Test new feature"),                           Icon::Empty},
 #endif
             {Action::DebugTraces,                   QStringLiteral("debug_traces"),                   i18n("Debug Traces"),                               Icon::Empty},
@@ -1593,7 +1593,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates},
             {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates},
             {Action::FilePersonalData,              &KMyMoneyApp::slotFileViewPersonal},
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
             {Action::FileDump,                      &KMyMoneyApp::slotFileFileInfo},
 #endif
             {Action::FileInformation,               &KMyMoneyApp::slotFileInfoDialog},
@@ -1635,7 +1635,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             // Actions w/o main menu entry
             // ***************************
             //debug actions
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
             {Action::NewFeature,                    &KMyMoneyApp::slotNewFeature},
 #endif
             {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
@@ -1717,7 +1717,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
                                                Action::ViewHideReconciled,
                                                Action::ViewHideCategories,
                                                Action::DebugTraces,
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
                                                Action::DebugTimers,
 #endif
                                                Action::ViewShowAll};
@@ -1774,7 +1774,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             {qMakePair(Action::GoToPayee,                   Qt::CTRL | Qt::SHIFT | Qt::Key_P)},
             {qMakePair(Action::SelectAllTransactions,       Qt::CTRL | Qt::Key_A)},
             {qMakePair(Action::EditTabOrder,                Qt::META | Qt::ALT | Qt::Key_T)},
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
             {qMakePair(Action::NewFeature,                  Qt::CTRL | Qt::Key_G)},
 #endif
             {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL | Qt::SHIFT | Qt::Key_N)},
@@ -1872,7 +1872,7 @@ void KMyMoneyApp::slotAddSharedAction(eMenu::Action action, QAction* defaultActi
     }
 }
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
 void KMyMoneyApp::dumpActions() const
 {
     const QList<QAction*> list = actionCollection()->actions();
@@ -1975,7 +1975,7 @@ void KMyMoneyApp::readOptions()
     d->m_startDialog = grp.readEntry("StartDialog", true);
 }
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
 void KMyMoneyApp::resizeEvent(QResizeEvent* ev)
 {
     KMainWindow::resizeEvent(ev);
@@ -3250,7 +3250,7 @@ void KMyMoneyApp::slotShowAllAccounts()
     d->m_myMoneyView->slotSettingsChanged();
 }
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
 void KMyMoneyApp::slotFileFileInfo()
 {
     if (!d->m_storageInfo.isOpened) {

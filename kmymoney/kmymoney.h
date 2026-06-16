@@ -153,7 +153,7 @@ protected Q_SLOTS:
       */
     void slotGenerateSql();
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
     /**
       * Called when the user asks for file information.
       */
@@ -322,7 +322,7 @@ public:
       */
     bool isImportableFile(const QUrl &url);
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
     /**
      * Dump a list of the names of all defined KActions to stdout.
      */
@@ -424,7 +424,7 @@ protected:
      */
     bool queryClose() final override;
 
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
     void resizeEvent(QResizeEvent*) final override;
 #endif
 

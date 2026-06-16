@@ -30,7 +30,7 @@ enum class Action {
     FileImportTemplate, FileExportTemplate,
     Print,
     PrintPreview,
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
     FileDump,
 #endif
     FilePersonalData, FileInformation,
@@ -132,7 +132,7 @@ enum class Action {
     // The misc actions
     // *************
     EditTabOrder,
-#ifdef KMM_DEBUG
+#ifdef KMM_TRACING
     NewFeature,
 #endif
     DebugTraces, DebugTimers,
