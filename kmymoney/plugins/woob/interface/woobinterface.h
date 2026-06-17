@@ -40,6 +40,7 @@ public:
     struct Backend {
         QString name;
         QString module;
+        QString login;
     };
 
     struct Transaction {

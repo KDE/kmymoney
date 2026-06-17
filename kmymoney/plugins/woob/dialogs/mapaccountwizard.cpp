@@ -171,7 +171,7 @@ void MapAccountWizard::slotGotBackends()
     try {
         const auto backends = d->backendsWatcher.result();
         for (const auto& backend : backends)
-            d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name, backend.module}));
+            d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name, backend.module, backend.login}));
         d->progress.reset();
 
         if (backends.isEmpty())

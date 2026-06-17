@@ -67,20 +67,14 @@ def _get_woob():
 
 def get_backends():
     w = _get_woob()
-
+    w.load_backends(caps=[CapBank])
     result = {}
-    for instance_name, name, params in sorted(w.backends_config.iter_backends()):
-        try:
-            module = w.modules_loader.get_or_load_module(name)
-        except Exception as e:
-            LOGGER.error("Failed to read module %s: %s", name, e)
-            continue
-
-        if not module.has_caps(CapBank):
-            continue
-
-        result[instance_name] = {'module': name}
-
+    for backend in w.iter_backends():
+        login = backend.config.get('login')
+        result[backend.name] = {
+            'module': backend.NAME,
+            'login': login.get() if login else '',
+        }
     return result
 
 

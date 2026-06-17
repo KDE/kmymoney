@@ -35,7 +35,7 @@ def main():
     if cmd == "backends":
         backends = get_backends()
         for name, info in backends.items():
-            print(f"{name}: {info['module']}")
+            print(f"{name}: {info['module']} (login: {info['login']})")
 
     elif cmd == "accounts":
         if len(sys.argv) < 3:

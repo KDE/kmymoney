@@ -199,6 +199,7 @@ QList<WoobInterface::Backend> WoobInterface::getBackends()
             WoobInterface::Backend backend;
             backend.name = PyUnicode_AsUTF8(key);
             backend.module = extractDictStringValue(value, "module");
+            backend.login = extractDictStringValue(value, "login");
             backendsList.append(backend);
         }
         Py_DECREF(pValue);

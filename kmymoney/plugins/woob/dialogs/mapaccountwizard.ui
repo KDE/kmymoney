@@ -25,18 +25,23 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTreeWidget" name="backendsList">
-      <column>
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Module</string>
-       </property>
-      </column>
-     </widget>
+      <widget class="QTreeWidget" name="backendsList">
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Module</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Login</string>
+        </property>
+       </column>
+      </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
