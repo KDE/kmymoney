@@ -106,8 +106,10 @@ def get_accounts(bname):
         count += 1
         results[account.id] = {
             'name': account.label,
+            'number': account.number,
             'balance': int(account.balance * 100),
             'type': int(account.type),
+            'currency': account.currency,
         }
     backend.dump_state()
     LOGGER.debug("bank: got %d accounts", count)

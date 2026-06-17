@@ -67,6 +67,8 @@ public:
     struct Account {
         QString id;
         QString name;
+        QString number;
+        QString currency;
         enum type_t {
             TYPE_UNKNOWN = 0,
             TYPE_CHECKING,

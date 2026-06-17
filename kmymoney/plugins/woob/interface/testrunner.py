@@ -44,7 +44,7 @@ def main():
         backend = sys.argv[2]
         accounts = get_accounts(backend)
         for accid, acc in accounts.items():
-            print(f"{accid}: {acc['name']} ({acc['balance']})")
+            print(f"{accid}: {acc['name']} ({acc['number']}) {acc['balance']} {acc['currency']}")
 
     elif cmd == "transactions":
         if len(sys.argv) < 4:

@@ -73,7 +73,17 @@
       </column>
       <column>
        <property name="text">
+        <string>Number</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Balance</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Currency</string>
        </property>
       </column>
      </widget>

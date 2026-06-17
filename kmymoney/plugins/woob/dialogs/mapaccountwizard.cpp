@@ -194,7 +194,8 @@ void MapAccountWizard::slotGotAccounts()
     try {
         const auto accounts = d->accountsWatcher.result();
         for (const auto& account : accounts)
-            d->ui->accountsList->addTopLevelItem(new QTreeWidgetItem(QStringList{account.id, account.name, account.balance.formatMoney(QString(), 2)}));
+            d->ui->accountsList->addTopLevelItem(
+                new QTreeWidgetItem(QStringList{account.id, account.name, account.number, account.balance.formatMoney(QString(), 2), account.currency}));
         d->progress.reset();
 
         if (accounts.isEmpty())

@@ -221,8 +221,10 @@ QList<WoobInterface::Account> WoobInterface::getAccounts(QString backend)
             WoobInterface::Account account;
             account.id = PyUnicode_AsUTF8(key);
             account.name = extractDictStringValue(value, "name");
+            account.number = extractDictStringValue(value, "number");
             account.balance = MyMoneyMoney(extractDictLongValue(value, "balance"), 100);
             account.type = (WoobInterface::Account::type_t)extractDictLongValue(value, "type");
+            account.currency = extractDictStringValue(value, "currency");
 
             accountsList.append(account);
         }
