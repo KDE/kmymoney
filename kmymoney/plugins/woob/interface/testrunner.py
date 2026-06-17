@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024
+# SPDX-FileCopyrightText: 2022-2026 Dawid Wróbel <me@dawidwrobel.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 """
 Companion script for debugging kmymoneywoob.py outside of KMyMoney.

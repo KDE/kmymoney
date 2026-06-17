@@ -4,7 +4,7 @@
     SPDX-FileCopyrightText: 2016 Christian David <christian-david@web.de>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
-    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
+    SPDX-FileCopyrightText: 2021-2026 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 

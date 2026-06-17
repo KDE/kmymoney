@@ -2,7 +2,7 @@
 
 # SPDX-FileCopyrightText: 2014-2015 Romain Bignon <romain@symlink.me>
 # SPDX-FileCopyrightText: 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
-# SPDX-FileCopyrightText: 2022 Dawid Wróbel <me@dawidwrobel.com>
+# SPDX-FileCopyrightText: 2022-2026 Dawid Wróbel <me@dawidwrobel.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
 
