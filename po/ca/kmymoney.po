@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-16 00:45+0000\n"
-"PO-Revision-Date: 2026-06-14 09:42+0200\n"
+"POT-Creation-Date: 2026-06-17 00:45+0000\n"
+"PO-Revision-Date: 2026-06-16 08:52+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -6408,49 +6408,49 @@ msgstr[1] "No s'han importat operacions noves."
 msgid "Statement import statistics"
 msgstr "Estadístiques d'importació d'extractes"
 
-#: kmymoney/main.cpp:135
+#: kmymoney/main.cpp:136
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:157
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "l'idioma a emprar"
 
-#: kmymoney/main.cpp:161
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "no obris el darrer fitxer emprat"
 
-#: kmymoney/main.cpp:165
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "activa els temporitzadors de rendiment"
 
-#: kmymoney/main.cpp:169
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "no capturis globalment les excepcions no capturades"
 
-#: kmymoney/main.cpp:175
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "engega els traçats de programa"
 
-#: kmymoney/main.cpp:179
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "bolca els noms de tots els objectes QAction definits a la sortida estàndard "
 "i surt"
 
-#: kmymoney/main.cpp:185 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "fitxer a obrir"
 
-#: kmymoney/main.cpp:292
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr ""
@@ -9318,11 +9318,10 @@ msgid "Payee"
 msgstr "Beneficiari"
 
 #: kmymoney/mymoney/storage/payeesmodel.cpp:267
-#, fuzzy, kde-format
-#| msgid "Unknown payee"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced payee"
 msgid "Unknown payee '%1'"
-msgstr "Beneficiari desconegut"
+msgstr "Beneficiari desconegut «%1»"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:36
 #, kde-format

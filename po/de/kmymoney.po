@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-16 00:45+0000\n"
+"POT-Creation-Date: 2026-06-17 00:45+0000\n"
 "PO-Revision-Date: 2026-02-24 22:25+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -6436,50 +6436,50 @@ msgstr[1] "Es wurden keine neuen Buchungen importiert.."
 msgid "Statement import statistics"
 msgstr "Kontoauszug-Importstatistik"
 
-#: kmymoney/main.cpp:135
+#: kmymoney/main.cpp:136
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:157
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "Zu verwendende Sprache"
 
-#: kmymoney/main.cpp:161
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "zuletzt benutzte Datei nicht öffnen"
 
-#: kmymoney/main.cpp:165
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "Performance-Timer erlauben"
 
-#: kmymoney/main.cpp:169
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "Unbehandelte Programmfehler nicht global abfangen"
 
 # Muß man das wirklich übersetzen? Die Diskussion haben wir ja häufiger bei Entwickler-Fachausdrücken. Hätte Programm-Trace benutzt
-#: kmymoney/main.cpp:175
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "Programm-Ablaufverfolgung einschalten"
 
-#: kmymoney/main.cpp:179
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "Die Namen aller definierten QAction-Objekte auf der Standardausgabe (stdout) "
 "ausgeben und beenden"
 
-#: kmymoney/main.cpp:185 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "Zu öffnende Datei"
 
-#: kmymoney/main.cpp:292
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Unbehandelter Fehler: Bitte melden Sie die Details an die Entwickler"

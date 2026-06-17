@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-16 00:45+0000\n"
+"POT-Creation-Date: 2026-06-17 00:45+0000\n"
 "PO-Revision-Date: 2026-01-04 11:05+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -6382,49 +6382,49 @@ msgstr[1] "Ez da transakzio berririk inportatu."
 msgid "Statement import statistics"
 msgstr "Kontu-laburpen inportazioen estatistikak"
 
-#: kmymoney/main.cpp:135
+#: kmymoney/main.cpp:136
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:157
+#: kmymoney/main.cpp:159
 #, kde-format
 msgid "language to be used"
 msgstr "erabili beharreko hizkuntza"
 
-#: kmymoney/main.cpp:161
+#: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
 msgstr "ez ireki azkenekoz erabilitako fitxategia"
 
-#: kmymoney/main.cpp:165
+#: kmymoney/main.cpp:167
 #, kde-format
 msgid "enable performance timers"
 msgstr "gaitu errendimendu-tenporizadoreak"
 
-#: kmymoney/main.cpp:169
+#: kmymoney/main.cpp:171
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "ez detektatu globalki salbuespen detektatugabeak"
 
-#: kmymoney/main.cpp:175
+#: kmymoney/main.cpp:177
 #, kde-format
 msgid "turn on program traces"
 msgstr "aktibatu programa-aztarnak"
 
-#: kmymoney/main.cpp:179
+#: kmymoney/main.cpp:181
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "irauli KAction-eko objektu definitu guztien izenak irteera estandarrean eta "
 "irten"
 
-#: kmymoney/main.cpp:185 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:187 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "ireki beharreko fitxategia"
 
-#: kmymoney/main.cpp:292
+#: kmymoney/main.cpp:294
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Detektatu gabeko errorea. Jakinarazi xehetasunak garatzaileei"
