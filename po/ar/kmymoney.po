@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-16 03:33+0000\n"
+"POT-Creation-Date: 2026-06-17 03:31+0000\n"
 "PO-Revision-Date: 2026-06-14 20:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -6212,47 +6212,47 @@ msgstr[5] "لم تستورد أي معاملات جديدة."
 msgid "Statement import statistics"
 msgstr "إحصاءات استيراد البيان"
 
-#: kmymoney/main.cpp:133
+#: kmymoney/main.cpp:134
 #, kde-format
 msgid "KMyMoney"
 msgstr "«أموالك»"
 
-#: kmymoney/main.cpp:155
+#: kmymoney/main.cpp:157
 #, kde-format
 msgid "language to be used"
 msgstr "اللغة لاستخدامها"
 
-#: kmymoney/main.cpp:159
+#: kmymoney/main.cpp:161
 #, kde-format
 msgid "do not open last used file"
 msgstr "لا تفتح آخر ملف مستخدم"
 
-#: kmymoney/main.cpp:163
+#: kmymoney/main.cpp:165
 #, kde-format
 msgid "enable performance timers"
 msgstr "مكّن مؤقتات الأداء"
 
-#: kmymoney/main.cpp:167
+#: kmymoney/main.cpp:169
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "لا تلتقط الاستثناءات غير الملتقطة عالمياً"
 
-#: kmymoney/main.cpp:173
+#: kmymoney/main.cpp:175
 #, kde-format
 msgid "turn on program traces"
 msgstr "شغّل آثار البرنامج"
 
-#: kmymoney/main.cpp:177
+#: kmymoney/main.cpp:179
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "أفرغ أسماء كل كائنات QAction المحددة إلى الإخراج القياسي واخرج"
 
-#: kmymoney/main.cpp:183 tools/kmmreport-export.cpp:149
+#: kmymoney/main.cpp:185 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "الملف لفتحه"
 
-#: kmymoney/main.cpp:284
+#: kmymoney/main.cpp:286
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "خطأ لم يُلتقط. رجاءً أبلِغ المطوّرين بالتّفاصيل"
@@ -8690,8 +8690,7 @@ msgid "SWIFT/BIC"
 msgstr "رمز SWIFT/BIC"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:500
-#, fuzzy, kde-format
-#| msgid "Currency"
+#, kde-format
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "العملة"
@@ -8700,7 +8699,7 @@ msgstr "العملة"
 #, kde-format
 msgctxt "@info:tooltip for 'Currency' column"
 msgid "The currency assigned to the account"
-msgstr ""
+msgstr "العملة المسندة للحساب"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #, kde-format

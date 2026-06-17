@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-16 03:33+0000\n"
-"PO-Revision-Date: 2026-06-14 12:17+0200\n"
+"POT-Creation-Date: 2026-06-17 03:31+0000\n"
+"PO-Revision-Date: 2026-06-16 06:14+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -6272,47 +6272,47 @@ msgstr[3] "Nobene nove transakcije ni bilo uvožene."
 msgid "Statement import statistics"
 msgstr "Statistika uvoza izkazov"
 
-#: kmymoney/main.cpp:133
+#: kmymoney/main.cpp:134
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:155
+#: kmymoney/main.cpp:157
 #, kde-format
 msgid "language to be used"
 msgstr "jezik, ki naj bi se uporabil"
 
-#: kmymoney/main.cpp:159
+#: kmymoney/main.cpp:161
 #, kde-format
 msgid "do not open last used file"
 msgstr "ne odpirajte zadnje uporabljene datoteke"
 
-#: kmymoney/main.cpp:163
+#: kmymoney/main.cpp:165
 #, kde-format
 msgid "enable performance timers"
 msgstr "omogoči časomerilnike učinkovitosti"
 
-#: kmymoney/main.cpp:167
+#: kmymoney/main.cpp:169
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "globalno ne lovite neulovljenih izjem"
 
-#: kmymoney/main.cpp:173
+#: kmymoney/main.cpp:175
 #, kde-format
 msgid "turn on program traces"
 msgstr "vklopite sledenje programa"
 
-#: kmymoney/main.cpp:177
+#: kmymoney/main.cpp:179
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "izbruhaj imena vseh določenih predmetov QAction na stdout in končaj"
 
-#: kmymoney/main.cpp:183 tools/kmmreport-export.cpp:149
+#: kmymoney/main.cpp:185 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "datoteka za odpiranje"
 
-#: kmymoney/main.cpp:284
+#: kmymoney/main.cpp:286
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Neulovljena napaka. Prosimo poročajte podrobnosti razvijalcem"
@@ -8769,8 +8769,7 @@ msgid "SWIFT/BIC"
 msgstr "SWIFT/BIC"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:500
-#, fuzzy, kde-format
-#| msgid "Currency"
+#, kde-format
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "Valuta"
@@ -8779,7 +8778,7 @@ msgstr "Valuta"
 #, kde-format
 msgctxt "@info:tooltip for 'Currency' column"
 msgid "The currency assigned to the account"
-msgstr ""
+msgstr "Valuta dodeljena računu"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #, kde-format

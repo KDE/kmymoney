@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-16 03:33+0000\n"
+"POT-Creation-Date: 2026-06-17 03:31+0000\n"
 "PO-Revision-Date: 2020-09-15 12:07+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -6554,49 +6554,49 @@ msgstr[1] "Não foram importadas transacções novas."
 msgid "Statement import statistics"
 msgstr "Estatísticas da importação do extracto"
 
-#: kmymoney/main.cpp:133
+#: kmymoney/main.cpp:134
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:155
+#: kmymoney/main.cpp:157
 #, kde-format
 msgid "language to be used"
 msgstr ""
 
-#: kmymoney/main.cpp:159
+#: kmymoney/main.cpp:161
 #, kde-format
 msgid "do not open last used file"
 msgstr "não abrir o último ficheiro usado"
 
-#: kmymoney/main.cpp:163
+#: kmymoney/main.cpp:165
 #, kde-format
 msgid "enable performance timers"
 msgstr "activar as medições de desempenho"
 
-#: kmymoney/main.cpp:167
+#: kmymoney/main.cpp:169
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "não capturar globalmente as excepções não-capturadas"
 
-#: kmymoney/main.cpp:173
+#: kmymoney/main.cpp:175
 #, kde-format
 msgid "turn on program traces"
 msgstr "activar o registo de eventos do programa"
 
-#: kmymoney/main.cpp:177
+#: kmymoney/main.cpp:179
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "apresentar os nomes de todos os objectos QAction definidos para o 'stdout' e "
 "sair"
 
-#: kmymoney/main.cpp:183 tools/kmmreport-export.cpp:149
+#: kmymoney/main.cpp:185 tools/kmmreport-export.cpp:149
 #, kde-format
 msgid "file to open"
 msgstr "ficheiro a abrir"
 
-#: kmymoney/main.cpp:284
+#: kmymoney/main.cpp:286
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr ""
