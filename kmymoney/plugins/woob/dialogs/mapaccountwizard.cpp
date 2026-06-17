@@ -66,6 +66,8 @@ MapAccountWizard::MapAccountWizard(QWidget* parent, WoobInterface* woob)
     Q_D(MapAccountWizard);
     d->ui->setupUi(this);
     d->ui->addBackendButton->setVisible(false); // the button isn't connected to anything
+    d->ui->backendsList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    d->ui->accountsList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     slotCheckNextButton();
     connect(this, &QWizard::currentIdChanged, this, &MapAccountWizard::slotCheckNextButton);
