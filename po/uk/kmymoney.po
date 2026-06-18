@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-17 00:45+0000\n"
-"PO-Revision-Date: 2026-06-14 15:38+0300\n"
+"PO-Revision-Date: 2026-06-17 10:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -9307,11 +9307,10 @@ msgid "Payee"
 msgstr "Отримувач"
 
 #: kmymoney/mymoney/storage/payeesmodel.cpp:267
-#, fuzzy, kde-format
-#| msgid "Unknown payee"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced payee"
 msgid "Unknown payee '%1'"
-msgstr "Невідомий отримувач"
+msgstr "Невідомий отримувач «%1»"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:36
 #, kde-format

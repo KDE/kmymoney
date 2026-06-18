@@ -24921,33 +24921,3 @@ msgstr ""
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Configure your report"
-#~ msgstr "Настройване"
-
-#~ msgid "Prices"
-#~ msgstr "Цени"
-
-#, fuzzy
-#~ msgid "Oldest unmarked transaction: %1"
-#~ msgstr "Да не се показват закритите сметки"
-
-#~ msgctxt "To open a new report"
-#~ msgid "&Open"
-#~ msgstr "&Отваряне"
-
-#~ msgctxt "Configure a report"
-#~ msgid "&Configure"
-#~ msgstr "&Настройване"
-
-#~ msgid "&New report"
-#~ msgstr "&Нов доклад"
-
-#~ msgid "&Delete"
-#~ msgstr "&Изтриване"
-
-#, fuzzy
-#~| msgid "%1 Balance History"
-#~ msgid "Value/Balance History"
-#~ msgstr "История на баланса на %1"

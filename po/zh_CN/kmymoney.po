@@ -8993,11 +8993,10 @@ msgid "Payee"
 msgstr "收款人"
 
 #: kmymoney/mymoney/storage/payeesmodel.cpp:267
-#, fuzzy, kde-format
-#| msgid "Unknown payee"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced payee"
 msgid "Unknown payee '%1'"
-msgstr "未知收款人"
+msgstr ""
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:36
 #, kde-format
