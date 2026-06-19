@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-18 03:33+0000\n"
-"PO-Revision-Date: 2026-06-16 06:12-0300\n"
+"PO-Revision-Date: 2026-06-18 06:23-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -9189,11 +9189,10 @@ msgid "Payee"
 msgstr "Beneficiário"
 
 #: kmymoney/mymoney/storage/payeesmodel.cpp:267
-#, fuzzy, kde-format
-#| msgid "Unknown payee"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced payee"
 msgid "Unknown payee '%1'"
-msgstr "Beneficiário desconhecido"
+msgstr "Beneficiário '%1' desconhecido"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:36
 #, kde-format
