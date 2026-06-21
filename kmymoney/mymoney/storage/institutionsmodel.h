@@ -49,6 +49,8 @@ public:
 
     void setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color);
 
+    void createMissingEntries(const QSet<QString>& institutionsToCreate);
+
 public Q_SLOTS:
     /**
      * Add the accounts pointed to by @a indexes to the group of
