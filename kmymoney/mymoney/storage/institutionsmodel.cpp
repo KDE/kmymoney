@@ -320,3 +320,26 @@ void InstitutionsModel::removeAccount(const QString& institutionId, const QStrin
         }
     }
 }
+
+void InstitutionsModel::createMissingEntries(const QSet<QString>& institutionsToCreate)
+{
+    if (!institutionsToCreate.isEmpty()) {
+        // create the number of required items
+        auto row = rowCount();
+        insertRows(row, institutionsToCreate.count());
+        const auto topLeft = InstitutionsModel::index(row, 0);
+        for (const auto& id : institutionsToCreate) {
+            auto institution = MyMoneyInstitution(id);
+            institution.setName(i18nc("@info Name for recreated missing but referenced institution", "Unknown institution '%1'", id));
+            const auto idx = index(row, 0);
+            static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->dataRef() = institution;
+            if (m_idToItemMapper) {
+                m_idToItemMapper->insert(id, static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer()));
+            }
+            qDebug() << "Missing institution:" << institution.name() << "created";
+            ++row;
+        }
+        const auto bottomRight = InstitutionsModel::index(row - 1, columnCount() - 1);
+        Q_EMIT dataChanged(topLeft, bottomRight);
+    }
+}

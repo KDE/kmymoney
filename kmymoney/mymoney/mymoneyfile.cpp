@@ -342,13 +342,19 @@ public:
         }
     }
 
-    void createMissingPayees()
+    void createMissingObjects()
     {
-        QSet<QString> payeesToCreate;
+        QSet<QString> objectsToCreate;
+
+        auto checkAndCreateInstitution = [&](const QString& id) {
+            if (!id.isEmpty() && !institutionsModel.indexById(id).isValid()) {
+                objectsToCreate << id;
+            }
+        };
 
         auto checkAndCreatePayee = [&](const QString& id) {
             if (!id.isEmpty() && !payeesModel.indexById(id).isValid()) {
-                payeesToCreate << id;
+                objectsToCreate << id;
             }
         };
 
@@ -388,7 +394,40 @@ public:
             }
         }
 
-        payeesModel.createMissingEntries(payeesToCreate);
+        payeesModel.createMissingEntries(objectsToCreate);
+
+        // scan the models for institutions that do not exist and create a placeholder
+        // for each of them so that the user can rename them
+
+        objectsToCreate.clear();
+        QMap<QString, QString> institutionToAccountMap;
+        const auto accountIndexes =
+            accountsModel.match(accountsModel.index(0, 0), eMyMoney::Model::IdRole, QLatin1String("*"), -1, Qt::MatchRecursive | Qt::MatchWildcard);
+        for (const auto& accountIndex : accountIndexes) {
+            const auto institutionId = accountIndex.data(eMyMoney::Model::AccountInstitutionIdRole).toString();
+            checkAndCreateInstitution(institutionId);
+            if (objectsToCreate.contains(institutionId)) {
+                institutionToAccountMap.insert(accountIndex.data(eMyMoney::Model::IdRole).toString(), institutionId);
+            }
+        }
+
+        // now create institution entries
+        institutionsModel.createMissingEntries(objectsToCreate);
+
+        // and their respective accounts
+        for (const auto& institutionId : objectsToCreate) {
+            auto institution = institutionsModel.itemById(institutionId);
+            for (auto it_a = institutionToAccountMap.cbegin(); it_a != institutionToAccountMap.cend(); ++it_a) {
+                if (it_a.value() == institution.id()) {
+                    institution.addAccountId(it_a.key());
+                    const auto accountIdx = accountsModel.indexById(it_a.key());
+                    if (accountIdx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool()) {
+                        institutionsModel.addAccount(it_a.value(), it_a.key());
+                    }
+                }
+            }
+            m_file->modifyInstitution(institution);
+        }
     }
 
     bool applyFileFixes(bool expertMode)
@@ -463,7 +502,7 @@ public:
 
             // Files exported from Skrooge may have lost payees using
             // earlier versions.
-            createMissingPayees();
+            createMissingObjects();
 
             ft.commit();
         } catch (const MyMoneyException&) {
