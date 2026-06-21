@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:45+0000\n"
+"POT-Creation-Date: 2026-06-21 00:44+0000\n"
 "PO-Revision-Date: 2025-12-07 00:37+0700\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
@@ -549,8 +549,8 @@ msgstr "ຊື່"
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:47
-#: kmymoney/plugins/woob/dialogs/accountsettings.ui:26
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:66
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:20
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
 #, kde-format
 msgid "ID"
 msgstr "ໄອດີ"
@@ -1293,7 +1293,7 @@ msgstr "ປ້ອນຄວາມລະອຽດຂອງລາຄາສຳລັ
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:332
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:82
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:31
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:76
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
 #, kde-format
 msgid "Name"
@@ -2971,10 +2971,12 @@ msgstr "ການປ້ອນລາຄາໃໝ່"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:38
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:87
 #: kmymoney/plugins/views/reports/core/listtable.cpp:781
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:91
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
 #, kde-format
@@ -10146,7 +10148,7 @@ msgstr "ລຶບການເລືອກຟີວບັນທຶກຊ່ວຍ
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:170
 #: kmymoney/plugins/views/reports/core/listtable.cpp:759
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:216
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:76
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:86
 #: kmymoney/views/khomeview_p.h:1067
 #, kde-format
 msgid "Balance"
@@ -12951,7 +12953,7 @@ msgstr "ລາຍລະອຽດການເຊື່ອມຕໍ່"
 #. i18n: ectx: property (title), widget (QWizardPage, pageAccounts)
 #. i18n: ectx: property (title), widget (QWizardPage, AccountPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:345
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:56
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:61
 #, kde-format
 msgid "Select Account"
 msgstr "ເລືອກບັນຊີ"
@@ -12966,10 +12968,12 @@ msgstr "ກະລຸນາເລືອກບັນຊີຈາກສະຖາບ
 
 #. i18n: ectx: property (text), widget (QLabel, numberLabel)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
+#. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:379
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:126
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:81
 #: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:254
 #: kmymoney/views/newtransactionform.ui:54
@@ -13074,24 +13078,28 @@ msgstr "ລາຍລະອຽດການນຳເຂົ້າ"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:284
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:43
 #, kde-format
 msgid "Start date of import"
 msgstr "ວັນທີເລີ່ມຕົ້ນຂອງການນຳເຂົ້າ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_lastUpdateRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:305
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:64
 #, kde-format
 msgid "Last &update"
 msgstr "ການອັບເດດ&ລ່າສຸດ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_todayRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:325
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:84
 #, kde-format
 msgid "To&day minus"
 msgstr "ມື້&ນີ້ ລົບ"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:345
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:104
 #, kde-format
 msgctxt "@action number of days"
 msgid "days"
@@ -13099,6 +13107,7 @@ msgstr "ມື້"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_pickDateRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:355
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:114
 #, kde-format
 msgid "Pi&ck date"
 msgstr "ເລືອກ&ວັນທີ"
@@ -17870,39 +17879,33 @@ msgid "Include only Investment accounts"
 msgstr "ລວມເອົາສະເພາະບັນຊີການລົງທຶນ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kmymoney/plugins/woob/dialogs/accountsettings.ui:39
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:30
 #, kde-format
 msgid "Backend"
 msgstr "Backend"
 
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: kmymoney/plugins/woob/dialogs/accountsettings.ui:46
-#, kde-format
-msgid "History"
-msgstr "ປະຫວັດ"
-
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:129
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:133
 #, kde-format
 msgid "Loading Woob backend..."
 msgstr "ກຳລັງໂຫຼດ Woob backend..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:130
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:134
 #, kde-format
 msgid "Getting list of backends."
 msgstr "ກຳລັງດຶງລາຍຊື່ຂອງ backends."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:142
-#: kmymoney/plugins/woob/woob.cpp:172
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:146
+#: kmymoney/plugins/woob/woob.cpp:188
 #, kde-format
 msgid "Connecting to bank..."
 msgstr "ກຳລັງເຊື່ອມຕໍ່ກັບທະນາຄານ..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:143
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:147
 #, kde-format
 msgid "Getting list of accounts from your bank."
 msgstr "ກຳລັງດຶງລາຍຊື່ບັນຊີຈາກທະນາຄານຂອງທ່ານ."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:173
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:178
 #, kde-format
 msgid ""
 "No backends available.\n"
@@ -17911,7 +17914,14 @@ msgstr ""
 "ບໍ່ມີ backends ໃຫ້ໃຊ້ງານ.\n"
 "ເພີ່ມອັນໜຶ່ງໂດຍໃຊ້ woob config-qt."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:186
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:184
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:214
+#: kmymoney/plugins/woob/woob.cpp:262
+#, kde-format
+msgid "Incorrect password."
+msgstr "ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ."
+
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:205
 #, kde-format
 msgid ""
 "No accounts available.\n"
@@ -17919,11 +17929,6 @@ msgid ""
 msgstr ""
 "ບໍ່ມີບັນຊີໃຫ້ໃຊ້ງານ.\n"
 "ກວດເບິ່ງການຕັ້ງຄ່າ backend ຂອງທ່ານໃນ woob config-qt."
-
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:195
-#, kde-format
-msgid "Incorrect password."
-msgstr "ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ."
 
 #. i18n: ectx: property (title), widget (QWizardPage, pageBackends)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:21
@@ -17943,21 +17948,27 @@ msgstr "ກະລຸນາເລືອກ backend ຈາກລາຍການຂ
 msgid "Module"
 msgstr "ໂມດູນ"
 
+#. i18n: ectx: property (text), widget (QTreeWidget, backendsList)
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:41
+#, kde-format
+msgid "Login"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QPushButton, addBackendButton)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:46
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:51
 #, kde-format
 msgid "Select a backend"
 msgstr "ເລືອກ backend"
 
 #. i18n: ectx: property (subTitle), widget (QWizardPage, pageAccounts)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:59
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:64
 #, kde-format
 msgid ""
 "Select what <b>online</b> account you want to map to the <b>application</b> "
 "account..."
 msgstr "ເລືອກບັນຊີ <b>ອອນລາຍ</b> ທີ່ທ່ານຕ້ອງການຈັບຄູ່ກັບບັນຊີ <b>ແອັບພລິເຄຊັນ</b>..."
 
-#: kmymoney/plugins/woob/woob.cpp:60
+#: kmymoney/plugins/woob/woob.cpp:61
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -17967,7 +17978,7 @@ msgstr ""
 "ປັກອິນ Woob ລົ້ມເຫຼວໃນການເລີ່ມຕົ້ນຢ່າງສົມບູນ, ສ່ວນຫຼາຍອາດຈະເປັນຍ້ອນສະພາບແວດລ້ອມ Python "
 "ທີ່ຂາດຫາຍໄປ ຫຼື ກຳນົດຄ່າຜິດພາດ. ກະລຸນາເບິ່ງຄູ່ມືກ່ຽວກັບວິທີແກ້ໄຂ."
 
-#: kmymoney/plugins/woob/woob.cpp:66
+#: kmymoney/plugins/woob/woob.cpp:67
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -17977,12 +17988,12 @@ msgstr ""
 "ປັກອິນ Woob ລົ້ມເຫຼວໃນການເລີ່ມຕົ້ນຢ່າງສົມບູນ, ສ່ວນຫຼາຍອາດຈະເປັນຍ້ອນໂມດູນ Woob Python "
 "ທີ່ຂາດຫາຍໄປ ຫຼື ກຳນົດຄ່າຜິດພາດ. ກະລຸນາເບິ່ງຄູ່ມືກ່ຽວກັບວິທີແກ້ໄຂ."
 
-#: kmymoney/plugins/woob/woob.cpp:121
+#: kmymoney/plugins/woob/woob.cpp:122
 #, kde-format
 msgid "Woob configuration"
 msgstr "ການຕັ້ງຄ່າ Woob"
 
-#: kmymoney/plugins/woob/woob.cpp:173
+#: kmymoney/plugins/woob/woob.cpp:189
 #, kde-format
 msgid "Retrieving transactions..."
 msgstr "ກຳລັງດຶງທຸລະກຳ..."
@@ -25684,6 +25695,9 @@ msgstr "ປະມວນຜົນບົດລາຍງານສະເພາະ"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "ຮອງຮັບພຽງແຕ່ອັນໃດອັນໜຶ່ງຂອງ --csv ແລະ --html ເທົ່ານັ້ນ"
+
+#~ msgid "History"
+#~ msgstr "ປະຫວັດ"
 
 #~ msgid "Prices"
 #~ msgstr "ລາຄາ"

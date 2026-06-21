@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-17 00:45+0000\n"
+"POT-Creation-Date: 2026-06-21 00:44+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -552,8 +552,8 @@ msgstr "Naam"
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:47
-#: kmymoney/plugins/woob/dialogs/accountsettings.ui:26
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:66
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:20
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
 #, kde-format
 msgid "ID"
 msgstr "ID"
@@ -1311,7 +1311,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:332
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:82
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:31
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:71
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:76
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
 #, fuzzy, kde-format
 #| msgctxt "@title header of the currency name column"
@@ -3037,10 +3037,12 @@ msgstr "Nieg Priesindrag"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:38
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:87
 #: kmymoney/plugins/views/reports/core/listtable.cpp:781
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:91
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
 #, kde-format
@@ -10714,7 +10716,7 @@ msgstr "Köör leddig maken"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:170
 #: kmymoney/plugins/views/reports/core/listtable.cpp:759
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:216
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:76
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:86
 #: kmymoney/views/khomeview_p.h:1067
 #, kde-format
 msgid "Balance"
@@ -13687,7 +13689,7 @@ msgstr "Verbinnen-Enkelheiten"
 #. i18n: ectx: property (title), widget (QWizardPage, pageAccounts)
 #. i18n: ectx: property (title), widget (QWizardPage, AccountPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:345
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:56
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:61
 #, kde-format
 msgid "Select Account"
 msgstr "Konto utsöken"
@@ -13702,10 +13704,12 @@ msgstr "Söök bitte ut de List nerrn Dien to dissen Konto passen Bankkonto ut."
 
 #. i18n: ectx: property (text), widget (QLabel, numberLabel)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
+#. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:379
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:126
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:81
 #: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:254
 #: kmymoney/views/newtransactionform.ui:54
@@ -13810,6 +13814,7 @@ msgstr "Importenkelheiten"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:284
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:43
 #, fuzzy, kde-format
 #| msgid "Start date"
 msgid "Start date of import"
@@ -13817,18 +13822,21 @@ msgstr "Startdatum"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_lastUpdateRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:305
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:64
 #, kde-format
 msgid "Last &update"
 msgstr "Tolest &opfrischt"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_todayRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:325
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:84
 #, kde-format
 msgid "To&day minus"
 msgstr "&Daag torüch"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:345
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:104
 #, kde-format
 msgctxt "@action number of days"
 msgid "days"
@@ -13836,6 +13844,7 @@ msgstr "Daag"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_pickDateRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:355
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:114
 #, kde-format
 msgid "Pi&ck date"
 msgstr "Datum &utsöken"
@@ -18763,61 +18772,55 @@ msgid "Include only Investment accounts"
 msgstr "Bloots Anlaagkontos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kmymoney/plugins/woob/dialogs/accountsettings.ui:39
+#: kmymoney/plugins/woob/dialogs/accountsettings.ui:30
 #, kde-format
 msgid "Backend"
 msgstr "Hülpprogramm"
 
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: kmymoney/plugins/woob/dialogs/accountsettings.ui:46
-#, fuzzy, kde-format
-#| msgctxt "History-based method"
-#| msgid "History"
-msgid "History"
-msgstr "Vörgeschicht"
-
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:129
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:133
 #, fuzzy, kde-format
 #| msgid "Loading accounts..."
 msgid "Loading Woob backend..."
 msgstr "Kontos warrt laadt..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:130
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:134
 #, kde-format
 msgid "Getting list of backends."
 msgstr ""
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:142
-#: kmymoney/plugins/woob/woob.cpp:172
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:146
+#: kmymoney/plugins/woob/woob.cpp:188
 #, fuzzy, kde-format
 #| msgid "Contacting bank..."
 msgid "Connecting to bank..."
 msgstr "Bank warrt ansnackt..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:143
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:147
 #, kde-format
 msgid "Getting list of accounts from your bank."
 msgstr ""
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:173
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:178
 #, kde-format
 msgid ""
 "No backends available.\n"
 "Add one using woob config-qt."
 msgstr ""
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:186
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:184
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:214
+#: kmymoney/plugins/woob/woob.cpp:262
+#, fuzzy, kde-format
+#| msgid "Store password"
+msgid "Incorrect password."
+msgstr "Passwoort wohren"
+
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:205
 #, kde-format
 msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
-
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:195
-#, fuzzy, kde-format
-#| msgid "Store password"
-msgid "Incorrect password."
-msgstr "Passwoort wohren"
 
 #. i18n: ectx: property (title), widget (QWizardPage, pageBackends)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:21
@@ -18839,15 +18842,21 @@ msgstr "Söök bitte Dien Bank ut de List nerrn ut…"
 msgid "Module"
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QTreeWidget, backendsList)
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:41
+#, kde-format
+msgid "Login"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QPushButton, addBackendButton)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:46
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:51
 #, fuzzy, kde-format
 #| msgid "Select as base currency"
 msgid "Select a backend"
 msgstr "As Hööft-Geldsort fastleggen"
 
 #. i18n: ectx: property (subTitle), widget (QWizardPage, pageAccounts)
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:59
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:64
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>\n"
@@ -18863,7 +18872,7 @@ msgstr ""
 "dat Du dat <b>Programm</b>-Konto towiesen wullt.\n"
 "</qt>"
 
-#: kmymoney/plugins/woob/woob.cpp:60
+#: kmymoney/plugins/woob/woob.cpp:61
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -18871,7 +18880,7 @@ msgid ""
 "it."
 msgstr ""
 
-#: kmymoney/plugins/woob/woob.cpp:66
+#: kmymoney/plugins/woob/woob.cpp:67
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -18879,13 +18888,13 @@ msgid ""
 "it."
 msgstr ""
 
-#: kmymoney/plugins/woob/woob.cpp:121
+#: kmymoney/plugins/woob/woob.cpp:122
 #, fuzzy, kde-format
 #| msgid "Report Configuration"
 msgid "Woob configuration"
 msgstr "Bericht-Instellen"
 
-#: kmymoney/plugins/woob/woob.cpp:173
+#: kmymoney/plugins/woob/woob.cpp:189
 #, fuzzy, kde-format
 #| msgid "Saving transactions..."
 msgid "Retrieving transactions..."
@@ -26791,6 +26800,12 @@ msgstr ""
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr ""
+
+#, fuzzy
+#~| msgctxt "History-based method"
+#~| msgid "History"
+#~ msgid "History"
+#~ msgstr "Vörgeschicht"
 
 #, fuzzy
 #~| msgid "Configure this report"
