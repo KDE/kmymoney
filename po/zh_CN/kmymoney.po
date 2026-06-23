@@ -8619,11 +8619,10 @@ msgid "Accounts with no institution assigned"
 msgstr "未指定金融机构的账户："
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:333
-#, fuzzy, kde-format
-#| msgid "Cannot add institution: %1"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced institution"
 msgid "Unknown institution '%1'"
-msgstr "无法添加金融机构：%1"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:56
 #, kde-format

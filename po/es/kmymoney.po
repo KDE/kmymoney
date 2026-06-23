@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-22 00:44+0000\n"
-"PO-Revision-Date: 2026-06-21 12:02+0100\n"
+"PO-Revision-Date: 2026-06-22 23:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -8927,11 +8927,10 @@ msgid "Accounts with no institution assigned"
 msgstr "Cuentas sin una institución asignada"
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:333
-#, fuzzy, kde-format
-#| msgid "Cannot add institution: %1"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced institution"
 msgid "Unknown institution '%1'"
-msgstr "No se puede añadir la institución: %1"
+msgstr "Institución «%1» desconocida"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:56
 #, kde-format
