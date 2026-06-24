@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
-"3 : 4\n"
+"3 : 4;\n"
 "X-Generator: Weblate 5.17\n"
 
 #, kde-format
@@ -9314,46 +9314,40 @@ msgid "Name"
 msgstr "Ainm"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:61
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Trácht"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:64
-#, fuzzy, kde-format
-#| msgid "Start Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "Dáta Tosaigh"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:67
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "End Date"
-msgstr "Dáta"
+msgstr "Dáta Deiridh"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:70
-#, fuzzy, kde-format
-#| msgid "Favorite"
+#, kde-format
 msgctxt "Report favorite"
 msgid "Favorite"
 msgstr "Ceanán"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:73
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Grúpaí"
+msgstr "Grúpa"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:76
-#, fuzzy, kde-format
-#| msgid "Modify"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
-msgstr "Athraigh"
+msgstr "Modhnaithe"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format
@@ -16425,17 +16419,14 @@ msgid "Payment Method"
 msgstr "Modh Íocaíochta"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:775
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
-msgstr "Stádas"
+msgstr "Stát"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Iarmhéid Deiridh"
+msgstr "Dáta Deiridh"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:779
 #, kde-format
@@ -16561,11 +16552,9 @@ msgstr "Aistriú go %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:271
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:333
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgid "Open"
-msgstr "&Oscail"
+msgstr "Oscail"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:279
 #, kde-format
@@ -17053,17 +17042,15 @@ msgstr "Tuairiscí"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
-msgstr "Tuarascáil Réamhshocraithe"
+msgstr "Tuairiscí réamhshocraithe"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Tuarascáil Saincheaptha"
+msgstr "Tuarascálacha saincheaptha"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:296
 #, kde-format
