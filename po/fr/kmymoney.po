@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-22 00:44+0000\n"
-"PO-Revision-Date: 2026-06-17 07:41+0200\n"
+"PO-Revision-Date: 2026-06-22 11:55+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -18528,7 +18528,7 @@ msgstr "Module"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:41
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "Se connecter"
 
 #. i18n: ectx: property (text), widget (QPushButton, addBackendButton)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:51
