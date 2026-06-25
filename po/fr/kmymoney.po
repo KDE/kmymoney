@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-22 00:44+0000\n"
-"PO-Revision-Date: 2026-06-22 11:55+0200\n"
+"PO-Revision-Date: 2026-06-23 18:20+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -9003,11 +9003,10 @@ msgid "Accounts with no institution assigned"
 msgstr "Comptes sans établissement assigné"
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:333
-#, fuzzy, kde-format
-#| msgid "Cannot add institution: %1"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced institution"
 msgid "Unknown institution '%1'"
-msgstr "Impossible d'ajouter l'établissement : %1"
+msgstr "Établissement inconnu %1"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:56
 #, kde-format
