@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-22 03:45+0000\n"
-"PO-Revision-Date: 2026-04-30 17:47+0200\n"
+"PO-Revision-Date: 2026-06-30 15:36+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -563,11 +563,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/kbackupdlg.ui:61
-#, fuzzy, kde-format
-#| msgctxt "Menu header"
-#| msgid "Price options"
+#, kde-format
 msgid "Device options"
-msgstr "Optiones de precio"
+msgstr "Optiones de dispositivo"
 
 #. i18n: ectx: property (text), widget (QLabel, lblMountPoint)
 #: kmymoney/dialogs/kbackupdlg.ui:99
@@ -578,10 +576,9 @@ msgstr "Puncto de Montage"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, chooseButton)
 #: kmymoney/dialogs/kbackupdlg.ui:112
-#, fuzzy, kde-format
-#| msgid "Select none"
+#, kde-format
 msgid "Select mount point"
-msgstr "Selige necun"
+msgstr "Selige puncto de montage"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, chooseButton)
 #: kmymoney/dialogs/kbackupdlg.ui:115
@@ -624,10 +621,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCategoryReassignDlg)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgid "Reassign categories"
-msgstr "Categorias celate"
+msgstr "Reassigna Categorias "
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:32
@@ -640,10 +636,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:61
-#, fuzzy, kde-format
-#| msgid "Available tags:"
+#, kde-format
 msgid "Available categories:"
-msgstr "Etiquettas disponibile"
+msgstr "Categorias disponibile:"
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:72
 #, kde-format
@@ -736,10 +731,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:152
-#, fuzzy, kde-format
-#| msgid "Short description"
+#, kde-format
 msgid "Some description"
-msgstr "Description breve "
+msgstr "Alcun description"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:71
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:73
@@ -870,10 +864,9 @@ msgstr "Usator"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyCalculator)
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
-#, fuzzy, kde-format
-#| msgid "Price Editor"
+#, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr "Redactor de precio"
+msgstr "Editor de taxa de excambio / precio"
 
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
@@ -1011,10 +1004,9 @@ msgstr ""
 #. i18n: ectx: label, entry (PriceHistoryUpdate), group (General Options)
 #: kmymoney/dialogs/kcurrencycalculator.ui:310
 #: kmymoney/settings/kmymoney.kcfg:88
-#, fuzzy, kde-format
-#| msgid "Price History"
+#, kde-format
 msgid "Update price history"
-msgstr "Chronologia de precio"
+msgstr "Actualisa Chronologia de precio"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:139
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:666
@@ -1204,11 +1196,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, lblpricePrecision)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:60
-#, fuzzy, kde-format
-#| msgctxt "Menu header"
-#| msgid "Price options"
+#, kde-format
 msgid "Price precision:"
-msgstr "Optiones de precio"
+msgstr "Precision de precio:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, spbPricePrecision)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:67
@@ -1401,10 +1391,9 @@ msgstr "Bond"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/keditequityentry.ui:50
 #: kmymoney/dialogs/knewequityentrydlg.ui:91
-#, fuzzy, kde-format
-#| msgid "Smallest account unit:"
+#, kde-format
 msgid "Smallest fraction:"
-msgstr "Unitate de conto plus parve:"
+msgstr "Fraction plus parve:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -1419,10 +1408,9 @@ msgstr "1 /"
 #. i18n: ectx: property (text), widget (QLabel, lblType)
 #: kmymoney/dialogs/keditequityentry.ui:88
 #: kmymoney/dialogs/knewequityentrydlg.ui:35
-#, fuzzy, kde-format
-#| msgid "Investment"
+#, kde-format
 msgid "Investment Type:"
-msgstr "Investimento"
+msgstr "Typo de Investimento:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEquityName)
 #: kmymoney/dialogs/keditequityentry.ui:98
@@ -1535,8 +1523,7 @@ msgid "Ask"
 msgstr "Demanda"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:231
-#, fuzzy, kde-format
-#| msgid "Configure"
+#, kde-format
 msgctxt "@action:button Configuration of price update"
 msgid "Configure"
 msgstr "Configura"
@@ -1743,10 +1730,9 @@ msgstr "Create sur"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:48
-#, fuzzy, kde-format
-#| msgid "Last month"
+#, kde-format
 msgid "Last modified on"
-msgstr "Ultime mense"
+msgstr "Ultime modificale le"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:68
@@ -1811,17 +1797,15 @@ msgstr "Planificationes"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel19)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:208
-#, fuzzy, kde-format
-#| msgid "Delete prices"
+#, kde-format
 msgid "Stock prices"
 msgstr "Precios de Stock"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel20)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:228
-#, fuzzy, kde-format
-#| msgid "Price Editor"
+#, kde-format
 msgid "Exchange rates"
-msgstr "Redactor de precio"
+msgstr "Taxas de excambio"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (text), widget (QLabel, textLabel11)
@@ -1829,10 +1813,9 @@ msgstr "Redactor de precio"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:248
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:14
 #: kmymoney/views/kinvestmentview.ui:121
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgid "Securities"
-msgstr "Securitate"
+msgstr "Securitates"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel12)
 #. i18n: ectx: property (windowTitle), widget (QDialog, CurrenciesDlg)
@@ -1909,7 +1892,7 @@ msgstr ""
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:346
 #, kde-format
 msgid "Delete price..."
-msgstr ""
+msgstr "Dele precio"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:358
 #, kde-format
@@ -1925,9 +1908,7 @@ msgstr "Redactor de precio"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, fuzzy, kde-format
-#| msgctxt "Search widget label"
-#| msgid "S&earch:"
+#, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
 msgstr "Cerca..."
@@ -1947,10 +1928,9 @@ msgstr "Adde un nove entrata"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:66
-#, fuzzy, kde-format
-#| msgid "Create a new category"
+#, kde-format
 msgid "Create a new price entry."
-msgstr "Crea un nove categoria"
+msgstr "Crea un nove entrata de precio."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:69
@@ -1961,10 +1941,9 @@ msgstr "Nove "
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_editButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:76
-#, fuzzy, kde-format
-#| msgid "Delete the selected source entry"
+#, kde-format
 msgid "Modify the selected entry"
-msgstr "Dele le entrata de fonte selectionate"
+msgstr "Modifica le entrata seligite"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_editButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:79
@@ -2220,10 +2199,9 @@ msgstr "Crea un nove conto"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewAccountDlg)
 #: kmymoney/dialogs/knewaccountdlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Account Details"
+#, kde-format
 msgid "New Account Dialog"
-msgstr "Detalios de conto"
+msgstr "Nove Dialogo de conto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_generalTab)
 #: kmymoney/dialogs/knewaccountdlg.ui:27
@@ -2241,10 +2219,9 @@ msgstr "Nomine:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox4)
 #: kmymoney/dialogs/knewaccountdlg.ui:62
-#, fuzzy, kde-format
-#| msgid "File Information"
+#, kde-format
 msgid "Opening information"
-msgstr "Information de file"
+msgstr "Aperir Information "
 
 #. i18n: ectx: property (text), widget (QLabel, m_currencyText)
 #: kmymoney/dialogs/knewaccountdlg.ui:86
@@ -3206,7 +3183,7 @@ msgstr "Decembre"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:286
 #, kde-format
 msgid "External programs"
-msgstr ""
+msgstr "Programmas externe"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:292
@@ -5026,11 +5003,9 @@ msgid "Copy splits"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1482
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Skip scheduled transaction"
+#, kde-format
 msgid "Copy selected transactions"
-msgstr "Salta transaction planificate"
+msgstr "Copia transactiones selectionate"
 
 #: kmymoney/kmymoney.cpp:1483
 #, kde-format
@@ -8942,15 +8917,13 @@ msgid "Name"
 msgstr "Nomine"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:61
-#, fuzzy, kde-format
-#| msgid "Comment"
+#, kde-format
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Commento"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:64
-#, fuzzy, kde-format
-#| msgid "Start Date"
+#, kde-format
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "Data de initio"
@@ -8960,7 +8933,7 @@ msgstr "Data de initio"
 #| msgid "Date"
 msgctxt "Report date range"
 msgid "End Date"
-msgstr "Data"
+msgstr "Data de fin"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:70
 #, fuzzy, kde-format
@@ -8970,18 +8943,16 @@ msgid "Favorite"
 msgstr "Favorito"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:73
-#, fuzzy, kde-format
-#| msgid "Groups"
+#, kde-format
 msgctxt "Report group"
 msgid "Group"
-msgstr "Gruppos"
+msgstr "Gruppo"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:76
-#, fuzzy, kde-format
-#| msgid "Modify"
+#, kde-format
 msgctxt "Report state"
 msgid "Modified"
-msgstr "Modifica"
+msgstr "Modificate"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format
@@ -9463,10 +9434,10 @@ msgid "Tab (\\t)"
 msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:69
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Pipe (|)"
-msgstr ""
+msgstr "pipa"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
@@ -11024,9 +10995,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
-#, kde-format
+#, fuzzy, kde-format
 msgid "pipe (|)"
-msgstr ""
+msgstr "pipa"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
@@ -15687,17 +15658,14 @@ msgid "Payment Method"
 msgstr "Methodo de pagamento"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:775
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State"
 msgstr "Stato"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
-#, fuzzy, kde-format
-#| msgid "Opening Date"
+#, kde-format
 msgid "Closing Date"
-msgstr "Data de apertura"
+msgstr "Data de clauder"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:779
 #, kde-format
@@ -15792,10 +15760,10 @@ msgid "Starting Market Value"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:819
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Exchange rate"
 msgid "Rate"
-msgstr ""
+msgstr "Frequentia"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:830
 #, kde-format
@@ -15827,7 +15795,7 @@ msgstr "Transferer a %1"
 #| msgctxt "To open a new report"
 #| msgid "&Open"
 msgid "Open"
-msgstr "&Aperi"
+msgstr "Aperi"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:279
 #, kde-format
@@ -16308,17 +16276,15 @@ msgstr "Reportos"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Delete report"
+#, kde-format
 msgid "Default reports"
-msgstr "Dele reporto"
+msgstr "Reportos predefinite"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Copy report"
+#, kde-format
 msgid "Custom reports"
-msgstr "Copia reporto"
+msgstr "Reportos personalisate"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:296
 #, kde-format
@@ -16711,8 +16677,7 @@ msgid "Generated Report"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:71
-#, fuzzy, kde-format
-#| msgid "CSV"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "CSV"
 msgstr "CSV"
@@ -16721,11 +16686,10 @@ msgstr "CSV"
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:73
-#, fuzzy, kde-format
-#| msgid "XML"
+#, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "XML"
 msgstr "XML"
@@ -16770,10 +16734,9 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:119
-#, fuzzy, kde-format
-#| msgid "Copy to clipboard"
+#, kde-format
 msgid "Copy this report to the clipboard"
-msgstr "Copia in area de transferentia"
+msgstr "Copia iste reporto  in area de transferentia"
 
 #. i18n: ectx: property (text), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:122
@@ -17537,9 +17500,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkRate)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:226
-#, kde-format
+#, fuzzy, kde-format
 msgid "Rate"
-msgstr ""
+msgstr "Frequentia"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:245
@@ -21321,14 +21284,14 @@ msgstr "Nomine"
 #, kde-format
 msgctxt "@action:button"
 msgid "Collapse"
-msgstr ""
+msgstr "Plica"
 
 #: kmymoney/widgets/kguiutils.cpp:297
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Expand"
-msgstr ""
+msgstr "Expande"
 
 #: kmymoney/widgets/kmmemptyview.h:49
 #, kde-format
@@ -21765,7 +21728,7 @@ msgstr "Selige necun"
 #: kmymoney/widgets/ktransactionfilter.ui:552
 #, kde-format
 msgid "Expand"
-msgstr ""
+msgstr "Expande"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
 #: kmymoney/widgets/ktransactionfilter.ui:512
