@@ -12,6 +12,7 @@
 #include <QClipboard>
 #include <QDate>
 #include <QDateTimeEdit>
+#include <QInputMethodEvent>
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QMimeData>
@@ -731,21 +732,30 @@ void KMyMoneyDateEdit::setAllowEmptyDate(bool emptyDateAllowed)
 bool KMyMoneyDateEdit::event(QEvent* e)
 {
     if (e->type() == QEvent::KeyPress) {
+        const auto key = static_cast<QKeyEvent*>(e)->key();
         if (d->m_settings->tabHandling == ChangeSection) {
-            QKeyEvent* kev = static_cast<QKeyEvent*>(e);
-            if (kev->key() == Qt::Key_Tab) {
+            if (key == Qt::Key_Tab) {
                 const auto nextIndex = d->partBySection(d->sectionByCursorPos()) + 1;
                 if (nextIndex < d->m_sections.size()) {
                     d->selectSection(d->m_sections[nextIndex]);
                     return true;
                 }
-            } else if (kev->key() == Qt::Key_Backtab) {
+            } else if (key == Qt::Key_Backtab) {
                 const auto nextIndex = d->partBySection(d->sectionByCursorPos()) - 1;
                 if (nextIndex > -1) {
                     d->selectSection(d->m_sections[nextIndex]);
                     return true;
                 }
             }
+        }
+    }
+    if (e->type() == QEvent::InputMethod) {
+        const auto inputMethod = static_cast<QInputMethodEvent*>(e);
+        if (inputMethod->commitString().toLower() == QLatin1String("t")) {
+            d->setDate(QDate::currentDate());
+            Q_EMIT dateValidityChanged(QDate::currentDate());
+            d->selectSection(d->m_settings->initialSection);
+            return true;
         }
     }
     return KDateComboBox::event(e);
