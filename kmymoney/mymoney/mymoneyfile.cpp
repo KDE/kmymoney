@@ -3436,17 +3436,23 @@ QStringList MyMoneyFile::consistencyCheck()
 
         auto checkSplitSum = [&]() {
             if (!t.splitSum().isZero()) {
-                rc << i18n("  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not zero.",
-                           t.id(),
-                           MyMoneyUtils::formatDate(t.postDate()));
+                QStringList tmpRc;
+                tmpRc << i18n("  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not zero.",
+                              t.id(),
+                              MyMoneyUtils::formatDate(t.postDate()));
+                bool haveOpenAccount = false;
                 for (const auto& split : t.splits()) {
                     const auto accIdx = d->accountsModel.indexById(split.accountId());
                     const auto name = accIdx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
                     const auto acc = d->accountsModel.itemByIndex(accIdx);
+                    haveOpenAccount |= !acc.isClosed();
                     const auto security = MyMoneyFile::instance()->security(acc.currencyId());
-                    rc << i18n("    Account: %1, Amount: %2", name, MyMoneyUtils::formatMoney(split.shares(), security));
+                    tmpRc << i18n("    Account: %1, Amount: %2", name, MyMoneyUtils::formatMoney(split.shares(), security));
                 }
-                ++unfixedCount;
+                if (haveOpenAccount) {
+                    rc << tmpRc;
+                    ++unfixedCount;
+                }
             }
         };
 
