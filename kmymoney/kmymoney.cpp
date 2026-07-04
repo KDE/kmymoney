@@ -266,6 +266,7 @@ public:
         , m_progressTimer(nullptr)
         , m_autoSavePeriod(0)
         , m_inAutoSaving(false)
+        , m_consistencyProblemReported(false)
         , m_recentFiles(nullptr)
 #ifdef ENABLE_HOLIDAYS
         , m_holidayRegion(nullptr)
@@ -351,6 +352,7 @@ public:
 
     int m_autoSavePeriod;
     bool m_inAutoSaving;
+    bool m_consistencyProblemReported;
 
     // id's that need to be remembered
     QString m_accountGoto, m_payeeGoto;
@@ -394,8 +396,8 @@ public:
     // methods
     void consistencyCheck(bool alwaysDisplayResults);
     static void setThemedCSS();
-    void copyConsistencyCheckResults();
-    void saveConsistencyCheckResults();
+    void copyConsistencyCheckResults(const QString& txt);
+    void saveConsistencyCheckResults(const QString& txt);
 
     void checkAccountName(const MyMoneyAccount& _acc, const QString& name) const
     {
@@ -1229,24 +1231,6 @@ QUrl KMyMoneyApp::lastOpenedURL()
     return url;
 }
 
-void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
-{
-    // this code relies on the implementation of KMessageBox::informationList to add a context menu to that list,
-    // please adjust it if it's necessary or rewrite the way the consistency check results are displayed
-    if (QWidget* dialog = QApplication::activeModalWidget()) {
-        // allow the user to resize the dialog, since the contents might be large
-        dialog->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
-        dialog->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        if (QListWidget* widget = dialog->findChild<QListWidget*>()) {
-            // give the user a hint that the data can be saved
-            widget->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
-            widget->setWhatsThis(widget->toolTip());
-            widget->setContextMenuPolicy(Qt::CustomContextMenu);
-            connect(widget, &QListWidget::customContextMenuRequested, this, &KMyMoneyApp::slotShowContextMenuForConsistencyCheck);
-        }
-    }
-}
-
 void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint& pos)
 {
     // allow the user to save the consistency check results
@@ -1257,12 +1241,18 @@ void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint& pos)
         contextMenu.addAction(copy);
         contextMenu.addAction(save);
         QAction* result = contextMenu.exec(widget->mapToGlobal(pos));
+
+        auto textbrowser = qobject_cast<QTextBrowser*>(widget);
+        QString txt;
+        if (textbrowser) {
+            txt = textbrowser->toPlainText();
+        }
         if (result == copy) {
             // copy the consistency check results to the clipboard
-            d->copyConsistencyCheckResults();
+            d->copyConsistencyCheckResults(txt);
         } else if (result == save) {
             // save the consistency check results to a file
-            d->saveConsistencyCheckResults();
+            d->saveConsistencyCheckResults(txt);
         }
     }
 }
@@ -3960,9 +3950,94 @@ void KMyMoneyApp::slotFileConsistencyCheck()
     d->consistencyCheck(true);
 }
 
+void KMyMoneyApp::slotOpenConsistencyUrl(const QUrl& url)
+{
+    SelectedObjects selections;
+    const auto objectUrl = url.toString();
+    const auto file = MyMoneyFile::instance();
+    if (!objectUrl.isEmpty()) {
+        const auto objectId = objectUrl.toUpper();
+        const auto objectType = objectId.left(1).toLatin1();
+        switch (objectType.at(0)) {
+        default:
+            qDebug() << "Unknown object" << objectId << "in slotOpenConsistencyUrl";
+            return;
+        case 'T':
+            // transaction, determine an asset or liability account
+            const auto transactionIndexes = file->journalModel()->indexesByTransactionId(objectId);
+            if (!transactionIndexes.isEmpty()) {
+                for (const auto& idx : transactionIndexes) {
+                    const auto accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
+                    const auto accountIdx = file->accountsModel()->indexById(accountId);
+                    if (accountIdx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool()) {
+                        selections.setSelection(SelectedObjects::Account, accountId);
+                        selections.setSelection(SelectedObjects::JournalEntry, idx.data(eMyMoney::Model::IdRole).toString());
+                        break;
+                    }
+                }
+                d->m_myMoneyView->executeAction(Action::GoToAccount, selections);
+            }
+            break;
+        }
+    }
+}
+
 void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
 {
     KMSTATUS(i18n("Running consistency check..."));
+
+    auto showDialog = [&](const QStringList& content) {
+        QDialog* txInfo = new QDialog;
+        txInfo->setAttribute(Qt::WA_DeleteOnClose);
+        txInfo->setWindowTitle(i18nc("@info:title ", "Consistency check results"));
+
+        txInfo->setMinimumSize(800, 400);
+        QTextBrowser* textBrowser = new QTextBrowser();
+        textBrowser->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
+        textBrowser->setWhatsThis(textBrowser->toolTip());
+        textBrowser->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(textBrowser, &QListWidget::customContextMenuRequested, q, &KMyMoneyApp::slotShowContextMenuForConsistencyCheck);
+
+        // allow to follow links
+        textBrowser->setOpenLinks(false);
+        connect(textBrowser, &QTextBrowser::anchorClicked, q, &KMyMoneyApp::slotOpenConsistencyUrl);
+
+        QPushButton* doneButton = new QPushButton(i18nc("@action:button close consistency check", "Close"), txInfo);
+        doneButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        connect(doneButton, &QPushButton::clicked, txInfo, &QDialog::deleteLater);
+
+        QVBoxLayout* vLayout = new QVBoxLayout(txInfo);
+        vLayout->addWidget(textBrowser);
+
+        QHBoxLayout* hLayout = new QHBoxLayout(txInfo);
+
+        // only show the refresh button a problem is reported
+        // no problems are identified by a single line
+        if (content.size() > 1) {
+            QPushButton* refreshButton = new QPushButton(i18nc("@action:button refresh consistency check", "Refresh"), txInfo);
+            refreshButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            connect(refreshButton, &QPushButton::clicked, q, &KMyMoneyApp::slotFileConsistencyCheck);
+            connect(refreshButton, &QPushButton::clicked, txInfo, &QDialog::deleteLater);
+
+            hLayout->addWidget(refreshButton);
+        }
+        hLayout->addWidget(doneButton);
+
+        vLayout->addLayout(hLayout);
+        vLayout->setAlignment(hLayout, Qt::AlignHCenter);
+
+        // convert lines into single string
+        QString txt = QLatin1String("<qt><p>");
+        txt.append(content.join(QLatin1String("<br>")));
+        txt.append(QLatin1String("</p></qt>"));
+        // make all spaces non-breakable
+        txt.replace(QLatin1Char(' '), QLatin1String("&nbsp;"));
+        // except those in href tags
+        txt.replace(QLatin1String("<a&nbsp;h"), QLatin1String("<a h"));
+        textBrowser->setHtml(txt);
+
+        txInfo->show();
+    };
 
     MyMoneyFileTransaction ft;
     try {
@@ -3974,31 +4049,32 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
         alwaysDisplayResult = true;
     }
 
+    m_consistencyProblemReported = m_consistencyCheckResult.size() > 1;
+
     // in case the consistency check was OK, we get a single line as result
     // in all erroneous cases, we get more than one line and force the
     // display of them.
 
     if (alwaysDisplayResult || m_consistencyCheckResult.size() > 1) {
         QString msg = i18n("The consistency check has found no issues in your data. Details are presented below.");
-        if (m_consistencyCheckResult.size() > 1)
+        if (m_consistencyCheckResult.size() > 1) {
             msg = i18n(
                 "The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically "
                 "need to be solved by the user.");
-        // install a context menu for the list after the dialog is displayed
-        QTimer::singleShot(500, q, SLOT(slotInstallConsistencyCheckContextMenu()));
-        KMessageBox::informationList(nullptr, msg, m_consistencyCheckResult, i18n("Consistency check result"));
+        }
+        showDialog(m_consistencyCheckResult);
     }
     // this data is no longer needed
     m_consistencyCheckResult.clear();
 }
 
-void KMyMoneyApp::Private::copyConsistencyCheckResults()
+void KMyMoneyApp::Private::copyConsistencyCheckResults(const QString& txt)
 {
     QClipboard* clipboard = QApplication::clipboard();
-    clipboard->setText(m_consistencyCheckResult.join(QLatin1String("\n")));
+    clipboard->setText(txt);
 }
 
-void KMyMoneyApp::Private::saveConsistencyCheckResults()
+void KMyMoneyApp::Private::saveConsistencyCheckResults(const QString& txt)
 {
     QUrl fileUrl = QFileDialog::getSaveFileUrl(q);
 
@@ -4006,7 +4082,7 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
         QFile file(fileUrl.toLocalFile());
         if (file.open(QFile::WriteOnly | QFile::Append | QFile::Text)) {
             QTextStream out(&file);
-            out << m_consistencyCheckResult.join(QLatin1String("\n"));
+            out << txt;
             file.close();
         }
     }
@@ -4689,6 +4765,12 @@ bool KMyMoneyApp::slotFileClose()
 
     if (!d->askAboutSaving())
         return false;
+
+    // in case a problem was reported during saving don't close this time
+    if (d->m_consistencyProblemReported) {
+        d->m_consistencyProblemReported = false;
+        return false;
+    }
 
     // prevent starting action checks
     // when there is no file open

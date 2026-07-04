@@ -94,9 +94,9 @@ class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar, pub
 
 private Q_SLOTS:
     /**
-      * Add a context menu to the list used by KMessageBox::informationList to display the consistency check results.
-      */
-    void slotInstallConsistencyCheckContextMenu();
+     * Select an object from within the consistency check dialog
+     */
+    void slotOpenConsistencyUrl(const QUrl& url);
 
     /**
       * Handle the context menu of the list used by KMessageBox::informationList to display the consistency check results.

@@ -3436,7 +3436,9 @@ QStringList MyMoneyFile::consistencyCheck()
 
         auto checkSplitSum = [&]() {
             if (!t.splitSum().isZero()) {
-                rc << i18n("  * Sum of splits in transaction '%1' posted on %2 is not zero.", t.id(), MyMoneyUtils::formatDate(t.postDate()));
+                rc << i18n("  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not zero.",
+                           t.id(),
+                           MyMoneyUtils::formatDate(t.postDate()));
                 for (const auto& split : t.splits()) {
                     const auto accIdx = d->accountsModel.indexById(split.accountId());
                     const auto name = accIdx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
