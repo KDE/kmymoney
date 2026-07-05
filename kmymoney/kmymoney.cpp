@@ -4049,13 +4049,25 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
         alwaysDisplayResult = true;
     }
 
-    m_consistencyProblemReported = m_consistencyCheckResult.size() > 1;
-
     // in case the consistency check was OK, we get a single line as result
     // in all erroneous cases, we get more than one line and force the
     // display of them.
+    m_consistencyProblemReported = m_consistencyCheckResult.size() > 1;
 
-    if (alwaysDisplayResult || m_consistencyCheckResult.size() > 1) {
+    // make sure that the consistency check is not reported too often.
+    // once a week is enough when problems are not completely resolved.
+    const auto file = MyMoneyFile::instance();
+    bool suppressDisplay = false;
+    auto lastConsistencyFailed = QDate::fromString(file->value(QLatin1String("kmm-lastConsistencyFailed")), Qt::ISODate);
+    if (lastConsistencyFailed.isValid()) {
+        suppressDisplay = true;
+        if (lastConsistencyFailed.addDays(7) < QDate::currentDate()) {
+            suppressDisplay = false;
+        }
+    }
+
+    ft.restart();
+    if (alwaysDisplayResult || (m_consistencyProblemReported && !suppressDisplay)) {
         QString msg = i18n("The consistency check has found no issues in your data. Details are presented below.");
         if (m_consistencyCheckResult.size() > 1) {
             msg = i18n(
@@ -4063,7 +4075,19 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
                 "need to be solved by the user.");
         }
         showDialog(m_consistencyCheckResult);
+
+        // update the consistency error display only if run as part of save
+        if (!alwaysDisplayResult) {
+            file->setValue(QLatin1String("kmm-lastConsistencyFailed"), QDate::currentDate().toString(Qt::ISODate));
+        }
     }
+
+    // reset the lastConsistencyFailed date in case all problems are resolved
+    if (lastConsistencyFailed.isValid() && !m_consistencyProblemReported) {
+        file->deletePair(QLatin1String("kmm-lastConsistencyFailed"));
+    }
+    ft.commit();
+
     // this data is no longer needed
     m_consistencyCheckResult.clear();
 }
