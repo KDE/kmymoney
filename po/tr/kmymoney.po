@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-05 00:44+0000\n"
-"PO-Revision-Date: 2026-06-22 19:58+0300\n"
+"POT-Creation-Date: 2026-07-06 00:45+0000\n"
+"PO-Revision-Date: 2026-07-05 19:03+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -5826,11 +5826,10 @@ msgid "Running consistency check..."
 msgstr "Tutarlılık denetimi çalıştırılıyor…"
 
 #: kmymoney/kmymoney.cpp:3992
-#, fuzzy, kde-format
-#| msgid "Consistency check result"
+#, kde-format
 msgctxt "@info:title "
 msgid "Consistency check results"
-msgstr "Tutarlılık denetimi sonucu"
+msgstr "Tutarlılık Denetimi Sonuçları"
 
 #: kmymoney/kmymoney.cpp:3996
 #, kde-format
@@ -5841,8 +5840,7 @@ msgstr ""
 "menüsünü kullanın."
 
 #: kmymoney/kmymoney.cpp:4005
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "Kapat"
@@ -5851,14 +5849,14 @@ msgstr "Kapat"
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
-msgstr ""
+msgstr "Yenile"
 
 #: kmymoney/kmymoney.cpp:4047
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Tutarlılık denetimi başarısız: %1"
 
-#: kmymoney/kmymoney.cpp:4059
+#: kmymoney/kmymoney.cpp:4071
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5866,7 +5864,7 @@ msgid ""
 msgstr ""
 "Tutarlılık denetimi verisinde hiçbir sorun bulamadı. Ayrıntılar aşağıdadır."
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4074
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5877,24 +5875,24 @@ msgstr ""
 "Kendiliğinden düzeltilemeyen sorunların kullanıcı tarafından çözülmesi "
 "gerekir."
 
-#: kmymoney/kmymoney.cpp:4130
+#: kmymoney/kmymoney.cpp:4154
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Vadesi geçmiş planlı işlemler denetleniyor…"
 
-#: kmymoney/kmymoney.cpp:4294
+#: kmymoney/kmymoney.cpp:4318
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Bir hesap özetini içe aktarmadan önce bir K Param dosyası seçmelisiniz."
 
-#: kmymoney/kmymoney.cpp:4300
+#: kmymoney/kmymoney.cpp:4324
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Web Bağlantısı yoluyla bir hesap özeti içe aktarılıyor"
 
-#: kmymoney/kmymoney.cpp:4314
+#: kmymoney/kmymoney.cpp:4338
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5904,57 +5902,57 @@ msgstr ""
 "%2 eklentisi kullanılarak %1 içe aktarılamadı. Eklenti aşağıdaki hatayı "
 "döndürdü: %3"
 
-#: kmymoney/kmymoney.cpp:4318 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4342 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr "İçe aktarma hatası"
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Tüm iletiler etkinleştirildi."
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages"
 msgstr "Tüm iletiler"
 
-#: kmymoney/kmymoney.cpp:4381
+#: kmymoney/kmymoney.cpp:4405
 #, kde-format
 msgid "Auto saving..."
 msgstr "Kendiliğinden kaydediliyor…"
 
-#: kmymoney/kmymoney.cpp:4502
+#: kmymoney/kmymoney.cpp:4526
 #, kde-format
 msgid "Creating new document..."
 msgstr "Yeni belge oluşturuluyor…"
 
-#: kmymoney/kmymoney.cpp:4562
+#: kmymoney/kmymoney.cpp:4586
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Yeni bir dosya oluşturulamadı."
 
-#: kmymoney/kmymoney.cpp:4573
+#: kmymoney/kmymoney.cpp:4597
 #, kde-format
 msgid "Open a file."
 msgstr "Bir dosya açın."
 
-#: kmymoney/kmymoney.cpp:4587
+#: kmymoney/kmymoney.cpp:4611
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Depolamayı açmak için bir eklenti bulunamadı."
 
-#: kmymoney/kmymoney.cpp:4591
+#: kmymoney/kmymoney.cpp:4615
 #, kde-format
 msgid "All files (*)"
 msgstr "Tüm dosyalar (*)"
 
-#: kmymoney/kmymoney.cpp:4604
+#: kmymoney/kmymoney.cpp:4628
 #, kde-format
 msgid "Loading file..."
 msgstr "Dosya yükleniyor…"
 
-#: kmymoney/kmymoney.cpp:4613
+#: kmymoney/kmymoney.cpp:4637
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5963,23 +5961,23 @@ msgstr ""
 "<p><b>%1</b> ya geçersiz bir dosya adı ya da dosya yok. Başka bir dosya "
 "açabilir veya yeni bir tane oluşturabilirsiniz.</p>"
 
-#: kmymoney/kmymoney.cpp:4615
+#: kmymoney/kmymoney.cpp:4639
 #, kde-format
 msgid "File not found"
 msgstr "Dosya bulunamadı"
 
-#: kmymoney/kmymoney.cpp:4647
+#: kmymoney/kmymoney.cpp:4671
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "Depolama Açılırken Hata"
 
-#: kmymoney/kmymoney.cpp:4653
+#: kmymoney/kmymoney.cpp:4677
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "İstenen dosya açılamadı."
 
-#: kmymoney/kmymoney.cpp:4660
+#: kmymoney/kmymoney.cpp:4684
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5988,32 +5986,32 @@ msgstr ""
 "Veri kaynağınız okunamadı. Lütfen gerekli eklentinin etkinleştirildiğini K "
 "Param ayarlarında denetleyin."
 
-#: kmymoney/kmymoney.cpp:4671
+#: kmymoney/kmymoney.cpp:4695
 #, kde-format
 msgid "Saving file..."
 msgstr "Dosya kaydediliyor…"
 
-#: kmymoney/kmymoney.cpp:4683
+#: kmymoney/kmymoney.cpp:4707
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Veriniz kaydedilemedi."
 
-#: kmymoney/kmymoney.cpp:4689
+#: kmymoney/kmymoney.cpp:4713
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Verinizi kaydetmek için uygun bir eklenti bulunamadı."
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4719
 #, kde-format
 msgid "Saving file as...."
 msgstr "Dosya farklı kaydediliyor…"
 
-#: kmymoney/kmymoney.cpp:4711
+#: kmymoney/kmymoney.cpp:4735
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Veri kaydetmek için uygun bir eklenti bulunamadı."
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4763
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Depolamanız kaydedilemedi."
@@ -6955,13 +6953,13 @@ msgid "  * Removed unused match information from transaction '%1'."
 msgstr "  * “%1” işleminden kullanılmayan eşleşme bilgisi kaldırıldı."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3440
-#, fuzzy, kde-format
-#| msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
+#, kde-format
 msgid ""
 "  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not "
 "zero."
 msgstr ""
-"  * %2 tarihinde kaydedilen “%1” işlemindeki bölmelerin toplamı sıfır değil."
+"  * %2 tarihinde kaydedilen <a href=\"%1\">“%1”</a> işlemindeki bölmelerin "
+"toplamı sıfır değil."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3450
 #, kde-format

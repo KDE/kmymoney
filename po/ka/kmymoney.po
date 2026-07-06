@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-05 00:44+0000\n"
-"PO-Revision-Date: 2026-06-22 03:41+0200\n"
+"POT-Creation-Date: 2026-07-06 00:45+0000\n"
+"PO-Revision-Date: 2026-07-05 06:27+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5662,8 +5662,7 @@ msgid "Running consistency check..."
 msgstr "თანმიმდევრულობის შემოწმება..."
 
 #: kmymoney/kmymoney.cpp:3992
-#, fuzzy, kde-format
-#| msgid "Consistency check result"
+#, kde-format
 msgctxt "@info:title "
 msgid "Consistency check results"
 msgstr "თანმიმდევრულობის შემოწმების შედეგი"
@@ -5677,8 +5676,7 @@ msgstr ""
 "დასაკოპირებლად ან შესანახად."
 
 #: kmymoney/kmymoney.cpp:4005
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "დახურვა"
@@ -5687,14 +5685,14 @@ msgstr "დახურვა"
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
-msgstr ""
+msgstr "განახლება"
 
 #: kmymoney/kmymoney.cpp:4047
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "თანმიმდევრულობის შემოწმება ჩავარდა: %1"
 
-#: kmymoney/kmymoney.cpp:4059
+#: kmymoney/kmymoney.cpp:4071
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5703,7 +5701,7 @@ msgstr ""
 "მთლიანობის შემოწმებამ მონაცემებთან პრობლემები ვერ აღმოაჩინა. დეტალები იხილეთ "
 "ქვემოთ."
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4074
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5714,23 +5712,23 @@ msgstr ""
 "დეტალები ქვემოთაა მოყვანილი. ეს პრობლემები ავტომატურად ვერ გადაიჭრა და ხელით "
 "ჩარევას საჭიროებს."
 
-#: kmymoney/kmymoney.cpp:4130
+#: kmymoney/kmymoney.cpp:4154
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "გადაცილებული დაგეგმილი ტრანზაქციების შემოწმება..."
 
-#: kmymoney/kmymoney.cpp:4294
+#: kmymoney/kmymoney.cpp:4318
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "ამონაწერის შემოტანამდე საჭიროა, KMyMoney-ის ფაილი აირჩიოთ."
 
-#: kmymoney/kmymoney.cpp:4300
+#: kmymoney/kmymoney.cpp:4324
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "ამონაწერის შემოტანა ვებ-კავშირით"
 
-#: kmymoney/kmymoney.cpp:4314
+#: kmymoney/kmymoney.cpp:4338
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5740,57 +5738,57 @@ msgstr ""
 "%1-ის შემოტანა დამატებით %2 შეუძლებელია. დამატებამ დააბრუნა შემდეგი შეცდომა: "
 "%3"
 
-#: kmymoney/kmymoney.cpp:4318 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4342 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr "შემოტანის შეცდომა"
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "ყველა შეტყობინება ჩართულია."
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages"
 msgstr "ყველა შეტყობინება"
 
-#: kmymoney/kmymoney.cpp:4381
+#: kmymoney/kmymoney.cpp:4405
 #, kde-format
 msgid "Auto saving..."
 msgstr "ავტოშენახვა..."
 
-#: kmymoney/kmymoney.cpp:4502
+#: kmymoney/kmymoney.cpp:4526
 #, kde-format
 msgid "Creating new document..."
 msgstr "ახალი დოკუმენტის შექმნა..."
 
-#: kmymoney/kmymoney.cpp:4562
+#: kmymoney/kmymoney.cpp:4586
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "ახალი ფაილის შექმნის შეცდომა."
 
-#: kmymoney/kmymoney.cpp:4573
+#: kmymoney/kmymoney.cpp:4597
 #, kde-format
 msgid "Open a file."
 msgstr "ფაილის გახსნა."
 
-#: kmymoney/kmymoney.cpp:4587
+#: kmymoney/kmymoney.cpp:4611
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "საცავის გასახსნელად დამატება აღმჩენილი არაა."
 
-#: kmymoney/kmymoney.cpp:4591
+#: kmymoney/kmymoney.cpp:4615
 #, kde-format
 msgid "All files (*)"
 msgstr "ყველა ფაილი (*)"
 
-#: kmymoney/kmymoney.cpp:4604
+#: kmymoney/kmymoney.cpp:4628
 #, kde-format
 msgid "Loading file..."
 msgstr "ფაილის ჩატვირთვა..."
 
-#: kmymoney/kmymoney.cpp:4613
+#: kmymoney/kmymoney.cpp:4637
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5799,23 +5797,23 @@ msgstr ""
 "<p><b>%1</b> ეს ან არასწორი ფაილის სახელია, ან ფაილი არ არსებობს. შეგიძლიათ, "
 "გახსნათ სხვა ფაილი, ან ახალი შექმნათ.</p>"
 
-#: kmymoney/kmymoney.cpp:4615
+#: kmymoney/kmymoney.cpp:4639
 #, kde-format
 msgid "File not found"
 msgstr "ფაილი ვერ მოიძებნა"
 
-#: kmymoney/kmymoney.cpp:4647
+#: kmymoney/kmymoney.cpp:4671
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "საცავის გახსნის პრობლემა"
 
-#: kmymoney/kmymoney.cpp:4653
+#: kmymoney/kmymoney.cpp:4677
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "მოთხოვნისამებრ ფაილის გახსნა შეუძლებელია."
 
-#: kmymoney/kmymoney.cpp:4660
+#: kmymoney/kmymoney.cpp:4684
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5824,32 +5822,32 @@ msgstr ""
 "თქვენი მონაცემთა წყაროს წაკითხვა შეუძლებელია. შეამოწმეთ KMyMoney-ის "
 "პარამეტრები და დარწმუნდით, რომ საჭირო მოდული ჩართულია."
 
-#: kmymoney/kmymoney.cpp:4671
+#: kmymoney/kmymoney.cpp:4695
 #, kde-format
 msgid "Saving file..."
 msgstr "ფაილის შენახვა..."
 
-#: kmymoney/kmymoney.cpp:4683
+#: kmymoney/kmymoney.cpp:4707
 #, kde-format
 msgid "Failed to save your data."
 msgstr "თქვენი მონაცემების შენახვა ვერ ჩავარდა."
 
-#: kmymoney/kmymoney.cpp:4689
+#: kmymoney/kmymoney.cpp:4713
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "თქვენი მონაცემების შესანახად საჭირო მოდული აღმოჩენილი არაა."
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4719
 #, kde-format
 msgid "Saving file as...."
 msgstr "ფაილის შენახვა, როგორც..."
 
-#: kmymoney/kmymoney.cpp:4711
+#: kmymoney/kmymoney.cpp:4735
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "მონაცემების შესანახად დამატება აღმოჩენილი არაა."
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4763
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "თქვენი საცავის შენახვა ჩავარდა."
@@ -6787,12 +6785,13 @@ msgid "  * Removed unused match information from transaction '%1'."
 msgstr "  * წაიშალა გამოუყენებელი დამთხვევის ინფორმაცია ტრანზაქციიდან '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3440
-#, fuzzy, kde-format
-#| msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
+#, kde-format
 msgid ""
 "  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not "
 "zero."
-msgstr "  *გაყოფების რაოდენობა ტრანზაქციაში '%1', გამოტანილი %2-ზე, ნული არაა."
+msgstr ""
+"  *გაყოფების რაოდენობა ტრანზაქციაში <a href=\"%1\">'%1'</a>, გამოტანილი %2-"
+"ზე, ნული არაა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3450
 #, kde-format

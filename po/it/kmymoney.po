@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-05 00:44+0000\n"
+"POT-Creation-Date: 2026-07-06 00:45+0000\n"
 "PO-Revision-Date: 2026-06-22 08:58+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -5913,7 +5913,7 @@ msgstr ""
 msgid "Consistency check failed: %1"
 msgstr "Controllo di consistenza non riuscito: %1"
 
-#: kmymoney/kmymoney.cpp:4059
+#: kmymoney/kmymoney.cpp:4071
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5922,7 +5922,7 @@ msgstr ""
 "Il controllo di consistenza non ha rilevato problemi nei tuoi dati. I "
 "dettagli sono presentati in basso."
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4074
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5933,24 +5933,24 @@ msgstr ""
 "dettagli sono presentati in basso. I problemi che non possono essere "
 "corretti automaticamente, devono essere risolti dall'utente."
 
-#: kmymoney/kmymoney.cpp:4130
+#: kmymoney/kmymoney.cpp:4154
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Controllo delle transazioni pianificate arretrate..."
 
-#: kmymoney/kmymoney.cpp:4294
+#: kmymoney/kmymoney.cpp:4318
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Bisogna prima selezionare un file KMyMoney per importare un estratto conto."
 
-#: kmymoney/kmymoney.cpp:4300
+#: kmymoney/kmymoney.cpp:4324
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importazione dell'estratto conto via web"
 
-#: kmymoney/kmymoney.cpp:4314
+#: kmymoney/kmymoney.cpp:4338
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5960,57 +5960,57 @@ msgstr ""
 "Impossibile importare %1 utilizzando l'estensione %2. L'estensione ha "
 "restituito il seguente errore: %3"
 
-#: kmymoney/kmymoney.cpp:4318 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4342 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr "Importa errore"
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Tutti i messaggi sono stati abilitati."
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages"
 msgstr "Tutti i messaggi"
 
-#: kmymoney/kmymoney.cpp:4381
+#: kmymoney/kmymoney.cpp:4405
 #, kde-format
 msgid "Auto saving..."
 msgstr "Salvataggio automatico..."
 
-#: kmymoney/kmymoney.cpp:4502
+#: kmymoney/kmymoney.cpp:4526
 #, kde-format
 msgid "Creating new document..."
 msgstr "Creazione del nuovo documento..."
 
-#: kmymoney/kmymoney.cpp:4562
+#: kmymoney/kmymoney.cpp:4586
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Impossibile creare un nuovo file."
 
-#: kmymoney/kmymoney.cpp:4573
+#: kmymoney/kmymoney.cpp:4597
 #, kde-format
 msgid "Open a file."
 msgstr "Apri un file."
 
-#: kmymoney/kmymoney.cpp:4587
+#: kmymoney/kmymoney.cpp:4611
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Impossibile trovare un'estensione aprire la tua archiviazione."
 
-#: kmymoney/kmymoney.cpp:4591
+#: kmymoney/kmymoney.cpp:4615
 #, kde-format
 msgid "All files (*)"
 msgstr "Tutti i file (*)"
 
-#: kmymoney/kmymoney.cpp:4604
+#: kmymoney/kmymoney.cpp:4628
 #, kde-format
 msgid "Loading file..."
 msgstr "Caricamento file..."
 
-#: kmymoney/kmymoney.cpp:4613
+#: kmymoney/kmymoney.cpp:4637
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6019,23 +6019,23 @@ msgstr ""
 "<p><b>%1</b> ha un nome non valido, o il file non esiste. Puoi aprire un "
 "altro file o crearne uno nuovo.</p>"
 
-#: kmymoney/kmymoney.cpp:4615
+#: kmymoney/kmymoney.cpp:4639
 #, kde-format
 msgid "File not found"
 msgstr "File non trovato"
 
-#: kmymoney/kmymoney.cpp:4647
+#: kmymoney/kmymoney.cpp:4671
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "Problema nell'apertura dell'archiviazione"
 
-#: kmymoney/kmymoney.cpp:4653
+#: kmymoney/kmymoney.cpp:4677
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Impossibile aprire il file come richiesto."
 
-#: kmymoney/kmymoney.cpp:4660
+#: kmymoney/kmymoney.cpp:4684
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6044,32 +6044,32 @@ msgstr ""
 "Impossibile leggere la tua fonte di dati. Controlla nelle impostazioni di "
 "KMyMoney che l'estensione necessaria sia installata."
 
-#: kmymoney/kmymoney.cpp:4671
+#: kmymoney/kmymoney.cpp:4695
 #, kde-format
 msgid "Saving file..."
 msgstr "Salva file..."
 
-#: kmymoney/kmymoney.cpp:4683
+#: kmymoney/kmymoney.cpp:4707
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Impossibile salvare i tuoi dati."
 
-#: kmymoney/kmymoney.cpp:4689
+#: kmymoney/kmymoney.cpp:4713
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Impossibile trovare l'estensione adatta per salvare i dati."
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4719
 #, kde-format
 msgid "Saving file as...."
 msgstr "Salvataggio file come..."
 
-#: kmymoney/kmymoney.cpp:4711
+#: kmymoney/kmymoney.cpp:4735
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Impossibile trovare una estensione per il salvataggio dei dati."
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4763
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Impossibile salvare la tua archiviazione."

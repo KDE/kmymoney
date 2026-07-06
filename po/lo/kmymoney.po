@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-05 00:44+0000\n"
+"POT-Creation-Date: 2026-07-06 00:45+0000\n"
 "PO-Revision-Date: 2025-12-07 00:37+0700\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
@@ -5743,14 +5743,14 @@ msgstr ""
 msgid "Consistency check failed: %1"
 msgstr "ການກວດສອບຄວາມສອດຄ່ອງລົ້ມເຫຼວ: %1"
 
-#: kmymoney/kmymoney.cpp:4059
+#: kmymoney/kmymoney.cpp:4071
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
 "presented below."
 msgstr "ການກວດສອບຄວາມສອດຄ່ອງບໍ່ພົບບັນຫາໃນຂໍ້ມູນຂອງທ່ານ. ລາຍລະອຽດສະແດງຢູ່ດ້ານລຸ່ມ."
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4074
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5760,23 +5760,23 @@ msgstr ""
 "ການກວດສອບຄວາມສອດຄ່ອງພົບບາງບັນຫາໃນຂໍ້ມູນຂອງທ່ານ. ລາຍລະອຽດສະແດງຢູ່ດ້ານລຸ່ມ. "
 "ບັນຫາທີ່ບໍ່ສາມາດແກ້ໄຂໄດ້ໂດຍອັດຕະໂນມັດຕ້ອງໄດ້ຮັບການແກ້ໄຂໂດຍຜູ້ໃຊ້."
 
-#: kmymoney/kmymoney.cpp:4130
+#: kmymoney/kmymoney.cpp:4154
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "ກຳລັງກວດສອບທຸລະກຳທີ່ກຳນົດເວລາທີ່ເກີນກຳນົດ..."
 
-#: kmymoney/kmymoney.cpp:4294
+#: kmymoney/kmymoney.cpp:4318
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "ເຈົ້າຕ້ອງເລືອກໄຟລ໌ KMyMoney ກ່ອນຈຶ່ງຈະສາມາດນຳເຂົ້າລາຍການເຄື່ອນໄຫວໄດ້."
 
-#: kmymoney/kmymoney.cpp:4300
+#: kmymoney/kmymoney.cpp:4324
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "ກຳລັງນຳເຂົ້າລາຍການເຄື່ອນໄຫວຜ່ານ Web Connect"
 
-#: kmymoney/kmymoney.cpp:4314
+#: kmymoney/kmymoney.cpp:4338
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5784,57 +5784,57 @@ msgid ""
 "error: %3"
 msgstr "ບໍ່ສາມາດນຳເຂົ້າ %1 ໂດຍໃຊ້ປລັກອິນ %2. ປລັກອິນສົ່ງຄືນຂໍ້ຜິດພາດຕໍ່ໄປນີ້: %3"
 
-#: kmymoney/kmymoney.cpp:4318 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4342 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr "ຂໍ້ຜິດພາດການນຳເຂົ້າ"
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "ເປີດໃຊ້ຂໍ້ຄວາມທັງໝົດແລ້ວ."
 
-#: kmymoney/kmymoney.cpp:4345
+#: kmymoney/kmymoney.cpp:4369
 #, kde-format
 msgid "All messages"
 msgstr "ຂໍ້ຄວາມທັງໝົດ"
 
-#: kmymoney/kmymoney.cpp:4381
+#: kmymoney/kmymoney.cpp:4405
 #, kde-format
 msgid "Auto saving..."
 msgstr "ກຳລັງບັນທຶກອັດຕະໂນມັດ..."
 
-#: kmymoney/kmymoney.cpp:4502
+#: kmymoney/kmymoney.cpp:4526
 #, kde-format
 msgid "Creating new document..."
 msgstr "ກຳລັງສ້າງເອກະສານໃໝ່..."
 
-#: kmymoney/kmymoney.cpp:4562
+#: kmymoney/kmymoney.cpp:4586
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "ບໍ່ສາມາດສ້າງໄຟລ໌ໃໝ່ໄດ້."
 
-#: kmymoney/kmymoney.cpp:4573
+#: kmymoney/kmymoney.cpp:4597
 #, kde-format
 msgid "Open a file."
 msgstr "ເປີດໄຟລ໌."
 
-#: kmymoney/kmymoney.cpp:4587
+#: kmymoney/kmymoney.cpp:4611
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "ບໍ່ພົບປລັກອິນສຳລັບການເປີດບ່ອນຈັດເກັບຂໍ້ມູນ."
 
-#: kmymoney/kmymoney.cpp:4591
+#: kmymoney/kmymoney.cpp:4615
 #, kde-format
 msgid "All files (*)"
 msgstr "ໄຟລ໌ທັງໝົດ (*)"
 
-#: kmymoney/kmymoney.cpp:4604
+#: kmymoney/kmymoney.cpp:4628
 #, kde-format
 msgid "Loading file..."
 msgstr "ກຳລັງໂຫຼດໄຟລ໌..."
 
-#: kmymoney/kmymoney.cpp:4613
+#: kmymoney/kmymoney.cpp:4637
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5842,23 +5842,23 @@ msgid ""
 msgstr ""
 "<p><b>%1</b> ເປັນຊື່ໄຟລ໌ທີ່ບໍ່ຖືກຕ້ອງ ຫຼື ໄຟລ໌ບໍ່ມີຢູ່. ເຈົ້າສາມາດເປີດໄຟລ໌ອື່ນ ຫຼື ສ້າງໄຟລ໌ໃໝ່ໄດ້.</p>"
 
-#: kmymoney/kmymoney.cpp:4615
+#: kmymoney/kmymoney.cpp:4639
 #, kde-format
 msgid "File not found"
 msgstr "ບໍ່ພົບໄຟລ໌"
 
-#: kmymoney/kmymoney.cpp:4647
+#: kmymoney/kmymoney.cpp:4671
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "ບັນຫາໃນການເປີດບ່ອນຈັດເກັບຂໍ້ມູນ"
 
-#: kmymoney/kmymoney.cpp:4653
+#: kmymoney/kmymoney.cpp:4677
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "ບໍ່ສາມາດເປີດໄຟລ໌ຕາມທີ່ຮ້ອງຂໍ."
 
-#: kmymoney/kmymoney.cpp:4660
+#: kmymoney/kmymoney.cpp:4684
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5867,32 +5867,32 @@ msgstr ""
 "ບໍ່ສາມາດອ່ານແຫຼ່ງຂໍ້ມູນຂອງທ່ານ. ກະລຸນາກວດສອບການຕັ້ງຄ່າ KMyMoney "
 "ວ່າປລັກອິນທີ່ຈຳເປັນຖືກເປີດໃຊ້ງານແລ້ວ."
 
-#: kmymoney/kmymoney.cpp:4671
+#: kmymoney/kmymoney.cpp:4695
 #, kde-format
 msgid "Saving file..."
 msgstr "ກຳລັງບັນທຶກໄຟລ໌..."
 
-#: kmymoney/kmymoney.cpp:4683
+#: kmymoney/kmymoney.cpp:4707
 #, kde-format
 msgid "Failed to save your data."
 msgstr "ການບັນທຶກຂໍ້ມູນຂອງທ່ານລົ້ມເຫຼວ."
 
-#: kmymoney/kmymoney.cpp:4689
+#: kmymoney/kmymoney.cpp:4713
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "ບໍ່ພົບປລັກອິນທີ່ເໝາະສົມເພື່ອບັນທຶກຂໍ້ມູນຂອງທ່ານ."
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4719
 #, kde-format
 msgid "Saving file as...."
 msgstr "ກຳລັງບັນທຶກໄຟລ໌ເປັນ...."
 
-#: kmymoney/kmymoney.cpp:4711
+#: kmymoney/kmymoney.cpp:4735
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "ບໍ່ພົບປລັກອິນສຳລັບການບັນທຶກຂໍ້ມູນ."
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4763
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "ການບັນທຶກບ່ອນຈັດເກັບຂໍ້ມູນຂອງທ່ານລົ້ມເຫຼວ."
