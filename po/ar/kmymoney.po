@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-06 00:45+0000\n"
-"PO-Revision-Date: 2026-06-30 21:34+0400\n"
+"PO-Revision-Date: 2026-07-06 18:20+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -5802,11 +5802,10 @@ msgid "Running consistency check..."
 msgstr "يشغّل فحص الاتّساق..."
 
 #: kmymoney/kmymoney.cpp:3992
-#, fuzzy, kde-format
-#| msgid "Consistency check result"
+#, kde-format
 msgctxt "@info:title "
 msgid "Consistency check results"
-msgstr "نتيجة فحص الاتّساق"
+msgstr "نتائج فحص الاتّساق"
 
 #: kmymoney/kmymoney.cpp:3996
 #, kde-format
@@ -5815,8 +5814,7 @@ msgid ""
 msgstr "هذا هو سجل تدقيق الاتساق، استخدم قائمة السياق لنسخِه أو حفظِه."
 
 #: kmymoney/kmymoney.cpp:4005
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "أغلق"
@@ -5825,7 +5823,7 @@ msgstr "أغلق"
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
-msgstr ""
+msgstr "حدّث"
 
 #: kmymoney/kmymoney.cpp:4047
 #, kde-format
@@ -6918,12 +6916,13 @@ msgid "  * Removed unused match information from transaction '%1'."
 msgstr "  * أزل معلومات المطابقة غير المستخدمة من المعاملة '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3440
-#, fuzzy, kde-format
-#| msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
+#, kde-format
 msgid ""
 "  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not "
 "zero."
-msgstr "  * مجموع التجزئات في المعاملة '%1' المنشورة في %2 ليس صفرًا."
+msgstr ""
+"  * مجموع التجزئات في المعاملة <a href=\"%1\">'%1'</a> المنشورة في %2 ليس "
+"صفرًا."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3450
 #, kde-format

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-06 00:45+0000\n"
-"PO-Revision-Date: 2026-06-22 12:00+0200\n"
+"PO-Revision-Date: 2026-07-05 09:20+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -5893,8 +5893,7 @@ msgid "Running consistency check..."
 msgstr "S'està executant la comprovació de coherència…"
 
 #: kmymoney/kmymoney.cpp:3992
-#, fuzzy, kde-format
-#| msgid "Consistency check result"
+#, kde-format
 msgctxt "@info:title "
 msgid "Consistency check results"
 msgstr "Resultat de la comprovació de coherència"
@@ -5908,8 +5907,7 @@ msgstr ""
 "contextual per a copiar-lo o guardar-lo."
 
 #: kmymoney/kmymoney.cpp:4005
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "Tanca"
@@ -5918,7 +5916,7 @@ msgstr "Tanca"
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
-msgstr ""
+msgstr "Actualitza"
 
 #: kmymoney/kmymoney.cpp:4047
 #, kde-format
@@ -7036,13 +7034,13 @@ msgid "  * Removed unused match information from transaction '%1'."
 msgstr "  * S'ha eliminat la informació de liquidada de l'operació «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3440
-#, fuzzy, kde-format
-#| msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
+#, kde-format
 msgid ""
 "  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not "
 "zero."
 msgstr ""
-"  * La suma dels desglossaments de l'operació «%1» publicada a %2 no és zero."
+"  * La suma dels desglossaments de l'operació <a href=\"%1\">«%1»</a> "
+"publicada a %2 no és zero."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3450
 #, kde-format
