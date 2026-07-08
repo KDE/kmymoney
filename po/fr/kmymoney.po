@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-06 00:45+0000\n"
-"PO-Revision-Date: 2026-06-23 18:20+0200\n"
+"PO-Revision-Date: 2026-07-06 12:05+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.04.3\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -5948,11 +5948,10 @@ msgid "Running consistency check..."
 msgstr "Vérification de cohérence…"
 
 #: kmymoney/kmymoney.cpp:3992
-#, fuzzy, kde-format
-#| msgid "Consistency check result"
+#, kde-format
 msgctxt "@info:title "
 msgid "Consistency check results"
-msgstr "Résultat de la vérification de cohérence"
+msgstr "Résultat de vérification de cohérence"
 
 #: kmymoney/kmymoney.cpp:3996
 #, kde-format
@@ -5963,8 +5962,7 @@ msgstr ""
 "contextuel pour le copier ou l'enregistrer."
 
 #: kmymoney/kmymoney.cpp:4005
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "Fermer"
@@ -5973,7 +5971,7 @@ msgstr "Fermer"
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
-msgstr ""
+msgstr "Rafraîchir"
 
 #: kmymoney/kmymoney.cpp:4047
 #, kde-format
@@ -7097,14 +7095,13 @@ msgstr ""
 "transaction « %1 »."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3440
-#, fuzzy, kde-format
-#| msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
+#, kde-format
 msgid ""
 "  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not "
 "zero."
 msgstr ""
-" * La somme des fractionnements de l'opération « %1 » effectuée en date du "
-"%2 est différente de zéro. "
+" * La somme des fractionnements de l'opération <a href=\"%1\">« %1 »</a> "
+"effectuée en date du %2 est différente de zéro."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3450
 #, kde-format
