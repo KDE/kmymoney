@@ -9,6 +9,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QLocale>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -27,6 +29,10 @@ AmountValidator::AmountValidator(double bottom, double top, int decimals, QObjec
     : QDoubleValidator(bottom, top, decimals, parent)
 {
     setNotation(StandardNotation);
+    const auto monetaryLocale = qEnvironmentVariable("LC_MONETARY");
+    if (!monetaryLocale.isEmpty()) {
+        setLocale(QLocale(monetaryLocale));
+    }
 }
 
 QValidator::State AmountValidator::validate(QString& input, int& pos) const
