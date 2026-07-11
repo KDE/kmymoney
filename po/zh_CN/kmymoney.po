@@ -5652,11 +5652,10 @@ msgid "Running consistency check..."
 msgstr "正在执行一致性检查..."
 
 #: kmymoney/kmymoney.cpp:3992
-#, fuzzy, kde-format
-#| msgid "Consistency check result"
+#, kde-format
 msgctxt "@info:title "
 msgid "Consistency check results"
-msgstr "一致性检查结果"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3996
 #, kde-format
@@ -5665,11 +5664,10 @@ msgid ""
 msgstr "此为一致性检查日志，您可使用右键菜单进行复制或保存。"
 
 #: kmymoney/kmymoney.cpp:4005
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
-msgstr "关闭"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:4017
 #, kde-format
