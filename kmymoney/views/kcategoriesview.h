@@ -56,6 +56,8 @@ public:
     explicit KCategoriesView(QWidget *parent = nullptr);
     ~KCategoriesView();
 
+    void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
+
 public Q_SLOTS:
     void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
 
