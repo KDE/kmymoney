@@ -51,6 +51,7 @@ KCategoriesView::KCategoriesView(QWidget* parent)
     Q_D(KCategoriesView);
     d->init();
 
+    d->ui->m_accountTree->setObjectName("CategoriesView");
     connect(pActions[eMenu::Action::NewCategory], &QAction::triggered, this, &KCategoriesView::slotNewCategory);
     connect(pActions[eMenu::Action::EditCategory], &QAction::triggered, this, &KCategoriesView::slotEditCategory);
     connect(pActions[eMenu::Action::DeleteCategory], &QAction::triggered, this, &KCategoriesView::slotDeleteCategory);
@@ -69,6 +70,20 @@ KCategoriesView::KCategoriesView(QWidget* parent)
 
 KCategoriesView::~KCategoriesView()
 {
+}
+
+void KCategoriesView::executeAction(eMenu::Action action, const SelectedObjects& selections)
+{
+    Q_UNUSED(selections)
+
+    Q_D(KCategoriesView);
+    switch (action) {
+    case eMenu::Action::FileNew:
+        d->ui->m_accountTree->proxyModel()->invalidate();
+        break;
+    default:
+        break;
+    }
 }
 
 void KCategoriesView::slotSettingsChanged()
