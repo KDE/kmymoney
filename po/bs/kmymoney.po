@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:45+0000\n"
+"POT-Creation-Date: 2026-07-14 00:44+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -20677,78 +20677,78 @@ msgid "This account is still mapped to an online account"
 msgstr ""
 "<qt>Dati aplikacijski račun <b>%1</b> nije mapiran na mrežni račun.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "Gubitak: "
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgid "Loss: %1"
 msgstr "Gubitak: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "Dobit: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgid "Profit: %1"
 msgstr "Dobit: "
 
-#: kmymoney/views/kcategoriesview.cpp:195
+#: kmymoney/views/kcategoriesview.cpp:210
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Uredi kategoriju '%1'"
 
-#: kmymoney/views/kcategoriesview.cpp:203
+#: kmymoney/views/kcategoriesview.cpp:218
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Uredi kategoriju..."
 
-#: kmymoney/views/kcategoriesview.cpp:217
+#: kmymoney/views/kcategoriesview.cpp:232
 #, fuzzy, kde-format
 #| msgid "Unable to modify account '%1'. Cause: %2"
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Nije moguće izmjeniti račun '%1'.Uzrok :%2"
 
-#: kmymoney/views/kcategoriesview.cpp:315
+#: kmymoney/views/kcategoriesview.cpp:330
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr ""
 "Nemoguća razmjena kategorije <b>%1</b> sa kategorijom <b>%2</b>. Razlog: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:354
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete category <b>%1</b>?"
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "Da li zaista želite izbrisati kategoriju <b>%1</b>?"
 
-#: kmymoney/views/kcategoriesview.cpp:340
-#: kmymoney/views/kcategoriesview.cpp:402
+#: kmymoney/views/kcategoriesview.cpp:355
+#: kmymoney/views/kcategoriesview.cpp:417
 #, fuzzy, kde-format
 #| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Izbriši kategoriju..."
 
-#: kmymoney/views/kcategoriesview.cpp:350
+#: kmymoney/views/kcategoriesview.cpp:365
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "Nije moguće izbrisati kategoriju <b>%1</b>.Uzrok:%2"
 
-#: kmymoney/views/kcategoriesview.cpp:361
+#: kmymoney/views/kcategoriesview.cpp:376
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -20763,17 +20763,17 @@ msgstr ""
 "kategoriju? Ako želite izbrisati samo kategoriju, sve njene pod-kategorije "
 "će biti pod-kategorije <b>%2</b>."
 
-#: kmymoney/views/kcategoriesview.cpp:367
+#: kmymoney/views/kcategoriesview.cpp:382
 #, kde-format
 msgid "Delete all"
 msgstr "Izbriši sve"
 
-#: kmymoney/views/kcategoriesview.cpp:368
+#: kmymoney/views/kcategoriesview.cpp:383
 #, kde-format
 msgid "Just the category"
 msgstr "Samo kategoriju"
 
-#: kmymoney/views/kcategoriesview.cpp:398
+#: kmymoney/views/kcategoriesview.cpp:413
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -20782,14 +20782,14 @@ msgstr ""
 "<p>Neke pod-kategorije kategorije <b>%1</b> ne mogu biti izbrisane, jer se "
 "koriste. One će biti pod-kategorije <b>%2</b>. Želite li nastaviti?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:426
+#: kmymoney/views/kcategoriesview.cpp:441
 #, fuzzy, kde-format
 #| msgid "Unable to delete a sub-category of category <b>%1</b>. Reason: %2"
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "Nije moguće izbrisati podkategoriju categorije <b>%1</b>.Razlog:%2"
 
-#: kmymoney/views/kcategoriesview.cpp:436
+#: kmymoney/views/kcategoriesview.cpp:451
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "Unable to delete category '%1'. Cause: %2"

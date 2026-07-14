@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:45+0000\n"
+"POT-Creation-Date: 2026-07-14 00:44+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -20915,51 +20915,51 @@ msgstr ""
 "<qt>Ο δοσμένος λογαριασμός εφαρμογής <b>%1</b> δεν έχει συσχετιστεί με ένα "
 "διαδικτυακό λογαριασμό.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "Ζημιά: "
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgid "Loss: %1"
 msgstr "Ζημιά: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "Κέρδος: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgid "Profit: %1"
 msgstr "Κέρδος: "
 
-#: kmymoney/views/kcategoriesview.cpp:195
+#: kmymoney/views/kcategoriesview.cpp:210
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Επεξεργασία κατηγορίας '%1'"
 
-#: kmymoney/views/kcategoriesview.cpp:203
+#: kmymoney/views/kcategoriesview.cpp:218
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Επεξεργασία κατηγορίας..."
 
-#: kmymoney/views/kcategoriesview.cpp:217
+#: kmymoney/views/kcategoriesview.cpp:232
 #, fuzzy, kde-format
 #| msgid "Unable to modify account '%1'. Cause: %2"
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Αδυναμία τροποποίησης λογαριασμού '%1'. Αιτία: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:315
+#: kmymoney/views/kcategoriesview.cpp:330
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
@@ -20967,27 +20967,27 @@ msgstr ""
 "Αδυναμία ανταλλαγής της κατηγορίας <b>%1</b> με την κατηγορία <b>%2</b>. "
 "Αιτία: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:354
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete category <b>%1</b>?"
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "Θέλετε πράγματι να διαγράψετε την κατηγορία <b>%1</b>;"
 
-#: kmymoney/views/kcategoriesview.cpp:340
-#: kmymoney/views/kcategoriesview.cpp:402
+#: kmymoney/views/kcategoriesview.cpp:355
+#: kmymoney/views/kcategoriesview.cpp:417
 #, fuzzy, kde-format
 #| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Διαγραφή κατηγορίας..."
 
-#: kmymoney/views/kcategoriesview.cpp:350
+#: kmymoney/views/kcategoriesview.cpp:365
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "Αδυναμία διαγραφής της κατηγορίας <b>%1</b>. Αιτία: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:361
+#: kmymoney/views/kcategoriesview.cpp:376
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -21002,17 +21002,17 @@ msgstr ""
 "ή μόνο την κατηγορία την ίδια; Αν θέλετε το δεύτερο, όλες οι υποκατηγορίες "
 "της θα γίνουν υποκατηγορίες της <b>%2</b>."
 
-#: kmymoney/views/kcategoriesview.cpp:367
+#: kmymoney/views/kcategoriesview.cpp:382
 #, kde-format
 msgid "Delete all"
 msgstr "Διαγραφή όλων"
 
-#: kmymoney/views/kcategoriesview.cpp:368
+#: kmymoney/views/kcategoriesview.cpp:383
 #, kde-format
 msgid "Just the category"
 msgstr "Μόνο την κατηγορία"
 
-#: kmymoney/views/kcategoriesview.cpp:398
+#: kmymoney/views/kcategoriesview.cpp:413
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -21022,14 +21022,14 @@ msgstr ""
 "διαγραφούν, επειδή χρησιμοποιούνται ακόμα. Θα γίνουν υπο-κατηγορίες της <b>"
 "%2</b>. Θα συνεχίσετε;</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:426
+#: kmymoney/views/kcategoriesview.cpp:441
 #, fuzzy, kde-format
 #| msgid "Unable to delete a sub-category of category <b>%1</b>. Reason: %2"
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "Αδυναμία διαγραφής υπο-κστηγορίας της κατηγορίας <b>%1</b>. Αιτία: %2 "
 
-#: kmymoney/views/kcategoriesview.cpp:436
+#: kmymoney/views/kcategoriesview.cpp:451
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "Unable to delete category '%1'. Cause: %2"
