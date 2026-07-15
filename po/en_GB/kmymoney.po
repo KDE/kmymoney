@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-22 03:45+0000\n"
+"POT-Creation-Date: 2026-07-15 03:34+0000\n"
 "PO-Revision-Date: 2024-06-02 12:16+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -20065,75 +20065,75 @@ msgstr "This account is still included in an active schedule"
 msgid "This account is still mapped to an online account"
 msgstr "This account is still mapped to an online account"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "Loss: "
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgid "Loss: %1"
 msgstr "Loss: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "Profit: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgid "Profit: %1"
 msgstr "Profit: "
 
-#: kmymoney/views/kcategoriesview.cpp:195
+#: kmymoney/views/kcategoriesview.cpp:210
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Edit category '%1'"
 
-#: kmymoney/views/kcategoriesview.cpp:203
+#: kmymoney/views/kcategoriesview.cpp:218
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Edit category..."
 
-#: kmymoney/views/kcategoriesview.cpp:217
+#: kmymoney/views/kcategoriesview.cpp:232
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Unable to modify category '%1'. Cause: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:315
+#: kmymoney/views/kcategoriesview.cpp:330
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:354
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:340
-#: kmymoney/views/kcategoriesview.cpp:402
+#: kmymoney/views/kcategoriesview.cpp:355
+#: kmymoney/views/kcategoriesview.cpp:417
 #, fuzzy, kde-format
 #| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Delete category..."
 
-#: kmymoney/views/kcategoriesview.cpp:350
+#: kmymoney/views/kcategoriesview.cpp:365
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:361
+#: kmymoney/views/kcategoriesview.cpp:376
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -20144,17 +20144,17 @@ msgstr ""
 "only the category itself? If you only delete the category itself, all its "
 "sub-categories will be made sub-categories of <b>%2</b>.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:367
+#: kmymoney/views/kcategoriesview.cpp:382
 #, kde-format
 msgid "Delete all"
 msgstr "Delete all"
 
-#: kmymoney/views/kcategoriesview.cpp:368
+#: kmymoney/views/kcategoriesview.cpp:383
 #, kde-format
 msgid "Just the category"
 msgstr "Just the category"
 
-#: kmymoney/views/kcategoriesview.cpp:398
+#: kmymoney/views/kcategoriesview.cpp:413
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -20163,14 +20163,14 @@ msgstr ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
 "are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:426
+#: kmymoney/views/kcategoriesview.cpp:441
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:436
+#: kmymoney/views/kcategoriesview.cpp:451
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Unable to delete category '%1'. Cause: %2"

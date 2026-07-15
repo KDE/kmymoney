@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-22 03:45+0000\n"
+"POT-Creation-Date: 2026-07-15 03:34+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -20443,77 +20443,77 @@ msgstr ""
 "<qt>Келтірілген қолданба <b>%1</b> есершоты онлайн есепшотқа "
 "байланыстырылған.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "Шығын: "
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Loss: "
 msgid "Loss: %1"
 msgstr "Шығын: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "Пайда: "
 
-#: kmymoney/views/kcategoriesview.cpp:157
+#: kmymoney/views/kcategoriesview.cpp:172
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgid "Profit: %1"
 msgstr "Пайда: "
 
-#: kmymoney/views/kcategoriesview.cpp:195
+#: kmymoney/views/kcategoriesview.cpp:210
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "'%1' санатын өзгерту"
 
-#: kmymoney/views/kcategoriesview.cpp:203
+#: kmymoney/views/kcategoriesview.cpp:218
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Санатты өзгерту..."
 
-#: kmymoney/views/kcategoriesview.cpp:217
+#: kmymoney/views/kcategoriesview.cpp:232
 #, fuzzy, kde-format
 #| msgid "Unable to modify account '%1'. Cause: %2"
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "'%1' есепшоты өзгертілмеді. Себебі: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:315
+#: kmymoney/views/kcategoriesview.cpp:330
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr "<b>%1</b> санаты <b>%2</b> санатымен алмастырылмады. Себебі: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:354
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete category <b>%1</b>?"
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "Шынымен <b>%1</b> санатын өшірмексіз бе?"
 
-#: kmymoney/views/kcategoriesview.cpp:340
-#: kmymoney/views/kcategoriesview.cpp:402
+#: kmymoney/views/kcategoriesview.cpp:355
+#: kmymoney/views/kcategoriesview.cpp:417
 #, fuzzy, kde-format
 #| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Санатты өшіру..."
 
-#: kmymoney/views/kcategoriesview.cpp:350
+#: kmymoney/views/kcategoriesview.cpp:365
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<b>%1</b> санаты өшірілмеді. Себебі: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:361
+#: kmymoney/views/kcategoriesview.cpp:376
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -20527,17 +20527,17 @@ msgstr ""
 "<b>%1</b> санатын тармақтарымен қоса өшірмексіз бе, әлде өзін ғана ма? Өзін "
 "ғана болса, бүкіл тармақтары <b>%2</b> санатының тармақтары болмақ."
 
-#: kmymoney/views/kcategoriesview.cpp:367
+#: kmymoney/views/kcategoriesview.cpp:382
 #, kde-format
 msgid "Delete all"
 msgstr "Бүкілін өшіру"
 
-#: kmymoney/views/kcategoriesview.cpp:368
+#: kmymoney/views/kcategoriesview.cpp:383
 #, kde-format
 msgid "Just the category"
 msgstr "Өзін ғана"
 
-#: kmymoney/views/kcategoriesview.cpp:398
+#: kmymoney/views/kcategoriesview.cpp:413
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -20546,14 +20546,14 @@ msgstr ""
 "<p><b>%1</b> санатың кейбір тармақтары өшірілмейді, өйткені әлі қолданыста. "
 "Олар <b>%2</b> дегеннің тармағы болмақ. Болсын ба?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:426
+#: kmymoney/views/kcategoriesview.cpp:441
 #, fuzzy, kde-format
 #| msgid "Unable to delete a sub-category of category <b>%1</b>. Reason: %2"
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "<b>%1</b> санаттың тармағы өшірілмеді. Себебі: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:436
+#: kmymoney/views/kcategoriesview.cpp:451
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "Unable to delete category '%1'. Cause: %2"
