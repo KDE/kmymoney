@@ -59,11 +59,67 @@
 >jaar</emphasis
 >. Met de cursortoetsen &Up;/&Down; kan de waarde van het geselecteerde veld verhoogd/verlaagd worden. De toetsen <keycap
 >+</keycap
+> of <keycap
+>=</keycap
 > en <keycap
 >-</keycap
-> kunnen gebruikt worden om een enkele dag te verhogen/verlagen. Maand- en jaargrenzen worden meegenomen en verhoogd/verlaagd indien noodzakelijk. Op <keycap
+> kunnen gebruikt worden om een enkele dag te verhogen/verlagen. De toetsen <keycap
+>]</keycap
+> or <keycap
+>}</keycap
+> en <keycap
+>[</keycap
+> or <keycap
+>{</keycap
+> kunnen gebruikt worden om een enkele maand te verhogen/verlagen. De toetsen <keycap
+>'</keycap
+> of <keycap
+>"</keycap
+> en <keycap
+>;</keycap
+> of <keycap
+>:</keycap
+> kunnen gebruikt worden om een enkel jaar te verhogen/verlagen. Maand- en jaargrenzen worden meegenomen en verhoogd/verlaagd indien noodzakelijk, bijv. met toets <keycap
+>+</keycap
+> om 31 januari te verhogen zal het wijzigen in 1 februari.  </para>
+
+<para
+>De volgende extra sneltoetsen kunnen ook worden gebruikt: </para>
+
+<para>
+  <itemizedlist>
+    <listitem>
+      <para
+><keycap
+>M</keycap
+> om de datum in te stellen op de eerste dag van de huidige maand</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
+>H</keycap
+> om de datum in te stellen op de laatste dag van de huidige maand</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
+>Y</keycap
+> om de datum in te stellen op de eerste dag van het huidige jaar</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
+>R</keycap
+> om de datum in te stellen op de laatste dag van het huidige jaar</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
 >T</keycap
-> drukken zal de datum op de datum van vandaag zetten. </para>
+> om de datum in te stellen op de datum van vandaag</para>
+    </listitem>
+  </itemizedlist>
+</para>
 
 <para
 >De datum kan ook gewijzigd worden met de muis. Klikken op het veld <emphasis
