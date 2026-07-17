@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-14 00:44+0000\n"
-"PO-Revision-Date: 2026-04-15 16:32+0200\n"
+"PO-Revision-Date: 2026-07-16 17:04+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -5557,8 +5557,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:4005
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "Claude"
@@ -8496,8 +8495,7 @@ msgid "SWIFT/BIC"
 msgstr "SWIFT/BIC"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:494
-#, fuzzy, kde-format
-#| msgid "Currency"
+#, kde-format
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "Numerario"
@@ -8525,12 +8523,10 @@ msgid "Accounts with no institution assigned"
 msgstr ""
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:333
-#, fuzzy, kde-format
-#| msgctxt "@info Group name for accounts with no assigned institution"
-#| msgid "No institution"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced institution"
 msgid "Unknown institution '%1'"
-msgstr "Nulle Institution"
+msgstr "Institution incognoscite '%1'"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:56
 #, kde-format
