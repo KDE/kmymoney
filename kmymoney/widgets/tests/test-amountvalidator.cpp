@@ -109,6 +109,10 @@ void AmountValidatorTest::testValidator()
                           .arg(locale, QLocale().groupSeparator(), groupSeparator);
         QSKIP(msg.toLatin1());
     }
+
+    // AmountValidator sets its locale based on the LC_MONETARY environment variable
+    // so we have to tweak that here, otherwise AmountValidator will use the system value
+    qputenv("LC_MONETARY", locale.toLatin1());
     AmountValidator m(nullptr);
     int pos = inputValue.length();
     // QCOMPARE(m->validate(inputValue, pos), static_cast<QValidator::State>(result));
