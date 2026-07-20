@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-14 00:44+0000\n"
+"POT-Creation-Date: 2026-07-20 00:44+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -978,7 +978,7 @@ msgstr "환율/가격 편집기"
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #. i18n: ectx: attribute (title), widget (QWidget, amountTab)
 #: kmymoney/dialogs/kcurrencycalculator.ui:51
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:398
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:434
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
@@ -1595,7 +1595,7 @@ msgstr "삭제"
 #: kmymoney/dialogs/keditequityentry.ui:217
 #: kmymoney/dialogs/kimportverifydlg.ui:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:330
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:403
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:408
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:340
 #: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:102
@@ -1803,6 +1803,7 @@ msgstr "상태:"
 #. i18n: ectx: property (text), widget (QToolButton, m_categoryColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_memoColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_balanceColClear)
+#. i18n: ectx: property (text), widget (QToolButton, m_feeColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_amountColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_creditDebitIndicatorColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_debitColClear)
@@ -1817,10 +1818,11 @@ msgstr "상태:"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:260
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:318
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:354
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:441
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:471
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:390
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:477
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:507
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:648
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:693
 #: kmymoney/plugins/views/reports/kreportsview.ui:95
 #: kmymoney/settings/kmymoney.kcfg:506 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
@@ -10002,7 +10004,7 @@ msgid "Export completed.\n"
 msgstr "내보내기가 완료되었습니다.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:87
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:469
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:474
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:82
 #: kmymoney/plugins/xml/xmlstorage.cpp:213
 #, kde-format
@@ -10164,7 +10166,7 @@ msgstr ""
 "날짜: '%2', 금액: '%3'.\n"
 "거래가 중단되었습니다.\n"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:254
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:259
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -10174,26 +10176,26 @@ msgstr ""
 "<center>'<b>%1</b>' 필드에 이미 이 열을 선택했습니다.</center><center>수취인 "
 "데이터를 메모 필드에 복사하려면 '예'를 클릭하십시오.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:262
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:296
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:301
 #, kde-format
 msgctxt "@item:intext No field selection"
 msgid "None"
 msgstr "없음"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:304
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:309
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
 msgstr "<i>메모 열:</i> %1"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:348
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:353
 #, kde-format
 msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
@@ -10202,7 +10204,7 @@ msgstr ""
 "<center>필드 이름을 인식할 수 없습니다.</center><center>'<b>%1</b>'</center>"
 "열 선택을 다시 입력하십시오."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:355
 #: kmymoney/plugins/csv/import/csvwizard.cpp:965
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1037
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
@@ -10213,7 +10215,7 @@ msgstr ""
 msgid "CSV import"
 msgstr "CSV 가져오기"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:369
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:374
 #, kde-format
 msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
@@ -10222,7 +10224,7 @@ msgstr ""
 "'<b>%2</b>'에서 이미 사용 중이기 때문에 열 <b>%1</b>을(를) 선택할 수 없습니"
 "다."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:393
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:398
 #, kde-format
 msgid ""
 "<center>The %1 field contains '%2'</center><center>and the %3 field contains "
@@ -10232,13 +10234,13 @@ msgstr ""
 "'%4'이(가) 들어 있습니다.</center><center>승인할 대상을 선택하십시오.</"
 "center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:400
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:405
 #, kde-format
 msgid "CSV invalid field values"
 msgstr "CSV 잘못된 필드 값"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:401
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:402
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:406
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:407
 #, kde-format
 msgid "Accept %1"
 msgstr "%1 수락"
@@ -10393,132 +10395,153 @@ msgstr "잔액 필드를 포함하는 열을 선택하십시오."
 msgid "Clear balance field selection."
 msgstr "잔액 필드 설정을 초기화합니다."
 
+#. i18n: ectx: property (text), widget (QLabel, labelBnk_fee)
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:361
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
+#, kde-format
+msgid "Fee"
+msgstr "요금"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, m_feeCol)
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:380
+#, fuzzy, kde-format
+#| msgid "Select column containing date field."
+msgid "Select column containing fee field."
+msgstr "날짜 필드를 포함하는 열을 선택하십시오."
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, m_feeColClear)
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:387
+#, fuzzy, kde-format
+#| msgid "Clear payee field selection."
+msgid "Clear fee field selection."
+msgstr "수취인 필드 선택을 삭제합니다."
+
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:409
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:445
 #, kde-format
 msgctxt "location of amount column"
 msgid "Amount"
 msgstr "금액"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_amountCol)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:428
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:464
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:118
 #, kde-format
 msgid "Select column containing amount field."
 msgstr "금액 필드를 포함하는 열을 선택하십시오."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:474
 #, kde-format
 msgid "Clear amount field selection."
 msgstr "금액 필드 설정을 초기화합니다."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:484
 #, kde-format
 msgid "Debit/Credit Indicator"
 msgstr "차변/대변 표시기"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_creditDebitIndicatorCol)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:461
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:497
 #, kde-format
 msgid "Select column containing indicator field."
 msgstr "차변/대변 표시기 필드를 포함하는 열을 선택하십시오."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:504
 #, kde-format
 msgid "Clear indicator field selection."
 msgstr "차변/대변 표시기 필드 선택을 삭제합니다."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:514
 #, kde-format
 msgid "Indicator for Credit"
 msgstr "대출 표시기"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_creditIndicator)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:488
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:524
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a credit."
 msgstr "이 금액이 대출임을 알리는 문자열을 입력하십시오."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credit)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:498
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:534
 #, kde-format
 msgid "Indicator for Debit"
 msgstr "부채 표시기"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_debitIndicator)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:508
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:544
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a debit."
 msgstr "이 금액이 부채임을 알리는 문자열을 입력하십시오."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_opposite)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:518
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:554
 #, kde-format
 msgid "Opposite signs"
 msgstr "부호 반전"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_oppositeSigns)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:534
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:570
 #, kde-format
 msgid "Select if your amount column has signs improperly set."
 msgstr "금액 열에 잘못 설정된 부호가 있다면 선택하십시오."
 
 #. i18n: ectx: attribute (title), widget (QWidget, debitCreditTab)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:563
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:599
 #, kde-format
 msgid "Debit/credit"
 msgstr "차변/대변"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debits)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:577
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:613
 #, kde-format
 msgctxt "location of debit column"
 msgid "Debit"
 msgstr "차변"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_debitCol)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:599
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:635
 #, kde-format
 msgid "Select column containing debit field."
 msgstr "차변 필드를 포함하는 열을 선택하십시오."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_debitColClear)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:609
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:645
 #, kde-format
 msgid "Clear debit field selection."
 msgstr "차변 필드 선택을 삭제합니다."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credits)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:625
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:661
 #, kde-format
 msgctxt "location of credit column"
 msgid "Credit"
 msgstr "대변"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_creditCol)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:644
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:680
 #, kde-format
 msgid "Select column containing credit field."
 msgstr "대변 필드를 포함하는 열을 선택하십시오."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditColClear)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:654
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:690
 #, kde-format
 msgid "Clear credit field selection."
 msgstr "대변 필드 선택을 삭제합니다."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:719
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:755
 #, kde-format
 msgid "Clear all selected column and indicator entries"
 msgstr "모든 열과 표시기 항목 지우기"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:722
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:758
 #, kde-format
 msgctxt "Clear all column assignments"
 msgid "Clear all"
@@ -10544,37 +10567,37 @@ msgstr ""
 "할 수 없습니다.<br>그래서 해당 프로필을 사용할 수 없습니다. <br>삭제하시겠습"
 "니까?</center>"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1565
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1582
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
 msgstr "buy,구매"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1568
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1585
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
 msgstr "sell,repurchase,판매,재구매"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1571
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
 msgstr "reinvest,reinv,re-inv,재투자"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1574
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1591
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "dividend,배당금"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1577
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
 msgstr "interest,income,이자,수입"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1580
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1597
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid ""
@@ -10583,7 +10606,7 @@ msgstr ""
 "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry,추"
 "가,주식 배당금,배당 재투자,이체,재등록,분개"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1584
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1601
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
@@ -10923,11 +10946,6 @@ msgstr "이름 바꾸기"
 #, kde-format
 msgid "Select your importing profile here."
 msgstr "여기에서 가져올 프로필을 선택하십시오."
-
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
-#, kde-format
-msgid "Fee"
-msgstr "요금"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:186
 #, kde-format
