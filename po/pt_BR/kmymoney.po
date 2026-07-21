@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-20 00:44+0000\n"
-"PO-Revision-Date: 2026-07-05 07:00-0300\n"
+"PO-Revision-Date: 2026-07-20 07:05-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -10414,17 +10414,15 @@ msgstr "Taxa"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_feeCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:380
-#, fuzzy, kde-format
-#| msgid "Select column containing date field."
+#, kde-format
 msgid "Select column containing fee field."
-msgstr "Selecione a coluna que contém o campo data."
+msgstr "Selecione a coluna que contém o campo taxa."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_feeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:387
-#, fuzzy, kde-format
-#| msgid "Clear payee field selection."
+#, kde-format
 msgid "Clear fee field selection."
-msgstr "Limpar a seleção do campo beneficiário."
+msgstr "Limpar a seleção do campo taxa."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:445

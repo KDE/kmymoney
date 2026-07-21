@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-20 00:44+0000\n"
-"PO-Revision-Date: 2026-07-05 06:27+0200\n"
+"PO-Revision-Date: 2026-07-20 07:04+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -10174,17 +10174,15 @@ msgstr "გადასახადი"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_feeCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:380
-#, fuzzy, kde-format
-#| msgid "Select column containing date field."
+#, kde-format
 msgid "Select column containing fee field."
-msgstr "აირჩიეთ სვეტი, რომელიც თარიღის ველს შეიცავს."
+msgstr "აირჩიეთ სვეტი, რომელიც საკომისიოს ველს შეიცავს."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_feeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:387
-#, fuzzy, kde-format
-#| msgid "Clear payee field selection."
+#, kde-format
 msgid "Clear fee field selection."
-msgstr "მიმღების ველის არჩევნის გასუფთავება."
+msgstr "საკომისიოს ველის არჩევნის გასუფთავება."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:445
