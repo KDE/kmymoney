@@ -10117,17 +10117,15 @@ msgstr "费用"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_feeCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:380
-#, fuzzy, kde-format
-#| msgid "Select column containing date field."
+#, kde-format
 msgid "Select column containing fee field."
-msgstr "选择含有日期字段的列。"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_feeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:387
-#, fuzzy, kde-format
-#| msgid "Clear payee field selection."
+#, kde-format
 msgid "Clear fee field selection."
-msgstr "清空收款人字段选区。"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:445
