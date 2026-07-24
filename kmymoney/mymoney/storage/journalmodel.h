@@ -159,6 +159,7 @@ public:
         Amount,
         Value,
         Balance,
+        Memo,
         // insert new columns above this line
         MaxColumns,
     };

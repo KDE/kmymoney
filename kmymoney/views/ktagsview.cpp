@@ -95,6 +95,7 @@ public:
         m_updateAction->setEnabled(false);
 
         ui->m_register->setSingleLineDetailRole(eMyMoney::Model::TransactionCounterAccountRole);
+        ui->m_register->setColumnSelectorGroupName(QLatin1String("TagLedger"));
         ui->m_tagsList->setContextMenuPolicy(Qt::CustomContextMenu);
 
         ui->m_filterBox->addItem(i18nc("@item Show all tags", "All"), ItemRenameProxyModel::eAllItem);

@@ -78,6 +78,7 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
         JournalModel::Column::Amount,
         JournalModel::Column::Value,
         JournalModel::Column::Balance,
+        JournalModel::Column::Memo,
     };
     d->ui->m_ledgerView->setColumnsHidden(columns);
     columns = {

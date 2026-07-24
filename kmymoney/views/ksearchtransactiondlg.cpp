@@ -92,6 +92,7 @@ public:
             JournalModel::Column::Amount,
             JournalModel::Column::Value,
             JournalModel::Column::Balance,
+            JournalModel::Column::Memo,
         };
         ui.m_ledgerView->setColumnsHidden(columns);
         columns = {

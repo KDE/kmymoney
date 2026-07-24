@@ -69,6 +69,7 @@ struct JournalModel::Private {
               {Value, i18nc("@title:column", "Value")},
               {Balance, i18nc("@title:column", "Balance")},
               {EntryDate, i18nc("@title:column Entry date", "Entry")},
+              {Memo, i18nc("@title:column", "Memo")},
           }))
         , extendedHeaderData(QHash<Column, QString>({
               {Number, i18nc("@title:column Cheque Number (ext)", "Number")},
@@ -725,6 +726,15 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
         case EntryDate:
             return MyMoneyUtils::formatDate(transaction.entryDate());
+
+        case Memo: {
+            QString memo(split.memo());
+            // remove empty lines
+            memo.replace(QStringLiteral("\n\n"), QStringLiteral("\n"));
+            // replace '\n' with ", "
+            memo.replace(QStringLiteral("\n"), QStringLiteral(", "));
+            return memo;
+        }
         }
         break;
 

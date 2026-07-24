@@ -118,6 +118,7 @@ public:
         const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
         const auto showAllSplits = LedgerViewSettings::instance()->showAllSplits() & showLedgerLens;
         const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
+        const auto haveMemoColumn = !m_view->isColumnHidden(JournalModel::Memo);
 
         if (index.column() == JournalModel::Column::Detail) {
             const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
@@ -128,7 +129,9 @@ public:
                     rc.lines << index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString();
                     rc.lines << index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString();
                     rc.lines << index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString();
-                    rc.lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
+                    if (!haveMemoColumn) {
+                        rc.lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
+                    }
                 } else {
                     rc.lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
                 }
@@ -151,7 +154,7 @@ public:
                             ++rc.italicStartLine;
                         }
                     }
-                    const auto memo = index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
+                    const auto memo = haveMemoColumn ? QString() : index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
                     if (!memo.isEmpty()) {
                         rc.lines << memo;
                         ++rc.italicStartLine;
@@ -193,11 +196,13 @@ public:
                         rc.lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
                     }
                     rc.lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
-                    rc.lines << index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
+                    if (!haveMemoColumn) {
+                        rc.lines << index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
+                    }
                     addTags();
 
                 } else {
-                    if (rc.lines.at(0).isEmpty()) {
+                    if (!haveMemoColumn && rc.lines.at(0).isEmpty()) {
                         rc.lines.clear();
                         rc.lines << index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
                     }
