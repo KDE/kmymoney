@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-20 00:44+0000\n"
+"POT-Creation-Date: 2026-07-25 00:45+0000\n"
 "PO-Revision-Date: 2025-10-01 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -6372,7 +6372,7 @@ msgstr "您要新增 <b>%1</b> 為付款者/收款人嗎？"
 msgid "Unable to add payee"
 msgstr "無法新增收款人"
 
-#: kmymoney/kmymoneyutils.cpp:581 kmymoney/views/ktagsview.cpp:644
+#: kmymoney/kmymoneyutils.cpp:581 kmymoney/views/ktagsview.cpp:645
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New Tag"
@@ -8786,7 +8786,7 @@ msgid "Split transaction"
 msgstr "分割交易"
 
 #: kmymoney/mymoney/splitmodel.cpp:117
-#: kmymoney/mymoney/storage/journalmodel.cpp:202
+#: kmymoney/mymoney/storage/journalmodel.cpp:203
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1091
 #, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8799,14 +8799,14 @@ msgid "Not reconciled"
 msgstr "未對帳"
 
 #: kmymoney/mymoney/statusmodel.cpp:35
-#: kmymoney/mymoney/storage/journalmodel.cpp:93
+#: kmymoney/mymoney/storage/journalmodel.cpp:94
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/mymoney/statusmodel.cpp:40
-#: kmymoney/mymoney/storage/journalmodel.cpp:95
+#: kmymoney/mymoney/storage/journalmodel.cpp:96
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
@@ -8819,7 +8819,7 @@ msgid "Reconciled"
 msgstr "已對帳"
 
 #: kmymoney/mymoney/statusmodel.cpp:45
-#: kmymoney/mymoney/storage/journalmodel.cpp:97
+#: kmymoney/mymoney/storage/journalmodel.cpp:98
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
@@ -9114,136 +9114,143 @@ msgctxt "@title:column Entry date"
 msgid "Entry"
 msgstr "項目順序"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:74
+#: kmymoney/mymoney/storage/journalmodel.cpp:72
+#, fuzzy, kde-format
+#| msgid "Memo"
+msgctxt "@title:column"
+msgid "Memo"
+msgstr "備忘"
+
+#: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, fuzzy, kde-format
 #| msgid "Number"
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
 msgstr "編號"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:75
+#: kmymoney/mymoney/storage/journalmodel.cpp:76
 #, fuzzy, kde-format
 #| msgid "Reconciliation view"
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
 msgstr "對帳檢視"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:76
+#: kmymoney/mymoney/storage/journalmodel.cpp:77
 #, fuzzy, kde-format
 #| msgid "Amount entered"
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
 msgstr "輸入的金額"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:77
+#: kmymoney/mymoney/storage/journalmodel.cpp:78
 #, fuzzy, kde-format
 #| msgid "Entry order"
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
 msgstr "項目順序"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:80
+#: kmymoney/mymoney/storage/journalmodel.cpp:81
 #, fuzzy, kde-format
 #| msgid "Account Balances by Institution"
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
 msgstr "各機構的帳戶餘額"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:107
+#: kmymoney/mymoney/storage/journalmodel.cpp:108
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
 msgstr "未對帳"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:109
+#: kmymoney/mymoney/storage/journalmodel.cpp:110
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
 msgstr "已清算"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:111
+#: kmymoney/mymoney/storage/journalmodel.cpp:112
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "Reconciled"
 msgstr "已對帳"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:113
+#: kmymoney/mymoney/storage/journalmodel.cpp:114
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "Frozen"
 msgstr "已凍結"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:122
+#: kmymoney/mymoney/storage/journalmodel.cpp:123
 #, fuzzy, kde-format
 #| msgid "Add shares"
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
 msgstr "新增股票"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:124
+#: kmymoney/mymoney/storage/journalmodel.cpp:125
 #, fuzzy, kde-format
 #| msgid "Remove shares"
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
 msgstr "移除股票"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:126
+#: kmymoney/mymoney/storage/journalmodel.cpp:127
 #, fuzzy, kde-format
 #| msgid "Buy shares"
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
 msgstr "買股票"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:128
+#: kmymoney/mymoney/storage/journalmodel.cpp:129
 #, fuzzy, kde-format
 #| msgid "Sell shares"
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
 msgstr "賣股票"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:130
+#: kmymoney/mymoney/storage/journalmodel.cpp:131
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:45
 #, kde-format
 msgid "Dividend"
 msgstr "紅利"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:132
+#: kmymoney/mymoney/storage/journalmodel.cpp:133
 #, kde-format
 msgid "Reinvest Dividend"
 msgstr "紅利再投資"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:134
+#: kmymoney/mymoney/storage/journalmodel.cpp:135
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:47
 #, kde-format
 msgid "Yield"
 msgstr "產量"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:136
+#: kmymoney/mymoney/storage/journalmodel.cpp:137
 #, fuzzy, kde-format
 #| msgid "Split shares"
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "分割股票"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:138
+#: kmymoney/mymoney/storage/journalmodel.cpp:139
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
 msgstr "利息收入"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:140
+#: kmymoney/mymoney/storage/journalmodel.cpp:141
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "未知"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgid "Multiple fee categories"
 msgstr "支出類別"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, fuzzy, kde-format
 #| msgid "Interest category"
 msgid "Multiple interest categories"
@@ -15628,7 +15635,7 @@ msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "您要儲存 <b>%1</b> 的變更嗎？"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:147
-#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:292
 #, kde-format
 msgid "Save changes"
 msgstr "儲存變更"
@@ -19879,14 +19886,14 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "%1 的複本"
 
-#: kmymoney/views/journaldelegate.cpp:363
+#: kmymoney/views/journaldelegate.cpp:368
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
 msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] ""
 
-#: kmymoney/views/journaldelegate.cpp:368
+#: kmymoney/views/journaldelegate.cpp:373
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in a closed account."
 msgctxt "@info Unable to edit "
@@ -19894,21 +19901,21 @@ msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr "無法在關閉的帳戶中建立交易。"
 
-#: kmymoney/views/journaldelegate.cpp:370
+#: kmymoney/views/journaldelegate.cpp:375
 #, fuzzy, kde-format
 #| msgid "Storing transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "儲存交易中"
 
-#: kmymoney/views/journaldelegate.cpp:384
+#: kmymoney/views/journaldelegate.cpp:389
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
-#: kmymoney/views/journaldelegate.cpp:576
+#: kmymoney/views/journaldelegate.cpp:581
 #, kde-format
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
@@ -21238,7 +21245,7 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "未使用"
 
-#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:185
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
@@ -21253,12 +21260,12 @@ msgctxt ""
 msgid "Add"
 msgstr "新增"
 
-#: kmymoney/views/kpayeesview_p.h:365 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:365 kmymoney/views/ktagsview.cpp:215
 #, kde-format
 msgid "Balance: %1"
 msgstr "餘額：%1"
 
-#: kmymoney/views/kpayeesview_p.h:409 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:409 kmymoney/views/ktagsview.cpp:259
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "餘額：%1%2"
@@ -21405,7 +21412,7 @@ msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
 msgstr "搜尋交易"
 
-#: kmymoney/views/ksearchtransactiondlg.cpp:111
+#: kmymoney/views/ksearchtransactiondlg.cpp:112
 #, kde-format
 msgid "Found %1 matching splits"
 msgid_plural "Found %1 matching splits"
@@ -21430,43 +21437,43 @@ msgctxt "@action:button Update button in tags view"
 msgid "Update"
 msgstr "更新"
 
-#: kmymoney/views/ktagsview.cpp:100
+#: kmymoney/views/ktagsview.cpp:101
 #, kde-format
 msgctxt "@item Show all tags"
 msgid "All"
 msgstr "全部"
 
-#: kmymoney/views/ktagsview.cpp:101
+#: kmymoney/views/ktagsview.cpp:102
 #, kde-format
 msgctxt "@item Show only used tags"
 msgid "Used"
 msgstr "已使用"
 
-#: kmymoney/views/ktagsview.cpp:102
+#: kmymoney/views/ktagsview.cpp:103
 #, kde-format
 msgctxt "@item Show only unused tags"
 msgid "Unused"
 msgstr "未使用"
 
-#: kmymoney/views/ktagsview.cpp:103
+#: kmymoney/views/ktagsview.cpp:104
 #, fuzzy, kde-format
 #| msgid "Open"
 msgctxt "@item Show only opened tags"
 msgid "Opened"
 msgstr "開啟"
 
-#: kmymoney/views/ktagsview.cpp:104
+#: kmymoney/views/ktagsview.cpp:105
 #, kde-format
 msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "已關閉"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "您要儲存 <b>%1</b> 的變更嗎？"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:378
 #, fuzzy, kde-format
 #| msgid ""
 #| "A payee with the name '%1' already exists. It is not advisable to have "
@@ -21480,25 +21487,25 @@ msgstr ""
 "名為 %1 的收款人已存在。不能有多個收款人使用相同的名稱。您要重新命名此收款人"
 "嗎？"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:382
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "重複的標籤名稱"
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:405 kmymoney/views/ktagsview.cpp:529
 #, fuzzy, kde-format
 #| msgid "Unable to modify payee"
 msgid "Unable to modify tag"
 msgstr "無法變更收款人"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, fuzzy, kde-format
 #| msgid "Unable to reassign payee of transaction/split"
 msgid "Unable to reassign tag of transaction/split"
 msgstr "無法重新指定收款人給交易或分割"
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, fuzzy, kde-format
 #| msgid "Unable to remove payee(s)"
 msgid "Unable to remove tag(s)"
@@ -21532,12 +21539,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "選擇要作為樣本使用的交易。"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:148
+#: kmymoney/views/ktransactionselectdlg.cpp:149
 #, kde-format
 msgid "Merge Transactions"
 msgstr "合併交易"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:150
+#: kmymoney/views/ktransactionselectdlg.cpp:151
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21546,7 +21553,7 @@ msgid ""
 "the other one press the exchange button on the right."
 msgstr ""
 
-#: kmymoney/views/ktransactionselectdlg.cpp:156
+#: kmymoney/views/ktransactionselectdlg.cpp:157
 #, fuzzy, kde-format
 #| msgid "Unable to match the selected transactions"
 msgctxt "@info:tooltip Exchange transactions about to merge"

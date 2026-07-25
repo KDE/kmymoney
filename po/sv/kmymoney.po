@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-20 00:44+0000\n"
+"POT-Creation-Date: 2026-07-25 00:45+0000\n"
 "PO-Revision-Date: 2026-07-20 07:33+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -6338,7 +6338,7 @@ msgstr "<qt>Vill du lägga till <b>%1</b> som utbetalare och mottagare?</qt>"
 msgid "Unable to add payee"
 msgstr "Kan inte lägga till betalningsmottagare"
 
-#: kmymoney/kmymoneyutils.cpp:581 kmymoney/views/ktagsview.cpp:644
+#: kmymoney/kmymoneyutils.cpp:581 kmymoney/views/ktagsview.cpp:645
 #, kde-format
 msgid "New Tag"
 msgstr "Ny etikett"
@@ -8692,7 +8692,7 @@ msgid "Split transaction"
 msgstr "Dela transaktion"
 
 #: kmymoney/mymoney/splitmodel.cpp:117
-#: kmymoney/mymoney/storage/journalmodel.cpp:202
+#: kmymoney/mymoney/storage/journalmodel.cpp:203
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1091
 #, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8705,14 +8705,14 @@ msgid "Not reconciled"
 msgstr "Inte avstämd"
 
 #: kmymoney/mymoney/statusmodel.cpp:35
-#: kmymoney/mymoney/storage/journalmodel.cpp:93
+#: kmymoney/mymoney/storage/journalmodel.cpp:94
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/mymoney/statusmodel.cpp:40
-#: kmymoney/mymoney/storage/journalmodel.cpp:95
+#: kmymoney/mymoney/storage/journalmodel.cpp:96
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
@@ -8725,7 +8725,7 @@ msgid "Reconciled"
 msgstr "Avstämd"
 
 #: kmymoney/mymoney/statusmodel.cpp:45
-#: kmymoney/mymoney/storage/journalmodel.cpp:97
+#: kmymoney/mymoney/storage/journalmodel.cpp:98
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
@@ -8986,125 +8986,132 @@ msgctxt "@title:column Entry date"
 msgid "Entry"
 msgstr "Inmatning"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:74
+#: kmymoney/mymoney/storage/journalmodel.cpp:72
+#, fuzzy, kde-format
+#| msgid "Memo"
+msgctxt "@title:column"
+msgid "Memo"
+msgstr "Anteckning"
+
+#: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, kde-format
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
 msgstr "Nummer"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:75
+#: kmymoney/mymoney/storage/journalmodel.cpp:76
 #, kde-format
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
 msgstr "Avstämning"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:76
+#: kmymoney/mymoney/storage/journalmodel.cpp:77
 #, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
 msgstr "Kostnadsställe"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:77
+#: kmymoney/mymoney/storage/journalmodel.cpp:78
 #, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
 msgstr "Inmatningsdatum"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:80
+#: kmymoney/mymoney/storage/journalmodel.cpp:81
 #, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
 msgstr "Kontobehållning eller värdepappersenheter"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:107
+#: kmymoney/mymoney/storage/journalmodel.cpp:108
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
 msgstr "Inte avstämd"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:109
+#: kmymoney/mymoney/storage/journalmodel.cpp:110
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
 msgstr "Kontrollerad"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:111
+#: kmymoney/mymoney/storage/journalmodel.cpp:112
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "Reconciled"
 msgstr "Avstämd"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:113
+#: kmymoney/mymoney/storage/journalmodel.cpp:114
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "Frozen"
 msgstr "Frusen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:122
+#: kmymoney/mymoney/storage/journalmodel.cpp:123
 #, kde-format
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
 msgstr "Lägg till värdepapper"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:124
+#: kmymoney/mymoney/storage/journalmodel.cpp:125
 #, kde-format
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
 msgstr "Ta bort värdepapper"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:126
+#: kmymoney/mymoney/storage/journalmodel.cpp:127
 #, kde-format
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
 msgstr "Köp värdepapper"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:128
+#: kmymoney/mymoney/storage/journalmodel.cpp:129
 #, kde-format
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
 msgstr "Sälj värdepapper"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:130
+#: kmymoney/mymoney/storage/journalmodel.cpp:131
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:45
 #, kde-format
 msgid "Dividend"
 msgstr "Utdelning"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:132
+#: kmymoney/mymoney/storage/journalmodel.cpp:133
 #, kde-format
 msgid "Reinvest Dividend"
 msgstr "Återinvestera utdelning"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:134
+#: kmymoney/mymoney/storage/journalmodel.cpp:135
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:47
 #, kde-format
 msgid "Yield"
 msgstr "Avkastning"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:136
+#: kmymoney/mymoney/storage/journalmodel.cpp:137
 #, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "Värdepapperssplit"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:138
+#: kmymoney/mymoney/storage/journalmodel.cpp:139
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
 msgstr "Ränteinkomst"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:140
+#: kmymoney/mymoney/storage/journalmodel.cpp:141
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, kde-format
 msgid "Multiple fee categories"
 msgstr "Flera avgiftskategorier"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:236
+#: kmymoney/mymoney/storage/journalmodel.cpp:237
 #, kde-format
 msgid "Multiple interest categories"
 msgstr "Flera räntekategori"
@@ -15419,7 +15426,7 @@ msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Vill du spara ändringarna av <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:147
-#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:292
 #, kde-format
 msgid "Save changes"
 msgstr "Spara ändringar"
@@ -19653,7 +19660,7 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Tom anteckning"
 
-#: kmymoney/views/journaldelegate.cpp:363
+#: kmymoney/views/journaldelegate.cpp:368
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19661,7 +19668,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] "<qt>Stängt konto:<br><br>%2</qt>"
 msgstr[1] "Stängda konton:<br><br>%2</qt>"
 
-#: kmymoney/views/journaldelegate.cpp:368
+#: kmymoney/views/journaldelegate.cpp:373
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
@@ -19670,13 +19677,13 @@ msgstr ""
 "KMyMoney stöder inte att redigera transaktioner som refererar till stängda "
 "konton."
 
-#: kmymoney/views/journaldelegate.cpp:370
+#: kmymoney/views/journaldelegate.cpp:375
 #, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Förhindra redigering av transaktioner"
 
-#: kmymoney/views/journaldelegate.cpp:384
+#: kmymoney/views/journaldelegate.cpp:389
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
@@ -19685,7 +19692,7 @@ msgstr ""
 "Den nuvarande implementeringen kan inte ändra flera transaktioner i den här "
 "vyn."
 
-#: kmymoney/views/journaldelegate.cpp:576
+#: kmymoney/views/journaldelegate.cpp:581
 #, kde-format
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
@@ -20955,7 +20962,7 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "Oanvända"
 
-#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:185
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
@@ -20969,12 +20976,12 @@ msgctxt ""
 msgid "Add"
 msgstr "Lägg till"
 
-#: kmymoney/views/kpayeesview_p.h:365 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:365 kmymoney/views/ktagsview.cpp:215
 #, kde-format
 msgid "Balance: %1"
 msgstr "Behållning: %1"
 
-#: kmymoney/views/kpayeesview_p.h:409 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:409 kmymoney/views/ktagsview.cpp:259
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Behållning: %1 %2"
@@ -21125,7 +21132,7 @@ msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
 msgstr "Sök transaktioner"
 
-#: kmymoney/views/ksearchtransactiondlg.cpp:111
+#: kmymoney/views/ksearchtransactiondlg.cpp:112
 #, kde-format
 msgid "Found %1 matching splits"
 msgid_plural "Found %1 matching splits"
@@ -21150,42 +21157,42 @@ msgctxt "@action:button Update button in tags view"
 msgid "Update"
 msgstr "Uppdatera"
 
-#: kmymoney/views/ktagsview.cpp:100
+#: kmymoney/views/ktagsview.cpp:101
 #, kde-format
 msgctxt "@item Show all tags"
 msgid "All"
 msgstr "Alla"
 
-#: kmymoney/views/ktagsview.cpp:101
+#: kmymoney/views/ktagsview.cpp:102
 #, kde-format
 msgctxt "@item Show only used tags"
 msgid "Used"
 msgstr "Använda"
 
-#: kmymoney/views/ktagsview.cpp:102
+#: kmymoney/views/ktagsview.cpp:103
 #, kde-format
 msgctxt "@item Show only unused tags"
 msgid "Unused"
 msgstr "Oanvända"
 
-#: kmymoney/views/ktagsview.cpp:103
+#: kmymoney/views/ktagsview.cpp:104
 #, kde-format
 msgctxt "@item Show only opened tags"
 msgid "Opened"
 msgstr "Öppnade"
 
-#: kmymoney/views/ktagsview.cpp:104
+#: kmymoney/views/ktagsview.cpp:105
 #, kde-format
 msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Stängda"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Vill du spara ändringarna av <b>%1</b>?"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:378
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -21196,23 +21203,23 @@ msgstr ""
 "etiketter med samma identifikationsnamn. Är du säker på att du vill byta "
 "namn på etiketten?"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:382
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Duplicerad etikettnamn"
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:405 kmymoney/views/ktagsview.cpp:529
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Kan inte ändra etikett"
 
-#: kmymoney/views/ktagsview.cpp:816
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Kan inte omfördela etikett för transaktion eller delning"
 
-#: kmymoney/views/ktagsview.cpp:828
+#: kmymoney/views/ktagsview.cpp:829
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Kan inte ta bort etikett(er)"
@@ -21241,12 +21248,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Markera transaktionen som ska användas som mall."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:148
+#: kmymoney/views/ktransactionselectdlg.cpp:149
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Slå ihop transaktioner"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:150
+#: kmymoney/views/ktransactionselectdlg.cpp:151
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21258,7 +21265,7 @@ msgstr ""
 "värden kommer att användas i den resulterande sammanfogade transaktionen. Om "
 "du vill använda den andra, tryck på bytesknappen till höger."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:156
+#: kmymoney/views/ktransactionselectdlg.cpp:157
 #, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
