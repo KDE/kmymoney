@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-25 00:45+0000\n"
-"PO-Revision-Date: 2026-07-20 06:48+0200\n"
+"PO-Revision-Date: 2026-07-25 07:27+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -902,7 +902,7 @@ msgstr "prazno"
 msgid ""
 "<p>Memo changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
 msgstr ""
-"<p>Spremenjena opomba.<br/>&nbsp;&nbsp;&nbsp;Stara: <b>%1</b>, Nova: <b>%2</"
+"<p>Spremenjen zapisek.<br/>&nbsp;&nbsp;&nbsp;Stari: <b>%1</b>, Novi: <b>%2</"
 "b></p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:138
@@ -4477,15 +4477,15 @@ msgid ""
 "used otherwise the memos will not be considered when the transaction is "
 "autofilled."
 msgstr ""
-"Če je ta možnost odkljukana, se bodo uporabile opombe zapisov iz prejšnje "
-"transakcije sicer pa opombe ne bodo upoštevane, za samodejno polnjenje "
+"Če je ta možnost odkljukana, se bodo uporabili zapiski iz prejšnje "
+"transakcije sicer pa zapiski ne bodo upoštevani za samodejno polnjenje "
 "transakcije."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFillUseMemos)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:492
 #, kde-format
 msgid "Use memos from previous transaction"
-msgstr "Uporabi opombe iz prejšnje transakcije"
+msgstr "Uporabi zapiske iz prejšnje transakcije"
 
 #. i18n: ectx: attribute (title), widget (QWidget, import)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:519
@@ -4513,7 +4513,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:556
 #, kde-format
 msgid "Keep original payee information in memo"
-msgstr "Podatke o izvirnem prejemniku plačila hranite v opombah"
+msgstr "Podatke o izvirnem prejemniku plačila hrani v zapisku"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:564
@@ -4525,13 +4525,13 @@ msgstr "Izklopljeno"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:569
 #, kde-format
 msgid "Append to memo"
-msgstr "Dodaj v opombo na konec"
+msgstr "Dodaj v zapisku na konec"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_KeepOriginalPayeeInfo)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:574
 #, kde-format
 msgid "Prepend to memo"
-msgstr "Dodaj v opombo na začetek"
+msgstr "Dodaj v zapisku na začetek"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:613
@@ -8686,7 +8686,7 @@ msgstr "Kategorija"
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
-msgstr "Opomba"
+msgstr "Zapisek"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
 #, kde-format
@@ -9007,11 +9007,10 @@ msgid "Entry"
 msgstr "Vnos"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memo"
-msgstr "Opomba"
+msgstr "Zapisek"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, kde-format
@@ -10086,7 +10085,7 @@ msgstr "Račun"
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
-msgstr "Opomba"
+msgstr "Zapisek"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:114
 #: kmymoney/plugins/csv/export/csvwriter.cpp:120
@@ -10143,7 +10142,7 @@ msgstr "deljena-kategorija"
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
-msgstr "deljena-opomba"
+msgstr "deljeniZapisek"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:257
 #, kde-format
@@ -10170,7 +10169,7 @@ msgid ""
 "'Yes'.</center>"
 msgstr ""
 "<center>Polje '<b>%1</b>' ima že izbrano to polje.</center><center>Če želite "
-"kopirati podatke o prejemniku v polje vsebine, kliknite 'Da'.</center>"
+"kopirati podatke o prejemniku v polje zapiska, kliknite 'Da'.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:262
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:189
@@ -10189,7 +10188,7 @@ msgstr "Noben"
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
-msgstr "<i>Stolpci opomb:</i> %1"
+msgstr "<i>Stolpci zapiskov:</i> %1"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:353
 #, kde-format
@@ -10346,13 +10345,13 @@ msgstr "Očisti izbiro polja kategorije."
 #: kmymoney/views/newtransactionform.ui:124
 #, kde-format
 msgid "Memo"
-msgstr "Opomba"
+msgstr "Zapisek"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_memoCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:289
 #, kde-format
 msgid "Select column containing memo field."
-msgstr "Izberite stolpce, ki vsebuje polje opombe."
+msgstr "Izberite stolpce, ki vsebuje polje zapiska."
 
 #. i18n: ectx: property (text), widget (QLabel, m_currentMemoColumns)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:305
@@ -10364,7 +10363,7 @@ msgstr "Izbira"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:315
 #, kde-format
 msgid "Clear memo field selection."
-msgstr "Očisti izbiro polja opombe."
+msgstr "Očisti izbiro polja zapiska."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkBalance)
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
@@ -10948,7 +10947,7 @@ msgid ""
 "</center>"
 msgstr ""
 "<center>V polju '<b>%1</b>' je ta stolpec že izbran.</center><center>Če "
-"želite te podatke kopirati v polje beležke, kliknite 'Da'.</center>"
+"želite te podatke kopirati v polje zapiska, kliknite 'Da'.</center>"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:388
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:134
@@ -11174,7 +11173,7 @@ msgid ""
 "More than one column may be entered successively.\n"
 "May also be selected to contain a copy of the type or name column."
 msgstr ""
-"Izberite stolpec, ki vsebuje polje opombe.\n"
+"Izberite stolpec, ki vsebuje polje zapiska.\n"
 "Možno je vnesti več stolpcev zaporedoma.\n"
 "Stolpec je lahko je izbran tudi tako, da vsebuje kopijo stolpca vrste ali "
 "imena."
@@ -12411,8 +12410,8 @@ msgid ""
 "regular expression for payee and memo extraction. The option will not be "
 "activated."
 msgstr ""
-"Izbrali ste izvlek prejemnika plačila iz polja z opombo, a niste navedli "
-"regularnega izraza za izvlek prejemnikov plačil in opombe. Ta možnost ne bo "
+"Izbrali ste izvlek prejemnika plačila iz polja z zapiskom, a niste navedli "
+"regularnega izraza za izvlek prejemnikov plačil in zapiska. Ta možnost ne bo "
 "aktivirana."
 
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:88
@@ -12431,7 +12430,7 @@ msgstr "Uporabite polje prejemnika plačila, kot ga je določila institucija"
 #, kde-format
 msgid "Extract payee from memo field using regular expressions"
 msgstr ""
-"Izvleci prejemnika plačila iz polja opombe z uporabo regularnih izrazov"
+"Izvleci prejemnika plačila iz polja zapiska z uporabo regularnih izrazov"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:104
@@ -12506,7 +12505,7 @@ msgid ""
 "been inserted between multiple purpose fields of the transaction.</p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p>Odstranite prelome vrstic v polju opomb, ki so bili "
+"<html><head/><body><p>Odstranite prelome vrstic v polju zapiska, ki so bili "
 "vstavljeni med več namenskimi polji transakcije.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_removeLineBreaksFromMemo)
@@ -12527,7 +12526,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
 #, kde-format
 msgid "Remove line breaks from memo field"
-msgstr "Odstranite prelome vrstic iz polja opomb"
+msgstr "Odstrani prelome vrstic iz polja zapiska"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:218
@@ -12537,13 +12536,13 @@ msgid ""
 "to the memo.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Dodaj dodatne podatke o plačniku iz transakcije v "
-"opombe.</p></body></html>"
+"zapisek.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:221
 #, kde-format
 msgid "Include the payee details in memo"
-msgstr "Vključi podrobnosti o plačniku med opombe"
+msgstr "Vključi podrobnosti o plačniku v zapisek"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, MapAccountWizard)
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBMapAccount)
@@ -18188,7 +18187,7 @@ msgstr "<p>Izberite to možnost, da za prikaz stolpca Številka</p>"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:142
 #, kde-format
 msgid "<p>Select this option to show the Memo column</p>"
-msgstr "<p>Izberite to možnost, da za prikaz stolpca Opomba</p>"
+msgstr "<p>Izberite to možnost, da za prikaz stolpca Zapisek</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkPayee)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:161
@@ -18832,8 +18831,8 @@ msgstr ""
 #, kde-format
 msgid "When auto fill with previous transaction data use the memos"
 msgstr ""
-"Pri samodejnem izpolnjevanju s prejšnjimi podatki o transakcijah uporabite "
-"opombe"
+"Pri samodejnem izpolnjevanju s prejšnjimi podatki o transakcijah uporabi "
+"zapiske"
 
 #. i18n: ectx: label, entry (AutoSaveFile), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:25
@@ -19259,7 +19258,7 @@ msgstr "Število dni (plus/minus) za iskanje ustreznih transakcij"
 #: kmymoney/settings/kmymoney.kcfg:379
 #, kde-format
 msgid "Where to place the original payee info in the memo field"
-msgstr "Kam v polje za opombo postaviti podatke o izvirnem prejemniku plačila"
+msgstr "Kam v polje za zapiska postaviti podatke o izvirnem prejemniku plačila"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:388
@@ -19728,7 +19727,7 @@ msgstr "Znesek pristojbin"
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "Prazna zabeležka"
+msgstr "Prazen zapisek"
 
 #: kmymoney/views/journaldelegate.cpp:368
 #, kde-format
@@ -21642,13 +21641,13 @@ msgid ""
 "You have entered only spaces in the memo field which will clear the existing "
 "memo content. Do you really want to do this?"
 msgstr ""
-"V polje za beležko ste vnesli samo presledke, kar bo izbrisalo obstoječo "
-"vsebino beležke. Ali res želite to storiti?"
+"V polje zapiska ste vnesli samo presledke, kar bo izbrisalo obstoječo "
+"vsebino zapiska. Ali res želite to storiti?"
 
 #: kmymoney/views/multitransactioneditor.cpp:803
 #, kde-format
 msgid "Clear memo"
-msgstr "Počisti zabežko"
+msgstr "Počisti zapisek"
 
 #: kmymoney/views/newspliteditor.cpp:176
 #, kde-format
@@ -21779,13 +21778,13 @@ msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
-"Ali želite zamenjati beležko<p><i>%1</i></p>z beležko<p><i>%2</i></p>v "
+"Ali želite zamenjati zapisek<p><i>%1</i></p>z zapiskom<p><i>%2</i></p>v "
 "drugem razdelku?"
 
 #: kmymoney/views/newtransactioneditor.cpp:1710
 #, kde-format
 msgid "Copy memo"
-msgstr "Kopiraj zabeležko"
+msgstr "Kopiraj zapisek"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24

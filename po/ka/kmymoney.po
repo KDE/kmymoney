@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-25 00:45+0000\n"
-"PO-Revision-Date: 2026-07-20 07:04+0200\n"
+"PO-Revision-Date: 2026-07-25 06:06+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -8802,8 +8802,7 @@ msgid "Entry"
 msgstr "ერთეული"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memo"
 msgstr "მემორანდუმი"
@@ -19354,6 +19353,7 @@ msgstr "ვერ შევცვალე კატეგორია '%1'. მ
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr ""
+"კატეგორიის <b>%1</b> მიმოცვლა კატეგორიასთან <b>%2</b> შეუძლებელია. მიზეზი: %3"
 
 #: kmymoney/views/kcategoriesview.cpp:354
 #, kde-format
@@ -21113,7 +21113,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.cpp:1710
 #, kde-format
 msgid "Copy memo"
-msgstr "მემოს კოპირება"
+msgstr "მემორანდუმის კოპირება"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24

@@ -8740,11 +8740,10 @@ msgid "Entry"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memo"
-msgstr "备忘"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, kde-format

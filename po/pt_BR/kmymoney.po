@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-25 00:45+0000\n"
-"PO-Revision-Date: 2026-07-20 07:05-0300\n"
+"PO-Revision-Date: 2026-07-25 08:09-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -9024,8 +9024,7 @@ msgid "Entry"
 msgstr "Entrada"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memo"
 msgstr "Memorando"
