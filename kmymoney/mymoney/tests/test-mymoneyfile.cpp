@@ -2460,6 +2460,7 @@ void MyMoneyFileTest::testClearedBalance()
     testAddTransaction();
     MyMoneyTransaction t1;
     MyMoneyTransaction t2;
+    MyMoneyTransaction t3;
 
     // construct a transaction and add it to the pool
     t1.setPostDate(QDate(2002, 2, 1));
@@ -2472,6 +2473,8 @@ void MyMoneyFileTest::testClearedBalance()
     MyMoneySplit split2;
     MyMoneySplit split3;
     MyMoneySplit split4;
+    MyMoneySplit split5;
+    MyMoneySplit split6;
 
     MyMoneyFileTransaction ft;
     try {
@@ -2513,6 +2516,37 @@ void MyMoneyFileTest::testClearedBalance()
 
         // Date before first transaction
         QVERIFY(m->clearedBalance("A000002", QDate(2002, 1, 15)).isZero());
+
+        MyMoneyAccount liability;
+        liability.setAccountType(eMyMoney::Account::Type::Liability);
+        liability.setName("Account-Liability");
+        liability.setCurrencyId("EUR");
+
+        MyMoneyAccount parent = m->liability();
+        m->addAccount(liability, parent);
+        QCOMPARE(liability.id(), "A000005");
+
+        split5.setAccountId("A000002");
+        split5.setShares(MyMoneyMoney(2000, 100));
+        split5.setValue(MyMoneyMoney(2000, 100));
+        split5.setReconcileFlag(eMyMoney::Split::State::Cleared);
+        split6.setAccountId("A000005");
+        split6.setValue(MyMoneyMoney(-2000, 100));
+        split6.setShares(MyMoneyMoney(-2000, 100));
+        split6.setReconcileFlag(eMyMoney::Split::State::Cleared);
+
+        t3.setPostDate(QDate(2002, 2, 4));
+        t3.setMemo("Memotext");
+        t3.addSplit(split5);
+        t3.addSplit(split6);
+        m->addTransaction(t3);
+        ft.commit();
+        ft.restart();
+
+        // Date of last cleared transaction
+        const auto clearedBalance = m->clearedBalance("A000005", QDate(2002, 2, 4));
+        QCOMPARE(m->clearedBalance("A000005", QDate(2002, 2, 3)), MyMoneyMoney());
+        QCOMPARE(m->clearedBalance("A000005", QDate(2002, 2, 4)), MyMoneyMoney(-2000, 100));
 
     } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception!");
