@@ -2818,33 +2818,7 @@ MyMoneyMoney MyMoneyFile::balance(const QString& id) const
 
 MyMoneyMoney MyMoneyFile::clearedBalance(const QString& id, const QDate& date) const
 {
-    MyMoneyMoney cleared;
-    QList<MyMoneyTransaction> list;
-
-    cleared = balance(id, date);
-
-    MyMoneyAccount account = this->account(id);
-    MyMoneyMoney factor(1, 1);
-    if (account.accountGroup() == Account::Type::Liability || account.accountGroup() == Account::Type::Equity)
-        factor = -factor;
-
-    MyMoneyTransactionFilter filter;
-    filter.addAccount(id);
-    filter.setDateFilter(QDate(), date);
-    filter.setReportAllSplits(false);
-    filter.addState((int)TransactionFilter::State::NotReconciled);
-    transactionList(list, filter);
-
-    for (QList<MyMoneyTransaction>::const_iterator it_t = list.cbegin(); it_t != list.cend(); ++it_t) {
-        const QList<MyMoneySplit>& splits = (*it_t).splits();
-        for (QList<MyMoneySplit>::const_iterator it_s = splits.cbegin(); it_s != splits.cend(); ++it_s) {
-            const MyMoneySplit& split = (*it_s);
-            if (split.accountId() != id)
-                continue;
-            cleared -= split.shares();
-        }
-    }
-    return cleared * factor;
+    return d->journalModel.clearedBalance(id, date);
 }
 
 MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) const
