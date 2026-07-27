@@ -24,6 +24,7 @@
 // Project Includes
 
 #include "journalmodel.h"
+#include "kguiutils.h"
 #include "ktransactionfilter.h"
 #include "ledgerjournalidfilter.h"
 #include "menuenums.h"
@@ -51,6 +52,7 @@ public:
         Q_Q(KSearchTransactionDlg);
 
         ui.setupUi(q);
+        KGuiUtils::keepDialogSize(q);
         filterTab = new KTransactionFilter(q);
         ui.m_tabWidget->insertTab(0, filterTab, i18nc("Criteria tab", "Criteria"));
 

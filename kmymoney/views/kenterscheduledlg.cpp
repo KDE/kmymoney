@@ -23,7 +23,6 @@
 #include <KMessageBox>
 #include <KSharedConfig>
 #include <KStandardGuiItem>
-#include <KWindowConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -32,6 +31,7 @@
 
 #include "dialogenums.h"
 #include "icons.h"
+#include "kguiutils.h"
 #include "kmymoneyutils.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
@@ -93,13 +93,10 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
 {
     Q_D(KEnterScheduleDlg);
 
-    // restore the last used dialog size
-    KConfigGroup grp = KSharedConfig::openConfig()->group("KEnterScheduleDlg");
-    if (grp.isValid()) {
-        KWindowConfig::restoreWindowSize(windowHandle(), grp);
-    }
-    // let the minimum size be 780x410
-    resize(QSize(780, 410).expandedTo(windowHandle() ? windowHandle()->size() : QSize()));
+    // keep the size the dialog is left at from one use to the next
+    KGuiUtils::keepDialogSize(this);
+    // the size it opens with as long as none was stored
+    resize(780, 410);
 
     // position the dialog centered on the application (for some reason without
     // a call to winId() the dialog is positioned in the upper left corner of
@@ -190,12 +187,6 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
 KEnterScheduleDlg::~KEnterScheduleDlg()
 {
     Q_D(KEnterScheduleDlg);
-
-    // store the last used dialog size
-    KConfigGroup grp = KSharedConfig::openConfig()->group("KEnterScheduleDlg");
-    if (grp.isValid()) {
-        KWindowConfig::saveWindowSize(windowHandle(), grp);
-    }
 
     delete d;
 }

@@ -17,16 +17,21 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QEvent>
 #include <QTreeWidget>
 #include <QWidget>
+#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KComboBox>
+#include <KConfigGroup>
 #include <KLineEdit>
 #include <KLocalizedString>
+#include <KSharedConfig>
 #include <KUrlRequester>
+#include <KWindowConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -298,4 +303,79 @@ void KGuiUtils::setupExpandCollapseButton(QPushButton* button, QTreeWidget* widg
 
         button->setProperty("expanded", !expanded);
     });
+}
+
+namespace
+{
+/**
+  * Restores the size of a dialog when it is shown and stores it when it is
+  * hidden or destroyed. The window handle needed for this only exists once
+  * the dialog is shown, and creating it earlier (by a call to winId()) is not
+  * an option since that crashes on MS-Windows (see bug 404848).
+  */
+class DialogSizeKeeper : public QObject
+{
+public:
+    explicit DialogSizeKeeper(QWidget* dialog)
+        : QObject(dialog)
+        , m_dialog(dialog)
+        // the name of the class is only available as long as the dialog is
+        // not being destroyed, so it is kept here right away
+        , m_groupName(QLatin1String(dialog->metaObject()->className()))
+    {
+        dialog->installEventFilter(this);
+    }
+
+    ~DialogSizeKeeper() override
+    {
+        // dialogs that are deleted while they are still visible never see a
+        // hide event. A widget deletes its children before it gets rid of its
+        // window handle, so the size is still available here.
+        saveSize();
+    }
+
+protected:
+    bool eventFilter(QObject* watched, QEvent* event) override
+    {
+        if (watched == m_dialog) {
+            switch (event->type()) {
+            case QEvent::Show:
+                if (m_dialog->windowHandle()) {
+                    KWindowConfig::restoreWindowSize(m_dialog->windowHandle(), KSharedConfig::openConfig()->group(m_groupName));
+                    // the window handle does not pass the size on to the widget by itself
+                    m_dialog->resize(m_dialog->windowHandle()->size());
+                }
+                break;
+
+            case QEvent::Hide:
+                saveSize();
+                break;
+
+            default:
+                break;
+            }
+        }
+        return QObject::eventFilter(watched, event);
+    }
+
+private:
+    void saveSize()
+    {
+        if (m_dialog->windowHandle()) {
+            auto grp = KSharedConfig::openConfig()->group(m_groupName);
+            KWindowConfig::saveWindowSize(m_dialog->windowHandle(), grp);
+            grp.sync();
+        }
+    }
+
+    QWidget* const m_dialog;
+    const QString m_groupName;
+};
+}
+
+void KGuiUtils::keepDialogSize(QWidget* dialog)
+{
+    if (dialog) {
+        new DialogSizeKeeper(dialog);
+    }
 }

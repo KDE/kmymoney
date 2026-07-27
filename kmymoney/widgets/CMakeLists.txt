@@ -135,6 +135,7 @@ add_library(kmm_base_widgets ${kmm_base_widgets_SOURCES})
 
 target_link_libraries(kmm_base_widgets PUBLIC
   KF${QT_MAJOR_VERSION}::Completion
+  KF${QT_MAJOR_VERSION}::ConfigGui
   KF${QT_MAJOR_VERSION}::Notifications
   KF${QT_MAJOR_VERSION}::TextWidgets
   Alkimia::alkimia

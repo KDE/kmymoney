@@ -97,6 +97,17 @@ private:
 
 namespace KGuiUtils {
 void KMM_BASE_WIDGETS_EXPORT setupExpandCollapseButton(QPushButton* button, QTreeWidget* widget, int rows = -1);
+
+/**
+  * Make @a dialog open with the size it had the last time it was closed. The
+  * size is kept in a configuration group named after the class of the dialog,
+  * separately for each screen resolution. Call this once, e.g. in the
+  * constructor of the dialog; the size is restored and stored from then on.
+  *
+  * As long as no size has been stored, the dialog keeps the size its layout
+  * asks for.
+  */
+void KMM_BASE_WIDGETS_EXPORT keepDialogSize(QWidget* dialog);
 }
 
 #endif // KGUIUTILS_H

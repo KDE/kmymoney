@@ -32,6 +32,7 @@
 #include "icons.h"
 #include "kcurrencycalculator.h"
 #include "kequitypriceupdatedlg.h"
+#include "kguiutils.h"
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneyutils.h"
 #include "kpricetreeitem.h"
@@ -184,6 +185,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent)
 {
     Q_D(KMyMoneyPriceDlg);
     d->ui->setupUi(this);
+    KGuiUtils::keepDialogSize(this);
 
     d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditRemove));
     d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
