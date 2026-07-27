@@ -53,3 +53,9 @@ RemoveGroup=StandardLedger
 Id=add-currency-column-2026
 File=kmymoney/kmymoneyrc
 RemoveGroup=KAccountsView
+
+Id=remove-KSettingsDialogGeometry
+File=kmymoney/kmymoneyrc
+Group=Last Use Settings
+RemoveKey=KSettingsDialogGeometry
+
