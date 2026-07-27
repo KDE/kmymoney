@@ -495,6 +495,7 @@ void MyMoneyFileTest::testAddAccounts()
         QCOMPARE(a.id(), QLatin1String("A000001"));
         QCOMPARE(a.institutionId(), QLatin1String("I000001"));
         QCOMPARE(a.currencyId(), QLatin1String("EUR"));
+        QCOMPARE(a.openingDate(), QDate::currentDate());
         QCOMPARE(m->dirty(), true);
         QCOMPARE(m->asset().accountList().count(), 1);
         QCOMPARE(m->asset().accountList().at(0), QLatin1String("A000001"));
@@ -1887,6 +1888,58 @@ void MyMoneyFileTest::testOpeningBalance()
     } catch (const MyMoneyException& e) {
         unexpectedException(e);
     }
+}
+
+void MyMoneyFileTest::testOpeningBalanceMultipleSplits()
+{
+    testAddAccounts();
+
+    MyMoneyAccount openingAcc;
+
+    try {
+        openingAcc = m->openingBalanceAccount(m->baseCurrency());
+        QCOMPARE(openingAcc.parentAccountId(), m->equity().id());
+        QCOMPARE(openingAcc.name(), MyMoneyFile::openingBalancesPrefix());
+        QCOMPARE(openingAcc.openingDate(), QDate::currentDate());
+    } catch (const MyMoneyException& e) {
+        unexpectedException(e);
+    }
+
+    QDate postDate = QDate::currentDate().addDays(15);
+
+    MyMoneyFileTransaction ft;
+    MyMoneyTransaction t;
+
+    // construct a transaction at the day of the last transaction import and add it to the pool
+    t.setPostDate(postDate);
+
+    const auto firstAssetAccountId("A000001");
+    const auto secondAssetAccountId("A000002");
+
+    MyMoneySplit split1;
+
+    split1.setAccountId(firstAssetAccountId);
+    split1.setShares(MyMoneyMoney(-1000, 100));
+    split1.setValue(MyMoneyMoney(-1000, 100));
+    t.addSplit(split1);
+
+    MyMoneySplit split2;
+    split2.setAccountId(secondAssetAccountId);
+    split2.setShares(MyMoneyMoney(500, 100));
+    split2.setValue(MyMoneyMoney(500, 100));
+    for (int i = 0; i < 2; ++i) {
+        split2.clearId();
+        t.addSplit(split2);
+    }
+
+    m->addTransaction(t);
+    ft.commit();
+
+    const auto firstAssetAccount = m->account(firstAssetAccountId);
+    const auto secondAssetAccount = m->account(secondAssetAccountId);
+
+    QCOMPARE(m->openingBalanceTransaction(firstAssetAccount), QString());
+    QCOMPARE(m->openingBalanceTransaction(secondAssetAccount), QString());
 }
 
 void MyMoneyFileTest::testModifyStdAccount()

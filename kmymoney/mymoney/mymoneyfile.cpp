@@ -2229,32 +2229,33 @@ QString MyMoneyFile::openingBalanceTransaction(const MyMoneyAccount& acc) const
     const auto end = d->journalModel.rowCount();
 
     // look for a transaction with two splits, one referencing
-    // acc.id(), the other openAcc.id()
-    int matchCount = 0;
+    // acc.id(), the other openAcc.id(). Keep in mind, that an
+    // account can be referenced in multiple splits of the same
+    // transaction
     QString lastTxId;
     QString txId;
     QString splitAccoountId;
     QModelIndex idx;
+    QSet<QString> matchedAccountIds;
     for (int row = start; row < end; ++row) {
         idx = d->journalModel.index(row, 0);
         txId = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
         if (lastTxId != txId) {
-            matchCount = 0;
+            matchedAccountIds.clear();
             lastTxId = txId;
         }
         splitAccoountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-        if (splitAccoountId == acc.id())
-            ++matchCount;
-        else if (splitAccoountId == openAcc.id())
-            ++matchCount;
+        if (splitAccoountId == acc.id() || (splitAccoountId == openAcc.id())) {
+            matchedAccountIds.insert(splitAccoountId);
+        }
 
         // if we found both accounts in a transaction we have a match
-        if (matchCount == 2) {
+        if (matchedAccountIds.count() == 2) {
             return txId;
         }
     }
     // no opening balance transaction found
-    return QString();
+    return {};
 }
 
 MyMoneyAccount MyMoneyFile::openingBalanceAccount(const MyMoneySecurity& security)
