@@ -91,6 +91,7 @@ public:
         , infoMessage(new KMessageWidget(q))
         , editor(nullptr)
         , adjustableColumn(JournalModel::Column::Detail)
+        , userResizedColumn(-1)
         , adjustingColumn(false)
         , showValuesInverted(false)
         , newTransactionPresent(false)
@@ -514,6 +515,38 @@ public:
         }
     }
 
+    /**
+     * Returns the columns that take up the difference between the width of
+     * all columns and the width of the viewport, in the order in which they
+     * shall be used.
+     *
+     * When the user drags a section separator, the columns to the right of
+     * the modified one absorb the change, so that the separator stays where
+     * it was dropped. In all other cases (e.g. the view itself is resized)
+     * the detail column takes the difference, as it always did.
+     */
+    QVector<int> absorberColumns() const
+    {
+        QVector<int> columns;
+        const auto header = q->horizontalHeader();
+
+        if (userResizedColumn >= 0) {
+            for (int visualIndex = header->visualIndex(userResizedColumn) + 1; visualIndex < header->count(); ++visualIndex) {
+                const auto logicalIndex = header->logicalIndex(visualIndex);
+                if (!header->isSectionHidden(logicalIndex) && (header->sectionResizeMode(logicalIndex) == QHeaderView::Interactive)) {
+                    columns.append(logicalIndex);
+                }
+            }
+        }
+
+        // the detail column remains the last resort, e.g. when the columns
+        // to the right of the modified one cannot shrink any further
+        if (!columns.contains(adjustableColumn) && !header->isSectionHidden(adjustableColumn)) {
+            columns.append(adjustableColumn);
+        }
+        return columns;
+    }
+
     void resetMaxLineCache()
     {
         auto m = q->LedgerView::model();
@@ -533,6 +566,7 @@ public:
     TransactionEditorBase* editor;
     QHash<const QAbstractItemModel*, QStyledItemDelegate*> delegates;
     int adjustableColumn;
+    int userResizedColumn;
     bool adjustingColumn;
     bool showValuesInverted;
     bool newTransactionPresent;
@@ -574,6 +608,11 @@ LedgerView::LedgerView(QWidget* parent)
     // See LedgerView::resizeSection().
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&](int logicalIndex, int oldSize, int newSize) {
         Q_EMIT sectionResized(this, d->columnSelector->configGroupName(), logicalIndex, oldSize, newSize);
+        // when the user drags a separator, the columns to the right of the
+        // modified one absorb the difference. See Private::absorberColumns().
+        const auto draggingSeparator =
+            (QApplication::mouseButtons() & Qt::LeftButton) && (horizontalHeader()->cursor().shape() == Qt::SplitHCursor);
+        d->userResizedColumn = draggingSeparator ? logicalIndex : -1;
         QMetaObject::invokeMethod(this, "adjustDetailColumn", Qt::QueuedConnection, Q_ARG(int, viewport()->width()), Q_ARG(bool, false));
     });
 
@@ -1351,16 +1390,32 @@ void LedgerView::adjustDetailColumn(int newViewportWidth, bool informOtherViews)
         }
         totalColumnWidth += header->sectionSize(i);
     }
-    const int delta = newViewportWidth - totalColumnWidth;
-    const int newWidth = header->sectionSize(d->adjustableColumn) + delta;
-    if (newWidth > 10) {
+    int delta = newViewportWidth - totalColumnWidth;
+    if (delta != 0) {
+        const int minimumWidth = qMax(header->minimumSectionSize(), 10);
         QSignalBlocker blocker(header);
         if (informOtherViews)
             blocker.unblock();
-        header->resizeSection(d->adjustableColumn, newWidth);
+
+        // hand the difference to the absorber columns one after the other
+        // until it is used up or none of them can take any more of it
+        const auto columns = d->absorberColumns();
+        for (const int column : columns) {
+            if (delta == 0) {
+                break;
+            }
+            const int currentWidth = header->sectionSize(column);
+            const int newWidth = qMax(minimumWidth, currentWidth + delta);
+            if (newWidth == currentWidth) {
+                continue;
+            }
+            header->resizeSection(column, newWidth);
+            delta -= newWidth - currentWidth;
+        }
     }
 
     // remember that we're done this time
+    d->userResizedColumn = -1;
     d->adjustingColumn = false;
 }
 
