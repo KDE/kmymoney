@@ -43,6 +43,7 @@
 #include "dialogenums.h"
 #include "icons.h"
 #include "kequitypriceupdateconfdlg.h"
+#include "kguiutils.h"
 #include "kmmonlinequotesprofilemanager.h"
 #include "kmmyesno.h"
 #include "kmymoneyutils.h"
@@ -125,6 +126,7 @@ public:
     {
         Q_Q(KEquityPriceUpdateDlg);
         ui->setupUi(q);
+        KGuiUtils::keepDialogSize(q);
 
         m_filterModel = new KEquityFilterModel(this);
         m_filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);

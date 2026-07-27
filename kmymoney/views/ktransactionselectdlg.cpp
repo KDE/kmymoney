@@ -18,6 +18,7 @@
 
 #include "icons.h"
 #include "journalmodel.h"
+#include "kguiutils.h"
 #include "ledgerjournalidfilter.h"
 #include "mymoneyfile.h"
 
@@ -51,6 +52,7 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
 {
     Q_D(KTransactionSelectDlg);
     d->ui->setupUi(this);
+    KGuiUtils::keepDialogSize(this);
     d->ui->switchButton->hide();
 
     d->ui->label->setText(i18nc("@info:label Description of select transaction dialog", "Select the transaction to use as template."));

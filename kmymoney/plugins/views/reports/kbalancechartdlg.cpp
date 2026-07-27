@@ -23,13 +23,13 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <KWindowConfig>
 #include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "icons.h"
+#include "kguiutils.h"
 #include "kmymoneyutils.h"
 #include "kreportchartview.h"
 #include "mymoneyenums.h"
@@ -214,14 +214,10 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     setSizeGripEnabled(true);
     setModal(true);
 
-    // restore the last used dialog size
-    winId(); // needs to be called to create the QWindow
-    KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
-    if (grp.isValid()) {
-        KWindowConfig::restoreWindowSize(windowHandle(), grp);
-    }
-    // let the minimum size be 700x500
-    resize(QSize(700, 500).expandedTo(windowHandle() ? windowHandle()->size() : QSize()));
+    // keep the size the dialog is left at from one use to the next
+    KGuiUtils::keepDialogSize(this);
+    // the size it opens with as long as none was stored
+    resize(700, 500);
 
     QVBoxLayout* mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
@@ -260,11 +256,6 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
 
 KBalanceChartDlg::~KBalanceChartDlg()
 {
-    // store the last used dialog size
-    KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
-    if (grp.isValid()) {
-        KWindowConfig::saveWindowSize(windowHandle(), grp);
-    }
 }
 
 void KBalanceChartDlg::configureReport()

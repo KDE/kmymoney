@@ -39,6 +39,7 @@
 #include "icons/icons.h"
 #include "kavailablecurrencydlg.h"
 #include "kcurrencyeditordlg.h"
+#include "kguiutils.h"
 #include "kmymoneyutils.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
@@ -226,6 +227,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget* parent)
 {
     Q_D(KCurrencyEditDlg);
     d->ui->setupUi(this);
+    KGuiUtils::keepDialogSize(this);
     d->m_searchWidget = new KTreeWidgetSearchLineWidget(this, d->ui->m_currencyList);
     d->m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
     d->m_searchWidget->setFocus();
