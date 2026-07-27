@@ -59,6 +59,22 @@
                       </property>
                     </widget>
                   </item>
+                  <item>
+                    <spacer name="dayCountSpacer">
+                      <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeType">
+                        <enum>QSizePolicy::Expanding</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                        <size>
+                          <width>41</width>
+                          <height>21</height>
+                        </size>
+                      </property>
+                    </spacer>
+                  </item>
                 </layout>
               </widget>
             </item>
@@ -86,6 +102,18 @@
             </item>
             <item>
               <widget class="KComboBox" name="m_holidayRegion">
+                <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                  </sizepolicy>
+                </property>
+                <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+                </property>
+                <property name="minimumContentsLength">
+                  <number>15</number>
+                </property>
                 <item>
                   <property name="text">
                     <string comment="@item no holiday region selected">(None)</string>
@@ -103,7 +131,7 @@
                 </property>
                 <property name="sizeHint" stdset="0">
                   <size>
-                    <width>282</width>
+                    <width>41</width>
                     <height>17</height>
                   </size>
                 </property>
