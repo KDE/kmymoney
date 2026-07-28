@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2014-2016 Christian Dávid <christian-david@web.de>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2026      Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -22,6 +23,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kguiutils.h"
 #include "ksettingscolors.h"
 #include "ksettingsfonts.h"
 #include "ksettingsgeneral.h"
@@ -94,20 +96,8 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget* parent, const QString& name, KCore
     // make sure both HideZeroBalanceAccountsHome checkboxes sync each other
     connect(generalPage, &KSettingsGeneral::hideZeroBalanceAccountsHomeChanged, homePage, &KSettingsHome::setHideZeroBalanceAccountsHome);
     connect(homePage, &KSettingsHome::hideZeroBalanceAccountsHomeChanged, generalPage, &KSettingsGeneral::setHideZeroBalanceAccountsHome);
-}
 
-void KSettingsKMyMoney::showEvent(QShowEvent* ev)
-{
-    auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
-    restoreGeometry(grp.readEntry("KSettingsDialogGeometry", QByteArray()));
-    KConfigDialog::showEvent(ev);
-}
-
-void KSettingsKMyMoney::hideEvent(QHideEvent* ev)
-{
-    auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
-    grp.writeEntry("KSettingsDialogGeometry", saveGeometry());
-    KConfigDialog::hideEvent(ev);
+    KGuiUtils::keepDialogSize(this);
 }
 
 void KSettingsKMyMoney::slotEnableFinishButton(bool enable)
