@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-28 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:46+0000\n"
 "PO-Revision-Date: 2026-01-04 11:05+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2127,7 +2127,7 @@ msgstr "Aldatu"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3767,25 +3767,25 @@ msgstr ""
 "<html><head/><body><p align=\"center\">Aholkua: Instalatu Oxygen, Tango edo "
 "Breeze ikono gaiak aukera zabalagoa lortzeko.</p></body></html>"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "Orokorra"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "Etxea"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "Liburu nagusia"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
 #, fuzzy, kde-format
 #| msgid ""
 #| "Scheduled\n"
@@ -3798,22 +3798,22 @@ msgstr ""
 "Transakzio\n"
 "antolatuak"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:64
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
 msgid "Colors"
 msgstr "Koloreak"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
 #, kde-format
 msgid "Fonts"
 msgstr "Letra-tipoak"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
 #, kde-format
 msgid "Icons"
 msgstr "Ikonoak"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:71
 #, kde-format
 msgid "Plugins"
 msgstr "Pluginak"

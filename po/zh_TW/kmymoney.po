@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-28 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:46+0000\n"
 "PO-Revision-Date: 2025-10-01 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2077,7 +2077,7 @@ msgstr "變更"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3713,25 +3713,25 @@ msgid ""
 "icon theme to get wider selection.</p></body></html>"
 msgstr "用這個來清除此交易的所有分割"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "一般"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "首頁"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "分類簿"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
 #, fuzzy, kde-format
 #| msgid ""
 #| "Scheduled\n"
@@ -3742,22 +3742,22 @@ msgid ""
 "transactions"
 msgstr "排程交易"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:64
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
 msgid "Colors"
 msgstr "顏色"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
 #, kde-format
 msgid "Fonts"
 msgstr "字型"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
 #, kde-format
 msgid "Icons"
 msgstr "圖示"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:71
 #, kde-format
 msgid "Plugins"
 msgstr "外掛程式"

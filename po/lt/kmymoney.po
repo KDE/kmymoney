@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-28 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:46+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -2029,7 +2029,7 @@ msgstr "Keisti"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3610,26 +3610,26 @@ msgid ""
 "icon theme to get wider selection.</p></body></html>"
 msgstr ""
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "General settings"
 msgid "General"
 msgstr "Bendri"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "Namai"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "Ledger"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgctxt "@title Page name for schedules view"
@@ -3638,22 +3638,22 @@ msgid ""
 "transactions"
 msgstr "Periodinės operacijos"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:64
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
 msgid "Colors"
 msgstr "Spalvos"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
 #, kde-format
 msgid "Fonts"
 msgstr "Šriftai"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
 #, kde-format
 msgid "Icons"
 msgstr "Ženkliukai"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:71
 #, fuzzy, kde-format
 msgid "Plugins"
 msgstr "Papildiniai"

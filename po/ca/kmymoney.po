@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-28 00:45+0000\n"
-"PO-Revision-Date: 2026-07-25 09:50+0200\n"
+"POT-Creation-Date: 2026-07-29 00:46+0000\n"
+"PO-Revision-Date: 2026-07-28 10:20+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2128,7 +2128,7 @@ msgstr "Modifica"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3783,29 +3783,26 @@ msgstr ""
 "d'icones Oxygen, Tango o Brisa per a aconseguir una selecció més gran.</p></"
 "body></html>"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "General"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "Principal"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "Llibre major"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scheduled\n"
-#| "transactions"
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
+#, kde-format
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
@@ -3814,22 +3811,22 @@ msgstr ""
 "Operacions\n"
 "planificades"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:64
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
 msgid "Colors"
 msgstr "Colors"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
 #, kde-format
 msgid "Fonts"
 msgstr "Lletres"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
 #, kde-format
 msgid "Icons"
 msgstr "Icones"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:71
 #, kde-format
 msgid "Plugins"
 msgstr "Connectors"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-28 00:45+0000\n"
-"PO-Revision-Date: 2026-07-25 12:45+0300\n"
+"POT-Creation-Date: 2026-07-29 00:46+0000\n"
+"PO-Revision-Date: 2026-07-28 08:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2142,7 +2142,7 @@ msgstr "Змінити"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3788,29 +3788,26 @@ msgstr ""
 "<html><head/><body><p align=\"center\">Підказка: встановіть тему піктограм "
 "Oxygen, Tango або Breeze, щоб мати ширший вибір.</p></body></html>"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "Загальне"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "Домівка"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "Облікова книга"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scheduled\n"
-#| "transactions"
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
+#, kde-format
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
@@ -3819,22 +3816,22 @@ msgstr ""
 "Заплановані\n"
 "операції"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:64
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
 msgid "Colors"
 msgstr "Кольори"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:65
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
 #, kde-format
 msgid "Fonts"
 msgstr "Шрифти"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
 #, kde-format
 msgid "Icons"
 msgstr "Піктограми"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:71
 #, kde-format
 msgid "Plugins"
 msgstr "Додатки"
