@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-29 00:46+0000\n"
-"PO-Revision-Date: 2026-07-27 11:21+0200\n"
+"PO-Revision-Date: 2026-07-29 12:30+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -3547,14 +3547,14 @@ msgid "Ledger"
 msgstr "Libro Major"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Skip scheduled transaction"
+#, kde-format
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
 "transactions"
-msgstr "Salta transaction planificate"
+msgstr ""
+"Transactiones\n"
+" planificate"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
