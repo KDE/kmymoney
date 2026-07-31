@@ -45,6 +45,7 @@ public:
         : q(p)
         , splitDelegate(nullptr)
         , adjustableColumn(SplitModel::Column::Memo)
+        , userResizedColumn(-1)
         , adjustingColumn(false)
         , showValuesInverted(false)
         , balanceCalculationPending(false)
@@ -202,11 +203,44 @@ public:
         q->setFont(font);
     }
 
+    /**
+     * Returns the columns that take up the difference between the width of
+     * all columns and the width of the viewport, in the order in which they
+     * shall be used.
+     *
+     * When the user drags a section separator, the columns to the right of
+     * the modified one absorb the change, so that the separator stays where
+     * it was dropped. In all other cases (e.g. the view itself is resized)
+     * the memo column takes the difference, as it always did.
+     */
+    QVector<int> absorberColumns() const
+    {
+        QVector<int> columns;
+        const auto header = q->horizontalHeader();
+
+        if (userResizedColumn >= 0) {
+            for (int visualIndex = header->visualIndex(userResizedColumn) + 1; visualIndex < header->count(); ++visualIndex) {
+                const auto logicalIndex = header->logicalIndex(visualIndex);
+                if (!header->isSectionHidden(logicalIndex) && (header->sectionResizeMode(logicalIndex) == QHeaderView::Interactive)) {
+                    columns.append(logicalIndex);
+                }
+            }
+        }
+
+        // the memo column remains the last resort, e.g. when the columns
+        // to the right of the modified one cannot shrink any further
+        if (!columns.contains(adjustableColumn) && !header->isSectionHidden(adjustableColumn)) {
+            columns.append(adjustableColumn);
+        }
+        return columns;
+    }
+
     SplitView* q;
     SplitDelegate* splitDelegate;
     MyMoneyAccount account;
     MyMoneyMoney totalTransactionValue;
     int adjustableColumn;
+    int userResizedColumn;
     bool adjustingColumn;
     bool showValuesInverted;
     bool balanceCalculationPending;
@@ -235,7 +269,11 @@ SplitView::SplitView(QWidget* parent)
     setCornerButtonEnabled(false);
 
     // make sure to get informed about resize operations on the columns
-    connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&]() {
+    connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&](int logicalIndex) {
+        // when the user drags a separator, the columns to the right of the
+        // modified one absorb the difference. See Private::absorberColumns().
+        const auto draggingSeparator = (QApplication::mouseButtons() & Qt::LeftButton) && (horizontalHeader()->cursor().shape() == Qt::SplitHCursor);
+        d->userResizedColumn = draggingSeparator ? logicalIndex : -1;
         adjustDetailColumn(viewport()->width());
     });
 
@@ -622,13 +660,45 @@ void SplitView::adjustDetailColumn(int newViewportWidth)
         }
         totalColumnWidth += header->sectionSize(i);
     }
-    const int delta = newViewportWidth - totalColumnWidth;
-    const int newWidth = header->sectionSize(d->adjustableColumn) + delta;
-    if (newWidth > 10) {
-        header->resizeSection(d->adjustableColumn, newWidth);
+    int delta = newViewportWidth - totalColumnWidth;
+    if (delta != 0) {
+        const int minimumWidth = qMax(header->minimumSectionSize(), 10);
+
+        // our own resizes must not be taken for the one the user is
+        // performing, which would make us lose track of the dragged column
+        QSignalBlocker blocker(header);
+
+        // hand the difference to the absorber columns one after the other
+        // until it is used up or none of them can take any more of it
+        const auto columns = d->absorberColumns();
+        for (const int column : columns) {
+            if (delta == 0) {
+                break;
+            }
+            const int currentWidth = header->sectionSize(column);
+            const int newWidth = qMax(minimumWidth, currentWidth + delta);
+            if (newWidth == currentWidth) {
+                continue;
+            }
+            header->resizeSection(column, newWidth);
+            delta -= newWidth - currentWidth;
+        }
+
+        // when the absorber columns cannot take all of it, the column the
+        // user is dragging keeps the rest, so that the columns still fill
+        // the viewport exactly. The separator then stops instead of
+        // widening the view beyond it.
+        if ((delta != 0) && (d->userResizedColumn >= 0)) {
+            const int currentWidth = header->sectionSize(d->userResizedColumn);
+            const int newWidth = qMax(minimumWidth, currentWidth + delta);
+            if (newWidth != currentWidth) {
+                header->resizeSection(d->userResizedColumn, newWidth);
+            }
+        }
     }
 
     // remember that we're done this time
+    d->userResizedColumn = -1;
     d->adjustingColumn = false;
 }
 
