@@ -635,7 +635,7 @@ msgid ""
 msgstr ""
 "Verwenden Sie diesen Dialog, um Ihre Daten zu sichern.\n"
 "\n"
-"Bitte versichern Sie sich, dass sich ein Medium im Laufwerk (z. B. "
+"Bitte versichern Sie sich, dass sich ein Medium im Laufwerk (z. B. "
 "Diskettenlaufwerk) befindet. Wählen Sie weiterhin den Einhängepunkt, den Sie "
 "entweder im Eingabefeld eingeben oder mittels „Wählen“ suchen.\n"
 "\n"
@@ -1274,7 +1274,7 @@ msgstr "Bearbeiten"
 #, kde-format
 msgctxt "@action:button"
 msgid "Remove unused currencies"
-msgstr "Nicht benutzte Währungen entfernen"
+msgstr "Nicht verwendete Währungen entfernen"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_closeButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:102
@@ -1371,7 +1371,7 @@ msgstr "Name"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the name of the currency here (e.g. Euro)"
-msgstr "Geben Sie hier den Namen der Währung ein, z. B. Euro"
+msgstr "Geben Sie hier den Namen der Währung ein, z. B. Euro"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leIsoCode)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:97
@@ -1382,8 +1382,8 @@ msgid ""
 "for the Euro). This cannot be changed once the currency is created.</p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p>Geben Sie hier den ISO4217-Code für die Währung ein (z."
-"B. EUR für Euro). Sobald die Währung erstellt wurde, kann sie nicht mehr "
+"<html><head/><body><p>Geben Sie hier den ISO4217-Code für die Währung ein "
+"(z. B. EUR für Euro). Sobald die Währung erstellt wurde, kann sie nicht mehr "
 "verändert werden.</p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leSymbol)
@@ -1391,7 +1391,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the monetary symbol of the currency here (e.g. € for the Euro)"
-msgstr "Geben Sie hier das Symbol der Währung ein, z. B. € für Euro"
+msgstr "Geben Sie hier das Symbol der Währung ein, z. B. € für Euro"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leAccountFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:111
@@ -1461,13 +1461,13 @@ msgstr ""
 "Falle eines Rests eine Warnung ausgeben. Ansonsten wie „Dezimalstellen "
 "entfernen“.</p><p><span style=\" font-weight:600;\">Abrunden</span></"
 "p><p>Auf den größten ganzzahligen Wert runden, der nicht größer als der Wert "
-"ist. Z. B. 0,5 → 0,0 und -0,5 → −1,0</p><p><span style=\" font-weight:600;"
+"ist. z. B. 0,5 → 0,0 und -0,5 → −1,0</p><p><span style=\" font-weight:600;"
 "\">Aufrunden</span></p><p>Auf den kleinsten ganzzahligen Wert runden, der "
-"nicht kleiner als der Wert ist. Z. B. 0,5 → 1,0 und -0,5 → −0,0</p><p><span "
+"nicht kleiner als der Wert ist. z. B. 0,5 → 1,0 und -0,5 → −0,0</p><p><span "
 "style=\" font-weight:600;\">Dezimalstellen entfernen</span></p><p>Keine "
 "Rundung, einfach alle Dezimalstellen abschneiden</p><p><span style=\" font-"
 "weight:600;\">Von Null weg runden</span></p><p>Verwendet Aufrunden für "
-"positive und Abrunden für negative Werte. Z. B. 0,5 → 1,0 und −0,5 → −1,0</"
+"positive und Abrunden für negative Werte. z. B. 0,5 → 1,0 und −0,5 → −1,0</"
 "p><p><span style=\" font-weight:600;\">Ab der Hälfte abrunden</span></"
 "p><p>Auf- oder abrunden mit den folgenden Einschränkungen: 0,1 .. 0,5 → 0,0 "
 "und 0,6 .. 0,9 → 1,0</p><p><span style=\" font-weight:600;\">Ab der Hälfte "
@@ -1477,7 +1477,7 @@ msgstr ""
 "der Hälfte abrunden“ für 0,1 .. 0,4 und „Ab der Hälfte aufrunden“ für 0,6 .. "
 "0,9. Verwendet „Ab der Hälfte aufrunden“ für 0,5, wenn der resultierende "
 "Zähler ungerade ist und „Ab der Hälfte abrunden“, wenn der resultierende "
-"Zähler gerade ist. Z. B. 0,5 → 0,0 und 1,5 → 2,0</p></body></html>"
+"Zähler gerade ist. z. B. 0,5 → 0,0 und 1,5 → 2,0</p></body></html>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:135
@@ -3999,8 +3999,8 @@ msgstr ""
 "<p>Die folgenden Zeichen werden normalerweise entfernt:\n"
 "\n"
 "<ul>\n"
-"<li>HTML-Tags wie z. B. <b>&lt;tag&gt;</b></li>\n"
-"<li>& kodierte Zeichen wie z. B. <b>&amp;nbsp;</b></li>\n"
+"<li>HTML-Tags wie z. B. <b>&lt;tag&gt;</b></li>\n"
+"<li>& kodierte Zeichen wie z. B. <b>&amp;nbsp;</b></li>\n"
 "<li>doppelte Leerzeichen</li>\n"
 "</ul>\n"
 "</p>"
@@ -4645,7 +4645,7 @@ msgstr "Bankarbeitstage"
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:93
 #, kde-format
 msgid "Use holiday calendar for region"
-msgstr "Den Ferienkalender für diese Region benutzen"
+msgstr "Den Ferienkalender für diese Region verwenden"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_holidayRegion)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:119
@@ -5941,7 +5941,7 @@ msgstr "Ergebnis der Konsistenzprüfung"
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
-"Dies ist das Protokoll der Konsistenzüberprüfung, benutzen Sie das "
+"Dies ist das Protokoll der Konsistenzüberprüfung, verwenden Sie das "
 "Kontextmenü, um es zu kopieren oder zu speichern."
 
 #: kmymoney/kmymoney.cpp:4005
@@ -6471,7 +6471,7 @@ msgstr "Zu verwendende Sprache"
 #: kmymoney/main.cpp:163
 #, kde-format
 msgid "do not open last used file"
-msgstr "zuletzt benutzte Datei nicht öffnen"
+msgstr "zuletzt verwendete Datei nicht öffnen"
 
 #: kmymoney/main.cpp:167
 #, kde-format
@@ -10687,7 +10687,7 @@ msgid ""
 "want to delete it?</center>"
 msgstr ""
 "<center>Beim Aktualisieren von <b>%1</b><br>wurde der Profiltyp <b>%2</b> "
-"nicht erkennt.<br>Daher kann das Profile nicht benutzt werden.<br>Möchten "
+"nicht erkennt.<br>Daher kann das Profile nicht verwendet werden.<br>Möchten "
 "Sie es löschen?</center>"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1582
@@ -11796,7 +11796,7 @@ msgstr "GnuCash-Importoptionen"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:26
 #, kde-format
 msgid "Use 'Help' for more information on these options"
-msgstr "Benutzen Sie „Hilfe“ für weitere Informationen über diese Optionen"
+msgstr "Verwenden Sie „Hilfe“ für weitere Informationen über diese Optionen"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonInvestGroupBox)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:39
@@ -11832,7 +11832,7 @@ msgstr "Online-Kursnotizen"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:87
 #, kde-format
 msgid "Use Finance::Quote for share price quotes"
-msgstr "Benutzen Sie Finance::Quote für Aktienkurse"
+msgstr "Verwenden Sie Finance::Quote für Aktienkurse"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox2)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:100
@@ -11939,7 +11939,7 @@ msgid ""
 "Use the fo&llowing name for the price source.\n"
 "(Click Help for further information.)"
 msgstr ""
-"Fo&lgenden Namen für die Preisquelle benutzen.\n"
+"Fo&lgenden Namen für die Preisquelle verwenden.\n"
 "(Klicken Sie Hilfe für weitere Informationen.)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkAlwaysUse)
@@ -12548,7 +12548,7 @@ msgstr "Fehlende Informationen"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:33
 #, kde-format
 msgid "Use payee field as provided by institution"
-msgstr "Das vom Institut bereitgestellte Empfängerfeld benutzen"
+msgstr "Das vom Institut bereitgestellte Empfängerfeld verwenden"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_extractPayeeButton)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:43
@@ -14132,7 +14132,7 @@ msgstr ""
 "entweder ein Apostroph oder ein Schrägstrich als Markierung für ein "
 "bestimmtes Jahrhundert verwendet. So kann 1905 von 2005 unterschieden "
 "werden. Geben Sie hier den Jahresbereich an, der mit einem Apostroph "
-"markiert ist (z.B. ist das bei Quicken normalerweise 1900–1949)."
+"markiert ist (z. B. ist das bei Quicken normalerweise 1900–1949)."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:326
@@ -14963,7 +14963,7 @@ msgid ""
 "In order to use a database, you need to install some additional software. "
 "Click Help for more information"
 msgstr ""
-"Um eine Datenbank benutzen zu können, brauchen Sie zusätzliche Software. "
+"Um eine Datenbank verwenden zu können, benötigen Sie zusätzliche Software. "
 "Klicken Sie Hilfe für weitere Informationen"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:164
@@ -15274,8 +15274,8 @@ msgid ""
 "budget?"
 msgstr ""
 "Sie haben Budgetwerte in einer anderen Basis angegeben, was in einem "
-"monatlichen Budget von<b>%1</b> resultieren würde. Soll dieser Wert benutzt "
-"werden, um das Monatsbudget zu füllen?"
+"monatlichen Budget von<b>%1</b> resultieren würde. Soll dieser Wert "
+"verwendet werden, um das Monatsbudget zu füllen?"
 
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:240
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:268
@@ -15293,7 +15293,7 @@ msgid ""
 "budget?"
 msgstr ""
 "Sie haben Budgetwerte in einer anderen Basis angegeben, was in einem "
-"Jahresbudget von<b>%1</b> resultieren würde. Soll dieser Wert benutzt "
+"Jahresbudget von<b>%1</b> resultieren würde. Soll dieser Wert verwendet "
 "werden, um das monatliche Budget zu füllen?"
 
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:293
@@ -15305,7 +15305,7 @@ msgid ""
 msgstr ""
 "Sie haben Budgetwerte in einer anderen Basis angegeben, was in einem "
 "individuellen monatlichen Budget von<b>%1</b> resultieren würde. Soll dieser "
-"Wert benutzt werden, um das Monatsbudget zu füllen?"
+"Wert verwendet werden, um das Monatsbudget zu füllen?"
 
 #. i18n: ectx: property (title), widget (QGroupBox, periodGroupBox)
 #: kmymoney/plugins/views/budget/kbudgetvalues.ui:29
@@ -18588,7 +18588,7 @@ msgstr ""
 "<p>Sie haben die GPG-Verschlüsselung aktiviert. Dies bedeutet, dass neue "
 "Dateien verschlüsselt gespeichert werden.</p><p> Bestehende Dateien werden "
 "nicht automatisch verschlüsselt. Um die Verschlüsselung bestehender Dateien "
-"zu erreichen, benutzen Sie bitte die Funktion <b>Datei/Speichern unter ...</"
+"zu erreichen, verwenden Sie bitte die Funktion <b>Datei/Speichern unter ...</"
 "b> und speichern Sie die Datei unter einem anderen Namen.<br/>Sobald Sie mit "
 "dem Ergebnis zufrieden sind, können Sie die alte Datei löschen und der neuen "
 "Datei den alten Namen zuweisen.</p>"
@@ -19090,7 +19090,7 @@ msgstr "Die zuletzt gewählte Ansicht"
 #: kmymoney/settings/kmymoney.kcfg:116
 #, kde-format
 msgid "Use GPG to encrypt data file"
-msgstr "GPG-Verschlüsselung für Daten benutzen"
+msgstr "GPG-Verschlüsselung für Daten verwenden"
 
 #. i18n: ectx: label, entry (EncryptRecover), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:120
@@ -19397,7 +19397,7 @@ msgstr "Pfad zur Protokolldatei"
 #: kmymoney/settings/kmymoney.kcfg:334
 #, kde-format
 msgid "Use system font"
-msgstr "Systemschriftart benutzen"
+msgstr "Systemschriftart verwenden"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:348
@@ -19507,7 +19507,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:445
 #, kde-format
 msgid "The palette used to render charts"
-msgstr "Die für die Anzeige der Diagramme benutzte Palette"
+msgstr "Die für die Anzeige der Diagramme verwendete Palette"
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
 #: kmymoney/settings/kmymoney.kcfg:451
@@ -21907,7 +21907,7 @@ msgstr "Die Schecknummer für diese Buchung."
 #: kmymoney/views/newtransactioneditor.cpp:485
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
-msgstr "Die Schecknummer <b>%1</b> wird bereits in diesem Konto benutzt."
+msgstr "Die Schecknummer <b>%1</b> wird bereits in diesem Konto verwendet."
 
 #: kmymoney/views/newspliteditor.cpp:909
 #: kmymoney/views/newtransactioneditor.cpp:211
@@ -23571,7 +23571,7 @@ msgid ""
 "was opened and its currency."
 msgstr ""
 "Geben Sie den Namen des Kontos ein, unter dem es in KMyMoney bekannt ist. "
-"Wählen Sie den Typ für das neue Konto. Benutzen Sie die <b>Was ist das?</b>-"
+"Wählen Sie den Typ für das neue Konto. Verwenden Sie die <b>Was ist das?</b>-"
 "Hilfe, um mehr über die verschiedenen Kontotypen zu erfahren. Geben Sie das "
 "Datum ein, an dem das Konto erstellt wurde, und seine Währung."
 
@@ -23634,34 +23634,34 @@ msgid ""
 "account.</p>"
 msgstr ""
 "<p><b>Girokonto</b>\n"
-"Benutzen Sie den Typ Girokonto, um ein Girokonto zu verwalten, z. B. "
+"Verwenden Sie den Typ Girokonto, um ein Girokonto zu verwalten, z. B. "
 "Zahlungen und Gehaltseingänge.</p>\n"
 "\n"
 "<p><b>Sparkonto</b>\n"
-"Benutzen Sie den Typ Sparkonto, um ein Sparkonto zu verwalten.</p>\n"
+"Verwenden Sie den Typ Sparkonto, um ein Sparkonto zu verwalten.</p>\n"
 "\n"
 "<p><b>Kreditkarte</b>\n"
-"Benutzen Sie den Typ Kreditkarte, um eine Kreditkarte zu verwalten.</p>\n"
+"Verwenden Sie den Typ Kreditkarte, um eine Kreditkarte zu verwalten.</p>\n"
 "\n"
 "<p><b>Bargeld</b>\n"
 "\n"
-"Benutzen Sie den Typ Bargeld, um Ihren Geldbeutel zu verwalten.</p>\n"
+"Verwenden Sie den Typ Bargeld, um Ihren Geldbeutel zu verwalten.</p>\n"
 "\n"
 "<p><b>Kredit</b>\n"
-"Benutzen Sie den Typ Kredit, um Kredite zu verwalten, z. B. Hypotheken, "
+"Verwenden Sie den Typ Kredit, um Kredite zu verwalten, z. B. Hypotheken, "
 "Autokredite, verliehenes Geld, Privatkredite usw.</p>\n"
 "\n"
 "<p><b>Investition</b>\n"
-"Benutzen Sie den Typ Investition, um Ihre Aktien, Ihr Investmentfonds und "
+"Verwenden Sie den Typ Investition, um Ihre Aktien, Ihr Investmentfonds und "
 "andere Geldanlagen zu verwalten.</p>\n"
 "\n"
 "<p><b>Vermögen</b>\n"
-"Benutzen Sie den Typ Vermögen, um Ihr materielles Vermögen zu verwalten, z."
-"B. ein Haus, ein Auto oder eine Kunstsammlung.</p>\n"
+"Verwenden Sie den Typ Vermögen, um Ihr materielles Vermögen zu verwalten, "
+"z. B. ein Haus, ein Auto oder eine Kunstsammlung.</p>\n"
 "\n"
 "<p><b>Verbindlichkeiten</b>\n"
-"Benutzen Sie den Typ Verbindlichkeiten, um jede Art von Schulden, außer "
-"Kredite, zu verwalten. Benutzen Sie es für Steuern oder von Freunden "
+"Verwenden Sie den Typ Verbindlichkeiten, um jede Art von Schulden, außer "
+"Kredite, zu verwalten. Verwenden Sie es für Steuern oder von Freunden "
 "geliehenes Geld. Für amortisierende Schulden, wie Hypotheken, sollten Sie "
 "den Typ Kredit wählen.</p>"
 
@@ -23967,7 +23967,7 @@ msgid ""
 "Please select the required options. Please use the <b>What's this?</b> "
 "feature to see more information about the items."
 msgstr ""
-"Bitte wählen Sie die gewünschten Optionen aus. Benutzen Sie die <b>Was ist "
+"Bitte wählen Sie die gewünschten Optionen aus. Verwenden Sie die <b>Was ist "
 "das?</b>-Hilfe, um mehr Informationen über die Einträge zu erhalten."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -24032,7 +24032,7 @@ msgstr ""
 "Gab es bereits Zahlungen für diesen Kredit, gleichgültig ob sie schon in "
 "KMyMoney eingetragen sind oder nicht?\n"
 "Hinweis: Beträge, die zum Erhalt des Kredits an den Kreditgeber gezahlt "
-"wurden (z. B. Disagio) werden in diesem Zusammenhang nicht als Zahlung "
+"wurden (z. B. Disagio) werden in diesem Zusammenhang nicht als Zahlung "
 "angesehen."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_anyPayments)
@@ -24293,7 +24293,7 @@ msgstr ""
 "Bankkonten haben meist eine eindeutige Kontonummer. Diese können Sie hier "
 "eingeben.\n"
 "\n"
-"KMyMoney benutzt die Kontonummer nur für Online-Banking Funktionen."
+"KMyMoney verwendet die Kontonummer nur für Online-Banking Funktionen."
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_iban)
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:97
@@ -24322,8 +24322,8 @@ msgstr ""
 "Für mehr Informationen, schauen Sie unter https://en.wikipedia.org/wiki/"
 "International_Bank_Account_Number.\n"
 "\n"
-"KMyMoney bietet dieses Feld nur für Dokumentationszwecke und benutzt es für "
-"nichts anderes."
+"KMyMoney bietet dieses Feld nur für Dokumentationszwecke und verwendet es "
+"für nichts anderes."
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:100
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:34
@@ -24687,7 +24687,7 @@ msgid ""
 "If this loan is a 'consumer loan' (money to use however you want), you can "
 "use a checking account instead."
 msgstr ""
-"Wenn dieses Darlehen für die Finanzierung eines Aktivpostens, wie z. B. ein "
+"Wenn dieses Darlehen für die Finanzierung eines Aktivpostens, wie z. B. ein "
 "Auto oder Haus verwendet wird, können Sie jetzt ein entsprechendes "
 "Anlagekonto erzeugen. Das Anlagekonto repräsentiert damit den Wert der "
 "Anlage. Eine Transferbuchung zum Übertragen des Darlehensbetrages auf das "
@@ -25810,7 +25810,7 @@ msgid ""
 msgstr ""
 "\n"
 "Wie möchten Sie diesen Kredit nennen? Verwenden Sie einen beschreibenden "
-"Name wie z. B. „Hausbaukredit“ oder „Kredit fürs Auto“."
+"Name wie z. B. „Hausbaukredit“ oder „Kredit fürs Auto“."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/wizards/newloanwizard/namewizardpage.ui:50
@@ -25918,7 +25918,7 @@ msgid ""
 msgstr ""
 "\n"
 "Willkommen zum Kreditkonto-Erstellungs-Assistenten. Dieser wird Ihnen "
-"helfen, einen Konto zur Verwaltung eines Kredites, z. B. für Ihr Haus, Ihr "
+"helfen, einen Konto zur Verwaltung eines Kredites, z. B. für Ihr Haus, Ihr "
 "Auto oder irgend einen anderen Kredit, für den Sie Zinsen zahlen oder "
 "erhalten, zu erstellen.\n"
 "\n"
@@ -26031,7 +26031,7 @@ msgid ""
 "payments in this context."
 msgstr ""
 "Hinweis: Beträge, die zum Erhalt des Kredits an den Kreditgeber gezahlt "
-"wurden (z. B. Dissagio) werden in diesem Zusammenhang nicht als Zahlung "
+"wurden (z. B. Dissagio) werden in diesem Zusammenhang nicht als Zahlung "
 "angesehen."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, RecordPaymentWizardPage)
@@ -26294,9 +26294,9 @@ msgid ""
 "deselect the checkbox below and continue on the next page."
 msgstr ""
 "Ein typischer Benutzer von KMyMoney unterhält ein Girokonto bei einer Bank "
-"und benutzt es, um Geld zu empfangen oder Rechnungen zu bezahlen. Wenn dies "
-"bei Ihnen nicht der Fall ist, schalten Sie bitte die Option unten aus und "
-"fahren Sie zur nächsten Seite fort."
+"und verwendet es, um Geld zu empfangen oder Rechnungen zu bezahlen. Wenn "
+"dies bei Ihnen nicht der Fall ist, schalten Sie bitte die Option unten aus "
+"und fahren Sie zur nächsten Seite fort."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_haveCheckingAccountButton)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:30
@@ -26348,7 +26348,7 @@ msgid ""
 "checking account."
 msgstr ""
 "Wählen Sie bitte einen aussagekräftigen Namen, der von KMyMoney für Ihr "
-"Girokonto benutzt wird."
+"Girokonto verwendet wird."
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyDateEdit, m_openingDateEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:118
@@ -26360,7 +26360,7 @@ msgid ""
 msgstr ""
 "Bitte geben Sie das Datum ein, ab dem Sie die Buchungen dieses Kontos "
 "verwalten möchten. Dies ist üblicherweise das Datum des letzten "
-"Kontoauszugs. Wenn unklar, können Sie die Voreinstellung benutzen."
+"Kontoauszugs. Wenn unklar, können Sie die Voreinstellung verwenden."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:143
@@ -26406,8 +26406,8 @@ msgid ""
 "also the currency you select here."
 msgstr ""
 "KMyMoney unterstützt zahlreiche Währungen. Wählen Sie hier Ihre "
-"Standardwährung. Sie wird für Berichte benutzt und dient als Voreinstellung "
-"für neue Konten."
+"Standardwährung. Sie wird für Berichte verwendet und dient als "
+"Voreinstellung für neue Konten."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/newuserwizard/kgeneralpage.ui:22
@@ -26421,7 +26421,7 @@ msgstr ""
 "Wenn Sie mögen, können Sie hier persönlichen Informationen eingeben.\n"
 "\n"
 "Diese Informationen sind nur für Sie sichtbar. Sie werden zur "
-"Personalisierung Ihrer KMyMoney-Datei benutzt, um Ihre Datei zu "
+"Personalisierung Ihrer KMyMoney-Datei verwendet, um Ihre Datei zu "
 "verschlüsseln, etc."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7)
@@ -26553,8 +26553,8 @@ msgid ""
 "and reports. Please select the base currency from the following list."
 msgstr ""
 "KMyMoney unterstützt mehrere Währungen, aber eine von ihnen wird als Ihre "
-"Basiswährung benutzt. Die Basiswährung wird als Voreinstellung für neue "
-"Konten und Berichte benutzt. Bitte wählen Sie die Basiswährung aus der "
+"Basiswährung verwendet. Die Basiswährung wird als Voreinstellung für neue "
+"Konten und Berichte verwendet. Bitte wählen Sie die Basiswährung aus der "
 "folgenden Liste."
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
