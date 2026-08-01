@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-29 03:38+0000\n"
-"PO-Revision-Date: 2026-06-23 00:53+0100\n"
+"PO-Revision-Date: 2026-07-29 11:26+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.2\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3756,10 +3756,7 @@ msgid "Ledger"
 msgstr "Libro mayor"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scheduled\n"
-#| "transactions"
+#, kde-format
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
