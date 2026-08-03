@@ -3622,15 +3622,12 @@ msgid "Ledger"
 msgstr "账簿"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scheduled\n"
-#| "transactions"
+#, kde-format
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
 "transactions"
-msgstr "计划交易"
+msgstr ""
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
