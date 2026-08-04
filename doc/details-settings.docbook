@@ -985,14 +985,14 @@
 <note>
   <para>
     The initial list and configuration of online quote sources is set up when
-    &kmymoney; first creates your data file.  If an online source makes a change
-    which requires a change to these settings in order for &kmymoney; to continue to
-    use it as a valid source, the user must make the necessary changes, using this
-    dialog, based on instructions posted at one of the suggested<link
-    linkend="firsttime.contact">support options</link>.  Hopefully, in the not to
-    distant future, the way online source configuration is handled will be changed
-    so that &kmymoney; can automatically fetch any necessary updates to these
-    settings without requiring the user to make any manual edits.
+    &kmymoney; first creates your data file. Additional predefined quote sources,
+    as well as updates to existing ones, can be installed by clicking the
+    <guibutton>Install</guibutton> button in this dialog. Manual editing of quote
+    source definitions is only required for creating custom sources or modifying
+    existing ones. If an online source makes a change which requires a change to
+    these settings in order for &kmymoney; to continue to use it as a valid source,
+    the user must make the necessary changes, using this dialog, based on instructions
+    posted at one of the suggested <link linkend="firsttime.contact">support options</link>.
   </para>
 </note>
 </sect1>
