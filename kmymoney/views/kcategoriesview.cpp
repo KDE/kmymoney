@@ -196,6 +196,8 @@ void KCategoriesView::slotEditCategory()
         return;
 
     const auto file = MyMoneyFile::instance();
+    // update our local copy with actual data
+    d->m_currentCategory = file->account(d->m_currentCategory.id());
     if (file->isStandardAccount(d->m_currentCategory.id()))
         return;
 
