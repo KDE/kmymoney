@@ -134,6 +134,9 @@ public:
         if (file->isStandardAccount(m_currentAccount.id()))
             return;
 
+        // update our local copy with actual data
+        m_currentAccount = file->account(m_currentAccount.id());
+
         QPointer<KEditLoanWizard> wizard = new KEditLoanWizard(m_currentAccount);
         q->connect(wizard, &KEditLoanWizard::newCategory, q, &KAccountsView::slotNewCategory);
         q->connect(wizard, &KEditLoanWizard::createPayee, q, &KAccountsView::slotNewPayee);
@@ -184,6 +187,8 @@ public:
         if (file->isStandardAccount(m_currentAccount.id()))
             return;
 
+        // update our local copy with actual data
+        m_currentAccount = file->account(m_currentAccount.id());
 
         // set a status message so that the application can't be closed until the editing is done
         //        slotStatusMsg(caption);
