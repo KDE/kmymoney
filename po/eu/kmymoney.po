@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-29 03:38+0000\n"
+"POT-Creation-Date: 2026-08-05 03:39+0000\n"
 "PO-Revision-Date: 2025-09-23 19:01+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -19704,39 +19704,39 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Irabazien totala:"
 
-#: kmymoney/views/kaccountsview_p.h:194
+#: kmymoney/views/kaccountsview_p.h:199
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Editatu '%1' kontua"
 
-#: kmymoney/views/kaccountsview_p.h:250
+#: kmymoney/views/kaccountsview_p.h:255
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Editatu kontua"
 
-#: kmymoney/views/kaccountsview_p.h:284
+#: kmymoney/views/kaccountsview_p.h:289
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Ezin da '%1' kontua aldatu. Arrazoia: %2"
 
-#: kmymoney/views/kaccountsview_p.h:360
+#: kmymoney/views/kaccountsview_p.h:365
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "Kontuaren saldoa zero behar du izan kontua itxi ahal izateko"
 
-#: kmymoney/views/kaccountsview_p.h:363
+#: kmymoney/views/kaccountsview_p.h:368
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "Azpi-kontu denak itxi behar dira, kontu bat itxi ahal izateko"
 
-#: kmymoney/views/kaccountsview_p.h:366
+#: kmymoney/views/kaccountsview_p.h:371
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Kontu hau antolatu aktibo baten dago oraindik"
 
-#: kmymoney/views/kaccountsview_p.h:369
+#: kmymoney/views/kaccountsview_p.h:374
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Kontu honek oraindik online kontu bat esleitua du"
@@ -19763,47 +19763,47 @@ msgstr "Irabazia: ~%1"
 msgid "Profit: %1"
 msgstr "Irabazia: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:210
+#: kmymoney/views/kcategoriesview.cpp:212
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Editatu '%1' kategoria"
 
-#: kmymoney/views/kcategoriesview.cpp:218
+#: kmymoney/views/kcategoriesview.cpp:220
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Editatu kategoria"
 
-#: kmymoney/views/kcategoriesview.cpp:232
+#: kmymoney/views/kcategoriesview.cpp:234
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Ezin da '%1' kategoria aldatu. Arrazoia: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:330
+#: kmymoney/views/kcategoriesview.cpp:332
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr ""
 "Ezin da <b>%1</b> kategoria <b>%2</b>kategoriarekin trukatu. Arrazoia: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:354
+#: kmymoney/views/kcategoriesview.cpp:356
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>Benetan ezabatu nahi duzu <b>%1</b> kategoria?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:355
-#: kmymoney/views/kcategoriesview.cpp:417
+#: kmymoney/views/kcategoriesview.cpp:357
+#: kmymoney/views/kcategoriesview.cpp:419
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Ezabatu kategoria"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:367
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>Ezin da <b>%1</b> kategoria ezabatu. Arrazoia: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:376
+#: kmymoney/views/kcategoriesview.cpp:378
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -19814,17 +19814,17 @@ msgstr ""
 "kategoria bera baino ez? Kategoria bera soilik ezabatzen baduzu, haren "
 "azpikategoria guztiak <b>%2</b>(r)en azpikategoria bihurtuko dira.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:382
+#: kmymoney/views/kcategoriesview.cpp:384
 #, kde-format
 msgid "Delete all"
 msgstr "Ezabatu denak"
 
-#: kmymoney/views/kcategoriesview.cpp:383
+#: kmymoney/views/kcategoriesview.cpp:385
 #, kde-format
 msgid "Just the category"
 msgstr "Kategoria soilik"
 
-#: kmymoney/views/kcategoriesview.cpp:413
+#: kmymoney/views/kcategoriesview.cpp:415
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -19834,7 +19834,7 @@ msgstr ""
 "erabiltzen ari baitira. <b>%2</b>(r)en azpikategoria bihurtuko dira. Aurrera "
 "egin nahi duzu?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:441
+#: kmymoney/views/kcategoriesview.cpp:443
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
@@ -19842,7 +19842,7 @@ msgstr ""
 "<qt>Ezin da ezabatu <b>%1</b> kategoriaren azpikategoria bat. Arrazoia: %2</"
 "qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:451
+#: kmymoney/views/kcategoriesview.cpp:453
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Ezin da %1 kategoria ezabatu. Arrazoia: %2"
