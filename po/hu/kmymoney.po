@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-29 00:46+0000\n"
+"POT-Creation-Date: 2026-08-05 00:46+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -20196,24 +20196,24 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Teljes profit:"
 
-#: kmymoney/views/kaccountsview_p.h:194
+#: kmymoney/views/kaccountsview_p.h:199
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "'%1' számla szerkesztése"
 
-#: kmymoney/views/kaccountsview_p.h:250
+#: kmymoney/views/kaccountsview_p.h:255
 #, fuzzy, kde-format
 #| msgid "Edit account..."
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Számla szerkesztése…"
 
-#: kmymoney/views/kaccountsview_p.h:284
+#: kmymoney/views/kaccountsview_p.h:289
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Nem lehet módosítani a '%1' számlát. Ok: %2"
 
-#: kmymoney/views/kaccountsview_p.h:360
+#: kmymoney/views/kaccountsview_p.h:365
 #, fuzzy, kde-format
 #| msgid ""
 #| "The balance of account <b>%1</b> dropped below the warning balance of %2."
@@ -20221,17 +20221,17 @@ msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "A <b>%1</b> számla egyenlege a figyelmeztetési %2 összeg alá csökken."
 
-#: kmymoney/views/kaccountsview_p.h:363
+#: kmymoney/views/kaccountsview_p.h:368
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:366
+#: kmymoney/views/kaccountsview_p.h:371
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:369
+#: kmymoney/views/kaccountsview_p.h:374
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr ""
@@ -20262,51 +20262,51 @@ msgstr "Profit: "
 msgid "Profit: %1"
 msgstr "Profit: "
 
-#: kmymoney/views/kcategoriesview.cpp:210
+#: kmymoney/views/kcategoriesview.cpp:212
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "„%1” kategória szerkesztése"
 
-#: kmymoney/views/kcategoriesview.cpp:218
+#: kmymoney/views/kcategoriesview.cpp:220
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Kategória szerkesztése…"
 
-#: kmymoney/views/kcategoriesview.cpp:232
+#: kmymoney/views/kcategoriesview.cpp:234
 #, fuzzy, kde-format
 #| msgid "Unable to modify account '%1'. Cause: %2"
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Nem lehet módosítani a '%1' számlát. Ok: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:330
+#: kmymoney/views/kcategoriesview.cpp:332
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr ""
 
-#: kmymoney/views/kcategoriesview.cpp:354
+#: kmymoney/views/kcategoriesview.cpp:356
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete category <b>%1</b>?"
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "Valóban törölni akarja a kategóriát: <b>%1</b>?"
 
-#: kmymoney/views/kcategoriesview.cpp:355
-#: kmymoney/views/kcategoriesview.cpp:417
+#: kmymoney/views/kcategoriesview.cpp:357
+#: kmymoney/views/kcategoriesview.cpp:419
 #, fuzzy, kde-format
 #| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Kategória törlése…"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:367
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "Nem lehet törölni a <b>%1</b> kategóriát. Ok: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:376
+#: kmymoney/views/kcategoriesview.cpp:378
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -20321,17 +20321,17 @@ msgstr ""
 "kategóriát magát? Ha csak a kategóriát magát törölné, az összes alkategória "
 "<b>%2</b> alkategóriája lesz."
 
-#: kmymoney/views/kcategoriesview.cpp:382
+#: kmymoney/views/kcategoriesview.cpp:384
 #, kde-format
 msgid "Delete all"
 msgstr "Összes törlése"
 
-#: kmymoney/views/kcategoriesview.cpp:383
+#: kmymoney/views/kcategoriesview.cpp:385
 #, kde-format
 msgid "Just the category"
 msgstr "Csak a kategóriát"
 
-#: kmymoney/views/kcategoriesview.cpp:413
+#: kmymoney/views/kcategoriesview.cpp:415
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -20340,14 +20340,14 @@ msgstr ""
 "<p><b>%1</b> néhány alkategóriája nem törölhető, mert még használatban "
 "vannak. Ezek  <b>%2</b> alkategóriái lesznek. Folytatja?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:441
+#: kmymoney/views/kcategoriesview.cpp:443
 #, fuzzy, kde-format
 #| msgid "Unable to delete a sub-category of category <b>%1</b>. Reason: %2"
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "Nem lehet törölni a <b>%1</b> alkategóriáját. Ok: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:451
+#: kmymoney/views/kcategoriesview.cpp:453
 #, fuzzy, kde-format
 #| msgid "Unable to delete category <b>%1</b>. Cause: %2"
 msgid "Unable to delete category '%1'. Cause: %2"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-29 00:46+0000\n"
+"POT-Creation-Date: 2026-08-05 00:46+0000\n"
 "PO-Revision-Date: 2026-07-28 10:52+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -19930,23 +19930,23 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Totale Winsten:"
 
-#: kmymoney/views/kaccountsview_p.h:194
+#: kmymoney/views/kaccountsview_p.h:199
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Bewerk rekening '%1'"
 
-#: kmymoney/views/kaccountsview_p.h:250
+#: kmymoney/views/kaccountsview_p.h:255
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Rekening bewerken"
 
-#: kmymoney/views/kaccountsview_p.h:284
+#: kmymoney/views/kaccountsview_p.h:289
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Kan rekeningen '%1' niet aanpassen. Oorzaak: %2"
 
-#: kmymoney/views/kaccountsview_p.h:360
+#: kmymoney/views/kaccountsview_p.h:365
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
@@ -19954,19 +19954,19 @@ msgstr ""
 "Het saldo van de rekening moet nul zijn voordat de rekening kan worden "
 "gesloten"
 
-#: kmymoney/views/kaccountsview_p.h:363
+#: kmymoney/views/kaccountsview_p.h:368
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 "Alle subrekeningen moeten gesloten zijn voordat de rekening gesloten kan "
 "worden"
 
-#: kmymoney/views/kaccountsview_p.h:366
+#: kmymoney/views/kaccountsview_p.h:371
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Deze rekening is nog steeds actief in een periodieke betaling"
 
-#: kmymoney/views/kaccountsview_p.h:369
+#: kmymoney/views/kaccountsview_p.h:374
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Deze rekening is nog steeds gekoppeld aan een online rekening"
@@ -19993,47 +19993,47 @@ msgstr "Winst: ~%1"
 msgid "Profit: %1"
 msgstr "Winst: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:210
+#: kmymoney/views/kcategoriesview.cpp:212
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Bewerk categorie '%1'"
 
-#: kmymoney/views/kcategoriesview.cpp:218
+#: kmymoney/views/kcategoriesview.cpp:220
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Categorie bewerken"
 
-#: kmymoney/views/kcategoriesview.cpp:232
+#: kmymoney/views/kcategoriesview.cpp:234
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Kan categorie '%1' niet aanpassen. Oorzaak: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:330
+#: kmymoney/views/kcategoriesview.cpp:332
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr ""
 "Kan categorie <b>%1</b> niet vervangen door categorie <b>%2</b>, Reden: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:354
+#: kmymoney/views/kcategoriesview.cpp:356
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>Wilt u categorie <b>%1</b> daadwerkelijk verwijderen?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:355
-#: kmymoney/views/kcategoriesview.cpp:417
+#: kmymoney/views/kcategoriesview.cpp:357
+#: kmymoney/views/kcategoriesview.cpp:419
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Categorie verwijderen"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:367
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>Kan categorie  <b>%1</b> niet verwijderen. Oorzaak: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:376
+#: kmymoney/views/kcategoriesview.cpp:378
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -20044,17 +20044,17 @@ msgstr ""
 "alleen de categorie zelf? Als u alleen de categorie wilt vervangen, dan "
 "worden alle subcategorieën gekoppeld aan categorie <b>%2</b>.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:382
+#: kmymoney/views/kcategoriesview.cpp:384
 #, kde-format
 msgid "Delete all"
 msgstr "Alles verwijderen"
 
-#: kmymoney/views/kcategoriesview.cpp:383
+#: kmymoney/views/kcategoriesview.cpp:385
 #, kde-format
 msgid "Just the category"
 msgstr "Alleen de categorie"
 
-#: kmymoney/views/kcategoriesview.cpp:413
+#: kmymoney/views/kcategoriesview.cpp:415
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -20064,14 +20064,14 @@ msgstr ""
 "verwijderd, omdat deze nog in gebruik zijn. Ze worden verplaatst naar "
 "subcategorieën van <b>%2</b>. Doorgaan?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:441
+#: kmymoney/views/kcategoriesview.cpp:443
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr ""
 "<qt>Kan subcategorie van categorie <b>%1</b> niet verwijderen. Reden: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:451
+#: kmymoney/views/kcategoriesview.cpp:453
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Kan categorie '%1' niet verwijderen. Oorzaak: %2"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-29 00:46+0000\n"
+"POT-Creation-Date: 2026-08-05 00:46+0000\n"
 "PO-Revision-Date: 2026-07-28 15:02+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -19945,40 +19945,40 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Profitti totali:"
 
-#: kmymoney/views/kaccountsview_p.h:194
+#: kmymoney/views/kaccountsview_p.h:199
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Modifica conto «%1»"
 
-#: kmymoney/views/kaccountsview_p.h:250
+#: kmymoney/views/kaccountsview_p.h:255
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Modifica conto"
 
-#: kmymoney/views/kaccountsview_p.h:284
+#: kmymoney/views/kaccountsview_p.h:289
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Impossibile modificare il conto «%1». Motivo: %2"
 
-#: kmymoney/views/kaccountsview_p.h:360
+#: kmymoney/views/kaccountsview_p.h:365
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr ""
 "Il bilancio del conto deve essere pari a zero prima che il conto sia chiuso"
 
-#: kmymoney/views/kaccountsview_p.h:363
+#: kmymoney/views/kaccountsview_p.h:368
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "Tutti i sottoconti devono essere chiusi prima che il conto sia chiuso"
 
-#: kmymoney/views/kaccountsview_p.h:366
+#: kmymoney/views/kaccountsview_p.h:371
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Questo conto è ancora incluso in una pianificazione attiva"
 
-#: kmymoney/views/kaccountsview_p.h:369
+#: kmymoney/views/kaccountsview_p.h:374
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Questo conto è ancora associato a un conto in linea"
@@ -20005,23 +20005,23 @@ msgstr "Profitto: ~%1"
 msgid "Profit: %1"
 msgstr "Profitto: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:210
+#: kmymoney/views/kcategoriesview.cpp:212
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Modifica categoria «%1»"
 
-#: kmymoney/views/kcategoriesview.cpp:218
+#: kmymoney/views/kcategoriesview.cpp:220
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Modifica categoria"
 
-#: kmymoney/views/kcategoriesview.cpp:232
+#: kmymoney/views/kcategoriesview.cpp:234
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Impossibile modificare la categoria «%1». Motivo: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:330
+#: kmymoney/views/kcategoriesview.cpp:332
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
@@ -20029,24 +20029,24 @@ msgstr ""
 "Impossibile scambiare la categoria <b>%1</b> con la categoria <b>%2</b>. "
 "Motivo: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:354
+#: kmymoney/views/kcategoriesview.cpp:356
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>Vuoi davvero eliminare la categoria <b>%1</b>?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:355
-#: kmymoney/views/kcategoriesview.cpp:417
+#: kmymoney/views/kcategoriesview.cpp:357
+#: kmymoney/views/kcategoriesview.cpp:419
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Elimina categoria"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:367
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>Impossibile eliminare la categoria <b>%1</b>. Motivo: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:376
+#: kmymoney/views/kcategoriesview.cpp:378
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -20057,17 +20057,17 @@ msgstr ""
 "la categoria principale? Se elimini solo la categoria, tutte le "
 "sottocategorie diventeranno sottocategorie di <b>%2</b>.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:382
+#: kmymoney/views/kcategoriesview.cpp:384
 #, kde-format
 msgid "Delete all"
 msgstr "Elimina tutto"
 
-#: kmymoney/views/kcategoriesview.cpp:383
+#: kmymoney/views/kcategoriesview.cpp:385
 #, kde-format
 msgid "Just the category"
 msgstr "Solo la categoria"
 
-#: kmymoney/views/kcategoriesview.cpp:413
+#: kmymoney/views/kcategoriesview.cpp:415
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -20077,7 +20077,7 @@ msgstr ""
 "eliminate perché sono ancora in uso. Saranno rese sottocategorie di <b>%2</"
 "b>. Procedere?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:441
+#: kmymoney/views/kcategoriesview.cpp:443
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
@@ -20085,7 +20085,7 @@ msgstr ""
 "<qt>Impossibile eliminare una sottocategoria della categoria <b>%1</b>. "
 "Motivo: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:451
+#: kmymoney/views/kcategoriesview.cpp:453
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Impossibile eliminare la categoria <b>%1</b>. Motivo: %2"

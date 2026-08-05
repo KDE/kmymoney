@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-29 00:46+0000\n"
+"POT-Creation-Date: 2026-08-05 00:46+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -19850,39 +19850,39 @@ msgstr "Huomio: asetusten mukaisesti ei näytetä käyttämättömiä luokkia."
 msgid "Total Profits:"
 msgstr "Voitot yhteensä:"
 
-#: kmymoney/views/kaccountsview_p.h:194
+#: kmymoney/views/kaccountsview_p.h:199
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Muokkaa tiliä '%1'"
 
-#: kmymoney/views/kaccountsview_p.h:250
+#: kmymoney/views/kaccountsview_p.h:255
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Muokkaa tiliä"
 
-#: kmymoney/views/kaccountsview_p.h:284
+#: kmymoney/views/kaccountsview_p.h:289
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Tiliä ”%1” ei voitu muuttaa. Syy: %2"
 
-#: kmymoney/views/kaccountsview_p.h:360
+#: kmymoney/views/kaccountsview_p.h:365
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "Tilin saldo täytyy olla nolla ennen kuin tili voidaan sulkea"
 
-#: kmymoney/views/kaccountsview_p.h:363
+#: kmymoney/views/kaccountsview_p.h:368
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "Kaikki alitilit täytyy sulkea ennen kuin tili voidaan sulkea"
 
-#: kmymoney/views/kaccountsview_p.h:366
+#: kmymoney/views/kaccountsview_p.h:371
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Tämä tili on yhä mukana käytössä olevassa ajoitetussa tapahtumassa"
 
-#: kmymoney/views/kaccountsview_p.h:369
+#: kmymoney/views/kaccountsview_p.h:374
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Tämä tili on hyvä liitettynä online-tiliin"
@@ -19909,46 +19909,46 @@ msgstr "Tuotto: n. %1"
 msgid "Profit: %1"
 msgstr "Tuotto: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:210
+#: kmymoney/views/kcategoriesview.cpp:212
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "Muokkaa luokkaa ”%1”"
 
-#: kmymoney/views/kcategoriesview.cpp:218
+#: kmymoney/views/kcategoriesview.cpp:220
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "Muokkaa luokkaa"
 
-#: kmymoney/views/kcategoriesview.cpp:232
+#: kmymoney/views/kcategoriesview.cpp:234
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "Luokkaa ”%1” ei voitu muuttaa. Syy: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:330
+#: kmymoney/views/kcategoriesview.cpp:332
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr "Luokkaa <b>%1</b> ei voida vaihtaa luokaksi <b>%2</b>. Syy: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:354
+#: kmymoney/views/kcategoriesview.cpp:356
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>Haluatko varmasti poistaa luokan <b>%1</b>?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:355
-#: kmymoney/views/kcategoriesview.cpp:417
+#: kmymoney/views/kcategoriesview.cpp:357
+#: kmymoney/views/kcategoriesview.cpp:419
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "Poista luokka"
 
-#: kmymoney/views/kcategoriesview.cpp:365
+#: kmymoney/views/kcategoriesview.cpp:367
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>Luokkaa <b>%1</b>  ei voi poistaa. Syy: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:376
+#: kmymoney/views/kcategoriesview.cpp:378
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -19959,17 +19959,17 @@ msgstr ""
 "luokan? Jos poistat vain luokan, sen aliluokista tehdään luokan <b>%2</b> "
 "aliluokkia.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:382
+#: kmymoney/views/kcategoriesview.cpp:384
 #, kde-format
 msgid "Delete all"
 msgstr "Poista kaikki"
 
-#: kmymoney/views/kcategoriesview.cpp:383
+#: kmymoney/views/kcategoriesview.cpp:385
 #, kde-format
 msgid "Just the category"
 msgstr "Vain luokka"
 
-#: kmymoney/views/kcategoriesview.cpp:413
+#: kmymoney/views/kcategoriesview.cpp:415
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -19978,13 +19978,13 @@ msgstr ""
 "<p>Joitakin luokan <b>%1</b> aliluokkia ei voi poistaa, koska ne ovat "
 "käytössä. Niistä tehdään luokan <b>%2</b> aliluokkia. Jatketaanko?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:441
+#: kmymoney/views/kcategoriesview.cpp:443
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "<qt>Luokan <b>%1</b> aliluokkaa ei voi poistaa. Syy: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:451
+#: kmymoney/views/kcategoriesview.cpp:453
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Luokkaa ”%1” ei voi poistaa. Syy: %2"
