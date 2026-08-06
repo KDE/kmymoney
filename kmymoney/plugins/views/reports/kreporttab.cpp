@@ -99,7 +99,6 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     for (auto* button : std::as_const(buttons)) {
         button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     }
-    enableAllReportActions();
 
     connect(m_tableView, &KMMTextBrowser::anchorClicked, eventHandler, &KReportsView::slotOpenUrl);
 
@@ -286,15 +285,6 @@ void KReportTab::updateReport()
 
     m_showingChart = !m_showingChart;
     toggleChart();
-}
-
-void KReportTab::enableAllReportActions()
-{
-    pActions[eMenu::Action::ReportNew]->setEnabled(true);
-    pActions[eMenu::Action::ReportConfigure]->setEnabled(true);
-    pActions[eMenu::Action::ReportExport]->setEnabled(true);
-    pActions[eMenu::Action::ReportDelete]->setEnabled(true);
-    pActions[eMenu::Action::ReportClose]->setEnabled(true);
 }
 
 void KReportTab::showConfigurationSidebar(QWidget* widget)

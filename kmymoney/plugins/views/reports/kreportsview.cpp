@@ -197,6 +197,7 @@ void KReportsView::showEvent(QShowEvent* event)
             if (d->m_configurationSidebarOpen) {
                 doConfigure(NoConfigureOption);
             }
+            updateActions({});
         });
 
         // remove close button from list tab
@@ -297,11 +298,8 @@ void KReportsView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::ReportAccountTransactions]->setEnabled(enable);
 
     // only access the widgets if they are initialized
-    if (!d->m_needLoad) {
-        if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget())) {
-            tab->enableAllReportActions();
-        }
-    }
+    const bool enabled = !d->m_needLoad && (d->ui.m_reportTabWidget->currentIndex() > 0) && isVisible();
+    d->enableAllReportActions(enabled);
 }
 
 void KReportsView::slotOpenUrl(const QUrl& url)

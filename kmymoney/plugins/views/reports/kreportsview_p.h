@@ -955,6 +955,15 @@ public:
         }
     }
 
+    void enableAllReportActions(bool enabled)
+    {
+        pActions[eMenu::Action::ReportNew]->setEnabled(enabled);
+        pActions[eMenu::Action::ReportConfigure]->setEnabled(enabled);
+        pActions[eMenu::Action::ReportExport]->setEnabled(enabled);
+        pActions[eMenu::Action::ReportDelete]->setEnabled(enabled);
+        pActions[eMenu::Action::ReportClose]->setEnabled(enabled);
+    }
+
     /**
       * This member holds the load state of page
       */

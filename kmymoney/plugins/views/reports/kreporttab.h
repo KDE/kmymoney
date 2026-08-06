@@ -99,7 +99,6 @@ public:
         updateReport();
     }
 
-    void enableAllReportActions();
     void showConfigurationSidebar(QWidget* widget = nullptr);
     void closeConfigurationSidebar();
     QWidget* configurationSidebar() const;
