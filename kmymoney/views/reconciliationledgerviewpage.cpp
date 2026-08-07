@@ -24,6 +24,7 @@
 #include "icons.h"
 #include "journalmodel.h"
 #include "kendingbalancedlg.h"
+#include "kmmyesno.h"
 #include "kmymoneysettings.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
@@ -33,11 +34,10 @@
 #include "mymoneyreconciliationreport.h"
 #include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
+#include "securitiesmodel.h"
 #include "specialdatesmodel.h"
 #include "transactionmatcher.h"
 #include "widgetenums.h"
-
-#include "kmmyesno.h"
 
 using namespace Icons;
 using namespace eWidgets;
@@ -177,6 +177,7 @@ public:
                     } catch (const MyMoneyException& e) {
                         qWarning("interest transaction not stored: '%s'", e.what());
                     }
+                    updateClearedBalance();
                     updateSummaryInformation();
 
                     // select a transaction close to the reconciliation date
@@ -394,6 +395,42 @@ public:
         return KMyMoneySettings::sortReconcileView();
     }
 
+    void updateClearedBalance()
+    {
+        auto stockSplit = [&](MyMoneyMoney balance, MyMoneyMoney factor) {
+            balance *= factor;
+            const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+            const auto security = MyMoneyFile::instance()->securitiesModel()->itemById(account.currencyId());
+
+            AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
+            if (security.roundingMethod() != AlkValue::RoundNever)
+                roundingMethod = security.roundingMethod();
+
+            int securityFraction = security.smallestAccountFraction();
+
+            return balance.convertDenominator(securityFraction, roundingMethod);
+        };
+
+        const auto endDate = endingBalanceDlg->statementDate();
+        const auto journalModel = MyMoneyFile::instance()->journalModel();
+        const auto journalRows = journalModel->rowCount();
+
+        clearedBalance = MyMoneyMoney();
+        for (int row = 0; row < journalRows; ++row) {
+            const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(journalModel->index(row, 0).internalPointer())->constDataRef();
+            const auto& split = journalEntry.split();
+            if ((split.accountId() == accountId) && (split.reconcileFlag() != eMyMoney::Split::State::NotReconciled)) {
+                if (journalEntry.transaction().postDate() <= endDate) {
+                    if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
+                        clearedBalance = stockSplit(clearedBalance, journalEntry.split().shares());
+                    } else {
+                        clearedBalance += journalEntry.split().shares();
+                    }
+                }
+            }
+        }
+    }
+
     void updateSummaryInformation() const override
     {
         ui->m_reconciliationContainer->setVisible(endingBalanceDlg != nullptr);
@@ -478,11 +515,9 @@ bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const Sel
 
 void ReconciliationLedgerViewPage::updateSummaryInformation(const QHash<QString, AccountBalances>& balances)
 {
+    Q_UNUSED(balances)
+
     auto dd = static_cast<ReconciliationLedgerViewPage::Private*>(d);
-    const auto it = balances.find(d->accountId);
-    if (it != balances.cend()) {
-        dd->totalBalance = (*it).m_totalBalance;
-        dd->clearedBalance = (*it).m_clearedBalance;
-        dd->updateSummaryInformation();
-    }
+    dd->updateClearedBalance();
+    dd->updateSummaryInformation();
 }
