@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-05 00:46+0000\n"
+"POT-Creation-Date: 2026-08-07 00:46+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -12695,7 +12695,7 @@ msgid "iCalendar files"
 msgstr "iCalendar-Dateien"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:385
+#: kmymoney/plugins/views/reports/kreportsview.cpp:383
 #, kde-format
 msgid "Export as"
 msgstr "Exporteren as"
@@ -13161,7 +13161,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Fehler bi't Importeren vun Kontouttog. Wullt Du wiedermaken?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1529
-#: kmymoney/plugins/views/reports/kreportsview.cpp:542
+#: kmymoney/plugins/views/reports/kreportsview.cpp:540
 #, kde-format
 msgid "Critical Error"
 msgstr "Swoor Fehler"
@@ -15719,7 +15719,7 @@ msgid "Unable to remove budget."
 msgstr "Finanzplaan lett sik nich torüchsetten."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:517
+#: kmymoney/plugins/views/reports/kreportsview.cpp:515
 #, kde-format
 msgid "Copy of %1"
 msgstr "Kopie vun %1"
@@ -16241,7 +16241,7 @@ msgstr "Finanzplaan-Utblick"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:145
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:174
-#: kmymoney/plugins/views/reports/kreporttab.cpp:376
+#: kmymoney/plugins/views/reports/kreporttab.cpp:366
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
 msgid "Chart"
@@ -17275,7 +17275,7 @@ msgstr "Rebeet"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:196
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:200
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:49
-#: kmymoney/plugins/views/reports/kreporttab.cpp:386
+#: kmymoney/plugins/views/reports/kreporttab.cpp:376
 #: kmymoney/views/khomeview_p.h:1122
 #, kde-format
 msgid "Report"
@@ -17407,62 +17407,62 @@ msgstr ""
 msgid "Search transactions"
 msgstr "Boken söken"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:334
+#: kmymoney/plugins/views/reports/kreportsview.cpp:332
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "Befehl \"%1\" in KReportsView::slotOpenUrl() nich begäng"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:354
+#: kmymoney/plugins/views/reports/kreportsview.cpp:352
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "Ansicht \"%1\" in KReportsView::slotOpenUrl() nich begäng"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:413
+#: kmymoney/plugins/views/reports/kreportsview.cpp:411
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "\"%1\" lett sik nich sekern."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:442
+#: kmymoney/plugins/views/reports/kreportsview.cpp:440
 #, fuzzy, kde-format
 #| msgid " (Customized)"
 msgid "%1 (Customized)"
 msgstr "(Topasst)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:443
-#: kmymoney/plugins/views/reports/kreportsview.cpp:520
+#: kmymoney/plugins/views/reports/kreportsview.cpp:441
+#: kmymoney/plugins/views/reports/kreportsview.cpp:518
 #, kde-format
 msgid "Custom Report"
 msgstr "Egen Bericht"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:483
+#: kmymoney/plugins/views/reports/kreportsview.cpp:481
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "Bericht lett sik nich instellen. Oorsaak: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:536
+#: kmymoney/plugins/views/reports/kreportsview.cpp:534
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Bericht lett sik nich tofögen. Oorsaak: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:570
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> is en Standardbericht un lett sik nich wegdoon."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:571
+#: kmymoney/plugins/views/reports/kreportsview.cpp:569
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "Bericht wegdoon?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:749
+#: kmymoney/plugins/views/reports/kreportsview.cpp:747
 #, fuzzy, kde-format
 #| msgid "Import options"
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Importoptschonen"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:817
+#: kmymoney/plugins/views/reports/kreportsview.cpp:815
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export into directory"
@@ -17921,13 +17921,13 @@ msgid "Format used when copying the report to the clipboard"
 msgstr "Dissen Bericht na de Twischenaflaag koperen"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
-#: kmymoney/plugins/views/reports/kreporttab.cpp:377
+#: kmymoney/plugins/views/reports/kreporttab.cpp:367
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
 msgstr "Dissen Bericht as Diagrammverschoon wiesen"
 
-#: kmymoney/plugins/views/reports/kreporttab.cpp:387
+#: kmymoney/plugins/views/reports/kreporttab.cpp:377
 #, kde-format
 msgid "Show the report version of this chart"
 msgstr ""
