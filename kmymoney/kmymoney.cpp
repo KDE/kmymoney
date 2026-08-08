@@ -1014,6 +1014,33 @@ public:
     }
 };
 
+#ifdef Q_OS_LINUX
+
+class UrlHandler : public QObject
+{
+    Q_OBJECT
+public:
+    UrlHandler(QObject* parent)
+        : QObject(parent)
+    {
+    }
+public Q_SLOTS:
+    void openUrl(const QUrl& url)
+    {
+        QProcess* process = new QProcess(this);
+        process->setProgram("xdg-open");
+        process->setArguments({url.toString()});
+
+        // make sure to fix the LD_LIBRARY_PATH
+        // to not include APPDIR subdirectories
+        AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(process);
+
+        connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), process, &QProcess::deleteLater);
+        process->start();
+    }
+};
+#endif
+
 KMyMoneyApp::KMyMoneyApp(QWidget* parent)
     : KXmlGuiWindow(parent)
     , MyMoneyFactory(this)
@@ -1028,6 +1055,14 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
     // Register the main engine types used as meta-objects
     qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
     qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
+
+#ifdef Q_OS_LINUX
+    // setup special handler to support xdg-open in appimage versions
+    UrlHandler* handler = new UrlHandler(this);
+    QDesktopServices::setUrlHandler("file", handler, "openUrl");
+    QDesktopServices::setUrlHandler("http", handler, "openUrl");
+    QDesktopServices::setUrlHandler("https", handler, "openUrl");
+#endif
 
     registerCreator<KCurrencyCalculator, QWidget>(&KCurrencyCalculator::createObject);
 #ifdef ENABLE_SQLCIPHER
