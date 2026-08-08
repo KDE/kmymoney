@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:46+0000\n"
+"POT-Creation-Date: 2026-08-08 00:45+0000\n"
 "PO-Revision-Date: 2026-07-28 07:55+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -21488,7 +21488,7 @@ msgstr ""
 "inaktuellt och kan skilja sig från kontobehållningen."
 
 #: kmymoney/views/ledgerviewpage_p.h:150
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:440
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21814,7 +21814,7 @@ msgstr ""
 "avstämningsinformation.\n"
 " Vill du att KMyMoney ska rensa transaktionerna åt dig?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:256
+#: kmymoney/views/reconciliationledgerviewpage.cpp:257
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -21825,18 +21825,18 @@ msgstr ""
 "bankutdraget och transaktionerna markerad som kontrollerad.\n"
 "Är du säker på att du vill slutföra avstämningen?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:259
+#: kmymoney/views/reconciliationledgerviewpage.cpp:260
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Bekräfta avstämningens slut"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:402
+#: kmymoney/views/reconciliationledgerviewpage.cpp:439
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Utdrag: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:405
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

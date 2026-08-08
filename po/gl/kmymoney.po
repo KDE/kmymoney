@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:46+0000\n"
+"POT-Creation-Date: 2026-08-08 00:45+0000\n"
 "PO-Revision-Date: 2025-06-22 06:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -21625,7 +21625,7 @@ msgstr ""
 "non estar ao día e non coincidir co saldo da conta."
 
 #: kmymoney/views/ledgerviewpage_p.h:150
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:440
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21947,7 +21947,7 @@ msgstr ""
 "KMyMoney detectou algúns asentos que coinciden cos datos de conciliación.\n"
 "Quere que KMyMoney compense estes asentos?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:256
+#: kmymoney/views/reconciliationledgerviewpage.cpp:257
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -21958,18 +21958,18 @@ msgstr ""
 "seu extracto bancario e os asentos sinalados como compensados.\n"
 "Seguro que quere rematar a conciliación ?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:259
+#: kmymoney/views/reconciliationledgerviewpage.cpp:260
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Confirmar a conciliación"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:402
+#: kmymoney/views/reconciliationledgerviewpage.cpp:439
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Extracto: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:405
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

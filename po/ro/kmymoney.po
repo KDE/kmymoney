@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:46+0000\n"
+"POT-Creation-Date: 2026-08-08 00:45+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -22724,7 +22724,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:150
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:440
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -23063,7 +23063,7 @@ msgstr ""
 "reconciliere.\n"
 " Doriți ca aceste tranzacții să fie marcate ca verificate de către KMyMoney?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:256
+#: kmymoney/views/reconciliationledgerviewpage.cpp:257
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -23074,19 +23074,19 @@ msgstr ""
 "cu o diferență între extrasul bancar și tranzacțiile marcate ca verificate.\n"
 "Sunteți siguri că doriți să terminați procesul de reconciliere?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:259
+#: kmymoney/views/reconciliationledgerviewpage.cpp:260
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Confirmați sfârșitul reconcilierii"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:402
+#: kmymoney/views/reconciliationledgerviewpage.cpp:439
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Extras: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:405
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"

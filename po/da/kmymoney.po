@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:46+0000\n"
+"POT-Creation-Date: 2026-08-08 00:45+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -22462,7 +22462,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:150
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:440
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -22792,7 +22792,7 @@ msgstr ""
 "KMyMoney har detekteret transaktioner som matcher dine afstemningsdata.\n"
 "Skal KMyMoney godkende disse transaktioner for dig?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:256
+#: kmymoney/views/reconciliationledgerviewpage.cpp:257
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -22803,19 +22803,19 @@ msgstr ""
 "bankopgørelse og de transaktioner der er markeret som godkendt.\n"
 "Vil du virkelig afslutte afstemningen?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:259
+#: kmymoney/views/reconciliationledgerviewpage.cpp:260
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Bekræft afslutning af afstemning"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:402
+#: kmymoney/views/reconciliationledgerviewpage.cpp:439
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Opgørelse: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:405
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"

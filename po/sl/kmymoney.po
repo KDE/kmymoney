@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:46+0000\n"
+"POT-Creation-Date: 2026-08-08 00:45+0000\n"
 "PO-Revision-Date: 2026-07-28 11:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -21568,7 +21568,7 @@ msgstr ""
 "ažurna in se lahko razlikuje od stanja na računu."
 
 #: kmymoney/views/ledgerviewpage_p.h:150
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:440
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21885,7 +21885,7 @@ msgstr ""
 "KMyMoney je zaznal transakcije, ki se ujemajo s podatki o uskladitvi.\n"
 "Bi radi, da KMyMoney te transakcije razčisti za vas?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:256
+#: kmymoney/views/reconciliationledgerviewpage.cpp:257
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -21896,18 +21896,18 @@ msgstr ""
 "transakcijami, označenimi kot potrjene.\n"
 "Ali ste prepričani, da želite končati usklajevanje?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:259
+#: kmymoney/views/reconciliationledgerviewpage.cpp:260
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Potrdite konec usklajevanja"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:402
+#: kmymoney/views/reconciliationledgerviewpage.cpp:439
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Izkaz: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:405
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

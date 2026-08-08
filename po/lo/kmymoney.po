@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:46+0000\n"
+"POT-Creation-Date: 2026-08-08 00:45+0000\n"
 "PO-Revision-Date: 2025-12-07 00:37+0700\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
@@ -21081,7 +21081,7 @@ msgstr ""
 "ມູນຄ່າຖືກຄິດໄລ່ໂດຍອີງໃສ່ລາຄາທີ່ມີຢູ່ລ່າສຸດ, ດັ່ງນັ້ນອາດຈະບໍ່ທັນສະໄໝ ແລະ ອາດແຕກຕ່າງຈາກຍອດເງິນໃນບັນຊີ."
 
 #: kmymoney/views/ledgerviewpage_p.h:150
-#: kmymoney/views/reconciliationledgerviewpage.cpp:403
+#: kmymoney/views/reconciliationledgerviewpage.cpp:440
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21388,7 +21388,7 @@ msgstr ""
 "KMyMoney ກວດພົບທຸລະກຳທີ່ກົງກັບຂໍ້ມູນການປັບຍອດຂອງທ່ານ.\n"
 "ທ່ານຕ້ອງການໃຫ້ KMyMoney ເຄລຍທຸລະກຳເຫຼົ່ານີ້ໃຫ້ທ່ານບໍ່?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:256
+#: kmymoney/views/reconciliationledgerviewpage.cpp:257
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -21399,18 +21399,18 @@ msgstr ""
 "ທຸລະກຳທີ່ໝາຍວ່າເຄລຍແລ້ວ.\n"
 "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສຳເລັດການປັບຍອດ?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:259
+#: kmymoney/views/reconciliationledgerviewpage.cpp:260
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "ຢືນຢັນການສິ້ນສຸດການປັບຍອດ"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:402
+#: kmymoney/views/reconciliationledgerviewpage.cpp:439
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "ໃບແຈ້ງຍອດ: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:405
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
