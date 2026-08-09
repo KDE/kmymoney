@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-08 00:45+0000\n"
+"POT-Creation-Date: 2026-08-09 00:45+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -567,10 +567,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3711
-#: kmymoney/kmymoney.cpp:3781 kmymoney/kmymoney.cpp:3796
-#: kmymoney/kmymoney.cpp:3802 kmymoney/kmymoney.cpp:3814
-#: kmymoney/kmymoney.cpp:3816
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3746
+#: kmymoney/kmymoney.cpp:3816 kmymoney/kmymoney.cpp:3831
+#: kmymoney/kmymoney.cpp:3837 kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Backup"
 msgstr "Atsarginė kopija"
@@ -4714,572 +4714,572 @@ msgstr "Nepavyksta pašalinti operacijos"
 msgid "Unable to unmatch the selected transactions"
 msgstr "Nepavyksta pašalinti operacijos"
 
-#: kmymoney/kmymoney.cpp:1072
+#: kmymoney/kmymoney.cpp:1107
 #, fuzzy, kde-format
 #| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Nauja sąskaita..."
 
-#: kmymoney/kmymoney.cpp:1239
+#: kmymoney/kmymoney.cpp:1274
 #, kde-format
 msgid "Copy to clipboard"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1240
+#: kmymoney/kmymoney.cpp:1275
 #, fuzzy, kde-format
 msgid "Save to file"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/kmymoney.cpp:1374
+#: kmymoney/kmymoney.cpp:1409
 #, kde-format
 msgid "Backup..."
 msgstr "Kopijuoti..."
 
-#: kmymoney/kmymoney.cpp:1375
+#: kmymoney/kmymoney.cpp:1410
 #, fuzzy, kde-format
 msgid "Statement file..."
 msgstr "Išsaugojama failas..."
 
-#: kmymoney/kmymoney.cpp:1376 kmymoney/kmymoney.cpp:1377
+#: kmymoney/kmymoney.cpp:1411 kmymoney/kmymoney.cpp:1412
 #, fuzzy, kde-format
 msgid "Account Template..."
 msgstr "Sąskaitų šablonas ..."
 
-#: kmymoney/kmymoney.cpp:1378
+#: kmymoney/kmymoney.cpp:1413
 #, kde-format
 msgid "Personal Data..."
 msgstr "Asmeniniai duomenys..."
 
-#: kmymoney/kmymoney.cpp:1380
+#: kmymoney/kmymoney.cpp:1415
 #, kde-format
 msgid "Dump Memory"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1382
+#: kmymoney/kmymoney.cpp:1417
 #, kde-format
 msgid "File-Information..."
 msgstr "Failo informacija..."
 
-#: kmymoney/kmymoney.cpp:1386
+#: kmymoney/kmymoney.cpp:1421
 #, kde-format
 msgid "Find transaction..."
 msgstr "Rasti operaciją..."
 
-#: kmymoney/kmymoney.cpp:1390
+#: kmymoney/kmymoney.cpp:1425
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Rodyti operacijų detales"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1391 kmymoney/settings/kmymoney.kcfg:268
+#: kmymoney/kmymoney.cpp:1426 kmymoney/settings/kmymoney.kcfg:268
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr ""
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1392 kmymoney/settings/kmymoney.kcfg:240
+#: kmymoney/kmymoney.cpp:1427 kmymoney/settings/kmymoney.kcfg:240
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Slėpti nenaudojamas kategorijas"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1393 kmymoney/settings/kmymoney.kcfg:244
+#: kmymoney/kmymoney.cpp:1428 kmymoney/settings/kmymoney.kcfg:244
 #, kde-format
 msgid "Show all accounts"
 msgstr "Rodyti visas sąskaitas"
 
-#: kmymoney/kmymoney.cpp:1397
+#: kmymoney/kmymoney.cpp:1432
 #, kde-format
 msgid "New institution..."
 msgstr "Nauja įstaiga..."
 
-#: kmymoney/kmymoney.cpp:1398
+#: kmymoney/kmymoney.cpp:1433
 #, kde-format
 msgid "Edit institution..."
 msgstr "Keisti įstaigą..."
 
-#: kmymoney/kmymoney.cpp:1399
+#: kmymoney/kmymoney.cpp:1434
 #, kde-format
 msgid "Delete institution..."
 msgstr "Pašalinti įstaigą..."
 
-#: kmymoney/kmymoney.cpp:1403
+#: kmymoney/kmymoney.cpp:1438
 #, kde-format
 msgid "New account..."
 msgstr "Nauja sąskaita..."
 
-#: kmymoney/kmymoney.cpp:1404
+#: kmymoney/kmymoney.cpp:1439
 #, kde-format
 msgid "Open ledger"
 msgstr "Atverti knygą"
 
-#: kmymoney/kmymoney.cpp:1405
+#: kmymoney/kmymoney.cpp:1440
 #, kde-format
 msgid "Reconcile..."
 msgstr "Sutaikyti"
 
-#: kmymoney/kmymoney.cpp:1406
+#: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Baigti"
 
-#: kmymoney/kmymoney.cpp:1407
+#: kmymoney/kmymoney.cpp:1442
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Pašto kodas:"
 
-#: kmymoney/kmymoney.cpp:1408
+#: kmymoney/kmymoney.cpp:1443
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: kmymoney/kmymoney.cpp:1409
+#: kmymoney/kmymoney.cpp:1444
 #, fuzzy, kde-format
 msgid "Report reconciliation"
 msgstr "Sutaikinimo vediklis"
 
-#: kmymoney/kmymoney.cpp:1410
+#: kmymoney/kmymoney.cpp:1445
 #, kde-format
 msgid "Edit account..."
 msgstr "Keisti sąskaitą..."
 
-#: kmymoney/kmymoney.cpp:1411
+#: kmymoney/kmymoney.cpp:1446
 #, kde-format
 msgid "Delete account..."
 msgstr "Pašalinti sąskaitą..."
 
-#: kmymoney/kmymoney.cpp:1412
+#: kmymoney/kmymoney.cpp:1447
 #, fuzzy, kde-format
 msgid "Close account"
 msgstr "Uždaryti sąskaitą „%1“"
 
-#: kmymoney/kmymoney.cpp:1413
+#: kmymoney/kmymoney.cpp:1448
 #, fuzzy, kde-format
 msgid "Reopen account"
 msgstr "Iš naujo atidaryti sąskaitą „%1“"
 
-#: kmymoney/kmymoney.cpp:1414
+#: kmymoney/kmymoney.cpp:1449
 #, fuzzy, kde-format
 msgid "Transaction report"
 msgstr "Operacijų istorija"
 
-#: kmymoney/kmymoney.cpp:1415
+#: kmymoney/kmymoney.cpp:1450
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Rodyti balanso grafiką"
 
-#: kmymoney/kmymoney.cpp:1416
+#: kmymoney/kmymoney.cpp:1451
 #, fuzzy, kde-format
 msgid "Map account..."
 msgstr "Paskolos dydis"
 
-#: kmymoney/kmymoney.cpp:1417
+#: kmymoney/kmymoney.cpp:1452
 #, fuzzy, kde-format
 msgid "Unmap account..."
 msgstr "Paskolos dydis"
 
-#: kmymoney/kmymoney.cpp:1418
+#: kmymoney/kmymoney.cpp:1453
 #, kde-format
 msgid "Update account..."
 msgstr "Atnaujinti sąskaitą..."
 
-#: kmymoney/kmymoney.cpp:1419
+#: kmymoney/kmymoney.cpp:1454
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Atnaujinti visas sąskaitas..."
 
-#: kmymoney/kmymoney.cpp:1423
+#: kmymoney/kmymoney.cpp:1458
 #, kde-format
 msgid "New category..."
 msgstr "Nauja kategorija..."
 
-#: kmymoney/kmymoney.cpp:1424
+#: kmymoney/kmymoney.cpp:1459
 #, fuzzy, kde-format
 msgid "Edit category..."
 msgstr "Nauja kategorija..."
 
-#: kmymoney/kmymoney.cpp:1425
+#: kmymoney/kmymoney.cpp:1460
 #, fuzzy, kde-format
 msgid "Delete category..."
 msgstr "Trinti kategoriją"
 
-#: kmymoney/kmymoney.cpp:1429
+#: kmymoney/kmymoney.cpp:1464
 #, fuzzy, kde-format
 msgid "Currencies..."
 msgstr "Valiutos"
 
-#: kmymoney/kmymoney.cpp:1430
+#: kmymoney/kmymoney.cpp:1465
 #, kde-format
 msgid "Stock prices and exchange rates..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1431
+#: kmymoney/kmymoney.cpp:1466
 #, fuzzy, kde-format
 #| msgid "Update Stock and Currency Prices..."
 msgid "Update stock prices and exchange rates..."
 msgstr "Atnaujinti akcijų ir valiutų kainas..."
 
-#: kmymoney/kmymoney.cpp:1432
+#: kmymoney/kmymoney.cpp:1467
 #, kde-format
 msgid "Consistency Check"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1433
+#: kmymoney/kmymoney.cpp:1468
 #, kde-format
 msgid "Performance-Test"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1434
+#: kmymoney/kmymoney.cpp:1469
 #, kde-format
 msgid "Calculator..."
 msgstr "Skaičiuotuvas..."
 
-#: kmymoney/kmymoney.cpp:1438
+#: kmymoney/kmymoney.cpp:1473
 #, kde-format
 msgid "Enable all messages"
 msgstr "Įgalinti visus pranešimus"
 
-#: kmymoney/kmymoney.cpp:1442 kmymoney/views/kwelcomepage.cpp:81
+#: kmymoney/kmymoney.cpp:1477 kmymoney/views/kwelcomepage.cpp:81
 #, kde-format
 msgid "Get help from our community"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1443 kmymoney/views/kwelcomepage.cpp:83
+#: kmymoney/kmymoney.cpp:1478 kmymoney/views/kwelcomepage.cpp:83
 #, kde-format
 msgid "See what's new in this version"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1444 kmymoney/views/kwelcomepage.cpp:79
+#: kmymoney/kmymoney.cpp:1479 kmymoney/views/kwelcomepage.cpp:79
 #, kde-format
 msgid "Visit our website"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1448
+#: kmymoney/kmymoney.cpp:1483
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "Bet kokia operacija"
 
-#: kmymoney/kmymoney.cpp:1449
+#: kmymoney/kmymoney.cpp:1484
 #, fuzzy, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Keisti"
 
-#: kmymoney/kmymoney.cpp:1450
+#: kmymoney/kmymoney.cpp:1485
 #, fuzzy, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Įvesti"
 
-#: kmymoney/kmymoney.cpp:1451
+#: kmymoney/kmymoney.cpp:1486
 #, fuzzy, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Pridėti naują instituciją..."
 
-#: kmymoney/kmymoney.cpp:1452
+#: kmymoney/kmymoney.cpp:1487
 #, fuzzy, kde-format
 #| msgid "Balance"
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: kmymoney/kmymoney.cpp:1453
+#: kmymoney/kmymoney.cpp:1488
 #, fuzzy, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Trinti"
 
-#: kmymoney/kmymoney.cpp:1454
+#: kmymoney/kmymoney.cpp:1489
 #, fuzzy, kde-format
 #| msgid "Duplicate"
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Dublikuoti"
 
-#: kmymoney/kmymoney.cpp:1455
+#: kmymoney/kmymoney.cpp:1490
 #, fuzzy, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Adresas:"
 
-#: kmymoney/kmymoney.cpp:1456
+#: kmymoney/kmymoney.cpp:1491
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Priimti"
 
-#: kmymoney/kmymoney.cpp:1457
+#: kmymoney/kmymoney.cpp:1492
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Perjungti"
 
-#: kmymoney/kmymoney.cpp:1458
+#: kmymoney/kmymoney.cpp:1493
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Išvalytas"
 
-#: kmymoney/kmymoney.cpp:1459
+#: kmymoney/kmymoney.cpp:1494
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Sutaikintos"
 
-#: kmymoney/kmymoney.cpp:1460
+#: kmymoney/kmymoney.cpp:1495
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Nesutaikintos"
 
-#: kmymoney/kmymoney.cpp:1461
+#: kmymoney/kmymoney.cpp:1496
 #, fuzzy, kde-format
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Rasti operaciją..."
 
-#: kmymoney/kmymoney.cpp:1462
+#: kmymoney/kmymoney.cpp:1497
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Rodyti operacijų detales"
 
-#: kmymoney/kmymoney.cpp:1463
+#: kmymoney/kmymoney.cpp:1498
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Rodyti operacijų detales"
 
-#: kmymoney/kmymoney.cpp:1465
+#: kmymoney/kmymoney.cpp:1500
 #, fuzzy, kde-format
 #| msgid "&Open"
 msgctxt "Open URL"
 msgid "Open URL"
 msgstr "&Atverti"
 
-#: kmymoney/kmymoney.cpp:1466
+#: kmymoney/kmymoney.cpp:1501
 #, fuzzy, kde-format
 #| msgid "Select all"
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Išrinkti visus"
 
-#: kmymoney/kmymoney.cpp:1467
+#: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
 msgid "Go to account"
 msgstr "sąskaita"
 
-#: kmymoney/kmymoney.cpp:1468
+#: kmymoney/kmymoney.cpp:1503
 #, fuzzy, kde-format
 msgid "Go to payee"
 msgstr "Sąskaitos pavadinimas"
 
-#: kmymoney/kmymoney.cpp:1469
+#: kmymoney/kmymoney.cpp:1504
 #, fuzzy, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/kmymoney.cpp:1470
+#: kmymoney/kmymoney.cpp:1505
 #, kde-format
 msgid "Assign next number"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1471
+#: kmymoney/kmymoney.cpp:1506
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1472
+#: kmymoney/kmymoney.cpp:1507
 #, fuzzy, kde-format
 #| msgid "Month to date"
 msgid "Move to today"
 msgstr "Mėnuo iki šiandien"
 
-#: kmymoney/kmymoney.cpp:1473
+#: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
 msgid "Copy splits"
 msgstr "Pridėti naują instituciją..."
 
-#: kmymoney/kmymoney.cpp:1474
+#: kmymoney/kmymoney.cpp:1509
 #, fuzzy, kde-format
 #| msgid "Delete transaction"
 msgid "Copy selected transactions"
 msgstr "Trinti operaciją"
 
-#: kmymoney/kmymoney.cpp:1475
+#: kmymoney/kmymoney.cpp:1510
 #, kde-format
 msgid "Show filter widget"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1477
+#: kmymoney/kmymoney.cpp:1512
 #, fuzzy, kde-format
 msgid "New investment..."
 msgstr "Investicija"
 
-#: kmymoney/kmymoney.cpp:1478
+#: kmymoney/kmymoney.cpp:1513
 #, fuzzy, kde-format
 msgid "Edit investment..."
 msgstr "Investicija"
 
-#: kmymoney/kmymoney.cpp:1479
+#: kmymoney/kmymoney.cpp:1514
 #, fuzzy, kde-format
 msgid "Delete investment..."
 msgstr "Trinti ..."
 
-#: kmymoney/kmymoney.cpp:1480
+#: kmymoney/kmymoney.cpp:1515
 #, kde-format
 msgid "Online price update..."
 msgstr "Atnaujinti kainą iš interneto..."
 
-#: kmymoney/kmymoney.cpp:1481
+#: kmymoney/kmymoney.cpp:1516
 #, kde-format
 msgid "Manual price update..."
 msgstr "Rankiniu būdu atnaujinti kainą..."
 
-#: kmymoney/kmymoney.cpp:1482
+#: kmymoney/kmymoney.cpp:1517
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Edit security..."
 msgstr "Trinti vertybinį popierį"
 
-#: kmymoney/kmymoney.cpp:1483
+#: kmymoney/kmymoney.cpp:1518
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "Trinti apsaugą"
 
-#: kmymoney/kmymoney.cpp:1486
+#: kmymoney/kmymoney.cpp:1521
 #, fuzzy, kde-format
 #| msgid "&New Schedule..."
 msgid "New schedule..."
 msgstr "&Naujas tvarkaraštis..."
 
-#: kmymoney/kmymoney.cpp:1487 kmymoney/kmymoney.cpp:1488
+#: kmymoney/kmymoney.cpp:1522 kmymoney/kmymoney.cpp:1523
 #, fuzzy, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/kmymoney.cpp:1489
+#: kmymoney/kmymoney.cpp:1524
 #, fuzzy, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/kmymoney.cpp:1490
+#: kmymoney/kmymoney.cpp:1525
 #, fuzzy, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/kmymoney.cpp:1491
+#: kmymoney/kmymoney.cpp:1526
 #, fuzzy, kde-format
 msgid "Enter next transaction..."
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/kmymoney.cpp:1492
+#: kmymoney/kmymoney.cpp:1527
 #, fuzzy, kde-format
 msgid "Skip next transaction..."
 msgstr "Rasti operaciją..."
 
-#: kmymoney/kmymoney.cpp:1493
+#: kmymoney/kmymoney.cpp:1528
 #, fuzzy, kde-format
 #| msgid "Schedule Details"
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
 msgstr "Tvarkaraščio detalės"
 
-#: kmymoney/kmymoney.cpp:1496
+#: kmymoney/kmymoney.cpp:1531
 #, fuzzy, kde-format
 msgid "New payee..."
 msgstr "Naujas korespondentas"
 
-#: kmymoney/kmymoney.cpp:1497
+#: kmymoney/kmymoney.cpp:1532
 #, fuzzy, kde-format
 msgid "Rename payee"
 msgstr "Šalinti korespondentą"
 
-#: kmymoney/kmymoney.cpp:1498
+#: kmymoney/kmymoney.cpp:1533
 #, fuzzy, kde-format
 msgid "Delete payee"
 msgstr "Pasirinkite savaitę"
 
-#: kmymoney/kmymoney.cpp:1499
+#: kmymoney/kmymoney.cpp:1534
 #, kde-format
 msgid "Merge payees"
 msgstr "Sulieti korespondentus"
 
-#: kmymoney/kmymoney.cpp:1501
+#: kmymoney/kmymoney.cpp:1536
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "Nauja žyma"
 
-#: kmymoney/kmymoney.cpp:1502
+#: kmymoney/kmymoney.cpp:1537
 #, kde-format
 msgid "Rename tag"
 msgstr "Pervadinti žymę"
 
-#: kmymoney/kmymoney.cpp:1503
+#: kmymoney/kmymoney.cpp:1538
 #, fuzzy, kde-format
 msgid "Delete tag"
 msgstr "Trinti žymę"
 
-#: kmymoney/kmymoney.cpp:1505
+#: kmymoney/kmymoney.cpp:1540
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "&Nauja ataskaita"
 
-#: kmymoney/kmymoney.cpp:1506
+#: kmymoney/kmymoney.cpp:1541
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:244
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "&Nauja ataskaita"
 
-#: kmymoney/kmymoney.cpp:1507
+#: kmymoney/kmymoney.cpp:1542
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Copy report"
 msgstr "&Nauja ataskaita"
 
-#: kmymoney/kmymoney.cpp:1508
+#: kmymoney/kmymoney.cpp:1543
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:242
 #, fuzzy, kde-format
 #| msgid "Configure"
 msgid "Configure report"
 msgstr "Konfigūruoti"
 
-#: kmymoney/kmymoney.cpp:1509
+#: kmymoney/kmymoney.cpp:1544
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "Mėgstamiausios ataskaitos"
 
-#: kmymoney/kmymoney.cpp:1510
+#: kmymoney/kmymoney.cpp:1545
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "Trinti ataskaitą?"
 
-#: kmymoney/kmymoney.cpp:1511
+#: kmymoney/kmymoney.cpp:1546
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "&Nauja ataskaita"
 
-#: kmymoney/kmymoney.cpp:1512
+#: kmymoney/kmymoney.cpp:1547
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
@@ -5287,34 +5287,34 @@ msgid "Toggle chart"
 msgstr "Perjungti"
 
 #. i18n: ectx: property (text), widget (QToolButton, editTabOrderButton)
-#: kmymoney/kmymoney.cpp:1513 kmymoney/views/investtransactioneditor.ui:307
+#: kmymoney/kmymoney.cpp:1548 kmymoney/views/investtransactioneditor.ui:307
 #: kmymoney/views/newspliteditor.ui:69
 #: kmymoney/views/newtransactioneditor.ui:120
 #, fuzzy, kde-format
 msgid "Edit tab order"
 msgstr "Perkėlimai"
 
-#: kmymoney/kmymoney.cpp:1515
+#: kmymoney/kmymoney.cpp:1550
 #, kde-format
 msgid "Ledger Quick Open"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1517
+#: kmymoney/kmymoney.cpp:1552
 #, kde-format
 msgid "Test new feature"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1519
+#: kmymoney/kmymoney.cpp:1554
 #, kde-format
 msgid "Debug Traces"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1520
+#: kmymoney/kmymoney.cpp:1555
 #, kde-format
 msgid "Debug Timers"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1559
+#: kmymoney/kmymoney.cpp:1594
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5322,7 +5322,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "Atitikmuo"
 
-#: kmymoney/kmymoney.cpp:1560
+#: kmymoney/kmymoney.cpp:1595
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5330,53 +5330,53 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Atitikmuo"
 
-#: kmymoney/kmymoney.cpp:1688
+#: kmymoney/kmymoney.cpp:1723
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Trinti pasirinktą profilį"
 
-#: kmymoney/kmymoney.cpp:1689
+#: kmymoney/kmymoney.cpp:1724
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Sutaikinimo vediklis"
 
-#: kmymoney/kmymoney.cpp:1690
+#: kmymoney/kmymoney.cpp:1725
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Sutaikinimo vediklis"
 
-#: kmymoney/kmymoney.cpp:1691
+#: kmymoney/kmymoney.cpp:1726
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Sutaikinimo vediklis"
 
-#: kmymoney/kmymoney.cpp:1800
+#: kmymoney/kmymoney.cpp:1835
 #, kde-format
 msgid "View back"
 msgstr "Žiūrėti atgal"
 
-#: kmymoney/kmymoney.cpp:1801
+#: kmymoney/kmymoney.cpp:1836
 #, kde-format
 msgid "View forward"
 msgstr "Žiūrėti pirmyn"
 
-#: kmymoney/kmymoney.cpp:2193
+#: kmymoney/kmymoney.cpp:2228
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to delete the transactions anyway?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2195
+#: kmymoney/kmymoney.cpp:2230
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2200
+#: kmymoney/kmymoney.cpp:2235
 #, fuzzy, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5385,17 +5385,17 @@ msgstr[1] "Naudokite tai norėdami ištrinti pažymėtą profilį"
 msgstr[2] "Naudokite tai norėdami ištrinti pažymėtą profilį"
 msgstr[3] "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
-#: kmymoney/kmymoney.cpp:2204
+#: kmymoney/kmymoney.cpp:2239
 #, kde-format
 msgid "Delete transaction"
 msgstr "Trinti operaciją"
 
-#: kmymoney/kmymoney.cpp:2285
+#: kmymoney/kmymoney.cpp:2320
 #, fuzzy, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/kmymoney.cpp:2304 kmymoney/mymoney/splitmodel.cpp:198
+#: kmymoney/kmymoney.cpp:2339 kmymoney/mymoney/splitmodel.cpp:198
 #: kmymoney/mymoney/splitmodel.cpp:203 kmymoney/widgets/amountedit.cpp:287
 #: kmymoney/widgets/amountedit.cpp:344 kmymoney/widgets/creditdebitedit.cpp:128
 #: kmymoney/widgets/creditdebitedit.cpp:129
@@ -5406,32 +5406,32 @@ msgctxt "@info:placeholder amount widget"
 msgid "calculated"
 msgstr "Skaičiuoti"
 
-#: kmymoney/kmymoney.cpp:2409
+#: kmymoney/kmymoney.cpp:2444
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Užverti"
 
-#: kmymoney/kmymoney.cpp:2722
+#: kmymoney/kmymoney.cpp:2757
 #, fuzzy, kde-format
 msgid "Unable to modify transaction"
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/kmymoney.cpp:2866
+#: kmymoney/kmymoney.cpp:2901
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to change the transactions anyway?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2868
+#: kmymoney/kmymoney.cpp:2903
 #, fuzzy, kde-format
 #| msgid "Transactions by Payee"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Operacijos pagal korespondentą"
 
-#: kmymoney/kmymoney.cpp:2873
+#: kmymoney/kmymoney.cpp:2908
 #, fuzzy, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
@@ -5440,31 +5440,31 @@ msgstr[1] "Naudokite tai norėdami ištrinti pažymėtą profilį"
 msgstr[2] "Naudokite tai norėdami ištrinti pažymėtą profilį"
 msgstr[3] "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
-#: kmymoney/kmymoney.cpp:2877
+#: kmymoney/kmymoney.cpp:2912
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Bet kokia operacija"
 
-#: kmymoney/kmymoney.cpp:3007
+#: kmymoney/kmymoney.cpp:3042
 #, fuzzy, kde-format
 msgid "Unable to accept transaction"
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/kmymoney.cpp:3057
+#: kmymoney/kmymoney.cpp:3092
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3060
+#: kmymoney/kmymoney.cpp:3095
 #, fuzzy, kde-format
 msgid "Scheduled transactions found"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/kmymoney.cpp:3141
+#: kmymoney/kmymoney.cpp:3176
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5473,17 +5473,17 @@ msgid ""
 "all accounts</b>.</qt>"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3143
+#: kmymoney/kmymoney.cpp:3178
 #, kde-format
 msgid "Information"
 msgstr "Informacija"
 
-#: kmymoney/kmymoney.cpp:3247 kmymoney/kmymoney.cpp:3346
+#: kmymoney/kmymoney.cpp:3282 kmymoney/kmymoney.cpp:3381
 #, fuzzy, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
 
-#: kmymoney/kmymoney.cpp:3283 kmymoney/kmymoney.cpp:3285
+#: kmymoney/kmymoney.cpp:3318 kmymoney/kmymoney.cpp:3320
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1472
 #: kmymoney/plugins/xml/xmlstorage.cpp:700
 #, fuzzy, kde-format
@@ -5492,42 +5492,42 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Pasirengęs."
 
-#: kmymoney/kmymoney.cpp:3350
+#: kmymoney/kmymoney.cpp:3385
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Asmeninių duomenų peržiūra..."
 
-#: kmymoney/kmymoney.cpp:3363
+#: kmymoney/kmymoney.cpp:3398
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Redaguoti asmeninius duomenis"
 
-#: kmymoney/kmymoney.cpp:3378
+#: kmymoney/kmymoney.cpp:3413
 #, fuzzy, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/kmymoney.cpp:3386
+#: kmymoney/kmymoney.cpp:3421
 #, kde-format
 msgid "Importing account templates."
 msgstr "Importuojami sąskaitų šablonai."
 
-#: kmymoney/kmymoney.cpp:3400
+#: kmymoney/kmymoney.cpp:3435
 #, fuzzy, kde-format
 msgid "Unable to import template(s)"
 msgstr "Nepavyksta pašalinti operacijos"
 
-#: kmymoney/kmymoney.cpp:3408
+#: kmymoney/kmymoney.cpp:3443
 #, fuzzy, kde-format
 msgid "Exporting account templates."
 msgstr "Importuojami sąskaitų šablonai."
 
-#: kmymoney/kmymoney.cpp:3414
+#: kmymoney/kmymoney.cpp:3449
 #, kde-format
 msgid "Save as..."
 msgstr "Įrašyti kaip..."
 
-#: kmymoney/kmymoney.cpp:3414
+#: kmymoney/kmymoney.cpp:3449
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmy *.xml|KMyMoney files\n"
@@ -5537,118 +5537,118 @@ msgstr ""
 "*.kmy *.xml|KMyMoney failai\n"
 " *.*|All files (*.*)"
 
-#: kmymoney/kmymoney.cpp:3445
+#: kmymoney/kmymoney.cpp:3480
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Trinti ataskaitą?"
 
-#: kmymoney/kmymoney.cpp:3463
+#: kmymoney/kmymoney.cpp:3498
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3465 kmymoney/plugins/csv/export/csvexporter.cpp:109
+#: kmymoney/kmymoney.cpp:3500 kmymoney/plugins/csv/export/csvexporter.cpp:109
 #, fuzzy, kde-format
 msgid "File already exists"
 msgstr "Failas jau yra"
 
-#: kmymoney/kmymoney.cpp:3503
+#: kmymoney/kmymoney.cpp:3538
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3504
+#: kmymoney/kmymoney.cpp:3539
 #, kde-format
 msgid "Hide menu bar"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3617
+#: kmymoney/kmymoney.cpp:3652
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3619
+#: kmymoney/kmymoney.cpp:3654
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3635
+#: kmymoney/kmymoney.cpp:3670
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
 "files as source files. Your current source file is '%1'."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3638
+#: kmymoney/kmymoney.cpp:3673
 #, kde-format
 msgid "Local files only"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3677
+#: kmymoney/kmymoney.cpp:3712
 #, kde-format
 msgid "Mounting %1"
 msgstr "Montuojama %1"
 
-#: kmymoney/kmymoney.cpp:3711
+#: kmymoney/kmymoney.cpp:3746
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3711
+#: kmymoney/kmymoney.cpp:3746
 #, kde-format
 msgid "&Replace"
 msgstr "Pa&keisti"
 
-#: kmymoney/kmymoney.cpp:3719
+#: kmymoney/kmymoney.cpp:3754
 #, fuzzy, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/kmymoney.cpp:3724
+#: kmymoney/kmymoney.cpp:3759
 #, kde-format
 msgid "Writing %1"
 msgstr "Įrašomas %1"
 
-#: kmymoney/kmymoney.cpp:3745
+#: kmymoney/kmymoney.cpp:3780
 #, fuzzy, kde-format
 msgid "Unmounting %1"
 msgstr "Išmontuojama"
 
-#: kmymoney/kmymoney.cpp:3781
+#: kmymoney/kmymoney.cpp:3816
 #, kde-format
 msgid "Error mounting device"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3795 kmymoney/kmymoney.cpp:3812
+#: kmymoney/kmymoney.cpp:3830 kmymoney/kmymoney.cpp:3847
 #, fuzzy, kde-format
 #| msgid "Done"
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Atlikta"
 
-#: kmymoney/kmymoney.cpp:3796 kmymoney/kmymoney.cpp:3814
+#: kmymoney/kmymoney.cpp:3831 kmymoney/kmymoney.cpp:3849
 #, kde-format
 msgid "File successfully backed up"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3802
+#: kmymoney/kmymoney.cpp:3837
 #, kde-format
 msgid "Error copying file to device"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3816
+#: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Error unmounting device"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3864
+#: kmymoney/kmymoney.cpp:3899
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5659,60 +5659,60 @@ msgid ""
 "Please click Cancel to abort the account creation."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3874
+#: kmymoney/kmymoney.cpp:3909
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Atidarymo balanso tekstas"
 
-#: kmymoney/kmymoney.cpp:3885
+#: kmymoney/kmymoney.cpp:3920
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, fuzzy, kde-format
 msgid "Unable to add account: %1"
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/kmymoney.cpp:3987
+#: kmymoney/kmymoney.cpp:4022
 #, kde-format
 msgid "Running consistency check..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3992
+#: kmymoney/kmymoney.cpp:4027
 #, kde-format
 msgctxt "@info:title "
 msgid "Consistency check results"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3996
+#: kmymoney/kmymoney.cpp:4031
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4005
+#: kmymoney/kmymoney.cpp:4040
 #, fuzzy, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "Užverti"
 
-#: kmymoney/kmymoney.cpp:4017
+#: kmymoney/kmymoney.cpp:4052
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4047
+#: kmymoney/kmymoney.cpp:4082
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4071
+#: kmymoney/kmymoney.cpp:4106
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
 "presented below."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4074
+#: kmymoney/kmymoney.cpp:4109
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5720,23 +5720,23 @@ msgid ""
 "to be solved by the user."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4154
+#: kmymoney/kmymoney.cpp:4189
 #, fuzzy, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/kmymoney.cpp:4318
+#: kmymoney/kmymoney.cpp:4353
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4324
+#: kmymoney/kmymoney.cpp:4359
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4338
+#: kmymoney/kmymoney.cpp:4373
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5744,117 +5744,117 @@ msgid ""
 "error: %3"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4342 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4377 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4369
+#: kmymoney/kmymoney.cpp:4404
 #, kde-format
 msgid "All messages have been enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4369
+#: kmymoney/kmymoney.cpp:4404
 #, fuzzy, kde-format
 msgid "All messages"
 msgstr "Visos žinutės"
 
-#: kmymoney/kmymoney.cpp:4405
+#: kmymoney/kmymoney.cpp:4440
 #, fuzzy, kde-format
 msgid "Auto saving..."
 msgstr "Išsaugojamas failas..."
 
-#: kmymoney/kmymoney.cpp:4526
+#: kmymoney/kmymoney.cpp:4561
 #, kde-format
 msgid "Creating new document..."
 msgstr "Sukuriamas naujas dokumentas..."
 
-#: kmymoney/kmymoney.cpp:4586
+#: kmymoney/kmymoney.cpp:4621
 #, fuzzy, kde-format
 #| msgid "Create a new schedule."
 msgid "Couldn't create a new file."
 msgstr "Sukurti naują tvarkaraštį."
 
-#: kmymoney/kmymoney.cpp:4597
+#: kmymoney/kmymoney.cpp:4632
 #, fuzzy, kde-format
 msgid "Open a file."
 msgstr "Atverti failą..."
 
-#: kmymoney/kmymoney.cpp:4611
+#: kmymoney/kmymoney.cpp:4646
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4615
+#: kmymoney/kmymoney.cpp:4650
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Visi failai"
 
-#: kmymoney/kmymoney.cpp:4628
+#: kmymoney/kmymoney.cpp:4663
 #, kde-format
 msgid "Loading file..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4637
+#: kmymoney/kmymoney.cpp:4672
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
 "can open another file or create a new one.</p>"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4639
+#: kmymoney/kmymoney.cpp:4674
 #, kde-format
 msgid "File not found"
 msgstr "Failas nerastas"
 
-#: kmymoney/kmymoney.cpp:4671
+#: kmymoney/kmymoney.cpp:4706
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4677
+#: kmymoney/kmymoney.cpp:4712
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "Nepavyksta atverti „%1“ failo rašymui"
 
-#: kmymoney/kmymoney.cpp:4684
+#: kmymoney/kmymoney.cpp:4719
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4730
 #, kde-format
 msgid "Saving file..."
 msgstr "Išsaugojamas failas..."
 
-#: kmymoney/kmymoney.cpp:4707
+#: kmymoney/kmymoney.cpp:4742
 #, fuzzy, kde-format
 msgid "Failed to save your data."
 msgstr "Nepavyko įrašyti „%1“."
 
-#: kmymoney/kmymoney.cpp:4713
+#: kmymoney/kmymoney.cpp:4748
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4719
+#: kmymoney/kmymoney.cpp:4754
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Išsaugojamas failas..."
 
-#: kmymoney/kmymoney.cpp:4735
+#: kmymoney/kmymoney.cpp:4770
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4763
+#: kmymoney/kmymoney.cpp:4798
 #, fuzzy, kde-format
 msgid "Failed to save your storage."
 msgstr "Nepavyko įrašyti „%1“."

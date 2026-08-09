@@ -1037,9 +1037,11 @@
 
 <note>
   <para
->La llista inicial i la configuració de les fonts de cotització en línia es configura quan el &kmymoney; crea per primera vegada el fitxer de dades. Si una font en línia fa un canvi que requereix un canvi a aquests paràmetres perquè el &kmymoney; el continuï utilitzant com a font vàlida, l'usuari haurà de fer els canvis necessaris, utilitzant aquest diàleg, basat en les instruccions publicades en una de les <link linkend="firsttime.contact"
+>La llista inicial i la configuració de les fonts de cotització en línia es configura quan el &kmymoney; crea per primera vegada el fitxer de dades. Es poden instal·lar fonts de cotització addicionals predefinides, així com actualitzacions d'altres ja existents fent clic al botó <guibutton
+>Instal·la</guibutton
+> en aquest diàleg. L'edició manual de les definicions de les fonts de cotització només és necessària per crear fonts personalitzades o modificar les existents. Si una font en línia fa un canvi que requereix un canvi a aquests paràmetres perquè el &kmymoney; la continuï utilitzant com a font vàlida, l'usuari haurà de fer els canvis necessaris, utilitzant aquest diàleg, basat en les instruccions publicades en una de les <link linkend="firsttime.contact"
 >opcions de suport</link
-> suggerides. Esperem que, en un futur no llunyà, la forma en què es gestiona la configuració de la font en línia es canviï de manera que el &kmymoney; pugui obtenir automàticament les actualitzacions necessàries a aquests paràmetres sense requerir que l'usuari realitzi cap edició manual. </para>
+> suggerides. </para>
 </note>
 </sect1>
 
