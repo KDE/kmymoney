@@ -22,6 +22,7 @@
 // Project Includes
 #include "kmm_mymoney_export.h"
 #include "kmmset.h"
+#include "mymoneyaccount.h"
 #include "mymoneyunittestable.h"
 
 /**
@@ -119,7 +120,6 @@ class QBitArray;
 class QUndoStack;
 class MyMoneyStorageMgr;
 class MyMoneyCostCenter;
-class MyMoneyAccount;
 class MyMoneyInstitution;
 class MyMoneySecurity;
 class MyMoneyPrice;
