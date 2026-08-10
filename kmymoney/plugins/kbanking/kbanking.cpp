@@ -1119,6 +1119,15 @@ void KBankingExt::_xaToStatement(MyMoneyStatement& ks, const MyMoneyAccount& acc
     MyMoneyStatement::Transaction kt;
     unsigned long h;
 
+    // replace non-breaking-space with regular space characters
+    // and trim the resulting string so that a name with only
+    // space characters becomes empty. See bug 523929 for details
+    // at https://bugs.kde.org/show_bug.cgi?id=523929
+    auto replaceNonBreakingSpace = [](QString txt) {
+        txt.replace(QChar(0x00A0), QLatin1Char(' '));
+        return txt.trimmed();
+    };
+
     auto appendToMemo = [&](const QString& line) {
         s += QStringLiteral(", %1").arg(line);
         if (!memo.isEmpty())
@@ -1200,6 +1209,8 @@ void KBankingExt::_xaToStatement(MyMoneyStatement& ks, const MyMoneyAccount& acc
     h = MyMoneyTransaction::hash(kt.m_strPayee.trimmed());
     h = MyMoneyTransaction::hash(s, h);
 
+    kt.m_strPayee = replaceNonBreakingSpace(kt.m_strPayee);
+
     // see, if we need to extract the payee from the memo field
     QString rePayee = kvp.value("kbanking-payee-regexp");
     if (!rePayee.isEmpty() && kt.m_strPayee.isEmpty()) {
@@ -1237,17 +1248,19 @@ void KBankingExt::_xaToStatement(MyMoneyStatement& ks, const MyMoneyAccount& acc
     p = AB_Transaction_GetUltimateDebtor(t);
     if (p) {
         const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
-        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(QString::fromUtf8(p)));
+        const auto debitor = replaceNonBreakingSpace(QString::fromUtf8(p));
+        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(debitor));
         if (includePayeeDetails) {
-            kt.m_strMemo.append(QStringLiteral("\nABWA: %1").arg(QString::fromUtf8(p)));
+            kt.m_strMemo.append(QStringLiteral("\nABWA: %1").arg(debitor));
         }
     }
     p = AB_Transaction_GetUltimateCreditor(t);
     if (p) {
         const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
-        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(QString::fromUtf8(p)));
+        const auto creditor = replaceNonBreakingSpace(QString::fromUtf8(p));
+        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(creditor));
         if (includePayeeDetails) {
-            kt.m_strMemo.append(QStringLiteral("\nABWE: %1").arg(QString::fromUtf8(p)));
+            kt.m_strMemo.append(QStringLiteral("\nABWE: %1").arg(creditor));
         }
     }
 #endif
