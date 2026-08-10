@@ -1906,20 +1906,21 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     MyMoneyFile* file = MyMoneyFile::instance();
 
     MyMoneyAccount account;
-    QString tmp;
 
     account.setName(extractLine('N'));
     //   qDebug("Process account '%s'", account.name().data());
 
     account.setDescription(extractLine('D'));
 
-    tmp = extractLine('$');
-    if (tmp.length() > 0)
-        account.setValue("lastStatementBalance", tmp);
+    const auto balanceValue = extractLine('$');
+    if (!balanceValue.isEmpty()) {
+        account.setValue("lastStatementBalance", balanceValue);
+    }
 
-    tmp = extractLine('/');
-    if (tmp.length() > 0)
-        account.setLastReconciliationDate(m_qifProfile.date(tmp));
+    const auto balanceDate = extractLine('/');
+    if (!balanceDate.isEmpty()) {
+        account.setLastReconciliationDate(m_qifProfile.date(balanceDate));
+    }
 
     QifEntryTypeE transactionType = EntryTransaction;
     static const auto whiteSpaceRegex = QRegularExpression(QLatin1String("\\s+"));
@@ -2004,6 +2005,14 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
         m_account = acc;
         d->st.m_accountId = m_account.id(); //                      needed here for account selection
         d->transactionType = transactionType;
+
+        // keep closing balance information
+        if (!balanceValue.isEmpty()) {
+            d->st.m_closingBalance = m_qifProfile.value('T', balanceValue);
+        }
+        if (!balanceDate.isEmpty()) {
+            d->st.m_dateEnd = m_qifProfile.date(balanceDate);
+        }
     }
     return acc.id();
 }
