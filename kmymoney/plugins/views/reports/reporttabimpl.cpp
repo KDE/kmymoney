@@ -22,7 +22,6 @@
 #include "ui_reporttabperformance.h"
 #include "ui_reporttabrange.h"
 #include "ui_reporttabrowcolpivot.h"
-#include "ui_reporttabrowcolquery.h"
 
 ReportTabGeneral::ReportTabGeneral(QWidget* parent)
     : QWidget(parent)
@@ -44,37 +43,6 @@ ReportTabRowColPivot::ReportTabRowColPivot(QWidget* parent)
 }
 
 ReportTabRowColPivot::~ReportTabRowColPivot()
-{
-    delete ui;
-}
-
-ReportTabRowColQuery::ReportTabRowColQuery(QWidget* parent)
-    : QWidget(parent)
-{
-    ui = new Ui::ReportTabRowColQuery;
-    ui->setupUi(this);
-    ui->buttonGroup1->setExclusive(false);
-    ui->buttonGroup1->setId(ui->m_checkMemo, 0);
-    ui->buttonGroup1->setId(ui->m_checkShares, 1);
-    ui->buttonGroup1->setId(ui->m_checkPrice, 2);
-    ui->buttonGroup1->setId(ui->m_checkReconciled, 3);
-    ui->buttonGroup1->setId(ui->m_checkAccount, 4);
-    ui->buttonGroup1->setId(ui->m_checkNumber, 5);
-    ui->buttonGroup1->setId(ui->m_checkPayee, 6);
-    ui->buttonGroup1->setId(ui->m_checkCategory, 7);
-    ui->buttonGroup1->setId(ui->m_checkAction, 8);
-    ui->buttonGroup1->setId(ui->m_checkBalance, 9);
-    connect(ui->m_checkHideTransactions, &QAbstractButton::toggled, this, &ReportTabRowColQuery::slotHideTransactionsChanged);
-}
-
-void ReportTabRowColQuery::slotHideTransactionsChanged(bool checked)
-{
-    if (checked) // toggle m_checkHideSplitDetails only if it's mandatory
-        ui->m_checkHideSplitDetails->setChecked(checked);
-    ui->m_checkHideSplitDetails->setEnabled(!checked); // hiding transactions without hiding splits isn't allowed
-}
-
-ReportTabRowColQuery::~ReportTabRowColQuery()
 {
     delete ui;
 }

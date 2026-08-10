@@ -10,6 +10,11 @@ set(reportsview_SOURCES
   reportcontrolimpl.cpp
   reportsview.cpp
   reporttabimpl.cpp
+  reporttabrowcolquery.cpp
+  )
+
+set(reportsview_HEADERS
+  reporttabrowcolquery.h
   )
 
 ki18n_wrap_ui(reportsview_SOURCES
@@ -26,7 +31,7 @@ ki18n_wrap_ui(reportsview_SOURCES
   )
 # kconfig_add_kcfg_files(reportsview_SOURCES reportsviewsettings.kcfgc)
 
-kmymoney_add_plugin(reportsview SOURCES ${reportsview_SOURCES})
+kmymoney_add_plugin(reportsview SOURCES ${reportsview_SOURCES} ${reportsview_HEADERS})
 
 target_link_libraries(reportsview
   PUBLIC
