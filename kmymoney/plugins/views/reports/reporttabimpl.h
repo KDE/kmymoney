@@ -49,20 +49,6 @@ public:
     Ui::ReportTabRowColPivot* ui;
 };
 
-class ReportTabRowColQuery : public QWidget
-{
-    Q_OBJECT
-    Q_DISABLE_COPY(ReportTabRowColQuery)
-
-public:
-    explicit ReportTabRowColQuery(QWidget *parent);
-    ~ReportTabRowColQuery();
-
-    Ui::ReportTabRowColQuery* ui;
-private Q_SLOTS:
-    void slotHideTransactionsChanged(bool checked);
-};
-
 class ReportTabChart : public QWidget
 {
     Q_OBJECT
