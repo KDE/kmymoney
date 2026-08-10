@@ -35,7 +35,6 @@
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "mymoneyreport.h"
 #include "mymoneyutils.h"
 #include "pivottable.h"
 #include "reporttabimpl.h"

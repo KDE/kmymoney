@@ -37,7 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyaccount.h"
 #include "mymoneyaccountloan.h"
 #include "mymoneybalancecache.h"
 #include "mymoneybudget.h"
