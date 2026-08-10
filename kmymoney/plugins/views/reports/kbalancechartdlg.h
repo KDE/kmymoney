@@ -17,11 +17,13 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "mymoneyreport.h"
+
 namespace reports {
 class KReportChartView;
 }
 class MyMoneyAccount;
-class MyMoneyReport;
 class BalanceChartView;
 
 /**
