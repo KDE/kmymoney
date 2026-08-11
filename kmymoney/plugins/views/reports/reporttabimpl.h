@@ -38,17 +38,6 @@ public:
     Ui::ReportTabGeneral* ui;
 };
 
-class ReportTabRowColPivot : public QWidget
-{
-    Q_DISABLE_COPY(ReportTabRowColPivot)
-
-public:
-    explicit ReportTabRowColPivot(QWidget *parent);
-    ~ReportTabRowColPivot();
-
-    Ui::ReportTabRowColPivot* ui;
-};
-
 class ReportTabChart : public QWidget
 {
     Q_OBJECT
