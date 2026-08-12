@@ -1037,9 +1037,11 @@
 
 <note>
   <para
->L'elenco iniziale e la configurazione delle fonti delle quotazioni in linea vengono impostati quando &kmymoney; crea inizialmente il file di dati. Se una fonte in linea apporta una modifica che richiede una modifica a queste impostazioni affinché &kmymoney; possa continuare a utilizzarla come fonte valida, l'utente deve apportare le modifiche necessarie, utilizzando questa finestra, in base alle istruzioni pubblicate in una delle <link linkend="firsttime.contact"
+>L'elenco iniziale e la configurazione delle fonti di quotazioni in linea vengono configurati quando &kmymoney; crea per la prima volta il file di dati. Ulteriori fonti di quotazioni predefinite, così come gli aggiornamenti di quelle esistenti, possono essere installate facendo clic sul pulsante <guibutton
+>Installa</guibutton
+> in questa finestra. La modifica manuale delle definizioni delle fonti di quotazioni è necessaria solo per creare fonti personalizzate o modificare quelle esistenti. Se una fonte in linea apporta una modifica che richiede una variazione di queste impostazioni, affinché &kmymoney; continui a utilizzarla come fonte valida, l'utente deve apportare le modifiche necessarie, utilizzando questa finestra, in base alle istruzioni pubblicate in una delle <link linkend="firsttime.contact"
 >opzioni di supporto</link
-> suggerite. Se tutto va bene, in un futuro non troppo lontano, il modo in cui viene gestita la configurazione delle fonti in linea sarà cambiato in modo che &kmymoney; possa recuperare automaticamente tutti gli aggiornamenti necessari a queste impostazioni senza richiedere all'utente di apportare modifiche manuali. </para>
+> suggerite. </para>
 </note>
 </sect1>
 

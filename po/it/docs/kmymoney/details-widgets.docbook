@@ -51,19 +51,75 @@
 </para>
 
 <para
->Nell'oggetto di inserimento della data, i tasti freccia &Left;/&Right; possono essere usati per navigare tra i campi <emphasis
+>Nell'oggetto di inserimento della data, i tasti freccia &Left;/&Right; possono essere utilizzati per navigare tra i campi <emphasis
 >giorno</emphasis
 >, <emphasis
 >mese</emphasis
 > e <emphasis
 >anno</emphasis
->. Usando i tasti &Up;/&Down;, si può aumentare o diminuire il valore del campo selezionato. I tasti <keycap
+>. Utilizzando i tasti &Up;/&Down;, si può aumentare o diminuire il valore del campo selezionato. I tasti <keycap
 >+</keycap
+> o <keycap
+>=</keycap
 > e <keycap
 >-</keycap
-> possono essere usati per aumentare/diminuire di un solo giorno. Vengono considerati i limiti del mese e dell'anno e saranno aumentati o diminuiti se necessario. Premendo <keycap
+> possono essere utilizzati per aumentare o diminuire di un singolo giorno. I tasti <keycap
+>]</keycap
+> o <keycap
+>}</keycap
+> e <keycap
+>[</keycap
+> o <keycap
+>{</keycap
+> possono essere utilizzati per aumentare o diminuire di un singolo mese. I tasti <keycap
+>'</keycap
+> o <keycap
+>"</keycap
+> e <keycap
+>;</keycap
+> o <keycap
+>:</keycap
+> possono essere utilizzati per aumentare o diminuire di un singolo anno. I limiti di mese e anno vengono considerati e incrementati/decrementati se necessario, ad esempio, utilizzando <keycap
+>+</keycap
+> per incrementare la data del 31 gennaio, questa sarà trasformata nel 1° febbraio. </para>
+
+<para
+>È possibile utilizzare anche le seguenti scorciatoie aggiuntive: </para>
+
+<para>
+  <itemizedlist>
+    <listitem>
+      <para
+><keycap
+>M</keycap
+> per impostare la data al primo giorno del mese corrente</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
+>H</keycap
+> per impostare la data all'ultimo giorno del mese corrente</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
+>Y</keycap
+> per impostare la data al primo giorno dell'anno corrente</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
+>R</keycap
+> per impostare la data all'ultimo giorno dell'anno corrente</para>
+    </listitem>
+    <listitem>
+      <para
+><keycap
 >T</keycap
-> si imposterà la data a quella odierna. </para>
+> per impostare la data alla data odierna.</para>
+    </listitem>
+  </itemizedlist>
+</para>
 
 <para
 >La data può essere modificata anche utilizzando il mouse. Il clic sul campo <emphasis

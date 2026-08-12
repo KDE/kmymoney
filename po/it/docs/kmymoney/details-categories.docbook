@@ -135,7 +135,8 @@
  
 <para
 >Quando si comprano beni, li si inserisce in una transazione. Se, ad esempio, si seleziona l'inserimento del valore lordo, una volta inserita la categoria e il valore, &kmymoney; riconoscerà che c'è un'assegnazione IVA e calcola la parte relativa all'IVA, crea una seconda suddivisione con il conto IVA e l'importo dell'IVA e riduce l'importo della categoria. </para>
- 
+<para
+>Al contrario, se hai selezionato il metodo di inserimento dell'importo netto, l'importo inserito viene considerato IVA esclusa. &kmymoney; calcolerà la quota dell'IVA, creerà una suddivisione separata per il conto IVA e lascerà l'importo della categoria così come inserito. </para>
 <para
 >Lo stesso si applica alle categorie di entrata, ma al contrario. Speriamo che questo funzionamento abbia senso. </para>
 
