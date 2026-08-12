@@ -5073,7 +5073,7 @@ msgstr "كرّر"
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
-msgstr "أضِف عكساً"
+msgstr "أضِف عكسًا"
 
 #: kmymoney/kmymoney.cpp:1464
 #, kde-format
@@ -5367,7 +5367,7 @@ msgstr "أزِل المطابقة"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
-msgstr "ابدأ تسوية الحساب المحدد حالياً"
+msgstr "ابدأ تسوية الحساب المحدد حاليًا"
 
 #: kmymoney/kmymoney.cpp:1694
 #, kde-format
@@ -5462,12 +5462,12 @@ msgstr "المعاملة سوّيت بالفعل"
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
-msgstr[0] "أتريد تغيير المعاملة المحددة حقّاً؟"
-msgstr[1] "أتريد تغيير المعاملة المحددة حقّاً؟"
-msgstr[2] "أتريد تغيير المعاملتين المحدّدتين حقّاً؟"
-msgstr[3] "أتريد تغيير كل %1 معاملات المحددة حقّاً؟"
-msgstr[4] "أتريد تغيير كل %1 معاملة المحددة حقّاً؟"
-msgstr[5] "أتريد تغيير كل %1 معاملة المحددة حقّاً؟"
+msgstr[0] "أتريد تغيير المعاملة المحددة حقًّا؟"
+msgstr[1] "أتريد تغيير المعاملة المحددة حقًّا؟"
+msgstr[2] "أتريد تغيير المعاملتين المحدّدتين حقًّا؟"
+msgstr[3] "أتريد تغيير كل %1 معاملات المحددة حقًّا؟"
+msgstr[4] "أتريد تغيير كل %1 معاملة المحددة حقًّا؟"
+msgstr[5] "أتريد تغيير كل %1 معاملة المحددة حقًّا؟"
 
 #: kmymoney/kmymoney.cpp:2834
 #, kde-format
@@ -5584,7 +5584,7 @@ msgstr "الملف موجود فعلًا"
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
-msgstr "هذا سيُخفي شريط القائمة تماماً. يمكنك إظهاره ثانيةً بالضغط على %1."
+msgstr "هذا سيُخفي شريط القائمة تمامًا. يمكنك إظهاره ثانيةً بالضغط على %1."
 
 #: kmymoney/kmymoney.cpp:3461
 #, kde-format
@@ -6106,7 +6106,7 @@ msgstr "مستورد الأثمان"
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
-msgstr "<p>أتريد إزالة العملة <b>%1</b> من الملفّ حقّاً؟</p>"
+msgstr "<p>أتريد إزالة العملة <b>%1</b> من الملفّ حقًّا؟</p>"
 
 #: kmymoney/kmymoneyutils.cpp:425
 #, kde-format
@@ -6235,7 +6235,7 @@ msgstr "مكّن مؤقتات الأداء"
 #: kmymoney/main.cpp:169
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
-msgstr "لا تلتقط الاستثناءات غير الملتقطة عالمياً"
+msgstr "لا تلتقط الاستثناءات غير الملتقطة عالميًا"
 
 #: kmymoney/main.cpp:175
 #, kde-format
@@ -8357,7 +8357,7 @@ msgstr "سداد"
 #, kde-format
 msgctxt "Investment action"
 msgid "Buy shares"
-msgstr "اشترِ حصصاً"
+msgstr "اشترِ حصصًا"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:497
 #, kde-format
@@ -10555,8 +10555,8 @@ msgid ""
 "If required, a QIF file may then be produced."
 msgstr ""
 "الرجاء اختر الرمز العشري المستخدم في ملفك.\n"
-"فاصل الآلاف يتغير آلياً.\n"
-"إذا كان كل شيء صحيحاً، فستتمكن من النقر على 'استيراد'.\n"
+"فاصل الآلاف يتغير آليًا.\n"
+"إذا كان كل شيء صحيحًا، فستتمكن من النقر على 'استيراد'.\n"
 "إذا تطلب الأمر، يمكن حينها إنتاج ملف QIF."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
@@ -11390,7 +11390,7 @@ msgstr "أعد استثمار المعاد استثماره"
 #, kde-format
 msgctxt "description of investment activity"
 msgid "Add Shares"
-msgstr "أضِف حصصاً"
+msgstr "أضِف حصصًا"
 
 #. i18n: don't translate part after '-'
 #. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
@@ -11398,7 +11398,7 @@ msgstr "أضِف حصصاً"
 #, kde-format
 msgctxt "description of investment activity"
 msgid "Remove Shares"
-msgstr "أزِل حصصاً"
+msgstr "أزِل حصصًا"
 
 #. i18n: ectx: property (text), widget (QLabel, interestAmountLabel)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, interestAmountEdit)
@@ -13770,7 +13770,7 @@ msgid ""
 msgstr ""
 "إذا كان ملفّ QIF يحتوي على إدخالات تاريخ بأعوام ممثّلة برقمين، يمكن استخدام "
 "الفاصلة العليا أو الشّرطة المائلة لتحديد العام في التّواريخ لقرون معيّنة. هذا "
-"يتيح تمييز 1905 عن 2005. حدّد هنا أيّ نطاق أعوام سيُحدّد عامها بفاصلة عليا (مثلاً "
+"يتيح تمييز 1905 عن 2005. حدّد هنا أيّ نطاق أعوام سيُحدّد عامها بفاصلة عليا (مثلًا "
 "لـ Quicken هذا عادةً 1900-1949)."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
@@ -16355,7 +16355,7 @@ msgstr "أسبوع %1"
 #, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
-msgstr "بِع حصصاً"
+msgstr "بِع حصصًا"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:829
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1054
@@ -17609,7 +17609,7 @@ msgstr ""
 "\n"
 "              <p>\n"
 "              هذا الخيار خاص بتقارير الاستثمارات التي\n"
-"              تظهر الأسعار بدلاً من الأرصدة كما تفعل التقارير الأخرى.\n"
+"              تظهر الأسعار بدلًا من الأرصدة كما تفعل التقارير الأخرى.\n"
 "              </p>\n"
 "              <p>\n"
 "              اختر هذا الخيار لتضمين الأسعار فقط إذا كان هناك سعر فعلي "
@@ -17618,7 +17618,7 @@ msgstr ""
 "              </p>\n"
 "              <p>\n"
 "              إذا كان هذا الخيار غير فعال، فسيعرض آخر سعر موجود للفترة، إذا\n"
-"              كان فعالاً، في الجدول ستكون القيمة '0' وفي الرسم البياني سيتم "
+"              كان فعالًا، في الجدول ستكون القيمة '0' وفي الرسم البياني سيتم "
 "إجراء\n"
 "              استيفاء خطي للقيم المفقودة.\n"
 "              <br>مثال:\n"
@@ -20561,7 +20561,7 @@ msgstr "العنوان:"
 #: kmymoney/views/kpayeesview.ui:324
 #, kde-format
 msgid "Creates new e-mail to your payee."
-msgstr "أنشئ بريداً إلكترونياً جديداً لجهة الدفع."
+msgstr "أنشئ بريدًا إلكترونيًا جديدًا لجهة الدفع."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_sendMail)
 #: kmymoney/views/kpayeesview.ui:327
@@ -20675,7 +20675,7 @@ msgstr "التحقق من المطابقة"
 #: kmymoney/views/kpayeesview.ui:563
 #, kde-format
 msgid "Enter identifier"
-msgstr "أدخِل معرّفاً"
+msgstr "أدخِل معرّفًا"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
@@ -20827,7 +20827,7 @@ msgstr "في حالة مدفوعات القروض، لا يمكن حاليًا �
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "احذف جدولاً"
+msgstr "احذف جدولًا"
 
 #: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
@@ -21185,7 +21185,7 @@ msgstr "هل تريد إدخال الجدول المستحق الآن؟"
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
-msgstr "أدخِل جدولاً مستحقاً"
+msgstr "أدخِل جدولًا مستحقًا"
 
 #: kmymoney/views/ledgerview.cpp:1070
 #, kde-format
@@ -21572,7 +21572,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 "هذه الصفحة تظهر دفتر حسابات الحسابات. حاليًا، لا توجد حسابات لذا يظهر هذا "
-"النص بدلاً من ذلك."
+"النص بدلًا من ذلك."
 
 #: kmymoney/views/simpleledgerview.cpp:478
 #, kde-format
@@ -21582,7 +21582,7 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 "هذه الصفحة تظهر دفتر حسابات الحسابات. حاليًا، لم يحدد أي حساب، لذا يظهر هذا "
-"النص بدلاً من ذلك."
+"النص بدلًا من ذلك."
 
 #: kmymoney/views/simpleledgerview.cpp:762
 #, kde-format
@@ -21595,7 +21595,7 @@ msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
-"لا يمكنك إغلاق هذا العرض لأنك تسوي الحساب. أنهِ، ألغِ أو أجل التسوية أولاً."
+"لا يمكنك إغلاق هذا العرض لأنك تسوي الحساب. أنهِ، ألغِ أو أجل التسوية أولًا."
 
 #: kmymoney/views/simpleledgerview.cpp:955
 #, kde-format
@@ -24079,7 +24079,7 @@ msgstr ""
 "حساب الأصل القيمة الإجمالية للأصل. ستُحول الأموال من هذا القرض إلى حساب الأصل "
 "الذي تنشئه أو تختاره.\n"
 "إذا كان هذا القرض 'قرض استهلاكي' (أموال لاستخدامها كما تريد)، يمكنك استخدام "
-"حساب فحص بدلاً من ذلك."
+"حساب فحص بدلًا من ذلك."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_dontCreatePayoutCheckBox)
 #. i18n: ectx: property (text), widget (QCheckBox, m_noPayoutTransaction)
@@ -25713,7 +25713,7 @@ msgid ""
 "within KMyMoney."
 msgstr ""
 "الحقول أدناه تسمح لك بإدخال بعض المعلومات عن حسابك الجاري. فورما ينتهي هذا "
-"المعالج، سوف ينشأ الحساب آلياً لك في «أموالك» «أموالك»."
+"المعالج، سوف ينشأ الحساب آليًا لك في «أموالك» «أموالك»."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel3)
 #: kmymoney/wizards/newuserwizard/kcurrencypage.ui:23
@@ -25724,7 +25724,7 @@ msgid ""
 "also the currency you select here."
 msgstr ""
 "«أموالك» يدعم عملات متعددة. تقاريرك سوف تستند على عملة مبدئية يمكنك اختيارها "
-"هنا. العملة المبدئية للحسابات الجديدة هي أيضاً العملة التي تختارها هنا."
+"هنا. العملة المبدئية للحسابات الجديدة هي أيضًا العملة التي تختارها هنا."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/newuserwizard/kgeneralpage.ui:22
@@ -25855,7 +25855,7 @@ msgid ""
 msgstr ""
 "اختر مجموعات الحسابات التي تتوافق مع الطرق التي سوف تستخدم بها «أموالك» "
 "«أموالك». كل مجموعة تختارها سوف تتسبب في إنشاء العديد من الحسابات والفئات. "
-"اختر المجموعات التي هي ذات صلة بك. يمكنك دائماً إنشاء حسابات إضافية يدوياً في "
+"اختر المجموعات التي هي ذات صلة بك. يمكنك دائمًا إنشاء حسابات إضافية يدويًا في "
 "وقت لاحق."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
