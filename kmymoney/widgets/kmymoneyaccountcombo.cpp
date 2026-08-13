@@ -254,7 +254,11 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
             d->m_popupItemPressed = false;
         } else if (e->type() == QEvent::MouseButtonRelease && !d->m_popupItemPressed) {
             const auto mouseEvent = static_cast<QMouseEvent*>(e);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             const auto index = d->m_popupView->indexAt(mouseEvent->position().toPoint());
+#else
+            const auto index = d->m_popupView->indexAt(mouseEvent->localPos().toPoint());
+#endif
             if (index.isValid() && d->m_popupView->model()->hasChildren(index)) {
                 // QComboBox treats every release in the popup as an item selection.
                 // A click on a tree branch does not emit QAbstractItemView::pressed.
