@@ -11,6 +11,8 @@
 #include <QString>
 #include <QTest>
 
+#include "mymoneymoney.h"
+
 QTEST_GUILESS_MAIN(SymbolTest);
 
 Parse* m_parse;
@@ -24,12 +26,18 @@ void SymbolTest::init()
 {
     m_parse = new Parse;
     m_parse->setDecimalSymbol(DecimalSymbol::Dot);
-    m_localeDecimal = QLocale().decimalPoint();
-    m_localeThousands = QLocale().groupSeparator();
+    // the converted strings are fed into MyMoneyMoney, so they must use
+    // the decimal separator MyMoneyMoney parses with and not the one of QLocale()
+    m_localeDecimal = MyMoneyMoney::decimalSeparator();
+    m_localeThousands = MyMoneyMoney::thousandSeparator();
+    m_savedDecimal = MyMoneyMoney::decimalSeparator();
+    m_savedThousands = MyMoneyMoney::thousandSeparator();
 }
 
 void SymbolTest::cleanup()
 {
+    MyMoneyMoney::setDecimalSeparator(m_savedDecimal);
+    MyMoneyMoney::setThousandSeparator(m_savedThousands);
     delete m_parse;
 }
 
@@ -128,6 +136,57 @@ void SymbolTest::testDecimalSymbolInvalid_data()
     //  with thousands separator present
     QTest::newRow("test 2") << "987,654.32"
                             << "invalid";
+}
+
+void SymbolTest::testMonetaryLocaleDiffersFromNumericLocale()
+{
+    //  The numeric locale (QLocale) and the monetary locale used by
+    //  MyMoneyMoney may differ, e.g. LC_NUMERIC=C but LC_MONETARY=ru_RU.UTF-8.
+    //  In that case the string returned by possiblyReplaceSymbol() must still
+    //  be parseable by MyMoneyMoney, otherwise the decimal separator is taken
+    //  for a thousands separator and the value is off by a factor of 100.
+
+    QFETCH(QString, monetaryDecimal);
+    QFETCH(QString, monetaryThousands);
+    QFETCH(int, decimalSymbol);
+    QFETCH(QString, input);
+    QFETCH(int, expectedNumerator);
+    QFETCH(int, expectedDenominator);
+
+    MyMoneyMoney::setDecimalSeparator(monetaryDecimal);
+    MyMoneyMoney::setThousandSeparator(monetaryThousands);
+
+    m_parse->setDecimalSymbol(static_cast<DecimalSymbol>(decimalSymbol));
+
+    const auto converted = m_parse->possiblyReplaceSymbol(input);
+    QCOMPARE(m_parse->invalidConversion(), false);
+    QCOMPARE(MyMoneyMoney(converted).toString(), MyMoneyMoney(expectedNumerator, expectedDenominator).toString());
+}
+
+void SymbolTest::testMonetaryLocaleDiffersFromNumericLocale_data()
+{
+    QTest::addColumn<QString>("monetaryDecimal");
+    QTest::addColumn<QString>("monetaryThousands");
+    QTest::addColumn<int>("decimalSymbol");
+    QTest::addColumn<QString>("input");
+    QTest::addColumn<int>("expectedNumerator");
+    QTest::addColumn<int>("expectedDenominator");
+
+    //  monetary locale uses ',' as decimal separator, CSV file uses '.'
+    QTest::newRow("dot in comma monetary locale") << QStringLiteral(",") << QStringLiteral(".") << static_cast<int>(DecimalSymbol::Dot)
+                                                  << QStringLiteral("12.34") << 1234 << 100;
+    QTest::newRow("dot with thousands in comma monetary locale")
+        << QStringLiteral(",") << QStringLiteral(".") << static_cast<int>(DecimalSymbol::Dot) << QStringLiteral("1,234.56") << 123456 << 100;
+    QTest::newRow("integer in comma monetary locale") << QStringLiteral(",") << QStringLiteral(".") << static_cast<int>(DecimalSymbol::Dot)
+                                                      << QStringLiteral("145") << 145 << 1;
+
+    //  monetary locale uses '.' as decimal separator, CSV file uses ','
+    QTest::newRow("comma in dot monetary locale") << QStringLiteral(".") << QStringLiteral(",") << static_cast<int>(DecimalSymbol::Comma)
+                                                  << QStringLiteral("12,34") << 1234 << 100;
+    QTest::newRow("comma with thousands in dot monetary locale")
+        << QStringLiteral(".") << QStringLiteral(",") << static_cast<int>(DecimalSymbol::Comma) << QStringLiteral("1.234,56") << 123456 << 100;
+    QTest::newRow("integer in dot monetary locale") << QStringLiteral(".") << QStringLiteral(",") << static_cast<int>(DecimalSymbol::Comma)
+                                                    << QStringLiteral("145") << 145 << 1;
 }
 
 void SymbolTest::cleanupTestCase()

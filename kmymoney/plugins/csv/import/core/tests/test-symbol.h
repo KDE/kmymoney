@@ -30,6 +30,8 @@ private:
     QString m_localeDecimal;
     QString m_testDecimal;
     QString m_localeThousands;
+    QChar m_savedDecimal;
+    QChar m_savedThousands;
 
 private Q_SLOTS:
     void init();
@@ -54,5 +56,13 @@ private Q_SLOTS:
     void testDecimalSymbolComma_data();
     void testDecimalSymbolInvalid();
     void testDecimalSymbolInvalid_data();
+
+    /**
+     * Verifies that the conversion result can be parsed by MyMoneyMoney
+     * even if the monetary locale uses a different decimal separator than
+     * the numeric locale.
+     */
+    void testMonetaryLocaleDiffersFromNumericLocale();
+    void testMonetaryLocaleDiffersFromNumericLocale_data();
 };
 #endif
