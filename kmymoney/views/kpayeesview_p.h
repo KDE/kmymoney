@@ -53,6 +53,7 @@
 #include "mymoneymoney.h"
 #include "mymoneypayee.h"
 #include "mymoneyprice.h"
+#include "mymoneyreport.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
@@ -61,7 +62,6 @@
 #include "payeesmodel.h"
 #include "specialdatesmodel.h"
 #include "specialledgeritemfilter.h"
-
 #include "ui_kpayeesview.h"
 
 using namespace Icons;
@@ -467,12 +467,22 @@ public:
                 }
             }
 
+            // and a list of all reports that references one of the payees
+            const auto allReports = file->reportList();
+            QSet<QString> usedReportIds;
+            for (const auto& report : allReports) {
+                for (const MyMoneyPayee& payee : list) {
+                    if (payeeInList(list, payee.id())) {
+                        usedReportIds.insert(report.id());
+                        break;
+                    }
+                }
+            }
 
             MyMoneyPayee newPayee;
             bool addToMatchList = false;
             // if at least one payee is still referenced, we need to reassign its transactions first
-            if (!translist.isEmpty() || !used_schedules.isEmpty() || !usedAccounts.isEmpty()) {
-
+            if (!translist.isEmpty() || !used_schedules.isEmpty() || !usedAccounts.isEmpty() || !usedReportIds.isEmpty()) {
                 // first create list with all non-selected payees
                 QList<MyMoneyPayee> remainingPayees;
                 if (type == KPayeeReassignDlg::TypeMerge) {
@@ -524,8 +534,6 @@ public:
                     }
                 }
 
-                // TODO : check if we have a report that explicitly uses one of our payees
-                //        and issue an appropriate warning
                 try {
                     // now loop over all transactions and reassign payee
                     for (auto& transaction : translist) {
@@ -577,6 +585,15 @@ public:
                         file->modifyAccount(loanAccount);
                     }
 
+                    // now loop over all reports and reassign the payees
+                    for (const auto& reportId : usedReportIds) {
+                        auto report = file->report(reportId);
+                        for (const auto& payee : list) {
+                            report.removeReference(payee.id());
+                        }
+                        report.addPayee(newPayee.id());
+                        file->modifyReport(report);
+                    }
                 } catch (const MyMoneyException &e) {
                     KMessageBox::detailedError(q, i18n("Unable to reassign payee of transaction/split"), e.what());
                 }
