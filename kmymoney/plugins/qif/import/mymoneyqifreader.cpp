@@ -277,6 +277,11 @@ void MyMoneyQifReader::setCategoryMapping(bool map)
     d->mapCategories = map;
 }
 
+void MyMoneyQifReader::setInputDateFormat(const QString& format)
+{
+    m_qifProfile.setInputDateFormat(format);
+}
+
 void MyMoneyQifReader::setURL(const QUrl& url)
 {
     m_url = url;
@@ -350,35 +355,40 @@ void MyMoneyQifReader::slotImportFinished()
     QTimer::singleShot(0, this, SLOT(slotProcessData()));
 }
 
+QString MyMoneyQifReader::selectDateFormat(const QStringList& dateFormats)
+{
+    if (dateFormats.count() <= 1)
+        return dateFormats.first();
+
+    bool ok;
+    const auto format =
+        QInputDialog::getItem(nullptr, i18n("Date format selection"), i18n("Pick the date format that suits your input file"), dateFormats, 05, false, &ok);
+
+    return ok ? format : QString();
+}
+
 void MyMoneyQifReader::slotProcessData()
 {
     signalProgress(-1, -1);
 
-    // scan the file and try to determine numeric and date formats
-    m_qifProfile.autoDetect(m_qifLines);
+    QString format = m_qifProfile.inputDateFormat();
 
-    // the detection is accurate for numeric values, but it could be
-    // that the dates were too ambiguous so that we have to let the user
-    // decide which one to pick.
-    QStringList dateFormats;
-    m_qifProfile.possibleDateFormats(dateFormats);
-    QString format;
-    if (dateFormats.count() > 1) {
-        bool ok;
-        format =
-            QInputDialog::getItem(nullptr, i18n("Date format selection"), i18n("Pick the date format that suits your input file"), dateFormats, 05, false, &ok);
-        if (!ok) {
+    if (format.isEmpty()) {
+        // scan the file and try to determine numeric and date formats
+        m_qifProfile.autoDetect(m_qifLines);
+
+        // the detection is accurate for numeric values, but it could be
+        // that the dates were too ambiguous so that we have to let the user
+        // decide which one to pick.
+        QStringList dateFormats;
+        m_qifProfile.possibleDateFormats(dateFormats);
+        format = selectDateFormat(dateFormats);
+        if (format.isEmpty()) {
             m_userAbort = true;
+            return;
         }
-    } else
-        format = dateFormats.first();
-
-    if (!format.isEmpty()) {
         m_qifProfile.setInputDateFormat(format);
         qDebug("Selected date format: '%s'", qPrintable(format));
-    } else {
-        // cancel the process because there is probably nothing to work with
-        m_userAbort = true;
     }
 
     signalProgress(0, m_qifLines.count(), i18n("Importing QIF..."));

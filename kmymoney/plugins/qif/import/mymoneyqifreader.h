@@ -73,6 +73,12 @@ public:
     ~MyMoneyQifReader();
 
     /**
+     * Override the input date format and bypass automatic detection.
+     * Intended for deterministic imports and unit tests.
+     */
+    void setInputDateFormat(const QString& format);
+
+    /**
       * This method is used to store the filename into the object.
       * The file should exist. If it does and an external filter
       * program is specified with the current selected profile,
@@ -297,7 +303,7 @@ private Q_SLOTS:
 private:
 
     void parseReceivedData(const QByteArray& data);
-
+    QString selectDateFormat(const QStringList& dateFormats);
 
     /// \internal d-pointer class.
     class Private;

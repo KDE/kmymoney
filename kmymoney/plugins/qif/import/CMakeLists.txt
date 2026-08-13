@@ -29,3 +29,5 @@ target_link_libraries(qifimporter
     Alkimia::alkimia
     kmm_settings
 )
+
+add_subdirectory(tests)
