@@ -357,7 +357,10 @@ void MyMoneyQifReader::slotImportFinished()
 
 QString MyMoneyQifReader::selectDateFormat(const QStringList& dateFormats)
 {
-    if (dateFormats.count() <= 1)
+    if (dateFormats.count() == 0)
+        return QString();
+
+    if (dateFormats.count() == 1)
         return dateFormats.first();
 
     bool ok;
