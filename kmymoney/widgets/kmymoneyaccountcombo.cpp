@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2004-2020 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2026      Dimitrios Glentadakis <dglent@free.fr>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -14,6 +15,7 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QList>
+#include <QMouseEvent>
 #include <QRegularExpression>
 #include <QStylePainter>
 #include <QTreeView>
@@ -39,6 +41,7 @@ public:
         , m_popupView(nullptr)
         , m_splitAction(nullptr)
         , m_inMakeCompletion(false)
+        , m_popupItemPressed(false)
         , m_showFullAccountName(false)
     {
         m_q->setInsertPolicy(QComboBox::NoInsert);
@@ -53,6 +56,7 @@ public:
     QString m_fullAccountName;
     QModelIndex m_lastSelectedIndex;
     bool m_inMakeCompletion;
+    bool m_popupItemPressed;
     bool m_showFullAccountName;
 
     void selectFirstMatchingItem()
@@ -245,6 +249,23 @@ void KMyMoneyAccountCombo::activated()
 
 bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
 {
+    if (d->m_popupView && o == d->m_popupView->viewport()) {
+        if (e->type() == QEvent::MouseButtonPress) {
+            d->m_popupItemPressed = false;
+        } else if (e->type() == QEvent::MouseButtonRelease && !d->m_popupItemPressed) {
+            const auto mouseEvent = static_cast<QMouseEvent*>(e);
+            const auto index = d->m_popupView->indexAt(mouseEvent->position().toPoint());
+            if (index.isValid() && d->m_popupView->model()->hasChildren(index)) {
+                // QComboBox treats every release in the popup as an item selection.
+                // A click on a tree branch does not emit QAbstractItemView::pressed.
+                if (d->m_popupView->style()->styleHint(QStyle::SH_ListViewExpand_SelectMouseType, nullptr, d->m_popupView) == QEvent::MouseButtonRelease) {
+                    d->m_popupView->setExpanded(index, !d->m_popupView->isExpanded(index));
+                }
+                return true;
+            }
+        }
+    }
+
     if (isEditable()) {
         if (o == d->m_popupView) {
             // propagate all relevant key press events to the lineEdit widget
@@ -404,7 +425,11 @@ void KMyMoneyAccountCombo::setModel(QAbstractItemModel* model)
 
     d->m_popupView->expandAll();
 
+    connect(d->m_popupView, &QAbstractItemView::pressed, this, [this]() {
+        d->m_popupItemPressed = true;
+    });
     d->m_popupView->installEventFilter(this);
+    d->m_popupView->viewport()->installEventFilter(this);
 
     // for some unknown reason, the first selection with the mouse (not with the keyboard)
     // after the qlineedit had been cleared using the clear button does not trigger the
