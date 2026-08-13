@@ -1,0 +1,14 @@
+!Type:Bank
+!Account
+NTest account
+DTest account
+TBank
+$1234.56
+/31/12/2025
+^
+!Type:Bank
+D30/12/2025
+T100.00
+PTest transaction
+LTest category
+^
