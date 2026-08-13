@@ -1064,16 +1064,28 @@ void MyMoneyTransactionFilter::removeReference(const QString& id)
 {
     Q_D(MyMoneyTransactionFilter);
     if (d->m_accounts.end() != d->m_accounts.find(id)) {
-        qDebug("%s", qPrintable(QString("Remove account '%1' from report").arg(id)));
-        d->m_accounts.take(id);
+        qDebug() << "Remove account" << id << "from report";
+        d->m_accounts.remove(id);
+        if (d->m_accounts.isEmpty()) {
+            d->m_filterSet &= ~accountFilterActive;
+        }
     } else if (d->m_categories.end() != d->m_categories.find(id)) {
-        qDebug("%s", qPrintable(QString("Remove category '%1' from report").arg(id)));
+        qDebug() << "Remove category" << id << "from report";
         d->m_categories.remove(id);
+        if (d->m_categories.isEmpty()) {
+            d->m_filterSet &= ~categoryFilterActive;
+        }
     } else if (d->m_payees.end() != d->m_payees.find(id)) {
-        qDebug("%s", qPrintable(QString("Remove payee '%1' from report").arg(id)));
+        qDebug() << "Remove payee" << id << "from report";
         d->m_payees.remove(id);
+        if (d->m_payees.isEmpty()) {
+            d->m_filterSet &= ~payeeFilterActive;
+        }
     } else if (d->m_tags.end() != d->m_tags.find(id)) {
-        qDebug("%s", qPrintable(QString("Remove tag '%1' from report").arg(id)));
+        qDebug() << "Remove tag" << id << "from report";
         d->m_tags.remove(id);
+        if (d->m_tags.isEmpty()) {
+            d->m_filterSet &= ~tagFilterActive;
+        }
     }
 }
