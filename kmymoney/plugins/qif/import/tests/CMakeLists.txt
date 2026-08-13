@@ -12,7 +12,7 @@ ecm_add_test(${test_mymoneyqifreader_SRCS}
         KF${QT_MAJOR_VERSION}::I18n
         KF${QT_MAJOR_VERSION}::KIOCore
         KF${QT_MAJOR_VERSION}::KIOWidgets
-        Qt${QT_MAJOR_VERSION}::Test
+        Qt::Test
 )
 
 target_include_directories(test-mymoneyqifreader
