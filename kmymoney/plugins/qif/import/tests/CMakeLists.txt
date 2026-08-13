@@ -1,3 +1,5 @@
+include(ECMAddTests)
+
 set(test_mymoneyqifreader_SRCS
     test-mymoneyqifreader.cpp
     ../mymoneyqifreader.cpp
