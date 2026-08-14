@@ -184,6 +184,20 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
         }
         connect(d->m_tabChart->ui->m_logYaxis, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotLogAxisChanged);
         connect(d->m_tabChart->ui->m_negExpenses, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotNegExpensesChanged);
+
+        connect(d->m_tabRowColPivot->ui->m_propagateRemainder, &QCheckBox::stateChanged, this, [&](int _state) {
+            Q_D(KReportConfigurationFilterDlg);
+            const auto state = static_cast<Qt::CheckState>(_state);
+            d->m_tabRowColPivot->ui->m_checkTotalColumn->setDisabled(state == Qt::Checked);
+            switch (state) {
+            case Qt::Checked:
+                d->m_tabRowColPivot->ui->m_checkTotalColumn->setChecked(false);
+                break;
+            default:
+                break;
+            }
+        });
+
     } else if (d->m_initialState.reportType() == eMyMoney::Report::ReportType::QueryTable) {
         // eInvestmentHoldings is a special-case report, and you cannot configure the
         // rows & columns of that report.
@@ -607,19 +621,6 @@ void KReportConfigurationFilterDlg::slotReset()
         d->m_tabRowColPivot->ui->m_propagateRemainder->setEnabled(d->m_initialState.rowType() == eMyMoney::Report::RowType::BudgetActual);
         d->m_tabRowColPivot->ui->m_propagateRemainder->setChecked(d->m_initialState.isPropagateBudgetDifference());
         d->m_tabRowColPivot->ui->m_checkTotalRow->setDisabled(d->m_initialState.isPropagateBudgetDifference());
-
-        connect(d->m_tabRowColPivot->ui->m_propagateRemainder, &QCheckBox::stateChanged, this, [&](int _state) {
-            Q_D(KReportConfigurationFilterDlg);
-            const auto state = static_cast<Qt::CheckState>(_state);
-            d->m_tabRowColPivot->ui->m_checkTotalColumn->setDisabled(state == Qt::Checked);
-            switch (state) {
-            case Qt::Checked:
-                d->m_tabRowColPivot->ui->m_checkTotalColumn->setChecked(false);
-                break;
-            default:
-                break;
-            }
-        });
 
         slotRowTypeChanged(combo->currentIndex());
 
