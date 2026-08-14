@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-11 04:01+0000\n"
+"POT-Creation-Date: 2026-08-14 03:39+0000\n"
 "PO-Revision-Date: 2025-09-23 19:01+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -87,14 +87,14 @@ msgstr ""
 "ditu. Ez dira kontuan hartuko transakzio horiek."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:751
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1453
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1466
 #, kde-format
 msgid "Security not found"
 msgstr "Burtsa-balioa ez da aurkitu"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:804
 #: kmymoney/converter/mymoneystatementreader.cpp:810
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1437
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1450
 #, kde-format
 msgid "Statement Importer"
 msgstr "Kontu-laburpenaren inportatzailea"
@@ -6225,7 +6225,7 @@ msgstr "Prezioak ezabatu..."
 
 #: kmymoney/kmymoneyutils.cpp:506
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:137
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
@@ -6233,8 +6233,8 @@ msgstr "Errorea gertatu da '%1' fitxategia zamatzean."
 
 #: kmymoney/kmymoneyutils.cpp:506
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:139
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
@@ -14372,73 +14372,73 @@ msgstr "Inbertsio-kuotak"
 msgid "Unknown QIF type %1"
 msgstr "%1 QIF mota ezezaguna"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Date format selection"
 msgstr "Data-formatuaren hautapena"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "Aukeratu data-formatu egokia zure sarrera-fitxategirako"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:384
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:397
 #, kde-format
 msgid "Importing QIF..."
 msgstr "QIF inportatzen..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:483
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:496
 #, kde-format
 msgid "Reading QIF..."
 msgstr "QIF irakurtzen..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "Errorea gertatu da '%1' iragazkia exekutatzean."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Filter error"
 msgstr "Iragazki-errorea"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:522
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:535
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "Oth L"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:540
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "Inbertsioa"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:541
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:554
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "Kategoria"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:544
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "Burtsa-balorea"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:547
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:560
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "Prezioak"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:556
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:569
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "Mota"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:750
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14448,29 +14448,29 @@ msgstr ""
 "%1 kontuaren hasierako saldoa %2 da. QIF fitxategiak hasierako saldo hau "
 "ematen du: %3. Uneko saldoa QIF fitxategikoarekin ordezkatu nahi duzu?"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:751
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "Gainidatzi hasierako saldoa"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:905
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:918
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "Ezin da kontua aurkitu: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:919
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:929
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:954
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:932
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:942
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:967
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "QIF inportatzaileak automatikoki sortua"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:946
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:959
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "QIFetik inportatua, ez da eman kontu-izenik"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:982
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:995
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14481,18 +14481,18 @@ msgstr ""
 "dator bat fitxategian lehendik zegoenarekin. Eskuz zuzendu datu hori, "
 "inportazioa amaitu ondoren."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:998
 #, kde-format
 msgid "Opening balance problem"
 msgstr "Arazoak hasierako saldoan"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "Errorea gertatu da hasierako saldoaren transakzioan"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1084
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1319
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1097
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1332
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14509,13 +14509,13 @@ msgstr ""
 "\" sakatuz gero, inportazio-prozesua etengo da. Orduan, berriz has dezakezu "
 "inportazioa, eta beste QIF profil bat hautatu, edo berria sortu."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1091
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1326
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1104
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1339
 #, kde-format
 msgid "Invalid date format"
 msgstr "Datu-formatu baliogabea"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1451
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1464
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -14524,12 +14524,12 @@ msgstr ""
 "Inbertsio-kontu honek ez du \"%1\" burtsa-baliorik. Ez dira kontuan hartuko "
 "burtsa-balore horrekin lotutako transakzioak."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1964
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1977
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (Inbertsioa)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1965
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1978
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr ""
@@ -15326,13 +15326,13 @@ msgid "Include subaccounts"
 msgstr "Sartu azpikontuak"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:809
+#: kmymoney/views/kpayeesview_p.h:826
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<b>%1</b>(r)en aldaketak gorde nahi dituzu?"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:147
-#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:827 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "Gorde aldaketak"
@@ -20605,7 +20605,7 @@ msgstr "Kendu onuraduna"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Benetan bateratu nahi dituzu hautatutako onuradun guztiak?"
 
-#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:602
 #, kde-format
 msgid "Merge Payees"
 msgstr " Onuradunak bateratu"
@@ -20909,7 +20909,7 @@ msgstr "Saldoa: %1"
 msgid "Balance: %1%2"
 msgstr "Saldoa: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:494
+#: kmymoney/views/kpayeesview_p.h:504
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20923,17 +20923,17 @@ msgstr ""
 "transakzio/transakzio antolatua edo mailegu-kontua berriz esleitu ahal "
 "izateko."
 
-#: kmymoney/views/kpayeesview_p.h:581
+#: kmymoney/views/kpayeesview_p.h:598
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "Ez da transakzioaren/partidaren onuraduna berresleitzeko gai"
 
-#: kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview_p.h:602
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Bateratzeko ezer ez."
 
-#: kmymoney/views/kpayeesview_p.h:668
+#: kmymoney/views/kpayeesview_p.h:685
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Ezin d(ir)a onuraduna(k) kendu"
@@ -22085,7 +22085,7 @@ msgid ""
 "using Ctrl+F"
 msgstr ""
 
-#: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
+#: kmymoney/widgets/kmymoneyaccountcombo.cpp:140
 #, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"

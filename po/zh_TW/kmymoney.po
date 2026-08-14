@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-11 04:01+0000\n"
+"POT-Creation-Date: 2026-08-14 03:39+0000\n"
 "PO-Revision-Date: 2024-05-09 17:32+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -77,14 +77,14 @@ msgid ""
 msgstr "匯入的報表包含了沒有抵押品的投資交易。這些交易將被忽略。"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:751
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1453
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1466
 #, kde-format
 msgid "Security not found"
 msgstr "找不到抵押品"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:804
 #: kmymoney/converter/mymoneystatementreader.cpp:810
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1437
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1450
 #, kde-format
 msgid "Statement Importer"
 msgstr "報表匯入器"
@@ -6242,7 +6242,7 @@ msgstr "刪除價格..."
 
 #: kmymoney/kmymoneyutils.cpp:506
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:137
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
@@ -6250,8 +6250,8 @@ msgstr "載入檔案 %1 時發生錯誤。"
 
 #: kmymoney/kmymoneyutils.cpp:506
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:139
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
@@ -14572,75 +14572,75 @@ msgstr "投資費用"
 msgid "Unknown QIF type %1"
 msgstr "未知的 QIF 型態 %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Date format selection"
 msgstr "日期格式選取"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "選擇您的輸入檔內使用的日期格式"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:384
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:397
 #, fuzzy, kde-format
 #| msgid "Importing QIF ..."
 msgid "Importing QIF..."
 msgstr "匯入 QIF 中..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:483
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:496
 #, fuzzy, kde-format
 #| msgid "Reading QIF ..."
 msgid "Reading QIF..."
 msgstr "讀取 QIF 中..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "執行過濾器「%1」時發生錯誤。"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Filter error"
 msgstr "過濾器錯誤"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:522
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:535
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "其他債務"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:540
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "投資"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:541
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:554
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "類別"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:544
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "抵押品"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:547
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:560
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "價格"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:556
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:569
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "分類"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:750
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14650,29 +14650,29 @@ msgstr ""
 "%1 帳戶目前的開戶金額為 %2。QIF 檔案報告的開戶金額為 %3。您要用 QIF 檔內的資"
 "料覆寫目前帳戶的資料嗎？"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:751
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "覆寫開戶金額"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:905
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:918
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "找不到帳戶：%1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:919
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:929
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:954
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:932
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:942
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:967
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "由 QIF 匯入器自動產生"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:946
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:959
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "QIF 已匯入，未提供帳戶名稱"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:982
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:995
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14682,18 +14682,18 @@ msgstr ""
 "KMyMoney 已匯入第二個開戶金額交易到帳戶 <b>%1</b> 內。請在匯入完成後手動修正"
 "此問題。"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:998
 #, kde-format
 msgid "Opening balance problem"
 msgstr "開戶金額發生問題"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "建立開戶金額交易時發生錯誤"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1084
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1319
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1097
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1332
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14708,25 +14708,25 @@ msgstr ""
 "按下「繼續」可以將此筆交易的日期設為今天。按下「取消」則會中止匯入。中止後您"
 "可以重新開始匯入並選擇不同的 QIF 設定檔，或是建立新的設定檔。"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1091
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1326
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1104
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1339
 #, kde-format
 msgid "Invalid date format"
 msgstr "無效的日期格式"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1451
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1464
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
 "involving this security will be ignored."
 msgstr "此投資帳戶並未包含抵押品 %1。包含此抵押品的交易將被忽略。"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1964
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1977
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1（投資）"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1965
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1978
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr "由 QIF 匯入器從型態為「共同基金」的帳戶中自動產生"
@@ -15535,14 +15535,14 @@ msgid "Include subaccounts"
 msgstr "包含子帳戶"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:809
+#: kmymoney/views/kpayeesview_p.h:826
 #, fuzzy, kde-format
 #| msgid "Do you want to save the changes for <b>%1</b>?"
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "您要儲存 <b>%1</b> 的變更嗎？"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:147
-#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:827 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "儲存變更"
@@ -20846,7 +20846,7 @@ msgstr "移除收款人"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "您確定要移除所有選取的收款人嗎？"
 
-#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:602
 #, fuzzy, kde-format
 #| msgid "  Payees"
 msgid "Merge Payees"
@@ -21168,7 +21168,7 @@ msgstr "餘額：%1"
 msgid "Balance: %1%2"
 msgstr "餘額：%1%2"
 
-#: kmymoney/views/kpayeesview_p.h:494
+#: kmymoney/views/kpayeesview_p.h:504
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -21179,17 +21179,17 @@ msgstr ""
 "至少仍有一個交易、排程交易或借貸帳戶參照到此收款人。目前您選擇了所有的收款"
 "人，但是您至少要留下一個收款人，以便讓這些交易或帳戶重新指定。"
 
-#: kmymoney/views/kpayeesview_p.h:581
+#: kmymoney/views/kpayeesview_p.h:598
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "無法重新指定收款人給交易或分割"
 
-#: kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview_p.h:602
 #, kde-format
 msgid "Nothing to merge."
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:668
+#: kmymoney/views/kpayeesview_p.h:685
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "無法移除收款人"
@@ -22376,7 +22376,7 @@ msgid ""
 "using Ctrl+F"
 msgstr ""
 
-#: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
+#: kmymoney/widgets/kmymoneyaccountcombo.cpp:140
 #, fuzzy, kde-format
 #| msgid "Use this to open the profile editor"
 msgctxt "@info:tooltip icon in category to open the split editor"

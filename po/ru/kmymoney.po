@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-11 04:01+0000\n"
+"POT-Creation-Date: 2026-08-14 03:39+0000\n"
 "PO-Revision-Date: 2023-07-14 18:45+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -93,14 +93,14 @@ msgstr ""
 "ценных бумаг. Такие операции будут проигнорированы."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:751
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1453
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1466
 #, kde-format
 msgid "Security not found"
 msgstr "Ценная бумага не найдена"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:804
 #: kmymoney/converter/mymoneystatementreader.cpp:810
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1437
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1450
 #, kde-format
 msgid "Statement Importer"
 msgstr "Импорт выписки"
@@ -6382,7 +6382,7 @@ msgstr "Удалить курс"
 
 #: kmymoney/kmymoneyutils.cpp:506
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:137
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
@@ -6390,8 +6390,8 @@ msgstr "Ошибка загрузки файла «%1»."
 
 #: kmymoney/kmymoneyutils.cpp:506
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:139
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
@@ -14746,73 +14746,73 @@ msgstr "Комиссия за управление инвестициями"
 msgid "Unknown QIF type %1"
 msgstr "Неизвестный тип QIF %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Date format selection"
 msgstr "Выбор формата даты"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "Укажите формат даты, соответствующий файлу входных данных"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:384
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:397
 #, kde-format
 msgid "Importing QIF..."
 msgstr "Импорт QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:483
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:496
 #, kde-format
 msgid "Reading QIF..."
 msgstr "Чтение QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "В работе фильтра «%1» произошла ошибка."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Filter error"
 msgstr "Ошибка фильтра"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:522
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:535
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "Oth L"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:540
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "Invst"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:541
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:554
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "Cat"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:544
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "Security"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:547
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:560
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "Prices"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:556
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:569
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "Class"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:750
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14822,29 +14822,29 @@ msgstr ""
 "Начальный баланс счёта %1 составляет %2. В файле QIF начальный баланс равен "
 "%3. Перезаписать текущий баланс данными из файла QIF?"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:751
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "Перезапись начального баланса"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:905
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:918
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "Невозможно найти счёт: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:919
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:929
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:954
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:932
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:942
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:967
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "Автоматически создано при импорте QIF"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:946
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:959
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "Импорт QIF завершён, имя счёта не указано"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:982
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:995
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14855,18 +14855,18 @@ msgstr ""
 "которая отличается от той, что найдена в файле. Выполните исправления "
 "вручную после окончания импорта."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:998
 #, kde-format
 msgid "Opening balance problem"
 msgstr "Проблема начального баланса"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "Ошибка создания операции начального баланса"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1084
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1319
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1097
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1332
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14882,13 +14882,13 @@ msgstr ""
 "«Отмена» для прерывания операции импорта. После этого можно запустить "
 "операцию импорта заново и выбрать другой профиль QIF или создать новый."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1091
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1326
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1104
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1339
 #, kde-format
 msgid "Invalid date format"
 msgstr "Неверный формат даты"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1451
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1464
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -14897,12 +14897,12 @@ msgstr ""
 "Этот инвестиционный счёт не содержит ценную бумагу «%1». Все операции по ней "
 "будут проигнорированы."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1964
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1977
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (Инвестиция)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1965
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1978
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr "Автоматически создано при импорте QIF из счёта взаимных счетов"
@@ -15732,13 +15732,13 @@ msgid "Include subaccounts"
 msgstr "Учитывать субсчета"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:809
+#: kmymoney/views/kpayeesview_p.h:826
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Сохранить изменения <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:147
-#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:827 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "Сохранить изменения"
@@ -21103,7 +21103,7 @@ msgstr "Удаление контрагента"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Вы действительно хотите объединить выбранных контрагентов?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:602
 #, kde-format
 msgid "Merge Payees"
 msgstr "Объединение контрагентов"
@@ -21418,7 +21418,7 @@ msgstr "Остаток: %1"
 msgid "Balance: %1%2"
 msgstr "Баланс: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:494
+#: kmymoney/views/kpayeesview_p.h:504
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -21431,17 +21431,17 @@ msgstr ""
 "наличие хотя бы одного контрагента, чтобы можно было произвести "
 "перераспределение операций/запланированных операций и кредитных счетов."
 
-#: kmymoney/views/kpayeesview_p.h:581
+#: kmymoney/views/kpayeesview_p.h:598
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "Невозможно перераспределить операцию/разбивку на контрагента"
 
-#: kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview_p.h:602
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Элементы для объединения отсутствуют."
 
-#: kmymoney/views/kpayeesview_p.h:668
+#: kmymoney/views/kpayeesview_p.h:685
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Невозможно удалить контрагента(ов)"
@@ -22677,7 +22677,7 @@ msgid ""
 "using Ctrl+F"
 msgstr ""
 
-#: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
+#: kmymoney/widgets/kmymoneyaccountcombo.cpp:140
 #, fuzzy, kde-format
 #| msgid "Use this to open the profile editor"
 msgctxt "@info:tooltip icon in category to open the split editor"
