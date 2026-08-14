@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-11 00:45+0000\n"
+"POT-Creation-Date: 2026-08-14 00:45+0000\n"
 "PO-Revision-Date: 2025-12-07 00:37+0700\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
@@ -76,14 +76,14 @@ msgid ""
 msgstr "ໃບແຈ້ງຍອດທີ່ນຳເຂົ້ານີ້ ມີລາຍການເຄື່ອນໄຫວການລົງທຶນທີ່ບໍ່ມີຫຼັກຊັບ.  ລາຍການເຫຼົ່ານີ້ຈະຖືກລະເລີຍ."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:751
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1453
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1466
 #, kde-format
 msgid "Security not found"
 msgstr "ບໍ່ພົບຫຼັກຊັບ"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:804
 #: kmymoney/converter/mymoneystatementreader.cpp:810
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1437
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1450
 #, kde-format
 msgid "Statement Importer"
 msgstr "ຕົວນຳເຂົ້າໃບແຈ້ງຍອດ"
@@ -6170,7 +6170,7 @@ msgstr "ລຶບລາຄາ"
 
 #: kmymoney/kmymoneyutils.cpp:507
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:137
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
@@ -6178,8 +6178,8 @@ msgstr "ເກີດຂໍ້ຜິດພາດຂະນະໂຫຼດໄຟລ
 
 #: kmymoney/kmymoneyutils.cpp:507
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:139
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:449
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
@@ -14217,73 +14217,73 @@ msgstr "ຄ່າທຳນຽມການລົງທຶນ"
 msgid "Unknown QIF type %1"
 msgstr "ບໍ່ຮູ້ຈັກປະເພດ QIF %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Date format selection"
 msgstr "ການເລືອກຮູບແບບວັນທີ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:368
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "ເລືອກຮູບແບບວັນທີທີ່ເໝາະສົມກັບໄຟລ໌ປ້ອນເຂົ້າຂອງທ່ານ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:384
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:397
 #, kde-format
 msgid "Importing QIF..."
 msgstr "ກຳລັງນຳເຂົ້າ QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:483
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:496
 #, kde-format
 msgid "Reading QIF..."
 msgstr "ກຳລັງອ່ານ QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "ເກີດຂໍ້ຜິດພາດຂະນະແລ່ນຟິວເຕີ '%1'."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:501
 #, kde-format
 msgid "Filter error"
 msgstr "ຟິວເຕີຜິດພາດ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:522
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:535
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "Oth L"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:540
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "Invst"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:541
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:554
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "Cat"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:544
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "Security"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:547
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:560
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "Prices"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:556
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:569
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "Class"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:750
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14293,29 +14293,29 @@ msgstr ""
 "ບັນຊີ %1 ປະຈຸບັນມຍອດຍົກມາແມ່ນ %2. ໄຟລ໌ QIF ນີ້ລາຍງານຍອດຍົກມາແມ່ນ %3. "
 "ທ່ານຕ້ອງການຂຽນທັບຍອດເງິນປະຈຸບັນດ້ວຍຍອດເງິນຈາກໄຟລ໌ QIF ບໍ່?"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:751
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "ຂຽນທັບຍອດຍົກມາ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:905
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:918
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "ບໍ່ພົບບັນຊີ: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:919
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:929
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:954
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:932
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:942
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:967
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "ສ້າງອັດຕະໂນມັດໂດຍຕົວນຳເຂົ້າ QIF"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:946
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:959
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "ນຳເຂົ້າ QIF ແລ້ວ, ບໍ່ມີຊື່ບັນຊີ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:982
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:995
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14325,18 +14325,18 @@ msgstr ""
 "KMyMoney ໄດ້ນຳເຂົ້າທຸລະກຳຍອດຍົກມາທີສອງເຂົ້າໃນບັນຊີ <b>%1</b> "
 "ເຊິ່ງແຕກຕ່າງຈາກອັນທີ່ມີຢູ່ໃນໄຟລ໌ແລ້ວ. ກະລຸນາແກ້ໄຂດ້ວຍຕົນເອງເມື່ອການນຳເຂົ້າສຳເລັດ."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:998
 #, kde-format
 msgid "Opening balance problem"
 msgstr "ບັນຫາຍອດຍົກມາ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1007
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1020
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "ເກີດຂໍ້ຜິດພາດຂະນະສ້າງທຸລະກຳຍອດຍົກມາ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1084
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1319
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1097
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1332
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14352,25 +14352,25 @@ msgstr ""
 "ການກົດ \"ສືບຕໍ່\" ຈະກຳນົດວັນທີມື້ນີ້ໃຫ້ກັບທຸລະກຳ. ການກົດ \"ຍົກເລີກ\" ຈະຍົກເລີກການນຳເຂົ້າ. "
 "ທ່ານສາມາດເລີ່ມການນຳເຂົ້າໃໝ່ ແລະ ເລືອກໂປຣໄຟລ໌ QIF ອື່ນ ຫຼື ສ້າງອັນໃໝ່."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1091
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1326
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1104
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1339
 #, kde-format
 msgid "Invalid date format"
 msgstr "ຮູບແບບວັນທີບໍ່ຖືກຕ້ອງ"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1451
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1464
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
 "involving this security will be ignored."
 msgstr "ບັນຊີການລົງທຶນນີ້ບໍ່ມີຫຼັກຊັບ \"%1\". ທຸລະກຳທີ່ກ່ຽວຂ້ອງກັບຫຼັກຊັບນີ້ຈະຖືກບໍ່ສົນໃຈ."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1964
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1977
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (ການລົງທຶນ)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1965
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1978
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr "ສ້າງອັດຕະໂນມັດໂດຍຕົວນຳເຂົ້າ QIF ຈາກລາຍການປະເພດບັນຊີກອງທຶນລວມ"
@@ -15143,13 +15143,13 @@ msgid "Include subaccounts"
 msgstr "ລວມເອົາບັນຊີຍ່ອຍ"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:809
+#: kmymoney/views/kpayeesview_p.h:826
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>ທ່ານຕ້ອງການບັນທຶກການປ່ຽນແປງສຳລັບ <b>%1</b> ບໍ່?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:147
-#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:292
+#: kmymoney/views/kpayeesview_p.h:827 kmymoney/views/ktagsview.cpp:292
 #, kde-format
 msgid "Save changes"
 msgstr "ບັນທຶກການປ່ຽນແປງ"
@@ -20307,7 +20307,7 @@ msgstr "ລຶບຜູ້ຮັບເງິນ"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>ທ່ານຕ້ອງການຮວມຜູ້ຮັບເງິນທີ່ເລືອກເຂົ້າກັນແທ້ບໍ່?"
 
-#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview.cpp:617 kmymoney/views/kpayeesview_p.h:602
 #, kde-format
 msgid "Merge Payees"
 msgstr "ຮວມຜູ້ຮັບເງິນ"
@@ -20610,7 +20610,7 @@ msgstr "ຍອດເງິນ: %1"
 msgid "Balance: %1%2"
 msgstr "ຍອດເງິນ: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:494
+#: kmymoney/views/kpayeesview_p.h:504
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20622,17 +20622,17 @@ msgstr ""
 "ປະຈຸບັນທ່ານໄດ້ເລືອກຜູ້ຮັບເງິນທັງໝົດ. ແນວໃດກໍ່ຕາມ, ຕ້ອງມີຜູ້ຮັບເງິນຢ່າງໜ້ອຍໜຶ່ງຄົນເຫຼືອຢູ່ ເພື່ອໃຫ້ທຸລະກຳ/"
 "ທຸລະກຳຕາມຕາຕະລາງ ຫຼື ບັນຊີເງິນກູ້ສາມາດຖືກກຳນົດໃໝ່ໄດ້."
 
-#: kmymoney/views/kpayeesview_p.h:581
+#: kmymoney/views/kpayeesview_p.h:598
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "ບໍ່ສາມາດກຳນົດຜູ້ຮັບເງິນຂອງທຸລະກຳ/ການແຍກໃໝ່"
 
-#: kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview_p.h:602
 #, kde-format
 msgid "Nothing to merge."
 msgstr "ບໍ່ມີຫຍັງໃຫ້ຮວມ."
 
-#: kmymoney/views/kpayeesview_p.h:668
+#: kmymoney/views/kpayeesview_p.h:685
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "ບໍ່ສາມາດລຶບຜູ້ຮັບເງິນ"
@@ -21793,7 +21793,7 @@ msgid ""
 "using Ctrl+F"
 msgstr "ໃຊ້ເພື່ອໃຫ້ວິດເຈັດການກັ່ນຕອງສະແດງຢູ່ຕະຫຼອດ. ຖ້າບໍ່ເຫັນ, ສາມາດສະແດງມັນໄດ້ໂດຍການກົດ Ctrl+F"
 
-#: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
+#: kmymoney/widgets/kmymoneyaccountcombo.cpp:140
 #, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
