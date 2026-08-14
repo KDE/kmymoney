@@ -217,18 +217,18 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
 
     connect(d->m_tabGeneral->ui->m_checkCurrency, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotConvertCurrencyChanged);
 
-    auto* criteriaSections = new QWidget(d->ui->m_reportPage);
-    auto* criteriaSectionsLayout = new QVBoxLayout(criteriaSections);
+    auto criteriaSections = new QWidget(d->ui->m_reportPage);
+    auto criteriaSectionsLayout = new QVBoxLayout(criteriaSections);
     criteriaSectionsLayout->setContentsMargins(0, 0, 0, 0);
     criteriaSectionsLayout->setSpacing(style()->pixelMetric(QStyle::PM_LayoutVerticalSpacing));
 
     while (d->ui->m_criteriaTab->count() > 0) {
-        auto* sectionWidget = d->ui->m_criteriaTab->widget(0);
+        auto sectionWidget = d->ui->m_criteriaTab->widget(0);
         const auto sectionTitle = d->ui->m_criteriaTab->tabText(0);
         d->ui->m_criteriaTab->removeTab(0);
 
-        auto* sectionGroup = new QGroupBox(sectionTitle, criteriaSections);
-        auto* sectionLayout = new QVBoxLayout(sectionGroup);
+        auto sectionGroup = new QGroupBox(sectionTitle, criteriaSections);
+        auto sectionLayout = new QVBoxLayout(sectionGroup);
         sectionLayout->setContentsMargins(6, 6, 6, 6);
         sectionWidget->setParent(sectionGroup);
         sectionWidget->show();
@@ -237,18 +237,18 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
     }
     criteriaSectionsLayout->addStretch();
 
-    auto* scrollArea = new QScrollArea(d->ui->m_reportPage);
+    auto scrollArea = new QScrollArea(d->ui->m_reportPage);
     scrollArea->setWidgetResizable(true);
     scrollArea->setFrameShape(QFrame::NoFrame);
     scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollArea->setWidget(criteriaSections);
 
-    auto* reportPageLayout = qobject_cast<QVBoxLayout*>(d->ui->m_reportPage->layout());
+    auto reportPageLayout = qobject_cast<QVBoxLayout*>(d->ui->m_reportPage->layout());
     if (reportPageLayout) {
         reportPageLayout->replaceWidget(d->ui->m_criteriaTab, scrollArea);
         d->ui->m_criteriaTab->hide();
         for (int i = reportPageLayout->count() - 1; i >= 0; --i) {
-            auto* item = reportPageLayout->itemAt(i);
+            auto item = reportPageLayout->itemAt(i);
             if (item && item->spacerItem()) {
                 reportPageLayout->removeItem(item);
                 delete item;
