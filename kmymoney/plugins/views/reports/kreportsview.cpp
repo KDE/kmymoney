@@ -102,6 +102,8 @@ KReportsView::KReportsView(QWidget* parent)
     pActions[eMenu::Action::ReportClose]->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_W));
 
     addAction(pActions[eMenu::Action::ReportCopy]);
+
+    connect(MyMoneyFile::instance(), &MyMoneyFile::storageTransactionEnded, this, &KReportsView::slotUpdateConfiguration);
 }
 
 KReportsView::~KReportsView()
@@ -215,10 +217,14 @@ void KReportsView::showEvent(QShowEvent* event)
         d->setFilter(d->ui.m_searchWidget->text());
     }
 
-    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
+    SelectedObjects selection;
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget())) {
+        selection.setSelection(SelectedObjects::Report, tab->report().id());
         Q_EMIT reportSelected(tab->report());
-    else
+    } else {
         Q_EMIT reportSelected(MyMoneyReport());
+    }
+    Q_EMIT requestSelectionChange(selection);
 
     pActions[eMenu::Action::ReportCopy]->setEnabled(true);
     // don't forget base class implementation
@@ -497,6 +503,25 @@ void KReportsView::doConfigure(ConfigureOption configureOption)
 
     dlg->loadReport(report);
     tab->showConfigurationSidebar(dlg);
+}
+
+void KReportsView::slotUpdateConfiguration()
+{
+    Q_D(KReportsView);
+    if (!d->m_needLoad) {
+        const auto tabCount = d->ui.m_reportTabWidget->count();
+        for (auto i = 1; i < tabCount; ++i) {
+            auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(i));
+            if (tab) {
+                const auto report = MyMoneyFile::instance()->report(tab->report().id());
+                tab->updateReport();
+                auto dlg = qobject_cast<KReportConfigurationFilterDlg*>(tab->configurationSidebar());
+                if (dlg) {
+                    dlg->loadReport(report);
+                }
+            }
+        }
+    }
 }
 
 void KReportsView::slotDuplicate()

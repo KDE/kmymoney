@@ -58,6 +58,8 @@ public:
     void slotShowHelp();
     void slotReset();
 
+    void loadWidgets();
+
 private Q_SLOTS:
     void slotUpdateSelections();
 

@@ -260,6 +260,7 @@ public:
         QList<MyMoneyTag> list;
         QList<MyMoneyTag>::Iterator it_l;
 
+        ui->m_tagsView->clear();
         list = file->tagList();
         // load view
         for (it_l = list.begin(); it_l != list.end(); ++it_l) {
@@ -280,6 +281,7 @@ public:
         QList<MyMoneyPayee> list;
         QList<MyMoneyPayee>::Iterator it_l;
 
+        ui->m_payeesView->clear();
         list = file->payeeList();
         // load view
         for (it_l = list.begin(); it_l != list.end(); ++it_l) {

@@ -599,3 +599,10 @@ void KTransactionFilter::setCriteriaTabPosition(QTabWidget::TabPosition tabPosit
     }
     d->ui->m_criteriaTab->setProperty("stackedSectionsCreated", true);
 }
+
+void KTransactionFilter::loadWidgets()
+{
+    Q_D(KTransactionFilter);
+    d->loadTags();
+    d->loadPayees();
+}

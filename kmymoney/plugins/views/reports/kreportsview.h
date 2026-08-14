@@ -149,6 +149,9 @@ public Q_SLOTS:
 
     void updateActions(const SelectedObjects& selections) override;
 
+private Q_SLOTS:
+    void slotUpdateConfiguration();
+
 private:
     Q_DECLARE_PRIVATE(KReportsView)
 

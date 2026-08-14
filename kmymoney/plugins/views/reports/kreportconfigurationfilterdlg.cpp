@@ -286,6 +286,7 @@ void KReportConfigurationFilterDlg::loadReport(const MyMoneyReport& report)
     Q_D(KReportConfigurationFilterDlg);
     d->m_initialState = report;
     d->m_currentState = report;
+    d->m_tabFilters->loadWidgets();
     slotReset();
 }
 
