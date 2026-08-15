@@ -3730,10 +3730,7 @@ msgid "Ledger"
 msgstr "Účtovná kniha"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scheduled\n"
-#| "transactions"
+#, kde-format
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
@@ -8748,8 +8745,7 @@ msgid "SWIFT/BIC"
 msgstr "SWIFT/BIC"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:494
-#, fuzzy, kde-format
-#| msgid "Currency"
+#, kde-format
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "Mena"
@@ -8758,7 +8754,7 @@ msgstr "Mena"
 #, kde-format
 msgctxt "@info:tooltip for 'Currency' column"
 msgid "The currency assigned to the account"
-msgstr ""
+msgstr "Mena priradená k účtu"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:74
 #, kde-format
@@ -8777,11 +8773,10 @@ msgid "Accounts with no institution assigned"
 msgstr "Účty bez priradenej inštitúcie"
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:333
-#, fuzzy, kde-format
-#| msgid "Cannot add institution: %1"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced institution"
 msgid "Unknown institution '%1'"
-msgstr "Nie je možné pridať inštitúciu: %1"
+msgstr "Neznáma inštitúcia '%1'"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:56
 #, kde-format
@@ -9160,11 +9155,10 @@ msgid "Payee"
 msgstr "Príjemca"
 
 #: kmymoney/mymoney/storage/payeesmodel.cpp:267
-#, fuzzy, kde-format
-#| msgid "Unknown payee"
+#, kde-format
 msgctxt "@info Name for recreated missing but referenced payee"
 msgid "Unknown payee '%1'"
-msgstr "Neznámy príjemca"
+msgstr "Neznámy príjemca '%1'"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:36
 #, kde-format
@@ -9706,7 +9700,7 @@ msgstr "Tabulátor (\\t)"
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Pipe (|)"
-msgstr ""
+msgstr "Zvislá čiara (|)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
@@ -11346,7 +11340,7 @@ msgstr "tabulátor (\\t)"
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:144
 #, kde-format
 msgid "pipe (|)"
-msgstr ""
+msgstr "zvislá čiara (|)"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:155
