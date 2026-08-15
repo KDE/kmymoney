@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 00:45+0000\n"
+"POT-Creation-Date: 2026-08-15 00:46+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1818,7 +1818,7 @@ msgstr "基准货币"
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:88
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:670
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:672
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:264
 #: kmymoney/views/kmymoneyview.cpp:192
 #: kmymoney/widgets/ktransactionfilter.cpp:146
@@ -4159,7 +4159,7 @@ msgstr "日"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:312
 #: kmymoney/plugins/views/reports/core/listtable.cpp:705
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:679
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:681
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:279
 #, kde-format
 msgid "Month"
@@ -11863,7 +11863,7 @@ msgid "iCalendar files"
 msgstr "iCalendar 文件"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
-#: kmymoney/plugins/views/reports/kreportsview.cpp:383
+#: kmymoney/plugins/views/reports/kreportsview.cpp:389
 #, kde-format
 msgid "Export as"
 msgstr "导出为..."
@@ -12311,7 +12311,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "导入对账单时出错，您仍要继续吗？"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:565
 #, kde-format
 msgid "Critical Error"
 msgstr "致命错误"
@@ -13879,7 +13879,7 @@ msgstr "QIF格式配置文件"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:254
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:661
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:663
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
 #: kmymoney/views/kmymoneyview.cpp:190
 #, kde-format
@@ -14771,7 +14771,7 @@ msgid "Unable to remove budget."
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:515
+#: kmymoney/plugins/views/reports/kreportsview.cpp:540
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1的副本"
@@ -15200,7 +15200,7 @@ msgstr "全部"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:584
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:599
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
@@ -15208,7 +15208,7 @@ msgstr "顶层"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:587
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:602
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -15216,7 +15216,7 @@ msgstr "组"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:590
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:605
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -15638,7 +15638,7 @@ msgstr "编号"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:693
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:667
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:669
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:259
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:117
 #: kmymoney/views/newtransactioneditor.ui:221
@@ -15660,7 +15660,7 @@ msgstr "交易类别类型"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:707
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:682
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:284
 #, kde-format
 msgid "Week"
@@ -16214,7 +16214,7 @@ msgid "General"
 msgstr "通用"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:166
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:192
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:206
 #, kde-format
 msgid "Rows/Columns"
 msgstr "行/栏目"
@@ -16229,8 +16229,8 @@ msgid "Range"
 msgstr "范围"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_reportPage)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:196
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:200
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:210
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:214
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:49
 #: kmymoney/plugins/views/reports/kreporttab.cpp:376
 #: kmymoney/views/khomeview_p.h:1122
@@ -16239,37 +16239,37 @@ msgid "Report"
 msgstr "报表"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:515
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:526
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:744
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:530
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:541
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:746
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
 msgid "Monthly"
 msgstr "每月"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:581
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:596
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
 msgstr "全部"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:599
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:614
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "收入与支出"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:602
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:617
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "资产与负债"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:664
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:666
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:254
 #, kde-format
 msgid "Top Categories"
@@ -16277,7 +16277,7 @@ msgstr "顶级交易类别"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:673
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:675
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:269
 #: kmymoney/views/kmymoneyview.cpp:188
 #: kmymoney/widgets/kaccounttemplateselector.ui:87
@@ -16286,14 +16286,14 @@ msgid "Accounts"
 msgstr "账户"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:676
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:678
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:274
 #, kde-format
 msgid "Top Accounts"
 msgstr "顶级账户"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:732
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:734
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -16301,7 +16301,7 @@ msgid "Daily"
 msgstr "每天"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:735
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:737
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -16309,7 +16309,7 @@ msgid "Weekly"
 msgstr "每周"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:747
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:749
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -16317,7 +16317,7 @@ msgid "Bi-Monthly"
 msgstr "每两个月"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:750
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:752
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -16325,31 +16325,31 @@ msgid "Quarterly"
 msgstr "每季度"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:753
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:755
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "每年"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:768
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:781
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:770
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:783
 #, kde-format
 msgid "Only owned"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:769
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:782
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:771
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:784
 #, kde-format
 msgid "Only sold"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:779
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:781
 #, kde-format
 msgid "From period"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:780
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:782
 #, kde-format
 msgid "Owned and sold"
 msgstr ""
@@ -16364,60 +16364,60 @@ msgstr ""
 msgid "Search transactions"
 msgstr "搜索交易"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:332
+#: kmymoney/plugins/views/reports/kreportsview.cpp:338
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:352
+#: kmymoney/plugins/views/reports/kreportsview.cpp:358
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:411
+#: kmymoney/plugins/views/reports/kreportsview.cpp:417
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "无法保存：%1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:440
+#: kmymoney/plugins/views/reports/kreportsview.cpp:446
 #, kde-format
 msgid "%1 (Customized)"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:441
-#: kmymoney/plugins/views/reports/kreportsview.cpp:518
+#: kmymoney/plugins/views/reports/kreportsview.cpp:447
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Custom Report"
 msgstr "自定义报表"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:481
+#: kmymoney/plugins/views/reports/kreportsview.cpp:487
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:534
+#: kmymoney/plugins/views/reports/kreportsview.cpp:559
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:568
+#: kmymoney/plugins/views/reports/kreportsview.cpp:593
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:569
+#: kmymoney/plugins/views/reports/kreportsview.cpp:594
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "删除报表？"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:747
+#: kmymoney/plugins/views/reports/kreportsview.cpp:772
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:815
+#: kmymoney/plugins/views/reports/kreportsview.cpp:840
 #, kde-format
 msgid "Export into directory"
 msgstr ""
