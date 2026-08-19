@@ -1096,7 +1096,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                         }
                         break;
                     case eMyMoney::Model::TransactionIsImportedRole:
-                        pActions[eMenu::Action::AcceptTransaction]->trigger();
+                        MyMoneyUtils::triggerAction(pActions[eMenu::Action::AcceptTransaction]);
                         break;
                     case eMyMoney::Model::JournalSplitIsMatchedRole: {
                         buttonYes.setText(pActions[eMenu::Action::AcceptTransaction]->text());
