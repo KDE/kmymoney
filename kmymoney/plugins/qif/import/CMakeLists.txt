@@ -30,4 +30,6 @@ target_link_libraries(qifimporter
     kmm_settings
 )
 
-add_subdirectory(tests)
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
