@@ -89,6 +89,11 @@ public:
     {
     }
 
+    bool isCapitalGainReport(eMyMoney::Report::RowType rt) const
+    {
+        return rt == eMyMoney::Report::RowType::CapitalGainByTopAccount || rt == eMyMoney::Report::RowType::CapitalGainByType;
+    }
+
     void collectReferencedObjects() override
     {
         QStringList list;

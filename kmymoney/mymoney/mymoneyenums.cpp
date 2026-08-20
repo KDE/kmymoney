@@ -35,6 +35,10 @@ eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowTy
         {eMyMoney::Report::RowType::AccountLoanInfo, eMyMoney::Report::ReportType::InfoTable},
         {eMyMoney::Report::RowType::AccountReconcile, eMyMoney::Report::ReportType::QueryTable},
         {eMyMoney::Report::RowType::CashFlow, eMyMoney::Report::ReportType::QueryTable},
+        {eMyMoney::Report::RowType::CapitalGainByTopAccount, eMyMoney::Report::ReportType::QueryTable},
+        {eMyMoney::Report::RowType::CapitalGainByType, eMyMoney::Report::ReportType::QueryTable},
+        {eMyMoney::Report::RowType::PerformanceByTopAccount, eMyMoney::Report::ReportType::QueryTable},
+        {eMyMoney::Report::RowType::PerformanceByType, eMyMoney::Report::ReportType::QueryTable},
     };
     // clang-format on
     return reportTypes.value(rowType, eMyMoney::Report::ReportType::Invalid);

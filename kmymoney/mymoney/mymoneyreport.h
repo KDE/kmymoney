@@ -140,6 +140,8 @@ public:
     bool isBuiltIn() const;
     void setIsBuiltIn();
 
+    bool isCapitalGainReport() const;
+
     bool isCustom() const;
     void setIsCustom();
 
@@ -158,8 +160,13 @@ public:
     bool isInvestmentsOnly() const;
     void setInvestmentsOnly(bool f);
 
+    bool isLegacyCapitalGainReport() const;
+    bool isLegacyPerformanceReport() const;
+
     bool isLoansOnly() const;
     void setLoansOnly(bool f);
+
+    bool isPerformanceReport() const;
 
     bool isPropagateBudgetDifference() const;
     void setPropagateBudgetDifference(bool f);

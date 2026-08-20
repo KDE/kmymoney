@@ -738,7 +738,7 @@ void QueryTableTest::testInvestment()
         //
 
         MyMoneyReport invhold_r(QLatin1String("fake-id"),
-                                MyMoneyReport(eMyMoney::Report::RowType::AccountByTopAccount,
+                                MyMoneyReport(eMyMoney::Report::RowType::PerformanceByTopAccount,
                                               eMyMoney::Report::QueryColumn::Performance,
                                               eMyMoney::TransactionFilter::Date::UserDefined,
                                               eMyMoney::Report::DetailLevel::All,
@@ -830,7 +830,7 @@ void QueryTableTest::testSplitShares()
         //
 
         MyMoneyReport invhold_r(QLatin1String("fake-id"),
-                                MyMoneyReport(eMyMoney::Report::RowType::AccountByTopAccount,
+                                MyMoneyReport(eMyMoney::Report::RowType::PerformanceByTopAccount,
                                               eMyMoney::Report::QueryColumn::Performance,
                                               eMyMoney::TransactionFilter::Date::UserDefined,
                                               eMyMoney::Report::DetailLevel::All,

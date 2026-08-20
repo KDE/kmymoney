@@ -205,11 +205,11 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
             d->m_tabRowColQuery = new ReportTabRowColQuery(d->ui->m_criteriaTab);
             d->ui->m_criteriaTab->insertTab(1, d->m_tabRowColQuery, i18n("Rows/Columns"));
         }
-        if (d->m_initialState.queryColumns() & eMyMoney::Report::QueryColumn::CapitalGain) {
+        if (d->m_initialState.isCapitalGainReport()) {
             d->m_tabCapitalGain = new ReportTabCapitalGain(d->ui->m_criteriaTab);
             d->ui->m_criteriaTab->insertTab(1, d->m_tabCapitalGain, i18n("Report"));
         }
-        if (d->m_initialState.queryColumns() & eMyMoney::Report::QueryColumn::Performance) {
+        if (d->m_initialState.isPerformanceReport()) {
             d->m_tabPerformance = new ReportTabPerformance(d->ui->m_criteriaTab);
             d->ui->m_criteriaTab->insertTab(1, d->m_tabPerformance, i18n("Report"));
         }

@@ -492,6 +492,11 @@ public:
                     m_file->setFileFixVersion(11);
                     break;
 
+                case 11:
+                    fixFile_11();
+                    m_file->setFileFixVersion(12);
+                    break;
+
                 // add new levels above. Don't forget to add a corresponding fix routine
                 // to MyMoneyStorageSqlPrivate::upgradeDb()
                 default:
@@ -513,6 +518,40 @@ public:
     /* DO NOT ADD code to these functions or any of it's called ones.
        Instead, create a new function, fixFile_n, and modify the applyFileFixes()
        logic above to call it */
+
+    void fixFile_11()
+    {
+        const auto file = MyMoneyFile::instance();
+        const auto model = file->reportsModel();
+
+        auto count = 0;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            MyMoneyReport report = model->itemByIndex(idx);
+            eMyMoney::Report::RowType rowType = report.rowType();
+            bool isAccountByTopAccount = rowType == eMyMoney::Report::RowType::AccountByTopAccount;
+            bool isEquityType = rowType == eMyMoney::Report::RowType::EquityType;
+            eMyMoney::Report::RowType newRowType = rowType;
+            if (report.isLegacyPerformanceReport()) {
+                if (isAccountByTopAccount)
+                    newRowType = eMyMoney::Report::RowType::PerformanceByTopAccount;
+                else if (isEquityType)
+                    newRowType = eMyMoney::Report::RowType::PerformanceByType;
+            } else if (report.isLegacyCapitalGainReport()) {
+                if (isAccountByTopAccount)
+                    newRowType = eMyMoney::Report::RowType::CapitalGainByTopAccount;
+                else if (isEquityType)
+                    newRowType = eMyMoney::Report::RowType::CapitalGainByType;
+            }
+            if (newRowType != rowType) {
+                report.setRowType(newRowType);
+                file->modifyReport(report);
+                ++count;
+            }
+        }
+        qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
+    }
 
     void fixFile_10()
     {

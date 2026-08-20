@@ -216,6 +216,10 @@ QHash<eMyMoney::Report::RowType, QString> rowTypesLUT()
         {eMyMoney::Report::RowType::AccountLoanInfo,      QStringLiteral("accountloaninfo")},
         {eMyMoney::Report::RowType::AccountReconcile,     QStringLiteral("accountreconcile")},
         {eMyMoney::Report::RowType::CashFlow,             QStringLiteral("cashflow")},
+        {eMyMoney::Report::RowType::CapitalGainByTopAccount,  QStringLiteral("capitaltopaccount")},
+        {eMyMoney::Report::RowType::CapitalGainByType,  QStringLiteral("capitaltype")},
+        {eMyMoney::Report::RowType::PerformanceByTopAccount,  QStringLiteral("performancetopaccount")},
+        {eMyMoney::Report::RowType::PerformanceByType,  QStringLiteral("performancetype")},
     };
     // clang-format on
     return lut;
@@ -910,13 +914,13 @@ MyMoneyReport readReport(QXmlStreamReader* reader)
         }
 
         // read performance or capital gains tab
-        if (report.queryColumns() & eMyMoney::Report::QueryColumn::Performance) {
+        if (report.isPerformanceReport() || report.isLegacyPerformanceReport()) {
             report.setInvestmentSum(static_cast<eMyMoney::Report::InvestmentSum>(
                 readUintAttribute(reader, attributeName(Attribute::Report::InvestmentSum), static_cast<int>(eMyMoney::Report::InvestmentSum::Period))));
         }
 
         // read capital gains tab
-        if (report.queryColumns() & eMyMoney::Report::QueryColumn::CapitalGain) {
+        if (report.isCapitalGainReport() || report.isLegacyCapitalGainReport()) {
             report.setInvestmentSum(static_cast<eMyMoney::Report::InvestmentSum>(
                 readUintAttribute(reader, attributeName(Attribute::Report::InvestmentSum), static_cast<int>(eMyMoney::Report::InvestmentSum::Sold))));
             if (report.investmentSum() == eMyMoney::Report::InvestmentSum::Sold) {
@@ -1146,11 +1150,11 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
         writer->writeAttribute(attributeName(Attribute::Report::IncludesTransfers), attrValue(report.isIncludingTransfers()));
 
         // write performance tab
-        if (report.queryColumns() & eMyMoney::Report::QueryColumn::Performance || report.queryColumns() & eMyMoney::Report::QueryColumn::CapitalGain)
+        if (report.isPerformanceReport() || report.isCapitalGainReport())
             writer->writeAttribute(attributeName(Attribute::Report::InvestmentSum), attrValue(static_cast<int>(report.investmentSum())));
 
         // write capital gains tab
-        if (report.queryColumns() & eMyMoney::Report::QueryColumn::CapitalGain) {
+        if (report.isCapitalGainReport()) {
             if (report.investmentSum() == eMyMoney::Report::InvestmentSum::Sold) {
                 writer->writeAttribute(attributeName(Attribute::Report::SettlementPeriod), attrValue(report.settlementPeriod()));
                 writer->writeAttribute(attributeName(Attribute::Report::ShowSTLTCapitalGains), attrValue(report.isShowingSTLTCapitalGains()));

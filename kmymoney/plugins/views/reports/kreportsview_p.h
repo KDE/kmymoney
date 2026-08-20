@@ -540,7 +540,7 @@ public:
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
 
-            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::AccountByTopAccount,
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::PerformanceByTopAccount,
                                          eMyMoney::Report::QueryColumn::Performance,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
@@ -549,7 +549,7 @@ public:
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
 
-            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::EquityType,
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::PerformanceByType,
                                          eMyMoney::Report::QueryColumn::Performance,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
@@ -558,7 +558,7 @@ public:
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
 
-            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::AccountByTopAccount,
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::CapitalGainByTopAccount,
                                          eMyMoney::Report::QueryColumn::CapitalGain,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,
@@ -567,7 +567,7 @@ public:
                                          i18n("Default Report")));
             list.back().setInvestmentsOnly(true);
 
-            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::EquityType,
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::CapitalGainByType,
                                          eMyMoney::Report::QueryColumn::CapitalGain,
                                          TransactionFilter::Date::YearToDate,
                                          eMyMoney::Report::DetailLevel::All,

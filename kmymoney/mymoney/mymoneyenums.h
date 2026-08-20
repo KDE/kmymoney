@@ -110,7 +110,35 @@ inline qHashSeedType qHash(const Type key, qHashSeedType seed)
 }
 
 namespace Report {
-enum class RowType { NoRows = 0, AssetLiability, ExpenseIncome, Category, TopCategory, Account, Tag, Payee, Month, Week, TopAccount, AccountByTopAccount, EquityType, AccountType, Institution, Budget, BudgetActual, Schedule, AccountInfo, AccountLoanInfo, AccountReconcile, CashFlow, Invalid };
+enum class RowType {
+    NoRows = 0,
+    AssetLiability,
+    ExpenseIncome,
+    Category,
+    TopCategory,
+    Account,
+    Tag,
+    Payee,
+    Month,
+    Week,
+    TopAccount,
+    AccountByTopAccount,
+    EquityType,
+    AccountType,
+    Institution,
+    Budget,
+    BudgetActual,
+    Schedule,
+    AccountInfo,
+    AccountLoanInfo,
+    AccountReconcile,
+    CashFlow,
+    CapitalGainByTopAccount,
+    CapitalGainByType,
+    PerformanceByTopAccount,
+    PerformanceByType,
+    Invalid
+};
 inline qHashSeedType qHash(const RowType key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
@@ -792,6 +820,8 @@ Q_DECLARE_METATYPE(eMyMoney::Report::ChartPalette)
 Q_DECLARE_METATYPE(eMyMoney::Report::DataLock)
 Q_DECLARE_METATYPE(eMyMoney::Report::InvestmentSum)
 Q_DECLARE_METATYPE(eMyMoney::Report::Origin)
+Q_DECLARE_METATYPE(eMyMoney::Report::QueryColumn)
+Q_DECLARE_METATYPE(eMyMoney::Report::RowType)
 Q_DECLARE_METATYPE(eMyMoney::Split::State)
 Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
 Q_DECLARE_METATYPE(eMyMoney::Schedule::Occurrence)
