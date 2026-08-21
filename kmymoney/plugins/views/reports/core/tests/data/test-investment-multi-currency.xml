@@ -162,7 +162,6 @@
     </REPORT>
     <REPORT id="R000009" type="querytable 1.15" group="Investments" name="Investment Holdings by Account (with currency conversion)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="topaccount-account" querycolumns="shares,price" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
     <REPORT id="R000010" type="querytable 1.15" group="Investments" name="Investment Holdings by Account (without currency conversion)" comment="Custom Report" convertcurrency="0" favorite="0" skipZero="0" datelock="alldates" rowtype="topaccount-account" querycolumns="shares,price" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
-   </REPORTS>
     <REPORT id="R000011" type="pivottable 1.16" group="Investments" name="Investment Moving Average (with currency conversion)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="assetliability" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="1" showrowtotals="0" showcolumntotals="1" detail="all" includesmovingaverage="1" movingaveragedays="1" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="1" charttype="line" chartpalette="application" chartchgridlines="0" chartsvgridlines="0" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
       <ACCOUNTGROUP group="asset"/>
       <ACCOUNTGROUP group="liability"/>
@@ -173,6 +172,7 @@
     </REPORT>
     <REPORT id="R000013" type="querytable 1.15" group="Investments" name="Investment Performance by Account (with currency conversion)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="performancetopaccount" querycolumns="performance" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0" investmentsum="0"/>
     <REPORT id="R000014" type="querytable 1.15" group="Investments" name="Investment Performance by Account (without currency conversion)" comment="Custom Report" convertcurrency="0" favorite="0" skipZero="0" datelock="alldates" rowtype="performancetopaccount" querycolumns="performance" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0" investmentsum="0"/>
+  </REPORTS>
   <BUDGETS/>
   <ONLINEJOBS/>
 </KMYMONEY-FILE>
