@@ -508,19 +508,22 @@ void KReportsView::doConfigure(ConfigureOption configureOption)
 void KReportsView::slotUpdateConfiguration()
 {
     Q_D(KReportsView);
-    if (!d->m_needLoad) {
-        const auto tabCount = d->ui.m_reportTabWidget->count();
-        for (auto i = 1; i < tabCount; ++i) {
-            auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(i));
-            if (tab) {
-                const auto report = MyMoneyFile::instance()->report(tab->report().id());
-                tab->updateReport();
-                auto dlg = qobject_cast<KReportConfigurationFilterDlg*>(tab->configurationSidebar());
-                if (dlg) {
-                    dlg->loadReport(report);
-                }
-            }
-        }
+
+    if (d->m_needLoad)
+        return;
+
+    const auto tabCount = d->ui.m_reportTabWidget->count();
+    for (auto i = 1; i < tabCount; ++i) {
+        auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(i));
+        if (!tab || tab->report().id().isEmpty())
+            continue;
+
+        const auto report = MyMoneyFile::instance()->report(tab->report().id());
+        tab->updateReport();
+
+        auto dlg = qobject_cast<KReportConfigurationFilterDlg*>(tab->configurationSidebar());
+        if (dlg)
+            dlg->loadReport(report);
     }
 }
 
