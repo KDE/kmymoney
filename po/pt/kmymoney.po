@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -22808,9 +22808,10 @@ msgid "The date you entered is invalid"
 msgstr "A data que introduziu é inválida"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Todas as datas"
+#, fuzzy, kde-format
+#| msgid "Any transaction"
+msgid "All transaction dates"
+msgstr "Qualquer transacção"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26810,6 +26811,9 @@ msgstr ""
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr ""
+
+#~ msgid "All dates"
+#~ msgstr "Todas as datas"
 
 #~ msgid "History"
 #~ msgstr "Histórico"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -22478,9 +22478,10 @@ msgid "The date you entered is invalid"
 msgstr "Syötetty päivämäärä on virheellinen"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Kaikkina päivinä"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Lopeta tapahtuman muokkaaminen"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26396,6 +26397,9 @@ msgstr "Käsittele tietty raportti"
 msgid "Only one of --csv and --html is supported"
 msgstr "Vain joko --csv tai --html voidaan antaa"
 
+#~ msgid "All dates"
+#~ msgstr "Kaikkina päivinä"
+
 #~ msgid "History"
 #~ msgstr "Historia"
 
@@ -27589,9 +27593,6 @@ msgstr "Vain joko --csv tai --html voidaan antaa"
 #~ "tapahtuman muokkaamista.</p><p>On mahdollista valita myös asetus, jolloin "
 #~ "tapahtuma tallennetaan automaattisesti kun esimerkiksi valitaan toinen "
 #~ "tapahtuma..</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Lopeta tapahtuman muokkaaminen"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

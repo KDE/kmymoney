@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2024-11-30 09:29+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -22564,9 +22564,10 @@ msgid "The date you entered is invalid"
 msgstr "Podana data jest nieprawidłowa"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Wszystkie daty"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Zakończ edycję transakcji"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26513,6 +26514,9 @@ msgstr "Przetwórz dane sprawozdanie"
 msgid "Only one of --csv and --html is supported"
 msgstr "Tylko jedno z --csv lub --html jest obsługiwane"
 
+#~ msgid "All dates"
+#~ msgstr "Wszystkie daty"
+
 #~ msgid "History"
 #~ msgstr "Historia"
 
@@ -27726,9 +27730,6 @@ msgstr "Tylko jedno z --csv lub --html jest obsługiwane"
 #~ "<p>Porzucić zmiany, zapisać zmiany czy kontynuować edycje transakcji.</"
 #~ "p><p>Aby uniknąć tych pytań możesz ustawić opcję samoczynnego zapisu "
 #~ "transakcji, gdy np. będziesz chciał edytować inną transakcję.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Zakończ edycję transakcji"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

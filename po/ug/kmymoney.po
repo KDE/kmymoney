@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2026-05-31 19:06-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -21309,9 +21309,10 @@ msgid "The date you entered is invalid"
 msgstr "كىرگۈزگەن چېسلا ئىناۋەتسىز"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "  Transactions"
+msgid "All transaction dates"
+msgstr "  سودا"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -24860,9 +24861,6 @@ msgstr ""
 #~| msgid "  Transactions"
 #~ msgctxt "@label Reconciliation progress dialog"
 #~ msgid "Reconciling transactions..."
-#~ msgstr "  سودا"
-
-#~ msgid "  Transactions"
 #~ msgstr "  سودا"
 
 #~| msgid "Delete account..."

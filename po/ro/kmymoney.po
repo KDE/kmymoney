@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -23625,9 +23625,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Toate datele"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Renunță la modificarea tranzacției"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -27682,6 +27683,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "Toate datele"
+
 #, fuzzy
 #~| msgctxt "History-based method"
 #~| msgid "History"
@@ -28919,9 +28923,6 @@ msgstr ""
 #~ "continuați editarea tranzacției.</p><p> Puteți alege opțiunea de a salva "
 #~ "automat o tranzacție în curs de modificare când, de exemplu, se alege o "
 #~ "altă tranzacție.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Renunță la modificarea tranzacției"
 
 #, fuzzy
 #~| msgid ""

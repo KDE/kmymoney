@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -23369,9 +23369,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Svi datumi"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Zavši uređivanje transakcije"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -27347,6 +27348,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "Svi datumi"
+
 #, fuzzy
 #~| msgctxt "History-based method"
 #~| msgid "History"
@@ -28552,9 +28556,6 @@ msgstr ""
 #~ "promjene ili nastaviti uređivati ​​transakciju </p> <p> Također možete "
 #~ "postaviti opciju za automatsko spremanje transakcije kada npr..odabirom "
 #~ "druge transakcije. </p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Zavši uređivanje transakcije"
 
 #, fuzzy
 #~| msgid ""

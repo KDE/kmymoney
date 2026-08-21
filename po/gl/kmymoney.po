@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2025-06-22 06:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -22504,9 +22504,10 @@ msgid "The date you entered is invalid"
 msgstr "A data que inseriu é incorrecta"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Todas as datas"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Rematar a edición do asento"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26442,6 +26443,9 @@ msgstr "Procesar un informe específico"
 msgid "Only one of --csv and --html is supported"
 msgstr "Só se permite usar ou --csv ou --html."
 
+#~ msgid "All dates"
+#~ msgstr "Todas as datas"
+
 #~ msgid "History"
 #~ msgstr "Historial"
 
@@ -27674,9 +27678,6 @@ msgstr "Só se permite usar ou --csv ou --html."
 #~ "continuar editando o asento.</p><p>Tamén pode Tamén pode escoller unha "
 #~ "opción para gardar o asento automaticamente cando, p.ex. escolla outro "
 #~ "asento.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Rematar a edición do asento"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -22872,9 +22872,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Összes dátum"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Tranzakció szerkesztésének befejezése"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26664,6 +26665,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "Összes dátum"
+
 #, fuzzy
 #~| msgctxt "History-based method"
 #~| msgid "History"
@@ -27707,9 +27711,6 @@ msgstr ""
 #~ "mentése, vagy a tranzakció szerkesztésének folytatása.</p><p>Beállítható "
 #~ "az is , hogy automatikusan mentse a tranzakciót, ha például egy másik "
 #~ "tranzakciót választ ki.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Tranzakció szerkesztésének befejezése"
 
 #, fuzzy
 #~| msgid ""

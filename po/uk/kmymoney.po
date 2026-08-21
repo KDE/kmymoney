@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2026-07-28 08:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -22606,9 +22606,10 @@ msgid "The date you entered is invalid"
 msgstr "Вами вказано некоректну дату"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Всі дати"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Завершення зміни операції"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26577,6 +26578,9 @@ msgstr "Обробити вказаний звіт"
 msgid "Only one of --csv and --html is supported"
 msgstr "Передбачено підтримку лише одного з варіантів, --csv або --html"
 
+#~ msgid "All dates"
+#~ msgstr "Всі дати"
+
 #~ msgid "History"
 #~ msgstr "Журнал"
 
@@ -27793,9 +27797,6 @@ msgstr "Передбачено підтримку лише одного з ва�
 #~ "зміни чи продовжити редагування операції.</p><p>Крім того, ви можете "
 #~ "наказати програмі автоматично зберігати дані операції, наприклад під час "
 #~ "переходу до іншої операції.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Завершення зміни операції"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

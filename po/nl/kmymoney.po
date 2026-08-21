@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-15 00:46+0000\n"
+"POT-Creation-Date: 2026-08-21 00:45+0000\n"
 "PO-Revision-Date: 2026-07-28 10:52+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -22527,9 +22527,10 @@ msgid "The date you entered is invalid"
 msgstr "De ingevoerde datum is ongeldig"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Alle datums"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Transactie bewerken beëindigen"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26478,6 +26479,9 @@ msgstr "Verwerk een specifiek rapport"
 msgid "Only one of --csv and --html is supported"
 msgstr "Slechts een van --csv en --html wordt ondersteund"
 
+#~ msgid "All dates"
+#~ msgstr "Alle datums"
+
 #~ msgid "History"
 #~ msgstr "Geschiedenis"
 
@@ -27694,9 +27698,6 @@ msgstr "Slechts een van --csv en --html wordt ondersteund"
 #~ "of doorgaan met het bewerken van transacties.</p><p>U kunt ook een optie "
 #~ "instellen om de transactie automatisch op te slaan wanneer u een andere "
 #~ "selecteert.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Transactie bewerken beëindigen"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"
