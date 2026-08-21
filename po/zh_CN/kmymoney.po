@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -22187,9 +22187,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "所有日期"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "结束交易编辑"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -25988,6 +25989,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "所有日期"
+
 #~ msgid "Prices"
 #~ msgstr "价格"
 
@@ -26690,9 +26694,6 @@ msgstr ""
 #~ "您对本交易的修改尚未保存，是否取消？<p>- <b>是</b>取消对交易的修改并退出"
 #~ "<br>- <b>否</b>在保存对交易的修改并退出。<p>您可以通过选项的设置来在诸如选"
 #~ "择其他交易等情况时，自动保存交易修改。"
-
-#~ msgid "End transaction edit"
-#~ msgstr "结束交易编辑"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

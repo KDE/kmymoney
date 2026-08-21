@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2023-07-14 18:45+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -22831,9 +22831,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Все даты"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Завершение редактирования операции"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26780,6 +26781,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "Все даты"
+
 #~ msgid "Prices"
 #~ msgstr "Курсы"
 
@@ -27615,9 +27619,6 @@ msgstr ""
 #~ "сохранить изменения или продолжить редактирование операции.</p><p>Можно "
 #~ "установить режим автоматического сохранения операции, например, при "
 #~ "переходе от одной операции к другой.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Завершение редактирования операции"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

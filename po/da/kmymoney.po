@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -23170,9 +23170,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Alle datoer"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Afslut transaktionsredigering"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -27137,6 +27138,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "Alle datoer"
+
 #~ msgid "Prices"
 #~ msgstr "Priser"
 
@@ -28019,9 +28023,6 @@ msgstr ""
 #~ "fortsætte med at redigere transaktionen.</p><p>Du kan også sætte en "
 #~ "indstilling for at gemme transaktionen automatisk, f.eks. når du vælger "
 #~ "en anden transaktion.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Afslut transaktionsredigering"
 
 #, fuzzy
 #~| msgid ""

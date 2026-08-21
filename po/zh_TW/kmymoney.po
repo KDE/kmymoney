@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2024-05-09 17:32+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -22517,9 +22517,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "所有日期"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "結束編輯交易"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26211,6 +26212,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "所有日期"
+
 #~ msgid "Prices"
 #~ msgstr "價格"
 
@@ -27030,9 +27034,6 @@ msgstr ""
 
 #~ msgid "Cannot edit investment transactions in the context of this account."
 #~ msgstr "不能在此帳戶的內文中編輯投資交易。"
-
-#~ msgid "End transaction edit"
-#~ msgstr "結束編輯交易"
 
 #, fuzzy
 #~| msgid "Date:"

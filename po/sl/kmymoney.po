@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2026-07-29 07:13+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -22234,9 +22234,10 @@ msgid "The date you entered is invalid"
 msgstr "Vneseni datum je neveljaven"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Vsi datumi"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Končaj urejanje transakcije"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26158,6 +26159,9 @@ msgstr "Obdelaj določeno poročilo"
 msgid "Only one of --csv and --html is supported"
 msgstr "Podprta sta samo eden od --csv in --html"
 
+#~ msgid "All dates"
+#~ msgstr "Vsi datumi"
+
 #~ msgid "Prices"
 #~ msgstr "Cene"
 
@@ -27050,9 +27054,6 @@ msgstr "Podprta sta samo eden od --csv in --html"
 #~ "ali nadaljevati z urejanjem transakcije.</p><p>Lahko nastavite tudi "
 #~ "možnost, da transakcijo shranite samodejno, kadar npr. izbirate druge "
 #~ "transakcije.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Končaj urejanje transakcije"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2026-07-29 08:45+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -22476,9 +22476,10 @@ msgid "The date you entered is invalid"
 msgstr "La date que vous avez saisie est non valable."
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Toutes les dates"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Terminer l'édition de l'opération"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26453,6 +26454,9 @@ msgstr "Traiter un rapport spécifique"
 msgid "Only one of --csv and --html is supported"
 msgstr "Une seule option parmi « --csv » et « --html » est prise en charge."
 
+#~ msgid "All dates"
+#~ msgstr "Toutes les dates"
+
 #~ msgid "Prices"
 #~ msgstr "Cours"
 
@@ -27313,9 +27317,6 @@ msgstr "Une seule option parmi « --csv » et « --html » est prise en char
 #~ "opérations.</p><p>Vous pouvez également régler une option pour que les "
 #~ "opérations soient automatiquement enregistrées lorsque, par exemple, vous "
 #~ "choisissez une autre opération.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Terminer l'édition de l'opération"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

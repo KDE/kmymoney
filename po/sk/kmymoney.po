@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2024-11-10 18:13+0100\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -22164,9 +22164,10 @@ msgid "The date you entered is invalid"
 msgstr "Zadaný dátum je neplatný"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Všetky dátumy"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Úprava koncovej transakcie"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26087,6 +26088,9 @@ msgstr "Spracovať konkrétnu správu"
 msgid "Only one of --csv and --html is supported"
 msgstr "Podporovaná je iba jedna z --csv a --html"
 
+#~ msgid "All dates"
+#~ msgstr "Všetky dátumy"
+
 #~ msgid "Prices"
 #~ msgstr "Ceny"
 
@@ -26905,9 +26909,6 @@ msgstr "Podporovaná je iba jedna z --csv a --html"
 #~ "<p>Prosím, vyberte si, čo chcete urobiť: zrušiť zmeny, zmeny uložiť alebo "
 #~ "pokračovať v úpravách transakcie.</p><p>Môžete tiež nastaviť možnosť "
 #~ "automatického uloženia transakcie, keď napr. vyberiete inú transakciu.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Úprava koncovej transakcie"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

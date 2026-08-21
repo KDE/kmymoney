@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -21090,7 +21090,7 @@ msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
 #, kde-format
-msgid "All dates"
+msgid "All transaction dates"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33

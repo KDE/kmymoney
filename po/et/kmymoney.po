@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -22657,9 +22657,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Kõik kuupäevad"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Tehingu muutmise lõpetamine"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26576,6 +26577,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "Kõik kuupäevad"
+
 #~ msgid "Prices"
 #~ msgstr "Hinnad"
 
@@ -27410,9 +27414,6 @@ msgstr ""
 #~ "<p>Palun vali, mida soovid ette võtta: tühistada muudatused, salvestada "
 #~ "muudatused või jätkata tehingu muutmist.</p><p>Samuti võib lasta tehingu "
 #~ "automaatselt salvestada, kui näiteks valid teise tehingu.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Tehingu muutmise lõpetamine"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

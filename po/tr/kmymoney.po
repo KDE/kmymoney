@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2025-10-25 21:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -22146,9 +22146,10 @@ msgid "The date you entered is invalid"
 msgstr "Girdiğiniz tarih geçersiz"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Tüm tarihler"
+#, fuzzy, kde-format
+#| msgid "Any transaction"
+msgid "All transaction dates"
+msgstr "Herhangi bir işlem"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26057,6 +26058,9 @@ msgstr "Belirli bir raporu işle"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "--csv veya --html bayraklarından yalnızca biri kullanılabilir"
+
+#~ msgid "All dates"
+#~ msgstr "Tüm tarihler"
 
 #~ msgid "Prices"
 #~ msgstr "Fiyatlar"

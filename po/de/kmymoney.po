@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2026-02-24 22:25+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -22432,9 +22432,10 @@ msgid "The date you entered is invalid"
 msgstr "Das eingegebene Datum ist ungültig"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Beliebiges Datum"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Buchungsbearbeitung beenden"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26406,6 +26407,9 @@ msgstr "Einen spezifischen Bericht verarbeiten"
 msgid "Only one of --csv and --html is supported"
 msgstr "Nur einer der Parameter --csv und --html wird unterstützt"
 
+#~ msgid "All dates"
+#~ msgstr "Beliebiges Datum"
+
 #~ msgid "Prices"
 #~ msgstr "Preise"
 
@@ -27249,9 +27253,6 @@ msgstr "Nur einer der Parameter --csv und --html wird unterstützt"
 #~ "dieser Buchung fortsetzen?</p><p>Es gibt auch eine Option, Buchungen "
 #~ "automatisch zu speichern, wenn beispielsweise eine andere Buchung "
 #~ "angewählt wird.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Buchungsbearbeitung beenden"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

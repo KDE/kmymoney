@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2025-09-23 19:01+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -22232,9 +22232,10 @@ msgid "The date you entered is invalid"
 msgstr "Zuk emandako data balio gabea da"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Data guztiak"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Amaitu transakzioa editatzea"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26159,6 +26160,9 @@ msgstr "Txosten jakin bat prozesatu"
 msgid "Only one of --csv and --html is supported"
 msgstr "--csv eta --html arteko bakarra onartzen da"
 
+#~ msgid "All dates"
+#~ msgstr "Data guztiak"
+
 #~ msgid "Prices"
 #~ msgstr "Prezioak"
 
@@ -26997,9 +27001,6 @@ msgstr "--csv eta --html arteko bakarra onartzen da"
 #~ "<p>Hautatu zer egin nahi duzun: aldaketak baztertu, aldaketak gorde edo "
 #~ "transakzioa editatzen jarraitu.</p><p>Transakzioa automatikoki gordetzeko "
 #~ "aukera ere ezar dezakezu, esaterako, beste transakzio bat hautatzean.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Amaitu transakzioa editatzea"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

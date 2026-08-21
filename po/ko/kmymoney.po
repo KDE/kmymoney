@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -22042,9 +22042,10 @@ msgid "The date you entered is invalid"
 msgstr "입력한 날짜가 잘못되었습니다"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "모든 날짜"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "거래 편집 종료"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -25907,6 +25908,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "모든 날짜"
+
 #~ msgid "Prices"
 #~ msgstr "가격"
 
@@ -26695,9 +26699,6 @@ msgstr ""
 #~ "<p>수행할 작업을 선택하십시오: 변경 사항을 버리거나, 변경 사항을 저장하거"
 #~ "나, 거래를 계속 편집합니다.</p><p>예를 들어 다른 거래를 선택할 때 거래를 "
 #~ "자동으로 저장하도록 옵션을 설정할 수도 있습니다.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "거래 편집 종료"
 
 #~ msgid ""
 #~ "<p>Please select what you want to do: discard or save the changes.</"

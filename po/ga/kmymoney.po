@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2026-04-22 16:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@yahoo.com>\n"
 "Language-Team: Irish <http://weblate.amgelocalnet.duckdns.org/projects/kde-"
@@ -22571,9 +22571,10 @@ msgid "The date you entered is invalid"
 msgstr "Tá an dáta a chuir tú isteach neamhbhailí"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Gach dáta"
+#, fuzzy, kde-format
+#| msgid "Any transaction"
+msgid "All transaction dates"
+msgstr "Aon idirbheart"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26540,6 +26541,9 @@ msgstr "Próiseáil tuarascáil shonrach"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Ní thacaítear ach le ceann amháin de --csv agus --html"
+
+#~ msgid "All dates"
+#~ msgstr "Gach dáta"
 
 #~ msgid "Prices"
 #~ msgstr "Praghsanna"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -23071,9 +23071,10 @@ msgid "The date you entered is invalid"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, kde-format
-msgid "All dates"
-msgstr "Бүкіл кездер"
+#, fuzzy, kde-format
+#| msgid "End transaction edit"
+msgid "All transaction dates"
+msgstr "Транзакцияны өңдеуді аяқтау"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -26985,6 +26986,9 @@ msgstr ""
 msgid "Only one of --csv and --html is supported"
 msgstr ""
 
+#~ msgid "All dates"
+#~ msgstr "Бүкіл кездер"
+
 #~ msgid "Prices"
 #~ msgstr "Бағалар"
 
@@ -27836,9 +27840,6 @@ msgstr ""
 #~ "<p>Не қалайсыз: өзгерістерді ысырып тастау, оларды сақтау, не өзгертуді "
 #~ "жалғастыру ма.</p><p>Транзакцияны автосақтауды да (мысалы. басқасын "
 #~ "таңдағанда) орната аласыз.</p> "
-
-#~ msgid "End transaction edit"
-#~ msgstr "Транзакцияны өңдеуді аяқтау"
 
 #, fuzzy
 #~| msgid ""
