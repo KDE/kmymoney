@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
-"PO-Revision-Date: 2026-07-28 06:13+0200\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
+"PO-Revision-Date: 2026-08-21 06:12+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -12361,7 +12361,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "ამონაწერის შემოტანის შეცდომა. გნებავთ, გააგრძელოთ?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "კრიტიკული შეცდომა"
@@ -14837,7 +14837,7 @@ msgid "Unable to remove budget."
 msgstr "ბიუჯეტის წაშლა შეუძლებელია."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1-ის კოპირება"
@@ -16458,7 +16458,7 @@ msgid "%1 (Customized)"
 msgstr "%1 (მორგებულია)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "მორგებული ანგარიში"
@@ -16468,29 +16468,29 @@ msgstr "მორგებული ანგარიში"
 msgid "Failed to configure report: %1"
 msgstr "ანგარიშის მორგება ჩავარდა: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "ანგარიშის დამატება შეუძლებელია. მიზეზი: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> ნაგულისხმევი ანგარიშია. მას ვერ წაშლით."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "წავშალო ანგარიში?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "ანგარიშის მორგება"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
 msgstr "გატანა საქაღალდეში"
@@ -21758,10 +21758,9 @@ msgid "The date you entered is invalid"
 msgstr "შეყვანილი თარიღი არასწორია"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "Any transaction"
+#, kde-format
 msgid "All transaction dates"
-msgstr "ნებისმიერი ტრანზაქცია"
+msgstr "ტრანზაქციის ყველა თარიღი"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format

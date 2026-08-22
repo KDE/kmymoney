@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
-"PO-Revision-Date: 2026-07-28 07:55+0200\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
+"PO-Revision-Date: 2026-08-21 19:25+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -12659,7 +12659,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Fel vid import av utdrag. Vill du fortsätta?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "Kritiskt fel"
@@ -15214,7 +15214,7 @@ msgid "Unable to remove budget."
 msgstr "Kan inte ta bort budget."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "Kopia av %1"
@@ -16850,7 +16850,7 @@ msgid "%1 (Customized)"
 msgstr "%1 (Anpassad)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "Anpassad rapport"
@@ -16860,29 +16860,29 @@ msgstr "Anpassad rapport"
 msgid "Failed to configure report: %1"
 msgstr "Misslyckades anpassa rapport: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Kan inte lägga till rapport, orsak: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> en standardrapport, alltså kan den inte tas bort."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "Ta bort rapport?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Rapportalternativ"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
 msgstr "Exportera till katalog"
@@ -22376,10 +22376,9 @@ msgid "The date you entered is invalid"
 msgstr "Datumet du angav är ogiltigt"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "End transaction edit"
+#, kde-format
 msgid "All transaction dates"
-msgstr "Sluta redigera transaktion"
+msgstr "Alla transaktionsdatum"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format

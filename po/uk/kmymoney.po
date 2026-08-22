@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
-"PO-Revision-Date: 2026-07-28 08:36+0300\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
+"PO-Revision-Date: 2026-08-21 08:22+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -12767,7 +12767,7 @@ msgstr ""
 "дії?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "Критична помилка"
@@ -15373,7 +15373,7 @@ msgid "Unable to remove budget."
 msgstr "Не вдалося вилучити бюджет."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "Копія %1"
@@ -17022,7 +17022,7 @@ msgid "%1 (Customized)"
 msgstr "%1 (змінений)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "Нетиповий звіт"
@@ -17032,29 +17032,29 @@ msgstr "Нетиповий звіт"
 msgid "Failed to configure report: %1"
 msgstr "Не вдалося налаштувати звіт: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Не вдалося додати звіт, причина: «%1»"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> є типовим звітом. Його не можна вилучати."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "Вилучити звіт?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Параметри звіту"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
 msgstr "Експортувати до каталогу"
@@ -22606,10 +22606,9 @@ msgid "The date you entered is invalid"
 msgstr "Вами вказано некоректну дату"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "End transaction edit"
+#, kde-format
 msgid "All transaction dates"
-msgstr "Завершення зміни операції"
+msgstr "Усі дати операцій"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format

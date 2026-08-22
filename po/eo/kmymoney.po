@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
 "PO-Revision-Date: 2025-02-15 14:15+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -12700,7 +12700,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Eraro dum importo de deklaro. Ĉu vi volas daŭrigi?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "Kritika Eraro"
@@ -15244,7 +15244,7 @@ msgid "Unable to remove budget."
 msgstr "Ne eblas forigi buĝeton."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "Kopio de %1"
@@ -16883,7 +16883,7 @@ msgid "%1 (Customized)"
 msgstr "%1 (Personigita)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "Propra Raporto"
@@ -16893,29 +16893,29 @@ msgstr "Propra Raporto"
 msgid "Failed to configure report: %1"
 msgstr "Malsukcesis agordi raporton: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Ne povas aldoni raporton, kialo: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> estas defaŭlta raporto, do ĝi ne povas esti forigita."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "Ĉu forigi raporton?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Raportaj elektebloj"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
 msgstr "Elporti en dosierujon"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
 "PO-Revision-Date: 2026-08-10 18:34+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -12608,7 +12608,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "خطأ أثناء استيراد البيان. أتريد المتابعة؟"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "خطأ حرج"
@@ -15181,7 +15181,7 @@ msgid "Unable to remove budget."
 msgstr "لا يمكن إزالة الموازنة."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "نسخة من %1"
@@ -16832,7 +16832,7 @@ msgid "%1 (Customized)"
 msgstr "%1 (مخصّص)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "تقرير مخصّص"
@@ -16842,29 +16842,29 @@ msgstr "تقرير مخصّص"
 msgid "Failed to configure report: %1"
 msgstr "فشل ضبط التقرير: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "تعذّر إضافة التقرير، السبب: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> تقرير مبدئي، لذا لا يمكن حذفه."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "احذف التقرير؟"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "خيارات التقرير"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
 msgstr "صدّر إلى مجلد"

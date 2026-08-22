@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -12643,7 +12643,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Priderinimo operacija"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "Kritinė klaida"
@@ -15173,7 +15173,7 @@ msgid "Unable to remove budget."
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 kopija"
@@ -16851,7 +16851,7 @@ msgid "%1 (Customized)"
 msgstr "(Savadarbė)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "Savadarbė ataskaita"
@@ -16862,29 +16862,29 @@ msgstr "Savadarbė ataskaita"
 msgid "Failed to configure report: %1"
 msgstr "Nepavyksta generuoti ataskaitos"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, fuzzy, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Nepavyksta redaguoti institucijos:"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "Trinti ataskaitą?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, fuzzy, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Indėlio parinktys"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export into directory"

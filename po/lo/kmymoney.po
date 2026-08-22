@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
 "PO-Revision-Date: 2025-12-07 00:37+0700\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
@@ -12446,7 +12446,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "ເກີດຂໍ້ຜິດພາດໃນການນຳເຂົ້າໃບແຈ້ງຍອດ. ທ່ານຕ້ອງການສືບຕໍ່ບໍ່?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "ຂໍ້ຜິດພາດຮ້າຍແຮງ"
@@ -14940,7 +14940,7 @@ msgid "Unable to remove budget."
 msgstr "ບໍ່ສາມາດລຶບງົບປະມານ."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "ສຳເນົາຂອງ %1"
@@ -16563,7 +16563,7 @@ msgid "%1 (Customized)"
 msgstr "%1 (ກຳນົດເອງ)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "ລາຍງານກຳນົດເອງ"
@@ -16573,29 +16573,29 @@ msgstr "ລາຍງານກຳນົດເອງ"
 msgid "Failed to configure report: %1"
 msgstr "ການຕັ້ງຄ່າລາຍງານບໍ່ສຳເລັດ: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "ບໍ່ສາມາດເພີ່ມລາຍງານໄດ້, ເຫດຜົນ: \"%1\""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> ເປັນລາຍງານເລີ່ມຕົ້ນ, ດັ່ງນັ້ນມັນຈຶ່ງບໍ່ສາມາດລຶບໄດ້."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "ລຶບລາຍງານບໍ?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "ຕົວເລືອກລາຍງານ"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
 msgstr "ສົ່ງອອກໄປຍັງໂຟນເດີ"

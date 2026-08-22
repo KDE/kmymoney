@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 00:45+0000\n"
-"PO-Revision-Date: 2026-08-06 20:24+0300\n"
+"POT-Creation-Date: 2026-08-22 00:46+0000\n"
+"PO-Revision-Date: 2026-08-21 19:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -12638,7 +12638,7 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Hesap özeti içe aktarılırken hata. Sürdürmek istiyor musunuz?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1542
-#: kmymoney/plugins/views/reports/kreportsview.cpp:565
+#: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
 msgstr "Kritik Hata"
@@ -15196,7 +15196,7 @@ msgid "Unable to remove budget."
 msgstr "Bütçe kaldırılamıyor."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
-#: kmymoney/plugins/views/reports/kreportsview.cpp:540
+#: kmymoney/plugins/views/reports/kreportsview.cpp:543
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 kopyası"
@@ -16825,7 +16825,7 @@ msgid "%1 (Customized)"
 msgstr "%1 (Özelleştirilmiş)"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:447
-#: kmymoney/plugins/views/reports/kreportsview.cpp:543
+#: kmymoney/plugins/views/reports/kreportsview.cpp:546
 #, kde-format
 msgid "Custom Report"
 msgstr "Özel Rapor"
@@ -16835,29 +16835,29 @@ msgstr "Özel Rapor"
 msgid "Failed to configure report: %1"
 msgstr "Rapor yapılandırılamadı: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:559
+#: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Rapor eklenemiyor, gerekçe: “%1”"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:593
+#: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> öntanımlı bir rapordur, bu yüzden silinemez."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:594
+#: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid "Delete Report?"
 msgstr "Raporu Sil?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:772
+#: kmymoney/plugins/views/reports/kreportsview.cpp:775
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Rapor Seçenekleri"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
 msgstr "Dizine Dışa Aktar"
@@ -22334,10 +22334,9 @@ msgid "The date you entered is invalid"
 msgstr "Girdiğiniz tarih geçersiz"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "Any transaction"
+#, kde-format
 msgid "All transaction dates"
-msgstr "Herhangi bir işlem"
+msgstr "Bütün işlem tarihleri"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
