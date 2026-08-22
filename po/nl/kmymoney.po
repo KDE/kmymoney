@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-21 03:36+0000\n"
-"PO-Revision-Date: 2026-07-29 10:47+0200\n"
+"PO-Revision-Date: 2026-08-21 13:37+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -22301,10 +22301,9 @@ msgid "The date you entered is invalid"
 msgstr "De ingevoerde datum is ongeldig"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "End transaction edit"
+#, kde-format
 msgid "All transaction dates"
-msgstr "Transactie bewerken beëindigen"
+msgstr "Alle transactiedatums"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format

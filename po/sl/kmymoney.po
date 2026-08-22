@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-21 03:36+0000\n"
-"PO-Revision-Date: 2026-07-29 07:13+0200\n"
+"PO-Revision-Date: 2026-08-21 08:18+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -22234,10 +22234,9 @@ msgid "The date you entered is invalid"
 msgstr "Vneseni datum je neveljaven"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "End transaction edit"
+#, kde-format
 msgid "All transaction dates"
-msgstr "Končaj urejanje transakcije"
+msgstr "Vsi datumi transakcij"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
