@@ -26310,6 +26310,3 @@ msgstr "Prosesser en spesifikk rapport"
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Kun en av --csv og --html er støttet"
-
-#~ msgid "All dates"
-#~ msgstr "Alle datoer"
