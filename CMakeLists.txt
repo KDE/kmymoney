@@ -80,15 +80,18 @@ elseif(DEFINED VERSION_SUFFIX)
   set(${PROJECT_NAME}_VERSION_SUFFIX "-${DASHFREE_SUFFIX}")
 endif()
 
-if (POLICY CMP0063)
-  cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
-endif()
-if (POLICY CMP0127)
-  cmake_policy(SET CMP0127 NEW) # Policy introduced in CMake version 3.22
-endif()
-if (POLICY CMP0159)
-  cmake_policy(SET CMP0159 NEW) # Policy introduced in CMake version 3.29
-endif()
+# setup policies
+set(POLICIES
+    CMP0063 # Honor visibility properties for all target types, cmake version 3.3
+    CMP0127 # cmake_dependent_option() supports full Condition Syntax, cmake version 3.22
+    CMP0159 # file(STRINGS) with REGEX updates CMAKE_MATCH_<n>, cmake version 3.29
+)
+foreach(P ${POLICIES})
+    if(POLICY ${P})
+        cmake_policy(SET ${P} NEW)
+        message(STATUS "cmake policy ${P} set to NEW")
+    endif()
+endforeach()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
