@@ -153,6 +153,8 @@ enum QueryColumn : int {
     End = 0x8000
 };
 
+eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType);
+
 enum class DetailLevel { None = 0, All, Top, Group, Total, End };
 inline qHashSeedType qHash(const DetailLevel key, qHashSeedType seed)
 {

@@ -44,7 +44,7 @@ public:
         , m_propagateBudgetDifference(false)
         , m_investments(false)
         , m_loans(false)
-        , m_reportType(rowTypeToReportType(eMyMoney::Report::RowType::ExpenseIncome))
+        , m_reportType(eMyMoney::Report::rowTypeToReportType(eMyMoney::Report::RowType::ExpenseIncome))
         , m_rowType(eMyMoney::Report::RowType::ExpenseIncome)
         , m_columnType(eMyMoney::Report::ColumnType::Months)
         , m_columnsAreDays(false)
@@ -87,35 +87,6 @@ public:
         , m_skipZero(false)
         , m_modified(false)
     {
-    }
-
-    static eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType)
-    {
-        static const QHash<eMyMoney::Report::RowType, eMyMoney::Report::ReportType> reportTypes {
-            {eMyMoney::Report::RowType::NoRows,               eMyMoney::Report::ReportType::NoReport},
-            {eMyMoney::Report::RowType::AssetLiability,       eMyMoney::Report::ReportType::PivotTable},
-            {eMyMoney::Report::RowType::ExpenseIncome,        eMyMoney::Report::ReportType::PivotTable},
-            {eMyMoney::Report::RowType::Category,             eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::TopCategory,          eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::Account,              eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::Tag,                  eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::Payee,                eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::Month,                eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::Week,                 eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::TopAccount,           eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::AccountByTopAccount,  eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::EquityType,           eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::AccountType,          eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::Institution,          eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::Budget,               eMyMoney::Report::ReportType::PivotTable},
-            {eMyMoney::Report::RowType::BudgetActual,         eMyMoney::Report::ReportType::PivotTable},
-            {eMyMoney::Report::RowType::Schedule,             eMyMoney::Report::ReportType::InfoTable},
-            {eMyMoney::Report::RowType::AccountInfo,          eMyMoney::Report::ReportType::InfoTable},
-            {eMyMoney::Report::RowType::AccountLoanInfo,      eMyMoney::Report::ReportType::InfoTable},
-            {eMyMoney::Report::RowType::AccountReconcile,     eMyMoney::Report::ReportType::QueryTable},
-            {eMyMoney::Report::RowType::CashFlow,             eMyMoney::Report::ReportType::QueryTable},
-        };
-        return reportTypes.value(rowType, eMyMoney::Report::ReportType::Invalid);
     }
 
     void collectReferencedObjects() override

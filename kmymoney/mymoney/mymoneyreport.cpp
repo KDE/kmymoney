@@ -54,7 +54,7 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
     d->m_comment = comment;
     d->m_detailLevel = ss;
     d->m_investmentSum = ct & eMyMoney::Report::QueryColumn::CapitalGain ? eMyMoney::Report::InvestmentSum::Sold : eMyMoney::Report::InvestmentSum::Period;
-    d->m_reportType = d->rowTypeToReportType(rt);
+    d->m_reportType = eMyMoney::Report::rowTypeToReportType(rt);
     d->m_rowType = rt;
     d->m_dateLock = dl;
     d->m_origin = origin;
@@ -67,7 +67,7 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
     setDateFilter(dl);
 
     // throw exception if the type is inconsistent
-    if (d->rowTypeToReportType(rt) == eMyMoney::Report::ReportType::Invalid || d->m_reportType == eMyMoney::Report::ReportType::NoReport)
+    if (eMyMoney::Report::rowTypeToReportType(rt) == eMyMoney::Report::ReportType::Invalid || d->m_reportType == eMyMoney::Report::ReportType::NoReport)
         throw MYMONEYEXCEPTION_CSTRING("Invalid report type");
 
     // add the corresponding account groups
@@ -219,7 +219,7 @@ void MyMoneyReport::setRowType(eMyMoney::Report::RowType rt)
 {
     Q_D(MyMoneyReport);
     d->m_rowType = rt;
-    d->m_reportType = d->rowTypeToReportType(rt);
+    d->m_reportType = eMyMoney::Report::rowTypeToReportType(rt);
 
     d->m_accountGroupFilter = false;
     d->m_accountGroups.clear();
