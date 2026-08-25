@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-14 03:39+0000\n"
+"POT-Creation-Date: 2026-08-21 03:36+0000\n"
 "PO-Revision-Date: 2026-03-01 12:31+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -22134,8 +22134,8 @@ msgstr "Datoen du har oppgitt er ugyldig"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
 #, kde-format
-msgid "All dates"
-msgstr "Alle datoer"
+msgid "All transaction dates"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
