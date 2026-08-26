@@ -86,6 +86,9 @@ endif()
 if (POLICY CMP0127)
   cmake_policy(SET CMP0127 NEW) # Policy introduced in CMake version 3.22
 endif()
+if (POLICY CMP0159)
+  cmake_policy(SET CMP0159 NEW) # Policy introduced in CMake version 3.29
+endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
