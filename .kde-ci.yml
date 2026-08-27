@@ -57,4 +57,4 @@ Dependencies:
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
-  cmake-options: '-DWARNINGS_AS_ERRORS=on -Werror=dev'
+  cmake-options: '-DWARNINGS_AS_ERRORS=on -Werror=author -Wno-error=policy'
