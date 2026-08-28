@@ -83,8 +83,15 @@ endif()
 # setup policies
 set(POLICIES
     CMP0063 # Honor visibility properties for all target types, cmake version 3.3
+    # not fixable here, see #89
+    #CMP0102 # The mark_as_advanced() command no longer creates a cache entry if one does not already exist, cmake version 3.17
+    CMP0112 # Target file component generator expressions do not add target dependencies, cmake version 3.19
     CMP0127 # cmake_dependent_option() supports full Condition Syntax, cmake version 3.22
+    CMP0156 # De-duplicate libraries on link lines based onlinker capabilities, cmake version 3.29
     CMP0159 # file(STRINGS) with REGEX updates CMAKE_MATCH_<n>, cmake version 3.29
+    CMP0179 # De-duplication of static libraries on link lines keeps first occurrence, cmake version 3.29
+    CMP0181 # Link command-line fragment variables are parsed and re-quoted, cmake version 4.0
+    CMP0200 # Location and configuration selection for imported targets is more consistent, cmake version 4.2
 )
 foreach(P ${POLICIES})
     if(POLICY ${P})
