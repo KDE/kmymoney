@@ -12,6 +12,7 @@
 #include <QDoubleValidator>
 
 #include "mymoneyenums.h"
+#include "reporttabperformance.h"
 
 class DateRangeDlg;
 class MyMoneyReport;
@@ -103,15 +104,6 @@ public:
 
 private Q_SLOTS:
     void slotInvestmentSumChanged(int index);
-};
-
-class ReportTabPerformance : public QWidget
-{
-public:
-    explicit ReportTabPerformance(QWidget *parent);
-    ~ReportTabPerformance();
-
-    Ui::ReportTabPerformance* ui;
 };
 
 class MyDoubleValidator : public QDoubleValidator

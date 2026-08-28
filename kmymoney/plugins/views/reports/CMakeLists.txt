@@ -10,11 +10,13 @@ set(reportsview_SOURCES
   reportcontrolimpl.cpp
   reportsview.cpp
   reporttabimpl.cpp
+  reporttabperformance.cpp
   reporttabrowcolpivot.cpp
   reporttabrowcolquery.cpp
   )
 
 set(reportsview_HEADERS
+  reporttabperformance.h
   reporttabrowcolpivot.h
   reporttabrowcolquery.h
   )

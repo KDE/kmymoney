@@ -19,7 +19,6 @@
 #include "ui_reporttabcapitalgain.h"
 #include "ui_reporttabchart.h"
 #include "ui_reporttabgeneral.h"
-#include "ui_reporttabperformance.h"
 #include "ui_reporttabrange.h"
 
 ReportTabGeneral::ReportTabGeneral(QWidget* parent)
@@ -363,18 +362,6 @@ void ReportTabCapitalGain::slotInvestmentSumChanged(int index)
         ui->m_showSTLTCapitalGains->setEnabled(true);
         ui->m_termSeparator->setEnabled(true);
     }
-}
-
-ReportTabPerformance::ReportTabPerformance(QWidget* parent)
-    : QWidget(parent)
-{
-    ui = new Ui::ReportTabPerformance;
-    ui->setupUi(this);
-}
-
-ReportTabPerformance::~ReportTabPerformance()
-{
-    delete ui;
 }
 
 MyDoubleValidator::MyDoubleValidator(int decimals, QObject* parent)

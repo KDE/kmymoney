@@ -46,6 +46,7 @@
 #include "mymoneyreport.h"
 #include "pricemodel.h"
 #include "reporttabimpl.h"
+#include "reporttabperformance.h"
 #include "reporttabrowcolpivot.h"
 #include "reporttabrowcolquery.h"
 
@@ -375,8 +376,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     }
 
     if (d->m_tabPerformance) {
-        d->m_currentState.setShowingColumnTotals(!d->m_tabPerformance->ui->m_checkHideTotals->isChecked());
-        d->m_currentState.setInvestmentSum(static_cast<eMyMoney::Report::InvestmentSum>(d->m_tabPerformance->ui->m_investmentSum->currentData().toInt()));
+        d->m_tabPerformance->apply(&d->m_currentState);
     }
 
     if (isWindow()) {
@@ -516,16 +516,7 @@ void KReportConfigurationFilterDlg::slotReset()
     }
 
     if (d->m_tabPerformance) {
-        d->m_tabPerformance->ui->m_checkHideTotals->setChecked(!d->m_initialState.isShowingColumnTotals());
-        d->m_tabPerformance->ui->m_investmentSum->blockSignals(true);
-        d->m_tabPerformance->ui->m_investmentSum->clear();
-        d->m_tabPerformance->ui->m_investmentSum->addItem(i18n("From period"), static_cast<int>(eMyMoney::Report::InvestmentSum::Period));
-        d->m_tabPerformance->ui->m_investmentSum->addItem(i18n("Owned and sold"), static_cast<int>(eMyMoney::Report::InvestmentSum::OwnedAndSold));
-        d->m_tabPerformance->ui->m_investmentSum->addItem(i18n("Only owned"), static_cast<int>(eMyMoney::Report::InvestmentSum::Owned));
-        d->m_tabPerformance->ui->m_investmentSum->addItem(i18n("Only sold"), static_cast<int>(eMyMoney::Report::InvestmentSum::Sold));
-        d->m_tabPerformance->ui->m_investmentSum->blockSignals(false);
-        d->m_tabPerformance->ui->m_investmentSum->setCurrentIndex(
-            d->m_tabPerformance->ui->m_investmentSum->findData(static_cast<int>(d->m_initialState.investmentSum())));
+        d->m_tabPerformance->load(&d->m_initialState);
     }
 
     d->m_tabFilters->resetFilter(d->m_initialState);
