@@ -45,7 +45,7 @@ public:
         StaticEvaluationSafe, ///< actual chart page only
     };
 
-    explicit KReportConfigurationFilterDlg(MyMoneyReport report, Type type = Type::Default, QWidget* parent = nullptr);
+    explicit KReportConfigurationFilterDlg(const MyMoneyReport& report, Type type = Type::Default, QWidget* parent = nullptr);
     ~KReportConfigurationFilterDlg();
 
     MyMoneyReport getConfig() const;

@@ -98,7 +98,7 @@ public:
     KReportConfigurationFilterDlg::Type m_type;
 };
 
-KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport report, Type type, QWidget* parent)
+KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(const MyMoneyReport& report, Type type, QWidget* parent)
     : QDialog(parent)
     , d_ptr(new KReportConfigurationFilterDlgPrivate(this))
 {
