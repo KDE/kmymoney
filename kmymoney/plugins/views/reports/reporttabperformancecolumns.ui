@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ReportTabPerformanceColumns</class>
+ <widget class="QWidget" name="ReportTabPerformanceColumns">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>594</width>
+    <height>206</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Performance Columns</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="m_groupPerformanceColumns">
+     <property name="toolTip">
+      <string>&lt;p&gt;Choose which columns should be shown in the investment performance report.&lt;/p&gt;</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayoutPerformance">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="m_checkStartingMarketValue">
+        <property name="text">
+         <string>Starting Market Value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="m_checkBuys">
+        <property name="text">
+         <string>Buy Value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="m_checkSells">
+        <property name="text">
+         <string>Sell Value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="m_checkReinvestIncome">
+        <property name="text">
+         <string>Dividends Reinvested</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="m_checkCashIncome">
+        <property name="text">
+         <string>Dividends Paid Out</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="m_checkEndingMarketValue">
+        <property name="text">
+         <string>Ending Market Value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="m_checkReturn">
+        <property name="text">
+         <string>Return</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="m_checkReturnInvestment">
+        <property name="text">
+         <string>Return On Investment</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="m_checkAnnualizedReturn">
+        <property name="text">
+         <string>Annualized Return</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="m_checkExtendedInternalRateOfReturn">
+        <property name="text">
+         <string>Extended internal rate of return</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

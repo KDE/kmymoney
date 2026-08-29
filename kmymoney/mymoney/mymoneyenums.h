@@ -8,6 +8,8 @@
 #ifndef MYMONEYENUMS_H
 #define MYMONEYENUMS_H
 
+#include "kmm_mymoney_export.h"
+
 #include <QtCore/qnamespace.h>
 #include <QMetaType>
 #include <QHashFunctions>
@@ -158,8 +160,10 @@ enum class Origin {
 };
 
 enum class ReportType { NoReport = 0, PivotTable, QueryTable, InfoTable, Invalid };
-// if you add bits to this bitmask, start with the value currently assigned to QCend and update its value afterwards
-// also don't forget to add column names to kQueryColumnsText in mymoneyreport.cpp
+
+KMM_MYMONEY_EXPORT eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType);
+
+// if you add bits to this bitmask, start with the value currently assigned to End and update its value afterwards
 enum QueryColumn : int {
     None = 0x0,
     Begin = 0x1,
@@ -178,10 +182,22 @@ enum QueryColumn : int {
     Balance = 0x1000,
     CapitalGain = 0x2000,
     Rate = 0x4000,
-    End = 0x8000
+    StartingMarketValue = 0x8000,
+    Buys = 0x10000,
+    Sells = 0x20000,
+    ReinvestIncome = 0x40000,
+    CashIncome = 0x80000,
+    EndingMarketValue = 0x100000,
+    Return = 0x200000,
+    ReturnInvestment = 0x400000,
+    AnnualizedReturn = 0x800000,
+    ExtendedInternalRateOfReturn = 0x1000000,
+    End = 0x2000000
 };
 
-eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType);
+KMM_MYMONEY_EXPORT unsigned int performanceColumns();
+KMM_MYMONEY_EXPORT unsigned int expandPerformanceColumns(unsigned int qc);
+KMM_MYMONEY_EXPORT unsigned int collapsePerformanceColumns(unsigned int qc);
 
 enum class DetailLevel { None = 0, All, Top, Group, Total, End };
 inline qHashSeedType qHash(const DetailLevel key, qHashSeedType seed)

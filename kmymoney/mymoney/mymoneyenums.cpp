@@ -44,4 +44,33 @@ eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowTy
     return reportTypes.value(rowType, eMyMoney::Report::ReportType::Invalid);
 }
 
+unsigned int performanceColumns()
+{
+    return static_cast<unsigned int>(eMyMoney::Report::QueryColumn::StartingMarketValue | eMyMoney::Report::QueryColumn::Buys
+                                     | eMyMoney::Report::QueryColumn::Sells | eMyMoney::Report::QueryColumn::ReinvestIncome
+                                     | eMyMoney::Report::QueryColumn::CashIncome | eMyMoney::Report::QueryColumn::EndingMarketValue
+                                     | eMyMoney::Report::QueryColumn::Return | eMyMoney::Report::QueryColumn::ReturnInvestment
+                                     | eMyMoney::Report::QueryColumn::AnnualizedReturn | eMyMoney::Report::QueryColumn::ExtendedInternalRateOfReturn);
+}
+
+unsigned int expandPerformanceColumns(unsigned int qc)
+{
+    // when the default column set is used, expand to the single columns
+    if ((qc & eMyMoney::Report::performanceColumns()) == 0 || qc & eMyMoney::Report::QueryColumn::Performance) {
+        qc &= ~eMyMoney::Report::QueryColumn::Performance;
+        qc |= eMyMoney::Report::performanceColumns();
+    }
+    return qc;
+}
+
+unsigned int collapsePerformanceColumns(unsigned int qc)
+{
+    // when the default column set is used, replace them by the default value
+    if ((qc & eMyMoney::Report::performanceColumns()) == eMyMoney::Report::performanceColumns()) {
+        qc &= ~eMyMoney::Report::performanceColumns();
+        qc |= eMyMoney::Report::QueryColumn::Performance;
+    }
+    return qc;
+}
+
 }}

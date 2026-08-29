@@ -3,10 +3,10 @@
 <KMYMONEY-FILE>
   <FILEINFO>
     <CREATION_DATE date=""/>
-    <LAST_MODIFIED_DATE date="2026-08-21T06:11:12+02:00"/>
+    <LAST_MODIFIED_DATE date="2026-08-29T22:51:23+02:00"/>
     <VERSION id="1"/>
     <FIXVERSION id="12"/>
-    <APPVERSION id="5.2.70-27c3069ed"/>
+    <APPVERSION id="5.2.70-94cd76bbb"/>
   </FILEINFO>
   <USER name="" email="">
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
@@ -110,7 +110,7 @@
     </TRANSACTION>
   </TRANSACTIONS>
   <KEYVALUEPAIRS>
-    <PAIR key="LastModificationDate" value="2026-08-21T06:11:12+02:00"/>
+    <PAIR key="LastModificationDate" value="2026-08-29T22:51:23+02:00"/>
     <PAIR key="kmm-baseCurrency" value="AUD"/>
     <PAIR key="kmm-id" value="{03147f88-51aa-4582-bde7-1b3a065cefa9}"/>
   </KEYVALUEPAIRS>
@@ -153,6 +153,7 @@
     <REPORT id="R000027" type="querytable 1.15" group="Investments" name="Investment Performance by Type (Customized - all dates)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="performancetype" querycolumns="performance" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0" investmentsum="0"/>
     <REPORT id="R000028" type="querytable 1.15" group="Investments" name="Investment Capital Gains by Type (Customized - only owned)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="untiltoday" rowtype="capitaltype" querycolumns="capitalgain" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0" investmentsum="2"/>
     <REPORT id="R000029" type="querytable 1.15" group="Investments" name="Investment Holdings by Type (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="untiltoday" rowtype="equitytype" querycolumns="shares,price" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+    <REPORT id="R000030" type="querytable 1.15" group="Investments" name="Investment Performance by Account (Customized - all dates - special columns)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="performancetopaccount" querycolumns="return,returninvestment,annualizedreturn,extendedinternalrateofreturn" tax="0" propBudgetDiff="0" investments="1" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0" investmentsum="0"/>
   </REPORTS>
   <BUDGETS/>
   <ONLINEJOBS/>

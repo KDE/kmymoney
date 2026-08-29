@@ -287,6 +287,16 @@ QHash<eMyMoney::Report::QueryColumn, QString> queryColumnsLUT()
         {eMyMoney::Report::QueryColumn::Balance,     QStringLiteral("balance")},
         {eMyMoney::Report::QueryColumn::CapitalGain, QStringLiteral("capitalgain")},
         {eMyMoney::Report::QueryColumn::Rate,        QStringLiteral("rate")},
+        {eMyMoney::Report::QueryColumn::AnnualizedReturn, QStringLiteral("annualizedreturn")},
+        {eMyMoney::Report::QueryColumn::Buys, QStringLiteral("buys")},
+        {eMyMoney::Report::QueryColumn::CashIncome, QStringLiteral("cashincome")},
+        {eMyMoney::Report::QueryColumn::EndingMarketValue, QStringLiteral("endingmarketvalue")},
+        {eMyMoney::Report::QueryColumn::ExtendedInternalRateOfReturn, QStringLiteral("extendedinternalrateofreturn")},
+        {eMyMoney::Report::QueryColumn::ReinvestIncome, QStringLiteral("reinvestincome")},
+        {eMyMoney::Report::QueryColumn::Return, QStringLiteral("return")},
+        {eMyMoney::Report::QueryColumn::ReturnInvestment, QStringLiteral("returninvestment")},
+        {eMyMoney::Report::QueryColumn::Sells, QStringLiteral("sells")},
+        {eMyMoney::Report::QueryColumn::StartingMarketValue, QStringLiteral("startingmarketvalue")},
     };
     // clang-format on
     return lut;

@@ -47,6 +47,7 @@
 #include "pricemodel.h"
 #include "reporttabimpl.h"
 #include "reporttabperformance.h"
+#include "reporttabrowcolperformance.h"
 #include "reporttabrowcolpivot.h"
 #include "reporttabrowcolquery.h"
 
@@ -68,6 +69,7 @@ public:
         , ui(new Ui::KReportConfigurationFilterDlg)
         , m_tabRowColPivot(nullptr)
         , m_tabRowColQuery(nullptr)
+        , m_tabRowColPerformance(nullptr)
         , m_tabChart(nullptr)
         , m_tabRange(nullptr)
         , m_dateRange(nullptr)
@@ -87,6 +89,7 @@ public:
     QPointer<ReportTabGeneral> m_tabGeneral;
     QPointer<ReportTabRowColPivot> m_tabRowColPivot;
     QPointer<ReportTabRowColQuery> m_tabRowColQuery;
+    QPointer<ReportTabRowColPerformance> m_tabRowColPerformance;
     QPointer<ReportTabChart> m_tabChart;
     QPointer<ReportTabRange> m_tabRange;
     QPointer<ReportTabCapitalGain> m_tabCapitalGain;
@@ -199,6 +202,12 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(const MyMoneyReport
         if (d->m_initialState.isPerformanceReport()) {
             d->m_tabPerformance = new ReportTabPerformance(d->ui->m_criteriaTab);
             d->ui->m_criteriaTab->insertTab(1, d->m_tabPerformance, i18n("Report"));
+            d->m_tabRowColPerformance = new ReportTabRowColPerformance(d->ui->m_criteriaTab);
+            d->ui->m_criteriaTab->insertTab(1, d->m_tabRowColPerformance, i18n("Rows/Columns"));
+            connect(d->m_tabPerformance,
+                    &ReportTabPerformance::investmentSumChanged,
+                    d->m_tabRowColPerformance,
+                    &ReportTabRowColPerformance::slotUpdatePerformanceColumnVisibility);
         }
     }
 
@@ -329,10 +338,13 @@ void KReportConfigurationFilterDlg::slotSearch()
     d->m_currentState.setFavorite(d->m_tabGeneral->ui->m_checkFavorite->isChecked());
     d->m_currentState.setSkipZero(d->m_tabGeneral->ui->m_skipZero->isChecked());
 
+    // either or
     if (d->m_tabRowColPivot) {
         d->m_tabRowColPivot->apply(&d->m_currentState, d->m_initialState.rowType() == eMyMoney::Report::RowType::BudgetActual, d->m_budgets);
     } else if (d->m_tabRowColQuery) {
         d->m_tabRowColQuery->apply(&d->m_currentState);
+    } else if (d->m_tabRowColPerformance) {
+        d->m_tabRowColPerformance->apply(&d->m_currentState);
     }
 
     if (d->m_tabChart) {
@@ -445,10 +457,13 @@ void KReportConfigurationFilterDlg::slotReset()
         d->m_tabGeneral->ui->m_skipZero->setEnabled(false);
     }
 
+    // either or
     if (d->m_tabRowColPivot) {
         d->m_tabRowColPivot->load(&d->m_initialState, d->m_budgets);
     } else if (d->m_tabRowColQuery) {
         d->m_tabRowColQuery->load(&d->m_initialState);
+    } else if (d->m_tabRowColPerformance) {
+        d->m_tabRowColPerformance->load(&d->m_initialState);
     }
 
     if (d->m_tabChart) {

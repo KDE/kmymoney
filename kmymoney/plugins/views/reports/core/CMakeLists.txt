@@ -22,8 +22,9 @@ target_link_libraries(reports
     $<$<BOOL:${KChart6_FOUND}>:KChart6>
     Alkimia::alkimia
     Qt::PrintSupport
-    kmymoney_common
+    kmm_mymoney
     kmm_settings
+    kmymoney_common
     PRIVATE
     KF${QT_MAJOR_VERSION}::I18n
 )

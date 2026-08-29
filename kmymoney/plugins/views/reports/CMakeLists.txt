@@ -14,6 +14,7 @@ set(reportsview_SOURCES
   reporttabperformance.cpp
   reporttabrowcolpivot.cpp
   reporttabrowcolquery.cpp
+  reporttabrowcolperformance.cpp
   )
 
 set(reportsview_HEADERS
@@ -21,6 +22,7 @@ set(reportsview_HEADERS
   reporttabperformance.h
   reporttabrowcolpivot.h
   reporttabrowcolquery.h
+  reporttabrowcolperformance.h
   )
 
 ki18n_wrap_ui(reportsview_SOURCES
@@ -31,6 +33,7 @@ ki18n_wrap_ui(reportsview_SOURCES
   reporttabchart.ui
   reporttabgeneral.ui
   reporttabperformance.ui
+  reporttabperformancecolumns.ui
   reporttabrange.ui
   reporttabrowcolpivot.ui
   reporttabrowcolquery.ui

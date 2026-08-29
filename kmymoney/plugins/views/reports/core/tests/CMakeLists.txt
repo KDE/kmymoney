@@ -13,7 +13,6 @@ kmm_add_tests(${tests_sources}
     Qt::Core
     Qt::Test
     reports
-    kmm_mymoney
     kmm_codec
     kmm_testutils
     kmm_testutilities
