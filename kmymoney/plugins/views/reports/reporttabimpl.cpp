@@ -16,7 +16,6 @@
 #include "mymoneyexception.h"
 #include "mymoneyreport.h"
 
-#include "ui_reporttabcapitalgain.h"
 #include "ui_reporttabchart.h"
 #include "ui_reporttabgeneral.h"
 #include "ui_reporttabrange.h"
@@ -335,34 +334,9 @@ void ReportTabRange::slotDataLockChanged(int index)
     }
 }
 
-ReportTabCapitalGain::ReportTabCapitalGain(QWidget* parent)
-    : QWidget(parent)
-{
-    ui = new Ui::ReportTabCapitalGain;
-    ui->setupUi(this);
-    connect(ui->m_investmentSum, &QComboBox::currentIndexChanged, this, &ReportTabCapitalGain::slotInvestmentSumChanged);
-}
 
-ReportTabCapitalGain::~ReportTabCapitalGain()
-{
-    delete ui;
-}
 
-void ReportTabCapitalGain::slotInvestmentSumChanged(int index)
-{
-    Q_UNUSED(index);
-    if (ui->m_investmentSum->currentData().value<eMyMoney::Report::InvestmentSum>() == eMyMoney::Report::InvestmentSum::Owned) {
-        ui->m_settlementPeriod->setValue(0);
-        ui->m_settlementPeriod->setEnabled(false);
-        ui->m_showSTLTCapitalGains->setChecked(false);
-        ui->m_showSTLTCapitalGains->setEnabled(false);
-        ui->m_termSeparator->setEnabled(false);
-    } else {
-        ui->m_settlementPeriod->setEnabled(true);
-        ui->m_showSTLTCapitalGains->setEnabled(true);
-        ui->m_termSeparator->setEnabled(true);
-    }
-}
+
 
 MyDoubleValidator::MyDoubleValidator(int decimals, QObject* parent)
     : QDoubleValidator(0, 0, decimals, parent)

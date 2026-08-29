@@ -368,11 +368,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     d->m_currentState.setDateFilter(range);
 
     if (d->m_tabCapitalGain) {
-        d->m_currentState.setTermSeparator(d->m_tabCapitalGain->ui->m_termSeparator->date());
-        d->m_currentState.setShowSTLTCapitalGains(d->m_tabCapitalGain->ui->m_showSTLTCapitalGains->isChecked());
-        d->m_currentState.setSettlementPeriod(d->m_tabCapitalGain->ui->m_settlementPeriod->value());
-        d->m_currentState.setShowingColumnTotals(!d->m_tabCapitalGain->ui->m_checkHideTotals->isChecked());
-        d->m_currentState.setInvestmentSum(static_cast<eMyMoney::Report::InvestmentSum>(d->m_tabCapitalGain->ui->m_investmentSum->currentData().toInt()));
+        d->m_tabCapitalGain->apply(&d->m_currentState);
     }
 
     if (d->m_tabPerformance) {
@@ -502,17 +498,7 @@ void KReportConfigurationFilterDlg::slotReset()
     }
 
     if (d->m_tabCapitalGain) {
-        d->m_tabCapitalGain->ui->m_termSeparator->setDate(d->m_initialState.termSeparator());
-        d->m_tabCapitalGain->ui->m_showSTLTCapitalGains->setChecked(d->m_initialState.isShowingSTLTCapitalGains());
-        d->m_tabCapitalGain->ui->m_settlementPeriod->setValue(d->m_initialState.settlementPeriod());
-        d->m_tabCapitalGain->ui->m_checkHideTotals->setChecked(!d->m_initialState.isShowingColumnTotals());
-        d->m_tabCapitalGain->ui->m_investmentSum->blockSignals(true);
-        d->m_tabCapitalGain->ui->m_investmentSum->clear();
-        d->m_tabCapitalGain->ui->m_investmentSum->addItem(i18n("Only owned"), static_cast<int>(eMyMoney::Report::InvestmentSum::Owned));
-        d->m_tabCapitalGain->ui->m_investmentSum->addItem(i18n("Only sold"), static_cast<int>(eMyMoney::Report::InvestmentSum::Sold));
-        d->m_tabCapitalGain->ui->m_investmentSum->blockSignals(false);
-        d->m_tabCapitalGain->ui->m_investmentSum->setCurrentIndex(
-            d->m_tabCapitalGain->ui->m_investmentSum->findData(static_cast<int>(d->m_initialState.investmentSum())));
+        d->m_tabCapitalGain->load(&d->m_initialState);
     }
 
     if (d->m_tabPerformance) {
