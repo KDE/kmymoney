@@ -2,8 +2,8 @@
 # Copyright (C) 2006-2026 This_file_is_part_of_KDE
 # This file is put in the public domain.
 #
-# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2006, 2010, 2011 Orestes Mas Casals <orestes@tsc.upc.edu>
+# SPDX-FileCopyrightText: 2013-2023 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2006, 2010-2011 Orestes Mas Casals <orestes@tsc.upc.edu>
 # SPDX-FileCopyrightText: 2009-2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
