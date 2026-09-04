@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-03 00:43+0000\n"
-"PO-Revision-Date: 2026-08-21 08:17+0200\n"
+"PO-Revision-Date: 2026-09-03 07:28+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -17940,23 +17940,19 @@ msgstr "Lastne in prodane"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "Preizkus zmogljivosti"
+msgstr "Stolpci uspešnosti"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
 msgstr ""
-"<p>Izberite stolpce, ki naj bodo prikazani v poročilu.</p><p>Datum in znesek "
-"transakcije sta vedno prikazana.</p>"
+"<p>Izberite, kateri stolpci naj bodo prikazani v poročilu o uspešnosti "
+"naložb.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26

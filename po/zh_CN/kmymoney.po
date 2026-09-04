@@ -17375,21 +17375,17 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "性能测试"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
-msgstr "<p>选择应该显示在报表中的栏目。</p><p>总是会显示日期和交易金额。</p>"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26

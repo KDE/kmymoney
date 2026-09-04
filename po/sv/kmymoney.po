@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-03 00:43+0000\n"
-"PO-Revision-Date: 2026-08-21 19:25+0200\n"
+"PO-Revision-Date: 2026-09-03 19:58+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -17885,23 +17885,18 @@ msgstr "Ägd och såld"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "Prestandakontroll"
+msgstr "Avkastningskolumner"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
 msgstr ""
-"<p>Välj vilka kolumner som ska visas i rapporten.</p><p>Datum och "
-"transaktionsbelopp visas alltid.</p>"
+"<p>Välj vilka kolumner som ska visas i rapporten om investeringsavkastning."
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26

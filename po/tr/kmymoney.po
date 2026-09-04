@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-03 00:43+0000\n"
-"PO-Revision-Date: 2026-08-21 19:25+0300\n"
+"PO-Revision-Date: 2026-09-03 20:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.04.2\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -17857,23 +17857,18 @@ msgstr "Alınan ve satılan"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "Başarım Sınaması"
+msgstr "Başarım Sütunları"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
 msgstr ""
-"<p>Raporda gösterilmesi gereken sütunları seçin.</p><p>Tarih ve işlem "
-"miktarı her zaman gösterilir.</p>"
+"<p>Yatırım başarımı raporunda gösterilmesi gereken sütunları seçin.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26

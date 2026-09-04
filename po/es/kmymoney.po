@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-03 00:43+0000\n"
-"PO-Revision-Date: 2026-08-21 23:31+0100\n"
+"PO-Revision-Date: 2026-09-04 00:51+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -14078,11 +14078,11 @@ msgid ""
 "2005.  Specify here which range of years will have year delimited by an "
 "apostrophe (eg. for Quicken this is usually 1900-1949)."
 msgstr ""
-"Si un archivo QIF contiene asientos con el año representado por dos dígitos "
-"entonces puede usarse un apóstrofo o una barra para delimitarlo en ciertos "
-"siglos. Esto permite distinguir 1905 de 2005. Especifique aquí qué intervalo "
-"de años estarán delimitados con un apóstrofo (en Quicken esto, por lo "
-"general, es 1900-1949)."
+"Si un archivo QIF contiene asientos con el año representado por dos dígitos, "
+"puede usar un apóstrofo o una barra para delimitarlo en ciertos siglos. Esto "
+"permite distinguir 1905 de 2005. Especifique aquí qué intervalo de años "
+"estarán delimitados con un apóstrofo (en Quicken esto, por lo general, es "
+"1900-1949)."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:326
@@ -17194,7 +17194,7 @@ msgstr "Participaciones de la inversión por tipo"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:548
 #, kde-format
 msgid "Investment Performance by Account"
-msgstr "Comportamiento de la inversión por cuenta"
+msgstr "Rendimiento de la inversión por cuenta"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:557
 #, kde-format
@@ -17692,7 +17692,7 @@ msgstr "<p>En esta pestaña puede configurar el gráfico de este informe.</p>"
 #: kmymoney/plugins/views/reports/reporttabchart.ui:54
 #, kde-format
 msgid "<p>Select what form you would like the chart to be drawn as.</p>"
-msgstr "<p>Escoja qué forma le gustaría que tuviera el gráfico.</p>"
+msgstr "<p>Escoja la forma que le gustaría que tuviera el gráfico.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:35
@@ -18003,23 +18003,19 @@ msgstr "En propiedad y vendidos"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "Prueba de Desempeño"
+msgstr "Columnas de rendimiento"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
 msgstr ""
-"<p>Escoja qué columnas deben ser mostradas en el informe.</p><p>La fecha e "
-"importe del asiento siempre son mostradas.</p>"
+"<p>Escoja las columnas que se deben mostrar en el informe de rendimiento de "
+"la inversión.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26
@@ -18236,8 +18232,8 @@ msgid ""
 "<p>Choose which columns should be shown in the report.</p><p>The date and "
 "transaction amount are always shown.</p>"
 msgstr ""
-"<p>Escoja qué columnas deben ser mostradas en el informe.</p><p>La fecha e "
-"importe del asiento siempre son mostradas.</p>"
+"<p>Escoja las columnas que se deben mostrar en el informe.</p><p>La fecha y "
+"el importe del asiento siempre se muestran.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:44
@@ -18334,7 +18330,7 @@ msgstr "Tasa"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:245
 #, kde-format
 msgid "<p>Choose how to group the transactions in this report</p>"
-msgstr "<p>Escoja como agrupar los asientos en este informe</p>"
+msgstr "<p>Escoja cómo se agrupan los asientos de este informe</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkLoans)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:292

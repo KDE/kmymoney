@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-03 00:43+0000\n"
-"PO-Revision-Date: 2026-08-21 06:12+0200\n"
+"PO-Revision-Date: 2026-09-03 06:21+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -17447,23 +17447,19 @@ msgstr "საკუთრები და გაყიდულები"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "წარმადობის ტესტი"
+msgstr "წარმადობის სვეტები"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
 msgstr ""
-"<p>აირჩიეთ, რომელი სვეტები გნებავთ, ანგარიშში გამოჩნდეს.</p><p>თარიღი და "
-"გადარიცხვის თანხა ყოველთვის გამოჩნდება.</p>"
+"<p>აირჩიეთ რომელი სვეტები უნდა იყოს ნაჩვენები ინვესტიციების შესრულების "
+"ანგარიშში.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26
