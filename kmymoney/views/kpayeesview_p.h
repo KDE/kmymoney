@@ -472,7 +472,7 @@ public:
             QSet<QString> usedReportIds;
             for (const auto& report : allReports) {
                 for (const MyMoneyPayee& payee : list) {
-                    if (report.includesPayee(payee.id())) {
+                    if (report.isReferenced(payee.id())) {
                         usedReportIds.insert(report.id());
                         break;
                     }
