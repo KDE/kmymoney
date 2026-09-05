@@ -1089,3 +1089,13 @@ void MyMoneyTransactionFilter::removeReference(const QString& id)
         }
     }
 }
+
+bool MyMoneyTransactionFilter::isReferenced(const QString& id) const
+{
+    Q_D(const MyMoneyTransactionFilter);
+    if ((d->m_accounts.end() != d->m_accounts.find(id)) || (d->m_categories.end() != d->m_categories.find(id)) || (d->m_payees.end() != d->m_payees.find(id))
+        || (d->m_tags.end() != d->m_tags.find(id))) {
+        return true;
+    }
+    return false;
+}

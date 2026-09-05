@@ -769,3 +769,44 @@ void MyMoneyTransactionFilterTest::testMatchTransactionValidity()
     QVERIFY(!filter.match(transaction));
     QCOMPARE(filter.matchingSplits(transaction).size(), 0);
 }
+
+void MyMoneyTransactionFilterTest::testIsObjectReferenced()
+{
+    payeeId = QLatin1String("P000001");
+    const auto accountId = QLatin1String("A000001");
+    const auto categoryId = QLatin1String("A000002");
+    const auto tagId = QLatin1String("G000001");
+
+    MyMoneyTransactionFilter filter;
+    QCOMPARE(filter.isReferenced(payeeId), false);
+    QCOMPARE(filter.isReferenced(accountId), false);
+    QCOMPARE(filter.isReferenced(categoryId), false);
+    QCOMPARE(filter.isReferenced(tagId), false);
+
+    filter.addPayee(payeeId);
+    filter.addAccount(accountId);
+    filter.addCategory(categoryId);
+    filter.addTag(tagId);
+
+    QCOMPARE(filter.isReferenced(payeeId), true);
+    QCOMPARE(filter.isReferenced(accountId), true);
+    QCOMPARE(filter.isReferenced(categoryId), true);
+    QCOMPARE(filter.isReferenced(tagId), true);
+
+    filter = MyMoneyTransactionFilter();
+    QCOMPARE(filter.isReferenced(payeeId), false);
+    filter.addPayee(QString());
+    QCOMPARE(filter.isReferenced(payeeId), false);
+
+    QCOMPARE(filter.isReferenced(accountId), false);
+    filter.addAccount(QString());
+    QCOMPARE(filter.isReferenced(accountId), false);
+
+    QCOMPARE(filter.isReferenced(categoryId), false);
+    filter.addCategory(QString());
+    QCOMPARE(filter.isReferenced(categoryId), false);
+
+    QCOMPARE(filter.isReferenced(tagId), false);
+    filter.addTag(QString());
+    QCOMPARE(filter.isReferenced(tagId), false);
+}
