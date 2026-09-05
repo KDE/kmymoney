@@ -380,14 +380,14 @@ public:
     bool includesAccount(const QString& acc) const;
 
     /**
-      * This method is used to return information about the
-      * presence of a specific payee in the account filter.
-      * The payee in question is included in the filter set,
-      * if it has been set or no account filter is set.
-      *
-      * @param pye id of payee in question
-      * @return true if payee is in filter set, false otherwise
-      */
+     * This method is used to return information about the
+     * presence of a specific payee in the payee filter.
+     * The payee in question is included in the filter set,
+     * if it has been set or no payee filter is set.
+     *
+     * @param pye id of payee in question
+     * @return true if payee is in filter set, false otherwise
+     */
     bool includesPayee(const QString& pye) const;
 
     /**
@@ -477,7 +477,7 @@ public:
     /**
      * This method returns all accounts set in the filter.
      *
-     * @return QStringList of payeeIds to match;
+     * @return QStringList of accountIds to match;
      */
     QStringList accounts() const;
 
@@ -562,9 +562,16 @@ public:
     FilterSet filterSet() const;
 
     /**
-      * This member removes all references to object identified by @p id. Used
-      * to remove objects which are about to be removed from the engine.
-      */
+     * This method checks if the @a id is contained in any of the
+     * filter lists and returns @c true if that is the case. It
+     * returns @c false otherwise.
+     */
+    bool isReferenced(const QString& id) const;
+
+    /**
+     * This method removes all references to object identified by @p id. Used
+     * to remove objects which are about to be removed from the engine.
+     */
     void removeReference(const QString& id);
 
 private:
