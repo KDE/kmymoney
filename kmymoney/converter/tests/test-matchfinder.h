@@ -91,6 +91,7 @@ private Q_SLOTS:
     void testScheduleMatch_dueDateWithinMatchWindow();
     void testScheduleMatch_amountWithinAllowedVariation();
     void testScheduleMatch_overdue();
+    void testScheduleMismatch_finished();
     void testScheduleMismatch_dueDate();
     void testScheduleMismatch_amount();
 

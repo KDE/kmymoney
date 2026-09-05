@@ -444,6 +444,19 @@ void MatchFinderTest::testScheduleMatch_overdue()
     QCOMPARE(m_schedule.isOverdue(), true);
 }
 
+void MatchFinderTest::testScheduleMismatch_finished()
+{
+    const auto finalDueDate = QDate::currentDate().addDays(-2);
+    m_schedule.setEndDate(finalDueDate);
+    m_schedule.setLastPayment(finalDueDate);
+    m_schedule.setNextDueDate(finalDueDate.addDays(1));
+    importTransaction.setPostDate(m_schedule.nextDueDate());
+    addSchedule(m_schedule);
+
+    QVERIFY(m_schedule.isFinished());
+    expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchNotFound);
+}
+
 void MatchFinderTest::testScheduleMismatch_dueDate()
 {
     importTransaction.setPostDate(m_schedule.adjustedNextDueDate().addDays(MATCH_WINDOW + 1));
