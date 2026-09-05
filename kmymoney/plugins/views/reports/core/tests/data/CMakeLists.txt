@@ -33,6 +33,7 @@ set(querytable_test_files
   test-refinance-loan.xml
   test-transactions-multi-currency.xml
   test-transactions.xml
+  test-split-account.xml
 )
 
 if(NOT WIN32)

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date="2026-09-05"/>
+    <LAST_MODIFIED_DATE date="2026-09-05T13:13:09+02:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION id="12"/>
+    <APPVERSION id="5.2.70-36ae8d55b"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES>
+    <PAYEE id="P000001" name="Payee" reference="" email="" matchingenabled="1" usingmatchkey="0" matchignorecase="1" matchkey="^$">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+    </PAYEE>
+  </PAYEES>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="EUR"/>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="EUR"/>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="EUR"/>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2026-09-05" institution="" opened="2026-01-01" number="" type="1" name="Checking Account" description="" currency="EUR"/>
+    <ACCOUNT id="A000002" parentaccount="AStd::Liability" lastreconciled="" lastmodified="2026-09-05" institution="" opened="2026-01-01" number="" type="10" name="Collect pre-payments" description="" currency="EUR"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000001" postdate="2026-08-04" memo="" entrydate="2026-09-05" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000001" reconciledate="" action="" reconcileflag="0" value="200/1" shares="200/1" price="0/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000001" reconciledate="" action="" reconcileflag="0" value="-150/1" shares="-150/1" price="1/1" memo="" account="A000002" number="" bankid=""/>
+        <SPLIT id="S0003" payee="P000001" reconciledate="" action="" reconcileflag="0" value="-50/1" shares="-50/1" price="1/1" memo="" account="A000002" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2026-09-05T13:13:09+02:00"/>
+    <PAIR key="kmm-baseCurrency" value="EUR"/>
+    <PAIR key="kmm-id" value="{3d39b91b-6d6b-42bb-a88f-a354f1f4224f}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="EUR" name="Euro" symbol="€" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES/>
+  <REPORTS>
+    <REPORT id="R000001" type="querytable 1.15" group="Transactions" name="Collections" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="payee" querycolumns="" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <TYPE type="payments"/>
+      <ACCOUNT id="A000002"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>

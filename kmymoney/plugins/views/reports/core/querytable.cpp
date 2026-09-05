@@ -1278,7 +1278,15 @@ void QueryTable::processTransaction(const MyMoneyTransaction& t, ReportState& st
 
         qA[ctTag] = split.tagIdList().join(tagSeparator);
 
-        if (isReferenceSplit && splitCount > 1) {
+        // in case the transaction contains multiple splits to the account
+        // found in the referenceSplit, we need to add it in its own row
+        bool secondSplit = false;
+        if (!isReferenceSplit) {
+            if (referenceSplit.accountId() == split.accountId()) {
+                secondSplit = true;
+            }
+        }
+        if ((isReferenceSplit && splitCount > 1) || secondSplit) {
             setupReferenceSplitRow(split, splitAcc, xr, rateXr, valueXr, fraction, state);
             processIncludedReferenceSplit(split, splitAcc, valueXr, fraction, splitCount, state);
         } else {
