@@ -55,13 +55,13 @@ public:
     QString result() const;
 
     /**
-      * This method is used to set the character to be used
-      * as the separator between the integer and fractional part
-      * of an operand. Upon creation of the object, m_comma is
-      * set to the current locale setting of KDE's decimalSymbol.
-      *
-      * @param ch QChar representing the character to be used
-      */
+     * This method is used to set the character to be used
+     * as the separator between the integer and fractional part
+     * of an operand. Upon creation of the object, m_comma is
+     * set to the monetary decimal separator used by MyMoneyMoney.
+     *
+     * @param ch QChar representing the character to be used
+     */
     void setComma(const QChar ch);
 
     /**
