@@ -15,7 +15,6 @@
 #include <QGridLayout>
 #include <QKeyEvent>
 #include <QLabel>
-#include <QLocale>
 #include <QPushButton>
 #include <QRegularExpression>
 #include <QSignalMapper>
@@ -25,6 +24,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "mymoneymoney.h"
 
 class KMyMoneyCalculatorPrivate
 {
@@ -80,6 +81,12 @@ public:
      * part of numbers. The internal representation is always a period.
      */
     QString m_comma;
+
+    /**
+     * This member variable stores the character used to group thousands
+     * in monetary values.
+     */
+    QString m_groupSeparator;
 
     /**
      * The numeric representation of a stacked first operand
@@ -152,7 +159,8 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent)
     , d_ptr(new KMyMoneyCalculatorPrivate)
 {
     Q_D(KMyMoneyCalculator);
-    d->m_comma = QLocale().decimalPoint();
+    d->m_comma = MyMoneyMoney::decimalSeparator();
+    d->m_groupSeparator = MyMoneyMoney::thousandSeparator();
     d->m_clearOperandOnDigit = false;
 
     QGridLayout* grid = new QGridLayout(this);
@@ -479,12 +487,13 @@ void KMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
         const auto clipboard = qApp->clipboard();
         auto txt = clipboard->text();
 
+        // Convert the localized value into the calculator's internal format
+        txt.remove(d->m_groupSeparator);
+        txt.replace(d->m_comma, QLatin1String("."));
+
         // check that the clipboard content is valid
         bool ok;
-        QLocale().toDouble(txt, &ok);
-
-        // Now convert the localized command into a dot
-        txt.replace(d->m_comma, QLatin1String("."));
+        txt.toDouble(&ok);
 
         // since toDouble() allows scientific notation, we
         // make sure the letter e is not contained
@@ -570,9 +579,9 @@ void KMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
     // setup operand
     d->operand = value;
     // make sure the group/thousands separator is removed ...
-    d->operand.replace(QRegularExpression(QStringLiteral("\\%1").arg(QLocale().groupSeparator())), QChar());
+    d->operand.remove(d->m_groupSeparator);
     // ... and the decimal is represented by a dot
-    d->operand.replace(QRegularExpression(QStringLiteral("\\%1").arg(d->m_comma)), QChar('.'));
+    d->operand.replace(d->m_comma, QLatin1String("."));
     if (d->operand.contains('(')) {
         negative = true;
         d->operand.remove('(');
