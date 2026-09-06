@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-03 00:43+0000\n"
+"POT-Creation-Date: 2026-09-06 00:45+0000\n"
 "PO-Revision-Date: 2026-09-03 20:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -16395,8 +16395,8 @@ msgstr "Dönüştürmede kullanılan ve şu anda uygulanmakta olan döviz kuru"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1030
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1108
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2238
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2256
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2246
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2264
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Şuradan havale et: %1"
@@ -16404,8 +16404,8 @@ msgstr "Şuradan havale et: %1"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1030
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1107
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2238
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2255
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2246
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2263
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Şuraya havale et %1"
@@ -16504,7 +16504,7 @@ msgid "[No Tag]"
 msgstr "[Künye Yok]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:831
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2179
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2187
 #, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
@@ -16512,21 +16512,21 @@ msgstr "Hisseler sat"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:851
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1112
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1365
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2203
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2370
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1373
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2211
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2378
 #, kde-format
 msgid "No Institution"
 msgstr "Kurum Yok"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:853
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2212
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2220
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Boş Alacaklı]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:898
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2243
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2251
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Bölünmüş İşlem]"
@@ -16539,18 +16539,18 @@ msgid "Split"
 msgstr "Ayır"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1162
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2074
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2082
 #, kde-format
 msgid "Month of %1"
 msgstr "%1 ayı"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1163
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2075
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2083
 #, kde-format
 msgid "Week of %1"
 msgstr "%1 haftası"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1988
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1996
 #, kde-format
 msgctxt "No institution"
 msgid "None"
