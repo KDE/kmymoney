@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-06 00:45+0000\n"
+"POT-Creation-Date: 2026-09-07 00:45+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -22186,32 +22186,32 @@ msgstr "&OK"
 msgid "&Cancel"
 msgstr "&Peru"
 
-#: kmymoney/views/splitview.cpp:117
+#: kmymoney/views/splitview.cpp:118
 #, fuzzy, kde-format
 #| msgid "Split Options"
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "Jaotteluvalinnat"
 
-#: kmymoney/views/splitview.cpp:119
+#: kmymoney/views/splitview.cpp:120
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Uusi…"
 
-#: kmymoney/views/splitview.cpp:134
+#: kmymoney/views/splitview.cpp:135
 #, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Muokkaa…"
 
-#: kmymoney/views/splitview.cpp:139
+#: kmymoney/views/splitview.cpp:140
 #, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Monista"
 
-#: kmymoney/views/splitview.cpp:181
+#: kmymoney/views/splitview.cpp:182
 #, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"

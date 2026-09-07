@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-06 00:45+0000\n"
+"POT-Creation-Date: 2026-09-07 00:45+0000\n"
 "PO-Revision-Date: 2026-05-31 19:06-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -21030,31 +21030,31 @@ msgstr "جەزملە(&O)"
 msgid "&Cancel"
 msgstr "ۋاز كەچ(&C)"
 
-#: kmymoney/views/splitview.cpp:117
+#: kmymoney/views/splitview.cpp:118
 #, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr ""
 
-#: kmymoney/views/splitview.cpp:119
+#: kmymoney/views/splitview.cpp:120
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "يېڭى…"
 
-#: kmymoney/views/splitview.cpp:134
+#: kmymoney/views/splitview.cpp:135
 #, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "تەھرىر…"
 
-#: kmymoney/views/splitview.cpp:139
+#: kmymoney/views/splitview.cpp:140
 #, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "كۆپەيت"
 
-#: kmymoney/views/splitview.cpp:181
+#: kmymoney/views/splitview.cpp:182
 #, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"

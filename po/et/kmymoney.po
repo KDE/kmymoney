@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-06 00:45+0000\n"
+"POT-Creation-Date: 2026-09-07 00:45+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -22564,14 +22564,14 @@ msgstr "&OK"
 msgid "&Cancel"
 msgstr "&Loobu"
 
-#: kmymoney/views/splitview.cpp:117
+#: kmymoney/views/splitview.cpp:118
 #, fuzzy, kde-format
 #| msgid "Split Options"
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "Tükeldamise valikud"
 
-#: kmymoney/views/splitview.cpp:119
+#: kmymoney/views/splitview.cpp:120
 #, fuzzy, kde-format
 #| msgctxt "create new institution"
 #| msgid "New..."
@@ -22579,14 +22579,14 @@ msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Uus..."
 
-#: kmymoney/views/splitview.cpp:134
+#: kmymoney/views/splitview.cpp:135
 #, fuzzy, kde-format
 #| msgid "Edit..."
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Muuda..."
 
-#: kmymoney/views/splitview.cpp:139
+#: kmymoney/views/splitview.cpp:140
 #, fuzzy, kde-format
 #| msgctxt "Duplicate transaction"
 #| msgid "Duplicate"
@@ -22594,7 +22594,7 @@ msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Klooni"
 
-#: kmymoney/views/splitview.cpp:181
+#: kmymoney/views/splitview.cpp:182
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@item:inmenu Delete selected split(s)"

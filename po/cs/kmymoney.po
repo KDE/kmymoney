@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-06 00:45+0000\n"
+"POT-Creation-Date: 2026-09-07 00:45+0000\n"
 "PO-Revision-Date: 2024-09-17 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -21487,31 +21487,31 @@ msgstr "&OK"
 msgid "&Cancel"
 msgstr "Z&rušit"
 
-#: kmymoney/views/splitview.cpp:117
+#: kmymoney/views/splitview.cpp:118
 #, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr ""
 
-#: kmymoney/views/splitview.cpp:119
+#: kmymoney/views/splitview.cpp:120
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Nový..."
 
-#: kmymoney/views/splitview.cpp:134
+#: kmymoney/views/splitview.cpp:135
 #, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Upravit..."
 
-#: kmymoney/views/splitview.cpp:139
+#: kmymoney/views/splitview.cpp:140
 #, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Duplikovat"
 
-#: kmymoney/views/splitview.cpp:181
+#: kmymoney/views/splitview.cpp:182
 #, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"

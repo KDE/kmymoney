@@ -279,7 +279,7 @@
 >Si el formulari d'operació es mostra o no a la vista dels llibres majors depèn de les opcions de la configuració i del tipus de compte que es mostra. Si està present, inclou camps de tots els detalls d'una única operació. Es descriu amb més detall en els apartats següents. </para>
 
 <para
->Quan es mostra, el formulari d'operació és una visualització de només lectura de l'operació seleccionada actualment. Sempre està a la part inferior de la vista d'operacions, sota l'àrea del filtre, si es mostra. Se separa de tot el que hi ha per sobre d'ell per una barra divisòria, que es pot arrossegar cap amunt o cap avall per a canviar l'alçada del formulari. Si s'arrossega a la part inferior, ocultarà el formulari, encara que l'alçada del formulari establert d'aquesta manera no és persistent, i tornarà al seu valor predeterminat quan es reiniciï el &kmymoney;. El divisor, igual que el formulari d'operació, només està disponible quan s'activa la configuració apropiada per a mostrar el formulari. </para>
+>Quan es mostra, el formulari d'operació és una visualització de només lectura de l'operació seleccionada actualment. Sempre està a la part inferior de la vista d'operacions, sota l'àrea del filtre, si es mostra. Se separa de tot el que hi ha per sobre d'ell per una barra divisòria, que es pot arrossegar cap amunt o cap avall per a canviar l'altura del formulari. Si s'arrossega a la part inferior, ocultarà el formulari, encara que l'altura del formulari establert d'aquesta manera no és persistent, i tornarà al seu valor predeterminat quan es reiniciï el &kmymoney;. El divisor, igual que el formulari d'operació, només està disponible quan s'activa la configuració apropiada per a mostrar el formulari. </para>
 </sect2>
 </sect1>
 
