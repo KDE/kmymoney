@@ -4644,7 +4644,7 @@ msgstr "&Laisser %1 non attribué."
 #: kmymoney/dialogs/splitadjustdialog.ui:14
 #, kde-format
 msgid "Dialog"
-msgstr "Boîte de dialogue"
+msgstr "Boite de dialogue"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
 #, kde-format
@@ -16123,7 +16123,7 @@ msgstr "Origine"
 #, kde-format
 msgctxt "@item name of view"
 msgid "Outbox"
-msgstr "Boîte d'envoi"
+msgstr "Boite d'envoi"
 
 #. i18n: ectx: Menu (onlinejob_context_menu)
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.rc:4
