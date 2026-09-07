@@ -1411,10 +1411,8 @@ void KBankingExt::_slToStatement(MyMoneyStatement& ks, const MyMoneyAccount& acc
         security = file->security(sacc.currencyId());
         if ((!ksy.m_strSymbol.isEmpty() && QString::compare(ksy.m_strSymbol, security.tradingSymbol(), Qt::CaseInsensitive) == 0)
             || (!ksy.m_strName.isEmpty() && QString::compare(ksy.m_strName, security.name(), Qt::CaseInsensitive) == 0)) {
-            if (sacc.balance().toDouble() != AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy))) {
-                qDebug("Creating dummy correction booking for '%s' with %f shares",
-                       qPrintable(security.tradingSymbol()),
-                       AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) - sacc.balance().toDouble());
+            kt.m_shares = MyMoneyMoney(AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) - sacc.balance().toDouble());
+            if (!kt.m_shares.isZero()) {
                 kt.m_fees = MyMoneyMoney();
                 kt.m_strMemo = "Dummy booking added by KMyMoney to reflect online balance - please adjust";
                 kt.m_datePosted = QDate::currentDate();
@@ -1422,16 +1420,15 @@ void KBankingExt::_slToStatement(MyMoneyStatement& ks, const MyMoneyAccount& acc
                 kt.m_strSecurity = security.name();
                 kt.m_strBrokerageAccount = acc.name();
 
-                kt.m_shares = MyMoneyMoney(AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) - sacc.balance().toDouble());
-                if (AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) > sacc.balance().toDouble())
+                qDebug() << "Creating dummy transaction for correction with" << kt.m_shares.formatMoney(security.tradingSymbol(), -1) << "shares";
+                if (kt.m_shares.isPositive())
                     kt.m_eAction = eMyMoney::Transaction::Action::Shrsin;
                 else
                     kt.m_eAction = eMyMoney::Transaction::Action::Shrsout;
 
                 // store transaction
                 ks.m_listTransactions += kt;
-            } else
-                qDebug("Online balance matches balance in KMyMoney account!");
+            }
         }
     }
 
