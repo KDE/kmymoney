@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 00:45+0000\n"
+"POT-Creation-Date: 2026-09-08 00:46+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -12658,12 +12658,12 @@ msgstr ""
 "<qt>작업을 대기열에 추가할 수 없습니다.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1541
+#: kmymoney/plugins/kbanking/kbanking.cpp:1538
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "거래 내역을 가져오는 중 오류가 발생했습니다. 계속 진행하시겠습니까?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1542
+#: kmymoney/plugins/kbanking/kbanking.cpp:1539
 #: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"

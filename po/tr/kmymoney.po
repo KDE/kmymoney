@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 00:45+0000\n"
+"POT-Creation-Date: 2026-09-08 00:46+0000\n"
 "PO-Revision-Date: 2026-09-03 20:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -12632,12 +12632,12 @@ msgstr ""
 "<qt>İş kuyruğa eklenemedi.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1541
+#: kmymoney/plugins/kbanking/kbanking.cpp:1538
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Hesap özeti içe aktarılırken hata. Sürdürmek istiyor musunuz?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1542
+#: kmymoney/plugins/kbanking/kbanking.cpp:1539
 #: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"

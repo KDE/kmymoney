@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 00:45+0000\n"
+"POT-Creation-Date: 2026-09-08 00:46+0000\n"
 "PO-Revision-Date: 2024-09-17 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -12311,12 +12311,12 @@ msgid ""
 "</qt>"
 msgstr ""
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1541
+#: kmymoney/plugins/kbanking/kbanking.cpp:1538
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Chyba při importu výpisu. Přejete si pokračovat?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1542
+#: kmymoney/plugins/kbanking/kbanking.cpp:1539
 #: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"

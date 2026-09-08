@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 00:45+0000\n"
+"POT-Creation-Date: 2026-09-08 00:46+0000\n"
 "PO-Revision-Date: 2026-09-03 16:54+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -12746,12 +12746,12 @@ msgstr ""
 "<qt>Impossibile accodare l'operazione.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1541
+#: kmymoney/plugins/kbanking/kbanking.cpp:1538
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Errore di importazione dell'estratto conto. Vuoi continuare?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1542
+#: kmymoney/plugins/kbanking/kbanking.cpp:1539
 #: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"

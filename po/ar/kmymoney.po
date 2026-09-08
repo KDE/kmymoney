@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 00:45+0000\n"
+"POT-Creation-Date: 2026-09-08 00:46+0000\n"
 "PO-Revision-Date: 2026-08-29 10:57+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -12602,12 +12602,12 @@ msgstr ""
 "<qt>لم يمكن إدراج الوظيفة في طابور.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1541
+#: kmymoney/plugins/kbanking/kbanking.cpp:1538
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "خطأ أثناء استيراد البيان. أتريد المتابعة؟"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1542
+#: kmymoney/plugins/kbanking/kbanking.cpp:1539
 #: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"

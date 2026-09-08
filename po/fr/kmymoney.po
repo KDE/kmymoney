@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 00:45+0000\n"
-"PO-Revision-Date: 2026-09-03 18:03+0200\n"
+"POT-Creation-Date: 2026-09-08 00:46+0000\n"
+"PO-Revision-Date: 2026-08-22 10:06+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -4729,7 +4729,7 @@ msgstr "&Laisser %1 non attribué."
 #: kmymoney/dialogs/splitadjustdialog.ui:14
 #, kde-format
 msgid "Dialog"
-msgstr "Boîte de dialogue"
+msgstr "Boite de dialogue"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
 #, kde-format
@@ -12852,12 +12852,12 @@ msgstr ""
 "<qt>Impossible de mettre la tâche dans la file d'attente.\n"
 "</qt>"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1541
+#: kmymoney/plugins/kbanking/kbanking.cpp:1538
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
 msgstr "Erreur lors de l'importation du relevé. Voulez-vous poursuivre ?"
 
-#: kmymoney/plugins/kbanking/kbanking.cpp:1542
+#: kmymoney/plugins/kbanking/kbanking.cpp:1539
 #: kmymoney/plugins/views/reports/kreportsview.cpp:568
 #, kde-format
 msgid "Critical Error"
@@ -16274,7 +16274,7 @@ msgstr "Origine"
 #, kde-format
 msgctxt "@item name of view"
 msgid "Outbox"
-msgstr "Boîte d'envoi"
+msgstr "Boite d'envoi"
 
 #. i18n: ectx: Menu (onlinejob_context_menu)
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.rc:4
@@ -18126,13 +18126,17 @@ msgstr "Possédés et vendus"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Performance Columns"
 msgid "Performance Columns"
 msgstr "Colonnes de performance"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>Choose which columns should be shown in the investment performance "
+#| "report.</p>"
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
