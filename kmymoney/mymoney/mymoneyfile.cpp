@@ -525,6 +525,7 @@ public:
         const auto model = file->reportsModel();
 
         auto count = 0;
+        QStringList fixedReportIds;
         const auto rows = model->rowCount();
         for (int row = 0; row < rows; ++row) {
             const auto idx = model->index(row, 0);
@@ -547,10 +548,11 @@ public:
             if (newRowType != rowType) {
                 report.setRowType(newRowType);
                 file->modifyReport(report);
+                fixedReportIds.append(report.id());
                 ++count;
             }
         }
-        qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
+        qDebug() << count << "reports(s)" << fixedReportIds.join(",") << "fixed in" << __FUNCTION__;
     }
 
     void fixFile_10()
