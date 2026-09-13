@@ -1520,7 +1520,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             //Schedule
             {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New schedule..."),                            Icon::NewSchedule},
             {Action::EditSchedule,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
-            {Action::EditScheduleForce,             QStringLiteral("schedule_edit_force"),            i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
+            {Action::EditScheduleForce,             QStringLiteral("schedule_edit_force"),            i18n("Edit scheduled transaction (detailed)"),      Icon::DocumentEdit},
             {Action::DeleteSchedule,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditRemove},
             {Action::DuplicateSchedule,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
             {Action::EnterSchedule,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
