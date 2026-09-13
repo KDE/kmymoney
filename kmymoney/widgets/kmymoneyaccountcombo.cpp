@@ -344,11 +344,10 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
 void KMyMoneyAccountCombo::setSelected(const QString& id, bool ignoreCache)
 {
     if (id.isEmpty()) {
-        d->m_lastSelectedAccount.clear();
         d->m_popupView->selectionModel()->clearSelection();
         d->m_popupView->setCurrentIndex(QModelIndex());
         setRootModelIndex(QModelIndex());
-        setCurrentIndex(-1);
+        clearSelection();
         Q_EMIT accountSelected(id);
         return;
     }
@@ -584,6 +583,7 @@ QTreeView* KMyMoneyAccountCombo::popup() const
 void KMyMoneyAccountCombo::clearSelection()
 {
     d->m_lastSelectedAccount.clear();
+    d->m_fullAccountName.clear();
     setCurrentIndex(-1);
     clearEditText();
 }
