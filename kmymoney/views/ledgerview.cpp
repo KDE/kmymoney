@@ -673,6 +673,15 @@ LedgerView::~LedgerView()
 {
     if (d->editor) {
         disconnect(d->editor, &QObject::destroyed, this, &LedgerView::transactionEditorDestroyed);
+        // If the editor is still around at this point, Qt never destroyed it
+        // through the normal closeEditor() -> destroyEditor() path (its
+        // registration in Qt's internal indexEditorHash can be lost due to the
+        // setSpan() manipulation done in edit()). Destroy it explicitly so that
+        // the editor widget and its child tree do not leak. We delete
+        // synchronously (rather than deleteLater()) because there may be no
+        // event loop left to process a deferred deletion during shutdown.
+        delete d->editor;
+        d->editor = nullptr;
     }
     delete d;
 }

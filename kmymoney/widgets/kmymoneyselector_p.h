@@ -40,6 +40,11 @@ public:
     {
     }
 
+    // virtual so that deleting a derived private (e.g.
+    // KMyMoneyAccountSelectorPrivate) through a KMyMoneySelectorPrivate*
+    // in ~KMyMoneySelector() is well-defined and runs the derived destructor.
+    virtual ~KMyMoneySelectorPrivate() = default;
+
     void init()
     {
         Q_Q(KMyMoneySelector);

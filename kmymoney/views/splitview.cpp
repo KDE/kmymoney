@@ -14,6 +14,7 @@
 #include <QHeaderView>
 #include <QMenu>
 #include <QPainter>
+#include <QPointer>
 #include <QResizeEvent>
 #include <QScopedPointer>
 #include <QScrollBar>
@@ -55,11 +56,24 @@ public:
         , rightMouseButtonPress(false)
         , readOnly(false)
         , columnSelector(nullptr)
+        , editor(nullptr)
     {
     }
 
     ~Private()
     {
+        // In case an editor is still around (e.g. the view is torn down while
+        // editing, or Qt lost track of the editor in its internal
+        // indexEditorHash due to the setSpan() manipulation performed in
+        // SplitView::edit()), make sure it is destroyed. Otherwise the editor
+        // widget and its whole child tree would leak. We delete synchronously
+        // (rather than deleteLater()) because there may be no event loop left
+        // to process a deferred deletion during shutdown. The QPointer guards
+        // against the case where Qt already destroyed the editor.
+        if (editor) {
+            delete editor;
+            editor = nullptr;
+        }
         delete columnSelector;
     }
 
@@ -250,6 +264,7 @@ public:
     bool rightMouseButtonPress;
     bool readOnly;
     ColumnSelector* columnSelector;
+    QPointer<QWidget> editor;
 };
 
 SplitView::SplitView(QWidget* parent)
@@ -365,6 +380,14 @@ bool SplitView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger tr
             QModelIndex editIndex = model()->index(index.row(), 0);
             rc = QTableView::edit(editIndex, trigger, event);
 
+            // Keep track of the editor that is actually shown. Due to the
+            // setSpan() manipulation above, Qt may lose this editor from its
+            // internal indexEditorHash and then never destroy it via the
+            // normal closeEditor() -> destroyEditor() path. By holding a
+            // (guarded) pointer we can make sure it is destroyed on teardown.
+            // Using QPointer avoids a double free in case Qt does destroy it.
+            d->editor = indexWidget(editIndex);
+
             // make sure that the row gets resized according to the requirements of the editor
             // and is completely visible
             resizeRowToContents(index.row());
@@ -382,6 +405,18 @@ void SplitView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint 
 {
     QTableView::closeEditor(editor, hint);
     clearSpans();
+
+    // QTableView::closeEditor() only destroys the editor if it is still
+    // registered in Qt's internal indexEditorHash for its index. The setSpan()
+    // manipulation done in edit() can cause that registration to be lost, in
+    // which case the editor would leak. If the editor we are closing is the one
+    // we tracked, make sure it is scheduled for destruction. deleteLater() is
+    // safe to call even if Qt already destroyed the widget (the QPointer is
+    // then null) or already posted a deferred-delete event for it.
+    if (editor && (editor == d->editor)) {
+        editor->deleteLater();
+        d->editor = nullptr;
+    }
 
     // we need to resize the row that contained the editor.
     resizeRowsToContents();

@@ -36,6 +36,8 @@ public:
     {
     }
 
+    virtual ~LedgerSortProxyModelPrivate() = default;
+
     inline bool isSpecialDatesModel(const QModelIndex& idx) const
     {
         return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::SpecialDatesEntryRole;

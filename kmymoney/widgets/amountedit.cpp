@@ -103,6 +103,13 @@ public:
         m_calculatorFrame->hide();
     }
 
+    ~AmountEditPrivate()
+    {
+        // m_calculatorFrame is created without a parent, so it (and the
+        // KMyMoneyCalculator parented to it) must be deleted explicitly.
+        delete m_calculatorFrame;
+    }
+
     void init()
     {
         Q_Q(AmountEdit);

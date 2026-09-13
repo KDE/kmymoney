@@ -107,6 +107,7 @@ struct NewSplitEditor::Private {
     ~Private()
     {
         delete ui;
+        delete tabOrderUi;
     }
 
     bool checkForValidSplit(bool doUserInteraction = true);

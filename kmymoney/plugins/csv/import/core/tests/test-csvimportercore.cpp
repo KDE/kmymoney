@@ -109,6 +109,7 @@ void CSVImporterCoreTest::cleanup()
     delete investmentProfile;
     delete pricesProfile;
     delete amountProfile;
+    delete debitCreditProfile;
     delete csvImporter;
 }
 

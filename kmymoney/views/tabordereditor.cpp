@@ -112,6 +112,16 @@ TabOrderDialog::TabOrderDialog(QWidget* parent)
 TabOrderDialog::~TabOrderDialog()
 {
     Q_D(TabOrderDialog);
+    // Destroy the editor overlay first. It has installed itself as an event
+    // filter on d->ui.m_targetWidget and its eventFilter()/paintEvent() access
+    // the dialog's private data via d->m_dialog->d_func(). If we deleted the
+    // private (delete d) first, the subsequent QWidget child-destruction
+    // cascade (which reparents/destroys m_targetWidget and delivers events
+    // through the still-installed filter) would dereference the freed private
+    // and cause a heap-use-after-free. Deleting the editor here also
+    // uninstalls its event filter.
+    delete d->m_editor;
+    d->m_editor = nullptr;
     delete d;
 }
 
@@ -187,7 +197,14 @@ void TabOrderDialog::createAndExec(QWidget* parent)
         if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
             tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
         }
-        tabOrderDialog->deleteLater();
+        // The dialog was executed modally, so it is safe to delete it
+        // synchronously once exec() returns. Using deleteLater() would defer
+        // destruction until the event loop runs again, which does not happen
+        // during application shutdown; the dialog (together with the target UI
+        // widgets built in setTarget()) would then leak. A synchronous delete
+        // also guarantees the editor overlay teardown in ~TabOrderDialog runs
+        // while an event loop is still available.
+        delete tabOrderDialog;
     }
 }
 

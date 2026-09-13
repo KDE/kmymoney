@@ -50,6 +50,8 @@ public:
       */
     KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent, const QString& title);
 
+    ~KNewAccountDlg() override;
+
     /**
       * This method returns the edited account object.
       */

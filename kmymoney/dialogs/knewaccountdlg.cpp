@@ -787,6 +787,11 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     d->updateIcon();
 }
 
+KNewAccountDlg::~KNewAccountDlg()
+{
+    delete d_ptr;
+}
+
 MyMoneyMoney KNewAccountDlg::openingBalance() const
 {
     Q_D(const KNewAccountDlg);

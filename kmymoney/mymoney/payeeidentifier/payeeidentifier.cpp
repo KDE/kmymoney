@@ -107,10 +107,12 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier& other)
         return *this;
 
     m_id = other.m_id;
-    if (other.m_payeeIdentifier == nullptr)
-        m_payeeIdentifier = nullptr;
-    else
-        m_payeeIdentifier = other.m_payeeIdentifier->clone();
+    // clone the other's data first, so that self-consistent state is kept
+    // even if clone() throws, then release the data we currently own to
+    // avoid leaking it (m_payeeIdentifier is owned and deleted in the dtor).
+    payeeIdentifierData* const newData = (other.m_payeeIdentifier == nullptr) ? nullptr : other.m_payeeIdentifier->clone();
+    delete m_payeeIdentifier;
+    m_payeeIdentifier = newData;
 
     return *this;
 }

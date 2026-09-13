@@ -56,6 +56,11 @@ TabOrder::TabOrder(const QString& name, const QStringList& defaultTabOrder)
     d->m_defaultTabOrder = defaultTabOrder;
 }
 
+TabOrder::~TabOrder()
+{
+    delete d;
+}
+
 void TabOrder::setWidget(QWidget* topLevelWidget)
 {
     if (topLevelWidget != nullptr) {

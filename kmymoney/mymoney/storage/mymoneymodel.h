@@ -218,6 +218,7 @@ public:
 
     virtual ~MyMoneyModel()
     {
+        delete m_idToItemMapper;
         delete m_rootItem;
     }
 

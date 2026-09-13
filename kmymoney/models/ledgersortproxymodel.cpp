@@ -35,6 +35,7 @@ LedgerSortProxyModel::LedgerSortProxyModel(LedgerSortProxyModelPrivate* dd, QObj
 
 LedgerSortProxyModel::~LedgerSortProxyModel()
 {
+    delete d_ptr;
 }
 
 void LedgerSortProxyModel::setSourceModel(QAbstractItemModel* model)

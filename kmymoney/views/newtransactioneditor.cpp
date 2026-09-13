@@ -119,6 +119,7 @@ public:
     ~Private()
     {
         delete ui;
+        delete tabOrderUi;
     }
 
     void updateWidgetState();
@@ -865,7 +866,13 @@ int NewTransactionEditor::Private::editSplits()
     }
 
     if (splitDialog) {
-        splitDialog->deleteLater();
+        // The dialog was executed modally (exec() above), so control only
+        // returns here once it has been closed. It is therefore safe to delete
+        // it synchronously. We avoid deleteLater() on purpose: it would defer
+        // destruction until the event loop runs again, which does not happen
+        // during application shutdown, leaking the SplitDialog together with
+        // its SplitView and the NewSplitEditor hosted inside it.
+        delete splitDialog;
     }
 
     return rc;

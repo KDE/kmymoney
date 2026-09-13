@@ -54,6 +54,11 @@ DelegateProxy::DelegateProxy(QObject* parent)
 {
 }
 
+DelegateProxy::~DelegateProxy()
+{
+    delete d_ptr;
+}
+
 void DelegateProxy::addDelegate(eMyMoney::Delegates::Types role, KMMStyledItemDelegate* delegate)
 {
     Q_D(DelegateProxy);
@@ -142,6 +147,12 @@ void DelegateProxy::destroyEditor(QWidget* editor, const QModelIndex& index) con
     const auto delegate = d->findDelegate(index);
     if (delegate) {
         delegate->destroyEditor(editor, index);
+    } else {
+        // We could not resolve a concrete delegate for this index (e.g. the
+        // index became invalid or its row changed between createEditor() and
+        // teardown). Fall back to the default implementation so that the editor
+        // is still destroyed instead of being leaked until the view is torn down.
+        QStyledItemDelegate::destroyEditor(editor, index);
     }
 }
 

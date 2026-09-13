@@ -549,7 +549,12 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
     }
 
     if (splitDialog) {
-        splitDialog->deleteLater();
+        // The dialog was executed modally (exec() above), so it is safe to
+        // delete synchronously. Using deleteLater() would defer destruction
+        // until the event loop runs again, which does not happen during
+        // application shutdown, leaking the SplitDialog together with its
+        // SplitView and the NewSplitEditor hosted inside it.
+        delete splitDialog;
     }
 }
 

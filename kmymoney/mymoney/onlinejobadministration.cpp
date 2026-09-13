@@ -165,6 +165,10 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(QXmlStreamReader* rea
 {
     onlineTask* task = rootOnlineTask(iid);
     if (task) {
+        // task is a cache-owned root/template used only to access the
+        // virtual createFromXml() method, which returns a pointer to the
+        // actual newly created object. Do not delete task: it is owned by
+        // the m_onlineTasks cache.
         return task->createFromXml(reader);
     }
     qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
@@ -180,10 +184,17 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(QXmlStreamReader* rea
  * @internal Using KPluginFactory to create the plugins seemed to be good idea. The drawback is that it does not support to create non QObjects directly.
  * This made this function way longer than needed and adds many checks.
  *
- * @fixme Delete created tasks
+ * The created root task is stored in and owned by the m_onlineTasks cache;
+ * repeated calls for the same task name return the cached instance.
  */
 onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
 {
+    // Return the cached root task if we already created one. The cache
+    // (m_onlineTasks) owns these instances and frees them in clearCaches().
+    const auto cached = m_onlineTasks.constFind(name);
+    if (cached != m_onlineTasks.cend())
+        return cached.value();
+
     auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins", [&name](const KPluginMetaData& data) {
         QJsonValue array = kmyMoneyObj(data).value("OnlineTask").toObject().value("Iids");
         if (array.isArray())
@@ -204,11 +215,12 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
     }
     auto taskFactory = pluginResult.plugin;
 
-    // Finally create task
+    // Finally create the task and hand ownership to our cache. The returned
+    // pointer is the cached instance and must be treated as non-owning by
+    // callers (it is used as a root/template to clone() or createFromXml()).
     onlineTask* task = taskFactory->createOnlineTask(name);
     if (task)
-        // Add to our cache as this is still used in several places
-        onlineJobAdministration::instance()->registerOnlineTask(taskFactory->createOnlineTask(name));
+        onlineJobAdministration::instance()->registerOnlineTask(task);
 
     return task;
 }

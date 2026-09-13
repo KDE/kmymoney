@@ -27,6 +27,7 @@ class KMM_BASE_WIDGETS_EXPORT TabOrder
 {
 public:
     explicit TabOrder(const QString& name, const QStringList& defaultTabOrder);
+    ~TabOrder();
 
     /**
      * Setup the widget for which this object shall be used

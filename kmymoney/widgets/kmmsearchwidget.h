@@ -29,6 +29,7 @@ class KMM_BASE_WIDGETS_EXPORT KMMSearchWidget : public QWidget
 
 public:
     explicit KMMSearchWidget(QWidget* parent);
+    ~KMMSearchWidget() override;
 
     QLineEdit* lineEdit() const;
     QToolButton* closeButton() const;

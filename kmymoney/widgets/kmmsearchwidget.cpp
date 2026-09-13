@@ -36,7 +36,10 @@ public:
         ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
         ui->m_pinButton->setIcon(Icons::get(Icon::FilterPin));
     }
-    virtual ~KMMSearchWidgetPrivate() = default;
+    virtual ~KMMSearchWidgetPrivate()
+    {
+        delete ui;
+    }
 
     KMMSearchWidget* q_ptr;
     Ui_KMMSearchWidget* ui;
@@ -60,6 +63,11 @@ KMMSearchWidget::KMMSearchWidget(QWidget* parent)
             Q_EMIT widgetPinned(checked);
         }
     });
+}
+
+KMMSearchWidget::~KMMSearchWidget()
+{
+    delete d_ptr;
 }
 
 void KMMSearchWidget::setWidgetPinned(bool pinned)

@@ -43,6 +43,8 @@ public:
      */
     explicit DelegateProxy(QObject* parent = nullptr);
 
+    ~DelegateProxy() override;
+
     /**
      * This method adds @a delegate as the delegate to be used when the item
      * to be shown/edited is located in a model that returns @a role when asked
