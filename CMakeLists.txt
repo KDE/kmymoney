@@ -482,13 +482,39 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Cla
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed")
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--as-needed")
   # TODO: remove multiple definitions of payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase
-  set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed -Wl,--allow-multiple-definition")
+  set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -Wl,--allow-multiple-definition")
+
+  # When sanitizers are enabled (e.g. -DECM_ENABLE_SANITIZERS='address' as used
+  # by the KDE CI), ECMEnableSanitizers only adds the runtime to the link line
+  # as a plain library via link_libraries(asan). Combined with -Wl,--as-needed
+  # the linker drops the ASan runtime from the executable's direct dependencies,
+  # because the executable's own objects don't reference any ASan symbol - the
+  # instrumentation lives in the shared libraries it pulls in. At runtime the
+  # ASan runtime is then loaded transitively (not first), which makes ASan abort
+  # with "ASan runtime does not come first in initial library list".
+  # See https://github.com/google/sanitizers/issues/934
+  # Therefore do not add --as-needed to executables when sanitizers are on, and
+  # pass the sanitizer flag to the linker so the runtime is a first-class,
+  # first-loaded dependency of the executable.
+  if(ECM_ENABLE_SANITIZERS)
+    foreach(_sanitizer ${ECM_ENABLE_SANITIZERS})
+      string(TOLOWER "${_sanitizer}" _sanitizer)
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=${_sanitizer}")
+    endforeach()
+  else()
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed")
+  endif()
+
   # CI builds are crashing on FreeBSD with --no-undefined. Probably because -DECM_ENABLE_SANITIZERS='address'
   # more can be read on the following site https://bugs.freedesktop.org/show_bug.cgi?id=100120
   if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--no-undefined")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
-    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--no-undefined")
+    # --no-undefined would fail to link executables against the ASan runtime that
+    # is only pulled in transitively, so skip it as well when sanitizers are on.
+    if(NOT ECM_ENABLE_SANITIZERS)
+      set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    -Wl,--no-undefined")
+    endif()
   endif()
 
   # TODO: remove multiple definitions of payeeIdentifierLoader::hasItemEditDelegate
