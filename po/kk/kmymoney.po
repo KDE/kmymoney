@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-11 00:46+0000\n"
+"POT-Creation-Date: 2026-09-14 00:43+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -2255,8 +2255,8 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:701
-#: kmymoney/dialogs/knewaccountdlg.cpp:997
-#: kmymoney/dialogs/knewaccountdlg.cpp:1012
+#: kmymoney/dialogs/knewaccountdlg.cpp:1002
+#: kmymoney/dialogs/knewaccountdlg.cpp:1017
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:516
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:48
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:83
@@ -2264,7 +2264,7 @@ msgstr ""
 msgid "(No Institution)"
 msgstr "(Мекемесі жоқ)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:823
+#: kmymoney/dialogs/knewaccountdlg.cpp:828
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2273,12 +2273,12 @@ msgstr ""
 "Атауы келтірілмеген.\n"
 "Осы өрісті толтырыңыз."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:830
+#: kmymoney/dialogs/knewaccountdlg.cpp:835
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Қай есепшотың тармагы, таңдаңыз."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:889
+#: kmymoney/dialogs/knewaccountdlg.cpp:894
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2286,7 +2286,7 @@ msgid ""
 msgstr ""
 "'<b>%1'</b> деп аталған санат бар екен. Санаттың атауын қайталауға болмайды."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:918
+#: kmymoney/dialogs/knewaccountdlg.cpp:923
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2303,14 +2303,14 @@ msgstr ""
 "KMyMoney баптау диалогында қолданбаған санаттардағылар көрсетілмесін "
 "деліген. Сондықтан жаңа құрылған санат пайдаланбағанша көрсетілмейді."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:920
+#: kmymoney/dialogs/knewaccountdlg.cpp:925
 #, fuzzy, kde-format
 #| msgid "Payment accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Есеп айыру шоты"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:928
+#: kmymoney/dialogs/knewaccountdlg.cpp:933
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2327,46 +2327,46 @@ msgstr ""
 "KMyMoney баптау диалогында қолданбаған санаттардағылар көрсетілмесін "
 "деліген. Сондықтан жаңа құрылған санат пайдаланбағанша көрсетілмейді."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:930
+#: kmymoney/dialogs/knewaccountdlg.cpp:935
 #, fuzzy, kde-format
 #| msgid "Hidden categories"
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Көрсетілмейтін санаттар"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1037
+#: kmymoney/dialogs/knewaccountdlg.cpp:1042
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:105
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Мекемесі қосылмады"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1072
+#: kmymoney/dialogs/knewaccountdlg.cpp:1077
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1077
+#: kmymoney/dialogs/knewaccountdlg.cpp:1082
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:106
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1084
+#: kmymoney/dialogs/knewaccountdlg.cpp:1089
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1088
+#: kmymoney/dialogs/knewaccountdlg.cpp:1093
 #, fuzzy, kde-format
 #| msgid "Please select a default category for payee '%1'"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "'%1' деген алушының әдетті санатын таңдау"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1153
+#: kmymoney/dialogs/knewaccountdlg.cpp:1158
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2377,13 +2377,13 @@ msgstr ""
 "бойынша әдеттегісі - <b>%2</b> , бірақ оны келесі диалогында өзгерту болады</"
 "i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1157
-#: kmymoney/dialogs/knewaccountdlg.cpp:1182
+#: kmymoney/dialogs/knewaccountdlg.cpp:1162
+#: kmymoney/dialogs/knewaccountdlg.cpp:1187
 #, kde-format
 msgid "Create category"
 msgstr "Санатты құру"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1178
+#: kmymoney/dialogs/knewaccountdlg.cpp:1183
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
@@ -2398,14 +2398,14 @@ msgstr ""
 "бойынша әдеттегісі - <b>%2</b> , бірақ оны келесі диалогында өзгерту болады</"
 "i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1200
+#: kmymoney/dialogs/knewaccountdlg.cpp:1205
 #, fuzzy, kde-format
 #| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Жаңа санатты құру"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1205
+#: kmymoney/dialogs/knewaccountdlg.cpp:1210
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgctxt "@title:window"
@@ -5482,9 +5482,15 @@ msgstr "Құнды қағазды өшіру"
 msgid "New schedule..."
 msgstr "&Жаңа жоспар..."
 
-#: kmymoney/kmymoney.cpp:1522 kmymoney/kmymoney.cpp:1523
+#: kmymoney/kmymoney.cpp:1522
 #, kde-format
 msgid "Edit scheduled transaction"
+msgstr "Транзакция жоспарын өшіру"
+
+#: kmymoney/kmymoney.cpp:1523
+#, fuzzy, kde-format
+#| msgid "Edit scheduled transaction"
+msgid "Edit scheduled transaction (detailed)"
 msgstr "Транзакция жоспарын өшіру"
 
 #: kmymoney/kmymoney.cpp:1524
@@ -5718,8 +5724,8 @@ msgid "Unable to duplicate transaction(s)"
 msgstr "Транзакциялар қосылмады"
 
 #: kmymoney/kmymoney.cpp:2339 kmymoney/mymoney/splitmodel.cpp:198
-#: kmymoney/mymoney/splitmodel.cpp:203 kmymoney/widgets/amountedit.cpp:287
-#: kmymoney/widgets/amountedit.cpp:344 kmymoney/widgets/creditdebitedit.cpp:128
+#: kmymoney/mymoney/splitmodel.cpp:203 kmymoney/widgets/amountedit.cpp:294
+#: kmymoney/widgets/amountedit.cpp:351 kmymoney/widgets/creditdebitedit.cpp:128
 #: kmymoney/widgets/creditdebitedit.cpp:129
 #: kmymoney/widgets/creditdebitedit.cpp:160
 #: kmymoney/widgets/creditdebitedit.cpp:161
@@ -20242,7 +20248,7 @@ msgstr "Өсім кірісі"
 
 #: kmymoney/views/investtransactioneditor.cpp:311
 #: kmymoney/views/multitransactioneditor.cpp:232
-#: kmymoney/views/newtransactioneditor.cpp:340
+#: kmymoney/views/newtransactioneditor.cpp:341
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * The account '%1' in currency '%2' has no price set for the opening "
@@ -20260,14 +20266,14 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:616
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:614
+#: kmymoney/views/investtransactioneditor.cpp:619
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20275,14 +20281,14 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:627
+#: kmymoney/views/investtransactioneditor.cpp:632
 #, fuzzy, kde-format
 #| msgid "Number of Days to Forecast:"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Қанша күндік болжамы:"
 
-#: kmymoney/views/investtransactioneditor.cpp:629
+#: kmymoney/views/investtransactioneditor.cpp:634
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20290,84 +20296,84 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:633
+#: kmymoney/views/investtransactioneditor.cpp:638
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:639
+#: kmymoney/views/investtransactioneditor.cpp:644
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Транзакцияны бөлу"
 
-#: kmymoney/views/investtransactioneditor.cpp:641
+#: kmymoney/views/investtransactioneditor.cpp:646
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:645
+#: kmymoney/views/investtransactioneditor.cpp:650
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:657
+#: kmymoney/views/investtransactioneditor.cpp:662
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:673
+#: kmymoney/views/investtransactioneditor.cpp:678
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Автотолтыруға транзакцияны таңдау"
 
-#: kmymoney/views/investtransactioneditor.cpp:680
+#: kmymoney/views/investtransactioneditor.cpp:685
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Алушының әдетті санаты"
 
-#: kmymoney/views/investtransactioneditor.cpp:683
+#: kmymoney/views/investtransactioneditor.cpp:688
 #, fuzzy, kde-format
 #| msgid "Enter additional fees"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Қосымша ақысын келтіріңіз"
 
-#: kmymoney/views/investtransactioneditor.cpp:689
+#: kmymoney/views/investtransactioneditor.cpp:694
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Шығыс санаттар"
 
-#: kmymoney/views/investtransactioneditor.cpp:692
+#: kmymoney/views/investtransactioneditor.cpp:697
 #, fuzzy, kde-format
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Өсім мөшерлеме түрі"
 
-#: kmymoney/views/investtransactioneditor.cpp:697
+#: kmymoney/views/investtransactioneditor.cpp:702
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:702
+#: kmymoney/views/investtransactioneditor.cpp:707
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -22254,7 +22260,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "'%1' дегенге өту"
 
-#: kmymoney/views/ledgerview.cpp:819
+#: kmymoney/views/ledgerview.cpp:828
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -22262,35 +22268,35 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:946
+#: kmymoney/views/ledgerview.cpp:955
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Транзакция санатқа жатқызылмаған."
 
-#: kmymoney/views/ledgerview.cpp:953
+#: kmymoney/views/ledgerview.cpp:962
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Транзакцияда <b>%1</b> тағайындалмаған."
 
-#: kmymoney/views/ledgerview.cpp:962
+#: kmymoney/views/ledgerview.cpp:971
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Бул жоспарда аяктау кезі бар"
 
-#: kmymoney/views/ledgerview.cpp:968
+#: kmymoney/views/ledgerview.cpp:977
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Бірінші транзакция сәйкестік талабына сай келмейді"
 
-#: kmymoney/views/ledgerview.cpp:974
+#: kmymoney/views/ledgerview.cpp:983
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -22298,14 +22304,14 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Бірінші транзакция сәйкестік талабына сай келмейді"
 
-#: kmymoney/views/ledgerview.cpp:1020
+#: kmymoney/views/ledgerview.cpp:1029
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1085
+#: kmymoney/views/ledgerview.cpp:1094
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -22313,14 +22319,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Таңдалған баға жазу(лар)ды шын өшірмексіз бе?"
 
-#: kmymoney/views/ledgerview.cpp:1086
+#: kmymoney/views/ledgerview.cpp:1095
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Транзакция жоспарын енгізу"
 
-#: kmymoney/views/ledgerview.cpp:1089
+#: kmymoney/views/ledgerview.cpp:1098
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -22328,7 +22334,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Таңдалған баға жазу(лар)ды шын өшірмексіз бе?"
 
-#: kmymoney/views/ledgerview.cpp:1090
+#: kmymoney/views/ledgerview.cpp:1099
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -22336,7 +22342,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Енгізу ме жоспарлау ма?"
 
-#: kmymoney/views/ledgerview.cpp:1110
+#: kmymoney/views/ledgerview.cpp:1119
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -22346,7 +22352,7 @@ msgid ""
 "the ledger again."
 msgstr "Бұл кейін гроссбухқа жазып алатын транзакцияны жоспарлауы. "
 
-#: kmymoney/views/ledgerview.cpp:1112
+#: kmymoney/views/ledgerview.cpp:1121
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -22354,7 +22360,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1116
+#: kmymoney/views/ledgerview.cpp:1125
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -22362,7 +22368,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Бүкіл таңдалған %1 транзакцияны өшіргіңіз келе ме?"
 
-#: kmymoney/views/ledgerview.cpp:1117
+#: kmymoney/views/ledgerview.cpp:1126
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
@@ -22435,14 +22441,14 @@ msgid "Balance: %1"
 msgstr "Балансы: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:210
-#: kmymoney/views/newtransactioneditor.cpp:323
+#: kmymoney/views/newtransactioneditor.cpp:324
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Транзакцияларсыз үзінді көшірмесін импорттау"
 
 #: kmymoney/views/multitransactioneditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:367
+#: kmymoney/views/newtransactioneditor.cpp:368
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -22504,14 +22510,14 @@ msgstr ""
 msgid "Clear memo"
 msgstr "&Нөлдітерді тазалау"
 
-#: kmymoney/views/newspliteditor.cpp:176
+#: kmymoney/views/newspliteditor.cpp:177
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Гроссбухқа транзакцяны осымен енгізу керек."
 
-#: kmymoney/views/newspliteditor.cpp:189
+#: kmymoney/views/newspliteditor.cpp:190
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -22520,34 +22526,34 @@ msgid ""
 "category."
 msgstr "Санат контекстінде транзакциялар құрылмайды."
 
-#: kmymoney/views/newspliteditor.cpp:200
+#: kmymoney/views/newspliteditor.cpp:201
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Гроссбухқа транзакцяны осымен енгізу керек."
 
-#: kmymoney/views/newspliteditor.cpp:245
+#: kmymoney/views/newspliteditor.cpp:246
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Санат контекстінде транзакциялар құрылмайды."
 
-#: kmymoney/views/newspliteditor.cpp:254
+#: kmymoney/views/newspliteditor.cpp:255
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgid "The check number used for this transaction."
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/newspliteditor.cpp:263
-#: kmymoney/views/newtransactioneditor.cpp:485
+#: kmymoney/views/newspliteditor.cpp:264
+#: kmymoney/views/newtransactioneditor.cpp:486
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:909
-#: kmymoney/views/newtransactioneditor.cpp:211
+#: kmymoney/views/newspliteditor.cpp:910
+#: kmymoney/views/newtransactioneditor.cpp:212
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info:tooltip Protected"
@@ -22575,39 +22581,39 @@ msgstr "Төлеуші/Қабылдаушы"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:181
+#: kmymoney/views/newtransactioneditor.cpp:182
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:184
+#: kmymoney/views/newtransactioneditor.cpp:185
 #, fuzzy, kde-format
 #| msgid "Use this to clear all splits of this transaction"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
 msgstr "Осы транзакцияның бүкіл бөліктерін тексеру"
 
-#: kmymoney/views/newtransactioneditor.cpp:187
+#: kmymoney/views/newtransactioneditor.cpp:188
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:260
+#: kmymoney/views/newtransactioneditor.cpp:261
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Транзакция санатқа жатқызылмаған."
 
-#: kmymoney/views/newtransactioneditor.cpp:264
+#: kmymoney/views/newtransactioneditor.cpp:265
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:643
+#: kmymoney/views/newtransactioneditor.cpp:644
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -22615,7 +22621,7 @@ msgid "Select autofill transaction"
 msgstr "Автотолтыруға транзакцияны таңдау"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1164
+#: kmymoney/views/newtransactioneditor.cpp:1171
 #: kmymoney/views/newtransactioneditor.ui:327
 #: kmymoney/views/newtransactionform.cpp:103
 #: kmymoney/views/newtransactionform.ui:179
@@ -22623,7 +22629,7 @@ msgstr "Автотолтыруға транзакцияны таңдау"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1360
+#: kmymoney/views/newtransactioneditor.cpp:1367
 #, kde-format
 msgctxt "@info Question for confirmation of operation"
 msgid ""
@@ -22632,14 +22638,14 @@ msgid ""
 "continue?</p>"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1709
+#: kmymoney/views/newtransactioneditor.cpp:1716
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1710
+#: kmymoney/views/newtransactioneditor.cpp:1717
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"
@@ -22970,14 +22976,14 @@ msgstr "&ОК"
 msgid "&Cancel"
 msgstr "&Айну"
 
-#: kmymoney/views/splitview.cpp:118
+#: kmymoney/views/splitview.cpp:132
 #, fuzzy, kde-format
 #| msgid "Split Options"
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "Бөліну параметрлері"
 
-#: kmymoney/views/splitview.cpp:120
+#: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
 #| msgctxt "create new institution"
 #| msgid "New..."
@@ -22985,14 +22991,14 @@ msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Жаңа..."
 
-#: kmymoney/views/splitview.cpp:135
+#: kmymoney/views/splitview.cpp:149
 #, fuzzy, kde-format
 #| msgid "Edit..."
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Өзгерту..."
 
-#: kmymoney/views/splitview.cpp:140
+#: kmymoney/views/splitview.cpp:154
 #, fuzzy, kde-format
 #| msgctxt "Duplicate transaction"
 #| msgid "Duplicate"
@@ -23000,49 +23006,49 @@ msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Қосарлау"
 
-#: kmymoney/views/splitview.cpp:182
+#: kmymoney/views/splitview.cpp:196
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Өшіру"
 
-#: kmymoney/views/tabordereditor.cpp:441
+#: kmymoney/views/tabordereditor.cpp:458
 #, fuzzy, kde-format
 #| msgid "Tag options"
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
 msgstr "Белгінің параметрлері"
 
-#: kmymoney/views/tabordereditor.cpp:444
+#: kmymoney/views/tabordereditor.cpp:461
 #, fuzzy, kde-format
 #| msgid "Start operation"
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
 msgstr "Орерацияны бастау"
 
-#: kmymoney/views/tabordereditor.cpp:446
+#: kmymoney/views/tabordereditor.cpp:463
 #, fuzzy, kde-format
 #| msgid "Restart"
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "Қайта бастау"
 
-#: kmymoney/views/tabordereditor.cpp:449
+#: kmymoney/views/tabordereditor.cpp:466
 #, fuzzy, kde-format
 #| msgid "Save changes"
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
 msgstr "Өзгерістерді сақтау"
 
-#: kmymoney/views/tabordereditor.cpp:451
+#: kmymoney/views/tabordereditor.cpp:468
 #, fuzzy, kde-format
 #| msgid "Use default"
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
 msgstr "Әдетті болсын"
 
-#: kmymoney/views/tabordereditor.cpp:456
+#: kmymoney/views/tabordereditor.cpp:473
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
@@ -23055,14 +23061,14 @@ msgstr ""
 msgid "Tab Order Editor"
 msgstr "Бағалар редакторы"
 
-#: kmymoney/widgets/amountedit.cpp:268
+#: kmymoney/widgets/amountedit.cpp:275
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr ""
 
-#: kmymoney/widgets/amountedit.cpp:275
+#: kmymoney/widgets/amountedit.cpp:282
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
