@@ -6,11 +6,20 @@
 */
 
 #include "reporttabrowcolpivot.h"
+#include "ui_reporttabrowcolpivot.h"
+
+// ----------------------------------------------------------------------------
+// QT Includes
+#include <QDateTime>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+#include <KLocalizedString>
+
+// ----------------------------------------------------------------------------
+// Project Includes
 #include "mymoneybudget.h"
 #include "mymoneyenums.h"
-
-#include "ui_reporttabrowcolpivot.h"
-#include <qdatetime.h>
 
 ReportTabRowColPivot::ReportTabRowColPivot(QWidget* parent)
     : QWidget(parent)
@@ -127,7 +136,9 @@ bool ReportTabRowColPivot::load(MyMoneyReport* report, const QVector<MyMoneyBudg
         ui->m_budgetFrame->setEnabled(!budgets.empty());
         auto i = 0;
         for (QVector<MyMoneyBudget>::const_iterator it_b = budgets.cbegin(); it_b != budgets.cend(); ++it_b) {
-            ui->m_comboBudget->insertItem((*it_b).name(), i);
+            ui->m_comboBudget->insertItem(
+                i18nc("@item:inlistbox budget name and starting date", "%1, starting at %2").arg((*it_b).name(), (*it_b).budgetStart().toString()),
+                i);
             // set the current selected item
             if ((report->budget() == "Any" && (*it_b).budgetStart().year() == QDate::currentDate().year()) || report->budget() == (*it_b).id())
                 ui->m_comboBudget->setCurrentItem(i);
