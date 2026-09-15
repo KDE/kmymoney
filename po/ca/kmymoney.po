@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-14 00:43+0000\n"
-"PO-Revision-Date: 2026-09-03 09:46+0200\n"
+"PO-Revision-Date: 2026-09-14 10:02+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -5396,10 +5396,9 @@ msgid "Edit scheduled transaction"
 msgstr "Edita l'operació planificada"
 
 #: kmymoney/kmymoney.cpp:1523
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgid "Edit scheduled transaction (detailed)"
-msgstr "Edita l'operació planificada"
+msgstr "Edita l'operació planificada (detallada)"
 
 #: kmymoney/kmymoney.cpp:1524
 #, kde-format

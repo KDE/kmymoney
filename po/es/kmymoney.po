@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-14 00:43+0000\n"
-"PO-Revision-Date: 2026-09-04 00:51+0100\n"
+"PO-Revision-Date: 2026-09-15 00:01+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -5385,10 +5385,9 @@ msgid "Edit scheduled transaction"
 msgstr "Editar asiento planificado"
 
 #: kmymoney/kmymoney.cpp:1523
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgid "Edit scheduled transaction (detailed)"
-msgstr "Editar asiento planificado"
+msgstr "Editar asiento planificado (detallado)"
 
 #: kmymoney/kmymoney.cpp:1524
 #, kde-format

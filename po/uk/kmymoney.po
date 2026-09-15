@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-14 00:43+0000\n"
-"PO-Revision-Date: 2026-09-03 18:22+0300\n"
+"PO-Revision-Date: 2026-09-14 09:47+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -5395,10 +5395,9 @@ msgid "Edit scheduled transaction"
 msgstr "Змінити заплановану операцію"
 
 #: kmymoney/kmymoney.cpp:1523
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgid "Edit scheduled transaction (detailed)"
-msgstr "Змінити заплановану операцію"
+msgstr "Змінити заплановану операцію (докладно)"
 
 #: kmymoney/kmymoney.cpp:1524
 #, kde-format

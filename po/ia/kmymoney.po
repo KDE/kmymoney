@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-14 00:43+0000\n"
-"PO-Revision-Date: 2026-08-31 17:27+0200\n"
+"PO-Revision-Date: 2026-09-14 18:34+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -5072,11 +5072,9 @@ msgid "Edit scheduled transaction"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1523
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Skip scheduled transaction"
+#, kde-format
 msgid "Edit scheduled transaction (detailed)"
-msgstr "Salta transaction planificate"
+msgstr "Edita Transaction planificate (detaliate)"
 
 #: kmymoney/kmymoney.cpp:1524
 #, kde-format
@@ -17167,11 +17165,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgctxt "column containing fee field"
-#| msgid "Fee Column"
+#, kde-format
 msgid "Performance Columns"
-msgstr "Columna de honorario"
+msgstr "Columnas de prestation"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23

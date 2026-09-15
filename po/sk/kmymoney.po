@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-14 00:43+0000\n"
-"PO-Revision-Date: 2020-01-02 16:30+0100\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
+"PO-Revision-Date: 2026-09-14 20:10+0200\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -5346,10 +5346,9 @@ msgid "Edit scheduled transaction"
 msgstr "Upraviť plánovanú transakciu"
 
 #: kmymoney/kmymoney.cpp:1523
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgid "Edit scheduled transaction (detailed)"
-msgstr "Upraviť plánovanú transakciu"
+msgstr "Upraviť plánovanú transakciu (podrobne)"
 
 #: kmymoney/kmymoney.cpp:1524
 #, kde-format
@@ -17895,23 +17894,19 @@ msgstr "Vlastnené a predané"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "Test výkonnosti"
+msgstr "Stĺpce výkonnosti"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
 msgstr ""
-"<p>Zvoliť, ktoré stĺpce, ktoré by mali byť uvedené v správe.</p><p>Dátum a "
-"suma transakcie sú vždy zobrazené.</p>"
+"<p>Vyberte, ktoré stĺpce sa majú zobraziť vo výkaze o výkonnosti investícií."
+"</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26
@@ -22429,10 +22424,9 @@ msgid "The date you entered is invalid"
 msgstr "Zadaný dátum je neplatný"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "End transaction edit"
+#, kde-format
 msgid "All transaction dates"
-msgstr "Úprava koncovej transakcie"
+msgstr "Všetky dátumy transakcií"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
