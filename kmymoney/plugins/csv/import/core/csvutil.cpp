@@ -2,13 +2,15 @@
     SPDX-FileCopyrightText: 2010-2015 Allan Anderson <agander93@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
     SPDX-FileCopyrightText: 2022 Alexander Kuznetsov <alx.kuzza@gmail.com>
+    SPDX-FileCopyrightText: 2026 Thomas Baumgart <tbaumgart@kde.org>
 */
 
 #include "csvutil.h"
-// #include <QStringList>
-// #include <QVector>
+
 #include <QLocale>
 #include <QRegularExpression>
+
+#include <mymoneymoney.h>
 
 Parse::Parse()
     : m_lastLine(0)
@@ -168,7 +170,7 @@ QString Parse::possiblyReplaceSymbol(const QString& str)
     int decimalIndex = txt.indexOf(m_decimalSymbol);
     int thouIndex = txt.lastIndexOf(m_thousandsSeparator);
 
-    txt.remove(QRegularExpression(QStringLiteral("\\D.,-+"))); // remove all non-digits
+    txt.remove(QRegularExpression(QStringLiteral("[^\\d\\.,\\-+]"))); // remove all non-digits
     txt.remove(m_thousandsSeparator);
 
     if (txt.isEmpty()) // empty strings not allowed
@@ -176,7 +178,7 @@ QString Parse::possiblyReplaceSymbol(const QString& str)
 
     if (decimalIndex == -1) { // e.g. 1 ; 1,234 ; 1,234,567; 12,
         if (thouIndex == -1 || thouIndex == length - 4) { // e.g. 1 ; 1,234 ; 1,234,567
-            txt.append(QLocale().decimalPoint() + QLatin1String("00")); // e.g. 1.00 ; 1234.00 ; 1234567.00
+            txt.append(MyMoneyMoney::decimalSeparator() + QLatin1String("00")); // e.g. 1.00 ; 1234.00 ; 1234567.00
             m_invalidConversion = false;
         }
         return txt;
@@ -187,7 +189,7 @@ QString Parse::possiblyReplaceSymbol(const QString& str)
         return txt;
 
     m_invalidConversion = false; // it cannot be true after this point
-    txt.replace(m_decimalSymbol, QLocale().decimalPoint()); // so swap it
+    txt.replace(m_decimalSymbol, MyMoneyMoney::decimalSeparator()); // so swap it
 
     if (decimalIndex == length - 1) // e.g. 1. ; 123.
         txt.append(QLatin1String("00"));

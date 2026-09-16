@@ -662,8 +662,8 @@ DecimalSymbol CSVImporterCore::detectDecimalSymbol(const int col, const QString&
         detectedSymbol = DecimalSymbol::Dot;
     else if (commaIsDecimalSeparator)
         detectedSymbol = DecimalSymbol::Comma;
-    else { // whole column was empty, but we don't want to fail so take OS's decimal symbol
-        if (QLocale().decimalPoint() == QLatin1Char('.'))
+    else { // whole column was empty, but we don't want to fail so take our decimal symbol
+        if (MyMoneyMoney::decimalSeparator() == QLatin1Char('.'))
             detectedSymbol = DecimalSymbol::Dot;
         else
             detectedSymbol = DecimalSymbol::Comma;

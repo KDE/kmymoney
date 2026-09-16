@@ -122,11 +122,12 @@ void InvestmentPage::initializePage()
 
     ui->m_feeRate->setText(m_profile->m_feeRate);
     ui->m_minFee->setText(m_profile->m_minFee);
-    ui->m_feeRate->setValidator(
-        new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,2}[") + QLocale().decimalPoint() + QStringLiteral("]{1,1}[0-9]{0,2}")),
-                                        this));
+    ui->m_feeRate->setValidator(new QRegularExpressionValidator(
+        QRegularExpression(QStringLiteral("[0-9]{1,2}[") + MyMoneyMoney::decimalSeparator() + QStringLiteral("]{1,1}[0-9]{0,2}")),
+        this));
     ui->m_minFee->setValidator(
-        new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,}[") + QLocale().decimalPoint() + QStringLiteral("]{0,1}[0-9]{0,}")), this));
+        new QRegularExpressionValidator(QRegularExpression(QStringLiteral("[0-9]{1,}[") + MyMoneyMoney::decimalSeparator() + QStringLiteral("]{0,1}[0-9]{0,}")),
+                                        this));
 
     if (!m_profile->m_feeRate.isEmpty()) { // fee rate indicates that fee column needs to be calculated
         if (m_imp->calculateFee()) {

@@ -10,6 +10,8 @@
 #include <QString>
 #include <QTest>
 
+#include <mymoneymoney.h>
+
 QTEST_GUILESS_MAIN(SymbolTest);
 
 Parse* m_parse;
@@ -23,8 +25,8 @@ void SymbolTest::init()
 {
     m_parse = new Parse;
     m_parse->setDecimalSymbol(DecimalSymbol::Dot);
-    m_localeDecimal = QLocale().decimalPoint();
-    m_localeThousands = QLocale().groupSeparator();
+    m_localeDecimal = MyMoneyMoney::decimalSeparator();
+    m_localeThousands = MyMoneyMoney::thousandSeparator();
 }
 
 void SymbolTest::cleanup()
@@ -41,7 +43,7 @@ void SymbolTest::testDecimalSymbolDot()
     QFETCH(QString, input);
     QFETCH(QString, result);
 
-    QVERIFY(m_parse->possiblyReplaceSymbol(input) == result);
+    QCOMPARE(m_parse->possiblyReplaceSymbol(input), result);
 }
 
 void SymbolTest::testDecimalSymbolComma()
@@ -67,7 +69,7 @@ void SymbolTest::testDecimalSymbolInvalid()
     // QFETCH(QString, result);
     m_parse->possiblyReplaceSymbol(input);
 
-    QVERIFY(m_parse->invalidConversion() == true);
+    QCOMPARE(m_parse->invalidConversion(), true);
 }
 
 void SymbolTest::testDecimalSymbolDot_data()
@@ -101,7 +103,7 @@ void SymbolTest::testDecimalSymbolComma_data()
 
     //  Detect ',' as decimal and replace from locale
 
-    QTest::newRow("test 1") << "$987,654" << QString("$987" + m_localeDecimal + "654");
+    QTest::newRow("test 1") << "$987,654" << QString("987" + m_localeDecimal + "654");
 
     //  Detect ',' as decimal and replace from locale
     //  with thousands separator present

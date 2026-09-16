@@ -33,6 +33,8 @@ private Q_SLOTS:
     void testConstructor_data();
     void initTestCase();
     void initTestCase_data();
+    void testPossiblyReplaceSymbol();
+    void testPossiblyReplaceSymbol_data();
 
     /**
     * This method is used to test that a quoted string containing
@@ -41,7 +43,5 @@ private Q_SLOTS:
     * separator is not a comma, the split does not occur.
     */
     void parseSplitString();
-    void parse_data();
-
 };
 #endif
