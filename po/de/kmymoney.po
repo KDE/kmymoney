@@ -16,22 +16,22 @@
 # SPDX-FileCopyrightText: 2014 Frank Steinmetzger <Warp_7@gmx.de>
 # SPDX-FileCopyrightText: 2018-2019 Stefan Vater <st.vater@web.de>
 # SPDX-FileCopyrightText: 2021-2022, 2025-2026 Alois Spitzbart <spitz234@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Philipp Kiemle <l10n.daphipz@fastmail.de>
 # SPDX-FileCopyrightText: 2025 lipor <collect.aqua019@passinbox.com>
+# SPDX-FileCopyrightText: 2025-2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-21 03:36+0000\n"
-"PO-Revision-Date: 2026-02-24 22:25+0100\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2026-09-13 21:27+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -12656,7 +12656,7 @@ msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
 "account.</qt>"
 msgstr ""
-"<qt>Das angegebene Konto <b>%1</b> ist keinem Onlinekonto zugeordnet worden."
+"<qt>Das angegebene Konto <b>%1</b> ist keinem Online-Konto zugeordnet worden."
 "</qt>"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:522
@@ -19819,20 +19819,20 @@ msgid ""
 "account? Depending on the details of the online banking method used, this "
 "action cannot be reverted."
 msgstr ""
-"Möchten Sie die Zuordnung vom Konto <b>%1</b> auf ein Onlinekonto wirklich "
+"Möchten Sie die Zuordnung vom Konto <b>%1</b> zu einem Online-Konto wirklich "
 "entfernen? Abhängig von der jeweils verwendeten Onlinezugangsmethode kann "
 "dies eventuell nicht rückgängig gemacht werden."
 
 #: kmymoney/views/kaccountsview.cpp:277
 #, kde-format
 msgid "Remove mapping to online account"
-msgstr "Entfernen der Zuordnung zu Onlinekonto"
+msgstr "Zuordnung zu Online-Konto entfernen"
 
 #: kmymoney/views/kaccountsview.cpp:295
 #, kde-format
 msgid "Unable to unmap account from online account: %1"
 msgstr ""
-"Die Zuordnung des Kontos zum Onlinekonto kann nicht entfernt werden: %1"
+"Die Zuordnung des Kontos zum Online-Konto kann nicht entfernt werden: %1"
 
 #: kmymoney/views/kaccountsview.cpp:316
 #, kde-format
@@ -19842,9 +19842,9 @@ msgid ""
 "account. Please cancel if you intended to map the investment account, "
 "continue otherwise"
 msgstr ""
-"Sie versuchen, ein Wertpapierkonto einem Onlinekonto zuzuordnen. Das ist in "
+"Sie versuchen, ein Wertpapierkonto einem Online-Konto zuzuordnen. Das ist in "
 "der Regel nicht gebräuchlich. Normalerweise verbinden Sie das "
-"Investitionskonto mit dem Onlinekonto. Bitte brechen Sie hier ab, wenn Sie "
+"Investitionskonto mit dem Online-Konto. Bitte brechen Sie hier ab, wenn Sie "
 "lieber das Investitionskonto zuordnen möchten. Anderenfalls fahren Sie fort."
 
 #: kmymoney/views/kaccountsview.cpp:318
@@ -19862,7 +19862,7 @@ msgstr "Online-Aktualisierung"
 #: kmymoney/views/kaccountsview.cpp:378
 #, kde-format
 msgid "Unable to map account to online account: %1"
-msgstr "Das Konto kann dem Onlinekonto nicht zugeordnet werden: %1"
+msgstr "Das Konto kann dem Online-Konto nicht zugeordnet werden: %1"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/views/kaccountsview.ui:58 kmymoney/views/kcategoriesview.ui:44
@@ -19930,7 +19930,7 @@ msgstr "Dieses Konto ist immer noch in einer geplanten Buchung enthalten"
 #: kmymoney/views/kaccountsview_p.h:374
 #, kde-format
 msgid "This account is still mapped to an online account"
-msgstr "Dieses Konto ist immer noch in einem Onlinekonto zugeordnet"
+msgstr "Dieses Konto ist immer noch einem Online-Konto zugeordnet"
 
 #: kmymoney/views/kcategoriesview.cpp:169
 #, kde-format
