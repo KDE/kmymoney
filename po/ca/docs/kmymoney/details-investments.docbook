@@ -29,7 +29,7 @@
 ><title
 >Comptes d'inversió</title>
 <para
->Un compte d'inversió del &kmymoney; té una col·lecció de títols, també coneguts com accions. Un compte d'inversió conté operacions, registrant les activitats com ara compres, vendes, dividends, reinversions, rendiments, desglossaments i ingressos d'aquestes inversions. Cada operació en un compte d'inversió es relacionarà amb un títol específic. </para>
+>Un compte d'inversió del &kmymoney; té una col·lecció de títols, també coneguts com a accions. Un compte d'inversió conté operacions, registrant les activitats com ara compres, vendes, dividends, reinversions, rendiments, desglossaments i ingressos d'aquestes inversions. Cada operació en un compte d'inversió es relacionarà amb un títol específic. </para>
 
 <para
 >És habitual que un compte en una agència de borsa contingui tant títols com efectiu. En el &kmymoney;, un compte d'Inversió <emphasis

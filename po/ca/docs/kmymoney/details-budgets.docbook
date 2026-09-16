@@ -318,7 +318,7 @@
 >Si una subcategoria té un valor definit al pressupost, llavors els ingressos i despeses es mostraran a la subcategoria. </para>
 
       <para
->Si la categoria seleccionada a la llista de categories té les seves subcategories plegades, encara que el seu valor total mostri la suma dels valors totals per a totes les seves subcategories, els imports a l'àrea assignacions encara podrien mostrar 0, llevat que aquesta casella s'hagi marcat o que s'hagi assignat explícitament un import a la categoria. </para>
+>Si la categoria seleccionada a la llista de categories té les seves subcategories plegades, encara que el seu valor total mostri la suma dels valors totals per a totes les seves subcategories, els imports a l'àrea d'assignacions encara podrien mostrar 0, llevat que aquesta casella s'hagi marcat o que s'hagi assignat explícitament un import a la categoria. </para>
 
       <para
 >En general, ja sigui que marqueu aquesta casella i assigneu valors a la categoria i no a cap de les seves subcategories, o que no marqueu la casella i assigneu valors a les subcategories però no a la categoria. Si qualsevol subcategoria té assignat un import quan aquesta casella està marcada, aquests imports s'acumularan a la categoria. </para>
