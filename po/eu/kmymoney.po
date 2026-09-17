@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-14 00:43+0000\n"
+"POT-Creation-Date: 2026-09-17 00:44+0000\n"
 "PO-Revision-Date: 2026-01-04 11:05+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -10209,7 +10209,7 @@ msgstr ""
 "klik 'Bai' botoian.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:262
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:189
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:190
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
@@ -10239,9 +10239,9 @@ msgstr ""
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:355
 #: kmymoney/plugins/csv/import/csvwizard.cpp:965
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1037
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:390
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:419
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:439
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
 #, kde-format
 msgid "CSV import"
@@ -10979,7 +10979,7 @@ msgstr "Aldatu izena"
 msgid "Select your importing profile here."
 msgstr "Hautatu zure inportazio profila hemen."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:186
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:187
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -10990,7 +10990,7 @@ msgstr ""
 "center><center>Datua horiek ohar-eremuan kopiatu nahi badituzu, egin klik "
 "'Bai' botoian.</center>"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:388
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:134
 #, kde-format
 msgid ""
@@ -11000,7 +11000,7 @@ msgstr ""
 "<center>Eremu-izena ez da ezagutzen.</center><center>'<b>%1</b>'</"
 "center>Sartu berriz zutabe-hautapena."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:416
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:417
 #, kde-format
 msgid ""
 "The values in the columns you have selected\n"
@@ -11013,13 +11013,13 @@ msgstr ""
 "Egiaztatu uneko transakzioaren eremuak\n"
 "eta zuk egindako hautapena."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:429
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:430
 #, kde-format
 msgctxt "Unused column"
 msgid "Unused"
 msgstr "Erabiligabeak"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:436
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:437
 #, kde-format
 msgid ""
 "<center>No valid action type found for this transaction.</"
@@ -11028,7 +11028,7 @@ msgstr ""
 "<center>Ez da aurkitu ekintza mota onargarririk transakzio honetarako.</"
 "center><center>mesedez berrikusi bidalitako parametroak.</center>"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:467
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:468
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:152
 #, kde-format
 msgid ""
@@ -15711,7 +15711,7 @@ msgstr "Denak"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:92
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:101
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
@@ -15719,7 +15719,7 @@ msgstr "Goi-mailakoak"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:95
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:104
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -15727,7 +15727,7 @@ msgstr "Taldeak"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:98
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:107
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -18052,25 +18052,32 @@ msgstr "Amaiera-data"
 msgid "Labels precision"
 msgstr "Etiketen zehaztasuna"
 
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:89
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:98
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
 msgstr "Denak"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:107
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:116
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "Diru-sarrerak eta gastuak"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:110
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:119
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "Aktiboak eta pasiboak"
+
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
+#, fuzzy, kde-format
+#| msgid "rows starting at row"
+msgctxt "@item:inlistbox budget name and starting date"
+msgid "%1, starting at %2"
+msgstr "errenkadak, errenkada honetatik hasita:"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
@@ -29907,9 +29914,6 @@ msgstr "--csv eta --html arteko bakarra onartzen da"
 
 #~ msgid "Display"
 #~ msgstr "Bistaratu"
-
-#~ msgid "rows starting at row"
-#~ msgstr "errenkadak, errenkada honetatik hasita:"
 
 #~ msgid "Adding transactions"
 #~ msgstr "Transakzioak eranstea"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-14 00:43+0000\n"
+"POT-Creation-Date: 2026-09-17 00:44+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -10487,7 +10487,7 @@ msgstr ""
 "soovid kopeerida maksesaaja andmed memo väljale, klõpsa \"Jah\".</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:262
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:189
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:190
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
@@ -10519,9 +10519,9 @@ msgstr ""
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:355
 #: kmymoney/plugins/csv/import/csvwizard.cpp:965
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1037
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:390
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:419
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:439
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
 #, kde-format
 msgid "CSV import"
@@ -11275,7 +11275,7 @@ msgstr "Muuda nime"
 msgid "Select your importing profile here."
 msgstr "Siin saab valida oma impordiprofiili."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:186
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:187
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -11285,7 +11285,7 @@ msgstr ""
 "<center>Väljal \"<b>%1</b>\" on see veerg juba valitud.</center><center>Kui "
 "soovid kopeerida need andmed memo väljale, klõpsa \"Jah\".</center>"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:388
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:134
 #, kde-format
 msgid ""
@@ -11295,7 +11295,7 @@ msgstr ""
 "<center>Välja nime ei tuntud ära.</center> <center>'<b>%1</b>'</center> "
 "Palun sisesta uuesti valitud veerud."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:416
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:417
 #, kde-format
 msgid ""
 "The values in the columns you have selected\n"
@@ -11308,13 +11308,13 @@ msgstr ""
 "Palun kontrolli välju aktiivses tehingus\n"
 "ning samuti oma valikut."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:429
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:430
 #, kde-format
 msgctxt "Unused column"
 msgid "Unused"
 msgstr "Kasutamata"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:436
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:437
 #, kde-format
 msgid ""
 "<center>No valid action type found for this transaction.</"
@@ -11323,7 +11323,7 @@ msgstr ""
 "<center>Sellele tehingule ei leitud korrektset toimingutüüpi.</"
 "center><center>Palun kontrolli määratud parameetreid.</center>"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:467
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:468
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:152
 #, kde-format
 msgid ""
@@ -15986,7 +15986,7 @@ msgstr "Kõik"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:92
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:101
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
@@ -15994,7 +15994,7 @@ msgstr "Tipptase"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:95
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:104
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -16002,7 +16002,7 @@ msgstr "Rühmad"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:98
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:107
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -18349,25 +18349,32 @@ msgstr "Kuni"
 msgid "Labels precision"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:89
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:98
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
 msgstr "Kõik"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:107
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:116
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "Tulud ja kulud"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:110
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:119
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "Vara ja kohustised"
+
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
+#, fuzzy, kde-format
+#| msgid "rows starting at row"
+msgctxt "@item:inlistbox budget name and starting date"
+msgid "%1, starting at %2"
+msgstr "read alates reast"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
@@ -30303,9 +30310,6 @@ msgstr ""
 
 #~ msgid "Display"
 #~ msgstr "Kuvatakse"
-
-#~ msgid "rows starting at row"
-#~ msgstr "read alates reast"
 
 #~ msgid "Adding transactions"
 #~ msgstr "Tehingute lisamine"

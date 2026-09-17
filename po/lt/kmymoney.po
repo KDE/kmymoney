@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-14 00:43+0000\n"
+"POT-Creation-Date: 2026-09-17 00:44+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -10193,7 +10193,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:262
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:189
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:190
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
@@ -10222,9 +10222,9 @@ msgstr ""
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:355
 #: kmymoney/plugins/csv/import/csvwizard.cpp:965
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1037
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:390
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:419
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:439
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
 #, fuzzy, kde-format
 #| msgid "&Import"
@@ -10964,7 +10964,7 @@ msgstr "Pervadinti"
 msgid "Select your importing profile here."
 msgstr "Trinti ..."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:186
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:187
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -10972,7 +10972,7 @@ msgid ""
 "</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:388
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:134
 #, kde-format
 msgid ""
@@ -10980,7 +10980,7 @@ msgid ""
 "center>Please re-enter your column selections."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:416
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:417
 #, kde-format
 msgid ""
 "The values in the columns you have selected\n"
@@ -10989,7 +10989,7 @@ msgid ""
 "and also your selections."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:429
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:430
 #, fuzzy, kde-format
 #| msgctxt "@item Show only unused payees"
 #| msgid "Unused"
@@ -10997,14 +10997,14 @@ msgctxt "Unused column"
 msgid "Unused"
 msgstr "Nenaudojamas"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:436
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:437
 #, kde-format
 msgid ""
 "<center>No valid action type found for this transaction.</"
 "center><center>Please check the parameters supplied.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:467
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:468
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:152
 #, kde-format
 msgid ""
@@ -15622,7 +15622,7 @@ msgstr "Visi"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:181
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:92
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:101
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, fuzzy, kde-format
 msgid "Top-Level"
@@ -15630,7 +15630,7 @@ msgstr "Viršutinis lygis"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:186
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:95
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:104
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
@@ -15638,7 +15638,7 @@ msgstr "Grupės"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:191
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:98
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:107
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
@@ -17946,7 +17946,7 @@ msgstr "Kam"
 msgid "Labels precision"
 msgstr "Kainų istorija"
 
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:89
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:98
 #, fuzzy, kde-format
 #| msgid "All"
 msgctxt "All accounts"
@@ -17954,18 +17954,25 @@ msgid "All"
 msgstr "Visi"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:107
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:116
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:110
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:119
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "Turtas ir įsipareigojimai"
+
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
+#, fuzzy, kde-format
+#| msgid "Future payments"
+msgctxt "@item:inlistbox budget name and starting date"
+msgid "%1, starting at %2"
+msgstr "Mokėjimai ateityje"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
