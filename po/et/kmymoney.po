@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 03:36+0000\n"
+"POT-Creation-Date: 2026-09-18 03:36+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -10364,7 +10364,7 @@ msgstr ""
 "soovid kopeerida maksesaaja andmed memo väljale, klõpsa \"Jah\".</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:189
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:190
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
@@ -10396,9 +10396,9 @@ msgstr ""
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
 #: kmymoney/plugins/csv/import/csvwizard.cpp:965
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1037
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:390
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:419
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:439
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
 #, kde-format
 msgid "CSV import"
@@ -11140,7 +11140,7 @@ msgstr "Siin saab valida oma impordiprofiili."
 msgid "Fee"
 msgstr "Teenustasu"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:186
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:187
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -11150,7 +11150,7 @@ msgstr ""
 "<center>Väljal \"<b>%1</b>\" on see veerg juba valitud.</center><center>Kui "
 "soovid kopeerida need andmed memo väljale, klõpsa \"Jah\".</center>"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:388
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:134
 #, kde-format
 msgid ""
@@ -11160,7 +11160,7 @@ msgstr ""
 "<center>Välja nime ei tuntud ära.</center> <center>'<b>%1</b>'</center> "
 "Palun sisesta uuesti valitud veerud."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:416
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:417
 #, kde-format
 msgid ""
 "The values in the columns you have selected\n"
@@ -11173,13 +11173,13 @@ msgstr ""
 "Palun kontrolli välju aktiivses tehingus\n"
 "ning samuti oma valikut."
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:429
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:430
 #, kde-format
 msgctxt "Unused column"
 msgid "Unused"
 msgstr "Kasutamata"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:436
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:437
 #, kde-format
 msgid ""
 "<center>No valid action type found for this transaction.</"
@@ -11188,7 +11188,7 @@ msgstr ""
 "<center>Sellele tehingule ei leitud korrektset toimingutüüpi.</"
 "center><center>Palun kontrolli määratud parameetreid.</center>"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:467
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:468
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:152
 #, kde-format
 msgid ""

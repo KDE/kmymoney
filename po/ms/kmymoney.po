@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-21 03:36+0000\n"
+"POT-Creation-Date: 2026-09-18 03:36+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -9685,7 +9685,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:189
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:190
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
@@ -9713,9 +9713,9 @@ msgstr ""
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:350
 #: kmymoney/plugins/csv/import/csvwizard.cpp:965
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1037
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:418
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:438
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:390
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:419
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:439
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
 #, fuzzy, kde-format
 msgid "CSV import"
@@ -10408,7 +10408,7 @@ msgstr ""
 msgid "Fee"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:186
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:187
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -10416,7 +10416,7 @@ msgid ""
 "</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:388
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:389
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:134
 #, kde-format
 msgid ""
@@ -10424,7 +10424,7 @@ msgid ""
 "center>Please re-enter your column selections."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:416
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:417
 #, kde-format
 msgid ""
 "The values in the columns you have selected\n"
@@ -10433,21 +10433,21 @@ msgid ""
 "and also your selections."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:429
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:430
 #, fuzzy, kde-format
 #| msgid "User"
 msgctxt "Unused column"
 msgid "Unused"
 msgstr "Pengguna"
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:436
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:437
 #, kde-format
 msgid ""
 "<center>No valid action type found for this transaction.</"
 "center><center>Please check the parameters supplied.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:467
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:468
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:152
 #, kde-format
 msgid ""
