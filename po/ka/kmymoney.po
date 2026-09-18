@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-17 00:44+0000\n"
-"PO-Revision-Date: 2026-09-14 04:45+0200\n"
+"PO-Revision-Date: 2026-09-17 04:39+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -17556,12 +17556,10 @@ msgid "Assets & Liabilities"
 msgstr "აქტივები და ვალდებულებები"
 
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
-#, fuzzy, kde-format
-#| msgid "%1 outstanding payment"
-#| msgid_plural "%1 outstanding payments in total"
+#, kde-format
 msgctxt "@item:inlistbox budget name and starting date"
 msgid "%1, starting at %2"
-msgstr "%1 გადაცილებული გადახდა"
+msgstr "%1, დაწყებული %2-დან"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
