@@ -465,8 +465,16 @@ set(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
 Possible values are: 'Release' 'RelWithDebInfo' 'Debug' 'DebugKMM' 'Debugfull' 'Profile'
 The default value is: 'RelWithDebInfo'" FORCE)
 
-# tells gcc to enable exception handling
+# Re-request ECM right before including KDECompilerSettings so that
+# ECM_GLOBAL_FIND_VERSION reflects the ECM version requirement again. The
+# global is set by the most recent find_package() call, and intervening
+# find_package() calls without a version argument may have cleared it, which
+# causes the configuration to fail on the KDE_COMPILERSETTINGS_LEVEL vs
+# ECM version guard in KDECompilerSettings.cmake.
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 include(KDECompilerSettings)
+
+# tells gcc to enable exception handling
 kde_enable_exceptions()
 
 # Set linker flags
