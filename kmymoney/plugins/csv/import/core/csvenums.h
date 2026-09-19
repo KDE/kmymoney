@@ -8,6 +8,7 @@
 #define CSVENUMS_H
 
 #include <QHash>
+#include <QMetaType>
 
 #include "qhashseedtype.h"
 
@@ -28,5 +29,8 @@ inline qHashSeedType qHash(const Profile key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
 }
+
+Q_DECLARE_METATYPE(FieldDelimiter);
+Q_DECLARE_METATYPE(DecimalSymbol);
 
 #endif
