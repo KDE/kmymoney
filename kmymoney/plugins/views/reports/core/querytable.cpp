@@ -1215,12 +1215,14 @@ void QueryTable::processTransaction(const MyMoneyTransaction& t, ReportState& st
         }
     }
 
+    bool haveLoanAccount = false;
     for (int splitOffset = 0; splitOffset < splitCount; ++splitOffset) {
         MyMoneyMoney xr;
         const auto splitIndex = (referenceSplitIndex + splitOffset) % splitCount;
         const MyMoneySplit& split = splits.at(splitIndex);
         const bool isReferenceSplit = (splitOffset == 0);
         ReportAccount splitAcc(split.accountId());
+        haveLoanAccount |= splitAcc.isLoan();
         qA[csID] = qS[csID] = split.id();
 
         QString splitCurrency = splitCurrencyId(split);
@@ -1291,11 +1293,17 @@ void QueryTable::processTransaction(const MyMoneyTransaction& t, ReportState& st
             processIncludedReferenceSplit(split, splitAcc, valueXr, fraction, splitCount, state);
         } else {
             processFurtherSplit(t, referenceSplit, split, splitAcc, xr, valueXr, fraction, splitCount, state);
-            processTransferSplit(split, splitAcc, xr, rateXr, valueXr, fraction, splitCount, institution, payee, tagIdList, state);
+            // Do not include non-loan transactions in a loan report
+            if (!(report.queryColumns() & eMyMoney::Report::QueryColumn::Loan) || haveLoanAccount) {
+                processTransferSplit(split, splitAcc, xr, rateXr, valueXr, fraction, splitCount, institution, payee, tagIdList, state);
+            }
         }
     }
 
-    addPendingTransactionRows(state);
+    // Do not include non-loan transactions in a loan report
+    if (!(report.queryColumns() & eMyMoney::Report::QueryColumn::Loan) || haveLoanAccount) {
+        addPendingTransactionRows(state);
+    }
 }
 
 // Run through our accts list and add opening and closing balances
