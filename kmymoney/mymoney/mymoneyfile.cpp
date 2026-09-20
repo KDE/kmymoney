@@ -1261,8 +1261,8 @@ const QString& MyMoneyFile::fixedKey(FixedKey key) const
 
 MyMoneyFile* MyMoneyFile::instance()
 {
-    static MyMoneyFile file;
-    return &file;
+    static MyMoneyFile* file = new MyMoneyFile;
+    return file;
 }
 
 MyMoneyModelBase* MyMoneyFile::baseModel()

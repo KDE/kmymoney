@@ -1246,6 +1246,9 @@ KMyMoneyApp::~KMyMoneyApp()
     // delete global settings object
     delete KMyMoneyDateEditSettings::instance();
 
+    // delete the models
+    delete MyMoneyFile::instance();
+
     delete d;
 
     // clear the pointer because it could still be used in connected lambdas
