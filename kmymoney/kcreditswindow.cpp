@@ -39,6 +39,9 @@ KAboutData initializeCreditsData()
 #ifdef ENABLE_KBANKING
     features << i18n("Online banking");
 #endif
+#ifdef ENABLE_SANATIZERS
+    features << i18nc("about option, %1 list of sanatizers", "Sanatizers: %1").arg(QLatin1String(ENABLED_SANATIZERS));
+#endif
 
     aboutData.setShortDescription(
         i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."));

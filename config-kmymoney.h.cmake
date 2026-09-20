@@ -15,6 +15,10 @@
 #cmakedefine ENABLE_ADDRESSBOOK 1
 #define ENABLE_ADDRESSBOOK_VERSION "@ADDRESSBOOK_VERSION@"
 
+#cmakedefine ENABLE_SANATIZERS 1
+/* debug option */
+#cmakedefine ENABLED_SANATIZERS "@ENABLED_SANATIZERS@"
+
 #cmakedefine ENABLE_ACTIVITIES 1
 /* Part of KF */
 

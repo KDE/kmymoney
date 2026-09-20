@@ -481,6 +481,8 @@ kde_enable_exceptions()
 
 # There is no way to detect linker in cmake (see https://gitlab.kitware.com/cmake/cmake/issues/17596)
 # and linkers aren't compatible with each other, so we need to assume something
+set(ENABLED_SANATIZERS "")
+
 if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-dead_strip -Wl,-undefined,error")
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-dead_strip -Wl,-undefined,error -Wl,-mark_dead_strippable_dylib")
@@ -505,8 +507,12 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Cla
   # pass the sanitizer flag to the linker so the runtime is a first-class,
   # first-loaded dependency of the executable.
   if(ECM_ENABLE_SANITIZERS)
+    set(_sanatizers_sep "")
+    set(ENABLE_SANATIZERS TRUE)
     foreach(_sanitizer ${ECM_ENABLE_SANITIZERS})
       string(TOLOWER "${_sanitizer}" _sanitizer)
+      set(ENABLED_SANATIZERS "${ENABLED_SANATIZERS}${_sanatizers_sep}${_sanitizer}")
+      set(_sanatizers_sep ", ")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=${_sanitizer}")
     endforeach()
   else()
