@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-17 00:44+0000\n"
+"POT-Creation-Date: 2026-09-20 00:46+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -16470,8 +16470,8 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1030
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1108
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2246
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2264
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2254
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2272
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Siirrä %1:stä"
@@ -16479,8 +16479,8 @@ msgstr "Siirrä %1:stä"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1030
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1107
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2246
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2263
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2254
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2271
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Siirto %1:een"
@@ -16581,7 +16581,7 @@ msgid "[No Tag]"
 msgstr "[Ei luokitusta]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:831
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2187
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2195
 #, fuzzy, kde-format
 #| msgid "Sell shares"
 msgctxt "Investment action"
@@ -16590,21 +16590,21 @@ msgstr "Myy osakkeita"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:851
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1112
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1373
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2211
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2378
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1381
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2219
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2386
 #, kde-format
 msgid "No Institution"
 msgstr "Ei rahalaitosta"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:853
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2220
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2228
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Ei maksunsaajaa]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:898
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2251
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2259
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Tapahtuman jaottelu]"
@@ -16617,18 +16617,18 @@ msgid "Split"
 msgstr "Jaottelu"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1162
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2082
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2090
 #, kde-format
 msgid "Month of %1"
 msgstr "Kuukausi: %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1163
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2083
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2091
 #, kde-format
 msgid "Week of %1"
 msgstr "Viikko: %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1996
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2004
 #, kde-format
 msgctxt "No institution"
 msgid "None"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-17 00:44+0000\n"
+"POT-Creation-Date: 2026-09-20 00:46+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -16381,8 +16381,8 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1030
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1108
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2246
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2264
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2254
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2272
 #, kde-format
 msgid "Transfer from %1"
 msgstr "%1에서 이체"
@@ -16390,8 +16390,8 @@ msgstr "%1에서 이체"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1030
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1107
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2246
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2263
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2254
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2271
 #, kde-format
 msgid "Transfer to %1"
 msgstr "%1(으)로 이체"
@@ -16492,7 +16492,7 @@ msgid "[No Tag]"
 msgstr "[태그 없음]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:831
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2187
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2195
 #, fuzzy, kde-format
 #| msgid "Sell shares"
 msgctxt "Investment action"
@@ -16501,21 +16501,21 @@ msgstr "주식 매도"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:851
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1112
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1373
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2211
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2378
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1381
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2219
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2386
 #, kde-format
 msgid "No Institution"
 msgstr "금융기관 없음"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:853
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2220
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2228
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[빈 수취인]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:898
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2251
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2259
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[분할 거래]"
@@ -16528,18 +16528,18 @@ msgid "Split"
 msgstr "분할"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1162
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2082
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2090
 #, kde-format
 msgid "Month of %1"
 msgstr "%1의 달"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1163
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2083
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2091
 #, kde-format
 msgid "Week of %1"
 msgstr "%1의 주"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1996
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2004
 #, kde-format
 msgctxt "No institution"
 msgid "None"
