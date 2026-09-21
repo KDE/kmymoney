@@ -803,6 +803,11 @@ void LedgerView::setColumnsHidden(QVector<int> columns)
     d->columnSelector->setAlwaysHidden(columns);
 }
 
+void LedgerView::setColumnsInitialHidden(QVector<int> columns)
+{
+    d->columnSelector->setInitiallyHidden(columns);
+}
+
 void LedgerView::setColumnsShown(QVector<int> columns)
 {
     d->columnSelector->setAlwaysVisible(columns);

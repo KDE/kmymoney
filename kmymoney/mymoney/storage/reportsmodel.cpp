@@ -47,7 +47,7 @@ ReportsModel::~ReportsModel()
 int ReportsModel::columnCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent);
-    return useGroups() ? 4 : 7;
+    return useGroups() ? MaxColumns - 3 : MaxColumns;
 }
 
 QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -74,6 +74,9 @@ QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int 
             break;
         case Modified:
             return i18nc("Report state", "Modified");
+            break;
+        case Id:
+            return i18nc("@title:column Report ID", "ID");
             break;
         }
     }
@@ -105,6 +108,8 @@ QVariant ReportsModel::data(const QModelIndex& index, int role) const
             return i18n(report.group().toLatin1());
         case Modified:
             return report.isModified() ? QStringLiteral("\u2605") : QString();
+        case Id:
+            return report.id();
         default:
             return QStringLiteral("not yet implemented");
         }

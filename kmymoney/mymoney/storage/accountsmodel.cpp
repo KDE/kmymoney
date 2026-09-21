@@ -492,6 +492,8 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
                 return i18nc("@title:column Shows SWIFT/BIC", "SWIFT/BIC");
             case Column::Currency:
                 return i18nc("@title:column Shows Currency", "Currency");
+            case Column::Id:
+                return i18nc("@title:column Shows Account ID", "ID");
             default:
                 break;
             }
@@ -531,6 +533,8 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
                 return i18nc("@info:tooltip for 'SWIFT/BIC' column", "A Business Identifier Code, also known as SWIFT.");
             case Column::Currency:
                 return i18nc("@info:tooltip for 'Currency' column", "The currency assigned to the account");
+            case Column::Id:
+                return i18nc("@info:tooltip for 'ID' column", "The internal identification of the account");
             default:
                 break;
             }
@@ -665,6 +669,9 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
                 return security.tradingCurrency();
             }
             return account.currencyId();
+
+        case Column::Id:
+            return account.id();
 
         default:
             break;

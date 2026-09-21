@@ -144,6 +144,9 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
         case AccountsModel::Column::Bic:
             return institution.value("bic");
 
+        case AccountsModel::Column::Id:
+            return institution.id();
+
         default:
             return QString();
         }

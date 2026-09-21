@@ -82,7 +82,9 @@ public:
             AccountsModel::Column::Number,
             AccountsModel::Column::HasOnlineMapping,
         }));
-
+        columnSelector->setInitiallyHidden(QVector<int>({
+            AccountsModel::Column::Id,
+        }));
         ui->m_accountTree->setProxyModel(new InstitutionsProxyModel);
         m_proxyModel = ui->m_accountTree->proxyModel();
         m_proxyModel->setClosedSelectable(true);

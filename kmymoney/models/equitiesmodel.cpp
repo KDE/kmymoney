@@ -197,6 +197,7 @@ EquitiesModel::EquitiesModel(QObject* parent)
     appendColumn(i18n("Price"));
     appendColumn(i18n("Value"));
     appendColumn(i18n("Last Price Update"));
+    appendColumn(i18nc("@title:column Id", "ID"));
 }
 
 EquitiesModel::~EquitiesModel()
@@ -268,6 +269,8 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
             const auto priceDate = MyMoneyUtils::formatDate(file->price(acc.currencyId(), tradingCurrencyId).date());
             return priceDate;
         }
+        case Id:
+            return acc.id();
 
         default:
             break;

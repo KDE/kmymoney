@@ -71,6 +71,7 @@ public:
 
     void setAlwaysHidden(QVector<int> columns);
     void setAlwaysVisible(QVector<int> columns);
+    void setInitiallyHidden(const QVector<int>& columns);
     void setSelectable(QVector<int> columns);
     void setModel(QAbstractItemModel* model);
     const QAbstractItemModel* model() const;

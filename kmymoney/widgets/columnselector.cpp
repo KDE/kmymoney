@@ -94,7 +94,9 @@ public:
             if (visibleColumns.isEmpty()) {
                 // in case no column was marked as visible so far, all should
                 for (int col = 0; col < maxColumn; ++col) {
-                    visibleColumns += col;
+                    if (!initiallyHiddenColumns.contains(col)) {
+                        visibleColumns += col;
+                    }
                 }
             }
 
@@ -145,6 +147,7 @@ public:
     QVector<int> alwaysHiddenColumns;
     QVector<int> alwaysVisibleColumns;
     QVector<int> applyStorageOffsetColumns;
+    QVector<int> initiallyHiddenColumns;
     QString configGroupName;
 
     int storageOffset;
@@ -287,6 +290,13 @@ void ColumnSelector::setAlwaysVisible(QVector<int> columns)
         d->setColumnHidden(col, false);
         d->alwaysHiddenColumns.removeAll(col);
     }
+}
+
+void ColumnSelector::setInitiallyHidden(const QVector<int>& columns)
+{
+    Q_D(ColumnSelector);
+
+    d->initiallyHiddenColumns = columns;
 }
 
 void ColumnSelector::setSelectable(QVector<int> columns)

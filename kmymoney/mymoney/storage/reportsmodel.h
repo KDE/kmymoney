@@ -38,6 +38,7 @@ public:
         Favorite,
         Modified,
         Group,
+        Id,
         // insert new columns above this line
         MaxColumns,
     };

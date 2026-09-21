@@ -70,6 +70,7 @@ struct JournalModel::Private {
               {Balance, i18nc("@title:column", "Balance")},
               {EntryDate, i18nc("@title:column Entry date", "Entry")},
               {Memo, i18nc("@title:column", "Memo")},
+              {Id, i18nc("@title:column Transaction ID", "ID")},
           }))
         , extendedHeaderData(QHash<Column, QString>({
               {Number, i18nc("@title:column Cheque Number (ext)", "Number")},
@@ -735,6 +736,8 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             memo.replace(QStringLiteral("\n"), QStringLiteral(", "));
             return memo;
         }
+        case Id:
+            return transaction.id();
         }
         break;
 

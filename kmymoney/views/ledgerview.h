@@ -44,6 +44,7 @@ public:
     bool showValuesInverted() const;
 
     void setColumnsHidden(QVector<int> columns);
+    void setColumnsInitialHidden(QVector<int> columns);
     void setColumnsShown(QVector<int> columns);
 
     void setModel(QAbstractItemModel * model) override;

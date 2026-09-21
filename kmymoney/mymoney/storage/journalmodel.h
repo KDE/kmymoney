@@ -160,6 +160,7 @@ public:
         Value,
         Balance,
         Memo,
+        Id,
         // insert new columns above this line
         MaxColumns,
     };

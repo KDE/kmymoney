@@ -228,6 +228,10 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
     delete d->form;
     d->form = nullptr;
     d->hideFormReasons.insert(QLatin1String("FormAvailable"));
+    d->ui->m_ledgerView->setColumnsInitialHidden(columns);
+    columns = {
+        JournalModel::Column::Id,
+    };
 
     switch (acc.accountType()) {
     case eMyMoney::Account::Type::Investment:

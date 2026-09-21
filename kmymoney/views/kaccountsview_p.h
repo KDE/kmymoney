@@ -91,7 +91,9 @@ public:
             AccountsModel::Column::CostCenter,
 #endif
         }));
-
+        columnSelector->setInitiallyHidden(QVector<int>({
+            AccountsModel::Column::Id,
+        }));
         ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
         m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
         m_proxyModel->setFilterComboBox(ui->m_filterBox);

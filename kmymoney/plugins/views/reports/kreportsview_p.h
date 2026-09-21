@@ -116,6 +116,7 @@ public:
         // add column selector
         auto columnSelector = new ColumnSelector(view, view->objectName());
         columnSelector->setAlwaysVisible(QVector<int>({ReportsModel::Columns::ReportName}));
+        columnSelector->setInitiallyHidden(QVector<int>({ReportsModel::Columns::Id}));
         columnSelector->setModel(proxyModel);
 
         view->setAllColumnsShowFocus(true);
