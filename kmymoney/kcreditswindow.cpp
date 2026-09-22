@@ -39,8 +39,8 @@ KAboutData initializeCreditsData()
 #ifdef ENABLE_KBANKING
     features << i18n("Online banking");
 #endif
-#ifdef ENABLE_SANATIZERS
-    features << i18nc("about option, %1 list of sanatizers", "Sanatizers: %1").arg(QLatin1String(ENABLED_SANATIZERS));
+#ifdef ENABLE_SANITIZERS
+    features << i18nc("about option, %1 list of sanitizers", "Sanitizers: %1").arg(QLatin1String(ENABLED_SANITIZERS));
 #endif
 
     aboutData.setShortDescription(
