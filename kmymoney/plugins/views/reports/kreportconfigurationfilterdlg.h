@@ -59,7 +59,6 @@ Q_SIGNALS:
     void closeRequested();
 
 protected Q_SLOTS:
-    void slotRowTypeChanged(int);
     void slotColumnTypeChanged(int);
     void slotReset();
     void slotConvertCurrencyChanged(int state);

@@ -21,7 +21,6 @@
 #include "ui_reporttabgeneral.h"
 #include "ui_reporttabperformance.h"
 #include "ui_reporttabrange.h"
-#include "ui_reporttabrowcolpivot.h"
 
 ReportTabGeneral::ReportTabGeneral(QWidget* parent)
     : QWidget(parent)
@@ -31,18 +30,6 @@ ReportTabGeneral::ReportTabGeneral(QWidget* parent)
 }
 
 ReportTabGeneral::~ReportTabGeneral()
-{
-    delete ui;
-}
-
-ReportTabRowColPivot::ReportTabRowColPivot(QWidget* parent)
-    : QWidget(parent)
-{
-    ui = new Ui::ReportTabRowColPivot;
-    ui->setupUi(this);
-}
-
-ReportTabRowColPivot::~ReportTabRowColPivot()
 {
     delete ui;
 }
