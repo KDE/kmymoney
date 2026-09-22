@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
 "PO-Revision-Date: 2025-06-22 06:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -4690,8 +4690,8 @@ msgstr "Banca por Internet"
 #: kmymoney/kcreditswindow.cpp:43
 #, fuzzy, kde-format
 #| msgid "Date: %1"
-msgctxt "about option, %1 list of sanatizers"
-msgid "Sanatizers: %1"
+msgctxt "about option, %1 list of sanitizers"
+msgid "Sanitizers: %1"
 msgstr "Data: %1"
 
 #: kmymoney/kcreditswindow.cpp:47

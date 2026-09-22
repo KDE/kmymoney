@@ -1035,9 +1035,11 @@
 
 <note>
   <para
->De initiële lijst en configuratie van online bronnen voor koersen is opgezet toen &kmymoney; voor het eerst uw gegevensbestand aanmaakte. Als een online bron een wijziging ondergaat die een wijziging in deze instellingen vereist om voor &kmymoney; door te gaan met het te gebruiken als een geldige bron, dan moet de gebruiker de noodzakelijke wijzigingen doen, met deze dialoog, gebaseerd op instructies gepost op een van de gesuggereerde <link linkend="firsttime.contact"
+>De initiële lijst en configuratie van online koersbronnen worden ingesteld wanneer &kmymoney; uw gegevensbestand voor het eerst aanmaakt. Aanvullende vooraf gedefinieerde koersbronnen, evenals updates voor bestaande bronnen, kunnen worden geïnstalleerd door in dit dialoogvenster op de knop <guibutton
+>Installeren</guibutton
+> te klikken. Handmatige aanpassing van de definities van koersbronnen is alleen nodig voor het aanmaken van aangepaste bronnen of het wijzigen van bestaande bronnen. Als een online bron een wijziging doorvoert waarvoor de instellingen moeten worden aangepast om &kmymoney; in staat te stellen de bron te blijven gebruiken, moet de gebruiker de nodige wijzigingen in dit dialoogvenster doorvoeren. Dit dient te gebeuren aan de hand van instructies die te vinden zijn via een van de voorgestelde <link linkend="firsttime.contact"
 >ondersteuningsopties</link
->. Hopelijk, in de niet zo verre toekomst, zal de manier waarop configuratie  van online bronnen wordt behandeld worden gewijzigd zodat &kmymoney; automatisch elke noodzakelijke updates in deze instellingen zal ophalen zonder te vereisen dat de gebruiker een handmatige bewerking doet. </para>
+>. </para>
 </note>
 </sect1>
 

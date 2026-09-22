@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
-"PO-Revision-Date: 2026-05-31 19:06-0400\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
-"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -704,7 +704,7 @@ msgstr ""
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:130
 #, kde-format
 msgid "CSV"
-msgstr "CSV"
+msgstr ""
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:107
 #, kde-format
@@ -2715,7 +2715,7 @@ msgstr ""
 #: kmymoney/dialogs/ksaveasquestion.cpp:31
 #, kde-format
 msgid "SQL"
-msgstr "SQL"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSaveAsQuestion)
 #: kmymoney/dialogs/ksaveasquestion.ui:20
@@ -3528,14 +3528,12 @@ msgid "Ledger"
 msgstr "ئانا ھېساب دەپتىرى"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Accept transaction"
+#, kde-format
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
 "transactions"
-msgstr "سودا"
+msgstr ""
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:66
 #, kde-format
@@ -4162,7 +4160,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:460
 #, no-c-format, kde-format
 msgid "%"
-msgstr "%"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_AutoFillUseMemos)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:489
@@ -4359,11 +4357,10 @@ msgid "Online banking"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:43
-#, fuzzy, kde-format
-#| msgid "Date: %1"
-msgctxt "about option, %1 list of sanatizers"
-msgid "Sanatizers: %1"
-msgstr "چېسلا:"
+#, kde-format
+msgctxt "about option, %1 list of sanitizers"
+msgid "Sanitizers: %1"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:47
 #, kde-format
@@ -5042,11 +5039,9 @@ msgid "Edit scheduled transaction"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1526
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Accept transaction"
+#, kde-format
 msgid "Edit scheduled transaction (detailed)"
-msgstr "سودا"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1527
 #, kde-format
@@ -5405,8 +5400,6 @@ msgstr "ھۆججەت مەۋجۇت"
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
-"بۇ مەشغۇلات تىزىملىك بالداقنى پۈتۈنلەي يوشۇرىدۇ. %1 نى بېسىپ قايتا "
-"كۆرسىتەلەيسىز."
 
 #: kmymoney/kmymoney.cpp:3542
 #, kde-format
@@ -5536,8 +5529,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:4043
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "ياپ"
@@ -5546,7 +5538,7 @@ msgstr "ياپ"
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
-msgstr ""
+msgstr "يېڭىلا"
 
 #: kmymoney/kmymoney.cpp:4085
 #, kde-format
@@ -6602,6 +6594,8 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"  * Payee %1 has BIC with invalid length '%2'.\n"
+"    Must be 11 chars and is %3"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3407
 #, kde-format
@@ -7936,7 +7930,7 @@ msgstr ""
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 days"
-msgstr ""
+msgstr "ھەر %1 كۈن"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:959
 #, kde-format
@@ -8326,7 +8320,7 @@ msgstr ""
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
-msgstr "C"
+msgstr ""
 
 #: kmymoney/mymoney/statusmodel.cpp:40
 #: kmymoney/mymoney/storage/journalmodel.cpp:96
@@ -8346,7 +8340,7 @@ msgstr ""
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
-msgstr ""
+msgstr "بىرىنچى ھەرپ"
 
 #: kmymoney/mymoney/statusmodel.cpp:46
 #, kde-format
@@ -8472,8 +8466,7 @@ msgid "SWIFT/BIC"
 msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:494
-#, fuzzy, kde-format
-#| msgid "Currency"
+#, kde-format
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "پۇل"
@@ -8553,7 +8546,7 @@ msgstr "تەپسىلاتى"
 #, kde-format
 msgctxt "@title:column Reconciliation state"
 msgid "C"
-msgstr "C"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:64
 #, kde-format
@@ -8605,8 +8598,7 @@ msgid "Entry"
 msgstr "تۈر"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "@title:column"
 msgid "Memo"
 msgstr "ئەسلەتمە"
@@ -9355,7 +9347,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item %1 = tens text, %2 = ones text"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:65
 #, kde-format
@@ -9377,13 +9369,13 @@ msgctxt ""
 "@item Can be used to script translation of numerals. Leave untranslated when "
 "not needed. %1 = integer, %2 = fraction, %3 = denominator"
 msgid "%1 %2 %3"
-msgstr "%1 %2 %3"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:122
 #, kde-format
 msgctxt "@item %1 = numeral <1000, %2 = scale"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:124
 #, kde-format
@@ -10259,31 +10251,31 @@ msgstr ""
 #, kde-format
 msgctxt "Noun, the introduction."
 msgid "1. File"
-msgstr ""
+msgstr "1. ھۆججەت"
 
 #. i18n: ectx: property (text), widget (QLabel, label_separators)
 #: kmymoney/plugins/csv/import/csvwizard.ui:76
 #, kde-format
 msgid "2. Separators"
-msgstr ""
+msgstr "2. Separators"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
 #: kmymoney/plugins/csv/import/csvwizard.ui:89
 #, kde-format
 msgid "3. Rows"
-msgstr ""
+msgstr "3. قۇرلار"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: kmymoney/plugins/csv/import/csvwizard.ui:96
 #, kde-format
 msgid "4. Columns"
-msgstr ""
+msgstr "4. رەت"
 
 #. i18n: ectx: property (text), widget (QLabel, label_formats)
 #: kmymoney/plugins/csv/import/csvwizard.ui:103
 #, kde-format
 msgid "5. Formats"
-msgstr ""
+msgstr "5. Formats"
 
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:26
@@ -12758,7 +12750,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:242
 #, kde-format
 msgid "User Agent"
-msgstr ""
+msgstr "ئىشلەتكۈچى ۋاكالەتچى"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, m_clientUidEdit)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:252
@@ -12838,14 +12830,14 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:126
 #, kde-format
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_timestampOffsetSign)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:435
 #: kmymoney/plugins/ofx/import/importoption.ui:140
 #, kde-format
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:462
@@ -13404,13 +13396,13 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:417
 #, kde-format
 msgid "T"
-msgstr "T"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:426
 #, kde-format
 msgid "0"
-msgstr "0"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:431
@@ -13552,7 +13544,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:588
 #, kde-format
 msgid "1"
-msgstr "1"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:448
@@ -13570,19 +13562,19 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:460
 #, kde-format
 msgid "2"
-msgstr "2"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:468
 #, kde-format
 msgid "I"
-msgstr "I"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:477
 #, kde-format
 msgid "3"
-msgstr "3"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:485
@@ -13594,7 +13586,7 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:494
 #, kde-format
 msgid "4"
-msgstr "4"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:531
@@ -14643,7 +14635,7 @@ msgstr ""
 #, kde-format
 msgctxt "Delete budget button"
 msgid "Del"
-msgstr "Del"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_updateButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:114
@@ -15522,7 +15514,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:74
 #, kde-format
 msgid "Return"
-msgstr "Return"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReturnInvestment)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:751
@@ -16534,13 +16526,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "CSV"
-msgstr "CSV"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:72
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "HTML"
-msgstr "HTML"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:73
 #, kde-format
@@ -17000,6 +16992,40 @@ msgid ""
 "              </p>\n"
 "            "
 msgstr ""
+"\n"
+"              <p>\n"
+"              This option is for investments reports only which\n"
+"              show prices instead of balances as all other reports do.\n"
+"              </p>\n"
+"              <p>\n"
+"              Select this option to include prices only if there is an "
+"actual price for the date.\n"
+"              If not, 0 will be shown. In the graph, the value will be "
+"skipped.\n"
+"              </p>\n"
+"              <p>\n"
+"              If this option is off the last existing price is shown for a "
+"period, if\n"
+"              it is on, in a table the value is '0' shown and in a chart a "
+"linear\n"
+"              interpolation for the missing values will be performed.\n"
+"              <br>Example:\n"
+"              <br>There are prices for January and March, but there is no "
+"price for\n"
+"              February.\n"
+"              <ul>\n"
+"              <li><b>OFF</b>: shows the price for February as the last price "
+"of\n"
+"              يانۋار\n"
+"              <li><b>ON</b>: in a table the value is '0', in a chart a "
+"linear\n"
+"              interpolation for the February-price will be performed\n"
+"              (so it makes a kind of average-value using the January- and "
+"the\n"
+"              March-price in the chart)\n"
+"              </ul>\n"
+"              </p>\n"
+"            "
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipZero)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:103
@@ -17106,10 +17132,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Memo Column"
+#, kde-format
 msgid "Performance Columns"
-msgstr "ئىستون كۆرسەت"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
@@ -17564,7 +17589,7 @@ msgstr "بۆلەك"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:41
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "تىزىمغا كىر"
 
 #. i18n: ectx: property (text), widget (QPushButton, addBackendButton)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:51
@@ -19421,7 +19446,7 @@ msgstr ""
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
-msgstr "C"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1060
 #, kde-format
@@ -19470,7 +19495,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
-msgstr "C"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1439
 #, kde-format
@@ -19815,7 +19840,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview.ui:73 kmymoney/views/ktagsview.ui:84
 #, kde-format
 msgid "Del"
-msgstr "Del"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QToolButton, m_mergeButton)
 #: kmymoney/views/kpayeesview.ui:80
@@ -20233,7 +20258,7 @@ msgstr "نەتىجە"
 #: kmymoney/views/ksearchtransactiondlg.ui:33
 #, kde-format
 msgid "F"
-msgstr ""
+msgstr "بىرىنچى ھەرپ"
 
 #: kmymoney/views/ktagsview.cpp:93
 #, kde-format
@@ -20792,7 +20817,7 @@ msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
 "parenthesis"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/views/onlinebalancedelegate.cpp:140
 #, kde-format
@@ -21108,7 +21133,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr ""
+msgstr "كۆڭۈلدىكىگە قايتۇر"
 
 #: kmymoney/views/tabordereditor.cpp:473
 #, kde-format
@@ -21365,10 +21390,9 @@ msgid "The date you entered is invalid"
 msgstr "كىرگۈزگەن چېسلا ئىناۋەتسىز"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgid "All transaction dates"
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
@@ -24204,7 +24228,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/newpaymentswizardpage.ui:83
 #, kde-format
 msgid "1. General Information"
-msgstr ""
+msgstr "1. ئادەتتىكى ئۇچۇر"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel19_4)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4_3_2)
@@ -24215,6 +24239,8 @@ msgid ""
 "\n"
 "2. Calculate Loan"
 msgstr ""
+"\n"
+"2. Calculate Loan"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel19_5)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4_3)
@@ -24225,6 +24251,8 @@ msgid ""
 "\n"
 "3. Payments"
 msgstr ""
+"\n"
+"3. پۇل تۆلەش"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:19
@@ -24244,6 +24272,10 @@ msgid ""
 "\n"
 "3. Payments"
 msgstr ""
+"\n"
+"2. Calculate Loan\n"
+"\n"
+"3. پۇل تۆلەش"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_1)
 #: kmymoney/wizards/newloanwizard/newintrowizardpage.ui:43

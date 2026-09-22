@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
 "PO-Revision-Date: 2026-04-22 16:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@yahoo.com>\n"
 "Language-Team: Irish <http://weblate.amgelocalnet.duckdns.org/projects/kde-"
@@ -4741,8 +4741,8 @@ msgstr "Baincéireacht ar líne"
 
 #: kmymoney/kcreditswindow.cpp:43
 #, kde-format
-msgctxt "about option, %1 list of sanatizers"
-msgid "Sanatizers: %1"
+msgctxt "about option, %1 list of sanitizers"
+msgid "Sanitizers: %1"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:47

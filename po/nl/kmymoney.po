@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
-"PO-Revision-Date: 2026-09-17 15:00+0200\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
+"PO-Revision-Date: 2026-09-22 11:20+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -4710,10 +4710,11 @@ msgstr "Online bankieren"
 
 #: kmymoney/kcreditswindow.cpp:43
 #, fuzzy, kde-format
-#| msgid "Date: %1"
-msgctxt "about option, %1 list of sanatizers"
-msgid "Sanatizers: %1"
-msgstr "Datum: %1"
+#| msgctxt "about option, %1 list of sanatizers"
+#| msgid "Sanatizers: %1"
+msgctxt "about option, %1 list of sanitizers"
+msgid "Sanitizers: %1"
+msgstr "Opschoonmiddelen: %1"
 
 #: kmymoney/kcreditswindow.cpp:47
 #, kde-format

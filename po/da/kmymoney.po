@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -4793,8 +4793,8 @@ msgstr "Online-indstillinger"
 #: kmymoney/kcreditswindow.cpp:43
 #, fuzzy, kde-format
 #| msgid "Date:"
-msgctxt "about option, %1 list of sanatizers"
-msgid "Sanatizers: %1"
+msgctxt "about option, %1 list of sanitizers"
+msgid "Sanitizers: %1"
 msgstr "Dato:"
 
 #: kmymoney/kcreditswindow.cpp:47

@@ -193,7 +193,7 @@
 
 <sect2
 ><title
->Lijst met Categorieën</title>
+>Lijst met categorieën</title>
 <para
 >De lijst met Categorieën toont de lijst met Inkomen- en Uitgavenrekeningen. (Bedenk, binnen &kmymoney; worden categorieën behandeld als een speciaal type rekening). Zoals in andere plaatsen in &kmymoney;, is de lijst georganiseerd in een boomstructuur. De lijst kan uit- of ingevouwen worden om subcategorieën binnen een categorie te tonen of te verbergen. De lijst met Categorieën heeft een aantal kolommen: </para>
 
