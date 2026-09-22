@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-20 00:46+0000\n"
+"POT-Creation-Date: 2026-09-22 00:45+0000\n"
 "PO-Revision-Date: 2026-04-22 16:00+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@yahoo.com>\n"
 "Language-Team: Irish <http://weblate.amgelocalnet.duckdns.org/projects/kde-"
@@ -618,10 +618,10 @@ msgid "Backup location:"
 msgstr "Suíomh cúltaca:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3746
-#: kmymoney/kmymoney.cpp:3816 kmymoney/kmymoney.cpp:3831
-#: kmymoney/kmymoney.cpp:3837 kmymoney/kmymoney.cpp:3849
-#: kmymoney/kmymoney.cpp:3851
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3749
+#: kmymoney/kmymoney.cpp:3819 kmymoney/kmymoney.cpp:3834
+#: kmymoney/kmymoney.cpp:3840 kmymoney/kmymoney.cpp:3852
+#: kmymoney/kmymoney.cpp:3854
 #, kde-format
 msgid "Backup"
 msgstr "Déan cúltaca"
@@ -4718,13 +4718,13 @@ msgid "Create tag"
 msgstr "Cruthaigh clib"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:99
+#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:102
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "Criptiú GPG"
 
-#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:80
+#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:83
 #, kde-format
 msgid "Addressbook integration"
 msgstr "Comhtháthú leabhar seoltaí"
@@ -4734,12 +4734,18 @@ msgstr "Comhtháthú leabhar seoltaí"
 msgid "Holiday regions integration"
 msgstr "Comhtháthú réigiún saoire"
 
-#: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:92
+#: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:95
 #, kde-format
 msgid "Online banking"
 msgstr "Baincéireacht ar líne"
 
-#: kmymoney/kcreditswindow.cpp:44
+#: kmymoney/kcreditswindow.cpp:43
+#, kde-format
+msgctxt "about option, %1 list of sanatizers"
+msgid "Sanatizers: %1"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:47
 #, kde-format
 msgid ""
 "\n"
@@ -4753,12 +4759,12 @@ msgstr ""
 "Smaoinigh, le do thoil, ar rannchuidiú leis an tionscadal seo le cód agus/nó "
 "moltaí."
 
-#: kmymoney/kcreditswindow.cpp:46
+#: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
 msgstr "(c) 2000-2025 Foireann forbartha KMyMoney"
 
-#: kmymoney/kcreditswindow.cpp:50
+#: kmymoney/kcreditswindow.cpp:53
 #, kde-format
 msgid ""
 "Compiled with the following optional features:\n"
@@ -4767,176 +4773,176 @@ msgstr ""
 "Tiomsaithe leis na gnéithe roghnacha seo a leanas:\n"
 "%1"
 
-#: kmymoney/kcreditswindow.cpp:53
+#: kmymoney/kcreditswindow.cpp:56
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Inneall lárnach, Bainisteoir Scaoilte, Riarthóir tionscadail"
 
-#: kmymoney/kcreditswindow.cpp:54
+#: kmymoney/kcreditswindow.cpp:57
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr "Forbróir, Cothabhálaí, tacaíocht Windows"
 
-#: kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:58
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr "Tacaíocht d'fhorbróirí, do Windows agus do MacOS"
 
-#: kmymoney/kcreditswindow.cpp:58 kmymoney/kcreditswindow.cpp:60
-#: kmymoney/kcreditswindow.cpp:62 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:68 kmymoney/kcreditswindow.cpp:70
-#: kmymoney/kcreditswindow.cpp:71 kmymoney/kcreditswindow.cpp:72
-#: kmymoney/kcreditswindow.cpp:73 kmymoney/kcreditswindow.cpp:75
-#: kmymoney/kcreditswindow.cpp:138 kmymoney/kcreditswindow.cpp:141
-#: kmymoney/kcreditswindow.cpp:144 kmymoney/kcreditswindow.cpp:147
-#: kmymoney/kcreditswindow.cpp:149
+#: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:63
+#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:71 kmymoney/kcreditswindow.cpp:73
+#: kmymoney/kcreditswindow.cpp:74 kmymoney/kcreditswindow.cpp:75
+#: kmymoney/kcreditswindow.cpp:76 kmymoney/kcreditswindow.cpp:78
+#: kmymoney/kcreditswindow.cpp:141 kmymoney/kcreditswindow.cpp:144
+#: kmymoney/kcreditswindow.cpp:147 kmymoney/kcreditswindow.cpp:150
+#: kmymoney/kcreditswindow.cpp:152
 #, kde-format
 msgid "Inactive member. "
 msgstr "Ball neamhghníomhach. "
 
-#: kmymoney/kcreditswindow.cpp:58
+#: kmymoney/kcreditswindow.cpp:61
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "Smaoineamh tosaigh, go leor cód foinse tosaigh, Riarthóir tionscadail"
 
-#: kmymoney/kcreditswindow.cpp:60
+#: kmymoney/kcreditswindow.cpp:63
 #, kde-format
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Réamhaisnéis, Tuarascálacha"
 
-#: kmymoney/kcreditswindow.cpp:62
+#: kmymoney/kcreditswindow.cpp:65
 #, kde-format
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Loighic tuairiscithe, Iompórtáil OFX"
 
-#: kmymoney/kcreditswindow.cpp:65
+#: kmymoney/kcreditswindow.cpp:68
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Cúltaca bunachar sonraí, cothaitheoir brainse cobhsaí"
 
-#: kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:71
 #, kde-format
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Riarthóir Tionscadail"
 
-#: kmymoney/kcreditswindow.cpp:70 kmymoney/kcreditswindow.cpp:72
-#: kmymoney/kcreditswindow.cpp:73
+#: kmymoney/kcreditswindow.cpp:73 kmymoney/kcreditswindow.cpp:75
+#: kmymoney/kcreditswindow.cpp:76
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Forbróir"
 
-#: kmymoney/kcreditswindow.cpp:71
+#: kmymoney/kcreditswindow.cpp:74
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Cúltaca bunachar sonraí"
 
-#: kmymoney/kcreditswindow.cpp:75
+#: kmymoney/kcreditswindow.cpp:78
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Forbróir, Athfhachtóireacht Chóid"
 
-#: kmymoney/kcreditswindow.cpp:81 kmymoney/kcreditswindow.cpp:93
-#: kmymoney/kcreditswindow.cpp:100 kmymoney/kcreditswindow.cpp:107
-#: kmymoney/kcreditswindow.cpp:113 kmymoney/kcreditswindow.cpp:118
-#: kmymoney/kcreditswindow.cpp:125 kmymoney/kcreditswindow.cpp:132
+#: kmymoney/kcreditswindow.cpp:84 kmymoney/kcreditswindow.cpp:96
+#: kmymoney/kcreditswindow.cpp:103 kmymoney/kcreditswindow.cpp:110
+#: kmymoney/kcreditswindow.cpp:116 kmymoney/kcreditswindow.cpp:121
+#: kmymoney/kcreditswindow.cpp:128 kmymoney/kcreditswindow.cpp:135
 #: kmymoney/mymoney/mymoneysecurity.cpp:265
 #, kde-format
 msgid "Unknown"
 msgstr "Anaithnid"
 
-#: kmymoney/kcreditswindow.cpp:81 kmymoney/kcreditswindow.cpp:87
-#: kmymoney/kcreditswindow.cpp:93 kmymoney/kcreditswindow.cpp:100
-#: kmymoney/kcreditswindow.cpp:107 kmymoney/kcreditswindow.cpp:113
-#: kmymoney/kcreditswindow.cpp:118 kmymoney/kcreditswindow.cpp:125
-#: kmymoney/kcreditswindow.cpp:132
+#: kmymoney/kcreditswindow.cpp:84 kmymoney/kcreditswindow.cpp:90
+#: kmymoney/kcreditswindow.cpp:96 kmymoney/kcreditswindow.cpp:103
+#: kmymoney/kcreditswindow.cpp:110 kmymoney/kcreditswindow.cpp:116
+#: kmymoney/kcreditswindow.cpp:121 kmymoney/kcreditswindow.cpp:128
+#: kmymoney/kcreditswindow.cpp:135
 #, kde-format
 msgid "%1 (build against %2)"
 msgstr "%1 (tóg i gcoinne %2)"
 
-#: kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:89
 #, kde-format
 msgid "Financial framework"
 msgstr "Creat airgeadais"
 
-#: kmymoney/kcreditswindow.cpp:106
+#: kmymoney/kcreditswindow.cpp:109
 #, kde-format
 msgid "Online banking framework"
 msgstr "Creat baincéireachta ar líne"
 
-#: kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:115
 #, kde-format
 msgid "Library for creating diagrams"
 msgstr "Leabharlann chun léaráidí a chruthú"
 
-#: kmymoney/kcreditswindow.cpp:117
+#: kmymoney/kcreditswindow.cpp:120
 #, kde-format
 msgid "iCalendar integration"
 msgstr "Comhtháthú iCalendar"
 
-#: kmymoney/kcreditswindow.cpp:124
+#: kmymoney/kcreditswindow.cpp:127
 #, kde-format
 msgid "OFX banking protocol abstraction library"
 msgstr "Leabharlann teibí prótacail baincéireachta OFX"
 
-#: kmymoney/kcreditswindow.cpp:131
+#: kmymoney/kcreditswindow.cpp:134
 #, kde-format
 msgid "SQLite database encryption"
 msgstr "Criptiú bunachar sonraí SQLite"
 
-#: kmymoney/kcreditswindow.cpp:136
+#: kmymoney/kcreditswindow.cpp:139
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr "Doiciméadú agus tacaíocht d'úsáideoirí"
 
-#: kmymoney/kcreditswindow.cpp:138
+#: kmymoney/kcreditswindow.cpp:141
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Tacaíocht infheistíochta tosaigh"
 
-#: kmymoney/kcreditswindow.cpp:141
+#: kmymoney/kcreditswindow.cpp:144
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Forbróir & Ealaíontóir"
 
-#: kmymoney/kcreditswindow.cpp:144
+#: kmymoney/kcreditswindow.cpp:147
 #, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Deilbhíní & splancscáileán"
 
-#: kmymoney/kcreditswindow.cpp:146
+#: kmymoney/kcreditswindow.cpp:149
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Paistí agus portáil chuig kde4"
 
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:150
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Paistí"
 
-#: kmymoney/kcreditswindow.cpp:149
+#: kmymoney/kcreditswindow.cpp:152
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Paistí, pacáistiú agus KF5-CI do OS X"
 
-#: kmymoney/kcreditswindow.cpp:151
+#: kmymoney/kcreditswindow.cpp:154
 #, kde-format
 msgctxt "Roles in project"
 msgid "CSV import/export"
@@ -4987,625 +4993,625 @@ msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Leabhar nua..."
 
-#: kmymoney/kmymoney.cpp:1274
+#: kmymoney/kmymoney.cpp:1277
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Cóipeáil chuig an ghearrthaisce"
 
-#: kmymoney/kmymoney.cpp:1275
+#: kmymoney/kmymoney.cpp:1278
 #, kde-format
 msgid "Save to file"
 msgstr "Sábháil chuig comhad"
 
-#: kmymoney/kmymoney.cpp:1409
+#: kmymoney/kmymoney.cpp:1412
 #, kde-format
 msgid "Backup..."
 msgstr "Déan cúltaca..."
 
-#: kmymoney/kmymoney.cpp:1410
+#: kmymoney/kmymoney.cpp:1413
 #, kde-format
 msgid "Statement file..."
 msgstr "Comhad ráitis..."
 
-#: kmymoney/kmymoney.cpp:1411 kmymoney/kmymoney.cpp:1412
+#: kmymoney/kmymoney.cpp:1414 kmymoney/kmymoney.cpp:1415
 #, kde-format
 msgid "Account Template..."
 msgstr "Teimpléad Cuntais..."
 
-#: kmymoney/kmymoney.cpp:1413
+#: kmymoney/kmymoney.cpp:1416
 #, kde-format
 msgid "Personal Data..."
 msgstr "Sonraí Pearsanta..."
 
-#: kmymoney/kmymoney.cpp:1415
+#: kmymoney/kmymoney.cpp:1418
 #, kde-format
 msgid "Dump Memory"
 msgstr "Cuimhne Dumpála"
 
-#: kmymoney/kmymoney.cpp:1417
+#: kmymoney/kmymoney.cpp:1420
 #, kde-format
 msgid "File-Information..."
 msgstr "Faisnéis Chomhaid..."
 
-#: kmymoney/kmymoney.cpp:1421
+#: kmymoney/kmymoney.cpp:1424
 #, kde-format
 msgid "Find transaction..."
 msgstr "Aimsigh idirbheart..."
 
-#: kmymoney/kmymoney.cpp:1425
+#: kmymoney/kmymoney.cpp:1428
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Taispeáin Sonraí an Idirbhirt"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1426 kmymoney/settings/kmymoney.kcfg:268
+#: kmymoney/kmymoney.cpp:1429 kmymoney/settings/kmymoney.kcfg:268
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Folaigh idirbhearta réitithe"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1427 kmymoney/settings/kmymoney.kcfg:240
+#: kmymoney/kmymoney.cpp:1430 kmymoney/settings/kmymoney.kcfg:240
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Folaigh catagóirí neamhúsáidte"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1428 kmymoney/settings/kmymoney.kcfg:244
+#: kmymoney/kmymoney.cpp:1431 kmymoney/settings/kmymoney.kcfg:244
 #, kde-format
 msgid "Show all accounts"
 msgstr "Taispeáin na cuntais uile"
 
-#: kmymoney/kmymoney.cpp:1432
+#: kmymoney/kmymoney.cpp:1435
 #, kde-format
 msgid "New institution..."
 msgstr "Institiúid nua..."
 
-#: kmymoney/kmymoney.cpp:1433
+#: kmymoney/kmymoney.cpp:1436
 #, kde-format
 msgid "Edit institution..."
 msgstr "Cuir institiúid in eagar..."
 
-#: kmymoney/kmymoney.cpp:1434
+#: kmymoney/kmymoney.cpp:1437
 #, kde-format
 msgid "Delete institution..."
 msgstr "Scrios an institiúid..."
 
-#: kmymoney/kmymoney.cpp:1438
+#: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgid "New account..."
 msgstr "Cuntas nua..."
 
-#: kmymoney/kmymoney.cpp:1439
+#: kmymoney/kmymoney.cpp:1442
 #, kde-format
 msgid "Open ledger"
 msgstr "Oscail an leabhar mór"
 
-#: kmymoney/kmymoney.cpp:1440
+#: kmymoney/kmymoney.cpp:1443
 #, kde-format
 msgid "Reconcile..."
 msgstr "Réiteach..."
 
-#: kmymoney/kmymoney.cpp:1441
+#: kmymoney/kmymoney.cpp:1444
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Críochnaigh"
 
-#: kmymoney/kmymoney.cpp:1442
+#: kmymoney/kmymoney.cpp:1445
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Cuir siar"
 
-#: kmymoney/kmymoney.cpp:1443
+#: kmymoney/kmymoney.cpp:1446
 #, kde-format
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Cealaigh"
 
-#: kmymoney/kmymoney.cpp:1444
+#: kmymoney/kmymoney.cpp:1447
 #, kde-format
 msgid "Report reconciliation"
 msgstr "Tuairiscigh réiteach"
 
-#: kmymoney/kmymoney.cpp:1445
+#: kmymoney/kmymoney.cpp:1448
 #, kde-format
 msgid "Edit account..."
 msgstr "Cuir cuntas in eagar..."
 
-#: kmymoney/kmymoney.cpp:1446
+#: kmymoney/kmymoney.cpp:1449
 #, kde-format
 msgid "Delete account..."
 msgstr "Scrios cuntas..."
 
-#: kmymoney/kmymoney.cpp:1447
+#: kmymoney/kmymoney.cpp:1450
 #, kde-format
 msgid "Close account"
 msgstr "Dún cuntas"
 
-#: kmymoney/kmymoney.cpp:1448
+#: kmymoney/kmymoney.cpp:1451
 #, kde-format
 msgid "Reopen account"
 msgstr "Athoscail cuntas"
 
-#: kmymoney/kmymoney.cpp:1449
+#: kmymoney/kmymoney.cpp:1452
 #, kde-format
 msgid "Transaction report"
 msgstr "Tuarascáil idirbhirt"
 
-#: kmymoney/kmymoney.cpp:1450
+#: kmymoney/kmymoney.cpp:1453
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Taispeáin cairt iarmhéid..."
 
-#: kmymoney/kmymoney.cpp:1451
+#: kmymoney/kmymoney.cpp:1454
 #, kde-format
 msgid "Map account..."
 msgstr "Cuntas léarscáile..."
 
-#: kmymoney/kmymoney.cpp:1452
+#: kmymoney/kmymoney.cpp:1455
 #, kde-format
 msgid "Unmap account..."
 msgstr "Dímhapáil cuntas..."
 
-#: kmymoney/kmymoney.cpp:1453
+#: kmymoney/kmymoney.cpp:1456
 #, kde-format
 msgid "Update account..."
 msgstr "Nuashonraigh cuntas..."
 
-#: kmymoney/kmymoney.cpp:1454
+#: kmymoney/kmymoney.cpp:1457
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Nuashonraigh gach cuntas..."
 
-#: kmymoney/kmymoney.cpp:1458
+#: kmymoney/kmymoney.cpp:1461
 #, kde-format
 msgid "New category..."
 msgstr "Catagóir nua..."
 
-#: kmymoney/kmymoney.cpp:1459
+#: kmymoney/kmymoney.cpp:1462
 #, kde-format
 msgid "Edit category..."
 msgstr "Cuir catagóir in eagar..."
 
-#: kmymoney/kmymoney.cpp:1460
+#: kmymoney/kmymoney.cpp:1463
 #, kde-format
 msgid "Delete category..."
 msgstr "Scrios catagóir..."
 
-#: kmymoney/kmymoney.cpp:1464
+#: kmymoney/kmymoney.cpp:1467
 #, kde-format
 msgid "Currencies..."
 msgstr "Airgeadraí..."
 
-#: kmymoney/kmymoney.cpp:1465
+#: kmymoney/kmymoney.cpp:1468
 #, kde-format
 msgid "Stock prices and exchange rates..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1466
+#: kmymoney/kmymoney.cpp:1469
 #, kde-format
 msgid "Update stock prices and exchange rates..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1467
+#: kmymoney/kmymoney.cpp:1470
 #, kde-format
 msgid "Consistency Check"
 msgstr "Seiceáil Chomhsheasmhachta"
 
-#: kmymoney/kmymoney.cpp:1468
+#: kmymoney/kmymoney.cpp:1471
 #, kde-format
 msgid "Performance-Test"
 msgstr "Tástáil Feidhmíochta"
 
-#: kmymoney/kmymoney.cpp:1469
+#: kmymoney/kmymoney.cpp:1472
 #, kde-format
 msgid "Calculator..."
 msgstr "Áireamhán..."
 
-#: kmymoney/kmymoney.cpp:1473
+#: kmymoney/kmymoney.cpp:1476
 #, kde-format
 msgid "Enable all messages"
 msgstr "Cumasaigh gach teachtaireacht"
 
-#: kmymoney/kmymoney.cpp:1477 kmymoney/views/kwelcomepage.cpp:81
+#: kmymoney/kmymoney.cpp:1480 kmymoney/views/kwelcomepage.cpp:81
 #, kde-format
 msgid "Get help from our community"
 msgstr "Faigh cabhair ónár bpobal"
 
-#: kmymoney/kmymoney.cpp:1478 kmymoney/views/kwelcomepage.cpp:83
+#: kmymoney/kmymoney.cpp:1481 kmymoney/views/kwelcomepage.cpp:83
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Féach cad atá nua sa leagan seo"
 
-#: kmymoney/kmymoney.cpp:1479 kmymoney/views/kwelcomepage.cpp:79
+#: kmymoney/kmymoney.cpp:1482 kmymoney/views/kwelcomepage.cpp:79
 #, kde-format
 msgid "Visit our website"
 msgstr "Tabhair cuairt ar ár suíomh gréasáin"
 
-#: kmymoney/kmymoney.cpp:1483
+#: kmymoney/kmymoney.cpp:1486
 #, kde-format
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "Idirbheart nua"
 
-#: kmymoney/kmymoney.cpp:1484
+#: kmymoney/kmymoney.cpp:1487
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Cuir in Eagar"
 
-#: kmymoney/kmymoney.cpp:1485
+#: kmymoney/kmymoney.cpp:1488
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Iontráil"
 
-#: kmymoney/kmymoney.cpp:1486
+#: kmymoney/kmymoney.cpp:1489
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Cuir scoilteanna in eagar"
 
-#: kmymoney/kmymoney.cpp:1487
+#: kmymoney/kmymoney.cpp:1490
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Cealaigh"
 
-#: kmymoney/kmymoney.cpp:1488
+#: kmymoney/kmymoney.cpp:1491
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Scrios"
 
-#: kmymoney/kmymoney.cpp:1489
+#: kmymoney/kmymoney.cpp:1492
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Dúblach"
 
-#: kmymoney/kmymoney.cpp:1490
+#: kmymoney/kmymoney.cpp:1493
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Cuir aisiompú leis"
 
-#: kmymoney/kmymoney.cpp:1491
+#: kmymoney/kmymoney.cpp:1494
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Glac leis"
 
-#: kmymoney/kmymoney.cpp:1492
+#: kmymoney/kmymoney.cpp:1495
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Scorán"
 
-#: kmymoney/kmymoney.cpp:1493
+#: kmymoney/kmymoney.cpp:1496
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Glanta"
 
-#: kmymoney/kmymoney.cpp:1494
+#: kmymoney/kmymoney.cpp:1497
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Réitithe"
 
-#: kmymoney/kmymoney.cpp:1495
+#: kmymoney/kmymoney.cpp:1498
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Gan réiteach"
 
-#: kmymoney/kmymoney.cpp:1496
+#: kmymoney/kmymoney.cpp:1499
 #, kde-format
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Bog idirbheart"
 
-#: kmymoney/kmymoney.cpp:1497
+#: kmymoney/kmymoney.cpp:1500
 #, kde-format
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Taispeáin an t-idirbheart"
 
-#: kmymoney/kmymoney.cpp:1498
+#: kmymoney/kmymoney.cpp:1501
 #, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Taispeáin sonraí an idirbhirt"
 
-#: kmymoney/kmymoney.cpp:1500
+#: kmymoney/kmymoney.cpp:1503
 #, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
 msgstr "Oscail URL"
 
-#: kmymoney/kmymoney.cpp:1501
+#: kmymoney/kmymoney.cpp:1504
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Roghnaigh gach rud"
 
-#: kmymoney/kmymoney.cpp:1502
+#: kmymoney/kmymoney.cpp:1505
 #, kde-format
 msgid "Go to account"
 msgstr "Féach ar chuntas"
 
-#: kmymoney/kmymoney.cpp:1503
+#: kmymoney/kmymoney.cpp:1506
 #, kde-format
 msgid "Go to payee"
 msgstr "Téigh chuig an íocaí"
 
-#: kmymoney/kmymoney.cpp:1504
+#: kmymoney/kmymoney.cpp:1507
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Cruthaigh idirbheart sceidealaithe..."
 
-#: kmymoney/kmymoney.cpp:1505
+#: kmymoney/kmymoney.cpp:1508
 #, kde-format
 msgid "Assign next number"
 msgstr "Sannadh an chéad uimhir eile"
 
-#: kmymoney/kmymoney.cpp:1506
+#: kmymoney/kmymoney.cpp:1509
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Comhcheangail"
 
-#: kmymoney/kmymoney.cpp:1507
+#: kmymoney/kmymoney.cpp:1510
 #, kde-format
 msgid "Move to today"
 msgstr "Bog go dtí an lá inniu"
 
-#: kmymoney/kmymoney.cpp:1508
+#: kmymoney/kmymoney.cpp:1511
 #, kde-format
 msgid "Copy splits"
 msgstr "Cóipeáil scoilteanna"
 
-#: kmymoney/kmymoney.cpp:1509
+#: kmymoney/kmymoney.cpp:1512
 #, kde-format
 msgid "Copy selected transactions"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1510
+#: kmymoney/kmymoney.cpp:1513
 #, kde-format
 msgid "Show filter widget"
 msgstr "Taispeáin giuirléid scagaire"
 
-#: kmymoney/kmymoney.cpp:1512
+#: kmymoney/kmymoney.cpp:1515
 #, kde-format
 msgid "New investment..."
 msgstr "Infheistíocht nua..."
 
-#: kmymoney/kmymoney.cpp:1513
+#: kmymoney/kmymoney.cpp:1516
 #, kde-format
 msgid "Edit investment..."
 msgstr "Cuir infheistíocht in eagar..."
 
-#: kmymoney/kmymoney.cpp:1514
+#: kmymoney/kmymoney.cpp:1517
 #, kde-format
 msgid "Delete investment..."
 msgstr "Scrios infheistíocht..."
 
-#: kmymoney/kmymoney.cpp:1515
+#: kmymoney/kmymoney.cpp:1518
 #, kde-format
 msgid "Online price update..."
 msgstr "Nuashonrú praghais ar líne..."
 
-#: kmymoney/kmymoney.cpp:1516
+#: kmymoney/kmymoney.cpp:1519
 #, kde-format
 msgid "Manual price update..."
 msgstr "Nuashonrú praghais de láimh..."
 
-#: kmymoney/kmymoney.cpp:1517
+#: kmymoney/kmymoney.cpp:1520
 #, kde-format
 msgid "Edit security..."
 msgstr "Cuir slándáil in eagar..."
 
-#: kmymoney/kmymoney.cpp:1518
+#: kmymoney/kmymoney.cpp:1521
 #, kde-format
 msgid "Delete security..."
 msgstr "Scrios slándáil..."
 
-#: kmymoney/kmymoney.cpp:1521
+#: kmymoney/kmymoney.cpp:1524
 #, kde-format
 msgid "New schedule..."
 msgstr "Sceideal nua..."
 
-#: kmymoney/kmymoney.cpp:1522
+#: kmymoney/kmymoney.cpp:1525
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Cuir idirbheart sceidealaithe in eagar"
 
-#: kmymoney/kmymoney.cpp:1523
+#: kmymoney/kmymoney.cpp:1526
 #, fuzzy, kde-format
 #| msgid "Edit scheduled transaction"
 msgid "Edit scheduled transaction (detailed)"
 msgstr "Cuir idirbheart sceidealaithe in eagar"
 
-#: kmymoney/kmymoney.cpp:1524
+#: kmymoney/kmymoney.cpp:1527
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Scrios idirbheart sceidealaithe"
 
-#: kmymoney/kmymoney.cpp:1525
+#: kmymoney/kmymoney.cpp:1528
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Idirbheart sceidealaithe dúblach"
 
-#: kmymoney/kmymoney.cpp:1526
+#: kmymoney/kmymoney.cpp:1529
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Cuir isteach an chéad idirbheart eile..."
 
-#: kmymoney/kmymoney.cpp:1527
+#: kmymoney/kmymoney.cpp:1530
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Seachain an chéad idirbheart eile..."
 
-#: kmymoney/kmymoney.cpp:1528
+#: kmymoney/kmymoney.cpp:1531
 #, kde-format
 msgctxt "Display scheudule details"
 msgid "Show schedule details"
 msgstr "Taispeáin sonraí an sceidil"
 
-#: kmymoney/kmymoney.cpp:1531
+#: kmymoney/kmymoney.cpp:1534
 #, kde-format
 msgid "New payee..."
 msgstr "Íocaí nua..."
 
-#: kmymoney/kmymoney.cpp:1532
+#: kmymoney/kmymoney.cpp:1535
 #, kde-format
 msgid "Rename payee"
 msgstr "Athainmnigh an t-íocaí"
 
-#: kmymoney/kmymoney.cpp:1533
+#: kmymoney/kmymoney.cpp:1536
 #, kde-format
 msgid "Delete payee"
 msgstr "Scrios an íocaí"
 
-#: kmymoney/kmymoney.cpp:1534
+#: kmymoney/kmymoney.cpp:1537
 #, kde-format
 msgid "Merge payees"
 msgstr "Íocaithe a chumasc"
 
-#: kmymoney/kmymoney.cpp:1536
+#: kmymoney/kmymoney.cpp:1539
 #, kde-format
 msgid "New tag..."
 msgstr "Clib nua..."
 
-#: kmymoney/kmymoney.cpp:1537
+#: kmymoney/kmymoney.cpp:1540
 #, kde-format
 msgid "Rename tag"
 msgstr "Athainmnigh an clib"
 
-#: kmymoney/kmymoney.cpp:1538
+#: kmymoney/kmymoney.cpp:1541
 #, kde-format
 msgid "Delete tag"
 msgstr "Scrios clib"
 
-#: kmymoney/kmymoney.cpp:1540
+#: kmymoney/kmymoney.cpp:1543
 #, kde-format
 msgid "Open report"
 msgstr "Oscail an tuarascáil"
 
-#: kmymoney/kmymoney.cpp:1541
+#: kmymoney/kmymoney.cpp:1544
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:243
 #, kde-format
 msgid "New report"
 msgstr "Tuarascáil nua"
 
-#: kmymoney/kmymoney.cpp:1542
+#: kmymoney/kmymoney.cpp:1545
 #, kde-format
 msgid "Copy report"
 msgstr "Cóipeáil tuairisce"
 
-#: kmymoney/kmymoney.cpp:1543
+#: kmymoney/kmymoney.cpp:1546
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:241
 #, kde-format
 msgid "Configure report"
 msgstr "Cumraigh an tuarascáil"
 
-#: kmymoney/kmymoney.cpp:1544
+#: kmymoney/kmymoney.cpp:1547
 #, kde-format
 msgid "Export report"
 msgstr "Tuarascáil easpórtála"
 
-#: kmymoney/kmymoney.cpp:1545
+#: kmymoney/kmymoney.cpp:1548
 #, kde-format
 msgid "Delete report"
 msgstr "Scrios an tuarascáil"
 
-#: kmymoney/kmymoney.cpp:1546
+#: kmymoney/kmymoney.cpp:1549
 #, kde-format
 msgid "Close report"
 msgstr "Dún an tuarascáil"
 
-#: kmymoney/kmymoney.cpp:1547
+#: kmymoney/kmymoney.cpp:1550
 #, kde-format
 msgid "Toggle chart"
 msgstr "Scoránaigh an chairt"
 
 #. i18n: ectx: property (text), widget (QToolButton, editTabOrderButton)
-#: kmymoney/kmymoney.cpp:1548 kmymoney/views/investtransactioneditor.ui:307
+#: kmymoney/kmymoney.cpp:1551 kmymoney/views/investtransactioneditor.ui:307
 #: kmymoney/views/newspliteditor.ui:69
 #: kmymoney/views/newtransactioneditor.ui:120
 #, kde-format
 msgid "Edit tab order"
 msgstr "Cuir ord na dtab in eagar"
 
-#: kmymoney/kmymoney.cpp:1550
+#: kmymoney/kmymoney.cpp:1553
 #, kde-format
 msgid "Ledger Quick Open"
 msgstr "Oscailt Thapa an Leabhar Mór"
 
-#: kmymoney/kmymoney.cpp:1552
+#: kmymoney/kmymoney.cpp:1555
 #, kde-format
 msgid "Test new feature"
 msgstr "Tástáil gné nua"
 
-#: kmymoney/kmymoney.cpp:1554
+#: kmymoney/kmymoney.cpp:1557
 #, kde-format
 msgid "Debug Traces"
 msgstr "Rianta Dífhabhtaithe"
 
-#: kmymoney/kmymoney.cpp:1555
+#: kmymoney/kmymoney.cpp:1558
 #, kde-format
 msgid "Debug Timers"
 msgstr "Amadóirí Dífhabhtaithe"
 
-#: kmymoney/kmymoney.cpp:1594
+#: kmymoney/kmymoney.cpp:1597
 #, kde-format
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "Mheaitseáil"
 
-#: kmymoney/kmymoney.cpp:1595
+#: kmymoney/kmymoney.cpp:1598
 #, kde-format
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Dí-mheaitseáil"
 
-#: kmymoney/kmymoney.cpp:1723
+#: kmymoney/kmymoney.cpp:1726
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Tosaigh ag réiteach an chuntais atá roghnaithe faoi láthair"
 
-#: kmymoney/kmymoney.cpp:1724
+#: kmymoney/kmymoney.cpp:1727
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Cuir an réiteach reatha ar athló"
 
-#: kmymoney/kmymoney.cpp:1725
+#: kmymoney/kmymoney.cpp:1728
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Críochnaigh an réiteach reatha"
 
-#: kmymoney/kmymoney.cpp:1726
+#: kmymoney/kmymoney.cpp:1729
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Cealaigh an réiteach reatha"
 
-#: kmymoney/kmymoney.cpp:1835
+#: kmymoney/kmymoney.cpp:1838
 #, kde-format
 msgid "View back"
 msgstr "Féach ar ais"
 
-#: kmymoney/kmymoney.cpp:1836
+#: kmymoney/kmymoney.cpp:1839
 #, kde-format
 msgid "View forward"
 msgstr "Féach ar aghaidh"
 
-#: kmymoney/kmymoney.cpp:2228
+#: kmymoney/kmymoney.cpp:2231
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5614,12 +5620,12 @@ msgstr ""
 "Tá ar a laghad scoilt amháin de na hidirbhearta roghnaithe réitithe. Ar "
 "mhaith leat na hidirbhearta a scriosadh ar aon nós?"
 
-#: kmymoney/kmymoney.cpp:2230
+#: kmymoney/kmymoney.cpp:2233
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "Idirbheart réitithe cheana féin"
 
-#: kmymoney/kmymoney.cpp:2235
+#: kmymoney/kmymoney.cpp:2238
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5638,17 +5644,17 @@ msgstr[4] ""
 "An bhfuil tú cinnte gur mian leat na %1 idirbheart roghnaithe go léir a "
 "scriosadh?"
 
-#: kmymoney/kmymoney.cpp:2239
+#: kmymoney/kmymoney.cpp:2242
 #, kde-format
 msgid "Delete transaction"
 msgstr "Scrios an t-idirbheart"
 
-#: kmymoney/kmymoney.cpp:2320
+#: kmymoney/kmymoney.cpp:2323
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr "Ní féidir idirbheart(anna) a dhúbailt"
 
-#: kmymoney/kmymoney.cpp:2339 kmymoney/mymoney/splitmodel.cpp:198
+#: kmymoney/kmymoney.cpp:2342 kmymoney/mymoney/splitmodel.cpp:198
 #: kmymoney/mymoney/splitmodel.cpp:203 kmymoney/widgets/amountedit.cpp:294
 #: kmymoney/widgets/amountedit.cpp:351 kmymoney/widgets/creditdebitedit.cpp:128
 #: kmymoney/widgets/creditdebitedit.cpp:129
@@ -5659,18 +5665,18 @@ msgctxt "@info:placeholder amount widget"
 msgid "calculated"
 msgstr "ríomhaithe"
 
-#: kmymoney/kmymoney.cpp:2444
+#: kmymoney/kmymoney.cpp:2447
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Dún"
 
-#: kmymoney/kmymoney.cpp:2757
+#: kmymoney/kmymoney.cpp:2760
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "Ní féidir an t-idirbheart a mhodhnú"
 
-#: kmymoney/kmymoney.cpp:2901
+#: kmymoney/kmymoney.cpp:2904
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5679,13 +5685,13 @@ msgstr ""
 "Tá ar a laghad scoilt amháin de na hidirbhearta roghnaithe réitithe. Ar "
 "mhaith leat na hidirbhearta a athrú ar aon nós?"
 
-#: kmymoney/kmymoney.cpp:2903
+#: kmymoney/kmymoney.cpp:2906
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Idirbheart réitithe cheana féin"
 
-#: kmymoney/kmymoney.cpp:2908
+#: kmymoney/kmymoney.cpp:2911
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
@@ -5704,18 +5710,18 @@ msgstr[4] ""
 "An bhfuil tú cinnte gur mian leat na %1 idirbheart roghnaithe go léir a "
 "athrú?"
 
-#: kmymoney/kmymoney.cpp:2912
+#: kmymoney/kmymoney.cpp:2915
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Athraigh an t-idirbheart"
 
-#: kmymoney/kmymoney.cpp:3042
+#: kmymoney/kmymoney.cpp:3045
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "Ní féidir glacadh leis an idirbheart"
 
-#: kmymoney/kmymoney.cpp:3092
+#: kmymoney/kmymoney.cpp:3095
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5725,12 +5731,12 @@ msgstr ""
 "chuntas <b>%1</b>. Ar mhaith leat na hidirbhearta sceidealaithe sin a "
 "iontráil anois?"
 
-#: kmymoney/kmymoney.cpp:3095
+#: kmymoney/kmymoney.cpp:3098
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Idirbhearta sceidealaithe aimsithe"
 
-#: kmymoney/kmymoney.cpp:3176
+#: kmymoney/kmymoney.cpp:3179
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5743,17 +5749,17 @@ msgstr ""
 "leat é a dhéanamh le feiceáil arís trí dhul go dtí an roghchlár Amharc agus "
 "<b>Taispeáin gach cuntas</b> a roghnú.</qt>"
 
-#: kmymoney/kmymoney.cpp:3178
+#: kmymoney/kmymoney.cpp:3181
 #, kde-format
 msgid "Information"
 msgstr "Eolas"
 
-#: kmymoney/kmymoney.cpp:3282 kmymoney/kmymoney.cpp:3381
+#: kmymoney/kmymoney.cpp:3285 kmymoney/kmymoney.cpp:3384
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Níl aon chomhad KMyMoney oscailte"
 
-#: kmymoney/kmymoney.cpp:3318 kmymoney/kmymoney.cpp:3320
+#: kmymoney/kmymoney.cpp:3321 kmymoney/kmymoney.cpp:3323
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1472
 #: kmymoney/plugins/xml/xmlstorage.cpp:700
 #, kde-format
@@ -5761,65 +5767,65 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Réidh."
 
-#: kmymoney/kmymoney.cpp:3385
+#: kmymoney/kmymoney.cpp:3388
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Ag féachaint ar shonraí pearsanta..."
 
-#: kmymoney/kmymoney.cpp:3398
+#: kmymoney/kmymoney.cpp:3401
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Cuir Sonraí Pearsanta in Eagar"
 
-#: kmymoney/kmymoney.cpp:3413
+#: kmymoney/kmymoney.cpp:3416
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Ní féidir faisnéis úsáideora a stóráil: %1"
 
-#: kmymoney/kmymoney.cpp:3421
+#: kmymoney/kmymoney.cpp:3424
 #, kde-format
 msgid "Importing account templates."
 msgstr "Ag allmhairiú teimpléid chuntais."
 
-#: kmymoney/kmymoney.cpp:3435
+#: kmymoney/kmymoney.cpp:3438
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "Ní féidir teimpléad(í) a allmhairiú"
 
-#: kmymoney/kmymoney.cpp:3443
+#: kmymoney/kmymoney.cpp:3446
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Ag easpórtáil teimpléid chuntais."
 
-#: kmymoney/kmymoney.cpp:3449
+#: kmymoney/kmymoney.cpp:3452
 #, kde-format
 msgid "Save as..."
 msgstr "Sábháil mar..."
 
-#: kmymoney/kmymoney.cpp:3449
+#: kmymoney/kmymoney.cpp:3452
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "Comhaid teimpléid KMyMoney (*.kmt);;Gach comhad (*)"
 
-#: kmymoney/kmymoney.cpp:3480
+#: kmymoney/kmymoney.cpp:3483
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Easpórtáil teimpléid"
 
-#: kmymoney/kmymoney.cpp:3498
+#: kmymoney/kmymoney.cpp:3501
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr ""
 "Tá an comhad <b>%1</b> ann cheana féin. An bhfuil tú cinnte gur mhaith leat "
 "é a athscríobh?"
 
-#: kmymoney/kmymoney.cpp:3500 kmymoney/plugins/csv/export/csvexporter.cpp:109
+#: kmymoney/kmymoney.cpp:3503 kmymoney/plugins/csv/export/csvexporter.cpp:109
 #, kde-format
 msgid "File already exists"
 msgstr "Tá an comhad ann cheana"
 
-#: kmymoney/kmymoney.cpp:3538
+#: kmymoney/kmymoney.cpp:3541
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
@@ -5827,12 +5833,12 @@ msgstr ""
 "Cuirfidh sé seo an barra roghchláir i bhfolach go hiomlán. Is féidir leat é "
 "a thaispeáint arís trí %1 a chlóscríobh."
 
-#: kmymoney/kmymoney.cpp:3539
+#: kmymoney/kmymoney.cpp:3542
 #, kde-format
 msgid "Hide menu bar"
 msgstr "Folaigh an barra roghchláir"
 
-#: kmymoney/kmymoney.cpp:3652
+#: kmymoney/kmymoney.cpp:3655
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5841,13 +5847,13 @@ msgstr ""
 "Caithfear an comhad a shábháil ar dtús sula bhféadfar cúltaca de a dhéanamh. "
 "Ar mhaith leat leanúint ar aghaidh?"
 
-#: kmymoney/kmymoney.cpp:3654
+#: kmymoney/kmymoney.cpp:3657
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr "Deimhniú cúltaca"
 
-#: kmymoney/kmymoney.cpp:3670
+#: kmymoney/kmymoney.cpp:3673
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5856,69 +5862,69 @@ msgstr ""
 "Ní thacaíonn an cur i bhfeidhm reatha den fheidhmiúlacht chúltaca ach le "
 "comhaid áitiúla mar chomhaid foinse. Is é '%1' do chomhad foinse reatha."
 
-#: kmymoney/kmymoney.cpp:3673
+#: kmymoney/kmymoney.cpp:3676
 #, kde-format
 msgid "Local files only"
 msgstr "Comhaid áitiúla amháin"
 
-#: kmymoney/kmymoney.cpp:3712
+#: kmymoney/kmymoney.cpp:3715
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 á fheistiú"
 
-#: kmymoney/kmymoney.cpp:3746
+#: kmymoney/kmymoney.cpp:3749
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Tá comhad cúltaca don lá inniu ar an ngléas sin. Athsholáthar?"
 
-#: kmymoney/kmymoney.cpp:3746
+#: kmymoney/kmymoney.cpp:3749
 #, kde-format
 msgid "&Replace"
 msgstr "&Ionadaigh"
 
-#: kmymoney/kmymoney.cpp:3754
+#: kmymoney/kmymoney.cpp:3757
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Ní féidir eolaire cúltaca '%1' a chruthú."
 
-#: kmymoney/kmymoney.cpp:3759
+#: kmymoney/kmymoney.cpp:3762
 #, kde-format
 msgid "Writing %1"
 msgstr "%1 á scríobh"
 
-#: kmymoney/kmymoney.cpp:3780
+#: kmymoney/kmymoney.cpp:3783
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Ag dífheistiú %1"
 
-#: kmymoney/kmymoney.cpp:3816
+#: kmymoney/kmymoney.cpp:3819
 #, kde-format
 msgid "Error mounting device"
 msgstr "Earráid ag gléasadh gléas"
 
-#: kmymoney/kmymoney.cpp:3830 kmymoney/kmymoney.cpp:3847
+#: kmymoney/kmymoney.cpp:3833 kmymoney/kmymoney.cpp:3850
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Déanta"
 
-#: kmymoney/kmymoney.cpp:3831 kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3834 kmymoney/kmymoney.cpp:3852
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Cúltaca déanta den chomhad go rathúil"
 
-#: kmymoney/kmymoney.cpp:3837
+#: kmymoney/kmymoney.cpp:3840
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Earráid ag cóipeáil comhaid chuig gléas"
 
-#: kmymoney/kmymoney.cpp:3851
+#: kmymoney/kmymoney.cpp:3854
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Earráid ag dífheistiú an fheiste"
 
-#: kmymoney/kmymoney.cpp:3899
+#: kmymoney/kmymoney.cpp:3902
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5935,31 +5941,31 @@ msgstr ""
 "Cliceáil Níl le do thoil chun an méid a fhágáil mar %2,\n"
 "Cliceáil Cealaigh le do thoil chun cruthú an chuntais a chur ar ceal."
 
-#: kmymoney/kmymoney.cpp:3909
+#: kmymoney/kmymoney.cpp:3912
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Iarmhéid tosaigh le haghaidh dliteanais"
 
-#: kmymoney/kmymoney.cpp:3920
+#: kmymoney/kmymoney.cpp:3923
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Ní féidir cuntas a chur leis: %1"
 
-#: kmymoney/kmymoney.cpp:4022
+#: kmymoney/kmymoney.cpp:4025
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Seiceáil chomhsheasmhachta á rith..."
 
-#: kmymoney/kmymoney.cpp:4027
+#: kmymoney/kmymoney.cpp:4030
 #, fuzzy, kde-format
 #| msgid "Consistency check result"
 msgctxt "@info:title "
 msgid "Consistency check results"
 msgstr "Toradh seiceála comhsheasmhachta"
 
-#: kmymoney/kmymoney.cpp:4031
+#: kmymoney/kmymoney.cpp:4034
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
@@ -5967,25 +5973,25 @@ msgstr ""
 "Seo é log seiceála comhsheasmhachta, bain úsáid as an roghchlár comhthéacs "
 "chun é a chóipeáil nó a shábháil."
 
-#: kmymoney/kmymoney.cpp:4040
+#: kmymoney/kmymoney.cpp:4043
 #, fuzzy, kde-format
 #| msgid "Close"
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "Dún"
 
-#: kmymoney/kmymoney.cpp:4052
+#: kmymoney/kmymoney.cpp:4055
 #, kde-format
 msgctxt "@action:button refresh consistency check"
 msgid "Refresh"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4082
+#: kmymoney/kmymoney.cpp:4085
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Theip ar an seiceáil comhsheasmhachta: %1"
 
-#: kmymoney/kmymoney.cpp:4106
+#: kmymoney/kmymoney.cpp:4109
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5994,7 +6000,7 @@ msgstr ""
 "Níor aimsíodh aon fhadhbanna i do shonraí sa tseiceáil chomhsheasmhachta. "
 "Cuirtear sonraí i láthair thíos."
 
-#: kmymoney/kmymoney.cpp:4109
+#: kmymoney/kmymoney.cpp:4112
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -6005,12 +6011,12 @@ msgstr ""
 "Cuirtear sonraí i láthair thíos. Caithfidh an t-úsáideoir na fadhbanna sin "
 "nárbh fhéidir a cheartú go huathoibríoch a réiteach."
 
-#: kmymoney/kmymoney.cpp:4189
+#: kmymoney/kmymoney.cpp:4192
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Ag seiceáil le haghaidh idirbhearta sceidealaithe atá thar téarma..."
 
-#: kmymoney/kmymoney.cpp:4353
+#: kmymoney/kmymoney.cpp:4356
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -6018,12 +6024,12 @@ msgstr ""
 "Ní mór duit comhad KMyMoney a roghnú ar dtús sula bhféadann tú ráiteas a "
 "allmhairiú."
 
-#: kmymoney/kmymoney.cpp:4359
+#: kmymoney/kmymoney.cpp:4362
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Ráiteas a allmhairiú trí Web Connect"
 
-#: kmymoney/kmymoney.cpp:4373
+#: kmymoney/kmymoney.cpp:4376
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -6033,57 +6039,57 @@ msgstr ""
 "Ní féidir %1 a iompórtáil ag baint úsáide as breiseán %2. Thug an breiseán "
 "an earráid seo a leanas ar ais: %3"
 
-#: kmymoney/kmymoney.cpp:4377 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4380 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr "Earráid allmhairithe"
 
-#: kmymoney/kmymoney.cpp:4404
+#: kmymoney/kmymoney.cpp:4407
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Tá gach teachtaireacht cumasaithe."
 
-#: kmymoney/kmymoney.cpp:4404
+#: kmymoney/kmymoney.cpp:4407
 #, kde-format
 msgid "All messages"
 msgstr "Gach teachtaireacht"
 
-#: kmymoney/kmymoney.cpp:4440
+#: kmymoney/kmymoney.cpp:4443
 #, kde-format
 msgid "Auto saving..."
 msgstr "Sábháil uathoibríoch..."
 
-#: kmymoney/kmymoney.cpp:4561
+#: kmymoney/kmymoney.cpp:4564
 #, kde-format
 msgid "Creating new document..."
 msgstr "Cáipéis nua á cruthú..."
 
-#: kmymoney/kmymoney.cpp:4621
+#: kmymoney/kmymoney.cpp:4624
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Níorbh fhéidir comhad nua a chruthú."
 
-#: kmymoney/kmymoney.cpp:4632
+#: kmymoney/kmymoney.cpp:4635
 #, kde-format
 msgid "Open a file."
 msgstr "Oscail comhad."
 
-#: kmymoney/kmymoney.cpp:4646
+#: kmymoney/kmymoney.cpp:4649
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Ní bhfuarthas aon bhreiseán le haghaidh stóras a oscailt."
 
-#: kmymoney/kmymoney.cpp:4650
+#: kmymoney/kmymoney.cpp:4653
 #, kde-format
 msgid "All files (*)"
 msgstr "Gach comhad (*)"
 
-#: kmymoney/kmymoney.cpp:4663
+#: kmymoney/kmymoney.cpp:4666
 #, kde-format
 msgid "Loading file..."
 msgstr "Comhad á lódáil..."
 
-#: kmymoney/kmymoney.cpp:4672
+#: kmymoney/kmymoney.cpp:4675
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6092,23 +6098,23 @@ msgstr ""
 "Is ainm comhaid neamhbhailí é <p><b>%1</b> nó níl an comhad ann. Is féidir "
 "leat comhad eile a oscailt nó ceann nua a chruthú.</p>"
 
-#: kmymoney/kmymoney.cpp:4674
+#: kmymoney/kmymoney.cpp:4677
 #, kde-format
 msgid "File not found"
 msgstr "Níor aimsíodh an comhad"
 
-#: kmymoney/kmymoney.cpp:4706
+#: kmymoney/kmymoney.cpp:4709
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "Fadhb le hoscailt stórais"
 
-#: kmymoney/kmymoney.cpp:4712
+#: kmymoney/kmymoney.cpp:4715
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Ní féidir an comhad a oscailt mar a iarradh."
 
-#: kmymoney/kmymoney.cpp:4719
+#: kmymoney/kmymoney.cpp:4722
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6117,33 +6123,33 @@ msgstr ""
 "Níorbh fhéidir do fhoinse sonraí a léamh. Seiceáil le do thoil i socruithe "
 "KMyMoney go bhfuil an breiseán riachtanach cumasaithe."
 
-#: kmymoney/kmymoney.cpp:4730
+#: kmymoney/kmymoney.cpp:4733
 #, kde-format
 msgid "Saving file..."
 msgstr "Comhad á shábháil..."
 
-#: kmymoney/kmymoney.cpp:4742
+#: kmymoney/kmymoney.cpp:4745
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Theip ar do shonraí a shábháil."
 
-#: kmymoney/kmymoney.cpp:4748
+#: kmymoney/kmymoney.cpp:4751
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Níorbh fhéidir breiseán oiriúnach a aimsiú chun do chuid sonraí a shábháil."
 
-#: kmymoney/kmymoney.cpp:4754
+#: kmymoney/kmymoney.cpp:4757
 #, kde-format
 msgid "Saving file as...."
 msgstr "Ag sábháil comhaid mar...."
 
-#: kmymoney/kmymoney.cpp:4770
+#: kmymoney/kmymoney.cpp:4773
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Ní bhfuarthas aon bhreiseán le haghaidh sonraí a shábháil."
 
-#: kmymoney/kmymoney.cpp:4798
+#: kmymoney/kmymoney.cpp:4801
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Theip ar do stóráil a shábháil."
