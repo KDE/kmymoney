@@ -186,7 +186,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(const MyMoneyReport
             connect(d->m_tabRange->ui->m_comboColumns,
                     static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),
                     this,
-                    static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotUpdateColumnsCombo));
+                    &KReportConfigurationFilterDlg::slotUpdateColumnsCombo);
         }
         connect(d->m_tabChart->ui->m_logYaxis, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotLogAxisChanged);
         connect(d->m_tabChart->ui->m_negExpenses, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotNegExpensesChanged);
