@@ -28,7 +28,7 @@ void ScheduledTransactionMatchFinder::createListOfMatchCandidates()
 
 void ScheduledTransactionMatchFinder::findMatchInMatchCandidatesList()
 {
-    for (const MyMoneySchedule& schedule : std::as_const(listOfMatchCandidates)) {
+    for (const MyMoneySchedule& schedule : qAsConst(listOfMatchCandidates)) {
         if (schedule.isFinished()) {
             continue;
         }
