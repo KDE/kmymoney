@@ -409,11 +409,6 @@ void KReportConfigurationFilterDlg::slotUpdateColumnsCombo()
     }
 }
 
-void KReportConfigurationFilterDlg::slotUpdateColumnsCombo(int)
-{
-    slotUpdateColumnsCombo();
-}
-
 void KReportConfigurationFilterDlg::slotLogAxisChanged(int state)
 {
     Q_D(KReportConfigurationFilterDlg);
