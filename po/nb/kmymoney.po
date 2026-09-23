@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
 "PO-Revision-Date: 2026-03-01 12:31+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -1950,14 +1950,12 @@ msgstr "Tidsplaner"
 #. i18n: ectx: property (text), widget (QLabel, textLabel19)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:208
 #, fuzzy, kde-format
-#| msgid "Stock p&rices"
 msgid "Stock prices"
 msgstr "Aksjeku&rser"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel20)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:228
 #, fuzzy, kde-format
-#| msgid "Exchange &rate / Price"
 msgid "Exchange rates"
 msgstr "Vekslings&kurs/aksjekurs"
 
@@ -3766,9 +3764,6 @@ msgstr "Hovedbok"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:60
 #, fuzzy, kde-format
-#| msgid ""
-#| "Scheduled\n"
-#| "transactions"
 msgctxt "@title Page name for schedules view"
 msgid ""
 "Scheduled\n"
@@ -4672,8 +4667,8 @@ msgstr "Nettbank"
 
 #: kmymoney/kcreditswindow.cpp:43
 #, kde-format
-msgctxt "about option, %1 list of sanatizers"
-msgid "Sanatizers: %1"
+msgctxt "about option, %1 list of sanitizers"
+msgid "Sanitizers: %1"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:47
@@ -5121,7 +5116,6 @@ msgstr ""
 
 #: kmymoney/kmymoney.cpp:1469
 #, fuzzy, kde-format
-#| msgid "Update Stock and Currency Prices..."
 msgid "Update stock prices and exchange rates..."
 msgstr "Oppdater aksje- og valutakurser..."
 
@@ -5306,7 +5300,6 @@ msgstr "Kopier fordelinger"
 
 #: kmymoney/kmymoney.cpp:1512
 #, fuzzy, kde-format
-#| msgid "Delete transaction"
 msgid "Copy selected transactions"
 msgstr "Slett transaksjon"
 
@@ -5362,7 +5355,6 @@ msgstr "Endre planlagte transaksjoner"
 
 #: kmymoney/kmymoney.cpp:1526
 #, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
 msgid "Edit scheduled transaction (detailed)"
 msgstr "Endre planlagte transaksjoner"
 
@@ -5866,7 +5858,6 @@ msgstr "Kjører konsistenssjekk..."
 
 #: kmymoney/kmymoney.cpp:4030
 #, fuzzy, kde-format
-#| msgid "Consistency check result"
 msgctxt "@info:title "
 msgid "Consistency check results"
 msgstr "Resultat av konsistenssjekk"
@@ -5881,7 +5872,6 @@ msgstr ""
 
 #: kmymoney/kmymoney.cpp:4043
 #, fuzzy, kde-format
-#| msgid "Close"
 msgctxt "@action:button close consistency check"
 msgid "Close"
 msgstr "Lukk"
@@ -6993,7 +6983,6 @@ msgstr "  * Fjernet ubrukt samsvarsinformasjon fra transaksjonen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3455
 #, fuzzy, kde-format
-#| msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
 msgid ""
 "  * Sum of splits in transaction <a href=\"%1\">'%1'</a> posted on %2 is not "
 "zero."
@@ -8873,7 +8862,6 @@ msgstr "SWIFT/BIC"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:494
 #, fuzzy, kde-format
-#| msgid "Currency"
 msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "Valuta"
@@ -8902,7 +8890,6 @@ msgstr "Konti uten tildelt institusjon"
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:333
 #, fuzzy, kde-format
-#| msgid "Cannot add institution: %1"
 msgctxt "@info Name for recreated missing but referenced institution"
 msgid "Unknown institution '%1'"
 msgstr "Kan ikke legge til institusjon: %1"
@@ -9007,7 +8994,6 @@ msgstr "Oppføring"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
 #, fuzzy, kde-format
-#| msgid "Memo"
 msgctxt "@title:column"
 msgid "Memo"
 msgstr "Notat"
@@ -9292,7 +9278,6 @@ msgstr "Mottaker"
 
 #: kmymoney/mymoney/storage/payeesmodel.cpp:267
 #, fuzzy, kde-format
-#| msgid "Unknown payee"
 msgctxt "@info Name for recreated missing but referenced payee"
 msgid "Unknown payee '%1'"
 msgstr "Ukjent mottaker"
@@ -9320,42 +9305,36 @@ msgstr "Navn"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:61
 #, fuzzy, kde-format
-#| msgid "Comment"
 msgctxt "Report comment"
 msgid "Comment"
 msgstr "Kommentar"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:64
 #, fuzzy, kde-format
-#| msgid "Start Date"
 msgctxt "Report date range"
 msgid "Start Date"
 msgstr "Startdato"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:67
 #, fuzzy, kde-format
-#| msgid "Date"
 msgctxt "Report date range"
 msgid "End Date"
 msgstr "Dato"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:70
 #, fuzzy, kde-format
-#| msgid "Favorite"
 msgctxt "Report favorite"
 msgid "Favorite"
 msgstr "Favoritt"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:73
 #, fuzzy, kde-format
-#| msgid "Groups"
 msgctxt "Report group"
 msgid "Group"
 msgstr "Grupper"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:76
 #, fuzzy, kde-format
-#| msgid "Modified"
 msgctxt "Report state"
 msgid "Modified"
 msgstr "Endret"
@@ -10411,14 +10390,12 @@ msgstr "Avgift"
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_feeCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:380
 #, fuzzy, kde-format
-#| msgid "Select column containing date field."
 msgid "Select column containing fee field."
 msgstr "Velg kolonnen som inneholder datofeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_feeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:387
 #, fuzzy, kde-format
-#| msgid "Clear payee field selection."
 msgid "Clear fee field selection."
 msgstr "Tøm valg av mottakerfelt."
 
@@ -16886,14 +16863,12 @@ msgstr "Rapporter"
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
 #, fuzzy, kde-format
-#| msgid "Default Report"
 msgid "Default reports"
 msgstr "Standardrapport"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #, fuzzy, kde-format
-#| msgid "Custom Report"
 msgid "Custom reports"
 msgstr "Tilpasset rapport"
 
@@ -17291,7 +17266,6 @@ msgstr "Generert rapport"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:71
 #, fuzzy, kde-format
-#| msgid "CSV"
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "CSV"
 msgstr "CSV"
@@ -17304,7 +17278,6 @@ msgstr ""
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:73
 #, fuzzy, kde-format
-#| msgid "XML"
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "XML"
 msgstr "XML"
@@ -17349,14 +17322,12 @@ msgstr "Eksporter denne rapporten til en HTML- eller CSV-fil"
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:119
 #, fuzzy, kde-format
-#| msgid "Copy to clipboard"
 msgid "Copy this report to the clipboard"
 msgstr "Kopier til utklippstavle"
 
 #. i18n: ectx: property (text), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:122
 #, fuzzy, kde-format
-#| msgid "Copy memo"
 msgid "Copy"
 msgstr "Kopier notat"
 
@@ -17919,16 +17890,12 @@ msgstr "Eide og solgte"
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
 #, fuzzy, kde-format
-#| msgid "Performance-Test"
 msgid "Performance Columns"
 msgstr "Ytelsestest"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
 #, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
@@ -18027,8 +17994,6 @@ msgstr "Eiendeler og gjeld"
 
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
 #, fuzzy, kde-format
-#| msgid "%1 outstanding payment"
-#| msgid_plural "%1 outstanding payments in total"
 msgctxt "@item:inlistbox budget name and starting date"
 msgid "%1, starting at %2"
 msgstr "%1 utestående betaling"
@@ -19242,7 +19207,6 @@ msgstr "Sorteringsrekkefølge for hovedboken i normalvisning"
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:352
 #, fuzzy, kde-format
-#| msgid "Sort order of register in normal view"
 msgid "Sort order of register in reconcile view"
 msgstr "Sorteringsrekkefølge for hovedboken i normalvisning"
 
@@ -22447,7 +22411,6 @@ msgstr "Datoen du har oppgitt er ugyldig"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
 #, fuzzy, kde-format
-#| msgid "Any transaction"
 msgid "All transaction dates"
 msgstr "Alle transaksjoner"
 
