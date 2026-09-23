@@ -105,7 +105,6 @@
         "Name[sl]": "iCalendar",
         "Name[sv]": "iCalendar",
         "Name[tr]": "iCalendar",
-        "Name[ug]": "iCalendar",
         "Name[uk]": "iCalendar",
         "Name[zh_CN]": "iCalendar",
         "Name[zh_TW]": "iCalendar",
