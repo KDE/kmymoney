@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-23 04:40+0000\n"
+"POT-Creation-Date: 2026-09-24 03:50+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -16597,7 +16597,7 @@ msgstr "Raporttinäkymä"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:398
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:408
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:497
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:492
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
@@ -16605,7 +16605,7 @@ msgid "Monthly"
 msgstr "Kuukausittain"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:485
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:480
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -16613,7 +16613,7 @@ msgid "Daily"
 msgstr "Päivittäin"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:488
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:483
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -16621,7 +16621,7 @@ msgid "Weekly"
 msgstr "Viikoittain"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:500
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:495
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -16629,7 +16629,7 @@ msgid "Bi-Monthly"
 msgstr "Joka toinen kuukausi"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:503
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:498
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -16637,31 +16637,31 @@ msgid "Quarterly"
 msgstr "Neljännesvuosittain"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:506
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:501
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "Vuosittain"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:521
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:534
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:516
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:529
 #, kde-format
 msgid "Only owned"
 msgstr "Vain omistetut"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:535
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:517
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:530
 #, kde-format
 msgid "Only sold"
 msgstr "Vain myydyt"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:532
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:527
 #, kde-format
 msgid "From period"
 msgstr "Mistä lähtien"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:533
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:528
 #, kde-format
 msgid "Owned and sold"
 msgstr "Omistetut ja myydyt"

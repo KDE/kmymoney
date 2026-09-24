@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-23 04:40+0000\n"
+"POT-Creation-Date: 2026-09-24 03:50+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -16496,7 +16496,7 @@ msgstr "보고서"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:398
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:408
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:497
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:492
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
@@ -16504,7 +16504,7 @@ msgid "Monthly"
 msgstr "월별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:485
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:480
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -16512,7 +16512,7 @@ msgid "Daily"
 msgstr "일별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:488
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:483
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -16520,7 +16520,7 @@ msgid "Weekly"
 msgstr "주별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:500
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:495
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -16528,7 +16528,7 @@ msgid "Bi-Monthly"
 msgstr "격월별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:503
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:498
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -16536,31 +16536,31 @@ msgid "Quarterly"
 msgstr "분기별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:506
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:501
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "연도별"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:521
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:534
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:516
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:529
 #, kde-format
 msgid "Only owned"
 msgstr "소유한 것만"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:535
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:517
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:530
 #, kde-format
 msgid "Only sold"
 msgstr "판매한 것만"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:532
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:527
 #, kde-format
 msgid "From period"
 msgstr "기간으로부터"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:533
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:528
 #, kde-format
 msgid "Owned and sold"
 msgstr "소유와 판매"
