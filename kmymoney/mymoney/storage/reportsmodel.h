@@ -39,6 +39,7 @@ public:
         Modified,
         Group,
         Id,
+        Type,
         // insert new columns above this line
         MaxColumns,
     };

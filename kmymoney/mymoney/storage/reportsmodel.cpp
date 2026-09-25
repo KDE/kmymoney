@@ -78,6 +78,9 @@ QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int 
         case Id:
             return i18nc("@title:column Report ID", "ID");
             break;
+        case Type:
+            return i18nc("@title column: Report type", "Type");
+            break;
         }
     }
     return MyMoneyModelBase::headerData(section, orientation, role);
@@ -110,6 +113,17 @@ QVariant ReportsModel::data(const QModelIndex& index, int role) const
             return report.isModified() ? QStringLiteral("\u2605") : QString();
         case Id:
             return report.id();
+        case Type:
+            if (report.isCapitalGainReport())
+                return i18n("Capital Gain");
+            else if (report.isPerformanceReport())
+                return i18n("Performance");
+            else if (report.isLegacyCapitalGainReport())
+                return i18n("Capital Gain (Legacy)");
+            else if (report.isLegacyPerformanceReport())
+                return i18n("Performance (Legacy)");
+            else
+                return QString();
         default:
             return QStringLiteral("not yet implemented");
         }
