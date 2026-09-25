@@ -1,0 +1,5 @@
+Date,Num,Tags,Category,Amount
+"[Empty Payee]"
+"2026-02-02","","My Tag","My Category"," -200.00"
+Total [Empty Payee],,,," -200.00"
+Grand Total,,,," -200.00"
