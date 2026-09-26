@@ -1,14 +1,14 @@
 # translation of kmymoney to Italian
-# SPDX-FileCopyrightText: 2005-2008, 2010-2026 Vincenzo Reale <smart2128vr@gmail.com>
 # Samuel Algisi <woodhouse@member.fsf.org>, 2005.
+# SPDX-FileCopyrightText: 2005-2008, 2010-2026 Vincenzo Reale <smart2128vr@gmail.com>
 # Sandro Bonazzola <sandrobonazzola@users.sourceforge.net>, 2008.
 # SPDX-FileCopyrightText: 2025 Paolo Zamponi <feus73@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-24 03:50+0000\n"
-"PO-Revision-Date: 2026-08-21 12:43+0200\n"
+"POT-Creation-Date: 2026-09-26 04:03+0000\n"
+"PO-Revision-Date: 2026-09-23 09:33+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -15765,12 +15765,12 @@ msgstr "Media"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:473
 #: kmymoney/plugins/views/reports/core/listtable.cpp:318
 #: kmymoney/plugins/views/reports/core/listtable.cpp:319
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1523
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1662
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1712
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1789
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1967
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2038
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1561
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1700
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1750
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1827
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2005
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2076
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16033,8 +16033,8 @@ msgstr "Bilancio di chiusura"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:322
 #: kmymoney/plugins/views/reports/core/listtable.cpp:323
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1736
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2075
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1774
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2113
 #, kde-format
 msgid "Grand Total"
 msgstr "Totale complessivo"
@@ -16391,62 +16391,62 @@ msgid "Yes"
 msgstr "Sì"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:358
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:408
 #: kmymoney/widgets/ktransactionfilter.ui:648
 #, kde-format
 msgid "Transfers"
 msgstr "Trasferimenti"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:558
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:608
 #, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Apertura"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1509
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1776
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1547
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1814
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Conto"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2291
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2329
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Attuale"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2296
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2334
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Budget"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2301
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2339
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Differenza"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2306
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2344
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Previsione"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2311
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2349
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Media mobile"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2316
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2354
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Media mobile di prezzo"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2321
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2359
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -17911,11 +17911,10 @@ msgid "Assets & Liabilities"
 msgstr "Attività e passività"
 
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
-#, fuzzy, kde-format
-#| msgid "rows starting at row"
+#, kde-format
 msgctxt "@item:inlistbox budget name and starting date"
 msgid "%1, starting at %2"
-msgstr "righe che iniziano alla riga"
+msgstr "%1, a partire da %2"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
