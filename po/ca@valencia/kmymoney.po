@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 16:01+0000\n"
+"POT-Creation-Date: 2026-09-26 00:45+0000\n"
 "PO-Revision-Date: 2026-09-23 13:07+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1936,8 +1936,8 @@ msgstr "Comptes/Categories"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:516
-#: kmymoney/plugins/views/reports/kreportsview_p.h:435
-#: kmymoney/plugins/views/reports/kreportsview_p.h:952
+#: kmymoney/plugins/views/reports/kreportsview_p.h:436
+#: kmymoney/plugins/views/reports/kreportsview_p.h:953
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
 #: kmymoney/views/ktagsview.ui:127
 #, kde-format
@@ -3891,7 +3891,7 @@ msgstr "Expressió regular per a extraure l'identificador de les dades baixades"
 #. i18n: ectx: property (text), widget (QLabel, lblpriceCol)
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
-#: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
+#: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:437
 #: kmymoney/mymoney/storage/pricemodel.cpp:40
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
@@ -4921,7 +4921,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "Importació/exportació de CSV"
 
-#: kmymoney/kmymoney.cpp:451 kmymoney/models/equitiesmodel.cpp:426
+#: kmymoney/kmymoney.cpp:451 kmymoney/models/equitiesmodel.cpp:429
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:201
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:416
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -6303,7 +6303,7 @@ msgid "Budget"
 msgstr "Pressupost"
 
 #: kmymoney/kmymoneyutils.cpp:122
-#: kmymoney/plugins/views/reports/kreportsview_p.h:503
+#: kmymoney/plugins/views/reports/kreportsview_p.h:504
 #, kde-format
 msgid "Cash Flow"
 msgstr "Flux de caixa"
@@ -6417,7 +6417,7 @@ msgstr "Etiqueta nova"
 msgid "Unable to add tag"
 msgstr "No s'ha pogut afegir l'etiqueta"
 
-#: kmymoney/kmymoneyutils.cpp:636 kmymoney/views/kinstitutionsview.cpp:223
+#: kmymoney/kmymoneyutils.cpp:636 kmymoney/views/kinstitutionsview.cpp:225
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "No s'ha pogut afegir la institució: %1"
@@ -6529,7 +6529,7 @@ msgid "Closed"
 msgstr "Tancat"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
-#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:428
+#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:431
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:81
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
@@ -6540,7 +6540,7 @@ msgstr "Símbol"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_quantity)
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:196 kmymoney/models/equitiesmodel.cpp:432
+#: kmymoney/models/equitiesmodel.cpp:196 kmymoney/models/equitiesmodel.cpp:435
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:56
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:102
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:482
@@ -6549,20 +6549,27 @@ msgid "Quantity"
 msgstr "Quantitat"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:198 kmymoney/models/equitiesmodel.cpp:430
+#: kmymoney/models/equitiesmodel.cpp:198 kmymoney/models/equitiesmodel.cpp:433
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:414
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:168
 #, kde-format
 msgid "Value"
 msgstr "Valor"
 
-#: kmymoney/models/equitiesmodel.cpp:199 kmymoney/models/equitiesmodel.cpp:436
+#: kmymoney/models/equitiesmodel.cpp:199 kmymoney/models/equitiesmodel.cpp:439
 #, kde-format
 msgid "Last Price Update"
 msgstr "Última actualització del preu"
 
-#: kmymoney/models/equitiesmodel.cpp:542
-#: kmymoney/widgets/columnselector.cpp:228
+#: kmymoney/models/equitiesmodel.cpp:200
+#, fuzzy, kde-format
+#| msgid "ID"
+msgctxt "@title:column Id"
+msgid "ID"
+msgstr "ID"
+
+#: kmymoney/models/equitiesmodel.cpp:545
+#: kmymoney/widgets/columnselector.cpp:231
 #, kde-format
 msgid "Displayed columns"
 msgstr "Columnes mostrades"
@@ -6687,7 +6694,7 @@ msgid "Payees created"
 msgstr "Beneficiaris creats"
 
 #: kmymoney/models/statementmodel.cpp:117
-#: kmymoney/mymoney/storage/accountsmodel.cpp:503
+#: kmymoney/mymoney/storage/accountsmodel.cpp:505
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -6696,7 +6703,7 @@ msgid "Full name"
 msgstr "Nom complet"
 
 #: kmymoney/models/statementmodel.cpp:119
-#: kmymoney/mymoney/storage/accountsmodel.cpp:505
+#: kmymoney/mymoney/storage/accountsmodel.cpp:507
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -6705,28 +6712,28 @@ msgid "Type"
 msgstr "Tipus"
 
 #: kmymoney/models/statementmodel.cpp:121
-#: kmymoney/mymoney/storage/accountsmodel.cpp:507
+#: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "Si el compte té una configuració vinculada en línia"
 
 #: kmymoney/models/statementmodel.cpp:123
-#: kmymoney/mymoney/storage/accountsmodel.cpp:509
+#: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "Si este compte està inclòs en els informes d'impostos"
 
 #: kmymoney/models/statementmodel.cpp:125
-#: kmymoney/mymoney/storage/accountsmodel.cpp:511
+#: kmymoney/mymoney/storage/accountsmodel.cpp:513
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "Tipus del percentatge d'IVA, si està configurat."
 
 #: kmymoney/models/statementmodel.cpp:127
-#: kmymoney/mymoney/storage/accountsmodel.cpp:513
+#: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
@@ -6736,7 +6743,7 @@ msgstr ""
 "operació."
 
 #: kmymoney/models/statementmodel.cpp:129
-#: kmymoney/mymoney/storage/accountsmodel.cpp:515
+#: kmymoney/mymoney/storage/accountsmodel.cpp:517
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
@@ -6744,20 +6751,20 @@ msgstr "Balanç del compte (en la divisa del compte)"
 
 #: kmymoney/models/statementmodel.cpp:131
 #: kmymoney/mymoney/storage/accountsmodel.cpp:479
-#: kmymoney/mymoney/storage/accountsmodel.cpp:517
+#: kmymoney/mymoney/storage/accountsmodel.cpp:519
 #, kde-format
 msgid "Posted Value"
 msgstr "Valor publicat"
 
 #: kmymoney/models/statementmodel.cpp:133
-#: kmymoney/mymoney/storage/accountsmodel.cpp:519
+#: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "Valor total (inclou els subcomptes)"
 
 #: kmymoney/models/statementmodel.cpp:135
-#: kmymoney/mymoney/storage/accountsmodel.cpp:521
+#: kmymoney/mymoney/storage/accountsmodel.cpp:523
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
@@ -6765,7 +6772,7 @@ msgstr ""
 "Número de compte o de targeta de crèdit, tal com l'ha assignat la institució."
 
 #: kmymoney/models/statementmodel.cpp:137
-#: kmymoney/mymoney/storage/accountsmodel.cpp:523
+#: kmymoney/mymoney/storage/accountsmodel.cpp:525
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
@@ -6774,7 +6781,7 @@ msgstr ""
 "de compte bancari internacional)"
 
 #: kmymoney/models/statementmodel.cpp:142
-#: kmymoney/mymoney/storage/accountsmodel.cpp:528
+#: kmymoney/mymoney/storage/accountsmodel.cpp:530
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -6791,7 +6798,7 @@ msgstr ""
 "d'ordenació» (Sort Code) per als comptes en RU."
 
 #: kmymoney/models/statementmodel.cpp:145
-#: kmymoney/mymoney/storage/accountsmodel.cpp:531
+#: kmymoney/mymoney/storage/accountsmodel.cpp:533
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8776,7 +8783,7 @@ msgid "Split transaction"
 msgstr "Operació desglossada"
 
 #: kmymoney/mymoney/splitmodel.cpp:117
-#: kmymoney/mymoney/storage/journalmodel.cpp:203
+#: kmymoney/mymoney/storage/journalmodel.cpp:204
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1110
 #, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8789,14 +8796,14 @@ msgid "Not reconciled"
 msgstr "No conciliat"
 
 #: kmymoney/mymoney/statusmodel.cpp:35
-#: kmymoney/mymoney/storage/journalmodel.cpp:94
+#: kmymoney/mymoney/storage/journalmodel.cpp:95
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/mymoney/statusmodel.cpp:40
-#: kmymoney/mymoney/storage/journalmodel.cpp:96
+#: kmymoney/mymoney/storage/journalmodel.cpp:97
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
@@ -8809,7 +8816,7 @@ msgid "Reconciled"
 msgstr "Conciliat"
 
 #: kmymoney/mymoney/statusmodel.cpp:45
-#: kmymoney/mymoney/storage/journalmodel.cpp:98
+#: kmymoney/mymoney/storage/journalmodel.cpp:99
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
@@ -8944,10 +8951,25 @@ msgctxt "@title:column Shows Currency"
 msgid "Currency"
 msgstr "Divisa"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:533
+#: kmymoney/mymoney/storage/accountsmodel.cpp:496
+#, fuzzy, kde-format
+#| msgid "ID"
+msgctxt "@title:column Shows Account ID"
+msgid "ID"
+msgstr "ID"
+
+#: kmymoney/mymoney/storage/accountsmodel.cpp:535
 #, kde-format
 msgctxt "@info:tooltip for 'Currency' column"
 msgid "The currency assigned to the account"
+msgstr "La divisa assignada al compte"
+
+#: kmymoney/mymoney/storage/accountsmodel.cpp:537
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip for 'Currency' column"
+#| msgid "The currency assigned to the account"
+msgctxt "@info:tooltip for 'ID' column"
+msgid "The internal identification of the account"
 msgstr "La divisa assignada al compte"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:74
@@ -8961,12 +8983,12 @@ msgstr "Any"
 msgid "Cost center"
 msgstr "Centre de despesa"
 
-#: kmymoney/mymoney/storage/institutionsmodel.cpp:240
+#: kmymoney/mymoney/storage/institutionsmodel.cpp:243
 #, kde-format
 msgid "Accounts with no institution assigned"
 msgstr "Comptes sense una institució assignada"
 
-#: kmymoney/mymoney/storage/institutionsmodel.cpp:333
+#: kmymoney/mymoney/storage/institutionsmodel.cpp:336
 #, kde-format
 msgctxt "@info Name for recreated missing but referenced institution"
 msgid "Unknown institution '%1'"
@@ -9076,125 +9098,132 @@ msgctxt "@title:column"
 msgid "Memo"
 msgstr "Recordatori"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:75
+#: kmymoney/mymoney/storage/journalmodel.cpp:73
+#, fuzzy, kde-format
+#| msgid "ID"
+msgctxt "@title:column Transaction ID"
+msgid "ID"
+msgstr "ID"
+
+#: kmymoney/mymoney/storage/journalmodel.cpp:76
 #, kde-format
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
 msgstr "Número"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:76
+#: kmymoney/mymoney/storage/journalmodel.cpp:77
 #, kde-format
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
 msgstr "Conciliació"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:77
+#: kmymoney/mymoney/storage/journalmodel.cpp:78
 #, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
 msgstr "Centre de despesa"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:78
+#: kmymoney/mymoney/storage/journalmodel.cpp:79
 #, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
 msgstr "Data d'entrada"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:81
+#: kmymoney/mymoney/storage/journalmodel.cpp:82
 #, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
 msgstr "Saldo del compte o unitats de títols"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:108
+#: kmymoney/mymoney/storage/journalmodel.cpp:109
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
 msgstr "No conciliat"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:110
+#: kmymoney/mymoney/storage/journalmodel.cpp:111
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
 msgstr "Liquidada"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:112
+#: kmymoney/mymoney/storage/journalmodel.cpp:113
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "Reconciled"
 msgstr "Conciliat"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:114
+#: kmymoney/mymoney/storage/journalmodel.cpp:115
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "Frozen"
 msgstr "Congelat"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:123
+#: kmymoney/mymoney/storage/journalmodel.cpp:124
 #, kde-format
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
 msgstr "Afig accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:125
+#: kmymoney/mymoney/storage/journalmodel.cpp:126
 #, kde-format
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
 msgstr "Elimina les accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:127
+#: kmymoney/mymoney/storage/journalmodel.cpp:128
 #, kde-format
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
 msgstr "Compra accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:129
+#: kmymoney/mymoney/storage/journalmodel.cpp:130
 #, kde-format
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
 msgstr "Ven accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:131
+#: kmymoney/mymoney/storage/journalmodel.cpp:132
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:45
 #, kde-format
 msgid "Dividend"
 msgstr "Dividend"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:133
+#: kmymoney/mymoney/storage/journalmodel.cpp:134
 #, kde-format
 msgid "Reinvest Dividend"
 msgstr "Reinversió del dividend"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:135
+#: kmymoney/mymoney/storage/journalmodel.cpp:136
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:47
 #, kde-format
 msgid "Yield"
 msgstr "Rendiment"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:137
+#: kmymoney/mymoney/storage/journalmodel.cpp:138
 #, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "Desdoblament d'accions"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:139
+#: kmymoney/mymoney/storage/journalmodel.cpp:140
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
 msgstr "Interessos rebuts"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:141
+#: kmymoney/mymoney/storage/journalmodel.cpp:142
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "Desconeguda"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:237
+#: kmymoney/mymoney/storage/journalmodel.cpp:238
 #, kde-format
 msgid "Multiple fee categories"
 msgstr "Categories múltiples de despeses"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:237
+#: kmymoney/mymoney/storage/journalmodel.cpp:238
 #, kde-format
 msgid "Multiple interest categories"
 msgstr "Categories múltiples d'interés"
@@ -9416,6 +9445,13 @@ msgstr "Grup"
 msgctxt "Report state"
 msgid "Modified"
 msgstr "Modificat"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:79
+#, fuzzy, kde-format
+#| msgid "ID"
+msgctxt "@title:column Report ID"
+msgid "ID"
+msgstr "ID"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format
@@ -15586,7 +15622,7 @@ msgstr "Nom"
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:53
 #: kmymoney/plugins/views/forecast/kforecastview.ui:272
-#: kmymoney/plugins/views/reports/kreportsview_p.h:801
+#: kmymoney/plugins/views/reports/kreportsview_p.h:802
 #, kde-format
 msgid "Forecast"
 msgstr "Previsió"
@@ -16970,7 +17006,7 @@ msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> és un informe predeterminat, no es pot suprimir."
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:597
-#: kmymoney/plugins/views/reports/kreportsview_p.h:297
+#: kmymoney/plugins/views/reports/kreportsview_p.h:298
 #, kde-format
 msgid "Delete Report?"
 msgstr "Voleu suprimir l'informe?"
@@ -17011,7 +17047,7 @@ msgstr "Informes predeterminats"
 msgid "Custom reports"
 msgstr "Informes personalitzats"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:296
+#: kmymoney/plugins/views/reports/kreportsview_p.h:297
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to delete report <b>%1</b>?  There is no way to "
@@ -17020,388 +17056,388 @@ msgstr ""
 "<qt>Segur que voleu suprimir l'informe <b>%1</b>? No hi ha manera de "
 "recuperar-lo.</qt>"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:310
+#: kmymoney/plugins/views/reports/kreportsview_p.h:311
 #, kde-format
 msgid "Income and Expenses"
 msgstr "Ingressos i despeses"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:317
+#: kmymoney/plugins/views/reports/kreportsview_p.h:318
 #, kde-format
 msgid "Income and Expenses This Month"
 msgstr "Ingressos i despeses d'este mes"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:318
-#: kmymoney/plugins/views/reports/kreportsview_p.h:325
-#: kmymoney/plugins/views/reports/kreportsview_p.h:332
-#: kmymoney/plugins/views/reports/kreportsview_p.h:340
-#: kmymoney/plugins/views/reports/kreportsview_p.h:351
-#: kmymoney/plugins/views/reports/kreportsview_p.h:363
-#: kmymoney/plugins/views/reports/kreportsview_p.h:379
-#: kmymoney/plugins/views/reports/kreportsview_p.h:386
-#: kmymoney/plugins/views/reports/kreportsview_p.h:393
-#: kmymoney/plugins/views/reports/kreportsview_p.h:400
-#: kmymoney/plugins/views/reports/kreportsview_p.h:410
-#: kmymoney/plugins/views/reports/kreportsview_p.h:422
-#: kmymoney/plugins/views/reports/kreportsview_p.h:430
-#: kmymoney/plugins/views/reports/kreportsview_p.h:444
-#: kmymoney/plugins/views/reports/kreportsview_p.h:453
-#: kmymoney/plugins/views/reports/kreportsview_p.h:460
-#: kmymoney/plugins/views/reports/kreportsview_p.h:467
-#: kmymoney/plugins/views/reports/kreportsview_p.h:475
-#: kmymoney/plugins/views/reports/kreportsview_p.h:483
-#: kmymoney/plugins/views/reports/kreportsview_p.h:490
-#: kmymoney/plugins/views/reports/kreportsview_p.h:499
-#: kmymoney/plugins/views/reports/kreportsview_p.h:510
-#: kmymoney/plugins/views/reports/kreportsview_p.h:522
-#: kmymoney/plugins/views/reports/kreportsview_p.h:531
-#: kmymoney/plugins/views/reports/kreportsview_p.h:540
-#: kmymoney/plugins/views/reports/kreportsview_p.h:549
-#: kmymoney/plugins/views/reports/kreportsview_p.h:558
-#: kmymoney/plugins/views/reports/kreportsview_p.h:567
-#: kmymoney/plugins/views/reports/kreportsview_p.h:576
-#: kmymoney/plugins/views/reports/kreportsview_p.h:585
-#: kmymoney/plugins/views/reports/kreportsview_p.h:598
-#: kmymoney/plugins/views/reports/kreportsview_p.h:612
-#: kmymoney/plugins/views/reports/kreportsview_p.h:633
-#: kmymoney/plugins/views/reports/kreportsview_p.h:654
-#: kmymoney/plugins/views/reports/kreportsview_p.h:670
-#: kmymoney/plugins/views/reports/kreportsview_p.h:691
-#: kmymoney/plugins/views/reports/kreportsview_p.h:700
-#: kmymoney/plugins/views/reports/kreportsview_p.h:708
-#: kmymoney/plugins/views/reports/kreportsview_p.h:717
-#: kmymoney/plugins/views/reports/kreportsview_p.h:730
-#: kmymoney/plugins/views/reports/kreportsview_p.h:740
-#: kmymoney/plugins/views/reports/kreportsview_p.h:754
-#: kmymoney/plugins/views/reports/kreportsview_p.h:763
-#: kmymoney/plugins/views/reports/kreportsview_p.h:773
-#: kmymoney/plugins/views/reports/kreportsview_p.h:782
-#: kmymoney/plugins/views/reports/kreportsview_p.h:791
-#: kmymoney/plugins/views/reports/kreportsview_p.h:809
-#: kmymoney/plugins/views/reports/kreportsview_p.h:818
-#: kmymoney/plugins/views/reports/kreportsview_p.h:828
-#: kmymoney/plugins/views/reports/kreportsview_p.h:837
-#: kmymoney/plugins/views/reports/kreportsview_p.h:855
-#: kmymoney/plugins/views/reports/kreportsview_p.h:863
-#: kmymoney/plugins/views/reports/kreportsview_p.h:871
-#: kmymoney/plugins/views/reports/kreportsview_p.h:879
+#: kmymoney/plugins/views/reports/kreportsview_p.h:319
+#: kmymoney/plugins/views/reports/kreportsview_p.h:326
+#: kmymoney/plugins/views/reports/kreportsview_p.h:333
+#: kmymoney/plugins/views/reports/kreportsview_p.h:341
+#: kmymoney/plugins/views/reports/kreportsview_p.h:352
+#: kmymoney/plugins/views/reports/kreportsview_p.h:364
+#: kmymoney/plugins/views/reports/kreportsview_p.h:380
+#: kmymoney/plugins/views/reports/kreportsview_p.h:387
+#: kmymoney/plugins/views/reports/kreportsview_p.h:394
+#: kmymoney/plugins/views/reports/kreportsview_p.h:401
+#: kmymoney/plugins/views/reports/kreportsview_p.h:411
+#: kmymoney/plugins/views/reports/kreportsview_p.h:423
+#: kmymoney/plugins/views/reports/kreportsview_p.h:431
+#: kmymoney/plugins/views/reports/kreportsview_p.h:445
+#: kmymoney/plugins/views/reports/kreportsview_p.h:454
+#: kmymoney/plugins/views/reports/kreportsview_p.h:461
+#: kmymoney/plugins/views/reports/kreportsview_p.h:468
+#: kmymoney/plugins/views/reports/kreportsview_p.h:476
+#: kmymoney/plugins/views/reports/kreportsview_p.h:484
+#: kmymoney/plugins/views/reports/kreportsview_p.h:491
+#: kmymoney/plugins/views/reports/kreportsview_p.h:500
+#: kmymoney/plugins/views/reports/kreportsview_p.h:511
+#: kmymoney/plugins/views/reports/kreportsview_p.h:523
+#: kmymoney/plugins/views/reports/kreportsview_p.h:532
+#: kmymoney/plugins/views/reports/kreportsview_p.h:541
+#: kmymoney/plugins/views/reports/kreportsview_p.h:550
+#: kmymoney/plugins/views/reports/kreportsview_p.h:559
+#: kmymoney/plugins/views/reports/kreportsview_p.h:568
+#: kmymoney/plugins/views/reports/kreportsview_p.h:577
+#: kmymoney/plugins/views/reports/kreportsview_p.h:586
+#: kmymoney/plugins/views/reports/kreportsview_p.h:599
+#: kmymoney/plugins/views/reports/kreportsview_p.h:613
+#: kmymoney/plugins/views/reports/kreportsview_p.h:634
+#: kmymoney/plugins/views/reports/kreportsview_p.h:655
+#: kmymoney/plugins/views/reports/kreportsview_p.h:671
+#: kmymoney/plugins/views/reports/kreportsview_p.h:692
+#: kmymoney/plugins/views/reports/kreportsview_p.h:701
+#: kmymoney/plugins/views/reports/kreportsview_p.h:709
+#: kmymoney/plugins/views/reports/kreportsview_p.h:718
+#: kmymoney/plugins/views/reports/kreportsview_p.h:731
+#: kmymoney/plugins/views/reports/kreportsview_p.h:741
+#: kmymoney/plugins/views/reports/kreportsview_p.h:755
+#: kmymoney/plugins/views/reports/kreportsview_p.h:764
+#: kmymoney/plugins/views/reports/kreportsview_p.h:774
+#: kmymoney/plugins/views/reports/kreportsview_p.h:783
+#: kmymoney/plugins/views/reports/kreportsview_p.h:792
+#: kmymoney/plugins/views/reports/kreportsview_p.h:810
+#: kmymoney/plugins/views/reports/kreportsview_p.h:819
+#: kmymoney/plugins/views/reports/kreportsview_p.h:829
+#: kmymoney/plugins/views/reports/kreportsview_p.h:838
+#: kmymoney/plugins/views/reports/kreportsview_p.h:856
+#: kmymoney/plugins/views/reports/kreportsview_p.h:864
+#: kmymoney/plugins/views/reports/kreportsview_p.h:872
+#: kmymoney/plugins/views/reports/kreportsview_p.h:880
 #, kde-format
 msgid "Default Report"
 msgstr "Informe predeterminat"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:324
+#: kmymoney/plugins/views/reports/kreportsview_p.h:325
 #, kde-format
 msgid "Income and Expenses This Year"
 msgstr "Ingressos i despeses d'este any"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:331
+#: kmymoney/plugins/views/reports/kreportsview_p.h:332
 #, kde-format
 msgid "Income and Expenses By Year"
 msgstr "Ingressos i despeses per any"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:339
+#: kmymoney/plugins/views/reports/kreportsview_p.h:340
 #, kde-format
 msgid "Income and Expenses Graph"
 msgstr "Gràfic d'ingressos i despeses"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:350
+#: kmymoney/plugins/views/reports/kreportsview_p.h:351
 #, kde-format
 msgid "Income and Expenses Bar Graph"
 msgstr "Gràfic de barres d'ingressos i despeses"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:362
+#: kmymoney/plugins/views/reports/kreportsview_p.h:363
 #, kde-format
 msgid "Income and Expenses Pie Chart"
 msgstr "Gràfic de pastís d'ingressos i despeses"
 
 # skip-rule: ff-net
-#: kmymoney/plugins/views/reports/kreportsview_p.h:371
+#: kmymoney/plugins/views/reports/kreportsview_p.h:372
 #: kmymoney/views/khomeview_p.h:1559
 #, kde-format
 msgid "Net Worth"
 msgstr "Valor net"
 
 # skip-rule: ff-net
-#: kmymoney/plugins/views/reports/kreportsview_p.h:378
+#: kmymoney/plugins/views/reports/kreportsview_p.h:379
 #, kde-format
 msgid "Net Worth By Month"
 msgstr "Valor net per mes"
 
 # skip-rule: ff-net
-#: kmymoney/plugins/views/reports/kreportsview_p.h:385
+#: kmymoney/plugins/views/reports/kreportsview_p.h:386
 #, kde-format
 msgid "Net Worth Today"
 msgstr "Valor net hui"
 
 # skip-rule: ff-net
-#: kmymoney/plugins/views/reports/kreportsview_p.h:392
+#: kmymoney/plugins/views/reports/kreportsview_p.h:393
 #, kde-format
 msgid "Net Worth By Year"
 msgstr "Valor net per any"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:399
+#: kmymoney/plugins/views/reports/kreportsview_p.h:400
 #, kde-format
 msgid "7-day Cash Flow Forecast"
 msgstr "Previsió del flux de caixa a 7 dies"
 
 # skip-rule: ff-net
-#: kmymoney/plugins/views/reports/kreportsview_p.h:409
+#: kmymoney/plugins/views/reports/kreportsview_p.h:410
 #, kde-format
 msgid "Net Worth Graph"
 msgstr "Gràfic del valor net"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:421
+#: kmymoney/plugins/views/reports/kreportsview_p.h:422
 #, kde-format
 msgid "Account Balances by Institution"
 msgstr "Balanç comptable per institució"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:429
+#: kmymoney/plugins/views/reports/kreportsview_p.h:430
 #, kde-format
 msgid "Account Balances by Type"
 msgstr "Balanç comptable per tipus"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:443
+#: kmymoney/plugins/views/reports/kreportsview_p.h:444
 #, kde-format
 msgid "Transactions by Account"
 msgstr "Operacions per compte"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:452
+#: kmymoney/plugins/views/reports/kreportsview_p.h:453
 #, kde-format
 msgid "Transactions by Category"
 msgstr "Operacions per categoria"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:459
+#: kmymoney/plugins/views/reports/kreportsview_p.h:460
 #, kde-format
 msgid "Transactions by Payee"
 msgstr "Operacions per beneficiari"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:466
+#: kmymoney/plugins/views/reports/kreportsview_p.h:467
 #, kde-format
 msgid "Transactions by Tag"
 msgstr "Operacions per etiqueta"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:474
+#: kmymoney/plugins/views/reports/kreportsview_p.h:475
 #, kde-format
 msgid "Transactions by Month"
 msgstr "Operacions per mes"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:482
+#: kmymoney/plugins/views/reports/kreportsview_p.h:483
 #, kde-format
 msgid "Transactions by Week"
 msgstr "Operacions per setmana"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:489
+#: kmymoney/plugins/views/reports/kreportsview_p.h:490
 #, kde-format
 msgid "Loan Transactions"
 msgstr "Operacions de préstec"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:498
+#: kmymoney/plugins/views/reports/kreportsview_p.h:499
 #, kde-format
 msgid "Transactions by Reconciliation Status"
 msgstr "Operacions per a l'estat de la conciliació"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:509
+#: kmymoney/plugins/views/reports/kreportsview_p.h:510
 #, kde-format
 msgid "Cash Flow Transactions This Month"
 msgstr "Operacions de flux de caixa d'este mes"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:514
+#: kmymoney/plugins/views/reports/kreportsview_p.h:515
 #: kmymoney/views/kmymoneyview.cpp:194
 #, kde-format
 msgid "Investments"
 msgstr "Inversions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:521
+#: kmymoney/plugins/views/reports/kreportsview_p.h:522
 #, kde-format
 msgid "Investment Transactions"
 msgstr "Operacions d'inversió"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:530
+#: kmymoney/plugins/views/reports/kreportsview_p.h:531
 #, kde-format
 msgid "Investment Holdings by Account"
 msgstr "Participacions en inversions per compte"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:539
+#: kmymoney/plugins/views/reports/kreportsview_p.h:540
 #, kde-format
 msgid "Investment Holdings by Type"
 msgstr "Participacions en inversions per tipus"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:548
+#: kmymoney/plugins/views/reports/kreportsview_p.h:549
 #, kde-format
 msgid "Investment Performance by Account"
 msgstr "Comportament de les inversions per compte"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:557
+#: kmymoney/plugins/views/reports/kreportsview_p.h:558
 #, kde-format
 msgid "Investment Performance by Type"
 msgstr "Rendiment de la inversió per tipus"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:566
+#: kmymoney/plugins/views/reports/kreportsview_p.h:567
 #, kde-format
 msgid "Investment Capital Gains by Account"
 msgstr "Guany de capital en inversions per compte"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:575
+#: kmymoney/plugins/views/reports/kreportsview_p.h:576
 #, kde-format
 msgid "Investment Capital Gains by Type"
 msgstr "Guany de capital en inversions per tipus"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:584
+#: kmymoney/plugins/views/reports/kreportsview_p.h:585
 #, kde-format
 msgid "Investment Holdings Pie"
 msgstr "Gràfic de pastís de les participacions en inversions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:597
+#: kmymoney/plugins/views/reports/kreportsview_p.h:598
 #, kde-format
 msgid "Investment Worth Graph"
 msgstr "Gràfic del valor de les inversions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:611
+#: kmymoney/plugins/views/reports/kreportsview_p.h:612
 #, kde-format
 msgid "Investment Price Graph"
 msgstr "Gràfic del preu de les inversions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:632
+#: kmymoney/plugins/views/reports/kreportsview_p.h:633
 #, kde-format
 msgid "Investment Moving Average Price Graph"
 msgstr "Gràfic de la mitjana mòbil del preu de les inversions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:653
+#: kmymoney/plugins/views/reports/kreportsview_p.h:654
 #, kde-format
 msgid "Investment Moving Average"
 msgstr "Mitjana mòbil de les inversions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:669
+#: kmymoney/plugins/views/reports/kreportsview_p.h:670
 #, kde-format
 msgid "Investment Moving Average vs Actual"
 msgstr "Mitjana mòbil vs. valor real de les inversions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:683
+#: kmymoney/plugins/views/reports/kreportsview_p.h:684
 #, kde-format
 msgid "Taxes"
 msgstr "Impostos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:690
+#: kmymoney/plugins/views/reports/kreportsview_p.h:691
 #, kde-format
 msgid "Tax Transactions by Category"
 msgstr "Operacions d'impostos per categoria"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:699
+#: kmymoney/plugins/views/reports/kreportsview_p.h:700
 #, kde-format
 msgid "Tax Transactions by Payee"
 msgstr "Operacions d'impostos per beneficiari"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:707
+#: kmymoney/plugins/views/reports/kreportsview_p.h:708
 #, kde-format
 msgid "Tax Transactions by Category Last Fiscal Year"
 msgstr "Operacions d'impostos per categoria de l'últim any fiscal"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:716
+#: kmymoney/plugins/views/reports/kreportsview_p.h:717
 #, kde-format
 msgid "Tax Transactions by Payee Last Fiscal Year"
 msgstr "Operacions d'impostos per beneficiari de l'últim any fiscal"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:722
+#: kmymoney/plugins/views/reports/kreportsview_p.h:723
 #, kde-format
 msgid "Budgeting"
 msgstr "Pressupostos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:729
+#: kmymoney/plugins/views/reports/kreportsview_p.h:730
 #, kde-format
 msgid "Budgeted vs. Actual This Year"
 msgstr "Pressupostat vs. realitzat este any"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:739
+#: kmymoney/plugins/views/reports/kreportsview_p.h:740
 #, kde-format
 msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr "Pressupostat vs. realitzat este any (YTM)"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:753
+#: kmymoney/plugins/views/reports/kreportsview_p.h:754
 #: kmymoney/plugins/views/reports/reportsview.cpp:181
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr "Pressupost mensual vs. realitzat"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:762
+#: kmymoney/plugins/views/reports/kreportsview_p.h:763
 #, kde-format
 msgid "Yearly Budgeted vs. Actual"
 msgstr "Pressupost anual vs. realitzat"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:772
+#: kmymoney/plugins/views/reports/kreportsview_p.h:773
 #, kde-format
 msgid "Monthly Budget"
 msgstr "Pressupost mensual"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:781
+#: kmymoney/plugins/views/reports/kreportsview_p.h:782
 #, kde-format
 msgid "Yearly Budget"
 msgstr "Pressupost anual"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:790
+#: kmymoney/plugins/views/reports/kreportsview_p.h:791
 #, kde-format
 msgid "Yearly Budgeted vs Actual Graph"
 msgstr "Pressupost anual vs. realitzat (gràfic)"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:808
+#: kmymoney/plugins/views/reports/kreportsview_p.h:809
 #, kde-format
 msgid "Forecast By Month"
 msgstr "Previsió per mesos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:817
+#: kmymoney/plugins/views/reports/kreportsview_p.h:818
 #, kde-format
 msgid "Forecast Next Quarter"
 msgstr "Previsió per al trimestre pròxim"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:827
+#: kmymoney/plugins/views/reports/kreportsview_p.h:828
 #, kde-format
 msgid "Income and Expenses Forecast This Year"
 msgstr "Previsió d'ingressos i despeses d'este any"
 
 # skip-rule: ff-net
-#: kmymoney/plugins/views/reports/kreportsview_p.h:836
+#: kmymoney/plugins/views/reports/kreportsview_p.h:837
 #, kde-format
 msgid "Net Worth Forecast Graph"
 msgstr "Gràfic de la previsió del valor net"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
 #. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:847
+#: kmymoney/plugins/views/reports/kreportsview_p.h:848
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
 #, kde-format
 msgid "General Information"
 msgstr "Informació general"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:854
+#: kmymoney/plugins/views/reports/kreportsview_p.h:855
 #, kde-format
 msgid "Schedule Information"
 msgstr "Informació de planificació"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:862
+#: kmymoney/plugins/views/reports/kreportsview_p.h:863
 #, kde-format
 msgid "Schedule Summary Information"
 msgstr "Resum de les planificacions"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:870
+#: kmymoney/plugins/views/reports/kreportsview_p.h:871
 #, kde-format
 msgid "Account Information"
 msgstr "Informació dels comptes"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:878
+#: kmymoney/plugins/views/reports/kreportsview_p.h:879
 #, kde-format
 msgid "Loan Information"
 msgstr "Informació dels préstecs"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:884
+#: kmymoney/plugins/views/reports/kreportsview_p.h:885
 #, kde-format
 msgid "Charts"
 msgstr "Gràfics"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:950
+#: kmymoney/plugins/views/reports/kreportsview_p.h:951
 #, kde-format
 msgid "%1 YTD Account Transactions"
 msgstr "%1 operacions del compte d'este any"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:951
+#: kmymoney/plugins/views/reports/kreportsview_p.h:952
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:124
 #: kmymoney/plugins/views/reports/reportsview.cpp:182
@@ -19927,7 +19963,7 @@ msgstr[1] "Etiquetes: "
 
 # skip-rule: ff-net
 #: kmymoney/views/kaccountsview.cpp:172
-#: kmymoney/views/kinstitutionsview.cpp:203
+#: kmymoney/views/kinstitutionsview.cpp:205
 #, kde-format
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
@@ -19935,7 +19971,7 @@ msgstr "Valor net: ~%1"
 
 # skip-rule: ff-net
 #: kmymoney/views/kaccountsview.cpp:172
-#: kmymoney/views/kinstitutionsview.cpp:203
+#: kmymoney/views/kinstitutionsview.cpp:205
 #, kde-format
 msgid "Net Worth: %1"
 msgstr "Valor net: %1"
@@ -20022,40 +20058,40 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Beneficis totals:"
 
-#: kmymoney/views/kaccountsview_p.h:199
+#: kmymoney/views/kaccountsview_p.h:201
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Edita el compte «%1»"
 
-#: kmymoney/views/kaccountsview_p.h:255
+#: kmymoney/views/kaccountsview_p.h:257
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Editeu un compte"
 
-#: kmymoney/views/kaccountsview_p.h:289
+#: kmymoney/views/kaccountsview_p.h:291
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "No s'ha pogut modificar el compte «%1». Motiu: %2"
 
-#: kmymoney/views/kaccountsview_p.h:365
+#: kmymoney/views/kaccountsview_p.h:367
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr ""
 "El saldo del compte cal que siga zero abans que es puga tancar el compte"
 
-#: kmymoney/views/kaccountsview_p.h:368
+#: kmymoney/views/kaccountsview_p.h:370
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "Cal tancar tots els subcomptes abans que es puga tancar el compte"
 
-#: kmymoney/views/kaccountsview_p.h:371
+#: kmymoney/views/kaccountsview_p.h:373
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Este compte encara està inclòs en una planificació activa"
 
-#: kmymoney/views/kaccountsview_p.h:374
+#: kmymoney/views/kaccountsview_p.h:376
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Este compte encara està vinculat amb un compte en línia"
@@ -20716,50 +20752,50 @@ msgstr "Passius líquids esperats"
 msgid "Expected Profit/Loss"
 msgstr "Benefici/pèrdua esperat"
 
-#: kmymoney/views/kinstitutionsview.cpp:245
+#: kmymoney/views/kinstitutionsview.cpp:247
 #, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
 msgstr "Editeu la institució"
 
-#: kmymoney/views/kinstitutionsview.cpp:252
+#: kmymoney/views/kinstitutionsview.cpp:254
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "No s'ha pogut guardar la institució: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:258
+#: kmymoney/views/kinstitutionsview.cpp:260
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "No s'ha pogut editar la institució: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:269
+#: kmymoney/views/kinstitutionsview.cpp:271
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Segur que voleu suprimir la institució <b>%1</b>?</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:270
+#: kmymoney/views/kinstitutionsview.cpp:272
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "Suprimiu una institució"
 
-#: kmymoney/views/kinstitutionsview.cpp:281
-#: kmymoney/views/kinstitutionsview.cpp:284
+#: kmymoney/views/kinstitutionsview.cpp:283
+#: kmymoney/views/kinstitutionsview.cpp:286
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "No s'ha pogut suprimir la institució: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:603
+#: kmymoney/views/kinvestmentview.cpp:605
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Segur que voleu suprimir la inversió <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:604
+#: kmymoney/views/kinvestmentview.cpp:606
 #, kde-format
 msgid "Delete investment"
 msgstr "Elimina la inversió"
 
-#: kmymoney/views/kinvestmentview.cpp:615
+#: kmymoney/views/kinvestmentview.cpp:617
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "No s'ha pogut suprimir la inversió: %1"
@@ -21579,7 +21615,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Ves fins a «%1»"
 
-#: kmymoney/views/ledgerview.cpp:828
+#: kmymoney/views/ledgerview.cpp:833
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21590,20 +21626,20 @@ msgstr ""
 "dues operacions en paral·lel.<a href=\"jumpToEditor\">Aneu cap a l'editor "
 "actual</a>"
 
-#: kmymoney/views/ledgerview.cpp:955
+#: kmymoney/views/ledgerview.cpp:960
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Falta assignar una categoria a l'operació."
 
-#: kmymoney/views/ledgerview.cpp:962
+#: kmymoney/views/ledgerview.cpp:967
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Falta assignar una categoria a l'operació de <b>%1</b>."
 
 # skip-rule: ff-enter
-#: kmymoney/views/ledgerview.cpp:971
+#: kmymoney/views/ledgerview.cpp:976
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
@@ -21611,14 +21647,14 @@ msgstr ""
 "Esta planificació està endarrerida des del %1. Cliqueu damunt de la icona "
 "per a entrar-hi."
 
-#: kmymoney/views/ledgerview.cpp:977
+#: kmymoney/views/ledgerview.cpp:982
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "Esta operació és importada. Cliqueu damunt de la icona per a acceptar-la."
 
-#: kmymoney/views/ledgerview.cpp:983
+#: kmymoney/views/ledgerview.cpp:988
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21627,38 +21663,38 @@ msgstr ""
 "Esta operació és concordant. Cliqueu damunt de la icona per a acceptar-la o "
 "marcar-la com desaparellada."
 
-#: kmymoney/views/ledgerview.cpp:1029
+#: kmymoney/views/ledgerview.cpp:1034
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr "La diferència entre el saldo del compte i el saldo en línia és %1."
 
-#: kmymoney/views/ledgerview.cpp:1094
+#: kmymoney/views/ledgerview.cpp:1099
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "No introduïu l'operació de la planificació endarrerida."
 
-#: kmymoney/views/ledgerview.cpp:1095
+#: kmymoney/views/ledgerview.cpp:1100
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Introduïu l'operació de la planificació endarrerida."
 
-#: kmymoney/views/ledgerview.cpp:1098
+#: kmymoney/views/ledgerview.cpp:1103
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Voleu introduir ara la planificació endarrerida?"
 
-#: kmymoney/views/ledgerview.cpp:1099
+#: kmymoney/views/ledgerview.cpp:1104
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Introducció de la planificació endarrerida"
 
-#: kmymoney/views/ledgerview.cpp:1119
+#: kmymoney/views/ledgerview.cpp:1124
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21668,7 +21704,7 @@ msgstr ""
 "Separeu l'operació oculta (concordant) des de la qual es mostra i torneu a "
 "introduir-la en el llibre major."
 
-#: kmymoney/views/ledgerview.cpp:1121
+#: kmymoney/views/ledgerview.cpp:1126
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21678,13 +21714,13 @@ msgstr ""
 "Accepteu la coincidència com es mostra i elimineu les dades de l'operació "
 "oculta (concordant)."
 
-#: kmymoney/views/ledgerview.cpp:1125
+#: kmymoney/views/ledgerview.cpp:1130
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Voleu acceptar o desfer ara l'operació concordant?"
 
-#: kmymoney/views/ledgerview.cpp:1126
+#: kmymoney/views/ledgerview.cpp:1131
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
