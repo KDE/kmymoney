@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-26 00:45+0000\n"
-"PO-Revision-Date: 2026-09-23 11:33+0200\n"
+"PO-Revision-Date: 2026-09-26 07:40+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -6522,8 +6522,7 @@ msgid "Last Price Update"
 msgstr "Zadnja posodobitev cene"
 
 #: kmymoney/models/equitiesmodel.cpp:200
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Id"
 msgid "ID"
 msgstr "ID"
@@ -8899,8 +8898,7 @@ msgid "Currency"
 msgstr "Valuta"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:496
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Shows Account ID"
 msgid "ID"
 msgstr "ID"
@@ -8912,12 +8910,10 @@ msgid "The currency assigned to the account"
 msgstr "Valuta dodeljena računu"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:537
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip for 'Currency' column"
-#| msgid "The currency assigned to the account"
+#, kde-format
 msgctxt "@info:tooltip for 'ID' column"
 msgid "The internal identification of the account"
-msgstr "Valuta dodeljena računu"
+msgstr "Interna identifikacija računa"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:74
 #, kde-format
@@ -9046,8 +9042,7 @@ msgid "Memo"
 msgstr "Zapisek"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:73
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Transaction ID"
 msgid "ID"
 msgstr "ID"
@@ -9394,8 +9389,7 @@ msgid "Modified"
 msgstr "Spremenjena"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:79
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Report ID"
 msgid "ID"
 msgstr "ID"

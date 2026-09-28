@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-26 00:45+0000\n"
-"PO-Revision-Date: 2026-09-23 15:42+0300\n"
+"PO-Revision-Date: 2026-09-26 12:42+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -6566,8 +6566,7 @@ msgid "Last Price Update"
 msgstr "Останнє оновлення ціни"
 
 #: kmymoney/models/equitiesmodel.cpp:200
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Id"
 msgid "ID"
 msgstr "Ідентифікатор"
@@ -8946,8 +8945,7 @@ msgid "Currency"
 msgstr "Валюта"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:496
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Shows Account ID"
 msgid "ID"
 msgstr "Ідентифікатор"
@@ -8959,12 +8957,10 @@ msgid "The currency assigned to the account"
 msgstr "Валюта, яку пов'язано з рахунком"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:537
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip for 'Currency' column"
-#| msgid "The currency assigned to the account"
+#, kde-format
 msgctxt "@info:tooltip for 'ID' column"
 msgid "The internal identification of the account"
-msgstr "Валюта, яку пов'язано з рахунком"
+msgstr "Внутрішній ідентифікатор облікового запису"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:74
 #, kde-format
@@ -9093,8 +9089,7 @@ msgid "Memo"
 msgstr "Нотатка"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:73
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Transaction ID"
 msgid "ID"
 msgstr "Ідентифікатор"
@@ -9443,8 +9438,7 @@ msgid "Modified"
 msgstr "Змінено"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:79
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Report ID"
 msgid "ID"
 msgstr "Ідентифікатор"
