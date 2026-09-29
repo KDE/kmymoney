@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>1 декабря 2024 г.</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>Поиск операций</title>
+
+<para
+>Для поиска операций в данных по заданным условиям служит диалоговое окно <guilabel
+>Поиск операций</guilabel
+>. Чтобы открыть его, выберите пункт меню <menuchoice
+> <guimenu
+>Правка</guimenu
+> <guimenuitem
+>Найти операцию…</guimenuitem
+></menuchoice
+> или нажмите комбинацию клавиш <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>F</keycap
+></keycombo
+>. </para>
+
+<para
+>В этом диалоговом окне есть две основные вкладки. На вкладке <guilabel
+>Критерии поиска</guilabel
+> показывается несколько вложенных вкладок для указания критериев поиска. При нажатии кнопки <guibutton
+>Найти</guibutton
+> начинается поиск, при этом учитываются все критерии, введённые на любых вложенных вкладках критериев. </para>
+
+<para
+>После завершения поиска результаты будут показаны на вкладке <guilabel
+>Результат</guilabel
+>. Под списком результатов &kmymoney; показывает количество операций, соответствующих критериям поиска. Двойной щелчок по отдельной операции в списке результатов откроет соответствующий журнал с выбранной операцией. </para>
+
+<para
+>Кнопка <guibutton
+>Сброс</guibutton
+> возвращает все поля на всех вложенных вкладках критериев к значениям по умолчанию. Это позволяет задать новые условия поиска. </para>
+
+<para
+>Кнопка <guibutton
+>Закрыть</guibutton
+> закрывает диалоговое окно <guilabel
+>Поиск операций</guilabel
+>. </para>
+
+<sect1 id="details.search.criteria"
+><title
+>Критерии поиска</title>
+<para
+>На основной вкладке «Критерии» есть несколько подвкладок, каждая из которых позволяет задать отдельный тип критериев поиска. Под областью задания критериев &kmymoney; выводит список всех типов критериев, заданных в данный момент для поиска. </para>
+
+<sect2 id="details.search.text"
+><title
+>Текст</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Текст»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-text.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Критерии», подвкладка «Текст»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно задать текст для поиска. Кроме того, здесь есть раскрывающийся список и два флажка, которые определяют, как этот текст используется при поиске. </para>
+
+<para
+>По умолчанию поиск выполняется по простым подстрокам. Например: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+>По запросу <quote
+>Best</quote
+> будет найдено <quote
+>Best Cakes, Inc.</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+>По запросу <quote
+>est</quote
+> также будет найдено <quote
+>Best Cakes, Inc.</quote
+> </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>В раскрывающемся списке рядом с текстовым полем выберите <guilabel
+>Содержит</guilabel
+>, чтобы найти операции, содержащие текст, или <guilabel
+>Не содержит</guilabel
+>, чтобы найти операции, не содержащие указанный текст. </para>
+
+<para
+>Если установить флажок <guilabel
+>С учётом регистра</guilabel
+>, поиск будет учитывать регистр. Например, если этот параметр установлен, <quote
+>best</quote
+> не найдёт <quote
+>Best Cakes, Inc.</quote
+>. </para>
+
+<para
+>Если установить флажок <guilabel
+>Регулярное выражение</guilabel
+>, текст будет обрабатываться как регулярное выражение. Подробнее о составлении регулярных выражений см. документацию &Qt; по <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>классу QRegularExpression</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account"
+><title
+>Счёт</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Счёт»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-account.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Критерии», подвкладка «Счёт»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно задать счета для поиска. </para>
+
+<para
+>Счета показываются в виде дерева. Счета, отмеченные для поиска, обозначаются флажком. При нажатии кнопки <guibutton
+>Все</guibutton
+> все счета отмечаются для поиска. При нажатии кнопки <guibutton
+>Не указано</guibutton
+> ни один счёт не будет отмечен для поиска. Отдельные счета можно отметить или снять отметку, щёлкнув по флажку рядом с названием счёта с помощью &LMB;. Всю иерархию счетов можно отметить или снять отметку, щёлкнув по флажку с помощью &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.date"
+><title
+>Дата</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Дата»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-date.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Критерии», подвкладка «Дата»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно указать, по каким датам выполнять поиск. Под датой понимается дата проводки операции. </para>
+
+<para
+>Раскрывающийся список <quote
+>Диапазон</quote
+> позволяет удобно задать элементы управления датами «С» и «По». Элементы «С» и «По» можно изменять по отдельности. Даты можно вводить вручную; щелчок по стрелке вниз справа от поля открывает обычный календарь для выбора даты. Элементы управления не позволят ввести несуществующие даты. Значения даты можно также изменять щелчками по стрелкам вверх и вниз, когда курсор находится в определённой части даты. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount"
+><title
+>Сумма</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Сумма»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-amount.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Критерии», подвкладка «Сумма»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно задать суммы для поиска. </para>
+
+<para
+>Можно искать точную сумму или диапазон сумм. При щелчке по значку калькулятора появится небольшой экранный калькулятор, помогающий ввести значение. </para>
+</sect2>
+
+<sect2 id="details.search.category"
+><title
+>Категория</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Категория»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-category.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Критерии», подвкладка «Категория»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно задать категории для поиска. </para>
+
+<para
+>Категории показываются в виде дерева, как и счета. Категории, отмеченные для поиска, обозначаются флажком. При нажатии кнопки <guibutton
+>Все</guibutton
+> все категории отмечаются для поиска. При нажатии кнопки <guibutton
+>Доход</guibutton
+> все категории доходов отмечаются, а у всех категорий расходов отметка снимается. При нажатии кнопки <guibutton
+>Расход</guibutton
+> у всех категорий доходов отметка снимается, а все категории расходов отмечаются. При нажатии кнопки <guibutton
+>Не указано</guibutton
+> ни одна категория не будет отмечена для поиска. </para>
+
+<para
+>Отдельные категории можно отметить или снять отметку, щёлкнув по флажку рядом с названием категории с помощью &LMB;. Всю иерархию категорий можно отметить или снять отметку, щёлкнув по флажку с помощью &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.tag"
+><title
+>Метка</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Метка»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-tag.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Критерии», подвкладка «Метка»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно задать метки для поиска. </para>
+
+<para
+>Метки, отмеченные для поиска, обозначаются установленным флажком. При нажатии кнопки <guibutton
+>Выделить все</guibutton
+> все метки отмечаются для поиска. При нажатии кнопки <guibutton
+>Снять выделение</guibutton
+> ни одна метка не будет отмечена для поиска. Отдельные метки можно отметить или снять отметку, щёлкнув по флажку рядом с именем получателя. </para>
+
+<para
+>Если установить флажок <guilabel
+>Только операции без меток</guilabel
+>, будут выбраны только операции без метки. </para>
+</sect2>
+
+<sect2 id="details.search.payee"
+><title
+>Контрагент</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Получатель»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-payee.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Критерии», подвкладка «Контрагент»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно задать контрагентов для поиска. </para>
+
+<para
+>Контрагенты, отмеченные для поиска, обозначаются флажком. При нажатии кнопки <guibutton
+>Выделить все</guibutton
+> все контрагенты отмечаются для поиска. При нажатии кнопки <guibutton
+>Снять выделение</guibutton
+> ни один контрагент не будет отмечен для поиска. Отдельных контрагентов можно отметить или снять отметку, щёлкнув по флажку рядом с названием контрагента. </para>
+
+<para
+>Если установить флажок <guilabel
+>Найти операции без контрагентов</guilabel
+>, будут выбраны только операции без получателя. </para>
+</sect2>
+
+<sect2 id="details.search.details"
+><title
+>Подробности</title>
+<screenshot>
+  <screeninfo
+>поиск операций, вкладка «Критерии», подвкладка «Подробности»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-details.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Диалог «Поиск операций», вкладка «Подробности»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке можно задать различные дополнительные условия поиска. </para>
+
+<para>
+  <itemizedlist>
+    <title
+>Параметр «Тип» может принимать одно из следующих значений:</title>
+    <listitem
+><para
+>Все типы</para
+></listitem>
+    <listitem
+><para
+>Платежи</para
+></listitem>
+    <listitem
+><para
+>Зачисления</para
+></listitem>
+    <listitem
+><para
+>Переводы</para
+></listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <title
+>Параметр «Состояние» может принимать одно из следующих значений:</title>
+    <listitem
+><para
+>Все состояния</para
+></listitem>
+    <listitem
+><para
+>Не сверено</para
+></listitem>
+    <listitem
+><para
+>Учтено</para
+></listitem>
+    <listitem
+><para
+>Сверено</para
+></listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <title
+>Состояние может принимать одно из следующих значений:</title>
+    <listitem
+><para
+>Любая операция</para
+></listitem>
+    <listitem
+><para
+>Корректная операция</para
+></listitem>
+    <listitem
+><para
+>Недопустимая операция</para
+></listitem>
+  </itemizedlist>
+</para>
+
+<para
+>Поиск можно выполнить по конкретному номеру операции или по диапазону номеров операций. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results"
+><title
+>Результаты поиска</title>
+<para
+>На вкладке <guilabel
+>Результат</guilabel
+> для каждой операции, соответствующей введённым критериям поиска, показываются столбцы Ввод (дата ввода, необязательно), Дата (дата проводки), Счёт, Получатель, Подробности (примечание), C (состояние сверки), Уменьшение и Увеличение. Щелчок &RMB; по строке заголовка списка результатов позволяет включать и отключать показ необязательных столбцов. </para>
+
+<para
+>Двойной щелчок по операции откроет соответствующий журнал счёта с выбранной операцией. </para>
+</sect1>
+</chapter>

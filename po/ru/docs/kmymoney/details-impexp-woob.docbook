@@ -1,0 +1,69 @@
+<sect1 id="details.impexp.woob">
+<sect1info>
+  <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+</sect1info>
+<title
+>Импорт Woob</title>
+
+<sect2
+><title
+>Что такое Woob?</title>
+<para
+><acronym
+><ulink url="https://woob.tech/"
+>Woob</ulink
+></acronym
+>, или <quote
+>Web outside of browsers</quote
+> — это <quote
+>набор приложений, способных взаимодействовать с веб-сайтами без необходимости открывать их в браузере</quote
+>. Одно из <ulink url="https://woob.tech/applications/"
+>таких приложений</ulink
+> позволяет взаимодействовать именно с <ulink url="https://woob.tech/applications/bank"
+>финансовыми учреждениями</ulink
+>. &kmymoney; предоставляет модуль, использующий его напрямую, что даёт возможность импортировать операции из тех банков и учреждений, которые иначе не поддерживают ни одного другого финансового протокола, поддерживаемого &kmymoney;. </para>
+</sect2>
+  
+<sect2
+><title
+>Установка Woob</title>
+<note>
+  <para
+>В настоящее время &kmymoney; требует отдельной установки Woob. Подробности см. ниже. </para>
+</note>
+
+<para
+>Некоторые дистрибутивы &Linux; включают Woob в свои пакеты — это предпочтительный способ установки, если он доступен. Если нет, перед продолжением нужно установить свежую версию Python 3. Все основные дистрибутивы &Linux; включают Python, и по возможности следует использовать именно эту версию. В противном случае можно загрузить пакет для своей системы с <ulink url="https://www.python.org/downloads/"
+>официального сайта Python</ulink
+>. Точная минимальная версия Python, требуемая для Woob, указана на <ulink url="https://woob.tech/install/"
+>сайте Woob</ulink
+>. </para>
+
+<para
+>Если Python 3 установлен, теперь можно легко загрузить и установить необходимые модули Woob. Инструкции приведены на сайте Woob. При запуске &kmymoney; проверяет наличие Woob и загружает модуль, если Woob обнаружен. Сведения о том, как убедиться, что модуль woob загружен, приведены в разделе <link linkend="details.settings.plugins"
+>Модули</link
+> главы <link linkend="details.settings"
+>Параметры</link
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Использование Woob</title>
+<para
+>Если Woob установлен и модуль woob для &kmymoney; загружен, его можно настроить для работы со счётом, выбрав пункт меню <menuchoice
+> <guimenu
+>Счёт</guimenu
+> <guimenuitem
+>Сопоставить с учётной записью в Интернете…</guimenuitem
+> </menuchoice
+>. После этого пункт меню <menuchoice
+> <guimenu
+>Счёт</guimenu
+> <guimenuitem
+>Обновить счёт…</guimenuitem
+> </menuchoice
+> будет загружать операции по этому счёту с помощью Woob. </para>
+</sect2>
+</sect1>

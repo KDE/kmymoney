@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.aqbanking">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ralf.Habacker; &Ralf.Habacker.mail; </author>
+  </authorgroup>
+  <date
+>2025-07-31</date>
+  <releaseinfo
+>5.2.70</releaseinfo>
+</chapterinfo>
+<title
+>Интернет-банкинг</title>
+
+<para
+>Онлайн-банкинг настраивается выбором пункта меню «Настройка» -&gt; «Настроить Aqbanking», </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Меню настройки KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_menu.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Меню настройки KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Этот пункт меню показывается после активации соответствующего модуля KBanking: для этого выберите пункт меню «Настроить KMyMoney…» и элемент «Расширения» в левой части окна. </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>Меню настройки KMyMoney</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Меню настройки KMyMoney</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot
+>Убедитесь, что флажок напротив строки с KBanking установлен. </para>
+
+<sect1>
+<title
+>Настройка Aqbanking</title>
+<para
+>После выбора пункта меню «Настройка AqBanking» появится следующее окно: </para>
+
+<para>
+<screenshot>
+  <screeninfo
+></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="aqbanking-wizard-page1.png"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Добавление выполняется в два этапа. Первый этап — добавление пользователя, второй — добавление счёта. </para>
+</sect1>
+
+<sect1 id="create_user">
+  <title
+>Создание пользователя</title>
+  <para
+>После нажатия кнопки «Создать пользователя» откроется диалоговое окно «Мастер создания нового пользователя», показанное ниже: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+<sect2 id="hbci_create_user">
+  <title
+>Создание пользователя для HBCI</title>
+<sect3 id="hbci_select_online_banking_protocol">
+  <title
+>Выбор протокола банковского обслуживания через Интернет</title>
+  <para
+>После нажатия кнопки «Далее» появится список доступных протоколов Интернет-банкинга: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page2-hbci.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_configuring_a_account">
+  <title
+>Настройка счёта HBCI</title>
+  <para
+>После выбора «HBCI backend using AqHBCI» и нажатия кнопки «Далее» появится следующая страница, на которой можно выбрать тип защиты: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Некоторые сведения о поддерживаемых банками типах защиты приведены в <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle#section-2"
+>таблице банков AqBanking6</ulink
+>. Если банка нет в этом списке, сначала попробуйте Pin/TAN. </para>
+</sect3>
+<sect3 id="hbci_setup_pintan">
+  <title
+>Настройка PIN/TAN</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_bank_and_server_url">
+  <title
+>Выбор банка и URL сервера</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>На странице <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle"
+>AqBanking6 Bankentabelle</ulink
+> приведён список URL банковских серверов, работоспособность которых подтверждена. </para>
+</sect3>
+<sect3 id="hbci_select_bank_account_and_user_name">
+  <title
+>Выбор банковского счёта и имени пользователя</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_choose_extended_settings_or_continue">
+  <title
+>Выбор расширенных параметров или продолжение</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_extended_settings">
+  <title
+>Выбор расширенных параметров</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_finish_creating_user">
+  <title
+>Завершение создания пользователя</title>
+  <para
+>После нажатия кнопки «Далее» Aqbanking свяжется с сервером и получит сертификат сервера и информацию о банке. </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>После нажатия кнопки «Закрыть» учётная запись пользователя будет создана. </para>
+</sect3>
+<sect3 id="add_account">
+  <title
+>Добавление счёта</title>
+  <para
+>Если добавление учётной записи пользователя не завершилось ошибкой, счета, связанные с указанным банком, уже должны быть в списке счетов. </para>
+</sect3>
+</sect2>
+<sect2 id="paypal_create_user">
+  <title
+>Paypal</title>
+<sect3 id="paypal_select_online_banking_protocol">
+  <title
+>Выбор протокола банковского обслуживания через Интернет</title>
+  <para
+>После нажатия кнопки «Далее» появится список доступных протоколов Интернет-банкинга: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_1">
+  <title
+>Настройка пользователя для Paypal</title>
+  <para
+>После выбора «Paypal» и нажатия кнопки «Далее» появится следующая информационная страница: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>Нажмите кнопку «Запустить», чтобы продолжить. </para>
+</sect3>
+<sect3 id="paypal_user_name_and_email">
+  <title
+>Ввод имени пользователя и адреса электронной почты PayPal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_api_password_and_signature">
+  <title
+>Выбор параметров API</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_2">
+  <title
+>Сводная информация перед созданием пользователя</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_setup_password">
+  <title
+>Ввод нового пароля для пользователя Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_finish_creating_user">
+  <title
+>Завершение создания пользователя</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>После нажатия кнопки «Готово» учётная запись пользователя будет создана. </para>
+  <para
+>Остаётся создать новый счёт на основе этого пользователя. </para>
+</sect3>
+<sect3 id="paypal_choose_backend">
+  <title
+>Добавление счёта Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_add_account">
+  <title
+>Добавление счёта Paypal</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

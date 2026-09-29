@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>1 декабря 2024 г.</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>Учреждения</title>
+
+<para
+>Учреждения в &kmymoney; служат способом объединения счетов. Чаще всего это финансовые учреждения, такие как банки и брокерские фирмы, но в этой роли может выступать что угодно — например, <quote
+>Собственные средства</quote
+> для учёта наличных в кармане и прочих активов, фактически не хранящихся в финансовом учреждении, или <quote
+>Магазины</quote
+> для объединения всех счетов по кредитным картам и прочих счетов в розничных магазинах. </para>
+
+<sect1 id="details.institutions.view"
+><title
+>Представление учреждений</title>
+<para
+>Представление учреждений содержит сводку всех счетов, сгруппированных по соответствующим учреждениям. Список счетов любого учреждения можно развернуть или свернуть, щёлкнув по стрелке слева от названия учреждения. Последним в списке указано учреждение «Счета без учреждения». </para>
+
+<para
+>Представление учреждений показывает несколько столбцов с информацией о счёте. Кроме того, показывается общая сумма всех счетов в каждом учреждении. Выбрать, какие столбцы показывать, можно, щёлкнув правой кнопкой мыши по заголовку любого столбца и установив или сняв флажок рядом с названием столбца. </para>
+
+<screenshot>
+  <screeninfo
+>Представление «Учреждения»</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>представление «Учреждения»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Название</term>
+    <listitem>
+      <para
+>Название учреждения или счёта. Этот столбец показывается всегда. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Баланс</term>
+    <listitem>
+      <para
+>Текущий баланс счёта. Для учреждений значение не показывается. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Общая стоимость</term>
+    <listitem>
+      <para
+>Для счетов это то же значение, что и баланс. Для учреждений — сумма балансов всех счетов этого учреждения. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>IBAN</term>
+    <listitem>
+      <para
+><acronym
+><ulink url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+>IBAN</ulink
+> </acronym
+> (Международный номер банковского счёта) показывается, если в соответствующем поле диалогового окна сведений о счёте введено значение. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Код банка</term>
+    <listitem>
+      <para
+><ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Код банка</ulink
+>. Этот идентификатор имеет разный формат и назначение в разных странах. В США он известен как routing number (routing transit number), а в Великобритании — как sort code. В настоящее время &kmymoney; его не использует. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>SWIFT/BIC</term>
+    <listitem>
+      <para
+><acronym
+><ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>SWIFT/BIC</ulink
+></acronym
+> (Сообщество всемирных межбанковских финансовых телекоммуникаций/код идентификации банка) </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="details.institutions.institution"
+><title
+>Параметры учреждения</title>
+<para
+>Щелчок правой кнопкой мыши по названию учреждения открывает меню параметров учреждения с несколькими вариантами действий. Выбор пункта <guimenuitem
+>Новое учреждение…</guimenuitem
+> открывает диалоговое окно создания учреждения, в котором можно ввести все сведения, необходимые для создания нового учреждения. Выбор пункта <guimenuitem
+>Редактировать учреждение…</guimenuitem
+> открывает окно редактирования, в котором можно изменить сведения об учреждении. Выбор пункта <guimenuitem
+>Удалить учреждение</guimenuitem
+> полностью удаляет учреждение из файла данных. Все счета, связанные с этим учреждением, останутся, но без привязки к какому-либо учреждению. Выбор пункта <guimenuitem
+>Новый счёт…</guimenuitem
+> запускает процесс создания счёта, который подробнее описан в следующем разделе. </para>
+
+<screenshot>
+  <screeninfo
+>Подменю параметров учреждения</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_options.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Подменю «Действия с учреждениями»</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect2 id="details.institutions.new"
+><title
+>Новое учреждение</title>
+<screenshot>
+  <screeninfo
+>новое учреждение</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newinst.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Новое учреждение</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<note
+><para
+>Прежде чем создать новое учреждение, необходимо открыть файл. Если файла ещё нет, его нужно <link linkend="firsttime.newfile"
+>создать</link
+>. </para
+></note>
+
+<para
+>В диалоге создания учреждения обязательным является только название, все остальные поля необязательны. Как и в диалоге личных сведений, эти данные пока не используются в &kmymoney;, но некоторые из них могут потребоваться в будущих выпусках для отдельных возможностей. В частности, <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>код банка</ulink
+> и <acronym
+> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>BIC (банковский идентификационный код)</ulink
+></acronym
+> потребуются для банковских операций через Интернет, хотя это может зависеть от страны, в которой находится банк. </para>
+</sect2>
+
+<sect2
+><title
+>Параметры счёта</title>
+<para
+>Рассмотренные выше параметры относятся к учреждениям, перечисленным в представлении учреждений. Большинство строк в этом представлении — счета. Щелчок правой кнопкой мыши по названию счёта открывает меню параметров счёта. Пункты и подробности этого меню описаны в конце <link linkend="details.accounts.options"
+>главы о счетах</link
+>. </para>
+</sect2>
+</sect1>
+</chapter>

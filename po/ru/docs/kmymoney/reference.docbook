@@ -2,11 +2,10 @@
 <chapter id="reference">
 <chapterinfo>
   <date
->5 декабря 2016 г.</date>
+>1 декабря 2024 г.</date>
   <releaseinfo
->5.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Справочник</title>
 
@@ -14,17 +13,18 @@
 <sect1info>
   <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title
 >Меню</title>
 
 <para
->Далее приводится полный перечень меню &kmymoney;, снабжённый кратким описанием назначения каждого из них. Обратите внимание, что многие из вариантов могут быть недоступны или выделены серым цветом; это зависит от текущего представления или состояния приложения. Например, отредактировать счёт возможно только тогда, когда он выбран или показан в текущем представлении. </para>
+>Ниже приведён полный список пунктов меню &kmymoney; с очень кратким описанием действия каждого из них. Обратите внимание: многие из этих пунктов меню могут быть недоступны или неактивны в зависимости от текущего вида или состояния приложения. Кроме того, некоторые пункты могут отсутствовать, если относятся к возможности, не включённой в эту версию. Например, изменить счёт невозможно, если счёт не выбран или не показан в текущем виде. </para>
 
-<sect2 id="reference.menus.file">
-<title
+<sect2 id="reference.menus.file"
+><title
 >Меню «Файл»</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -38,14 +38,12 @@
 > <guimenu
 >Файл</guimenu
 ><guimenuitem
->Создать</guimenuitem
+>Новая книга</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Создаёт новый пустой файл данных &kmymoney;. Одновременно возможно открыть только один файл &kmymoney;, поэтому текущий открытый файл (если таковой имеется) будет закрыт. </action
-></para>
+>Создаёт новый пустой файл данных &kmymoney;. Одновременно может быть открыт только один файл &kmymoney;, поэтому, если текущий файл открыт, сначала он будет закрыт. </para>
     </listitem>
   </varlistentry>
 
@@ -61,14 +59,12 @@
 > <guimenu
 >Файл</guimenu
 ><guimenuitem
->Открыть...</guimenuitem
+>Открыть</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Открывает существующий файл данных &kmymoney;.</action
-></para>
+>Открывает существующий файл данных &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -79,15 +75,13 @@
 >Файл</guimenu
 > <guimenuitem
 >Последние файлы</guimenuitem
-> <guimenuitem
->...</guimenuitem
+><guimenuitem
+>…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Предоставляет быстрый доступ к последним открытым файлам.</action
-></para>
+>Обеспечивает быстрый доступ к последним открытым файлам.</para>
     </listitem>
   </varlistentry>
 
@@ -97,14 +91,12 @@
 ><guimenu
 >Файл</guimenu
 ><guimenuitem
->Открыть базу данных...</guimenuitem
+>Открыть базу данных…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Открывает существующую базу данных.</action
-></para>
+>Открывает существующую базу данных.</para>
     </listitem>
   </varlistentry>
 
@@ -125,11 +117,10 @@
 ></term>
     <listitem>
       <para
-><action
->Сохраняет текущий открытый файл.</action
-></para>
+>Сохраняет текущий открытый файл. Команда доступна, только если есть несохранённые изменения. </para>
     </listitem>
   </varlistentry>
+
 
   <varlistentry>
     <term
@@ -143,33 +134,12 @@
 > <guimenu
 >Файл</guimenu
 ><guimenuitem
->Сохранить как...</guimenuitem
+>Сохранить как…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Сохраняет текущий открытый файл под другим именем.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Файл</guimenu
-><guimenuitem
->Сохранить как базу данных...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Сохраняет текущий открытый файл как <link linkend="details.database"
->базу данных</link
->.</action
-></para>
+>Сохраняет текущий открытый файл под другим именем.</para>
     </listitem>
   </varlistentry>
 
@@ -181,14 +151,12 @@
 > <guisubmenu
 >Импорт</guisubmenu
 > <guimenuitem
->...</guimenuitem
+>…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Импортирует финансовые данные из файлов других типов, таких как QIF и &gnucash;, или из файла-шаблона счетов и статей, который возможно использовать при настройке новых счетов.</action
-></para>
+>Импортирует финансовые данные из файлов других типов, например QIF и &gnucash;, либо файл шаблона счетов и категорий, который можно использовать при создании новых счетов. </para>
     </listitem>
   </varlistentry>
 
@@ -200,14 +168,12 @@
 > <guimenuitem
 >Экспорт</guimenuitem
 > <guimenuitem
->...</guimenuitem
+>…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Экспортирует текущий файл как файл другого типа (например, QIF) или экспортирует список счетов и статей в виде шаблона. </action
-></para>
+>Экспортирует текущий файл в другой формат, например QIF, либо экспортирует список счетов и категорий в виде шаблона. </para>
     </listitem>
   </varlistentry>
 
@@ -223,14 +189,12 @@
 > <guimenu
 >Файл</guimenu
 ><guimenuitem
->Печать</guimenuitem
+>Печать…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Выводит текущий файл на печать.</action
-></para>
+>Выводит текущий файл на печать.</para>
     </listitem>
   </varlistentry>
 
@@ -240,14 +204,12 @@
 ><guimenu
 >Файл</guimenu
 ><guimenuitem
->Резервное копирование...</guimenuitem
+>Резервное копирование…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Сохраняет резервную копию текущего файла.</action
-></para>
+>Сохраняет резервную копию текущего файла.</para>
     </listitem>
   </varlistentry>
 
@@ -257,14 +219,12 @@
 ><guimenu
 >Файл</guimenu
 ><guimenuitem
->Персональные данные...</guimenuitem
+>Персональные данные…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Позволяет редактировать персональные данные.</action
-></para>
+>Позволяет редактировать персональные данные.</para>
     </listitem>
   </varlistentry>
 
@@ -274,17 +234,15 @@
 ><guimenu
 >Файл</guimenu
 ><guimenuitem
->Информация о файле...</guimenuitem
+>Информация о файле…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Отображает сведения о текущем открытом файле &kmymoney;.</action
-></para>
+>Показывает сведения о текущем открытом файле &kmymoney;.</para>
     </listitem>
   </varlistentry>
-  <!--Dump Memory what i sthis?-->
+
   <varlistentry>
     <term
 ><menuchoice
@@ -302,9 +260,7 @@
 ></term>
     <listitem>
       <para
-><action
->Закрывает текущий файл.</action
-></para>
+>Закрывает текущий открытый файл данных.</para>
     </listitem>
   </varlistentry>
 
@@ -325,18 +281,15 @@
 ></term>
     <listitem>
       <para
-><action
->Выход из программы &kmymoney;.</action
-></para>
+>Завершает работу &kmymoney;. Предлагает сохранить текущий открытый файл данных, если есть изменения. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit">
-<title
+<sect2 id="reference.menus.edit"
+><title
 >Меню «Правка»</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -344,29 +297,72 @@
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+><guimenuitem
+>Отменить</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Отменяет последнее действие.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Правка</guimenu
+><guimenuitem
+>Повторить</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Повторно применяет последнее отменённое действие.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
 >F</keycap
 ></keycombo
 > </shortcut
 > <guimenu
 >Правка</guimenu
 ><guimenuitem
->Найти операцию...</guimenuitem
+>Найти операцию…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Поиск операций.</action
-></para>
+>Поиск операций.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view">
-<title
+<sect2 id="reference.menus.view"
+><title
 >Меню «Вид»</title>
-
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
     <term
@@ -385,14 +381,12 @@
 ></term>
     <listitem>
       <para
-><action
->Отображает сведения об операциях в представлении <link linkend="details.ledgers"
->Книга учёта</link
->. Когда этот параметр включён, в книге учёта будут показаны все строки операции. Когда он отключён, будет показана только одна строка. </action
-></para>
+>Показывает подробности операции в <link linkend="details.ledgers"
+>книге учёта</link
+>. Если этот параметр включён, показываются все строки операции. Если он выключен, показывается только одна строка. </para>
       <para
->Если требуется просмотреть подробные сведения о текущей выбранной операции, но при этом для остальных операций по-прежнему следует показывать только одну строку, воспользуйтесь функцией <link linkend="details.settings.register.lens"
->показа подробных сведений для выделенной строки таблицы</link
+>Если подробности нужны только для выбранной операции, а для остальных — лишь одна строка, включите <link linkend="details.settings.register.lens"
+>Линзу книги учёта</link
 >. </para>
     </listitem>
   </varlistentry>
@@ -414,9 +408,7 @@
 ></term>
     <listitem>
       <para
-><action
->Скрывает сверенные операции в реестре.</action
-></para>
+>Скрывает сверенные операции в журнале.</para>
     </listitem>
   </varlistentry>
 
@@ -437,9 +429,7 @@
 ></term>
     <listitem>
       <para
-><action
->Скрывает неиспользуемые статьи в представлениях.</action
-></para>
+>Скрывает неиспользуемые категории в представлениях.</para>
     </listitem>
   </varlistentry>
 
@@ -448,9 +438,9 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Shift;<keycap
+>&Ctrl;&Shift;<keycap
 >A</keycap
-> </keycombo
+></keycombo
 > </shortcut
 > <guimenu
 >Вид</guimenu
@@ -460,18 +450,15 @@
 ></term>
     <listitem>
       <para
-><action
->Показывает все счета в представлениях.</action
-></para>
+>Показывает все счета в представлениях, включая закрытые счета и счета с нулевым балансом. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution">
-<title
+<sect2 id="reference.menus.institution"
+><title
 >Меню «Учреждение»</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -479,14 +466,12 @@
 ><guimenu
 >Учреждение</guimenu
 > <guimenuitem
->Новое учреждение...</guimenuitem
+>Новое учреждение…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Добавить новое учреждение.</action
-></para>
+>Добавить новое учреждение.</para>
     </listitem>
   </varlistentry>
 
@@ -496,14 +481,12 @@
 ><guimenu
 >Учреждение</guimenu
 > <guimenuitem
->Редактировать учреждение...</guimenuitem
+>Редактировать учреждение…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Изменить учреждение.</action
-></para>
+>Изменяет учреждение.</para>
     </listitem>
   </varlistentry>
 
@@ -513,23 +496,20 @@
 ><guimenu
 >Учреждение</guimenu
 > <guimenuitem
->Удалить учреждение...</guimenuitem
+>Удалить учреждение…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Удалить учреждение.</action
-></para>
+>Удаляет учреждение.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account">
-<title
+<sect2 id="reference.menus.account"
+><title
 >Меню «Счёт»</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -537,14 +517,12 @@
 ><guimenu
 >Счёт</guimenu
 > <guimenuitem
->Новый счёт...</guimenuitem
+>Новый счёт…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Добавляет новый счёт.</action
-></para>
+>Добавляет новый счёт.</para>
     </listitem>
   </varlistentry>
 
@@ -554,14 +532,12 @@
 ><guimenu
 >Счёт</guimenu
 ><guimenuitem
->Редактировать счёт...</guimenuitem
+>Редактировать счёт…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Изменяет счёт.</action
-></para>
+>Изменить счёт.</para>
     </listitem>
   </varlistentry>
 
@@ -571,14 +547,12 @@
 ><guimenu
 >Счёт</guimenu
 ><guimenuitem
->Удалить счёт...</guimenuitem
+>Удалить счёт…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Удаляет счёт.</action
-></para>
+>Удаляет счёт.</para>
     </listitem>
   </varlistentry>
 
@@ -593,9 +567,7 @@
 ></term>
     <listitem>
       <para
-><action
->Отображает счёт в представлении книги учёта.</action
-></para>
+>Показывает представление книги учёта для выбранного счёта.</para>
     </listitem>
   </varlistentry>
 
@@ -604,21 +576,19 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Shift;<keycap
+>&Ctrl;&Shift;<keycap
 >R</keycap
-> </keycombo
+></keycombo
 > </shortcut
 > <guimenu
 >Счёт</guimenu
 ><guimenuitem
->Сверить...</guimenuitem
+>Сверить…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Выполняет сверку счёта с помощью мастера сверки.</action
-></para>
+>Выполняет сверку счёта с помощью мастера сверки.</para>
     </listitem>
   </varlistentry>
 
@@ -633,9 +603,7 @@
 ></term>
     <listitem>
       <para
-><action
->Откладывает сверку счёта.</action
-></para>
+>Откладывает сверку счёта.</para>
     </listitem>
   </varlistentry>
 
@@ -650,9 +618,22 @@
 ></term>
     <listitem>
       <para
-><action
->Завершает сверку счёта.</action
-></para>
+>Завершает сверку счёта.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Счёт</guimenu
+><guimenuitem
+>Отмена</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Отменяет сверку счёта.</para>
     </listitem>
   </varlistentry>
 
@@ -667,9 +648,22 @@
 ></term>
     <listitem>
       <para
-><action
->Открывает отчёт об операциях по счёту.</action
-></para>
+>Открывает отчёт об операциях для выбранного счёта.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Счёт</guimenu
+><guimenuitem
+>Показать диаграмму баланса…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Открывает диаграмму баланса выбранного счёта с начала года (YTD).</para>
     </listitem>
   </varlistentry>
 
@@ -684,9 +678,7 @@
 ></term>
     <listitem>
       <para
-><action
->Закрывает счёт.</action
-></para>
+>Закрывает счёт.</para>
     </listitem>
   </varlistentry>
 
@@ -701,9 +693,7 @@
 ></term>
     <listitem>
       <para
-><action
->Открывает счёт вновь, если он был закрыт.</action
-></para>
+>Открывает счёт вновь, если он был закрыт.</para>
     </listitem>
   </varlistentry>
 
@@ -713,14 +703,12 @@
 ><guimenu
 >Счёт</guimenu
 ><guimenuitem
->Удалить привязку счёта...</guimenuitem
+>Удалить привязку счёта…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Отменяет привязку сетевого счёта.</action
-></para>
+>Отменяет привязку сетевого счёта.</para>
     </listitem>
   </varlistentry>
 
@@ -730,14 +718,12 @@
 ><guimenu
 >Счёт</guimenu
 ><guimenuitem
->Привязать счёт...</guimenuitem
+>Привязать счёт…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Создаёт привязку к сетевому счёту.</action
-></para>
+>Сопоставляет счёт с сетевым счётом.</para>
     </listitem>
   </varlistentry>
 
@@ -747,14 +733,12 @@
 ><guimenu
 >Счёт</guimenu
 ><guimenuitem
->Обновить счёт...</guimenuitem
+>Обновить счёт…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Импортирует операции по счёту из онлайн-банка.</action
-></para>
+>Импортирует операции из онлайн-банка для выбранного счёта.</para>
     </listitem>
   </varlistentry>
 
@@ -764,24 +748,20 @@
 ><guimenu
 >Счёт</guimenu
 > <guimenuitem
->Обновить все счета...</guimenuitem
+>Обновить все счета…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Импортирует операции по всем счетам из онлайн-банка.</action
-></para>
+>Импортирует операции из онлайн-банка по всем сопоставленным счетам.</para>
     </listitem>
   </varlistentry>
-  <!--New credit transfer-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category">
-<title
+<sect2 id="reference.menus.category"
+><title
 >Меню «Статьи бюджета»</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -789,14 +769,12 @@
 ><guimenu
 >Статьи бюджета</guimenu
 ><guimenuitem
->Новая статья бюджета...</guimenuitem
+>Новая статья бюджета…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Добавляет новую статью бюджета.</action
-></para>
+>Добавляет новую статью бюджета.</para>
     </listitem>
   </varlistentry>
 
@@ -806,14 +784,12 @@
 ><guimenu
 >Статьи бюджета</guimenu
 ><guimenuitem
->Редактировать статью бюджета...</guimenuitem
+>Редактировать статью бюджета…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Изменяет статью бюджета.</action
-></para>
+>Изменяет статью бюджета.</para>
     </listitem>
   </varlistentry>
 
@@ -823,14 +799,12 @@
 ><guimenu
 >Статьи бюджета</guimenu
 ><guimenuitem
->Удалить статью бюджета...</guimenuitem
+>Удалить статью бюджета…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Удаляет статью бюджета.</action
-></para>
+>Удаляет статью бюджета.</para>
     </listitem>
   </varlistentry>
 
@@ -845,18 +819,15 @@
 ></term>
     <listitem>
       <para
-><action
->Отображает статью бюджета в представлении книги учёта.</action
-></para>
+>Показывает представление книги учёта для статьи бюджета.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction">
-<title
+<sect2 id="reference.menus.transaction"
+><title
 >Меню «Операция»</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -868,38 +839,46 @@
 > <guimenu
 >Операция</guimenu
 ><guimenuitem
->Создать</guimenuitem
+>Новая операция</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Добавляет новую операцию.</action
-></para>
+>Добавляет новую операцию.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Операция</guimenu
 ><guimenuitem
->Редактировать</guimenuitem
+>Изменить</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Изменяет операцию.</action
-></para>
+>Изменяет операцию.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Операция</guimenu
 ><guimenuitem
 >Редактировать разбивки</guimenuitem
@@ -907,16 +886,18 @@
 ></term>
     <listitem>
       <para
-><action
->Изменяет разбивки операции.</action
-></para>
+>Изменяет разбивки операции.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Del;</keycombo
+> </shortcut
+> <guimenu
 >Операция</guimenu
 ><guimenuitem
 >Удалить</guimenuitem
@@ -924,16 +905,20 @@
 ></term>
     <listitem>
       <para
-><action
->Удаляет операцию.</action
-></para>
+>Удаляет операцию.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Операция</guimenu
 ><guimenuitem
 >Дублировать</guimenuitem
@@ -941,28 +926,7 @@
 ></term>
     <listitem>
       <para
-><action
->Создаёт копию (дубликат) операции.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Операция</guimenu
-> <guimenuitem
->Отметить как...</guimenuitem
-> <guimenuitem
->Не сверено</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Устанавливает операцию в состояние «Не сверено».</action
-></para>
+>Создаёт копию операции.</para>
     </listitem>
   </varlistentry>
 
@@ -971,21 +935,19 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Alt;&Space; </keycombo
+>&Ctrl;&Alt;&Shift;&Space;</keycombo
 > </shortcut
 > <guimenu
 >Операция</guimenu
 > <guimenuitem
->Отметить как...</guimenuitem
+>Отметить как…</guimenuitem
 > <guimenuitem
->Учтено</guimenuitem
+>не сверено</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Устанавливает операцию в состояние «Учтено».</action
-></para>
+>Изменяет состояние выбранных операций на «Не сверено». </para>
     </listitem>
   </varlistentry>
 
@@ -994,21 +956,40 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Shift;&Space; </keycombo
+>&Ctrl;&Alt;&Space;</keycombo
 > </shortcut
 > <guimenu
 >Операция</guimenu
 > <guimenuitem
->Отметить как...</guimenuitem
+>Отметить как…</guimenuitem
 > <guimenuitem
->Сверено</guimenuitem
+>учтено</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Устанавливает операцию в состояние «Сверено».</action
-></para>
+>Устанавливает для выбранных операций состояние «Учтено».</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;&Space;</keycombo
+> </shortcut
+> <guimenu
+>Операция</guimenu
+> <guimenuitem
+>Отметить как…</guimenuitem
+> <guimenuitem
+>сверено</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Изменяет состояние выбранных операций на «Сверено».</para>
     </listitem>
   </varlistentry>
 
@@ -1023,16 +1004,20 @@
 ></term>
     <listitem>
       <para
-><action
->Отображает другой счёт операции.</action
-></para>
+>Показывает другой счёт операции в книге учёта.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Операция</guimenu
 ><guimenuitem
 >Перейти к контрагенту</guimenuitem
@@ -1040,9 +1025,7 @@
 ></term>
     <listitem>
       <para
-><action
->Отображает представление «Контрагенты» с фокусом на контрагенте из выбранной операции.</action
-></para>
+>Показывает представление контрагентов и переходит к контрагенту выбранной операции. </para>
     </listitem>
   </varlistentry>
 
@@ -1052,14 +1035,12 @@
 ><guimenu
 >Операция</guimenu
 > <guimenuitem
->Создать запланированную операцию...</guimenuitem
+>Создать запланированную операцию…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Создаёт новую запланированную операцию.</action
-></para>
+>Создаёт новую запланированную операцию на основе данных выбранной операции. </para>
     </listitem>
   </varlistentry>
 
@@ -1069,14 +1050,12 @@
 ><guimenu
 >Операция</guimenu
 ><guimenuitem
->Совместить</guimenuitem
+>Установить соответствие</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Устанавливает соответствие импортируемых операций.</action
-></para>
+>Сопоставляет две операции. Чаще всего используется для сопоставления импортированной и введённой вручную операции, но возможны и другие сочетания. </para>
     </listitem>
   </varlistentry>
 
@@ -1086,14 +1065,12 @@
 ><guimenu
 >Операция</guimenu
 ><guimenuitem
->Отменить совмещение</guimenuitem
+>Отменить соответствие</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Отменяет соответствие операций, предложенное программой &kmymoney; при установлении соответствия импортируемых операций.</action
-> Обратите внимание, что эта опция будет доступна в меню только в том случае, если существуют записи операций, для которых установлено соответствие. </para>
+>Отменяет сопоставление операции, которую &kmymoney; предложил как соответствующую импортированным операциям. Обратите внимание: этот пункт меню присутствует, только если сопоставленная операция существует и выбрана. </para>
     </listitem>
   </varlistentry>
 
@@ -1108,9 +1085,7 @@
 ></term>
     <listitem>
       <para
-><action
->Подтверждает предложенное объединение импортируемых записей операций.</action
-></para>
+>Принимает предложенное объединение двух операций.</para>
     </listitem>
   </varlistentry>
 
@@ -1131,9 +1106,7 @@
 ></term>
     <listitem>
       <para
-><action
->Выбирает все операции в реестре.</action
-></para>
+>Выбирает все операции в журнале.</para>
     </listitem>
   </varlistentry>
 
@@ -1148,20 +1121,17 @@
 ></term>
     <listitem>
       <para
-><action
->Распечатывает содержание записи операции, которая выбрана в отображаемом реестре, отформатированное в соответствии с выбранным шаблоном.</action
-> Обратите внимание, что эта опция меню будет доступна только в том случае, если в реестре выбрана запись операции. Дополнительные сведения доступны в разделе о настройке модуля <link linkend="details.settings.plugins"
->распечатки чеков</link
+>Печатает содержимое выбранной операции в текущей книге учёта в соответствии с выбранным шаблоном. Дополнительные сведения приведены в разделе о настройке модуля <link linkend="details.settings.plugins"
+>Печать чека</link
 >. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools">
-<title
+<sect2 id="reference.menus.tools"
+><title
 >Меню «Сервис»</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -1169,14 +1139,12 @@
 ><guimenu
 >Сервис</guimenu
 ><guimenuitem
->Редактор профилей QIF...</guimenuitem
+>Валюты…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Изменяет профиль QIF, который используется для импорта и экспорта файлов QIF.</action
-></para>
+>Перечисляет валюты, известные &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -1186,31 +1154,12 @@
 ><guimenu
 >Сервис</guimenu
 ><guimenuitem
->Валюты...</guimenuitem
+>Курсы…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Отображает список валют, известных программе &kmymoney;.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Сервис</guimenu
-><guimenuitem
->Курсы...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Отображает список курсов акций и валют.</action
-></para>
+>Показывает список курсов акций и валют.</para>
     </listitem>
   </varlistentry>
 
@@ -1220,16 +1169,14 @@
 ><guimenu
 >Сервис</guimenu
 > <guimenuitem
->Обновить курсы акций и валют...</guimenuitem
+>Обновление курсов акций и валют…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Обновляет курсы акций и валют из сетевых источников с помощью функции <link linkend="details.investments.onlinequotes"
->Онлайн-котировки</link
->.</action
-></para>
+>Обновляет цены акций и валют из источников в Интернете с помощью функции <link linkend="details.investments.onlinequotes"
+>Котировки в Интернете</link
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -1244,11 +1191,9 @@
 ></term>
     <listitem>
       <para
-><action
->Выполняет проверку файла и пытается исправить обнаруженные ошибки, если это возможно.</action
-></para>
+>Выполняет проверку файла, исправляет все возможные проблемы и показывает отчёт о результатах. </para>
       <para
->Создайте резервную копию файла перед использованием этой опции.</para>
+>Перед использованием этого параметра создайте резервную копию файла.</para>
     </listitem>
   </varlistentry>
 
@@ -1263,25 +1208,49 @@
 ></term>
     <listitem>
       <para
-><action
->Тестирует файл на производительность и отображает результаты.</action
-></para>
+>Выполняет тест производительности файла и показывает результаты.</para>
     </listitem>
   </varlistentry>
-  <!--Generate Database SQL
-  Debug Traces
-  Debug Timers-->
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Сервис</guimenu
+><guimenuitem
+>Создать базу данных SQL</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Создаёт SQL-код для создания базы данных.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Сервис</guimenu
+><guimenuitem
+>Отладочные таймеры</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Это инструмент для разработчиков.</para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings.help">
-<title
+<sect2 id="reference.menus.settings.help"
+><title
 >Меню «Настройка» и «Справка»</title>
-
 <para
->В программе &kmymoney; присутствуют стандартные меню &kde; «Настройка» и «Справка» (их описание доступно в разделе справки<ulink url="help:/fundamentals/menus.html"
->«Основы &kde;»</ulink
->) с одним дополнительным пунктом:</para>
+>Меню «Настройка» и «Справка» в &kmymoney; основаны на меню, описанных в <ulink url="help:/fundamentals/menus.html"
+>Основы &kde;</ulink
+>, с некоторыми дополнительными пунктами. </para>
 
 <variablelist>
   <varlistentry>
@@ -1295,38 +1264,112 @@
 ></term>
     <listitem>
       <para
-><action
->Снова включает показ сообщений, который мог ранее быть отключён установкой флажка <guimenuitem
->Больше не показывать</guimenuitem
-> в диалоговом окне сообщения.</action
-></para>
+>Снова включает сообщения, отключённые установкой флажка <guimenuitem
+>Больше не сообщать об этом</guimenuitem
+> в диалоговом окне.</para>
     </listitem>
   </varlistentry>
+
   <varlistentry>
     <term
 ><menuchoice
 ><guimenu
 >Настройка</guimenu
 ><guimenuitem
->Настроить AqBanking...</guimenuitem
+>Настройка используемого языка…</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Настройка параметров онлайн-банка</action
->, подробные сведения доступны в <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
->соответствующем разделе пользовательской базы знаний KDE</ulink
->. </para>
+>По умолчанию язык, используемый &kmymoney;, зависит от общесистемных параметров местоположения или локали. Здесь можно изменить этот язык и задать резервный язык, который используется для текста, не переведённого на основной язык. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>,</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Настройка</guimenu
+><guimenuitem
+>Настроить комбинации клавиш…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
       <para
->Обратите внимание, что этот пункт меню доступен только в том случае, если модуль KBanking включён. Дополнительные сведения доступны в разделе о настройке <link linkend="details.settings.plugins.kbanking"
->модуля KBanking</link
+>Позволяет добавлять или изменять комбинации клавиш для различных действий. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
+    <term
+><menuchoice
+><guimenu
+>Настройка</guimenu
+><guimenuitem
+>Настроить AqBanking…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Настраивает параметры онлайн-банка, но только если включён модуль KBanking. Дополнительные сведения приведены в разделе о настройке модуля <link linkend="details.settings.plugins.kbanking"
+>KBanking</link
+>, а также в <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
+>документации &gnucash;</ulink
+>. </para>
+
+      <para
+>Процесс настройки онлайн-доступа в AqBanking описан в <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
+>вики &gnucash; (только на немецком языке)</ulink
+>. Этот пункт меню открывает диалоговое окно, показанное на шаге 3. Процесс до шага 18 одинаков для KMyMoney. После этого можно сопоставить счёт в &kmymoney; с помощью <guimenu
+>Счёт</guimenu
+> <guisubmenu
+>Привязать счёт</guisubmenu
+> и выбрать счёт из предложенного списка. Затем достаточно воспользоваться <guimenu
+>Счёт</guimenu
+> <guisubmenu
+>Обновить счёт</guisubmenu
+>, а если сопоставлено несколько счетов онлайн-банка — <guimenu
+>Счёт</guimenu
+> <guisubmenu
+>Обновить все счета</guisubmenu
+>. </para>
+
+      <para
+>Дополнительные сведения см. в разделе <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>Настройка онлайн-банка</ulink
 >. </para>
     </listitem>
   </varlistentry>
 
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Справка</guimenu
+><guimenuitem
+>Найти действие…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Показывает названия и комбинации клавиш всех действий в &kmymoney;. Щелчок по одному из них вызовет это действие, если оно в данный момент доступно. </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
-
 </sect1
 >&details-widgets; </chapter>
