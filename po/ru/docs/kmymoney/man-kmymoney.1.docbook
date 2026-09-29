@@ -93,7 +93,7 @@
 ><surname
 >Ostroff</surname
 > <contrib
->Документация.</contrib
+>Документация и поддержка пользователей.</contrib
 > <email
 >ostroffjh@users.sourceforge.net</email
 > </author>
@@ -135,9 +135,9 @@
 >arniing@users.sourceforge.net</email
 ></author>
 
-    These persons were not previously listed as authors here, but are included
-    in credits.docbook.  They should either be dropped from there or included
-    here.
+    These persons were not previously listed as authors here, but are included in
+    credits.docbook and as authors of some chapter(s).  They should either be dropped
+    from there or included here.
 
     <author
 ><firstname
@@ -145,7 +145,7 @@
 ><surname
 >Jones</surname>
     <contrib
->Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+>Reports.  OFX Import.  Online Quotes.  Documentation.  Previous versions.</contrib>
     <email
 >acejones@users.sourceforge.net</email
 ></author>
@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->5 июня 2022 г.</date>
+>1 декабря 2024 г.</date>
 <releaseinfo
->KMyMoney 5.1</releaseinfo>
+>KMyMoney 5.2</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -188,7 +188,7 @@
 >kmymoney</command
 ></refname>
 <refpurpose
->программа учёта личных финансов, разработанная &kde;</refpurpose>
+>приложение для управления личными финансами от &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -206,8 +206,8 @@
 > <group choice="opt"
 ><option
 >--timers</option
-><replaceable
-> column</replaceable
+> <replaceable
+> столбец</replaceable
 ></group
 > <group choice="opt"
 ><option
@@ -219,12 +219,8 @@
 ></group
 > <group choice="opt"
 ><option
->--dump-actions</option
-></group
-> <group choice="opt"
-><option
 ><replaceable
->file</replaceable
+>файл</replaceable
 ></option
 ></group
 > </cmdsynopsis>
@@ -235,7 +231,7 @@
 >Описание</title>
 
 <para
->&kmymoney; — программа учёта личных финансов, разработанная &kde;. Она предоставляет графический интерфейс, который позволяет просматривать баланс счетов, управлять кредитами, разбивать доходы и расходы на статьи и выполнять многие другие действия. </para>
+>&kmymoney; — менеджер личных финансов от &kde;. Приложение предоставляет функции, необходимые для сведения баланса чековых книжек, управления личными займами и распределения доходов и расходов по категориям с помощью графического интерфейса в стиле чековой книжки. </para>
 </refsect1>
 
 <refsect1>
@@ -251,7 +247,7 @@
 ></term>
 <listitem>
 <para
->Язык, который следует использовать </para>
+>Язык, который следует использовать</para>
 </listitem>
 </varlistentry>
 
@@ -262,7 +258,7 @@
 ></term>
 <listitem>
 <para
->Не открывать последний открытый файл </para>
+>Не открывать последний открытый файл</para>
 </listitem>
 </varlistentry>
 
@@ -273,7 +269,7 @@
 ></term>
 <listitem>
 <para
->Включить таймеры производительности </para>
+>Включить таймеры производительности</para>
 </listitem>
 </varlistentry>
 
@@ -284,7 +280,7 @@
 ></term>
 <listitem>
 <para
->Не выполнять глобальный перехват неперехваченных исключений </para>
+>Не выполнять глобальный перехват неперехваченных исключений</para>
 </listitem>
 </varlistentry>
 
@@ -311,7 +307,9 @@
 </varlistentry>
 
 </variablelist>
+
 </refsect1>
+
 
 <refsect1>
 <title
@@ -319,23 +317,20 @@
 
 <simplelist>
 <member
->Полная документация приложения &kmymoney; содержится в руководстве в формате .docbook. Если программа «Центр справки» надлежащим образом установлена, команда <userinput
-><command
+>Полная документация по &kmymoney; поддерживается в виде руководства в формате DocBook. Если программа &khelpcenter; правильно установлена в вашей системе, команда <userinput
+> <command
 >khelpcenter</command
 > <parameter
 >help:/kmymoney</parameter
-></userinput
-> позволяет получить доступ к полному руководству. Его также также возможно просмотреть с помощью &konqueror;, указав <acronym
->URL-адрес</acronym
+> </userinput
+> должна обеспечить доступ к полному руководству. Кроме того, руководство можно просмотреть в &konqueror;, указав <acronym
+>URL</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
->. Кроме того, по адресу <ulink url="https://docs.kde.org/index.php?application=kmymoney"
->https://docs.kde.org/index.php?application=kmymoney"</ulink
-> доступны онлайн-версии руководства как для стабильной, так и для разрабатываемой версий &kmymoney;. </member>
-
-  <member
+> </member>
+<member
 >kf5options(7)</member>
-  <member
+<member
 >qt5options(7)</member>
 </simplelist>
 

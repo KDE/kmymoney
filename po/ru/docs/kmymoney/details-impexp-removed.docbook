@@ -1,0 +1,53 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>Удалённые объекты</title>
+
+<sect2
+><title
+>Принятие импортированных операций</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>Импортированные операции</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Импортированные операции</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Некоторые операции в журнале могут мигать красным цветом. Причина в том, что им требуется назначить статью. Модуль импорта не смог автоматически назначить статью на основе истории прошлых операций. </para>
+
+<para
+>Данные операции можно изменить или даже удалить при необходимости. Чтобы изменить операцию, дважды щёлкните запись или нажмите Enter, когда запись выделена. По завершении нажмите <guibutton
+>ОК</guibutton
+>, чтобы принять импортированные операции, или <guibutton
+>Отмена</guibutton
+>, чтобы удалить импортированные операции. </para>
+</sect2>
+
+
+<sect2
+><title
+>Импорт инвестиций</title>
+<para
+>Обратите внимание: если импортируется файл с инвестиционными операциями, эти инвестиции должны уже существовать в файле &kmymoney;. Сопоставление выполняется по торговому символу, поэтому символ в &kmymoney; должен точно совпадать с символом в импортируемом файле. </para>
+</sect2>
+</sect1>
+
