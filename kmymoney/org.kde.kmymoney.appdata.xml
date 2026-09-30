@@ -43,7 +43,7 @@
   <name xml:lang="sk">KMyMoney</name>
   <name xml:lang="sl">KMyMoney</name>
   <name xml:lang="sv">KMyMoney</name>
-  <name xml:lang="tr">K Param</name>
+  <name xml:lang="tr">KMyMoney</name>
   <name xml:lang="ug">K پۇلۇم</name>
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="zh-CN">KMyMoney</name>
@@ -113,7 +113,7 @@
     <p xml:lang="sk">KMyMomney je osobný správca financií od KDE. Prichádza s veľkou sadou funkcií, pričom je jednoduchý na používanie pre netechnického používateľa.</p>
     <p xml:lang="sl">KMyMoney je osebni finančni upravitelj namizja KDE. Priložen je velik nabor zmožnosti, ki so enostavne za uporabo za netehničnega uporabnika.</p>
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare av KDE. Den levereras med ett stort antal funktioner, medan den är lätt att använda för den icke-tekniska användaren.</p>
-    <p xml:lang="tr">K Param, KDE tarafından yapılmış bir kişisel finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolaydır ve büyük bir özellik kümesiyle birlikte gelir.</p>
+    <p xml:lang="tr">KMyMoney, KDE tarafından yapılmış bir kişisel finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolaydır ve büyük bir özellik kümesiyle birlikte gelir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
     <p xml:lang="zh-CN">KMyMoney 是一款 KDE 开发的个人财务管理工具。它不但功能丰富，而且非专业人士也可轻松上手。</p>
     <p xml:lang="zh-TW">KMyMoney 是來自 KDE 的個人財務管理工具。它包含許多功能，但同時也能讓不熟悉的使用者輕鬆使用。</p>
@@ -190,7 +190,7 @@
       <caption xml:lang="sk">KMyMoney má uvítaciu stránku na pomoc novým používateľom na dobrý začiatok</caption>
       <caption xml:lang="sl">KMyMoney ima stran dobrodošlice, s katero lahko novim uporabnikom pomaga do dobrega začetka</caption>
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång</caption>
-      <caption xml:lang="tr">K Param, yeni kullanıcıların iyi bir başlangıç yapması için bir karşılama sayfası sunar</caption>
+      <caption xml:lang="tr">KMyMoney, yeni kullanıcıların iyi bir başlangıç yapması için bir karşılama sayfası sunar</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
       <caption xml:lang="zh-CN">KMyMoney 会显示一个欢迎页面来帮助新用户轻松上手</caption>
       <caption xml:lang="zh-TW">KMyMoney 有歡迎頁面讓新使用者知道從哪開始</caption>
