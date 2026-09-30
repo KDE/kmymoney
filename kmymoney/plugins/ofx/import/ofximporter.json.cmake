@@ -66,7 +66,7 @@
         "Description[sk]": "Pridať OFX import do KMyMoney",
         "Description[sl]": "Doda uvoz OFX v KMyMoney",
         "Description[sv]": "Lägg till OFX-import till KMyMoney",
-        "Description[tr]": "K Param’a OFX içe aktarma ekleyin",
+        "Description[tr]": "KMyMoney’ye OFX içe aktarma ekleyin",
         "Description[uk]": "Імпортування даних OFX у KMyMoney",
         "Description[zh_CN]": "为 KMyMoney 添加 QFX 导入服务",
         "Description[zh_TW]": "提供 OFX 匯入功能給 KMyMoney",

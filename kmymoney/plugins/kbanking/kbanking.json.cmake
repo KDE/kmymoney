@@ -64,7 +64,7 @@
         "Description[sk]": "Pridať HBCI/FinTs online banking do KMyMoney",
         "Description[sl]": "Doda HBCI/FinTs, OFX and PayPal spletno bančništvo v KMyMoney",
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank och PayPal till KMyMoney",
-        "Description[tr]": "K Param’a HBCI/FinTs, OFX ve PayPal çevrim içi bankacılığını ekleyin",
+        "Description[tr]": "KMyMoney’ye HBCI/FinTs, OFX ve PayPal çevrim içi bankacılığını ekleyin",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs, OFX і PayPal у KMyMoney",
         "Description[zh_CN]": "将 HBCI (FinTs)、OFX 或 PayPal 网上银行添加到 KMyMoney",
         "Description[zh_TW]": "提供 HBCI/FinTs、OFX 與 PayPal 線上理財功能給 KMyMoney",

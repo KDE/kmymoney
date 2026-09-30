@@ -66,7 +66,7 @@
         "Description[sk]": "Pridáva zobrazenie schránky odoslaných online úloh do KMyMoney",
         "Description[sl]": "V KMyMoney doda pogled na oddano e-pošto",
         "Description[sv]": "Lägger till utkorgsvy för nätjobb i KMyMoney",
-        "Description[tr]": "K Param’a çevrim içi iş giden kutusu görünümü ekleyin",
+        "Description[tr]": "KMyMoney’ye çevrim içi iş giden kutusu görünümü ekleyin",
         "Description[uk]": "Панель вихідних інтернет-завдань у KMyMoney",
         "Description[zh_CN]": "为 KMyMoney 添加在线任务发件箱视图",
         "EnabledByDefault": true,

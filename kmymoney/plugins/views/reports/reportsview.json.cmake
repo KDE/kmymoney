@@ -66,7 +66,7 @@
         "Description[sk]": "Pridá pohľad výpisov do KMyMoney",
         "Description[sl]": "Doda pogled poročil v KMyMoney",
         "Description[sv]": "Lägger till rapportvy i KMyMoney",
-        "Description[tr]": "K Param’a raporlar görünümü ekleyin",
+        "Description[tr]": "KMyMoney’ye raporlar görünümü ekleyin",
         "Description[uk]": "Панель звітів у KMyMoney",
         "Description[zh_CN]": "为 KMyMoney 添加报告视图",
         "Description[zh_TW]": "提供回報檢視給 KMyMoney",

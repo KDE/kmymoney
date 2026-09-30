@@ -65,7 +65,7 @@
         "Description[sk]": "Pridáva podporu SQL úložiska do KMyMoney",
         "Description[sl]": "Doda v KMyMoney podporo za shranjevanje SQL",
         "Description[sv]": "Lägger till stöd för SQL-lagring i KMyMoney",
-        "Description[tr]": "K Param’a SQL depolama desteği ekleyin",
+        "Description[tr]": "KMyMoney’ye SQL depolama desteği ekleyin",
         "Description[uk]": "Підтримка сховища даних SQL у KMyMoney",
         "Description[zh_CN]": "为 KMyMoney 添加 SQL 存储支持",
         "Description[zh_TW]": "提供 SQL 儲存功能給 KMyMoney",

@@ -66,7 +66,7 @@
         "Description[sk]": "Pridá pohľad predpovede do KMyMoney",
         "Description[sl]": "Doda pogled napovedi v KMyMoney",
         "Description[sv]": "Lägger till prognosvy i KMyMoney",
-        "Description[tr]": "K Param’a öngörü görünümü ekleyin",
+        "Description[tr]": "KMyMoney’ye öngörü görünümü ekleyin",
         "Description[uk]": "Панель прогнозів у KMyMoney",
         "Description[zh_CN]": "为 KMyMoney 添加预测视图",
         "Description[zh_TW]": "提供預測檢視給 KMyMoney",

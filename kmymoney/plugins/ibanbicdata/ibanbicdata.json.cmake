@@ -67,7 +67,7 @@
         "Description[sk]": "Pridá preddefinované IBAN/BIC čísla do KMyMoney",
         "Description[sl]": "V KMyMoney doda vnaprej določene številke IBAN/BIC",
         "Description[sv]": "Lägger till fördefinierade IBAN/BIC-nummer i KMyMoney",
-        "Description[tr]": "K Param’a önceden tanımlanmış IBAN/BIC numaralarını ekleyinr",
+        "Description[tr]": "KMyMoney’ye önceden tanımlanmış IBAN/BIC numaralarını ekleyin",
         "Description[uk]": "Попередньо визначені номери IBAN/BIC у KMyMoney",
         "Description[zh_CN]": "为 KMyMoney 添加预定义的国际银行账号/银行识别码",
         "Description[zh_TW]": "提供預先定義的 IBAN/BIC 號碼給 KMyMoney",

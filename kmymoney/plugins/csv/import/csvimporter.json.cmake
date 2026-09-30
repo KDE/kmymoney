@@ -67,7 +67,7 @@
         "Description[sk]": "Pridať CSV importovanie do KMyMoney",
         "Description[sl]": "Doda uvoz CSV v KMyMoney",
         "Description[sv]": "Lägg till CSV-import till KMyMoney",
-        "Description[tr]": "K Param’a CSV içe aktarma ekleyin",
+        "Description[tr]": "KMyMoney’ye CSV içe aktarma ekleyin",
         "Description[uk]": "Імпортування даних CSV у KMyMoney",
         "Description[zh_CN]": "为 KMyMoney 添加 CSV 导入服务",
         "Description[zh_TW]": "提供 CSV 匯入功能給 KMyMoney",
