@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-26 00:45+0000\n"
-"PO-Revision-Date: 2026-09-23 13:07+0200\n"
+"PO-Revision-Date: 2026-09-26 12:57+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -6562,8 +6562,7 @@ msgid "Last Price Update"
 msgstr "Última actualització del preu"
 
 #: kmymoney/models/equitiesmodel.cpp:200
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Id"
 msgid "ID"
 msgstr "ID"
@@ -8952,8 +8951,7 @@ msgid "Currency"
 msgstr "Divisa"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:496
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Shows Account ID"
 msgid "ID"
 msgstr "ID"
@@ -8965,12 +8963,10 @@ msgid "The currency assigned to the account"
 msgstr "La divisa assignada al compte"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:537
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip for 'Currency' column"
-#| msgid "The currency assigned to the account"
+#, kde-format
 msgctxt "@info:tooltip for 'ID' column"
 msgid "The internal identification of the account"
-msgstr "La divisa assignada al compte"
+msgstr "La identificació interna del compte"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:74
 #, kde-format
@@ -9099,8 +9095,7 @@ msgid "Memo"
 msgstr "Recordatori"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:73
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Transaction ID"
 msgid "ID"
 msgstr "ID"
@@ -9447,8 +9442,7 @@ msgid "Modified"
 msgstr "Modificat"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:79
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Report ID"
 msgid "ID"
 msgstr "ID"
