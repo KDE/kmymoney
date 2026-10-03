@@ -209,6 +209,12 @@ void KEnterScheduleDlg::setShowExtendedKeys(bool visible)
 MyMoneyTransaction KEnterScheduleDlg::transaction()
 {
     Q_D(const KEnterScheduleDlg);
+    if (d->m_editor) {
+        const auto activeWidget = d->m_editor->focusWidget();
+        if (activeWidget) {
+            activeWidget->clearFocus();
+        }
+    }
     auto t = d->m_editor->transaction();
     t.clearId();
     t.setEntryDate(QDate());
