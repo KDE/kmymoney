@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-26 00:45+0000\n"
+"POT-Creation-Date: 2026-10-04 00:47+0000\n"
 "PO-Revision-Date: 2026-09-26 12:42+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -20416,7 +20416,7 @@ msgstr "Кількість операцій, які ще не виконано:"
 msgid "Date of final transaction:"
 msgstr "Дата останньої операції:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:232
+#: kmymoney/views/kenterscheduledlg.cpp:238
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20431,7 +20431,7 @@ msgstr ""
 "варіантів цього розкладу. (Програма запитає у вас про це у наступному "
 "діалоговому вікні, яке буде відкрито після натискання кнопки «Гаразд»)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:235
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Введення спланованої операції"

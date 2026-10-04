@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-26 00:45+0000\n"
+"POT-Creation-Date: 2026-10-04 00:47+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -20111,7 +20111,7 @@ msgstr ""
 msgid "Date of final transaction:"
 msgstr "Trinti operaciją"
 
-#: kmymoney/views/kenterscheduledlg.cpp:232
+#: kmymoney/views/kenterscheduledlg.cpp:238
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20121,7 +20121,7 @@ msgid ""
 "dialog)</p>"
 msgstr ""
 
-#: kmymoney/views/kenterscheduledlg.cpp:235
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, fuzzy, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"

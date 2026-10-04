@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-26 00:45+0000\n"
+"POT-Creation-Date: 2026-10-04 00:47+0000\n"
 "PO-Revision-Date: 2026-09-26 16:23+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -20145,7 +20145,7 @@ msgstr "عدد المعاملات المتبقيّة:"
 msgid "Date of final transaction:"
 msgstr "تاريخ المعاملة الأخيرة:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:232
+#: kmymoney/views/kenterscheduledlg.cpp:238
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20159,7 +20159,7 @@ msgstr ""
 "على كلّ حدوثات الجدول المتعاقبة. (ستُسأل عمّا تريد فعله بعد نقر ”حسنًا“ في "
 "الحواريّ الآتي)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:235
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "إدخال معاملة مجدولة"

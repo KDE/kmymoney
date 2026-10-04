@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-26 00:45+0000\n"
+"POT-Creation-Date: 2026-10-04 00:47+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -21327,7 +21327,7 @@ msgstr "Numărul de tranzacții rămase:"
 msgid "Date of final transaction:"
 msgstr "Data tranzacției finale:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:232
+#: kmymoney/views/kenterscheduledlg.cpp:238
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -21342,7 +21342,7 @@ msgstr ""
 "programări. (După ce veți apăsa OK, veți fi întrebat, în următoarea casetă "
 "de dialog, care e alegerea dumneavoastră.)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:235
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Introduceți tranzacția programată"

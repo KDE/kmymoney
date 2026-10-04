@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-26 00:45+0000\n"
+"POT-Creation-Date: 2026-10-04 00:47+0000\n"
 "PO-Revision-Date: 2026-09-26 07:40+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -20265,7 +20265,7 @@ msgstr "Število preostalih transakcij:"
 msgid "Date of final transaction:"
 msgstr "Datum končne transakcije:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:232
+#: kmymoney/views/kenterscheduledlg.cpp:238
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20280,7 +20280,7 @@ msgstr ""
 "načrtu. (Vprašanje o vaših namenih bo prišlo, ko pritisnete V redu, v "
 "naslednjem pogovornem oknu.</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:235
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Vnesi načrtovano transakcijo"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-26 00:45+0000\n"
+"POT-Creation-Date: 2026-10-04 00:47+0000\n"
 "PO-Revision-Date: 2025-02-15 14:15+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -20249,7 +20249,7 @@ msgstr "Nombro de restantaj transakcioj:"
 msgid "Date of final transaction:"
 msgstr "Dato de fina transakcio:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:232
+#: kmymoney/views/kenterscheduledlg.cpp:238
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20263,7 +20263,7 @@ msgstr ""
 "aplikitaj nur al ĉi tiu okazo aŭ por ĉiuj postaj okazoj por ĉi tiu horaro. "
 "(Vi estos demandita, kion vi intencas premante OK en la sekva dialogo)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:235
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Enigi planitan transakcion"

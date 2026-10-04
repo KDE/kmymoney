@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-26 00:45+0000\n"
+"POT-Creation-Date: 2026-10-04 00:47+0000\n"
 "PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -20263,7 +20263,7 @@ msgstr "Jäljellä olevien tapahtumien määrä:"
 msgid "Date of final transaction:"
 msgstr "Viimeisen tapahtuman päiväys:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:232
+#: kmymoney/views/kenterscheduledlg.cpp:238
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20277,7 +20277,7 @@ msgstr ""
 "ajastetun tapahtuman tälle tai kaikille myöhemmille esiintymille. (Tätä "
 "kysytään painettuasi seuraavassa ikkunassa OK.) </p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:235
+#: kmymoney/views/kenterscheduledlg.cpp:241
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Kirjaa ajoitettu tapahtuma"
