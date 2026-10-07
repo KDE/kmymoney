@@ -516,12 +516,6 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Cla
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=${_sanitizer}")
     endforeach()
 
-    # This avoids "warning C5072: ASAN enabled without debug information emission.
-    # Enable debug info for better ASAN error reporting" issued by the MSVC compiler
-    if(MSVC)
-        add_compile_options(/Z7)
-        add_link_options(/DEBUG)
-    endif()
   else()
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed")
   endif()
@@ -546,6 +540,12 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Cla
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:Multiple")
+  if(ECM_ENABLE_SANITIZERS)
+    # This avoids "warning C5072: ASAN enabled without debug information emission.
+    # Enable debug info for better ASAN error reporting" issued by the MSVC compiler
+    add_compile_options(/Z7)
+    add_link_options(/DEBUG)
+  endif()
 endif()
 
 option(WARNINGS_AS_ERRORS "Force warnings to be reported as errors" OFF)
