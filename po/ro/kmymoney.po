@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-04 00:47+0000\n"
+"POT-Creation-Date: 2026-10-08 00:46+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -27630,11 +27630,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you would like to review or change any preference settings for "
+#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
+#| "If not just click <b>Next</b>."
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
-"click <b>Next</b>."
+"click <b>Finish</b>."
 msgstr ""
 "Dacă doriți să revedeți sau să schimbați opțiunile KMyMoney ale "
 "dumneavoastră o puteți face în acest moment. Dacă nu folosiți butonul "

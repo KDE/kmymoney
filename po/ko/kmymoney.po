@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-04 00:47+0000\n"
+"POT-Creation-Date: 2026-10-08 00:46+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -26120,11 +26120,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you would like to review or change any preference settings for "
+#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
+#| "If not just click <b>Next</b>."
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
-"click <b>Next</b>."
+"click <b>Finish</b>."
 msgstr ""
 "이 마법사를 완료한 후 KMyMoney에 대한 기본 설정 설정을 검토하거나 변경하려면 "
 "이 확인란을 선택하여 변경할 수 있습니다. 그렇지 않으면 <b>다음</b>을 클릭하십"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-04 00:47+0000\n"
+"POT-Creation-Date: 2026-10-08 00:46+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -26761,11 +26761,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you would like to review or change any preference settings for "
+#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
+#| "If not just click <b>Next</b>."
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
-"click <b>Next</b>."
+"click <b>Finish</b>."
 msgstr ""
 "Se desejar rever ou alterar alguma opção do KMyMoney, depois de terminar "
 "este assistente, podê-lo-á fazer, assinalando para tal esta opção. Caso "

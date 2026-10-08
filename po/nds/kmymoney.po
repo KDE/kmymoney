@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-04 00:47+0000\n"
+"POT-Creation-Date: 2026-10-08 00:46+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -26819,11 +26819,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you would like to review or change any preference settings for "
+#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
+#| "If not just click <b>Next</b>."
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
-"click <b>Next</b>."
+"click <b>Finish</b>."
 msgstr ""
 "Wullt Du de Vörinstellen ankieken oder ännern, de disse Hölper maakt hett, "
 "denn maak dit Feld an. Wullt Du nix ännern, klick eenfach op <b>Nakamen</b>."
