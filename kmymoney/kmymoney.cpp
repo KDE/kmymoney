@@ -4126,6 +4126,11 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
     }
     ft.commit();
 
+    // in case we suppressed the display, we need to reset the flag
+    if (suppressDisplay) {
+        m_consistencyProblemReported = false;
+    }
+
     // this data is no longer needed
     m_consistencyCheckResult.clear();
 }
