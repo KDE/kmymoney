@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:46+0000\n"
-"PO-Revision-Date: 2026-09-26 10:25+0200\n"
+"POT-Creation-Date: 2026-10-09 00:47+0000\n"
+"PO-Revision-Date: 2026-10-08 08:05+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -292,7 +292,7 @@ msgid ""
 ">Do you want KMyMoney to enter this schedule now so that the transaction can "
 "be matched?"
 msgstr ""
-"Обнаружена запланированная операция, соответствующая импортируемой операции. "
+"Обнаружена запланированная операция, соответствующая импортируемой операции."
 "<br/>График платежей: <b>%1</b><br/>Операция: <i>%2 %3</i><br/>Ввести этот "
 "график сейчас для сопоставления операции?"
 
@@ -316,15 +316,18 @@ msgstr[0] ""
 msgstr[1] ""
 "Обнаружена запланированная операция, соответствующая импортируемой операции."
 "<br/>График платежей: <b>%2</b><br/>Операция: <i>%3 %4</i><br/>Даты операций "
-"отличаются на %1 дня.<br/>Ввести этот график сейчас для совмещения операции?"
+"отличаются на %1 дня.<br/>Ввести этот график сейчас для сопоставления "
+"операции?"
 msgstr[2] ""
 "Обнаружена запланированная операция, соответствующая импортируемой операции."
 "<br/>График платежей: <b>%2</b><br/>Операция: <i>%3 %4</i><br/>Даты операций "
-"отличаются на %1 дней.<br/>Ввести этот график сейчас для совмещения операции?"
+"отличаются на %1 дней.<br/>Ввести этот график сейчас для сопоставления "
+"операции?"
 msgstr[3] ""
 "Обнаружена запланированная операция, соответствующая импортируемой операции."
 "<br/>График платежей: <b>%2</b><br/>Операция: <i>%3 %4</i><br/>Даты операций "
-"отличаются на %1 день.<br/>Ввести этот график сейчас для совмещения операции?"
+"отличаются на %1 день.<br/>Ввести этот график сейчас для сопоставления "
+"операции?"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1756
 #, kde-format
@@ -5934,23 +5937,23 @@ msgstr ""
 "Подробности представлены ниже. Несоответствия, которые не могут быть "
 "исправлены автоматически, должны быть исправлены пользователем."
 
-#: kmymoney/kmymoney.cpp:4192
+#: kmymoney/kmymoney.cpp:4197
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Проверка наличия просроченных платежей..."
 
-#: kmymoney/kmymoney.cpp:4356
+#: kmymoney/kmymoney.cpp:4361
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Перед началом импорта выписки необходимо выбрать файл KMyMoney."
 
-#: kmymoney/kmymoney.cpp:4362
+#: kmymoney/kmymoney.cpp:4367
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Импорт выписки через Web Connect"
 
-#: kmymoney/kmymoney.cpp:4376
+#: kmymoney/kmymoney.cpp:4381
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5958,58 +5961,58 @@ msgid ""
 "error: %3"
 msgstr "Невозможно импортировать %1 с помощью модуля %2. Ошибка: %3"
 
-#: kmymoney/kmymoney.cpp:4380 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4385 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr "Ошибка импорта"
 
-#: kmymoney/kmymoney.cpp:4407
+#: kmymoney/kmymoney.cpp:4412
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Будут показываться все сообщения."
 
-#: kmymoney/kmymoney.cpp:4407
+#: kmymoney/kmymoney.cpp:4412
 #, kde-format
 msgid "All messages"
 msgstr "Все сообщения"
 
-#: kmymoney/kmymoney.cpp:4443
+#: kmymoney/kmymoney.cpp:4448
 #, kde-format
 msgid "Auto saving..."
 msgstr "Автоматическое сохранение..."
 
-#: kmymoney/kmymoney.cpp:4564
+#: kmymoney/kmymoney.cpp:4569
 #, kde-format
 msgid "Creating new document..."
 msgstr "Создание нового документа..."
 
-#: kmymoney/kmymoney.cpp:4624
+#: kmymoney/kmymoney.cpp:4629
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Невозможно создать новый файл."
 
-#: kmymoney/kmymoney.cpp:4635
+#: kmymoney/kmymoney.cpp:4640
 #, kde-format
 msgid "Open a file."
 msgstr "Открыть файл."
 
-#: kmymoney/kmymoney.cpp:4649
+#: kmymoney/kmymoney.cpp:4654
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 "Невозможно найти модуль, используемый для открытия запоминающего устройства."
 
-#: kmymoney/kmymoney.cpp:4653
+#: kmymoney/kmymoney.cpp:4658
 #, kde-format
 msgid "All files (*)"
 msgstr "Все файлы (*)"
 
-#: kmymoney/kmymoney.cpp:4666
+#: kmymoney/kmymoney.cpp:4671
 #, kde-format
 msgid "Loading file..."
 msgstr "Загрузка файла..."
 
-#: kmymoney/kmymoney.cpp:4675
+#: kmymoney/kmymoney.cpp:4680
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6018,23 +6021,23 @@ msgstr ""
 "<p>Файл <b>%1</b> имеет недопустимое имя или не существует. Откройте другой "
 "файл или создайте новый.</p>"
 
-#: kmymoney/kmymoney.cpp:4677
+#: kmymoney/kmymoney.cpp:4682
 #, kde-format
 msgid "File not found"
 msgstr "Файл не найден"
 
-#: kmymoney/kmymoney.cpp:4709
+#: kmymoney/kmymoney.cpp:4714
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "Проблема открытия запоминающего устройства"
 
-#: kmymoney/kmymoney.cpp:4715
+#: kmymoney/kmymoney.cpp:4720
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Невозможно открыть запрашиваемый файл."
 
-#: kmymoney/kmymoney.cpp:4722
+#: kmymoney/kmymoney.cpp:4727
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6043,32 +6046,32 @@ msgstr ""
 "Чтение информации из источника данных невозможно. Проверьте наличие "
 "необходимого модуля в параметрах настройки KMyMoney."
 
-#: kmymoney/kmymoney.cpp:4733
+#: kmymoney/kmymoney.cpp:4738
 #, kde-format
 msgid "Saving file..."
 msgstr "Сохранение файла..."
 
-#: kmymoney/kmymoney.cpp:4745
+#: kmymoney/kmymoney.cpp:4750
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Не удалось сохранить данные."
 
-#: kmymoney/kmymoney.cpp:4751
+#: kmymoney/kmymoney.cpp:4756
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Невозможно найти модуль, подходящий для сохранения данных."
 
-#: kmymoney/kmymoney.cpp:4757
+#: kmymoney/kmymoney.cpp:4762
 #, kde-format
 msgid "Saving file as...."
 msgstr "Сохранение файла...."
 
-#: kmymoney/kmymoney.cpp:4773
+#: kmymoney/kmymoney.cpp:4778
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Невозможно найти модуль, используемый для сохранения данных."
 
-#: kmymoney/kmymoney.cpp:4801
+#: kmymoney/kmymoney.cpp:4806
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Не удалось сохранить запоминающее устройство."
@@ -18874,7 +18877,7 @@ msgid ""
 msgstr ""
 "Введите идентификатор ключа, который будет использоваться для шифрования "
 "данных. Это может быть как адрес электронной почты, так и идентификатор в "
-"шестнадцатеричном виде, начинающийся с <i>0x</i>."
+"шестнадцатеричном виде, начинающийся с «0x»."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_userKeysFound)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:95
@@ -26202,7 +26205,7 @@ msgid ""
 msgstr ""
 "Как правило, учреждение, в котором открыт счёт, присваивает этому счёту "
 "номер. Укажите его здесь. Если номер счёта неизвестен, оставьте поле пустым, "
-"номер можно будет добавить позднее. "
+"номер можно будет добавить позднее."
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_accountNameEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:99
@@ -26363,19 +26366,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you would like to review or change any preference settings for "
-#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
-#| "If not just click <b>Next</b>."
+#, kde-format
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
 "click <b>Finish</b>."
 msgstr ""
 "Чтобы выполнить более тонкую настройку программы после завершения работы "
-"мастера настройки, установите этот флажок. Чтобы перейти к следующему шагу, "
-"нажмите <b>«Далее»</b>."
+"мастера настройки, установите этот флажок. В противном случае нажмите "
+"<b>«Готово»</b>."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_openConfigAfterFinished)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32

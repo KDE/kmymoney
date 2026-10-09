@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:46+0000\n"
-"PO-Revision-Date: 2026-09-26 12:57+0200\n"
+"POT-Creation-Date: 2026-10-09 00:47+0000\n"
+"PO-Revision-Date: 2026-10-08 12:54+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -4453,7 +4453,7 @@ msgstr ""
 "% com a idèntiques. Si es troba més d'una operació, es presenta la llista a "
 "l'usuari.\n"
 "\n"
-"Seleccionant 0% es llistaran totes les operacions."
+"Seleccionant 0 % es llistaran totes les operacions."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:415
@@ -5956,24 +5956,24 @@ msgstr ""
 "Seguidament es mostren els detalls. Estos problemes no s'han pogut corregir "
 "automàticament i cal que l'usuari els resolga."
 
-#: kmymoney/kmymoney.cpp:4192
+#: kmymoney/kmymoney.cpp:4197
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "S'estan verificant les operacions planificades endarrerides…"
 
-#: kmymoney/kmymoney.cpp:4356
+#: kmymoney/kmymoney.cpp:4361
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Primer cal seleccionar un fitxer de KMyMoney abans d'importar un extracte."
 
-#: kmymoney/kmymoney.cpp:4362
+#: kmymoney/kmymoney.cpp:4367
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importeu un extracte via Web Connect"
 
-#: kmymoney/kmymoney.cpp:4376
+#: kmymoney/kmymoney.cpp:4381
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5983,57 +5983,57 @@ msgstr ""
 "No s'ha pogut importar %1 utilitzant el connector %2. El connector ha "
 "retornat l'error següent: %3"
 
-#: kmymoney/kmymoney.cpp:4380 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/kmymoney.cpp:4385 kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid "Importing error"
 msgstr "S'ha produït un error d'importació"
 
-#: kmymoney/kmymoney.cpp:4407
+#: kmymoney/kmymoney.cpp:4412
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "S'han activat tots els missatges."
 
-#: kmymoney/kmymoney.cpp:4407
+#: kmymoney/kmymoney.cpp:4412
 #, kde-format
 msgid "All messages"
 msgstr "Tots els missatges"
 
-#: kmymoney/kmymoney.cpp:4443
+#: kmymoney/kmymoney.cpp:4448
 #, kde-format
 msgid "Auto saving..."
 msgstr "S'està guardant automàticament…"
 
-#: kmymoney/kmymoney.cpp:4564
+#: kmymoney/kmymoney.cpp:4569
 #, kde-format
 msgid "Creating new document..."
 msgstr "S'està creant un document nou…"
 
-#: kmymoney/kmymoney.cpp:4624
+#: kmymoney/kmymoney.cpp:4629
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "No s'ha pogut crear un fitxer nou."
 
-#: kmymoney/kmymoney.cpp:4635
+#: kmymoney/kmymoney.cpp:4640
 #, kde-format
 msgid "Open a file."
 msgstr "Obri un fitxer."
 
-#: kmymoney/kmymoney.cpp:4649
+#: kmymoney/kmymoney.cpp:4654
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "No s'ha trobat cap connector per a obrir l'emmagatzematge."
 
-#: kmymoney/kmymoney.cpp:4653
+#: kmymoney/kmymoney.cpp:4658
 #, kde-format
 msgid "All files (*)"
 msgstr "Tots els fitxers (*)"
 
-#: kmymoney/kmymoney.cpp:4666
+#: kmymoney/kmymoney.cpp:4671
 #, kde-format
 msgid "Loading file..."
 msgstr "S'està carregant el fitxer…"
 
-#: kmymoney/kmymoney.cpp:4675
+#: kmymoney/kmymoney.cpp:4680
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6042,23 +6042,23 @@ msgstr ""
 "<p><b>%1</b> és un nom de fitxer no vàlid o el fitxer no existix. Podeu "
 "obrir un altre fitxer o crear-ne un de nou.</p>"
 
-#: kmymoney/kmymoney.cpp:4677
+#: kmymoney/kmymoney.cpp:4682
 #, kde-format
 msgid "File not found"
 msgstr "No s'ha trobat el fitxer"
 
-#: kmymoney/kmymoney.cpp:4709
+#: kmymoney/kmymoney.cpp:4714
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "S'ha produït un problema mentre s'obria l'emmagatzematge"
 
-#: kmymoney/kmymoney.cpp:4715
+#: kmymoney/kmymoney.cpp:4720
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "No s'ha pogut obrir el fitxer tal com s'ha sol·licitat."
 
-#: kmymoney/kmymoney.cpp:4722
+#: kmymoney/kmymoney.cpp:4727
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6067,32 +6067,32 @@ msgstr ""
 "No s'ha pogut llegir la font de dades. Verifiqueu les opcions de "
 "configuració de KMyMoney que el connector necessari està activat."
 
-#: kmymoney/kmymoney.cpp:4733
+#: kmymoney/kmymoney.cpp:4738
 #, kde-format
 msgid "Saving file..."
 msgstr "S'està guardant el fitxer…"
 
-#: kmymoney/kmymoney.cpp:4745
+#: kmymoney/kmymoney.cpp:4750
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Ha fallat mentre es guardaven les dades."
 
-#: kmymoney/kmymoney.cpp:4751
+#: kmymoney/kmymoney.cpp:4756
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "No s'ha trobat cap connector adequat per a guardar les dades."
 
-#: kmymoney/kmymoney.cpp:4757
+#: kmymoney/kmymoney.cpp:4762
 #, kde-format
 msgid "Saving file as...."
 msgstr "S'està guardant el fitxer com a…"
 
-#: kmymoney/kmymoney.cpp:4773
+#: kmymoney/kmymoney.cpp:4778
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "No s'ha trobat cap connector per a guardar les dades."
 
-#: kmymoney/kmymoney.cpp:4801
+#: kmymoney/kmymoney.cpp:4806
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Ha fallat mentre es guardava l'emmagatzematge."
@@ -26471,11 +26471,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you would like to review or change any preference settings for "
-#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
-#| "If not just click <b>Next</b>."
+#, kde-format
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
@@ -26483,7 +26479,7 @@ msgid ""
 msgstr ""
 "Si voleu revisar o canviar qualsevol preferència en les opcions de "
 "configuració de KMyMoney després de finalitzar l'assistent, podreu fer-ho "
-"marcant esta casella. Si no, cliqueu damunt <b>Següent</b>."
+"marcant esta casella. Si no, cliqueu damunt <b>Finalitza</b>."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_openConfigAfterFinished)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
