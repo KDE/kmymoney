@@ -76,7 +76,7 @@ endif ()
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args (DocBookXSL
     REQUIRED_VARS DocBookXSL_DIR
-    FOUND_VAR DocBookXSL_FOUND)
+)
 
 #maintain backwards compatibility
 set(DOCBOOKXSL_FOUND ${DocBookXSL_FOUND})
