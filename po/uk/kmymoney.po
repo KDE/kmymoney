@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-09 00:47+0000\n"
-"PO-Revision-Date: 2026-09-26 12:42+0300\n"
+"PO-Revision-Date: 2026-10-08 17:53+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -26516,11 +26516,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you would like to review or change any preference settings for "
-#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
-#| "If not just click <b>Next</b>."
+#, kde-format
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
@@ -26528,7 +26524,7 @@ msgid ""
 msgstr ""
 "Якщо ви бажаєте переглянути або змінити будь-який з параметрів налаштування "
 "KMyMoney після завершення роботи цього майстра, позначте відповідний пункт. "
-"Якщо всі параметри вас задовольняють, натисніть кнопку <b>Далі</b>."
+"Якщо всі параметри вас задовольняють, натисніть кнопку <b>Завершити</b>."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_openConfigAfterFinished)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
