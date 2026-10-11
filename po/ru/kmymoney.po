@@ -4726,7 +4726,7 @@ msgstr ""
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
-msgstr "Основной движок, управление выпуском, администратор проекта"
+msgstr "Основной механизм, управление выпуском, администратор проекта"
 
 #: kmymoney/kcreditswindow.cpp:57
 #, kde-format
