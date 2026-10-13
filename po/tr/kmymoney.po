@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-09 00:47+0000\n"
-"PO-Revision-Date: 2026-10-08 18:57+0300\n"
+"PO-Revision-Date: 2026-10-12 11:58+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -11326,13 +11326,13 @@ msgid ""
 "Ensure that statement header and footer is excluded."
 msgstr ""
 "Lütfen tarih eriminizi ayarlayın.\n"
-"Hesap özeti üstbilgisi ve altbilgisinin dışlandığından emin olun."
+"Hesap özeti üst bilgisi ve alt bilgisinin dışlandığından emin olun."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_headerHasName)
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:109
 #, kde-format
 msgid "Header contains account name or number"
-msgstr "Ad veya numara içeren üstbilgi"
+msgstr "Ad veya numara içeren üst bilgi"
 
 #. i18n: ectx: property (text), widget (QLabel, lblStartLine)
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:148
@@ -13233,7 +13233,7 @@ msgstr "Uygulamanın dört basamaklı sürüm bilgisini girmek için uzman seçe
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:219
 #, kde-format
 msgid "Header Version"
-msgstr "Üstbilgi sürümü"
+msgstr "Üst bilgi sürümü"
 
 #. i18n: ectx: property (text), widget (QLabel, m_clientUidLabel)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:321
