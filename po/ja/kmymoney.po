@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-09 00:47+0000\n"
+"POT-Creation-Date: 2026-10-14 00:47+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -8968,6 +8968,33 @@ msgctxt "@title:column Report ID"
 msgid "ID"
 msgstr ""
 
+#: kmymoney/mymoney/storage/reportsmodel.cpp:82
+#, kde-format
+msgctxt "@title column: Report type"
+msgid "Type"
+msgstr ""
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:118
+#: kmymoney/plugins/views/reports/core/listtable.cpp:807
+#, kde-format
+msgid "Capital Gain"
+msgstr ""
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:120
+#, kde-format
+msgid "Performance"
+msgstr ""
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:122
+#, kde-format
+msgid "Capital Gain (Legacy)"
+msgstr ""
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:124
+#, kde-format
+msgid "Performance (Legacy)"
+msgstr ""
+
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format
 msgctxt "Schedule group"
@@ -15666,11 +15693,6 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/listtable.cpp:805
 #, kde-format
 msgid "Current Balance"
-msgstr ""
-
-#: kmymoney/plugins/views/reports/core/listtable.cpp:807
-#, kde-format
-msgid "Capital Gain"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:809

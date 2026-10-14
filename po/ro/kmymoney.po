@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-09 00:47+0000\n"
+"POT-Creation-Date: 2026-10-14 00:47+0000\n"
 "PO-Revision-Date: 2026-01-28 21:52+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -9926,6 +9926,40 @@ msgctxt "@title:column Report ID"
 msgid "ID"
 msgstr "Identificator"
 
+#: kmymoney/mymoney/storage/reportsmodel.cpp:82
+#, fuzzy, kde-format
+#| msgid "Type"
+msgctxt "@title column: Report type"
+msgid "Type"
+msgstr "Tip"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:118
+#: kmymoney/plugins/views/reports/core/listtable.cpp:807
+#, fuzzy, kde-format
+#| msgctxt "Category name"
+#| msgid "Capital Gain (mid term)"
+msgid "Capital Gain"
+msgstr "Câștig din capital (termen mediu)"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:120
+#, fuzzy, kde-format
+#| msgid "Performance-Test"
+msgid "Performance"
+msgstr "Verificarea performanței"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:122
+#, fuzzy, kde-format
+#| msgctxt "Category name"
+#| msgid "Capital Gain (mid term)"
+msgid "Capital Gain (Legacy)"
+msgstr "Câștig din capital (termen mediu)"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:124
+#, fuzzy, kde-format
+#| msgid "Performance-Test"
+msgid "Performance (Legacy)"
+msgstr "Verificarea performanței"
+
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, fuzzy, kde-format
 #| msgid "Bills"
@@ -17303,13 +17337,6 @@ msgstr "Plată finală"
 #, kde-format
 msgid "Current Balance"
 msgstr "Soldul curent"
-
-#: kmymoney/plugins/views/reports/core/listtable.cpp:807
-#, fuzzy, kde-format
-#| msgctxt "Category name"
-#| msgid "Capital Gain (mid term)"
-msgid "Capital Gain"
-msgstr "Câștig din capital (termen mediu)"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:809
 #, fuzzy, kde-format

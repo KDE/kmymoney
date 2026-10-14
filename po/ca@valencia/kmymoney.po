@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-09 00:47+0000\n"
+"POT-Creation-Date: 2026-10-14 00:47+0000\n"
 "PO-Revision-Date: 2026-10-08 12:54+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -9447,6 +9447,37 @@ msgctxt "@title:column Report ID"
 msgid "ID"
 msgstr "ID"
 
+#: kmymoney/mymoney/storage/reportsmodel.cpp:82
+#, fuzzy, kde-format
+#| msgid "Type"
+msgctxt "@title column: Report type"
+msgid "Type"
+msgstr "Tipus"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:118
+#: kmymoney/plugins/views/reports/core/listtable.cpp:807
+#, kde-format
+msgid "Capital Gain"
+msgstr "Guany de capital"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:120
+#, fuzzy, kde-format
+#| msgid "Performance-Test"
+msgid "Performance"
+msgstr "Prova de rendiment"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:122
+#, fuzzy, kde-format
+#| msgid "Capital Gain"
+msgid "Capital Gain (Legacy)"
+msgstr "Guany de capital"
+
+#: kmymoney/mymoney/storage/reportsmodel.cpp:124
+#, fuzzy, kde-format
+#| msgid "Performance-Test"
+msgid "Performance (Legacy)"
+msgstr "Prova de rendiment"
+
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format
 msgctxt "Schedule group"
@@ -16549,11 +16580,6 @@ msgstr "Pagament final"
 #, kde-format
 msgid "Current Balance"
 msgstr "Saldo actual"
-
-#: kmymoney/plugins/views/reports/core/listtable.cpp:807
-#, kde-format
-msgid "Capital Gain"
-msgstr "Guany de capital"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:809
 #, kde-format
