@@ -269,6 +269,7 @@ public:
             item->setData(0, Qt::UserRole, (*it_l).id());
             item->setCheckState(0, Qt::Checked);
         }
+        ui->m_tagsView->sortItems(0, Qt::AscendingOrder);
     }
 
     /**
@@ -290,6 +291,7 @@ public:
             item->setData(0, Qt::UserRole, (*it_l).id());
             item->setCheckState(0, Qt::Checked);
         }
+        ui->m_payeesView->sortItems(0, Qt::AscendingOrder);
     }
 
     void setupDetailsPage()
