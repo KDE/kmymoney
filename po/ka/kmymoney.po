@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-14 00:47+0000\n"
-"PO-Revision-Date: 2026-09-26 06:49+0200\n"
+"PO-Revision-Date: 2026-10-14 07:10+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -9190,11 +9190,10 @@ msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:82
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "@title column: Report type"
 msgid "Type"
-msgstr "ტიპით"
+msgstr "ტიპი"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:118
 #: kmymoney/plugins/views/reports/core/listtable.cpp:807
@@ -9203,22 +9202,19 @@ msgid "Capital Gain"
 msgstr "კაპიტალის მოგება"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:120
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance"
-msgstr "წარმადობის ტესტი"
+msgstr "წარმადობა"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:122
-#, fuzzy, kde-format
-#| msgid "Capital Gain"
+#, kde-format
 msgid "Capital Gain (Legacy)"
-msgstr "კაპიტალის მოგება"
+msgstr "კაპიტალის მოგება (მოძველებული)"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:124
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance (Legacy)"
-msgstr "წარმადობის ტესტი"
+msgstr "წარმადობა (მოძველებული)"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format
@@ -25436,216 +25432,3 @@ msgstr "კონკრეტული ანგარიშის დამუ�
 #, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "მხარდაჭერილია, მხოლოდ, ერთ-ერთი, --csv, ან --html"
-
-#~ msgid "All dates"
-#~ msgstr "ყველა თარიღი"
-
-#~ msgid "History"
-#~ msgstr "ისტორია"
-
-#~ msgid "Configure your report"
-#~ msgstr "მოირგეთ თქვენი ანგარიში"
-
-#~ msgid "Prices"
-#~ msgstr "ფასები"
-
-#~ msgid "Prices..."
-#~ msgstr "ფასები..."
-
-#~ msgid "Oldest unmarked transaction: %1"
-#~ msgstr "ყველაზე ძველი დაუნიშნავი ტრანზაქცია: %1"
-
-#~ msgctxt "To open a new report"
-#~ msgid "&Open"
-#~ msgstr "&გახსნა"
-
-#~ msgctxt "To print a report"
-#~ msgid "&Print"
-#~ msgstr "&ბეჭდვა"
-
-#~ msgctxt "To export a report"
-#~ msgid "&Export to PDF file"
-#~ msgstr "PDF ფაილში გატან&ა"
-
-#~ msgctxt "Configure a report"
-#~ msgid "&Configure"
-#~ msgstr "&მორგება"
-
-#~ msgid "&New report"
-#~ msgstr "ახალი ა&ნგარიში"
-
-#~ msgid "&Delete"
-#~ msgstr "&წაშლა"
-
-#~ msgctxt "To export reports"
-#~ msgid "&Export to PDF files"
-#~ msgstr "გატანა PDF ფაილ&ებში"
-
-#~ msgid "Favorite Reports"
-#~ msgstr "რჩეული ანგარიშები"
-
-#~ msgid "Old Customized Reports"
-#~ msgstr "ძველი მორგებული ანგარიშები"
-
-#~ msgid "Value/Balance History"
-#~ msgstr "ღირებულების/ბალანსის ისტორია"
-
-#~ msgid "saving report '%1' into '%2'"
-#~ msgstr "ინახება ანგარიში '%1' ფაილში '%2'"
-
-#~ msgctxt "@label Reconciliation progress dialog"
-#~ msgid "Reconciling transactions..."
-#~ msgstr "ტრანზაქციების შეთანხმება..."
-
-#~ msgid "Startup page options"
-#~ msgstr "გაშვების გვერდის პარამეტრები"
-
-#~ msgid "Start with ho&mepage"
-#~ msgstr "გაშვე&ბა საწყისი გვერდით"
-
-#~ msgid "Start with last selected view"
-#~ msgstr "გაშვება ბოლოს არჩეული ხედით"
-
-#~ msgid "Synchronize account selection of ledger and investment view"
-#~ msgstr "გოსბუხის და ინვესტიციების ხედის ანგარიშის არჩევნის სინქრონიზაცია"
-
-#~ msgid "Payment Accounts"
-#~ msgstr "გადახდის ანგარიშები"
-
-#~ msgid "Importing statement for account %1"
-#~ msgstr "ამონაწერის შემოტანა ანგარიშისთვის %1"
-
-#~ msgid "Importing statement without transactions"
-#~ msgstr "ამონაწერის შემოტანა ტრანზაქციების გარეშე"
-
-#~ msgid "  Transactions"
-#~ msgstr "  ტრანზაქციები"
-
-#~ msgctxt "x transactions have been added"
-#~ msgid "    %1 added"
-#~ msgid_plural "    %1 added"
-#~ msgstr[0] "    %1 დაემატა"
-#~ msgstr[1] "    %1 დაემატა"
-
-#~ msgid "    %1 matched"
-#~ msgid_plural "    %1 matched"
-#~ msgstr[0] "    %1 დამთხვევა"
-#~ msgstr[1] "    %1 დამთხვევა"
-
-#~ msgid "    %1 duplicate"
-#~ msgid_plural "    %1 duplicates"
-#~ msgstr[0] "    %1 დუბლიკატი"
-#~ msgstr[1] "    %1 დუბლიკატი"
-
-#~ msgid "  Payees"
-#~ msgstr " თანხის მიმღებები"
-
-#~ msgctxt "x transactions have been created"
-#~ msgid "    %1 created"
-#~ msgid_plural "    %1 created"
-#~ msgstr[0] "    %1 შეიქმნა"
-#~ msgstr[1] "    %1 შეიქმნა"
-
-#~ msgid "Account problem"
-#~ msgstr "ანგარიშის პრობლემა"
-
-#~ msgid "Select category or account."
-#~ msgstr "აირჩიეთ კატეგორია ან ანგარიში."
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "წყარო"
-
-#~ msgid "Upd"
-#~ msgstr "განახლ"
-
-#~ msgid "Close this window"
-#~ msgstr "ამ ფანჯრის დახურვა"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "სახელი"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "წყარო"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "ფასი უკვე არსებობს"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "სიმბოლო"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "საიდენტიფიკაციო ნომერი"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "სახელი"
-
-#~ msgid "New Quote Source"
-#~ msgstr "კვოტის ახალი წყარო"
-
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "კვოტის წყაროს წაშლა"
-
-#~ msgid "Source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "წყარო <placeholder>%1</placeholder> არ არსებობს."
-
-#~ msgid "Fetching URL %1..."
-#~ msgstr "URL %1-ის გამოთხოვა..."
-
-#~ msgctxt "The process x is executing"
-#~ msgid "Executing %1..."
-#~ msgstr "%1-ის შესრულება..."
-
-#~ msgid "Unable to launch: %1"
-#~ msgstr "გაშვების შედომა: %1"
-
-#~ msgid "Failed to open downloaded file"
-#~ msgstr "გადმოწერილი ფაილის გახსნის პრობლემა"
-
-#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
-#~ msgid "Executing %1 %2 %3..."
-#~ msgstr "შესრულება %1 %2 %3..."
-
-#~ msgid "Price found: '%1' (%2)"
-#~ msgstr "ნაპოვნია ფასი: '%1' (%2)"
-
-#~ msgid "Date found: '%1'"
-#~ msgstr "ნაპოვნია მონაცემები: '%1'"
-
-#~ msgid "Unable to update price for %1 (empty quote data)"
-#~ msgstr ""
-#~ "%1-ის ფასის განახლების დამუშავების სშეცდომა (კოტის მონაცემები ცარიელია)"
-
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "%1-ის ფასის განახლების შეცდომა (შეცდომა: '%2')"
-
-#, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "იარლიყი"
-
-#~ msgctxt "Debit suffix"
-#~ msgid "Dr."
-#~ msgstr "დრ."
-
-#~ msgid "Invalid account"
-#~ msgstr "არასწორი ანგარიში"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "მიღებულია"
-
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "დასაწყისი"
-
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "CC"

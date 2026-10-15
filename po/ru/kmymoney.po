@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-14 00:47+0000\n"
-"PO-Revision-Date: 2026-10-08 08:05+0200\n"
+"PO-Revision-Date: 2026-10-14 12:00+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -9412,8 +9412,7 @@ msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:82
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "@title column: Report type"
 msgid "Type"
 msgstr "Тип"
@@ -9425,22 +9424,19 @@ msgid "Capital Gain"
 msgstr "Доход от прироста капитала"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:120
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance"
-msgstr "Тест на производительность"
+msgstr "Доходность"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:122
-#, fuzzy, kde-format
-#| msgid "Capital Gain"
+#, kde-format
 msgid "Capital Gain (Legacy)"
-msgstr "Доход от прироста капитала"
+msgstr "Доход от прироста капитала (старый формат)"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:124
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance (Legacy)"
-msgstr "Тест на производительность"
+msgstr "Доходность (старый формат)"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format

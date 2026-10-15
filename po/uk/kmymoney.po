@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-14 00:47+0000\n"
-"PO-Revision-Date: 2026-10-08 17:53+0300\n"
+"PO-Revision-Date: 2026-10-14 15:57+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -9444,8 +9444,7 @@ msgid "ID"
 msgstr "Ідентифікатор"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:82
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "@title column: Report type"
 msgid "Type"
 msgstr "Тип"
@@ -9457,22 +9456,19 @@ msgid "Capital Gain"
 msgstr "Збільшення капіталу"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:120
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance"
-msgstr "Перевірка швидкодії"
+msgstr "Швидкодія"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:122
-#, fuzzy, kde-format
-#| msgid "Capital Gain"
+#, kde-format
 msgid "Capital Gain (Legacy)"
-msgstr "Збільшення капіталу"
+msgstr "Збільшення капіталу (застаріле)"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:124
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance (Legacy)"
-msgstr "Перевірка швидкодії"
+msgstr "Швидкодія (застаріле)"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format

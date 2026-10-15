@@ -9180,10 +9180,9 @@ msgid "Capital Gain"
 msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:120
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance"
-msgstr "Test výkonu"
+msgstr "Výkon"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:122
 #, fuzzy, kde-format

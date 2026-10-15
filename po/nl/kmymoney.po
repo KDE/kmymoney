@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-14 00:47+0000\n"
-"PO-Revision-Date: 2026-10-08 20:01+0200\n"
+"PO-Revision-Date: 2026-10-14 12:06+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -9429,8 +9429,7 @@ msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:82
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "@title column: Report type"
 msgid "Type"
 msgstr "Type"
@@ -9442,22 +9441,19 @@ msgid "Capital Gain"
 msgstr "Kapitaalwinst"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:120
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance"
-msgstr "Prestatie test"
+msgstr "Prestatie"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:122
-#, fuzzy, kde-format
-#| msgid "Capital Gain"
+#, kde-format
 msgid "Capital Gain (Legacy)"
-msgstr "Kapitaalwinst"
+msgstr "Kapitaalwinst (verouderd)"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:124
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance (Legacy)"
-msgstr "Prestatie test"
+msgstr "Prestatie (verouderd)"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:147
 #, kde-format
