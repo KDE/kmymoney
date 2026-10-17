@@ -5,6 +5,7 @@ add_subdirectory( payeeidentifier )
 ########### next target ###############
 
 set(kmm_mymoney_LIB_SRCS
+  fixuncategroziedtransactions.cpp
   mymoneyenums.cpp
   mymoneymoney.cpp mymoneyfinancialcalculator.cpp
   mymoneytransactionfilter.cpp

@@ -100,6 +100,7 @@
 #include "dialogs/kcurrencycalculator.h"
 #include "dialogs/kcurrencyeditdlg.h"
 #include "dialogs/kequitypriceupdatedlg.h"
+#include "dialogs/kfixuncategorizedtransactionsdlg.cpp"
 #include "dialogs/kmymoneyfileinfodlg.h"
 #include "dialogs/kmymoneypricedlg.h"
 #include "dialogs/knewaccountdlg.h"
@@ -109,6 +110,7 @@
 #include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/transactionmatcher.h"
 #include "equitiesmodel.h"
+#include "fixuncategroziedtransactions.h"
 #include "importsummarydlg.h"
 #include "journalmodel.h"
 #include "keditscheduledlg.h"
@@ -626,6 +628,7 @@ public:
             Action::ToolPrices,
             Action::ToolUpdatePrices,
             Action::ToolConsistency,
+            Action::ToolFixUncategorized,
             Action::ToolPerformance,
             Action::NewAccount,
             Action::NewInstitution,
@@ -1473,6 +1476,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             {Action::ToolConsistency,               QStringLiteral("tools_consistency_check"),        i18n("Consistency Check"),                          Icon::Empty},
             {Action::ToolPerformance,               QStringLiteral("tools_performancetest"),          i18n("Performance-Test"),                           Icon::PerformanceTest},
             {Action::ToolCalculator,                QStringLiteral("tools_kcalc"),                    i18n("Calculator..."),                              Icon::Calculator},
+            {Action::ToolFixUncategorized,          QStringLiteral("tools_fix_uncategorized"),        i18n("Fix uncategorized transactions"),             Icon::TransactionDetails},
             // *****************
             // The settings menu
             // *****************
@@ -1648,6 +1652,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             {Action::ToolPrices,                    &KMyMoneyApp::slotPriceDialog},
             {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate},
             {Action::ToolConsistency,               &KMyMoneyApp::slotFileConsistencyCheck},
+            {Action::ToolFixUncategorized,          &KMyMoneyApp::slotFixUncategorizedTransactions},
             {Action::ToolPerformance,               &KMyMoneyApp::slotPerformanceTest},
     //      {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql},
             {Action::ToolCalculator,                &KMyMoneyApp::slotToolsStartKCalc},
@@ -3982,6 +3987,22 @@ void KMyMoneyApp::slotCurrencyDialog()
 void KMyMoneyApp::slotPriceDialog()
 {
     QPointer<KMyMoneyPriceDlg> dlg = new KMyMoneyPriceDlg(this);
+    dlg->exec();
+    delete dlg;
+}
+
+void KMyMoneyApp::slotFixUncategorizedTransactions()
+{
+    QPointer<KFixUncategorizedTransactionsDlg> dlg(new KFixUncategorizedTransactionsDlg(this));
+    QSharedPointer<FixUncategorizedTransactions> corrector(new FixUncategorizedTransactions(this));
+
+    connect(corrector.get(), &FixUncategorizedTransactions::progressUpdate, dlg, &KFixUncategorizedTransactionsDlg::setProgress);
+
+    connect(dlg, &KFixUncategorizedTransactionsDlg::startProcess, this, [dlg, corrector](const QString& incomeCategoryId, const QString& expenseCategoryId) {
+        corrector->assignCategories(incomeCategoryId, expenseCategoryId);
+    });
+
+    dlg->setUncategorizedCount(corrector->unCategorizedIncomeCount(), corrector->unCategorizedExpensesCount());
     dlg->exec();
     delete dlg;
 }
