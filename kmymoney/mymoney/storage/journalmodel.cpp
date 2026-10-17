@@ -286,7 +286,11 @@ struct JournalModel::Private {
     {
         const auto file = MyMoneyFile::instance();
         const auto acc = file->accountsModel()->itemById(journalEntry.split().accountId());
-        return file->securitiesModel()->itemById(acc.currencyId());
+        auto security = file->currenciesModel()->itemById(acc.currencyId());
+        if (security.id().isEmpty()) {
+            security = file->securitiesModel()->itemById(acc.currencyId());
+        }
+        return security;
     }
 
     void removeIdKeyMapping(const QString& id)
@@ -1094,6 +1098,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::JournalSplitSecurityNameRole:
         return d->security(journalEntry).name();
+
+    case eMyMoney::Model::JournalSplitSecurityIdRole:
+        return d->security(journalEntry).id();
 
     case eMyMoney::Model::DelegateRole:
         return static_cast<int>(eMyMoney::Delegates::Types::JournalDelegate);

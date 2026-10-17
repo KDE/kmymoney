@@ -93,6 +93,7 @@ enum class Action {
     ToolPrices, ToolUpdatePrices,
     ToolConsistency, ToolPerformance,
     ToolSQL, ToolCalculator,
+    ToolFixUncategorized,
     // *************
     // The help menu
     // *************

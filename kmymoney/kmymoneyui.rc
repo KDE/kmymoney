@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="59" name="kmymoney" >
+<kpartgui version="60" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -109,6 +109,7 @@
    <Action name="tools_price_editor" />
    <Action name="tools_update_prices" />
    <Action name="tools_consistency_check" />
+   <Action name="tools_fix_uncategorized" />
    <Action name="tools_performancetest" />
    <DefineGroup name="tools_group" append="tools_group"/>
    <Separator/>
