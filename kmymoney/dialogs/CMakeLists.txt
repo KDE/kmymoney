@@ -99,6 +99,7 @@ set_target_properties(kmm_base_dialogs PROPERTIES VERSION ${PROJECT_VERSION} SOV
 set(kmm_extended_dialogs_SOURCES
   kequitypriceupdateconfdlg.cpp
   kequitypriceupdatedlg.cpp
+  kfixuncategorizedtransactionsdlg.cpp
   kmymoneypricedlg.cpp
   splitadjustdialog.cpp
 )
@@ -106,6 +107,7 @@ set(kmm_extended_dialogs_SOURCES
 set(kmm_extended_dialogs_UI
   kequitypriceupdateconfdlg.ui
   kequitypriceupdatedlg.ui
+  kfixuncategorizedtransactionsdlg.ui
   kmymoneypricedlg.ui
   ksplitcorrectiondlg.ui
 )

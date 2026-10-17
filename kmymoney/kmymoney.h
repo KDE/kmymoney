@@ -442,6 +442,7 @@ public Q_SLOTS:
     void slotFileInfoDialog();
 
     void slotFileConsistencyCheck();
+    void slotFixUncategorizedTransactions();
 
     /**
       * fires up the price table editor
