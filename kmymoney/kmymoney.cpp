@@ -100,7 +100,7 @@
 #include "dialogs/kcurrencycalculator.h"
 #include "dialogs/kcurrencyeditdlg.h"
 #include "dialogs/kequitypriceupdatedlg.h"
-#include "dialogs/kfixuncategorizedtransactionsdlg.cpp"
+#include "dialogs/kfixuncategorizedtransactionsdlg.h"
 #include "dialogs/kmymoneyfileinfodlg.h"
 #include "dialogs/kmymoneypricedlg.h"
 #include "dialogs/knewaccountdlg.h"

@@ -25,7 +25,7 @@ class KMM_EXTENDED_DIALOGS_EXPORT KFixUncategorizedTransactionsDlg : public QDia
     Q_OBJECT
 
 public:
-    KFixUncategorizedTransactionsDlg(QWidget* parent);
+    explicit KFixUncategorizedTransactionsDlg(QWidget* parent);
 
     void setUncategorizedCount(int incomeCount, int expenseCount);
 
