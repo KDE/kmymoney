@@ -371,6 +371,9 @@ public:
     QBitArray m_processingDays;
     QMap<QDate, bool> m_holidayMap;
     QStringList m_consistencyCheckResult;
+    QPointer<QDialog> m_consistencyCheckDialog;
+    QPointer<QTextBrowser> m_consistencyCheckBrowser;
+    QPointer<QPushButton> m_consistencyCheckRefreshButton;
     bool m_applicationIsReady;
 
     WebConnect* m_webConnect;
@@ -4025,44 +4028,49 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
     KMSTATUS(i18n("Running consistency check..."));
 
     auto showDialog = [&](const QStringList& content) {
-        QDialog* txInfo = new QDialog;
-        txInfo->setAttribute(Qt::WA_DeleteOnClose);
-        txInfo->setWindowTitle(i18nc("@info:title ", "Consistency check results"));
+        // reuse an already open dialog (e.g. when the refresh button was pressed)
+        if (!m_consistencyCheckDialog) {
+            QDialog* txInfo = new QDialog;
+            txInfo->setAttribute(Qt::WA_DeleteOnClose);
+            txInfo->setWindowTitle(i18nc("@info:title ", "Consistency check results"));
 
-        txInfo->setMinimumSize(800, 400);
-        QTextBrowser* textBrowser = new QTextBrowser();
-        textBrowser->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
-        textBrowser->setWhatsThis(textBrowser->toolTip());
-        textBrowser->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(textBrowser, &QListWidget::customContextMenuRequested, q, &KMyMoneyApp::slotShowContextMenuForConsistencyCheck);
+            txInfo->setMinimumSize(800, 400);
+            QTextBrowser* textBrowser = new QTextBrowser();
+            textBrowser->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
+            textBrowser->setWhatsThis(textBrowser->toolTip());
+            textBrowser->setContextMenuPolicy(Qt::CustomContextMenu);
+            connect(textBrowser, &QListWidget::customContextMenuRequested, q, &KMyMoneyApp::slotShowContextMenuForConsistencyCheck);
 
-        // allow to follow links
-        textBrowser->setOpenLinks(false);
-        connect(textBrowser, &QTextBrowser::anchorClicked, q, &KMyMoneyApp::slotOpenConsistencyUrl);
+            // allow to follow links
+            textBrowser->setOpenLinks(false);
+            connect(textBrowser, &QTextBrowser::anchorClicked, q, &KMyMoneyApp::slotOpenConsistencyUrl);
 
-        QPushButton* doneButton = new QPushButton(i18nc("@action:button close consistency check", "Close"), txInfo);
-        doneButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        connect(doneButton, &QPushButton::clicked, txInfo, &QDialog::deleteLater);
+            QPushButton* doneButton = new QPushButton(i18nc("@action:button close consistency check", "Close"), txInfo);
+            doneButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            connect(doneButton, &QPushButton::clicked, txInfo, &QDialog::deleteLater);
 
-        QVBoxLayout* vLayout = new QVBoxLayout(txInfo);
-        vLayout->addWidget(textBrowser);
-
-        QHBoxLayout* hLayout = new QHBoxLayout(txInfo);
-
-        // only show the refresh button a problem is reported
-        // no problems are identified by a single line
-        if (content.size() > 1) {
             QPushButton* refreshButton = new QPushButton(i18nc("@action:button refresh consistency check", "Refresh"), txInfo);
             refreshButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
             connect(refreshButton, &QPushButton::clicked, q, &KMyMoneyApp::slotFileConsistencyCheck);
-            connect(refreshButton, &QPushButton::clicked, txInfo, &QDialog::deleteLater);
 
+            QVBoxLayout* vLayout = new QVBoxLayout(txInfo);
+            vLayout->addWidget(textBrowser);
+
+            QHBoxLayout* hLayout = new QHBoxLayout(txInfo);
             hLayout->addWidget(refreshButton);
-        }
-        hLayout->addWidget(doneButton);
+            hLayout->addWidget(doneButton);
 
-        vLayout->addLayout(hLayout);
-        vLayout->setAlignment(hLayout, Qt::AlignHCenter);
+            vLayout->addLayout(hLayout);
+            vLayout->setAlignment(hLayout, Qt::AlignHCenter);
+
+            m_consistencyCheckDialog = txInfo;
+            m_consistencyCheckBrowser = textBrowser;
+            m_consistencyCheckRefreshButton = refreshButton;
+        }
+
+        // only show the refresh button a problem is reported
+        // no problems are identified by a single line
+        m_consistencyCheckRefreshButton->setVisible(content.size() > 1);
 
         // convert lines into single string
         QString txt = QLatin1String("<qt><p>");
@@ -4072,9 +4080,11 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
         txt.replace(QLatin1Char(' '), QLatin1String("&nbsp;"));
         // except those in href tags
         txt.replace(QLatin1String("<a&nbsp;h"), QLatin1String("<a h"));
-        textBrowser->setHtml(txt);
+        m_consistencyCheckBrowser->setHtml(txt);
 
-        txInfo->show();
+        m_consistencyCheckDialog->show();
+        m_consistencyCheckDialog->raise();
+        m_consistencyCheckDialog->activateWindow();
     };
 
     MyMoneyFileTransaction ft;
