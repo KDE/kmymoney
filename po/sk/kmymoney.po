@@ -17809,11 +17809,10 @@ msgid "Assets & Liabilities"
 msgstr "Aktíva a pasíva"
 
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
-#, fuzzy, kde-format
-#| msgid "rows starting at row"
+#, kde-format
 msgctxt "@item:inlistbox budget name and starting date"
 msgid "%1, starting at %2"
-msgstr "riadky začínajúce na riadku"
+msgstr "%1, od %2"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
@@ -22171,10 +22170,9 @@ msgid "The date you entered is invalid"
 msgstr "Zadaný dátum je neplatný"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
-#, fuzzy, kde-format
-#| msgid "End transaction edit"
+#, kde-format
 msgid "All transaction dates"
-msgstr "Úprava koncovej transakcie"
+msgstr "Všetky dátumy transakcií"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
