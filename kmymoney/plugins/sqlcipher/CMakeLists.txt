@@ -60,7 +60,8 @@ if(WIN32 AND MSVC AND NOT BUILD_STATIC_PLUGINS)
     add_custom_command(TARGET qsqlcipher POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E echo "==== deploying SQLCipher runtime (sqlite3.dll) ===="
       COMMAND ${CMAKE_COMMAND} -E echo "source: ${SQLCIPHER_RUNTIME_DLL}"
-      COMMAND ${CMAKE_COMMAND} -E copy_if_different
+      COMMAND ${CMAKE_COMMAND} -E echo "dest:   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sqlite3.dll"
+      COMMAND ${CMAKE_COMMAND} -E copy
               "${SQLCIPHER_RUNTIME_DLL}"
               "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sqlite3.dll"
       COMMAND ${CMAKE_COMMAND} -E echo "==================================================="
