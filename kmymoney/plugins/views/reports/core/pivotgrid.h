@@ -104,6 +104,21 @@ class PivotGridRowSet: public QMap<ERowType, PivotGridRow>
 public:
     explicit PivotGridRowSet(unsigned _numcolumns = 0);
     bool saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const;
+
+    using QMap<ERowType, PivotGridRow>::operator[];
+
+    /**
+     * Read access to the row of type @a type without copying it.
+     *
+     * Since Qt6, QMap::operator[]() const returns a non-const copy of the
+     * value. Indexing into that copy (e.g. rowSet[eActual][column]) calls the
+     * non-const QList::operator[]() which detaches and deep copies the whole
+     * row just to read a single cell. This overload returns a const reference
+     * instead, so read access in const contexts never copies.
+     *
+     * @return the row or an empty row if @a type is not present
+     */
+    const PivotGridRow& operator[](const ERowType& type) const;
 };
 
 class PivotInnerGroup: public QMap<ReportAccount, PivotGridRowSet>

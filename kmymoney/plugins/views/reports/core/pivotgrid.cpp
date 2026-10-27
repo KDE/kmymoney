@@ -129,6 +129,13 @@ PivotGridRowSet::PivotGridRowSet(unsigned _numcolumns)
     insert(ePrice, PivotGridRow(_numcolumns));
 }
 
+const PivotGridRow& PivotGridRowSet::operator[](const ERowType& type) const
+{
+    static const PivotGridRow emptyRow;
+    const auto it = constFind(type);
+    return (it != cend()) ? *it : emptyRow;
+}
+
 PivotGridRowSet PivotGrid::rowSet(QString id)
 {
     // go through the data and get the row that matches the id
