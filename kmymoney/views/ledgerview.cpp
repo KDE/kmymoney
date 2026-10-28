@@ -1469,6 +1469,13 @@ void LedgerView::adjustDetailColumn(int newViewportWidth, bool informOtherViews)
         }
     }
 
+    // Adjust the column heading of the Detail column. It may show two
+    // different labels, depending if the detail column only shows the
+    // category or more than one item
+    const auto isOnlyCategoryColumn = !(isColumnHidden(JournalModel::Payee) || isColumnHidden(JournalModel::Memo));
+    const QString label = isOnlyCategoryColumn ? i18nc("@title:column Category", "Category") : i18nc("@title:column Ledger not only category", "Detail");
+    MyMoneyFile::instance()->journalModel()->setHeaderData(JournalModel::Detail, Qt::Horizontal, label, Qt::EditRole);
+
     // remember that we're done this time
     d->userResizedColumn = -1;
     d->adjustingColumn = false;

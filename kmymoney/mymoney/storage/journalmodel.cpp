@@ -591,6 +591,26 @@ QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int 
     return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
+bool JournalModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role)
+{
+    if (orientation == Qt::Horizontal) {
+        switch (role) {
+        case Qt::EditRole:
+            if (section == JournalModel::Column::Detail) {
+                if (d->headerData.value(static_cast<Column>(section)) != value.toString()) {
+                    d->headerData.insert(static_cast<Column>(section), value.toString());
+                    Q_EMIT headerDataChanged(orientation, section, section);
+                }
+                return true;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    return MyMoneyModelBase::setHeaderData(section, orientation, value, role);
+}
+
 Qt::ItemFlags JournalModel::flags(const QModelIndex& index) const
 {
     if (index.isValid()) {
