@@ -999,7 +999,7 @@ bool LedgerView::viewportEvent(QEvent* event)
                     if (preventLineBreak) {
                         text = QString("<p style='white-space:pre'>%1</p>").arg(text);
                     }
-                    QToolTip::showText(helpEvent->globalPos(), tooltips[iconIndex]);
+                    QToolTip::showText(helpEvent->globalPos(), tooltips[iconIndex], this);
                     return true;
                 }
 
@@ -1008,7 +1008,7 @@ bool LedgerView::viewportEvent(QEvent* event)
                     if (!idx.data(Qt::DisplayRole).toString().isEmpty()) {
                         auto tip = d->createSplitTooltip(idx);
                         if (!tip.isEmpty()) {
-                            QToolTip::showText(helpEvent->globalPos(), tip);
+                            QToolTip::showText(helpEvent->globalPos(), tip, this);
                             return true;
                         }
                     }
@@ -1032,7 +1032,8 @@ bool LedgerView::viewportEvent(QEvent* event)
                         QToolTip::showText(helpEvent->globalPos(),
                                            i18nc("@info:tooltip",
                                                  "The difference between the account balance and the online balance is %1.",
-                                                 difference.formatMoney(security.tradingSymbol(), prec)));
+                                                 difference.formatMoney(security.tradingSymbol(), prec)),
+                                           this);
                         return true;
                     }
                 }
