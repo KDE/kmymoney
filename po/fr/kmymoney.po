@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-23 00:49+0000\n"
+"POT-Creation-Date: 2026-10-29 00:53+0000\n"
 "PO-Revision-Date: 2026-08-22 10:06+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -21829,31 +21829,31 @@ msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr "La différence entre le solde du compte et le solde en ligne est de %1."
 
-#: kmymoney/views/ledgerview.cpp:1099
+#: kmymoney/views/ledgerview.cpp:1100
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Ne pas saisir la transaction programmée en retard."
 
-#: kmymoney/views/ledgerview.cpp:1100
+#: kmymoney/views/ledgerview.cpp:1101
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Saisir la transaction programmée en retard."
 
-#: kmymoney/views/ledgerview.cpp:1103
+#: kmymoney/views/ledgerview.cpp:1104
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Voulez-vous saisir le calendrier des retards maintenant ?"
 
-#: kmymoney/views/ledgerview.cpp:1104
+#: kmymoney/views/ledgerview.cpp:1105
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Saisir le calendrier des retards"
 
-#: kmymoney/views/ledgerview.cpp:1124
+#: kmymoney/views/ledgerview.cpp:1125
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21863,7 +21863,7 @@ msgstr ""
 "Détacher la transaction cachée (associée) de celle affichée et la saisir à "
 "nouveau dans le grand livre."
 
-#: kmymoney/views/ledgerview.cpp:1126
+#: kmymoney/views/ledgerview.cpp:1127
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21873,18 +21873,32 @@ msgstr ""
 "Acceptez la concordance comme indiqué et supprimez les données de la "
 "transaction cachée (concordance)."
 
-#: kmymoney/views/ledgerview.cpp:1130
+#: kmymoney/views/ledgerview.cpp:1131
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr ""
 "Voulez-vous accepter ou désapprouver la transaction associée maintenant ?"
 
-#: kmymoney/views/ledgerview.cpp:1131
+#: kmymoney/views/ledgerview.cpp:1132
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Accepter ou désapprouver une transaction"
+
+#: kmymoney/views/ledgerview.cpp:1476
+#, fuzzy, kde-format
+#| msgid "Category"
+msgctxt "@title:column Category"
+msgid "Category"
+msgstr "Catégorie"
+
+#: kmymoney/views/ledgerview.cpp:1476
+#, fuzzy, kde-format
+#| msgid "Detail"
+msgctxt "@title:column Ledger not only category"
+msgid "Detail"
+msgstr "Détail"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format

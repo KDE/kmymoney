@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-23 00:49+0000\n"
+"POT-Creation-Date: 2026-10-29 00:53+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -22211,7 +22211,7 @@ msgid ""
 "The difference between the account balance and the online balance is %1."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1099
+#: kmymoney/views/ledgerview.cpp:1100
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -22219,14 +22219,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Wullt Du den utsöchten Priesindrag redig wegdoon?"
 
-#: kmymoney/views/ledgerview.cpp:1100
+#: kmymoney/views/ledgerview.cpp:1101
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Plaant Boken ingeven"
 
-#: kmymoney/views/ledgerview.cpp:1103
+#: kmymoney/views/ledgerview.cpp:1104
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -22234,7 +22234,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Wullt Du den utsöchten Priesindrag redig wegdoon?"
 
-#: kmymoney/views/ledgerview.cpp:1104
+#: kmymoney/views/ledgerview.cpp:1105
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -22242,7 +22242,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Ingeven oder planen?"
 
-#: kmymoney/views/ledgerview.cpp:1124
+#: kmymoney/views/ledgerview.cpp:1125
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -22250,7 +22250,7 @@ msgid ""
 "the ledger again."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1126
+#: kmymoney/views/ledgerview.cpp:1127
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -22258,7 +22258,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:1130
+#: kmymoney/views/ledgerview.cpp:1131
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -22266,12 +22266,26 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Wullt Du de utsöcht Boken redig wegdoon?"
 
-#: kmymoney/views/ledgerview.cpp:1131
+#: kmymoney/views/ledgerview.cpp:1132
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Na lieke Boken kieken"
+
+#: kmymoney/views/ledgerview.cpp:1476
+#, fuzzy, kde-format
+#| msgid "Category"
+msgctxt "@title:column Category"
+msgid "Category"
+msgstr "Kategorie"
+
+#: kmymoney/views/ledgerview.cpp:1476
+#, fuzzy, kde-format
+#| msgid "Detail"
+msgctxt "@title:column Ledger not only category"
+msgid "Detail"
+msgstr "Enkelheiten"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, fuzzy, kde-format

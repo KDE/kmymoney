@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-23 00:49+0000\n"
+"POT-Creation-Date: 2026-10-29 00:53+0000\n"
 "PO-Revision-Date: 2026-10-14 12:06+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -21640,31 +21640,31 @@ msgid ""
 msgstr ""
 "Het verschil tussen het saldo van de rekening en het saldo online is %1."
 
-#: kmymoney/views/ledgerview.cpp:1099
+#: kmymoney/views/ledgerview.cpp:1100
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "De over tijd zijnde periodieke transactie niet invoeren?"
 
-#: kmymoney/views/ledgerview.cpp:1100
+#: kmymoney/views/ledgerview.cpp:1101
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "De over tijd zijnde periodieke transactie invoeren."
 
-#: kmymoney/views/ledgerview.cpp:1103
+#: kmymoney/views/ledgerview.cpp:1104
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Wilt u de over tijd zijnde periodieke transactie nu invoeren?"
 
-#: kmymoney/views/ledgerview.cpp:1104
+#: kmymoney/views/ledgerview.cpp:1105
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Over tijd zijnde periodieke transactie invoeren"
 
-#: kmymoney/views/ledgerview.cpp:1124
+#: kmymoney/views/ledgerview.cpp:1125
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21674,7 +21674,7 @@ msgstr ""
 "Maak de verborgen (overeenkomende) transactie los van de getoonde en voer "
 "het opnieuw in in het kasboek."
 
-#: kmymoney/views/ledgerview.cpp:1126
+#: kmymoney/views/ledgerview.cpp:1127
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21684,7 +21684,7 @@ msgstr ""
 "De overeenkomende zoals getoond accepteren en de gegevens van de verborgen "
 "(overeenkomende) transactie verwijderen."
 
-#: kmymoney/views/ledgerview.cpp:1130
+#: kmymoney/views/ledgerview.cpp:1131
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
@@ -21692,11 +21692,25 @@ msgstr ""
 "Wilt u de overeenkomende transactie nu accepteren of niet overeen laten "
 "komen?"
 
-#: kmymoney/views/ledgerview.cpp:1131
+#: kmymoney/views/ledgerview.cpp:1132
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
 msgstr "Transacties accepteren of niet overeen laten komen"
+
+#: kmymoney/views/ledgerview.cpp:1476
+#, fuzzy, kde-format
+#| msgid "Category"
+msgctxt "@title:column Category"
+msgid "Category"
+msgstr "Categorie"
+
+#: kmymoney/views/ledgerview.cpp:1476
+#, fuzzy, kde-format
+#| msgid "Detail"
+msgctxt "@title:column Ledger not only category"
+msgid "Detail"
+msgstr "Detail"
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
