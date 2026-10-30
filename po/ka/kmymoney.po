@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-10-14 07:10+0200\n"
+"PO-Revision-Date: 2026-10-29 03:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -20972,15 +20972,13 @@ msgid "Accept or unmatch transaction"
 msgstr "ტრანზაქციის მიღება ან დამთხვევის გაუქმება"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgctxt "@title:column Category"
 msgid "Category"
 msgstr "კატეგორია"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Detail"
+#, kde-format
 msgctxt "@title:column Ledger not only category"
 msgid "Detail"
 msgstr "დეტალები"

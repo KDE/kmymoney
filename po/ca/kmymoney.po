@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-10-15 19:31+0200\n"
+"PO-Revision-Date: 2026-10-29 11:09+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -21751,15 +21751,13 @@ msgid "Accept or unmatch transaction"
 msgstr "Acceptació o desaparellament de l'operació"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgctxt "@title:column Category"
 msgid "Category"
 msgstr "Categoria"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Detail"
+#, kde-format
 msgctxt "@title:column Ledger not only category"
 msgid "Detail"
 msgstr "Detall"
