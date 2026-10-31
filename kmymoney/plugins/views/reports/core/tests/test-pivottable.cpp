@@ -1269,3 +1269,264 @@ void PivotTableTest::testCurrentDateColumnUsesEvaluationDateMonthly()
         QVERIFY(evalDate >= prevBoundary);
     }
 }
+
+namespace {
+/**
+ * The opening balance of a report is taken from the journal, the reference
+ * for it is the balance MyMoneyFile reports for the day before the report starts.
+ */
+MyMoneyMoney balanceBeforeStart(const QString& accountId, const QDate& reportStart)
+{
+    return MyMoneyFile::instance()->balance(accountId, reportStart.addDays(-1));
+}
+
+/**
+ * Adds a stock split of @a stockAccountId. InvTransactionHelper does not set the action that
+ * marks the transaction as a stock split, so the transaction is created here.
+ */
+void addStockSplit(const QDate& date, const QString& stockAccountId, const MyMoneyMoney& factor)
+{
+    MyMoneyTransaction t;
+    t.setPostDate(date);
+    t.setCommodity("USD");
+    MyMoneySplit split;
+    split.setAccountId(stockAccountId);
+    split.setShares(factor);
+    split.setValue(MyMoneyMoney());
+    split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
+    t.addSplit(split);
+
+    MyMoneyFileTransaction ft;
+    MyMoneyFile::instance()->addTransaction(t);
+    ft.commit();
+}
+
+void closeAccount(const QString& accountId)
+{
+    MyMoneyFileTransaction ft;
+    auto account = MyMoneyFile::instance()->account(accountId);
+    account.setClosed(true);
+    MyMoneyFile::instance()->modifyAccount(account);
+    ft.commit();
+}
+} // namespace
+
+void PivotTableTest::testOpeningBalanceWithEarlierTransactions()
+{
+    // The opening balance of a net worth report has to be the balance
+    // of the day before the report starts, for assets and for liabilities.
+    try {
+        const auto acBasic = makeAccount("Basic Account", eMyMoney::Account::Type::Checkings, MyMoneyMoney(1200000), QDate(2003, 1, 1), acAsset);
+        const auto acSavings = makeAccount("Savings Account", eMyMoney::Account::Type::Savings, MyMoneyMoney(500000), QDate(2003, 6, 1), acAsset);
+        const auto acCard = makeAccount("Basic Card", eMyMoney::Account::Type::CreditCard, MyMoneyMoney(-70000), QDate(2003, 1, 1), acLiability);
+        const auto ctIncome = makeAccount("Basic Income", eMyMoney::Account::Type::Income, MyMoneyMoney(), QDate(2003, 1, 1), acIncome);
+        const auto ctExpense = makeAccount("Basic Expense", eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2003, 1, 1), acExpense);
+
+        TransactionHelper t1(QDate(2003, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-300000), acBasic, ctIncome);
+        TransactionHelper t2(QDate(2004, 2, 10), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(45000), acBasic, ctExpense);
+        TransactionHelper t3(QDate(2004, 5, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(12000), acCard, ctExpense);
+        TransactionHelper t4(QDate(2004, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer), MyMoneyMoney(100000), acBasic, acSavings);
+        // inside the report period, must not be part of the opening balance
+        TransactionHelper t5(QDate(2005, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-77000), acBasic, ctIncome);
+
+        const QDate start(2005, 1, 1);
+        MyMoneyReport filter(QLatin1String("fake-id"));
+        filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
+        filter.setDateFilter(start, QDate(2005, 3, 31));
+        filter.setName("Opening balance with earlier transactions");
+        XMLandback(filter);
+        PivotTable networth(filter);
+        writeTable(networth, filter.name());
+
+        const auto basic = balanceBeforeStart(acBasic, start);
+        const auto savings = balanceBeforeStart(acSavings, start);
+        const auto card = balanceBeforeStart(acCard, start);
+        // the references themselves must not be trivial
+        QVERIFY(!basic.isZero());
+        QVERIFY(!savings.isZero());
+        QVERIFY(!card.isZero());
+
+        QCOMPARE(networth.m_grid["Asset"]["Basic Account"][ReportAccount(acBasic)][eActual][0].toDouble(), basic.toDouble());
+        QCOMPARE(networth.m_grid["Asset"]["Savings Account"][ReportAccount(acSavings)][eActual][0].toDouble(), savings.toDouble());
+        QCOMPARE(networth.m_grid["Liability"]["Basic Card"][ReportAccount(acCard)][eActual][0].toDouble(), (-card).toDouble());
+
+        // the columns after the opening balance include the transaction inside the period
+        QCOMPARE(networth.m_grid["Asset"]["Basic Account"][ReportAccount(acBasic)][eActual][1].toDouble(),
+                 MyMoneyFile::instance()->balance(acBasic, QDate(2005, 1, 31)).toDouble());
+        QCOMPARE(networth.m_grid["Asset"]["Basic Account"][ReportAccount(acBasic)][eActual][2].toDouble(),
+                 MyMoneyFile::instance()->balance(acBasic, QDate(2005, 2, 28)).toDouble());
+    } catch (const MyMoneyException& e) {
+        QFAIL(e.what());
+    }
+}
+
+void PivotTableTest::testOpeningBalanceOfClosedAccounts()
+{
+    // An account can only be closed when its balance is zero, so a closed account
+    // that had a balance during the report period was emptied inside or after it.
+    // A closed account is part of the report when it has activity in the report
+    // period. Its opening balance is the balance of the day before the start.
+    // A closed account without activity in the report period is not shown.
+    try {
+        const auto acActive = makeAccount("Closed with activity", eMyMoney::Account::Type::Checkings, MyMoneyMoney(500000), QDate(2003, 1, 1), acAsset);
+        const auto acIdle = makeAccount("Closed without activity", eMyMoney::Account::Type::Checkings, MyMoneyMoney(300000), QDate(2003, 1, 1), acAsset);
+        const auto acOpen = makeAccount("Open without activity", eMyMoney::Account::Type::Checkings, MyMoneyMoney(200000), QDate(2003, 1, 1), acAsset);
+        const auto ctIncome = makeAccount("Basic Income", eMyMoney::Account::Type::Income, MyMoneyMoney(), QDate(2003, 1, 1), acIncome);
+        const auto ctExpense = makeAccount("Basic Expense", eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2003, 1, 1), acExpense);
+
+        TransactionHelper t1(QDate(2004, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-40000), acActive, ctIncome);
+        TransactionHelper t2(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-30000), acIdle, ctIncome);
+        // emptied inside the report period
+        TransactionHelper t3(QDate(2005, 2, 10), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(540000), acActive, ctExpense);
+        // The first journal entry after the report period is counted as activity of the
+        // report period, so another account has the first one.
+        const auto acOther = makeAccount("Other Account", eMyMoney::Account::Type::Checkings, MyMoneyMoney(), QDate(2003, 1, 1), acAsset);
+        TransactionHelper t4(QDate(2005, 4, 15), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-1000), acOther, ctIncome);
+        // emptied after the report period
+        TransactionHelper t5(QDate(2006, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(330000), acIdle, ctExpense);
+
+        closeAccount(acActive);
+        closeAccount(acIdle);
+
+        const QDate start(2005, 1, 1);
+        MyMoneyReport filter(QLatin1String("fake-id"));
+        filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
+        filter.setDateFilter(start, QDate(2005, 3, 31));
+        filter.setName("Opening balance of closed accounts");
+        XMLandback(filter);
+        PivotTable networth(filter);
+        writeTable(networth, filter.name());
+
+        QVERIFY(networth.m_grid["Asset"].contains("Closed with activity"));
+        QCOMPARE(networth.m_grid["Asset"]["Closed with activity"][ReportAccount(acActive)][eActual][0].toDouble(),
+                 balanceBeforeStart(acActive, start).toDouble());
+        QCOMPARE(networth.m_grid["Asset"]["Closed with activity"][ReportAccount(acActive)][eActual][0].toDouble(), MyMoneyMoney(540000).toDouble());
+
+        QVERIFY(networth.m_grid["Asset"].contains("Open without activity"));
+        QCOMPARE(networth.m_grid["Asset"]["Open without activity"][ReportAccount(acOpen)][eActual][0].toDouble(), balanceBeforeStart(acOpen, start).toDouble());
+
+        QVERIFY(!networth.m_grid["Asset"].contains("Closed without activity"));
+    } catch (const MyMoneyException& e) {
+        QFAIL(e.what());
+    }
+}
+
+void PivotTableTest::testOpeningBalanceWithStockSplitBeforeStart()
+{
+    // The shares of an investment are multiplied by the factor of a stock split
+    // that happened before the report starts, but not by one on the start date.
+    try {
+        eqStock1 = makeEquity("Stock1", "STK1");
+        acInvestment = makeAccount("Investment", eMyMoney::Account::Type::Investment, MyMoneyMoney(), QDate(2003, 1, 1), acAsset);
+        acStock1 = makeAccount("Stock 1", eMyMoney::Account::Type::Stock, MyMoneyMoney(), QDate(2003, 1, 1), acInvestment, eqStock1);
+
+        // 100.001 shares, a reverse split of 3:1 makes 33.33366... which is rounded by the security
+        InvTransactionHelper b1(QDate(2004, 2, 1),
+                                MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                MyMoneyMoney(100.001),
+                                MyMoneyMoney(1000.00),
+                                acStock1,
+                                acChecking,
+                                QString());
+        addStockSplit(QDate(2004, 6, 1), acStock1, MyMoneyMoney(1, 3));
+        InvTransactionHelper b2(QDate(2004, 9, 1),
+                                MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                MyMoneyMoney(10.00),
+                                MyMoneyMoney(1000.00),
+                                acStock1,
+                                acChecking,
+                                QString());
+        // on the start date
+        addStockSplit(QDate(2005, 1, 1), acStock1, MyMoneyMoney(2));
+
+        const QDate start(2005, 1, 1);
+        MyMoneyReport filter(QLatin1String("fake-id"));
+        filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
+        filter.setDateFilter(start, QDate(2005, 3, 31));
+        filter.setName("Opening balance with stock split");
+        XMLandback(filter);
+        PivotTable networth(filter);
+        writeTable(networth, filter.name());
+
+        // all prices are 1000.00 so the value is the number of shares times 1000
+        const auto shares = balanceBeforeStart(acStock1, start);
+        QVERIFY(!shares.isZero());
+        QCOMPARE(networth.m_grid["Asset"]["Investment"].m_total[eActual][0].toDouble(), (shares * MyMoneyMoney(1000)).toDouble());
+    } catch (const MyMoneyException& e) {
+        QFAIL(e.what());
+    }
+}
+
+void PivotTableTest::testOpeningBalanceWithStockSplitAfterStart()
+{
+    // A stock split after the report starts does not change the opening balance: it is the number of shares that were
+    // bought before the start. MyMoneyFile::balance() gets the same number only if the start is in the first half of the
+    // journal. In the second half it works backwards from the total and undoes the split with a division that was
+    // rounded by the security, 100 shares and a split by 1:7 give 100.002 shares. The report does not use that.
+    try {
+        eqStock1 = makeEquity("Stock1", "STK1");
+        acInvestment = makeAccount("Investment", eMyMoney::Account::Type::Investment, MyMoneyMoney(), QDate(2003, 1, 1), acAsset);
+        acStock1 = makeAccount("Stock 1", eMyMoney::Account::Type::Stock, MyMoneyMoney(), QDate(2003, 1, 1), acInvestment, eqStock1);
+        const auto acBasic = makeAccount("Basic Account", eMyMoney::Account::Type::Checkings, MyMoneyMoney(1000000), QDate(2003, 1, 1), acAsset);
+        const auto ctIncome = makeAccount("Basic Income", eMyMoney::Account::Type::Income, MyMoneyMoney(), QDate(2003, 1, 1), acIncome);
+
+        // 100 shares, a split by 1:7 makes 14.285714... shares which the security rounds to 14.286
+        InvTransactionHelper b1(QDate(2004, 2, 1),
+                                MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares),
+                                MyMoneyMoney(100),
+                                MyMoneyMoney(1000.00),
+                                acStock1,
+                                acChecking,
+                                QString());
+        for (int day = 1; day <= 20; ++day) {
+            TransactionHelper deposit(QDate(2004, 3, day), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-1000), acBasic, ctIncome);
+        }
+        addStockSplit(QDate(2005, 2, 1), acStock1, MyMoneyMoney(1, 7));
+
+        const QDate start(2005, 1, 1);
+        MyMoneyReport filter(QLatin1String("fake-id"));
+        filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
+        filter.setDateFilter(start, QDate(2005, 3, 31));
+        filter.setName("Opening balance with stock split after the start");
+        XMLandback(filter);
+        PivotTable networth(filter);
+        writeTable(networth, filter.name());
+
+        // all prices are 1000.00 so the value is the number of shares times 1000
+        QCOMPARE(networth.m_grid["Asset"]["Investment"].m_total[eActual][0].toDouble(), MyMoneyMoney(100 * 1000).toDouble());
+    } catch (const MyMoneyException& e) {
+        QFAIL(e.what());
+    }
+}
+
+void PivotTableTest::testOpeningBalanceAroundStartDate()
+{
+    // A transaction on the day before the report starts is part of the opening
+    // balance, one on the start date is not.
+    try {
+        const auto acBasic = makeAccount("Basic Account", eMyMoney::Account::Type::Checkings, MyMoneyMoney(1000000), QDate(2003, 1, 1), acAsset);
+        const auto ctIncome = makeAccount("Basic Income", eMyMoney::Account::Type::Income, MyMoneyMoney(), QDate(2003, 1, 1), acIncome);
+
+        TransactionHelper t1(QDate(2004, 12, 30), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-10000), acBasic, ctIncome);
+        TransactionHelper t2(QDate(2004, 12, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-20000), acBasic, ctIncome);
+        TransactionHelper t3(QDate(2005, 1, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-40000), acBasic, ctIncome);
+        TransactionHelper t4(QDate(2005, 1, 2), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-80000), acBasic, ctIncome);
+
+        const QDate start(2005, 1, 1);
+        MyMoneyReport filter(QLatin1String("fake-id"));
+        filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
+        filter.setDateFilter(start, QDate(2005, 3, 31));
+        filter.setName("Opening balance around the start date");
+        XMLandback(filter);
+        PivotTable networth(filter);
+        writeTable(networth, filter.name());
+
+        const auto& row = networth.m_grid["Asset"]["Basic Account"][ReportAccount(acBasic)][eActual];
+        QCOMPARE(row[0].toDouble(), MyMoneyMoney(1030000).toDouble());
+        QCOMPARE(row[0].toDouble(), balanceBeforeStart(acBasic, start).toDouble());
+        // the first column is the end of January
+        QCOMPARE(row[1].toDouble(), MyMoneyMoney(1150000).toDouble());
+    } catch (const MyMoneyException& e) {
+        QFAIL(e.what());
+    }
+}

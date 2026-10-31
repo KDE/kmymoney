@@ -51,6 +51,11 @@ private Q_SLOTS:
     void testHtmlEncoding();
     void testCurrentDateColumnUsesEvaluationDate();
     void testCurrentDateColumnUsesEvaluationDateMonthly();
+    void testOpeningBalanceWithEarlierTransactions();
+    void testOpeningBalanceOfClosedAccounts();
+    void testOpeningBalanceWithStockSplitBeforeStart();
+    void testOpeningBalanceWithStockSplitAfterStart();
+    void testOpeningBalanceAroundStartDate();
 };
 
 }
