@@ -448,9 +448,7 @@ msgstr[1] "Procesáronse %1 extractos co seguinte resultado:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Import summary"
+#, kde-format
 msgctxt "@title:window, this is a compound word (one noun)"
 msgid "Import summary"
 msgstr "Resumo da importación"
