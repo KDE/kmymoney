@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-01 00:55+0000\n"
-"PO-Revision-Date: 2026-10-16 20:02+0300\n"
+"PO-Revision-Date: 2026-11-03 22:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21519,15 +21519,13 @@ msgid "Accept or unmatch transaction"
 msgstr "İşlemi Kabul Et veya Eşleşmesini Kaldır"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgctxt "@title:column Category"
 msgid "Category"
 msgstr "Kategori"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Detail"
+#, kde-format
 msgctxt "@title:column Ledger not only category"
 msgid "Detail"
 msgstr "Ayrıntı"
