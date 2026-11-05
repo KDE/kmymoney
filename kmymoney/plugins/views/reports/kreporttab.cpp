@@ -21,19 +21,25 @@
 // Project Includes
 
 #include "kmm_printer.h"
-#include "kmmtextbrowser.h"
 #include "kreportchartview.h"
 #include "kreportsview.h"
 #include "kreportsview_p.h"
 #include "mymoneyexception.h"
 #include "reportcontrolimpl.h"
 
+#ifdef USE_ALKIMIA_WEBVIEW
+#include <alkimia/alkwebpage.h>
+#include <alkimia/alkwebview.h>
+#else
+#include "kmmtextbrowser.h"
+#endif
+
 /**
  * KReportTab Implementation
  */
 KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler, KReportsView::OpenOption openOption)
     : QWidget(parent)
-    , m_tableView(new KMMTextBrowser(this))
+    , m_tableView(new Browser(this))
     , m_chartView(new reports::KReportChartView(this))
     , m_control(new ReportControl(this))
     , m_layout(new QVBoxLayout(this))
@@ -50,9 +56,14 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     , m_isTableViewValid(false)
     , m_table(nullptr)
 {
-    m_layout->setSpacing(6);
+#ifdef USE_ALKIMIA_WEBVIEW
+    m_tableView->setWebPage(new AlkWebPage(m_tableView));
+    m_tableView->setZoomFactor(KMyMoneySettings::zoomFactor());
+#else
     // TODO
     //    m_tableView->setZoomFactor(KMyMoneySettings::zoomFactor());
+#endif
+    m_layout->setSpacing(6);
 
     // set button icons
     m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeCharBar));
@@ -100,7 +111,11 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
         button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     }
 
-    connect(m_tableView, &KMMTextBrowser::anchorClicked, eventHandler, &KReportsView::slotOpenUrl);
+#ifdef USE_ALKIMIA_WEBVIEW
+    connect(m_tableView, &Browser::linkClicked, eventHandler, &KReportsView::slotOpenUrl);
+#else
+    connect(m_tableView, &Browser::anchorClicked, eventHandler, &KReportsView::slotOpenUrl);
+#endif
 
     // if this is a default report, then you can't delete it!
     if (report.id().isEmpty())
@@ -125,14 +140,18 @@ void KReportTab::wheelEvent(QWheelEvent* event)
     // Zoom text on Ctrl + Scroll
     if (event->modifiers() & Qt::CTRL) {
         if (!m_showingChart) {
-            // TODO
-            //            qreal factor = m_tableView->zoomFactor();
+#ifdef USE_ALKIMIA_WEBVIEW
+            qreal factor = m_tableView->zoomFactor();
             if (event->angleDelta().y() > 0)
-                //                factor += 0.1;
-                //            else if (event->delta() < 0)
-                //                factor -= 0.1;
-                //            m_tableView->setZoomFactor(factor);
+                factor += 0.1;
+            else if (event->angleDelta().y() < 0)
+                factor -= 0.1;
+            m_tableView->setZoomFactor(factor);
+            event->accept();
+#else
+            if (event->angleDelta().y() > 0)
                 event->accept();
+#endif
             return;
         }
     }
@@ -357,7 +376,15 @@ void KReportTab::toggleChart()
 
     if (m_showingChart) {
         if (!m_isTableViewValid) {
-            m_tableView->setHtml(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()));
+            QString html = m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name());
+#ifdef USE_ALKIMIA_WEBVIEW
+            connect(m_tableView, &AlkWebView::loadFinished, [](bool ok) {
+                qDebug() << "HTML load finished:" << ok;
+            });
+            m_tableView->setHtml(html, QUrl("file://"));
+#else
+            m_tableView->setHtml(html);
+#endif
         }
         m_isTableViewValid = true;
         m_tableView->show();

@@ -612,6 +612,11 @@ option(KMM_I18N_GENERATION
   "Generate i18n messages and documentation (default=ON)" ON)
 add_feature_info("Internationalization" KMM_I18N_GENERATION "Generation of i18n files (messages and docs)")
 
+option(USE_ALKIMIA_WEBVIEW
+  "Compile using alkimia's web view module to speed up report display (default=OFF)" OFF)
+
+add_feature_info("Alkimia web view module" USE_ALKIMIA_WEBVIEW "Use alkimia's web view module to display reports (performance improvement).")
+
 ######################### The Actual Targets ##########################
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")

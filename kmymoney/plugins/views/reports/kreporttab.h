@@ -16,7 +16,13 @@
 #include <QPointer>
 #include <QWidget>
 
+#ifdef USE_ALKIMIA_WEBVIEW
+class AlkWebView;
+using Browser = AlkWebView;
+#else
 class KMMTextBrowser;
+using Browser = KMMTextBrowser;
+#endif
 namespace reports {
 class KReportChartView;
 }
@@ -36,7 +42,7 @@ class QSplitter;
 class KReportTab : public QWidget
 {
 private:
-    KMMTextBrowser* m_tableView;
+    Browser* m_tableView;
     reports::KReportChartView* m_chartView;
     ReportControl* m_control;
     QVBoxLayout* m_layout;

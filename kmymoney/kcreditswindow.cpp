@@ -42,6 +42,9 @@ KAboutData initializeCreditsData()
 #ifdef ENABLE_SANITIZERS
     features << i18nc("about option, %1 list of sanitizers", "Sanitizers: %1").arg(QLatin1String(ENABLED_SANITIZERS));
 #endif
+#ifdef USE_ALKIMIA_WEBVIEW
+    features << i18n("Alkimia web view modul for displaying reports");
+#endif
 
     aboutData.setShortDescription(
         i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."));

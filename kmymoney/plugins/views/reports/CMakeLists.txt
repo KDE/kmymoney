@@ -43,6 +43,8 @@ ki18n_wrap_ui(reportsview_SOURCES
 kmymoney_add_plugin(reportsview SOURCES ${reportsview_SOURCES} ${reportsview_HEADERS})
 
 target_link_libraries(reportsview
+  PRIVATE
+    Alkimia::alkimia
   PUBLIC
     kmm_plugin
     KF${QT_MAJOR_VERSION}::TextWidgets

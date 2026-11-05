@@ -48,6 +48,8 @@
 #cmakedefine ENABLE_COSTCENTER 1
 /* No external component */
 
+#cmakedefine USE_ALKIMIA_WEBVIEW 1
+
 #include <qglobal.h>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
