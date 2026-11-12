@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:58+0000\n"
-"PO-Revision-Date: 2026-11-03 22:38+0300\n"
+"PO-Revision-Date: 2026-11-10 22:02+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -17508,7 +17508,7 @@ msgstr "Öntanımlı CSS dosyası"
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:141
 #, kde-format
 msgid "default style sheet"
-msgstr "öntanımlı biçem sayfası"
+msgstr "öntanımlı stil sayfası"
 
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.cpp:44
 #: kmymoney/plugins/views/reports/reporttabperformance.cpp:20
@@ -17612,7 +17612,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:54
 #, kde-format
 msgid "<p>Select what form you would like the chart to be drawn as.</p>"
-msgstr "<p>Grafiğin çizilmesini istediğiniz biçemi seçin.</p>"
+msgstr "<p>Grafiğin çizilmesini istediğiniz stili seçin.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:35
@@ -18641,12 +18641,12 @@ msgid_plural ""
 msgstr[0] ""
 "KMyMoney’yi GPG kullanarak verinizi koruyacak ve KMyMoney kurtarma "
 "anahtarıyla şifreleyecek şekilde yapılandırdınız. Bu anahtar %1 gün içinde "
-"geçerliliğini yitirecek. Lütfen anahtarınızı GPG arayüzünü (örneğin K GPG) "
+"geçerliliğini yitirecek. Lütfen anahtarınızı GPG arayüzünü (örneğin KGpg) "
 "kullanarak anahtar sunucusundan güncelleyin."
 msgstr[1] ""
 "KMyMoney programını GPG kullanarak verinizi koruyacak ve KMyMoney kurtarma "
 "anahtarıyla şifreleyecek şekilde yapılandırdınız. Bu anahtar %1 gün içinde "
-"geçerliliğini yitirecek. Lütfen anahtarınızı GPG arayüzünü (örneğin K GPG) "
+"geçerliliğini yitirecek. Lütfen anahtarınızı GPG arayüzünü (örneğin KGpg) "
 "kullanarak anahtar sunucusundan güncelleyin."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:283

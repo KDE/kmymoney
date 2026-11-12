@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:58+0000\n"
-"PO-Revision-Date: 2026-10-29 07:44+0200\n"
+"PO-Revision-Date: 2026-11-11 23:00+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -4436,7 +4436,7 @@ msgstr ""
 "одинаковыми. В случае обнаружения более одной операции на экран будет "
 "выведен их список.\n"
 "\n"
-"При выборе значения 0% будут показаны все операции."
+"При выборе значения 0 % будут показаны все операции."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:415
@@ -23335,7 +23335,7 @@ msgstr "Переданная в долг сумма: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:165
 #, kde-format
 msgid "Interest rate: %1 %"
-msgstr "Процентная ставка: %1 %"
+msgstr "Процентная ставка: %1 %"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:166
 #, kde-format
@@ -24285,7 +24285,7 @@ msgstr "По результатам расчёта сумма кредита с�
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:311
 #, kde-format
 msgid "KMyMoney has calculated the interest rate to %1%."
-msgstr "По результатам расчёта процентная ставка по кредиту составила %1%."
+msgstr "По результатам расчёта процентная ставка по кредиту составила %1 %."
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:197
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:323
