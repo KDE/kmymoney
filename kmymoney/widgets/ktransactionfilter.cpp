@@ -556,6 +556,13 @@ DateRangeDlg* KTransactionFilter::dateRange()
     return d->m_dateRange;
 }
 
+void KTransactionFilter::setShowClosedAccounts(bool show)
+{
+    Q_D(KTransactionFilter);
+    d->accountSet.setHideClosedAccounts(!show);
+    d->accountSet.load(d->ui->m_accountsView);
+}
+
 void KTransactionFilter::setCriteriaTabPosition(QTabWidget::TabPosition tabPosition)
 {
     Q_D(KTransactionFilter);

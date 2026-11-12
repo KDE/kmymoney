@@ -1364,29 +1364,39 @@ void PivotTableTest::testOpeningBalanceOfClosedAccounts()
 {
     // An account can only be closed when its balance is zero, so a closed account
     // that had a balance during the report period was emptied inside or after it.
-    // A closed account is part of the report when it has activity in the report
-    // period. Its opening balance is the balance of the day before the start.
-    // A closed account without activity in the report period is not shown.
+    // Such an account is part of the report: when it has activity in the report
+    // period, or when it had a balance at the start. Its opening balance is the
+    // balance of the day before the start. A closed account that had no balance
+    // at the start and has no activity in the report period is not shown.
     try {
         const auto acActive = makeAccount("Closed with activity", eMyMoney::Account::Type::Checkings, MyMoneyMoney(500000), QDate(2003, 1, 1), acAsset);
-        const auto acIdle = makeAccount("Closed without activity", eMyMoney::Account::Type::Checkings, MyMoneyMoney(300000), QDate(2003, 1, 1), acAsset);
+        const auto acEmptiedAfter =
+            makeAccount("Closed after the period", eMyMoney::Account::Type::Checkings, MyMoneyMoney(300000), QDate(2003, 1, 1), acAsset);
+        const auto acEmptiedBefore =
+            makeAccount("Closed before the period", eMyMoney::Account::Type::Checkings, MyMoneyMoney(100000), QDate(2003, 1, 1), acAsset);
         const auto acOpen = makeAccount("Open without activity", eMyMoney::Account::Type::Checkings, MyMoneyMoney(200000), QDate(2003, 1, 1), acAsset);
         const auto ctIncome = makeAccount("Basic Income", eMyMoney::Account::Type::Income, MyMoneyMoney(), QDate(2003, 1, 1), acIncome);
         const auto ctExpense = makeAccount("Basic Expense", eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2003, 1, 1), acExpense);
 
         TransactionHelper t1(QDate(2004, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-40000), acActive, ctIncome);
-        TransactionHelper t2(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-30000), acIdle, ctIncome);
+        TransactionHelper t2(QDate(2004, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-30000), acEmptiedAfter, ctIncome);
+        TransactionHelper t3(QDate(2004, 8, 1),
+                             MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                             MyMoneyMoney(100000),
+                             acEmptiedBefore,
+                             ctExpense);
         // emptied inside the report period
-        TransactionHelper t3(QDate(2005, 2, 10), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(540000), acActive, ctExpense);
+        TransactionHelper t4(QDate(2005, 2, 10), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(540000), acActive, ctExpense);
         // The first journal entry after the report period is counted as activity of the
         // report period, so another account has the first one.
         const auto acOther = makeAccount("Other Account", eMyMoney::Account::Type::Checkings, MyMoneyMoney(), QDate(2003, 1, 1), acAsset);
-        TransactionHelper t4(QDate(2005, 4, 15), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-1000), acOther, ctIncome);
+        TransactionHelper t5(QDate(2005, 4, 15), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-1000), acOther, ctIncome);
         // emptied after the report period
-        TransactionHelper t5(QDate(2006, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(330000), acIdle, ctExpense);
+        TransactionHelper t6(QDate(2006, 3, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(330000), acEmptiedAfter, ctExpense);
 
         closeAccount(acActive);
-        closeAccount(acIdle);
+        closeAccount(acEmptiedAfter);
+        closeAccount(acEmptiedBefore);
 
         const QDate start(2005, 1, 1);
         MyMoneyReport filter(QLatin1String("fake-id"));
@@ -1397,15 +1407,24 @@ void PivotTableTest::testOpeningBalanceOfClosedAccounts()
         PivotTable networth(filter);
         writeTable(networth, filter.name());
 
+        // activity in the report period
         QVERIFY(networth.m_grid["Asset"].contains("Closed with activity"));
         QCOMPARE(networth.m_grid["Asset"]["Closed with activity"][ReportAccount(acActive)][eActual][0].toDouble(),
                  balanceBeforeStart(acActive, start).toDouble());
         QCOMPARE(networth.m_grid["Asset"]["Closed with activity"][ReportAccount(acActive)][eActual][0].toDouble(), MyMoneyMoney(540000).toDouble());
 
+        // no activity, but it had a balance during the whole report period
+        QVERIFY(networth.m_grid["Asset"].contains("Closed after the period"));
+        QCOMPARE(networth.m_grid["Asset"]["Closed after the period"][ReportAccount(acEmptiedAfter)][eActual][0].toDouble(),
+                 balanceBeforeStart(acEmptiedAfter, start).toDouble());
+        QCOMPARE(networth.m_grid["Asset"]["Closed after the period"][ReportAccount(acEmptiedAfter)][eActual][0].toDouble(), MyMoneyMoney(330000).toDouble());
+        QCOMPARE(networth.m_grid["Asset"]["Closed after the period"][ReportAccount(acEmptiedAfter)][eActual][3].toDouble(), MyMoneyMoney(330000).toDouble());
+
         QVERIFY(networth.m_grid["Asset"].contains("Open without activity"));
         QCOMPARE(networth.m_grid["Asset"]["Open without activity"][ReportAccount(acOpen)][eActual][0].toDouble(), balanceBeforeStart(acOpen, start).toDouble());
 
-        QVERIFY(!networth.m_grid["Asset"].contains("Closed without activity"));
+        // no activity and nothing left at the start of the report period
+        QVERIFY(!networth.m_grid["Asset"].contains("Closed before the period"));
     } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }

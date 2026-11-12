@@ -785,6 +785,9 @@ void PivotTable::calculateOpeningBalances()
             activeInWindow.insert(accountId);
         }
     }
+    const auto balanceBefore = [&](const QString& accountId) {
+        return accountsWithStockSplit.contains(accountId) ? file->balance(accountId, from.addDays(-1)) : balanceBeforeStart.value(accountId);
+    };
 
     while (it_account != accounts.cend()) {
         ReportAccount account(*it_account);
@@ -792,8 +795,11 @@ void PivotTable::calculateOpeningBalances()
         // only include this item if its account group is included in this report
         // and if the report includes this account
         if (m_config.includes(*it_account)) {
-            // do not include account if it is closed and it has no transactions in the report period
-            if (account.isClosed() && !activeInWindow.contains(account.id())) {
+            // do not include account if it is closed, it has no transactions in the report
+            // period and it had no balance at the start of it. An account can only be closed
+            // with a zero balance, so one that was emptied after the period has a balance
+            // during the whole period.
+            if (account.isClosed() && !activeInWindow.contains(account.id()) && balanceBefore(account.id()).isZero()) {
                 DEBUG_OUTPUT(QString("DOES NOT INCLUDE account %1").arg(account.name()));
                 ++it_account;
                 continue;
@@ -808,8 +814,7 @@ void PivotTable::calculateOpeningBalances()
             // date
 
             // this is in the underlying currency
-            MyMoneyMoney value =
-                accountsWithStockSplit.contains(account.id()) ? file->balance(account.id(), from.addDays(-1)) : balanceBeforeStart.value(account.id());
+            MyMoneyMoney value = balanceBefore(account.id());
 
             if ((columnValue(from) == columnValue(account.openingDate())) && value.isZero()) {
                 auto tid = file->openingBalanceTransaction(account);

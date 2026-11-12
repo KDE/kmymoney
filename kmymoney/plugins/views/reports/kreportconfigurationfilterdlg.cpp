@@ -158,6 +158,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(const MyMoneyReport
         d->m_dateRange = d->m_tabFilters->dateRange();
     }
 
+    d->m_tabFilters->setShowClosedAccounts(true);
     d->ui->m_tabWidget->addTab(d->m_tabFilters, i18nc("Filters tab", "Filters"));
     d->m_tabFilters->setCriteriaTabPosition(QTabWidget::North);
 

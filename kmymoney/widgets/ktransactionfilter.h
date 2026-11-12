@@ -50,6 +50,7 @@ public:
     KMyMoneyAccountSelector* categoriesView();
     DateRangeDlg* dateRange();
     void setCriteriaTabPosition(QTabWidget::TabPosition tabPosition);
+    void setShowClosedAccounts(bool show);
 
     /**
       * This slot opens the detailed help page in khelpcenter. The
