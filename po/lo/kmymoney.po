@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:58+0000\n"
+"POT-Creation-Date: 2026-11-13 00:59+0000\n"
 "PO-Revision-Date: 2025-12-07 00:37+0700\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
@@ -15506,7 +15506,7 @@ msgstr "ການຄາດຄະເນງົບປະມານ"
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:150
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:178
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:179
 #: kmymoney/plugins/views/reports/kreporttab.cpp:366
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
@@ -15611,12 +15611,12 @@ msgstr "ສະເລ່ຍ"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:473
 #: kmymoney/plugins/views/reports/core/listtable.cpp:318
 #: kmymoney/plugins/views/reports/core/listtable.cpp:319
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1629
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1768
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1818
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1895
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2073
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2144
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1634
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1773
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1823
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1900
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2078
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2149
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15872,8 +15872,8 @@ msgstr "ຍອດເຫຼືອປິດບັນຊີ"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:322
 #: kmymoney/plugins/views/reports/core/listtable.cpp:323
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1842
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2181
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1847
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2186
 #, kde-format
 msgid "Grand Total"
 msgstr "ລວມທັງໝົດສຸດທິ"
@@ -16260,50 +16260,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "ເລີ່ມຕົ້ນ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1615
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1882
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1620
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1887
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "ບັນຊີ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2397
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2402
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "ຕົວຈິງ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2402
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2407
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "ງົບປະມານ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2407
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2412
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "ຄວາມແຕກຕ່າງ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2412
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2417
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "ການຄາດຄະເນ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2417
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2422
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "ຄ່າສະເລ່ຍເຄື່ອນທີ່"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2422
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2427
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "ລາຄາສະເລ່ຍເຄື່ອນທີ່"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2427
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2432
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -16472,28 +16472,28 @@ msgctxt "@info:tooltip for report configuration apply button"
 msgid "Apply the configuration changes to the report"
 msgstr "ນຳໃຊ້ການປ່ຽນແປງການຕັ້ງຄ່າໃສ່ລາຍງານ"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:161
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:162
 #, kde-format
 msgctxt "Filters tab"
 msgid "Filters"
 msgstr "ຕົວຄັດຕອງ"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:165
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:166
 #, kde-format
 msgctxt "General tab"
 msgid "General"
 msgstr "ທົ່ວໄປ"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:196
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:206
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:197
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:207
 #, kde-format
 msgid "Rows/Columns"
 msgstr "ແຖວ/ຖັນ"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:181
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:182
 #: kmymoney/plugins/views/reports/reporttabrange.ui:171
 #: kmymoney/widgets/daterangedlg.ui:9
 #, kde-format
@@ -16501,8 +16501,8 @@ msgid "Range"
 msgstr "ຊ່ວງ"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_reportPage)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:200
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:204
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:201
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:205
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:49
 #: kmymoney/plugins/views/reports/kreporttab.cpp:376
 #: kmymoney/views/khomeview_p.h:1122
@@ -16511,9 +16511,9 @@ msgid "Report"
 msgstr "ລາຍງານ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:401
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:411
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:498
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:402
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:412
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:499
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
@@ -16521,7 +16521,7 @@ msgid "Monthly"
 msgstr "ລາຍເດືອນ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:486
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:487
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -16529,7 +16529,7 @@ msgid "Daily"
 msgstr "ລາຍວັນ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:489
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:490
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -16537,7 +16537,7 @@ msgid "Weekly"
 msgstr "ລາຍອາທິດ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:501
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:502
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -16545,7 +16545,7 @@ msgid "Bi-Monthly"
 msgstr "ສອງເດືອນຄັ້ງ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:504
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:505
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -16553,7 +16553,7 @@ msgid "Quarterly"
 msgstr "ລາຍໄຕມາດ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:507
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:508
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"

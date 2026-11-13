@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>المؤسسات</title>
+
+<para
+>تُستخدَم المؤسسات في أموالك كطريقة لتجميع الحسابات. عادةً ما تكون مؤسسات مالية مثل المصارف وشركات الوساطة، ولكن يمكن أن تكون أي شيء تريده، مثل <quote
+>ذاتي</quote
+>، للاحتفاظ بحسابات النقد في جيبك وأي أصول أخرى لا تحتفظ بها مؤسسة مالية فعليًا، أو <quote
+>المتاجر</quote
+>، لتجميع كافة بطاقات الائتمان والحسابات الأخرى مع المتاجر. </para>
+
+<sect1 id="details.institutions.view"
+><title
+>عرض المؤسسات</title>
+<para
+>يوفر عرض المؤسسات ملخصًا لجميع الحسابات مجمعة تحت مؤسساتها الخاصة. يمكن توسيع قائمة الحسابات تحت أي مؤسسة أو طيها بالنقر فوق السهم الموجود على يسار اسم المؤسسة. آخر مؤسسة مدرجة هي "حسابات غير منسوبة لمؤسسة". </para>
+
+<para
+>يعرض عرض المؤسسات عدة أعمدة توضح معلومات حول الحساب. كما يظهر القيمة الإجمالية لجميع الحسابات في كل مؤسسة. يمكنك اختيار الأعمدة المعروضة بالنقر بزر الفأرة الأيمن فوق أي عنوان عمود وتحديد أو إلغاء تحديد خانة الاختيار بجوار اسم العمود. </para>
+
+<screenshot>
+  <screeninfo
+>عرض المؤسسة</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>عرض المؤسسة</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الاسم</term>
+    <listitem>
+      <para
+>اسم المؤسسة أو الحساب. يُعرض هذا العمود دائمًا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الرصيد</term>
+    <listitem>
+      <para
+>الرصيد الحالي للحساب. لا تُعرض أي قيمة للمؤسسات. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>القيمة الإجمالية</term>
+    <listitem>
+      <para
+>بالنسبة للحسابات، هذه هي نفس قيمة الرصيد. بالنسبة للمؤسسات، هذا هو إجمالي الأرصدة لجميع الحسابات في تلك المؤسسة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>IBAN</term>
+    <listitem>
+      <para
+>يُعرض الـ <acronym
+><ulink url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+>IBAN</ulink
+> </acronym
+> (رقم الحساب المصرفي الدولي) إذا أُدخلت قيمة في الحقل المناسب في مربع حوار معلومات الحساب. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>رمز المصرف</term>
+    <listitem>
+      <para
+> <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>رمز المصرف</ulink
+>. يُنسّق هذا المعرف ويُستخدم بشكل مختلف في بلدان مختلفة. ويُعرف برقم التوجيه أو رقم مرور التوجيه في الولايات المتحدة وكرمز الفرز في المملكة المتحدة. لا يستخدمه أموالك حاليًا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>SWIFT/BIC</term>
+    <listitem>
+      <para
+> <acronym
+><ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>SWIFT/BIC</ulink
+></acronym
+> (جمعية الاتصالات المالية العالمية بين المصارف/رمز معرف العمل) </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="details.institutions.institution"
+><title
+>خيارات المؤسسة</title>
+<para
+>يؤدي النقر بزر الفأرة الأيمن فوق اسم المؤسسة إلى إظهار قائمة خيارات المؤسسة، مما يوفر لك عدة خيارات. يؤدي اختيار <guimenuitem
+>مؤسسة جديدة...</guimenuitem
+> إلى فتح مربع حوار مؤسسة جديدة، حيث يمكنك إدخال كافة المعلومات اللازمة لإنشاء مؤسسة جديدة. يؤدي اختيار <guimenuitem
+>حرر المؤسسة...</guimenuitem
+> إلى إظهار نافذة قابلة للتحرير حيث يمكنك تغيير تفاصيل المؤسسة. يؤدي اختيار <guimenuitem
+>احذف المؤسسة</guimenuitem
+> إلى إزالة المؤسسة تمامًا من ملف البيانات. ستبقى أي حسابات مرتبطة بتلك المؤسسة، ولكن دون أن تكون مرتبطة بأي مؤسسة. يرشدك اختيار <guimenuitem
+>حساب جديد...</guimenuitem
+> عبر عملية الحساب الجديد، والموضحة بمزيد من التفصيل في القسم التالي. </para>
+
+<screenshot>
+  <screeninfo
+>القائمة الفرعية لخيارات المؤسسة</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_options.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>القائمة الفرعية لخيارات المؤسسة</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect2 id="details.institutions.new"
+><title
+>مؤسسة جديدة</title>
+<screenshot>
+  <screeninfo
+>مؤسسة جديدة</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newinst.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>مؤسسة جديدة</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<note
+><para
+>يجب أن يكون لديك ملف مفتوح قبل أن تتمكن من إنشاء مؤسسة جديدة. إذا لم يكن لديك ملف موجود، فستحتاج إلى <link linkend="firsttime.newfile"
+>إنشاء واحد</link
+>. </para
+></note>
+
+<para
+>الاسم فقط هو المطلوب في مربع حوار مؤسسة جديدة، وجميع الحقول الأخرى اختيارية. كما هو الحال مع مربع حوار المعلومات الشخصية، لا يستخدم أموالك هذه البيانات حاليًا، ولكن قد تكون بعض العناصر مطلوبة في الإصدارات المستقبلية لميزات معينة. على وجه الخصوص، سيُطلب <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>رمز المصرف</ulink
+> و <acronym
+> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>BIC (رمز معرف المصرف)</ulink
+></acronym
+> للخدمات المصرفية عبر الإنترنت، على الرغم من أن هذا قد يعتمد على البلد الذي يقع فيه مصرفك. </para>
+</sect2>
+
+<sect2
+><title
+>خيارات الحساب</title>
+<para
+>تشير الخيارات المناقشة أعلاه إلى المؤسسات المدرجة في عرض المؤسسات. معظم الصفوف في هذا العرض هي حسابات. يؤدي النقر بزر الفأرة الأيمن فوق اسم الحساب إلى إظهار قائمة خيارات الحساب. تُناقش المدخلات والتفاصيل لهذه القائمة في نهاية <link linkend="details.accounts.options"
+>فصل الحسابات</link
+>. </para>
+</sect2>
+</sect1>
+</chapter>

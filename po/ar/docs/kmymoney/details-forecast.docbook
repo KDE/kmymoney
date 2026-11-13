@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.forecast">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author
+> 
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>التّنبّؤ</title>
+
+<sect1 id="details.forecast.define"
+><title
+>ما هو التّنبّؤ؟</title>
+<para
+>التّنبّؤ في أموالك هو توقّع لأرصدة الحسابات خلال فترة زمنية مستقبلية محددة. </para>
+
+<para
+>يمكن توقّع التنبؤات باستخدام إحدى طريقتين. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>المعاملات المجدولة والمستقبلية</term>
+    <listitem>
+      <para
+>يستخدم أموالك مزيجًا من المعاملات المستقبلية المدخلة بالفعل في الدفاتر والمدخلات الموجودة في الجدول. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>مبنيّ على السجل</term>
+    <listitem>
+      <para
+>يستخدم أموالك قيمًا من المعاملات الماضية. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>يعرض <guilabel
+>منظور التنبؤ</guilabel
+> الأرصدة المتوقعة في تواريخ دورة الحساب والفرق المتوقع بين رصيدي البداية والنهاية. يعرض الملخص أيضًا رسائل حول التغييرات المتوقعة الهامة في الحسابات خلال فترة التنبؤ. بالإضافة إلى الملخص، يمكنك أيضًا عرض الأرصدة يومًا بيوم والحدين الأدنى والأقصى للأرصدة لكل دورة حساب تنبؤ. </para>
+
+<para
+>يصف القسم التالي كيف يمكنك ضبط طريقة التنبؤ والمعاملات الأخرى المستخدمة لحساب التنبؤ. يتبع ذلك قسم يحتوي على مزيد من التفاصيل حول منظور التنبؤ. </para>
+</sect1>
+
+<sect1 id="details.forecast.configure"
+><title
+>ضبط التنبؤ</title>
+
+<para
+>يمكن ضبط المعاملات المستخدمة لحساب التنبؤ، بما في ذلك طريقة التنبؤ، في مربع حوار ضبط <link linkend="details.settings.plugins.forecast"
+> <guilabel
+>منظور التنبؤ</guilabel
+> </link
+>. نظرًا لأن وظيفة التنبؤ نُفذت كـ <link linkend="makingmostof.plugins"
+>ملحق لأموالك</link
+>، يمكنك الوصول إلى هذا الحوار عبر عنصر القائمة <menuchoice
+> <guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>اضبط أموالك...</guimenuitem
+> </menuchoice
+>، واختيار <guilabel
+>الملحقات</guilabel
+> في الجزء الأيسر، ثم النقر فوق أيقونة <guilabel
+>اضبط</guilabel
+> بجوار <guilabel
+>منظور التنبؤ</guilabel
+>. </para>
+
+<screenshot>
+  <screeninfo
+>ضبط التنبؤ</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="plugin_config_forecast.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>ضبط التنبؤ</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>عدد أيام التنبؤ</term>
+    <listitem>
+      <para
+>سيُحسب التنبؤ حتى هذا المدى في المستقبل. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>عدد أيام دورة الحساب</term>
+    <listitem>
+      <para
+>لا يعتمد التنبؤ على الأشهر الفعلية، بل على فترات متكررة من عدد الأيام المحدد في هذا الحقل. القيم الأكثر شيوعًا المستخدمة هي 30 أو 31. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>يوم الشهر لبدء التنبؤ</term>
+    <listitem>
+      <para
+>يحدد هذا يوم الشهر الحالي الذي يُستخدم كنقطة بداية لعد كل من الدورات وعدد أيام التنبؤ. القيمة 0 تعني استخدام اليوم الحالي. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>طريقة التنبؤ</term>
+    <listitem>
+      <para
+>كما ذُكر في القسم السابق، يمكنك اختيار ما إذا كان أموالك سيستخدم المعاملات المجدولة والمستقبلية أو المعاملات التاريخية لحساب التنبؤ. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>إعدادات مبنية على السجل</term>
+    <listitem>
+      <para
+>الإعدادات في هذا القسم من الحوار قابلة للتطبيق فقط إذا ضُبطت طريقة التنبؤ على <quote
+>مبني على السجل</quote
+> </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+>عدد الدورات المستخدمة في التنبؤ</term>
+          <listitem>
+            <para
+>يحدد هذا عدد دورات البيانات التاريخية لاستخدامها في توقع القيم المستقبلية. </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+>طريقة التنبؤ بالسجل</term>
+          <listitem>
+            <para
+>يؤدي اختيار أحد أزرار الانتقاء الثلاثة، <guilabel
+>متوسط متحرك بسيط</guilabel
+>، و <guilabel
+>متوسط متحرك موزون</guilabel
+> (هذا هو الضبط المبدئي)، و <guilabel
+>انحدار خطي</guilabel
+>، إلى تحديد الصيغة الرياضية التي سيستخدمها أموالك للتنبؤ المبني على السجل. </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>تنطبق طريقة التنبؤ المحددة هنا على جميع التنبؤات. تصبح الإعدادات الأخرى مبدئية، ويمكن تغييرها عند حساب التنبؤ وعرضه فعليًا في منظور التنبؤ. </para>
+
+<para
+>في الجزء السفلي من الحوار، يعيد زر <guibutton
+>المبدئيات</guibutton
+> ضبط جميع القيم إلى قيمها المبدئية. لزري <guibutton
+>موافق</guibutton
+> و <guibutton
+>إلغاء</guibutton
+> معانيهما المعتادة. </para>
+</sect1>
+
+<sect1 id="details.forecast.view"
+><title
+>عرض التنبؤات</title>
+<para
+>يمكنك عرض منظور التنبؤ بالنقر فوق الأيقونة المناسبة في جزء التنقل الموجود على الجانب الأيسر من نافذة أموالك. </para>
+
+<screenshot>
+  <screeninfo
+>منظور التنبؤ</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="forecast_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>منظور التنبؤ</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>المنطقة العلوية من منظور التنبؤ هي <guilabel
+>إعدادات التنبؤ</guilabel
+>. يوجد على اليسار عدة حقول للتحكم في حسابات التنبؤ. ضُبطت المبدئيات لهذه القيم في حوار ضبط منظور التنبؤ، كما هو موضح في القسم السابق. القيم (مع إظهار الاسم المستخدم في حوار الضبط بين قوسين إذا كان مختلفًا) هي: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>أيام التنبؤ (عدد أيام التنبؤ)</para>
+  </listitem>
+
+  <listitem>
+    <para
+>أيام دورة الحسابات (عدد أيام دورة الحساب)</para>
+  </listitem>
+
+  <listitem>
+        <para
+>يوم الشهر لبدء التنبؤ</para>
+  </listitem>
+    
+  <listitem>
+        <para
+>الدورات التاريخية (عدد الدورات المستخدمة في التنبؤ)</para>
+  </listitem>
+    
+  <listitem>
+    <para
+>تفاصيل الرسم البياني: لا يُضبط هذا العنصر في حوار الضبط. اختر إحدى القيم التالية للتحكم في النتائج كما تُعرض في لسان تبويب <guilabel
+>مخطط</guilabel
+>. <itemizedlist>
+        <listitem>
+          <para
+>الكل</para>
+        </listitem>
+        <listitem>
+          <para
+>المستوى الأعلى</para>
+        </listitem>
+        <listitem>
+          <para
+>المجموعات</para>
+        </listitem>
+        <listitem>
+          <para
+>المجموع</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </listitem>
+</itemizedlist>
+    
+<para
+>إلى يمين هذه العناصر، يعرض أموالك <guilabel
+>طريقة التنبؤ الحالية</guilabel
+>. وإلى يمين ذلك يوجد زر <guibutton
+>تنبؤ</guibutton
+>. عند النقر فوق هذا الزر، يحسب أموالك التنبؤ بناءً على الإعدادات الموجودة على اليسار، ويعرض النتائج في الجزء السفلي من النافذة. يوجد أسفل هذه العناصر مباشرة <guilabel
+>طريقة التنبؤ بالسجل</guilabel
+>، والتي تُمكّن فقط إذا ضُبطت طريقة التنبؤ الحالية على <quote
+>السجل</quote
+>. </para>
+
+<para
+>تحتوي المنطقة السفلية من منظور التنبؤ على خمسة ألسنة تبويب. </para>
+
+<sect2 id="details.forecast.summary"
+><title
+>لسان ملخص</title>
+<para
+>يحتوي لسان الملخص على قسمين. </para>
+
+<sect3
+><title
+>ملخص الحساب</title>
+<para
+>يوجد على اليسار ملخص الحساب، الذي يعرض صفًا واحدًا من المعلومات لكل من الأصول والخصوم، مع الأعمدة الموضحة أدناه. لاحظ أنه إذا كان التنبؤ مبنيًا على المعاملات المجدولة والمستقبلية، فستكون هناك صفوف فقط للحسابات المشار إليها في مثل هذه المعاملات. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الحساب</term>
+    <listitem>
+      <para
+>اسم حساب الأصول أو الخصوم</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الحالي</term>
+    <listitem>
+      <para
+>الرصيد الحالي للحساب</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>رصيد دورة الحساب</term>
+    <listitem>
+      <para
+>تُقسم فترة التنبؤ إلى دورات حساب. طول دورة الحساب المبدئي هو 30 يومًا، ولكن يمكن للمستخدم ضبطه. </para>
+
+      <para
+>تاريخ دورة الحساب الأول هو تاريخ التنبؤ الأول. مبدئيًا، هذا هو التاريخ الحالي زائد دورة حساب واحدة، ولكن يمكن أن يتغير هذا بناءً على إعداد "يوم الشهر لبدء التنبؤ". </para>
+
+      <para
+>تُحدد تواريخ دورة الحساب المتبقية بإضافة طول دورة الحساب إلى تاريخ دورة الحساب السابق. يستمر هذا حتى يتجاوز تاريخ دورة الحساب المحسوب فترة التنبؤ، أو أيام التنبؤ.</para>
+
+      <para
+>يُعرض الرصيد المتوقع لكل تاريخ دورة حساب.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>إجمالي التباين</term>
+    <listitem>
+      <para
+>يعرض العمود الموجود في أقصى اليمين الفرق المتوقع في القيمة بين الأرصدة في بداية ونهاية التنبؤ. إذا كانت القيمة النهائية المتوقعة للحساب (من حيث صافي الثروة) أقل من قيمة البداية، فسيُبرز الصف بأكمله باللون الأحمر. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3
+><title
+>معلومات الملخص الرئيسية</title>
+<para
+>يعرض الجزء الأيمن من لسان الملخص معلومات جديرة بالملاحظة حول الحسابات. يتضمن ذلك: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الأصول أقل من الصفر</term>
+    <listitem>
+      <para
+>تُعرض رسالة (باللون الأحمر) لأي حساب أصول تبدأ قيمته أو ستنخفض إلى ما دون الصفر خلال فترة التنبؤ. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الخصوم فوق الصفر</term>
+    <listitem>
+      <para
+>تُعرض رسالة لأي حساب خصوم تبدأ قيمته أو ستتجاوز الصفر خلال فترة التنبؤ. لاحظ أن قيمة الخصوم هي القيمة السالبة لرصيد دفتر الأستاذ الخاص بها، حيث يشير الرصيد الموجب إلى أموال مستحقة. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>لسان التفاصيل</title>
+<para
+>يعرض لسان التفاصيل أيضًا صفًا واحدًا لكل حساب أصول وخصوم، ولكن الأعمدة المعروضة تختلف عن لسان الملخص. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الحساب</term>
+    <listitem>
+      <para
+>اسم حساب الأصول أو الخصوم</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>التواريخ</term>
+    <listitem>
+      <para
+>يُعرض عمود لكل تاريخ في فترة التنبؤ يوضح الرصيد المتوقع للحساب في ذلك التاريخ. أعمدة التاريخ مرتبة تصاعديًا من اليسار إلى اليمين. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>إجمالي التباين</term>
+    <listitem>
+      <para
+>يعرض العمود الموجود في أقصى اليمين الفرق المتوقع في القيمة بين الأرصدة في بداية ونهاية التنبؤ. إذا كانت القيمة النهائية المتوقعة للحساب (من حيث صافي الثروة) أقل من قيمة البداية، فسيُبرز الصف بأكمله باللون الأحمر. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>لسان متقدم</title>
+<para
+>يعرض لسان متقدم أيضًا صفًا واحدًا من المعلومات لكل حساب أصول وخصوم. تُقسم المعلومات إلى أعمدة كما يلي: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الحساب</term>
+    <listitem>
+      <para
+>اسم حساب الأصول أو الخصوم</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>معلومات الحد الأدنى لرصيد دورة الحساب</term>
+    <listitem>
+      <para
+>تُعرض الأعمدة التالية لكل رقم دورة حساب &lt;n&gt; في فترة التنبؤ: </para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>أدنى رصيد &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>أدنى رصيد متوقع خلال دورة الحساب</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>تاريخ الأدنى &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>التاريخ الذي يصل فيه الرصيد إلى الحد الأدنى المتوقع.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>أقصى رصيد &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>أقصى رصيد متوقع خلال دورة الحساب</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>تاريخ الأقصى &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>التاريخ الذي يصل فيه الرصيد إلى الحد الأقصى المتوقع.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+      <para
+>لاحظ أن جميع الأرصدة الدنيا والتواريخ تُعرض قبل جميع الأرصدة القصوى والتواريخ. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>المتوسط</term>
+    <listitem>
+      <para
+>متوسط رصيد الحساب خلال فترة التنبؤ</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>لسان تنبؤ الموازنة</title>
+<para
+>يعرض لسان الموازنة حساب تنبؤ لجميع فئات الدخل والنفقات. على عكس لسان الملخص، يوجد عمود واحد لكل شهر، يبدأ من شهر يناير من العام الحالي، وينتهي بالشهر الذي يتضمن نهاية فترة التنبؤ. العمود الأخير هو إجمالي، وليس قيمة متوقعة أو قيمة محسوبة بناءً على أي قيمة متوقعة. </para>
+</sect2>
+
+<sect2
+><title
+>لسان مخطط</title>
+<para
+>يعرض هذا التنبؤ في شكل مخطط أو رسم بياني. يختلف مستوى التفاصيل اعتمادًا على مستوى التفاصيل المحدد في الخيار أعلاه. </para>
+</sect2>
+</sect1>
+</chapter>

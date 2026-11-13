@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>العملات</title>
+
+<para
+>يدعم أموالك استخدام عملات متعددة في حسابات مختلفة. على سبيل المثال، يمكنك إعداد حساب توفير باليورو، وحساب جاري بالجنيه الإسترليني، مع بقاء حساب بطاقتك الائتمانية بالدولار الأمريكي. </para>
+
+<sect1 id="details.currencies.basecurrency"
+><title
+>العملة الأساس</title>
+<para
+>أثناء <link linkend="firsttime.newfile"
+>إعداد ملف جديد</link
+> في أموالك، سيُطلب منك اختيار العملة الأساس. عادةً ما تكون العملة الأساس هي العملة التي تستخدمها في بلدك. العملة الأساس هي التي تستخدمها جميع فئات الدخل والمصروفات والتي ستستند التقارير إليها. عند إعداد حساب جديد، سينتقل أموالك آليًا إلى العملة الأساس المبدئية. إذا كان حسابك يتطلب استخدام عملة مختلفة، فيمكنك تغييرها أثناء <link linkend="details.accounts.create.account"
+>إعداد حساب جديد</link
+>. </para>
+
+<para
+>يُصدر أموالك مع قائمة بجميع العملات المعروفة في ذلك الوقت، وهي القائمة التي تختار منها العملة المبدئية عند إنشاء ملف بياناتك. حوار <guilabel
+>العملات</guilabel
+> هو المكان الذي تدير فيه قائمة العملات المستخدمة في ملف بياناتك. لعرض هذا الحوار، اختر عنصر القائمة <menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>العملات...</guimenuitem
+></menuchoice
+>. </para>
+
+<sect2 id="details.currencies.addcurrency"
+><title
+>إضافة عملة إلى ملف بياناتك</title>
+<screenshot>
+  <screeninfo
+>حوار العملات</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_dialog1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>حوار العملات</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>بالنسبة لملف بيانات منشأ حديثًا، سيظهر حوار العملات فقط العملة التي اخترتها كعملة مبدئية. إذا كنت تريد استخدام عملة مختلفة لحساب جديد، فيجب عليك أولًا إضافة تلك العملة. بالنقر فوق <guibutton
+>أضف</guibutton
+>، ستظهر لك نفس قائمة العملات التي اخترت منها العملة المبدئية. يمكنك إما التمرير عبر القائمة أو استخدام صندوق البحث في الأعلى للعثور على العملة التي ترغب في استخدامها. انقر فوق تلك العملة، ثم انقر فوق <guibutton
+>موافق</guibutton
+>. سيشمل حوار العملات بعد ذلك تلك العملة في القائمة المعروضة، ويمكنك الآن تحديد تلك العملة عند إنشاء حساب جديد. </para>
+</sect2>
+
+<sect2 id="details.currencies.newcurrency"
+><title
+>إضافة عملة جديدة</title>
+<screenshot>
+  <screeninfo
+>إضافة عملة جديدة</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="select_currency.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>إضافة عملة جديدة</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>على الرغم من أن هذا لا يحدث كثيرًا، إلا أنه يتم أحيانًا تقديم عملة جديدة. يمكن أن تكون هذه عملة افتراضية جديدة، مثل بيتكوين، أو تغييرًا قدمته دولة ما لأسباب تتعلق بالسياسة المالية. بينما ستُضاف أي عملة من هذا القبيل إلى الإصدار التالي من أموالك، فمن الممكن إضافتها إلى ملف بياناتك يدويًا، في حال كنت بحاجة إلى البدء في استخدامها على الفور. </para>
+
+<para
+>لإضافة عملة يدويًا، ارفع حوار العملات كما هو موضح أعلاه. انقر بزر الفأرة الأيمن فوق أي عملة موجودة واختر <guimenuitem
+>عملة جديدة</guimenuitem
+> من قائمة السياق <guimenu
+>خيارات العملة</guimenu
+>، أو انقر فوق <guibutton
+>جديد</guibutton
+>. سيؤدي هذا إلى رفع <guilabel
+>محرر العملات</guilabel
+>. </para>
+
+<screenshot>
+  <screeninfo
+>محرر العملات</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_editor.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>محرر العملات</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يحتوي محرر العملات على بعض التشابه مع حوار تحرير تفاصيل الأوراق المالية </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>رمز ISO: <ulink url="https://www.iso.org/iso-4217-currency-codes.html"
+>الرمز الأبجدي الرسمي</ulink
+> للعملة. حددت ISO أيضًا رمزًا رقميًا، ولكن لا يُستخدم هذا في أموالك. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>الاسم: الاسم الكامل للعملة. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>الرمز: الرمز الرسومي الذي يمثل العملة، مثل $ للدولار الأمريكي (USD) أو € لليورو (EUR). في بعض الحالات، لا يمكن تحديد الرمز إلا في مجموعة محارف معينة تتضمن الرمز المناسب. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>أصغر وحدة حساب: أصغر وحدة مدعومة رسميًا للعملة. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>أصغر وحدة نقدية: أصغر وحدة توجد لها ورقة نقدية أو عملة معدنية بالفعل. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>طريقة التقريب: توفر هذه القائمة المنسدلة قائمة بالقواعد الممكنة لتقريب المبالغ المحسوبة بدقة أكبر مما تسمح به أصغر وحدة حساب. </para>
+  </listitem>
+  
+  <listitem>
+    <para
+>دقة السعر: عدد الأرقام أو المنازل العشرية التي ستُستخدم لتسجيل القيم بالعملة. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>أدخل المعلومات وانقر فوق <guilabel
+>موافق</guilabel
+>، وستُنشأ العملة. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.transactions"
+><title
+>إدخال المعاملات باستخدام عملات مختلفة</title>
+<para
+>كلما أُدخلت معاملة تشير إلى أكثر من عملة واحدة، يظهر محرر سعر الصرف ويسمح لك بإدخال سعر الصرف. في البداية، سيُستخدم أحدث سعر متاح من قاعدة بيانات الأسعار كسعر صرف. راجع <link linkend="details.currencies.prices"
+>إدخال أسعار الصرف للعملات</link
+> لمزيد من المعلومات حول كيفية توفير أسعار الصرف يدويًا والحصول على معلومات الأسعار عبر الإنترنت. </para>
+
+<para
+>اختياريًا، يُحفظ سعر الصرف في قاعدة بيانات الأسعار بمجرد إدخاله من قبل المستخدم. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices"
+><title
+>أسعار صرف العملات</title>
+
+<sect2
+><title
+>إدخال الأسعار يدويًا</title>
+<para
+>يتيح لك <guilabel
+>محرر الأسعار</guilabel
+>، المعروف أيضًا باسم محرر قاعدة بيانات الأسعار، إدخال أو تعديل الأسعار لكل من الاستثمارات وأسعار الصرف بين العملات. يمكنك رفعه باستخدام عنصر القائمة <menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>الأسعار...</guimenuitem
+></menuchoice
+>. </para>
+
+<screenshot>
+  <screeninfo
+>محرر أسعار الأوراق المالية والعملات</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_priceeditor.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>محرر أسعار الأوراق المالية والعملات</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>العمود الأول في الحوار مسمى بـ <guilabel
+>السلعة</guilabel
+>، والذي يعرض رموز تداول الأوراق المالية ورموز العملات. في أموالك، <quote
+>السعر</quote
+> هو سعر الورقة المالية بدلالة عملة ما، أو سعر عملة بدلالة عملة ثانية. على سبيل المثال، وقت كتابة هذا، سعر 1 دولار أمريكي بدلالة 1 يورو هو 0.94؛ أي أن 1 دولار أمريكي يكلف 0.94 يورو. العملة الأولى هي التي تُشترى أو تُباع، والثانية هي العملة المستخدمة لشرائها أو بيعها. </para>
+
+<para
+>لإدخال سعر صرف جديد يدويًا، اضغط على زر <guibutton
+>جديد</guibutton
+>، وستحصل على حوار مدخل سعر جديد. </para>
+
+<screenshot>
+  <screeninfo
+>مدخل سعر جديد</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>مدخل سعر جديد</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>أدخل العملة الأولى (USD في المثال أعلاه) في حقل الورقة المالية. أدخل العملة الثانية (EUR في المثال أعلاه) في حقل العملة. أدخل تاريخ سريان السعر في حقل التاريخ. </para>
+
+<para
+>اضغط على زر <guilabel
+>موافق</guilabel
+>، وسترى بعد ذلك حوار <guilabel
+>محرر سعر الصرف/السعر</guilabel
+>. </para>
+
+<screenshot>
+  <screeninfo
+>محرر سعر الصرف/السعر</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="exchange_rate_editor.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>محرر سعر الصرف/السعر</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يمكنك تحديد السعر بطريقتين. يمكنك إدخال <guilabel
+>إلى المبلغ</guilabel
+> أو السعر الإجمالي للعملة الأولى بدلالة الثانية، أو يمكنك إدخال سعر الصرف الفعلي. في هذه الحالة، وبما أنك تدخل عدد اليورو مقابل 1 دولار أمريكي، فإن هاتين القيمتين هما نفسهما. ومع ذلك، هذا هو نفس الحوار المستخدم لإدخال سعر صرف عندما تدخل معاملة تتضمن عملتين. في هذه الحالة، ستدخل المبلغ بشكل عام، وتترك أموالك يحسب سعر الصرف، مع مراعاة أي تقريب. </para>
+</sect2>
+
+<sect2
+><title
+>تحديثات العملات عبر الإنترنت</title>
+<para
+>يمكن لـ أموالك جلب أسعار تحويل العملات من الويب. بمجرد إدخال سعر واحد لزوج من العملات، ستدرج ميزة عرض الأسعار عبر الإنترنت دائمًا هذا الزوج ضمن خياراتها. </para>
+
+<para
+>راجع قسم <link linkend="details.investments.onlinequotes"
+>عرض الأسعار عبر الإنترنت</link
+> في فصل الاستثمارات لمزيد من التفاصيل. </para>
+</sect2>
+</sect1>
+</chapter>
+

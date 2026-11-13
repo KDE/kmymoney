@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.budgets">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+
+<title
+>الميزانيات</title>
+
+<sect1 id="details.budgets.define"
+><title
+>ما هي الميزانية؟</title>
+<para
+>الميزانية هي قائمة مصنفة للدخل والمصروفات المتوقعة لفترة زمنية محددة. </para>
+
+<para
+>تسمح لك ميزة الميزانية في أموالك بإنشاء ميزانيات سنوية. يمكن إنشاء أكثر من ميزانية لأي عام. يمكنك تعيين قيم الميزانية الشهرية مقابل أي فئات دخل أو مصروفات حددتها. يمكن تعيين القيم بثلاث طرق، حسب الفترة: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>شهري</term>
+    <listitem
+><para
+>(مبدئي) حدد قيمة واحدة تُطبق على كل شهر في الميزانية</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>سنوي</term>
+    <listitem
+><para
+>حدد قيمة واحدة لتُقسم بالتساوي على كل شهر في الميزانية</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>فردي</term>
+    <listitem>
+      <para
+>حدد قيمًا منفصلة لكل شهر.</para>
+      <para
+>يُستخدم هذا للدخل والمصروفات التي تتوزع بشكل غير منتظم خلال العام.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>يوفر أموالك عددًا من التقارير التي تقارن الدخل والمصروفات الفعلية بالميزانيات المدخلة. وُصفت هذه التقارير بمزيد من التفصيل في <link linkend="budget.details.reports"
+>قسم آخر</link
+>. </para>
+</sect1>
+
+<sect1 id="details.budgets.create"
+><title
+>ميزانياتك</title>
+<para
+>يمكنك الوصول إلى ميزانياتك في <guilabel
+>عرض الميزانيات</guilabel
+>، والذي يمكنك عرضه بالنقر فوق الأيقونة المناسبة في منتقي العرض الموجود على الجانب الأيسر من نافذة أموالك. </para>
+
+<para
+>هناك قسمان رئيسان في عرض الميزانيات. على اليسار، توجد قائمة بالميزانيات التي أنشأتها. وفوق ذلك توجد أزرار لإنشاء الميزانيات وإعادة تسميتها وحذفها. وعلى اليمين، يوجد ثلاثة أقسام. في الجزء العلوي توجد قائمة الفئات. وفي الجزء السفلي يعرض المبالغ المخصصة للميزانية المحددة على اليسار للفئة المحددة في قائمة الفئات أعلاه. بين هاتين المنطقتين توجد بعض عناصر التحكم الإضافية لإدارة الميزانية. </para>
+
+<sect2
+><title
+>عرض الميزانيات وإنشاؤها وإعادة تسميتها وحذفها</title>
+<para
+>يعرض القسم الأيسر من عرض الميزانيات قائمة الميزانيات الموجودة في ملف أموالك الحالي. إذا لم تُنشأ أي ميزانية بعد، فستكون القائمة فارغة. تحتوي قائمة الميزانيات على عمودين: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الاسم</term>
+    <listitem>
+      <para
+>اسم الميزانية</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>السنة</term>
+    <listitem>
+      <para
+>السنة المالية للميزانية. لاحظ أنه يمكن تحديد شهر وبداية السنة المالية في <link linkend="details.settings.general.global"
+>حوار اضبط أموالك.</link
+> لتغيير السنة المالية للميزانية، انقر نقرًا مزدوجًا فوق السنة. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>تُعرض قيم الميزانية المحددة على اليمين. لاختيار ميزانية مختلفة يمكنك النقر فوق اسم الميزانية في القائمة على اليسار. بدلًا من ذلك، عندما يكون التركيز على القائمة، يمكنك اختيار ميزانية مختلفة باستخدام مفتاحي &Up; و &Down;. إذا أجريت تغييرات على ميزانية ثم اخترت ميزانية مختلفة، فسيطلب منك أموالك ما إذا كنت تريد حفظ التغييرات أو تجاهلها. </para>
+
+<para
+>توجد ثلاثة أزرار فوق قائمة الميزانيات. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>جديد</term>
+    <listitem>
+      <para
+>أنشئ ميزانية جديدة فارغة. الاسم المبدئي للميزانية الجديدة هو "ميزانية &lt;year&gt;" حيث &lt;year&gt; هي السنة المالية الحالية. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>أعد التسمية</term>
+    <listitem>
+      <para
+>حرر اسم الميزانية المحددة. يمكنك أيضًا تحرير اسم الميزانية بالنقر المزدوج فوق اسم الميزانية في القائمة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>احذف</term>
+    <listitem>
+      <para
+>احذف الميزانية المحددة.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>تتوفر خيارات إضافية في القائمة السياقية <guilabel
+>خيارات الميزانية</guilabel
+> والتي يُوصَل إليها بالنقر بزر الفأرة الأيمن فوق الميزانية. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>ميزانية جديدة</term>
+    <listitem>
+      <para
+>أنشئ ميزانية جديدة فارغة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>أعد تسمية الميزانية</term>
+    <listitem>
+      <para
+>أعد تسمية الميزانية المحددة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>احذف الميزانية</term>
+    <listitem>
+      <para
+>احذف الميزانية المحددة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>انسخ الميزانية</term>
+    <listitem>
+      <para
+>ينشئ نسخة من الميزانية المحددة. الميزانية الجديدة تحمل الاسم "نسخة من &lt;budget&gt;"، حيث &lt;budget&gt; هو اسم الميزانية المنسوخة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>ميزانية بناءً على التوقعات</term>
+    <listitem>
+      <para
+>يملأ مبالغ الميزانية بناءً على البيانات من قيم توقعات أموالك. راجع قسم <link linkend="details.forecast.define"
+>التوقعات</link
+> لمزيد من المعلومات. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>قائمة الفئات</title>
+<para
+>تعرض قائمة الفئات قائمة حسابات الدخل والمصروفات. (تذكر، في أموالك، تُعامل الفئات كنوع خاص من الحسابات.) وكما هو الحال في أماكن أخرى في أموالك، نُظمت القائمة في هيكل شجري. يمكن توسيع القائمة أو طيها لإظهار أو إخفاء الفئات الفرعية داخل فئة ما. تحتوي قائمة الفئات على عدد من الأعمدة: </para>
+
+<para
+>بصرف النظر عن عمود الاسم، يمكن إظهار أو إخفاء جميع الأعمدة الأخرى بالنقر بزر الفأرة الأيمن فوق أي رأس عمود، وتحديد أو إلغاء تحديد خانة الاختيار بجانب اسم العمود. لمزيد من التفاصيل حول معنى كل عمود، راجع قسم <link linkend="details.categories.view"
+>عرض الفئات</link
+>. أُدرجت الأعمدة ذات الصلة بالميزانيات فقط أدناه، ولكن يمكن عرض جميع أعمدة الفئات. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الاسم</term>
+    <listitem>
+      <para
+>اسم الحساب (الفئة)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>النوع</term>
+    <listitem>
+      <para
+>نوع الفئة (دخل أو مصروفات)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الرصيد</term>
+    <listitem>
+      <para
+>الرصيد الحالي للحساب. سيكون هذا فارغًا للفئات، إلا إذا كانت الفئة محددة بعملة أجنبية. في هذه الحالة، سيظهر الرصيد قيمة الفئة بعملتها المحددة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>القيمة الإجمالية</term>
+    <listitem>
+      <para
+>إجمالي القيمة السنوية في الميزانية. إذا كانت الفئة تحتوي على فئات فرعية وكانت قائمة الفئات الفرعية للفئة مطوية، فإن القيمة المعروضة هي مجموع قيم الفئة وجميع فئاتها الفرعية. إذا كانت الفئة محددة بعملة أجنبية، فستظهر القيمة الإجمالية القيمة بالعملة الأساسية. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>توجد عدة عناصر تحكم أسفل قائمة الفئات. وُصف زرا <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-gtk-floppy.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> <guibutton
+>حدّث</guibutton
+> و <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-edit-undo.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> <guibutton
+>صفر</guibutton
+> (إعادة تعيين) بمزيد من التفصيل أدناه. أما زرا <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-zoom-out.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+></guiicon
+> (طي) و <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-zoom-in.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+></guiicon
+> (توسيع) فيقومان بطي أو توسيع قائمة الفئات بالكامل. </para>
+
+<para
+>يمكن ترشيح قائمة الفئات بطريقتين. يؤدي تحديد خانة الاختيار <guilabel
+>أخفِ فئات الميزانية غير المستخدمة</guilabel
+> إلى إخفاء أي فئات لم تُخصص لها أي قيمة أو لأي من فئاتها الفرعية في الميزانية المحددة. وإلى يمين هذا، يوجد مربع نص غير معنون. تُدرج الفئات التي تتضمن ما يُكتب في هذا المربع فقط، ولكن تُدرج فئاتها الأم أيضًا. </para>
+
+<para
+>لاحظ أن تغيير <guilabel
+>أخفِ فئات الميزانية غير المستخدمة</guilabel
+> أو قيمة المرشح من المحتمل أن يغير قائمة الفئات المعروضة. قد تحتاج إلى إعادة توسيع القائمة لرؤية جميع الفئات التي ينبغي عرضها بالإعدادات الحالية. </para>
+</sect2>
+
+<sect2
+><title
+>التخصيصات</title>
+<para
+>تعرض منطقة التخصيصات القيم للفئة المحددة في قائمة الفئات. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الحساب</term>
+    <listitem>
+      <para
+>اسم الفئة المحددة. إذا كانت الفئة فئة فرعية، فسيُعرض اسمها الكامل بتنسيق الفئة:الفئة الفرعية. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الإجمالي</term>
+    <listitem>
+      <para
+>إجمالي القيمة السنوية المخصصة للفئة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>ضمن الحسابات الفرعية</term>
+    <listitem>
+      <para
+>إذا حُدد هذا، فستظهر التقارير الدخل أو المصروفات الفعلية في الفئات الفرعية التابعة للفئة مقابل الفئة بدلًا من الفئة الفرعية. </para>
+
+      <para
+>إذا كان للفئة الفرعية قيمة محددة في الميزانية، فسيُعرض الدخل والمصروفات مقابل الفئة الفرعية. </para>
+
+      <para
+>إذا كانت الفئة المحددة في قائمة الفئات مطوية فئاتها الفرعية، فعلى الرغم من أن قيمتها الإجمالية ستظهر مجموع القيم الإجمالية لجميع فئاتها الفرعية، إلا أن المبالغ في منطقة التخصيصات قد تظل تظهر 0، ما لم تُحدد هذه الخانة أو يُخصص مبلغ صراحة للفئة. </para>
+
+      <para
+>بشكل عام، ستقوم إما بتحديد هذه الخانة وتخصيص قيم للفئة وليس لأي من فئاتها الفرعية، أو عدم تحديد الخانة، وتخصيص قيم للفئات الفرعية ولكن ليس للفئة. إذا كان لأي فئات فرعية مبالغ مخصصة عند تحديد هذه الخانة، فستُجمع تلك المبالغ وتُرفع إلى الفئة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>امسح</term>
+    <listitem>
+      <para
+>يؤدي النقر فوق هذا الزر إلى تصفير قيمة أو قيم الفئة المخصصة في الميزانية. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الفترة</term>
+    <listitem>
+      <para
+>تسمح لك أزرار الانتقاء هذه باختيار الفترة التي تنطبق عليها القيمة </para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>شهري</term>
+	  <listitem>
+	    <para
+>تُدخل قيمة واحدة، تحدد المبلغ لكل شهر. هذا هو الإعداد المبدئي. </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>سنوي</term>
+	  <listitem>
+	    <para
+>تُدخل قيمة واحدة، تحدد المبلغ لكل سنة.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>فردي</term>
+	  <listitem>
+	    <para
+>تُحدد القيم لكل شهر ميلادي. يُستخدم هذا عندما يتوزع الدخل أو المصروفات بشكل غير منتظم خلال العام. </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+      <para
+>إذا كانت هناك قيمة أو قيم محددة بالفعل وغُيرت الفترة، فسيسألك أموالك عما إذا كنت تريد استخدام القيمة السنوية الإجمالية الحالية لتخصيص القيم الجديدة. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>التحديث والتراجع</title>
+<para
+>عند تعديل قيم الميزانية لأول مرة، يُفعّل زرا <guibutton
+>حدّث</guibutton
+> و <guibutton
+>ارجع</guibutton
+>. يمكن إجراء تغييرات متعددة على الميزانية. سيؤدي الضغط على <guibutton
+>حدّث</guibutton
+> إلى تخزين التغييرات وتعطيل هذه الأزرار. </para>
+
+<para
+>يحفظ زر <guibutton
+>احفظ</guibutton
+> فقط التغييرات التي خُزّنت باستخدام زر <guibutton
+>حدّث</guibutton
+>. وبالتالي، إذا عدلت ميزانية ولكنك لم تخزن التغييرات بعد، فلن يؤثر زر <guibutton
+>احفظ</guibutton
+> على الميزانية المعدلة وسيظل زرا <guibutton
+>حدّث</guibutton
+> و <guibutton
+>ارجع</guibutton
+> مفعلين. </para>
+
+<para
+>يقوم التراجع بإلغاء أي تغييرات أُجريت على الميزانية منذ آخر تحديث ويعطل زري <guibutton
+>حدّث</guibutton
+> و <guibutton
+>ارجع</guibutton
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="budget.details.reports"
+><title
+>تقارير الميزانية</title>
+<para
+>يوفر أموالك عددًا من التقارير لمقارنة الدخل والمصروفات الفعلية بالميزانية. أُدرجت هذه التقارير في التقارير تحت قسم "الميزانية". هناك نوعان من تقارير الميزانية: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>الميزانية فقط</term>
+    <listitem
+><para
+>تعرض هذه التقارير قيمًا من ميزانية ما.</para>
+      <variablelist>
+        <varlistentry>
+          <term
+>الميزانية الشهرية</term
+> 
+          <listitem>
+            <para
+>يعرض القيم الشهرية من ميزانية ما.</para>
+          </listitem
+></varlistentry>
+        <varlistentry>
+          <term
+>الميزانية السنوية</term
+> 
+          <listitem>
+            <para
+>يعرض القيم الشهرية من ميزانية ما، مع الإجمالي السنوي. </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الميزانية مقابل الفعلي</term>
+    <listitem>
+      <para
+>تقارن هذه التقارير القيم من الميزانية بالدخل والمصروفات الفعلية. ستجد في كل تقرير ميزانية أعمدة: الميزانية، والفعلي، والفرق. يختلف كل تقرير في الفترة الزمنية المعروضة. </para>
+      <variablelist>
+        <varlistentry>
+          <term
+>الميزانية مقابل الفعلي لهذا العام</term
+> 
+          <listitem>
+            <para
+>من بداية العام حتى اليوم</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term
+>الميزانية مقابل الفعلي لهذا العام (حتى نهاية الشهر الماضي)</term
+> 
+          <listitem>
+            <para
+>من بداية العام حتى آخر يوم من الشهر السابق </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term
+>الميزانية الشهرية مقابل الفعلي</term
+> 
+          <listitem>
+            <para
+>من بداية العام حتى آخر يوم من الشهر الحالي </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term
+>الميزانية السنوية مقابل الفعلي</term
+> 
+          <listitem>
+            <para
+>من 1 يناير حتى 31 ديسمبر</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term
+>الميزانية السنوية مقابل الفعلي (رسم بياني)</term
+> 
+          <listitem>
+            <para
+>نفس التقرير السابق ولكنه يظهر الرسم البياني مبدئيًا </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>توفر هذه التقارير قاعدة يمكن من خلالها إنشاء تقارير مخصصة عبر تغيير النطاق الزمني والميزانية، من بين خيارات أخرى. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+</chapter>

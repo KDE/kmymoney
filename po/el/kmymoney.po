@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:58+0000\n"
+"POT-Creation-Date: 2026-11-13 00:59+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -16680,7 +16680,7 @@ msgstr "Πρόβλεψη προϋπολογισμού"
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:150
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:178
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:179
 #: kmymoney/plugins/views/reports/kreporttab.cpp:366
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
@@ -16791,12 +16791,12 @@ msgstr "Μέσος όρος"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:473
 #: kmymoney/plugins/views/reports/core/listtable.cpp:318
 #: kmymoney/plugins/views/reports/core/listtable.cpp:319
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1629
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1768
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1818
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1895
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2073
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2144
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1634
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1773
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1823
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1900
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2078
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2149
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -17069,8 +17069,8 @@ msgstr "Υπόλοιπο κλεισίματος"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:322
 #: kmymoney/plugins/views/reports/core/listtable.cpp:323
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1842
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2181
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1847
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2186
 #, kde-format
 msgid "Grand Total"
 msgstr "Ολικό σύνολο"
@@ -17468,57 +17468,57 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Ημερομηνία έναρξης"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1615
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1882
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1620
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1887
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Λογαριασμός"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2397
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2402
 #, fuzzy, kde-format
 #| msgid "Actual"
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Πραγματικό"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2402
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2407
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Προϋπολογισμός"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2407
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2412
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Διαφορά"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2412
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2417
 #, fuzzy, kde-format
 #| msgid "Forecast"
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Πρόβλεψη"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2417
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2422
 #, fuzzy, kde-format
 #| msgid "Moving Average"
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Κινητός μέσος"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2422
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2427
 #, fuzzy, kde-format
 #| msgid "Moving Average Price"
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Μέση κινητή τιμή"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2427
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2432
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"
@@ -17698,14 +17698,14 @@ msgctxt "@info:tooltip for report configuration apply button"
 msgid "Apply the configuration changes to the report"
 msgstr "Εφαρμογή των αλλαγών διαμόρφωσης στην αναφορά"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:161
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:162
 #, fuzzy, kde-format
 #| msgid "Filter"
 msgctxt "Filters tab"
 msgid "Filters"
 msgstr "Φίλτρο"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:165
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:166
 #, fuzzy, kde-format
 #| msgctxt "Account general settings"
 #| msgid "General"
@@ -17713,16 +17713,16 @@ msgctxt "General tab"
 msgid "General"
 msgstr "Γενικά"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:196
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:206
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:197
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:207
 #, kde-format
 msgid "Rows/Columns"
 msgstr "Γραμμές/Στήλες"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:181
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:182
 #: kmymoney/plugins/views/reports/reporttabrange.ui:171
 #: kmymoney/widgets/daterangedlg.ui:9
 #, kde-format
@@ -17730,8 +17730,8 @@ msgid "Range"
 msgstr "Διάστημα"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_reportPage)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:200
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:204
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:201
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:205
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:49
 #: kmymoney/plugins/views/reports/kreporttab.cpp:376
 #: kmymoney/views/khomeview_p.h:1122
@@ -17740,9 +17740,9 @@ msgid "Report"
 msgstr "Αναφορά"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:401
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:411
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:498
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:402
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:412
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:499
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
@@ -17750,7 +17750,7 @@ msgid "Monthly"
 msgstr "Μηνιαία"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:486
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:487
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -17758,7 +17758,7 @@ msgid "Daily"
 msgstr "Καθημερινά"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:489
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:490
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -17766,7 +17766,7 @@ msgid "Weekly"
 msgstr "Εβδομαδιαία"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:501
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:502
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -17774,7 +17774,7 @@ msgid "Bi-Monthly"
 msgstr "Διμηνιαία"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:504
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:505
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -17782,7 +17782,7 @@ msgid "Quarterly"
 msgstr "Τριμηνιαία"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:507
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:508
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"

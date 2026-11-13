@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>ابحث عن المعاملات</title>
+
+<para
+>يمكنك استخدام مربع حوار <guilabel
+>البحث عن المعاملات</guilabel
+> للبحث في بياناتك عن معاملات بناءً على معايير تحددها. يمكنك الوصول إلى مربع الحوار عبر تحديد عنصر القائمة <menuchoice
+> <guimenu
+>حرّر</guimenu
+> <guimenuitem
+>ابحث عن معاملة...</guimenuitem
+></menuchoice
+>، أو عبر ضغط <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>F</keycap
+></keycombo
+>. </para>
+
+<para
+>يوجد لسانان رئيسان في مربع الحوار هذا. يعرض لسان <guilabel
+>المعايير</guilabel
+> عددًا من الألسنة الفرعية لتحديد معايير البحث. عند ضغط زر <guibutton
+>ابحث</guibutton
+>، يبدأ البحث وتُؤخذ جميع المعايير المدخلة في أي من ألسنة المعايير الفرعية في الحسبان. </para>
+
+<para
+>بعد اكتمال البحث، تُعرض النتائج تحت لسان <guilabel
+>النتيجة</guilabel
+>. يُظهر برنامج أموالك أسفل قائمة النتائج عدد المعاملات التي استوفت معايير البحث. يؤدي النقر المزدوج على معاملة فردية في قائمة النتائج إلى إظهار دفتر الأستاذ المناسب مع تحديد تلك المعاملة. </para>
+
+<para
+>يعيد زر <guibutton
+>صَفّر</guibutton
+> جميع الحقول في جميع ألسنة المعايير الفرعية إلى القيم المبدئية. يتيح لك هذا تحديد معايير بحث جديدة. </para>
+
+<para
+>يغلق زر <guibutton
+>أغلق</guibutton
+> مربع حوار <guilabel
+>البحث عن المعاملات</guilabel
+>. </para>
+
+<sect1 id="details.search.criteria"
+><title
+>معايير البحث</title>
+<para
+>هناك عدة ألسنة فرعية تحت لسان المعايير الرئيس، يسمح كل منها بتحديد نوع مختلف من معايير البحث. يسرد أموالك أسفل منطقة تحديد المعايير كل نوع من أنواع المعايير المحددة حاليًا للبحث. </para>
+
+<sect2 id="details.search.text"
+><title
+>النص</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان النص الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-text.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>البحث عن المعاملات، لسان المعايير، لسان النص الفرعي</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد نص للبحث عنه. يوجد أيضًا حقل منسدل ومربعا اختيار للتحكم في كيفية استخدام النص في البحث. </para>
+
+<para
+>يطابق البحث السلاسل الفرعية البسيطة مبدئيًا. على سبيل المثال: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+><quote
+>Best</quote
+> ستجد <quote
+>Best Cakes, Inc.</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+><quote
+>est</quote
+> ستجد أيضًا <quote
+>Best Cakes, Inc.</quote
+> </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>في الحقل المنسدل بجوار حقل النص، اختر <guilabel
+>يحتوي</guilabel
+> إذا كنت تريد العثور على المعاملات التي تحتوي على النص، أو اختر <guilabel
+>لا يحتوي</guilabel
+> إذا كنت تريد العثور على المعاملات التي لا تحتوي على النص المحدد. </para>
+
+<para
+>إذا حددت مربع <guilabel
+>حساس لحالة الأحرف</guilabel
+>، فسيكون البحث حساسًا لحالة الأحرف. على سبيل المثال، لن تجد كلمة <quote
+>best</quote
+> عبارة <quote
+>Best Cakes, Inc.</quote
+> في حال ضُبط هذا الخيار. </para>
+
+<para
+>إذا حددت مربع <guilabel
+>عامل النص كتعبير نمطي</guilabel
+>، فسيُعامل النص كتعبير نمطي. لمزيد من التفاصيل حول كيفية صياغة التعبيرات النمطية، تفضل بزيارة توثيق Qt حول <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>فئة QRegularExpression</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account"
+><title
+>الحساب</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان الحساب الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-account.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>البحث عن المعاملات، لسان المعايير، لسان الحساب الفرعي</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد الحسابات التي يجب البحث فيها. </para>
+
+<para
+>تُعرض الحسابات في تنسيق شجري. يشار إلى الحسابات المحددة للبحث بمربع اختيار. إذا نقرت على <guibutton
+>الكل</guibutton
+>، فستُحدد جميع الحسابات للبحث. إذا نقرت على <guibutton
+>لا شيء</guibutton
+>، فلن يُحدد أي حساب للبحث. يمكن تحديد الحسابات الفردية أو إلغاء تحديدها بالنقر فوق المربع المجاور لاسم الحساب باستخدام زر الفأرة الأيسر. يمكن تحديد تسلسل هرمي كامل للحسابات أو إلغاء تحديده بالنقر فوق المربع باستخدام زر الفأرة الأيمن. </para>
+</sect2>
+
+<sect2 id="details.search.date"
+><title
+>التاريخ</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان التاريخ الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-date.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>البحث عن المعاملات، لسان المعايير، لسان التاريخ الفرعي</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد التواريخ التي يجب البحث فيها. يشير التاريخ إلى تاريخ ترحيل المعاملة. </para>
+
+<para
+>توفر القائمة المنسدلة <quote
+>النطاق</quote
+> طريقة مريحة لضبط عنصري التحكم في تاريخي "من" و "إلى". يمكن التحكم في عنصري "من" و "إلى" بشكل فردي. يمكن إدخال التواريخ يدويًا، ويؤدي النقر فوق السهم المتجه لأسفل على يمين الحقل إلى إظهار ودجة تقويم نموذجية لاختيار التاريخ. ستمنعك عناصر التحكم من إدخال تواريخ غير موجودة. يمكن أيضًا تغيير قيم التاريخ بالنقر فوق السهمين العلوي والسفلي بينما يكون المؤشر داخل جزء معين من التاريخ. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount"
+><title
+>المبلغ</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان المبلغ الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-amount.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>البحث عن المعاملات، لسان المعايير، لسان المبلغ الفرعي</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد المبالغ التي يجب البحث عنها. </para>
+
+<para
+>يمكنك البحث عن مبلغ محدد أو عن نطاق من المبالغ. إذا نقرت على أيقونة الحاسبة، فستظهر حاسبة صغيرة على الشاشة لمساعدتك في إدخال قيمة. </para>
+</sect2>
+
+<sect2 id="details.search.category"
+><title
+>الفئة</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان الفئة الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-category.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>البحث عن المعاملات، لسان المعايير، لسان الفئة الفرعي</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد الفئات التي يجب البحث فيها. </para>
+
+<para
+>تُعرض الفئات في تنسيق شجري، بشكل مشابه للحسابات. يشار إلى الفئات المحددة للبحث بمربع اختيار. إذا نقرت على <guibutton
+>الكل</guibutton
+>، فستُحدد جميع الفئات للبحث. إذا نقرت على <guibutton
+>الدخل</guibutton
+>، فستُحدد جميع فئات الدخل وسيُلغى تحديد جميع فئات المصروفات. إذا نقرت على <guibutton
+>المصروفات</guibutton
+>، فسيُلغى تحديد جميع فئات الدخل وستُحدد جميع فئات المصروفات. إذا نقرت على <guibutton
+>لا شيء</guibutton
+>، فلن تُحدد أي فئة للبحث. </para>
+
+<para
+>يمكن تحديد الفئات الفردية أو إلغاء تحديدها بالنقر فوق مربع الاختيار المجاور لاسم الفئة باستخدام زر الفأرة الأيسر. يمكن تحديد تسلسل هرمي كامل للفئات أو إلغاء تحديده بالنقر فوق المربع باستخدام زر الفأرة الأيمن. </para>
+</sect2>
+
+<sect2 id="details.search.tag"
+><title
+>الوسم</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان الوسم الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-tag.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>البحث عن المعاملات، لسان المعايير، لسان الوسم الفرعي</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد الأوسمة التي يجب البحث فيها. </para>
+
+<para
+>يشار إلى الأوسمة المحددة للبحث بمربع محدد. إذا نقرت على <guibutton
+>اختر الكل</guibutton
+>، فستُحدد جميع الأوسمة للبحث. إذا نقرت على <guibutton
+>لا تختار شيئًا</guibutton
+>، فلن يُحدد أي وسم للبحث. يمكن تحديد الأوسمة الفردية أو إلغاء تحديدها بالنقر فوق مربع الاختيار المجاور لاسم المستفيد. </para>
+
+<para
+>إذا حددت مربع <guilabel
+>اختر المعاملات التي لا تملك أوسمة</guilabel
+>، فسيُختار المعاملات التي ليس لها وسم فقط. </para>
+</sect2>
+
+<sect2 id="details.search.payee"
+><title
+>المستفيد</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان المستفيد الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-payee.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>البحث عن المعاملات، لسان المعايير، لسان المستفيد الفرعي</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد المستفيدين الذين يجب البحث فيهم. </para>
+
+<para
+>يشار إلى المستفيدين المحددين للبحث بمربع. إذا نقرت على <guibutton
+>اختر الكل</guibutton
+>، فستُحدد جميع المستفيدين للبحث. إذا نقرت على <guibutton
+>لا تختار شيئًا</guibutton
+>، فلن يُحدد أي مستفيد للبحث. يمكن تحديد المستفيدين الفرديين أو إلغاء تحديدهم بالنقر فوق المربع المجاور لاسم المستفيد. </para>
+
+<para
+>إذا حددت مربع <guilabel
+>اختر المعاملات التي لا تملك مستفيدين</guilabel
+>، فسيُختار المعاملات التي ليس لها مستفيد فقط. </para>
+</sect2>
+
+<sect2 id="details.search.details"
+><title
+>التفاصيل</title>
+<screenshot>
+  <screeninfo
+>البحث عن المعاملات، لسان المعايير، لسان التفاصيل الفرعي</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-details.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>مربع حوار البحث عن المعاملات، لسان التفاصيل</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يتيح لك هذا اللسان تحديد معايير بحث إضافية متنوعة. </para>
+
+<para>
+  <itemizedlist>
+    <title
+>يمكن أن يكون النوع أحد ما يلي:</title>
+    <listitem
+><para
+>جميع الأنواع</para
+></listitem>
+    <listitem
+><para
+>المدفوعات</para
+></listitem>
+    <listitem
+><para
+>الإيداعات</para
+></listitem>
+    <listitem
+><para
+>التحويلات</para
+></listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <title
+>يمكن أن تكون الحالة واحدة مما يلي:</title>
+    <listitem
+><para
+>جميع الحالات</para
+></listitem>
+    <listitem
+><para
+>غير مسوّى</para
+></listitem>
+    <listitem
+><para
+>خالص</para
+></listitem>
+    <listitem
+><para
+>مسوّى</para
+></listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <title
+>يمكن أن تكون الصلاحية واحدة مما يلي:</title>
+    <listitem
+><para
+>أي معاملة</para
+></listitem>
+    <listitem
+><para
+>معاملة صالحة</para
+></listitem>
+    <listitem
+><para
+>معاملة غير صالحة</para
+></listitem>
+  </itemizedlist>
+</para>
+
+<para
+>يمكنك البحث عن رقم معاملة معين أو البحث عن نطاق من أرقام المعاملات. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results"
+><title
+>نتائج البحث</title>
+<para
+>يعرض لسان <guilabel
+>النتيجة</guilabel
+> المدخل (تاريخ الإدخال، اختياري،) والتاريخ (تاريخ الترحيل،) والحساب، والمستفيد، والتفاصيل (المذكرة،) وس (حالة التسوية،) والنقص، والزيادة لكل معاملة تطابق معايير البحث التي أدخلتها. يسمح النقر بزر الفأرة الأيمن على صف الرأس لقائمة النتائج بتبديل عرض الأعمدة الاختيارية. </para>
+
+<para
+>يؤدي النقر المزدوج على معاملة إلى عرض دفتر أستاذ الحساب المقابل مع تحديد تلك المعاملة. </para>
+</sect1>
+</chapter>

@@ -1,0 +1,53 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>الأشياء المزالة</title>
+
+<sect2
+><title
+>قبل المعاملات المستوردة</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>المعاملات المستوردة</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>المعاملات المستوردة</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>قد تومض بعض معاملاتك باللون الأحمر في الدفتر. هذا لأنها بحاجة إلى تعيين فئة لها. لم يتمكن المستورد من تعيين فئة آليًا بناءً على تاريخ معاملاتك السابقة. </para>
+
+<para
+>يمكن تحرير بيانات المعاملات أو حتى حذفها إذا لزم الأمر. لتحرير معاملة، ما عليك سوى النقر نقرًا مزدوجًا على المدخلة أو الضغط على مفتاح الإدخال عند تمييز المدخلة. بمجرد الانتهاء، انقر فوق <guibutton
+>موافق</guibutton
+> لقبول المعاملات المستوردة أو <guibutton
+>إلغاء</guibutton
+> لإزالة المعاملات المستوردة. </para>
+</sect2>
+
+
+<sect2
+><title
+>استيراد الاستثمارات</title>
+<para
+>يرجى ملاحظة أنه إذا كنت تستورد ملفًا يحتوي على معاملات استثمار، يجب أن تكون تلك الاستثمارات موجودة أولًا في ملف أموالك. يُستخدم رمز التداول للمطابقة، لذا يرجى التأكد من أن الرمز في أموالك هو بالضبط نفس الرمز الموجود في الملف الذي تستورده. </para>
+</sect2>
+</sect1>
+

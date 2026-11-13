@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>الوسوم</title>
+
+<para
+>توفر الوسوم طريقة إضافية لك لتجميع المعاملات وتصنيفها. غالبًا ما تكون مفيدة في <link linkend="details.search"
+>البحث عن المعاملات</link
+> وفي <link linkend="details.reports.avail"
+>إنشاء التقارير</link
+>. </para>
+
+<sect1 id="details.tags.view"
+><title
+>منظور الوسوم</title>
+<screenshot>
+  <screeninfo
+>لسان معاملات منظور الوسوم</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="tags.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>لسان معاملات منظور الوسوم</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يوفر منظور الوسوم معلومات حول كافة الوسوم التي أُضيفت إلى ملف البيانات. ينقسم العرض إلى منطقتين. </para>
+
+<sect2 id="details.tags.list"
+><title
+>قائمة الوسوم</title>
+<para
+>على اليسار توجد قائمة بالوسوم، مع أزرار لإضافة وسم أو إعادة تسميته أو حذفه. </para>
+
+<para
+>على اليمين يمكنك رؤية المزيد من المعلومات التفصيلية حول الوسم المحدد في القائمة على اليسار، في أحد اللسانين: المعاملات والتفاصيل. يعرض لسان <guilabel
+>المعاملات</guilabel
+> كافة المعاملات المرتبطة بالوسم. يتضمن لسان <guilabel
+>التفاصيل</guilabel
+> لونًا يختاره المستخدم، بالإضافة إلى الملاحظات التي لا تُستخدم في مكان آخر. لاحظ أنه إذا غيرت اللون، الذي يُستخدم في الرمز المعروض قبل اسم الوسم في أي معاملات مرتبطة، فستحتاج إلى النقر فوق <guibutton
+>حدّث</guibutton
+> في الركن السفلي الأيمن من منطقة التفاصيل ليُحفظ. </para>
+</sect2>
+  
+<sect2
+><title
+>إضافة وسم</title>
+<para
+>كما هو الحال مع معظم الإجراءات في أموالك، هناك طرق متعددة لإنشاء وسم جديد. أولًا، يمكنك النقر فوق أيقونة وسم جديد <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="tag-new.svg" format="SVG"/></imageobject
+></inlinemediaobject
+></guiicon
+>. ثانيًا، يمكنك النقر بالزر الأيمن على أي وسم واختيار <guimenuitem
+>وسم جديد...</guimenuitem
+>. يؤدي هذا إلى إنشاء وسم جديد يسمى <quote
+>وسم جديد.</quote
+> راجع القسم التالي لمعرفة كيفية إعادة تسمية الوسم. وأخيرًا، يمكنك إضافة وسم جديد مباشرة في دفتر الأستاذ أو ضمن معاملة منقسمة عن طريق كتابة اسم الوسم في حقل الوسم. سيسألك أموالك عما إذا كنت تريد إضافة هذا الوسم وبعد اختيار <quote
+>نعم</quote
+> سيُضاف. </para>
+</sect2>
+
+<sect2
+><title
+>إعادة تسمية وسم</title>
+<para
+>لإعادة تسمية وسم، إما أن تنقر فوق اسم الوسم لتحديده ثم تنقر فوق <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="tag-edit.svg" format="SVG"/></imageobject
+> </inlinemediaobject
+> </guiicon
+> إعادة تسمية الوسم، أو تنقر بالزر الأيمن على الاسم ثم تختار <guimenuitem
+>أعد تسمية الوسم</guimenuitem
+>. يصبح الاسم حينها قابلًا للتحرير. سيؤثر تغيير الاسم على الاسم في كافة المعاملات التي يظهر فيها. </para>
+</sect2>
+
+<sect2
+><title
+>حذف وسم</title>
+<para
+>لحذف وسم، إما أن تحدده وتنقر فوق <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="tag-delete.svg" format="SVG"/></imageobject
+> </inlinemediaobject
+> </guiicon
+> حذف الوسم أو تنقر بالزر الأيمن على اسم الوسم وتختار <guimenuitem
+>احذف الوسم</guimenuitem
+>. إذا كان الوسم يحتوي على أي معاملات، فسيظهر لك حوار يسمح لك بإعادة تعيينها لوسم مختلف. </para>
+
+<note>
+<para
+>أُدخلت الوسوم إلى أموالك في الإصدار 4.7، ولكن ليست كافة طرق استيراد البيانات قادرة على استيراد الوسوم. من المفهوم أن هذه ميزة مهمة، وستُضاف في النهاية إلى كافة طرق الاستيراد </para>
+</note>
+</sect2>
+</sect1>
+
+<sect1 id="details.tags.info"
+><title
+>المعاملات الموسومة وتفاصيل الوسم</title>
+<para
+>لعرض المعاملات أو عرض وتحرير المعلومات المرتبطة بوسم معين، اختر الوسم من القائمة واختر اللسان المناسب على الجانب الأيمن من الحوار. </para>
+
+<screenshot>
+  <screeninfo
+>لسان تفاصيل منظور الوسوم</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="tag_details.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>لسان تفاصيل منظور الوسوم</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect2 id="details.tags.info.transactions"
+><title
+>المعاملات الموسومة</title>
+<para
+>لرؤية قائمة بالمعاملات المرتبطة بالوسم المحدد، اختر لسان <guilabel
+>المعاملات</guilabel
+>. هذه القائمة مشابهة لقائمة المعاملات للمستفيد. يمكنك النقر مزدوجًا فوق معاملة لتحريرها، أو يمكنك النقر بالزر الأيمن فوق المعاملة واختيار <guimenuitem
+>اذهب إلى 'اسم الحساب'</guimenuitem
+> للانتقال إلى منظور دفاتر الأستاذ لتلك المعاملة في الحساب الذي وُسمت فيه المعاملة. </para>
+</sect2>
+
+<sect2 id="details.tags.info.details"
+><title
+>تفاصيل الوسم</title>
+<para
+>لعرض وتحرير المعلومات المرتبطة بوسم معين، اختر لسان <guilabel
+>التفاصيل</guilabel
+>. </para>
+  <itemizedlist>
+    <listitem>
+      <para
+>يمكنك اختيار اللون المستخدم لتمييز المعاملات التي ارتبط بها هذا الوسم. إذا نقرت فوق شريط الألوان، فسيظهر لك حوار اختيار الألوان. </para>
+    </listitem>
+    <listitem>
+      <para
+>لن يؤدي النقر فوق مربع الاختيار <guilabel
+>مغلق</guilabel
+> إلى تغيير أي معاملات مرتبطة بالفعل بالوسم، ولكنه سيمنع تعيين الوسم لأي معاملات إضافية. </para>
+    </listitem>
+    <listitem>
+      <para
+>لتعديل الملاحظات المرتبطة بالوسم، ما عليك سوى تحرير النص في الصندوق. </para>
+    </listitem>
+  </itemizedlist>
+<para
+>عند الانتهاء، لا تنسَ النقر فوق <guiicon
+>حدّث</guiicon
+>، في الركن السفلي الأيمن من النافذة، رغم أنه سيُطلب منك ذلك إذا حاولت مغادرة الحوار دون القيام بذلك. </para>
+</sect2>
+</sect1>
+</chapter>
+

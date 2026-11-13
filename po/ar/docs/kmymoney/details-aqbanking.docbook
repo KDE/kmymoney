@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.aqbanking">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ralf.Habacker; &Ralf.Habacker.mail; </author>
+  </authorgroup>
+  <date
+>2025-07-31</date>
+  <releaseinfo
+>5.2.70</releaseinfo>
+</chapterinfo>
+<title
+>الصيرفة عبر الإنترنت</title>
+
+<para
+>تُضبط الصيرفة عبر الإنترنت باختيار مدخل القائمة إعدادات &lt;- اضبط Aqbanking، </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>قائمة ضبط أموالك</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_menu.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>قائمة ضبط أموالك</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>يظهر عنصر القائمة هذا بعد تفعيل ملحق KBanking المصاحب، ويمكن فعل ذلك عبر عنصر القائمة &quot;اضبط أموالك&quot; وبعد اختيار مدخل &quot;الملحقات&quot; في منطقة النافذة اليسرى. </para>
+
+<para>
+<screenshot>
+  <screeninfo
+>قائمة ضبط أموالك</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>قائمة ضبط أموالك</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot
+>تأكد من تأشير مربع الاختيار أمام سطر KBanking. </para>
+
+<sect1>
+<title
+>إعداد Aqbanking</title>
+<para
+>بعد الضغط على مدخل القائمة &quot;اضبط Aqbanking&quot; سيظهر الحوار التالي: </para>
+
+<para>
+<screenshot>
+  <screeninfo
+></screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="aqbanking-wizard-page1.png"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>تجري الإضافة في خطوتين. الخطوة الأولى هي إضافة مستخدم، والخطوة الثانية هي إضافة حساب. </para>
+</sect1>
+
+<sect1 id="create_user">
+  <title
+>أنشئ مستخدمًا</title>
+  <para
+>بعد الضغط على &quot;أنشئ مستخدمًا&quot; ستُوجّه إلى حوار &quot;معالج مستخدم جديد&quot; الموضح أدناه: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+<sect2 id="hbci_create_user">
+  <title
+>أنشئ مستخدمًا لـ HBCI</title>
+<sect3 id="hbci_select_online_banking_protocol">
+  <title
+>اختر بروتوكول الصيرفة عبر الإنترنت</title>
+  <para
+>بعد الضغط على &quot;التالي&quot; ستظهر قائمة ببروتوكولات الصيرفة عبر الإنترنت المتاحة: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-page2-hbci.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_configuring_a_account">
+  <title
+>ضبط حساب HBCI</title>
+  <para
+>بعد اختيار &quot;خلفية HBCI باستخدام AqHBCI&quot; والضغط على &quot;التالي&quot; ستظهر الصفحة التالية، والتي يمكنك منها اختيار نوع الأمان: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>راجع <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle#section-2"
+>جدول بنوك AqBanking6</ulink
+> لبعض التفاصيل حول أنواع الأمان التي تدعمها البنوك. إذا لم يكن بنكك مدرجًا هناك، فيجب عليك تجربة Pin/TAN أولًا. </para>
+</sect3>
+<sect3 id="hbci_setup_pintan">
+  <title
+>إعداد Pin/TAN</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_bank_and_server_url">
+  <title
+>اختر البنك ورابط الخادوم</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>في <ulink url="https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/AqBanking6_Bankentabelle"
+>AqBanking6 Bankentabelle</ulink
+> يمكنك العثور على قائمة بروابط خواديم البنوك المعروفة بعملها. </para>
+</sect3>
+<sect3 id="hbci_select_bank_account_and_user_name">
+  <title
+>اختر حساب البنك واسم المستخدم</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_choose_extended_settings_or_continue">
+  <title
+>اختر الإعدادات الموسعة أو استمر</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_select_extended_settings">
+  <title
+>اختر الإعدادات الموسعة</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="hbci_finish_creating_user">
+  <title
+>أنهِ إنشاء المستخدم</title>
+  <para
+>بعد الضغط على &quot;التالي&quot; سيتصل Aqbanking بالخادوم ويجلب شهادة الخادوم ومعلومات البنك. </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-hbci-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>بعد الضغط على &quot;أغلق&quot; يكون حساب المستخدم قد أُنشئ. </para>
+</sect3>
+<sect3 id="add_account">
+  <title
+>أضف حسابًا</title>
+  <para
+>في حال لم يفشل إضافة حساب مستخدم، يجب أن تكون الحسابات المرتبطة بالبنك المعني موجودة بالفعل في قائمة الحسابات. </para>
+</sect3>
+</sect2>
+<sect2 id="paypal_create_user">
+  <title
+>باي بال</title>
+<sect3 id="paypal_select_online_banking_protocol">
+  <title
+>اختر بروتوكول الصيرفة عبر الإنترنت</title>
+  <para
+>بعد الضغط على &quot;التالي&quot; ستظهر قائمة ببروتوكولات الصيرفة عبر الإنترنت المتاحة: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_1">
+  <title
+>ضبط مستخدم لباي بال</title>
+  <para
+>بعد اختيار &quot;باي بال&quot; والضغط على &quot;التالي&quot; ستظهر صفحة المعلومات التالية: </para>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>اضغط على &quot;شغل&quot; للاستمرار. </para>
+</sect3>
+<sect3 id="paypal_user_name_and_email">
+  <title
+>أدخل اسم المستخدم وعنوان بريد باي بال الإلكتروني</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page3.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_api_password_and_signature">
+  <title
+>اختر إعدادات الواجهة البرمجية (API)</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page4.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_info_page_2">
+  <title
+>معلومات ملخصة قبل إنشاء المستخدم</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page5.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_setup_password">
+  <title
+>أدخل كلمة سر جديدة لمستخدم باي بال</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page6.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_finish_creating_user">
+  <title
+>أنهِ إنشاء المستخدم</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-user-wizard-paypal-page7.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+  <para
+>بعد الضغط على &quot;أنهِ&quot; يكون حساب المستخدم قد أُنشئ. </para>
+  <para
+>الخطوة المتبقية هي إنشاء حساب جديد بناءً على هذا المستخدم. </para>
+</sect3>
+<sect3 id="paypal_choose_backend">
+  <title
+>أضف حساب باي بال</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page1.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+<sect3 id="paypal_add_account">
+  <title
+>أضف حساب باي بال</title>
+  <screenshot>
+    <screeninfo
+></screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="aqbanking-account-wizard-paypal-page2.png"/>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

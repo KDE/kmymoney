@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="credits">
+<chapterinfo>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+
+<title
+>إشادات</title>
+
+<para
+>حقوق نشر البرنامج &copy; 2000-2024 فريق تطوير أموالك </para>
+
+<para
+>&underGPL; </para>
+
+<para
+>حقوق نشر التوثيق &copy; 2000-2024 فريق تطوير أموالك </para>
+
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> 
+<para
+>&underFDL; </para>
+
+<sect1 id="credits.active"
+><title
+>المطورون النشطون</title>
+<itemizedlist>
+  <listitem>
+    <para
+><emphasis
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</emphasis
+>: مدير الإصدار والمصون الفعلي. المحرك الرئيس. مدير المشروع. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Ralf.Habacker; &Ralf.Habacker.mail;</emphasis
+>: مطور. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.special"
+><title
+>شكر خاص</title>
+<itemizedlist>
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Allan.Anderson;</emphasis
+>: رقع. استيراد وتصدير CSV. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Marko Käning <email
+>mk-lists@email.de</email
+></emphasis
+>: رقع، وتحزيم، و KF5-CI لنظام OS-X. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Laurent Montel <email
+>montel@kde.org</email
+></emphasis
+>: رقع. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></emphasis
+>: مطور وفنان. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</emphasis
+>: التوثيق ودعم المستخدم. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Wolfgang Rohdewald <email
+>woro@users.sourceforge.net</email
+></emphasis
+>: رقع. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>Kevin Tambascio <email
+>tambascio@users.sourceforge.net</email
+></emphasis
+>: دعم الاستثمار الأولي. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis role="bold"
+>&Robert.Wadley; &Robert.Wadley.mail;</emphasis
+>: فنان. أيقونات، وشاشة البدء، وعرض الصفحة الرئيسة. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.past"
+><title
+>المطورون غير النشطين والمساهمون في الإصدارات السابقة</title>
+<itemizedlist>
+  <listitem>
+    <para
+><emphasis
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</emphasis
+>: مستورد &gnucash;. دعم قاعدة البيانات. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>John C <email
+>tacoturtle@users.sourceforge.net</email
+></emphasis
+>: مطور. </para>
+  </listitem>
+ 
+  <listitem>
+    <para
+><emphasis
+>&Christian.David; &Christian.David.mail;</emphasis
+>: مطور. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail;</emphasis
+>: المؤلف الأصلي، والكثير من الكود المصدري الأولي. مدير المشروع. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>Bernd Gonsior <email
+>bernd.gonsior@googlemail.com</email
+></emphasis
+>: تقارير. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Ace.Jones; &Ace.Jones.mail;</emphasis
+>: منطق التقارير. استيراد OFX. أسعار العملات عبر الإنترنت. التوثيق. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Roger.Lum; &Roger.Lum.mail;</emphasis
+>: التوثيق. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>Ian Neal <email
+>iann_bugzilla@blueyonder.co.uk</email
+></emphasis
+>: المعاملات المجدولة والتقويمات. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Cristian.Onet; &Cristian.Onet.mail;</emphasis
+>: رقع وملحقات. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></emphasis
+>: مدير المشروع. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Alvaro.Soliverez; &Alvaro.Soliverez.mail;</emphasis
+>: التوقعات والتقارير. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Darin.Strait; &Darin.Strait.mail;</emphasis
+>: التوثيق. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Fernando.Vilas; &Fernando.Vilas.mail;</emphasis
+>: دعم قاعدة البيانات. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Lukasz.Wojnilowicz; &Lukasz.Wojnilowicz.mail;</emphasis
+>: مطور. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Colin.Wright; &Colin.Wright.mail;</emphasis
+>: رقع وتوثيق. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</emphasis
+>: رقع وتكامل Woob. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+</chapter>
