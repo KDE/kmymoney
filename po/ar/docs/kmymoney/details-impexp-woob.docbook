@@ -1,0 +1,69 @@
+<sect1 id="details.impexp.woob">
+<sect1info>
+  <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+</sect1info>
+<title
+>مستورد Woob</title>
+
+<sect2
+><title
+>ما هو Woob؟</title>
+<para
+><acronym
+><ulink url="https://woob.tech/"
+>Woob</ulink
+></acronym
+>، أو <quote
+>الويب خارج المتصفحات</quote
+> هو <quote
+>مجموعة من التطبيقات القادرة على التفاعل مع المواقع الإلكترونية، دون مطالبة المستخدم بفتحها في متصفح.</quote
+> أحد <ulink url="https://woob.tech/applications/"
+>هذه التطبيقات</ulink
+> يسمح خصيصًا بالتفاعل مع <ulink url="https://woob.tech/applications/bank"
+>المؤسسات المالية</ulink
+>. يوفر أموالك ملحقًا يستخدمه مباشرة، مما يسمح باستيراد المعاملات من تلك البنوك والمؤسسات التي لا تقدم دعمًا لأي بروتوكول مالي آخر يتعامل معه أموالك. </para>
+</sect2>
+  
+<sect2
+><title
+>تثبيت Woob</title>
+<note>
+  <para
+>يتطلب أموالك حاليًا تثبيت Woob بشكل مستقل. انظر أدناه للحصول على التفاصيل. </para>
+</note>
+
+<para
+>تقوم بعض توزيعات لينكس بتحزيم Woob، وهذه هي طريقة التثبيت المفضلة، إذا كانت متاحة. إذا لم تكن كذلك، فأنت بحاجة إلى تثبيت إصدار حديث من بايثون 3 أولًا قبل المتابعة. تحزم جميع توزيعات لينكس الكبرى بايثون، ويجب عليك استخدام هذا الإصدار، إذا كان ذلك ممكنًا. خلاف ذلك، يمكنك تنزيل حزمة لنظامك من <ulink url="https://www.python.org/downloads/"
+>موقع بايثون الرسمي</ulink
+>. يمكن العثور على الحد الأدنى الدقيق لإصدار بايثون المطلوب بواسطة Woob على <ulink url="https://woob.tech/install/"
+>موقع Woob</ulink
+>. </para>
+
+<para
+>مع تثبيت بايثون 3، يجب أن تكون قادرًا الآن على تنزيل وتثبيت وحدات Woob المطلوبة بسهولة. يرجى الرجوع إلى التعليمات الموجودة على موقع Woob. عندما يعمل أموالك، فإنه يتحقق من وجود Woob، ويحمل الملحق إذا وُجد Woob. انظر قسم <link linkend="details.settings.plugins"
+>الملحقات</link
+> في فصل <link linkend="details.settings"
+>الإعدادات</link
+> لمزيد من المعلومات حول التأكد من تحميل ملحق woob. </para>
+</sect2>
+
+<sect2
+><title
+>استخدام Woob</title>
+<para
+>إذا كان Woob مثبتًا، وملحق woob الخاص بأموالك محملًا، فيجب أن تكون قادرًا على ضبطه للاستخدام مع حساب عن طريق استدعاء عنصر القائمة <menuchoice
+> <guimenu
+>حساب</guimenu
+> <guimenuitem
+>قابل حسابًا عبر الإنترنت...</guimenuitem
+> </menuchoice
+>. بمجرد الانتهاء من ذلك، سيقوم عنصر القائمة <menuchoice
+> <guimenu
+>حساب</guimenu
+> <guimenuitem
+>حدث الحساب...</guimenuitem
+> </menuchoice
+> بتنزيل المعاملات لهذا الحساب باستخدام Woob. </para>
+</sect2>
+</sect1>

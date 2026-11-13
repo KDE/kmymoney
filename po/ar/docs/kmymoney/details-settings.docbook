@@ -1,0 +1,1343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.settings">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>إعدادات أموالك</title>
+
+<para
+>تعدل الإعدادات الموصوفة في هذا الفصل سلوك أموالك، مما يتيح لك تخصيصه لتلبية احتياجات شؤونك المالية الفريدة، وتعديل مظهره وإحساسه ليلائم شخصيتك. يمكن تغيير هذه الإعدادات عبر عنصر القائمة <menuchoice
+> <guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>اضبط أموالك...</guimenuitem
+> </menuchoice
+> أو باستخدام اختصار لوحة المفاتيح <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>،</keycap
+></keycombo
+>. ولكي تدخل أي تغييرات حيز التنفيذ، يجب النقر على زر <guibutton
+>طبق</guibutton
+>. </para>
+
+<para
+>يوجد على يسار حوار <guilabel
+>اضبط</guilabel
+> أو الإعدادات قائمة من الأيقونات واللصائق، يمثل كل منها منطقة معينة من البرنامج. عند النقر على إحدى هذه الأيقونات، سيعرض الجزء الأيمن من الحوار عناصر تحكم لضبط تلك المنطقة من البرنامج، وغالبًا ما تكون مقسمة إلى عدة ألسنة. </para>
+
+<sect1 id="details.settings.general"
+><title
+>عام</title>
+
+<sect2 id="details.settings.general.global"
+><title
+>لسان عام</title>
+<screenshot>
+  <screeninfo
+>ضبط أموالك، عام، لسان عام</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_global.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>ضبط أموالك، عام، لسان عام</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<!-- FIXME: I would prefer a more consistent hierarchy and use of levels here, such
+     as with using sectX and variablelist.  For now, I minimize layout changes. -->
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>خيارات الحفظ الآلي</guilabel
+></term>
+    <listitem>
+      <para
+>ملف الحفظ الآلي هو مجرد نسخة من ملف بياناتك. الغرض الرئيس منها هو أنها تُنشأ آليًا، وفقًا لإعدادات الضبط، لذا لا تحتاج إلى تذكر القيام بأي إجراء. أي ملفات حفظ آلي تُنشأ ستكون في نفس دليل ملف البيانات المفتوح حاليًا. </para>
+
+      <para
+>يؤدي تحديد مربع <guilabel
+>احفظ آليًا بصفة دورية</guilabel
+> إلى توجيه أموالك لحفظ ملفك آليًا في الفاصل الزمني المحدد في حقل <guilabel
+>دقائق</guilabel
+>. القيمة المبدئية هي 10 دقائق. يمكنك تغيير هذا الإعداد من 0 (حفظ آلي فورًا بعد إدخال عملية) وحتى 60 دقيقة. </para>
+
+      <para
+>يؤدي تحديد مربع <guilabel
+>احفظ آليًا عند تعديل الملف عند الإغلاق</guilabel
+> إلى توجيه أموالك لحفظ ملفك آليًا عند إغلاق البرنامج، ولكن فقط إذا أُجريت أي تغييرات. لديك أيضًا خيار إجراء نسخة احتياطية لملف أموالك عند إغلاق البرنامج. </para>
+
+      <para
+>يمكن ضبط <guilabel
+>عدد النسخ الاحتياطية للاحتفاظ بها</guilabel
+> من 0 (معطل) حتى 20. ستُخزن ملفات الحفظ الآلي في نفس مجلد الملف الرئيس. إذا كان ملف بياناتك هو MyFinances.kmy، فعند إنشاء ملف حفظ آلي، سيُسمى MyFinances.kmy.1~. ستزداد أرقام أي ملفات حفظ آلي موجودة بمقدار 1، وصولًا إلى العدد المحدد. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>السنة المالية</guilabel
+></term>
+    <listitem>
+      <para
+>يتيح لك أموالك تحديد سنة مالية تختلف عن السنة الميلادية. للقيام بذلك، أدخل اليوم والشهر الذي تبدأ فيه سنتك المالية. تُستخدم هذه القيمة للميزانيات وبعض التقارير. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>البرامج الخارجية</guilabel
+></term>
+    <listitem>
+      <para
+>لا يؤثر هذا الإعداد مباشرة على تشغيل أموالك، ولكنه يوفر وسيلة مريحة لتشغيل أي أداة خارجية، مثل آلة حاسبة متقدمة. الخطوة الأولى هي إدخال المسار الكامل للبرنامج المختار في مربع نص <guilabel
+>آلة حاسبة</guilabel
+>. </para>
+
+      <para
+>لا يوجد حاليًا عنصر قائمة مباشر لتشغيل الآلة الحاسبة، أو أي برنامج خارجي ضبطته. هناك طريقتان لتشغيل البرنامج. </para>
+
+      <para
+>أولًا، يمكنك استخدام عنصر القائمة <guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>اضبط أشرطة الأدوات...</guimenuitem
+> لوضع أيقونة الآلة الحاسبة <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-accessories-calculator.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> على شريط الأدوات. ثم، عند النقر على تلك الأيقونة في شريط الأدوات، سيشغل أموالك التطبيق المحدد. </para>
+
+      <para
+>ثانيًا، يمكنك استخدام عنصر القائمة <guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>اضبط الاختصارات...</guimenuitem
+> لتعيين اختصار لوحة مفاتيح مخصص. (الإدخال موجود تحت أموالك/الآلة الحاسبة في تلك القائمة). يمكنك بعد ذلك استخدام ذلك الاختصار لتشغيل التطبيق. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.views"
+><title
+>لسان العرض</title>
+<screenshot>
+  <screeninfo
+>ضبط أموالك، عام، لسان منظورات</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_views.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>ضبط أموالك، عام، لسان منظورات</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>خيارات صفحة البدء</guilabel
+></term>
+    <listitem>
+      <para
+>عند بدء تشغيل أموالك، يحدد هذا الخيار ما إذا كان سيبدأ بمنظور الصفحة الرئيسة (<guilabel
+>ابدأ بصفحة البداية</guilabel
+>) أو بالمنظور الذي كان معروضًا عند إغلاق البرنامج في آخر مرة (<guilabel
+>ابدأ بآخر منظور مختار</guilabel
+>.) </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>نوع منظور أموالك</guilabel
+></term>
+    <listitem>
+      <para
+>يتيح لك هذا اختيار واحد من ثلاثة تخطيطات لمحدد المنظورات. عند اختيار منظور <guilabel
+>قائمة</guilabel
+> أو <guilabel
+>شجري</guilabel
+>، ستوضع الأيقونات ولصائقها على الجانب الأيسر من النافذة. يعرض المنظور القائمي أيقونات أكبر فوق اسم كل منظور، بينما يحتوي المنظور الشجري على أيقونات أصغر إلى يسار الأسماء. يضع المنظور <guilabel
+>المبوب</guilabel
+> الأيقونات واللصائق في ألسنة عبر الجزء العلوي من النافذة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <guilabel
+>زامن اختيار الحساب بين منظور السجلات ومنظور الاستثمارات </guilabel>
+    </term>
+    <listitem>
+      <para
+>إذا حُدد هذا الخيار، فستُزامن الحسابات المعروضة في منظور السجلات ومنظور الاستثمارات، مما يعني أنه إذا غيرت الحساب المعروض في أحد المنظورين، ثم انتقلت إلى المنظور الآخر، فستُعرض معلومات نفس الحساب. هذا يزيد من كفاءة التنقل بين هذين المنظورين. إذا لم يُحدد، فإن اختيار أي من هذين المنظورين سيُظهر نفس الحساب الذي اختير سابقًا في ذلك المنظور، بغض النظر عن الحساب المختار في المنظور الآخر. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.filter"
+><title
+>لسان مرشح</title>
+<screenshot>
+  <screeninfo
+>ضبط أموالك، عام، لسان مرشح</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_filter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>ضبط أموالك، عام، لسان مرشح</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>حسابات / فئات</term>
+    <listitem>
+      <para
+>يؤدي تحديد مربع <guilabel
+>لا تظهر الفئات غير المستخدمة</guilabel
+> إلى إخفاء الفئات غير المستخدمة في منظور الفئات. تظل الفئة المخفية متاحة إذا تطلبتها عملية ما. وعن طريق كتابة فئة مخفية في السجل، ستصبح متاحة للاستخدام. </para>
+
+      <para
+>تُستخدم حسابات الأسهم لتتبع الأسهم الفردية أو الاستثمارات المحتفظ بها في حساب استثماري. لا ينبغي الخلط بينها وبين مجموعة حسابات <emphasis
+>رأس المال</emphasis
+> من المستوى الأعلى، والتي تشمل الحساب (أو الحسابات) التي تحتوي على الأرصدة الافتتاحية للحسابات الأخرى. تُخفى حسابات الأسهم افتراضيًا في منظور الحسابات. يؤدي تحديد مربع <guilabel
+>أظهر حسابات الأسهم</guilabel
+> إلى عرض حسابات الأسهم في منظور الحسابات. </para>
+
+      <para
+>تُخفى الفئات افتراضيًا في منظور الحسابات. سيؤدي تحديد <guilabel
+>أظهر الفئات في منظور قائمة الحسابات</guilabel
+> إلى عرض الفئات في منظور الحسابات. </para>
+
+      <para
+>يؤدي تحديد مربع <guilabel
+>لا تظهر الأسهم ذات الرصيد الصفري</guilabel
+> إلى إزالة أي حسابات أسهم ذات رصيد صفري من الظهور في منظور الحسابات. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry
+> 
+    <term
+>الجداول</term>
+    <listitem>
+      <para
+>يؤدي تحديد مربع <guilabel
+>لا تظهر الجداول المنتهية</guilabel
+> إلى إخفاء جميع الجداول المنتهية من الظهور في منظور العمليات المجدولة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>العمليات</term>
+    <listitem>
+      <para
+>لن تُعرض العمليات التي تسبق التاريخ الموجود في حقل <guilabel
+>لا تظهر العمليات قبل</guilabel
+> في منظور السجلات. يمكن أن يكون هذا مفيدًا إذا كانت بياناتك تتضمن عمليات لسنوات عديدة؛ فضبط هذا على سنة أو سنتين ماضيتين يخفي العمليات الأقدم. </para>
+      
+      <para
+>يُعد ضبط هذا الخيار على 1 يناير 1900 (القيمة المبدئية) طريقة جيدة لتنقيح مشاكل استيراد البيانات المتعلقة بالتاريخ، في حال كانت بعض التواريخ بعيدة جدًا في الماضي عن طريق الخطأ. </para>
+
+      <para
+>يؤدي تحديد مربع <guilabel
+>لا تظهر العمليات المُسواة</guilabel
+> إلى ترشيح العمليات حسب حالة التسوية. العمليات التي عُلمت على أنها <emphasis
+>مُسواة</emphasis
+> لن تظهر في منظور السجلات. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.support"
+><title
+>لسان دعم</title>
+<screenshot>
+  <screeninfo
+>ضبط أموالك، قسم عام، لسان دعم</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_support.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>ضبط أموالك، قسم عام، لسان دعم</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>التسجيل</term>
+    <listitem>
+      <para
+>يمكن لأموالك إنشاء ملف سجل عند استيراد البيانات. قد يكون هذا مفيدًا لاستكشاف الأخطاء وإصلاحها، ولكن من المهم توخي الحذر، حيث يمكن أن تحتوي ملفات السجل هذه على بيانات حساسة، مثل أسماء المستخدمين وكلمات المرور بنص صريح، كما هو موضح في الحوار. </para>
+
+      <para
+>لكي يحدث أي تسجيل، حدد المسار إلى الدليل الذي ستُنشأ فيه السجلات في حقل <guilabel
+>مسار السجل</guilabel
+>. يمكنك أيضًا النقر فوق <guibutton
+>...</guibutton
+> إلى يمين الحقل، واستخدام حوار اختيار الملفات للانتقال إلى الدليل المختار. </para>
+
+      <para
+>إذا حددت مربع <guilabel
+>سجل كشوفات الحساب المستوردة</guilabel
+>، فكلما استورد أموالك بيانات، سيحفظ ملفًا يسمى <quote
+> <literal
+>kmm-statement-</literal
+>yyyy-mm-dd<literal
+>T</literal
+>hh-mm-ss.sss<literal
+>.txt</literal
+> </quote
+> في الدليل المحدد. هذا الملف هو ملف XML يحتوي على جميع البيانات المستوردة للتو. </para>
+
+      <para
+>إذا حددت مربع <guilabel
+>سجل عمليات OFX</guilabel
+>، فكلما استخدم أموالك <link linkend="details.impexp.ofxdirectconnect"
+>اتصال OFX المباشر</link
+> لجلب بيانات العمليات، فإنه سيسجل جميع التفاعلات التي يجريها مع خادم OFX البعيد. سيقوم بإلحاق هذه التفاعلات بملف يسمى <literal
+>ofxlog.txt</literal
+> في الدليل المحدد. وكما ذُكر أعلاه، فمن المرجح أن يحتوي هذا الملف على أسماء الحسابات والمستخدمين وكلمات المرور بنص صريح. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.home"
+><title
+>المنزل</title>
+
+<sect2
+><title
+>أقسام عرض صفحة البداية</title>
+<screenshot>
+  <screeninfo
+>ضبط أموالك، منظور البداية</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_home.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>ضبط أموالك، منظور البداية</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>تتيح لك هذه الخيارات تخصيص مظهر <link linkend="firsttime.mainwindow"
+>منظور البداية</link
+> (المسمى أيضًا صفحة البداية أو النافذة الرئيسة) عن طريق اختيار المعلومات التي تود عرضها هناك وترتيب ظهورها. يمكن إعادة ترتيب الأقسام المختارة بالنقر على زري <guibutton
+>أعلى</guibutton
+> أو <guibutton
+>أسفل</guibutton
+> المعنيين. قد لا يظهر القسم، حتى لو حُدد الإدخال المناسب، إذا كان فارغًا. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>الأصول والخصوم</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا قائمة بحسابات الأصول على اليسار وحسابات الخصوم على اليمين. تُرتب هذه وقوائم الحسابات الأخرى في صفحة البداية أبجديًا، ما لم يُذكر خلاف ذلك. عادةً، تُدرج الحسابات المفتوحة فقط، ما لم يُختر <link linkend="reference.menus.view"
+>أظهر كل الحسابات</link
+>. </para>
+
+      <para
+>بالنسبة لهذا وقوائم الحسابات الأخرى في منظور البداية، سيشمل العرض اسم الحساب، تاريخ آخر تسوية، والرصيد الحالي. بالإضافة إلى ذلك، قد تُعرض أعمدة أخرى، كما هو مضبوط في <guilabel
+>عرض معلومات الحساب</guilabel
+> في أسفل هذه النافذة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>المدفوعات المجدولة</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا المرات القادمة من <link linkend="details.schedules"
+>العمليات المجدولة</link
+>، مع التمييز بين تلك المتأخرة، أو المستحقة اليوم، أو المستحقة في المستقبل. يعرض التاريخ، اسم الجدول، الحساب، ومبلغ الدفعة، ورصيد الحساب بعد الدفعة. يعرض افتراضيًا ما يصل إلى ست عمليات. إذا عُرضت ست عمليات، فسيكون هناك رابط يمكنك اختياره لإظهار المزيد، حتى 30 يومًا مقدمًا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>الحسابات المفضلة</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا الحسابات التي عُرّفت كحسابات مفضلة في حوار ضبط <guimenu
+>حساب</guimenu
+> <guimenuitem
+>حرر الحساب...</guimenuitem
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>حسابات الدفع</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا كافة حسابات الدفع؛ وتشمل أي حساب يمكن إيداع الدخل فيه، و/أو دفع الفواتير منه. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>التقارير المفضلة</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا قائمة بجميع التقارير التي عُرّفت كمفضلة في <link linkend="details.reports.config"
+>حوار ضبط</link
+> التقرير. القائمة مرتبة حسب التاريخ الذي أصبح فيه كل تقرير مفضلًا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>التوقعات (الجدول)</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا توقعات لحسابات الأصول والخصوم، على غرار <link linkend="details.forecast.summary"
+>لسان الملخص</link
+> في منظور التوقعات. يمكن التحكم في تفاصيل العرض باستخدام حوار <link linkend="details.forecast.configure"
+>ضبط التوقعات</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>توقعات صافي الثروة</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا مخططًا لصافي ثروتك المتوقعة للأيام 90 القادمة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>الميزانية</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا ملخص الشهر الحالي والتجاوزات لأي <link linkend="details.budgets"
+>ميزانية (ميزانيات) محددة</link
+>. إذا لم تُحدد أي ميزانية، فلن يعرض أي ميزانية أو تجاوزات، مع عرض الإنفاق الفعلي للشهر الحالي. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>التدفق النقدي</guilabel
+></term>
+    <listitem>
+      <para
+>سيعرض هذا تحليل ملخص التدفق النقدي للشهر الحالي.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>تحجيم صفحة البداية/الملخص</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>عامل التقريب:</guilabel
+></term>
+    <listitem>
+      <para
+>يتيح هذا الخيار اختيار حجم الخط كنسبة مئوية ليتناسب مع منظور البداية بناءً على تفضيلات المستخدم. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>تذكر عامل التقريب عند مغادرة البرنامج إذا غُيّر يدويًا بعجلة الفأرة</guilabel
+></term>
+    <listitem>
+      <para
+>سيؤدي اختيار هذا إلى حفظ تفضيل حجم الخط الخاص بك إذا كنت قد غيرته في صفحة البداية باستخدام عجلة الفأرة. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.home.acctinfo"
+><title
+>عرض معلومات الحساب</title>
+<para
+>تتيح لك هذه الخيارات تخصيص المعلومات المضمنة في أي قائمة حسابات في منظور البداية. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>أظهر معلومات حد الحساب</guilabel
+></term>
+    <listitem>
+      <para
+>يعرض حد الحساب كما هو محدد في حوار <link linkend="details.accounts.edit"
+>تحرير الحساب</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>أظهر حالة الرصيد للحسابات المتصلة بالإنترنت المربوطة</guilabel
+></term>
+    <listitem>
+      <para
+>يظهر حالة الرصيد للحسابات المربوطة، والحسابات التي استُوردت عملياتها. ترمز الحالة بأيقونة في العمود الذي يسبق اسم الحساب. لاحظ أن الألوان الموصوفة هنا قد تختلف عما يعرض لك، اعتمادًا على سمة العرض المختارة. تشير علامة الصح الخضراء <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-dialog-ok.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> إلى أن الرصيد عبر الإنترنت والرصيد المحلي متماثلان. تشير علامة التحذير الحمراء <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-dialog-cancel.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> إلى وجود عدم تطابق بين الملف المحلي والرصيد عبر الإنترنت. يشير صندوق البريد ذو السهم الأخضر <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-mail-receive.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> إلى أن الملف المحلي يحتوي على عمليات أحدث من آخر تحديث عبر الإنترنت. وهذا ينبه المستخدم لإجراء تحديث عبر الإنترنت. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>أظهر عدد العمليات غير المعلمة لكل حساب [!M]</guilabel
+></term>
+    <listitem>
+      <para
+>يدرج عمودًا بعد اسم الحساب، يظهر عدد العمليات غير المعلمة في الحساب. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>أظهر عدد العمليات المصفاة لكل حساب [C]</guilabel
+></term>
+    <listitem>
+      <para
+>يدرج عمودًا يظهر عدد العمليات المصفاة للحساب. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>أظهر عدد العمليات غير المُسواة (غير معلمة + مصفاة) لكل حساب [!R]</guilabel
+></term>
+    <listitem>
+      <para
+>يدرج عمودًا يظهر عدد العمليات غير المُسواة للحساب، أي مجموع كافة العمليات غير المعلمة والمصفاة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>أظهر تاريخ آخر تسوية</guilabel
+></term>
+    <listitem>
+      <para
+>يدرج عمودًا إضافيًا يظهر تاريخ آخر تسوية للحساب. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.register"
+><title
+>سجل الأستاذ</title>
+<para
+>تتيح الإعدادات والخيارات في هذا القسم تعديل سجل العمليات المعروض في منظور السجلات. </para>
+
+<sect2 id="details.settings.register.display"
+><title
+>لسان عرض</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>أظهر شبكة في السجل</guilabel
+></term>
+    <listitem>
+      <para
+>يؤدي اختيار هذا الخيار إلى عرض خطوط الشبكة في منظور السجلات. هذا خيار عرض إضافي قد يسهل تصور العمليات المنفصلة وأجزائها المكونة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>أظهر نموذج العملية</guilabel
+></term>
+    <listitem>
+      <para
+>يؤدي اختيار هذا الخيار إلى عرض <link linkend="details.ledger.transactionform"
+>نموذج العملية</link
+> في أسفل السجل، وهو المكان الذي تدخل فيه العملية أو تحررها. إذا لم يُعرض نموذج العملية، فستقوم بتحرير العملية داخل السجل نفسه. مع تمكين هذا الخيار، تظهر عمليات أقل في السجل مقارنة بحالة تعطيله. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>اعرض الجداول المتأخرة مع التاريخ المخطط له</guilabel
+></term>
+    <listitem>
+      <para
+>تُعرض العمليات المجدولة ذات التواريخ المستقبلية في منظور السجلات للحساب المعني. عندما يمر التاريخ، وتصبح العملية المجدولة متأخرة، فإنها لا تظهر في السجل، ما لم يُحدد هذا الخيار. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>تفاصيل إدخال السجل</guilabel
+></term>
+    <listitem>
+      <formalpara>
+        <title
+><guilabel
+>أظهر كافة إدخالات السجل بكامل التفاصيل</guilabel
+></title>
+        <para
+>يؤدي اختيار هذا الخيار إلى جعل السجل يعرض جميع المعلومات لكل العمليات المعروضة، مع خطوط منفصلة في عمود التفاصيل للفئة والوسوم والمذكرة. إذا لم يُحدد، فلن تُعرض الفئة والوسوم والمذكرة. وهذا له نفس تأثير اختيار خيار القائمة <link linkend="reference.menus.settings.transactiondetail"
+>أظهر تفاصيل العملية</link
+>. </para>
+      </formalpara>
+
+      <formalpara id="details.settings.register.lens">
+        <title
+><guilabel
+>استخدم عدسة السجل</guilabel
+></title>
+        <para
+>يؤدي اختيار هذا الخيار إلى عرض كافة خطوط التفاصيل للعملية المختارة، حتى لو لم يُحدد <guilabel
+>أظهر كافة إدخالات السجل بكامل التفاصيل</guilabel
+>. </para>
+      </formalpara>
+
+      <formalpara
+><title
+>أظهر كافة تفاصيل التقسيم في السجل</title>
+      <para
+>يؤدي اختيار هذا الخيار إلى إظهار المزيد من التفاصيل حول العمليات المقسمة. </para>
+      </formalpara>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>ترويسات المعلومات</guilabel
+></term>
+    <listitem>
+      <formalpara>
+        <title
+><guilabel
+>أظهر ترويسات المجموعات بين العمليات</guilabel
+></title>
+        <para
+>سيؤدي اختيار هذا الخيار إلى عرض ترويسات المجموعات في السجل. تشير هذه إلى فترات زمنية أو معالم مثل الشهر الماضي، الأسبوع الماضي، هذا الشهر، آخر تسوية، الأسبوع القادم، والشهر القادم. </para>
+      </formalpara>
+
+      <formalpara>
+        <title>
+          <guilabel
+>أظهر الترويسة للسنة المالية السابقة والحالية</guilabel>
+        </title>
+        <para
+>سيؤدي اختيار هذا الخيار إلى عرض ترويسات المجموعات في السجل للسنة المالية الحالية والسابقة. </para>
+      </formalpara>
+
+      <formalpara>
+        <title
+><guilabel
+>ترويسات مجموعة التسوية</guilabel
+></title>
+        <para
+>تتحكم هذه القائمة المنسدلة في عرض ترويسات المجموعات للتسويات. إذا اختير <guilabel
+>لا تظهر إدخالات التسوية</guilabel
+>، فلن تظهر ترويسات المجموعات للتسويات. إذا اختير <guilabel
+>أظهر آخر إدخال تسوية مع التاريخ والرصيد في السجل</guilabel
+>، فسيُشار إلى أحدث تسوية فقط بترويسة مجموعة. إذا اختير <guilabel
+>أظهر كافة إدخالات التسوية مع التاريخ والرصيد في السجل</guilabel
+>، فستظهر ترويسة مجموعة لكافة التسويات السابقة. </para>
+      </formalpara>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.sorting"
+><title
+>لسان فرز</title>
+<para
+>تتيح لك هذه الأقسام الثلاثة تعيين ترتيب الفرز المبدئي للعمليات في منظور السجلات. في جميع الحالات، تظهر القائمة على اليمين الحقول التي اختيرت كجزء من ترتيب الفرز لذلك المنظور، وتظهر القائمة على اليسار جميع الحقول المتاحة للفرز والتي لم تُختر بعد. للفرز بناءً على عنصر، اختره (نقرة واحدة بالفأرة) وانقر على السهم الأيمن بين القائمتين. يمكنك ضبط الترتيب النسبي للحقول باختيار أحدها وضبط موقعه في القائمة باستخدام السهمين لأعلى ولأسفل الموجودين على يمين القائمة. يمكنك التبديل بين الفرز التصاعدي والتنازلي لأي عنصر بالنقر المزدوج عليه. </para>
+
+<para
+>الحقول المتاحة للفرز هي نفسها للأقسام الثلاثة: المبلغ، الفئة، ترتيب الإدخال (تاريخ إنشاء العملية، وليس معرف العملية الداخلي)، الرقم، المستفيد، تاريخ القيد، حالة التسوية، تاريخ التسوية، الورقة المالية، والنوع. </para>
+
+<sect3 id="details.settings.register.sorting.normal"
+><title
+>اللسان الفرعي للمنظور العادي</title>
+<para
+>يتحكم هذا اللسان في ترتيب الفرز المبدئي لمنظور السجلات العادي. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.reconciliation"
+><title
+>اللسان الفرعي لمنظور التسوية</title>
+<para
+>يتحكم هذا اللسان في ترتيب الفرز المبدئي للسجل أثناء وجوده في منظور التسوية. هذا هو عرض العمليات الظاهر أثناء عملية <link linkend="details.reconcile"
+>التسوية</link
+>. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.search"
+><title
+>اللسان الفرعي لمنظور البحث</title>
+<para
+>يتحكم هذا اللسان في ترتيب الفرز المبدئي للسجل أثناء وجوده في <link linkend="details.search"
+>منظور البحث</link
+>. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.register.dataentry"
+><title
+>لسان إدخال البيانات</title>
+<para
+>تؤثر هذه الخيارات على عملية إنشاء عمليات جديدة.</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>زد رقم الشيك آليًا</guilabel
+></term>
+    <listitem>
+      <para
+>سيؤدي تمكين هذا إلى زيادة رقم الشيك آليًا كلما أُدخلت عملية شيك جديدة. وله نفس التأثير سواء استخدمت عدسة السجل أو نموذج العملية. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <guilabel
+>احتفظ بالتغييرات عند اختيار عملية/تقسيم مختلف</guilabel>
+    </term>
+    <listitem>
+      <para
+>عند التمكين، سيؤدي اختيار عملية أو تقسيم مختلف إلى حفظ أي تعديلات أُجريت على العملية الحالية. عند التعطيل، سيؤدي اختيار تقسيم عملية مختلف إلى سؤالك عما إذا كنت تريد حفظ أي تغييرات أم لا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>استخدم مفتاح Enter للتنقل بين الحقول</guilabel
+></term>
+    <listitem>
+      <para
+>عند التمكين، سيؤدي الضغط على &Enter; إلى نقل التركيز إلى الحقل التالي للعملية. وعندما تكون في الحقل الأخير، ستُحفظ العملية. عند التعطيل، سيكون التنقل بين الحقول باستخدام مفتاح &Tab; أو الفأرة. الضغط على مفتاح &Enter; سيحفظ العملية، بغض النظر عن الحقل الذي يقع عليه التركيز حاليًا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>طابق الأسماء من البداية</guilabel
+></term>
+    <listitem>
+      <para
+>يتحكم هذا الخيار في <link linkend="details.payees.details.matching"
+>مطابقة المستفيد</link
+>. عند التمكين، ستُطابق أسماء المستفيدين دائمًا من البداية. عند التعطيل، ستُطابق أي سلسلة فرعية. أيضًا، عند التمكين، يمكن وضع خيارات إضافية للمطابقة في لسان المطابقة في منظور المستفيدين. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <!-- FIXME:   missing description of Automatic reconciliation -->
+    <term
+><guilabel
+>تسوية آلية</guilabel
+></term>
+    <listitem>
+      <para
+>هذا الخيار بحاجة للتوثيق. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>الموضع المبدئي للمؤشر داخل حقل التاريخ</guilabel
+></term>
+    <listitem>
+      <para
+>عندما تنتقل إلى حقل تاريخ العملية (سواء عن طريق إنشاء عملية أو تحريرها، أو استخدام &Tab; أو &Enter;)، تحدد هذه القائمة المنسدلة ما إذا كان المؤشر سيبدأ في جزء اليوم، أو الشهر، أو السنة من التاريخ. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>حالة التسوية المبدئية</guilabel
+></term>
+    <listitem>
+      <para
+>تتيح لك هذه القائمة المنسدلة تحديد حالة التسوية المبدئية للعمليات الجديدة: غير مُسواة، مصفاة، أو مُسواة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>إكمال آلي</guilabel
+></term>
+    <listitem>
+      <para
+>يتيح لك هذا الخيار تحديد السلوك المطلوب للإكمال الآلي. يتحكم هذا في أي من العمليات السابقة لنفس المستفيد ستُعرض (إن وجدت)، وأي منها ستُستخدم للإكمال الآلي لتفاصيل العملية الجديدة. </para>
+
+      <itemizedlist>
+        <listitem>
+          <para
+>لا إكمال آلي</para>
+          <para
+>سيؤدي هذا إلى تعطيل الإكمال الآلي، ويجب عليك إدخال جميع تفاصيل العملية الجديدة يدويًا. </para>
+        </listitem>
+        
+        <listitem>
+          <para
+>نفس العملية إذا كان المبلغ يختلف بنسبة أقل من النسبة المئوية المحددة أدناه</para>
+          <para
+>عند اختيار هذا الخيار، عند إدخال عملية جديدة، سيعرض أموالك قائمة بالعمليات السابقة لنفس المستفيد والحساب. إذا كان مبلغ العملية السابقة قريبًا بدرجة كافية من المبلغ الذي أدخلته، فسيُعتبر مطابقًا، وستُستخدم تفاصيل تلك العملية السابقة لإكمال تفاصيل العملية الجديدة آليًا. تعني عبارة <quote
+>قريب بدرجة كافية</quote
+> ضمن النسبة المئوية المحددة في المربع بجانب <guilabel
+>نفس العملية إذا اختلف المبلغ بأقل من</guilabel
+>، ويمكن أن تتراوح من 0 إلى 100%. إذا كانت النسبة 0، فستُعرض كافة العمليات السابقة للمستفيد والحساب، ويمكنك اختيار إحدى تلك العمليات لاستخدامها في الإكمال الآلي بالنقر عليها. </para>
+        </listitem>
+
+        <listitem>
+          <para
+>باستخدام العملية الأكثر استخدامًا سابقًا للمستفيد</para>
+          <para
+>عند اختيار هذا الخيار، عند إدخال عملية جديدة، سيملأ أموالك جميع تفاصيل العملية بناءً على العملية الأكثر استخدامًا سابقًا للمستفيد المختار. </para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>استخدم المذكرات من العملية السابقة</guilabel
+></term>
+    <listitem>
+      <para
+>عند الاختيار، ستُدخل المذكرة من العملية المدخلة سابقًا آليًا كمذكرة للعملية الجديدة. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.import"
+><title
+>لسان استيراد</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>طابق العملية خلال أيام</guilabel
+></term>
+    <listitem>
+      <para
+>ابحث عن العمليات المطابقة ضمن نطاق العملية المستوردة +/- عدد الأيام المعطى، والذي يمكن ضبطه من 0 إلى 99. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>اسأل عن الفئة المبدئية لمستفيد جديد</guilabel
+></term>
+    <listitem>
+      <para
+>إذا حُدد هذا الخيار، فكلما كُشف عن مستفيد جديد أثناء الاستيراد، سيُسأل المستخدم عن الفئة المبدئية للمستفيد. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.schedules"
+><title
+>العمليات المجدولة</title>
+<para
+>تتيح لك هذه الخيارات تعديل سلوك <link linkend="details.schedules"
+>العمليات المجدولة</link
+>. </para>
+
+<sect2
+><title
+>خيارات بدء التشغيل</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>افحص الجداول عند بدء التشغيل</guilabel
+></term>
+    <listitem>
+      <para
+>يمكن فحص الجدول عند بدء تشغيل أموالك. إذا طابقت عملية مجدولة معايير الجدول المحددة، فسيصدر أموالك إشعارًا يتطلب التعامل مع العملية. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <guilabel
+>أدخل العمليات قبل عدد الأيام هذا</guilabel>
+    </term>
+    <listitem>
+      <para
+>حدد عدد الأيام المقدمة التي يجب فيها إدخال العملية المجدولة. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.schedules.calendar"
+><title
+>أيام المعالجة</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>استخدم تقويم العطلات للمنطقة</guilabel
+></term>
+    <listitem>
+      <para
+>اختر منطقة العالم التي تناسب احتياجاتك بشكل أفضل.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>عنصر غير مجمع</title>
+<!-- FIXME: This is a good example of problems with the current mix of sectX and variablelist.  Without a title, this
+     sect has inadequate spacing above.  so it looks part of the previous group, but the actual title doesn't match the
+     lack of title in the actual config dialog.  I'm open to suggestions on how to deal with this.  Not using sect2 for
+     boxes might help, but would be a lot of effort.  Perhaps just adding a box and title to the config dialog?-->
+<literallayout
+>
+</literallayout>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>عدد أيام معاينة الجداول في السجل</guilabel
+></term>
+    <listitem>
+      <para
+>حدد عدد الأيام المقدمة التي يجب أن تظهر فيها العمليات المجدولة في السجل. بالنسبة للعمليات المجدولة المستقبلية المعروضة في السجل، يمكنك إدخالها أو تخطيها بالنقر عليها بزر الفأرة الأيمن. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.onlinequote"
+><title
+>الأسعار عبر الإنترنت</title>
+<para
+>تحدد هذه الإعدادات كيفية جلب أسعار العملات والأسهم من مصادر مختلفة عبر الإنترنت. وتشمل هذه أسعار الأسهم والسندات وغيرها من الأوراق المالية، بالإضافة إلى أسعار المعادن الثمينة وتحويل العملات. </para>
+
+<para
+>يتيح لك هذا القسم تغيير مصادر الأسعار عبر الإنترنت لأموالك. وبصفة عامة، هذه ميزة متقدمة، ويجب ألا يحاول القيام بها إلا المستخدمون الأكثر مهارة تقنيًا. </para>
+
+<para
+>لمزيد من التفاصيل، يرجى الرجوع إلى قسم <link linkend="details.investments.onlinequotes"
+>أسعار الأثمان عبر الإنترنت</link
+>. </para>
+
+<note>
+  <para
+>تُضبط القائمة والضبط المبدئيان لمصادر الأسعار عبر الإنترنت عندما ينشئ أموالك ملف بياناتك لأول مرة. إذا أجرت مصلحة عبر الإنترنت تغييرًا يتطلب تغييرًا في هذه الإعدادات لكي يستمر أموالك في استخدامها كمصدر صالح، يجب على المستخدم إجراء التغييرات اللازمة، باستخدام هذا الحوار، بناءً على التعليمات المنشورة في أحد <link linkend="firsttime.contact"
+>خيارات الدعم</link
+> المقترحة. نأمل في المستقبل القريب أن تُغير طريقة التعامل مع ضبط المصادر عبر الإنترنت بحيث يتمكن أموالك من جلب أي تحديثات ضرورية لهذه الإعدادات آليًا دون مطالبة المستخدم بإجراء أي تعديلات يدوية. </para>
+</note>
+</sect1>
+
+<sect1 id="details.settings.colors"
+><title
+>الألوان</title>
+<para
+>يتيح لك هذا القسم تخصيص الألوان المستخدمة داخل أموالك. إذا لم يُحدد <guilabel
+>ألوان مخصصة</guilabel
+>، فستُستخدم الألوان المبدئية. </para>
+
+<para
+>لتخصيص الألوان، حدد مربع <guilabel
+>ألوان مخصصة</guilabel
+>. يمكنك بعد ذلك تعديل أي من الألوان بالنقر فوق زر اللون، مما سيفتح لوحة اختيار الألوان. سيوفر هذا خيارات غير محدودة في اختيار الألوان. يمكنك اختيار لون أساسي محدد، أو التقاط لون بالنقر في أي مكان على لوحة الألوان المعروضة، أو إدخال لون معرف بـ HTML، أو تحديد قيم لدرجة اللون، والتشبع، والقيمة، والأحمر، والأخضر، والأزرق. </para>
+</sect1>
+
+<sect1 id="details.settings.fonts"
+><title
+>الخطوط</title>
+<para
+>يتيح لك هذا القسم تعديل الخطوط المستخدمة داخل حقول الخلايا أو الترويسة. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>استخدم خطوط النظام</guilabel
+></term>
+    <listitem>
+      <para
+>اختر هذا لاستخدام خطوط النظام. يتيح لك عدم اختيار هذا الخيار تحديد الخطوط التي تختارها. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>خط الخلية</guilabel
+></term>
+    <listitem>
+      <para
+>حدد الخط المخصص لاستخدامه داخل كل خلية من السجلات.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>خط الترويسة</guilabel
+></term>
+    <listitem>
+      <para
+>حدد الخط المخصص لاستخدامه لترويسات كل منظور داخل السجل. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.icons"
+><title
+>الأيقونات</title>
+<para
+>يتيح هذا الخيار تحديد الأيقونات التي ستُعرض. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>إعدادات الأيقونات الفردية</guilabel
+></term>
+    <listitem>
+      <para
+>تعرض القائمة المنسدلة مجموعة مختارة من سمات الأيقونات المتاحة للاستخدام. قد تتوفر أيقونات إضافية للتنزيل والاستخدام اعتمادًا على نظام التشغيل أو توزيعة لينكس المثبتة. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.plugins"
+><title
+>الملحقات</title>
+<para
+>يوفر هذا القسم معلومات حول الملحقات المتاحة، ويتيح لك تعديل سلوك بعضها. لاحظ أن قائمة الملحقات المعروضة ستعتمد على الملحقات التي وجدها أموالك عند بدئه. ولا يهم ما إذا كان الملحق قد صُرّف كجزء من التطبيق أو أُضيف كحزمة منفصلة. </para>
+  
+<screenshot>
+  <screeninfo
+>ضبط أموالك، الملحقات</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>ضبط أموالك، الملحقات</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يمكن تمكين أو تعطيل كل ملحق، وفقًا لحالة مربع الاختيار الموجود على يسار اسم الملحق وأيقونته. بالإضافة إلى ذلك، يوجد على اليمين زر <guibutton
+>معلومات</guibutton
+> &infoicon; لكل ملحق، والذي سيعرض إصدار الملحق ومؤلفه (مؤلفيه). بالنسبة لبعض الملحقات، يمكن العثور على مزيد من المعلومات حول ضبطه واستخدامه بالنقر فوق &configicon; <guibutton
+>اضبط</guibutton
+> الموجود مباشرة على يسار زر المعلومات. </para>
+
+<para
+>حتى وقت قريب، كان هناك ملحق واحد فقط يتطلب الضبط، وهو ملحق طباعة الشيكات. أما الآن، فهناك العديد من الملحقات التي لها صفحات ضبط تُستدعى من هذه الصفحة. هذه الملحقات مدرجة في الأقسام التالية. لاحظ مع ذلك، أن العديد منها قد وُصف سابقًا في هذا المستند. </para>
+
+<sect2 id="details.settings.plugins.printchecks"
+><title
+>ملحق طباعة الشيكات</title>
+<para
+>يوجد ملحق لطباعة الشيكات، وهو مضمن مع مصدر أموالك، ويجب أن يكون ممكنًا دائمًا. يتيح طباعة شيك بناءً على البيانات من عملية مختارة، مع التحكم في التخطيط بواسطة قالب HTML. تحتاج إلى استخدام قالب يتوافق مع شيكاتك المطبوعة مسبقًا. يوفر البرنامج قالبًا مبدئيًا مدمجًا. يمكنك أيضًا اختيار قالب مخصص. للقيام بذلك، انقر فوق &configicon; <guibutton
+>اضبط</guibutton
+> ليُعرض حوار ضبط <guilabel
+>طباعة الشيكات</guilabel
+>. في الجزء العلوي يمكنك تحديد المربع لاستخدام قالب مخصص. إلى يمين ذلك يوجد زر يفتح منتقي ملفات، لاختيار ملف قالب بديل. </para>
+
+<para
+>ملف القالب هو ملف HTML، تُستخدم فيه سلاسل نصية محددة للإشارة إلى حقول من العملية ومن الحساب الحالي والمؤسسة لإظهار مكان طباعتها على الشيك. يشحن أموالك مع قالب مبدئي مدمج. في <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+>هذا العنوان</ulink
+>، يمكنك العثور على ملف مصدر HTML للقالب المبدئي، بالإضافة إلى بعض القوالب الإضافية. يجب أن تكون قادرًا إما على استخدام أحدها أو تعديل أحدها ليناسب احتياجاتك. لاحظ أنه لا يُدعم إلا <emphasis
+>مجموعة فرعية</emphasis
+> من معيار HTML — ويمكن العثور على التوثيق التفصيلي حول ذلك <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
+>هنا</ulink
+>. </para>
+
+<!-- FIXME: do we want to actually include these checkwriting variables here, and if
+           so, with how much detail? -->
+<!-- info from source code on substitution variables.  Future exercise to list/describe them here.
+    // data about the user
+    checkHTML.replace("$OWNER_NAME", file->user().name());
+    checkHTML.replace("$OWNER_ADDRESS", file->user().address());
+    checkHTML.replace("$OWNER_CITY", file->user().city());
+    checkHTML.replace("$OWNER_STATE", file->user().state());
+
+    // data about the account's institution
+    checkHTML.replace("$INSTITUTION_NAME", institution.name());
+    checkHTML.replace("$INSTITUTION_STREET", institution.street());
+    checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
+    checkHTML.replace("$INSTITUTION_TOWN", institution.town());
+    checkHTML.replace("$INSTITUTION_CITY", institution.city());
+    checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
+    checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+
+    // data about the transaction
+    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
+    checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
+    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
+    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
+    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
+    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
+    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$MEMO", (*it).split().memo());
+-->
+</sect2>
+
+<sect2 id="details.settings.plugins.csvimporter"
+><title
+>مستورد CSV</title>
+<para
+>نوقشت بعض جوانب ضبط ملحق مستورد CSV سابقًا <link linkend="details.settings.plugins.csvimporter"
+>هنا</link
+>. ومع ذلك، هناك أيضًا حوار يمكن استدعاؤه هنا. </para>
+
+<screenshot>
+  <screeninfo
+>اضبط ملحق مستورد csv</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_csvimporter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>اضبط ملحق مستورد csv</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect3
+><title
+>الكشف الآلي</title>
+<para
+>من الأفضل عمومًا ترك الملحق يكشف آليًا عن محدد الحقول والرمز العشري وتنسيق التاريخ. ومع ذلك، من الممكن تعطيل هذا السلوك لكل من هذه العناصر عن طريق إلغاء تحديد المربع المناسب. </para>
+
+<para
+>في بعض الحالات، يحتوي ملف csv المراد استيراده على اسم الحساب في مكان ما في الأسطر الأولى من الملف. يمكنك مطالبة الملحق بالبحث عن هذا آليًا عن طريق تحديد المربع المناسب، بشكل منفصل للاستيرادات المصرفية والاستثمارية. </para>
+</sect3>
+
+<sect3
+><title
+>تشكيلة تصدير QIF</title>
+<para
+>على الرغم من أنه من الأفضل حاليًا استخدام ملحق مصدر QIF مباشرة، إلا أنه لا يزال من الممكن جعل مستورد CSV يصدر ملف QIF. في هذه الحالة، يمكنك استخدام هذه القائمة المنسدلة لتحديد تشكيلة تصدير QIF المبدئية المراد استخدامها. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.plugins.forecast"
+><title
+>منظور التوقعات</title>
+<para
+>هذا موصوف في قسم <link linkend="details.forecast.configure"
+>ضبط التوقعات</link
+> من <link linkend="details.forecast"
+>فصل التوقعات.</link
+> </para>
+</sect2>
+
+<sect2
+><title
+>iCalendar</title>
+<para
+>أموالك قادر على تصدير ملف بتنسيق <quote
+>iCalendar</quote
+>، لذا يمكنك استيراد عملياتك المجدولة إلى منظم كيدي، أو برنامج تقويم آخر، لكي تُذكّر بالعمليات المجدولة. يتم تصدير الملف فعليًا باستخدام عنصر القائمة <menuchoice
+> <guimenu
+>ملف</guimenu
+> <guisubmenu
+>تصدير</guisubmenu
+> <guimenuitem
+>الجداول إلى iCalendar</guimenuitem
+> </menuchoice
+>. </para>
+
+<screenshot>
+  <screeninfo
+>اضبط تصدير icalendar</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_ical.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>اضبط تصدير icalendar</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>سيحتوي الملف المصدر على حدث واحد لكل عملية مجدولة. هناك عناصر تحكم لضبط ما إذا كنت تريد أن يظهر التقويم تذكيرات للأحداث، بالإضافة إلى عدد التذكيرات، ومدى تقدم التذكيرات عن الأحداث، على الرغم من أن هذه لا يبدو أن لها أي تأثير حاليًا على الملف المنشأ. </para>
+
+<para
+>يتيح لك الحقل الأخير في الحوار تحديد الاسم والمسار المبدئيين للملف المصدر. كالعادة، يمكنك إما كتابة المسار الكامل، أو النقر فوق أيقونة منتقي الملفات الموجودة على اليمين للحصول على حوار اختيار الملفات. حاليًا، يفترض حوار حفظ الملف المجلد المحدد هنا، ولكنك لا تزال بحاجة إلى إدخال اسم الملف الفعلي وقت التصدير. </para>
+</sect2>
+
+<!-- FIXME: There is some overlap between here and the Reference/Settings section.
+            There should be better coordination between the two areas.  -->
+<sect2 id="details.settings.plugins.kbanking"
+><title
+>KBanking</title>
+
+<para
+>يضيف هذا الملحق دعمًا لخدمات المصارف عبر الإنترنت HBCI/FinTs و OFX و PayPal باستخدام <ulink url="https://www.aquamaniac.de/rdm/"
+>AqBanking</ulink
+>، وهو مشروع مفتوح المصدر بحد ذاته. تُستخدم HBCI/FinTs للتواصل مع المصارف في ألمانيا فقط. </para>
+
+<para
+>لا يتم ضبط هذا الملحق عبر هذا الحوار، بل باستخدام عنصر القائمة <link linkend="reference.menus.settings.help"
+> <guimenu
+>إعدادات</guimenu
+> <guisubmenu
+>اضبط Aqbanking...</guisubmenu
+> </link
+>، وهناك مزيد من المعلومات هناك. </para>
+</sect2>
+
+<sect2
+><title
+>مصدر QIF، مستورد QIF</title>
+<para
+>هذه موصوفة في القسم الخاص بـ <link linkend="details.impexp.qif.profile"
+>تشكيلات QIF</link
+>. وكما هو موضح في ذلك القسم، فإن استيراد QIF وتصدير QIF نُفذا كملحقين منفصلين، وكلاهما يستخدم نفس مجموعة التشكيلات. </para>
+</sect2>
+
+<sect2 id="details.settings.plugins.reports"
+><title
+>منظور التقارير</title>
+<para
+>يوفر هذا حوارًا حيث يمكنك ضبط بعض القيم المبدئية لاستخدامها عند عرض <link linkend="details.reports"
+>التقارير</link
+>. التفاصيل موصوفة مع إعدادات <link linkend="details.reports.config.plugin"
+>ضبط التقارير</link
+> الأخرى. </para>
+</sect2>
+
+<sect2
+><title
+>تخزين XML</title>
+<para
+>التخزين المبدئي لبياناتك هو بتنسيق XML، الموصوف في الفصل الخاص بـ <link linkend="details.formats"
+>تنسيقات الملفات</link
+>. ولأن الكود الذي يقرأ ويحفظ بياناتك نُفذ كملحق، فإن حوار الضبط الذي يتحكم في بعض جوانب هذا التخزين يُصل إليه عبر قسم الملحقات في ضبط أموالك العام، على الرغم من أنه موصوف في القسم المرتبط أعلاه. </para>
+</sect2>
+</sect1>
+</chapter>

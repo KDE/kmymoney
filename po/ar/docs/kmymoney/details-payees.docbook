@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>المستفيدون</title>
+
+<para
+>يمثل المستفيدون الأشخاص أو المؤسسات التي تعطيها المال. أما الدافعون فهم أولئك الذين تستلم منهم المال. يُعاملون بشكل متطابق في أموالك ويُفرّق بينهم فقط من خلال الاتجاه الذي يتحرك فيه المال. من الممكن لشخص واحد أو مؤسسة واحدة أن تكون مستفيدًا ودافعًا في آن واحد. مثال على ذلك هو صاحب العمل، الذي يدفع لك المال كراتب، ولكنك قد تدفع له المال عندما تتناول الغداء في الكافتيريا في العمل. الأمر يعود لك تمامًا في اختيار استخدام نفس المستفيد لكلا نوعي المعاملات، أو إنشاء مستفيد ودافع منفصلين، إذا كنت ترغب في تتبعهما بشكل منفصل. </para>
+
+<sect1 id="details.payees.view"
+><title
+>منظور المستفيدين</title>
+
+<para
+>يوفر منظور المستفيدين معلومات مفصلة حول جميع المستفيدين والدافعين المشاركين في المعاملات. يخزن أموالك معلومات حول جميع المستفيدين والدافعين من جميع المعاملات الحالية. وهذا يجعل من الممكن اختيار مستفيد من قائمة بدلًا من الاضطرار إلى كتابة الاسم الكامل، مما يقلل أيضًا من فرصة الخطأ في الإملاء أو كتابة الاسم الخاطئ. </para>
+
+<screenshot>
+  <screeninfo
+>منظور المستفيدين</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payeeview.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>منظور المستفيدين</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>مثل منظور الأوسمة، ينقسم منظور المستفيدين إلى منطقتين رئيستين: قائمة المستفيدين والدافعين على اليسار، ومنطقة التفاصيل على اليمين. </para>
+
+<para
+>ينقسم منظور المستفيدين إلى منطقتين رئيستين: قائمة المستفيدين والدافعين على اليسار، ومنطقة التفاصيل على اليمين. يسمح قسم <guilabel
+>المستفيدون</guilabel
+> بإضافة المستفيدين وحذفهم وإعادة تسميتهم ودمجهم. تحتوي منطقة التفاصيل على عدة ألسنة، تعرض المعاملات والعنوان ومعلومات المطابقة وفئة الحساب المبدئية وأرقام الحساب للمستفيد المحدد في القائمة. علاوة على ذلك، يمكن إنشاء وإدارة الروابط بين محتويات حقل المذكرة الخاصة بالمستفيد في المعاملة ومسارات الملفات المحلية أو عناوين URL البعيدة. </para>
+
+<para
+>تحتوي منطقة التفاصيل على عدة ألسنة: المعاملات، والعنوان، والمطابقة، والفئة المبدئية، وأرقام الحساب، ومطابقة الروابط. يُشرح كل منها في الأقسام التالية. </para>
+
+<sect2
+><title
+>إضافة مستفيد أو دافع</title>
+<para
+>لإضافة مستفيد أو دافع، انقر فوق زر مستفيد جديد <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="list-add-user.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+>. ينشئ هذا مستفيدًا جديدًا باسم <quote
+>مستفيد جديد</quote
+>. يمكنك أيضًا النقر بزر الفأرة الأيمن على أي مستفيد موجود واختيار <guimenuitem
+>أضف مستفيدًا</guimenuitem
+>. </para>
+</sect2>
+
+<sect2
+><title
+>إعادة تسمية مستفيد أو دافع</title>
+<para
+>لإعادة تسمية مستفيد أو دافع، حدد المستفيد (انقر بزر الفأرة الأيسر على الاسم) وانقر <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="user-group-properties.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+>أعد تسمية المستفيد. يمكنك أيضًا النقر مزدوجًا على الاسم أو النقر بزر الفأرة الأيمن على الاسم واختيار <guimenuitem
+>أعد تسمية المستفيد</guimenuitem
+>. يصبح الاسم حينها قابلًا للتحرير. سيؤثر تغيير الاسم على الاسم في جميع المعاملات التي يظهر فيها. </para>
+</sect2>
+
+<sect2
+><title
+>حذف مستفيد أو دافع</title>
+<para
+>لإزالة مستفيد أو دافع، حدده وانقر فوق <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="list-remove-user.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> احذف المستفيد، أو انقر بزر الفأرة الأيمن على الاسم واختيار <guimenuitem
+>احذف المستفيد</guimenuitem
+>. إذا كان للمستفيد أي معاملات، فسيُعرض لك حوار يسمح لك بإعادة تعيينها لمستفيد مختلف، وأيضًا مربع اختيار لإضافة الاسم المحذوف إلى قائمة مطابقة المستفيد الجديد. </para>
+</sect2>
+
+<sect2 id="details.payees.merging"
+><title
+>دمج المستفيدين</title>
+<para
+>لدمج مستفيدين، حدد أحدهما (نقرة يسار على الاسم) ثم حدد الآخر (<keycombo
+>&Ctrl;<mousebutton
+>نقرة يسار</mousebutton
+></keycombo
+>). يمكنك بعد ذلك إما النقر فوق <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="merge.svg" format="SVG"/></imageobject
+></inlinemediaobject
+></guiicon
+> ادمج المستفيدين أو النقر بزر الفأرة الأيمن على أي من المستفيدين المحددين واختيار 	<guilabel
+>ادمج المستفيدين</guilabel
+>.. ستظهر لك نافذة منبثقة تسألك عما إذا كنت تريد حقًا دمج المستفيدين المحددين. إذا نقرت فوق <guibutton
+>نعم</guibutton
+>، فستظهر لك نافذة منبثقة أخرى لتحدد اسم المستفيد للبيانات المجمعة. ستكون هناك قائمة منسدلة بأسماء المستفيدين الذين اخترتهم للدمج (يمكنك في الواقع اختيار أكثر من اثنين) وتسمح لك أيضًا بكتابة اسم جديد تمامًا. يوجد أيضًا مربع اختيار لإضافة أسماء المستفيدين المدمجين إلى قائمة مطابقة المستفيد الجديد. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory"
+><title
+>عرض المعاملات لمستفيد</title>
+<para
+>لعرض جميع المعاملات المرتبطة بمستفيد معين، حدد المستفيد من القائمة وحدد لسان <guilabel
+>المعاملات</guilabel
+> في منطقة التفاصيل. سيسمح لك النقر المزدوج فوق معاملة معينة بتحرير تلك المعاملة في سياق الحساب المناسب. سيؤدي النقر بزر الفأرة الأيمن فوق معاملة إلى إظهار قائمة سياقية تتضمن الإجراءات المناسبة، بما في ذلك القدرة على الانتقال مباشرة إلى دفتر الأستاذ للحساب المناسب، مع تحديد تلك المعاملة. </para>
+
+<screenshot>
+  <screeninfo
+>لسان معاملات منظور المستفيدين</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_history.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>لسان معاملات منظور المستفيدين</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+  
+<sect1 id="details.payees.details"
+><title
+>تفاصيل المستفيد الإضافية</title>
+
+<sect2
+><title
+>المعلومات الشخصية للمستفيد</title>
+<para
+>لعرض وتحرير المعلومات الشخصية المرتبطة بمستفيد معين، حدد المستفيد من القائمة وحدد لسان العنوان. على الرغم من أننا نسمي هذه المعلومات شخصية، إلا أنها تنطبق أيضًا إذا كان المستفيد شركة أو مؤسسة أخرى. جنبا إلى جنب مع معلومات العنوان يمكنك أيضًا تخزين رقم هاتف وعنوان بريد إلكتروني وملاحظات تتعلق بالمستفيد المحدد. لتعديل هذه المعلومات، حرر منطقة التفاصيل مباشرة واضغط على زر <guibutton
+>حدّث</guibutton
+> عند الانتهاء. </para>
+
+<screenshot>
+  <screeninfo
+>لسان المعلومات الشخصية لمنظور المستفيدين</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_info.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>لسان المعلومات الشخصية لمنظور المستفيدين</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="details.payees.details.matching"
+><title
+>إعدادات مطابقة المعاملات</title>
+
+<sect3
+><title
+>نظرة عامة</title>
+<para
+>لدى أموالك القدرة على تعيين المستفيد المناسب آليًا لـ المعاملات المستوردة. يمكن أن يكون هذا مفيدًا عند استيراد المعاملات من البنك الذي تتعامل معه، عندما يحتوي اسم المستفيد على أحرف إضافية غير ضرورية، أو والأسوأ من ذلك، إذا تغيرت أسماء المستفيدين. تساعد القدرة على مطابقة المعاملات مع مستفيد معين في توفير تسمية متسقة للمستفيدين داخل دفتر الأستاذ والتقارير. </para>
+
+<para
+>على سبيل المثال، لنفترض أن دفعة الرهن العقاري الشهرية تأتي من مصرفك هكذا <quote
+>SUN TRUST BANK, MAPLE VALLEY, GA 111506</quote
+> في شهر ثم <quote
+>SUN TRUST BANK MAPLE VALLEY, GA 121606</quote
+> في الشهر التالي. تود حقًا تعيين كلتا المعاملتين لـ المستفيد <quote
+>Sun Trust</quote
+>. في هذه الحالة، ميزة مطابقة المعاملات هي الحل! </para>
+</sect3>
+
+<sect3
+><title
+>إعداد مطابقة المستفيدين</title>
+<screenshot>
+  <screeninfo
+>لسان مطابقة منظور المستفيدين</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_match.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>لسان مطابقة منظور المستفيدين</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>في لسان المطابقة، يمكنك ضبط إعدادات المطابقة للمعاملات المستوردة لهذا المستفيد. يمكنك تحديد واحد من أربعة خيارات من قائمة <guilabel
+>طريقة المطابقة</guilabel
+> المنسدلة. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><emphasis
+>لا توجد مطابقة</emphasis
+>: يؤدي هذا إلى تعطيل ميزة المطابقة لهذا المستفيد. هذا هو الإعداد المبدئي لجميع المستفيدين. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>طابق اسم المستفيد (جزئي)</emphasis
+>: يُفعّل هذا الميزة بناءً على مطابقة الاسم الجزئي للمستفيد ويستخدم اسم المستفيد نفسه كمفتاح مطابقة. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>طابق اسم المستفيد (تام)</emphasis
+>: يُفعّل هذا الميزة بناءً على تطابق تام للمستفيد. قد تستخدم هذه الطريقة عندما تريد تتبع مستفيدين مختلفين لديهم نفس الاسم التجاري ولكن بمواقع مختلفة. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><emphasis
+>طابق مع اسم مدرج أدناه</emphasis
+>: يُفعّل هذا المطابقة بناءً على أسماء متعددة مختلفة أو اختيارية للمستفيد. ستستخدم قدرة المطابقة هذه عندما يكون لديك مستفيد معين له أسماء تجارية مختلفة ولكنك تريد تحديد جميع المعاملات المستوردة بأي من تلك الأسماء لتكون مرتبطة بمستفيد واحد في أموالك. </para>
+    <para
+>استخدام آخر لهذه الطريقة هو إذا كنت تريد مستفيدًا لـ "متاجر أغذية أخرى" لتجميع جميع متاجر المواد الغذائية بخلاف المتجر أو المتجرين اللذين تستخدمهما كثيرًا لترغب في تتبعهما بشكل منفصل. ستدخل كل اسم من أسماء المتاجر المختلفة في قائمة المطابقة، وسيُطابق الجميع بعد ذلك مع نفس المستفيد. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>مع أي من هذه الخيارات، يمكنك اختيار تجاهل حالة الأحرف في إملاء اسم المستفيد أم لا بناءً على تحديد خيار <guilabel
+>تجاهل حالة الأحرف</guilabel
+>. </para>
+</sect3>
+
+<sect3
+><title
+>استيراد المعاملات</title>
+<para
+>سيُنظر في مفاتيح المطابقة التي ضبطتها كلما استوردت معاملات باستخدام QIF أو CSV أو OFX أو AqBanking من ملف أو مصدر عبر الإنترنت. إذا وُجد مفتاح المطابقة لأحد المستفيدين في أي مكان في مستفيد المعاملة المستوردة، فسيُخصص المستفيد المقابل من قائمتك لتلك المعاملة. وبالتالي، فإن مفتاح المطابقة <quote
+>Sun Trust</quote
+> سيطابق <quote
+>SUN TRUST BANK MAPLE VALLEY,GA</quote
+> أو حتى <quote
+>MORGEN SUN TRUST&amp;LOAN</quote
+>. لذا اختر مفاتيح المطابقة بعناية. </para>
+
+<note>
+  <para
+>إذا طابق مستفيد المعاملة أكثر من مفتاح مطابقة واحد، فإن السلوك غير محدد. سيختار أموالك بشكل تعسفي أحد المستفيدين المطابقين. </para>
+</note>
+
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.linkmatching"
+><title
+>إدارة مطابقة الروابط</title>
+
+<para
+>يمكن استخدام هذا اللسان لربط جزء من حقل المذكرة لمعاملة ما بـ عنوان URL بعيد أو محلي، على سبيل المثال لجعل الفواتير أو المستندات الأخرى سهلة الوصول. </para>
+
+<para
+>يحتوي اللسان على حقول إدخال لنمط وقالب URL. يُعامل النمط المحدد كتعبيبر نمطي، والذي يُطبق على حقل المذكرة للمعاملات المرتبطة بهذا المستفيد، ويُدرج النص الناتج في قالب URL في مواقع محددة. <screenshot>
+  <screeninfo
+>لسان مطابقة الروابط</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="payee_link-matching.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+</screenshot>
+</para>
+
+<para
+>يُعرض عنوان URL الناتج كرابط في دفتر الأستاذ العام للمعاملات المقابلة (انظر عمود ”التفاصيل“) وفي منظور التفاصيل في أسفل يسار حقل إدخال المذكرة. </para>
+
+<screenshot>
+  <screeninfo
+>أظهر الرابط في دفتر الأستاذ العام</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يمكن أيضًا الوصول إلى الرابط عبر عنصر قائمة ”افتح عنوان URL“ في قائمة السياق للمعاملة أو عبر اختصار لوحة المفاتيح. </para>
+<screenshot>
+  <screeninfo
+>أظهر قائمة سياق المعاملة</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>يمكن ضبط اختصار لوحة المفاتيح المرتبط في <link linkend="reference.menus.settings.help"
+>قائمة الضبط والمساعدة</link
+>. </para>
+<screenshot>
+  <screeninfo
+>أظهر اختصار لوحة المفاتيح لفتح عنوان url</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="shortcut-payee-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+<sect2 id="details.payees.linkmatching.pattern"
+><title
+>تلميحات</title>
+<para
+>تُدرج الأنماط الموجودة، والتي يجب أن تطابق التعبيرات النمطية المتوافقة مع Perl، في قالب URL بدلًا من العناصر النائبة المدعومة. أمثلة بسيطة هي: <itemizedlist>
+    <listitem
+><para
+>\d+\b - رقم واحد أو أكثر متبوعًا بحدود كلمة.</para
+></listitem>
+    <listitem
+><para
+>\d{2,4}\b - من 2 إلى 4 أرقام متبوعة بحدود كلمة</para
+></listitem>
+    <listitem
+><para
+>\d{3}-d{6}\b - 3 أرقام متبوعة بوصلة و 6 أرقام متبوعة بحدود كلمة</para
+></listitem>
+  </itemizedlist>
+</para>
+
+<para
+>العناصر النائبة المدعومة هي: <itemizedlist
+> <listitem
+><para
+>%1 - التعبير الأول الموجود</para
+></listitem
+> <listitem
+><para
+>%2 - التعبير الثاني الموجود (اختياري)</para
+></listitem
+> </itemizedlist
+> عند استخدام نمطين مستقلين، تُفصل التعبيرات الفردية في النمط بالأقواس، مثل: <code
+>(..)...(..)</code
+>. </para>
+
+<para
+>بالإضافة إلى ذلك، يمكن استخدام متغيرات محددة مسبقًا في قالب URL. المتغيرات المدعومة حاليًا هي: <itemizedlist
+> <listitem
+> <para
+>%year - السنة من تاريخ المعاملة المقابلة</para>
+    </listitem>
+  </itemizedlist>
+</para>
+</sect2>
+</sect1>
+</chapter>

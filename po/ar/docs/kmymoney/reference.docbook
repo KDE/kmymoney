@@ -1,0 +1,1373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="reference">
+<chapterinfo>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>المرجع</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+  <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+</sect1info>
+<title
+>القوائم</title>
+
+<para
+>أدناه قائمة كاملة بخيارات القوائم في أموالك، مع وصف موجز جدًا لما يفعله كل منها. لاحظ أن العديد من خيارات القوائم هذه لن تكون متاحة، أو ستظهر بلون رمادي، اعتمادًا على العرض الحالي أو حالة التطبيق. بالإضافة إلى ذلك، قد لا يتواجد بعضها إذا كان يتعلق بميزة غير مضمنة في إصدارك الخاص. على سبيل المثال، لن تتمكن من تحرير حساب ما لم يكن لديك حساب محدد أو معروض في العرض الحالي. </para>
+
+<sect2 id="reference.menus.file"
+><title
+>قائمة ملف</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+><guimenuitem
+>كتاب جديد</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يُنشئ ملف بيانات أموالك جديدًا وفارغًا. يمكن فتح ملف أموالك واحد فقط في الوقت نفسه، لذا سيغلق هذا ملفك الحالي أولًا إذا كان مفتوحًا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يفتح ملف بيانات أموالك موجودًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح الأخير</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يوفر وصولًا سريعًا إلى الملفات المفتوحة مؤخرًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>افتح قاعدة بيانات...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يفتح قاعدة بيانات موجودة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>احفظ</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحفظ الملف المفتوح حاليًا. يُفعّل فقط في حال وجود تغييرات لحفظها. </para>
+    </listitem>
+  </varlistentry>
+
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+><guimenuitem
+>احفظ باسم...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحفظ الملف المفتوح حاليًا باسم ملف مختلف.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guisubmenu
+>استورد</guisubmenu
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يستورد البيانات المالية من أنواع ملفات أخرى، مثل QIF و غنوكاش، أو ملف قالب للحسابات والفئات التي يمكن استخدامها في إعداد حسابات جديدة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>صدّر</guimenuitem
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يصدّر الملف الحالي كنوع ملف مختلف، مثل QIF، أو يصدّر قائمة بحساباتك وفئاتك كقالب. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>ملف</guimenu
+><guimenuitem
+>اطبع...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يطبع الملف الحالي.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>نسخة احتياطية...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحفظ نسخة احتياطية للملف الحالي.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>بيانات شخصية...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يسمح بتحرير البيانات الشخصية.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>معلومات الملف...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعرض معلومات حول ملف أموالك المفتوح حاليًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>أغلق</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يغلق ملف البيانات المفتوح حاليًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>أنهِ</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>ينهي أموالك. يعرض حفظ ملف البيانات المفتوح حاليًا، في حال وجود أي تغييرات. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.edit"
+><title
+>قائمة حرر</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حرر</guimenu
+> <guimenuitem
+>تراجع</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعكس الإجراء الأحدث.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+></shortcut
+> <guimenu
+>حرر</guimenu
+> <guimenuitem
+>أعد</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعيد تطبيق الإجراء الذي تراجعت عنه مؤخرًا.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حرر</guimenu
+><guimenuitem
+>ابحث عن معاملة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يبحث في المعاملات.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.view"
+><title
+>قائمة عرض</title>
+<variablelist>
+  <varlistentry id="reference.menus.settings.transactiondetail">
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>أظهر تفاصيل المعاملة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يظهر تفاصيل المعاملة في عرض <link linkend="details.ledgers"
+>دفاتر الأستاذ</link
+>. عند تفعيل هذا الخيار، ستُعرض جميع أسطر المعاملة. وعند إيقافه، سيُعرض سطر واحد فقط. </para>
+      <para
+>إذا كنت ترغب فقط في رؤية تفاصيل المعاملة المحددة حاليًا، وسطر واحد فقط للبقية، يمكنك تفعيل <link linkend="details.settings.register.lens"
+>عدسة دفتر الأستاذ</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>أخفِ المعاملات المسواة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يخفي المعاملات المسواة في دفتر الأستاذ.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>أخفِ الفئات غير المستخدمة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يخفي الفئات غير المستخدمة في العروض.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>عرض</guimenu
+><guimenuitem
+>أظهر كل الحسابات</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يظهر جميع الحسابات في العروض، بما في ذلك الحسابات المغلقة والحسابات ذات الرصيد الصفري. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.institution"
+><title
+>قائمة المؤسسة</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>مؤسسة</guimenu
+> <guimenuitem
+>مؤسسة جديدة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>أضف مؤسسة جديدة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>مؤسسة</guimenu
+> <guimenuitem
+>حرر المؤسسة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>حرر مؤسسة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>مؤسسة</guimenu
+> <guimenuitem
+>احذف المؤسسة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>احذف مؤسسة.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.account"
+><title
+>قائمة الحساب</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+> <guimenuitem
+>حساب جديد...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يضيف حسابًا جديدًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>حرر الحساب...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحرر حسابًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>احذف الحساب...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحذف حسابًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>افتح دفتر الأستاذ</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعرض عرض دفاتر الأستاذ للحساب المحدد.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حساب</guimenu
+><guimenuitem
+>سوّ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يسوي حسابًا عبر معالج التسوية.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>أجّل</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يؤجل تسوية حساب ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>أنهِ</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>ينهي تسوية حساب ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>ألغِ</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يلغي تسوية حساب ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>تقرير المعاملة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يفتح تقرير معاملات للحساب المحدد.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>أظهر مخطط الرصيد...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يفتح مخططًا للرصيد منذ بداية السنة حتى تاريخه للحساب المحدد.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>أغلق الحساب</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يغلق حسابًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>أعد فتح الحساب</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعيد فتح حساب ما، إذا كان مغلقًا.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>افصل الحساب...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يفصل ربط حساب عبر الإنترنت.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>اربط الحساب...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يربط حسابًا بحساب عبر الإنترنت.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+><guimenuitem
+>حدّث الحساب...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يستورد المعاملات من الخدمات المصرفية عبر الإنترنت للحساب المحدد.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حساب</guimenu
+> <guimenuitem
+>حدّث جميع الحسابات...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>استورد المعاملات من الخدمات المصرفية عبر الإنترنت لجميع الحسابات المربوطة.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.category"
+><title
+>قائمة الفئة</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>فئة</guimenu
+><guimenuitem
+>فئة جديدة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يضيف فئة جديدة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>فئة</guimenu
+><guimenuitem
+>حرر الفئة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحرر فئة ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>فئة</guimenu
+><guimenuitem
+>احذف الفئة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحذف فئة ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>فئة</guimenu
+><guimenuitem
+>افتح دفتر الأستاذ</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعرض عرض دفاتر الأستاذ لفئة ما.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.transaction"
+><title
+>قائمة المعاملة</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Ins;</keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+><guimenuitem
+>معاملة جديدة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يضيف معاملة جديدة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+><guimenuitem
+>حرر</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحرر معاملة ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+><guimenuitem
+>حرر التقسيمات</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحرر تقسيمات المعاملة.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Del;</keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+><guimenuitem
+>احذف</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحذف معاملة ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+><guimenuitem
+>كرّر</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يكرر معاملة ما.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;&Shift;&Space;</keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+> <guimenuitem
+>علّم المعاملة كـ ...</guimenuitem
+> <guimenuitem
+>غير مسواة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يغير حالة المعاملة (المعاملات) المحددة إلى حالة "غير مسواة". </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;&Space;</keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+> <guimenuitem
+>علّم المعاملة كـ ...</guimenuitem
+> <guimenuitem
+>خالصة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يغير حالة المعاملة (المعاملات) المحددة إلى "خالصة".</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;&Space;</keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+> <guimenuitem
+>علّم المعاملة كـ ...</guimenuitem
+> <guimenuitem
+>مسواة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يغير حالة المعاملة (المعاملات) المحددة إلى "مسواة".</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>معاملة</guimenu
+><guimenuitem
+>اذهب إلى "الحساب"</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعرض الحساب الآخر للمعاملة في دفتر الأستاذ.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+><guimenuitem
+>اذهب إلى المستفيد</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعرض عرض المستفيدين ويركز على المستفيد من المعاملة المحددة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>معاملة</guimenu
+> <guimenuitem
+>أنشئ معاملة مجدولة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>ينشئ معاملة مجدولة جديدة باستخدام تفاصيل المعاملة المحددة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>معاملة</guimenu
+><guimenuitem
+>طابق</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يطابق بين معاملتين. يُستخدم هذا غالبًا لمطابقة معاملة مستوردة مع معاملة مُدخلة يدويًا، ولكن التوليفات الأخرى تعمل أيضًا. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>معاملة</guimenu
+><guimenuitem
+>ألغِ المطابقة</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يلغي مطابقة معاملة اقترحها أموالك كمطابقة لمعاملات مستوردة. لاحظ أن خيار القائمة هذا يظهر فقط في حال وجود معاملة مطابقة وتحديدها. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>معاملة</guimenu
+><guimenuitem
+>اقبل</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يقبل دمجًا مقترحًا لمعاملتين.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>معاملة</guimenu
+><guimenuitem
+>حدد الكل</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحدد جميع المعاملات في دفتر الأستاذ.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>معاملة</guimenu
+><guimenuitem
+>اطبع شيكًا</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يطبع محتويات المعاملة المحددة في دفتر الأستاذ المعروض، منسقة وفقًا للقالب المحدد. انظر قسم ضبط ملحق <link linkend="details.settings.plugins"
+>اطبع الشيك</link
+> لمزيد من المعلومات. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.tools"
+><title
+>قائمة أدوات</title>
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>العملات...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يسرد العملات المعروفة لبرنامج أموالك.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>الأسعار...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يسرد أسعار الأسهم والعملات.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>أدوات</guimenu
+> <guimenuitem
+>حدّث أسعار الأسهم والعملات...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يحدث أسعار الأسهم والعملات من المصادر عبر الإنترنت باستخدام ميزة <link linkend="details.investments.onlinequotes"
+>أسعار العملات عبر الإنترنت</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>فحص الاتساق</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يجري فحصًا لملفك، ويصلح أي مشاكل يمكنه إصلاحها، ويعرض تقريرًا بالنتائج. </para>
+      <para
+>أنشئ نسخة احتياطية لملفك قبل تشغيل هذا الخيار.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>اختبار الأداء</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يجري اختبار أداء على ملفك ويعرض النتائج.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>ولّد SQL لقاعدة البيانات</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يولد كود SQL اللازم لإنشاء قاعدة بيانات.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>أدوات</guimenu
+><guimenuitem
+>مؤقتات التنقيح</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>هذه أداة للمطورين.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.settings.help"
+><title
+>قائمتا الإعدادات والمساعدة</title>
+<para
+>تعتمد قائمتا الإعدادات والمساعدة في أموالك على تلك الموصوفة في <ulink url="help:/fundamentals/menus.html"
+>أساسيات كيدي</ulink
+> مع بعض العناصر الإضافية. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>الإعدادات</guimenu
+> <guimenuitem
+>مكّن جميع الرسائل</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعيد تمكين أي رسائل قد تكون أوقفتها بتحديد <guimenuitem
+>لا تخبرني بهذا مجددًا</guimenuitem
+> في مربع حوار.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+><guimenuitem
+>اضبط اللغة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>بشكل مبدئي، تعتمد اللغة التي يستخدمها أموالك على إعدادات النظام العامة للموقع أو المنطقة. يتيح لك هذا تغيير تلك اللغة، وتعيين لغة احتياطية، تُستخدم للنصوص التي لم تُترجم إلى اللغة الرئيسة. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>,</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>الإعدادات</guimenu
+><guimenuitem
+>اضبط اختصارات لوحة المفاتيح...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يسمح لك بإضافة أو تعديل اختصارات لوحة المفاتيح لمختلف الإجراءات. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
+    <term
+><menuchoice
+><guimenu
+>الإعدادات</guimenu
+><guimenuitem
+>اضبط Aqbanking</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>اضبط إعدادات الخدمات المصرفية عبر الإنترنت، ولكن فقط في حال تمكين وحدة KBanking. يمكن العثور على مزيد من المعلومات في قسم ضبط <link linkend="details.settings.plugins.kbanking"
+>ملحق KBanking</link
+> وكذلك في <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-aqb-modules"
+>وثائق غنوكاش</ulink
+>. </para>
+
+      <para
+>وُصفت عملية إعداد الوصول عبر الإنترنت في AqBanking في <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
+>ويكي غنوكاش (بالألمانية فقط)</ulink
+>. يأخذك إدخال القائمة هذا إلى مربع الحوار الموضح في الخطوة رقم 3. العملية حتى الخطوة رقم 18 هي نفسها لبرنامج أموالك. بمجرد الانتهاء، يمكنك ربط الحساب في أموالك باستخدام <guimenu
+>حساب</guimenu
+> <guisubmenu
+>اربط الحساب</guisubmenu
+> وتحديد الحساب من القائمة المقدمة. من هناك، استخدم ببساطة <guimenu
+>حساب</guimenu
+> <guisubmenu
+>حدّث الحساب</guisubmenu
+>، أو في حالة ربط أكثر من حساب واحد عبر الإنترنت <guimenu
+>حساب</guimenu
+> <guisubmenu
+>حدّث جميع الحسابات</guisubmenu
+>. </para>
+
+      <para
+>انظر <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>كيف أضبط الخدمات المصرفية عبر الإنترنت</ulink
+> لمزيد من التفاصيل. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مساعدة</guimenu
+><guimenuitem
+>ابحث عن إجراء...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>يعرض أسماء واختصارات جميع الإجراءات في أموالك. سيؤدي النقر فوق أحدها إلى استدعاء ذلك الإجراء، إذا كان مكّنًا حاليًا. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1
+>&details-widgets; </chapter>

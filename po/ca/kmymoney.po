@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 06:30+0000\n"
-"PO-Revision-Date: 2026-10-15 19:32+0200\n"
+"PO-Revision-Date: 2026-11-12 20:11+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -7702,7 +7702,7 @@ msgstr "Dinar jordà"
 #: kmymoney/mymoney/mymoneyfile.cpp:4243
 #, kde-format
 msgid "Kazakhstan Tenge"
-msgstr "Tenge de Kazakhstan"
+msgstr "Tenge del Kazakhstan"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4244
 #, kde-format

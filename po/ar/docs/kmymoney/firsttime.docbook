@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="firsttime">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2024-12-01</date>
+  <releaseinfo
+>5.2.0</releaseinfo>
+</chapterinfo>
+<title
+>استخدام أموالك للمرة الأولى</title>
+
+<sect1 id="firstime"
+><title
+>تشغيل أموالك للمرة الأولى</title>
+<note
+><title
+>قد تختلف لقطات الشاشة</title>
+  <para
+>عند تشغيل أموالك، قد لا يبدو تمامًا مثل لقطات الشاشة في هذا الدليل. يمكن تخصيص العديد من التفاصيل، مثل الخطوط والألوان والأيقونات، باستخدام عنصر القائمة <menuchoice
+><guimenu
+>إعدادات</guimenu
+><guimenuitem
+>اضبط أموالك...</guimenuitem
+></menuchoice
+> أو تطبيق إعدادات نظام كيدي، اعتمادًا على نظام التشغيل أو التوزيعة. </para>
+</note>
+
+<sect2 id="firsttime.mainwindow"
+><title
+>النافذة الرئيسة</title>
+<screenshot>
+  <screeninfo
+>النافذة الرئيسة</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>النافذة الرئيسة</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>تتكون النافذة الرئيسة لأموالك من أربعة أجزاء رئيسة </para>
+
+<itemizedlist>
+  <listitem
+><para
+>أ. شريط القوائم</para
+></listitem>
+  <listitem
+><para
+>ب. شريط الأدوات</para
+></listitem>
+  <listitem
+><para
+>ج. محدد العرض</para
+></listitem>
+  <listitem
+><para
+>د. العرض</para
+></listitem>
+</itemizedlist>
+
+<para
+>يوفر شريط القوائم وشريط الأدوات إمكانية الوصول إلى ميزات أموالك ويسمحان لك بـ <link linkend="firsttime.newfile"
+>إنشاء ملف بيانات جديد،</link
+> أو فتح ملف بيانات موجود، أو ضبط كيفية عمل أموالك. يمكن ضبط شريط الأدوات لإظهار أيقونات العمليات التي تستخدمها بكثرة. </para>
+
+<para
+>على الجانب الأيسر من النافذة الرئيسة، يتكون محدد العرض من أحد عشر أيقونة على الأقل مع لصائق اختيارية، اعتمادًا على البرمجيات التي يوفرها نظامك، حيث يمكن تضمين بعض الميزات أو استبعادها عند تجميع البرنامج. قد تُضاف المزيد من الأيقونات بواسطة ملحقات مختلفة. بالنقر فوق إحدى الأيقونات، يُحمّل عرض البيانات المالية المناسب في نافذة العرض على الجانب الأيمن. يوفر كل عرض تمثيلًا فريدًا لوضعك المالي ويسمح لك بعرض المعلومات المعروضة أو تحريرها. </para>
+
+<para
+>قد يحتوي محدد العرض على الأيقونات التالية </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="home_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض المنزل</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> المنزل: نظرة عامة قابلة للضبط لوضعك المالي الحالي (أو صفحة مقدمة عندما لا يكون هناك ملف بيانات مفتوح). </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="institutions_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض المؤسسات</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> المؤسسات: مؤسساتك وحساباتك معروضة في تسلسل هرمي. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="accounts_view.png" format="PNG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض الحسابات</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> الحسابات: حساباتك معروضة في تسلسل هرمي. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض الجدولة</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> المعاملات المجدولة: مدفوعاتك المتكررة، ودخلك، وتحويلاتك. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="categories_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض الفئات</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> الفئات: حسابات خاصة توفر وسيلة لك لتجميع المعاملات المرتبطة. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="mail_tagged.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض الوسوم</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> الوسوم: حسابات خاصة توفر وسيلة إضافية مشابهة للفئات لتجميع المعاملات المرتبطة. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="payees_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض المستفيدين</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> المستفيدون: المستفيدون الخاصون بك - الأشخاص والمؤسسات التي تدفع لها المال أو تستلم المال منها. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض الدفاتر</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> الدفاتر: معاملاتك في كل حساب. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="investments_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض الاستثمارات</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> الاستثمارات: ملخص محفظتك </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="reports_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض التقارير</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> التقارير: مجموعة من عروض البيانات المالية المختلفة والقابلة للتخصيص. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="budgets_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض الميزانيات</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> الميزانيات: ميزانياتك. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="forecast_view_icon.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض التوقعات</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> التوقعات: توقعات أرصدة حساباتك وفئاتك. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="outbox_view.svg" format="SVG" depth="2em"/> </imageobject
+> <textobject
+> <phrase
+>عرض صندوق الصادر</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> صندوق الصادر: عرض يوفره ملحق KBanking لتقديم ملاحظات حول العمليات الجارية. </para>
+  </listitem>
+</itemizedlist>
+<para
+>تذكر أن بعض هذه قد لا تكون موجودة في نظامك؛ فالأمر يعتمد على كيفية ضبط نسختك من أموالك وبنائها. </para>
+</sect2>
+</sect1>
+
+<sect1 id="firsttime.newfile"
+><title
+>إنشاء ملف جديد</title>
+<para
+>يحتفظ أموالك بجميع البيانات المتعلقة بأمورك المالية في ملف. وكما ذُكر في <link linkend="makingmostof.basicaccounting.personalaccounts"
+>تعريف الحسابات (السجلات الشخصية)</link
+>، يمكنك الاحتفاظ بأكثر من مجموعة واحدة من الحسابات، ولكن سيُحتفظ ببيانات كل منها في ملف منفصل، ويمكن لأموالك فتح ملف واحد فقط في كل مرة. راجع فصل <link linkend="details.formats"
+>تنسيقات الملفات</link
+> لمزيد من التفاصيل حول ملفات بيانات أموالك. </para>
+
+<para
+>بالإضافة إلى ملف البيانات هذا الذي يحتوي على جميع البيانات المالية لمجموعة الحسابات تلك، يستخدم أموالك ملفات إضافية لتخزين البيانات المتعلقة بإعدادات الضبط وتفضيلات العرض. يعتمد الموقع الدقيق لهذه الملفات على نظام التشغيل أو التوزيعة الخاصة بك. </para>
+
+<para
+>لإنشاء ملف جديد، يمكنك إما تحديد عنصر القائمة <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>جديد</guimenuitem
+></menuchoice
+> أو اختيار أيقونة <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="new.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> <guilabel
+>جديد</guilabel
+> من شريط الأدوات. بالإضافة إلى ذلك، إذا عُرضت صفحة الترحيب الرئيسة، يمكنك أيضًا تحديد الرابط الأول: <quote
+>ابدأ وإعداد الحسابات.</quote
+> </para>
+
+<para
+>سيفتح أموالك بعد ذلك <quote
+>معالج إعداد ملف جديد</quote
+> والذي سيرشدك خلال عملية إنشاء الملف. </para>
+
+<screenshot>
+  <screeninfo
+>صفحة البيانات الشخصية</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>صفحة البيانات الشخصية</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>تُستخدم أي معلومات تُدخل هنا في صفحة <guilabel
+>البيانات الشخصية</guilabel
+> فقط لتخصيص ملفك. جميع هذه الحقول اختيارية، لذا يمكنك استخدام أموالك دون إدخال أي معلومات الآن. في المستقبل، قد تُستخدم هذه المعلومات في بعض التقارير وللخدمات المصرفية عبر الإنترنت. إذا طلب أموالك أي معلومات شخصية في الإصدارات المستقبلية ولم يجد أيًا منها، فسيُطلب منك إدخال البيانات ذات الصلة حينها. </para>
+
+<para
+>في حال كان لديك عنوان لنفسك مخزن في دفتر عناوين كيدي، فسيُفعّل زر <guibutton
+>تحميل من دفتر العناوين</guibutton
+> ويؤدي الضغط عليه إلى استيراد جميع المعلومات إلى أموالك. </para>
+
+<para
+>بمجرد الانتهاء من إدخال البيانات، اضغط على <guibutton
+>التالي</guibutton
+>. </para>
+
+<para
+>إذا كنت بحاجة إلى تغيير أي من هذه المعلومات في المستقبل، يمكنك الوصول إلى هذا النموذج باستخدام عنصر القائمة <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>البيانات الشخصية...</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>يدعم أموالك عملات متعددة. لضبط عملتك الأساسية (العملة التي تستخدمها يوميًا والتي ستُستخدم في تقاريرك)، حدد الإدخال المناسب من القائمة المقدمة واضغط على <guibutton
+>التالي</guibutton
+>. ستُحدد عملة مبدئية بناءً على إعداداتك المحلية، ولكن يمكنك بسهولة اختيار عملة مختلفة، إذا كان ذلك مناسبًا لوضعك. </para>
+
+<screenshot>
+  <screeninfo
+>صفحة اختيار العملة الأساسية</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>صفحة اختيار العملة الأساسية</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>في هذا المثال، اختير الدولار الأمريكي كعملة أساسية. </para>
+
+<para
+>بعد النقر فوق <guibutton
+>التالي</guibutton
+>، تسمح لك الصفحة التالية بإنشاء حساب أولي. بالنسبة لمستخدم أموالك العادي، يكون هذا حسابًا جاريًا. </para>
+
+<screenshot>
+  <screeninfo
+>صفحة إنشاء حساب جاري</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>صفحة إنشاء حساب جاري</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>أدخل اسم الحساب ورقم حساب أو رقم مرجعي محتمل مخصص من قِبل المؤسسة التي تدير الحساب. الاسم عشوائي، وهو ببساطة كيفية الرجوع إلى الحساب وعرضه بواسطة أموالك. أدخل تاريخ الافتتاح والرصيد الافتتاحي للحساب. على سبيل المثال، إذا كنت تريد استخدام أموالك لإدارة جميع أمورك المالية بدءًا من 01-01-2008، فأدخل رصيد الحساب في بداية هذا التاريخ. يمكن الحصول على الرقم من كشف حساب ورقي. يمكنك أيضًا إدخال اسم ورمز البنك للمؤسسة. هذا الأخير، المعروف باسم رقم التوجيه في الولايات المتحدة أو رمز الفرز في المملكة المتحدة، اختياري ومطلوب فقط لأغراض الخدمات المصرفية عبر الإنترنت، ولكنه قد يكون مفيدًا أيضًا عند استيراد كشوف الحسابات البنكية ببعض التنسيقات المدعومة (OFX، QFX). </para>
+
+<para
+>في حال كنت لا تريد إعداد حساب أولي أو ليس لديك حساب جاري، فما عليك سوى إلغاء تحديد مربع الاختيار. </para>
+
+<para
+>بمجرد الانتهاء، اضغط على <guibutton
+>التالي</guibutton
+> للمتابعة. </para>
+
+<screenshot>
+  <screeninfo
+>صفحة اختيار قالب الحساب</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>صفحة اختيار قالب الحساب</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>اختر البلد المناسب وقالب (قوالب) الحساب. يوفر كل قالب مجموعة مختلفة من الفئات لتنظيم أمورك المالية. يمكن تحديد قوالب متعددة، حتى من بلدان مختلفة، باستخدام مزيج من مفتاحي &Ctrl; و &Shift; مع زر الفأرة الأيسر. سيُعرض التسلسل الهرمي للحساب المراد إعداده في جزء المعاينة من المعالج. في حال لم تتمكن من العثور على قالب يناسب احتياجاتك، فلا تختر قالبًا في هذا الوقت، ويمكنك إعداد الفئات يدويًا لاحقًا. </para>
+
+<para
+>بمجرد الانتهاء من اختيار القالب اضغط على <guibutton
+>التالي</guibutton
+> للمتابعة. </para>
+
+<para
+>هذه هي الصفحة الأخيرة من المعالج. إذا حددت مربع الاختيار <quote
+>اضبط التفضيلات بعد إنهاء المعالج</quote
+>، فسيُعرض مربع حوار إعدادات التطبيق بعد إكمال معالج إعداد الحساب. </para>
+
+<screenshot>
+  <screeninfo
+>صفحة اختيار اسم الملف</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>صفحة اختيار اسم الملف</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>عند هذه النقطة، سيؤدي النقر فوق <quote
+>إنهاء</quote
+> إلى بدء مربع حوار <quote
+>احفظ التخزين باسم...</quote
+>، حيث تختار نوع التخزين (XML، ربما مع التعمية، أو SQL) وتحدد تفاصيل طريقة التخزين تلك، مثل اسم الملف وموقعه أو تفاصيل قاعدة بيانات sql. راجع فصول <link linkend="details.formats"
+>تنسيقات الملفات</link
+> و <link linkend="details.database"
+>تنسيقات الملفات</link
+> لمزيد من المعلومات حول كل نوع تخزين. </para>
+
+</sect1>
+
+<sect1 id="firsttime.4"
+><title
+>إنشاء الحسابات</title>
+<para
+>هناك عدة طرق يمكنك من خلالها إنشاء حساب: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>باستخدام القائمة</term>
+    <listitem>
+      <para
+>لإنشاء حساب باستخدام القائمة، حدد عنصر القائمة <menuchoice
+><guimenu
+>حسابات</guimenu
+><guimenuitem
+>حساب جديد</guimenuitem
+></menuchoice
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>باستخدام عرض الحسابات</term>
+    <listitem>
+      <para
+>لإنشاء حساب باستخدام عرض الحسابات، انقر فوق أيقونة الحسابات <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="accounts_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> في محدد العرض لإظهار عرض الحسابات. انقر بزر الفأرة الأيمن فوق أيقونة شجرة الأصول أو أيقونة شجرة الالتزامات في العرض وحدد <guimenuitem
+>حساب جديد</guimenuitem
+> من القائمة المنبثقة. تحتوي شجرة الأصول على جميع حساباتك التي تعتبر أصولًا، مثل المدخرات والاستثمارات. تحتوي شجرة الالتزامات على جميع حساباتك التي تمثل أموالًا تدين بها، مثل القروض وبطاقات الائتمان. نوقشت هذه الحسابات وجميع أنواع الحسابات الأخرى بمزيد من التفصيل في <link linkend="details.accounts"
+>فصل الحسابات.</link
+> </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>باستخدام شريط الأدوات</term>
+    <listitem>
+      <para
+>إذا عُرض زر <guibutton
+>حساب جديد...</guibutton
+> على شريط الأدوات، يمكنك النقر فوقه لإنشاء حساب. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<tip>
+  <para
+>لاحظ أن أموالك يستخدم القوائم السياقية في جميع أنحاء التطبيق. إذا وجدت نفسك عالقًا في محاولة معرفة كيفية القيام بشيء ما، فجرّب النقر بزر الفأرة الأيمن حيث تتوقع رؤية ميزة ما. </para>
+</tip>
+
+<para
+>يؤدي إنشاء حساب جديد بأي من الطرق المذكورة أعلاه إلى فتح <emphasis
+>معالج حساب جديد</emphasis
+>. سيأخذك هذا المعالج خطوة بخطوة خلال عملية إنشاء حساب، وجمع المعلومات المطلوبة في كل خطوة. للتنقل بين الصفحات، انقر فوق <guibutton
+>التالي</guibutton
+> و <guibutton
+>السابق</guibutton
+>. يمكن العثور على وصف كامل لإنشاء الحسابات في قسم <link linkend="details.accounts"
+>الحسابات</link
+>. </para>
+
+<para
+>الآن بعد وجود حساب واحد أو أكثر في أموالك، يُعرض ملخص حسابك في عرض المنزل. يمكنك إنشاء معاملات يدويًا في عرض <link linkend="details.ledgers"
+>الدفاتر</link
+>، أو إعداد معاملات آلية من خلال عرض <link linkend="details.schedules"
+>الجداول</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.schedules"
+><title
+>المعاملات المجدولة</title>
+<para
+>الـ <link linkend="details.schedules"
+>معاملة المجدولة</link
+>، والتي تُسمى أحيانًا جدولًا أو معاملة متكررة، هي معاملة تحدث مرة واحدة أو أكثر في فترة زمنية محددة خلال فترة زمنية معينة. مثال نموذجي هو شيك راتبك الذي تستلمه كل أسبوع أو شهر، أو فاتورة خدمات تدفعها كل شهر. بدلًا من الاضطرار إلى إدخال تفاصيل المعاملة في كل مرة تتقاضى فيها راتبك، يمكنك توجيه أموالك لإنشاء جدول يقوم بإدخال المعاملة نيابة عنك عندما تتقاضى راتبك. </para>
+
+<para
+>لصيانة <link linkend="details.schedules"
+>الجداول</link
+> الخاصة بك، انقر فوق أيقونة المعاملة المجدولة <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> في محدد العرض. </para>
+</sect1>
+
+<sect1 id="firsttime.categories"
+><title
+>الفئات</title>
+<para
+>لصيانة <link linkend="details.categories"
+>الفئات</link
+> الخاصة بك، انقر فوق أيقونة الفئات <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="categories_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> في محدد العرض. </para>
+
+<para
+>يمكن العثور على وصف كامل لهذا الموضوع في قسم <link linkend="details.categories"
+>الفئات</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.tags"
+><title
+>الوسوم</title>
+<para
+>لصيانة <link linkend="details.tags"
+>الوسوم</link
+> الخاصة بك، انقر فوق أيقونة الوسوم <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="mail_tagged.svg" format="SVG" depth="2em"/> </imageobject
+></inlinemediaobject
+></guiicon
+> في محدد العرض. </para>
+
+<para
+>يمكن العثور على وصف أكثر تفصيلًا لهذا الموضوع في قسم <link linkend="details.tags"
+>الوسوم</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.payees"
+><title
+>المستفيدون</title>
+<para
+>لصيانة <link linkend="details.payees"
+>المستفيدين</link
+> الخاصين بك، انقر فوق أيقونة المستفيدين <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="payees_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> في محدد العرض. </para>
+
+<para
+>يمكن العثور على وصف أكثر تفصيلًا لهذا الموضوع في قسم <link linkend="details.payees"
+>المستفيدين</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.import"
+><title
+>استيراد البيانات المالية من تطبيقات أخرى</title>
+<para
+>إذا كنت تستخدم حاليًا تطبيقًا آخر للإدارة المالية، فمن المحتمل جدًا أن يتمكن أموالك من استيراد معظم أو كل البيانات من ذلك البرنامج، طالما أنه يمكن تصديرها أو حفظها بتنسيق يفهمه أموالك. وأكثر هذه التنسيقات شيوعًا هو تنسيق Quicken Interchange Format (QIF). يمكن لمعظم البرامج المالية تصدير هذا التنسيق، على الرغم من أن طرق التطبيقات المختلفة لتصدير QIF لم تُناقش هنا من أجل الاختصار. </para>
+
+<para
+>يمكن العثور على وصف كامل لاستيراد البيانات بهذا التنسيق في قسم <link linkend="details.impexp.qifimp"
+>استيراد QIF</link
+>. </para>
+
+<para
+>بالإضافة إلى استيراد ملفات بتنسيق QIF، يمكن لأموالك فتح ملفات البيانات المستخدمة من قِبل ملف <link linkend="details.impexp.gnucash"
+>غنوكاش</link
+> مباشرة. </para>
+</sect1>
+
+<sect1 id="firsttime.find"
+><title
+>البحث عن المعاملات</title>
+<para
+>يوفر أموالك مرفقًا مفيدًا وقويًا للبحث عن المعاملات في شكل مربع حوار بحث. </para>
+
+<para
+>يمكن فتح مربع حوار البحث من شريط الأدوات باستخدام أيقونة البحث <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="transaction_find.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> أو بتحديد عنصر القائمة <menuchoice
+><guimenu
+>حرر</guimenu
+><guimenuitem
+>ابحث عن معاملة</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>يمكن العثور على وصف كامل لهذا الموضوع في قسم <link linkend="details.search"
+>البحث</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.reconcile"
+><title
+>المطابقة</title>
+<para
+>عند نقطة ما، سترغب في مطابقة سجلاتك وتفاصيل حسابك مع الحساب الفعلي للتأكد من تطابقهما. يتم ذلك عمومًا بمقارنة الحساب في أموالك مع كشف حساب مطبوع أو إلكتروني للحساب صادر عن المؤسسة، مثل البنك أو بطاقة الائتمان أو القرض أو أي كشف حساب آخر. تتضمن المطابقة مواءمة ما أدخلته، وتحديدًا المعاملات منذ المطابقة السابقة، مع ما يسجله كشف الحساب. إذا وُجدت أي تناقضات، فهذا يعني أنك أو الشخص الذي أنشأ كشف الحساب قد ارتكب خطأً. </para>
+
+<para
+>لمطابقة حساب، اختر الحساب أولًا، إما من عرض <guiicon
+>الحسابات</guiicon
+> أو في عرض <guiicon
+>الدفاتر</guiicon
+>. ثم، إما انقر فوق أيقونة <guiicon
+>طابق</guiicon
+> على شريط الأدوات، إذا كانت مرئية، أو حدد عنصر القائمة <menuchoice
+><guimenu
+>حساب</guimenu
+> <guimenuitem
+>طابق</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>يمكن العثور على وصف أكثر تفصيلًا لهذا الموضوع في قسم <link linkend="details.reconcile"
+>المطابقة</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.backup"
+><title
+>النسخ الاحتياطي</title>
+<para
+>الآن بعد أن أنشأت بعض الحسابات وأدخلت المعاملات، فمن الجيد إجراء نسخة احتياطية. نظرًا لأن الملف الذي يستخدمه أموالك هو ملف لينكس قياسي (أو ماك أو ويندوز، اعتمادًا على نظام التشغيل الخاص بك)، يمكنك فقط نسخ الملف إلى موقع آخر لنسخه احتياطيًا أو استخدام مربع الحوار الذي يوفره أموالك. استخدام مربع الحوار هو الطريقة المفضلة لأنه إذا بدأ أموالك في استخدام تنسيقات ملفات أخرى، مثل SQL، فسيصبح من الصعب جدًا نسخ الملف يدويًا. </para>
+
+<para
+>لنسخ ملفك احتياطيًا من خلال أموالك، حدد عنصر القائمة <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>نسخ احتياطي</guimenuitem
+></menuchoice
+> وأدخل المجلد الذي ترغب في حفظ الملف فيه. إذا كان المجلد يحتاج إلى وصل أولًا ولديك الامتيازات الكافية، فحدد خانة الاختيار المسماة <guilabel
+>صل هذا المجلد قبل النسخ الاحتياطي</guilabel
+> وانقر فوق <guibutton
+>موافق</guibutton
+>. </para>
+
+<para
+>سيوُحفظ الملف في المجلد المحدد مع إلحاق التاريخ الحالي باسم الملف بحيث يسهل رؤية تاريخ النسخ الاحتياطي للملف. </para>
+
+<para
+>لمزيد من التفاصيل حول التنسيق الفعلي لملف البيانات، وعملية النسخ الاحتياطي، راجع <link linkend="details.formats"
+>تنسيقات الملفات</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.launch"
+><title
+>إطلاق أموالك</title>
+<para
+>في الغالب، ستطلق أموالك من أيقونة أو قائمة بدء لمدير النوافذ أو بيئة سطح المكتب. في هذه الحالة، السلوك المبدئي هو أن أموالك سيفتح آخر ملف كنت تفتحه. ومع ذلك، في بعض الظروف، قد ترغب أو تحتاج إلى إطلاق أموالك من سطر الأوامر. </para>
+
+<para
+>للحصول على وصف كامل لجميع خيارات سطر الأوامر المتاحة، راجع صفحة الدليل (man) لأموالك. ومع ذلك، هناك حالتان خاصتان نصفهما هنا. </para>
+
+<formalpara
+><title
+><command
+>kmymoney -n</command
+></title>
+<para
+>يخبر الخيار -n أموالك بعدم فتح آخر ملف كان مفتوحًا. قد يكون هذا مفيدًا إذا تعطل البرنامج عند بدء التشغيل. </para>
+</formalpara>
+
+<formalpara
+><title
+><command
+>kmymoney &lt;مسار الملف&gt;</command
+></title>
+<para
+>إن إعطاء أموالك اسم ملف في سطر الأوامر يخبره بفتح ذلك الملف بدلًا من آخر ملف كان مفتوحًا. يمكنك استخدام اسم أي ملف أموالك صالح، كما هو موضح في الفصل المتعلق بـ <link linkend="details.formats"
+>تنسيقات الملفات</link
+>. بالإضافة إلى ذلك، يمكن استخدام هذا لاستيراد ملف <link linkend="details.impexp.gnucash"
+>غنوكاش</link
+>. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="firsttime.newpc"
+><title
+>كيفية نقل أموالك إلى حاسوب جديد</title>
+
+<sect2 id="firsttime.newpc.data"
+><title
+>نقل بياناتك</title>
+<para
+>إذا حصلت على حاسوب جديد، فمن السهل جدًا نقل بياناتك. في الواقع، كل ما عليك فعله هو نسخ ملف بيانات أموالك. يظهر اسم الملف في شريط العنوان عندما يكون أموالك قيد التشغيل؛ وعادة ما ينتهي بـ <filename class="extension"
+>.kmy</filename
+>. في المرة الأولى التي تشغل فيها التطبيق على الحاسوب الجديد، سيتعين عليك إخباره بمكان وضع ملف البيانات، إما عن طريق التشغيل من سطر الأوامر، أو من عنصر القائمة <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>افتح...</guimenuitem
+></menuchoice
+>. يجب أن تكون قادرًا حتى على الانتقال بين أنظمة ويندوز، وماك، ولينكس. </para>
+
+<para
+>إذا قمت بتعمية ملف بياناتك، فتأكد من إعداد البرمجيات والمفاتيح المناسبة على الحاسوب الجديد أيضًا. </para>
+
+<para
+>إذا كانت بياناتك في قاعدة بيانات SQL، فراجع وثائق برمجيات قاعدة البيانات الخاصة بك للحصول على إرشادات حول ترحيل بياناتك. </para>
+
+<para
+>لاحظ أن هذا يفترض أنك قمت بتثبيت نفس إصدار أموالك على الحاسوب الجديد كما كنت تشغل على الحاسوب القديم. يجب أن يكون تثبيت إصدار أحدث آمنًا أيضًا، ولكن عليك أن تكون على دراية بأي مشكلات تتعلق بهذه الترقية. يجب ملاحظة أي مشكلات من هذا القبيل في ملاحظات الإصدار للإصدار الجديد. </para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings"
+><title
+>نقل إعداداتك</title>
+<!-- FIXME: confirm we don't need to consider/mention that there might also be KMM related files under .local/share or
+     even elsewhere.  Also, do we want/need a section on OS specific issues beyond what is mentioned here? -->
+<para
+>إذا قمت بنقل ملف بياناتك فقط إلى الجهاز الجديد، كما هو موضح في القسم السابق، فسيعمل أموالك بشكل صحيح، ولكنك ستفقد أي إعدادات ضبط قمت بتغييرها عن القيم المبدئية في جهازك القديم. للحفاظ على هذه الإعدادات، تحتاج أيضًا إلى نسخ ملف الضبط الخاص بك. يسمى هذا الملف <filename
+>kmymoneyrc</filename
+>. يعتمد موقع هذا الملف على نظام التشغيل والتوزيعة الخاصة بك. في نظام لينكس، سيكون هذا على الأرجح في <filename class="directory"
+>.config</filename
+> داخل مجلدك الشخصي. إذا كنت تهاجر من إصدار لأموالك أقدم من 5.0، فإن الموقع القديم كان <filename class="directory"
+>.kde4</filename
+>. </para>
+
+<sect3 id="firsttime.newpc.settings.plugins"
+><title
+>نقل إعدادات الملحقات</title>
+<para
+>إذا كنت قد شغلت أي ملحق لأموالك، مثل مستورد أو مصدر csv، فقد يكون قد أنشأ أيضًا ملف ضبط في نفس المجلد، مثل <filename
+>csvimporterrc</filename
+> أو <filename
+>csvexporterrc</filename
+>. يجب أيضًا نسخ هذه الملفات إلى الحاسوب الجديد. </para>
+
+<para
+>كما هو الحال مع ملف البيانات الرئيس، يفترض هذا نفس إصدار الملحق على كلا الحاسوبين. الترقية آمنة بشكل عام، ولكن إذا تغيرت وظائف الملحق بشكل كبير، فمن المستحسن الاختبار بعناية باستخدام ملف الضبط القديم، للتأكد من أن الملحق يعمل كما تتوقع. بالطبع ينطبق هذا حتى عند ترقية إصدار أموالك على حاسوب واحد. </para>
+
+<para
+>لاحظ أنه عند الترقية من إصدار سابق إلى الإصدار 5.0 أو أعلى، فإن موقع ملفات القوالب المستخدمة من قِبل الملحق لطباعة الشيكات قد تغير. يرجى استشارة ملاحظات الإصدار أو <ulink url="https://www.kmymoney.org/faq.php"
+>موقع</ulink
+> المشروع لمزيد من التفاصيل. </para>
+
+<note>
+<para
+>هذه التعليمات مخصصة فقط لنقل بيانات وإعدادات أموالك. ومع ذلك، قد تكون هناك عناصر مهمة مخزنة بواسطة كيدي وليس بواسطة أموالك، مثل كلمات المرور المخزنة في Keychain. نقل أجزاء أخرى من إعداد كيدي الخاص بك خارج نطاق هذا الدليل، على الرغم من أن العديد من الملفات ذات الصلة مخزنة أيضًا تحت <envar
+>$KDEHOME</envar
+>. </para>
+</note>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="firsttime.contact"
+><title
+>الحصول على المساعدة / الاتصال بالمطورين / الإبلاغ عن العلل</title>
+<para
+>بما أن قنوات الدعم تتغير بمرور الوقت، يمكنك الرجوع إلى <ulink url="https://kmymoney.org/support.html"
+>صفحة الدعم</ulink
+> في <ulink url="https://kmymoney.org/"
+>موقع ويب أموالك</ulink
+> للحصول على أحدث المعلومات حول مكان الحصول على المساعدة بشأن أموالك. </para>
+
+<para
+>إذا كان لديك ببساطة أسئلة حول استخدام أموالك، أو تريد تأكيد فهمك لكيفية عمل التطبيق، أو تحتاج إلى مساعدة في معرفة أفضل طريقة للتعامل مع وضع مالي معين، يرجى التفكير في استخدام أحد مصادر المعلومات أو المنتديات أو القوائم البريدية أو قنوات الدردشة المدرجة في الرابط أعلاه. </para>
+
+<sect2
+><title
+>الاتصال بالمطورين</title>
+<para
+>للأسئلة العامة أو التعليقات حول أموالك، توجد قائمة بريدية للمستخدمين &userlist; مع مزيد من التفاصيل <ulink url="https://mail.kde.org/mailman/listinfo/kmymoney"
+>هنا</ulink
+>. هذه القائمة مناسبة للأسئلة والمناقشات العامة. توجد أيضًا قائمة بريدية للمطورين &devlist; مع مزيد من التفاصيل <ulink url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"
+>هنا</ulink
+>. هذه القائمة مخصصة لمزيد من المناقشات التقنية. نظرًا لأن الردود غالبًا ما تُرسل فقط إلى القائمة، فقد لا تحصل على أي رد ما لم تشترك في القائمة التي ترسل إليها. </para>
+
+<para
+>لاحظ أن المطورين يراقبون عمومًا قنوات الاتصال المختلفة المذكورة أعلاه، لذا نادرًا ما يكون الاتصال المباشر عبر البريد الإلكتروني ضروريًا. ومع ذلك، يسعدنا سماع تجاربك في استخدام أموالك عبر أي قناة تفضلها. </para>
+</sect2>
+
+<sect2
+><title
+>الإبلاغ عن العلل</title>
+<para
+>للإبلاغ عن علة، يرجى استخدام الواجهة التي يوفرها أموالك عن طريق تحديد عنصر القائمة <menuchoice
+><guimenu
+>مساعدة</guimenu
+><guimenuitem
+>أبلغ عن علة</guimenuitem
+></menuchoice
+> وملء المعلومات المطلوبة. ومع ذلك، في حال واجهت أي صعوبات في هذه الطريقة، يمكنك الإبلاغ عن علة (أو تقديم قائمة أمنيات أو طلب تحسين) مباشرة في <ulink url="https://bugs.kde.org"
+>موقع ويب كيدي للإبلاغ عن العلل</ulink
+>. يجب تقديم التقارير ضد المنتج <quote
+>kmymoney</quote
+>. </para>
+
+<para
+>على أي حال، قبل الإبلاغ عن علة، يرجى قراءة الإرشادات أدناه. اتباعها سيجعل من المرجح أن يتمكن المطورون من تحديد المشكلة بسرعة دون الحاجة إلى سؤالك عن مزيد من المعلومات. حاول أيضًا التأكد من أن ما تبلغ عنه هو حقًا علة (أو قائمة أمنيات/طلب تحسين). إذا كانت الأمور لا تعمل بالطريقة التي تتوقعها، أو كنت بحاجة إلى مساعدة في استخدام بعض ميزات أموالك، فيرجى استخدام أحد قنوات الدعم البديلة المذكورة أعلاه. </para>
+
+<sect3 id="firsttime.bugs.quality"
+><title
+>كتابة تقارير علل عالية الجودة</title>
+<para
+>نحن نشجع المستخدمين على قضاء وقت إضافي لكتابة تقارير علل عالية الجودة عند تقديمها. هذا يقلل من الجهد الضائع من جميع الأطراف، حيث يتبادل صاحب التقرير والمطور الذي سيصلحها رسائل البريد الإلكتروني حتى تكتمل هذه المعلومات. </para>
+
+<para
+>كتب إيلي غولدبيرغ دليل كتابة العلل الأساسي، المتاح في <ulink url="https://issues.apache.org/bugwritinghelp.html"
+>https://issues.apache.org/bugwritinghelp.html</ulink
+>. بشكل عام، ستستفيد من اتباع الإرشادات والنصائح الواردة في تلك الصفحة. سُردت بعض تلك النقاط أدناه: </para>
+
+<formalpara
+><title
+>ضمن معلومات نظامك</title>
+<para
+>سيملأ عنصر القائمة <menuchoice
+><guimenu
+>مساعدة</guimenu
+><guimenuitem
+>أبلغ عن علة</guimenuitem
+></menuchoice
+> هذا آليًا، ولكن إذا كنت تفضل عدم استخدام هذه الواجهة، فهناك العديد من العناصر التي يجب عليك تضمينها في التقرير. سنحتاج إلى معرفة نظام التشغيل الذي تستخدمه (لينكس، أو ماك، أو ويندوز)، وإصدار كيدي، وإصدار أموالك الذي تشغله، وإما إصدار ماك أو ويندوز أو اسم وإصدار توزيعة لينكس الخاصة بك وإصدار النواة. هذه المعلومات مهمة للغاية، لأن العديد من العلل (وكذلك السلوكيات التي يُساء تحديدها كعلل) تعتمد على نظام التشغيل. </para>
+</formalpara>
+
+<formalpara
+><title
+>ضمن تتبعًا خلفيًا للاعطال</title>
+<para
+>غالبًا ما يكون التتبع الخلفي هو المعلومة الوحيدة الأكثر فائدة في حل الأعطال. </para>
+</formalpara>
+
+<formalpara
+><title
+>حاول إعادة إنتاجها</title>
+<para
+>أخبرنا إذا كنت قادرًا على القيام بذلك. من المفيد معرفة ما إذا كانت العلة قد حدثت مرة واحدة فقط ولم تتمكن من تكرارها مرة أخرى أو إذا كانت تحدث في كل مرة أو إذا كانت تحدث أحيانًا دون غيرها. </para>
+</formalpara>
+
+<formalpara
+><title
+>ضمن خطوات محددة</title>
+<para
+>هذا تقرير علة سيء: <quote
+>أدخلت معاملة، وتعطل أموالك.</quote
+> تقرير العلة الأفضل بكثير هو: <quote
+>باستخدام نموذج المعاملة، أدخلت معاملة جديدة في حساب بطاقة الائتمان الخاصة بي. حددت لسان تبويب التحويل، وأدخلت مبلغًا، ثم انتقلت إلى لسان تبويب الإيداع، وبالعودة إلى لسان تبويب التحويل. عندما عدت إلى لسان تبويب التحويل، تعطل أموالك. هذه العلة قابلة لإعادة الإنتاج تمامًا بالنسبة لي.</quote
+> </para>
+</formalpara>
+
+<formalpara
+><title
+>أخبرنا بما كنت تتوقع حدوثه</title>
+<para
+>في بعض الحالات، يكون هذا واضحًا، ولكن في العلل الأكثر دقة، سترى أحيانًا تقرير علة حيث لا يكون من الواضح ما الذي توقعه صاحب التقرير أن يحدث. أخبرنا دائمًا بما تعتقد أنه كان ينبغي أن يحدث، بالإضافة إلى ما حدث بالفعل. </para>
+</formalpara>
+
+<formalpara
+><title
+>فكر في التشغيل مع تفعيل التنقيب</title>
+<para
+>من خلال تجميع إصدار مضبوط بـ --enable-debug=full، يمكنك التأكد من توليد أفضل تتبعات خلفية ممكنة. إذا واجهت عطلًا، فشغل أموالك مرة أخرى من داخل gdb، وأعد إنتاج العطل. عندما يتعطل، اكتب <quote
+>bt</quote
+> لتوليد تتبع خلفي. </para>
+</formalpara>
+
+<para
+>التشغيل بهذه الطريقة أصعب قليلًا، لذا لا نتوقع من جميع المستخدمين القيام بذلك. ومع ذلك، إذا كنت مهتمًا بمساعدة أموالك ليصبح مستقرًا قدر الإمكان، فهذه هي أفضل طريقة للقيام بذلك بخلاف العثور على العلة في الكود وإرسال رقعة. </para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
