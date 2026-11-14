@@ -39,6 +39,8 @@ public:
             NextDueDate,
             Frequency,
             PaymentMethod,
+            RemainingPayments,
+            FinalPaymentDate,
             // insert new values above this line
             MaxColumns,
         } Columns;

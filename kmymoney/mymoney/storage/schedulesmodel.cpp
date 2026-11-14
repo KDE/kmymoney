@@ -124,6 +124,16 @@ struct SchedulesModel::Private {
         return MyMoneyFile::instance()->payee(s1.payeeId()).name();
     }
 
+    // The last scheduled occurrence can precede the configured end date.
+    QDate finalPaymentDate(const MyMoneySchedule& schedule) const
+    {
+        if (!schedule.willEnd()) {
+            return {};
+        }
+        const auto paymentDates = schedule.paymentDates(schedule.startDate(), schedule.endDate());
+        return paymentDates.isEmpty() ? QDate() : paymentDates.constLast();
+    }
+
     SchedulesModel* q;
     QColor overdueScheme;
     QColor finishedScheme;
@@ -177,6 +187,8 @@ QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, in
         kli18nc("Schedule header", "Next Due Date").untranslatedText(),
         kli18nc("Schedule header", "Frequency").untranslatedText(),
         kli18nc("Schedule header", "Payment Method").untranslatedText(),
+        kli18nc("Schedule header", "Remaining Payments").untranslatedText(),
+        kli18nc("Schedule header", "Final Payment Date").untranslatedText(),
     };
 
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
@@ -246,6 +258,21 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
         case Column::PaymentMethod:
             rc = MyMoneyUtils::paymentMethodToString(schedule.paymentType());
             break;
+
+        case Column::RemainingPayments:
+            if (schedule.willEnd()) {
+                rc = QString::number(schedule.isFinished() ? 0 : schedule.transactionsRemaining());
+            } else {
+                rc = QStringLiteral("---");
+            }
+            break;
+
+        case Column::FinalPaymentDate:
+            {
+                const auto finalPaymentDate = d->finalPaymentDate(schedule);
+                rc = finalPaymentDate.isValid() ? MyMoneyUtils::formatDate(finalPaymentDate) : QStringLiteral("---");
+            }
+            break;
         }
 
         // make sure to never return any displayable text for the dummy entries
@@ -311,6 +338,15 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::ScheduleFrequencyRole:
         rc = schedule.occurrenceMultiplier() * schedule.daysBetweenEvents(schedule.occurrence());
+        break;
+
+    case eMyMoney::Model::ScheduleRemainingPaymentsRole:
+        // Distinguish open-ended schedules from finished schedules with 0 payments.
+        rc = schedule.willEnd() ? (schedule.isFinished() ? 0 : schedule.transactionsRemaining()) : -1;
+        break;
+
+    case eMyMoney::Model::ScheduleFinalPaymentDateRole:
+        rc = d->finalPaymentDate(schedule);
         break;
     }
     return rc;

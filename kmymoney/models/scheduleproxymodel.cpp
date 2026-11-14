@@ -83,6 +83,12 @@ bool ScheduleProxyModel::lessThan(const QModelIndex& source_left, const QModelIn
 
         case SchedulesModel::Column::Frequency:
             return source_left.data(eMyMoney::Model::ScheduleFrequencyRole).toInt() < source_right.data(eMyMoney::Model::ScheduleFrequencyRole).toInt();
+
+        case SchedulesModel::Column::RemainingPayments:
+            return source_left.data(eMyMoney::Model::ScheduleRemainingPaymentsRole).toInt() < source_right.data(eMyMoney::Model::ScheduleRemainingPaymentsRole).toInt();
+
+        case SchedulesModel::Column::FinalPaymentDate:
+            return source_left.data(eMyMoney::Model::ScheduleFinalPaymentDateRole).toDate() < source_right.data(eMyMoney::Model::ScheduleFinalPaymentDateRole).toDate();
         }
     }
     return QSortFilterProxyModel::lessThan(source_left, source_right);

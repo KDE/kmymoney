@@ -820,6 +820,10 @@ enum Roles {
 
     // Other
     SortRole,
+
+    // Typed schedule values for sorting independently of the display text.
+    ScheduleRemainingPaymentsRole,
+    ScheduleFinalPaymentDateRole,
 };
 
 typedef enum {
