@@ -259,6 +259,12 @@ protected Q_SLOTS:
 
     void slotCheckSchedules();
 
+    /**
+     * Updates the online prices once a day if the user has enabled it.
+     */
+    void slotAutoUpdatePrices();
+    void slotAutoUpdatePricesFinished(int updated, const QStringList& failed, bool storeFailed);
+
     void slotDeleteTransactions();
     void slotDuplicateTransactions();
     void slotDisplayTransactionDetails();

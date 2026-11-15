@@ -13,6 +13,7 @@ set( kmm_textbrowser_SRCS
 set( kmm_webconnect_SRCS
   webconnect.cpp
   kmmonlinequotesprofilemanager.cpp
+  onlinepriceupdater.cpp
 )
 
 set ( kmm_keychain_SRCS
@@ -31,6 +32,7 @@ set( kmm_utils_validators_HEADER
 set( kmm_webconnect_HEADER
   webpricequote.h
   webconnect.h
+  onlinepriceupdater.h
 )
 
 set ( kmm_keychain_HEADER

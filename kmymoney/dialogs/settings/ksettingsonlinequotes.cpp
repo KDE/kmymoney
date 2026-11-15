@@ -76,6 +76,15 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget* parent)
     d->m_detailsWidget = d->m_quotesWidgetContainer->quoteDetailsWidget();
     layout->addWidget(d->m_quotesWidget);
     layout->addWidget(d->m_detailsWidget);
+
+    // the object name binds the check box to the setting of the same name
+    auto autoUpdatePrices = new QCheckBox(i18nc("@option:check", "Update prices automatically once a day"), this);
+    autoUpdatePrices->setObjectName(QStringLiteral("kcfg_AutoUpdatePrices"));
+    autoUpdatePrices->setToolTip(i18nc("@info:tooltip",
+                                       "Updates the prices of all securities and currencies that have an online source once a day, while KMyMoney is open. "
+                                       "The prices are stored in the file, which then needs to be saved."));
+    layout->addWidget(autoUpdatePrices);
+
     d->m_acceptButton = d->m_detailsWidget->findChild<QPushButton*>();
     connect(d->m_acceptButton, &QPushButton::clicked, this, [&]() {
         Q_EMIT settingsChanged(true);

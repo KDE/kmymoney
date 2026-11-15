@@ -176,6 +176,7 @@
 
 #include "icons/icons.h"
 
+#include "misc/onlinepriceupdater.h"
 #include "misc/webconnect.h"
 
 #include "kcreditswindow.h"
@@ -266,6 +267,9 @@ public:
         , m_autoSaveEnabled(true)
         , m_autoSaveTimer(nullptr)
         , m_progressTimer(nullptr)
+        , m_priceUpdater(nullptr)
+        , m_priceUpdateTimer(nullptr)
+        , m_priceUpdateFailures(0)
         , m_autoSavePeriod(0)
         , m_inAutoSaving(false)
         , m_consistencyProblemReported(false)
@@ -351,6 +355,13 @@ public:
     bool m_autoSaveEnabled;
     QTimer* m_autoSaveTimer;
     QTimer* m_progressTimer;
+
+    // This is the automatic online price update
+    OnlinePriceUpdater* m_priceUpdater;
+    QTimer* m_priceUpdateTimer;
+    QDate m_priceUpdateDoneDay; ///< day an update ended without a problem since the file was opened
+    QDate m_priceUpdateFailureDay;
+    int m_priceUpdateFailures;
 
     int m_autoSavePeriod;
     bool m_inAutoSaving;
@@ -744,6 +755,12 @@ public:
             // start the check for scheduled transactions that need to be
             // entered as soon as the event loop becomes active.
             QMetaObject::invokeMethod(q, "slotCheckSchedules", Qt::QueuedConnection);
+
+            // update the online prices if that has not been done today
+            m_priceUpdateDoneDay = QDate();
+            m_priceUpdateFailureDay = QDate();
+            m_priceUpdateFailures = 0;
+            QMetaObject::invokeMethod(q, "slotAutoUpdatePrices", Qt::QueuedConnection);
             break;
 
         case eKMyMoney::FileAction::AboutToClose:
@@ -759,6 +776,7 @@ public:
             break;
 
         case eKMyMoney::FileAction::Closing:
+            m_priceUpdater->cancel();
             disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
             // make sure to not catch view activations anymore
             m_myMoneyView->executeAction(Action::FileClose, SelectedObjects());
@@ -1199,6 +1217,15 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
 
     connect(d->m_autoSaveTimer, &QTimer::timeout, this, &KMyMoneyApp::slotAutoSave);
     connect(d->m_progressTimer, &QTimer::timeout, this, &KMyMoneyApp::slotStatusProgressDone);
+
+    // Check twice an hour whether the online prices have been updated today.
+    // This also covers the day change while the application stays open.
+    d->m_priceUpdater = new OnlinePriceUpdater(this);
+    d->m_priceUpdateTimer = new QTimer(this);
+    d->m_priceUpdateTimer->setInterval(30 * 60 * 1000);
+    connect(d->m_priceUpdateTimer, &QTimer::timeout, this, &KMyMoneyApp::slotAutoUpdatePrices);
+    connect(d->m_priceUpdater, &OnlinePriceUpdater::finished, this, &KMyMoneyApp::slotAutoUpdatePricesFinished);
+    d->m_priceUpdateTimer->start();
 
     // connect the WebConnect server
     connect(d->m_webConnect, &WebConnect::gotUrl, this, &KMyMoneyApp::webConnectUrl);
@@ -4254,6 +4281,53 @@ void KMyMoneyApp::slotCheckSchedules()
             }
         }
     }
+}
+
+void KMyMoneyApp::slotAutoUpdatePrices()
+{
+    if (!KMyMoneySettings::autoUpdatePrices() || !d->m_storageInfo.isOpened || d->m_priceUpdater->isRunning()) {
+        return;
+    }
+
+    const auto today = QDate::currentDate();
+    // the file knows when it got prices, the session knows when an update found nothing new
+    if (d->m_priceUpdater->lastUpdateDate() == today || d->m_priceUpdateDoneDay == today) {
+        return;
+    }
+
+    // give up for today after three attempts without a result, for example when offline
+    if (d->m_priceUpdateFailureDay == today && d->m_priceUpdateFailures >= 3) {
+        return;
+    }
+
+    statusBar()->showMessage(i18n("Updating prices online..."));
+    d->m_priceUpdater->start();
+}
+
+void KMyMoneyApp::slotAutoUpdatePricesFinished(int updated, const QStringList& failed, bool storeFailed)
+{
+    const auto today = QDate::currentDate();
+    if (!storeFailed && (updated > 0 || failed.isEmpty())) {
+        // done for today, also if all prices already existed
+        d->m_priceUpdateDoneDay = today;
+        d->m_priceUpdateFailures = 0;
+    } else {
+        if (d->m_priceUpdateFailureDay != today) {
+            d->m_priceUpdateFailureDay = today;
+            d->m_priceUpdateFailures = 0;
+        }
+        ++d->m_priceUpdateFailures;
+    }
+
+    QString message = (updated > 0) ? i18np("Updated %1 price online.", "Updated %1 prices online.", updated) : i18n("Online prices are up to date.");
+    if (!failed.isEmpty()) {
+        const auto names = failed.mid(0, 5).join(QLatin1String(", ")) + (failed.count() > 5 ? QStringLiteral(", ...") : QString());
+        message += QLatin1Char(' ') + i18np("%1 quote could not be retrieved: %2", "%1 quotes could not be retrieved: %2", failed.count(), names);
+    }
+    if (storeFailed) {
+        message = i18n("The online prices could not be stored because the file was busy.");
+    }
+    statusBar()->showMessage(message, 20000);
 }
 
 void KMyMoneyApp::writeLastUsedDir(const QString& directory)

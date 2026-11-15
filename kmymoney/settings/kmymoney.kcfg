@@ -57,6 +57,10 @@
    <label>Check schedules upon startup</label>
    <default>false</default>
   </entry>
+  <entry name="AutoUpdatePrices" type="Bool">
+   <label>Update prices online once a day</label>
+   <default>false</default>
+  </entry>
   <entry name="CheckSchedulePreview" type="Int">
    <label>Enter transactions this number of days in advance</label>
    <default>0</default>
