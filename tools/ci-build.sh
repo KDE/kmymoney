@@ -108,13 +108,14 @@ if test "$ci_build" = "yes"; then
         (kf6*)
             ecm_version=$(rpm -q --queryformat="%{version}" kf6-extra-cmake-modules | sed 's,\.,,g');
             if test $ecm_version -lt 6180; then
-                cmake_options+=-Wno-error=dev
+                cmake_options+=" -Wno-error=dev -DKMM_I18N_GENERATION=OFF"
             else
-                cmake_options+=-Werror=dev
+                cmake_options+=" -Werror=dev"
             fi
             cmake $cmake_options -DBUILD_WITH_QT6=1 -DWARNINGS_AS_ERRORS=on ..
             ;;
         (*)
+            cmake_options+=" -DKMM_I18N_GENERATION=OFF"
             cmake $cmake_options ..
             ;;
     esac
