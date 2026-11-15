@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-14 01:04+0000\n"
+"POT-Creation-Date: 2026-11-15 01:06+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -4485,13 +4485,13 @@ msgid "Create tag"
 msgstr "Sukurti"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:102
+#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:105
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, fuzzy, kde-format
 msgid "GPG encryption"
 msgstr "Naudoti GPG šifravimą"
 
-#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:83
+#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:86
 #, fuzzy, kde-format
 #| msgid "Address book import"
 msgid "Addressbook integration"
@@ -4502,7 +4502,7 @@ msgstr "Adresų knygelės importavimas"
 msgid "Holiday regions integration"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:95
+#: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:98
 #, fuzzy, kde-format
 msgid "Online banking"
 msgstr "GPG šifravimo nuostatos"
@@ -4514,7 +4514,12 @@ msgctxt "about option, %1 list of sanitizers"
 msgid "Sanitizers: %1"
 msgstr "Data:"
 
-#: kmymoney/kcreditswindow.cpp:47
+#: kmymoney/kcreditswindow.cpp:46
+#, kde-format
+msgid "Alkimia web view modul for displaying reports"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:50
 #, kde-format
 msgid ""
 "\n"
@@ -4523,196 +4528,196 @@ msgid ""
 "Please consider contributing to this project with code and/or suggestions."
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:49
+#: kmymoney/kcreditswindow.cpp:52
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "(c) 2000-2025 The KMyMoney development team"
 msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
 
-#: kmymoney/kcreditswindow.cpp:53
+#: kmymoney/kcreditswindow.cpp:56
 #, kde-format
 msgid ""
 "Compiled with the following optional features:\n"
 "%1"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:56
+#: kmymoney/kcreditswindow.cpp:59
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:57
+#: kmymoney/kcreditswindow.cpp:60
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:58
+#: kmymoney/kcreditswindow.cpp:61
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:63
-#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:68
-#: kmymoney/kcreditswindow.cpp:71 kmymoney/kcreditswindow.cpp:73
-#: kmymoney/kcreditswindow.cpp:74 kmymoney/kcreditswindow.cpp:75
-#: kmymoney/kcreditswindow.cpp:76 kmymoney/kcreditswindow.cpp:78
-#: kmymoney/kcreditswindow.cpp:141 kmymoney/kcreditswindow.cpp:144
-#: kmymoney/kcreditswindow.cpp:147 kmymoney/kcreditswindow.cpp:150
-#: kmymoney/kcreditswindow.cpp:152
+#: kmymoney/kcreditswindow.cpp:64 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:68 kmymoney/kcreditswindow.cpp:71
+#: kmymoney/kcreditswindow.cpp:74 kmymoney/kcreditswindow.cpp:76
+#: kmymoney/kcreditswindow.cpp:77 kmymoney/kcreditswindow.cpp:78
+#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:81
+#: kmymoney/kcreditswindow.cpp:144 kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:150 kmymoney/kcreditswindow.cpp:153
+#: kmymoney/kcreditswindow.cpp:155
 #, kde-format
 msgid "Inactive member. "
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:61
+#: kmymoney/kcreditswindow.cpp:64
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:63
+#: kmymoney/kcreditswindow.cpp:66
 #, fuzzy, kde-format
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Mėgstamiausios ataskaitos"
 
-#: kmymoney/kcreditswindow.cpp:65
+#: kmymoney/kcreditswindow.cpp:68
 #, kde-format
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:71
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:71
+#: kmymoney/kcreditswindow.cpp:74
 #, kde-format
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:73 kmymoney/kcreditswindow.cpp:75
-#: kmymoney/kcreditswindow.cpp:76
+#: kmymoney/kcreditswindow.cpp:76 kmymoney/kcreditswindow.cpp:78
+#: kmymoney/kcreditswindow.cpp:79
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Programuotojas"
 
-#: kmymoney/kcreditswindow.cpp:74
+#: kmymoney/kcreditswindow.cpp:77
 #, fuzzy, kde-format
 #| msgid "Database backend"
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Duomenų bazės variklis"
 
-#: kmymoney/kcreditswindow.cpp:78
+#: kmymoney/kcreditswindow.cpp:81
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:84 kmymoney/kcreditswindow.cpp:96
-#: kmymoney/kcreditswindow.cpp:103 kmymoney/kcreditswindow.cpp:110
-#: kmymoney/kcreditswindow.cpp:116 kmymoney/kcreditswindow.cpp:121
-#: kmymoney/kcreditswindow.cpp:128 kmymoney/kcreditswindow.cpp:135
+#: kmymoney/kcreditswindow.cpp:87 kmymoney/kcreditswindow.cpp:99
+#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:113
+#: kmymoney/kcreditswindow.cpp:119 kmymoney/kcreditswindow.cpp:124
+#: kmymoney/kcreditswindow.cpp:131 kmymoney/kcreditswindow.cpp:138
 #: kmymoney/mymoney/mymoneysecurity.cpp:265
 #, kde-format
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: kmymoney/kcreditswindow.cpp:84 kmymoney/kcreditswindow.cpp:90
-#: kmymoney/kcreditswindow.cpp:96 kmymoney/kcreditswindow.cpp:103
-#: kmymoney/kcreditswindow.cpp:110 kmymoney/kcreditswindow.cpp:116
-#: kmymoney/kcreditswindow.cpp:121 kmymoney/kcreditswindow.cpp:128
-#: kmymoney/kcreditswindow.cpp:135
+#: kmymoney/kcreditswindow.cpp:87 kmymoney/kcreditswindow.cpp:93
+#: kmymoney/kcreditswindow.cpp:99 kmymoney/kcreditswindow.cpp:106
+#: kmymoney/kcreditswindow.cpp:113 kmymoney/kcreditswindow.cpp:119
+#: kmymoney/kcreditswindow.cpp:124 kmymoney/kcreditswindow.cpp:131
+#: kmymoney/kcreditswindow.cpp:138
 #, kde-format
 msgid "%1 (build against %2)"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:89
+#: kmymoney/kcreditswindow.cpp:92
 #, kde-format
 msgid "Financial framework"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:109
+#: kmymoney/kcreditswindow.cpp:112
 #, fuzzy, kde-format
 #| msgid "Select Accounts"
 msgid "Online banking framework"
 msgstr "Pasirinkite sąskaitas"
 
-#: kmymoney/kcreditswindow.cpp:115
+#: kmymoney/kcreditswindow.cpp:118
 #, kde-format
 msgid "Library for creating diagrams"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:120
+#: kmymoney/kcreditswindow.cpp:123
 #, fuzzy, kde-format
 #| msgid "Calendar View"
 msgid "iCalendar integration"
 msgstr "Kalendoriaus vaizdas"
 
-#: kmymoney/kcreditswindow.cpp:127
+#: kmymoney/kcreditswindow.cpp:130
 #, kde-format
 msgid "OFX banking protocol abstraction library"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:134
+#: kmymoney/kcreditswindow.cpp:137
 #, kde-format
 msgid "SQLite database encryption"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:139
+#: kmymoney/kcreditswindow.cpp:142
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:141
+#: kmymoney/kcreditswindow.cpp:144
 #, fuzzy, kde-format
 #| msgid "Investment Type:"
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Investicijos tipas:"
 
-#: kmymoney/kcreditswindow.cpp:144
+#: kmymoney/kcreditswindow.cpp:147
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Programuotojas"
 
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:150
 #, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:149
+#: kmymoney/kcreditswindow.cpp:152
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:150
+#: kmymoney/kcreditswindow.cpp:153
 #, fuzzy, kde-format
 #| msgid "Patches"
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Pataisos"
 
-#: kmymoney/kcreditswindow.cpp:152
+#: kmymoney/kcreditswindow.cpp:155
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:154
+#: kmymoney/kcreditswindow.cpp:157
 #, fuzzy, kde-format
 msgctxt "Roles in project"
 msgid "CSV import/export"
@@ -9393,83 +9398,96 @@ msgstr ""
 msgid "Performance (Legacy)"
 msgstr "Stulpeliai"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:147
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:157
 #, fuzzy, kde-format
 #| msgid "Bills"
 msgctxt "Schedule group"
 msgid "Bills"
 msgstr "Mokėjimo sąskaitos"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:148
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:158
 #, fuzzy, kde-format
 #| msgid "Deposits"
 msgctxt "Schedule group"
 msgid "Deposits"
 msgstr "Indėliai"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:149
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:159
 #, fuzzy, kde-format
 #| msgid "Transfers"
 msgctxt "Schedule group"
 msgid "Transfers"
 msgstr "Perkėlimai"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:150
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:160
 #, fuzzy, kde-format
 #| msgid "Loan"
 msgctxt "Schedule group"
 msgid "Loans"
 msgstr "Paskola"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:173
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:183
 #, fuzzy
 #| msgid "Type"
 msgctxt "Schedule header"
 msgid "Type/Name"
 msgstr "Tipo pavadinimas:"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:174
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:184
 #, fuzzy
 #| msgid "Account"
 msgctxt "Schedule header"
 msgid "Account"
 msgstr "Sąskaita"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:175
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:185
 #, fuzzy
 #| msgid "Payee"
 msgctxt "Schedule header"
 msgid "Payee"
 msgstr "Korespondentas"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:176
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:186
 #, fuzzy
 #| msgid "Amount"
 msgctxt "Schedule header"
 msgid "Amount"
 msgstr "Suma"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:177
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:187
 #, fuzzy
 #| msgid "Next due date"
 msgctxt "Schedule header"
 msgid "Next Due Date"
 msgstr "Kitas atlikimo terminas"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:178
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:188
 #, fuzzy
 #| msgid "Frequency"
 msgctxt "Schedule header"
 msgid "Frequency"
 msgstr "Dažnis"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:179
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:189
 #, fuzzy
 msgctxt "Schedule header"
 msgid "Payment Method"
 msgstr "Mokėjimo metodas"
 
-#: kmymoney/mymoney/storage/schedulesmodel.cpp:238
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:190
+#, fuzzy
+#| msgid "Overdue payments"
+msgctxt "Schedule header"
+msgid "Remaining Payments"
+msgstr "Vėluojantys mokėjimai"
+
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:191
+#, fuzzy
+msgctxt "Schedule header"
+msgid "Final Payment Date"
+msgstr "Mokėjimai"
+
+#: kmymoney/mymoney/storage/schedulesmodel.cpp:250
 #, kde-format
 msgctxt "Finished schedule"
 msgid "Finished"
@@ -15796,7 +15814,7 @@ msgstr "Kiti metai"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:150
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:179
-#: kmymoney/plugins/views/reports/kreporttab.cpp:366
+#: kmymoney/plugins/views/reports/kreporttab.cpp:393
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
 msgid "Chart"
@@ -16827,7 +16845,7 @@ msgstr "Intervalas"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:201
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:205
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:49
-#: kmymoney/plugins/views/reports/kreporttab.cpp:376
+#: kmymoney/plugins/views/reports/kreporttab.cpp:403
 #: kmymoney/views/khomeview_p.h:1122
 #, kde-format
 msgid "Report"
@@ -17379,39 +17397,39 @@ msgstr "Mokesčių operacijos"
 msgid "Generated Report"
 msgstr "Trinti ataskaitą?"
 
-#: kmymoney/plugins/views/reports/kreporttab.cpp:71
+#: kmymoney/plugins/views/reports/kreporttab.cpp:82
 #, fuzzy, kde-format
 #| msgid "CSV"
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "CSV"
 msgstr "CSV"
 
-#: kmymoney/plugins/views/reports/kreporttab.cpp:72
+#: kmymoney/plugins/views/reports/kreporttab.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "HTML"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreporttab.cpp:73
+#: kmymoney/plugins/views/reports/kreporttab.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox Report clipboard format"
 msgid "XML"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreporttab.cpp:74
+#: kmymoney/plugins/views/reports/kreporttab.cpp:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Format used when copying the report to the clipboard"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
-#: kmymoney/plugins/views/reports/kreporttab.cpp:367
+#: kmymoney/plugins/views/reports/kreporttab.cpp:394
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreporttab.cpp:377
+#: kmymoney/plugins/views/reports/kreporttab.cpp:404
 #, kde-format
 msgid "Show the report version of this chart"
 msgstr ""
