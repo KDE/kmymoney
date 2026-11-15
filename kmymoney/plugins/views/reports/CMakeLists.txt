@@ -44,7 +44,7 @@ kmymoney_add_plugin(reportsview SOURCES ${reportsview_SOURCES} ${reportsview_HEA
 
 target_link_libraries(reportsview
   PRIVATE
-    Alkimia::alkimia
+    $<$<BOOL:${USE_ALKIMIA_WEBVIEW}>:Alkimia::alkimia>
   PUBLIC
     kmm_plugin
     KF${QT_MAJOR_VERSION}::TextWidgets
