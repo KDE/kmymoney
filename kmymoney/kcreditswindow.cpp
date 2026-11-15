@@ -43,7 +43,7 @@ KAboutData initializeCreditsData()
     features << i18nc("about option, %1 list of sanitizers", "Sanitizers: %1").arg(QLatin1String(ENABLED_SANITIZERS));
 #endif
 #ifdef USE_ALKIMIA_WEBVIEW
-    features << i18n("Alkimia web view modul for displaying reports");
+    features << i18n("Alkimia web view module for displaying reports");
 #endif
 
     aboutData.setShortDescription(
