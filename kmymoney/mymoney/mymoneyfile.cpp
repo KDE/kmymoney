@@ -2988,14 +2988,34 @@ void MyMoneyFile::setValue(const QString& key, const QString& val)
 {
     d->checkTransaction(Q_FUNC_INFO);
 
+    // Notify the change set so commitTransaction() emits dataChanged()
+    // and the UI can enable Save. addItem() alone does not do that.
+    const auto current = d->parametersModel.itemById(key);
+    const bool isNew = current.id().isEmpty();
+    if (!isNew && current.value() == val)
+        return;
+
     d->parametersModel.addItem(key, val);
+    d->m_changeSet += MyMoneyNotification(isNew ? File::Mode::Add : File::Mode::Modify, File::Object::Parameter, key);
+}
+
+void MyMoneyFile::setValue(const QString& key, const QString& val, const QString& defaultValue)
+{
+    if (val == defaultValue)
+        deletePair(key);
+    else
+        setValue(key, val);
 }
 
 void MyMoneyFile::deletePair(const QString& key)
 {
     d->checkTransaction(Q_FUNC_INFO);
 
+    if (d->parametersModel.itemById(key).id().isEmpty())
+        return;
+
     d->parametersModel.deleteItem(key);
+    d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Parameter, key);
 }
 
 void MyMoneyFile::addSchedule(MyMoneySchedule& sched)

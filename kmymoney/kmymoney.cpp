@@ -122,6 +122,7 @@
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyview.h"
+#include "accountsidebar.h"
 #include "ksearchtransactiondlg.h"
 #include "ktransactionselectdlg.h"
 #include "ledgerviewsettings.h"
@@ -1462,6 +1463,7 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
             {Action::ViewHideReconciled,            QStringLiteral("view_hide_reconciled_transactions"), i18n("Hide reconciled transactions"),            Icon::HideReconciled},
             {Action::ViewHideCategories,            QStringLiteral("view_hide_unused_categories"),    i18n("Hide unused categories"),                     Icon::HideCategories},
             {Action::ViewShowAll,                   QStringLiteral("view_show_all_accounts"),         i18n("Show all accounts"),                          Icon::Empty},
+            {Action::ViewShowAccountSidebar,        QStringLiteral("view_show_account_sidebar"),      i18nc("@action:inmenu Account sidebar", "Show Account Sidebar"), Icon::Accounts},
             // *********************
             // The institutions menu
             // *********************
@@ -1783,7 +1785,8 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
 #ifdef KMM_TRACING
                                                Action::DebugTimers,
 #endif
-                                               Action::ViewShowAll};
+                                               Action::ViewShowAll,
+                                               Action::ViewShowAccountSidebar};
 
         for (const auto& it : checkableActions) {
             lutActions[it]->setCheckable(true);
@@ -1860,6 +1863,15 @@ QHash<Action, QAction*> KMyMoneyApp::initActions()
     lutActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
     lutActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
     lutActions[Action::ViewShowAll]->setChecked(KMyMoneySettings::showAllAccounts());
+    // the account sidebar of the ledger view: on/off is saved right away,
+    // so it is remembered even before the ledger view was opened
+    {
+        auto group = KSharedConfig::openConfig()->group(QStringLiteral("AccountSidebar"));
+        lutActions[Action::ViewShowAccountSidebar]->setChecked(group.readEntry("Visible", AccountSidebarVisibleByDefault));
+        connect(lutActions[Action::ViewShowAccountSidebar], &QAction::toggled, this, [](bool on) {
+            KSharedConfig::openConfig()->group(QStringLiteral("AccountSidebar")).writeEntry("Visible", on);
+        });
+    }
 
     // *************
     // Adding actions to ActionCollection

@@ -17,6 +17,7 @@ set(libviews_a_SOURCES
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
   simpleledgerview.cpp
+  accountsidebar.cpp
   kmmstyleditemdelegate.cpp
   ledgerviewpage.cpp
   ledgerview.cpp

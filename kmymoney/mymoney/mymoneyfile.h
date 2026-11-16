@@ -1108,6 +1108,12 @@ public:
     void setValue(const QString& key, const QString& val);
 
     /**
+      * Same as setValue(key, val), but the pair is removed when @p val
+      * equals @p defaultValue, like MyMoneyKeyValueContainer::setValue().
+      */
+    void setValue(const QString& key, const QString& val, const QString& defaultValue);
+
+    /**
      * This method returns the unique id of the attached storage object.
      * In case the storage object does not have an id yet, a new one will be
      * assigned.

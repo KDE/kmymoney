@@ -35,6 +35,7 @@
    <Action name="view_hide_reconciled_transactions" />
    <Action name="view_hide_unused_categories" />
    <Action name="view_show_all_accounts" />
+   <Action name="view_show_account_sidebar" />
   </Menu>
   <Menu name="institution" >
    <text>&amp;Institution</text>

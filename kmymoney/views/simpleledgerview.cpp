@@ -13,6 +13,7 @@
 #include <QHeaderView>
 #include <QKeyEvent>
 #include <QLineEdit>
+#include <QSplitter>
 #include <QTabBar>
 #include <QTimer>
 #include <QToolButton>
@@ -29,6 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountsidebar.h"
 #include "accountsmodel.h"
 #include "icons.h"
 #include "institutionsmodel.h"
@@ -95,6 +97,40 @@ public:
         ui->ledgerTab->setTabText(0, QString());
         newTabWidget = ui->ledgerTab->widget(0);
 
+        // put the account sidebar next to the ledger tabs, separated by a movable splitter
+        auto splitter = new QSplitter(q);
+        sidebar = new AccountSidebar(splitter);
+        ui->verticalLayout_2->replaceWidget(ui->ledgerTab, splitter);
+        splitter->addWidget(ui->ledgerTab);
+        splitter->addWidget(sidebar);
+        // default is right (like Quicken); the user can move it via its context menu
+        sidebar->setOnLeft(KSharedConfig::openConfig()->group(QStringLiteral("AccountSidebar")).readEntry("Position", "right") == QLatin1String("left"));
+        q->connect(sidebar, &AccountSidebar::accountSelected, q, [this](const QString& accountId) {
+            openLedger(accountId, true);
+            keepOnlyCurrentLedger();
+        });
+        sidebar->setTabWidget(ui->ledgerTab);
+        // hiding the tab bar remembers the open tabs, showing it again reopens them
+        q->connect(sidebar, &AccountSidebar::tabBarHiddenChanged, q, [this](bool hidden) {
+            hidden ? rememberTabs() : reopenRememberedTabs();
+        });
+        // View > Show Account Sidebar shows or hides the sidebar (the choice is saved)
+        auto showSidebar = pActions[eMenu::Action::ViewShowAccountSidebar];
+        q->connect(showSidebar, &QAction::toggled, q, [this](bool on) {
+            sidebar->setVisible(on); // when hidden, the sidebar shows the tab bar again
+        });
+        q->connect(sidebar, &AccountSidebar::hideRequested, showSidebar, [showSidebar]() {
+            showSidebar->setChecked(false);
+        });
+        sidebar->setVisible(showSidebar->isChecked());
+
+        // the sidebar always highlights the account of the current ledger tab
+        q->connect(ui->ledgerTab, &QTabWidget::currentChanged, q, [this]() {
+            const auto page = qobject_cast<LedgerViewPage*>(ui->ledgerTab->currentWidget());
+            sidebar->selectAccount(page ? page->accountId() : QString());
+        });
+        sidebar->refresh();
+
         accountsModel = new AccountNamesFilterProxyModel(q);
         q->slotSettingsChanged();
 
@@ -138,6 +174,7 @@ public:
 
         q->tabSelected(0);
         openLedgersAfterFileOpen();
+        keepOnlyCurrentLedger();
 
         q->addAction(pActions[eMenu::Action::CopyTransactionsToClipboard]);
     }
@@ -174,6 +211,51 @@ public:
     {
         if (accountCombo) {
             accountCombo->hide();
+        }
+    }
+
+    /**
+     * Single tab mode: when the ledger tab bar is hidden, the tabs cannot be
+     * seen, so we keep only the tab of the current account open (plus the
+     * "new ledger" tab). With a visible tab bar nothing changes.
+     */
+    /// save the ids of all open account tabs, in order; the current one is marked with "*"
+    void rememberTabs()
+    {
+        QStringList ids;
+        for (int idx = 0; idx < ui->ledgerTab->count(); ++idx) {
+            if (const auto page = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx)))
+                ids.append(page->accountId() + (idx == ui->ledgerTab->currentIndex() ? QStringLiteral("*") : QString()));
+        }
+        AccountSidebar::setTabsBeforeHide(ids);
+        keepOnlyCurrentLedger();
+    }
+
+    /// reopen the tabs saved by rememberTabs(); the account viewed now stays open and current
+    void reopenRememberedTabs()
+    {
+        const auto page = qobject_cast<LedgerViewPage*>(ui->ledgerTab->currentWidget());
+        const auto currentId = page ? page->accountId() : QString();
+        const auto ids = AccountSidebar::tabsBeforeHide();
+        for (auto id : ids) {
+            id.remove(QLatin1Char('*'));
+            if (MyMoneyFile::instance()->accountsModel()->indexById(id).isValid())
+                openLedger(id, false); // only accounts that still exist
+        }
+        if (!currentId.isEmpty())
+            openLedger(currentId, true);
+    }
+
+    void keepOnlyCurrentLedger()
+    {
+        Q_Q(SimpleLedgerView);
+        if (!sidebar || !sidebar->tabBarHidden())
+            return;
+        const auto current = ui->ledgerTab->currentWidget();
+        for (int idx = ui->ledgerTab->count() - 1; idx >= 0; --idx) {
+            const auto widget = ui->ledgerTab->widget(idx);
+            if (widget != current && qobject_cast<LedgerViewPage*>(widget))
+                q->closeLedger(idx);
         }
     }
 
@@ -565,6 +647,7 @@ public:
     AccountNamesFilterProxyModel* accountsModel;
     QWidget* newTabWidget;
     QToolButton* webSiteButton;
+    AccountSidebar* sidebar = nullptr;
     KMyMoneyAccountCombo* accountCombo;
     QUrl webSiteUrl;
     QString reconciledAccount;
@@ -941,11 +1024,16 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
     case eMenu::Action::FileNew:
         d->createAccountsCombo();
         d->openLedgersAfterFileOpen();
+        d->keepOnlyCurrentLedger();
+        if (d->sidebar)
+            d->sidebar->refresh();
         break;
 
     case eMenu::Action::FileClose:
         d->closeLedgers();
         d->destroyAccountsCombo();
+        if (d->sidebar)
+            d->sidebar->fileClosed();
         break;
 
     case eMenu::Action::CloseAccount:

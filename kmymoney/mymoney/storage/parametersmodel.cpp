@@ -122,13 +122,17 @@ void ParametersModel::addItem(const QString& key, const QString& val)
     int row;
     if (idx.isValid()) {
         row = idx.row();
-
+        const auto& current = static_cast<TreeItem<ParameterItem>*>(index(row, 0).internalPointer())->constDataRef();
+        if (current.value() == val)
+            return;
     } else {
         row = rowCount();
         insertRow(row);
     }
     ParameterItem item(key, val);
     static_cast<TreeItem<ParameterItem>*>(index(row, 0).internalPointer())->dataRef() = item;
+    setDirty();
+    Q_EMIT dataChanged(index(row, 0), index(row, columnCount() - 1));
 }
 
 void ParametersModel::deleteItem(const QString& key)
