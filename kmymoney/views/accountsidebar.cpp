@@ -54,8 +54,10 @@ public:
             color = index.data(Qt::ForegroundRole).value<QBrush>().color(); // grey (hidden) or red (negative)
         painter->setPen(color);
         auto font = opt.font;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
         if (index.column() == 1)
             font.setFeature(QFont::Tag("tnum"), 1); // digits of equal width, so amounts line up
+#endif
         painter->setFont(font);
         const auto rect = opt.rect.adjusted(6, 0, -6, 0);
         const auto align = (index.column() == 0 ? Qt::AlignLeft : Qt::AlignRight) | Qt::AlignVCenter;
@@ -304,7 +306,11 @@ void AccountSidebar::dragMoveEvent(QDragMoveEvent* event)
     // While dragging, an empty row (the "gap") shows where the account will land.
     // Above the middle of a row means before it, below the middle means after it,
     // below all rows means last. Over the gap itself nothing changes.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const auto pos = event->position().toPoint();
+#else
+    const auto pos = event->pos();
+#endif
     const auto item = itemAt(pos);
     if (item && item == m_gap)
         return;
