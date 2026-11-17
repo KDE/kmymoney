@@ -1039,9 +1039,11 @@
 
 <note>
   <para
->A lista inicial e a configuração das fontes de cotação online são definidas quando o &kmymoney; cria seu arquivo de dados pela primeira vez. Se uma fonte online sofrer uma alteração que exija uma mudança nessas configurações para que o &kmymoney; continue a usá-la como uma fonte válida, o usuário deverá fazer as alterações necessárias usando esta caixa de diálogo, com base nas instruções publicadas em uma das <link linkend="firsttime.contact"
+>A lista inicial e a configuração das fontes de cotação online são definidas quando o &kmymoney; cria o seu arquivo de dados pela primeira vez. Fontes de cotação predefinidas adicionais, bem como atualizações das existentes, podem ser instaladas clicando no botão <guibutton
+>Instalar</guibutton
+> nesta janela. A edição manual das definições de fontes de cotação só é necessária para criar fontes personalizadas ou modificar as existentes. Se uma fonte online realizar uma alteração que exija modificações nessas configurações para que o &kmymoney; continue a utilizá-la como uma fonte válida, o usuário deverá fazer as alterações necessárias nesta janela, seguindo as instruções disponíveis em uma das <link linkend="firsttime.contact"
 >opções de suporte</link
-> sugeridas. Esperamos que, em um futuro próximo, a forma como a configuração da fonte online é gerenciada seja alterada para que o &kmymoney; possa buscar automaticamente quaisquer atualizações necessárias nessas configurações, sem exigir que o usuário faça edições manuais. </para>
+> sugeridas. </para>
 </note>
 </sect1>
 
