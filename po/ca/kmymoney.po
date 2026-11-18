@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 01:08+0000\n"
-"PO-Revision-Date: 2026-11-16 16:11+0100\n"
+"PO-Revision-Date: 2026-11-17 11:35+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -5094,11 +5094,10 @@ msgid "Show all accounts"
 msgstr "Mostra tots els comptes"
 
 #: kmymoney/kmymoney.cpp:1466
-#, fuzzy, kde-format
-#| msgid "Show accounts page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show Account Sidebar"
-msgstr "Mostra la pàgina dels comptes"
+msgstr "Mostra la barra lateral dels comptes"
 
 #: kmymoney/kmymoney.cpp:1470
 #, kde-format
@@ -19769,66 +19768,58 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "No s'ha pogut pujar a «%1».<br />%2"
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgid "Normal view"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
-msgstr "Vista normal"
+msgstr "Normal"
 
 #: kmymoney/views/accountsidebar.cpp:492
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Hide"
-msgstr ""
+msgstr "Oculta"
 
 #: kmymoney/views/accountsidebar.cpp:495
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Always show"
-msgstr ""
+msgstr "Mostra sempre"
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgctxt "@title:window Warning message about hidden account"
-#| msgid "Hidden accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "Comptes ocults"
+msgstr "Mostra els comptes ocults"
 
 #: kmymoney/views/accountsidebar.cpp:508
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide zero balances"
-msgstr "Oculta les accions amb saldo zero"
+msgstr "Oculta els saldos zero"
 
 #: kmymoney/views/accountsidebar.cpp:514
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide ledger tab bar"
-msgstr "Oculta la barra de menús"
+msgstr "Oculta la barra de pestanyes del llibre major"
 
 #: kmymoney/views/accountsidebar.cpp:522
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide sidebar"
-msgstr "Oculta la barra de menús"
+msgstr "Oculta la barra lateral"
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show home page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "Mostra la pàgina principal"
+msgstr "Mostra a l'esquerra"
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "Mostra el registre"
+msgstr "Mostra a la dreta"
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format
