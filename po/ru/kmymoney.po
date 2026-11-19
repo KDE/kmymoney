@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 01:08+0000\n"
-"PO-Revision-Date: 2026-11-16 07:30+0200\n"
+"PO-Revision-Date: 2026-11-18 07:57+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -5076,11 +5076,10 @@ msgid "Show all accounts"
 msgstr "Показать все счета"
 
 #: kmymoney/kmymoney.cpp:1466
-#, fuzzy, kde-format
-#| msgid "Show accounts page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show Account Sidebar"
-msgstr "Показывать раздел «Счета»"
+msgstr "Показывать панель счетов"
 
 #: kmymoney/kmymoney.cpp:1470
 #, kde-format
@@ -19704,68 +19703,58 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Невозможно отправить по адресу «%1».<br />%2"
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgctxt "@label normal color"
-#| msgid "Normal"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
-msgstr "Обычный фон"
+msgstr "Обычный режим"
 
 #: kmymoney/views/accountsidebar.cpp:492
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Hide"
-msgstr ""
+msgstr "Скрыть"
 
 #: kmymoney/views/accountsidebar.cpp:495
-#, fuzzy, kde-format
-#| msgid "Always show a No. field"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Always show"
-msgstr "Всегда показывать номер записи"
+msgstr "Всегда показывать"
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgctxt "@title:window Warning message about hidden account"
-#| msgid "Hidden accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "Скрытые счета"
+msgstr "Показывать скрытые счета"
 
 #: kmymoney/views/accountsidebar.cpp:508
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide zero balances"
-msgstr "Скрыть капиталы с нулевым балансом"
+msgstr "Скрывать счета с нулевым балансом"
 
 #: kmymoney/views/accountsidebar.cpp:514
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide ledger tab bar"
-msgstr "Скрыть строку меню"
+msgstr "Скрывать панель вкладок книги учёта"
 
 #: kmymoney/views/accountsidebar.cpp:522
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide sidebar"
-msgstr "Скрыть строку меню"
+msgstr "Скрывать боковую панель"
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show home page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "Показывать домашнюю страницу"
+msgstr "Показывать слева"
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "Показать журнал"
+msgstr "Показывать справа"
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format

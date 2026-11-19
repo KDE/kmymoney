@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 01:08+0000\n"
-"PO-Revision-Date: 2026-11-17 12:26+0100\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"PO-Revision-Date: 2026-11-18 13:30+0100\n"
+"Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.3\n"
+"X-Generator: Lokalize 26.04.1\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3041,7 +3041,7 @@ msgstr "Corrigeer splitsing"
 #: kmymoney/dialogs/splitadjustdialog.ui:42
 #, kde-format
 msgid "How do you want to proceed?"
-msgstr "Hoe wilt u verder gaan?"
+msgstr "Hoe wilt u doorgaan?"
 
 #. i18n: ectx: property (text), widget (QRadioButton, continueBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:55
