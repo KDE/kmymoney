@@ -99,6 +99,7 @@ public:
 
         // put the account sidebar next to the ledger tabs, separated by a movable splitter
         auto splitter = new QSplitter(q);
+        splitter->setOpaqueResize(false);
         sidebar = new AccountSidebar(splitter);
         ui->verticalLayout_2->replaceWidget(ui->ledgerTab, splitter);
         splitter->addWidget(ui->ledgerTab);
