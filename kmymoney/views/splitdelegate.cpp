@@ -9,6 +9,7 @@
 // QT Includes
 
 #include <QApplication>
+#include <QDate>
 #include <QDebug>
 #include <QPainter>
 #include <QScrollBar>
@@ -128,6 +129,11 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
             // propagate read-only mode
             d->m_editor->setReadOnly(d->m_readOnly);
             d->m_editor->setBaseTransactionEditor(d->m_baseEditor);
+
+            // use the date of the transaction for the exchange rate of the split
+            if (d->m_baseEditor) {
+                d->m_editor->setPostDate(d->m_baseEditor->postDate());
+            }
         }
 
     } else {
