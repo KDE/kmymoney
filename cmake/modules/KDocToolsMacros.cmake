@@ -1,33 +1,3 @@
-function(kmm_kdoctools_get_unsupported_languages subdirectory)
-    set(options)
-    set(oneValueArgs RESULT_VAR SUFFIX)
-    set(multiValueArgs)
-    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-    if(NOT ARG_RESULT_VAR)
-        message(FATAL_ERROR
-            "kdoctools_get_unsupported_languages: RESULT_VAR is required"
-        )
-    endif()
-
-    set(unsupported_languages)
-
-    file(GLOB language_dirs
-        LIST_DIRECTORIES true
-        RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/${subdirectory}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/${subdirectory}/*"
-    )
-
-    foreach(language IN LISTS language_dirs)
-        string(REPLACE "_" "-" kdoctools_language ${language})
-        if(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${subdirectory}/${language}${ARG_SUFFIX}"
-           AND NOT EXISTS "${KDOCTOOLS_CUSTOMIZATION_DIR}/${kdoctools_language}/lang.entities")
-            list(APPEND unsupported_languages "${language}")
-        endif()
-    endforeach()
-
-    set(${ARG_RESULT_VAR} "${unsupported_languages}" PARENT_SCOPE)
-endfunction()
 
 function(kmm_kdoctools_install podir)
     # Parse arguments
