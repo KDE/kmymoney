@@ -38,6 +38,7 @@ private Q_SLOTS:
     void testProcessLastDayInMonth();
     void testFixDate();
     void testPaymentDates();
+    void testNextPaymentWithSimpleOccurrence();
 };
 
 #endif

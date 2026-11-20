@@ -422,6 +422,16 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
     Schedule::WeekendOption option(adjust ? weekendOption() : Schedule::WeekendOption::MoveNothing);
 
     Q_D(const MyMoneySchedule);
+
+    // The occurrence may still be stored in its 'simple' form (e.g. EveryFourWeeks
+    // with a multiplier of 1), for example when it was set through the schedule
+    // editor using setOccurrencePeriod(). Work with the compound form
+    // (e.g. Weekly with a multiplier of 4) so that the switch below
+    // handles all cases.
+    auto occurrence = d->m_occurrence;
+    auto multiplier = d->m_occurrenceMultiplier;
+    simpleToCompoundOccurrence(multiplier, occurrence);
+
     QDate adjEndDate(adjustedDate(d->m_endDate, option));
 
     // if the enddate is valid and it is before the reference date,
@@ -434,7 +444,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
     QDate paymentDate(adjustedDate(dueDate, option));
 
     if (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate))) {
-        switch (d->m_occurrence) {
+        switch (occurrence) {
         case Schedule::Occurrence::Once:
             // If the lastPayment is already set or the payment should have been
             // prior to the reference date then invalidate the payment date.
@@ -443,7 +453,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
             break;
 
         case Schedule::Occurrence::Daily: {
-            int step = d->m_occurrenceMultiplier;
+            int step = multiplier;
             do {
                 dueDate = dueDate.addDays(step);
                 paymentDate = adjustedDate(dueDate, option);
@@ -451,7 +461,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
         } break;
 
         case Schedule::Occurrence::Weekly: {
-            int step = 7 * d->m_occurrenceMultiplier;
+            int step = 7 * multiplier;
             do {
                 dueDate = dueDate.addDays(step);
                 paymentDate = adjustedDate(dueDate, option);
@@ -460,14 +470,14 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
 
         case Schedule::Occurrence::EveryHalfMonth:
             do {
-                dueDate = addHalfMonths(dueDate, d->m_occurrenceMultiplier);
+                dueDate = addHalfMonths(dueDate, multiplier);
                 paymentDate = adjustedDate(dueDate, option);
             } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
             break;
 
         case Schedule::Occurrence::Monthly:
             do {
-                dueDate = dueDate.addMonths(d->m_occurrenceMultiplier);
+                dueDate = dueDate.addMonths(multiplier);
                 fixDate(dueDate);
                 paymentDate = adjustedDate(dueDate, option);
             } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
@@ -475,7 +485,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
 
         case Schedule::Occurrence::Yearly:
             do {
-                dueDate = dueDate.addYears(d->m_occurrenceMultiplier);
+                dueDate = dueDate.addYears(multiplier);
                 fixDate(dueDate);
                 paymentDate = adjustedDate(dueDate, option);
             } while (paymentDate.isValid() && (paymentDate <= refDate || d->m_recordedPayments.contains(dueDate)));
@@ -757,33 +767,39 @@ QDate MyMoneySchedule::dateAfter(int transactions) const
         return paymentDate;
 
     Q_D(const MyMoneySchedule);
-    switch (d->m_occurrence) {
+
+    // see nextPaymentDate() for why the occurrence is normalised here
+    auto occurrence = d->m_occurrence;
+    auto multiplier = d->m_occurrenceMultiplier;
+    simpleToCompoundOccurrence(multiplier, occurrence);
+
+    switch (occurrence) {
     case Schedule::Occurrence::Once:
         break;
 
     case Schedule::Occurrence::Daily:
         while (counter++ < transactions)
-            paymentDate = paymentDate.addDays(d->m_occurrenceMultiplier);
+            paymentDate = paymentDate.addDays(multiplier);
         break;
 
     case Schedule::Occurrence::Weekly: {
-        int step = 7 * d->m_occurrenceMultiplier;
+        int step = 7 * multiplier;
         while (counter++ < transactions)
             paymentDate = paymentDate.addDays(step);
     } break;
 
     case Schedule::Occurrence::EveryHalfMonth:
-        paymentDate = addHalfMonths(paymentDate, d->m_occurrenceMultiplier * (transactions - 1));
+        paymentDate = addHalfMonths(paymentDate, multiplier * (transactions - 1));
         break;
 
     case Schedule::Occurrence::Monthly:
         while (counter++ < transactions)
-            paymentDate = paymentDate.addMonths(d->m_occurrenceMultiplier);
+            paymentDate = paymentDate.addMonths(multiplier);
         break;
 
     case Schedule::Occurrence::Yearly:
         while (counter++ < transactions)
-            paymentDate = paymentDate.addYears(d->m_occurrenceMultiplier);
+            paymentDate = paymentDate.addYears(multiplier);
         break;
 
     case Schedule::Occurrence::Any:

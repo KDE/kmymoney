@@ -1165,3 +1165,41 @@ void MyMoneyScheduleTest::testPaymentDates()
     QCOMPARE(dates.at(6), QDate(2025, 5, 2));
     QCOMPARE(dates.at(7), QDate(2025, 5, 17));
 }
+
+void MyMoneyScheduleTest::testNextPaymentWithSimpleOccurrence()
+{
+    // The schedule editor sets the period and the multiplier separately
+    // (setOccurrencePeriod() followed by setOccurrenceMultiplier()), so a
+    // schedule can carry a 'simple' occurrence such as EveryFourWeeks with
+    // a multiplier of 1. Make sure the next payment is still calculated.
+    MyMoneySchedule s;
+    s.setStartDate(QDate(2026, 1, 5));
+    s.setOccurrencePeriod(Schedule::Occurrence::EveryFourWeeks);
+    s.setOccurrenceMultiplier(1);
+    s.setNextDueDate(s.startDate());
+    s.setLastPayment(s.startDate());
+
+    QCOMPARE(s.nextPayment(s.nextDueDate()), QDate(2026, 2, 2));
+    QCOMPARE(s.dateAfter(3), QDate(2026, 3, 2));
+
+    // the result must be identical to the canonical form (Weekly x 4)
+    MyMoneySchedule c;
+    c.setStartDate(QDate(2026, 1, 5));
+    c.setOccurrence(Schedule::Occurrence::EveryFourWeeks);
+    c.setNextDueDate(c.startDate());
+    c.setLastPayment(c.startDate());
+    QCOMPARE(c.occurrence(), Schedule::Occurrence::Weekly);
+    QCOMPARE(c.occurrenceMultiplier(), 4);
+    QCOMPARE(s.nextPayment(s.nextDueDate()), c.nextPayment(c.nextDueDate()));
+    QCOMPARE(s.dateAfter(3), c.dateAfter(3));
+
+    // and a month based one
+    MyMoneySchedule m;
+    m.setStartDate(QDate(2026, 1, 15));
+    m.setOccurrencePeriod(Schedule::Occurrence::EveryOtherMonth);
+    m.setOccurrenceMultiplier(1);
+    m.setNextDueDate(m.startDate());
+    m.setLastPayment(m.startDate());
+    QCOMPARE(m.nextPayment(m.nextDueDate()), QDate(2026, 3, 15));
+    QCOMPARE(m.dateAfter(3), QDate(2026, 5, 15));
+}
