@@ -1853,24 +1853,22 @@ msgid "..."
 msgstr "..."
 
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.cpp:74
-#, fuzzy, kde-format
-#| msgid "Create a new transaction"
+#, kde-format
 msgctxt ""
 msgid "Category for unassigned income, %1 transaction"
 msgid_plural "Category for unassigned income, %1 transactions"
-msgstr[0] "Vytvoriť novú transakciu"
-msgstr[1] "Vytvoriť novú transakciu"
-msgstr[2] "Vytvoriť novú transakciu"
+msgstr[0] "Kategória pre nepriradený príjem, %1 transakcia"
+msgstr[1] "Kategória pre nepriradený príjem, %1 transakcie"
+msgstr[2] "Kategória pre nepriradený príjem, %1 transakcií"
 
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.cpp:77
-#, fuzzy, kde-format
-#| msgid "Unable to reassign payee of transaction/split"
+#, kde-format
 msgctxt ""
 msgid "Category for unassigned expense, %1 transaction"
 msgid_plural "Category for unassigned expenses, %1 transactions"
-msgstr[0] "Nemožno znovu priradiť príjemcu transakcie/rozdelenia"
-msgstr[1] "Nemožno znovu priradiť príjemcu transakcie/rozdelenia"
-msgstr[2] "Nemožno znovu priradiť príjemcu transakcie/rozdelenia"
+msgstr[0] "Kategória pre nepriradený výdavok, %1 transakcia"
+msgstr[1] "Kategória pre nepriradené výdavky, %1 transakcie"
+msgstr[2] "Kategória pre nepriradené výdavky, %1 transakcií"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, FixUncategorizedTransactions)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitAdjustDialog)
@@ -1884,7 +1882,7 @@ msgstr "Dialóg"
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.ui:40
 #, kde-format
 msgid "Good, no uncategorzied transactions found in your data."
-msgstr ""
+msgstr "Výborne, vo vašich údajoch sa nenašli žiadne nezaradené transakcie."
 
 #. i18n: ectx: property (text), widget (QLabel, m_warningLabel)
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.ui:119
@@ -1894,6 +1892,9 @@ msgid ""
 "sure to have a good backup before you save the results of this operation.</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-weight:600; color:#ff0000;\">Pred "
+"uložením výsledkov tejto operácie si urobte dobrú zálohu.</span></p></body></"
+"html>"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportVerifyDlg)
 #: kmymoney/dialogs/kimportverifydlg.ui:17
@@ -3844,7 +3845,7 @@ msgstr "Moduly"
 #, kde-format
 msgctxt "@option:check"
 msgid "Update prices automatically once a day"
-msgstr ""
+msgstr "Aktualizovať ceny automaticky raz denne"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:84
 #, kde-format
@@ -3854,6 +3855,9 @@ msgid ""
 "source once a day, while KMyMoney is open. The prices are stored in the "
 "file, which then needs to be saved."
 msgstr ""
+"Raz denne, kým je KMyMoney otvorený, aktualizuje ceny všetkých cenných "
+"papierov a mien, ktoré majú online zdroj. Ceny sa uložia do súboru, ktorý "
+"potom treba uložiť."
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:145
 #, kde-format
@@ -4724,7 +4728,7 @@ msgstr "Sanitizéry: %1"
 #: kmymoney/kcreditswindow.cpp:46
 #, kde-format
 msgid "Alkimia web view module for displaying reports"
-msgstr ""
+msgstr "Modul webového zobrazenia Alkimia na zobrazovanie výkazov"
 
 #: kmymoney/kcreditswindow.cpp:50
 #, kde-format
@@ -5042,11 +5046,10 @@ msgid "Show all accounts"
 msgstr "Ukazovať všetky účty"
 
 #: kmymoney/kmymoney.cpp:1466
-#, fuzzy, kde-format
-#| msgid "Show accounts page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show Account Sidebar"
-msgstr "Zobraziť stránku účtov"
+msgstr "Zobraziť bočný panel účtov"
 
 #: kmymoney/kmymoney.cpp:1470
 #, kde-format
@@ -5197,10 +5200,9 @@ msgid "Calculator..."
 msgstr "Kalkulačka..."
 
 #: kmymoney/kmymoney.cpp:1508
-#, fuzzy, kde-format
-#| msgid "Future transactions"
+#, kde-format
 msgid "Fix uncategorized transactions"
-msgstr "Budúce transakcie"
+msgstr "Opraviť nezaradené transakcie"
 
 #: kmymoney/kmymoney.cpp:1512
 #, kde-format
@@ -5982,38 +5984,35 @@ msgid "Checking for overdue scheduled transactions..."
 msgstr "Kontrola na plánované transakcie po termíne..."
 
 #: kmymoney/kmymoney.cpp:4315
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updating prices online..."
-msgstr "Aktualizujem cenovú politiku"
+msgstr "Aktualizujú sa ceny online..."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updated %1 price online."
 msgid_plural "Updated %1 prices online."
-msgstr[0] "Aktualizujem cenovú politiku"
-msgstr[1] "Aktualizujem cenovú politiku"
-msgstr[2] "Aktualizujem cenovú politiku"
+msgstr[0] "Online aktualizovaná %1 cena."
+msgstr[1] "Online aktualizované %1 ceny."
+msgstr[2] "Online aktualizovaných %1 cien."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Online price update..."
+#, kde-format
 msgid "Online prices are up to date."
-msgstr "Online cenová aktualizácia..."
+msgstr "Online ceny sú aktuálne."
 
 #: kmymoney/kmymoney.cpp:4337
 #, kde-format
 msgid "%1 quote could not be retrieved: %2"
 msgid_plural "%1 quotes could not be retrieved: %2"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1 kurz sa nepodarilo získať: %2"
+msgstr[1] "%1 kurzy sa nepodarilo získať: %2"
+msgstr[2] "%1 kurzov sa nepodarilo získať: %2"
 
 #: kmymoney/kmymoney.cpp:4340
 #, kde-format
 msgid "The online prices could not be stored because the file was busy."
-msgstr ""
+msgstr "Online ceny sa nepodarilo uložiť, pretože súbor bol zaneprázdnený."
 
 #: kmymoney/kmymoney.cpp:4478
 #, kde-format
@@ -9559,18 +9558,14 @@ msgid "Payment Method"
 msgstr "Spôsob platby"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:190
-#, fuzzy
-#| msgid "Recording payments?"
 msgctxt "Schedule header"
 msgid "Remaining Payments"
-msgstr "Zaznamenať platby?"
+msgstr "Zostávajúce platby"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:191
-#, fuzzy
-#| msgid "Final Payment"
 msgctxt "Schedule header"
 msgid "Final Payment Date"
-msgstr "Konečná platba"
+msgstr "Dátum poslednej platby"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:250
 #, kde-format
@@ -19048,10 +19043,9 @@ msgstr "Skontrolovať harmonogramy počas spustenia"
 
 #. i18n: ectx: label, entry (AutoUpdatePrices), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:61
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Update prices online once a day"
-msgstr "Aktualizujem cenovú politiku"
+msgstr "Aktualizovať ceny online raz denne"
 
 #. i18n: ectx: label, entry (ExternalCalculator), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:71
@@ -19605,9 +19599,7 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Unable to upload to '%1'.<br />%2"
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgctxt "@label normal color"
-#| msgid "Normal"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
 msgstr "Normálne"
@@ -19616,57 +19608,49 @@ msgstr "Normálne"
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Hide"
-msgstr ""
+msgstr "Skryť"
 
 #: kmymoney/views/accountsidebar.cpp:495
-#, fuzzy, kde-format
-#| msgid "Always show a No. field"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Always show"
-msgstr "Vždy ukazovať pole poradového čísla"
+msgstr "Vždy zobraziť"
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgctxt "@title:window Warning message about hidden account"
-#| msgid "Hidden accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "Skryť uzatvorené účty"
+msgstr "Zobraziť skryté účty"
 
 #: kmymoney/views/accountsidebar.cpp:508
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide zero balances"
-msgstr "Nezobrazovať akcie s nulovým zostatkom"
+msgstr "Skryť nulové zostatky"
 
 #: kmymoney/views/accountsidebar.cpp:514
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide ledger tab bar"
-msgstr "Skryť panel ponuky"
+msgstr "Skryť panel kariet účtovnej knihy"
 
 #: kmymoney/views/accountsidebar.cpp:522
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide sidebar"
-msgstr "Skryť panel ponuky"
+msgstr "Skryť bočný panel"
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show home page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "Zobraziť domovskú stránku"
+msgstr "Zobraziť vľavo"
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "Ukázať záznam"
+msgstr "Zobraziť vpravo"
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format
@@ -21749,15 +21733,13 @@ msgid "Accept or unmatch transaction"
 msgstr "Prijať alebo zrušiť párovanie transakcie"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgctxt "@title:column Category"
 msgid "Category"
 msgstr "Kategória"
 
 #: kmymoney/views/ledgerview.cpp:1476
-#, fuzzy, kde-format
-#| msgid "Detail"
+#, kde-format
 msgctxt "@title:column Ledger not only category"
 msgid "Detail"
 msgstr "Detail"

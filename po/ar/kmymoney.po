@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 01:08+0000\n"
-"PO-Revision-Date: 2026-11-14 17:28+0400\n"
+"PO-Revision-Date: 2026-11-19 18:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1850,17 +1850,16 @@ msgstr[4] "فئة للدخل غير المُصنَّف، %1 معاملة"
 msgstr[5] "فئة للدخل غير المُصنَّف، %1 معاملة"
 
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.cpp:77
-#, fuzzy, kde-format
-#| msgid "Unable to reassign payee of transaction/split"
+#, kde-format
 msgctxt ""
 msgid "Category for unassigned expense, %1 transaction"
 msgid_plural "Category for unassigned expenses, %1 transactions"
-msgstr[0] "لا يمكن إعادة تعيين المدفوع له للمعاملة/التجزئة"
-msgstr[1] "لا يمكن إعادة تعيين المدفوع له للمعاملة/التجزئة"
-msgstr[2] "لا يمكن إعادة تعيين المدفوع له للمعاملة/التجزئة"
-msgstr[3] "لا يمكن إعادة تعيين المدفوع له للمعاملة/التجزئة"
-msgstr[4] "لا يمكن إعادة تعيين المدفوع له للمعاملة/التجزئة"
-msgstr[5] "لا يمكن إعادة تعيين المدفوع له للمعاملة/التجزئة"
+msgstr[0] "فئة للنفقات غير المُصنَّف، %1 معاملات"
+msgstr[1] "فئة للنفقات غير المُصنَّف، معاملة واحدة"
+msgstr[2] "فئة للنفقات غير المُصنَّف، معاملتان"
+msgstr[3] "فئة للنفقات غير المُصنَّف، %1 معاملات"
+msgstr[4] "فئة للنفقات غير المُصنَّف، %1 معاملة"
+msgstr[5] "فئة للنفقات غير المُصنَّف، %1 معاملة"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, FixUncategorizedTransactions)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitAdjustDialog)
@@ -3816,7 +3815,7 @@ msgstr "الملحقات"
 #, kde-format
 msgctxt "@option:check"
 msgid "Update prices automatically once a day"
-msgstr ""
+msgstr "حدّث الأسعار آليًا مرة واحدة يوميًا"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:84
 #, kde-format
@@ -3826,6 +3825,8 @@ msgid ""
 "source once a day, while KMyMoney is open. The prices are stored in the "
 "file, which then needs to be saved."
 msgstr ""
+"يحدّث أسعار كل الأوراق المالية والعملات التي لها مصدر عبر الإنترنت مرة واحدة "
+"يوميًا، أثناء فتح KMyMoney. تُخزَّن الأسعار في الملف، الذي يحتاج بعدها إلى الحفظ."
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:145
 #, kde-format
@@ -4690,7 +4691,7 @@ msgstr "المعقّمات: %1"
 #: kmymoney/kcreditswindow.cpp:46
 #, kde-format
 msgid "Alkimia web view module for displaying reports"
-msgstr ""
+msgstr "وحدة عرض الوِب Alkimia لعرض التقارير"
 
 #: kmymoney/kcreditswindow.cpp:50
 #, kde-format
@@ -5008,11 +5009,10 @@ msgid "Show all accounts"
 msgstr "أظهر كل الحسابات"
 
 #: kmymoney/kmymoney.cpp:1466
-#, fuzzy, kde-format
-#| msgid "Show accounts page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show Account Sidebar"
-msgstr "اعرض صفحة الحسابات"
+msgstr "أظهر الشريط الجانبي للحساب"
 
 #: kmymoney/kmymoney.cpp:1470
 #, kde-format
@@ -5943,44 +5943,41 @@ msgid "Checking for overdue scheduled transactions..."
 msgstr "يدقق المعاملات المجدولة المتأخرة..."
 
 #: kmymoney/kmymoney.cpp:4315
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updating prices online..."
-msgstr "سياسة تحديث الأثمان"
+msgstr "تحديث الأسعار عبر الإنترنت..."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updated %1 price online."
 msgid_plural "Updated %1 prices online."
-msgstr[0] "سياسة تحديث الأثمان"
-msgstr[1] "سياسة تحديث الأثمان"
-msgstr[2] "سياسة تحديث الأثمان"
-msgstr[3] "سياسة تحديث الأثمان"
-msgstr[4] "سياسة تحديث الأثمان"
-msgstr[5] "سياسة تحديث الأثمان"
+msgstr[0] "حُدّث %1 سعر عبر الإنترنت."
+msgstr[1] "حُدّث سعر واحد عبر الإنترنت."
+msgstr[2] "حُدّث سعران عبر الإنترنت."
+msgstr[3] "حُدّثت %1أسعار عبر الإنترنت."
+msgstr[4] "حُدّث %1 سعرًا عبر الإنترنت."
+msgstr[5] "حُدّث %1 سعر عبر الإنترنت."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Online price update..."
+#, kde-format
 msgid "Online prices are up to date."
-msgstr "حدّث الأثمان عبر الإنترنت..."
+msgstr "الأسعار عبر الإنترنت محدّثة."
 
 #: kmymoney/kmymoney.cpp:4337
 #, kde-format
 msgid "%1 quote could not be retrieved: %2"
 msgid_plural "%1 quotes could not be retrieved: %2"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "تعذر جلب %1 من العروض: %2"
+msgstr[1] "تعذر جلب عرض واحد: %2"
+msgstr[2] "تعذر جلب عرضين: %2"
+msgstr[3] "تعذر جلب %1 من العروض: %2"
+msgstr[4] "تعذر جلب %1 من العروض: %2"
+msgstr[5] "تعذر جلب %1 من العروض: %2"
 
 #: kmymoney/kmymoney.cpp:4340
 #, kde-format
 msgid "The online prices could not be stored because the file was busy."
-msgstr ""
+msgstr "تعذّر تخزين الأسعار عبر الإنترنت لأن الملف كان مشغولًا."
 
 #: kmymoney/kmymoney.cpp:4478
 #, kde-format
@@ -9521,18 +9518,14 @@ msgid "Payment Method"
 msgstr "طريقة السّداد"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:190
-#, fuzzy
-#| msgid "Recording payments?"
 msgctxt "Schedule header"
 msgid "Remaining Payments"
-msgstr "تسجيل المدفوعات؟"
+msgstr "الدفعات المتبقية"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:191
-#, fuzzy
-#| msgid "Final Payment"
 msgctxt "Schedule header"
 msgid "Final Payment Date"
-msgstr "آخر سداد"
+msgstr "تاريخ الدفعة الأخيرة"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:250
 #, kde-format
@@ -19013,10 +19006,9 @@ msgstr "تحقّق من الجداول عند البدء"
 
 #. i18n: ectx: label, entry (AutoUpdatePrices), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:61
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Update prices online once a day"
-msgstr "سياسة تحديث الأثمان"
+msgstr "حدّث الأسعار عبر الإنترنت مرة واحدة يوميًا"
 
 #. i18n: ectx: label, entry (ExternalCalculator), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:71
@@ -19565,9 +19557,7 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "تعذّر الرّفع إلى ’%1‘<br />%2"
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgctxt "@label normal color"
-#| msgid "Normal"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
 msgstr "عادي"
@@ -19576,57 +19566,49 @@ msgstr "عادي"
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Hide"
-msgstr ""
+msgstr "أخفِ"
 
 #: kmymoney/views/accountsidebar.cpp:495
-#, fuzzy, kde-format
-#| msgid "Always show a No. field"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Always show"
-msgstr "اعرض حقل الرّقم دومًا"
+msgstr "أظهر دائمًا"
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgctxt "@title:window Warning message about hidden account"
-#| msgid "Hidden accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "الحسابات المخفية"
+msgstr "أظهر الحسابات المخفية"
 
 #: kmymoney/views/accountsidebar.cpp:508
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide zero balances"
-msgstr "أخفِ حقوق الملكيّة ذات الرّصيد الصّفري"
+msgstr "أخفِ الأرصدة الصفرية"
 
 #: kmymoney/views/accountsidebar.cpp:514
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide ledger tab bar"
-msgstr "أخفِ شريط القائمة"
+msgstr "أخفِ شريط تبويب دفتر الأستاذ"
 
 #: kmymoney/views/accountsidebar.cpp:522
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide sidebar"
-msgstr "أخفِ شريط القائمة"
+msgstr "اخفِ الشريط الجانبي"
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show home page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "اعرض الصّفحة الرّئيسيّة"
+msgstr "أظهر على اليسار"
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "اعرض السجل"
+msgstr "أظهر على اليمين"
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format

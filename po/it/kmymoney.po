@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 01:08+0000\n"
-"PO-Revision-Date: 2026-10-31 09:23+0100\n"
+"PO-Revision-Date: 2026-11-18 18:52+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1863,24 +1863,20 @@ msgid "..."
 msgstr "..."
 
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.cpp:74
-#, fuzzy, kde-format
-#| msgid "Create a new transaction"
+#, kde-format
 msgctxt ""
 msgid "Category for unassigned income, %1 transaction"
 msgid_plural "Category for unassigned income, %1 transactions"
-msgstr[0] "Crea una nuova transazione"
-msgstr[1] "Crea una nuova transazione"
+msgstr[0] "Categoria per entrate non assegnate, %1 transazione"
+msgstr[1] "Categoria per entrate non assegnate, %1 transazioni"
 
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.cpp:77
-#, fuzzy, kde-format
-#| msgid "Unable to reassign payee of transaction/split"
+#, kde-format
 msgctxt ""
 msgid "Category for unassigned expense, %1 transaction"
 msgid_plural "Category for unassigned expenses, %1 transactions"
-msgstr[0] ""
-"Impossibile riassegnare il beneficiario della transazione/suddivisione"
-msgstr[1] ""
-"Impossibile riassegnare il beneficiario della transazione/suddivisione"
+msgstr[0] "Categoria per entrate non assegnate, %1 transazione"
+msgstr[1] "Categoria per entrate non assegnate, %1 transazioni"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, FixUncategorizedTransactions)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitAdjustDialog)
@@ -1895,6 +1891,7 @@ msgstr "Finestra"
 #, kde-format
 msgid "Good, no uncategorzied transactions found in your data."
 msgstr ""
+"Bene, nei tuoi dati non sono state rilevate transazioni senza categoria."
 
 #. i18n: ectx: property (text), widget (QLabel, m_warningLabel)
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.ui:119
@@ -1904,6 +1901,9 @@ msgid ""
 "sure to have a good backup before you save the results of this operation.</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-weight:600; color:#ff0000;"
+"\">Assicurati di disporre di un buon backup prima di salvare i risultati di "
+"questa operazione.</span></p></body></html>"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportVerifyDlg)
 #: kmymoney/dialogs/kimportverifydlg.ui:17
@@ -3867,7 +3867,7 @@ msgstr "Estensioni"
 #, kde-format
 msgctxt "@option:check"
 msgid "Update prices automatically once a day"
-msgstr ""
+msgstr "Aggiorna i prezzi automaticamente una volta al giorno"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:84
 #, kde-format
@@ -3877,6 +3877,9 @@ msgid ""
 "source once a day, while KMyMoney is open. The prices are stored in the "
 "file, which then needs to be saved."
 msgstr ""
+"Aggiorna una volta al giorno, mentre KMyMoney è in esecuzione, i prezzi di "
+"tutti i titoli e le valute che dispongono di una fonte in linea. I prezzi "
+"sono memorizzati nel file, che deve poi essere salvato."
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:145
 #, kde-format
@@ -4762,6 +4765,7 @@ msgstr "Sanitizer: %1"
 #, kde-format
 msgid "Alkimia web view module for displaying reports"
 msgstr ""
+"Modulo di visualizzazione web di Alkimia per la visualizzazione dei report"
 
 #: kmymoney/kcreditswindow.cpp:50
 #, kde-format
@@ -5081,11 +5085,10 @@ msgid "Show all accounts"
 msgstr "Mostra tutti i conti"
 
 #: kmymoney/kmymoney.cpp:1466
-#, fuzzy, kde-format
-#| msgid "Show accounts page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show Account Sidebar"
-msgstr "Mostra la pagina dei conti"
+msgstr "Mostra la barra laterale dei conti"
 
 #: kmymoney/kmymoney.cpp:1470
 #, kde-format
@@ -5236,10 +5239,9 @@ msgid "Calculator..."
 msgstr "Calcolatrice..."
 
 #: kmymoney/kmymoney.cpp:1508
-#, fuzzy, kde-format
-#| msgid "Future transactions"
+#, kde-format
 msgid "Fix uncategorized transactions"
-msgstr "Transazioni future"
+msgstr "Correggi le transazioni senza categoria"
 
 #: kmymoney/kmymoney.cpp:1512
 #, kde-format
@@ -6020,36 +6022,33 @@ msgid "Checking for overdue scheduled transactions..."
 msgstr "Controllo delle transazioni pianificate arretrate..."
 
 #: kmymoney/kmymoney.cpp:4315
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updating prices online..."
-msgstr "Criterio di aggiornamento del prezzo"
+msgstr "Aggiornamento dei prezzi in linea..."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updated %1 price online."
 msgid_plural "Updated %1 prices online."
-msgstr[0] "Criterio di aggiornamento del prezzo"
-msgstr[1] "Criterio di aggiornamento del prezzo"
+msgstr[0] "Aggiornato %1 prezzo in linea."
+msgstr[1] "Aggiornati %1 prezzi in linea."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Online price update..."
+#, kde-format
 msgid "Online prices are up to date."
-msgstr "Aggiornamento in linea dei prezzi..."
+msgstr "I prezzi in linea sono aggiornati."
 
 #: kmymoney/kmymoney.cpp:4337
 #, kde-format
 msgid "%1 quote could not be retrieved: %2"
 msgid_plural "%1 quotes could not be retrieved: %2"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 quotazione non può essere recuperata: %2"
+msgstr[1] "%1 quotazioni non possono essere recuperate: %2"
 
 #: kmymoney/kmymoney.cpp:4340
 #, kde-format
 msgid "The online prices could not be stored because the file was busy."
-msgstr ""
+msgstr "Impossibile salvare i prezzi in linea perché il file era occupato."
 
 #: kmymoney/kmymoney.cpp:4478
 #, kde-format
@@ -9618,18 +9617,14 @@ msgid "Payment Method"
 msgstr "Metodo di pagamento"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:190
-#, fuzzy
-#| msgid "Recording payments?"
 msgctxt "Schedule header"
 msgid "Remaining Payments"
-msgstr "Registra pagamenti?"
+msgstr "Pagamenti rimanenti"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:191
-#, fuzzy
-#| msgid "Final Payment"
 msgctxt "Schedule header"
 msgid "Final Payment Date"
-msgstr "Pagamento finale"
+msgstr "Data del pagamento finale"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:250
 #, kde-format
@@ -19163,10 +19158,9 @@ msgstr "Controlla le operazioni pianificate all'avvio"
 
 #. i18n: ectx: label, entry (AutoUpdatePrices), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:61
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Update prices online once a day"
-msgstr "Criterio di aggiornamento del prezzo"
+msgstr "Aggiorna i prezzi in linea una volta al giorno"
 
 #. i18n: ectx: label, entry (ExternalCalculator), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:71
@@ -19738,9 +19732,7 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Impossibile inviare a «%1».<br />%2"
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgctxt "@label normal color"
-#| msgid "Normal"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
 msgstr "Normale"
@@ -19749,57 +19741,49 @@ msgstr "Normale"
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Hide"
-msgstr ""
+msgstr "Nascondi"
 
 #: kmymoney/views/accountsidebar.cpp:495
-#, fuzzy, kde-format
-#| msgid "Always show a No. field"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Always show"
-msgstr "Mostra sempre un campo Num."
+msgstr "Mostra sempre"
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgctxt "@title:window Warning message about hidden account"
-#| msgid "Hidden accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "Conti nascosti"
+msgstr "Mostra i conti nascosti"
 
 #: kmymoney/views/accountsidebar.cpp:508
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide zero balances"
-msgstr "Nascondi i conti patrimoniali a saldo zero"
+msgstr "Nascondi i conti a saldo zero"
 
 #: kmymoney/views/accountsidebar.cpp:514
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide ledger tab bar"
-msgstr "Nascondi la barra dei menu"
+msgstr "Nascondi la barra delle schede del registro"
 
 #: kmymoney/views/accountsidebar.cpp:522
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide sidebar"
-msgstr "Nascondi la barra dei menu"
+msgstr "Nascondi la barra laterale"
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show home page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "Mostra la pagina principale"
+msgstr "Mostra a sinistra"
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "Mostra registro"
+msgstr "Mostra a destra"
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format
