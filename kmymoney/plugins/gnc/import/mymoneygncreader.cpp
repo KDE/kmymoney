@@ -1820,9 +1820,12 @@ void MyMoneyGncReader::convertTransaction(const GncTransaction* gtx)
         m_potentialTransfer = false;
         nonSplitTx = false;
     }
-    QString slotMemo = gtx->getKvpValue(QString("notes"));
-    if (!slotMemo.isEmpty())
-        tx.setMemo(slotMemo);
+    // the memo of the first split is kept in a different location
+    // we extract it here and assign it to the split
+    const QString slotMemo = gtx->getKvpValue(QString("notes"));
+    if (!slotMemo.isEmpty()) {
+        m_splitList[0].setMemo(slotMemo);
+    }
 
     QList<MyMoneySplit>::iterator it = m_splitList.begin();
     while (!m_splitList.isEmpty()) {
@@ -2529,15 +2532,12 @@ bool MyMoneyGncReader::writeReportToFile(const QList<QString>& sectionsToReport)
 QString MyMoneyGncReader::createPayee(const QString& gncDescription)
 {
     MyMoneyPayee payee;
-    TRY {
-        payee = m_storage->payeeByName(gncDescription);
-    }
-    CATCH
-    { // payee not found, create one
+    payee = m_storage->payeeByName(gncDescription);
+    if (payee.id().isEmpty()) {
         payee.setName(gncDescription);
         m_storage->addPayee(payee);
     }
-    return (payee.id());
+    return payee.id();
 }
 //************************************** createOrphanAccount *******************************
 QString MyMoneyGncReader::createOrphanAccount(const QString& gncName)
