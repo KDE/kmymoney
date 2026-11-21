@@ -5,6 +5,7 @@ Name=A database for institution names and iban to bic rules
 Name[ar]=قاعدة بيانات لأسماء المؤسسات وقواعد iban إلى bic
 Name[ca]=Una base de dades per als noms de les institucions i les regles «iban» a «bic»
 Name[ca@valencia]=Una base de dades per als noms de les institucions i les regles «iban» a «bic»
+Name[cs]=Databáze názvů institucí a pravidel pro IBAN a BIC
 Name[en_GB]=A database for institution names and IBAN to BIC rules
 Name[eo]=Datumaro por instituciaj nomoj kaj iban al bic-reguloj
 Name[es]=Una base de datos de nombres de organismos y de reglas IBAN y BIC
