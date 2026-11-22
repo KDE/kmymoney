@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 06:30+0000\n"
+"POT-Creation-Date: 2026-11-22 04:20+0000\n"
 "PO-Revision-Date: 2026-09-27 19:21+0200\n"
 "Last-Translator: Frank Steinmetzger <dev-kde@felsenfleischer.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -11909,7 +11909,7 @@ msgstr "Konten werden geladen …"
 msgid "Loading transactions..."
 msgstr "Buchungen werden geladen …"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1890
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1893
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11918,37 +11918,37 @@ msgstr ""
 "Konto oder Kategorie %1, Buchungsdatum %2; Split-Buchung enthält ungültigen "
 "Wert. Bitte überprüfen"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1932
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1935
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Importierte Buchungen"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1982
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1985
 #, kde-format
 msgid "Loading templates..."
 msgstr "Vorlagen werden geladen …"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1996
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1999
 #, kde-format
 msgid "Unknown payee"
 msgstr "Unbekannter Zahlungsempfänger"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2127
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2130
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "Planung %1 enthält eine unbekannte Aktion (Schlüssel = %2, Typ = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2133
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2136
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "Die Planung %1 enthält mehrere Vorgänge; nur einer wurde importiert"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2137
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2140
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "Planung %1 enthält keine gültigen Split-Buchungen"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2141
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2144
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -11957,19 +11957,19 @@ msgstr ""
 "Planung %1 scheint eine Formel zu enthalten. GnuCash-Formeln können nicht "
 "konvertiert werden"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2191
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2194
 #, kde-format
 msgid "Loading schedules..."
 msgstr "Geplante Buchungen werden geladen …"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2275
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2278
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr ""
 "Die geplante Buchug %1 hat ein Intervall von %2, das momentan nicht "
 "verfügbar ist"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2280
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2283
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11978,7 +11978,7 @@ msgstr ""
 "Planung %1 enthält eine unbekannte Intervall-Spezifikation, bitte überprüfen "
 "Sie diese auf korrekte Funktionsweise"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2317
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11987,12 +11987,12 @@ msgstr ""
 "Planung %1 enthält eine zurückgestellte Intervall-Spezifikation, bitte "
 "überprüfen Sie diese auf korrekte Funktionsweise"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2337
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2340
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "Planung %1 wurde wunschgemäß gelöscht"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2393
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2396
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -12001,30 +12001,30 @@ msgstr ""
 "Ihre Hauptwährung scheint %1 (%2) zu sein; möchten Sie diese als "
 "Basiswährung verwenden?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2413
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2416
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Mehr"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2415
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2418
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Fertig"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2417
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2420
 #, kde-format
 msgid "Save Report"
 msgstr "Bericht speichern"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2433
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2436
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr ""
 "Beim Konvertieren der geplanten Zahlung „%1“ sind Probleme aufgetreten."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2458
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
 #, kde-format
 msgid ""
 "Found:\n"
@@ -12033,91 +12033,91 @@ msgstr ""
 "Gefunden:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2459
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2462
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 Ware (Eigenkapital)\n"
 msgstr[1] "%1 Waren (Eigenkapital)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2460
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2463
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 Preis\n"
 msgstr[1] "%1 Preise\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2464
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 Konto\n"
 msgstr[1] "%1 Konten\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2462
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2465
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 Buchung\n"
 msgstr[1] "%1 Buchungen\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2463
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2466
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 Planung\n"
 msgstr[1] "%1 Planungen\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2466
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2469
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "Keine Inkonsistenzen entdeckt\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2468
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2471
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "%1 Inkonsistenz wurde gefunden und korrigiert.\n"
 msgstr[1] "%1 Inkonsistenzen wurden gefunden und korrigiert.\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2473
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2476
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "%1 Ausbuchungskonto wurde angelegt\n"
 msgstr[1] "%1 Ausbuchungskonten wurden angelegt\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2478
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2481
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "%1 mögliches Problem mit den Planungen wurde entdeckt\n"
 msgstr[1] "%1 mögliche Probleme mit den Planungen wurden entdeckt\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2484
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2487
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Kleinfirmenfunktionen (Kunden, Rechnungen, etc.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2486
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2489
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Budgets"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2488
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2491
 #, kde-format
 msgid "Lots"
 msgstr "Posten"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2493
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
 "Die folgenden in Ihrer Datei verwendeten Funktionen werden derzeit nicht "
 "unterstützt:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2494
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
 #, kde-format
 msgid ""
 "\n"
@@ -12128,7 +12128,7 @@ msgstr ""
 "\n"
 "Klicken Sie auf Mehr für weitere Informationen"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2509
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2512
 #, kde-format
 msgid "Save report as"
 msgstr "Bericht speichern als"

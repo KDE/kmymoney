@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 06:30+0000\n"
+"POT-Creation-Date: 2026-11-22 04:20+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -12124,7 +12124,7 @@ msgstr "Számlák betöltése…"
 msgid "Loading transactions..."
 msgstr "Tranzakciók betöltése…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1890
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1893
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -12133,39 +12133,39 @@ msgstr ""
 "A(z) %1 számla vagy kategória, tranzakciós dátum %2; osztott tranzakció "
 "érvénytelen értéket tartalmaz; kérjük, ellenőrizze"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1932
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1935
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Importált tranzakciók"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1982
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1985
 #, kde-format
 msgid "Loading templates..."
 msgstr "Sablonok betöltése…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1996
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1999
 #, kde-format
 msgid "Unknown payee"
 msgstr "Ismeretlen kedvezményezett"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2127
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2130
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr ""
 "A(z) %1 ütemezés ismeretlen műveletet tartalmaz (kulcs = %2, típus = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2133
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2136
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr ""
 "A(z) %1 ütemezés többszörös műveleteket tartalmaz; csak egy lett importálva"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2137
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2140
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "A(z) %1 ütemezés nem tartalmaz érvényes osztott tranzakciót"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2141
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2144
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -12173,19 +12173,19 @@ msgid ""
 msgstr ""
 "A(z) %1 ütemezés formulát tartalmaz. A GnuCash formulái nem konvertibilisek"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2191
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2194
 #, kde-format
 msgid "Loading schedules..."
 msgstr "Ütemezések betöltése…"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2275
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2278
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr ""
 "A(z) %1 ütemezésnek a(z) %2 intervallum lett megadva, ami jelenleg nem "
 "elérhető"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2280
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2283
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -12194,7 +12194,7 @@ msgstr ""
 "A(z) %1 ütemezés ismeretlen intervallumspecifikációt tartalmaz; kérjük, "
 "ellenőrizze a helyes műveletet"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2317
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -12203,36 +12203,36 @@ msgstr ""
 "A(z) %1 ütemezés halasztott intervallumspecifikációt tartalmaz; kérjük, "
 "ellenőrizze a helyes műveletet"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2337
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2340
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "A(z) %1 ütemezés felhasználói kérésre eldobva"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2393
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2396
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
 "currency?"
 msgstr "Az Ön fő pénzneme %1 (%2); szeretné beállítani ezt alap pénznemnek?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2413
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2416
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Több"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2415
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2418
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Kész"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2417
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2420
 #, kde-format
 msgid "Save Report"
 msgstr "Jelentés mentése"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2433
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2436
 #, fuzzy, kde-format
 #| msgid ""
 #| "Problems were encountered in converting schedule '%1'.\n"
@@ -12242,7 +12242,7 @@ msgstr ""
 "Hibák történtek a(z) „%1” ütemezés konvertálása során.\n"
 "Szeretné átnézni vagy szerkeszteni ezeket?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2458
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
 #, kde-format
 msgid ""
 "Found:\n"
@@ -12251,90 +12251,90 @@ msgstr ""
 "Talált:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2459
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2462
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 árucikk (saját tőke)\n"
 msgstr[1] "%1 árucikk (saját tőke)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2460
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2463
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 árfolyam\n"
 msgstr[1] "%1 árfolyam\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2461
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2464
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 számla\n"
 msgstr[1] "%1 számla\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2462
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2465
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 tranzakció\n"
 msgstr[1] "%1 tranzakció\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2463
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2466
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 ütemezés\n"
 msgstr[1] "%1 ütemezés\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2466
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2469
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "Nincs inkonzisztencia\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2468
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2471
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "%1 inkonzisztencia észlelve és javítva\n"
 msgstr[1] "%1 inkonzisztencia észlelve és javítva\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2473
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2476
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "%1 árva számla létrehozva\n"
 msgstr[1] "%1 árva számla létrehozva\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2478
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2481
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "%1 lehetséges ütemezési probléma észlelve\n"
 msgstr[1] "%1 lehetséges ütemezési probléma észlelve\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2484
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2487
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Szolgáltatások kisvállalkozásoknak (ügyfelek, számlák, stb)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2486
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2489
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Költségvetések"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2488
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2491
 #, kde-format
 msgid "Lots"
 msgstr "Telkek"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2493
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
 "A fájlban található funkciók közül az alábbiak jelenleg nem támogatottak:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2494
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
 #, kde-format
 msgid ""
 "\n"
@@ -12345,7 +12345,7 @@ msgstr ""
 "\n"
 "Nyomja meg a Több gombot további információkért"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2509
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2512
 #, kde-format
 msgid "Save report as"
 msgstr "Jelentés mentése másként"
