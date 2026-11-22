@@ -152,15 +152,17 @@ void KScheduledView::slotListViewCollapsed(const QModelIndex& idx)
 
 void KScheduledView::slotSetSelectedItem(const QItemSelection& selected, const QItemSelection& deselected)
 {
+    Q_D(KScheduledView);
+    Q_UNUSED(selected)
     Q_UNUSED(deselected)
     SelectedObjects selections;
 
-    if (!selected.isEmpty()) {
-        QModelIndexList idxList = selected.indexes();
-        if (!idxList.isEmpty()) {
-            const auto objId = selected.indexes().front().data(eMyMoney::Model::IdRole).toString();
-            selections.addSelection(SelectedObjects::Schedule, objId);
-        }
+    // After a deletion, selectionChanged can report no newly selected rows
+    // while the view still has an automatically selected row.
+    const auto selectedRows = d->ui->m_scheduleTree->selectionModel()->selectedRows();
+    if (!selectedRows.isEmpty()) {
+        const auto objId = selectedRows.first().data(eMyMoney::Model::IdRole).toString();
+        selections.addSelection(SelectedObjects::Schedule, objId);
     }
     Q_EMIT requestSelectionChange(selections);
 }
