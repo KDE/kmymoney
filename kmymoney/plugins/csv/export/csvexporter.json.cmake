@@ -43,6 +43,7 @@
         "Description[ar]": "أضف تصدير CSV إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig l'exportació cap a CSV a KMyMoney",
         "Description[ca]": "Afegeix l'exportació a CSV al KMyMoney",
+        "Description[cs]": "Přidání exportu do formátu CSV do programu KMyMoney",
         "Description[de]": "Fügt CSV-Export zu KMyMoney hinzu",
         "Description[en_GB]": "Add CSV exporting to KMyMoney",
         "Description[eo]": "Aldoni CSV-eksportadon al KMyMoney",
