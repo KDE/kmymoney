@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-22 04:20+0000\n"
+"POT-Creation-Date: 2026-11-23 05:03+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -21542,44 +21542,44 @@ msgstr ""
 msgid "Unable to remove payee(s)"
 msgstr "Adressaten laat sik nich wegmaken"
 
-#: kmymoney/views/kscheduledview.cpp:197
+#: kmymoney/views/kscheduledview.cpp:199
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Wullt Du de plaant Boken <b>%1</b> redig wegdoon?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:200
+#: kmymoney/views/kscheduledview.cpp:202
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:202
+#: kmymoney/views/kscheduledview.cpp:204
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Plaant Boken utsöken"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:212
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Plaant Boken lett sik nich wegmaken: \"%1\""
 
-#: kmymoney/views/kscheduledview.cpp:224
+#: kmymoney/views/kscheduledview.cpp:226
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopie vun %1"
 
-#: kmymoney/views/kscheduledview.cpp:249
+#: kmymoney/views/kscheduledview.cpp:251
 #, fuzzy, kde-format
 #| msgid "Unable to enter scheduled transaction '%1'"
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Plaant Boken \"%1\" lett sik nich ingeven."
 
-#: kmymoney/views/kscheduledview.cpp:263 kmymoney/views/kscheduledview.cpp:276
+#: kmymoney/views/kscheduledview.cpp:265 kmymoney/views/kscheduledview.cpp:278
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
