@@ -41,6 +41,7 @@
         "Description[ar]": "أَنشِئْ تقريرًا بعد كل تسوية يحتوي على بيانات حول عملية التسوية",
         "Description[ca@valencia]": "Crea un informe després de cada conciliació que conté dades del procés de conciliació",
         "Description[ca]": "Crea un informe després de cada conciliació que conté dades del procés de conciliació",
+        "Description[cs]": "Po každém rozvaze vytvoří zprávu obsahující údaje o procesu rozvahy",
         "Description[de]": "Erstellt nach jedem Abgleich einen Bericht, der Daten über den Abgleich-Prozess enthält",
         "Description[en_GB]": "Creates a report after each reconciliation containing data about the reconciliation process",
         "Description[eo]": "Kreas raporton post ĉiu repaciĝo enhavantan datumojn pri la repaciĝoprocezo",

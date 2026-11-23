@@ -41,6 +41,7 @@
         "Description[ar]": "أضف استيراد CSV إلى «أموالك» أموالك",
         "Description[ca@valencia]": "Afig la importació des de CSV a KMyMoney",
         "Description[ca]": "Afegeix la importació des de CSV al KMyMoney",
+        "Description[cs]": "Přidání importu do formátu CSV do programu KMyMoney",
         "Description[de]": "Fügt CSV-Import zu KMyMoney hinzu",
         "Description[en_GB]": "Add CSV importing to KMyMoney",
         "Description[eo]": "Aldoni CSV-importadon al KMyMoney",

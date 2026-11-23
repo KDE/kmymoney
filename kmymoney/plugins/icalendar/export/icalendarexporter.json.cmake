@@ -41,6 +41,7 @@
         "Description[ar]": "يصدّر الجداول الزمنية إلى ملفات iCalendar",
         "Description[ca@valencia]": "Exporta les planificacions a fitxers iCalendar",
         "Description[ca]": "Exporta les planificacions a fitxers iCalendar",
+        "Description[cs]": "Exportuje plány do souborů iCalendar",
         "Description[de]": "Exportiert geplante Buchungen in iCalendar-Dateien",
         "Description[en_GB]": "Exports schedules to iCalendar files",
         "Description[eo]": "Eksportas horarojn al iCalendar dosieroj",
