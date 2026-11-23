@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-22 01:05+0000\n"
+"POT-Creation-Date: 2026-11-23 01:03+0000\n"
 "PO-Revision-Date: 2026-09-27 14:47+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -21319,7 +21319,7 @@ msgstr "Ingenting att sammanfoga."
 msgid "Unable to remove payee(s)"
 msgstr "Kan inte ta bort betalningsmottagare"
 
-#: kmymoney/views/kscheduledview.cpp:199
+#: kmymoney/views/kscheduledview.cpp:201
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
@@ -21327,7 +21327,7 @@ msgstr ""
 "<p>Är du säker på att du vill ta bort den schemalagda transaktionen <b>%1</"
 "b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:202
+#: kmymoney/views/kscheduledview.cpp:204
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -21336,29 +21336,29 @@ msgstr ""
 "I fallet med låneavbetalningar är det för närvarande inte möjligt att "
 "återskapa den schemalagda transaktionen."
 
-#: kmymoney/views/kscheduledview.cpp:204
+#: kmymoney/views/kscheduledview.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Ta bort schema"
 
-#: kmymoney/views/kscheduledview.cpp:212
+#: kmymoney/views/kscheduledview.cpp:214
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Kan inte ta bort schemalagd transaktion '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:226
+#: kmymoney/views/kscheduledview.cpp:228
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopia av %1"
 
-#: kmymoney/views/kscheduledview.cpp:251
+#: kmymoney/views/kscheduledview.cpp:253
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Kan inte duplicera schemalagd transaktion: '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:265 kmymoney/views/kscheduledview.cpp:278
+#: kmymoney/views/kscheduledview.cpp:267 kmymoney/views/kscheduledview.cpp:280
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-22 01:05+0000\n"
+"POT-Creation-Date: 2026-11-23 01:03+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1782,7 +1782,6 @@ msgstr[0] ""
 
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.cpp:77
 #, fuzzy, kde-format
-#| msgid "Unable to reassign payee of transaction/split"
 msgctxt ""
 msgid "Category for unassigned expense, %1 transaction"
 msgid_plural "Category for unassigned expenses, %1 transactions"
@@ -1918,7 +1917,7 @@ msgstr ""
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:228
 #, kde-format
 msgid "Exchange rates"
-msgstr ""
+msgstr "汇率"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (text), widget (QLabel, textLabel11)
@@ -2023,7 +2022,7 @@ msgstr "价格编辑器"
 #, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr ""
+msgstr "搜索"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -4862,11 +4861,10 @@ msgid "Show all accounts"
 msgstr "显示全部账户"
 
 #: kmymoney/kmymoney.cpp:1466
-#, fuzzy, kde-format
-#| msgid "New Account Dialog"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show Account Sidebar"
-msgstr "新账户对话框"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1470
 #, kde-format
@@ -5017,10 +5015,9 @@ msgid "Calculator..."
 msgstr "计算器..."
 
 #: kmymoney/kmymoney.cpp:1508
-#, fuzzy, kde-format
-#| msgid "Future transactions"
+#, kde-format
 msgid "Fix uncategorized transactions"
-msgstr "未来的交易"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1512
 #, kde-format
@@ -5242,10 +5239,9 @@ msgid "Edit scheduled transaction"
 msgstr "编辑计划交易"
 
 #: kmymoney/kmymoney.cpp:1562
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgid "Edit scheduled transaction (detailed)"
-msgstr "编辑计划交易"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1563
 #, kde-format
@@ -5780,23 +5776,20 @@ msgid "Checking for overdue scheduled transactions..."
 msgstr "正在检查逾期的计划交易..."
 
 #: kmymoney/kmymoney.cpp:4315
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updating prices online..."
-msgstr "正在更新价格策略"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updated %1 price online."
 msgid_plural "Updated %1 prices online."
-msgstr[0] "正在更新价格策略"
+msgstr[0] ""
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Online price update..."
+#, kde-format
 msgid "Online prices are up to date."
-msgstr "在线更新价格..."
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:4337
 #, kde-format
@@ -6396,11 +6389,10 @@ msgid "Last Price Update"
 msgstr ""
 
 #: kmymoney/models/equitiesmodel.cpp:200
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Id"
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: kmymoney/models/equitiesmodel.cpp:545
 #: kmymoney/widgets/columnselector.cpp:231
@@ -8728,11 +8720,10 @@ msgid "Currency"
 msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:496
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Shows Account ID"
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:535
 #, kde-format
@@ -8873,11 +8864,10 @@ msgid "Memo"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:73
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Transaction ID"
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:76
 #, kde-format
@@ -9221,18 +9211,16 @@ msgid "Modified"
 msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:79
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column Report ID"
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:82
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "@title column: Report type"
 msgid "Type"
-msgstr "类型"
+msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:118
 #: kmymoney/plugins/views/reports/core/listtable.cpp:807
@@ -9241,10 +9229,9 @@ msgid "Capital Gain"
 msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:120
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance"
-msgstr "性能测试"
+msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:122
 #, kde-format
@@ -9252,10 +9239,9 @@ msgid "Capital Gain (Legacy)"
 msgstr ""
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:124
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance (Legacy)"
-msgstr "性能测试"
+msgstr ""
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:157
 #, kde-format
@@ -9317,18 +9303,14 @@ msgid "Payment Method"
 msgstr "支付方式"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:190
-#, fuzzy
-#| msgid "Recording payments?"
 msgctxt "Schedule header"
 msgid "Remaining Payments"
-msgstr "记录支付计划？"
+msgstr ""
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:191
-#, fuzzy
-#| msgid "Final Payment"
 msgctxt "Schedule header"
 msgid "Final Payment Date"
-msgstr "最后一次支付"
+msgstr ""
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:250
 #, kde-format
@@ -18472,10 +18454,9 @@ msgstr "在启动时检查计划"
 
 #. i18n: ectx: label, entry (AutoUpdatePrices), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:61
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Update prices online once a day"
-msgstr "正在更新价格策略"
+msgstr ""
 
 #. i18n: ectx: label, entry (ExternalCalculator), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:71
@@ -19015,11 +18996,10 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr ""
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgid "Normal view"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
-msgstr "标准视图"
+msgstr ""
 
 #: kmymoney/views/accountsidebar.cpp:492
 #, kde-format
@@ -19034,12 +19014,10 @@ msgid "Always show"
 msgstr ""
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgctxt "@title:window Warning message about hidden account"
-#| msgid "Hidden accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "隐藏帐户"
+msgstr ""
 
 #: kmymoney/views/accountsidebar.cpp:508
 #, kde-format
@@ -19060,18 +19038,16 @@ msgid "Hide sidebar"
 msgstr ""
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "显示日志"
+msgstr ""
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "显示日志"
+msgstr ""
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format
@@ -20676,42 +20652,42 @@ msgstr ""
 msgid "Unable to remove payee(s)"
 msgstr "无法删除收/付款人"
 
-#: kmymoney/views/kscheduledview.cpp:199
+#: kmymoney/views/kscheduledview.cpp:201
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:202
+#: kmymoney/views/kscheduledview.cpp:204
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:204
+#: kmymoney/views/kscheduledview.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:212
+#: kmymoney/views/kscheduledview.cpp:214
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:226
+#: kmymoney/views/kscheduledview.cpp:228
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1 的副本"
 
-#: kmymoney/views/kscheduledview.cpp:251
+#: kmymoney/views/kscheduledview.cpp:253
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:265 kmymoney/views/kscheduledview.cpp:278
+#: kmymoney/views/kscheduledview.cpp:267 kmymoney/views/kscheduledview.cpp:280
 #: kmymoney/views/kscheduledview_p.h:411
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -21074,18 +21050,16 @@ msgid "Accept or unmatch transaction"
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:1475
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgctxt "@title:column Category"
 msgid "Category"
-msgstr "交易类别"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:1475
-#, fuzzy, kde-format
-#| msgid "Detail"
+#, kde-format
 msgctxt "@title:column Ledger not only category"
 msgid "Detail"
-msgstr "详细信息"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage.cpp:97
 #, kde-format
@@ -25584,18 +25558,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you would like to review or change any preference settings for "
-#| "KMyMoney after finishing this wizard, you can do so by checking this box. "
-#| "If not just click <b>Next</b>."
+#, kde-format
 msgid ""
 "If you would like to review or change any preference settings for KMyMoney "
 "after finishing this wizard, you can do so by checking this box. If not just "
 "click <b>Finish</b>."
 msgstr ""
-"如果您现在要检查或修改KMyMoney的偏好设置，可以在这里进行。否则，请按<b>继续</"
-"b>。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_openConfigAfterFinished)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
