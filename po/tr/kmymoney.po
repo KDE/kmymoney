@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-23 01:03+0000\n"
-"PO-Revision-Date: 2026-11-17 19:01+0300\n"
+"PO-Revision-Date: 2026-11-23 18:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -168,12 +168,12 @@ msgstr "Yeni alacaklı/alıcı"
 #: kmymoney/converter/mymoneystatementreader.cpp:1132
 #, kde-format
 msgid "Default Category for Payee"
-msgstr "Öntanımlı Alacaklı Kategorisi"
+msgstr "Varsayılan Alacaklı Kategorisi"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1139
 #, kde-format
 msgid "Please select a default category for payee '%1'"
-msgstr "Lütfen “%1” alacaklısı için öntanımlı bir kategori seçin"
+msgstr "Lütfen “%1” alacaklısı için varsayılan bir kategori seçin"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1166
 #, kde-format
@@ -2171,7 +2171,7 @@ msgstr "Sil"
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
-msgstr "(öntanımlı)"
+msgstr "(varsayılan)"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:181
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:160
@@ -2369,7 +2369,7 @@ msgid ""
 "the following dialog</i>.</p>"
 msgstr ""
 "<p><b>%1</b> kategorisi şu anda yok. Oluşturmak istiyor musunuz?</"
-"p><p><i>Üst hesap öntanımlı olarak <b>%2</b> olacaktır; ancak aşağıdaki "
+"p><p><i>Üst hesap varsayılan olarak <b>%2</b> olacaktır; ancak aşağıdaki "
 "iletişim kutusunda değiştirilebilir</i>.</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1162
@@ -2386,7 +2386,7 @@ msgid ""
 "the following dialog</i>.</p>"
 msgstr ""
 "<p><b>%1</b> hesabı şu anda yok. Oluşturmak istiyor musunuz?</p><p><i>Üst "
-"hesap öntanımlı olarak <b>%2</b> olacaktır; ancak aşağıdaki iletişim "
+"hesap varsayılan olarak <b>%2</b> olacaktır; ancak aşağıdaki iletişim "
 "kutusunda değiştirilebilir</i>.</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1205
@@ -2706,7 +2706,7 @@ msgstr "Kendiliğinden alacaklı oluşturma"
 #: kmymoney/dialogs/knewaccountdlg.ui:884
 #, kde-format
 msgid "Application Default"
-msgstr "Uygulama öntanımlısı"
+msgstr "Uygulama varsayılanı"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
@@ -3080,7 +3080,7 @@ msgstr "Sıralama seçenekleri"
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
 #, kde-format
 msgid "Use default"
-msgstr "Öntanımlıyı kullan"
+msgstr "Varsayılanı kullan"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -3272,7 +3272,7 @@ msgstr "Yedekleme Seçenekleri"
 msgid ""
 "Enter a character or string that will be added to backup files. Default is ~"
 msgstr ""
-"Yedek dosyalarına eklenecek bir karakter veya dizi girin. Öntanımlı "
+"Yedek dosyalarına eklenecek bir karakter veya dizi girin. Varsayılan "
 "karakter: ~"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
@@ -4127,8 +4127,8 @@ msgid ""
 "If a planned transaction is overdue, today's date is used by default as the "
 "posting date. With this option, the originally planned date is used instead."
 msgstr ""
-"Planlı bir işlem gecikmişse öntanımlı olarak kayıt tarihi bugünün tarihidir. "
-"Bu seçenekle, bunun yerine başlangıçta planlanan tarih kullanılır."
+"Planlı bir işlem gecikmişse varsayılan olarak kayıt tarihi bugünün "
+"tarihidir. Bu seçenekle, bunun yerine başlangıçta planlanan tarih kullanılır."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:50
@@ -4383,7 +4383,7 @@ msgstr "Yıl"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:341
 #, kde-format
 msgid "Default reconciliation state"
-msgstr "Öntanımlı uzlaştırma durumu"
+msgstr "Varsayılan uzlaştırma durumu"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:351
@@ -4392,7 +4392,7 @@ msgid ""
 "Default reconciliation state for transactions entered during reconciliation "
 "of an account"
 msgstr ""
-"Bir hesabın mutabakatı sırasında girilen işlemler için öntanımlı mutabakat "
+"Bir hesabın mutabakatı sırasında girilen işlemler için varsayılan mutabakat "
 "durumu"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
@@ -4577,14 +4577,14 @@ msgid ""
 "selected."
 msgstr ""
 "Bir hesap özetinin içe aktarılması sırasında yeni bir alacaklı tespit "
-"edildiğinde bu seçiliyse kullanıcıdan bu kullanıcı için öntanımlı bir "
+"edildiğinde bu seçiliyse kullanıcıdan bu kullanıcı için varsayılan bir "
 "kategori ataması istenecektir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_askForPayeeCategory)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:616
 #, kde-format
 msgid "Ask for a new payee's default category"
-msgstr "Yeni alacaklının öntanımlı kategorisini sor"
+msgstr "Yeni alacaklının varsayılan kategorisini sor"
 
 #: kmymoney/dialogs/settings/ksettingsschedules.cpp:354
 #, kde-format
@@ -12439,7 +12439,7 @@ msgid ""
 "\">VEVENT</a> are needed.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Girdilerin Google Takvim tarafından tanınabilmesi için "
-"iCalendar dosyasına yazın. Öntanımlı ayar, <a href=\"https://icalendar.org/"
+"iCalendar dosyasına yazın. Varsayılan ayar, <a href=\"https://icalendar.org/"
 "iCalendar-RFC-5545/3-6-2-to-do-component.html\">VTODO</a> girdilerini "
 "iCalendar dosyasına yazmaktır; ancak Google Takvim için <a href=\"https://"
 "icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html\">VEVENT</a> "
@@ -12606,7 +12606,7 @@ msgstr "İlk uygun"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:163
 #, kde-format
 msgid "Default start date for statement download"
-msgstr "Hesap özeti indirmek için öntanımlı başlangıç tarihi"
+msgstr "Hesap özeti indirmek için varsayılan başlangıç tarihi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_autoLoadPassword)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:175
@@ -14005,7 +14005,7 @@ msgstr "QIF Profili Seçicisi"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:168
 #, kde-format
 msgid "The default QIF profile"
-msgstr "Öntanımlı QIF profili"
+msgstr "Varsayılan QIF profili"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:384
 #, kde-format
@@ -16971,7 +16971,7 @@ msgstr "Rapor eklenemiyor, gerekçe: “%1”"
 #: kmymoney/plugins/views/reports/kreportsview.cpp:596
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
-msgstr "<b>%1</b> öntanımlı bir rapordur, bu yüzden silinemez."
+msgstr "<b>%1</b> varsayılan bir rapordur, bu yüzden silinemez."
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:597
 #: kmymoney/plugins/views/reports/kreportsview_p.h:298
@@ -17007,7 +17007,7 @@ msgstr "Raporlar"
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
 #, kde-format
 msgid "Default reports"
-msgstr "Öntanımlı raporlar"
+msgstr "Varsayılan raporlar"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
@@ -17090,7 +17090,7 @@ msgstr "Bu Ayın Gelirleri ve Giderleri"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:880
 #, kde-format
 msgid "Default Report"
-msgstr "Öntanımlı Rapor"
+msgstr "Varsayılan Rapor"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:325
 #, kde-format
@@ -17591,7 +17591,7 @@ msgstr "Grafik paleti"
 #, kde-format
 msgctxt "@item KDChart color palette"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ChartsPalette)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:106
@@ -17611,13 +17611,13 @@ msgstr "Hafif"
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:134
 #, kde-format
 msgid "Default CSS file"
-msgstr "Öntanımlı CSS dosyası"
+msgstr "Varsayılan CSS dosyası"
 
 #. i18n: ectx: property (toolTip), widget (KUrlRequester, kcfg_CssFileDefault)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:141
 #, kde-format
 msgid "default style sheet"
-msgstr "öntanımlı stil sayfası"
+msgstr "varsayılan stil sayfası"
 
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.cpp:44
 #: kmymoney/plugins/views/reports/reporttabperformance.cpp:20
@@ -17775,7 +17775,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:100
 #, kde-format
 msgid "Show as chart by default"
-msgstr "Öntanımlı olarak grafik biçiminde göster"
+msgstr "Varsayılan olarak grafik biçiminde göster"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_logYaxis)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:107
@@ -17984,7 +17984,7 @@ msgstr "Uygulama ayarını kullan"
 #, kde-format
 msgctxt "type of graphic palette"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:51
 #, kde-format
@@ -19371,7 +19371,7 @@ msgstr "Kayıt yerinin arama kutusundaki sıralama düzeni"
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
-msgstr "Mutabakat sürecinde girilen işlemler için öntanımlı mutabakat durumu"
+msgstr "Mutabakat sürecinde girilen işlemler için varsayılan mutabakat durumu"
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:379
@@ -19389,7 +19389,7 @@ msgstr "Not alanında özgün alacaklı bilgisinin nereye koyulacağı"
 #: kmymoney/settings/kmymoney.kcfg:392
 #, kde-format
 msgid "During import, ask for a new payee's default category"
-msgstr "İçe aktarım sırasında, yeni alacaklının öntanımlı kategorisini sor"
+msgstr "İçe aktarım sırasında, yeni alacaklının varsayılan kategorisini sor"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
 #: kmymoney/settings/kmymoney.kcfg:399
@@ -19455,7 +19455,7 @@ msgstr "Grafikleri sunmak için kullanılan palet"
 #: kmymoney/settings/kmymoney.kcfg:455
 #, kde-format
 msgid "Name of default CSS file"
-msgstr "Öntanımlı CSS dosyasının adı"
+msgstr "Varsayılan CSS dosyasının adı"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KLoadTemplateDlg)
 #: kmymoney/templates/kloadtemplatedlg.ui:14
@@ -21064,19 +21064,19 @@ msgstr ""
 #: kmymoney/views/kpayeesview.ui:439
 #, kde-format
 msgid "Default Category"
-msgstr "Öntanımlı Kategori"
+msgstr "Varsayılan Kategori"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkEnableDefaultCategory)
 #: kmymoney/views/kpayeesview.ui:445
 #, kde-format
 msgid "Use the default category for new transactions with this payee"
-msgstr "Bu alacaklıyla yeni işlemler için öntanımlı kategoriyi kullan"
+msgstr "Bu alacaklıyla yeni işlemler için varsayılan kategoriyi kullan"
 
 #. i18n: ectx: property (text), widget (QLabel, labelDefaultCategory)
 #: kmymoney/views/kpayeesview.ui:454
 #, kde-format
 msgid "Default category:"
-msgstr "Öntanımlı kategori:"
+msgstr "Varsayılan kategori:"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSuggestACategory)
 #: kmymoney/views/kpayeesview.ui:467
@@ -22346,7 +22346,7 @@ msgstr "Değişiklikleri Geri Al"
 #, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr "Öntanımlılara Sıfırla"
+msgstr "Varsayılanlara Sıfırla"
 
 #: kmymoney/views/tabordereditor.cpp:473
 #, kde-format
@@ -25353,7 +25353,7 @@ msgid ""
 msgstr ""
 "Lütfen aşağıdaki değişikliklerin yürürlüğe gireceği tarihi girin. Girilen "
 "tarih, bu hesabın (%1) açılış tarihinden sonra; ancak gelecekte olmamalıdır. "
-"Öntanımlı olarak bugün seçilir."
+"Varsayılan olarak bugün seçilir."
 
 #. i18n: ectx: property (title), widget (QWizardPage, EffectiveDateWizardPage)
 #: kmymoney/wizards/newloanwizard/effectivedatewizardpage.ui:14
@@ -26307,8 +26307,8 @@ msgid ""
 "also the currency you select here."
 msgstr ""
 "KMyMoney birden çok para birimini destekler. Raporlarınız, burada "
-"seçebileceğiniz öntanımlı bir para birimini temel alır. Yeni hesaplar için "
-"öntanımlı değer aynı zamanda burada seçtiğiniz para birimidir."
+"seçebileceğiniz varsayılan bir para birimini temel alır. Yeni hesaplar için "
+"varsayılan değer aynı zamanda burada seçtiğiniz para birimidir."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/newuserwizard/kgeneralpage.ui:22
@@ -26457,7 +26457,7 @@ msgid ""
 msgstr ""
 "KMyMoney birden çok para birimini desteklese de bunlardan biri sizin temel "
 "para biriminiz olmalıdır. Bu para birimi, yeni hesaplarda ve raporlarda "
-"öntanımlı olarak kullanılır. Lütfen listeden temel para biriminizi seçin."
+"varsayılan olarak kullanılır. Lütfen listeden temel para biriminizi seçin."
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/wizards/wizardpages/currency.ui:36
@@ -26496,7 +26496,7 @@ msgstr "KMyMoney raporlarını dışa aktar"
 #: tools/kmmreport-export.cpp:120
 #, kde-format
 msgid "Export in csv format (default)"
-msgstr "CSV biçiminde dışa aktar (öntanımlı)"
+msgstr "CSV biçiminde dışa aktar (varsayılan)"
 
 #: tools/kmmreport-export.cpp:123
 #, kde-format
@@ -26526,7 +26526,7 @@ msgstr "Dışa aktarma için özet tabloyu kullan"
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr "Dışa aktarma için sorgu tablosunu kullan (öntanımlı)"
+msgstr "Dışa aktarma için sorgu tablosunu kullan (varsayılan)"
 
 #: tools/kmmreport-export.cpp:141
 #, kde-format
