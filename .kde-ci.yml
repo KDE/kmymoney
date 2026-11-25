@@ -57,5 +57,5 @@ Dependencies:
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
-  cmake-options: '-DWARNINGS_AS_ERRORS=on -Werror=author -Wno-error=policy'
+  cmake-options: '-DWARNINGS_AS_ERRORS=on -Werror=author -Wno-error=policy -Wno-error=non-target-directive -Wno-error=deprecated'
   force-inject-asan: true
