@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-23 01:03+0000\n"
-"PO-Revision-Date: 2026-10-29 03:30+0100\n"
+"PO-Revision-Date: 2026-11-25 15:26+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1793,17 +1793,16 @@ msgstr "..."
 msgctxt ""
 msgid "Category for unassigned income, %1 transaction"
 msgid_plural "Category for unassigned income, %1 transactions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "კატეგორია მიუნიჭებელი შემოსავლისთვის. %1 ტრანზაქცია"
+msgstr[1] "კატეგორია მიუნიჭებელი შემოსავლებისთვის. %1 ტრანზაქცია"
 
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.cpp:77
-#, fuzzy, kde-format
-#| msgid "Unable to reassign payee of transaction/split"
+#, kde-format
 msgctxt ""
 msgid "Category for unassigned expense, %1 transaction"
 msgid_plural "Category for unassigned expenses, %1 transactions"
-msgstr[0] "ტრანზაქციის/გაყოფის მიმღების თავიდან მინიჭება შეუძლებელია"
-msgstr[1] "ტრანზაქციის/გაყოფის მიმღების თავიდან მინიჭება შეუძლებელია"
+msgstr[0] "კატეგორია მიუნიჭებელი ხარჯისთვის. %1 ტრანზაქცია"
+msgstr[1] "კატეგორია მიუნიჭებელი ხარჯისთვის. %1 ტრანზაქცია"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, FixUncategorizedTransactions)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitAdjustDialog)
@@ -1818,6 +1817,8 @@ msgstr "ფანჯარა"
 #, kde-format
 msgid "Good, no uncategorzied transactions found in your data."
 msgstr ""
+"კარგიაა... კატეგორიის არმქონე ტრანზაქციები თქვენს მონაცემებში აღმოჩენილი "
+"არაა."
 
 #. i18n: ectx: property (text), widget (QLabel, m_warningLabel)
 #: kmymoney/dialogs/kfixuncategorizedtransactionsdlg.ui:119
@@ -1827,6 +1828,9 @@ msgid ""
 "sure to have a good backup before you save the results of this operation.</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-weight:600; color:#ff0000;\">სანამ "
+"ამ ოპერაციის შედეგებს შეინახავთ, დარწმუნდით, რომ გაქვთ კარგი მარქაფი.</"
+"span></p></body></html>"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportVerifyDlg)
 #: kmymoney/dialogs/kimportverifydlg.ui:17
@@ -3733,7 +3737,7 @@ msgstr "დამატებები"
 #, kde-format
 msgctxt "@option:check"
 msgid "Update prices automatically once a day"
-msgstr ""
+msgstr "ფასების ავტომატური განახლება დღეში ერთხელ"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:84
 #, kde-format
@@ -4563,7 +4567,7 @@ msgstr "ინტერნეტბანკი"
 #, kde-format
 msgctxt "about option, %1 list of sanitizers"
 msgid "Sanitizers: %1"
-msgstr ""
+msgstr "სადეზინფექციო საშუალებები: %1"
 
 #: kmymoney/kcreditswindow.cpp:46
 #, kde-format
@@ -4882,11 +4886,10 @@ msgid "Show all accounts"
 msgstr "ყველა ანგარიშის ჩვენება"
 
 #: kmymoney/kmymoney.cpp:1466
-#, fuzzy, kde-format
-#| msgid "Show accounts page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show Account Sidebar"
-msgstr "ანგარიშების გვერდის ჩვენება"
+msgstr "ანგარიშების გვერდითი პანელის ჩვენება"
 
 #: kmymoney/kmymoney.cpp:1470
 #, kde-format
@@ -5037,10 +5040,9 @@ msgid "Calculator..."
 msgstr "კალკულატორი..."
 
 #: kmymoney/kmymoney.cpp:1508
-#, fuzzy, kde-format
-#| msgid "Future transactions"
+#, kde-format
 msgid "Fix uncategorized transactions"
-msgstr "მომავალი ტრანზაქციები"
+msgstr "გასწორდა კატეგორიის არმქონე ტრანზაქციები"
 
 #: kmymoney/kmymoney.cpp:1512
 #, kde-format
@@ -5798,24 +5800,21 @@ msgid "Checking for overdue scheduled transactions..."
 msgstr "გადაცილებული დაგეგმილი ტრანზაქციების შემოწმება..."
 
 #: kmymoney/kmymoney.cpp:4315
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updating prices online..."
-msgstr "ფასის პოლიტიკის განახლება"
+msgstr "მიმდინარეობს ფასების განახლება ინტერნეტიდან..."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Updated %1 price online."
 msgid_plural "Updated %1 prices online."
-msgstr[0] "ფასის პოლიტიკის განახლება"
-msgstr[1] "ფასის პოლიტიკის განახლება"
+msgstr[0] "განახლდა %1 ფასი ინტერნეტით."
+msgstr[1] "განახლდა %1 ფასი ინტერნეტით."
 
 #: kmymoney/kmymoney.cpp:4334
-#, fuzzy, kde-format
-#| msgid "Online price update..."
+#, kde-format
 msgid "Online prices are up to date."
-msgstr "ფასის განახლება ინტერნეტით..."
+msgstr "ფასები ინტერნეტიდან უკვე უახლესია."
 
 #: kmymoney/kmymoney.cpp:4337
 #, kde-format
@@ -9375,18 +9374,14 @@ msgid "Payment Method"
 msgstr "გადახდის მეთოდი"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:190
-#, fuzzy
-#| msgid "Recording payments?"
 msgctxt "Schedule header"
 msgid "Remaining Payments"
-msgstr "იწერთ გადახდებს?"
+msgstr "დარჩენილი გადახდები"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:191
-#, fuzzy
-#| msgid "Final Payment"
 msgctxt "Schedule header"
 msgid "Final Payment Date"
-msgstr "საბოლოო გადახდა"
+msgstr "საბოლოო გადახდის თარიღი"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:250
 #, kde-format
@@ -18529,10 +18524,9 @@ msgstr "გეგმების შემოწმება გაშვებ�
 
 #. i18n: ectx: label, entry (AutoUpdatePrices), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:61
-#, fuzzy, kde-format
-#| msgid "Updating price policy"
+#, kde-format
 msgid "Update prices online once a day"
-msgstr "ფასის პოლიტიკის განახლება"
+msgstr "ფასების განახლება ინტერნეტში დღეში ერთხელ"
 
 #. i18n: ectx: label, entry (ExternalCalculator), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:71
@@ -19081,66 +19075,58 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "ვერ ავტვირთე '%1'-ზე.<br />%2"
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgid "Normal view"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
-msgstr "ნორმალური ხედი"
+msgstr "ნორმალური"
 
 #: kmymoney/views/accountsidebar.cpp:492
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Hide"
-msgstr ""
+msgstr "დამალვა"
 
 #: kmymoney/views/accountsidebar.cpp:495
 #, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Always show"
-msgstr ""
+msgstr "ყოველთვის ჩვენება"
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgctxt "@title:window Warning message about hidden account"
-#| msgid "Hidden accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "დამალული ანგარიშები"
+msgstr "დამალული ანგარიშების ჩვენება"
 
 #: kmymoney/views/accountsidebar.cpp:508
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide zero balances"
-msgstr "ნულოვანი ბალანსის კაპიტალების დამალვა"
+msgstr "ნულოვანი ბალანსების დამალვა"
 
 #: kmymoney/views/accountsidebar.cpp:514
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide ledger tab bar"
-msgstr "მენიუს ზოლის დამალვა"
+msgstr "გროსბუხის ჩანართების ზოლის დამალვა"
 
 #: kmymoney/views/accountsidebar.cpp:522
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide sidebar"
-msgstr "მენიუს ზოლის დამალვა"
+msgstr "გვერდითი ზოლის დამალვა"
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show home page"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "საწყისი გვერდის ჩვენება"
+msgstr "ჩვენება მარცხნივ"
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "ჟურნალის ჩვენება"
+msgstr "ჩვენება მარჯვნივ"
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format

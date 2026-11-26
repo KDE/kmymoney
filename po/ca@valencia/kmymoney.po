@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-23 01:03+0000\n"
-"PO-Revision-Date: 2026-11-17 11:35+0100\n"
+"PO-Revision-Date: 2026-11-20 13:00+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1370,7 +1370,7 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p>Introduïu ací el codi ISO4217 de la divisa (p. ex., "
-"EUR per a l'Euro). Açò no es podrà canviar una vegada s'haja creat la divisa."
+"EUR per a l'euro). Açò no es podrà canviar una vegada s'haja creat la divisa."
 "</p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leSymbol)
@@ -1378,7 +1378,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the monetary symbol of the currency here (e.g. € for the Euro)"
-msgstr "Introduïu ací el símbol monetari de la divisa (p. ex., € per a l'Euro)"
+msgstr "Introduïu ací el símbol monetari de la divisa (p. ex., € per a l'euro)"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leAccountFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:111
@@ -7952,7 +7952,7 @@ msgstr "Dinar kuwaitià"
 #: kmymoney/mymoney/mymoneyfile.cpp:4311
 #, kde-format
 msgid "Kyrgyzstan Som"
-msgstr "Som de Kirguizstan"
+msgstr "Som kirguís"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4312
 #, kde-format
@@ -8252,7 +8252,7 @@ msgstr "Dòlar de Taiwan"
 #: kmymoney/mymoney/mymoneyfile.cpp:4372
 #, kde-format
 msgid "Tajikistan Somoni"
-msgstr "Somoni de Tadjikistan"
+msgstr "Somoni tadjik"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4373
 #, kde-format
@@ -8318,12 +8318,12 @@ msgstr "Dírham dels Emirats Àrabs Units"
 #: kmymoney/mymoney/mymoneyfile.cpp:4385
 #, kde-format
 msgid "Uruguayan Peso"
-msgstr "Peso d'Uruguai"
+msgstr "Peso uruguaià"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4386
 #, kde-format
 msgid "Uzbekistani Sum"
-msgstr "Som d'Uzbekistan"
+msgstr "Som uzbek"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4387
 #, kde-format
@@ -8338,7 +8338,7 @@ msgstr "Bolívar de Veneçuela"
 #: kmymoney/mymoney/mymoneyfile.cpp:4389
 #, kde-format
 msgid "Vietnamese Dong"
-msgstr "Dong de Vietnam"
+msgstr "Dong vietnamita"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4390
 #, kde-format
@@ -10840,8 +10840,8 @@ msgctxt "Type of operation as in financial statement"
 msgid ""
 "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry"
 msgstr ""
-"afegit,dividend en accions,reinv dividend,transferència rebuda,reinscripció,"
-"entrada de diari"
+"afegit,dividend en accions,reinv dividend,transferència rebuda,tornar a "
+"inscriure,entrada de diari"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1601
 #, kde-format
@@ -13963,7 +13963,7 @@ msgstr "Trieu un fitxer d'importació OFX"
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr "Fitxers OFX (*.ofx *.qfx *.ofc);;Tots els fitxes (*)"
+msgstr "Fitxers OFX (*.ofx *.qfx *.ofc);;Tots els fitxers (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:195
 #, kde-format
@@ -17651,7 +17651,7 @@ msgstr "Suprimix definitivament este informe"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:153
 #, kde-format
 msgid "Configure this report"
-msgstr "Configureu este informe"
+msgstr "Configureu l'este informe"
 
 #. i18n: ectx: property (text), widget (QToolButton, buttonConfigure)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:156
@@ -22626,7 +22626,7 @@ msgid ""
 "search. This will result in an empty set."
 msgstr ""
 "La data proporcionada com a inici passa per damunt de la proporcionada per "
-"al final de la busca. Açò resultarà en un conjunt buit."
+"al final de la busca. Açò provocarà un conjunt buit."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/widgets/daterangedlg.ui:22
@@ -24322,7 +24322,7 @@ msgid ""
 msgstr ""
 "Heu seleccionat enregistrar només els pagaments des de l'inici d'este any. "
 "Com que les operacions prèvies no s'han enregistrat, cal proporcionar el "
-"saldo del préstec a 1 de gener d'enguany."
+"saldo del préstec a 1r de gener d'enguany."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, PaymentFrequencyWizardPage)
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)

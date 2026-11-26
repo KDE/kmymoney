@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-23 01:03+0000\n"
-"PO-Revision-Date: 2026-11-24 20:41+0100\n"
+"PO-Revision-Date: 2026-11-26 00:55+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -3761,7 +3761,7 @@ msgid ""
 "Show number of not reconciled (not marked + cleared) transactions per "
 "account [!R]"
 msgstr ""
-"Zobrazit počet nezúčtovaných (neoznačených jako + vypořádáno) transakcí na "
+"Zobrazit počet nezúčtovaných (neoznačených jako + zúčtováno) transakcí na "
 "každý účet [!R]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowLimitInfo)
@@ -3830,7 +3830,7 @@ msgstr "Barvy"
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:67
 #, kde-format
 msgid "Fonts"
-msgstr "Fonty"
+msgstr "Písma"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:69
 #, kde-format
@@ -4426,7 +4426,7 @@ msgstr "Neoznačeno"
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Cleared"
-msgstr "Ověřeno"
+msgstr "Zúčtováno"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
@@ -5290,7 +5290,7 @@ msgstr "Přepnout"
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
-msgstr "Ověřeno"
+msgstr "Zúčtováno"
 
 #: kmymoney/kmymoney.cpp:1533
 #, kde-format
@@ -6661,7 +6661,7 @@ msgstr "Neschváleno"
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
 msgid "Cleared"
-msgstr "Ověřeno"
+msgstr "Zúčtováno"
 
 #: kmymoney/models/ledgerfilterbase.cpp:63
 #, kde-format
@@ -9165,7 +9165,7 @@ msgstr "Neschváleno"
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
-msgstr "Ověřeno"
+msgstr "Zúčtováno"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:113
 #, kde-format
@@ -9258,7 +9258,7 @@ msgstr "neschváleno"
 #, kde-format
 msgctxt "Reconciliation status 'Cleared'"
 msgid "cleared"
-msgstr "ověřeno"
+msgstr "zúčtováno"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:473
 #, kde-format
@@ -12913,7 +12913,7 @@ msgstr "Pro pokračování je nutné mít platný transakční kód."
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:14
 #, kde-format
 msgid "Order confirmation"
-msgstr "Potvrzení objednávky"
+msgstr "Potvrzení příkazu"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, reduceButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:24
@@ -12956,7 +12956,7 @@ msgstr "Zrychlit"
 #, kde-format
 msgid "To confirm this order enter the tan displayed by your generator"
 msgstr ""
-"Chcete-li tuto objednávku potvrdit, zadejte hodnotu transakčního kódu "
+"Chcete-li tento příkaz potvrdit, zadejte hodnotu transakčního kódu "
 "zobrazenou vaším generátorem"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:67
@@ -13167,7 +13167,7 @@ msgstr "Instituce"
 #, kde-format
 msgid "To confirm this order enter the tan displayed by your &generator"
 msgstr ""
-"Chcete-li tuto objednávku potvrdit, zadejte kód zobrazený vaším &generátorem"
+"Chcete-li tento příkaz potvrdit, zadejte kód zobrazený vaším &generátorem"
 
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:221
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:412
@@ -14888,17 +14888,17 @@ msgstr "Počáteční zůstatek na bankovním výpisu"
 #, kde-format
 msgid "%1 cleared payment"
 msgid_plural "%1 cleared payments in total"
-msgstr[0] "%1 ověřená platba"
-msgstr[1] "%1 ověřené platby"
-msgstr[2] "%1 ověřených plateb"
+msgstr[0] "%1 zúčtovaná platba"
+msgstr[1] "%1 zúčtované platby"
+msgstr[2] "%1 zúčtovaných plateb"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:151
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
-msgstr[0] "%1 ověřený vklad"
-msgstr[1] "%1 ověřené vklady"
-msgstr[2] "%1 ověřených vkladů"
+msgstr[0] "%1 zúčtovaný vklad"
+msgstr[1] "%1 zúčtované vklady"
+msgstr[2] "%1 zúčtovaných vkladů"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
 #, kde-format
@@ -14908,7 +14908,7 @@ msgstr "Koncový zůstatek na bankovním výpisu"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:167
 #, kde-format
 msgid "Cleared balance"
-msgstr "Ověřený zůstatek"
+msgstr "Zúčtovaný zůstatek"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:173
 #, kde-format
@@ -14943,8 +14943,9 @@ msgstr[2] "%1 plateb po %2"
 #, kde-format
 msgid "%1 deposit after %2"
 msgid_plural "%1 deposits after %2"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 vklad po %2"
+msgstr[1] "%1 vklady po %2"
+msgstr[2] "%1 vkladů po %2"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:231
 #, kde-format
@@ -14970,39 +14971,41 @@ msgstr "Kategorie"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:249
 #, kde-format
 msgid "Outstanding payments"
-msgstr ""
+msgstr "Nesplacené platby"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:291
 #, kde-format
 msgid "One outstanding payment of"
 msgid_plural "Total of %1 outstanding payments amounting to"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Jedna nesplacená platba za"
+msgstr[1] "Celkově %1 nesplacené platby za"
+msgstr[2] "Celkově %1 nesplacených plateb za"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
 #, kde-format
 msgid "Outstanding charges"
-msgstr ""
+msgstr "Nesplacené poplatky"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
 #, kde-format
 msgid "Outstanding deposits"
-msgstr ""
+msgstr "Nesplacené vklady"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:330
 #, kde-format
 msgid "One outstanding charges of"
 msgid_plural "Total of %1 outstanding charges amounting to"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Jeden nesplacený poplatek za"
+msgstr[1] "Celkově %1 nesplacené poplatky za"
+msgstr[2] "Celkově %1 nesplacených poplatků za"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:331
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Jeden nesplacený vklad za"
+msgstr[1] "Celkově %1 nesplacené vklady za"
+msgstr[2] "Celkově %1 nesplacených vkladů za"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:71
 #, kde-format
@@ -15021,6 +15024,8 @@ msgid ""
 "In order to use a database, you need to install some additional software. "
 "Click Help for more information"
 msgstr ""
+"Abyste mohli databázi používat, je třeba nainstalovat určitý doplňkový "
+"software. Další informace získáte kliknutím na položku Nápověda"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:164
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:94
@@ -15034,6 +15039,8 @@ msgid ""
 "Unable to open database.\n"
 "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
 msgstr ""
+"Nelze otevřít databázi.\n"
+"Před vytvořením tabulek musíte použít příkaz SQL CREATE DATABASE.\n"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:202
 #, kde-format
@@ -15065,6 +15072,10 @@ msgid ""
 "Please report any problems to the developer mailing list at kmymoney-"
 "devel@kde.org"
 msgstr ""
+"Typ databáze %1 nebyl v prostředí KMyMoney plně otestován.\n"
+"Ujistěte se prosím, že máte k dispozici dostatečné zálohy svých dat.\n"
+"Jakékoli problémy prosím nahlaste na vývojářskou konferenci na adrese "
+"kmymoney-devel@kde.org"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KGenerateSqlDlg)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:32
@@ -15102,7 +15113,7 @@ msgstr "Jméno databáze (u ostatních databází)"
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:87
 #, kde-format
 msgid "Host Name"
-msgstr "Název počítače"
+msgstr "Název hostitele"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:97
@@ -15162,7 +15173,7 @@ msgstr "&Název databáze"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:234
 #, kde-format
 msgid "Host &Name"
-msgstr "&Název počítače"
+msgstr "&Název hostitele"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:251
@@ -15180,7 +15191,7 @@ msgstr "&Heslo"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:293
 #, kde-format
 msgid "Preload &all data"
-msgstr ""
+msgstr "Předn&ačíst všechna data"
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:136
 #, kde-format
@@ -15188,6 +15199,8 @@ msgid ""
 "You're trying to open an encrypted database.\n"
 "Please provide a password in order to open it."
 msgstr ""
+"Snažíte se otevřít šifrovanou databázi.\n"
+"Zadejte prosím heslo, abyste ji mohli otevřít."
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:180
 #, kde-format
@@ -15196,6 +15209,8 @@ msgid ""
 "supported.\n"
 "Please save your database under a new name."
 msgstr ""
+"Přepsání stávající databáze šifrovanou databází zatím není podporováno.\n"
+"Uložte prosím svou databázi pod novým názvem."
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:212
 #, kde-format
@@ -15204,11 +15219,14 @@ msgid ""
 "Opened by %1 on %2 at %3.\n"
 "Open anyway?"
 msgstr ""
+"Databáze je zřejmě právě používána\n"
+"Otevřena uživatelem %1 %2 v %3.\n"
+"Přesto otevřít?"
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:935
 #, kde-format
 msgid "Inserting online jobs."
-msgstr ""
+msgstr "Vkládání online úloh."
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2035
 #, kde-format
@@ -15221,6 +15239,9 @@ msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
 "Please create database %2 manually"
 msgstr ""
+"Automatické vytvoření databáze pro typ %1 není v současné době "
+"implementováno.\n"
+"Vytvořte prosím databázi %2 ručně"
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2107
 #, kde-format
@@ -15271,7 +15292,7 @@ msgstr "Nelze uložit do současné databáze: %1"
 #: kmymoney/plugins/sql/sqlstorage.cpp:260
 #, kde-format
 msgid "Database files (*.db *.sql)"
-msgstr ""
+msgstr "Soubory databáze (*.db, *.sql)"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:266
 #, kde-format
@@ -15319,7 +15340,7 @@ msgstr ""
 #, kde-format
 msgctxt "Auto assignment (caption)"
 msgid "Auto assignment"
-msgstr ""
+msgstr "Automatické přiřazení"
 
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:264
 #, kde-format
@@ -15386,7 +15407,7 @@ msgstr "Rozpočet %1 (%2)"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:215
 #, kde-format
 msgid "Unable to add budget"
-msgstr ""
+msgstr "Rozpočet nelze přidat"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:173
 #, kde-format
@@ -15407,7 +15428,7 @@ msgstr "Odstranit rozpočet"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:196
 #, kde-format
 msgid "Unable to remove budget."
-msgstr ""
+msgstr "Rozpočet nelze odstranit."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:210
 #: kmymoney/plugins/views/reports/kreportsview.cpp:543
@@ -15536,7 +15557,7 @@ msgstr "Nový"
 #, kde-format
 msgctxt "Rename budget button"
 msgid "Ren"
-msgstr ""
+msgstr "Ren"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:61
@@ -15581,13 +15602,13 @@ msgstr "Použijte toto tlačítko ke znehodnocení upravených informací."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
 #, kde-format
 msgid "Collapse the items of the account tree"
-msgstr ""
+msgstr "Sbalit položky ve stromu účtů"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
 #, kde-format
 msgid "Expand the items of the account tree"
-msgstr ""
+msgstr "Rozbalit položky ve stromu účtů"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
@@ -15657,7 +15678,7 @@ msgstr "Předpovědi"
 #: kmymoney/settings/kmymoney.kcfg:462
 #, kde-format
 msgid "Method to calculate forecast"
-msgstr ""
+msgstr "Metoda výpočtu předpovědi"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
@@ -15692,28 +15713,28 @@ msgstr "Předpověď začíná dnem v měsíci"
 #: kmymoney/settings/kmymoney.kcfg:490
 #, kde-format
 msgid "Method to calculate history-based forecast"
-msgstr ""
+msgstr "Metoda výpočtu předpovědi na základě historických údajů"
 
 #. i18n: ectx: label, entry (skipOpeningDate), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:43
 #: kmymoney/settings/kmymoney.kcfg:494
 #, kde-format
 msgid "Skip opening date when fetching transactions"
-msgstr ""
+msgstr "Při načítání transakcí přeskočit datum otevření"
 
 #. i18n: ectx: label, entry (includeFutureTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:47
 #: kmymoney/settings/kmymoney.kcfg:498
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
-msgstr ""
+msgstr "Při použití funkce plánování předpovědi zahrnout budoucí transakce"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
 #: kmymoney/settings/kmymoney.kcfg:502
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
-msgstr ""
+msgstr "Při použití funkce plánování předpovědi zahrnout plánované transakce"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ForecastViewSettings)
@@ -15985,17 +16006,17 @@ msgstr "Účet %1 se během účetního cyklu snižuje o %2."
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:495
 #, kde-format
 msgid "Min Bal %1"
-msgstr ""
+msgstr "Min. zůst. %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:496
 #, kde-format
 msgid "Min Date %1"
-msgstr ""
+msgstr "Min datum %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:499
 #, kde-format
 msgid "Max Bal %1"
-msgstr ""
+msgstr "Max. zůst. %1"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:500
 #, kde-format
@@ -16033,17 +16054,19 @@ msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
+"Předpověď rozpočtu vychází z historických transakcí, jejichž hodnota se "
+"pohybovala mezi %1 a %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:668
 #, kde-format
 msgid "No data provided by reports plugin for this chart."
-msgstr ""
+msgstr "Pro tento graf nejsou k dispozici žádné údaje z modulu pro výkazy."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:670
 #: kmymoney/views/khomeview_p.h:578 kmymoney/views/khomeview_p.h:1585
 #, kde-format
 msgid "Enable reports plugin to see this chart."
-msgstr ""
+msgstr "Chcete-li zobrazit tento graf, aktivujte modul pro výkazy."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:695
 #, kde-format
@@ -16067,24 +16090,24 @@ msgstr "Neznámý"
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:299
 #, kde-format
 msgid "Send transfer"
-msgstr ""
+msgstr "Odeslat převod"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:205
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, kde-format
 msgid "New credit transfer"
-msgstr ""
+msgstr "Nový kreditní převod"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:210
 #, kde-format
 msgid "Remove transfer"
-msgstr ""
+msgstr "Odstranit převod"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:213
 #, kde-format
 msgid "Edit transfer"
-msgstr ""
+msgstr "Upravit převod"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:214
 #, kde-format
@@ -16095,32 +16118,32 @@ msgstr "Zobrazit záznam"
 #, kde-format
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
-msgstr ""
+msgstr "Možnosti kreditního převodu"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:289
 #, kde-format
 msgid "This job cannot be edited anymore because it was sent already."
-msgstr ""
+msgstr "Tuto úlohu již nelze upravit, protože již byla odeslána."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:292
 #, kde-format
 msgid "Job is being processed at the moment."
-msgstr ""
+msgstr "Úloha se právě zpracovává."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:297
 #, kde-format
 msgid "The plugin to edit this job is not available."
-msgstr ""
+msgstr "Modul pro úpravy této úlohy není k dispozici."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:304
 #, kde-format
 msgid "You need to select a single job for editing."
-msgstr ""
+msgstr "K úpravám je třeba vybrat pouze jednu úlohu."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:305
 #, kde-format
 msgid "Send transfers"
-msgstr ""
+msgstr "Odeslat převody"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:406
 #, kde-format
@@ -16129,12 +16152,14 @@ msgid ""
 "Not all selected credit transfers can be sent because some of them are "
 "invalid or were already sent."
 msgstr ""
+"Ne všechny vybrané kreditní převody lze odeslat, protože některé z nich jsou "
+"neplatné nebo již byly odeslány."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:407
 #, kde-format
 msgctxt "@title:window Online transfers"
 msgid "Cannot send transfers"
-msgstr ""
+msgstr "Převody nelze odeslat"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sendMail)
 #. i18n: ectx: property (text), widget (QPushButton, buttonSend)
@@ -16150,7 +16175,7 @@ msgstr "Odeslat"
 #, kde-format
 msgid ""
 "During the change of the order your previous entries could not be converted."
-msgstr ""
+msgstr "Při změně pořadí nebylo možné převést vaše předchozí záznamy."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:285
 #, kde-format
@@ -16158,18 +16183,21 @@ msgid ""
 "This credit-transfer was sent to your bank at %1 therefore cannot be edited "
 "anymore. You may create a copy for editing."
 msgstr ""
+"Tento kreditní převod byl odeslán do vaší banky %1, a proto jej již nelze "
+"upravit. Můžete si vytvořit kopii, kterou budete moci upravit."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:288
 #, kde-format
 msgid ""
 "This credit-transfer is not editable. You may create a copy for editing."
 msgstr ""
+"Tento kreditní převod nelze upravovat. Pro úpravy si můžete vytvořit kopii."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:20
 #, kde-format
 msgid "Order Account"
-msgstr ""
+msgstr "Účet příkazů"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:26
@@ -16181,7 +16209,7 @@ msgstr "Zůstatek účtu"
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:55
 #, kde-format
 msgid "Credit Transfer"
-msgstr ""
+msgstr "Kreditní převod"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:132
@@ -16192,6 +16220,10 @@ msgid ""
 "credit transfer and your online banking plugins are available.</p></body></"
 "html>"
 msgstr ""
+"<html><head/><body><p>Tento účet nepodporuje online bankovnictví.</"
+"p><p>Pokud se domníváte, že jde o chybu, zkontrolujte prosím, zda je k "
+"dispozici modul pro tento typ kreditního převodu a moduly pro vaše online "
+"bankovnictví.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonEnque)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:230
@@ -16202,17 +16234,17 @@ msgstr "Zařadit do fronty"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:51
 #, kde-format
 msgid "Information to find issues."
-msgstr ""
+msgstr "Informace k vyhledání problémů."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:53
 #, kde-format
 msgid "Information stored for provability."
-msgstr ""
+msgstr "Informace uložené pro účely prokazatelnosti."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:55
 #, kde-format
 msgid "Informative message without certain significance."
-msgstr ""
+msgstr "Informativní sdělení bez konkrétního významu."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:57
 #, kde-format
@@ -16234,7 +16266,7 @@ msgstr "Odchozí"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.rc:4
 #, kde-format
 msgid "Credit transfer options"
-msgstr ""
+msgstr "Možnosti kreditního převodu"
 
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:148
 #, kde-format
@@ -16253,12 +16285,12 @@ msgstr "Vysvětlivky"
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:67
 #, kde-format
 msgid "Ending Market Value"
-msgstr ""
+msgstr "Konečná tržní hodnota"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:286
 #, kde-format
 msgid "Initial Market Value"
-msgstr ""
+msgstr "Počáteční tržní hodnota"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:288
 #, kde-format
@@ -16368,22 +16400,22 @@ msgstr "Prodejní hodnota"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:727
 #, kde-format
 msgid "Short-term Buy Value"
-msgstr ""
+msgstr "Krátkodobá nákupní hodnota"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:729
 #, kde-format
 msgid "Short-term Sell Value"
-msgstr ""
+msgstr "Krátkodobá prodejní hodnota"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:731
 #, kde-format
 msgid "Long-term Buy Value"
-msgstr ""
+msgstr "Dlouhodobá nákupní hodnota"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:733
 #, kde-format
 msgid "Long-term Sell Value"
-msgstr ""
+msgstr "Dlouhodobá prodejní hodnota"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReinvestIncome)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:735
@@ -16397,7 +16429,7 @@ msgstr "Reinvestované dividendy"
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:60
 #, kde-format
 msgid "Dividends Paid Out"
-msgstr ""
+msgstr "Vyplacené dividendy"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:739
 #, kde-format
@@ -16412,21 +16444,21 @@ msgstr "Konečný zůstatek"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:743
 #, kde-format
 msgid "Market Value"
-msgstr ""
+msgstr "Tržní hodnota"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAnnualizedReturn)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:745
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:88
 #, kde-format
 msgid "Annualized Return"
-msgstr ""
+msgstr "Roční výnos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkExtendedInternalRateOfReturn)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:747
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:95
 #, kde-format
 msgid "Extended internal rate of return"
-msgstr ""
+msgstr "Rozšířená vnitřní míra výnosu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReturn)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:749
@@ -16440,7 +16472,7 @@ msgstr "Enter"
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:81
 #, kde-format
 msgid "Return On Investment"
-msgstr ""
+msgstr "Návratnost investice"
 
 #. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
 #. i18n: ectx: property (text), widget (QLabel, feesLabel)
@@ -16494,10 +16526,9 @@ msgid "State"
 msgstr "Stav"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:777
-#, fuzzy, kde-format
-#| msgid "Closing Balance"
+#, kde-format
 msgid "Closing Date"
-msgstr "Konečný zůstatek"
+msgstr "Datum uzavření"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:779
 #, kde-format
@@ -16507,22 +16538,22 @@ msgstr "Datum otevření"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:783
 #, kde-format
 msgid "Balance Early Warning"
-msgstr "Včasné varování"
+msgstr "Včasné varování o zůstatku"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:785
 #, kde-format
 msgid "Balance Max Limit"
-msgstr ""
+msgstr "Maximální limit zůstatku"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:787
 #, kde-format
 msgid "Credit Early Warning"
-msgstr "Včasné varování"
+msgstr "Včasné varování o kreditu"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:789
 #, kde-format
 msgid "Credit Max Limit"
-msgstr ""
+msgstr "Maximální limit kreditu"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:791
 #, kde-format
@@ -16569,36 +16600,36 @@ msgstr "Aktuální zůstatek"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:809
 #, kde-format
 msgid "Percentage Gain"
-msgstr ""
+msgstr "Procentuální nárůst"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:811
 #, kde-format
 msgid "Short-term Gain"
-msgstr ""
+msgstr "Krátkodobý nárůst"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:813
 #, kde-format
 msgid "Long-term Gain"
-msgstr ""
+msgstr "Dlouhodobý nárůst"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkStartingMarketValue)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:815
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:32
 #, kde-format
 msgid "Starting Market Value"
-msgstr ""
+msgstr "Počáteční tržní hodnota"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:819
 #, kde-format
 msgctxt "Exchange rate"
 msgid "Rate"
-msgstr ""
+msgstr "Kurz"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:830
 #, kde-format
 msgctxt "Exchange rate"
 msgid "The applied currency exchange rate used in the conversion"
-msgstr ""
+msgstr "Směnný kurz použitý při přepočtu"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1030
@@ -16709,7 +16740,7 @@ msgstr "Cena"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:750
 #, kde-format
 msgid "[No Tag]"
-msgstr ""
+msgstr "[žádná značka]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:831
 #: kmymoney/plugins/views/reports/core/querytable.cpp:2195
@@ -16794,28 +16825,30 @@ msgid ""
 "There was an error creating your report: \"%1\".\n"
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
+"Při vytváření vašeho přehledu došlo k chybě: \"%1\".\n"
+"Tuto chybu prosím nahlaste na vývojářském seznamu: kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:180
 #, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr ""
+msgstr "Historie hodnot %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:186
 #, kde-format
 msgid "Value of %1"
-msgstr ""
+msgstr "Hodnota %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:189
 #, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
-msgstr ""
+msgstr "Historie zůstatku %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:197
 #, kde-format
 msgid "Balance of %1"
-msgstr "Historie zůstatku na účtu %1"
+msgstr "Zůstatek %1"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:74
 #, kde-format
@@ -16866,7 +16899,7 @@ msgstr "Nastavení výkazu"
 #, kde-format
 msgctxt "@info:tooltip for report configuration apply button"
 msgid "Apply the configuration changes to the report"
-msgstr ""
+msgstr "Použít změny nastavení na výkaz"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:162
 #, kde-format
@@ -16995,7 +17028,7 @@ msgstr "Vlastní výkaz"
 #: kmymoney/plugins/views/reports/kreportsview.cpp:487
 #, kde-format
 msgid "Failed to configure report: %1"
-msgstr ""
+msgstr "Nepodařilo se nakonfigurovat výkaz: %1"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:562
 #, kde-format
@@ -17017,12 +17050,12 @@ msgstr "Odstranit výkaz?"
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
-msgstr ""
+msgstr "Možnosti výkazu"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:843
 #, kde-format
 msgid "Export into directory"
-msgstr ""
+msgstr "Exportovat do adresáře"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -17039,15 +17072,13 @@ msgstr "Výkazy"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/kreportsview.ui:40
-#, fuzzy, kde-format
-#| msgid "Default Report"
+#, kde-format
 msgid "Default reports"
 msgstr "Výchozí výkaz"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "Custom reports"
 msgstr "Vlastní výkaz"
 
@@ -17145,7 +17176,7 @@ msgstr "Graf příjmů a výdajů"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:351
 #, kde-format
 msgid "Income and Expenses Bar Graph"
-msgstr ""
+msgstr "Sloupcový graf příjmů a výdajů"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:363
 #, kde-format
@@ -17226,7 +17257,7 @@ msgstr "Transakce podle týdnů"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:490
 #, kde-format
 msgid "Loan Transactions"
-msgstr ""
+msgstr "Úvěrové transakce"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:499
 #, kde-format
@@ -17272,12 +17303,12 @@ msgstr "Výkonnost investic podle druhu"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:567
 #, kde-format
 msgid "Investment Capital Gains by Account"
-msgstr ""
+msgstr "Zisky z investic podle účtu"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:576
 #, kde-format
 msgid "Investment Capital Gains by Type"
-msgstr ""
+msgstr "Zisky z investic podle typu"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:585
 #, kde-format
@@ -17388,7 +17419,7 @@ msgstr "Předpověď pro následující čtvrtletí"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:828
 #, kde-format
 msgid "Income and Expenses Forecast This Year"
-msgstr ""
+msgstr "Předpověď příjmů a výdajů pro tento rok"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:837
 #, kde-format
@@ -17432,7 +17463,7 @@ msgstr "Grafy"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:951
 #, kde-format
 msgid "%1 YTD Account Transactions"
-msgstr ""
+msgstr "%1 transakce na účtu od začátku roku"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:952
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
@@ -17464,19 +17495,19 @@ msgstr "XML"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Format used when copying the report to the clipboard"
-msgstr ""
+msgstr "Formát použitý při kopírování výkazu do schránky"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreporttab.cpp:394
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
-msgstr ""
+msgstr "Zobrazit grafickou verzi této zprávy"
 
 #: kmymoney/plugins/views/reports/kreporttab.cpp:404
 #, kde-format
 msgid "Show the report version of this chart"
-msgstr ""
+msgstr "Zobrazit výkazovou verzi této zprávy"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonNew)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:54
@@ -17499,10 +17530,9 @@ msgstr "Vyexportovat tento výkaz jako HTML, nebo CVS soubor"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:119
-#, fuzzy, kde-format
-#| msgid "Copy to clipboard"
+#, kde-format
 msgid "Copy this report to the clipboard"
-msgstr "Zkopírovat do schránky"
+msgstr "Kopírovat tento výkaz do schránky"
 
 #. i18n: ectx: property (text), widget (QToolButton, buttonCopy)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:122
@@ -17549,7 +17579,7 @@ msgstr "Rozpočet"
 #: kmymoney/plugins/views/reports/reportsview.cpp:164
 #, kde-format
 msgid "You have no budgets to display."
-msgstr ""
+msgstr "Nemáte žádné rozpočty k zobrazení."
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:194
 #, kde-format
@@ -17641,7 +17671,7 @@ msgstr "Duha"
 #, kde-format
 msgctxt "@item KDChart color palette"
 msgid "Subdued"
-msgstr "Ztlumená"
+msgstr "Tlumený"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:134
@@ -17685,44 +17715,45 @@ msgstr "Karta výkazu"
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:20
 #, kde-format
 msgid "<p>On this tab, you set the basic properties of this report.</p>"
-msgstr ""
+msgstr "<p>Na této kartě nastavíte základní vlastnosti tohoto výkazu.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblSettlementPeriod)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:28
 #, kde-format
 msgid "Settlement period"
-msgstr ""
+msgstr "Lhůta pro vypořádání"
 
 #. i18n: ectx: property (text), widget (QLabel, lblTermsSeparator)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:35
 #, kde-format
 msgid "Terms separator"
-msgstr ""
+msgstr "Oddělovač termínů"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, m_termSeparator)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:45
 #, kde-format
 msgid "Before this date investments are counted as long-term investments."
 msgstr ""
+"Investice realizované před tímto datem se považují za dlouhodobé investice."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:52
 #, kde-format
 msgid "Show short-term and long-term capital gains"
-msgstr ""
+msgstr "Zobrazit krátkodobé a dlouhodobé kapitálové zisky"
 
 #. i18n: ectx: property (text), widget (QLabel, lblinvestmentSum)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:59
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:31
 #, kde-format
 msgid "Sum investments"
-msgstr ""
+msgstr "Součet investic"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_settlementPeriod)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:66
 #, kde-format
 msgid "Time in days between the settlement date and the transaction date."
-msgstr ""
+msgstr "Počet dnů mezi datem vypořádání a datem transakce."
 
 #. i18n: ectx: property (text), widget (QLabel, lblHideTotals)
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -17762,7 +17793,7 @@ msgstr "<p>Vyberte jakou formou si přejete graf vykreslit.</p>"
 #: kmymoney/plugins/views/reports/reporttabchart.ui:35
 #, kde-format
 msgid "Chart Palette"
-msgstr ""
+msgstr "Paleta grafu"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:57
@@ -17816,13 +17847,13 @@ msgstr "Výchozí zobrazení jako graf"
 #: kmymoney/plugins/views/reports/reporttabchart.ui:107
 #, kde-format
 msgid "Logarithmic vertical axis"
-msgstr ""
+msgstr "Logaritmická svislá osa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_negExpenses)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:114
 #, kde-format
 msgid "Plot expenses downwards"
-msgstr ""
+msgstr "Zobrazit výdaje sestupně"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textLabel6)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:127
@@ -17928,6 +17959,39 @@ msgid ""
 "              </p>\n"
 "            "
 msgstr ""
+"\n"
+"<p>\n"
+"              Tato volba je určena pouze pro investiční výkazy, které\n"
+"              zobrazují ceny namísto zůstatků, jak je tomu u všech ostatních "
+"výkazů.\n"
+"              </p>\n"
+"<p>\n"
+"              Tuto volbu vyberte, chcete-li zahrnout ceny pouze v případě, "
+"že pro dané datum existuje aktuální cena.\n"
+"              Pokud ne, zobrazí se hodnota 0. V grafu bude tato hodnota "
+"vynechána.\n"
+"              </p>\n"
+"<p>\n"
+"              Je-li tato volba vypnutá, zobrazí se pro dané období poslední "
+"existující cena; je-li\n"
+"              zapnutá, v tabulce se zobrazí hodnota '0' a v grafu se provede "
+"lineární\n"
+"              interpolace chybějících hodnot.\n"
+"              <br>Příklad:\n"
+"              <br>K dispozici jsou ceny za leden a březen, ale chybí cena "
+"za\n"
+"              únor.\n"
+"<ul>\n"
+"<li><b>Vypnuto</b>: zobrazí cenu za únor jako poslední cenu z\n"
+"              ledna\n"
+"<li><b>Zapnuto</b>: v tabulce je hodnota '0', v grafu se provede lineární\n"
+"              interpolace pro cenu za únor\n"
+"              (v grafu se tedy vytvoří jakási průměrná hodnota pomocí ceny "
+"za leden a\n"
+"              březen)\n"
+"              </ul>\n"
+"              </p>\n"
+"            "
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipZero)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:103
@@ -17976,13 +18040,13 @@ msgstr "Koláč"
 #, kde-format
 msgctxt "type of graphic chart"
 msgid "Ring"
-msgstr "Prozvonit"
+msgstr "Kruh"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:49
 #, kde-format
 msgctxt "type of graphic palette"
 msgid "Use application setting"
-msgstr ""
+msgstr "Použít nastavení aplikace"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:50
 #, kde-format
@@ -18000,32 +18064,32 @@ msgstr "Duha"
 #, kde-format
 msgctxt "type of graphic palette"
 msgid "Subdued"
-msgstr "Ztlumená"
+msgstr "Tlumený"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:64
 #, kde-format
 msgid "Show circular grid lines"
-msgstr ""
+msgstr "Zobrazit kruhové čáry mřížky"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:65
 #, kde-format
 msgid "Show sagittal grid lines"
-msgstr ""
+msgstr "Zobrazit sagitální čáry mřížky"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:71
 #, kde-format
 msgid "Show horizontal grid lines"
-msgstr "Zobrazit vodorovné linky mřížky"
+msgstr "Zobrazit vodorovné čáry mřížky"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:72
 #, kde-format
 msgid "Show vertical grid lines"
-msgstr "Zobrazit svislé linky mřížky"
+msgstr "Zobrazit svislé čáry mřížky"
 
 #: kmymoney/plugins/views/reports/reporttabperformance.cpp:18
 #, kde-format
 msgid "From period"
-msgstr ""
+msgstr "Z periody"
 
 #: kmymoney/plugins/views/reports/reporttabperformance.cpp:19
 #, kde-format
@@ -18034,23 +18098,19 @@ msgstr "Vlastněno a prodáno"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:14
-#, fuzzy, kde-format
-#| msgid "Performance-Test"
+#, kde-format
 msgid "Performance Columns"
-msgstr "Test výkonu"
+msgstr "Sloupce výkonu"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, m_groupPerformanceColumns)
 #: kmymoney/plugins/views/reports/reporttabperformancecolumns.ui:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>Choose which columns should be shown in the report.</p><p>The date and "
-#| "transaction amount are always shown.</p>"
+#, kde-format
 msgid ""
 "<p>Choose which columns should be shown in the investment performance report."
 "</p>"
 msgstr ""
-"<p>Vyberte, které sloupce mají být přítomné ve výpisu.</p><p>Datum a částka "
-"transakce jsou vždy zobrazeny.</p>"
+"<p>Vyberte, které sloupce se mají zobrazit ve výkazu o výkonnosti investic.</"
+"p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26
@@ -18087,7 +18147,7 @@ msgstr "Od"
 #: kmymoney/plugins/views/reports/reporttabrange.ui:145
 #, kde-format
 msgid "Major tick length"
-msgstr ""
+msgstr "Délka velké značky"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dataLock)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:179
@@ -18106,20 +18166,20 @@ msgstr "Nastaveno uživatelem"
 #: kmymoney/plugins/views/reports/reporttabrange.ui:192
 #, kde-format
 msgid "Minor tick length"
-msgstr ""
+msgstr "Délka malé značky"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDataRangeEnd)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:202
 #, kde-format
 msgctxt "To (Data)"
 msgid "To"
-msgstr "Komu"
+msgstr "Do"
 
 #. i18n: ectx: property (text), widget (QLabel, lblLabelsPrecision)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:222
 #, kde-format
 msgid "Labels precision"
-msgstr ""
+msgstr "Přesnost štítků"
 
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:98
 #, kde-format
@@ -18132,20 +18192,20 @@ msgstr "Vše"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
-msgstr "Příjmy & Výdaje"
+msgstr "Příjmy a výdaje"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:119
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
-msgstr "Aktiva & Pasiva"
+msgstr "Aktiva a pasiva"
 
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.cpp:140
 #, kde-format
 msgctxt "@item:inlistbox budget name and starting date"
 msgid "%1, starting at %2"
-msgstr ""
+msgstr "%1, počínaje %2"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRowColQuery)
@@ -18153,7 +18213,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:20
 #, kde-format
 msgid "Rows/Columns Tab"
-msgstr ""
+msgstr "Karta řádky/sloupce"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColQuery)
@@ -18164,12 +18224,14 @@ msgid ""
 "<p>On this tab, you configure how you would like the rows and columns to be "
 "selected and organized.</p>"
 msgstr ""
+"<p>Na této kartě můžete nastavit, jakým způsobem se mají řádky a sloupce "
+"vybírat a uspořádávat.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, m_movingAverageLabel)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:30
 #, kde-format
 msgid "Average days"
-msgstr ""
+msgstr "Průměr dnů"
 
 #. i18n: ectx: property (text), widget (QLabel, m_rowsLabel)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:50
@@ -18181,7 +18243,7 @@ msgstr "Řádky"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:60
 #, kde-format
 msgid "Show totals row"
-msgstr ""
+msgstr "Zobrazit řádek s celkovými součty"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboRows)
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboDetail)
@@ -18191,6 +18253,7 @@ msgstr ""
 msgid ""
 "<p>Choose what kind of accounts to display as the rows of this report.</p>"
 msgstr ""
+"<p>Vyberte, jaké typy účtů se mají zobrazit jako řádky v tomto výkazu.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTotalColumn)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:87
@@ -18212,12 +18275,14 @@ msgid ""
 "Check this to propagate the difference of one period to the budget of the "
 "next period."
 msgstr ""
+"Zaškrtněte toto políčko, chcete-li rozdíl z jednoho období promítnout do "
+"rozpočtu následujícího období."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_propagateRemainder)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:177
 #, kde-format
 msgid "Propagate difference of budget to next period"
-msgstr ""
+msgstr "Přenést rozdíly v rozpočtu do následujícího období"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkScheduled)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:204
@@ -18387,7 +18452,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:309
 #, kde-format
 msgid "Include only Tax categories"
-msgstr ""
+msgstr "Zahrnout pouze daňové kategorie"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkHideSplitDetails)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:323
@@ -18395,6 +18460,7 @@ msgstr ""
 msgid ""
 "Do not display the individual transactions that make up a split transaction"
 msgstr ""
+"Nezobrazovat jednotlivé transakce, z nichž se skládá rozdělená transakce"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkHideSplitDetails)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:326
@@ -18406,7 +18472,7 @@ msgstr "Skrýt podrobnosti rozdělených transakcí"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:346
 #, kde-format
 msgid "Do not display the transactions, leaving only totals displayed."
-msgstr ""
+msgstr "Transakce nezobrazovat, zobrazovat pouze součty."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkHideTransactions)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:349
@@ -18446,7 +18512,7 @@ msgstr "Načítání podpůrné vrstvy Woob..."
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:134
 #, kde-format
 msgid "Getting list of backends."
-msgstr ""
+msgstr "Načítání seznamu podpůrných vrstev."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:146
 #: kmymoney/plugins/woob/woob.cpp:188
@@ -18457,7 +18523,7 @@ msgstr "Připojování k bance..."
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:147
 #, kde-format
 msgid "Getting list of accounts from your bank."
-msgstr ""
+msgstr "Načítání seznamu účtů od vaší banky."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:178
 #, kde-format
@@ -18465,6 +18531,8 @@ msgid ""
 "No backends available.\n"
 "Add one using woob config-qt."
 msgstr ""
+"Nejsou k dispozici žádné podpůrné vrstvy.\n"
+"Přidejte jednu pomocí nástroje woob config-qt."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:184
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:214
@@ -18479,6 +18547,8 @@ msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
+"Nejsou k dispozici žádné účty.\n"
+"Zkontrolujte nastavení podpůrné vrstvy ve woob config-qt."
 
 #. i18n: ectx: property (title), widget (QWizardPage, pageBackends)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:21
@@ -18490,7 +18560,7 @@ msgstr "Vyberte podpůrnou vrstvu"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:24
 #, kde-format
 msgid "Please select a backend from the list below..."
-msgstr ""
+msgstr "Vyberte prosím podpůrnou vrstvu ze seznamu níže..."
 
 #. i18n: ectx: property (text), widget (QTreeWidget, backendsList)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:36
@@ -18517,6 +18587,8 @@ msgid ""
 "Select what <b>online</b> account you want to map to the <b>application</b> "
 "account..."
 msgstr ""
+"Vyberte, který <b>online</b> účet chcete přiřadit k <b>aplikačnímu</b> "
+"účtu..."
 
 #: kmymoney/plugins/woob/woob.cpp:61
 #, kde-format
@@ -18525,6 +18597,9 @@ msgid ""
 "misconfigured Python environment. Please refer to the manual on how to fix "
 "it."
 msgstr ""
+"Modul Woob se nepodařilo úplně inicializovat, pravděpodobně kvůli "
+"chybějícímu nebo nesprávně nakonfigurovanému prostředí Python. Postup řešení "
+"tohoto problému najdete v příručce."
 
 #: kmymoney/plugins/woob/woob.cpp:67
 #, kde-format
@@ -18533,6 +18608,9 @@ msgid ""
 "misconfigured Woob Python module. Please refer to the manual on how to fix "
 "it."
 msgstr ""
+"Modul Woob se nepodařilo úplně inicializovat, pravděpodobně kvůli "
+"chybějícímu nebo nesprávně nakonfigurovanému modulu Woob pro Python. Postup "
+"opravy najdete v příručce."
 
 #: kmymoney/plugins/woob/woob.cpp:122
 #, kde-format
@@ -18547,13 +18625,15 @@ msgstr "Získávání transakce..."
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:56
 #, kde-format
 msgid "GPG installation not found or not working properly."
-msgstr ""
+msgstr "Instalace GPG nebyla nalezena nebo nefunguje správně."
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:191
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
 msgstr ""
+"Nebyly nalezeny žádné tajné klíče GPG. Spusťte prosím příkaz gpg[2] --gen-"
+"key nebo importujte klíče do programu gpg"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:211
 #, kde-format
@@ -18586,7 +18666,7 @@ msgstr "Bez šifrování"
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:14
 #, kde-format
 msgid "Select additional keys"
-msgstr ""
+msgstr "Vybrat další klíče"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:26
@@ -18595,12 +18675,15 @@ msgid ""
 "You have configured KMyMoney to save your data secured with GPG. Please "
 "choose the key you want to use for encryption of your data."
 msgstr ""
+"Nastavili jste program KMyMoney tak, aby ukládal vaše data zabezpečená "
+"pomocí GPG. Vyberte prosím klíč, který chcete použít pro šifrování vašich "
+"dat."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:39
 #, kde-format
 msgid "Add additional keys here"
-msgstr ""
+msgstr "Zde přidejte další klíče"
 
 #. i18n: ectx: property (whatsThis), widget (KEditListWidget, m_listWidget)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:46
@@ -18610,10 +18693,9 @@ msgid ""
 "be an e-mail address or the hexadecimal key id. In case of the key id, do "
 "not forget the leading 0x."
 msgstr ""
-"Vložte identifikaci klíče, který si přejete používat pro šifrování dat. "
-"Touto identifikací může být poštovní adresa použitá v klíči, nebo "
-"hexadecimální id klíče. V případě, že použijete id, nezapomeňte uvést i "
-"úvodní 0x."
+"Zadejte id klíče, který chcete použít pro šifrování dat. Může se jednat buď "
+"o e-mailovou adresu, nebo o hexadecimální id klíče. Pokud zadáváte id klíče, "
+"nezapomeňte uvést úvodní 0x."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, ledLabel)
@@ -18639,7 +18721,7 @@ msgstr "%1 (makléřský účet)"
 #, kde-format
 msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
-msgstr ""
+msgstr "Neznámý typ identifikátoru příjemce %1"
 
 #: kmymoney/plugins/xml/mymoneyxmlreader.cpp:771
 #, kde-format
@@ -18648,6 +18730,7 @@ msgid ""
 "Corrupted data: transaction '%1', split '%2' references unknown account id "
 "'%3'"
 msgstr ""
+"Poškozená data: transakce '%1', část '%2' odkazuje na neznámé id účtu '%3'"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:113
 #, kde-format
@@ -18736,25 +18819,37 @@ msgid_plural ""
 "%1 days. Please update the key from a keyserver using your GPG frontend (e."
 "g. KGPG)."
 msgstr[0] ""
+"Nastavili jste program KMyMoney tak, aby k ochraně vašich dat používal GPG a "
+"aby je navíc šifroval pomocí obnovovacího klíče KMyMoney. Platnost tohoto "
+"klíče vyprší za %1 den. Aktualizujte prosím klíč ze serveru klíčů pomocí "
+"svého GPG rozhraní (např. KGPG)."
 msgstr[1] ""
+"Nastavili jste program KMyMoney tak, aby k ochraně vašich dat používal GPG a "
+"aby je navíc šifroval pomocí obnovovacího klíče KMyMoney. Platnost tohoto "
+"klíče vyprší za %1 dny. Aktualizujte prosím klíč ze serveru klíčů pomocí "
+"svého GPG rozhraní (např. KGPG)."
 msgstr[2] ""
+"Nastavili jste program KMyMoney tak, aby k ochraně vašich dat používal GPG a "
+"aby je navíc šifroval pomocí obnovovacího klíče KMyMoney. Platnost tohoto "
+"klíče vyprší za %1 dnů. Aktualizujte prosím klíč ze serveru klíčů pomocí "
+"svého GPG rozhraní (např. KGPG)."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:283
 #, kde-format
 msgid "Recover key expires soon"
-msgstr ""
+msgstr "Platnost klíče k obnovení brzy vyprší"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:358
 #, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr ""
+msgstr "Soubor <b>%1</b> je již otevřen jiným procesem."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:470
 #, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr ""
+msgstr "Soubor <b>%1</b> není datovým souborem programu KMyMoney."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:635
 #, kde-format
@@ -18788,7 +18883,7 @@ msgstr "Všechny soubory"
 #: kmymoney/plugins/xml/xmlstorage.cpp:712
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
-msgstr ""
+msgstr "Soubory KMyMoney (*.kmy, *.xml)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, XMLStorageSettings)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:14
@@ -18920,7 +19015,7 @@ msgstr "Zašifrovat data také nouzovým klíčem KMyMoney"
 #: kmymoney/settings/kmymoney.kcfg:9
 #, kde-format
 msgid "Auto fill with previous transaction data"
-msgstr ""
+msgstr "Automaticky vyplnit na základě údajů z předchozí transakce"
 
 #. i18n: ectx: label, entry (AutoFillDifference), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:13
@@ -18933,6 +19028,7 @@ msgstr "Považovat dvě transakce za identické, pokud se částka liší méně
 #, kde-format
 msgid "When auto fill with previous transaction data use the memos"
 msgstr ""
+"Při automatickém vyplňování údajů z předchozích transakcí použít poznámky"
 
 #. i18n: ectx: label, entry (AutoSaveFile), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:25
@@ -18946,6 +19042,7 @@ msgstr "Pravidelně automaticky ukládat"
 msgid ""
 "Automatically find which transactions match the given reconciliation data"
 msgstr ""
+"Automaticky vyhledat transakce, které odpovídají zadaným údajům rozvahy"
 
 #. i18n: ectx: label, entry (AutoBackupCopies), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:37
@@ -18957,7 +19054,7 @@ msgstr "Počet záložních souborů k ponechání"
 #: kmymoney/settings/kmymoney.kcfg:43
 #, kde-format
 msgid "Character or string appended to backup filename"
-msgstr ""
+msgstr "Znak nebo řetězec připojený k názvu záložního souboru"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:47
@@ -18969,7 +19066,7 @@ msgstr "Interval automatického ukládání v minutách"
 #: kmymoney/settings/kmymoney.kcfg:53
 #, kde-format
 msgid "Autosave file upon close"
-msgstr ""
+msgstr "Automatické uložení souboru při zavření"
 
 #. i18n: ectx: label, entry (CheckSchedule), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:57
@@ -18979,10 +19076,9 @@ msgstr "Po spuštění zkontrolovat plánované transakce"
 
 #. i18n: ectx: label, entry (AutoUpdatePrices), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:61
-#, fuzzy, kde-format
-#| msgid "Update price history"
+#, kde-format
 msgid "Update prices online once a day"
-msgstr "Aktualizovat historii cen"
+msgstr "Ceny online aktualizovat jednou denně"
 
 #. i18n: ectx: label, entry (ExternalCalculator), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:71
@@ -18994,7 +19090,7 @@ msgstr "Jméno externího programu s kalkulačkou"
 #: kmymoney/settings/kmymoney.kcfg:74
 #, kde-format
 msgid "Name of region used for non-processing days"
-msgstr ""
+msgstr "Název oblasti používaný pro dny, kdy se nezpracovává"
 
 #. i18n: ectx: label, entry (EnterMovesBetweenFields), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:88
@@ -19006,13 +19102,13 @@ msgstr "Použitím klávesy \"Enter\" se můžete pohybovat mezi poli"
 #: kmymoney/settings/kmymoney.kcfg:92
 #, kde-format
 msgid "Using the TAB key moves between the date parts"
-msgstr ""
+msgstr "Pomocí klávesy Tab se můžete pohybovat mezi jednotlivými částmi dat"
 
 #. i18n: ectx: label, entry (ShowAccountsAfterOpen), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:108
 #, kde-format
 msgid "Select which accounts to show in ledger after file open"
-msgstr ""
+msgstr "Vybrat, které účty se mají po otevření souboru zobrazit v účetní knize"
 
 #. i18n: ectx: label, entry (StartLastViewSelected), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:112
@@ -19024,7 +19120,7 @@ msgstr "Spustit s posledním použitým pohledem, nebo domovskou stránkou"
 #: kmymoney/settings/kmymoney.kcfg:116
 #, kde-format
 msgid "The last selected view"
-msgstr ""
+msgstr "Poslední vybraný pohled"
 
 #. i18n: ectx: label, entry (WriteDataEncrypted), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:120
@@ -19042,13 +19138,13 @@ msgstr "Zašifrovat data také nouzovým klíčem KMyMoney"
 #: kmymoney/settings/kmymoney.kcfg:128
 #, kde-format
 msgid "GPG User ID (deprecated)"
-msgstr "Uživatelské ID GPG (zastaralé)"
+msgstr "ID uživatele v GPG (zastaralé)"
 
 #. i18n: ectx: label, entry (GpgRecipientList), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:131
 #, kde-format
 msgid "GPG User ID"
-msgstr "Uživatelské ID GPG"
+msgstr "ID uživatele v GPG"
 
 #. i18n: ectx: label, entry (ExpertMode), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:134
@@ -19060,7 +19156,7 @@ msgstr "Spustit v profesionálním (účetnickém) režimu"
 #: kmymoney/settings/kmymoney.kcfg:138
 #, kde-format
 msgid "Synchronize account in ledger and investment view"
-msgstr ""
+msgstr "Synchronizovat účet v přehledu účetní knihy a v přehledu investic"
 
 #. i18n: ectx: label, entry (viewType), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:142
@@ -19072,7 +19168,7 @@ msgstr "Typ zobrazení v KMyMoney"
 #: kmymoney/settings/kmymoney.kcfg:146
 #, kde-format
 msgid "First time switch to start new user wizard"
-msgstr ""
+msgstr "První spuštění průvodce nastavením nového uživatele"
 
 #. i18n: ectx: label, entry (stringMatchFromStart), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:150
@@ -19081,18 +19177,20 @@ msgid ""
 "Match strings in auto-completion only from the first letter on. A substring "
 "behind the first letter is not found."
 msgstr ""
+"Při automatickém doplňování se vyhledávají řetězce pouze od prvního písmene. "
+"Podřetězec za prvním písmenem se nenajde."
 
 #. i18n: ectx: label, entry (stdTransactionFormTabOrder), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:154
 #, kde-format
 msgid "Tab order of edit widgets in transaction form"
-msgstr ""
+msgstr "Pořadí karet u widgetů úprav ve formuláři transakce"
 
 #. i18n: ectx: label, entry (stdTransactionRegisterTabOrder), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:158
 #, kde-format
 msgid "Tab order of edit widgets in register"
-msgstr ""
+msgstr "Pořadí karet u widgetů úprav v registru"
 
 #. i18n: ectx: label, entry (ItemList), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:164
@@ -19104,13 +19202,15 @@ msgstr "Pořadí položek na domovské stránce"
 #: kmymoney/settings/kmymoney.kcfg:168
 #, kde-format
 msgid "Zoom factor used for home view HTML page"
-msgstr ""
+msgstr "Měřítko přiblížení pro zobrazení domovské HTML stránky"
 
 #. i18n: ectx: label, entry (RememberZoomFactor), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:172
 #, kde-format
 msgid "Remember (manually adjusted) zoom factor in home view on program end."
 msgstr ""
+"Při ukončení programu si zapamatovat (ručně nastavené) měřítko přiblížení v "
+"domovském zobrazení."
 
 #. i18n: ectx: label, entry (ShowLimitInfo), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:176
@@ -19125,18 +19225,22 @@ msgid ""
 "Show balance status on the Homepage for accounts where data imports include "
 "balance information."
 msgstr ""
+"Zobrazit stav zůstatku na domovské stránce u účtů, u nichž importované údaje "
+"obsahují informace o zůstatku."
 
 #. i18n: ectx: label, entry (ShowCountOfUnmarkedTransactions), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:184
 #, kde-format
 msgid "Show number of not marked transactions per account on the Homepage [!M]"
 msgstr ""
+"Zobrazit počet neoznačených transakcí pro každý účet na domovské stránce [!M]"
 
 #. i18n: ectx: label, entry (ShowCountOfClearedTransactions), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:188
 #, kde-format
 msgid "Show number of cleared transactions per account on the Homepage [C]"
 msgstr ""
+"Zobrazit počet zúčtovaných transakcí pro každý účet na domovské stránce [C]"
 
 #. i18n: ectx: label, entry (ShowCountOfNotReconciledTransactions), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:192
@@ -19145,12 +19249,14 @@ msgid ""
 "Show number of not reconciled (not marked + cleared) transactions per "
 "account on the Homepage [!R]"
 msgstr ""
+"Zobrazit počet nezúčtovaných (neoznačených jako + zúčtováno) transakcí pro "
+"každý účet na úvodní stránce [!R]"
 
 #. i18n: ectx: label, entry (ShowDateOfLastReconciliation), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:196
 #, kde-format
 msgid "Show date of last reconciliation on the Homepage"
-msgstr ""
+msgstr "Zobrazit datum poslední rozvahy na úvodní stránce"
 
 #. i18n: ectx: label, entry (useCustomColors), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -19192,7 +19298,7 @@ msgstr "Barva seznamu chybných transakcí"
 #: kmymoney/settings/kmymoney.kcfg:226
 #, kde-format
 msgid "List color for missing conversion rate"
-msgstr ""
+msgstr "Barva položky pro chybějící hodnotu konverzního poměru"
 
 #. i18n: ectx: label, entry (groupMarkerColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:230
@@ -19222,19 +19328,19 @@ msgstr "V seznamu účtů zobrazovat i kategorie"
 #: kmymoney/settings/kmymoney.kcfg:256
 #, kde-format
 msgid "Hide zero balance equities"
-msgstr ""
+msgstr "Skrýt akcie s nulovým zůstatkem"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:260
 #, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr ""
+msgstr "Skrýt účty s nulovým zůstatkem ze seznamu účtů"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr ""
+msgstr "Skrýt účty s nulovým zůstatkem na domovské stránce"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:268
@@ -19252,55 +19358,55 @@ msgstr "Zobrazit v peněžním deníku podrobně všechny položky"
 #: kmymoney/settings/kmymoney.kcfg:280
 #, kde-format
 msgid "Show all split details in register"
-msgstr ""
+msgstr "Zobrazit všechny podrobnosti o rozdělení v registru"
 
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
 #, kde-format
 msgid "Show schedules with planned date"
-msgstr ""
+msgstr "Zobrazit plány s plánovaným datem"
 
 #. i18n: ectx: label, entry (ShowGrid), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:288
 #, kde-format
 msgid "Show a grid in the register"
-msgstr "Zobrazit čáry v peněžním deníku"
+msgstr "Zobrazit mřížku v registru"
 
 #. i18n: ectx: label, entry (ShowLedgerFilter), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:292
 #, kde-format
 msgid "Show the filter widget when an account is opened"
-msgstr ""
+msgstr "Zobrazit widget filtru při otevření účtu"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:296
 #, kde-format
 msgid "Show fancy group markers"
-msgstr ""
+msgstr "Zobrazit ozdobné značky skupin"
 
 #. i18n: ectx: label, entry (ShowFiscalMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:300
 #, kde-format
 msgid "Show fancy markers for previous and current fiscal year"
-msgstr ""
+msgstr "Zobrazit ozdobné značky pro předchozí a aktuální účetní rok"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:304
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Zobrazit záznamy o rozvaze s datem a zůstatkem"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:313
 #, kde-format
 msgid "Starting month of the fiscal year"
-msgstr "Počáteční měsíc fiskálního období"
+msgstr "Počáteční měsíc účetního roku"
 
 #. i18n: ectx: label, entry (FiscalYearBeginDay), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:319
 #, kde-format
 msgid "Starting day of the fiscal year"
-msgstr "Počáteční den fiskálního období"
+msgstr "Počáteční den účetního roku"
 
 #. i18n: ectx: label, entry (StartDate), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:325
@@ -19312,62 +19418,62 @@ msgstr "Počáteční datum"
 #: kmymoney/settings/kmymoney.kcfg:329
 #, kde-format
 msgid "Log file path"
-msgstr ""
+msgstr "Cesta k souboru záznamu"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:338
 #, kde-format
 msgid "Use system font"
-msgstr "Používat systémový font"
+msgstr "Použít systémové písmo"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:352
 #, kde-format
 msgid "Sort order of register in normal view"
-msgstr ""
+msgstr "Pořadí registru v normálním zobrazení"
 
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:356
 #, kde-format
 msgid "Sort order of register in reconcile view"
-msgstr ""
+msgstr "Pořadí registru v zobrazení rozvahy"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:360
 #, kde-format
 msgid "Sort order of register in search dialog"
-msgstr ""
+msgstr "Pořadí registru v dialogovém okně vyhledávání"
 
 #. i18n: ectx: label, entry (defaultReconciliationState), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:373
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
-msgstr ""
+msgstr "Výchozí stav rozvahy pro transakce zadané během rozvahy"
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:379
 #, kde-format
 msgid "Number of days (plus/minus) to search for matching transactions"
-msgstr ""
+msgstr "Počet dnů (plus/mínus) pro vyhledávání odpovídajících transakcí"
 
 #. i18n: ectx: label, entry (KeepOriginalPayeeInfo), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:383
 #, kde-format
 msgid "Where to place the original payee info in the memo field"
-msgstr ""
+msgstr "Kam uvést údaje o původním příjemci platby v poli pro poznámku"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
 #: kmymoney/settings/kmymoney.kcfg:392
 #, kde-format
 msgid "During import, ask for a new payee's default category"
-msgstr ""
+msgstr "Při importu se zeptat na výchozí kategorii nového příjemce platby"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
 #: kmymoney/settings/kmymoney.kcfg:399
 #, kde-format
 msgid "Post date last entered by the user"
-msgstr ""
+msgstr "Datum posledního příspěvku zadaného uživatelem"
 
 #. i18n: ectx: label, entry (qifCash), group (QIF Options)
 #: kmymoney/settings/kmymoney.kcfg:405
@@ -19409,7 +19515,7 @@ msgstr "další názvy pro účty s fakturami"
 #: kmymoney/settings/kmymoney.kcfg:431
 #, kde-format
 msgid "Show accounts view expanded when loaded"
-msgstr ""
+msgstr "Zobrazit rozbalené zobrazení účtů při načtení"
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
 #: kmymoney/settings/kmymoney.kcfg:437
@@ -19421,7 +19527,7 @@ msgstr "Maximální množství položek vysvětlivek v grafu"
 #: kmymoney/settings/kmymoney.kcfg:449
 #, kde-format
 msgid "The palette used to render charts"
-msgstr ""
+msgstr "Paleta použitá pro vykreslení grafů"
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
 #: kmymoney/settings/kmymoney.kcfg:455
@@ -19433,13 +19539,13 @@ msgstr "Název výchozího souboru CSS"
 #: kmymoney/templates/kloadtemplatedlg.ui:14
 #, kde-format
 msgid "Load Account Hierarchy"
-msgstr ""
+msgstr "Načíst hierarchii účtu"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTemplateExportDlg)
 #: kmymoney/templates/ktemplateexportdlg.ui:14
 #, kde-format
 msgid "Template Export Attributes"
-msgstr ""
+msgstr "Atributy exportu šablony"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/templates/ktemplateexportdlg.ui:26
@@ -19480,7 +19586,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Template Loading Error"
-msgstr ""
+msgstr "Chyba při načítání šablony"
 
 #: kmymoney/templates/templateloader.cpp:113
 #, kde-format
@@ -19506,7 +19612,7 @@ msgstr ""
 #: kmymoney/templates/templatewriter.cpp:174
 #, kde-format
 msgid "Invalid template URL '%1'"
-msgstr ""
+msgstr "Neplatná URL šablony '%1'"
 
 #: kmymoney/templates/templatewriter.cpp:184
 #: kmymoney/templates/templatewriter.cpp:198
@@ -19518,7 +19624,7 @@ msgstr "Nelze zapsat změny do '%1'"
 #: kmymoney/templates/templatewriter.cpp:202
 #, kde-format
 msgid "Unable to open template file '%1'"
-msgstr ""
+msgstr "Nelze otevřít soubor šablony '%1'"
 
 #: kmymoney/templates/templatewriter.cpp:211
 #, kde-format
@@ -19526,11 +19632,10 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Nelze odeslat na '%1'.<br />%2"
 
 #: kmymoney/views/accountsidebar.cpp:489
-#, fuzzy, kde-format
-#| msgid "Normal view"
+#, kde-format
 msgctxt "@action:inmenu Account behavior in sidebar"
 msgid "Normal"
-msgstr "Běžný pohled"
+msgstr "Normální"
 
 #: kmymoney/views/accountsidebar.cpp:492
 #, kde-format
@@ -19545,18 +19650,16 @@ msgid "Always show"
 msgstr "Vždy zobrazovat"
 
 #: kmymoney/views/accountsidebar.cpp:502
-#, fuzzy, kde-format
-#| msgid "Show all accounts"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show hidden accounts"
-msgstr "Zobrazit všechny účty"
+msgstr "Zobrazit skryté účty"
 
 #: kmymoney/views/accountsidebar.cpp:508
-#, fuzzy, kde-format
-#| msgid "Hide Totals"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide zero balances"
-msgstr "Skrýt celkové"
+msgstr "Skrýt nulové zůstatky"
 
 #: kmymoney/views/accountsidebar.cpp:514
 #, fuzzy, kde-format
@@ -19819,7 +19922,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.ui:239
 #, kde-format
 msgid "Cleared"
-msgstr "Smazané"
+msgstr "Zúčtováno"
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, interestAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:180
@@ -21666,7 +21769,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
-msgstr "Ověřeno: %1"
+msgstr "Zúčtováno: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:153
 #, kde-format
@@ -21971,9 +22074,9 @@ msgid ""
 "between your bank statement and the transactions marked as cleared.\n"
 "Are you sure you want to finish the reconciliation?"
 msgstr ""
-"Chystáte se schválit tento účet, i když je zde rozdíl mezi bankovním výpisem "
-"a transakcemi označenými jako zkontrolované.\n"
-"Opravdu si přejete dokončit schválení?"
+"Chystáte se dokončit rozvahu tohoto účtu, přičemž mezi výpisem z účtu a "
+"transakcemi označenými jako zúčtované existuje rozdíl.\n"
+"Opravdu chcete rozvahu dokončit?"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:260
 #, kde-format
@@ -22990,17 +23093,17 @@ msgid ""
 "\n"
 "The starting balance is the sum of your cleared and reconciled transactions."
 msgstr ""
-"Schválením svého účtu se ubezpečíte, že vaše vlastní záznamy odpovídají "
-"záznamům vaší instituce, a že na žádné straně nevznikla nějaká chyba. Svůj "
-"účet byste měli schválit pokaždé, když obdržíte výpis od své instituce.\n"
+"Zúčtování účtu zajišťuje, že se vaše záznamy shodují se záznamy vaší "
+"finanční instituce a že na žádné ze stran nedošlo k chybám. Účet byste měli "
+"zúčtovat vždy, když obdržíte výpis od své finanční instituce.\n"
 "\n"
-"Veškeré potřebné informace obvykle naleznete vytištěné na svém výpisu.\n"
+"Všechny relevantní informace potřebné pro tento proces jsou obvykle uvedeny "
+"na vašem výpisu.\n"
 "\n"
-"Na následující straně zkontrolujte, že váš koncový zůstatek odpovídá "
-"koncovému zůstatku na výpisu. Pokud ne, zadejte do formuláře skutečný "
-"zůstatek.\n"
+"Na následující stránce ověříte, zda se konečný zůstatek shoduje se zůstatkem "
+"na vašem výpisu. Pokud ne, upravte jej prosím.\n"
 "\n"
-"Počáteční zůstatek je součtem všech ověřených a schválených transakcí."
+"Počáteční zůstatek je součtem vašich zúčtovaných a vykázaných transakcí."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipIntroPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
@@ -23045,14 +23148,14 @@ msgid ""
 "If necessary, enter information about interest or charges here. KMyMoney "
 "will create transactions and mark them as cleared."
 msgstr ""
-"Zde vložte informace o úroku a platbách, pokud je to potřeba. KMyMoney vám "
-"vytvoří transakci a označí ji jako ověřenou."
+"Zde vložte informace o úroku a poplatcích, pokud je to potřeba. KMyMoney vám "
+"vytvoří transakci a označí ji jako zúčtovanou."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:134
 #, kde-format
 msgid "Charges"
-msgstr "Splátky"
+msgstr "Poplatky"
 
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:98
 #, kde-format
@@ -23094,15 +23197,15 @@ msgid ""
 "All information you have entered into this wizard will be shown and all "
 "transactions that you already cleared are marked with a 'C'."
 msgstr ""
-"Schválení tohoto účtu bylo někdy v minulosti odloženo. Pokud jste posledně "
-"při započetí schvalovacího procesu vložili poplatky a úroky, můžete je "
-"později opravit peněžním deníku.\n"
+"Rozvahu tohoto účtu jste již dříve odložili. Pokud jste při posledním pokusu "
+"o rozvahu tohoto účtu zadali poplatky nebo úroky, můžete je později upravit "
+"v peněžním deníku.\n"
 "\n"
-"Je důležité, abyste pokračovali se stejným bankovním výpisem, který jste "
-"použili při započetí schvalování.\n"
+"Je důležité, abyste pokračovali se stejným výpisem, který jste použili při "
+"odložení rozvahy.\n"
 "\n"
-"Zobrazovat se budou veškeré informace zadané pomocí tohoto průvodce a "
-"všechny ověřené transakce budou označeny statutem 'C'."
+"Zobrazí se všechny údaje, které jste zadali v tomto průvodci, a všechny "
+"transakce, které jste již zúčtovali, jsou označeny písmenem 'C'."
 
 #: kmymoney/wizards/kmymoneywizard_p.h:77
 #, kde-format
