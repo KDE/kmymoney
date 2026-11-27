@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-23 05:03+0000\n"
-"PO-Revision-Date: 2026-11-26 00:55+0100\n"
+"PO-Revision-Date: 2026-11-26 02:51+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -19322,14 +19322,14 @@ msgstr "Rozdělit akcie"
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
-msgstr ""
+msgstr "Výnosy z úroků"
 
 #: kmymoney/views/investtransactioneditor.cpp:311
 #: kmymoney/views/multitransactioneditor.cpp:233
 #: kmymoney/views/newtransactioneditor.cpp:320
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
-msgstr ""
+msgstr "Datum zaúčtování je dřívější než datum otevření účtu <b>%1</b>."
 
 #: kmymoney/views/investtransactioneditor.cpp:431
 #, kde-format
@@ -19338,12 +19338,14 @@ msgid ""
 "The transaction commodity has been changed which will possibly make all "
 "price information invalid. Please check them."
 msgstr ""
+"Došlo ke změně obchodovaného komodity, což může způsobit, že všechny cenové "
+"údaje budou neplatné. Zkontrolujte je prosím."
 
 #: kmymoney/views/investtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr ""
+msgstr "Vyberte aktivitu pro tuto transakci."
 
 #: kmymoney/views/investtransactioneditor.cpp:614
 #, kde-format
@@ -19352,12 +19354,14 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"Cenný papír pro tuto transakci nelze změnit, protože účet cenných papírů je "
+"uzavřen."
 
 #: kmymoney/views/investtransactioneditor.cpp:627
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
-msgstr ""
+msgstr "Počet akcií"
 
 #: kmymoney/views/investtransactioneditor.cpp:629
 #, kde-format
@@ -19365,7 +19369,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
-msgstr ""
+msgstr "Počet akcií nelze změnit, protože účet cenných papírů je uzavřen."
 
 #: kmymoney/views/investtransactioneditor.cpp:633
 #, kde-format
