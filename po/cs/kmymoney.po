@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-23 01:03+0000\n"
-"PO-Revision-Date: 2026-11-26 00:55+0100\n"
+"PO-Revision-Date: 2026-11-26 02:51+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -19662,11 +19662,10 @@ msgid "Hide zero balances"
 msgstr "Skrýt nulové zůstatky"
 
 #: kmymoney/views/accountsidebar.cpp:514
-#, fuzzy, kde-format
-#| msgid "Hide menu bar"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Hide ledger tab bar"
-msgstr "Skrýt nabídku"
+msgstr "Skrýt panel karet peněžního deníku"
 
 #: kmymoney/views/accountsidebar.cpp:522
 #, kde-format
@@ -19675,18 +19674,16 @@ msgid "Hide sidebar"
 msgstr "Skrýt postranní panel"
 
 #: kmymoney/views/accountsidebar.cpp:524
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on left"
-msgstr "Zobrazit záznam"
+msgstr "Zobrazit vlevo"
 
 #: kmymoney/views/accountsidebar.cpp:525
-#, fuzzy, kde-format
-#| msgid "Show log"
+#, kde-format
 msgctxt "@action:inmenu Account sidebar"
 msgid "Show on right"
-msgstr "Zobrazit záznam"
+msgstr "Zobrazit vpravo"
 
 #: kmymoney/views/investactivities.cpp:288
 #, kde-format
@@ -19770,14 +19767,14 @@ msgstr "Rozdělit akcie"
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
-msgstr ""
+msgstr "Výnosy z úroků"
 
 #: kmymoney/views/investtransactioneditor.cpp:311
 #: kmymoney/views/multitransactioneditor.cpp:232
 #: kmymoney/views/newtransactioneditor.cpp:341
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
-msgstr ""
+msgstr "Datum zaúčtování je dřívější než datum otevření účtu <b>%1</b>."
 
 #: kmymoney/views/investtransactioneditor.cpp:431
 #, kde-format
@@ -19786,12 +19783,14 @@ msgid ""
 "The transaction commodity has been changed which will possibly make all "
 "price information invalid. Please check them."
 msgstr ""
+"Došlo ke změně obchodovaného komodity, což může způsobit, že všechny cenové "
+"údaje budou neplatné. Zkontrolujte je prosím."
 
 #: kmymoney/views/investtransactioneditor.cpp:616
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr ""
+msgstr "Vyberte aktivitu pro tuto transakci."
 
 #: kmymoney/views/investtransactioneditor.cpp:619
 #, kde-format
@@ -19800,12 +19799,14 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"Cenný papír pro tuto transakci nelze změnit, protože účet cenných papírů je "
+"uzavřen."
 
 #: kmymoney/views/investtransactioneditor.cpp:632
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
-msgstr ""
+msgstr "Počet akcií"
 
 #: kmymoney/views/investtransactioneditor.cpp:634
 #, kde-format
@@ -19813,7 +19814,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
-msgstr ""
+msgstr "Počet akcií nelze změnit, protože účet cenných papírů je uzavřen."
 
 #: kmymoney/views/investtransactioneditor.cpp:638
 #, kde-format
